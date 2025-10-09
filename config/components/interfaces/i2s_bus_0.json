@@ -1,0 +1,11 @@
+{
+	"interface_type": "I2S_BUS",
+	"relative_filename": "config/components/interfaces/i2s_bus_0.json",
+	"version": "0.1.0",
+	"author": "config/author.json",
+	"interface_id": "I2S_BUS_0",
+	"shared_pins": {
+		"bck": "GPIO26",
+		"ws": "GPIO25"
+	}
+}

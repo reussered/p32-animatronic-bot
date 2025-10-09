@@ -1,0 +1,107 @@
+# -----------------------------------------------
+# Script: Recursive File/Folder Scanner
+# Purpose: Identify all files with legal extensions
+#          and folders that are either empty or contain such files
+# Author: Edward J. Reusser (via Copilot)
+# -----------------------------------------------
+
+# Define the root directory as the location of this script
+$root = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
+# -----------------------------------------------
+# Step 1: Load legal extensions
+# If an input file is provided, read extensions from it
+# Otherwise, use default set (.json, .md, .xml)
+# -----------------------------------------------
+$defaultExtensions = @('.json', '.md', '.xml')
+$extensions = if ($args.Count -gt 0 -and (Test-Path $args[0])) {
+    Get-Content $args[0] | ForEach-Object { $_.Trim().ToLower() }
+} else {
+    $defaultExtensions
+}
+
+# Normalize extensions to ensure they start with a dot
+$extensions = $extensions | ForEach-Object {
+    if ($_ -match '^\.') { $_ } else { ".$_" }
+}
+
+# -----------------------------------------------
+# Step 2: Initialize counters and logs
+# These will track matches and generate summary
+# -----------------------------------------------
+$matchedFiles = @()
+$matchedFolders = @()
+$log = @()
+
+# -----------------------------------------------
+# Step 3: Folder Evaluation Function
+# Determines if a folder is:
+#   - Truly empty (no files or subfolders)
+#   - Contains at least one matching file
+# -----------------------------------------------
+function Test-Folder {
+    param ($folderPath, $extensions)
+
+    # Get all items in the folder (files + subfolders)
+    $items = Get-ChildItem -Path $folderPath -ErrorAction SilentlyContinue
+
+    # If no items at all, folder is empty
+    if ($items.Count -eq 0) {
+        return $true
+    }
+
+    # If it contains subfolders, it's not empty
+    $hasSubfolder = $items | Where-Object { $_.PSIsContainer }
+    if ($hasSubfolder.Count -gt 0) {
+        return $false
+    }
+
+    # Check for matching files by extension
+    $hasMatchingFile = $items | Where-Object {
+        -not $_.PSIsContainer -and ($extensions -contains $_.Extension.ToLower())
+    }
+
+    return $hasMatchingFile.Count -gt 0
+}
+
+# -----------------------------------------------
+# Step 4: Recursive Scan
+# Walk through all files and folders under $root
+# Output matching files and folders to stdout
+# Log everything for optional review
+# -----------------------------------------------
+Get-ChildItem -Path $root -Recurse -ErrorAction SilentlyContinue | ForEach-Object {
+    try {
+        if ($_.PSIsContainer) {
+            # Folder: test if it's empty or contains matching files
+            if (Test-Folder $_.FullName $extensions) {
+                $matchedFolders += $_.FullName
+                Write-Output $_.FullName
+                $log += "Folder match: $($_.FullName)"
+            }
+        } elseif ($extensions -contains $_.Extension.ToLower()) {
+            # File: extension matches legal list
+            $matchedFiles += $_.FullName
+            Write-Output $_.FullName
+            $log += "File match: $($_.FullName)"
+        }
+    } catch {
+        # Log errors to stderr and internal log
+        Write-Error "Error processing $_.FullName: $_"
+        $log += "Error: $_"
+    }
+}
+
+# -----------------------------------------------
+# Step 5: Summary Report
+# Display total counts of matches
+# -----------------------------------------------
+Write-Output "`n--- Summary ---"
+Write-Output "Matching files: $($matchedFiles.Count)"
+Write-Output "Matching folders: $($matchedFolders.Count)"
+
+# -----------------------------------------------
+# Optional: Save log to file
+# Uncomment the line below to enable logging
+# -----------------------------------------------
+# $log | Set-Content "$root\scan_log.txt"

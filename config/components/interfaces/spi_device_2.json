@@ -1,0 +1,11 @@
+{
+	"interface_type": "SPI_DEVICE",
+	"relative_filename": "config/components/interfaces/spi_device_1.json",
+	"version": "0.1.0",
+	"author": "config/author.json",
+	"interface_id": "SPI_DEVICE_1",
+	"bus": "SPI_BUS_VSPI",
+	"cs_pin": "GPIO5",
+	"dc_pin": "GPIO16",
+	"rst_pin": "GPIO17"
+}

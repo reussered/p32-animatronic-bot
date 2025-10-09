@@ -1,0 +1,12 @@
+{
+	"interface_type": "SPI_BUS",
+	"relative_filename": "config/components/interfaces/spi_bus_vspi.json",
+	"version": "0.1.0",
+	"author": "config/author.json",
+	"interface_id": "SPI_BUS_VSPI",
+	"shared_pins": {
+		"mosi": "GPIO23",
+		"miso": "GPIO19",
+		"clk": "GPIO18"
+	}
+}
