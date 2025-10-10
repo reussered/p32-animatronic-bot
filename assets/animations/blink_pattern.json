@@ -1,0 +1,23 @@
+{
+  "name": "blink_pattern",
+  "type": "animation",
+  "description": "LED blink animation",
+  "duration_ms": 1000,
+  "loop": true,
+  "frames": [
+    {
+      "time_ms": 0,
+      "leds": [
+        { "id": 0, "color": "#FF0000", "brightness": 100 },
+        { "id": 1, "color": "#FF0000", "brightness": 100 }
+      ]
+    },
+    {
+      "time_ms": 500,
+      "leds": [
+        { "id": 0, "color": "#000000", "brightness": 0 },
+        { "id": 1, "color": "#000000", "brightness": 0 }
+      ]
+    }
+  ]
+}

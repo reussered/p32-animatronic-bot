@@ -1,0 +1,19 @@
+{
+  "name": "sleepy",
+  "type": "mood",
+  "description": "Tired and low-energy mood",
+  "priority": 2,
+  "triggers": [
+    "low_activity",
+    "night_time"
+  ],
+  "behaviors": [
+    "slow_blink",
+    "yawn"
+  ],
+  "led_color": "#4B0082",
+  "servo_settings": {
+    "speed": 20,
+    "range": 30
+  }
+}

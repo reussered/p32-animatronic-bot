@@ -1,0 +1,24 @@
+{
+  "name": "wave",
+  "type": "behavior",
+  "description": "Wave hand/arm gesture",
+  "duration_ms": 2000,
+  "servos": [
+    {
+      "id": 1,
+      "position": 90,
+      "time_ms": 500
+    },
+    {
+      "id": 1,
+      "position": 180,
+      "time_ms": 1000
+    },
+    {
+      "id": 1,
+      "position": 90,
+      "time_ms": 1500
+    }
+  ],
+  "sound_effect": "hello.wav"
+}

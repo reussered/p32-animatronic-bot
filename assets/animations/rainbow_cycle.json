@@ -1,0 +1,37 @@
+{
+  "name": "rainbow_cycle",
+  "type": "animation",
+  "description": "Smooth rainbow color transition",
+  "duration_ms": 3000,
+  "loop": true,
+  "frames": [
+    {
+      "time_ms": 0,
+      "leds": [
+        { "id": 0, "color": "#FF0000", "brightness": 100 },
+        { "id": 1, "color": "#FF0000", "brightness": 100 }
+      ]
+    },
+    {
+      "time_ms": 1000,
+      "leds": [
+        { "id": 0, "color": "#00FF00", "brightness": 100 },
+        { "id": 1, "color": "#00FF00", "brightness": 100 }
+      ]
+    },
+    {
+      "time_ms": 2000,
+      "leds": [
+        { "id": 0, "color": "#0000FF", "brightness": 100 },
+        { "id": 1, "color": "#0000FF", "brightness": 100 }
+      ]
+    },
+    {
+      "time_ms": 3000,
+      "leds": [
+        { "id": 0, "color": "#FF0000", "brightness": 100 },
+        { "id": 1, "color": "#FF0000", "brightness": 100 }
+      ]
+    }
+  ]
+}

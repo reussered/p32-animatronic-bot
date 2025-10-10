@@ -1,0 +1,19 @@
+{
+  "name": "tilt_head",
+  "type": "behavior",
+  "description": "Tilt head to the side in curiosity",
+  "duration_ms": 1500,
+  "servos": [
+    {
+      "id": 2,
+      "position": 60,
+      "time_ms": 750
+    },
+    {
+      "id": 2,
+      "position": 90,
+      "time_ms": 1500
+    }
+  ],
+  "sound_effect": "hmm.wav"
+}

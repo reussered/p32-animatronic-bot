@@ -1,0 +1,20 @@
+{
+  "name": "happy",
+  "type": "mood",
+  "description": "Happy and cheerful mood",
+  "priority": 5,
+  "triggers": [
+    "positive_interaction",
+    "music_detected"
+  ],
+  "behaviors": [
+    "wave",
+    "smile",
+    "dance"
+  ],
+  "led_color": "#FFD700",
+  "servo_settings": {
+    "speed": 80,
+    "range": 180
+  }
+}
