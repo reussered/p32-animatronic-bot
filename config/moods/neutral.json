@@ -1,0 +1,29 @@
+{
+  "name": "neutral",
+  "displayName": "Neutral",
+  "description": "Default calm and balanced mood",
+  "led": {
+    "color": "#FFFFFF",
+    "brightness": 180,
+    "pattern": "steady"
+  },
+  "servo": {
+    "headTilt": 0,
+    "headPan": 0,
+    "eyeBrows": 0,
+    "mouth": 50
+  },
+  "animations": {
+    "idle": "subtle_sway",
+    "transition": "smooth",
+    "speed": 1.0
+  },
+  "sounds": {
+    "enabled": true,
+    "volume": 60,
+    "effects": ["ambient_hum"]
+  },
+  "priority": 1,
+  "duration": 0,
+  "triggers": ["default", "reset"]
+}
