@@ -1,0 +1,38 @@
+{
+  "name": "sensors",
+  "displayName": "Sensors",
+  "description": "Sensor input configurations",
+  "type": "input",
+  "devices": [
+    {
+      "id": "motion_pir",
+      "pin": 34,
+      "type": "PIR",
+      "pollInterval": 100,
+      "sensitivity": 8
+    },
+    {
+      "id": "distance_ultrasonic",
+      "pin": 35,
+      "type": "HC-SR04",
+      "pollInterval": 200,
+      "maxRange": 400
+    },
+    {
+      "id": "touch",
+      "pin": 4,
+      "type": "capacitive",
+      "pollInterval": 50,
+      "threshold": 40
+    },
+    {
+      "id": "microphone",
+      "pin": 36,
+      "type": "analog",
+      "pollInterval": 100,
+      "threshold": 500
+    }
+  ],
+  "enabled": true,
+  "config": {}
+}

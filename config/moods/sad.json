@@ -1,0 +1,29 @@
+{
+  "name": "sad",
+  "displayName": "Sad",
+  "description": "Melancholic and low-energy mood",
+  "led": {
+    "color": "#0000FF",
+    "brightness": 128,
+    "pattern": "fade"
+  },
+  "servo": {
+    "headTilt": -10,
+    "headPan": 0,
+    "eyeBrows": -30,
+    "mouth": 20
+  },
+  "animations": {
+    "idle": "droop",
+    "transition": "slow",
+    "speed": 0.5
+  },
+  "sounds": {
+    "enabled": true,
+    "volume": 40,
+    "effects": ["sigh", "low_beep"]
+  },
+  "priority": 4,
+  "duration": 0,
+  "triggers": ["negative_interaction", "timeout"]
+}

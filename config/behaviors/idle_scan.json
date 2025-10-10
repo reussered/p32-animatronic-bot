@@ -1,0 +1,36 @@
+{
+  "name": "idle_scan",
+  "displayName": "Idle Scan",
+  "description": "Periodic scanning behavior when idle",
+  "type": "autonomous",
+  "sequence": [
+    {
+      "action": "pan_head",
+      "duration": 2000,
+      "params": {
+        "angle": -45
+      }
+    },
+    {
+      "action": "pause",
+      "duration": 1000
+    },
+    {
+      "action": "pan_head",
+      "duration": 2000,
+      "params": {
+        "angle": 45
+      }
+    },
+    {
+      "action": "pause",
+      "duration": 1000
+    }
+  ],
+  "moodModifier": {
+    "neutral": 5
+  },
+  "cooldown": 15000,
+  "enabled": true,
+  "triggers": ["idle_timeout"]
+}
