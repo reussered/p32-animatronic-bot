@@ -1,0 +1,20 @@
+{
+  "name": "excited",
+  "type": "mood",
+  "description": "Excited and energetic mood",
+  "priority": 7,
+  "triggers": [
+    "rapid_movement_detected",
+    "play_mode_activated"
+  ],
+  "behaviors": [
+    "bounce",
+    "spin",
+    "flash_lights"
+  ],
+  "led_color": "#FF69B4",
+  "servo_settings": {
+    "speed": 95,
+    "range": 180
+  }
+}

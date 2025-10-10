@@ -1,0 +1,19 @@
+{
+  "name": "curious",
+  "type": "mood",
+  "description": "Inquisitive and exploring mood",
+  "priority": 3,
+  "triggers": [
+    "new_object_detected",
+    "sound_detected"
+  ],
+  "behaviors": [
+    "look_around",
+    "tilt_head"
+  ],
+  "led_color": "#00BFFF",
+  "servo_settings": {
+    "speed": 60,
+    "range": 120
+  }
+}
