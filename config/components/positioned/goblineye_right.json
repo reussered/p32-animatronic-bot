@@ -1,14 +1,14 @@
 ﻿{
-  "relative_filename": "config/components/positioned/goblineye_left.json",
+  "relative_filename": "config/components/positioned/goblineye_right.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "component_id": "goblin_eye_left",
+  "component_id": "goblin_eye_right",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
-  "interface_assignment": "SPI_DEVICE_1",
+  "interface_assignment": "SPI_DEVICE_2",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {
-    "x": "-1.05 INCH",
+    "x": "+1.05 INCH",
     "y": "+0.7 INCH",
     "z": "-0.35 INCH"
   },
@@ -17,5 +17,5 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "primary_display_left"
+  "function": "primary_display_right"
 }

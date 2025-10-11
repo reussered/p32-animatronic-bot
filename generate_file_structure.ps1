@@ -115,9 +115,8 @@ Get-ChildItem -Path $root -Recurse -ErrorAction SilentlyContinue | ForEach-Objec
                     $jsonContent = Get-Content $_.FullName -Raw | ConvertFrom-Json
                     $formatted = $jsonContent | ConvertTo-Json -Depth 10
                     Write-Output "`nContents of $($_.Name):"
-                    Write-Output "{"
                     Write-Output $formatted
-                    Write-Output "}`n"
+                    Write-Output ""
                 } catch {
                     Write-Warning "Failed to parse JSON: $($_.FullName)"
                     $log += "Failed to parse JSON: $($_.FullName)"
