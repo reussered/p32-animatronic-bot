@@ -1,0 +1,16 @@
+﻿{
+  "relative_filename": "config/components/interfaces/spi_bus_vspi.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "interface_id": "SPI_BUS_VSPI",
+  "interface_type": "SPI_BUS",
+  "pins": {
+    "miso": 12,
+    "mosi": 13,
+    "clk": 14
+  },
+  "bus_config": {
+    "frequency": "10000000",
+    "mode": 0
+  }
+}

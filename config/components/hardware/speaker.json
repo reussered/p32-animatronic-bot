@@ -1,0 +1,27 @@
+﻿{
+  "relative_filename": "config/components/hardware/speaker.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "hardware_type": "I2S_SPEAKER",
+  "component_name": "I2S Digital Speaker Module",
+  "physical_specs": {
+    "diameter": "1.5 INCH",
+    "thickness": "0.3 INCH",
+    "mounting_holes": {
+      "count": 2,
+      "diameter": "0.08 INCH",
+      "spacing": "1.2 INCH"
+    }
+  },
+  "electrical_specs": {
+    "supply_voltage": "3.3V",
+    "interface": "I2S",
+    "power_output": "3W",
+    "current_consumption": "500mA"
+  },
+  "audio_specs": {
+    "frequency_range": "100-20000 Hz",
+    "sample_rates": ["8000", "16000", "22050", "44100", "48000"],
+    "bit_depths": [16, 24, 32]
+  }
+}

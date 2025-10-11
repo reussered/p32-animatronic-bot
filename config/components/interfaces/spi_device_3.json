@@ -1,0 +1,14 @@
+﻿{
+  "relative_filename": "config/components/interfaces/spi_device_3.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "interface_id": "SPI_DEVICE_3",
+  "interface_type": "SPI_DEVICE",
+  "bus_reference": "SPI_BUS_VSPI",
+  "pins": {
+    "cs": 17
+  },
+  "device_config": {
+    "cs_active_low": true
+  }
+}

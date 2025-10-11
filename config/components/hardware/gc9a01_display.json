@@ -1,0 +1,27 @@
+﻿{
+  "relative_filename": "config/components/hardware/gc9a01_display.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "hardware_type": "GC9A01_DISPLAY",
+  "component_name": "GC9A01 Circular LCD Display",
+  "physical_specs": {
+    "diameter": "1.28 INCH",
+    "thickness": "0.08 INCH",
+    "resolution": "240x240",
+    "mounting_holes": {
+      "count": 4,
+      "diameter": "0.1 INCH",
+      "spacing": "1.1 INCH"
+    }
+  },
+  "electrical_specs": {
+    "supply_voltage": "3.3V",
+    "interface": "SPI",
+    "current_consumption": "50mA"
+  },
+  "driver_config": {
+    "rotation": 0,
+    "invert_colors": false,
+    "backlight_pwm": true
+  }
+}
