@@ -1,0 +1,40 @@
+{
+  "sound_name": "goblin_ambient_breathing",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "description": "Subtle breathing sounds for idle contentment state",
+  "audio_file": "goblin_ambient_breathing.wav", 
+  "duration_ms": 4000,
+  "mood_trigger": "CONTENTMENT",
+  "volume": 0.3,
+  "audio_specs": {
+    "sample_rate": "44100 Hz",
+    "bit_depth": "16-bit",
+    "channels": "mono", 
+    "format": "WAV"
+  },
+  "playback_config": {
+    "loop": true,
+    "fade_in_ms": 1000,
+    "fade_out_ms": 1000,
+    "priority": "low"
+  },
+  "trigger_conditions": {
+    "proximity_cm": 200,
+    "mood_threshold": 20,
+    "cooldown_ms": 0
+  },
+  "ambient_config": {
+    "background_sound": true,
+    "volume_modulation": {
+      "min_volume": 0.1,
+      "max_volume": 0.4,
+      "modulation_period_ms": 3000
+    }
+  },
+  "notes": [
+    "Very low volume background ambiance",
+    "Should loop continuously in idle state",
+    "Creates 'living' presence even when inactive"
+  ]
+}
