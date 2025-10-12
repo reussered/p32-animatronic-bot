@@ -1,0 +1,36 @@
+{
+  "name": "sleep",
+  "displayName": "Sleep",
+  "description": "Low-power sleep behavior",
+  "type": "autonomous",
+  "sequence": [
+    {
+      "action": "dim_lights",
+      "duration": 2000,
+      "params": {
+        "level": 10
+      }
+    },
+    {
+      "action": "lower_head",
+      "duration": 1500
+    },
+    {
+      "action": "play_sound",
+      "duration": 1000,
+      "params": {
+        "sound": "yawn"
+      }
+    },
+    {
+      "action": "power_save",
+      "duration": 0
+    }
+  ],
+  "moodModifier": {
+    "neutral": -10
+  },
+  "cooldown": 60000,
+  "enabled": true,
+  "triggers": ["inactivity_long", "battery_low"]
+}

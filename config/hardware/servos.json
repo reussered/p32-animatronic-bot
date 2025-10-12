@@ -1,0 +1,44 @@
+{
+  "name": "servos",
+  "displayName": "Servo Motors",
+  "description": "Servo motor pin and range configurations",
+  "type": "actuator",
+  "devices": [
+    {
+      "id": "head_pan",
+      "pin": 12,
+      "minAngle": -90,
+      "maxAngle": 90,
+      "defaultAngle": 0,
+      "speed": 60
+    },
+    {
+      "id": "head_tilt",
+      "pin": 13,
+      "minAngle": -30,
+      "maxAngle": 30,
+      "defaultAngle": 0,
+      "speed": 60
+    },
+    {
+      "id": "eyebrows",
+      "pin": 14,
+      "minAngle": -45,
+      "maxAngle": 45,
+      "defaultAngle": 0,
+      "speed": 80
+    },
+    {
+      "id": "mouth",
+      "pin": 27,
+      "minAngle": 0,
+      "maxAngle": 100,
+      "defaultAngle": 50,
+      "speed": 100
+    }
+  ],
+  "enabled": true,
+  "config": {
+    "pwmFrequency": 50
+  }
+}

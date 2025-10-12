@@ -1,0 +1,19 @@
+{
+  "name": "audio",
+  "displayName": "Audio System",
+  "description": "Speaker and audio output configurations",
+  "type": "output",
+  "devices": [
+    {
+      "id": "speaker",
+      "pin": 22,
+      "type": "I2S",
+      "sampleRate": 44100,
+      "bitDepth": 16
+    }
+  ],
+  "enabled": true,
+  "config": {
+    "defaultVolume": 60
+  }
+}
