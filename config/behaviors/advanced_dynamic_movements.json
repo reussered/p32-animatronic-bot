@@ -1,0 +1,332 @@
+{
+  "relative_filename": "config/behaviors/advanced_dynamic_movements.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "behavior_id": "ADVANCED_DYNAMIC_MOVEMENTS",
+  "behavior_type": "FULL_BODY_DYNAMIC_COORDINATION",
+  "description": "Dancing, leaping, pouncing, and acrobatic movements with distributed ESP32 control",
+  
+  "dancing_algorithms": {
+    "humanoid_dance_styles": {
+      "robot_dance_classic": {
+        "description": "Mechanical precise movements with robotic flair",
+        "key_features": {
+          "sharp_movements": "ANGULAR_PRECISE_JOINT_ARTICULATION",
+          "isolation_movements": "SINGLE_BODY_PART_MOVEMENT_FOCUS",
+          "freeze_poses": "INSTANTANEOUS_STOPS_DRAMATIC_EFFECT",
+          "wave_propagation": "SEQUENTIAL_JOINT_ACTIVATION_WAVES"
+        },
+        "signature_moves": {
+          "robot_arm_waves": {
+            "sequence": "SHOULDER_TO_WRIST_SEQUENTIAL_ACTIVATION",
+            "timing": "0.1_SECOND_INTERVALS_EACH_JOINT",
+            "coordination": "BILATERAL_SYMMETRY_OR_ALTERNATING"
+          },
+          "head_isolation": {
+            "movement": "HEAD_MOVES_INDEPENDENTLY_BODY_STILL",
+            "patterns": ["NOD_SEQUENCES", "SIDE_TO_SIDE", "FIGURE_8_PATTERNS"]
+          },
+          "torso_wave": {
+            "movement": "SPINE_ARTICULATION_WAVE_MOTION",
+            "direction": "TOP_DOWN_OR_BOTTOM_UP_PROPAGATION",
+            "amplitude": "CONFIGURABLE_SUBTLE_TO_DRAMATIC"
+          }
+        }
+      },
+      
+      "breakdance_moves": {
+        "description": "Dynamic floor work and spinning moves adapted for humanoid",
+        "freeze_poses": {
+          "headstand_freeze": {
+            "balance_point": "HEAD_AND_HANDS_THREE_POINT_SUPPORT",
+            "leg_positions": "VARIOUS_ARTISTIC_LEG_CONFIGURATIONS",
+            "hold_time": "5_SECONDS_MAXIMUM_IMPRESSIVE_DISPLAY"
+          },
+          "handstand_freeze": {
+            "balance_point": "HANDS_ONLY_TWO_POINT_SUPPORT",
+            "balance_algorithm": "REAL_TIME_HAND_PRESSURE_ADJUSTMENT",
+            "difficulty": "ADVANCED_REQUIRES_PRECISE_BALANCE_CONTROL"
+          }
+        },
+        "spinning_moves": {
+          "headspin_simulation": {
+            "method": "RAPID_HEAD_ROTATION_WHILE_HANDSTAND",
+            "safety_limit": "MAX_30_RPM_PREVENT_DAMAGE",
+            "visual_effect": "LED_TRAILS_ENHANCE_SPINNING_EFFECT"
+          }
+        }
+      },
+      
+      "contemporary_dance": {
+        "description": "Fluid graceful movements with emotional expression",
+        "movement_characteristics": {
+          "flowing_transitions": "SMOOTH_SPLINE_INTERPOLATED_MOVEMENTS",
+          "weight_shifts": "DYNAMIC_CENTER_OF_GRAVITY_MANIPULATION",
+          "reach_extensions": "MAXIMUM_WORKSPACE_UTILIZATION",
+          "balance_challenges": "DELIBERATE_OFF_BALANCE_RECOVERY"
+        },
+        "signature_elements": {
+          "spiral_movements": {
+            "description": "CORK_SCREW_WHOLE_BODY_ROTATIONS",
+            "coordination": "SPINE_ARMS_LEGS_SYNCHRONIZED_ROTATION",
+            "axis": "VERTICAL_THROUGH_BODY_CENTER"
+          },
+          "floor_work": {
+            "description": "CONTROLLED_DROPS_AND_RECOVERIES",
+            "safety": "IMPACT_ABSORPTION_JOINT_COMPLIANCE",
+            "transitions": "SEAMLESS_FLOOR_TO_STANDING_RECOVERY"
+          }
+        }
+      }
+    },
+    
+    "quadruped_dance_adaptations": {
+      "four_legged_rhythm": {
+        "description": "Rhythmic stepping patterns with musical timing",
+        "step_patterns": {
+          "alternating_pairs": "FRONT_PAIR_THEN_REAR_PAIR_RHYTHM",
+          "diagonal_syncopation": "CROSS_PATTERN_SYNCOPATED_BEATS",
+          "all_four_stomp": "SIMULTANEOUS_IMPACT_EMPHASIS_BEATS"
+        }
+      },
+      "rearing_displays": {
+        "description": "Rear up on hind legs for dramatic effect",
+        "balance_challenge": "TWO_LEG_BALANCE_TEMPORARY_BIPEDAL",
+        "safety_timeout": "MAXIMUM_3_SECONDS_PREVENT_FALLING"
+      }
+    }
+  },
+  
+  "leaping_algorithms": {
+    "vertical_leap_mechanics": {
+      "takeoff_preparation": {
+        "crouch_phase": {
+          "duration": "0.3_SECONDS_ENERGY_STORAGE",
+          "joint_configuration": "DEEP_SQUAT_ANKLE_HIP_KNEE_FLEX",
+          "energy_storage": "ELASTIC_TENDON_SIMULATION_SPRINGS"
+        },
+        "explosive_extension": {
+          "duration": "0.15_SECONDS_RAPID_EXTENSION", 
+          "power_coordination": "ALL_LEG_JOINTS_SIMULTANEOUS_EXTENSION",
+          "force_multiplication": "KINETIC_CHAIN_OPTIMIZATION"
+        }
+      },
+      
+      "flight_phase_control": {
+        "airborne_duration": "UP_TO_0.6_SECONDS_MAXIMUM",
+        "trajectory_control": {
+          "arm_movements": "UPWARD_ARM_SWING_MOMENTUM_ADDITION",
+          "body_position": "AERODYNAMIC_TUCK_OR_EXTENDED_POSES",
+          "landing_preparation": "MID_FLIGHT_LANDING_CONFIGURATION"
+        }
+      },
+      
+      "landing_mechanics": {
+        "impact_absorption": {
+          "sequence": "TOES_FOREFOOT_HEEL_PROGRESSIVE_CONTACT",
+          "joint_compliance": "ANKLE_KNEE_HIP_SEQUENTIAL_FLEXION",
+          "energy_dissipation": "CONTROLLED_CRUMPLE_SAFE_LANDING"
+        },
+        "balance_recovery": {
+          "stability_assessment": "IMU_FEEDBACK_BALANCE_STATE",
+          "corrective_actions": "ARM_MOVEMENTS_BALANCE_RECOVERY",
+          "emergency_steps": "PROTECTIVE_STEPS_IF_NEEDED"
+        }
+      },
+      
+      "leap_performance_targets": {
+        "vertical_height": "18_INCHES_MAXIMUM_SAFE_HEIGHT",
+        "horizontal_distance": "36_INCHES_RUNNING_LEAP",
+        "safety_margin": "CONSERVATIVE_PARAMETERS_PREVENT_DAMAGE"
+      }
+    },
+    
+    "horizontal_leap_mechanics": {
+      "running_approach": {
+        "acceleration_phase": "3_STEP_ACCELERATION_TO_TAKEOFF",
+        "speed_buildup": "PROGRESSIVE_STEP_LENGTH_INCREASE",
+        "takeoff_timing": "PRECISE_FOOT_PLACEMENT_LAUNCH_POINT"
+      },
+      "ballistic_trajectory": {
+        "launch_angle": "OPTIMAL_45_DEGREE_MAXIMUM_DISTANCE",
+        "body_configuration": "STREAMLINED_FLIGHT_POSITION",
+        "distance_prediction": "REAL_TIME_LANDING_ZONE_CALCULATION"
+      }
+    }
+  },
+  
+  "pouncing_algorithms": {
+    "predatory_pounce_mechanics": {
+      "stalking_approach": {
+        "low_profile_gait": "CROUCHED_WALKING_STEALTH_MODE",
+        "target_tracking": "VISUAL_SERVO_TARGET_FOLLOWING",
+        "approach_distance": "OPTIMAL_POUNCE_RANGE_6_FEET"
+      },
+      
+      "pounce_execution": {
+        "explosive_launch": {
+          "duration": "0.2_SECONDS_RAPID_ACCELERATION",
+          "trajectory": "PARABOLIC_PATH_TO_TARGET",
+          "body_configuration": "EXTENDED_ARMS_CLAWS_READY_POSITION"
+        },
+        "target_acquisition": {
+          "visual_tracking": "CONTINUOUS_TARGET_POSITION_UPDATE",
+          "trajectory_correction": "MID_FLIGHT_MINOR_ADJUSTMENTS",
+          "impact_preparation": "ARMS_EXTENDED_CONTACT_READY"
+        }
+      },
+      
+      "landing_and_capture": {
+        "contact_strategy": "ARMS_FIRST_CONTACT_LEGS_STABILIZE",
+        "impact_management": "CONTROLLED_TACKLE_SAFE_CONTACT",
+        "post_contact": "SECURE_GRIP_STABLE_POSITION"
+      }
+    },
+    
+    "quadruped_pounce_adaptations": {
+      "four_legged_pounce": {
+        "launching_stance": "ALL_FOUR_LEGS_COORDINATED_PUSH",
+        "flight_configuration": "EXTENDED_BODY_MAXIMUM_REACH",
+        "landing_strategy": "FRONT_PAWS_FIRST_REAR_LEGS_SUPPORT"
+      }
+    }
+  },
+  
+  "acrobatic_movements": {
+    "rolls_and_tumbles": {
+      "forward_roll": {
+        "initiation": "CONTROLLED_FORWARD_FALL_FROM_CROUCH",
+        "rotation_control": "SPINE_FLEXION_MAINTAINS_ROUND_SHAPE",
+        "momentum_conservation": "CONTINUOUS_ROLLING_MOTION",
+        "recovery": "ROLL_TO_FEET_SEAMLESS_TRANSITION"
+      },
+      "side_roll": {
+        "technique": "LOG_ROLL_BODY_ALIGNMENT",
+        "safety": "ARMS_TUCKED_PROTECTED_POSITION",
+        "terrain_adaptation": "ADJUST_SPEED_FOR_SURFACE"
+      }
+    },
+    
+    "balance_challenges": {
+      "one_leg_stands": {
+        "duration": "UP_TO_10_SECONDS_IMPRESSIVE_BALANCE",
+        "variations": ["STRAIGHT_LEG", "BENT_KNEE", "LEG_EXTENSIONS"],
+        "arm_positions": "VARIOUS_ARTISTIC_ARM_CONFIGURATIONS"
+      },
+      "dynamic_balancing": {
+        "walking_beam": "NARROW_SURFACE_BALANCE_WALKING",
+        "perturbation_recovery": "EXTERNAL_PUSH_BALANCE_RECOVERY",
+        "eyes_closed_balance": "PROPRIOCEPTIVE_ONLY_BALANCE_CHALLENGE"
+      }
+    }
+  },
+  
+  "full_body_coordination_algorithms": {
+    "synchronization_control": {
+      "master_choreography_controller": {
+        "component": "ESP32_S3_MAIN_CONTROLLER",
+        "responsibilities": ["OVERALL_MOVEMENT_COORDINATION", "TIMING_SYNCHRONIZATION", "MUSIC_BEAT_TRACKING"],
+        "precision": "MILLISECOND_TIMING_ACCURACY"
+      },
+      
+      "distributed_execution": {
+        "limb_controllers": "ESP32_C3_LOCAL_MOVEMENT_EXECUTION",
+        "spine_controller": "TORSO_ARTICULATION_COORDINATION", 
+        "balance_controller": "REAL_TIME_STABILITY_MAINTENANCE",
+        "communication_latency": "UNDER_3_MS_CRITICAL_COORDINATION"
+      }
+    },
+    
+    "movement_primitives": {
+      "basic_building_blocks": {
+        "joint_trajectories": "SPLINE_INTERPOLATED_SMOOTH_PATHS",
+        "velocity_profiles": "S_CURVE_ACCELERATION_NATURAL_MOTION",
+        "force_control": "COMPLIANT_MOVEMENT_SAFE_INTERACTION",
+        "timing_control": "PRECISE_BEAT_SYNCHRONIZATION"
+      },
+      
+      "compound_movements": {
+        "sequential_chains": "KINETIC_CHAIN_WAVE_PROPAGATION",
+        "parallel_coordination": "SIMULTANEOUS_MULTI_LIMB_CONTROL",
+        "counter_movements": "OPPOSING_MOTIONS_DYNAMIC_BALANCE",
+        "rhythmic_patterns": "REPETITIVE_CYCLIC_MOVEMENTS"
+      }
+    }
+  },
+  
+  "safety_and_protection_systems": {
+    "dynamic_movement_safety": {
+      "impact_protection": {
+        "joint_limits": "SOFT_LIMITS_PREVENT_OVEREXTENSION",
+        "collision_detection": "ACCELEROMETER_UNEXPECTED_IMPACT",
+        "emergency_stops": "IMMEDIATE_HALT_DANGEROUS_SITUATIONS",
+        "recovery_positions": "SAFE_DEFENSIVE_POSES"
+      },
+      
+      "balance_safety": {
+        "fall_detection": "REAL_TIME_BALANCE_LOSS_DETECTION",
+        "protective_reflexes": "AUTOMATIC_ARM_EXTENSION_PROTECTION",
+        "controlled_falls": "MINIMIZE_DAMAGE_INEVITABLE_FALLS",
+        "recovery_assistance": "SELF_RIGHTING_FROM_GROUND"
+      }
+    },
+    
+    "performance_monitoring": {
+      "joint_stress_monitoring": "SERVO_CURRENT_TEMPERATURE_MONITORING",
+      "fatigue_detection": "PERFORMANCE_DEGRADATION_DETECTION",
+      "maintenance_alerts": "PREDICTIVE_MAINTENANCE_SCHEDULING",
+      "performance_optimization": "CONTINUOUS_MOVEMENT_IMPROVEMENT"
+    }
+  },
+  
+  "music_and_rhythm_integration": {
+    "beat_detection": {
+      "audio_input": "MICROPHONE_ARRAY_BEAT_EXTRACTION",
+      "tempo_analysis": "REAL_TIME_BPM_CALCULATION",
+      "rhythm_prediction": "ANTICIPATE_BEAT_PATTERNS",
+      "synchronization": "MOVEMENT_LOCKED_TO_MUSIC_BEAT"
+    },
+    
+    "choreography_generation": {
+      "procedural_dance": "AI_GENERATED_MOVEMENT_SEQUENCES",
+      "style_adaptation": "DIFFERENT_DANCE_STYLES_SELECTION",
+      "improvisation": "REAL_TIME_MOVEMENT_VARIATION",
+      "interaction": "RESPONSIVE_TO_AUDIENCE_REACTIONS"
+    }
+  },
+  
+  "performance_specifications": {
+    "humanoid_capabilities": {
+      "leap_height": "18_INCHES_VERTICAL_SAFE_MAXIMUM",
+      "leap_distance": "36_INCHES_HORIZONTAL_RUNNING_START",
+      "dance_duration": "15_MINUTES_CONTINUOUS_PERFORMANCE",
+      "balance_time": "30_SECONDS_ONE_LEG_STAND",
+      "pounce_range": "8_FEET_MAXIMUM_EFFECTIVE_DISTANCE"
+    },
+    
+    "quadruped_capabilities": {
+      "leap_height": "24_INCHES_FOUR_LEG_LAUNCH_ADVANTAGE",
+      "leap_distance": "48_INCHES_RUNNING_POUNCE",
+      "rearing_duration": "5_SECONDS_BIPEDAL_BALANCE",
+      "dance_complexity": "RHYTHMIC_STEPPING_PATTERNS",
+      "pounce_accuracy": "TARGET_WITHIN_2_INCH_RADIUS"
+    }
+  },
+  
+  "energy_and_power_considerations": {
+    "high_power_movements": {
+      "leap_power_burst": "BRIEF_HIGH_CURRENT_DRAW_ACCEPTABLE",
+      "dance_sustained_power": "MODERATE_POWER_EXTENDED_DURATION",
+      "pounce_explosive_power": "MAXIMUM_SERVO_OUTPUT_SHORT_BURST",
+      "recovery_power": "MINIMAL_POWER_STATIC_POSES"
+    },
+    
+    "thermal_management": {
+      "servo_cooling": "FORCED_AIR_COOLING_HIGH_ACTIVITY",
+      "duty_cycle_management": "ALTERNATE_HIGH_LOW_INTENSITY",
+      "performance_throttling": "REDUCE_ACTIVITY_OVERHEATING",
+      "thermal_monitoring": "CONTINUOUS_TEMPERATURE_TRACKING"
+    }
+  }
+}

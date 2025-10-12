@@ -1,0 +1,89 @@
+{
+  "relative_filename": "config/components/interfaces/esp32_servo_controller.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  
+  "interface_id": "ESP32_SERVO_CONTROLLER",
+  "interface_type": "PWM_SERVO_BANK",
+  "description": "ESP32-S3 native servo control replacing Dynamixel systems",
+  
+  "hardware_specifications": {
+    "microcontroller": "ESP32-S3-DevKitC-1",
+    "native_pwm_channels": 16,
+    "pwm_resolution": "16_BIT",
+    "pwm_frequency": "50_HZ",
+    "servo_voltage": "6V_REGULATED"
+  },
+  
+  "gpio_assignments": {
+    "servo_bank_1": {
+      "gpio_01": "LEG_LEFT_HIP_YAW",
+      "gpio_02": "LEG_LEFT_HIP_ROLL", 
+      "gpio_03": "LEG_LEFT_HIP_PITCH",
+      "gpio_04": "LEG_LEFT_KNEE_PITCH",
+      "gpio_05": "LEG_LEFT_ANKLE_PITCH",
+      "gpio_06": "LEG_LEFT_ANKLE_ROLL"
+    },
+    
+    "servo_bank_2": {
+      "gpio_07": "LEG_RIGHT_HIP_YAW",
+      "gpio_08": "LEG_RIGHT_HIP_ROLL",
+      "gpio_09": "LEG_RIGHT_HIP_PITCH", 
+      "gpio_10": "LEG_RIGHT_KNEE_PITCH",
+      "gpio_11": "LEG_RIGHT_ANKLE_PITCH",
+      "gpio_12": "LEG_RIGHT_ANKLE_ROLL"
+    },
+    
+    "communication": {
+      "gpio_13": "ESP_NOW_ANTENNA",
+      "gpio_14": "STATUS_LED",
+      "gpio_15": "IMU_I2C_SDA",
+      "gpio_16": "IMU_I2C_SCL"
+    }
+  },
+  
+  "servo_driver_specs": {
+    "heavy_duty_servos": {
+      "model": "MG996R",
+      "pulse_width_min": "1000_MICROSECONDS",
+      "pulse_width_max": "2000_MICROSECONDS", 
+      "pulse_width_neutral": "1500_MICROSECONDS",
+      "rotation_range": "180_DEGREES",
+      "torque": "11_KG_CM",
+      "current_draw": "1.2A_STALL"
+    },
+    
+    "standard_servos": {
+      "model": "MG90S", 
+      "pulse_width_min": "1000_MICROSECONDS",
+      "pulse_width_max": "2000_MICROSECONDS",
+      "pulse_width_neutral": "1500_MICROSECONDS", 
+      "rotation_range": "180_DEGREES",
+      "torque": "2.5_KG_CM",
+      "current_draw": "0.5A_STALL"
+    }
+  },
+  
+  "power_requirements": {
+    "servo_power": "6V_15A_REGULATED",
+    "logic_power": "3.3V_ESP32_INTERNAL", 
+    "total_power": "12V_20A_SUPPLY",
+    "power_distribution": "BUCK_CONVERTERS"
+  },
+  
+  "communication_protocol": {
+    "inter_esp32": "ESP_NOW_MESH",
+    "data_rate": "1_MBPS",
+    "latency": "10_MILLISECONDS_MAX",
+    "packet_format": "SERVO_POSITION_COMMANDS",
+    "error_handling": "AUTOMATIC_RETRY"
+  },
+  
+  "advantages_over_dynamixel": {
+    "cost": "90%_REDUCTION",
+    "simplicity": "NO_SERIAL_BUS_COMPLEXITY", 
+    "real_time": "DIRECT_PWM_NO_PROTOCOL_OVERHEAD",
+    "expandability": "EASY_GPIO_MAPPING",
+    "debugging": "STANDARD_PWM_SCOPE_ANALYSIS"
+  }
+}

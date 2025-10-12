@@ -1,0 +1,210 @@
+{
+  "relative_filename": "config/components/positioned/hand_controller_esp32c3.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "component_id": "HAND_CONTROLLER_ESP32C3",
+  "component_type": "POSITIONED_SUBSYSTEM",
+  "description": "5-finger robotic hand controlled by ESP32-C3 with GPIO constraint optimization",
+  
+  "physical_placement": {
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+      "x": "-8.0 INCH",
+      "y": "2.0 INCH", 
+      "z": "-4.0 INCH"
+    },
+    "mounting_location": "WRIST_ASSEMBLY_INTERNAL"
+  },
+  
+  "gpio_allocation_optimized": {
+    "available_pins": "8_USABLE_GPIO_PINS",
+    "critical_requirements": {
+      "finger_servos": "5_PWM_OUTPUTS_REQUIRED",
+      "sensors": "PRESSURE_AND_POSITION_FEEDBACK", 
+      "communication": "BLUETOOTH_MESH_BUILT_IN",
+      "status": "LED_AND_CALIBRATION_BUTTON"
+    },
+    
+    "pin_assignments": {
+      "GPIO0": {
+        "function": "THUMB_SERVO_PWM",
+        "servo_model": "MG90S_MICRO_SERVO",
+        "pulse_width": "1000_2000_MICROSECONDS"
+      },
+      "GPIO1": {
+        "function": "INDEX_FINGER_SERVO_PWM", 
+        "servo_model": "MG90S_MICRO_SERVO",
+        "pulse_width": "1000_2000_MICROSECONDS"
+      },
+      "GPIO3": {
+        "function": "MIDDLE_FINGER_SERVO_PWM",
+        "servo_model": "MG90S_MICRO_SERVO", 
+        "pulse_width": "1000_2000_MICROSECONDS"
+      },
+      "GPIO4": {
+        "function": "RING_FINGER_SERVO_PWM",
+        "servo_model": "MG90S_MICRO_SERVO",
+        "pulse_width": "1000_2000_MICROSECONDS"
+      },
+      "GPIO5": {
+        "function": "PINKY_FINGER_SERVO_PWM",
+        "servo_model": "MG90S_MICRO_SERVO",
+        "pulse_width": "1000_2000_MICROSECONDS" 
+      },
+      "GPIO7": {
+        "function": "I2C_SDA_SENSOR_BUS",
+        "pull_up": "INTERNAL_PULL_UP_ENABLED",
+        "devices": "MULTIPLE_I2C_SENSORS"
+      },
+      "GPIO10": {
+        "function": "I2C_SCL_SENSOR_BUS", 
+        "pull_up": "INTERNAL_PULL_UP_ENABLED",
+        "frequency": "400_KHZ_FAST_I2C"
+      },
+      "GPIO6": {
+        "function": "STATUS_LED_AND_CALIBRATION",
+        "led_indication": "MESH_CONNECTION_STATUS",
+        "button_input": "PULLUP_INPUT_CALIBRATION_MODE"
+      }
+    }
+  },
+  
+  "i2c_sensor_expansion": {
+    "shared_bus_devices": {
+      "pressure_sensor_array": {
+        "chip": "ADS1115_16BIT_ADC_4_CHANNEL",
+        "i2c_address": "0x48", 
+        "sensors_connected": "4_PRESSURE_SENSORS_FINGERTIPS",
+        "reading_frequency": "100_HZ",
+        "purpose": "GRIP_FORCE_FEEDBACK"
+      },
+      
+      "hand_orientation_imu": {
+        "chip": "MPU6050_6DOF_IMU",
+        "i2c_address": "0x68",
+        "sensors": "ACCELEROMETER_GYROSCOPE", 
+        "reading_frequency": "200_HZ",
+        "purpose": "HAND_ORIENTATION_GESTURE_RECOGNITION"
+      },
+      
+      "finger_position_feedback": {
+        "chip": "ADS1115_SECOND_INSTANCE", 
+        "i2c_address": "0x49",
+        "sensors_connected": "5_FLEX_SENSORS_FINGER_JOINTS",
+        "reading_frequency": "50_HZ",
+        "purpose": "CLOSED_LOOP_FINGER_POSITION_CONTROL"
+      }
+    },
+    
+    "i2c_bus_management": {
+      "total_devices": "3_I2C_DEVICES_ON_SHARED_BUS",
+      "address_allocation": "NO_CONFLICTS_DIFFERENT_ADDRESSES", 
+      "polling_strategy": "ROUND_ROBIN_NON_BLOCKING",
+      "interrupt_driven": "MPU6050_DATA_READY_INTERRUPT_AVAILABLE"
+    }
+  },
+  
+  "servo_control_optimization": {
+    "pwm_configuration": {
+      "frequency": "50_HZ_STANDARD_SERVO",
+      "resolution": "16_BIT_FINE_CONTROL", 
+      "channels_used": "5_OF_8_AVAILABLE_LEDC_CHANNELS",
+      "remaining_channels": "3_AVAILABLE_FOR_EXPANSION"
+    },
+    
+    "servo_specifications": {
+      "model": "MG90S_MICRO_SERVO",
+      "torque": "2.5_KG_CM_AT_6V",
+      "speed": "0.1_SECONDS_PER_60_DEGREES", 
+      "size": "22.5x12x29mm",
+      "weight": "13.4_GRAMS",
+      "current": "220_MA_NO_LOAD_800_MA_STALL"
+    }
+  },
+  
+  "power_management": {
+    "esp32c3_power": {
+      "supply_voltage": "3.3V_REGULATED",
+      "active_current": "80_MA_TYPICAL", 
+      "sleep_current": "5_MICROAMPS_DEEP_SLEEP",
+      "wake_sources": "BLUETOOTH_MESH_COMMANDS"
+    },
+    
+    "servo_power": {
+      "supply_voltage": "6V_REGULATED_FROM_ARM_CONTROLLER",
+      "total_current": "5x220MA_1.1A_NO_LOAD_5x800MA_4A_STALL", 
+      "current_limiting": "SOFTWARE_PWM_DUTY_CYCLE_LIMITING",
+      "protection": "CURRENT_SENSE_VIA_I2C_ADC"
+    }
+  },
+  
+  "bluetooth_mesh_integration": {
+    "node_role": "LEAF_NODE_END_DEVICE",
+    "parent_controller": "ARM_CONTROLLER_ESP32C3", 
+    "mesh_messages": {
+      "incoming": [
+        "HAND_GESTURE_COMMANDS",
+        "INDIVIDUAL_FINGER_POSITIONS", 
+        "GRIP_FORCE_COMMANDS",
+        "CALIBRATION_REQUESTS"
+      ],
+      "outgoing": [
+        "FINGER_POSITION_FEEDBACK",
+        "GRIP_FORCE_MEASUREMENTS", 
+        "HAND_ORIENTATION_DATA",
+        "STATUS_HEARTBEAT"
+      ]
+    }
+  },
+  
+  "functional_capabilities": {
+    "basic_grips": {
+      "pinch_grip": "THUMB_INDEX_FINGER_COORDINATION",
+      "power_grip": "ALL_FINGERS_CURL_AROUND_OBJECT", 
+      "precision_grip": "FINGERTIP_CONTROL_SMALL_OBJECTS",
+      "lateral_grip": "THUMB_SIDE_INDEX_FINGER_GRIP"
+    },
+    
+    "advanced_functions": {
+      "force_feedback": "PRESSURE_SENSORS_PREVENT_CRUSHING",
+      "adaptive_grip": "AUTOMATIC_GRIP_ADJUSTMENT_BASED_ON_OBJECT", 
+      "gesture_recognition": "IMU_BASED_HAND_GESTURE_DETECTION",
+      "position_control": "FLEX_SENSOR_CLOSED_LOOP_POSITIONING"
+    }
+  },
+  
+  "gpio_constraint_solutions": {
+    "problem": "ONLY_8_GPIO_PINS_FOR_COMPLEX_HAND",
+    "solutions_implemented": {
+      "i2c_multiplexing": "ALL_SENSORS_ON_SHARED_2_PIN_BUS",
+      "direct_pwm": "CRITICAL_SERVOS_GET_DEDICATED_PINS", 
+      "combo_functions": "STATUS_LED_DOUBLES_AS_CALIBRATION_INPUT",
+      "wireless_communication": "NO_GPIO_PINS_NEEDED_FOR_COMMUNICATION"
+    },
+    "result": "FULL_FUNCTIONALITY_WITHIN_GPIO_LIMITS"
+  },
+  
+  "expansion_possibilities": {
+    "within_current_design": {
+      "additional_i2c_devices": "5_MORE_ADDRESSES_AVAILABLE_0x50_TO_0x77",
+      "pwm_expansion": "PCA9685_COULD_ADD_16_MORE_PWM_CHANNELS", 
+      "spare_gpio": "NONE_ALL_ALLOCATED_FOR_CORE_FUNCTION"
+    },
+    
+    "future_upgrades": {
+      "tactile_sensors": "I2C_BASED_TACTILE_SENSOR_ARRAYS",
+      "haptic_feedback": "I2C_CONTROLLED_HAPTIC_ACTUATORS", 
+      "temperature_sensing": "I2C_TEMPERATURE_SENSORS_OBJECT_DETECTION"
+    }
+  },
+  
+  "design_validation": {
+    "gpio_usage": "8_OF_8_PINS_ALLOCATED_100%_UTILIZATION",
+    "i2c_capacity": "3_OF_127_ADDRESSES_USED_PLENTY_OF_EXPANSION", 
+    "pwm_channels": "5_OF_8_CHANNELS_USED_ADEQUATE_FOR_HAND",
+    "power_budget": "WITHIN_ESP32C3_AND_POWER_SUPPLY_LIMITS",
+    "mesh_bandwidth": "LOW_BANDWIDTH_SUITABLE_FOR_LEAF_NODE"
+  }
+}
