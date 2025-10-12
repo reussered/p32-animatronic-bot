@@ -92,11 +92,80 @@ Two coordinate systems supported:
 - `tools/launch-stl-viewer.ps1` - Web-based STL viewer for design validation
 - `src/main.c` - Currently minimal ESP-IDF entry point
 
+## Error Handling and Debugging
+
+### Common Issues and Solutions
+- **JSON Validation Errors**: Run `python3 config/validate.py` to identify malformed configs
+- **Build Failures**: Check `platformio.ini` matches your board, verify ESP-IDF installation
+- **GPIO Conflicts**: Review `docs/goblin-full-interconnection-diagram.md` for pin assignments
+- **OpenSCAD Errors**: Verify OpenSCAD is installed and in PATH for shape generation
+
+### Debugging Approaches
+- **Configuration Issues**: Use `.\generate_file_structure.ps1` to inspect all JSON files
+- **Hardware Testing**: Flash individual components before full bot assembly
+- **3D Printing**: Generate and preview STL files before printing with `.\tools\launch-stl-viewer.ps1`
+- **Serial Debugging**: Use `pio device monitor` for ESP32 serial output
+
+### Safety and Validation
+- **Always validate JSON** before committing to prevent broken configs
+- **Test shapes virtually** before 3D printing to save material
+- **Check GPIO assignments** to prevent hardware damage from pin conflicts
+- **Incremental testing** - build and test one component at a time
+
 ## Development Notes
 - Project uses Windows PowerShell for tooling scripts
 - Configuration system designed for rapid prototyping of different animatronic characters
 - Mood-driven behavior system suggests AI/ML integration planned
 - Hardware targets ESP32-S3 for advanced audio/display capabilities
+- Development primarily on Windows, but configs are cross-platform
+- 3D printing workflow integrated into development process
+
+## Testing and Quality Standards
+
+### Configuration Validation
+- **Python Validator**: Run `python3 config/validate.py` to validate all JSON files
+- **Validation Checks**: JSON syntax validation and schema consistency within folders
+- **Pre-commit**: Always validate configs before committing changes
+- **Schema Consistency**: All JSON files in same folder must have identical top-level keys
+
+### Code Quality
+- **PlatformIO Tests**: Test directory structure follows PlatformIO Unit Testing framework
+- **Documentation**: Update relevant docs when changing architecture or adding features
+- **PowerShell Scripts**: Use `Write-Host` with color coding for user feedback
+- **Error Handling**: Scripts should validate inputs and provide clear error messages
+
+### File Naming Conventions
+- **JSON Configs**: Use snake_case: `goblin_full.json`, `spi_bus_vspi.json`
+- **PowerShell Scripts**: Use kebab-case with verb-noun pattern: `generate-mounting-system.ps1`
+- **Markdown Docs**: Use kebab-case: `coordinate-system-spec.md`
+- **OpenSCAD Files**: Match bot/component names: `goblin_eye_shells.scad`
+
+## Contributing Guidelines
+
+### Making Changes
+- **Minimal Changes**: Make surgical, focused changes that don't break existing functionality
+- **Documentation First**: Update architecture docs before implementing major features
+- **Test After Changes**: Validate JSON configs and test builds after modifications
+- **Commit Messages**: Use clear, descriptive commit messages explaining the "why"
+
+### Adding New Bots
+1. Create JSON config in `config/bots/` following existing schema
+2. Define positioned components in `config/components/positioned/`
+3. Generate 3D shapes with `.\tools\generate-mounting-system.ps1 -BotType <name>`
+4. Create asset directories: `assets/{animations,sounds}/<bot_name>/`
+5. Validate with `python3 config/validate.py`
+
+### Adding New Hardware Components
+1. Define hardware specs in `config/components/hardware/`
+2. Create interface definition in `config/components/interfaces/`
+3. Update GPIO assignment documentation in `docs/`
+4. Test with existing bot configurations
+
+### Code Style
+- **C/C++ (ESP-IDF)**: Follow ESP-IDF coding standards
+- **Python**: Follow PEP 8, use type hints
+- **PowerShell**: Use approved verbs, parameter validation, meaningful variable names
+- **JSON**: 2-space indentation, always include required metadata fields
 
 ## Future Architecture Vision
 - **Multi-Tiered AI**: ESP32 (reflexive) → Raspberry Pi (behavioral) → Cloud (conversational)
