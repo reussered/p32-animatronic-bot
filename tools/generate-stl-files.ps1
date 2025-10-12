@@ -5,6 +5,7 @@ param(
     [switch]$BasicMounts,
     [switch]$BotShells,
     [switch]$Generated,
+    [switch]$SkullAssemblies,
     [switch]$All,
     [switch]$MultiColor,
     [string]$OutputDir = "assets\shapes\stl",
@@ -14,7 +15,7 @@ param(
 )
 
 # Default to true if no specific switches provided
-if (-not $BasicMounts -and -not $BotShells -and -not $Generated -and -not $All) {
+if (-not $BasicMounts -and -not $BotShells -and -not $Generated -and -not $SkullAssemblies -and -not $All) {
     $BasicMounts = $true
     $BotShells = $true
 }
@@ -23,6 +24,7 @@ if ($All) {
     $BasicMounts = $true
     $BotShells = $true
     $Generated = $true
+    $SkullAssemblies = $true
 }
 
 $OutputFormat = if ($MultiColor) { "3MF" } else { "STL" }
@@ -201,6 +203,81 @@ if ($Generated) {
     }
 }
 
+# Generate Skull Assemblies
+if ($SkullAssemblies) {
+    Write-Host "`n=== Generating Complete Skull Assemblies ===" -ForegroundColor Green
+    
+    $SkullAssemblyDir = "$OutputDir\skull_assemblies"
+    if (-not (Test-Path $SkullAssemblyDir)) {
+        New-Item -ItemType Directory -Path $SkullAssemblyDir -Force | Out-Null
+    }
+    
+    $AssemblyScadFile = "assets\shapes\scad\integrated_skull_assembly_system.scad"
+    
+    if (Test-Path $AssemblyScadFile) {
+        # Define creature types to generate
+        $CreatureTypes = @("goblin", "zombie", "android", "cat", "lion", "dragon_fire", "dragon_ice", "bear")
+        
+        foreach ($CreatureType in $CreatureTypes) {
+            Write-Host "  Generating $CreatureType skull assembly..." -ForegroundColor Yellow
+            
+            $OutputName = "${CreatureType}_skull_assembly." + $OutputFormat.ToLower()
+            $OutputPath = Join-Path $SkullAssemblyDir $OutputName
+            
+            # Build OpenSCAD command with creature type parameter
+            $Arguments = @()
+            $Arguments += "-o"
+            $Arguments += "`"$OutputPath`""
+            
+            # Set creature type parameter
+            $Arguments += "-D"
+            $Arguments += "creature_type=`"$CreatureType`""
+            
+            # Use printable assembly function
+            $Arguments += "-D"
+            $Arguments += "render_mode=`"printable`""
+            
+            # Add wall thickness parameter
+            $Arguments += "-D"
+            $Arguments += "wall_thickness=2.5"
+            
+            # Add construction type if specified
+            if ($ConstructionType) {
+                $Arguments += "-D"
+                $Arguments += "construction_type=`"$ConstructionType`""
+            }
+            
+            # Add color palette if specified
+            if ($ColorPalette.primary) {
+                $Arguments += "-D"
+                $Arguments += "PRIMARY_COLOR=`"$($ColorPalette.primary)`""
+            }
+            
+            # Add source file
+            $Arguments += "`"$AssemblyScadFile`""
+            
+            try {
+                $Result = & openscad @Arguments 2>&1
+                
+                if ($LASTEXITCODE -eq 0 -and (Test-Path $OutputPath)) {
+                    $FileSize = Get-Item $OutputPath
+                    $SizeKB = [math]::Round($FileSize.Length / 1KB, 1)
+                    Write-Host "    Generated successfully - Size: $SizeKB KB" -ForegroundColor Green
+                } else {
+                    Write-Host "    Generation failed" -ForegroundColor Red
+                    if ($Result) {
+                        Write-Host "      Error: $Result" -ForegroundColor Red
+                    }
+                }
+            } catch {
+                Write-Host "    Exception occurred: $($_.Exception.Message)" -ForegroundColor Red
+            }
+        }
+    } else {
+        Write-Host "  Assembly SCAD file not found: $AssemblyScadFile" -ForegroundColor Red
+    }
+}
+
 Write-Host "`n=== $OutputFormat Generation Complete ===" -ForegroundColor Cyan
 
 # Show output directories
@@ -213,6 +290,9 @@ if ($BotShells) {
 if ($Generated) {
     Write-Host "Generated ${OutputFormat}s: $OutputDir\generated" -ForegroundColor Yellow
 }
+if ($SkullAssemblies) {
+    Write-Host "Skull Assembly ${OutputFormat}s: $OutputDir\skull_assemblies" -ForegroundColor Yellow
+}
 
 # Show file sizes and types
 Write-Host "`nGenerated Files:" -ForegroundColor Cyan
@@ -221,6 +301,7 @@ $SearchPaths = @()
 if ($BasicMounts) { $SearchPaths += "$StlBasicDir\$SearchPattern" }
 if ($BotShells) { $SearchPaths += "$StlBotShellsDir\$SearchPattern" }
 if ($Generated) { $SearchPaths += "$OutputDir\generated\$SearchPattern" }
+if ($SkullAssemblies) { $SearchPaths += "$OutputDir\skull_assemblies\$SearchPattern" }
 
 if ($SearchPaths.Count -gt 0) {
     Get-ChildItem $SearchPaths -ErrorAction SilentlyContinue | 

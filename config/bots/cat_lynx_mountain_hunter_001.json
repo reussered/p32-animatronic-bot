@@ -1,0 +1,50 @@
+{
+    "relative_filename": "config/bots/cat_lynx_mountain_hunter_001.json",
+    "version": "2.1.0",
+    "author": "config/author.json",
+    "bot_type": "CAT_LYNX_MOUNTAIN_HUNTER",
+    "inherits_family": "cat_family",
+    "bot_name": "Tufted Ears the Silent Stalker",
+    "description": "A Canadian lynx with distinctive ear tufts and snowshoe paws. Expert mountain hunter with incredible patience and stealth.",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "eye_spacing": "2.8 INCH",
+    "scale_factor": 1.1,
+    "default_mood": "CURIOSITY",
+    "mood_defaults": {
+        "FEAR": {"duration_ms": 2500, "intensity": 0.5},
+        "ANGER": {"duration_ms": 8000, "intensity": 0.7},
+        "IRRITATION": {"duration_ms": 6000, "intensity": 0.6},
+        "HAPPINESS": {"duration_ms": 10000, "intensity": 0.7},
+        "CONTENTMENT": {"duration_ms": 25000, "intensity": 0.8},
+        "HUNGER": {"duration_ms": 15000, "intensity": 0.9},
+        "CURIOSITY": {"duration_ms": 20000, "intensity": 0.9},
+        "AFFECTION": {"duration_ms": 5000, "intensity": 0.4}
+    },
+    "personality_traits": {
+        "aggression_level": 0.6,
+        "curiosity_level": 0.9,
+        "sociability_level": 0.3,
+        "energy_level": 0.6,
+        "patience": 0.95,
+        "stealth_hunting": 0.9,
+        "mountain_adaptation": 0.85
+    },
+    "behavior_config": {
+        "proximity_alert_distance": "100 CM",
+        "proximity_interact_distance": "40 CM",
+        "interaction_timeout": "15000 MS",
+        "sleep_mode_timeout": "180000 MS"
+    },
+    "audio_profile": {
+        "ambient_sounds": ["lynx_breathing.wav", "mountain_wind.wav"],
+        "reaction_sounds": {
+            "happy": "lynx_satisfied_chuff.wav",
+            "angry": "lynx_warning_snarl.wav",
+            "curious": "lynx_questioning_chirp.wav",
+            "afraid": "lynx_retreat_hiss.wav"
+        }
+    },
+    "component_count": 0,
+    "components": []
+}

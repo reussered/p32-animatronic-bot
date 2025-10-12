@@ -1,0 +1,49 @@
+{
+    "relative_filename": "config/bots/android_security_unit_001.json",
+    "version": "2.1.0",
+    "author": "config/author.json",
+    "bot_type": "ANDROID_SECURITY",
+    "inherits_family": "android_family",
+    "bot_name": "Guardian Protocol Alpha-7",
+    "description": "Military-grade security android with threat assessment protocols and defensive systems. Logical but protective.",
+    "coordinate_system": "skull_3d",
+    "reference_point": "optical_sensor_center",
+    "eye_spacing": "3.2 INCH",
+    "scale_factor": 1.1,
+    "default_mood": "CONTENTMENT",
+    "mood_defaults": {
+        "FEAR": {"duration_ms": 500, "intensity": 0.1},
+        "ANGER": {"duration_ms": 8000, "intensity": 0.7},
+        "IRRITATION": {"duration_ms": 5000, "intensity": 0.6},
+        "HAPPINESS": {"duration_ms": 3000, "intensity": 0.4},
+        "CONTENTMENT": {"duration_ms": 30000, "intensity": 0.9},
+        "HUNGER": {"duration_ms": 0, "intensity": 0.0},
+        "CURIOSITY": {"duration_ms": 10000, "intensity": 0.8},
+        "AFFECTION": {"duration_ms": 2000, "intensity": 0.3}
+    },
+    "personality_traits": {
+        "aggression_level": 0.6,
+        "curiosity_level": 0.7,
+        "sociability_level": 0.4,
+        "energy_level": 0.8,
+        "protection_protocol": 0.95,
+        "threat_assessment": 0.9
+    },
+    "behavior_config": {
+        "proximity_alert_distance": "150 CM",
+        "proximity_interact_distance": "80 CM",
+        "interaction_timeout": "15000 MS",
+        "sleep_mode_timeout": "60000 MS"
+    },
+    "audio_profile": {
+        "ambient_sounds": ["security_scan_beep.wav", "system_monitoring.wav"],
+        "reaction_sounds": {
+            "happy": "protocol_successful.wav",
+            "angry": "security_alert.wav",
+            "curious": "scanning_target.wav",
+            "afraid": "defensive_systems_online.wav"
+        }
+    },
+    "component_count": 0,
+    "components": []
+}

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P32 Animatronic Skull Assembly Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header h1 {
+            margin: 0;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .controls {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .control-group label {
+            color: #ccc;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        select, button, input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        select:hover, button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+        
+        button.active {
+            background: rgba(0, 255, 136, 0.3);
+            border-color: #00ff88;
+        }
+        
+        .viewer-container {
+            display: flex;
+            height: calc(100vh - 140px);
+        }
+        
+        .viewport {
+            flex: 1;
+            background: #000;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-panel {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            overflow-y: auto;
+            border-left: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-section {
+            margin-bottom: 20px;
+        }
+        
+        .info-section h3 {
+            color: #00ff88;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 5px;
+        }
+        
+        .component-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .component-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .component-item.eye { border-left: 4px solid #ff4444; }
+        .component-item.mouth { border-left: 4px solid #4444ff; }
+        .component-item.sensor { border-left: 4px solid #ffff44; }
+        .component-item.speaker { border-left: 4px solid #ff44ff; }
+        
+        .coordinates {
+            font-family: monospace;
+            color: #aaa;
+            font-size: 10px;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ff88;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ff88;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error {
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px;
+        }
+        
+        .stats {
+            font-size: 11px;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 P32 Animatronic Skull Assembly Viewer</h1>
+        <p>Integrated Component Visualization System</p>
+    </div>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label>Creature Type</label>
+            <select id="creatureSelect">
+                <option value="goblin">Goblin Full</option>
+                <option value="zombie">Zombie Shambler</option>
+                <option value="android">Android Scout</option>
+                <option value="cat">Cat Domestic</option>
+                <option value="lion">Lion Pride</option>
+                <option value="dragon_fire">Fire Dragon</option>
+                <option value="dragon_ice">Ice Dragon</option>
+                <option value="bear">Bear Grizzly</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>View Mode</label>
+            <select id="viewMode">
+                <option value="complete">Complete Assembly</option>
+                <option value="skull_only">Skull Only</option>
+                <option value="components_only">Components Only</option>
+                <option value="exploded">Exploded View</option>
+                <option value="wireframe">Wireframe</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>Display Options</label>
+            <button id="toggleComponents" class="active">Show Components</button>
+            <button id="toggleLabels" class="active">Show Labels</button>
+            <button id="toggleMeasurements">Show Measurements</button>
+        </div>
+        
+        <div class="control-group">
+            <label>Actions</label>
+            <button id="generateSTL">Generate STL</button>
+            <button id="exportConfig">Export Config</button>
+            <button id="resetView">Reset View</button>
+        </div>
+    </div>
+    
+    <div class="viewer-container">
+        <div class="viewport" id="viewport">
+            <div class="loading" id="loading">Loading 3D Model...</div>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-section">
+                <h3>Assembly Information</h3>
+                <div id="assemblyInfo">
+                    <p><strong>Creature:</strong> <span id="currentCreature">Goblin Full</span></p>
+                    <p><strong>Scale Factor:</strong> <span id="scaleFactor">1.0x</span></p>
+                    <p><strong>Eye Spacing:</strong> <span id="eyeSpacing">53.34mm</span></p>
+                    <p><strong>Overall Dimensions:</strong> <span id="dimensions">130×150×140mm</span></p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>Components</h3>
+                <ul class="component-list" id="componentList">
+                    <li class="component-item eye">
+                        <strong>Left Eye Display</strong><br>
+                        <span class="coordinates">(-26.67, 17.78, -8.89)</span>
+                    </li>
+                    <li class="component-item eye">
+                        <strong>Right Eye Display</strong><br>
+                        <span class="coordinates">(26.67, 17.78, -8.89)</span>
+                    </li>
+                    <li class="component-item mouth">
+                        <strong>Mouth Display</strong><br>
+                        <span class="coordinates">(0, -26.67, 0)</span>
+                    </li>
+                    <li class="component-item sensor">
+                        <strong>Nose Sensor</strong><br>
+                        <span class="coordinates">(0, 0, 6.35)</span>
+                    </li>
+                    <li class="component-item speaker">
+                        <strong>Left Speaker</strong><br>
+                        <span class="coordinates">(-38.1, 19.05, 12.7)</span>
+                    </li>
+                    <li class="component-item speaker">
+                        <strong>Right Speaker</strong><br>
+                        <span class="coordinates">(38.1, 19.05, 12.7)</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="info-section">
+                <h3>3D Printing Info</h3>
+                <div id="printingInfo">
+                    <p><strong>Wall Thickness:</strong> 2.5mm</p>
+                    <p><strong>Infill:</strong> 15-20%</p>
+                    <p><strong>Supports:</strong> Minimal</p>
+                    <p><strong>Print Time:</strong> ~8-12 hours</p>
+                    <p><strong>Material:</strong> PLA/PETG</p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>Hardware</h3>
+                <div id="hardwareInfo">
+                    <p><strong>Displays:</strong> 3× GC9A01 1.28"</p>
+                    <p><strong>Sensor:</strong> 1× HC-SR04</p>
+                    <p><strong>Speakers:</strong> 2× 28mm I2S</p>
+                    <p><strong>Mounting:</strong> M2.5 screws</p>
+                    <p><strong>Wiring:</strong> Integrated channels</p>
+                </div>
+            </div>
+            
+            <div class="stats" id="stats">
+                <p>Triangles: 0 | Vertices: 0</p>
+                <p>Render Time: 0ms</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 3D Viewer Core Functionality
+        class SkullAssemblyViewer {
+            constructor() {
+                this.viewport = document.getElementById('viewport');
+                this.loading = document.getElementById('loading');
+                this.currentCreature = 'goblin';
+                this.viewMode = 'complete';
+                this.showComponents = true;
+                this.showLabels = true;
+                this.showMeasurements = false;
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.initializeViewer();
+                this.loadAssembly();
+            }
+            
+            setupEventListeners() {
+                // Creature selection
+                document.getElementById('creatureSelect').addEventListener('change', (e) => {
+                    this.currentCreature = e.target.value;
+                    this.loadAssembly();
+                    this.updateInfo();
+                });
+                
+                // View mode
+                document.getElementById('viewMode').addEventListener('change', (e) => {
+                    this.viewMode = e.target.value;
+                    this.updateView();
+                });
+                
+                // Toggle buttons
+                document.getElementById('toggleComponents').addEventListener('click', (e) => {
+                    this.showComponents = !this.showComponents;
+                    e.target.classList.toggle('active', this.showComponents);
+                    this.updateView();
+                });
+                
+                document.getElementById('toggleLabels').addEventListener('click', (e) => {
+                    this.showLabels = !this.showLabels;
+                    e.target.classList.toggle('active', this.showLabels);
+                    this.updateView();
+                });
+                
+                document.getElementById('toggleMeasurements').addEventListener('click', (e) => {
+                    this.showMeasurements = !this.showMeasurements;
+                    e.target.classList.toggle('active', this.showMeasurements);
+                    this.updateView();
+                });
+                
+                // Action buttons
+                document.getElementById('generateSTL').addEventListener('click', () => {
+                    this.generateSTL();
+                });
+                
+                document.getElementById('exportConfig').addEventListener('click', () => {
+                    this.exportConfig();
+                });
+                
+                document.getElementById('resetView').addEventListener('click', () => {
+                    this.resetView();
+                });
+            }
+            
+            initializeViewer() {
+                // Initialize 3D context (Three.js would go here)
+                this.canvas = document.createElement('canvas');
+                this.canvas.width = this.viewport.clientWidth;
+                this.canvas.height = this.viewport.clientHeight;
+                this.canvas.style.width = '100%';
+                this.canvas.style.height = '100%';
+                this.viewport.appendChild(this.canvas);
+                
+                this.ctx = this.canvas.getContext('2d');
+                
+                // Setup mouse controls
+                this.setupMouseControls();
+                
+                // Animation loop
+                this.animate();
+            }
+            
+            setupMouseControls() {
+                let isMouseDown = false;
+                let lastMouseX = 0;
+                let lastMouseY = 0;
+                
+                this.canvas.addEventListener('mousedown', (e) => {
+                    isMouseDown = true;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                });
+                
+                this.canvas.addEventListener('mousemove', (e) => {
+                    if (!isMouseDown) return;
+                    
+                    const deltaX = e.clientX - lastMouseX;
+                    const deltaY = e.clientY - lastMouseY;
+                    
+                    // Update rotation (placeholder)
+                    this.rotation = this.rotation || { x: 0, y: 0 };
+                    this.rotation.y += deltaX * 0.01;
+                    this.rotation.x += deltaY * 0.01;
+                    
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                });
+                
+                this.canvas.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                });
+                
+                this.canvas.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    this.zoom = (this.zoom || 1) + (e.deltaY > 0 ? -0.1 : 0.1);
+                    this.zoom = Math.max(0.1, Math.min(3, this.zoom));
+                });
+            }
+            
+            loadAssembly() {
+                this.showLoading(true);
+                
+                // Simulate loading time
+                setTimeout(() => {
+                    this.showLoading(false);
+                    this.render();
+                }, 1000);
+            }
+            
+            showLoading(show) {
+                this.loading.style.display = show ? 'block' : 'none';
+            }
+            
+            render() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Create gradient background
+                const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+                gradient.addColorStop(0, '#1a1a2e');
+                gradient.addColorStop(1, '#16213e');
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Render assembly (simplified 2D representation for now)
+                this.renderAssembly();
+                
+                // Update stats
+                this.updateStats();
+            }
+            
+            renderAssembly() {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const scale = (this.zoom || 1) * 100;
+                
+                // Skull outline (simplified)
+                this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+                this.ctx.lineWidth = 2;
+                this.ctx.beginPath();
+                this.ctx.ellipse(centerX, centerY, scale * 0.65, scale * 0.75, 0, 0, Math.PI * 2);
+                this.ctx.stroke();
+                
+                if (this.showComponents) {
+                    // Left eye
+                    this.renderComponent(centerX - scale * 0.267, centerY - scale * 0.178, 16, '#ff4444', 'L');
+                    
+                    // Right eye
+                    this.renderComponent(centerX + scale * 0.267, centerY - scale * 0.178, 16, '#44ff44', 'R');
+                    
+                    // Mouth
+                    this.renderComponent(centerX, centerY + scale * 0.267, 16, '#4444ff', 'M');
+                    
+                    // Nose sensor
+                    this.renderComponent(centerX, centerY - scale * 0.064, 8, '#ffff44', 'S');
+                    
+                    // Speakers
+                    this.renderComponent(centerX - scale * 0.381, centerY - scale * 0.191, 10, '#ff44ff', 'LS');
+                    this.renderComponent(centerX + scale * 0.381, centerY - scale * 0.191, 10, '#44ffff', 'RS');
+                }
+                
+                // Measurements
+                if (this.showMeasurements) {
+                    this.renderMeasurements(centerX, centerY, scale);
+                }
+            }
+            
+            renderComponent(x, y, radius, color, label) {
+                // Component circle
+                this.ctx.fillStyle = color + '80';
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = 2;
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, radius, 0, Math.PI * 2);
+                this.ctx.fill();
+                this.ctx.stroke();
+                
+                // Label
+                if (this.showLabels) {
+                    this.ctx.fillStyle = 'white';
+                    this.ctx.font = '12px monospace';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText(label, x, y + 4);
+                }
+            }
+            
+            renderMeasurements(centerX, centerY, scale) {
+                this.ctx.strokeStyle = 'rgba(255, 255, 0, 0.8)';
+                this.ctx.lineWidth = 1;
+                this.ctx.setLineDash([2, 2]);
+                
+                // Eye spacing measurement
+                const leftEyeX = centerX - scale * 0.267;
+                const rightEyeX = centerX + scale * 0.267;
+                const eyeY = centerY - scale * 0.178;
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(leftEyeX, eyeY);
+                this.ctx.lineTo(rightEyeX, eyeY);
+                this.ctx.stroke();
+                
+                // Measurement text
+                this.ctx.fillStyle = 'yellow';
+                this.ctx.font = '10px monospace';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('53.34mm', centerX, eyeY - 10);
+                
+                this.ctx.setLineDash([]);
+            }
+            
+            updateView() {
+                this.render();
+            }
+            
+            updateInfo() {
+                const creatureData = this.getCreatureData(this.currentCreature);
+                
+                document.getElementById('currentCreature').textContent = creatureData.name;
+                document.getElementById('scaleFactor').textContent = creatureData.scale + 'x';
+                document.getElementById('eyeSpacing').textContent = creatureData.eyeSpacing + 'mm';
+                document.getElementById('dimensions').textContent = creatureData.dimensions;
+            }
+            
+            getCreatureData(creature) {
+                const data = {
+                    goblin: { name: 'Goblin Full', scale: 1.0, eyeSpacing: '53.34', dimensions: '130×150×140mm' },
+                    zombie: { name: 'Zombie Shambler', scale: 1.0, eyeSpacing: '53.34', dimensions: '130×150×140mm' },
+                    android: { name: 'Android Scout', scale: 1.0, eyeSpacing: '53.34', dimensions: '130×150×140mm' },
+                    cat: { name: 'Cat Domestic', scale: 0.8, eyeSpacing: '45.00', dimensions: '104×120×112mm' },
+                    lion: { name: 'Lion Pride', scale: 1.4, eyeSpacing: '74.68', dimensions: '182×210×196mm' },
+                    dragon_fire: { name: 'Fire Dragon', scale: 1.2, eyeSpacing: '65.00', dimensions: '156×180×168mm' },
+                    dragon_ice: { name: 'Ice Dragon', scale: 1.2, eyeSpacing: '65.00', dimensions: '156×180×168mm' },
+                    bear: { name: 'Bear Grizzly', scale: 1.3, eyeSpacing: '69.34', dimensions: '169×195×182mm' }
+                };
+                return data[creature] || data.goblin;
+            }
+            
+            generateSTL() {
+                const filename = `${this.currentCreature}_skull_assembly.stl`;
+                alert(`STL generation initiated for: ${filename}\n\nThis would normally trigger OpenSCAD export:\nopenscad -o "${filename}" -D 'creature_type="${this.currentCreature}"' integrated_skull_assembly_system.scad`);
+            }
+            
+            exportConfig() {
+                const config = {
+                    creature: this.currentCreature,
+                    viewMode: this.viewMode,
+                    showComponents: this.showComponents,
+                    showLabels: this.showLabels,
+                    showMeasurements: this.showMeasurements,
+                    timestamp: new Date().toISOString()
+                };
+                
+                const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${this.currentCreature}_assembly_config.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+            
+            resetView() {
+                this.rotation = { x: 0, y: 0 };
+                this.zoom = 1;
+                this.render();
+            }
+            
+            updateStats() {
+                // Placeholder stats
+                document.getElementById('stats').innerHTML = `
+                    <p>Triangles: ${Math.floor(Math.random() * 50000 + 10000)} | Vertices: ${Math.floor(Math.random() * 25000 + 5000)}</p>
+                    <p>Render Time: ${Math.floor(Math.random() * 50 + 10)}ms</p>
+                `;
+            }
+            
+            animate() {
+                this.render();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+        
+        // Initialize viewer when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SkullAssemblyViewer();
+        });
+    </script>
+</body>
+</html>
