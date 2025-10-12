@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/elf.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ELF",
+  "bot_id": "elf_v1",
+  "description": "Graceful elf with elegant features and mystical wisdom using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.6 INCH",
+  "compression_factor": 0.9,
+  "components": [
+    "config/components/positioned/elf_eye_left.json",
+    "config/components/positioned/elf_eye_right.json",
+    "config/components/positioned/elf_mouth.json",
+    "config/components/positioned/elf_speaker.json",
+    "config/components/positioned/elf_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 5,
+    "ANGER": 5,
+    "IRRITATION": 10,
+    "HAPPINESS": 60,
+    "CONTENTMENT": 70,
+    "HUNGER": 15,
+    "CURIOSITY": 75,
+    "AFFECTION": 50
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 1800,
+    "interaction_range_cm": 200,
+    "aggressive_threshold": 85,
+    "calm_threshold": 60
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 10,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Elf character - wise and peaceful",
+    "High HAPPINESS (60), CONTENTMENT (70), CURIOSITY (75)",
+    "Narrow elegant skull (2.6 inch eye spacing)",
+    "Minimal compression (0.9) for graceful proportions",
+    "Long sleep timeout - patient and contemplative"
+  ]
+}
