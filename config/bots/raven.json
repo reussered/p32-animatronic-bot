@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/raven.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "RAVEN",
+  "bot_id": "raven_v1",
+  "description": "Intelligent raven with sharp features and cunning intellect using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.3 INCH",
+  "compression_factor": 0.7,
+  "components": [
+    "config/components/positioned/raven_eye_left.json",
+    "config/components/positioned/raven_eye_right.json",
+    "config/components/positioned/raven_mouth.json",
+    "config/components/positioned/raven_speaker.json",
+    "config/components/positioned/raven_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 15,
+    "ANGER": 10,
+    "IRRITATION": 20,
+    "HAPPINESS": 30,
+    "CONTENTMENT": 45,
+    "HUNGER": 30,
+    "CURIOSITY": 88,
+    "AFFECTION": 25
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 900,
+    "interaction_range_cm": 250,
+    "aggressive_threshold": 75,
+    "calm_threshold": 40
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 12,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Raven character - highly intelligent corvid",
+    "Very high CURIOSITY (88) - problem-solving intelligence",
+    "Narrow skull (2.3 inch) with moderate compression for beak",
+    "Tool-using intelligence reflected in behavior",
+    "Can mimic sounds - versatile audio capabilities"
+  ]
+}
