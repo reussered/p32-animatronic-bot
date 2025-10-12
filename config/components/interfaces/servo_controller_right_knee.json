@@ -1,0 +1,39 @@
+{
+  "relative_filename": "config/components/interfaces/servo_controller_right_knee.json", 
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "interface_id": "SERVO_CONTROLLER_RIGHT_KNEE",
+  "interface_type": "SINGLE_SERVO_CONTROLLER",
+  "description": "Single-servo controller interface for right knee 1DOF joint",
+  
+  "controller_assignment": "ESP32_S3_GAIT_MASTER_CONTROLLER",
+  "servo_count": 1,
+  "control_frequency": "2000_HZ",
+  
+  "servo_assignments": {
+    "knee_flex_extend": {
+      "servo_type": "NEMA17_WITH_100_1_GEARBOX",
+      "step_pin": "GPIO_25",
+      "direction_pin": "GPIO_26",
+      "enable_pin": "GPIO_27",
+      "encoder_sda": "GPIO_21", 
+      "encoder_scl": "GPIO_22"
+    }
+  },
+  
+  "shared_resources": {
+    "i2c_bus": {
+      "sda_pin": "GPIO_21",
+      "scl_pin": "GPIO_22",
+      "frequency": "400_KHZ",
+      "shared_by": ["knee_flex_extend_encoder"]
+    }
+  },
+  
+  "safety_configuration": {
+    "emergency_stop_pin": "GPIO_0",
+    "hyperextension_protection": "ACTIVE_SERVO_LIMITING",
+    "impact_detection": "ACCELEROMETER_BASED_SHOCK_MONITORING"
+  }
+}

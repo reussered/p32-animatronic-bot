@@ -16,13 +16,41 @@
   "reference_point": "nose_center",
   "eye_spacing": "3.0 INCH",
   "compression_factor": 0.7,
-  "components": [
-    "config/components/positioned/goblineye_left.json",
-    "config/components/positioned/goblineye_right.json",
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_speaker.json",
-    "config/components/positioned/goblin_nose.json"
-  ],
+  "components": {
+    "facial_features": [
+      "config/components/positioned/goblineye_left.json",
+      "config/components/positioned/goblineye_right.json",
+      "config/components/positioned/goblin_mouth.json",
+      "config/components/positioned/goblin_speaker.json",
+      "config/components/positioned/goblin_nose.json"
+    ],
+    "full_body_assembly": [
+      "config/components/positioned/humanoid_pelvis_assembly.json",
+      "config/components/positioned/humanoid_spine_vertebrae.json",
+      "config/components/positioned/humanoid_neck_assembly.json",
+      "config/components/positioned/humanoid_head_assembly.json"
+    ],
+    "left_arm_chain": [
+      "config/components/positioned/humanoid_shoulder_left.json",
+      "config/components/positioned/humanoid_elbow_left.json",
+      "config/components/positioned/humanoid_wrist_left.json"
+    ],
+    "right_arm_chain": [
+      "config/components/positioned/humanoid_shoulder_right.json",
+      "config/components/positioned/humanoid_elbow_right.json", 
+      "config/components/positioned/humanoid_wrist_right.json"
+    ],
+    "left_leg_chain": [
+      "config/components/positioned/humanoid_hip_left.json",
+      "config/components/positioned/humanoid_knee_left.json",
+      "config/components/positioned/humanoid_ankle_left.json"
+    ],
+    "right_leg_chain": [
+      "config/components/positioned/humanoid_hip_right.json",
+      "config/components/positioned/humanoid_knee_right.json",
+      "config/components/positioned/humanoid_ankle_right.json"
+    ]
+  },
   "mood_defaults": {
     "FEAR": 20,
     "ANGER": 10,

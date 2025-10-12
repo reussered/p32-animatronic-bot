@@ -1,0 +1,54 @@
+{
+  "relative_filename": "config/components/interfaces/servo_controller_left_hip.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "interface_id": "SERVO_CONTROLLER_LEFT_HIP",
+  "interface_type": "MULTI_SERVO_CONTROLLER",
+  "description": "Three-servo controller interface for left hip 3DOF joint",
+  
+  "controller_assignment": "ESP32_S3_GAIT_MASTER_CONTROLLER", 
+  "servo_count": 3,
+  "control_frequency": "2000_HZ",
+  
+  "servo_assignments": {
+    "hip_flex_extend": {
+      "servo_type": "NEMA17_WITH_100_1_GEARBOX",
+      "step_pin": "GPIO_31",
+      "direction_pin": "GPIO_32",
+      "enable_pin": "GPIO_33",
+      "encoder_sda": "GPIO_21",
+      "encoder_scl": "GPIO_22"
+    },
+    
+    "hip_abduct_adduct": {
+      "servo_type": "NEMA17_WITH_50_1_GEARBOX", 
+      "step_pin": "GPIO_34",
+      "direction_pin": "GPIO_35",
+      "enable_pin": "GPIO_36",
+      "encoder_sda": "GPIO_21",
+      "encoder_scl": "GPIO_22"
+    },
+    
+    "hip_internal_external_rotation": {
+      "servo_type": "DS3218_SERVO",
+      "pwm_pin": "GPIO_37",
+      "feedback_pin": "GPIO_A7"
+    }
+  },
+  
+  "shared_resources": {
+    "i2c_bus": {
+      "sda_pin": "GPIO_21",
+      "scl_pin": "GPIO_22",
+      "frequency": "400_KHZ", 
+      "shared_by": ["hip_flex_extend_encoder", "hip_abduct_adduct_encoder"]
+    }
+  },
+  
+  "safety_configuration": {
+    "emergency_stop_pin": "GPIO_0",
+    "overload_detection": "STRAIN_GAUGE_MONITORING",
+    "load_capacity_monitoring": "150_KG_DYNAMIC_LIMIT"
+  }
+}

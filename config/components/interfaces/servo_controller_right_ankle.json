@@ -1,0 +1,45 @@
+{
+  "relative_filename": "config/components/interfaces/servo_controller_right_ankle.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "interface_id": "SERVO_CONTROLLER_RIGHT_ANKLE",
+  "interface_type": "MULTI_SERVO_CONTROLLER", 
+  "description": "Three-servo controller interface for right ankle 3DOF joint",
+  
+  "controller_assignment": "ESP32_C3_LEG_CONTROLLER_RIGHT",
+  "servo_count": 3,
+  "control_frequency": "2000_HZ",
+  
+  "servo_assignments": {
+    "ankle_dorsi_plantar_flexion": {
+      "servo_type": "DS3218_SERVO",
+      "pwm_pin": "GPIO_28",
+      "feedback_pin": "GPIO_A4"
+    },
+    
+    "ankle_inversion_eversion": {
+      "servo_type": "MG996R_SERVO", 
+      "pwm_pin": "GPIO_29",
+      "feedback_pin": "GPIO_A5"
+    },
+    
+    "ankle_internal_external_rotation": {
+      "servo_type": "MG996R_SERVO",
+      "pwm_pin": "GPIO_30",
+      "feedback_pin": "GPIO_A6"
+    }
+  },
+  
+  "balance_integration": {
+    "imu_interface": "MPU6050_FOR_TILT_FEEDBACK",
+    "balance_algorithm": "PID_WITH_FEEDFORWARD_COMPENSATION", 
+    "response_time": "UNDER_50MS_CORRECTION_LATENCY"
+  },
+  
+  "safety_configuration": {
+    "emergency_stop_pin": "GPIO_0",
+    "balance_monitoring": "CONTINUOUS_TILT_DETECTION",
+    "terrain_sensing": "PRESSURE_SENSITIVE_FOOT_CONTACT"
+  }
+}

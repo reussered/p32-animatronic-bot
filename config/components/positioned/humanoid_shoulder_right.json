@@ -1,0 +1,79 @@
+{
+  "relative_filename": "config/components/positioned/humanoid_shoulder_right.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  
+  "component_id": "HUMANOID_SHOULDER_RIGHT",
+  "component_type": "ARTICULATED_JOINT_3DOF",
+  "description": "Right shoulder assembly with 3 degrees of freedom for humanoid arm attachment",
+  
+  "coordinate_system": "humanoid_3d",
+  "reference_point": "torso_center",
+  "position": {
+    "x": "9.0 INCH",
+    "y": "0.0 INCH",
+    "z": "18.0 INCH", 
+    "scaling_applies": true
+  },
+  
+  "hardware_reference": "config/components/hardware/shoulder_joint_assembly.json",
+  "interface_assignments": {
+    "servo_1_flexion_extension": "config/components/interfaces/servo_shoulder_flex_right.json",
+    "servo_2_abduction_adduction": "config/components/interfaces/servo_shoulder_abd_right.json", 
+    "servo_3_rotation": "config/components/interfaces/servo_shoulder_rot_right.json",
+    "position_feedback": "config/components/interfaces/encoder_shoulder_right.json",
+    "power_connection": "config/components/interfaces/power_tap_shoulder_right.json"
+  },
+  
+  "degrees_of_freedom": {
+    "total_dof": 3,
+    "joint_1_flexion_extension": {
+      "servo_type": "NEMA17_WITH_30_1_GEARBOX",
+      "range_degrees": {"min": -45, "max": 180},
+      "default_position": 15,
+      "max_speed_deg_per_sec": 45,
+      "holding_torque_nm": 3.5
+    },
+    "joint_2_abduction_adduction": {
+      "servo_type": "NEMA17_WITH_30_1_GEARBOX",
+      "range_degrees": {"min": -180, "max": 30},
+      "default_position": 0,
+      "max_speed_deg_per_sec": 45, 
+      "holding_torque_nm": 3.5
+    },
+    "joint_3_internal_external_rotation": {
+      "servo_type": "DS3218_HIGH_TORQUE",
+      "range_degrees": {"min": -90, "max": 90},
+      "default_position": 0,
+      "max_speed_deg_per_sec": 60,
+      "holding_torque_nm": 2.2
+    }
+  },
+  
+  "attachment_points": {
+    "torso_connection": {
+      "position": {"x": "0.0", "y": "0.0", "z": "0.0"},
+      "mounting_hardware": "M8_BOLT_ASSEMBLY",
+      "load_capacity": "50_KG_STATIC_LOAD"
+    },
+    "upper_arm_connection": {
+      "position": {"x": "4.0", "y": "0.0", "z": "0.0"},
+      "mounting_hardware": "M6_BOLT_ASSEMBLY", 
+      "component_reference": "config/components/positioned/humanoid_upper_arm_right.json"
+    }
+  },
+  
+  "structural_specifications": {
+    "material": "ALUMINUM_6061_T6",
+    "weight_grams": 850,
+    "safety_factor": 3.0,
+    "expected_cycles": 1000000,
+    "maintenance_interval_hours": 500
+  },
+  
+  "scaling_behavior": {
+    "position_scaling": "APPLIES_TO_ALL_XYZ_COORDINATES",
+    "servo_selection": "SCALES_WITH_CREATURE_SIZE_AND_LOAD",
+    "structural_scaling": "MATERIAL_THICKNESS_SCALES_WITH_SIZE"
+  }
+}
