@@ -1,0 +1,37 @@
+{
+  "sound_name": "goblin_curious_chirp",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "description": "Inquisitive chirping sound for curious interactions", 
+  "audio_file": "goblin_curious_chirp.wav",
+  "duration_ms": 800,
+  "mood_trigger": "CURIOSITY",
+  "volume": 0.6,
+  "audio_specs": {
+    "sample_rate": "44100 Hz",
+    "bit_depth": "16-bit", 
+    "channels": "mono",
+    "format": "WAV"
+  },
+  "playback_config": {
+    "loop": false,
+    "fade_in_ms": 50,
+    "fade_out_ms": 100,
+    "priority": "medium"
+  },
+  "trigger_conditions": {
+    "proximity_cm": 100,
+    "mood_threshold": 40,
+    "cooldown_ms": 2000
+  },
+  "variations": [
+    "goblin_curious_chirp_01.wav",
+    "goblin_curious_chirp_02.wav", 
+    "goblin_curious_chirp_03.wav"
+  ],
+  "notes": [
+    "Higher frequency tones for friendliness",
+    "Can be randomly selected from variations",
+    "Pairs well with curious_look animation"
+  ]
+}
