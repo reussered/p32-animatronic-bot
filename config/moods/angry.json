@@ -1,4 +1,8 @@
 {
+  "relative_filename": "config/moods/angry.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
   "name": "angry",
   "displayName": "Angry",
   "description": "Agitated and intense mood",

@@ -1,7 +1,11 @@
 {
+  "relative_filename": "config/hardware/servos.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
   "name": "servos",
   "displayName": "Servo Motors",
-  "description": "Servo motor pin and range configurations",
+  "description": "Servo motor pin and range configurations for head movement and facial expressions",
   "type": "actuator",
   "devices": [
     {

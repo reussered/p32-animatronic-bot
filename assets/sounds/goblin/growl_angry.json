@@ -1,4 +1,5 @@
 {
+  "relative_filename": "assets/sounds/goblin/growl_angry.json",
   "sound_name": "goblin_growl_angry",
   "version": "1.0.0",
   "author": "config/author.json", 

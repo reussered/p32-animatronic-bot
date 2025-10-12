@@ -1,0 +1,74 @@
+{
+  "relative_filename": "config/bots/pocket_pixie.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "bot_type": "POCKET_PIXIE",
+  "bot_id": "pocket_pixie_v1", 
+  "description": "Ultra-miniature pixie using unified proportional scaling for portable companion",
+  
+  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
+  "creature_variant": "ultra_miniature_pixie",
+  "horizontal_scale": "0.4",
+  "vertical_scale": "0.3",
+  
+  "calculated_dimensions": {
+    "total_height": "21.0 INCHES",
+    "shoulder_width": "7.2 INCHES", 
+    "head_height": "2.7 INCHES",
+    "leg_length": "10.5 INCHES",
+    "character": "DELICATE_WHIMSICAL_PORTABLE"
+  },
+  
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "1.2 INCH",
+  
+  "components": [
+    "config/components/positioned/goblineye_left.json",
+    "config/components/positioned/goblineye_right.json", 
+    "config/components/positioned/goblin_mouth.json",
+    "config/components/positioned/goblin_speaker.json",
+    "config/components/positioned/goblin_nose.json"
+  ],
+  
+  "servo_specifications": {
+    "primary_servos": "MICRO_SG90_SERVO_MOTORS",
+    "secondary_servos": "MICRO_SG92R_SERVO_MOTORS",
+    "stepper_motors": "NEMA8_MINIATURE_STEPPERS",
+    "power_system": "LITHIUM_ION_3S1P_PACK"
+  },
+  
+  "mood_defaults": {
+    "FEAR": 30,
+    "ANGER": 5,
+    "IRRITATION": 10,
+    "HAPPINESS": 90,
+    "CONTENTMENT": 70, 
+    "HUNGER": 20,
+    "CURIOSITY": 95,
+    "AFFECTION": 85,
+    "PLAYFULNESS": 95,
+    "MISCHIEF": 80,
+    "WONDER": 90
+  },
+  
+  "behavior_config": {
+    "movement_style": "QUICK_DARTING_GRACEFUL",
+    "personality": "PLAYFUL_CURIOUS_MISCHIEVOUS", 
+    "specializations": ["EXPLORATION", "ENTERTAINMENT", "COMPANIONSHIP"],
+    "voice_characteristics": "HIGH_PITCHED_MUSICAL_CHEERFUL"
+  },
+  
+  "pixie_capabilities": {
+    "rapid_movement": "SWIFT_AGILE_FLIGHT_SIMULATION",
+    "interactive_play": "ENGAGING_PLAYFUL_RESPONSES",
+    "portable_companion": "LIGHTWEIGHT_TRAVEL_FRIENDLY"
+  },
+  
+  "miniaturization_features": {
+    "battery_life": "EXTENDED_OPERATION_LOW_POWER",
+    "weight": "ULTRA_LIGHTWEIGHT_CONSTRUCTION", 
+    "portability": "COMPACT_TRAVEL_CASE_INCLUDED"
+  }
+}

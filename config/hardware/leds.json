@@ -1,7 +1,11 @@
 {
+  "relative_filename": "config/hardware/leds.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
   "name": "leds",
   "displayName": "LED Lights",
-  "description": "LED strip and indicator light configurations",
+  "description": "LED strip and indicator light configurations for mood expression and status indication",
   "type": "output",
   "devices": [
     {

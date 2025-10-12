@@ -1,11 +1,17 @@
-{
+﻿{
   "relative_filename": "config/bots/goblin_full.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "config/author.json",
   "bot_type": "GOBLINFULL",
-  "bot_id": "goblin_full_v1",
-  "description": "Full-featured scary goblin with skull-based 3D coordinate system",
+  "bot_id": "goblin_full_v2",
+  "description": "Full-featured scary goblin with unified proportional scaling system",
   "created": "2025-10-05",
+  
+  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
+  "creature_variant": "standard_goblin",
+  "horizontal_scale": "0.7",
+  "vertical_scale": "0.6",
+  
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "eye_spacing": "3.0 INCH",
