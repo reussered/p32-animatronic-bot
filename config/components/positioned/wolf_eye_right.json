@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/wolf_eye_right.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "wolf_eye_right",
+  "hardware_reference": "config/components/hardware/gc9a01_display.json",
+  "interface_assignment": "SPI_DEVICE_2",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "+1.6 INCH",
+    "y": "+0.7 INCH",
+    "z": "-0.35 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "0 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "primary_display_right"
+}

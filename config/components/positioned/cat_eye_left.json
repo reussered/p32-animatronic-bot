@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/cat_eye_left.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "cat_eye_left",
+  "hardware_reference": "config/components/hardware/gc9a01_display.json",
+  "interface_assignment": "SPI_DEVICE_1",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "-1.25 INCH",
+    "y": "+0.65 INCH",
+    "z": "-0.25 INCH"
+  },
+  "orientation": {
+    "tilt": "5 DEGREES",
+    "rotation": "0 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "primary_display_left"
+}

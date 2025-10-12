@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/zombie.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ZOMBIE",
+  "bot_id": "zombie_v1",
+  "description": "Shambling zombie with decayed features and relentless hunger using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "3.1 INCH",
+  "compression_factor": 0.75,
+  "components": [
+    "config/components/positioned/zombie_eye_left.json",
+    "config/components/positioned/zombie_eye_right.json",
+    "config/components/positioned/zombie_mouth.json",
+    "config/components/positioned/zombie_speaker.json",
+    "config/components/positioned/zombie_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 0,
+    "ANGER": 5,
+    "IRRITATION": 10,
+    "HAPPINESS": 0,
+    "CONTENTMENT": 0,
+    "HUNGER": 100,
+    "CURIOSITY": 5,
+    "AFFECTION": 0
+  },
+  "behavior_config": {
+    "threat_response_enabled": false,
+    "auto_sleep_timeout_seconds": 0,
+    "interaction_range_cm": 100,
+    "aggressive_threshold": 50,
+    "calm_threshold": 5
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 20,
+    "sensor_poll_rate_hz": 5,
+    "power_management": "low_power"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Horror zombie character - relentless and mindless",
+    "Maximum HUNGER (100) - insatiable undead appetite",
+    "Zero emotional responses except hunger",
+    "Never sleeps (timeout = 0) - undead never rest",
+    "Lower FPS and poll rate for shambling movement feel"
+  ]
+}

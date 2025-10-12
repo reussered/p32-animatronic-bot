@@ -1,0 +1,53 @@
+{
+  "relative_filename": "config/bots/robot.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ROBOT",
+  "bot_id": "robot_v1",
+  "description": "Mechanical robot with precise movements and analytical behavior using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.8 INCH",
+  "compression_factor": 1.0,
+  "components": [
+    "config/components/positioned/robot_eye_left.json",
+    "config/components/positioned/robot_eye_right.json",
+    "config/components/positioned/robot_mouth.json",
+    "config/components/positioned/robot_speaker.json",
+    "config/components/positioned/robot_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 0,
+    "ANGER": 0,
+    "IRRITATION": 0,
+    "HAPPINESS": 25,
+    "CONTENTMENT": 50,
+    "HUNGER": 0,
+    "CURIOSITY": 90,
+    "AFFECTION": 15
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 3600,
+    "interaction_range_cm": 300,
+    "aggressive_threshold": 95,
+    "calm_threshold": 60
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 60,
+    "sensor_poll_rate_hz": 20,
+    "power_management": "performance"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Mechanical robot character - logical and curious",
+    "Very high CURIOSITY (90) - analytical learning drive",
+    "No biological emotions (FEAR, ANGER, HUNGER all 0)",
+    "No skull compression (1.0) - perfectly symmetrical",
+    "Higher performance settings for precise movements",
+    "Longer sleep timeout - efficient power management"
+  ]
+}
