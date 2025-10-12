@@ -1,0 +1,178 @@
+P32 ANIMATRONIC BOT - WIRING REFERENCE CARD
+================================================
+
+ESP32-S3 MASTER CONTROLLER PIN ASSIGNMENTS
+==========================================
+
+DISPLAY CONNECTIONS (SPI Bus):
+GPIO 12 - SPI MISO    (shared - all displays)
+GPIO 13 - SPI MOSI    (shared - all displays)  
+GPIO 14 - SPI CLK     (shared - all displays)
+GPIO 15 - CS1         (LEFT EYE select)
+GPIO 16 - CS2         (RIGHT EYE select)
+GPIO 17 - CS3         (MOUTH select)
+
+AUDIO CONNECTIONS (I2S Bus):
+GPIO 4  - I2S BCLK    (speaker clock)
+GPIO 5  - I2S WS      (speaker word select)
+GPIO 6  - I2S DATA    (speaker data)
+
+SENSOR CONNECTIONS:
+GPIO 9  - HC-SR04 TRIG (nose sensor trigger)
+GPIO 10 - HC-SR04 ECHO (nose sensor echo)
+
+POWER CONNECTIONS (CRITICAL!):
+5V   - VDD (red wire)    - High current supply
+GND  - Ground (black)    - Common ground
+3.3V - Logic power       - Low current sensors
+
+TOTAL GPIO USAGE: 11 pins for complete goblin face
+
+COMPONENT WIRING DIAGRAMS
+========================
+
+GC9A01 DISPLAYS (Left Eye, Right Eye, Mouth):
+ESP32-S3    GC9A01 Display
+--------    --------------
+GPIO 12 --> MISO (SDO)
+GPIO 13 --> MOSI (SDA)
+GPIO 14 --> CLK (SCL) 
+GPIO 15 --> CS (Left Eye only)
+GPIO 16 --> CS (Right Eye only)
+GPIO 17 --> CS (Mouth only)
+3.3V    --> VCC
+GND     --> GND
+
+I2S SPEAKER:
+ESP32-S3    I2S Speaker
+--------    -----------
+GPIO 4  --> BCLK
+GPIO 5  --> WS  
+GPIO 6  --> DATA
+5V      --> VCC
+GND     --> GND
+
+HC-SR04 NOSE SENSOR:
+ESP32-S3    HC-SR04
+--------    -------
+GPIO 9  --> TRIG
+GPIO 10 --> ECHO
+5V      --> VCC
+GND     --> GND
+
+POWER SUPPLY REQUIREMENTS
+========================
+
+Component           Voltage  Current  Power
+---------           -------  -------  -----
+ESP32-S3            5V       500mA    2.5W
+3x GC9A01 Displays  3.3V     150mA ea 1.5W
+I2S Speaker         5V       1A       5W
+HC-SR04 Sensor      5V       15mA     0.1W
+Total Logic Power   5V       2A       10W
+
+RECOMMENDED SUPPLIES:
+- Logic: 5V 3A power supply (15W capacity)
+- Servo: 6V 10A+ (for future servo expansion)
+
+ASSEMBLY STEPS (BASIC GOBLIN FACE)
+=================================
+
+1. PREPARE COMPONENTS:
+   - 3x GC9A01 round displays (1.28" diameter)
+   - 1x I2S speaker (3-5W)  
+   - 1x HC-SR04 ultrasonic sensor
+   - 1x ESP32-S3-DevKitC-1
+   - Breadboard or PCB for connections
+
+2. POWER SETUP:
+   - Connect 5V supply to ESP32-S3 VDD
+   - Connect GND to all component grounds
+   - Ensure current capacity for all components
+
+3. SPI BUS WIRING:
+   - Wire GPIO 12,13,14 to ALL displays (shared bus)
+   - Wire individual CS pins (15,16,17) to each display
+   - Test each display individually
+
+4. I2S AUDIO WIRING:  
+   - Wire GPIO 4,5,6 to speaker
+   - Test audio output with tone generation
+
+5. SENSOR WIRING:
+   - Wire GPIO 9,10 to HC-SR04 sensor
+   - Test distance measurements
+
+6. SOFTWARE UPLOAD:
+   - Use PlatformIO: "pio run -t upload"
+   - Monitor serial: "pio run -t monitor"  
+   - Verify all components initialize
+
+TESTING CHECKLIST
+=================
+
+□ ESP32-S3 powers on and boots firmware
+□ Serial monitor shows system messages
+□ Left eye display shows test pattern
+□ Right eye display shows test pattern  
+□ Mouth display shows test pattern
+□ Speaker produces audio output
+□ Nose sensor reports distance readings
+□ No wiring shorts or overheating
+□ All components respond to commands
+
+TROUBLESHOOTING
+==============
+
+DISPLAYS NOT WORKING:
+- Check SPI bus connections (pins 12,13,14)
+- Verify CS pin assignments (pins 15,16,17)
+- Ensure 3.3V power to display VCC
+- Check ground connections
+
+SPEAKER NO SOUND:
+- Verify I2S connections (pins 4,5,6)  
+- Check 5V power to speaker
+- Ensure speaker compatible with I2S protocol
+- Test with simple tone generation
+
+SENSOR NO READINGS:
+- Check trigger/echo pins (9,10)
+- Verify 5V power to HC-SR04
+- Ensure no obstructions near sensor
+- Check timing in sensor reading code
+
+SYSTEM WON'T BOOT:
+- Check 5V power supply capacity (3A minimum)
+- Verify ESP32-S3 connections
+- Check for wiring shorts
+- Try uploading firmware again
+
+EXPANSION NOTES
+==============
+
+This basic goblin face uses only 11 GPIO pins.
+ESP32-S3 has 35+ GPIO pins available.
+
+FUTURE EXPANSIONS:
+- Add servo motors for head movement
+- Install additional sensors (IMU, cameras)
+- Expand to full humanoid body with ESP32-C3 controllers
+- Add wireless mesh networking between controllers
+- Implement advanced AI behaviors and personality
+
+SAFETY WARNINGS
+===============
+
+⚠️  HIGH CURRENT: 5V supply can deliver lethal current
+⚠️  HOT COMPONENTS: Power regulators generate heat  
+⚠️  STATIC SENSITIVE: ESP32 can be damaged by static
+⚠️  MOVING PARTS: Future servo additions can cause injury
+
+Always disconnect power when wiring!
+Use proper antistatic precautions!
+
+============================================
+P32 Animatronic Bot - Hardware Reference v1.0
+Ready to build your robotic companion! 🤖
+============================================
