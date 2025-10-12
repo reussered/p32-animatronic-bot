@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/cyclops_eye_center.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "cyclops_eye_center",
+  "hardware_reference": "config/components/hardware/gc9a01_display.json",
+  "interface_assignment": "SPI_DEVICE_1",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "0.0 INCH",
+    "y": "+1.2 INCH",
+    "z": "-0.4 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "0 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "primary_display_center"
+}

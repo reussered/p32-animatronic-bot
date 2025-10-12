@@ -1,0 +1,51 @@
+{
+  "relative_filename": "config/bots/vampire.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "VAMPIRE",
+  "bot_id": "vampire_v1",
+  "description": "Elegant vampire with pale features and menacing fangs using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.8 INCH",
+  "compression_factor": 0.85,
+  "components": [
+    "config/components/positioned/vampire_eye_left.json",
+    "config/components/positioned/vampire_eye_right.json",
+    "config/components/positioned/vampire_mouth.json",
+    "config/components/positioned/vampire_speaker.json",
+    "config/components/positioned/vampire_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 5,
+    "ANGER": 20,
+    "IRRITATION": 25,
+    "HAPPINESS": 0,
+    "CONTENTMENT": 40,
+    "HUNGER": 50,
+    "CURIOSITY": 30,
+    "AFFECTION": 0
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 600,
+    "interaction_range_cm": 250,
+    "aggressive_threshold": 80,
+    "calm_threshold": 30
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 10,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Vampire character with elegant, menacing presence",
+    "Higher HUNGER mood reflects vampiric nature",
+    "Narrower skull (2.8 inch eye spacing) for gaunt appearance",
+    "Less vertical compression (0.85) for elongated face"
+  ]
+}

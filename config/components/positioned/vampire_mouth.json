@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/vampire_mouth.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "vampire_mouth",
+  "hardware_reference": "config/components/hardware/gc9a01_display.json",
+  "interface_assignment": "SPI_DEVICE_3",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "0.0 INCH",
+    "y": "-1.0 INCH",
+    "z": "-0.2 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "0 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "mouth_display"
+}
