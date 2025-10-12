@@ -1,79 +1,87 @@
 {
   "relative_filename": "config/components/positioned/humanoid_shoulder_right.json",
-  "version": "1.0.0", 
+  "version": "1.0.0",
   "author": "config/author.json",
   
   "component_id": "HUMANOID_SHOULDER_RIGHT",
-  "component_type": "ARTICULATED_JOINT_3DOF",
-  "description": "Right shoulder assembly with 3 degrees of freedom for humanoid arm attachment",
+  "component_type": "POSITIONED_COMPONENT",
+  "description": "Right shoulder assembly with 3 DOF for arm attachment and manipulation workspace",
   
-  "coordinate_system": "humanoid_3d",
-  "reference_point": "torso_center",
-  "position": {
-    "x": "9.0 INCH",
-    "y": "0.0 INCH",
-    "z": "18.0 INCH", 
-    "scaling_applies": true
-  },
-  
-  "hardware_reference": "config/components/hardware/shoulder_joint_assembly.json",
+  "physical_component": "config/components/hardware/servo_assembly.json",
   "interface_assignments": {
-    "servo_1_flexion_extension": "config/components/interfaces/servo_shoulder_flex_right.json",
-    "servo_2_abduction_adduction": "config/components/interfaces/servo_shoulder_abd_right.json", 
-    "servo_3_rotation": "config/components/interfaces/servo_shoulder_rot_right.json",
-    "position_feedback": "config/components/interfaces/encoder_shoulder_right.json",
-    "power_connection": "config/components/interfaces/power_tap_shoulder_right.json"
+    "primary_interface": "config/components/interfaces/servo_controller_right_shoulder.json"
   },
   
-  "degrees_of_freedom": {
-    "total_dof": 3,
-    "joint_1_flexion_extension": {
-      "servo_type": "NEMA17_WITH_30_1_GEARBOX",
-      "range_degrees": {"min": -45, "max": 180},
-      "default_position": 15,
-      "max_speed_deg_per_sec": 45,
-      "holding_torque_nm": 3.5
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "6.0 INCH", 
+    "y": "0.0 INCH",
+    "z": "-8.0 INCH",
+    "description": "Right shoulder attachment point on torso"
+  },
+  
+  "scaling_behavior": {
+    "scales_with_creature": true,
+    "scaling_reference": "eye_spacing_baseline",
+    "position_scaling": "PROPORTIONAL_XYZ",
+    "component_scaling": "MASS_BASED_SERVO_SELECTION"
+  },
+  
+  "joint_specifications": {
+    "degrees_of_freedom": 3,
+    "joint_names": ["shoulder_flex_extend", "shoulder_abduct_adduct", "shoulder_internal_external_rotation"],
+    
+    "shoulder_flex_extend": {
+      "axis": "FRONTAL_PLANE_ROTATION",
+      "range_of_motion": "-30_TO_180_DEGREES",
+      "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+      "torque_requirement": "11.8_NM_PEAK",
+      "position_feedback": "AS5600_ABSOLUTE_ENCODER"
     },
-    "joint_2_abduction_adduction": {
-      "servo_type": "NEMA17_WITH_30_1_GEARBOX",
-      "range_degrees": {"min": -180, "max": 30},
-      "default_position": 0,
-      "max_speed_deg_per_sec": 45, 
-      "holding_torque_nm": 3.5
+    
+    "shoulder_abduct_adduct": {
+      "axis": "SAGITTAL_PLANE_ROTATION", 
+      "range_of_motion": "-45_TO_180_DEGREES",
+      "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+      "torque_requirement": "8.9_NM_PEAK",
+      "position_feedback": "AS5600_ABSOLUTE_ENCODER"
     },
-    "joint_3_internal_external_rotation": {
-      "servo_type": "DS3218_HIGH_TORQUE",
-      "range_degrees": {"min": -90, "max": 90},
-      "default_position": 0,
-      "max_speed_deg_per_sec": 60,
-      "holding_torque_nm": 2.2
+    
+    "shoulder_internal_external_rotation": {
+      "axis": "HUMERAL_LONGITUDINAL_AXIS",
+      "range_of_motion": "-90_TO_90_DEGREES", 
+      "servo_type": "DS3218_SERVO",
+      "torque_requirement": "2.2_NM_PEAK",
+      "position_feedback": "INTEGRATED_POTENTIOMETER"
     }
   },
   
   "attachment_points": {
-    "torso_connection": {
-      "position": {"x": "0.0", "y": "0.0", "z": "0.0"},
-      "mounting_hardware": "M8_BOLT_ASSEMBLY",
-      "load_capacity": "50_KG_STATIC_LOAD"
+    "connects_to_torso": {
+      "attachment_method": "M8_SHOULDER_BRACKET_ASSEMBLY",
+      "structural_load": "ARM_WEIGHT_PLUS_5KG_PAYLOAD"
     },
-    "upper_arm_connection": {
-      "position": {"x": "4.0", "y": "0.0", "z": "0.0"},
-      "mounting_hardware": "M6_BOLT_ASSEMBLY", 
-      "component_reference": "config/components/positioned/humanoid_upper_arm_right.json"
+    "connects_to_upper_arm": {
+      "component_reference": "config/components/positioned/humanoid_elbow_right.json",
+      "attachment_method": "M6_HUMERUS_COUPLING"
     }
   },
   
-  "structural_specifications": {
-    "material": "ALUMINUM_6061_T6",
-    "weight_grams": 850,
-    "safety_factor": 3.0,
-    "expected_cycles": 1000000,
-    "maintenance_interval_hours": 500
+  "control_specifications": {
+    "controller_assignment": "ESP32_C3_ARM_CONTROLLER_RIGHT",
+    "control_loop_frequency": "1000_HZ",
+    "coordinate_with": ["humanoid_elbow_right", "humanoid_wrist_right"],
+    "safety_limits": {
+      "max_angular_velocity": "180_DEGREES_PER_SECOND",
+      "emergency_stop_torque_limit": "15_NM"
+    }
   },
   
-  "scaling_behavior": {
-    "position_scaling": "APPLIES_TO_ALL_XYZ_COORDINATES",
-    "servo_selection": "SCALES_WITH_CREATURE_SIZE_AND_LOAD",
-    "structural_scaling": "MATERIAL_THICKNESS_SCALES_WITH_SIZE"
+  "behavioral_capabilities": {
+    "workspace_contribution": "RIGHT_ARM_REACH_ENVELOPE",
+    "gesture_primitives": ["wave", "point", "salute", "beckon"],
+    "manipulation_tasks": ["lift", "carry", "throw", "push"],
+    "coordination_with_left": "BILATERAL_SYMMETRIC_MOVEMENTS"
   }
 }
