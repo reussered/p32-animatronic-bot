@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/wolf.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "WOLF",
+  "bot_id": "wolf_v1",
+  "description": "Fierce wolf with alert predator features using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "3.2 INCH",
+  "compression_factor": 0.65,
+  "components": [
+    "config/components/positioned/wolf_eye_left.json",
+    "config/components/positioned/wolf_eye_right.json",
+    "config/components/positioned/wolf_mouth.json",
+    "config/components/positioned/wolf_speaker.json",
+    "config/components/positioned/wolf_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 10,
+    "ANGER": 35,
+    "IRRITATION": 25,
+    "HAPPINESS": 20,
+    "CONTENTMENT": 30,
+    "HUNGER": 60,
+    "CURIOSITY": 50,
+    "AFFECTION": 25
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 300,
+    "interaction_range_cm": 250,
+    "aggressive_threshold": 65,
+    "calm_threshold": 25
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 10,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Predatory wolf character with hunting instincts",
+    "High HUNGER and moderate ANGER - predator traits",
+    "Wide skull (3.2 inch eye spacing) for alert appearance",
+    "Moderate compression (0.65) for elongated snout",
+    "Pack-oriented with moderate curiosity"
+  ]
+}

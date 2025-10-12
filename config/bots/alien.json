@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/alien.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ALIEN",
+  "bot_id": "alien_v1",
+  "description": "Extraterrestrial being with otherworldly features using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "4.5 INCH",
+  "compression_factor": 1.2,
+  "components": [
+    "config/components/positioned/alien_eye_left.json",
+    "config/components/positioned/alien_eye_right.json",
+    "config/components/positioned/alien_mouth.json",
+    "config/components/positioned/alien_speaker.json",
+    "config/components/positioned/alien_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 20,
+    "ANGER": 5,
+    "IRRITATION": 15,
+    "HAPPINESS": 30,
+    "CONTENTMENT": 35,
+    "HUNGER": 20,
+    "CURIOSITY": 95,
+    "AFFECTION": 10
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 1200,
+    "interaction_range_cm": 350,
+    "aggressive_threshold": 80,
+    "calm_threshold": 50
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 45,
+    "sensor_poll_rate_hz": 15,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Alien character - extremely curious observer",
+    "Maximum CURIOSITY (95) - alien intelligence studying environment",
+    "Very wide skull (4.5 inch eye spacing) for large alien eyes",
+    "Vertical expansion (1.2 compression) for elongated alien head",
+    "Higher FPS for fluid alien movements"
+  ]
+}

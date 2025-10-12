@@ -1,0 +1,52 @@
+{
+  "relative_filename": "config/bots/dwarf.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "DWARF",
+  "bot_id": "dwarf_v1",
+  "description": "Stout dwarf with robust features and craftsmanship pride using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.9 INCH",
+  "compression_factor": 0.8,
+  "components": [
+    "config/components/positioned/dwarf_eye_left.json",
+    "config/components/positioned/dwarf_eye_right.json",
+    "config/components/positioned/dwarf_mouth.json",
+    "config/components/positioned/dwarf_speaker.json",
+    "config/components/positioned/dwarf_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 5,
+    "ANGER": 30,
+    "IRRITATION": 35,
+    "HAPPINESS": 50,
+    "CONTENTMENT": 55,
+    "HUNGER": 45,
+    "CURIOSITY": 40,
+    "AFFECTION": 45
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 900,
+    "interaction_range_cm": 150,
+    "aggressive_threshold": 60,
+    "calm_threshold": 30
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 10,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Dwarf character - gruff but loyal craftsman",
+    "Moderate ANGER (30) and IRRITATION (35) - grumpy demeanor",
+    "High HAPPINESS (50) and CONTENTMENT (55) when respected",
+    "Wide sturdy skull (2.9 inch) with moderate compression",
+    "Balanced personality - tough exterior, warm heart"
+  ]
+}

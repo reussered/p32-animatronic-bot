@@ -1,0 +1,51 @@
+{
+  "relative_filename": "config/bots/cyclops.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "CYCLOPS",
+  "bot_id": "cyclops_v1",
+  "description": "Massive single-eyed cyclops with brutal features using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "0.0 INCH",
+  "compression_factor": 0.6,
+  "components": [
+    "config/components/positioned/cyclops_eye_center.json",
+    "config/components/positioned/cyclops_mouth.json",
+    "config/components/positioned/cyclops_speaker.json",
+    "config/components/positioned/cyclops_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 5,
+    "ANGER": 60,
+    "IRRITATION": 40,
+    "HAPPINESS": 0,
+    "CONTENTMENT": 10,
+    "HUNGER": 70,
+    "CURIOSITY": 15,
+    "AFFECTION": 0
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 180,
+    "interaction_range_cm": 300,
+    "aggressive_threshold": 60,
+    "calm_threshold": 10
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 30,
+    "sensor_poll_rate_hz": 10,
+    "power_management": "balanced"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Cyclops with single central eye - unique configuration",
+    "Very high ANGER and HUNGER moods",
+    "Zero eye spacing for centered eye position",
+    "Heavy vertical compression (0.6) for brutish appearance",
+    "Uses only 2 SPI devices (eye + mouth) instead of 3"
+  ]
+}

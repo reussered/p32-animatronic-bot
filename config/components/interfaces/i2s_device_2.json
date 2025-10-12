@@ -1,0 +1,14 @@
+{
+  "relative_filename": "config/components/interfaces/i2s_device_2.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "interface_id": "I2S_DEVICE_2",
+  "interface_type": "I2S_DEVICE",
+  "bus_reference": "I2S_BUS_0",
+  "pins": {
+    "data": 7
+  },
+  "device_config": {
+    "channel": "right"
+  }
+}

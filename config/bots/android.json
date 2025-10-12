@@ -1,0 +1,53 @@
+{
+  "relative_filename": "config/bots/android.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ANDROID",
+  "bot_id": "android_v1",
+  "description": "Humanoid android with synthetic features and emerging consciousness using skull-based 3D coordinate system",
+  "created": "2025-10-12",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "2.75 INCH",
+  "compression_factor": 0.98,
+  "components": [
+    "config/components/positioned/android_eye_left.json",
+    "config/components/positioned/android_eye_right.json",
+    "config/components/positioned/android_mouth.json",
+    "config/components/positioned/android_speaker.json",
+    "config/components/positioned/android_nose.json"
+  ],
+  "mood_defaults": {
+    "FEAR": 5,
+    "ANGER": 5,
+    "IRRITATION": 10,
+    "HAPPINESS": 35,
+    "CONTENTMENT": 45,
+    "HUNGER": 0,
+    "CURIOSITY": 92,
+    "AFFECTION": 35
+  },
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 2400,
+    "interaction_range_cm": 280,
+    "aggressive_threshold": 90,
+    "calm_threshold": 65
+  },
+  "hardware_config": {
+    "i2s_sample_rate": 48000,
+    "display_update_rate_fps": 60,
+    "sensor_poll_rate_hz": 20,
+    "power_management": "performance"
+  },
+  "prototype_status": "planned",
+  "tested": false,
+  "notes": [
+    "Android character - synthetic humanoid with emerging consciousness",
+    "Very high CURIOSITY (92) - learning and adaptation",
+    "Moderate AFFECTION (35) - developing empathy",
+    "Human-like proportions (2.75 inch eyes, 0.98 compression)",
+    "Highest performance specs - advanced AI processing",
+    "Higher sample rate (48kHz) for natural speech"
+  ]
+}

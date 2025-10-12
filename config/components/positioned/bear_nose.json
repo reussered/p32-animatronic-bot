@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/bear_nose.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "bear_nose",
+  "hardware_reference": "config/components/hardware/hc_sr04_sensor.json",
+  "interface_assignment": "GPIO_PAIR_1",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "0.0 INCH",
+    "y": "0.0 INCH",
+    "z": "+0.8 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "0 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "proximity_sensor"
+}
