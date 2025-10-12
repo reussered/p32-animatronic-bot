@@ -41,12 +41,21 @@ Two coordinate systems supported:
 - Script auto-displays JSON contents and identifies empty/malformed files
 - Ignores `.pio` build artifacts by default
 
+### 3D Shape Generation Workflow
+- **Generate Mounting System**: `.\tools\generate-mounting-system.ps1 -BotType goblin`
+- **Create STL Files**: `.\tools\generate-stl-files.ps1 -BasicMounts -BotShells`
+- **View STLs**: `.\tools\launch-stl-viewer.ps1 assets/shapes/stl/file.stl`
+- **Two-Tier Architecture**: Basic hardware mounts + character-specific decorative shells
+- **Integration**: Uses `use <../basic_mounts/mount.scad>` pattern for shell composition
+
 ### Asset Organization
 - **Character-based**: `assets/{animations,sounds}/{bear,cat,cyclops,goblin}/`
-- **3D Shapes**: `assets/shapes/{scad,stl,descriptions}/` for printable components
-- **Shape Generation**: OpenSCAD templates + automated STL generation from hardware/coordinate configs
-- **Personality Integration**: Shape modifications (broken horns) directly affect bot personality traits
-- Assets organized by bot type for easy character swapping
+- **3D Shapes**: Two-tier mounting system in `assets/shapes/scad/`
+  - **Tier 1**: `basic_mounts/` - Generic hardware brackets (display, sensor, speaker)
+  - **Tier 2**: `bot_shells/` - Character-specific decorative shells incorporating basic mounts
+- **Shape Generation**: Automated OpenSCAD → STL pipeline via PowerShell tools
+- **STL Organization**: Generated files in `assets/shapes/stl/{basic_mounts,bot_shells}/`
+- **Personality Integration**: Character shells provide unique aesthetics while reusing hardware mounts
 
 ## Code Conventions
 
@@ -76,7 +85,11 @@ Two coordinate systems supported:
 - `docs/interface-gpio-assignment-spec.md` - GPIO assignment and interface architecture
 - `docs/goblin-full-interconnection-diagram.md` - Complete wiring diagram with all GPIO assignments
 - `docs/openscad-shape-generation-spec.md` - Automated STL generation system using OpenSCAD
+- `docs/two-tier-mounting-system.md` - Architecture for separating hardware mounts from character aesthetics
 - `generate_file_structure.ps1` - Configuration validation tool
+- `tools/generate-mounting-system.ps1` - Creates basic mounts + character shells
+- `tools/generate-stl-files.ps1` - Batch converts .scad files to .stl for 3D printing
+- `tools/launch-stl-viewer.ps1` - Web-based STL viewer for design validation
 - `src/main.c` - Currently minimal ESP-IDF entry point
 
 ## Development Notes
