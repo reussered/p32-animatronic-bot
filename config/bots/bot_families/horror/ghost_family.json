@@ -1,0 +1,163 @@
+{
+  "relative_filename": "config/bots/bot_families/horror/ghost_family.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_name": "GHOST",
+  "family_category": "horror",
+  "description": "Ethereal spirits with translucent effects, floating movement, and supernatural elements",
+  "created": "2025-10-12",
+  
+  "base_characteristics": {
+    "mood_defaults": {
+      "FEAR": 15,
+      "ANGER": 20,
+      "IRRITATION": 10,
+      "HAPPINESS": 5,
+      "CONTENTMENT": 10,
+      "HUNGER": 0,
+      "CURIOSITY": 25,
+      "AFFECTION": 15
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 600,
+      "interaction_range_cm": 150,
+      "aggressive_threshold": 80,
+      "movement_style": "ethereal_floating",
+      "attention_span_seconds": 90,
+      "phase_through_objects": true
+    },
+    
+    "aesthetic_profile": {
+      "color_scheme": "translucent_white",
+      "weathering_effects": false,
+      "mouth_style": "hollow_void",
+      "eye_style": "glowing_orbs",
+      "feature_asymmetry": false,
+      "surface_texture": "ethereal_mist",
+      "nose_style": "faded_outline",
+      "transparency_level": 0.7
+    },
+    
+    "audio_profile": {
+      "primary_sounds": ["whispers", "wailing", "chain_rattling", "cold_breeze"],
+      "volume_range": [30, 80],
+      "frequency_preference": "high_ethereal",
+      "echo_effects": true,
+      "reverb_level": 0.8,
+      "spectral_distortion": true
+    }
+  },
+  
+  "subfamily_variants": {
+    "vengeful_spirit": {
+      "description": "Angry ghost seeking revenge with violent tendencies",
+      "color_scheme": "blood_red_mist",
+      "aggression_level": "high",
+      "manifestation_strength": "powerful",
+      "backstory_theme": "tragic_injustice"
+    },
+    
+    "lost_soul": {
+      "description": "Confused ghost searching for peace or resolution",
+      "color_scheme": "melancholy_blue",
+      "aggression_level": "low",
+      "manifestation_strength": "weak",
+      "backstory_theme": "unfinished_business"
+    },
+    
+    "ancient_phantom": {
+      "description": "Old ghost with centuries of accumulated power",
+      "color_scheme": "silver_ethereal",
+      "aggression_level": "moderate",
+      "manifestation_strength": "very_powerful",
+      "backstory_theme": "historical_figure"
+    }
+  },
+  
+  "baseline_dimensions": {
+    "eye_spacing": "3.2 INCH",
+    "compression_factor": 0.95,
+    "skull_scale": 1.05,
+    "ethereal_extension": "1.5 INCH"
+  },
+  
+  "common_components": [
+    "config/components/positioned/ghost_ectoplasm_generator.json",
+    "config/components/positioned/ghost_floating_mechanism.json",
+    "config/components/positioned/ghost_phase_lights.json"
+  ],
+  
+  "supernatural_features": {
+    "manifestation_effects": {
+      "visibility_control": "fade_in_out",
+      "ectoplasm_emission": "glowing_mist",
+      "temperature_drop": "cold_aura"
+    },
+    
+    "spectral_abilities": {
+      "object_interaction": "telekinetic_simulation",
+      "phase_through": "transparency_illusion",
+      "possession_hints": "control_takeover"
+    },
+    
+    "energy_patterns": {
+      "spiritual_energy": "fluctuating_power",
+      "emotional_resonance": "mood_amplification",
+      "otherworldly_connection": "dimensional_hints"
+    }
+  },
+  
+  "thematic_elements": {
+    "afterlife_connection": "spirit_realm_contact",
+    "unfinished_business": "resolution_seeking",
+    "historical_memory": "past_event_echoes",
+    "protective_instinct": "guardian_spirit_role"
+  },
+  
+  "construction_types": {
+    "hard_shell": {
+      "description": "3D printed ethereal ghost with translucent materials and LED backlighting",
+      "materials": ["Translucent PETG", "Clear resin", "Frosted acrylic", "White PLA"],
+      "color_palette": {
+        "primary": "GhostWhite",
+        "secondary": "LightCyan", 
+        "accent": "LavenderBlush",
+        "highlight": "PaleTurquoise"
+      },
+      "special_features": [
+        "Translucent shell for backlighting effects",
+        "LED strips for ethereal glow",
+        "Frosted surfaces for light diffusion",
+        "Multi-color 3D printing uses 4-color HTML palette system"
+      ]
+    },
+    "soft_body": {
+      "description": "Fabric ghost with flowing materials and hidden LED framework",
+      "materials": ["Gossamer fabric", "Tulle netting", "Chiffon layers", "LED fiber optics"],
+      "color_palette": {
+        "primary": "GhostWhite",
+        "secondary": "LightCyan",
+        "accent": "LavenderBlush", 
+        "highlight": "PaleTurquoise"
+      },
+      "special_features": [
+        "Layered translucent fabrics for ethereal effect",
+        "Fiber optic lighting integrated into fabric",
+        "Flowing movement with hidden servo framework",
+        "Fog machine integration for ectoplasm effects"
+      ]
+    }
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Horror family focused on ethereal ghost archetypes",
+    "Emphasizes translucency, floating, and supernatural effects",
+    "Subfamily variants cover different types of spiritual manifestation",
+    "Audio effects create otherworldly atmospheric presence",
+    "Construction types support both translucent hard shells and flowing fabric approaches"
+  ]
+}

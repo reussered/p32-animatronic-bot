@@ -1,0 +1,161 @@
+{
+  "relative_filename": "config/bots/bot_families/mechanical/android_family.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_name": "ANDROID",
+  "family_category": "mechanical",
+  "description": "Humanoid androids with synthetic skin, advanced AI, and human-like behaviors",
+  "created": "2025-10-12",
+  
+  "base_characteristics": {
+    "mood_defaults": {
+      "FEAR": 10,
+      "ANGER": 5,
+      "IRRITATION": 10,
+      "HAPPINESS": 20,
+      "CONTENTMENT": 25,
+      "HUNGER": 0,
+      "CURIOSITY": 20,
+      "AFFECTION": 10
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 3600,
+      "interaction_range_cm": 180,
+      "aggressive_threshold": 95,
+      "movement_style": "human_mimicry",
+      "attention_span_seconds": 600,
+      "emotional_processing": "advanced_algorithms"
+    },
+    
+    "aesthetic_profile": {
+      "color_scheme": "synthetic_flesh",
+      "weathering_effects": false,
+      "mouth_style": "human_lips",
+      "eye_style": "synthetic_iris",
+      "feature_asymmetry": false,
+      "surface_texture": "artificial_skin",
+      "nose_style": "sculpted_human"
+    },
+    
+    "audio_profile": {
+      "primary_sounds": ["synthetic_speech", "subtle_servos", "cooling_fans", "data_processing"],
+      "volume_range": [45, 85],
+      "frequency_preference": "human_vocal_range",
+      "voice_synthesis": true,
+      "emotional_inflection": "advanced_modulation"
+    }
+  },
+  
+  "subfamily_variants": {
+    "companion_android": {
+      "description": "Social android designed for human companionship and emotional support",
+      "color_scheme": "warm_synthetic_skin",
+      "social_programming": "empathetic_interaction",
+      "personality_matrix": "nurturing_supportive",
+      "emotional_range": "full_spectrum"
+    },
+    
+    "labor_android": {
+      "description": "Industrial android optimized for physical tasks and workplace efficiency",
+      "color_scheme": "utilitarian_grey",
+      "social_programming": "task_focused",
+      "personality_matrix": "efficient_professional",
+      "physical_enhancement": "strength_durability"
+    },
+    
+    "research_android": {
+      "description": "Scientific android with advanced analytical capabilities and data processing",
+      "color_scheme": "clinical_white",
+      "social_programming": "analytical_interaction",
+      "personality_matrix": "logical_curious",
+      "cognitive_enhancement": "super_intelligence"
+    }
+  },
+  
+  "baseline_dimensions": {
+    "eye_spacing": "2.9 INCH",
+    "compression_factor": 1.0,
+    "skull_scale": 1.0,
+    "human_proportions": "anatomically_accurate"
+  },
+  
+  "common_components": [
+    "config/components/positioned/android_synthetic_skin.json",
+    "config/components/positioned/android_emotion_display.json",
+    "config/components/positioned/android_neural_interface.json"
+  ],
+  
+  "android_features": {
+    "artificial_intelligence": {
+      "learning_algorithms": "neural_network",
+      "memory_systems": "experience_based",
+      "decision_making": "ethical_framework"
+    },
+    
+    "human_mimicry": {
+      "facial_expressions": "micro_expression_control",
+      "body_language": "posture_adjustment",
+      "speech_patterns": "natural_conversation"
+    },
+    
+    "synthetic_biology": {
+      "skin_simulation": "temperature_texture",
+      "breathing_simulation": "chest_movement",
+      "pulse_simulation": "circulatory_mimicry"
+    }
+  },
+  
+  "thematic_elements": {
+    "artificial_consciousness": "self_awareness_questions",
+    "human_android_relations": "social_integration",
+    "technological_singularity": "AI_evolution",
+    "ethical_dilemmas": "rights_and_personhood"
+  },
+  
+  "construction_types": {
+    "hard_shell": {
+      "description": "3D printed android with synthetic skin texture and human-like proportions",
+      "materials": ["Skin-tone PLA", "Clear PETG", "Soft TPU", "Metallic accents"],
+      "color_palette": {
+        "primary": "PeachPuff",
+        "secondary": "LightGray",
+        "accent": "SteelBlue",
+        "highlight": "LightSteelBlue"
+      },
+      "special_features": [
+        "Realistic skin texture with subtle color variations",
+        "Clear sections for internal component visibility",
+        "Soft TPU joints for natural movement",
+        "Multi-color 3D printing uses 4-color HTML palette system"
+      ]
+    },
+    "soft_body": {
+      "description": "Fabric android with synthetic skin covering and humanoid proportions",
+      "materials": ["Synthetic skin fabric", "Memory foam", "Flexible framework", "LED strips"],
+      "color_palette": {
+        "primary": "PeachPuff",
+        "secondary": "LightGray",
+        "accent": "SteelBlue", 
+        "highlight": "LightSteelBlue"
+      },
+      "special_features": [
+        "Realistic synthetic skin texture and feel",
+        "Memory foam padding for human-like softness",
+        "Flexible internal framework for natural movement",
+        "Integrated LED strips for status and emotional displays"
+      ]
+    }
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Mechanical family focused on advanced humanoid androids",
+    "Emphasizes human mimicry, advanced AI, and social interaction",
+    "Subfamily variants cover different android specializations",
+    "Audio effects create believable human-like communication",
+    "Construction types support both hard synthetic shells and soft humanoid approaches"
+  ]
+}

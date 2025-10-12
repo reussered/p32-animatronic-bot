@@ -1,0 +1,115 @@
+{
+  "relative_filename": "config/bots/vampire_ancient_elder_001.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "VAMPIRE_ANCIENT_ELDER_001",
+  "family_reference": "config/bots/bot_families/fantasy/vampire_family.json",
+  "subfamily": "ancient_elder",
+  "description": "Ancient vampire elder with tentacle-like shadow manipulation and centuries of accumulated power",
+  "created": "2025-10-12",
+  
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "baseline_dimensions": {
+    "eye_spacing": "3.2 INCH",
+    "compression_factor": 0.8,
+    "skull_scale": 1.4,
+    "fang_extension": "1.2 INCH"
+  },
+  
+  "components": [
+    "config/components/positioned/vampire_eye_left_elder.json",
+    "config/components/positioned/vampire_eye_right_elder.json",
+    "config/components/positioned/vampire_mouth_elder.json",
+    "config/components/positioned/vampire_speaker_elder.json"
+  ],
+  
+  "mood_profile": {
+    "FEAR": 0,
+    "ANGER": 20,
+    "IRRITATION": 10,
+    "HAPPINESS": 15,
+    "CONTENTMENT": 25,
+    "HUNGER": 50,
+    "CURIOSITY": 40,
+    "AFFECTION": 0
+  },
+  
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 1200,
+    "interaction_range_cm": 500,
+    "aggressive_threshold": 95,
+    "movement_style": "ancient_deliberate",
+    "attention_span_seconds": 600,
+    "power_level": "elder_ancient"
+  },
+  
+  "specialized_components": {
+    "shadow_tentacle_system": {
+      "description": "Flexible tentacle-like appendages that emerge from darkness to simulate shadow manipulation powers",
+      "implementation": "Pneumatic-actuated flexible tubing with black fabric covering, controlled by pressure systems for lifelike movement",
+      "tentacle_behaviors": ["emerging_from_shadows", "grasping_motions", "intimidation_displays", "environmental_interaction"],
+      "tentacle_count": 6,
+      "length_range": "2-8 feet",
+      "material": "flexible_pneumatic_core_with_fabric_skin"
+    },
+    "hypnotic_gaze_system": {
+      "description": "Advanced LED eye system with hypnotic patterns and entrancing light sequences",
+      "implementation": "High-resolution LED matrices in eye sockets with programmable patterns, synchronized with audio for mesmerizing effects",
+      "hypnotic_patterns": ["spiral_convergence", "pulsing_intensity", "color_shifting", "depth_illusion"]
+    },
+    "blood_scent_detection": {
+      "description": "Chemical sensor array that detects iron content in air simulating supernatural blood sensing",
+      "implementation": "Electronic nose sensors calibrated for metallic compounds with behavioral response programming",
+      "detection_responses": ["hunger_activation", "tracking_behavior", "predatory_focus", "feeding_preparation"]
+    },
+    "centuries_memory_bank": {
+      "description": "Advanced AI system with extensive historical knowledge and period-appropriate responses",
+      "implementation": "Large language model trained on historical data with personality adaptation for different time periods",
+      "historical_periods": ["medieval_knowledge", "renaissance_wisdom", "industrial_experience", "modern_adaptation"]
+    },
+    "mist_transformation_effect": {
+      "description": "Fog generation system that creates disappearing/appearing effects simulating vampiric mist form",
+      "implementation": "High-density fog machine with rapid deployment system and coordinated lighting for dramatic transformation",
+      "transformation_stages": ["solid_form", "partial_misting", "full_mist_form", "re_materialization"]
+    },
+    "supernatural_strength_simulation": {
+      "description": "Hydraulic system that can demonstrate impressive lifting and crushing capabilities",
+      "implementation": "Pneumatic actuators with controlled pressure systems for safe demonstration of supernatural strength",
+      "strength_demonstrations": ["object_crushing", "heavy_lifting", "material_bending", "impact_resistance"]
+    },
+    "ancient_language_processor": {
+      "description": "Multi-language AI system capable of speaking in dead languages and ancient dialects",
+      "implementation": "Text-to-speech system trained on Latin, Ancient Greek, Sanskrit, and other historical languages",
+      "language_capabilities": ["latin_incantations", "ancient_greek_philosophy", "sanskrit_mantras", "archaic_english"]
+    }
+  },
+  
+  "audio_profile": {
+    "primary_sounds": ["ancient_whispers", "centuries_old_breathing", "shadow_rustling", "otherworldly_presence"],
+    "threat_sounds": ["ancient_hissing", "supernatural_roar", "shadow_manifestation", "power_display"],
+    "ambient_sounds": ["temporal_echoing", "shadow_movement", "ancient_knowledge", "ethereal_presence"],
+    "hypnotic_sounds": ["mesmerizing_tones", "entrancing_whispers", "hypnotic_frequencies", "consciousness_alteration"],
+    "volume_range": [30, 95],
+    "frequency_preference": "ancient_resonance",
+    "multi_lingual": true
+  },
+  
+  "aesthetic_customizations": {
+    "age_appearance": "millennia_old_wisdom",
+    "power_manifestations": ["shadow_tendrils", "reality_distortion", "temporal_presence", "supernatural_aura"],
+    "color_variations": ["ancient_ivory", "deep_shadow_black", "blood_crimson", "otherworldly_silver"],
+    "texture_details": ["timeless_marble", "shadow_integration", "power_emanation", "ancient_majesty"]
+  },
+  
+  "construction_preference": "hard_shell",
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Ancient vampire elder variant representing millennia of accumulated supernatural power",
+    "Specialized components emphasize shadow manipulation, hypnotic abilities, and ancient knowledge",
+    "Tentacle system provides unique environmental interaction and intimidation capabilities",
+    "Designed for high-end horror attractions and immersive supernatural experiences"
+  ]
+}

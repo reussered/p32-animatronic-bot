@@ -1,4 +1,4 @@
-﻿{
+{
   "relative_filename": "config/bots/goblin_full.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -44,7 +44,7 @@
   "tested": false,
   "notes": [
     "Updated to use skull_3d coordinate system",
-    "Uses new bus+device interface architecture", 
+    "Uses new bus+device interface architecture",
     "Components now reference positioned JSON files",
     "12 GPIO pins total for complete functionality"
   ]

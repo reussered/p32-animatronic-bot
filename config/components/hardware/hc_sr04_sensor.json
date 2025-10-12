@@ -1,4 +1,4 @@
-﻿{
+{
   "relative_filename": "config/components/hardware/hc_sr04_sensor.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -6,13 +6,13 @@
   "component_name": "HC-SR04 Ultrasonic Distance Sensor",
   "physical_specs": {
     "width": "1.8 INCH",
-    "height": "0.7 INCH", 
+    "height": "0.7 INCH",
     "depth": "0.6 INCH",
     "sensor_spacing": "1.0 INCH",
     "mounting_holes": {
       "count": 2,
       "diameter": "0.08 INCH",
-      "spacing": "1.5 INCH"  
+      "spacing": "1.5 INCH"
     }
   },
   "electrical_specs": {

@@ -1,0 +1,151 @@
+{
+  "relative_filename": "config/bots/bot_families/animals/wolf_family.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_type": "WOLF", 
+  "family_category": "animals",
+  "description": "Pack-oriented wolf family with territorial behaviors and howling sounds",
+  "created": "2025-10-12",
+  "template_type": "family_template",
+  
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "baseline_dimensions": {
+    "eye_spacing": "2.3 INCH",
+    "compression_factor": 0.7,
+    "skull_scale": 1.1,
+    "snout_extension": "1.8 INCH"
+  },
+  
+  "default_components": [
+    "config/components/positioned/wolf_eye_left.json",
+    "config/components/positioned/wolf_eye_right.json",
+    "config/components/positioned/wolf_snout.json",
+    "config/components/positioned/wolf_speaker.json"
+  ],
+  
+  "family_mood_profile": {
+    "FEAR": 10,
+    "ANGER": 20,
+    "IRRITATION": 15,
+    "HAPPINESS": 15,
+    "CONTENTMENT": 20,
+    "HUNGER": 25,
+    "CURIOSITY": 35,
+    "AFFECTION": 25
+  },
+  
+  "family_behavior_patterns": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 350,
+    "interaction_range_cm": 300,
+    "aggressive_threshold": 50,
+    "calm_threshold": 30,
+    "personality_traits": [
+      "pack_oriented",
+      "territorial",
+      "loyal",
+      "alert", 
+      "cautious_bold"
+    ]
+  },
+  
+  "hardware_preferences": {
+    "coordinate_system": "skull_3d",
+    "spi_device_assignments": {
+      "left_eye": "SPI_DEVICE_1", 
+      "right_eye": "SPI_DEVICE_2",
+      "snout_display": "SPI_DEVICE_3"
+    },
+    "i2s_device_assignments": {
+      "primary_speaker": "I2S_DEVICE_1"
+    }
+  },
+  
+  "aesthetic_profile": {
+    "surface_texture": "dense_fur",
+    "color_scheme": "gray_timber",
+    "eye_style": "piercing_narrow",
+    "nose_style": "canine_black",
+    "mouth_style": "predator_line",
+    "feature_asymmetry": false,
+    "weathering_effects": true
+  },
+  
+  "sound_characteristics": {
+    "voice_pitch": "deep_resonant",
+    "breathing_pattern": "controlled_panting",
+    "pack_sounds": ["howl", "bark", "whine"],
+    "alert_sounds": ["growl", "snarl", "warning_bark"],
+    "ambient_volume": 0.5,
+    "reaction_volume": 0.9
+  },
+  
+  "animation_style": {
+    "movement_speed": "controlled_predatory",
+    "eye_tracking": "intense_focused", 
+    "idle_behaviors": ["territory_scan", "pack_listen"],
+    "threat_responses": ["hackles_raise", "challenge_stare"],
+    "expression_intensity": "high"
+  },
+  
+  "subfamily_variants": {
+    "arctic_wolf": {
+      "color_scheme": "white_gray",
+      "personality_modifiers": {
+        "HUNGER": "+10",
+        "FEAR": "-10"
+      }
+    },
+    "red_wolf": {
+      "color_scheme": "russet_brown",
+      "personality_modifiers": {
+        "CURIOSITY": "+10",
+        "AFFECTION": "+5"
+      }
+    },
+    "dire_wolf": {
+      "size_scale": 1.4,
+      "color_scheme": "dark_black",
+      "personality_modifiers": {
+        "ANGER": "+15",
+        "FEAR": "-15"
+      }
+    }
+  },
+  
+  "construction_types": {
+    "hard_shell": {
+      "description": "3D printed wolf with elongated snout and predator features",
+      "materials": ["Dark gray PLA", "Brown PETG", "White accents", "Yellow transparent resin"],
+      "color_palette": {
+        "primary": "DarkSlateGray",
+        "secondary": "SaddleBrown",
+        "accent": "Snow",
+        "highlight": "Gold"
+      },
+      "special_features": [
+        "Elongated snout with detailed canine tooth features",
+        "Pointed ear structures with articulation points",
+        "Weathered fur texture with pack markings",
+        "Multi-color 3D printing uses 4-color HTML palette system"
+      ]
+    },
+    "soft_body": {
+      "description": "Realistic wolf costume with layered fur and pack details",
+      "materials": ["Long guard fur", "Dense undercoat fur", "Leather details", "Amber glass eyes"],
+      "color_palette": {
+        "primary": "DarkSlateGray",
+        "secondary": "SaddleBrown",
+        "accent": "Snow",
+        "highlight": "Gold"
+      },
+      "special_features": [
+        "Layered fur system with guard hairs and undercoat",
+        "Leather nose and paw pad details",
+        "Realistic amber glass eyes with depth",
+        "Pack scent marking simulation capability"
+      ]
+    }
+  }
+}

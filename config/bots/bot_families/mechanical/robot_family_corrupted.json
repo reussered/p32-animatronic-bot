@@ -1,0 +1,232 @@
+{{
+
+  "relative_filename": "config/bots/bot_families/mechanical/robot_family.json",  "relative_filename": "config/bots/bot_families/mechanical/robot_family.json",
+
+  "version": "1.0.0",  "version": "1.0.0",
+
+  "author": "config/author.json",  "author": "config/author.json",
+
+  "family_name": "ROBOT",  "family_name": "ROBOT",
+
+  "family_category": "mechanical",  "family_category": "mechanical",
+
+  "description": "Advanced robots with LED displays, servo mechanisms, and AI-inspired behaviors",  "description": "Advanced robots with LED displays, servo mechanisms, and AI-inspired behaviors",
+
+  "created": "2025-10-12",  "created": "2025-10-12",
+
+    
+
+  "base_characteristics": {  "base_characteristics": {
+
+    "mood_defaults": {    "mood_defaults": {
+
+      "FEAR": 5,      "FEAR": 5,
+
+      "ANGER": 10,      "ANGER": 10,
+
+      "IRRITATION": 15,      "IRRITATION": 15,
+
+      "HAPPINESS": 25,      "HAPPINESS": 25,
+
+      "CONTENTMENT": 20,      "CONTENTMENT": 20,
+
+      "HUNGER": 0,      "HUNGER": 0,
+
+      "CURIOSITY": 25,      "CURIOSITY": 25,
+
+      "AFFECTION": 0      "AFFECTION": 0
+
+    },    },
+
+        
+
+    "behavior_config": {    "behavior_config": {
+
+      "threat_response_enabled": true,      "threat_response_enabled": true,
+
+      "auto_sleep_timeout_seconds": 1800,      "auto_sleep_timeout_seconds": 1800,
+
+      "interaction_range_cm": 200,      "interaction_range_cm": 200,
+
+      "aggressive_threshold": 90,      "aggressive_threshold": 90,
+
+      "movement_style": "precise_mechanical",      "movement_style": "precise_mechanical",
+
+      "attention_span_seconds": 300,      "attention_span_seconds": 300,
+
+      "processing_delays": "computational_pauses"      "processing_delays": "computational_pauses"
+
+    },    },
+
+        
+
+    "aesthetic_profile": {    "aesthetic_profile": {
+
+      "color_scheme": "metallic_chrome",      "color_scheme": "metallic_chrome",
+
+      "weathering_effects": false,      "weathering_effects": false,
+
+      "mouth_style": "speaker_grille",      "mouth_style": "speaker_grille",
+
+      "eye_style": "led_matrix",      "eye_style": "led_matrix",
+
+      "feature_asymmetry": false,      "feature_asymmetry": false,
+
+      "surface_texture": "brushed_metal",      "surface_texture": "brushed_metal",
+
+      "nose_style": "sensor_array"      "nose_style": "sensor_array"
+
+    },    },
+
+        
+
+    "audio_profile": {    "audio_profile": {
+
+      "primary_sounds": ["servo_whirring", "electronic_beeps", "processing_hums", "data_transmission"],      "primary_sounds": ["servo_whirring", "electronic_beeps", "processing_hums", "data_transmission"],
+
+      "volume_range": [50, 100],      "volume_range": [50, 100],
+
+      "frequency_preference": "electronic_spectrum",      "frequency_preference": "electronic_spectrum",
+
+      "digital_processing": true,      "digital_processing": true,
+
+      "bit_rate": "high_fidelity"      "bit_rate": "high_fidelity"
+
+    }    }
+
+  },  },
+
+    DT_GUARD", 
+
+  "subfamily_variants": {    "submarine_robot": {
+
+    "combat_robot": {      "description": "Deep-sea exploration robot with waterproof systems",  
+
+      "description": "Military-grade robot with defensive capabilities and tactical awareness",      "color_scheme": "ocean_blue_metal",
+
+      "color_scheme": "tactical_black",      "environmental_adaptation": "aquatic",
+
+      "combat_readiness": "high",      "special_equipment": "sonar_navigation",
+
+      "armor_plating": "reinforced_kevlar",      "pressure_resistance": "deep_sea_rated"
+
+      "weapon_systems": "non_lethal_deterrent"    }
+
+    },  },
+
+      
+
+    "service_robot": {  "baseline_dimensions": {
+
+      "description": "Helpful domestic robot focused on assistance and companionship",    "eye_spacing": "3.4 INCH",
+
+      "color_scheme": "friendly_white",    "compression_factor": 1.0,
+
+      "combat_readiness": "low",    "skull_scale": 1.2,
+
+      "service_functions": "household_tasks",    "mechanical_precision": "high_tolerance"
+
+      "personality_matrix": "helpful_companion"  },
+
+    },  
+
+      "common_components": [
+
+    "exploration_robot": {    "config/components/positioned/robot_led_matrix_eyes.json",
+
+      "description": "Deep-sea exploration robot with waterproof systems",    "config/components/positioned/robot_servo_actuators.json",
+
+      "color_scheme": "ocean_blue_metal",    "config/components/positioned/robot_sensor_array.json"
+
+      "environmental_adaptation": "aquatic",  ],
+
+      "special_equipment": "sonar_navigation",  
+
+      "pressure_resistance": "deep_sea_rated"  "mechanical_features": {
+
+    }    "actuator_systems": {
+
+  },      "servo_motors": "high_precision",
+
+        "joint_articulation": "multi_axis",
+
+  "baseline_dimensions": {      "movement_speed": "variable_control"
+
+    "eye_spacing": "3.4 INCH",    },
+
+    "compression_factor": 1.0,    
+
+    "skull_scale": 1.2,    "electronic_systems": {
+
+    "mechanical_precision": "high_tolerance"      "led_displays": "matrix_configuration",
+
+  },      "sensor_integration": "multi_modal",
+
+        "processing_unit": "embedded_controller"
+
+  "common_components": [    },
+
+    "config/components/positioned/robot_led_matrix_eyes.json",    
+
+    "config/components/positioned/robot_servo_actuators.json",    "structural_elements": {
+
+    "config/components/positioned/robot_sensor_array.json"      "frame_material": "aluminum_alloy",
+
+  ],      "joint_bearings": "precision_ball_bearing",
+
+        "protective_housing": "impact_resistant"
+
+  "mechanical_features": {    }
+
+    "actuator_systems": {  },
+
+      "servo_motors": "high_precision",  
+
+      "joint_articulation": "multi_axis",  "thematic_elements": {
+
+      "movement_speed": "variable_control"    "artificial_intelligence": "learning_algorithms",
+
+    },    "human_robot_interaction": "social_protocols",
+
+        "task_specialization": "function_optimization",
+
+    "electronic_systems": {    "technological_evolution": "upgrade_compatibility"
+
+      "led_displays": "matrix_configuration",  },
+
+      "sensor_integration": "multi_modal",  
+
+      "processing_unit": "embedded_controller"  "prototype_status": "design_complete",
+
+    },  "tested": false,
+
+      "notes": [
+
+    "structural_elements": {    "Mechanical family focused on advanced robot archetypes",
+
+      "frame_material": "aluminum_alloy",    "Emphasizes precision, electronic systems, and AI behaviors",
+
+      "joint_bearings": "precision_ball_bearing",    "Subfamily variants cover different robot specializations",
+
+      "protective_housing": "impact_resistant"    "Audio effects create authentic mechanical ambiance"
+
+    }  ]
+
+  },}
+  
+  "thematic_elements": {
+    "artificial_intelligence": "learning_algorithms",
+    "human_robot_interaction": "social_protocols",
+    "task_specialization": "function_optimization",
+    "technological_evolution": "upgrade_compatibility"
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Mechanical family focused on advanced robot archetypes",
+    "Emphasizes precision, electronic systems, and AI behaviors",
+    "Subfamily variants cover different robot specializations",
+    "Audio effects create authentic mechanical ambiance"
+  ]
+}

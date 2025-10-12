@@ -1,0 +1,89 @@
+{
+  "relative_filename": "config/bots/zombie_shambler_001.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "ZOMBIE_SHAMBLER_001",
+  "family_reference": "config/bots/bot_families/horror/zombie_family.json",
+  "subfamily": "shambler",
+  "description": "Classic shambling zombie with rotting flesh effects and mindless pursuit behavior",
+  "created": "2025-10-12",
+  
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "baseline_dimensions": {
+    "eye_spacing": "2.4 INCH",
+    "compression_factor": 0.85,
+    "skull_scale": 1.1
+  },
+  
+  "components": [
+    "config/components/positioned/zombie_eye_left_shambler.json",
+    "config/components/positioned/zombie_eye_right_shambler.json",
+    "config/components/positioned/zombie_mouth_shambler.json",
+    "config/components/positioned/zombie_speaker_shambler.json"
+  ],
+  
+  "mood_profile": {
+    "FEAR": 5,
+    "ANGER": 45,
+    "IRRITATION": 20,
+    "HAPPINESS": 0,
+    "CONTENTMENT": 5,
+    "HUNGER": 80,
+    "CURIOSITY": 15,
+    "AFFECTION": 0
+  },
+  
+  "behavior_config": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 300,
+    "interaction_range_cm": 100,
+    "aggressive_threshold": 40,
+    "movement_style": "slow_shambling",
+    "attention_span_seconds": 45,
+    "pack_behavior": "follow_horde"
+  },
+  
+  "specialized_components": {
+    "rotting_flesh_effects": {
+      "description": "Servo-actuated skin flaps that simulate decaying flesh with periodic twitching movements",
+      "implementation": "Multi-layer silicone skin with hidden servo motors for realistic decay animation",
+      "activation_triggers": ["proximity_detection", "random_intervals", "audio_cues"]
+    },
+    "mindless_pursuit_system": {
+      "description": "Simple tracking behavior that follows movement with single-minded determination",
+      "implementation": "Ultrasonic sensor array with basic pathfinding algorithms, no complex decision making",
+      "behavioral_patterns": ["straight_line_pursuit", "obstacle_bumping", "relentless_following"]
+    },
+    "decay_scent_simulator": {
+      "description": "Chemical scent dispenser that releases decay-like odors for immersive horror experience",
+      "implementation": "Small pump system with scent cartridges, activated during peak interaction moments",
+      "safety_features": ["non-toxic_compounds", "limited_dispersion", "manual_override"]
+    }
+  },
+  
+  "audio_profile": {
+    "primary_sounds": ["moaning", "groaning", "shuffling_feet", "labored_breathing"],
+    "threat_sounds": ["aggressive_growl", "hissing", "bone_cracking"],
+    "ambient_sounds": ["decay_dripping", "cloth_rustling", "joint_creaking"],
+    "volume_range": [50, 85],
+    "frequency_preference": "low_guttural"
+  },
+  
+  "aesthetic_customizations": {
+    "weathering_level": "extreme",
+    "decay_patterns": ["flesh_wounds", "exposed_bone", "tattered_clothing"],
+    "color_variations": ["sickly_green_tint", "bruised_purple_patches", "dried_blood_stains"],
+    "texture_details": ["rough_skin", "exposed_muscle", "bone_protrusions"]
+  },
+  
+  "construction_preference": "hard_shell",
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Classic zombie archetype focused on shambling movement and mindless pursuit",
+    "Specialized components create immersive decay and horror effects",
+    "Designed for haunted house and horror entertainment applications",
+    "Behavior patterns emphasize simple, relentless pursuit mechanics"
+  ]
+}

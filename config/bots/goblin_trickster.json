@@ -1,0 +1,172 @@
+{
+  "relative_filename": "config/bots/goblin_trickster.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+  "bot_type": "GOBLINTRICKSTER",
+  "bot_id": "goblin_trickster_v1",
+  "description": "Mischievous goblin trickster with cunning intelligence and playful malice",
+  "created": "2025-10-12",
+  
+  "template_inheritance": "extend",
+  "subfamily_selection": "forest_goblin",
+  
+  "overrides": {
+    "mood_defaults": {
+      "FEAR": 8,
+      "ANGER": 5,
+      "IRRITATION": 3,
+      "HAPPINESS": 25,
+      "CONTENTMENT": 15,
+      "HUNGER": 7,
+      "CURIOSITY": 30,
+      "AFFECTION": 7
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 400,
+      "interaction_range_cm": 220,
+      "aggressive_threshold": 75,
+      "calm_threshold": 30,
+      "mischief_making": true,
+      "trick_planning": true,
+      "playful_malice": true,
+      "intelligence_cunning": "high"
+    },
+    
+    "aesthetic_profile": {
+      "color_scheme": "mischievous_bright_green",
+      "weathering_effects": false,
+      "trickster_features": {
+        "sly_grin": "permanent",
+        "clever_eyes": "glinting",
+        "expressive_eyebrows": true,
+        "nimble_fingers": true,
+        "prankster_accessories": "colorful_ribbons",
+        "youthful_appearance": true
+      },
+      "size_modifier": 0.95,
+      "charm_factor": "mischievous"
+    },
+    
+    "sound_characteristics": {
+      "voice_pitch": "playful_medium",
+      "breathing_pattern": "excited_anticipation",
+      "mischief_sounds": ["sly_chuckle", "prank_giggle", "trick_whisper", "gotcha_laugh"],
+      "planning_sounds": ["scheming_hum", "clever_murmur", "idea_spark"],
+      "idle_sounds": ["curious_sniff", "playful_tap", "mischief_plan"],
+      "ambient_volume": 0.4,
+      "reaction_volume": 0.7,
+      "playful_inflection": true
+    },
+    
+    "animation_style": {
+      "movement_speed": "quick_nimble",
+      "eye_tracking": "clever_calculating",
+      "idle_behaviors": ["mischief_planning", "trick_preparation", "playful_observation"],
+      "threat_responses": ["clever_evasion", "trick_distraction", "prank_deflection"],
+      "expression_intensity": "animated"
+    }
+  },
+  
+  "additional_components": [
+    "config/components/positioned/goblin_sly_grin.json",
+    "config/components/positioned/goblin_clever_eyes.json",
+    "config/components/positioned/goblin_nimble_fingers.json",
+    "config/components/positioned/goblin_prank_accessories.json"
+  ],
+  
+  "custom_behaviors": {
+    "prank_execution": {
+      "trigger": "opportunity_detected",
+      "eyes": "mischievous_sparkle",
+      "mouth": "sly_anticipation",
+      "sounds": ["prank_setup", "gotcha_prepare"],
+      "duration_ms": 10000,
+      "priority": "high",
+      "stealth_required": true
+    },
+    "trick_revelation": {
+      "trigger": "prank_success",
+      "eyes": "triumphant_twinkle",
+      "mouth": "gotcha_grin",
+      "sounds": ["gotcha_laugh", "trick_reveal"],
+      "duration_ms": 5000,
+      "priority": "medium",
+      "satisfaction_mode": true
+    },
+    "scheming_session": {
+      "trigger": "planning_mode",
+      "eyes": "calculating_gleam",
+      "mouth": "plotting_smirk",
+      "sounds": ["scheme_murmur", "plan_whisper"],
+      "duration_ms": 15000,
+      "priority": "medium",
+      "intelligence_boost": true
+    },
+    "curious_investigation": {
+      "trigger": "new_object",
+      "eyes": "investigative_focus",
+      "mouth": "curious_expression",
+      "sounds": ["investigate_hum", "curiosity_chirp"],
+      "duration_ms": 8000,
+      "priority": "medium",
+      "learning_mode": true
+    },
+    "playful_interaction": {
+      "trigger": "friendly_presence",
+      "eyes": "friendly_sparkle",
+      "mouth": "playful_smile",
+      "sounds": ["playful_greeting", "friendly_chuckle"],
+      "duration_ms": 6000,
+      "priority": "low",
+      "social_engagement": true
+    }
+  },
+  
+  "trickster_abilities": {
+    "prank_repertoire": [
+      "sound_mimicry",
+      "distraction_techniques",
+      "misdirection_mastery",
+      "timing_precision",
+      "opportunity_recognition"
+    ],
+    "intelligence_skills": {
+      "pattern_recognition": "high",
+      "cause_effect_understanding": true,
+      "social_manipulation": "moderate",
+      "problem_solving": "creative"
+    },
+    "social_awareness": {
+      "mood_reading": "expert",
+      "reaction_prediction": true,
+      "boundary_testing": "constant",
+      "relationship_dynamics": "intuitive"
+    }
+  },
+  
+  "hardware_config": {
+    "i2s_sample_rate": 44100,
+    "display_update_rate_fps": 40,
+    "sensor_poll_rate_hz": 18,
+    "power_management": "intelligent",
+    "audio_amplification": 0.6,
+    "expression_servo_speed": "fast",
+    "interaction_responsiveness": "high"
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "High curiosity and happiness for engaging personality",
+    "Mischief-focused behaviors with prank execution system",
+    "Intelligence-based approach to interactions",
+    "Playful malice without genuine hostility",
+    "Social awareness for reading human reactions",
+    "Fast expression changes for animated character",
+    "Balanced aggression levels for family-friendly pranks",
+    "Creative problem-solving for trick development"
+  ]
+}

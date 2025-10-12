@@ -1,0 +1,21 @@
+{
+  "relative_filename": "config/components/positioned/goblin_ear_right.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_id": "goblin_ear_right",
+  "hardware_reference": "config/components/hardware/directional_microphone.json",
+  "interface_assignment": "I2S_DEVICE_3",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "1.5 INCH",
+    "y": "0.5 INCH",
+    "z": "0.1 INCH"
+  },
+  "orientation": {
+    "tilt": "15 DEGREES",
+    "rotation": "30 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  "function": "right_ear_audio_input"
+}

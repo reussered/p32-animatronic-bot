@@ -1,0 +1,152 @@
+{
+  "relative_filename": "config/bots/bot_families/animals/bear_family.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "family_type": "BEAR",
+  "family_category": "animals",
+  "description": "Gentle, protective bear family with rounded features and fur textures",
+  "created": "2025-10-12",
+  "template_type": "family_template",
+  
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "baseline_dimensions": {
+    "eye_spacing": "2.5 INCH",
+    "compression_factor": 0.8,
+    "skull_scale": 1.2,
+    "snout_extension": "1.2 INCH"
+  },
+  
+  "default_components": [
+    "config/components/positioned/bear_eye_left.json",
+    "config/components/positioned/bear_eye_right.json",
+    "config/components/positioned/bear_snout.json", 
+    "config/components/positioned/bear_speaker.json"
+  ],
+  
+  "family_mood_profile": {
+    "FEAR": 5,
+    "ANGER": 5,
+    "IRRITATION": 10,
+    "HAPPINESS": 25,
+    "CONTENTMENT": 40,
+    "HUNGER": 20,
+    "CURIOSITY": 30,
+    "AFFECTION": 35
+  },
+  
+  "family_behavior_patterns": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 600,
+    "interaction_range_cm": 150,
+    "aggressive_threshold": 40,
+    "calm_threshold": 60,
+    "personality_traits": [
+      "protective",
+      "gentle",
+      "patient",
+      "nurturing", 
+      "loyal"
+    ]
+  },
+  
+  "hardware_preferences": {
+    "coordinate_system": "skull_3d",
+    "spi_device_assignments": {
+      "left_eye": "SPI_DEVICE_1",
+      "right_eye": "SPI_DEVICE_2",
+      "snout_display": "SPI_DEVICE_3"
+    },
+    "i2s_device_assignments": {
+      "primary_speaker": "I2S_DEVICE_1"
+    }
+  },
+  
+  "aesthetic_profile": {
+    "surface_texture": "fur_pattern",
+    "color_scheme": "brown",
+    "eye_style": "rounded_socket",
+    "nose_style": "bear_snout",
+    "mouth_style": "gentle_curve",
+    "feature_asymmetry": false,
+    "weathering_effects": false
+  },
+  
+  "sound_characteristics": {
+    "voice_pitch": "warm_deep",
+    "breathing_pattern": "slow_rhythmic",
+    "comfort_sounds": ["purr", "gentle_huff", "contented_sigh"],
+    "alert_sounds": ["sniff", "cautious_grunt"],
+    "ambient_volume": 0.4,
+    "reaction_volume": 0.6
+  },
+  
+  "animation_style": {
+    "movement_speed": "slow_deliberate", 
+    "eye_tracking": "gentle_following",
+    "idle_behaviors": ["sleepy_blink", "content_watch"],
+    "threat_responses": ["protective_stance", "warning_growl"],
+    "expression_intensity": "medium"
+  },
+  
+  "subfamily_variants": {
+    "grizzly_bear": {
+      "color_scheme": "dark_brown",
+      "size_scale": 1.3,
+      "personality_modifiers": {
+        "ANGER": "+10",
+        "CONTENTMENT": "-5"
+      }
+    },
+    "panda_bear": {
+      "color_scheme": "black_white",
+      "personality_modifiers": {
+        "HAPPINESS": "+15",
+        "CURIOSITY": "+10"
+      }
+    },
+    "polar_bear": {
+      "color_scheme": "white",
+      "size_scale": 1.4,
+      "personality_modifiers": {
+        "HUNGER": "+10",
+        "FEAR": "-5"
+      }
+    }
+  },
+  
+  "construction_types": {
+    "hard_shell": {
+      "description": "3D printed bear with textured fur surface and rounded features",
+      "materials": ["Brown PLA", "Tan PETG", "Dark brown accents", "Clear resin eyes"],
+      "color_palette": {
+        "primary": "SaddleBrown",
+        "secondary": "BurlyWood",
+        "accent": "DarkOliveGreen",
+        "highlight": "NavajoWhite"
+      },
+      "special_features": [
+        "Textured surface mimicking bear fur patterns",
+        "Rounded, gentle features with protective appearance",
+        "Natural brown color variations for realistic appearance",
+        "Multi-color 3D printing uses 4-color HTML palette system"
+      ]
+    },
+    "soft_body": {
+      "description": "Plush bear costume with soft fur fabric and cuddly proportions",
+      "materials": ["Faux fur", "Plush filling", "Felt details", "Safety eyes"],
+      "color_palette": {
+        "primary": "SaddleBrown",
+        "secondary": "BurlyWood",
+        "accent": "DarkOliveGreen",
+        "highlight": "NavajoWhite"
+      },
+      "special_features": [
+        "Soft faux fur exterior for tactile appeal",
+        "Plush filling for huggable, cushioned feel",
+        "Felt paw pads and nose details",
+        "Child-safe construction with secure eye attachments"
+      ]
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "relative_filename": "config/bots/bot_families/horror/skeleton_family.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_name": "SKELETON",
+  "family_category": "horror",
+  "description": "Animated skeletons with bone mechanics, rattling sounds, and undead warrior elements",
+  "created": "2025-10-12",
+  
+  "base_characteristics": {
+    "mood_defaults": {
+      "FEAR": 10,
+      "ANGER": 30,
+      "IRRITATION": 15,
+      "HAPPINESS": 0,
+      "CONTENTMENT": 5,
+      "HUNGER": 0,
+      "CURIOSITY": 20,
+      "AFFECTION": 20
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 900,
+      "interaction_range_cm": 120,
+      "aggressive_threshold": 75,
+      "movement_style": "mechanical_precise",
+      "attention_span_seconds": 120,
+      "bone_flexibility": "limited_joints"
+    },
+    
+    "aesthetic_profile": {
+      "color_scheme": "aged_bone_white",
+      "weathering_effects": true,
+      "mouth_style": "chattering_jaw",
+      "eye_style": "hollow_sockets",
+      "feature_asymmetry": false,
+      "surface_texture": "smooth_bone",
+      "nose_style": "nasal_cavity"
+    },
+    
+    "audio_profile": {
+      "primary_sounds": ["bone_rattling", "jaw_clicking", "joint_creaking", "hollow_echoes"],
+      "volume_range": [40, 85],
+      "frequency_preference": "mid_percussive",
+      "echo_effects": true,
+      "bone_resonance": 0.7
+    }
+  },
+  
+  "subfamily_variants": {
+    "warrior_skeleton": {
+      "description": "Armored skeleton with combat training and weapon expertise",
+      "color_scheme": "battle_worn_bone",
+      "combat_readiness": "high",
+      "armor_elements": "metal_reinforcement",
+      "weapon_proficiency": "sword_and_shield"
+    },
+    
+    "mage_skeleton": {
+      "description": "Magical skeleton with arcane knowledge and spell remnants",
+      "color_scheme": "mystic_bone_glow",
+      "combat_readiness": "low",
+      "magical_elements": "rune_inscriptions",
+      "spell_knowledge": "necromantic_arts"
+    },
+    
+    "ancient_guardian": {
+      "description": "Temple guardian skeleton with protective duties",
+      "color_scheme": "ceremonial_gold_bone",
+      "combat_readiness": "moderate",
+      "sacred_elements": "ritual_markings",
+      "duty_focus": "tomb_protection"
+    }
+  },
+  
+  "baseline_dimensions": {
+    "eye_spacing": "3.0 INCH",
+    "compression_factor": 0.90,
+    "skull_scale": 1.15,
+    "bone_prominence": "high_definition"
+  },
+  
+  "common_components": [
+    "config/components/positioned/skeleton_jaw_actuator.json",
+    "config/components/positioned/skeleton_bone_structure.json",
+    "config/components/positioned/skeleton_joint_mechanism.json"
+  ],
+  
+  "skeletal_features": {
+    "bone_mechanics": {
+      "jaw_movement": "chattering_articulation",
+      "joint_flexibility": "limited_range",
+      "bone_durability": "aged_but_strong"
+    },
+    
+    "undead_characteristics": {
+      "magical_animation": "necromantic_energy",
+      "consciousness_level": "basic_awareness",
+      "memory_retention": "combat_instincts"
+    },
+    
+    "structural_elements": {
+      "bone_density": "hollow_lightweight",
+      "joint_connections": "mystical_binding",
+      "skeletal_integrity": "magically_reinforced"
+    }
+  },
+  
+  "thematic_elements": {
+    "necromantic_origin": "dark_magic_animation",
+    "warrior_heritage": "battle_experience_echoes",
+    "tomb_guardian": "sacred_duty_programming",
+    "bone_collection": "skeletal_army_potential"
+  },
+  
+  "construction_types": {
+    "hard_shell": {
+      "description": "3D printed bone structure with mechanical joints and weathered finish",
+      "materials": ["Bone-white PLA", "Aged ivory PETG", "Wood-filled filament", "Copper accents"],
+      "color_palette": {
+        "primary": "OldLace",
+        "secondary": "SaddleBrown",
+        "accent": "Sienna", 
+        "highlight": "DarkGoldenrod"
+      },
+      "special_features": [
+        "Articulated bone joints with servo actuators",
+        "Weathered bone texture with aging effects",
+        "Metallic accents for armor and weapons",
+        "Multi-color 3D printing uses 4-color HTML palette system"
+      ]
+    },
+    "soft_body": {
+      "description": "Fabric skeleton costume with rigid bone inserts and movement framework",
+      "materials": ["Bone-colored canvas", "Leather strapping", "Foam bone inserts", "Metal framework"],
+      "color_palette": {
+        "primary": "OldLace",
+        "secondary": "SaddleBrown", 
+        "accent": "Sienna",
+        "highlight": "DarkGoldenrod"
+      },
+      "special_features": [
+        "Rigid foam bone inserts for authentic bone shape",
+        "Leather strapping and armor details",
+        "Hidden servo framework for bone movement",
+        "Rattling sound effects from loose joints"
+      ]
+    }
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Horror family focused on animated skeleton archetypes",
+    "Emphasizes bone mechanics, rattling sounds, and precise movement",
+    "Subfamily variants cover different skeleton roles and abilities", 
+    "Audio effects create distinctive bone-based sound signature",
+    "Construction types support both hard bone shells and fabric costume approaches"
+  ]
+}

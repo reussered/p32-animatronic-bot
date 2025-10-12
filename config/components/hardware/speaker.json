@@ -1,4 +1,4 @@
-﻿{
+{
   "relative_filename": "config/components/hardware/speaker.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -21,7 +21,17 @@
   },
   "audio_specs": {
     "frequency_range": "100-20000 Hz",
-    "sample_rates": ["8000", "16000", "22050", "44100", "48000"],
-    "bit_depths": [16, 24, 32]
+    "sample_rates": [
+      "8000",
+      "16000",
+      "22050",
+      "44100",
+      "48000"
+    ],
+    "bit_depths": [
+      16,
+      24,
+      32
+    ]
   }
 }

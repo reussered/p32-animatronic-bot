@@ -1,0 +1,156 @@
+{
+  "relative_filename": "config/bots/goblin_scout.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+  "bot_type": "GOBLINSCOUT",
+  "bot_id": "goblin_scout_v1",
+  "description": "Stealthy goblin scout with heightened senses and reconnaissance abilities",
+  "created": "2025-10-12",
+  
+  "template_inheritance": "extend",
+  "subfamily_selection": "forest_goblin",
+  
+  "overrides": {
+    "mood_defaults": {
+      "FEAR": 25,
+      "ANGER": 3,
+      "IRRITATION": 5,
+      "HAPPINESS": 8,
+      "CONTENTMENT": 12,
+      "HUNGER": 7,
+      "CURIOSITY": 35,
+      "AFFECTION": 5
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 450,
+      "interaction_range_cm": 300,
+      "aggressive_threshold": 85,
+      "calm_threshold": 40,
+      "stealth_mode": true,
+      "detection_sensitivity": "high",
+      "evasion_priority": true
+    },
+    
+    "aesthetic_profile": {
+      "color_scheme": "forest_camouflage_green",
+      "weathering_effects": true,
+      "camouflage_features": {
+        "leaf_patterns": true,
+        "bark_texture_patches": true,
+        "shadow_markings": true,
+        "muted_coloring": true
+      },
+      "size_modifier": 0.9,
+      "feature_sharpening": {
+        "enhanced_ears": true,
+        "keen_eyes": true,
+        "alert_posture": true
+      }
+    },
+    
+    "sound_characteristics": {
+      "voice_pitch": "whisper_soft",
+      "breathing_pattern": "controlled_quiet",
+      "stealth_sounds": ["leaf_rustle", "branch_crack", "wind_whisper"],
+      "alert_sounds": ["sharp_intake", "warning_chirp", "danger_hiss"],
+      "idle_sounds": ["quiet_breath", "soft_shuffle", "listening_pause"],
+      "ambient_volume": 0.2,
+      "reaction_volume": 0.4,
+      "silence_capability": true
+    },
+    
+    "animation_style": {
+      "movement_speed": "careful_precise",
+      "eye_tracking": "wide_scanning",
+      "idle_behaviors": ["perimeter_watch", "listening_tilt", "scent_analysis"],
+      "threat_responses": ["freeze_assessment", "evasive_crouch", "escape_route_scan"],
+      "expression_intensity": "subtle_alert"
+    }
+  },
+  
+  "additional_components": [
+    "config/components/positioned/goblin_enhanced_ears.json",
+    "config/components/positioned/goblin_camouflage_skin.json",
+    "config/components/positioned/goblin_scent_sensor.json"
+  ],
+  
+  "custom_behaviors": {
+    "reconnaissance_mode": {
+      "trigger": "new_environment",
+      "eyes": "scanning_sweep",
+      "mouth": "silent_concentration",
+      "sounds": ["environment_assessment"],
+      "duration_ms": 12000,
+      "priority": "high",
+      "sensor_boost": true
+    },
+    "danger_detected": {
+      "trigger": "threat_proximity",
+      "eyes": "sharp_focus_target",
+      "mouth": "alert_grimace",
+      "sounds": ["danger_chirp", "warning_signal"],
+      "duration_ms": 3000,
+      "priority": "critical",
+      "stealth_break": true
+    },
+    "all_clear_signal": {
+      "trigger": "area_secure",
+      "eyes": "relaxed_watch",
+      "mouth": "satisfied_nod",
+      "sounds": ["all_clear_whistle"],
+      "duration_ms": 2000,
+      "priority": "medium"
+    },
+    "tracking_target": {
+      "trigger": "scent_trail",
+      "eyes": "focused_pursuit",
+      "mouth": "concentration_line",
+      "sounds": ["tracking_sniff"],
+      "duration_ms": 8000,
+      "priority": "high",
+      "continuous_mode": true
+    }
+  },
+  
+  "enhanced_sensors": {
+    "motion_detection": {
+      "sensitivity": "maximum",
+      "range_multiplier": 1.5,
+      "false_positive_filter": true
+    },
+    "sound_detection": {
+      "frequency_range": "extended",
+      "directional_tracking": true,
+      "noise_filtering": "aggressive"
+    },
+    "environmental_awareness": {
+      "temperature_gradient_detection": true,
+      "air_current_sensing": true,
+      "vibration_detection": true
+    }
+  },
+  
+  "hardware_config": {
+    "i2s_sample_rate": 48000,
+    "display_update_rate_fps": 25,
+    "sensor_poll_rate_hz": 20,
+    "power_management": "sensor_optimized",
+    "audio_amplification": 0.3,
+    "microphone_gain": 1.8
+  },
+  
+  "prototype_status": "design_complete",
+  "tested": false,
+  "notes": [
+    "Inherits from goblin_family.json with forest_goblin subfamily",
+    "Maximized curiosity and detection capabilities",
+    "Stealth-focused with minimal audio signature",
+    "Enhanced sensor configuration for reconnaissance",
+    "Camouflage aesthetic with natural markings",
+    "Evasion-priority behavior over direct confrontation",
+    "Higher microphone gain for environmental listening"
+  ]
+}
