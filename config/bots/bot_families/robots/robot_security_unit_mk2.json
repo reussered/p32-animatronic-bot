@@ -1,0 +1,75 @@
+{
+  "relative_filename": "config/bots/robot_security_unit_mk2.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_id": "ROBOT_SECURITY_MK2",
+  "bot_type": "SECURITY_ROBOT",
+  "description": "Advanced security robot with enhanced threat detection and response capabilities",
+  "created": "2025-10-12",
+  
+  "family_template": "config/bots/bot_families/mechanical/robot_family_enhanced.json",
+  "subfamily_variant": "combat_robot",
+  
+  "overrides": {
+    "mood_defaults": {
+      "ANGER": 25,
+      "FEAR": 0,
+      "CURIOSITY": 35,
+      "CONTENTMENT": 10,
+      "IRRITATION": 20,
+      "VIGILANCE": 40
+    },
+    
+    "behavior_config": {
+      "threat_response_enabled": true,
+      "auto_sleep_timeout_seconds": 3600,
+      "interaction_range_cm": 300,
+      "aggressive_threshold": 30,
+      "patrol_mode_enabled": true,
+      "facial_recognition_enabled": true
+    }
+  },
+  
+  "additional_components": [
+    "config/components/positioned/security_camera_array.json",
+    "config/components/positioned/thermal_sensor.json", 
+    "config/components/positioned/audio_analysis_unit.json",
+    "config/components/positioned/emergency_beacon.json"
+  ],
+  
+  "specialized_behaviors": {
+    "patrol_patterns": [
+      "perimeter_sweep",
+      "checkpoint_rotation", 
+      "random_walk",
+      "area_focus"
+    ],
+    "threat_responses": [
+      "alert_broadcast",
+      "visual_recording",
+      "audio_challenge",
+      "backup_summon"
+    ],
+    "detection_modes": [
+      "motion_tracking",
+      "facial_recognition",
+      "audio_analysis",
+      "thermal_scanning"
+    ]
+  },
+  
+  "aesthetic_customization": {
+    "color_scheme": "tactical_black",
+    "warning_lights": true,
+    "intimidation_factor": "high",
+    "professional_appearance": true
+  },
+  
+  "operational_parameters": {
+    "battery_life_hours": 12,
+    "charging_time_minutes": 45,
+    "operating_temperature": "-10_TO_50_C",
+    "weather_resistance": "IP65",
+    "communication_range": "500_METERS"
+  }
+}

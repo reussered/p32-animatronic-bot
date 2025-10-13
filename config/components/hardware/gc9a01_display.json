@@ -23,5 +23,26 @@
     "rotation": 0,
     "invert_colors": false,
     "backlight_pwm": true
+  },
+  "color_specifications": {
+    "color_mode": "full_color",
+    "bit_depth": 16,
+    "color_space": "RGB565",
+    "colors_supported": 65536,
+    "description": "Full color 16-bit RGB display"
+  },
+  "mood_color_response": {
+    "supports_dynamic_colors": true,
+    "full_spectrum_available": true,
+    "mood_mapping": {
+      "ANGER": "#FF0000",
+      "FEAR": "#800080", 
+      "HAPPINESS": "#FFFF00",
+      "CONTENTMENT": "#00FF00",
+      "CURIOSITY": "#0080FF",
+      "IRRITATION": "#FF8000",
+      "HUNGER": "#FF0080",
+      "AFFECTION": "#FF69B4"
+    }
   }
 }

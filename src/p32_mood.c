@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPLEX_MOOD
 #include "p32_mood.h"
 #include "p32_display.h"
 #include "p32_audio.h"
@@ -236,3 +239,5 @@ p32_mood_t p32_string_to_mood(const char* mood_str) {
     
     return MOOD_CONTENTMENT; // Default fallback
 }
+
+#endif // ENABLE_COMPLEX_MOOD

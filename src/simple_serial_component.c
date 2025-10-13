@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_SIMPLE_SERIAL
 // Simple Serial Monitor Component
 // Provides ESP32 serial communication for debugging and logging
 
@@ -118,3 +121,4 @@ static simple_serial_component_t serial_component = {
     .printf = simple_serial_printf,
     .log_system_info = simple_serial_log_system_info
 };
+#endif // 0 - TEMPORARILY DISABLED

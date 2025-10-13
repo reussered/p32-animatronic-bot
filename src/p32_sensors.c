@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPLEX_SENSORS
 #include "p32_sensors.h"
 #include "p32_audio.h"
 #include "p32_display.h"
@@ -59,14 +62,14 @@ void p32_sensor_act(void) {
     if (loopCount % 10 == 0) {
         if (g_sensor_system.sensors_enabled) {
             // Read ultrasonic distance
-            float distance = p32_sensor_read_ultrasonic_distance(&g_sensor_system.nose_sensor);
+            float distance = p32_sensor_read_distance(&g_sensor_system.proximity_nose);
             if (distance > 0) {
                 // Check for proximity behavior triggers
                 p32_sensor_check_proximity_behavior(distance);
             }
             
             // Read motion sensors
-            bool motion = p32_sensor_read_pir_motion(&g_sensor_system.motion_sensor);
+            bool motion = p32_sensor_read_motion(&g_sensor_system.motion_detector);
             if (motion) {
                 p32_sensor_check_motion_behavior(motion);
             }
@@ -258,3 +261,5 @@ esp_err_t p32_sensor_check_touch_behavior(const char* touch_location) {
     ESP_LOGD(TAG, "Touch behavior check: %s", touch_location);
     return ESP_OK;
 }
+
+#endif // ENABLE_COMPLEX_SENSORS

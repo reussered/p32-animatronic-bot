@@ -17,5 +17,10 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "primary_display_left"
+  "function": "primary_display_left",
+  "component_name": "left_eye",
+  "description": "Left eye display animation",
+  "timing": {
+    "hitCount": 5
+  }
 }

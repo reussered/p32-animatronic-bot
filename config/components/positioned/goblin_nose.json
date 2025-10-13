@@ -17,5 +17,10 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "proximity_sensor"
+  "function": "proximity_sensor",
+  "component_name": "nose_sensor",
+  "description": "Proximity sensor monitoring",
+  "timing": {
+    "hitCount": 15
+  }
 }

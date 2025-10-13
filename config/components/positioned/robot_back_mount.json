@@ -1,0 +1,109 @@
+{
+  "relative_filename": "config/components/positioned/robot_back_mount.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  
+  "component_type": "POSITIONED_MECHANICAL",
+  "positioned_id": "ROBOT_BACK_MOUNT",
+  "description": "Back-mounted mechanical attachment system for deployable equipment",
+  
+  "hardware_reference": "config/components/hardware/back_mount_system.json",
+  "interface_assignments": {
+    "primary_servo_control": "config/components/interfaces/servo_pwm_1.json",
+    "secondary_servo_control": "config/components/interfaces/servo_pwm_2.json", 
+    "position_feedback": "config/components/interfaces/gpio_pair_1.json",
+    "status_indicators": "config/components/interfaces/gpio_pair_2.json"
+  },
+  
+  "spatial_coordinates": {
+    "coordinate_system": "planar_2d",
+    "reference_point": "nose_center",
+    "mount_position": {
+      "x": "0.0 INCH",
+      "y": "-6.0 INCH",
+      "z": "2.0 INCH"
+    },
+    "orientation": {
+      "pitch": "0 DEG",
+      "yaw": "180 DEG", 
+      "roll": "0 DEG"
+    },
+    "attachment_interface": "spine_rail_system"
+  },
+  
+  "operational_parameters": {
+    "deployment_modes": [
+      {
+        "mode": "transport_stowed",
+        "position": "horizontal_flat",
+        "power_draw": "0.015 WATT",
+        "profile_height": "0.5 INCH"
+      },
+      {
+        "mode": "equipment_deployed", 
+        "position": "vertical_extended",
+        "power_draw": "0.5 WATT",
+        "clearance_required": "16.0 INCH"
+      },
+      {
+        "mode": "emergency_retract",
+        "transition_time": "8 SECOND",
+        "power_draw": "15.0 WATT",
+        "safety_priority": "MAXIMUM"
+      }
+    ],
+    
+    "load_management": {
+      "maximum_payload": "15 KG",
+      "moment_compensation": "servo_feedback_control",
+      "wind_load_handling": "30 MPH sustained",
+      "stability_monitoring": "accelerometer_tilt_sensor"
+    }
+  },
+  
+  "control_interface": {
+    "deployment_commands": [
+      "DEPLOY_EQUIPMENT",
+      "RETRACT_EQUIPMENT", 
+      "EMERGENCY_JETTISON",
+      "POSITION_ADJUST"
+    ],
+    "status_reporting": [
+      "mount_position_degrees",
+      "load_weight_kg",
+      "lock_status",
+      "equipment_attached"
+    ],
+    "safety_interlocks": [
+      "weight_limit_exceeded",
+      "tilt_angle_unsafe", 
+      "wind_speed_high",
+      "battery_low_critical"
+    ]
+  },
+  
+  "attachment_compatibility": {
+    "equipment_types": [
+      "SOLAR_PARASOL_SYSTEM",
+      "SENSOR_ARRAY_PLATFORM",
+      "EQUIPMENT_STORAGE_RACK",
+      "COMMUNICATION_ANTENNA"
+    ],
+    "interface_standard": "P32_EQUIPMENT_MOUNT_V1",
+    "quick_release": "spring_loaded_pin_system"
+  },
+  
+  "behavioral_integration": {
+    "robot_awareness": true,
+    "balance_compensation": true, 
+    "navigation_clearance": true,
+    "emergency_protocols": ["rapid_retract", "equipment_jettison", "safe_mode"]
+  },
+  
+  "family_compatibility": {
+    "robot": "ESSENTIAL",
+    "android": "EXCELLENT", 
+    "steampunk": "GOOD",
+    "medical": "FAIR"
+  }
+}

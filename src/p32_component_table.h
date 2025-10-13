@@ -15,7 +15,7 @@ extern "C" {
 extern uint32_t loopCount;
 
 // Component init function table - core hardware only
-void (*componentInitTable[])(void) = {
+esp_err_t (*componentInitTable[])(void) = {
     p32_display_init,
     p32_audio_init,
     p32_sensor_init,

@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_ANDROID_PERSONALITY
 #include "p32_personality_component.h"
 
 static const char* TAG = "P32_ANDROID_PERSONALITY";
@@ -98,3 +101,5 @@ esp_err_t p32_register_android_personality(void) {
                                   p32_android_personality_act,
                                   p32_personality_component_cleanup);
 }
+
+#endif // ENABLE_ANDROID_PERSONALITY

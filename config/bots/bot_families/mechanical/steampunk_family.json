@@ -1,161 +1,87 @@
-{
+﻿{
   "relative_filename": "config/bots/bot_families/mechanical/steampunk_family.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "family_name": "STEAMPUNK",
+  "family_type": "STEAMPUNK",
   "family_category": "mechanical",
-  "description": "Victorian-era steam-powered automatons with brass fittings, gears, and mechanical aesthetics",
-  "created": "2025-10-12",
+  "description": "steampunk family with mechanical characteristics",
+  "created": "2025-10-13",
+  "template_type": "family_template",
   
-  "base_characteristics": {
-    "mood_defaults": {
-      "FEAR": 15,
-      "ANGER": 20,
-      "IRRITATION": 10,
-      "HAPPINESS": 15,
-      "CONTENTMENT": 25,
-      "HUNGER": 0,
-      "CURIOSITY": 15,
-      "AFFECTION": 0
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 1200,
-      "interaction_range_cm": 150,
-      "aggressive_threshold": 85,
-      "movement_style": "clockwork_precise",
-      "attention_span_seconds": 180,
-      "steam_cycles": "periodic_venting"
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "brass_copper",
-      "weathering_effects": true,
-      "mouth_style": "brass_speaking_tube",
-      "eye_style": "brass_goggle_lenses",
-      "feature_asymmetry": false,
-      "surface_texture": "aged_brass",
-      "nose_style": "steam_vent"
-    },
-    
-    "audio_profile": {
-      "primary_sounds": ["steam_hissing", "gear_clicking", "brass_clanking", "pressure_release"],
-      "volume_range": [55, 90],
-      "frequency_preference": "mechanical_industrial",
-      "steam_effects": true,
-      "brass_resonance": 0.8
-    }
-  },
-  
-  "subfamily_variants": {
-    "aristocrat_automaton": {
-      "description": "High-class Victorian automaton with elegant brass finishing",
-      "color_scheme": "polished_gold_brass",
-      "social_class": "upper_aristocracy",
-      "decorative_elements": "ornate_engravings",
-      "movement_style": "dignified_clockwork"
-    },
-    
-    "industrial_worker": {
-      "description": "Factory automaton built for heavy labor and industrial tasks",
-      "color_scheme": "weathered_iron_brass",
-      "social_class": "working_class",
-      "functional_elements": "heavy_duty_gears",
-      "movement_style": "powerful_mechanical"
-    },
-    
-    "airship_navigator": {
-      "description": "Aviation automaton designed for aerial exploration and navigation",
-      "color_scheme": "sky_blue_brass",
-      "specialized_function": "flight_systems",
-      "navigation_tools": "compass_barometer",
-      "movement_style": "precise_navigational"
-    }
-  },
-  
+  "coordinate_system": "planar_2d",
+  "reference_point": "nose_center",
   "baseline_dimensions": {
-    "eye_spacing": "3.1 INCH",
-    "compression_factor": 0.95,
-    "skull_scale": 1.1,
-    "brass_thickness": "substantial_gauge"
+    "face_width": "6.0 INCH",
+    "face_height": "8.0 INCH",
+    "component_spacing": "1.5 INCH"
   },
   
-  "common_components": [
-    "config/components/positioned/steampunk_brass_gears.json",
-    "config/components/positioned/steampunk_steam_vents.json",
-    "config/components/positioned/steampunk_pressure_gauges.json"
+  "default_components": [
+    "config/components/positioned/steampunk_eye_left.json",
+    "config/components/positioned/steampunk_eye_right.json",
+    "config/components/positioned/steampunk_nose.json",
+    "config/components/positioned/steampunk_mouth.json",
+    "config/components/positioned/steampunk_speaker.json"
   ],
   
-  "steampunk_features": {
-    "mechanical_systems": {
-      "gear_trains": "visible_clockwork",
-      "steam_power": "boiler_simulation",
-      "pressure_systems": "gauge_monitoring"
+  "family_mood_profile": {
+    "FEAR": 15,
+    "ANGER": 10,
+    "IRRITATION": 15,
+    "HAPPINESS": 20,
+    "CONTENTMENT": 20,
+    "HUNGER": 15,
+    "CURIOSITY": 25,
+    "AFFECTION": 15
+  },
+  
+  "family_behavior_patterns": {
+    "threat_response_enabled": true,
+    "auto_sleep_timeout_seconds": 300,
+    "interaction_range_cm": 150,
+    "aggressive_threshold": 50,
+    "calm_threshold": 30,
+    "personality_traits": [
+      "steampunk_trait_1",
+      "steampunk_trait_2",
+      "steampunk_trait_3"
+    ]
+  },
+  
+  "hardware_preferences": {
+    "coordinate_system": "planar_2d",
+    "spi_device_assignments": {
+      "left_eye": "SPI_DEVICE_1",
+      "right_eye": "SPI_DEVICE_2",
+      "mouth_display": "SPI_DEVICE_3"
     },
-    
-    "aesthetic_elements": {
-      "brass_fittings": "authentic_patina",
-      "copper_tubing": "steam_distribution",
-      "leather_elements": "victorian_styling"
-    },
-    
-    "functional_components": {
-      "steam_venting": "periodic_release",
-      "gear_movement": "visible_operation",
-      "pressure_regulation": "safety_systems"
+    "i2s_device_assignments": {
+      "primary_speaker": "I2S_DEVICE_1"
     }
   },
   
-  "thematic_elements": {
-    "victorian_era": "19th_century_aesthetics",
-    "industrial_revolution": "steam_age_technology",
-    "craftsmanship": "artisan_construction",
-    "mechanical_precision": "clockwork_reliability"
+  "aesthetic_profile": {
+    "surface_texture": "steampunk_texture",
+    "color_scheme": "steampunk_colors",
+    "eye_style": "steampunk_eyes",
+    "nose_style": "steampunk_nose",
+    "mouth_style": "steampunk_mouth"
   },
   
-  "construction_types": {
-    "hard_shell": {
-      "description": "3D printed steampunk automaton with brass finish and mechanical details",
-      "materials": ["Brass PLA", "Copper PETG", "Bronze filament", "Clear amber resin"],
-      "color_palette": {
-        "primary": "DarkGoldenrod",
-        "secondary": "SaddleBrown",
-        "accent": "Peru",
-        "highlight": "Goldenrod"
-      },
-      "special_features": [
-        "Brass metallic finish with patina weathering",
-        "Visible gear and clockwork mechanism details",
-        "Steam vent ports and pressure gauge mounts",
-        "Multi-color 3D printing uses 4-color HTML palette system"
-      ]
-    },
-    "soft_body": {
-      "description": "Fabric steampunk costume with leather accents and metal fixtures",
-      "materials": ["Leather", "Canvas", "Brass fittings", "Velvet trim"],
-      "color_palette": {
-        "primary": "DarkGoldenrod",
-        "secondary": "SaddleBrown", 
-        "accent": "Peru",
-        "highlight": "Goldenrod"
-      },
-      "special_features": [
-        "Leather outer shell with brass buckles and fittings",
-        "Canvas inner structure with Victorian styling",
-        "Actual brass gears and mechanical embellishments",
-        "Steam effect tubes and pressure release valves"
-      ]
-    }
+  "sound_characteristics": {
+    "voice_pitch": "steampunk_voice",
+    "breathing_pattern": "steampunk_breathing",
+    "comfort_sounds": ["sound1", "sound2"],
+    "alert_sounds": ["alert1", "alert2"]
   },
   
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Mechanical family focused on Victorian steam-powered automatons",
-    "Emphasizes brass aesthetics, steam effects, and clockwork precision",
-    "Subfamily variants cover different social classes and functions",
-    "Audio effects create authentic industrial steam-age ambiance",
-    "Construction types support both hard brass shells and authentic leather steampunk costumes"
-  ]
+  "animation_style": {
+    "movement_speed": "steampunk_movement",
+    "eye_tracking": "steampunk_tracking",
+    "idle_behaviors": ["idle1", "idle2"],
+    "expression_intensity": "moderate"
+  },
+  
+  "prototype_status": "template_generated",
+  "tested": false
 }

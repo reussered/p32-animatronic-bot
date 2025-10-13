@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_GOBLIN_PERSONALITY
 #include "p32_personality_component.h"
 
 static const char* TAG = "P32_GOBLIN_PERSONALITY";
@@ -100,3 +103,5 @@ esp_err_t p32_register_goblin_personality(void) {
                                   p32_goblin_personality_act,
                                   p32_personality_component_cleanup);
 }
+
+#endif // ENABLE_GOBLIN_PERSONALITY

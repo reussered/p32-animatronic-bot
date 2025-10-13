@@ -17,5 +17,10 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "primary_display_right"
+  "function": "primary_display_right",
+  "component_name": "right_eye",
+  "description": "Right eye display animation",
+  "timing": {
+    "hitCount": 5
+  }
 }

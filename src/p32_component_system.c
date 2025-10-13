@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPONENT_SYSTEM
 #include "p32_component_system.h"
 
 static const char* TAG = "P32_COMPONENTS";
@@ -249,3 +252,5 @@ void p32_action_params_set_data(p32_action_params_t* params, const char* key, vo
         params->data_size = size;
     }
 }
+
+#endif // ENABLE_COMPONENT_SYSTEM

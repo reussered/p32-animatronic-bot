@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_ZOMBIE_PERSONALITY
 #include "p32_personality_component.h"
 
 static const char* TAG = "P32_ZOMBIE_PERSONALITY";
@@ -100,3 +103,5 @@ esp_err_t p32_register_zombie_personality(void) {
                                   p32_zombie_personality_act,
                                   p32_personality_component_cleanup);
 }
+
+#endif // ENABLE_ZOMBIE_PERSONALITY

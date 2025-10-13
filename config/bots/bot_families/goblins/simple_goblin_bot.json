@@ -27,6 +27,7 @@
         {
             "component_id": "left_eye_display",
             "component_type": "SIMPLE_DISPLAY",
+            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
             "hardware_reference": "config/components/hardware/gc9a01_display.json",
             "interface_reference": "config/components/interfaces/spi_device_1.json",
             "position": {
@@ -43,6 +44,7 @@
         {
             "component_id": "right_eye_display", 
             "component_type": "SIMPLE_DISPLAY",
+            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
             "hardware_reference": "config/components/hardware/gc9a01_display.json",
             "interface_reference": "config/components/interfaces/spi_device_2.json",
             "position": {
@@ -58,7 +60,8 @@
         
         {
             "component_id": "mouth_display",
-            "component_type": "SIMPLE_DISPLAY", 
+            "component_type": "SIMPLE_DISPLAY",
+            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY", 
             "hardware_reference": "config/components/hardware/gc9a01_display.json",
             "interface_reference": "config/components/interfaces/spi_device_3.json",
             "position": {
@@ -75,6 +78,7 @@
         {
             "component_id": "nose_sensor",
             "component_type": "SIMPLE_SENSOR",
+            "ifdef_variable": "ENABLE_SIMPLE_SENSOR",
             "hardware_reference": "config/components/hardware/hc_sr04_sensor.json", 
             "interface_reference": "config/components/interfaces/gpio_pair_1.json",
             "position": {
@@ -91,6 +95,7 @@
         {
             "component_id": "main_speaker",
             "component_type": "SIMPLE_AUDIO",
+            "ifdef_variable": "ENABLE_SIMPLE_AUDIO",
             "hardware_reference": "config/components/hardware/speaker.json",
             "interface_reference": "config/components/interfaces/i2s_device_1.json", 
             "position": {

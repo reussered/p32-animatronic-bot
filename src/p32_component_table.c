@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPONENT_TABLE
 #include "p32_component_table.h"
 #include "nvs_flash.h"
 #include "esp_system.h"
@@ -49,3 +52,5 @@ void p32_loop_all_components(void) {
         ESP_LOGI(TAG, "System running - Loop: %lu", loopCount);
     }
 }
+
+#endif // ENABLE_COMPONENT_TABLE

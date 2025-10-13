@@ -1,0 +1,88 @@
+{
+  "relative_filename": "config/components/positioned/robot_status_oled.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_type": "POSITIONED_OLED_DISPLAY",
+  "component_id": "ROBOT_STATUS_OLED",
+  "description": "Small OLED display for text-based status information and diagnostics",
+  "created": "2025-10-12",
+  
+  "hardware_reference": "config/components/hardware/oled_ssd1306_128x64.json",
+  "interface_assignment": "config/components/interfaces/i2c_bus_primary.json",
+  
+  "spatial_coordinates": {
+    "coordinate_system": "planar_2d",
+    "reference_point": "nose_center",
+    "position": {
+      "x": "2.5 INCH",
+      "y": "-2.0 INCH", 
+      "z": "0.2 INCH"
+    },
+    "orientation": {
+      "rotation_x": "0 DEG",
+      "rotation_y": "0 DEG", 
+      "rotation_z": "0 DEG"
+    }
+  },
+  
+  "mounting_specifications": {
+    "mount_type": "surface_mounted",
+    "bezel_required": false,
+    "viewing_angle": "140 DEG",
+    "protection_rating": "dust_resistant"
+  },
+  
+  "display_configuration": {
+    "default_font": "8x16",
+    "text_color": "white",
+    "background_color": "black",
+    "scroll_speed": "medium",
+    "refresh_rate": "10 HZ"
+  },
+  
+  "content_types": {
+    "system_status": {
+      "cpu_usage": "percentage",
+      "memory_usage": "percentage", 
+      "temperature": "celsius",
+      "uptime": "hours_minutes"
+    },
+    "behavioral_info": {
+      "current_mood": "text_display",
+      "active_sensors": "list",
+      "interaction_count": "numeric",
+      "last_command": "text_scroll"
+    },
+    "diagnostic_data": {
+      "error_messages": "scrolling_text",
+      "component_status": "icon_grid",
+      "network_info": "text_display"
+    }
+  },
+  
+  "behavioral_integration": {
+    "mood_responsive": false,
+    "always_visible": true,
+    "priority_messages": [
+      "system_errors",
+      "low_battery",
+      "hardware_failures",
+      "user_commands"
+    ]
+  },
+  
+  "use_cases": [
+    "system_monitoring",
+    "troubleshooting",
+    "user_feedback",
+    "development_debug",
+    "performance_metrics"
+  ],
+  
+  "family_compatibility": {
+    "robot": "EXCELLENT",
+    "android": "GOOD",
+    "steampunk": "EXCELLENT",
+    "goblin": "POOR"
+  }
+}

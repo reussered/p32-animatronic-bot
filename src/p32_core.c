@@ -1,3 +1,7 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_P32_CORE
+// P32 CORE SYSTEM
 #include "p32_core.h"
 #include "cJSON.h"
 
@@ -263,3 +267,4 @@ void p32_log_component_status(const char* component_id) {
     ESP_LOGI(TAG, "Component Status: %s", component_id);
     // Implementation for detailed component logging
 }
+#endif // 0 - TEMPORARILY DISABLED

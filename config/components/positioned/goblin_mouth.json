@@ -17,5 +17,10 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "mouth_display"
+  "function": "mouth_display",
+  "component_name": "mouth",
+  "description": "Mouth display animation",
+  "timing": {
+    "hitCount": 3
+  }
 }

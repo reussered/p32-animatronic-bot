@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPLEX_DISPLAY
 #include "p32_display.h"
 
 static const char* TAG = "P32_DISPLAY";
@@ -426,3 +429,5 @@ void p32_display_fill_buffer(uint16_t* buffer, uint16_t color) {
         buffer[i] = color;
     }
 }
+
+#endif // ENABLE_COMPLEX_DISPLAY

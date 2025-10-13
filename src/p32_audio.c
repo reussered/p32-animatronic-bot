@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_COMPLEX_AUDIO
 #include "p32_audio.h"
 
 static const char* TAG = "P32_AUDIO";
@@ -196,3 +199,5 @@ void p32_audio_task(void* parameters) {
         }
     }
 }
+
+#endif // ENABLE_COMPLEX_AUDIO

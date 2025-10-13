@@ -1,0 +1,107 @@
+{
+  "relative_filename": "config/components/hardware/solar_parasol_system.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_type": "SOLAR_PARASOL_ASSEMBLY",
+  "hardware_id": "SOLAR_PARASOL_2M_DEPLOYABLE",
+  "description": "Complete 2-meter deployable solar parasol system with integrated tracking and weather protection",
+  "created": "2025-10-13",
+  
+  "physical_specifications": {
+    "deployed_diameter": "2000 MM",
+    "retracted_length": "600 MM", 
+    "deployment_height": "2200 MM",
+    "total_weight": "6500 G",
+    "solar_panel_area": "2.54 SQM",
+    "peak_power_output": "559 W",
+    "wind_resistance": "25 MPH",
+    "deployment_time": "45 SEC"
+  },
+  
+  "electrical_specifications": {
+    "solar_panel_voltage": "12V",
+    "peak_current_output": "46.6 A",
+    "mppt_controller": "30A_12V",
+    "tracking_servo_count": 2,
+    "deployment_servo_count": 8,
+    "total_servo_power": "16 W",
+    "control_voltage": "5V"
+  },
+  
+  "mechanical_subsystems": {
+    "central_hub": {
+      "component_id": "PARASOL_HUB_ASSEMBLY",
+      "material": "PLA_PLUS",
+      "mounting_interface": "ROBOT_SHOULDER_MOUNT", 
+      "internal_components": ["MPPT_controller", "servo_drivers", "weather_sensors"]
+    },
+    "deployment_mechanism": {
+      "component_id": "PARASOL_DEPLOYMENT_SYSTEM",
+      "rib_count": 8,
+      "extension_ratio": "3.33:1",
+      "actuation_method": "SERVO_DRIVEN_TELESCOPING"
+    },
+    "solar_panel_mounting": {
+      "component_id": "PARASOL_SOLAR_MOUNTS", 
+      "panel_segments": 16,
+      "flexible_interconnects": true,
+      "weather_sealing": "IP65"
+    },
+    "tracking_system": {
+      "component_id": "PARASOL_TRACKING_GIMBAL",
+      "tilt_range": "90 DEG",
+      "rotation_range": "360 DEG",
+      "positioning_accuracy": "1 DEG"
+    }
+  },
+  
+  "3d_printed_components": [
+    "parasol_central_hub.scad",
+    "parasol_telescoping_ribs.scad", 
+    "parasol_solar_cell_mounts.scad",
+    "parasol_deployment_servos.scad",
+    "parasol_tracking_gimbal.scad",
+    "parasol_weather_protection.scad",
+    "parasol_cable_management.scad",
+    "parasol_shoulder_interface.scad"
+  ],
+  
+  "deployment_states": {
+    "retracted": {
+      "description": "Fully collapsed for storage/transport",
+      "dimensions": "600x150x150 MM",
+      "power_generation": "0 W"
+    },
+    "partial_deployment": {
+      "description": "Weather protection mode", 
+      "dimensions": "1000x1000x1500 MM",
+      "power_generation": "200 W"
+    },
+    "full_deployment": {
+      "description": "Maximum power generation mode",
+      "dimensions": "2000x2000x2200 MM", 
+      "power_generation": "559 W"
+    }
+  },
+  
+  "control_integration": {
+    "esp32_interface": "I2C_BUS_SECONDARY",
+    "servo_controller": "PCA9685_16_CHANNEL",
+    "sensor_inputs": ["wind_speed", "solar_irradiance", "rain_detector"],
+    "safety_systems": ["emergency_retract", "wind_lock", "overcurrent_protection"]
+  },
+  
+  "use_cases": [
+    "autonomous_power_generation",
+    "mobile_charging_station", 
+    "event_shade_provider",
+    "emergency_power_source",
+    "home_energy_offset"
+  ],
+  
+  "family_compatibility": {
+    "robot": "PRIMARY",
+    "android": "EXCELLENT", 
+    "all_humanoid": "UNIVERSAL"
+  }
+}

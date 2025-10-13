@@ -17,5 +17,10 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "primary_audio_output"
+  "function": "primary_audio_output",
+  "component_name": "audio",
+  "description": "Audio output processing",
+  "timing": {
+    "hitCount": 7
+  }
 }

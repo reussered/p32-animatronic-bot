@@ -1,41 +1,72 @@
+// P32 Universal Main - JSON-driven component architecture
+// Works with any bot configuration via generated component tables
+
+#include <stdio.h>
 #include "p32_core.h"
-#include "p32_component_table.h"
-#include "p32_personality_variants.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_log.h"
+#include "esp_err.h"
+#include "esp_task_wdt.h"
 
-static const char* TAG = "P32_MAIN";
+// Generated component registry header
+#include "p32_component_registry.h"
 
-void app_main() {
-    ESP_LOGI(TAG, "P32 Animatronic Bot System Starting...");
-    ESP_LOGI(TAG, "ESP32-S3 DevKit, ESP-IDF %s", esp_get_idf_version());
+static const char *TAG = "P32_MAIN";
+static uint32_t loopCount = 0;
+
+void app_main(void)
+{
     
-    // Initialize core P32 system
-    ESP_LOGI(TAG, "Initializing P32 core system...");
-    ESP_ERROR_CHECK(p32_core_init());
-    
-    // Initialize all components using component table
-    ESP_LOGI(TAG, "Initializing all components...");
-    p32_init_all_components();
-    
-    // Register all personality variants
-    ESP_LOGI(TAG, "Registering personality variants...");
-    esp_err_t ret = p32_register_all_personalities();
-    if (ret != ESP_OK) {
-        ESP_LOGW(TAG, "Failed to register personalities, continuing anyway");
+    // Initialize all components from JSON-generated initTable
+    ESP_LOGI(TAG, "Initializing %d components...", INIT_TABLE_SIZE);
+    for (int i = 0; i < INIT_TABLE_SIZE; i++) {
+        if (initTable[i] != NULL) {
+            esp_err_t ret = initTable[i]();
+            if (ret != ESP_OK) {
+                ESP_LOGE(TAG, "Failed to initialize component %d", i);
+            }
+        }
     }
     
-    // Set initial mood state
-    ESP_LOGI(TAG, "Setting initial mood to CONTENTMENT...");
-    p32_set_mood(MOOD_CONTENTMENT);
+    ESP_LOGI(TAG, "=== P32 Goblin System Starting ===");
+    ESP_LOGI(TAG, "Components: %d active | Loop delay: 100ms", ACT_TABLE_SIZE);
+    ESP_LOGI(TAG, "Press 'p' + Enter to pause, 'c' + Enter to continue");
+    ESP_LOGI(TAG, "==========================================");
     
-    ESP_LOGI(TAG, "P32 System initialization complete!");
-    ESP_LOGI(TAG, "Starting main component loop...");
+    bool paused = false;
     
-    // Main application loop - calls all component act() functions
-    while (1) {
-        // Process all components in sequence
-        p32_loop_all_components();
+    // Main action loop - components execute based on loopCount % hitCount
+    while (true) {
+        // Check for user input (simple pause/continue)
+        // Note: In real implementation, you'd use proper UART input handling
         
-        // Main loop delay (50ms = 20Hz system tick rate)
-        vTaskDelay(pdMS_TO_TICKS(50));
+        if (!paused) {
+            // Show current loop info every 1000 loops for readability
+            if (loopCount % 1000 == 0) {
+                ESP_LOGI(TAG, "Loop %lu - Checking components...", loopCount);
+            }
+            
+            // Execute components
+            for (int i = 0; i < ACT_TABLE_SIZE; i++) {
+                if (actTable[i].act_func != NULL && actTable[i].hitCount > 0) {
+                    if (loopCount % actTable[i].hitCount == 0) {
+                        ESP_LOGI(TAG, "[%s] Executing (loop %lu)", 
+                                actTable[i].name ? actTable[i].name : "unknown", loopCount);
+                        actTable[i].act_func(loopCount);
+                    }
+                }
+            }
+            
+            loopCount++;
+        }
+        
+        // Readable delay - 100ms between loop iterations
+        vTaskDelay(pdMS_TO_TICKS(100));
+        
+        // Keep watchdog happy
+        if (loopCount % 100 == 0) {
+            esp_task_wdt_reset();
+        }
     }
 }

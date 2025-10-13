@@ -1,3 +1,6 @@
+#include "p32_component_config.h"
+
+#ifdef ENABLE_BEHAVIOR_SYSTEM
 #include "p32_behavior.h"
 #include "p32_display.h"
 #include "p32_audio.h"
@@ -226,3 +229,5 @@ const char* p32_behavior_state_to_string(p32_bot_state_t state) {
     }
     return behavior_state_names[state];
 }
+
+#endif // ENABLE_BEHAVIOR_SYSTEM

@@ -1,0 +1,75 @@
+{
+  "relative_filename": "config/components/hardware/gmt12864_display.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "hardware_type": "GMT12864_DISPLAY",
+  "manufacturer": "GMT",
+  "model": "GMT12864",
+  "description": "GMT12864 OLED display with color variants",
+  
+  "physical_specifications": {
+    "display_size_inches": "0.96",
+    "display_shape": "square",
+    "resolution": {
+      "width": 128,
+      "height": 64
+    },
+    "active_area": {
+      "width_mm": 24.38,
+      "height_mm": 12.19
+    },
+    "viewing_angle": "160_degrees",
+    "brightness": "150_cd_m2"
+  },
+  
+  "color_variants": {
+    "GMT12864-12": {
+      "variant_id": "TYPE_12",
+      "color_mode": "monochrome",
+      "colors": ["#000000", "#FFFFFF"],
+      "color_names": ["black", "white"],
+      "bit_depth": 1,
+      "description": "Monochrome black and white"
+    },
+    "GMT12864-13": {
+      "variant_id": "TYPE_13", 
+      "color_mode": "dual_color",
+      "colors": ["#000000", "#FFFFFF", "#FF0000"],
+      "color_names": ["black", "white", "red"],
+      "bit_depth": 2,
+      "description": "Black, white, and red"
+    },
+    "GMT12864-14": {
+      "variant_id": "TYPE_14",
+      "color_mode": "dual_color", 
+      "colors": ["#000000", "#FFFFFF", "#0000FF"],
+      "color_names": ["black", "white", "blue"],
+      "bit_depth": 2,
+      "description": "Black, white, and blue"
+    }
+  },
+  
+  "interface_requirements": {
+    "protocol": "SPI",
+    "pins_required": ["CS", "DC", "RST"],
+    "voltage": "3.3V",
+    "max_clock_speed": "10MHz"
+  },
+  
+  "driver_configuration": {
+    "unified_driver": true,
+    "variant_selection": "runtime_configurable",
+    "color_mapping": "automatic",
+    "dithering_support": false
+  },
+  
+  "mood_color_response": {
+    "supports_dynamic_colors": true,
+    "mood_mapping": {
+      "ANGER": "prefer_red_variant",
+      "FEAR": "prefer_white_intensity", 
+      "HAPPINESS": "prefer_blue_variant",
+      "NEUTRAL": "standard_colors"
+    }
+  }
+}
