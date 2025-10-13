@@ -6,16 +6,17 @@
 
 static const char* TAG = "MOOD_PALETTE";
 
-// Mood type names for debugging
+// Mood type names for debugging - matches p32_core.h order
 const char* mood_type_names[MOOD_TYPE_COUNT] = {
-    "ANGER",
-    "FEAR", 
+    "FEAR",
+    "ANGER", 
+    "IRRITATION",
     "HAPPINESS",
-    "SADNESS",
+    "CONTENTMENT",
+    "HUNGER",
     "CURIOSITY",
     "AFFECTION",
-    "IRRITATION",
-    "CONTENTMENT"
+    "EXCITEMENT"
 };
 
 // Current mood state and active palette

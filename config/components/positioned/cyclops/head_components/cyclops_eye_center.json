@@ -1,0 +1,42 @@
+{
+  "relative_filename": "config/components/positioned/cyclops/head_components/cyclops_eye_center.json",
+  "version": "2.0.0",
+  "author": "config/author.json",
+  "component_id": "cyclops_eye_center",
+  
+  "template_inheritance": {
+    "hardware_template": "config/components/hardware/tft_2p5x1p5_display.json",
+    "display_type": "LARGE_TFT_PORTRAIT",
+    "orientation": "PORTRAIT_VERTICAL",
+    "creature_shell": "assets/shapes/scad/creature_shells/cyclops/cyclops_eye_shell.scad",
+    "mount_template": "assets/shapes/scad/basic_mounts/tft_2p5x1p5_portrait_mount.scad"
+  },
+  
+  "interface_assignment": "SPI_DEVICE_1",
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "position": {
+    "x": "0 INCH",
+    "y": "+1.2 INCH", 
+    "z": "-0.5 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "90 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  
+  "creature_specific_config": {
+    "eye_color": "CYCLOPS_ANCIENT_AMBER",
+    "pupil_style": "MASSIVE_CENTRAL_PUPIL",
+    "expression_range": "SLEEPY_GIANT_TO_ENRAGED_TITAN",
+    "display_orientation": "PORTRAIT_1P5X2P5"
+  },
+  
+  "function": "primary_display_center",
+  "component_name": "center_eye",
+  "description": "Central cyclops eye - large TFT display in portrait orientation",
+  "timing": {
+    "hitCount": 4
+  }
+}

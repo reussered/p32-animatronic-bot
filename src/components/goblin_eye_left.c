@@ -2,13 +2,17 @@
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
+#include "p32_component_config.h"
+
+#ifdef ENABLE_GOBLIN_COMPONENTS
+
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
 #include "p32_eye_display.h"
 #include "p32_web_client.h"
 #include "p32_mood_transitions.h"
-#include "p32_mood_palette.h"
+// Note: Removed p32_mood_palette.h - using direct RGB565 colors now
 
 static const char *TAG = "GOBLIN_EYE_LEFT";
 static eye_display_t left_eye_display;
@@ -99,3 +103,5 @@ void goblin_eye_left_act(uint32_t loopCount) {
                  left_eye_display.current_frame.eye_openness);
     }
 }
+
+#endif // ENABLE_GOBLIN_COMPONENTS

@@ -56,7 +56,7 @@ esp_err_t p32_sensor_init(void) {
 }
 
 void p32_sensor_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Read sensors every 10 loops (about 5Hz if main loop is 50Hz)
     if (loopCount % 10 == 0) {

@@ -46,7 +46,7 @@ esp_err_t p32_behavior_init(void) {
 }
 
 void p32_behavior_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Update behavior state every 25 loops (about 2Hz if main loop is 50Hz)
     if (loopCount % 25 == 0) {

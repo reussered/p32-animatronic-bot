@@ -297,7 +297,7 @@ void p32_personality_system_init(void) {
 }
 
 void p32_personality_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Process personality behavior every 30 loops (about 1.7Hz if main loop is 50Hz)
     if (loopCount % 30 == 0) {
@@ -305,7 +305,7 @@ void p32_personality_act(void) {
         // This would typically be the currently loaded personality component
         // For now, just process basic personality functions
         
-        ESP_LOGD(TAG, "Personality system tick at loop %lu", loopCount);
+        ESP_LOGD(TAG, "Personality system tick at loop %llu", loopCount);
         
         // Here you could trigger personality-specific behaviors
         // based on current mood, recent interactions, etc.

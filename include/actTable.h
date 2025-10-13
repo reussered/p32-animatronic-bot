@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Component action function type
-typedef void (*act_func_t)(uint32_t loopCount);
+typedef void (*act_func_t)(uint64_t loopCount);
 
 // Action table entry with timing
 typedef struct {
@@ -13,15 +13,17 @@ typedef struct {
 } act_table_entry_t;
 
 // Forward declarations for component action functions
-// Generated from individual component files
-void system_act_component(uint32_t loopCount);
-void network_monitor_act(uint32_t loopCount);
-void goblin_eye_left_act(uint32_t loopCount);
-void goblin_eye_right_act(uint32_t loopCount);
-void goblin_nose_act(uint32_t loopCount);
+// Generated from JSON bot configuration
+void p32_comp_heartbeat_act(uint64_t loopCount);
+void p32_comp_network_monitor_act(uint64_t loopCount);
+void p32_comp_power_manager_act(uint64_t loopCount);
+void p32_comp_mesh_coordinator_act(uint64_t loopCount);
+void p32_comp_master_controller_act(uint64_t loopCount);
+void p32_comp_mesh_software_coordinator_act(uint64_t loopCount);
+void p32_comp_spine_lower_act(uint64_t loopCount);
 
-// JSON-generated action table - DECLARATION ONLY  
-#define ACT_TABLE_SIZE 5
+// JSON-generated action table with timing from bot configuration
+#define ACT_TABLE_SIZE 7
 extern act_table_entry_t actTable[ACT_TABLE_SIZE];
 
 #endif // ACT_TABLE_H

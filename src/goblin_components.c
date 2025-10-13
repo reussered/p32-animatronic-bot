@@ -17,8 +17,8 @@ esp_err_t p32_goblin_personality_init(void) {
     return ESP_OK;
 }
 
-void p32_goblin_personality_act(uint32_t loopCount) {
-    ESP_LOGI(TAG_GOBLIN, "Loop %lu: Goblin personality update", loopCount);
+void p32_goblin_personality_act(uint64_t loopCount) {
+    ESP_LOGI(TAG_GOBLIN, "Loop %llu: Goblin personality update", loopCount);
 }
 
 // Goblin mood component
@@ -27,7 +27,7 @@ esp_err_t p32_goblin_mood_init(void) {
     return ESP_OK;
 }
 
-void p32_goblin_mood_act(uint32_t loopCount) {
+void p32_goblin_mood_act(uint64_t loopCount) {
     ESP_LOGI(TAG_MOOD, "Loop %lu: Mood evaluation", loopCount);
 }
 
@@ -37,7 +37,7 @@ esp_err_t p32_left_eye_init(void) {
     return ESP_OK;
 }
 
-void p32_left_eye_act(uint32_t loopCount) {
+void p32_left_eye_act(uint64_t loopCount) {
     ESP_LOGI(TAG_EYES, "Loop %lu: Left eye animation", loopCount);
 }
 
@@ -46,7 +46,7 @@ esp_err_t p32_right_eye_init(void) {
     return ESP_OK;
 }
 
-void p32_right_eye_act(uint32_t loopCount) {
+void p32_right_eye_act(uint64_t loopCount) {
     ESP_LOGI(TAG_EYES, "Loop %lu: Right eye animation", loopCount);
 }
 
@@ -56,7 +56,7 @@ esp_err_t p32_mouth_init(void) {
     return ESP_OK;
 }
 
-void p32_mouth_act(uint32_t loopCount) {
+void p32_mouth_act(uint64_t loopCount) {
     ESP_LOGI(TAG_MOUTH, "Loop %lu: Mouth animation", loopCount);
 }
 
@@ -66,6 +66,6 @@ esp_err_t p32_audio_init(void) {
     return ESP_OK;
 }
 
-void p32_audio_act(uint32_t loopCount) {
+void p32_audio_act(uint64_t loopCount) {
     ESP_LOGI(TAG_AUDIO, "Loop %lu: Audio processing", loopCount);
 }

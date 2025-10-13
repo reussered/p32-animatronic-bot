@@ -85,8 +85,19 @@ class P32ComponentGenerator:
             hit_count = component.get("timing", {}).get("hitCount", 10)
             description = component.get("description", f"{comp_name} component")
             
-            init_func = self.generate_function_name(comp_name, "init")
-            act_func = self.generate_function_name(comp_name, "act")
+            # Check for explicit function declarations first
+            function_declarations = component.get("function_declarations", {})
+            if function_declarations:
+                init_func = function_declarations.get("init_function")
+                act_func = function_declarations.get("act_function")
+                if not init_func or not act_func:
+                    print(f"Warning: Incomplete function declarations in {comp_name}")
+                    init_func = self.generate_function_name(comp_name, "init")
+                    act_func = self.generate_function_name(comp_name, "act")
+            else:
+                # Fall back to auto-generated names
+                init_func = self.generate_function_name(comp_name, "init")
+                act_func = self.generate_function_name(comp_name, "act")
             
             self.components.append({
                 "name": comp_name,
@@ -136,7 +147,7 @@ class P32ComponentGenerator:
             '#include <stdint.h>',
             "",
             "// Component action function type",
-            "typedef void (*act_func_t)(uint32_t loopCount);",
+            "typedef void (*act_func_t)(uint64_t loopCount);",
             "",
             "// Action table entry with timing",
             "typedef struct {",
@@ -149,7 +160,7 @@ class P32ComponentGenerator:
         ]
         
         for comp in self.components:
-            content.append(f"void {comp['act_func']}(uint32_t loopCount);")
+            content.append(f"void {comp['act_func']}(uint64_t loopCount);")
         
         content.extend([
             "",
@@ -246,31 +257,31 @@ class P32ComponentGenerator:
             # Act function - special handling for network_monitor
             if comp['name'] == 'network_monitor':
                 content.extend([
-                    f"void {comp['act_func']}(uint32_t loopCount) {{",
+                    f"void {comp['act_func']}(uint64_t loopCount) {{",
                     "#ifdef SIMPLE_TEST",
                     "    // Send timing packet to server every 100,000 loops for server-side timing measurement",
                     "    static uint32_t packet_counter = 0;", 
                     "    if (loopCount % 100000 == 0 && loopCount > 0) {",
-                    "        printf(\"TIMING_PACKET: loop=%lu, packet=%lu\\n\", loopCount, packet_counter++);",
+                    "        printf(\"TIMING_PACKET: loop=%llu, packet=%lu\\n\", loopCount, packet_counter++);",
                     "        // TODO: Send actual network packet to server with loopCount and packet_counter",
                     "        // Server will measure time between packets to calculate loop performance",
                     "    }",
-                    f'    if (loopCount % {comp["hitCount"]} == 0) printf("ACT[%lu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
+                    f'    if (loopCount % {comp["hitCount"]} == 0) printf("ACT[%llu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
                     "    return;",
                     "#endif",
-                    f'    ESP_LOGI(TAG_{tag}, "Loop %lu: {comp["description"]}", loopCount);',
+                    f'    ESP_LOGI(TAG_{tag}, "Loop %llu: {comp["description"]}", loopCount);',
                     "    // TODO: Implement actual network monitoring and server communication",
                     "}",
                     ""
                 ])
             else:
                 content.extend([
-                    f"void {comp['act_func']}(uint32_t loopCount) {{",
+                    f"void {comp['act_func']}(uint64_t loopCount) {{",
                     "#ifdef SIMPLE_TEST",
-                    f'    printf("ACT[%lu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
+                    f'    printf("ACT[%llu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
                     "    return;",
                     "#endif",
-                    f'    ESP_LOGI(TAG_{tag}, "Loop %lu: {comp["description"]}", loopCount);',
+                    f'    ESP_LOGI(TAG_{tag}, "Loop %llu: {comp["description"]}", loopCount);',
                     "}",
                     ""
                 ])

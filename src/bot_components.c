@@ -5,57 +5,93 @@
 // Positioned component implementations
 // Generated from JSON bot configuration
 
-static const char *TAG_LEFT_EYE = "LEFT_EYE";
-static const char *TAG_RIGHT_EYE = "RIGHT_EYE";
-static const char *TAG_NOSE_SENSOR = "NOSE_SENSOR";
+static const char *TAG_POWER_MANAGER = "POWER_MANAGER";
+static const char *TAG_MESH_COORDINATOR = "MESH_COORDINATOR";
+static const char *TAG_MASTER_CONTROLLER = "MASTER_CONTROLLER";
+static const char *TAG_MESH_SOFTWARE_COORDINATOR = "MESH_SOFTWARE_COORDINATOR";
+static const char *TAG_SPINE_LOWER = "SPINE_LOWER";
 
-esp_err_t p32_comp_left_eye_init(void) {
+esp_err_t p32_comp_power_manager_init(void) {
 #ifdef SIMPLE_TEST
-    printf("INIT: left_eye - Left eye display animation\n");
+    printf("INIT: power_manager - Battery monitoring and power distribution control\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_LEFT_EYE, "Left eye display animation initialized");
+    ESP_LOGI(TAG_POWER_MANAGER, "Battery monitoring and power distribution control initialized");
     return ESP_OK;
 }
 
-void p32_comp_left_eye_act(uint32_t loopCount) {
+void p32_comp_power_manager_act(uint64_t loopCount) {
 #ifdef SIMPLE_TEST
-    printf("ACT[%lu]: left_eye - hitCount:5\n", loopCount);
+    printf("ACT[%llu]: power_manager - hitCount:100\n", loopCount);
     return;
 #endif
-    ESP_LOGI(TAG_LEFT_EYE, "Loop %lu: Left eye display animation", loopCount);
+    ESP_LOGI(TAG_POWER_MANAGER, "Loop %llu: Battery monitoring and power distribution control", loopCount);
 }
 
-esp_err_t p32_comp_right_eye_init(void) {
+esp_err_t p32_comp_mesh_coordinator_init(void) {
 #ifdef SIMPLE_TEST
-    printf("INIT: right_eye - Right eye display animation\n");
+    printf("INIT: mesh_coordinator - ESP-NOW mesh network master controller\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_RIGHT_EYE, "Right eye display animation initialized");
+    ESP_LOGI(TAG_MESH_COORDINATOR, "ESP-NOW mesh network master controller initialized");
     return ESP_OK;
 }
 
-void p32_comp_right_eye_act(uint32_t loopCount) {
+void p32_comp_mesh_coordinator_act(uint64_t loopCount) {
 #ifdef SIMPLE_TEST
-    printf("ACT[%lu]: right_eye - hitCount:5\n", loopCount);
+    printf("ACT[%llu]: mesh_coordinator - hitCount:10\n", loopCount);
     return;
 #endif
-    ESP_LOGI(TAG_RIGHT_EYE, "Loop %lu: Right eye display animation", loopCount);
+    ESP_LOGI(TAG_MESH_COORDINATOR, "Loop %llu: ESP-NOW mesh network master controller", loopCount);
 }
 
-esp_err_t p32_comp_nose_sensor_init(void) {
+esp_err_t p32_comp_master_controller_init(void) {
 #ifdef SIMPLE_TEST
-    printf("INIT: nose_sensor - Proximity sensor monitoring\n");
+    printf("INIT: master_controller - Master controller for coordinating all subsystems via mesh network\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_NOSE_SENSOR, "Proximity sensor monitoring initialized");
+    ESP_LOGI(TAG_MASTER_CONTROLLER, "Master controller for coordinating all subsystems via mesh network initialized");
     return ESP_OK;
 }
 
-void p32_comp_nose_sensor_act(uint32_t loopCount) {
+void p32_comp_master_controller_act(uint64_t loopCount) {
 #ifdef SIMPLE_TEST
-    printf("ACT[%lu]: nose_sensor - hitCount:15\n", loopCount);
+    printf("ACT[%llu]: master_controller - hitCount:50\n", loopCount);
     return;
 #endif
-    ESP_LOGI(TAG_NOSE_SENSOR, "Loop %lu: Proximity sensor monitoring", loopCount);
+    ESP_LOGI(TAG_MASTER_CONTROLLER, "Loop %llu: Master controller for coordinating all subsystems via mesh network", loopCount);
+}
+
+esp_err_t p32_comp_mesh_software_coordinator_init(void) {
+#ifdef SIMPLE_TEST
+    printf("INIT: mesh_software_coordinator - High-level software coordination logic for distributed robot mesh network\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_MESH_SOFTWARE_COORDINATOR, "High-level software coordination logic for distributed robot mesh network initialized");
+    return ESP_OK;
+}
+
+void p32_comp_mesh_software_coordinator_act(uint64_t loopCount) {
+#ifdef SIMPLE_TEST
+    printf("ACT[%llu]: mesh_software_coordinator - hitCount:20\n", loopCount);
+    return;
+#endif
+    ESP_LOGI(TAG_MESH_SOFTWARE_COORDINATOR, "Loop %llu: High-level software coordination logic for distributed robot mesh network", loopCount);
+}
+
+esp_err_t p32_comp_spine_lower_init(void) {
+#ifdef SIMPLE_TEST
+    printf("INIT: spine_lower - Lower spine flexion/extension control\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_SPINE_LOWER, "Lower spine flexion/extension control initialized");
+    return ESP_OK;
+}
+
+void p32_comp_spine_lower_act(uint64_t loopCount) {
+#ifdef SIMPLE_TEST
+    printf("ACT[%llu]: spine_lower - hitCount:20\n", loopCount);
+    return;
+#endif
+    ESP_LOGI(TAG_SPINE_LOWER, "Loop %llu: Lower spine flexion/extension control", loopCount);
 }

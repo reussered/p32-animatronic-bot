@@ -11,6 +11,7 @@
 #define ENABLE_SIMPLE_MOOD
 #define ENABLE_SIMPLE_GOBLIN
 #define ENABLE_SIMPLE_WIFI
+#define ENABLE_GOBLIN_COMPONENTS  // Enable goblin component implementations
 // #define ENABLE_SIMPLE_SERIAL  // DISABLED - has UART dependency issues
 
 // Standalone components (DISABLED - undefined/commented out)

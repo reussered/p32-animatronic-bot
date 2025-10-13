@@ -1,0 +1,57 @@
+{
+  "relative_filename": "config/subsystems/base/torso_base.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "subsystem_type": "TORSO_CONTROLLER", 
+  "description": "Universal base template for torso subsystem controllers across all creatures",
+  
+  "controller_hardware": {
+    "processor": "ESP32_C3_MINI",
+    "flash_memory": "4MB",
+    "ram": "400KB", 
+    "gpio_pins": 22,
+    "adc_channels": 6,
+    "pwm_channels": 6,
+    "spi_interfaces": 1,
+    "i2c_interfaces": 1
+  },
+  
+  "power_specifications": {
+    "input_voltage": "7V_12V_BATTERY",
+    "logic_voltage": "3.3V",
+    "distribution_voltage": "5V",
+    "max_current_capacity": "10000_MA",
+    "power_rails": ["BATTERY", "5V_DIST", "3.3V", "GND"],
+    "power_management": "SWITCHING_REGULATOR"
+  },
+  
+  "mesh_configuration": {
+    "role": "POWER_HUB_NODE",
+    "protocol": "ESP_NOW",
+    "coordination_functions": ["POWER_DISTRIBUTION", "SYSTEM_HEALTH", "EMERGENCY_SHUTDOWN"]
+  },
+  
+  "standard_components": [
+    {
+      "component_type": "MESH_NETWORK",
+      "function_name": "mesh_network_update", 
+      "default_hitCount": 5,
+      "role": "power_hub_node",
+      "required": true
+    },
+    {
+      "component_type": "POWER_MANAGEMENT",
+      "function_name": "power_management_update",
+      "default_hitCount": 25,
+      "role": "system_power_control",
+      "required": true
+    },
+    {
+      "component_type": "SYSTEM_HEALTH_MONITOR",
+      "function_name": "health_monitor_update",
+      "default_hitCount": 50, 
+      "role": "subsystem_monitoring",
+      "required": true
+    }
+  ]
+}

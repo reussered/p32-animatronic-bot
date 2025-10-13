@@ -176,7 +176,7 @@ class P32IndividualComponentGenerator:
             '}',
             '',
             f'// Component action function - executes every {component["hitCount"]} loops',
-            f'void {component["act_func"]}(uint32_t loopCount) {{',
+            f'void {component["act_func"]}(uint64_t loopCount) {{',
             '#ifdef SIMPLE_TEST'
         ])
         
@@ -184,13 +184,13 @@ class P32IndividualComponentGenerator:
         if 'network' in name:
             content.extend([
                 '    if (loopCount % 10000 == 0) {',
-                f'        printf("ACT: {name} - checking network (loop %lu)\\n", loopCount);',
+                f'        printf("ACT: {name} - checking network (loop %llu)\\n", loopCount);',
                 '    }',
             ])
         else:
             content.extend([
                 '    if (loopCount % 1000 == 0) {',
-                f'        printf("ACT: {name} - active (loop %lu)\\n", loopCount);',
+                f'        printf("ACT: {name} - active (loop %llu)\\n", loopCount);',
                 '    }',
             ])
         
@@ -206,14 +206,14 @@ class P32IndividualComponentGenerator:
                 content.extend([
                     '    // Network status check',
                     '    if (loopCount % 10000 == 0) {',
-                    '        ESP_LOGD(TAG, "Network status check - loop %lu", loopCount);',
+                    '        ESP_LOGD(TAG, "Network status check - loop %llu", loopCount);',
                     '    }',
                 ])
             else:
                 content.extend([
                     '    // System maintenance tasks',
                     '    if (loopCount % 5000 == 0) {',
-                    '        ESP_LOGD(TAG, "System maintenance - loop %lu", loopCount);', 
+                    '        ESP_LOGD(TAG, "System maintenance - loop %llu", loopCount);', 
                     '    }',
                 ])
         else:
@@ -225,24 +225,24 @@ class P32IndividualComponentGenerator:
                 content.extend([
                     '    // Display update logic',
                     '    // TODO: Update display content based on mood/state',
-                    '    ESP_LOGD(TAG, "Display update - loop %lu", loopCount);',
+                    '    ESP_LOGD(TAG, "Display update - loop %llu", loopCount);',
                 ])
             elif 'sensor' in hardware_ref.lower():
                 content.extend([
                     '    // Sensor reading logic',
                     '    // TODO: Read sensor data and process',
-                    '    ESP_LOGD(TAG, "Sensor reading - loop %lu", loopCount);',
+                    '    ESP_LOGD(TAG, "Sensor reading - loop %llu", loopCount);',
                 ])
             elif 'speaker' in hardware_ref.lower():
                 content.extend([
                     '    // Audio processing logic',
                     '    // TODO: Handle audio playback and effects',
-                    '    ESP_LOGD(TAG, "Audio processing - loop %lu", loopCount);',
+                    '    ESP_LOGD(TAG, "Audio processing - loop %llu", loopCount);',
                 ])
             else:
                 content.extend([
                     '    // Generic component action',
-                    '    ESP_LOGD(TAG, "Component action - loop %lu", loopCount);',
+                    '    ESP_LOGD(TAG, "Component action - loop %llu", loopCount);',
                 ])
         
         content.append('}')
@@ -262,7 +262,7 @@ class P32IndividualComponentGenerator:
             'typedef esp_err_t (*init_func_t)(void);',
             '',
             '// Component action function type',
-            'typedef void (*act_func_t)(uint32_t loopCount);',
+            'typedef void (*act_func_t)(uint64_t loopCount);',
             '',
             '// Action table entry with timing',
             'typedef struct {',
@@ -282,7 +282,7 @@ class P32IndividualComponentGenerator:
         content.append('')
         content.append('// Action functions') 
         for comp in self.components:
-            content.append(f'void {comp["act_func"]}(uint32_t loopCount);')
+            content.append(f'void {comp["act_func"]}(uint64_t loopCount);')
         
         content.extend([
             '',

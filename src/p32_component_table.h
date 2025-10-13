@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 // Global loop counter
-extern uint32_t loopCount;
+extern uint64_t loopCount;
 
 // Component init function table - core hardware only
 esp_err_t (*componentInitTable[])(void) = {

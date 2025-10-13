@@ -17,6 +17,7 @@ typedef enum {
     EYE_ANIM_ANGRY_STARE,
     EYE_ANIM_CURIOUS_LOOK,
     EYE_ANIM_FEAR_WIDE,
+    EYE_ANIM_EXCITED_SPARKLE,
     EYE_ANIM_COUNT
 } p32_eye_animation_t;
 
@@ -82,12 +83,4 @@ void p32_display_draw_circle(uint16_t* buffer, int x, int y, int radius, uint16_
 void p32_display_draw_rect(uint16_t* buffer, int x, int y, int w, int h, uint16_t color);
 void p32_display_fill_buffer(uint16_t* buffer, uint16_t color);
 
-// Mood-based color palettes
-typedef struct {
-    uint16_t primary;
-    uint16_t secondary;
-    uint16_t highlight;
-    uint16_t background;
-} p32_color_palette_t;
-
-extern const p32_color_palette_t p32_mood_palettes[MOOD_COUNT];
+// Note: Abandoned palette-based system - using direct RGB565 colors in animation functions

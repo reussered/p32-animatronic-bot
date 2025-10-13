@@ -1,0 +1,53 @@
+{
+  "relative_filename": "config/components/positioned/cyclops/head_components/cyclops_eye.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "positioned_component_type": "TFT_DISPLAY",
+  "display_id": "CYCLOPS_MAIN_EYE",
+  "display_role": "PRIMARY_EYE",
+  
+  "hardware_template": "config/components/hardware/tft_2p5x1p5_display.json",
+  "creature_shell": "config/shapes/scad/bot_shells/cyclops_eye_shell.scad",
+  "mount_template": "config/shapes/scad/basic_mounts/display_basic_mount.scad",
+  
+  "position": {
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "x": "0.0 INCH",
+    "y": "2.0 INCH", 
+    "z": "1.8 INCH",
+    "rotation_x": "0 DEG",
+    "rotation_y": "0 DEG", 
+    "rotation_z": "0 DEG"
+  },
+  
+  "orientation": {
+    "display_mode": "PORTRAIT",
+    "vertical_pixels": 320,
+    "horizontal_pixels": 240,
+    "viewing_angle": "forward_facing",
+    "tilt_forward": "15 DEG"
+  },
+  
+  "interface_assignment": {
+    "controller_type": "INTEGRATED_ESP32_WROOM",
+    "primary_interface": "NATIVE_SPI",
+    "power_interface": "DIRECT_5V_3V3",
+    "communication": "ESP_NOW_MESH"
+  },
+  
+  "cyclops_specific": {
+    "eye_size": "MASSIVE",
+    "iris_diameter": "1.8 INCH",
+    "pupil_tracking": "FULL_RANGE",
+    "blink_mechanism": "DIGITAL_OVERLAY",
+    "intimidation_factor": "MAXIMUM"
+  },
+  
+  "display_content": {
+    "default_animation": "assets/animations/cyclops/massive_stare.json",
+    "blink_animation": "assets/animations/cyclops/slow_blink.json", 
+    "anger_animation": "assets/animations/cyclops/burning_gaze.json",
+    "curiosity_animation": "assets/animations/cyclops/scanning_look.json"
+  }
+}

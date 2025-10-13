@@ -13,7 +13,7 @@
 #include "p32_component_registry.h"
 
 static const char *TAG = "P32_MAIN";
-static uint32_t loopCount = 0;
+static uint64_t loopCount = 0;
 
 void app_main(void)
 {
@@ -44,14 +44,14 @@ void app_main(void)
         if (!paused) {
             // Show current loop info every 1000 loops for readability
             if (loopCount % 1000 == 0) {
-                ESP_LOGI(TAG, "Loop %lu - Checking components...", loopCount);
+                ESP_LOGI(TAG, "Loop %llu - Checking components...", loopCount);
             }
             
             // Execute components
             for (int i = 0; i < ACT_TABLE_SIZE; i++) {
                 if (actTable[i].act_func != NULL && actTable[i].hitCount > 0) {
                     if (loopCount % actTable[i].hitCount == 0) {
-                        ESP_LOGI(TAG, "[%s] Executing (loop %lu)", 
+                        ESP_LOGI(TAG, "[%s] Executing (loop %llu)", 
                                 actTable[i].name ? actTable[i].name : "unknown", loopCount);
                         actTable[i].act_func(loopCount);
                     }

@@ -6,25 +6,7 @@
 static const char* TAG = "P32_DISPLAY";
 static p32_display_system_t g_display_system = {0};
 
-// Mood-based color palettes (RGB565 format)
-const p32_color_palette_t p32_mood_palettes[MOOD_COUNT] = {
-    // MOOD_FEAR: Dark blues and blacks
-    {.primary = 0x001F, .secondary = 0x0010, .highlight = 0x4A69, .background = 0x0000},
-    // MOOD_ANGER: Reds and oranges  
-    {.primary = 0xF800, .secondary = 0xFD20, .highlight = 0xFFE0, .background = 0x2000},
-    // MOOD_IRRITATION: Yellows and oranges
-    {.primary = 0xFD20, .secondary = 0xFFE0, .highlight = 0xF800, .background = 0x2100},
-    // MOOD_HAPPINESS: Greens and yellows
-    {.primary = 0x07E0, .secondary = 0xAFE5, .highlight = 0xFFE0, .background = 0x0200},
-    // MOOD_CONTENTMENT: Soft blues and greens
-    {.primary = 0x4A69, .secondary = 0x07E0, .highlight = 0xAFFF, .background = 0x0010},
-    // MOOD_HUNGER: Deep reds and browns
-    {.primary = 0x8000, .secondary = 0x4000, .highlight = 0xF800, .background = 0x0000},
-    // MOOD_CURIOSITY: Bright blues and purples
-    {.primary = 0x001F, .secondary = 0x781F, .highlight = 0xAFFF, .background = 0x0008},
-    // MOOD_AFFECTION: Pinks and warm colors
-    {.primary = 0xF81F, .secondary = 0xFD20, .highlight = 0xFFFF, .background = 0x2008}
-};
+// Note: Abandoned palette-based color system - using direct RGB565 color values in animation functions
 
 esp_err_t p32_display_init(void) {
     ESP_LOGI(TAG, "Initializing display system...");
@@ -74,7 +56,7 @@ esp_err_t p32_display_init(void) {
 }
 
 void p32_display_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Update display animations every 5 loops (about 10Hz if main loop is 50Hz)
     if (loopCount % 5 == 0) {
@@ -249,6 +231,10 @@ esp_err_t p32_display_update_mood_animations(p32_mood_t mood) {
             p32_display_set_eye_animation(EYE_ANIM_CURIOUS_LOOK);
             p32_display_set_mouth_animation(MOUTH_ANIM_SMILE);
             break;
+        case MOOD_EXCITEMENT:
+            p32_display_set_eye_animation(EYE_ANIM_CURIOUS_LOOK);
+            p32_display_set_mouth_animation(MOUTH_ANIM_SMILE);
+            break;
         case MOOD_CURIOSITY:
             p32_display_set_eye_animation(EYE_ANIM_CURIOUS_LOOK);
             p32_display_set_mouth_animation(MOUTH_ANIM_CLOSED);
@@ -267,13 +253,11 @@ esp_err_t p32_display_update_mood_animations(p32_mood_t mood) {
 esp_err_t p32_display_draw_eye_blink(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[p32_get_mood()];
+    // Clear to black background
+    p32_display_fill_buffer(display->framebuffer, 0x0000);
     
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
-    
-    // Draw closed eyelid (horizontal ellipse)
-    p32_display_draw_rect(display->framebuffer, 60, 115, 120, 10, palette.primary);
+    // Draw closed eyelid (horizontal ellipse) - white color
+    p32_display_draw_rect(display->framebuffer, 60, 115, 120, 10, 0xFFFF);
     
     return p32_display_update(display);
 }
@@ -281,15 +265,13 @@ esp_err_t p32_display_draw_eye_blink(p32_display_t* display) {
 esp_err_t p32_display_draw_eye_angry(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_ANGER];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to dark background for anger
+    p32_display_fill_buffer(display->framebuffer, 0x2000); // Dark red
     
     // Draw angry eye (angled narrow opening)
-    p32_display_draw_circle(display->framebuffer, 120, 120, 80, palette.primary);
-    p32_display_draw_circle(display->framebuffer, 120, 120, 40, palette.highlight);
-    p32_display_draw_circle(display->framebuffer, 130, 110, 15, 0x0000); // Pupil
+    p32_display_draw_circle(display->framebuffer, 120, 120, 80, 0xF800); // Red
+    p32_display_draw_circle(display->framebuffer, 120, 120, 40, 0xFFE0); // Yellow highlight
+    p32_display_draw_circle(display->framebuffer, 130, 110, 15, 0x0000); // Black pupil
     
     return p32_display_update(display);
 }
@@ -297,15 +279,13 @@ esp_err_t p32_display_draw_eye_angry(p32_display_t* display) {
 esp_err_t p32_display_draw_eye_curious(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_CURIOSITY];
-    
-    // Clear to background  
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to light blue background for curiosity
+    p32_display_fill_buffer(display->framebuffer, 0x001F); // Blue
     
     // Draw wide curious eye
-    p32_display_draw_circle(display->framebuffer, 120, 120, 90, palette.primary);
-    p32_display_draw_circle(display->framebuffer, 120, 120, 60, palette.secondary);
-    p32_display_draw_circle(display->framebuffer, 120, 120, 20, 0x0000); // Pupil
+    p32_display_draw_circle(display->framebuffer, 120, 120, 90, 0xFFFF); // White
+    p32_display_draw_circle(display->framebuffer, 120, 120, 60, 0x07E0); // Green iris
+    p32_display_draw_circle(display->framebuffer, 120, 120, 20, 0x0000); // Black pupil
     
     return p32_display_update(display);
 }
@@ -313,15 +293,13 @@ esp_err_t p32_display_draw_eye_curious(p32_display_t* display) {
 esp_err_t p32_display_draw_eye_fear(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_FEAR];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to dark background for fear
+    p32_display_fill_buffer(display->framebuffer, 0x0010); // Dark blue
     
     // Draw wide fearful eye
-    p32_display_draw_circle(display->framebuffer, 120, 120, 100, palette.primary);
-    p32_display_draw_circle(display->framebuffer, 120, 120, 70, palette.secondary);
-    p32_display_draw_circle(display->framebuffer, 120, 120, 30, 0x0000); // Dilated pupil
+    p32_display_draw_circle(display->framebuffer, 120, 120, 100, 0xFFFF); // White
+    p32_display_draw_circle(display->framebuffer, 120, 120, 70, 0xF7DE); // Light gray iris
+    p32_display_draw_circle(display->framebuffer, 120, 120, 30, 0x0000); // Dilated black pupil
     
     return p32_display_update(display);
 }
@@ -330,14 +308,12 @@ esp_err_t p32_display_draw_eye_fear(p32_display_t* display) {
 esp_err_t p32_display_draw_mouth_smile(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_HAPPINESS];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to light background for happiness
+    p32_display_fill_buffer(display->framebuffer, 0xFFE0); // Yellow
     
     // Draw smile curve
-    p32_display_draw_rect(display->framebuffer, 40, 140, 160, 20, palette.primary);
-    p32_display_draw_rect(display->framebuffer, 60, 120, 120, 15, palette.secondary);
+    p32_display_draw_rect(display->framebuffer, 40, 140, 160, 20, 0xF800); // Red
+    p32_display_draw_rect(display->framebuffer, 60, 120, 120, 15, 0xFFFF); // White teeth
     
     return p32_display_update(display);
 }
@@ -345,14 +321,12 @@ esp_err_t p32_display_draw_mouth_smile(p32_display_t* display) {
 esp_err_t p32_display_draw_mouth_frown(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[p32_get_mood()];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to gray background for sadness
+    p32_display_fill_buffer(display->framebuffer, 0x8410); // Gray
     
     // Draw frown curve (inverted smile)
-    p32_display_draw_rect(display->framebuffer, 40, 80, 160, 20, palette.primary);
-    p32_display_draw_rect(display->framebuffer, 60, 100, 120, 15, palette.secondary);
+    p32_display_draw_rect(display->framebuffer, 40, 80, 160, 20, 0x0000); // Black
+    p32_display_draw_rect(display->framebuffer, 60, 100, 120, 15, 0x4208); // Dark gray
     
     return p32_display_update(display);
 }
@@ -360,18 +334,16 @@ esp_err_t p32_display_draw_mouth_frown(p32_display_t* display) {
 esp_err_t p32_display_draw_mouth_snarl(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_ANGER];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to dark red background for anger
+    p32_display_fill_buffer(display->framebuffer, 0x2000); // Dark red
     
     // Draw snarling mouth with teeth
-    p32_display_draw_rect(display->framebuffer, 30, 100, 180, 40, palette.primary);
+    p32_display_draw_rect(display->framebuffer, 30, 100, 180, 40, 0xF800); // Red
     
-    // Draw teeth
+    // Draw white teeth
     for (int i = 0; i < 8; i++) {
         int x = 40 + (i * 20);
-        p32_display_draw_rect(display->framebuffer, x, 90, 8, 20, 0xFFFF);
+        p32_display_draw_rect(display->framebuffer, x, 90, 8, 20, 0xFFFF); // White
     }
     
     return p32_display_update(display);
@@ -380,13 +352,11 @@ esp_err_t p32_display_draw_mouth_snarl(p32_display_t* display) {
 esp_err_t p32_display_draw_mouth_roar(p32_display_t* display) {
     if (!display->framebuffer) return ESP_ERR_INVALID_STATE;
     
-    p32_color_palette_t palette = p32_mood_palettes[MOOD_ANGER];
-    
-    // Clear to background
-    p32_display_fill_buffer(display->framebuffer, palette.background);
+    // Clear to dark red background for roaring anger
+    p32_display_fill_buffer(display->framebuffer, 0x2000); // Dark red
     
     // Draw wide open roaring mouth
-    p32_display_draw_circle(display->framebuffer, 120, 120, 100, palette.primary);
+    p32_display_draw_circle(display->framebuffer, 120, 120, 100, 0xF800); // Red
     p32_display_draw_circle(display->framebuffer, 120, 120, 80, 0x0000); // Black interior
     
     return p32_display_update(display);

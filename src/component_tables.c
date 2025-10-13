@@ -11,11 +11,11 @@ extern esp_err_t goblin_eye_left_init(void);
 extern esp_err_t goblin_eye_right_init(void);
 extern esp_err_t goblin_nose_init(void);
 
-extern void system_act_component(uint32_t loopCount);
-extern void network_monitor_act(uint32_t loopCount);
-extern void goblin_eye_left_act(uint32_t loopCount);
-extern void goblin_eye_right_act(uint32_t loopCount);
-extern void goblin_nose_act(uint32_t loopCount);
+extern void system_act_component(uint64_t loopCount);
+extern void network_monitor_act(uint64_t loopCount);
+extern void goblin_eye_left_act(uint64_t loopCount);
+extern void goblin_eye_right_act(uint64_t loopCount);
+extern void goblin_nose_act(uint64_t loopCount);
 
 // Component initialization table - ACTUAL DEFINITION
 init_func_t initTable[INIT_TABLE_SIZE] = {

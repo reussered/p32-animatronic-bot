@@ -1,0 +1,41 @@
+{
+  "relative_filename": "config/components/positioned/goblin/leg_components/left/hip_flexion_servo.json",
+  "version": "2.0.0",
+  "author": "config/author.json",
+  "component_id": "hip_flexion_servo_left",
+  
+  "template_inheritance": {
+    "hardware_template": "config/components/hardware/mg996r_servo.json",
+    "creature_shell": "assets/shapes/scad/creature_shells/goblin/hip_flexion_mount.scad", 
+    "mount_template": "assets/shapes/scad/basic_mounts/servo_heavy_duty_mount.scad"
+  },
+  
+  "interface_assignment": "PWM_CHANNEL_1",
+  "coordinate_system": "humanoid_3d",
+  "reference_point": "hip_socket_left", 
+  "position": {
+    "x": "0 INCH",
+    "y": "0 INCH",
+    "z": "0 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES", 
+    "rotation": "90 DEGREES",
+    "roll": "0 DEGREES"
+  },
+  
+  "servo_specific_config": {
+    "joint_type": "HIP_FLEXION_EXTENSION",
+    "range_degrees": "120", 
+    "center_position": "90",
+    "movement_direction": "FORWARD_BACKWARD",
+    "max_torque_required_kg_cm": "25"
+  },
+  
+  "function": "hip_primary_movement",
+  "component_name": "hip_flexion", 
+  "description": "Left hip flexion/extension servo - primary leg lift for walking",
+  "timing": {
+    "hitCount": 5
+  }
+}

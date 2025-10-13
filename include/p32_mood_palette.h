@@ -12,17 +12,18 @@
 // RGB565 color type for efficient storage
 typedef uint16_t palette_color_t;
 
-// Mood types enum
+// Mood types enum - matches p32_core.h mood system
 typedef enum {
-    MOOD_ANGER = 0,
-    MOOD_FEAR = 1,
-    MOOD_HAPPINESS = 2,
-    MOOD_SADNESS = 3,
-    MOOD_CURIOSITY = 4,
-    MOOD_AFFECTION = 5,
-    MOOD_IRRITATION = 6,
-    MOOD_CONTENTMENT = 7,
-    MOOD_TYPE_COUNT = 8
+    MOOD_FEAR = 0,
+    MOOD_ANGER = 1,
+    MOOD_IRRITATION = 2, 
+    MOOD_HAPPINESS = 3,
+    MOOD_CONTENTMENT = 4,
+    MOOD_HUNGER = 5,
+    MOOD_CURIOSITY = 6,
+    MOOD_AFFECTION = 7,
+    MOOD_EXCITEMENT = 8,
+    MOOD_TYPE_COUNT = 9
 } mood_type_t;
 
 // Mood type names for debugging
@@ -34,16 +35,17 @@ typedef struct {
     const char* name;
 } mood_palette_t;
 
-// Current mood state - includes sadness now
+// Current mood state - matches p32_core.h enum order
 typedef struct {
-    uint16_t anger;        // 0-999
     uint16_t fear;         // 0-999
+    uint16_t anger;        // 0-999
+    uint16_t irritation;   // 0-999
     uint16_t happiness;    // 0-999
-    uint16_t sadness;      // 0-999 (was missing)
+    uint16_t contentment;  // 0-999
+    uint16_t hunger;       // 0-999
     uint16_t curiosity;    // 0-999
     uint16_t affection;    // 0-999
-    uint16_t irritation;   // 0-999
-    uint16_t contentment;  // 0-999
+    uint16_t excitement;   // 0-999
 } mood_state_t;
 
 // Active palette (computed from mood state)

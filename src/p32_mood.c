@@ -17,7 +17,8 @@ static const char* mood_names[MOOD_COUNT] = {
     "CONTENTMENT",
     "HUNGER",
     "CURIOSITY",
-    "AFFECTION"
+    "AFFECTION",
+    "EXCITEMENT"
 };
 
 // Goblin mood transition rules
@@ -30,10 +31,13 @@ const p32_mood_transition_t p32_goblin_mood_transitions[] = {
     {MOOD_HUNGER, MOOD_IRRITATION, 10000, 5},
     {MOOD_CURIOSITY, MOOD_CONTENTMENT, 6000, 3},
     {MOOD_AFFECTION, MOOD_HAPPINESS, 7000, 2},
+    {MOOD_EXCITEMENT, MOOD_HAPPINESS, 6000, 4},
     
     // Mood escalation paths
     {MOOD_IRRITATION, MOOD_ANGER, 2000, 7},
     {MOOD_CONTENTMENT, MOOD_CURIOSITY, 1000, 4},
+    {MOOD_HAPPINESS, MOOD_EXCITEMENT, 3000, 6},
+    {MOOD_CURIOSITY, MOOD_EXCITEMENT, 2000, 5},
     
     {0, 0, 0, 0} // Terminator
 };
@@ -70,7 +74,7 @@ esp_err_t p32_mood_engine_init(void) {
 }
 
 void p32_mood_engine_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Process mood transitions every 50 loops (about 1Hz if main loop is 50Hz)
     if (loopCount % 50 == 0) {

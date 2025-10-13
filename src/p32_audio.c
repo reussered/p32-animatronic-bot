@@ -51,7 +51,7 @@ esp_err_t p32_audio_init(void) {
 }
 
 void p32_audio_act(void) {
-    extern uint32_t loopCount;
+    extern uint64_t loopCount;
     
     // Process audio queue and ambient sounds every 20 loops (about 2.5Hz if main loop is 50Hz)
     if (loopCount % 20 == 0) {

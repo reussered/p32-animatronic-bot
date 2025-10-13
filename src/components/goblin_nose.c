@@ -2,6 +2,10 @@
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
+#include "p32_component_config.h"
+
+#ifdef ENABLE_GOBLIN_COMPONENTS
+
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
@@ -46,3 +50,5 @@ void goblin_nose_act(uint32_t loopCount) {
     
     ESP_LOGD(TAG, "Proximity sensor reading: %.1f cm - loop %lu", simulated_distance, loopCount);
 }
+
+#endif // ENABLE_GOBLIN_COMPONENTS

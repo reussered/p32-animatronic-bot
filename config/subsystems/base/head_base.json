@@ -1,0 +1,86 @@
+{
+  "relative_filename": "config/subsystems/base/head_base.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "subsystem_type": "HEAD_CONTROLLER",
+  "description": "Universal base template for head subsystem controllers across all creatures",
+  
+  "controller_hardware": {
+    "processor": "ESP32_S3_DEVKITC_1",
+    "flash_memory": "8MB",
+    "psram": "8MB",
+    "gpio_pins": 45,
+    "adc_channels": 20,
+    "dac_channels": 2,
+    "pwm_channels": 8,
+    "spi_interfaces": 4,
+    "i2c_interfaces": 2
+  },
+  
+  "power_specifications": {
+    "input_voltage": "5V_USB_OR_BARREL",
+    "logic_voltage": "3.3V",
+    "max_current_draw": "2000_MA",
+    "power_rails": ["5V", "3.3V", "GND"],
+    "voltage_regulation": "ONBOARD_LDO"
+  },
+  
+  "mesh_configuration": {
+    "role": "MASTER_COORDINATOR",
+    "protocol": "ESP_NOW",
+    "channel": "AUTO_SELECT",
+    "max_peers": 8,
+    "encryption": "AES_256",
+    "broadcast_capability": true,
+    "coordination_functions": ["BEHAVIOR_CONTROL", "SENSOR_FUSION", "EMERGENCY_COORDINATION"]
+  },
+  
+  "standard_components": [
+    {
+      "component_type": "MESH_NETWORK",
+      "function_name": "mesh_network_update",
+      "default_hitCount": 5,
+      "role": "master_coordinator",
+      "required": true
+    },
+    {
+      "component_type": "AI_BEHAVIOR_ENGINE", 
+      "function_name": "ai_behavior_update",
+      "default_hitCount": 100,
+      "role": "decision_making",
+      "required": true
+    },
+    {
+      "component_type": "SENSOR_FUSION",
+      "function_name": "sensor_fusion_update", 
+      "default_hitCount": 20,
+      "role": "environmental_awareness",
+      "required": true
+    },
+    {
+      "component_type": "EMERGENCY_HANDLER",
+      "function_name": "emergency_handler_update",
+      "default_hitCount": 1,
+      "role": "safety_monitor",
+      "required": true
+    }
+  ],
+  
+  "interface_assignments": {
+    "spi_bus_vspi": "SHARED_DISPLAY_BUS",
+    "spi_device_1": "LEFT_EYE_DISPLAY",
+    "spi_device_2": "RIGHT_EYE_DISPLAY", 
+    "spi_device_3": "MOUTH_DISPLAY_OR_INTEGRATED",
+    "i2c_bus_0": "SENSOR_BUS",
+    "uart_0": "DEBUG_CONSOLE",
+    "uart_1": "WIRELESS_INTERACTION"
+  },
+  
+  "timing_constraints": {
+    "loop_frequency": "MAXIMUM_SPEED",
+    "emergency_response": "1_LOOP_MAX",
+    "mesh_communication": "5_LOOP_INTERVAL",
+    "sensor_update": "10_LOOP_INTERVAL",
+    "display_refresh": "30_LOOP_INTERVAL"
+  }
+}

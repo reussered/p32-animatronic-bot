@@ -1,0 +1,75 @@
+{
+  "relative_filename": "config/templates/families/goblin_family.json",
+  "version": "2.0.0",
+  "author": "config/author.json",
+  "template_type": "family_template",
+  "family_type": "GOBLIN",
+  "family_category": "humanoids",
+  "description": "Goblin family characteristics - mischievous, compact, expressive humanoids",
+  "created": "2025-10-13",
+  
+  "inherits_from": "config/templates/base/humanoid_head_base.json",
+  
+  "baseline_dimensions": {
+    "eye_spacing": "3.0 INCH",
+    "compression_factor": 0.7,
+    "skull_scale": 0.8,
+    "snout_extension": "0.5 INCH"
+  },
+  
+  "family_components": [
+    "config/components/positioned/goblin_eye_left.json",
+    "config/components/positioned/goblin_eye_right.json",
+    "config/components/positioned/goblin_nose.json",
+    "config/components/positioned/goblin_mouth.json",
+    "config/components/positioned/goblin_ear_left.json",
+    "config/components/positioned/goblin_ear_right.json",
+    "config/components/positioned/goblin_speaker.json"
+  ],
+  
+  "family_mood_profile": {
+    "FEAR": 8,
+    "ANGER": 15,
+    "IRRITATION": 18,
+    "HAPPINESS": 12,
+    "CONTENTMENT": 6,
+    "HUNGER": 14,
+    "CURIOSITY": 16,
+    "AFFECTION": 8
+  },
+  
+  "aesthetic_profile": {
+    "surface_texture": "rough_skin",
+    "color_scheme": "green_brown",
+    "eye_style": "large_expressive",
+    "nose_style": "pointed_snout",
+    "mouth_style": "wide_grin",
+    "ear_style": "pointed_tall",
+    "feature_asymmetry": true,
+    "weathering_effects": true
+  },
+  
+  "behavioral_characteristics": {
+    "movement_speed": "quick_jerky",
+    "attention_span_seconds": "15", 
+    "curiosity_level": "high",
+    "aggression_threshold": "medium_low",
+    "social_interaction": "mischievous_playful"
+  },
+  
+  "sound_characteristics": {
+    "voice_pitch": "high_scratchy",
+    "breathing_pattern": "quick_irregular",
+    "comfort_sounds": ["chittering", "soft_giggle", "content_purr"],
+    "alert_sounds": ["sharp_hiss", "warning_growl", "excited_chatter"],
+    "ambient_volume": 0.6,
+    "voice_distortion": "slight_rasp"
+  },
+  
+  "timing_overrides": {
+    "eye_blink_hitCount": 80,
+    "mood_update_hitCount": 30,
+    "sound_trigger_hitCount": 150,
+    "sensor_read_hitCount": 15
+  }
+}

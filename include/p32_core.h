@@ -28,7 +28,7 @@
 #define P32_MAX_JSON_SIZE 8192
 #define P32_CONFIG_PATH "/spiffs/config"
 
-// Mood system states (8 primary emotions)
+// Mood system states (9 primary emotions)
 typedef enum {
     MOOD_FEAR = 0,
     MOOD_ANGER,
@@ -38,6 +38,7 @@ typedef enum {
     MOOD_HUNGER,
     MOOD_CURIOSITY,
     MOOD_AFFECTION,
+    MOOD_EXCITEMENT,
     MOOD_COUNT
 } p32_mood_t;
 
