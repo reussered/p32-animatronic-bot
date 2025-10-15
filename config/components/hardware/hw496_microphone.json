@@ -1,0 +1,70 @@
+{
+  "relative_filename": "config/components/hardware/hw496_microphone.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_type": "MEMS_MICROPHONE",
+  "hardware_name": "HW-496 MEMS Microphone Module",
+  "description": "HW-496 MEMS microphone with MAX4466 pre-amplifier",
+  "created": "2025-10-15",
+  
+  "hardware_specs": {
+    "microphone_type": "electret_mems",
+    "frequency_response": "20Hz_to_20kHz",
+    "sensitivity": "adjustable_gain",
+    "max_spl": "110dB_SPL",
+    "signal_to_noise": "58dB"
+  },
+  
+  "physical_properties": {
+    "board_dimensions": {
+      "width": "20mm",
+      "length": "15mm",
+      "height": "7mm"
+    },
+    "weight": "1.5g",
+    "mounting_holes": {
+      "count": 2,
+      "diameter": "2mm",
+      "spacing": "15mm"
+    }
+  },
+  
+  "control_interface": {
+    "protocol": "analog",
+    "output_type": "analog_voltage",
+    "output_range": "0-3.3V",
+    "adc_connection": "single_ended"
+  },
+  
+  "power_requirements": {
+    "operating_voltage": "2.4V-5V",
+    "typical_voltage": "3.3V",
+    "current_consumption": "4mA_typical",
+    "max_current": "10mA"
+  },
+  
+  "pin_mapping": {
+    "pins": [
+      {"name": "VCC", "type": "power", "voltage": "3.3V"},
+      {"name": "GND", "type": "ground"},
+      {"name": "OUT", "type": "analog_output", "description": "Audio signal output"}
+    ]
+  },
+  
+  "gain_adjustment": {
+    "method": "potentiometer",
+    "range": "25x_to_125x",
+    "default": "50x"
+  },
+  
+  "prototype_status": "available_on_hand",
+  "tested": false,
+  "quantity_available": 2,
+  "supplier": "Generic/AliExpress",
+  "notes": [
+    "Physical hardware available for testing",
+    "Requires ADC pin assignment for each ear",
+    "Adjustable gain via onboard trimpot",
+    "Can be used for sound detection or voice input"
+  ]
+}

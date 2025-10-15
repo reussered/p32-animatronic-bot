@@ -1,9 +1,15 @@
 {
   "relative_filename": "config/components/positioned/goblin/head_components/goblin_speaker.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "config/author.json",
   "component_id": "goblin_speaker",
-  "hardware_reference": "config/components/hardware/speaker.json",
+  
+  "template_inheritance": {
+    "hardware_template": "config/components/hardware/speaker.json",
+    "creature_shell": "assets/shapes/scad/creature_shells/goblin/goblin_speaker_shell.scad",
+    "mount_template": "assets/shapes/scad/basic_mounts/speaker_basic_mount.scad"
+  },
+  
   "interface_assignment": "I2S_DEVICE_1",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
@@ -17,9 +23,16 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
+  
+  "creature_specific_config": {
+    "audio_style": "GUTTURAL_GOBLIN",
+    "volume_boost": "10dB",
+    "frequency_profile": "LOW_EMPHASIS"
+  },
+  
   "function": "primary_audio_output",
-  "component_name": "audio",
-  "description": "Audio output processing",
+  "component_name": "speaker",
+  "description": "Audio output processing - goblin variant with guttural sound profile",
   "timing": {
     "hitCount": 7
   }

@@ -1,0 +1,33 @@
+{
+  "relative_filename": "config/components/functional/goblin_personality.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_name": "goblin_personality",
+  "component_type": "FAMILY_LEVEL",
+  "family_type": "GOBLIN",
+  "description": "Goblin family personality traits - mischievous, aggressive, curious",
+  "created": "2025-10-15",
+  "timing": {
+    "hitCount": 25,
+    "description": "Personality processing every 2.5 seconds"
+  },
+  "personality_traits": {
+    "base_aggression": 60,
+    "base_curiosity": 70,
+    "base_fear": 20,
+    "threat_sensitivity": "HIGH",
+    "exploration_drive": "MEDIUM"
+  },
+  "behavior_modifiers": {
+    "approach_distance_cm": 50,
+    "flee_distance_cm": 20,
+    "idle_movement_frequency": "FREQUENT",
+    "vocalization_style": "GUTTURAL_GROWLS"
+  },
+  "responsibilities": [
+    "Apply personality-driven mood modifications",
+    "Influence behavior selection probabilities",
+    "Adjust threat response thresholds",
+    "Modulate vocalization patterns"
+  ]
+}

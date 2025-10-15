@@ -16,11 +16,21 @@
   "reference_point": "nose_center",
   "eye_spacing": "3.0 INCH",
   "compression_factor": 0.7,
+  
+  "family_level_components": [
+    "config/components/functional/goblin_personality.json",
+    "config/components/functional/goblin_mood.json",
+    "config/components/functional/goblin_behavior_engine.json"
+  ],
+  
   "positioned_components": [
     "config/components/positioned/goblin/head_components/goblin_eye_left.json",
     "config/components/positioned/goblin/head_components/goblin_eye_right.json",
+    "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "config/components/positioned/goblin/head_components/goblin_speaker.json",
-    "config/components/positioned/goblin/head_components/goblin_nose.json"
+    "config/components/positioned/goblin/head_components/goblin_nose.json",
+    "config/components/positioned/goblin/head_components/goblin_ear_left.json",
+    "config/components/positioned/goblin/head_components/goblin_ear_right.json"
   ],
   "mood_defaults": {
     "FEAR": 20,

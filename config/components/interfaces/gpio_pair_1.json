@@ -5,8 +5,8 @@
   "interface_id": "GPIO_PAIR_1",
   "interface_type": "GPIO_PAIR",
   "pins": {
-    "trig": 9,
-    "echo": 10
+    "trig": 25,
+    "echo": 34
   },
   "device_config": {
     "trigger_duration_us": 10,

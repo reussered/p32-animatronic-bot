@@ -1,9 +1,16 @@
 {
   "relative_filename": "config/components/positioned/goblin/head_components/goblin_mouth.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "config/author.json",
   "component_id": "goblin_mouth",
-  "hardware_reference": "config/components/hardware/gc9a01_display.json",
+  
+  "template_inheritance": {
+    "hardware_template": "config/components/hardware/gc9a01_display.json",
+    "display_type": "CIRCULAR_LCD_FULL_COLOR",
+    "creature_shell": "assets/shapes/scad/creature_shells/goblin/goblin_mouth_shell.scad",
+    "mount_template": "assets/shapes/scad/basic_mounts/gc9a01_circular_mount.scad"
+  },
+  
   "interface_assignment": "SPI_DEVICE_3",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
@@ -17,9 +24,17 @@
     "rotation": "0 DEGREES",
     "roll": "0 DEGREES"
   },
+  
+  "creature_specific_config": {
+    "mouth_style": "WIDE_GOBLIN_GRIN",
+    "teeth_visibility": "PROMINENT",
+    "expression_range": "SNARL_TO_LAUGH",
+    "future_note": "May become autonomous ESP32 subsystem node when hardware arrives"
+  },
+  
   "function": "mouth_display",
   "component_name": "mouth",
-  "description": "Mouth display animation",
+  "description": "Mouth display animation - goblin variant with wide grin expressions",
   "timing": {
     "hitCount": 3
   }

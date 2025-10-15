@@ -1,0 +1,30 @@
+{
+  "relative_filename": "config/components/system/serial_console.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_name": "serial_console",
+  "component_type": "SYSTEM_LEVEL",
+  "description": "Serial console interface - debug commands and telemetry output",
+  "created": "2025-10-15",
+  "timing": {
+    "hitCount": 25,
+    "description": "Console check every 2.5 seconds"
+  },
+  "system_requirements": {
+    "min_controller": "ESP32",
+    "required_features": ["UART"],
+    "memory_footprint_kb": "40",
+    "cpu_usage_percent": "2-5"
+  },
+  "console_config": {
+    "baud_rate": 115200,
+    "command_prompt": "goblin> ",
+    "echo_enabled": true
+  },
+  "responsibilities": [
+    "Process debug commands via UART",
+    "Output system logs to console",
+    "Interactive component testing",
+    "Real-time parameter adjustment"
+  ]
+}
