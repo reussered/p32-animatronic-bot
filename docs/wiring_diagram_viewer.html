@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>P32 Goblin Full - Wiring Diagram</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .instructions {
+            background: #e6f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .print-button {
+            background: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .print-button:hover {
+            background: #0052a3;
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .print-button { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 P32 Goblin Full - Complete Wiring Diagram</h1>
+        
+        <div class="instructions">
+            <h3>📋 How to Use This Diagram:</h3>
+            <ul>
+                <li><strong>Print This Page:</strong> Use Ctrl+P to print this diagram in color</li>
+                <li><strong>Follow Wire Colors:</strong> Each connection type has a specific color</li>
+                <li><strong>Power First:</strong> Connect all 5V and GND connections before signal wires</li>
+                <li><strong>Test Connections:</strong> Use multimeter to verify power before connecting components</li>
+            </ul>
+        </div>
+        
+        <button class="print-button" onclick="window.print()">🖨️ Print This Diagram</button>
+        <button class="print-button" onclick="window.open('goblin_wiring_diagram.svg', '_blank')">📄 View SVG Only</button>
+        
+        <div class="diagram">
+            <object data="goblin_wiring_diagram.svg" type="image/svg+xml" width="800" height="600">
+                <p>Your browser does not support SVG. <a href="goblin_wiring_diagram.svg">Download the SVG file</a>.</p>
+            </object>
+        </div>
+        
+        <div class="instructions">
+            <h3>🔌 Critical Connection Notes:</h3>
+            <ul>
+                <li><strong>Power:</strong> All components need 5V power - use breadboard power rails</li>
+                <li><strong>SPI Bus:</strong> GPIO 12,13,14 are shared by ALL three displays</li>
+                <li><strong>Chip Select:</strong> GPIO 15,16,17 are unique to each display (CS pins)</li>
+                <li><strong>I2S Audio:</strong> GPIO 4,5,6 connect to MAX98357A amplifier</li>
+                <li><strong>Distance Sensor:</strong> GPIO 9,10 connect to HC-SR04 trigger/echo</li>
+                <li><strong>Ground:</strong> All components must share common ground connection</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 15px; background: #f0f8ff; border-left: 4px solid #0066cc;">
+            <h4>💡 Pro Assembly Tips:</h4>
+            <p><strong>1. Power Distribution:</strong> Connect breadboard power rails first - red rail to 5V, black rail to ground</p>
+            <p><strong>2. ESP32 Power:</strong> Connect ESP32 VIN to red rail, GND to black rail</p>
+            <p><strong>3. Component Power:</strong> Connect all component VCC pins to red rail, GND pins to black rail</p>
+            <p><strong>4. Signal Wires:</strong> Use color-coded jumper wires matching the diagram</p>
+            <p><strong>5. Test First:</strong> Verify 5V on all component VCC pins before uploading firmware</p>
+        </div>
+    </div>
+</body>
+</html>

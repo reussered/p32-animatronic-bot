@@ -29,6 +29,27 @@ Two coordinate systems supported:
 - **Pin Efficiency**: SPI uses 3 shared pins + 1 unique CS pin per device (4 pins for 1 display, 5 pins for 2 displays)
 - **Bus + Device Architecture**: Bus component defines shared pins, device components reference bus + add unique pins
 
+### Universal Head Architecture (CRITICAL DESIGN PATTERN)
+**Skull Framework + Component Modules = Complete Head**
+- **Skull Responsibility**: Provides mounting framework at P32 coordinates, creature-specific silhouette
+- **Component Responsibility**: Contains electronics + detailed creature features (eye shells, nose shapes, etc.)
+- **Standard Mounting**: 26mm eye/mouth rings, 22x17mm nose bracket, creature-specific ear points
+- **Modularity**: Same electronics work across all creatures (goblin, cat, bear) via component shell changes
+- **File Pattern**: `{creature}_skull.scad` + `{creature}_eye_shells.scad` + `{creature}_nose_shell.scad`
+
+### Two-Tier Component Architecture (NEVER CONFUSE AGAIN)
+**TIER 1: Basic Hardware Mounts** - Universal across ALL creatures
+- `sensor_basic_mount.scad` → `sensor_basic_mount.stl` (HC-SR04 bracket - IDENTICAL for goblin, cat, bear)
+- `display_basic_mount.scad` → `display_basic_mount.stl` (GC9A01 bracket - IDENTICAL for goblin, cat, bear) 
+- `speaker_basic_mount.scad` → `speaker_basic_mount.stl` (40mm speaker bracket - IDENTICAL for goblin, cat, bear)
+
+**TIER 2: Decorative Shells** - Unique per creature, incorporates Tier 1 mounts
+- `goblin_nose_shell.scad` → Contains warty goblin nose + uses `sensor_basic_mount`
+- `cat_nose_shell.scad` → Contains pink triangle nose + uses `sensor_basic_mount`
+- `bear_nose_shell.scad` → Contains black button nose + uses `sensor_basic_mount`
+
+**CRITICAL: The "goblin_nose_sensor.stl" file is actually the UNIVERSAL sensor_basic_mount, NOT goblin-specific!**
+
 ## Development Workflows
 
 ### Build System
@@ -77,15 +98,20 @@ Two coordinate systems supported:
 - Pin assignments centralized in interface configs
 
 ## Key Files Reference
+
+### Core Configuration Files
 - `config/author.json` - Project metadata template
 - `config/bots/goblin_full.json` - Complete bot example with 3D skull coordinate system
 - `config/components/interfaces/spi_bus_vspi.json` - Standard ESP32 SPI bus setup
 - `config/components/interfaces/spi_device_*.json` - Individual device GPIO assignments
-- `docs/coordinate-system-spec.md` - Detailed specification for both 2D and 3D coordinate systems
-- `docs/interface-gpio-assignment-spec.md` - GPIO assignment and interface architecture
-- `docs/goblin-full-interconnection-diagram.md` - Complete wiring diagram with all GPIO assignments
-- `docs/openscad-shape-generation-spec.md` - Automated STL generation system using OpenSCAD
-- `docs/two-tier-mounting-system.md` - Architecture for separating hardware mounts from character aesthetics
+
+### Universal Architecture Specifications (READ ALL)
+**Read all architecture documents automatically using these patterns:**
+- `docs/*ARCHITECTURE*.md` - All architecture specification documents
+- `docs/*UNIVERSAL*.md` - Universal design patterns for all subsystems  
+- `docs/*-spec.md` - Technical specifications for all systems
+- `docs/*-SPEC.md` - Architecture specifications (capitalized)
+- `docs/*diagram*.md` - Wiring and system interconnection diagrams
 - `generate_file_structure.ps1` - Configuration validation tool
 - `tools/generate-mounting-system.ps1` - Creates basic mounts + character shells
 - `tools/generate-stl-files.ps1` - Batch converts .scad files to .stl for 3D printing

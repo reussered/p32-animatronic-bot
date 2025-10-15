@@ -1,0 +1,30 @@
+{
+  "relative_filename": "config/components/positioned/goblin_status_leds.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "component_id": "goblin_status_leds",
+  "hardware_reference": "config/components/hardware/ws2812b_strip.json",
+  "interface_assignment": "GPIO_DIGITAL_PIN_5",
+  "mounting_architecture": {
+    "type": "hardware_direct",
+    "shape_generation": "none"
+  },
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center", 
+  "position": {
+    "x": "0 INCH",
+    "y": "-1.5 INCH",
+    "z": "+1.2 INCH"
+  },
+  "orientation": {
+    "tilt": "0 DEGREES",
+    "rotation": "0 DEGREES", 
+    "roll": "0 DEGREES"
+  },
+  "function": "status_indicator",
+  "component_name": "forehead_leds",
+  "description": "Status LED strip using adhesive mounting",
+  "timing": {
+    "refresh_rate": "30fps"
+  }
+}

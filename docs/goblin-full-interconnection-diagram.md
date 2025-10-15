@@ -134,3 +134,34 @@ All components require:
 - **Total**: 12 pins for complete face with audio and sensing
 
 This leaves 26+ GPIO pins available for expansion (arms, mobility, additional sensors).
+
+## 3D Printable Components
+
+### Generated STL Files (Ready for 3D Printing)
+The complete goblin head system includes professionally generated STL files:
+
+```bash
+assets/shapes/stl/
+├── goblin_skull_complete.stl          # Main skull (57.5g, 8-12hr print)
+├── goblin_head_assembly.stl           # Full assembly visualization  
+├── goblin_nose_sensor.stl             # HC-SR04 mount (15g, 2-3hr print)
+├── example_display_mount.stl          # GC9A01 mount (8g, 1-2hr print)
+├── sensor_basic_mount.stl             # Universal sensor bracket
+└── test_cube.stl                      # Printer calibration cube
+```
+
+### Print Specifications Summary
+- **Total Assembly Weight**: 249.75g (calculated from OpenSCAD)
+- **Required Motor Torque**: 0.795 N⋅m (112.5 oz⋅in)
+- **Recommended Motors**: NEMA 17 High Torque (≥120 oz⋅in)
+- **Material**: PLA plastic, 20% infill structural parts
+- **Print Time**: ~12-15 hours total for complete head
+- **Color**: Goblin green (#4A5D23) or equivalent
+
+### Manufacturing Documentation
+Complete 3D printing guide available at:
+**`docs/goblin-head-3d-printing-guide.md`** - Comprehensive printing specifications, color schemes, quality control procedures, and assembly integration.
+
+### Motor Load Analysis
+Complete motor sizing analysis available at:
+**`docs/goblin-head-weight-and-motor-analysis.md`** - Weight calculations, torque requirements, safety factors, and NEMA 17 motor specifications for responsive head movement.

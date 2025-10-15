@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="750" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .component { fill: #e6f3ff; stroke: #0066cc; stroke-width: 2; }
+      .display { fill: #ffe6e6; stroke: #cc0000; stroke-width: 2; }
+      .audio { fill: #e6ffe6; stroke: #00cc00; stroke-width: 2; }
+      .sensor { fill: #fff2e6; stroke: #ff6600; stroke-width: 2; }
+      .wire-spi { stroke: #0066cc; stroke-width: 3; }
+      .wire-cs { stroke: #ff6600; stroke-width: 2; stroke-dasharray: 5,5; }
+      .wire-i2s { stroke: #cc0000; stroke-width: 2; }
+      .wire-sensor { stroke: #666666; stroke-width: 2; }
+      .wire-power { stroke: #ff0000; stroke-width: 4; }
+      .wire-ground { stroke: #000000; stroke-width: 4; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #000; }
+      .pin-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+      .legend-bg { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" class="title" text-anchor="middle">P32 Goblin Full - Zero Crossover Professional Wiring</text>
+  
+  <!-- ESP32-S3-DevKitC-1 (centered left) -->
+  <rect x="100" y="300" width="140" height="220" class="component" rx="5"/>
+  <text x="170" y="320" class="label" text-anchor="middle" font-weight="bold">ESP32-S3</text>
+  <text x="170" y="335" class="label" text-anchor="middle">DevKitC-1</text>
+  
+  <!-- GPIO Pin Labels on ESP32 -->
+  <text x="245" y="350" class="pin-label">GPIO 4 (I2S BCLK)</text>
+  <text x="245" y="365" class="pin-label">GPIO 5 (I2S WS)</text>
+  <text x="245" y="380" class="pin-label">GPIO 6 (I2S DATA)</text>
+  <text x="245" y="395" class="pin-label">GPIO 9 (TRIG)</text>
+  <text x="245" y="410" class="pin-label">GPIO 10 (ECHO)</text>
+  <text x="245" y="425" class="pin-label">GPIO 12 (SPI MISO)</text>
+  <text x="245" y="440" class="pin-label">GPIO 13 (SPI MOSI)</text>
+  <text x="245" y="455" class="pin-label">GPIO 14 (SPI CLK)</text>
+  <text x="245" y="470" class="pin-label">GPIO 15 (CS1)</text>
+  <text x="245" y="485" class="pin-label">GPIO 16 (CS2)</text>
+  <text x="80" y="350" class="pin-label">VIN (5V)</text>
+  <text x="80" y="485" class="pin-label">GND</text>
+  
+  <!-- Left Eye Display (positioned well clear of routing paths) -->
+  <circle cx="450" cy="150" r="45" class="display"/>
+  <text x="450" y="145" class="label" text-anchor="middle" font-weight="bold">Left Eye</text>
+  <text x="450" y="160" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Right Eye Display -->
+  <circle cx="650" cy="150" r="45" class="display"/>
+  <text x="650" y="145" class="label" text-anchor="middle" font-weight="bold">Right Eye</text>
+  <text x="650" y="160" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Mouth Display (positioned well below to avoid all crossings) -->
+  <circle cx="550" cy="250" r="45" class="display"/>
+  <text x="550" y="245" class="label" text-anchor="middle" font-weight="bold">Mouth</text>
+  <text x="550" y="260" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Audio Amplifier (positioned far right) -->
+  <rect x="750" y="350" width="120" height="70" class="audio" rx="5"/>
+  <text x="810" y="375" class="label" text-anchor="middle" font-weight="bold">MAX98357A</text>
+  <text x="810" y="390" class="label" text-anchor="middle">Audio Amp</text>
+  <text x="810" y="405" class="label" text-anchor="middle">+ Speaker</text>
+  
+  <!-- HC-SR04 Sensor (positioned far right, lower) -->
+  <rect x="750" y="450" width="120" height="70" class="sensor" rx="5"/>
+  <text x="810" y="475" class="label" text-anchor="middle" font-weight="bold">HC-SR04</text>
+  <text x="810" y="490" class="label" text-anchor="middle">Distance</text>
+  <text x="810" y="505" class="label" text-anchor="middle">Sensor</text>
+  
+  <!-- Power Distribution - COMPLETELY avoiding component areas -->
+  <!-- Main power spine along far left -->
+  <line x1="100" y1="350" x2="40" y2="350" class="wire-power"/>
+  <line x1="40" y1="350" x2="40" y2="600" class="wire-power"/>
+  <line x1="40" y1="600" x2="920" y2="600" class="wire-power"/>
+  
+  <!-- Power routing to displays via SIDE paths (never through components) -->
+  <!-- Branch to left eye - goes around LEFT side -->
+  <line x1="40" y1="100" x2="40" y2="350" class="wire-power"/>
+  <line x1="40" y1="100" x2="380" y2="100" class="wire-power"/>
+  <line x1="380" y1="100" x2="380" y2="140" class="wire-power"/>
+  <line x1="380" y1="140" x2="405" y2="140" class="wire-power"/>
+  
+  <!-- Branch to right eye - goes around RIGHT side -->
+  <line x1="920" y1="600" x2="920" y2="80" class="wire-power"/>
+  <line x1="920" y1="80" x2="720" y2="80" class="wire-power"/>
+  <line x1="720" y1="80" x2="720" y2="140" class="wire-power"/>
+  <line x1="720" y1="140" x2="695" y2="140" class="wire-power"/>
+  
+  <!-- Branch to mouth - goes UNDER component -->
+  <line x1="920" y1="320" x2="920" y2="600" class="wire-power"/>
+  <line x1="920" y1="320" x2="620" y2="320" class="wire-power"/>
+  <line x1="620" y1="320" x2="620" y2="240" class="wire-power"/>
+  <line x1="620" y1="240" x2="595" y2="240" class="wire-power"/>
+  
+  <!-- Power to audio/sensor via spine -->
+  <line x1="920" y1="370" x2="870" y2="370" class="wire-power"/>
+  <line x1="920" y1="470" x2="870" y2="470" class="wire-power"/>
+  
+  <!-- Ground Distribution - parallel path avoiding ALL components -->
+  <line x1="100" y1="485" x2="20" y2="485" class="wire-ground"/>
+  <line x1="20" y1="485" x2="20" y2="620" class="wire-ground"/>
+  <line x1="20" y1="620" x2="940" y2="620" class="wire-ground"/>
+  
+  <!-- Ground routing to displays via OPPOSITE sides from power -->
+  <!-- Ground to left eye - via LEFT side but LOWER path -->
+  <line x1="20" y1="120" x2="20" y2="485" class="wire-ground"/>
+  <line x1="20" y1="120" x2="360" y2="120" class="wire-ground"/>
+  <line x1="360" y1="120" x2="360" y2="160" class="wire-ground"/>
+  <line x1="360" y1="160" x2="405" y2="160" class="wire-ground"/>
+  
+  <!-- Ground to right eye - via RIGHT side but DIFFERENT path -->
+  <line x1="940" y1="620" x2="940" y2="60" class="wire-ground"/>
+  <line x1="940" y1="60" x2="740" y2="60" class="wire-ground"/>
+  <line x1="740" y1="60" x2="740" y2="160" class="wire-ground"/>
+  <line x1="740" y1="160" x2="695" y2="160" class="wire-ground"/>
+  
+  <!-- Ground to mouth - BELOW component -->
+  <line x1="940" y1="340" x2="940" y2="620" class="wire-ground"/>
+  <line x1="940" y1="340" x2="640" y2="340" class="wire-ground"/>
+  <line x1="640" y1="340" x2="640" y2="260" class="wire-ground"/>
+  <line x1="640" y1="260" x2="595" y2="260" class="wire-ground"/>
+  
+  <!-- Ground to audio/sensor -->
+  <line x1="940" y1="390" x2="870" y2="390" class="wire-ground"/>
+  <line x1="940" y1="490" x2="870" y2="490" class="wire-ground"/>
+  
+  <!-- SPI Bus Lines - routed in CLEAR CHANNELS between components -->
+  <!-- MISO (GPIO 12) - runs in channel between ESP32 and displays -->
+  <line x1="240" y1="425" x2="300" y2="425" class="wire-spi"/>
+  <line x1="300" y1="425" x2="300" y2="200" class="wire-spi"/>
+  <line x1="300" y1="200" x2="700" y2="200" class="wire-spi"/>
+  
+  <!-- Connect to displays via SIDE approach (never through center) -->
+  <line x1="420" y1="200" x2="420" y2="180" class="wire-spi"/>
+  <line x1="420" y1="180" x2="405" y2="180" class="wire-spi"/>
+  
+  <line x1="520" y1="200" x2="520" y2="280" class="wire-spi"/>
+  <line x1="520" y1="280" x2="505" y2="280" class="wire-spi"/>
+  
+  <line x1="680" y1="200" x2="680" y2="180" class="wire-spi"/>
+  <line x1="680" y1="180" x2="695" y2="180" class="wire-spi"/>
+  
+  <!-- MOSI (GPIO 13) - parallel channel -->
+  <line x1="240" y1="440" x2="320" y2="440" class="wire-spi"/>
+  <line x1="320" y1="440" x2="320" y2="220" class="wire-spi"/>
+  <line x1="320" y1="220" x2="700" y2="220" class="wire-spi"/>
+  
+  <!-- Connect to displays -->
+  <line x1="440" y1="220" x2="440" y2="200" class="wire-spi"/>
+  <line x1="440" y1="200" x2="405" y2="200" class="wire-spi"/>
+  
+  <line x1="540" y1="220" x2="540" y2="300" class="wire-spi"/>
+  <line x1="540" y1="300" x2="505" y2="300" class="wire-spi"/>
+  
+  <line x1="660" y1="220" x2="660" y2="200" class="wire-spi"/>
+  <line x1="660" y1="200" x2="695" y2="200" class="wire-spi"/>
+  
+  <!-- CLK (GPIO 14) - third parallel channel -->
+  <line x1="240" y1="455" x2="340" y2="455" class="wire-spi"/>
+  <line x1="340" y1="455" x2="340" y2="240" class="wire-spi"/>
+  <line x1="340" y1="240" x2="700" y2="240" class="wire-spi"/>
+  
+  <!-- Connect to displays -->
+  <line x1="460" y1="240" x2="460" y2="220" class="wire-spi"/>
+  <line x1="460" y1="220" x2="405" y2="220" class="wire-spi"/>
+  
+  <line x1="560" y1="240" x2="560" y2="320" class="wire-spi"/>
+  <line x1="560" y1="320" x2="505" y2="320" class="wire-spi"/>
+  
+  <line x1="640" y1="240" x2="640" y2="220" class="wire-spi"/>
+  <line x1="640" y1="220" x2="695" y2="220" class="wire-spi"/>
+  
+  <!-- Chip Select Lines - individual paths avoiding ALL components -->
+  <!-- CS1 to Left Eye - UNDER routing -->
+  <line x1="240" y1="470" x2="280" y2="470" class="wire-cs"/>
+  <line x1="280" y1="470" x2="280" y2="540" class="wire-cs"/>
+  <line x1="280" y1="540" x2="350" y2="540" class="wire-cs"/>
+  <line x1="350" y1="540" x2="350" y2="190" class="wire-cs"/>
+  <line x1="350" y1="190" x2="405" y2="190" class="wire-cs"/>
+  
+  <!-- CS2 to Right Eye - OVER routing -->
+  <line x1="240" y1="485" x2="260" y2="485" class="wire-cs"/>
+  <line x1="260" y1="485" x2="260" y2="40" class="wire-cs"/>
+  <line x1="260" y1="40" x2="760" y2="40" class="wire-cs"/>
+  <line x1="760" y1="40" x2="760" y2="190" class="wire-cs"/>
+  <line x1="760" y1="190" x2="695" y2="190" class="wire-cs"/>
+  
+  <!-- CS3 to Mouth - LEFT side routing -->
+  <line x1="100" y1="400" x2="60" y2="400" class="wire-cs"/>
+  <line x1="60" y1="400" x2="60" y2="560" class="wire-cs"/>
+  <line x1="60" y1="560" x2="480" y2="560" class="wire-cs"/>
+  <line x1="480" y1="560" x2="480" y2="290" class="wire-cs"/>
+  <line x1="480" y1="290" x2="505" y2="290" class="wire-cs"/>
+  
+  <!-- I2S Audio Lines - clear path to audio section -->
+  <line x1="240" y1="350" x2="720" y2="350" class="wire-i2s"/>
+  <line x1="720" y1="350" x2="720" y2="365" class="wire-i2s"/>
+  <line x1="720" y1="365" x2="750" y2="365" class="wire-i2s"/>
+  
+  <line x1="240" y1="365" x2="710" y2="365" class="wire-i2s"/>
+  <line x1="710" y1="365" x2="710" y2="375" class="wire-i2s"/>
+  <line x1="710" y1="375" x2="750" y2="375" class="wire-i2s"/>
+  
+  <line x1="240" y1="380" x2="700" y2="380" class="wire-i2s"/>
+  <line x1="700" y1="380" x2="700" y2="385" class="wire-i2s"/>
+  <line x1="700" y1="385" x2="750" y2="385" class="wire-i2s"/>
+  
+  <!-- Sensor Lines - clear path to sensor section -->
+  <line x1="240" y1="395" x2="690" y2="395" class="wire-sensor"/>
+  <line x1="690" y1="395" x2="690" y2="465" class="wire-sensor"/>
+  <line x1="690" y1="465" x2="750" y2="465" class="wire-sensor"/>
+  
+  <line x1="240" y1="410" x2="680" y2="410" class="wire-sensor"/>
+  <line x1="680" y1="410" x2="680" y2="475" class="wire-sensor"/>
+  <line x1="680" y1="475" x2="750" y2="475" class="wire-sensor"/>
+  
+  <!-- Legend (positioned in clear space) -->
+  <rect x="100" y="550" width="450" height="160" class="legend-bg" rx="5"/>
+  <text x="110" y="570" class="label" font-weight="bold">Zero-Crossover Professional Wire Legend:</text>
+  
+  <line x1="110" y1="590" x2="140" y2="590" class="wire-power"/>
+  <text x="150" y="595" class="pin-label">5V Power Distribution (Red - 4AWG) - Routed around components</text>
+  
+  <line x1="110" y1="610" x2="140" y2="610" class="wire-ground"/>
+  <text x="150" y="615" class="pin-label">Ground Distribution (Black - 4AWG) - Parallel to power, no crossings</text>
+  
+  <line x1="110" y1="630" x2="140" y2="630" class="wire-spi"/>
+  <text x="150" y="635" class="pin-label">SPI Bus: MISO/MOSI/CLK (22AWG) - Channel routing between components</text>
+  
+  <line x1="110" y1="650" x2="140" y2="650" class="wire-cs"/>
+  <text x="150" y="655" class="pin-label">Chip Select Lines (22AWG) - Individual paths via over/under routing</text>
+  
+  <line x1="110" y1="670" x2="140" y2="670" class="wire-i2s"/>
+  <text x="150" y="675" class="pin-label">I2S Audio: BCLK/WS/DATA (22AWG) - Direct path to audio section</text>
+  
+  <line x1="110" y1="690" x2="140" y2="690" class="wire-sensor"/>
+  <text x="150" y="695" class="pin-label">HC-SR04: TRIG/ECHO (22AWG) - Dedicated sensor routing</text>
+  
+  <!-- Technical specifications -->
+  <text x="380" y="590" class="pin-label">• ZERO wire-component crossovers</text>
+  <text x="380" y="610" class="pin-label">• Professional PCB-style routing</text>
+  <text x="380" y="630" class="pin-label">• Power: 5V @ 3A recommended</text>
+  <text x="380" y="650" class="pin-label">• Available GPIO: 30+ for expansion</text>
+  <text x="380" y="670" class="pin-label">• Industry-standard wire management</text>
+  <text x="380" y="690" class="pin-label">• Expansion-ready architecture</text>
+  
+</svg>

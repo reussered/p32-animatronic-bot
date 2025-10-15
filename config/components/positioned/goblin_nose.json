@@ -5,6 +5,11 @@
   "component_id": "goblin_nose",
   "hardware_reference": "config/components/hardware/hc_sr04_sensor.json",
   "interface_assignment": "GPIO_PAIR_1",
+  "mounting_architecture": {
+    "type": "two_tier",
+    "hardware_mount": "sensor_basic_mount",
+    "decorative_shell": "goblin_nose_shell"
+  },
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {
