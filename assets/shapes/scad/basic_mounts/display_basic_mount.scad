@@ -1,4 +1,4 @@
-﻿// Basic Display Mount - Generic GC9A01 Mounting Bracket
+// Basic Display Mount - Generic GC9A01 Mounting Bracket
 // Reusable mounting solution for 1.28" circular displays
 
 module display_basic_mount() {

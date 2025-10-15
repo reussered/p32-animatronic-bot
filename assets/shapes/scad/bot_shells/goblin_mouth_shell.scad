@@ -1,4 +1,4 @@
-﻿// Goblin Mouth Shell - Fanged maw incorporating display_basic_mount
+// Goblin Mouth Shell - Fanged maw incorporating display_basic_mount
 // Character-specific decorative shell for goblin mouth display
 
 use <../basic_mounts/display_basic_mount.scad>
@@ -30,8 +30,8 @@ module goblin_mouth_shell() {
                 if (angle < 150 || angle > 210) {
                     rotate([0, 0, angle]) {
                         translate([mouth_width*0.4, 0, mouth_depth*0.8])
-                            rotate([random(15)+10, 0, 0])
-                                cylinder(h=random(8)+4, d1=3, d2=1);
+                            rotate([random(i, 15)+10, 0, 0])
+                                cylinder(h=random(i+10, 8)+4, d1=3, d2=1);
                     }
                 }
             }
@@ -81,4 +81,4 @@ module goblin_mouth_shell() {
 goblin_mouth_shell();
 
 // Helper function for random values
-function random(max_val) = max_val * (sin(*211.3 + max_val*11.7) + 1) / 2;
+function random(seed, max_val) = max_val * (sin(seed * 211.3 + max_val * 11.7) + 1) / 2;

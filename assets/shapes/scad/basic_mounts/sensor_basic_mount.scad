@@ -1,4 +1,4 @@
-﻿// Basic Sensor Mount - Generic HC-SR04 Mounting Bracket
+// Basic Sensor Mount - Generic HC-SR04 Mounting Bracket
 // Reusable mounting solution for ultrasonic proximity sensors
 
 module sensor_basic_mount() {

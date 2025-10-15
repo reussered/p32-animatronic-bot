@@ -142,7 +142,7 @@
         "primary": "DarkOliveGreen",
         "secondary": "SaddleBrown", 
         "accent": "Goldenrod",
-        "special": "OrangeRed"
+        "highlight": "OrangeRed"
       },
       "finish": "matte_textured",
       "durability": "high_impact_resistant",
@@ -155,7 +155,7 @@
         "primary": "ForestGreen",
         "secondary": "BurlyWood",
         "accent": "Khaki", 
-        "special": "Crimson"
+        "highlight": "Crimson"
       },
       "finish": "soft_cuddly",
       "durability": "child_safe_washable",

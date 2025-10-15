@@ -1,4 +1,4 @@
-﻿// Basic Speaker Mount - Generic 40mm Speaker Mounting Bracket
+// Basic Speaker Mount - Generic 40mm Speaker Mounting Bracket
 // Reusable mounting solution for round speakers
 
 module speaker_basic_mount() {

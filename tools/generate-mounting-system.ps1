@@ -94,6 +94,13 @@ if ($GenerateBasicMounts) {
     $DisplayMountScad = @"
 // Basic Display Mount - Generic GC9A01 Mounting Bracket
 // Reusable mounting solution for 1.28" circular displays
+// Multi-Color 3D Printing: Uses HTML named colors for 4-color system
+
+// Color palette parameters (can be overridden via command line)
+PRIMARY_COLOR = "DarkOliveGreen";      // Color 1: Main mounting ring
+SECONDARY_COLOR = "SaddleBrown";       // Color 2: Reinforcement tabs  
+ACCENT_COLOR = "Goldenrod";            // Color 3: (unused in basic mount)
+HIGHLIGHT_COLOR = "OrangeRed";         // Color 4: (unused in basic mount)
 
 module display_basic_mount() {
     diameter = $($MountingSpecs.gc9a01_display.diameter);
@@ -144,12 +151,12 @@ module display_basic_mount() {
     }
 }
 
-// Generate the mount
-display_basic_mount();
+// Generate the mount with primary color
+color(PRIMARY_COLOR) display_basic_mount();
 "@
     
     $DisplayMountPath = "$ScadBasicDir\display_basic_mount.scad"
-    $DisplayMountScad | Out-File -FilePath $DisplayMountPath -Encoding UTF8
+    $DisplayMountScad | Out-File -FilePath $DisplayMountPath -Encoding ASCII
     Write-Host "Generated: $DisplayMountPath" -ForegroundColor Green
     
     # Sensor Basic Mount
@@ -216,7 +223,7 @@ sensor_basic_mount();
 "@
     
     $SensorMountPath = "$ScadBasicDir\sensor_basic_mount.scad"
-    $SensorMountScad | Out-File -FilePath $SensorMountPath -Encoding UTF8
+    $SensorMountScad | Out-File -FilePath $SensorMountPath -Encoding ASCII
     Write-Host "Generated: $SensorMountPath" -ForegroundColor Green
     
     # Speaker Basic Mount
@@ -274,7 +281,7 @@ speaker_basic_mount();
 "@
     
     $SpeakerMountPath = "$ScadBasicDir\speaker_basic_mount.scad"
-    $SpeakerMountScad | Out-File -FilePath $SpeakerMountPath -Encoding UTF8
+    $SpeakerMountScad | Out-File -FilePath $SpeakerMountPath -Encoding ASCII
     Write-Host "Generated: $SpeakerMountPath" -ForegroundColor Green
 }
 
@@ -368,7 +375,7 @@ function random(max_val) = max_val * (sin($t*137.5) + 1) / 2;
 "@
         
         $GoblinEyePath = "$ScadBotShellsDir\goblin_eye_shells.scad"
-        $GoblinEyeShell | Out-File -FilePath $GoblinEyePath -Encoding UTF8
+        $GoblinEyeShell | Out-File -FilePath $GoblinEyePath -Encoding ASCII
         Write-Host "Generated: $GoblinEyePath" -ForegroundColor Green
         
         # Goblin Nose Shell (incorporates sensor_basic_mount)
@@ -466,7 +473,7 @@ function random(max_val) = max_val * (sin($t*173.7 + max_val*7.3) + 1) / 2;
 "@
         
         $GoblinNosePath = "$ScadBotShellsDir\goblin_nose_shell.scad"
-        $GoblinNoseShell | Out-File -FilePath $GoblinNosePath -Encoding UTF8
+        $GoblinNoseShell | Out-File -FilePath $GoblinNosePath -Encoding ASCII
         Write-Host "Generated: $GoblinNosePath" -ForegroundColor Green
         
         # Goblin Mouth Shell (incorporates display_basic_mount)
@@ -558,7 +565,7 @@ function random(max_val) = max_val * (sin($t*211.3 + max_val*11.7) + 1) / 2;
 "@
         
         $GoblinMouthPath = "$ScadBotShellsDir\goblin_mouth_shell.scad"
-        $GoblinMouthShell | Out-File -FilePath $GoblinMouthPath -Encoding UTF8
+        $GoblinMouthShell | Out-File -FilePath $GoblinMouthPath -Encoding ASCII
         Write-Host "Generated: $GoblinMouthPath" -ForegroundColor Green
     }
 }

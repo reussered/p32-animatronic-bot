@@ -1,28 +1,64 @@
-﻿// GOBLIN Eye Shell - craggy_socket incorporating display_basic_mount
-// Family-aware decorative shell for goblin eye displays
+// Goblin Eye Shell - Craggy socket incorporating display_basic_mount
+// Character-specific decorative shell for goblin eye displays
 
 use <../basic_mounts/display_basic_mount.scad>
 
 module goblin_eye_shell(is_left_eye = true) {
     eye_socket_diameter = 45;
     socket_depth = 12;
-    
-    // Eye style: craggy_socket
-    // Surface texture: rough_organic
-    // Color scheme: mystical_forest_green
+    crag_count = 8;
     
     difference() {
         union() {
-            // Main eye socket based on family aesthetic
-            generate_eye_socket();
+            // Main craggy eye socket
+            difference() {
+                // Outer socket shape
+                hull() {
+                    cylinder(h=socket_depth, d=eye_socket_diameter);
+                    // Slightly oval shape
+                    scale([1.1, 0.9, 1])
+                        cylinder(h=socket_depth*0.8, d=eye_socket_diameter*0.9);
+                }
+                
+                // Inner socket cavity for basic mount
+                translate([0,0,socket_depth*0.4])
+                    cylinder(h=socket_depth*0.6+1, d=eye_socket_diameter*0.75);
+            }
             
-            // Family-specific surface details
-            apply_surface_texture();
+            // Craggy surface details
+            for(i = [0:crag_count-1]) {
+                rotate([0, 0, i*(360/crag_count) + random(i, 30)]) {
+                    translate([eye_socket_diameter*0.4, 0, random(i+10, socket_depth*0.3)])
+                        rotate([random(i+20, 20), random(i+30, 20), 0])
+                            cylinder(h=random(i+40, 4)+2, d=random(i+50, 3)+2);
+                }
+            }
+            
+            // Brow ridge (more pronounced for left eye)
+            if (is_left_eye) {
+                translate([0, eye_socket_diameter*0.3, socket_depth*0.8])
+                    rotate([15, 0, 0])
+                        scale([1.2, 0.3, 0.4])
+                            cylinder(h=6, d=eye_socket_diameter*0.8);
+            } else {
+                translate([0, eye_socket_diameter*0.25, socket_depth*0.8])
+                    rotate([10, 0, 0])
+                        scale([1.1, 0.25, 0.35])
+                            cylinder(h=5, d=eye_socket_diameter*0.75);
+            }
         }
         
-        // Cutout for basic mount
+        // Mounting cavity for basic display mount
         translate([0,0,socket_depth*0.4])
-            mount_cutout();
+            cylinder(h=socket_depth*0.6+1, d=eye_socket_diameter*0.75);
+        
+        // Access holes for basic mount screws
+        for(i=[0:3]) {
+            rotate([0, 0, i*90 + 45]) {
+                translate([eye_socket_diameter*0.25, 0, socket_depth*0.6])
+                    cylinder(h=socket_depth*0.4+1, d=4);
+            }
+        }
     }
     
     // Include the basic mount (positioned inside shell)
@@ -30,47 +66,9 @@ module goblin_eye_shell(is_left_eye = true) {
         display_basic_mount();
 }
 
-module generate_eye_socket() {
-    // Implementation varies by eye_style
-    if ("craggy_socket" == "craggy_socket") {
-        // Goblin-style craggy implementation
-        difference() {
-            cylinder(h=socket_depth, d=eye_socket_diameter);
-            translate([0,0,socket_depth*0.3])
-                cylinder(h=socket_depth*0.7+1, d=eye_socket_diameter*0.8);
-        }
-    } else if ("craggy_socket" == "rounded_socket") {
-        // Bear-style rounded implementation  
-        hull() {
-            cylinder(h=socket_depth, d=eye_socket_diameter);
-            translate([0,0,socket_depth*0.5])
-                sphere(d=eye_socket_diameter*0.9);
-        }
-    } else {
-        // Default socket
-        cylinder(h=socket_depth, d=eye_socket_diameter);
-    }
-}
-
-module apply_surface_texture() {
-    // Surface texture based on family profile
-    if ("rough_organic" == "rough_organic") {
-        // Add organic warty details
-        for(i = [0:5]) {
-            rotate([0, 0, i*60 + random(30)])
-                translate([eye_socket_diameter*0.3, 0, random(socket_depth)])
-                    sphere(d=random(4)+2);
-        }
-    }
-}
-
-module mount_cutout() {
-    cylinder(h=socket_depth*0.6+1, d=35);
-}
-
 // Generate left and right eye shells
 translate([-30, 0, 0]) goblin_eye_shell(true);   // Left eye
 translate([30, 0, 0]) goblin_eye_shell(false);   // Right eye
 
-// Helper function for random values
-function random(max_val) = max_val * (sin($t*137.5 + max_val*7.3) + 1) / 2;
+// Helper function for random values (simplified)
+function random(seed, max_val) = max_val * (sin(seed * 137.5) + 1) / 2;
