@@ -44,5 +44,16 @@ Complete full-body animatronic robot system with:
 - **MG996R + MG90S Servos** (38 total for full humanoid)
 - **Modular Design** (mix goblin head + humanoid body + custom variants)
 
+### **Software Architecture: Pure Component System**
+📘 **[Three-Level Component Attachment Spec](docs/THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md)**
+
+**CRITICAL**: Every feature is a component with `init()` and `act()` functions.
+
+- **System Level**: WiFi, Serial, Core (always present)
+- **Family Level**: Personality, Mood, Behavior (shared across bot family)
+- **Bot-Specific Level**: Eyes, Sensors, Motors (positioned hardware)
+
+The core loop ONLY iterates components - no application logic in `app_main()`.
+
 ### **Current Status:** ✅ **ALL CORE COMPONENTS VERIFIED** 
 Ready for hardware build and firmware deployment!

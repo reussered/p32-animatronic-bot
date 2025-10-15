@@ -3,6 +3,10 @@
 ## Overview
 This document defines the mandatory structure and requirements for all P32 animatronic component source files to ensure proper compilation, initialization, and execution within the component system.
 
+📘 **[Three-Level Component Attachment Architecture](THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md)** - READ FIRST
+
+**CRITICAL PRINCIPLE**: Every feature must be a component with `init()` and `act(loopCount)` functions. The core loop in `app_main()` contains NO application logic - it ONLY iterates through registered components.
+
 ## Architecture: C/C++ Hybrid System
 
 The P32 system uses a **hybrid C/C++ architecture** which is supported and recommended by ESP-IDF:

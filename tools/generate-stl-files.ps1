@@ -37,10 +37,18 @@ if ($Family) {
 # Check if OpenSCAD is available
 $OpenSCADPath = Get-Command "openscad" -ErrorAction SilentlyContinue
 if (-not $OpenSCADPath) {
-    Write-Host "ERROR: OpenSCAD not found in PATH" -ForegroundColor Red
-    Write-Host "Please install OpenSCAD from: https://openscad.org/" -ForegroundColor Yellow
-    Write-Host "Or add OpenSCAD to your system PATH" -ForegroundColor Yellow
-    return
+    # Try common installation path as fallback
+    $OpenSCADExe = "C:\Program Files\OpenSCAD\openscad.exe"
+    if (Test-Path $OpenSCADExe) {
+        Write-Host "OpenSCAD not in PATH, using: $OpenSCADExe" -ForegroundColor Yellow
+        Write-Host "Note: Restart terminal to use 'openscad' command" -ForegroundColor Cyan
+        $OpenSCADPath = Get-Command $OpenSCADExe
+    } else {
+        Write-Host "ERROR: OpenSCAD not found" -ForegroundColor Red
+        Write-Host "Please install OpenSCAD from: https://openscad.org/" -ForegroundColor Yellow
+        Write-Host "Or add OpenSCAD to your system PATH" -ForegroundColor Yellow
+        return
+    }
 }
 
 $ScadBasicDir = "assets\shapes\scad\basic_mounts"

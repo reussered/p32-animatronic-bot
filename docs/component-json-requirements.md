@@ -17,9 +17,14 @@ Building `goblin_simple` bot as initial test case.
 - Action functions: `p32_{component_name}_act(uint32_t loopCount)`
 
 ## Component Categories
-- **System Level**: Serial, WiFi, Bluetooth - always present, low hitCount values
-- **Family Level**: Personality, mood, behavior - mid-range hitCount values  
-- **Bot Specific**: Eyes, mouth, sensors - higher frequency, low hitCount values
+
+📘 **[Complete Architecture Specification](THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md)**
+
+- **System Level**: Serial, WiFi, Bluetooth - always present, low hitCount values (50-500)
+- **Family Level**: Personality, mood, behavior - mid-range hitCount values (10-50)
+- **Bot Specific**: Eyes, mouth, sensors - higher frequency, low hitCount values (3-30)
+
+**CRITICAL**: NOTHING executes unless it's a component with init() and act() functions.
 
 ## Timing Guidelines
 - System heartbeat: hitCount = 1 (every loop)

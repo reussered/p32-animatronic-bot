@@ -3,6 +3,49 @@
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.
 
+## CRITICAL: Pure Component-Driven Architecture
+
+**READ FIRST**: 
+- `docs/THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md`
+- `docs/HIERARCHICAL-COMPONENT-COMPOSITION-SPEC.md`
+- `docs/COMPONENT-FUNCTION-SIGNATURES.md` (NO ARGUMENTS pattern)
+- `docs/MESH-STATE-SYNCHRONIZATION-SPEC.md` (Distributed global state)
+- `docs/CPP-CLASS-SERIALIZATION-PATTERN.md` (C++ classes + POD serialization)
+- `docs/RAW-MEMORY-BLOCK-PATTERN.md` (Simplest memcmp/memcpy pattern)
+- `docs/FAST-CHANGE-DETECTION-EXAMPLE.md` (Complete working code)
+
+**NOTHING executes unless it's a component with init() and act() functions.**
+
+- **System Level**: Core platform (WiFi, Serial, Watchdog) - always present
+- **Family Level**: Behavior/personality shared across bot family (Goblin, Cat, Bear)
+- **Bot-Specific Level**: Positioned hardware components (eyes, nose, mouth, sensors)
+
+**Components can contain other components**:
+- **Creature Assembly** (`goblin_full.json`) contains **Subsystem Assemblies** (`goblin_head.json`, `goblin_torso.json`)
+- **Subsystem Assembly** (`goblin_head.json`) contains **Hardware Components** (`left_eye.json`, `nose.json`)
+- **A single JSON file defines the entire creature** via recursive composition
+
+**Every feature requires**:
+1. Component JSON file with `component_name` and `hitCount` timing
+2. Component C code with `{name}_init(void)` and `{name}_act(void)` functions **WITH NO ARGUMENTS**
+3. Include `p32_shared_state.h` to access `g_loopCount` and all global shared state
+4. Attachment at appropriate level (System/Family/Subsystem/Hardware)
+5. Registration in generated component tables
+
+The core loop in `app_main()` ONLY iterates through components - it contains no application logic.
+
+**CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.
+
+**Shape assemblies are referenced by components**: The head component references `goblin_skull.scad`, which defines the mounting framework for eyes/nose/mouth components.
+
+**System components distributed strategically**:
+- **Torso subsystem** hosts system-level components (WiFi, ESP-NOW mesh, telemetry)
+- **Head subsystem** focuses exclusively on real-time rendering (displays, audio, sensors)
+- **Load balanced**: Torso 50% CPU (coordination), Head 75% CPU (rendering)
+
+📘 **[Distributed Processing Architecture](../docs/DISTRIBUTED-PROCESSING-ARCHITECTURE.md)**
+📘 **[Component Function Signatures](../docs/COMPONENT-FUNCTION-SIGNATURES.md)** - NO ARGUMENTS pattern
+
 ## Architecture Patterns
 
 ### Configuration-Driven Design
