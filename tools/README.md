@@ -2,6 +2,33 @@
 
 This directory contains development and visualization tools for the P32 Animatronic Bot project.
 
+## Documentation Generation (NEW)
+
+### Assembly PDF Generator
+- `generate-assembly-pdf.ps1` - **Creates professional PDF assembly guides from markdown**
+
+**Quick Start:**
+```powershell
+# First time: Install Pandoc
+.\tools\generate-assembly-pdf.ps1 -InstallPandoc
+
+# Generate all PDFs
+.\tools\generate-assembly-pdf.ps1
+```
+
+**Output**: `docs\assembly_guides\*.pdf`
+
+**Features:**
+- Professional styling with table of contents
+- Print-optimized layout (letter size, proper margins)
+- Syntax highlighting for code blocks
+- ASCII diagrams preserved correctly
+- Page numbers and document headers/footers
+
+**Complete Documentation**: See `docs\PDF-GENERATION-WORKFLOW.md`
+
+---
+
 ## STL Viewer
 
 A web-based 3D viewer for validating generated STL shapes.

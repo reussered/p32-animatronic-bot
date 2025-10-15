@@ -19,6 +19,73 @@
     "interface": "SPI",
     "current_consumption": "50mA"
   },
+  "pin_mapping": {
+    "description": "GC9A01 displays have varying pin labels depending on manufacturer. All alternate names map to standard SPI signals.",
+    "pins": {
+      "CLK": {
+        "standard_name": "SPI_CLK",
+        "alternate_names": ["SCK", "SCLK", "CLK"],
+        "function": "SPI Clock",
+        "required": true
+      },
+      "MOSI": {
+        "standard_name": "SPI_MOSI",
+        "alternate_names": ["SDA", "SDI", "DIN", "MOSI"],
+        "function": "SPI Master Out Slave In (Data)",
+        "required": true
+      },
+      "DC": {
+        "standard_name": "DATA_COMMAND",
+        "alternate_names": ["DC", "D/C", "RS", "A0"],
+        "function": "Data/Command Select",
+        "required": true
+      },
+      "CS": {
+        "standard_name": "SPI_CS",
+        "alternate_names": ["CS", "SS", "CE"],
+        "function": "Chip Select (Slave Select)",
+        "required": true
+      },
+      "RST": {
+        "standard_name": "RESET",
+        "alternate_names": ["RST", "RESET", "RES"],
+        "function": "Hardware Reset",
+        "required": true
+      },
+      "BL": {
+        "standard_name": "BACKLIGHT",
+        "alternate_names": ["BL", "BLK", "LED"],
+        "function": "Backlight Control (PWM)",
+        "required": false
+      },
+      "VCC": {
+        "standard_name": "POWER",
+        "alternate_names": ["VCC", "VDD", "3V3", "+3.3V"],
+        "function": "Power Supply (3.3V)",
+        "required": true
+      },
+      "GND": {
+        "standard_name": "GROUND",
+        "alternate_names": ["GND", "VSS", "0V"],
+        "function": "Ground Reference",
+        "required": true
+      }
+    },
+    "common_manufacturer_variations": {
+      "variation_1": {
+        "description": "Most common pinout (your displays)",
+        "pins_exposed": ["SCK", "SDA", "DC", "CS", "RST", "VCC", "GND"]
+      },
+      "variation_2": {
+        "description": "Waveshare/Adafruit style",
+        "pins_exposed": ["CLK", "MOSI", "DC", "CS", "RST", "BL", "VCC", "GND"]
+      },
+      "variation_3": {
+        "description": "Generic Chinese modules",
+        "pins_exposed": ["SCLK", "SDI", "RS", "CS", "RESET", "LED", "VDD", "GND"]
+      }
+    }
+  },
   "driver_config": {
     "rotation": 0,
     "invert_colors": false,

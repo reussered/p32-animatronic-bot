@@ -13,3 +13,11 @@ node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+
+# PDF Generation - Ignore temporary build artifacts
+docs/assembly_guides/*.pdf
+docs/assembly_guides/*.html
+docs/assembly_guides/*.css
+
+# But keep finished distribution PDFs (not in assembly_guides, but in assembly_guides_pdf)
+!docs/assembly_guides_pdf/*.pdf

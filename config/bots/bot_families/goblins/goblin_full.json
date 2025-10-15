@@ -19,7 +19,6 @@
   "positioned_components": [
     "config/components/positioned/goblin/head_components/goblin_eye_left.json",
     "config/components/positioned/goblin/head_components/goblin_eye_right.json",
-    "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "config/components/positioned/goblin/head_components/goblin_speaker.json",
     "config/components/positioned/goblin/head_components/goblin_nose.json"
   ],
