@@ -10,18 +10,22 @@
 #include "esp_err.h"
 #include "esp_timer.h"
 #include "p32_eye_display.hpp"
+#include "p32_eye_graphics.hpp"
 #include "p32_web_client.hpp"
 #include "p32_shared_state.hpp"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
-// Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
 static const char *TAG = "GOBLIN_EYE_RIGHT";
 static eye_display_t right_eye_display;
+static eye_graphics_config_t right_eye_config;
 
 // SPI device handle for GC9A01 display
 static spi_device_handle_t spi_display = NULL;
 extern bool spi_bus_initialized;  // Shared with left eye
+
+// Framebuffer for rendering (240x240 RGB565 = 115,200 bytes)
+static uint16_t* right_eye_framebuffer = NULL;
 
 // GC9A01 display dimensions
 #define DISPLAY_WIDTH  240
@@ -163,10 +167,23 @@ esp_err_t goblin_eye_right_init(void)
         return ret;
     }
     
+    // Allocate framebuffer for eye rendering
+    right_eye_framebuffer = (uint16_t*)malloc(EYE_DISPLAY_WIDTH * EYE_DISPLAY_HEIGHT * sizeof(uint16_t));
+    if (right_eye_framebuffer == NULL) {
+        ESP_LOGE(TAG, "Failed to allocate framebuffer (%d bytes)",
+                 EYE_DISPLAY_WIDTH * EYE_DISPLAY_HEIGHT * 2);
+        return ESP_ERR_NO_MEM;
+    }
+    ESP_LOGI(TAG, "Allocated %d KB framebuffer", 
+             (EYE_DISPLAY_WIDTH * EYE_DISPLAY_HEIGHT * 2) / 1024);
+    
+    // Initialize eye graphics configuration
+    eye_graphics_init_default(&right_eye_config);
+    
     // Initialize animation system
     ret = eye_display_init(&right_eye_display, "RIGHT EYE");
     if (ret == ESP_OK) {
-        ESP_LOGI(TAG, "Right eye display ready!");
+        ESP_LOGI(TAG, "Right eye display ready with pixel graphics!");
         eye_display_start_animation(&right_eye_display, &goblin_curious_look_animation);
     }
     
@@ -235,26 +252,55 @@ void goblin_eye_right_act(void)
     // Full hardware version
     eye_display_update(&right_eye_display, current_time);
     
-    // Render to actual SPI display
-    // For now, show test pattern based on eye openness
-    if (spi_display != NULL) {
-        float openness = right_eye_display.current_frame.eye_openness;
+    // Render pixel-perfect eye graphics to framebuffer
+    if (spi_display != NULL && right_eye_framebuffer != NULL) {
+        // Render current animation frame to framebuffer
+        eye_graphics_render_frame(right_eye_framebuffer, 
+                                   &right_eye_config,
+                                   &right_eye_display.current_frame);
         
-        // Map eye openness to colors for visual feedback
-        uint16_t color;
-        if (openness > 0.8f) {
-            color = 0xFFFF;  // White (wide open)
-        } else if (openness > 0.5f) {
-            color = 0x07E0;  // Green (open)
-        } else if (openness > 0.2f) {
-            color = 0xFFE0;  // Yellow (half open)
-        } else {
-            color = 0x0000;  // Black (closed)
+        // Set full screen window for GC9A01
+        gc9a01_send_cmd(0x2A);  // Column address
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0xEF);  // 239
+        
+        gc9a01_send_cmd(0x2B);  // Row address
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0x00);
+        gc9a01_send_data(0xEF);  // 239
+        
+        gc9a01_send_cmd(0x2C);  // Memory write
+        gpio_set_level(PIN_DC, 1);  // Data mode
+        
+        // Send framebuffer to display via SPI
+        // For better performance, send in chunks
+        const int CHUNK_SIZE = 4096;  // 2KB chunks
+        int total_pixels = DISPLAY_WIDTH * DISPLAY_HEIGHT;
+        int bytes_per_pixel = 2;  // RGB565
+        
+        for (int offset = 0; offset < total_pixels; offset += CHUNK_SIZE) {
+            int pixels_to_send = (offset + CHUNK_SIZE > total_pixels) ? 
+                                 (total_pixels - offset) : CHUNK_SIZE;
+            
+            spi_transaction_t trans = {};
+            trans.length = pixels_to_send * 16;  // bits
+            trans.tx_buffer = &right_eye_framebuffer[offset];
+            trans.flags = 0;  // Use tx_buffer, not tx_data
+            
+            esp_err_t ret = spi_device_polling_transmit(spi_display, &trans);
+            if (ret != ESP_OK) {
+                ESP_LOGW(TAG, "SPI transmit failed at offset %d", offset);
+                break;
+            }
         }
         
-        gc9a01_render_test_pattern(color);
-        
-        ESP_LOGD(TAG, "Right eye rendered - openness: %.2f, color: 0x%04X", openness, color);
+        ESP_LOGD(TAG, "Right eye rendered - openness: %.2f, pupil: %.2f, expr: %d",
+                 right_eye_display.current_frame.eye_openness,
+                 right_eye_display.current_frame.pupil_size,
+                 right_eye_display.current_frame.expression);
     }
 }
 
