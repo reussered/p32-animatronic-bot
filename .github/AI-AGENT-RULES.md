@@ -1,5 +1,51 @@
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
 
+## RULE 0: CODE IS KING - ALWAYS CHECK ACTUAL CODE FIRST
+
+**BEFORE doing ANYTHING, examine what's actually implemented in the code.**
+
+**The existing code is the source of truth, NOT:**
+- Documentation (may be outdated)
+- Your assumptions
+- What you think should be there
+- Old examples in docs
+
+**Workflow:**
+1. **READ THE CODE** - Use grep_search, file_search, read_file
+2. **UNDERSTAND** what's actually implemented
+3. **THEN** decide what (if anything) needs to change
+4. **VERIFY** your understanding by checking more files
+5. **ONLY THEN** propose or make changes
+
+**If human asks "implement feature X":**
+1. STOP
+2. Search for existing implementations of X
+3. Check if X already exists in different form
+4. Ask: "I found X is already implemented at [location]. Should I modify it or create new?"
+5. WAIT for answer
+
+**NO ASSUMPTIONS. NO GUESSING. CHECK THE CODE.**
+
+## RULE 0B: SYNCHRONIZE DOCUMENTATION WITH CODE CHANGES
+
+**EVERY code change MUST update corresponding documentation.**
+
+**When you modify code:**
+1. Identify ALL documentation files that reference the changed code
+2. Update documentation to match the new implementation
+3. Search for related examples in docs/ that need updating
+4. Update architecture specifications if patterns changed
+
+**Common documentation files to check:**
+- `docs/*-SPEC.md` - Architecture specifications
+- `docs/*-PATTERN.md` - Implementation patterns  
+- `docs/*-EXAMPLE.md` - Code examples
+- `.github/copilot-instructions.md` - AI coding guidelines
+- `README.md` - Project overview
+- Component-specific docs in `docs/`
+
+**NO CODE CHANGES WITHOUT DOCUMENTATION UPDATES.**
+
 ## RULE 1: ONLY MODIFY FILES RELATED TO CURRENT TASK
 
 **DO:**

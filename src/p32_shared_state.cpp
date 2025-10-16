@@ -1,7 +1,7 @@
 // P32 Shared State - Global State Implementation
 // Global instances of loop counter and shared state
 
-#include "p32_shared_state.h"
+#include "p32_shared_state.hpp"
 #include <string.h>
 
 // Global loop counter (64-bit to prevent overflow at 120,000 iterations/sec)

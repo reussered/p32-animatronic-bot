@@ -3,8 +3,8 @@
 // Component Type: FAMILY_LEVEL (shared across all goblin family bots)
 // Timing: hitCount 10 (executes every 1 second)
 
-#include "p32_component_config.h"
-#include "p32_shared_state.h"
+#include "p32_component_config.hpp"
+#include "p32_shared_state.hpp"
 #include "esp_log.h"
 #include "Mood.hpp"
 
