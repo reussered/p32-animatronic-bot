@@ -21,6 +21,6 @@
   "component_name": "right_eye",
   "description": "Right eye display animation",
   "timing": {
-    "hitCount": 5
+    "hitCount": 60000
   }
 }

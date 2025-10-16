@@ -21,6 +21,6 @@
   "component_name": "mouth",
   "description": "Mouth display animation",
   "timing": {
-    "hitCount": 3
+    "hitCount": 36000
   }
 }

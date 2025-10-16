@@ -21,11 +21,23 @@ class P32ComponentGenerator:
         
     def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
         """Load bot configuration from JSON file"""
-        bot_file = self.config_dir / "bots" / f"{bot_name}.json"
+        # Try multiple locations: bots/, subsystems/, or direct path
+        possible_paths = [
+            self.config_dir / "bots" / f"{bot_name}.json",
+            self.config_dir / "subsystems" / f"{bot_name}.json",
+            Path(bot_name)  # Direct path
+        ]
         
-        if not bot_file.exists():
-            raise FileNotFoundError(f"Bot config not found: {bot_file}")
-            
+        bot_file = None
+        for path in possible_paths:
+            if path.exists():
+                bot_file = path
+                break
+        
+        if bot_file is None:
+            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, and direct path)")
+        
+        print(f"DEBUG: Loading bot config from: {bot_file}")
         with open(bot_file, 'r') as f:
             return json.load(f)
     
@@ -39,6 +51,7 @@ class P32ComponentGenerator:
                 clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
                 component_file = self.config_dir / clean_ref
                 if component_file.exists():
+                    print(f"DEBUG: Loading component: {component_file}")
                     with open(component_file, 'r') as f:
                         component_data = json.load(f)
                         component_data['config_file'] = component_ref
@@ -82,7 +95,12 @@ class P32ComponentGenerator:
         # Process positioned components from JSON
         for component in components:
             comp_name = component.get("component_name", "unknown")
-            hit_count = component.get("timing", {}).get("hitCount", 10)
+            # Default hitCount = 1 if not specified (executes every loop)
+            timing = component.get("timing", {})
+            hit_count = timing.get("hitCount")
+            if hit_count is None:
+                print(f"Warning: Component '{comp_name}' has no hitCount defined, defaulting to 1 (every loop)")
+                hit_count = 1
             description = component.get("description", f"{comp_name} component")
             
             # Check for explicit function declarations first
@@ -109,19 +127,31 @@ class P32ComponentGenerator:
                 "config": component
             })
     
-    def generate_init_table_header(self) -> str:
-        """Generate initTable.h header file content"""
+    def generate_unified_header(self) -> str:
+        """Generate unified p32_component_tables.h header file content"""
         content = [
-            "#ifndef INIT_TABLE_H",
-            "#define INIT_TABLE_H",
+            "#ifndef P32_COMPONENT_TABLES_H",
+            "#define P32_COMPONENT_TABLES_H",
             "",
             '#include "esp_err.h"',
+            '#include <stdint.h>',
             "",
-            "// Component initialization function type",
+            "// ============================================================================",
+            "// P32 Component Dispatch Tables",
+            "// Auto-generated from JSON bot configuration",
+            "// ============================================================================",
+            "",
+            "// Component function type signatures - NO ARGUMENTS pattern",
             "typedef esp_err_t (*init_func_t)(void);",
+            "typedef void (*act_func_t)(void);",
             "",
-            "// Forward declarations for component init functions",
-            "// Generated from JSON bot configuration"
+            "// Table size - all three tables have same size (one entry per component)",
+            f"#define COMPONENT_TABLE_SIZE {len(self.components)}",
+            "",
+            "// ============================================================================",
+            "// Forward Declarations - Init Functions",
+            "// ============================================================================",
+            ""
         ]
         
         for comp in self.components:
@@ -129,83 +159,102 @@ class P32ComponentGenerator:
         
         content.extend([
             "",
-            "// JSON-generated initialization table",
-            f"#define INIT_TABLE_SIZE {len(self.components)}",
-            "extern init_func_t initTable[INIT_TABLE_SIZE];",
-            "",
-            "#endif // INIT_TABLE_H"
+            "// ============================================================================",
+            "// Forward Declarations - Act Functions (NO ARGUMENTS)",
+            "// ============================================================================",
+            ""
         ])
         
-        return "\n".join(content)
-    
-    def generate_act_table_header(self) -> str:
-        """Generate actTable.h header file content"""
-        content = [
-            "#ifndef ACT_TABLE_H",
-            "#define ACT_TABLE_H",
-            "",
-            '#include <stdint.h>',
-            "",
-            "// Component action function type",
-            "typedef void (*act_func_t)(uint64_t loopCount);",
-            "",
-            "// Action table entry with timing",
-            "typedef struct {",
-            "    act_func_t act_func;",
-            "    uint32_t hitCount;  // Execute every N loops (from JSON config)",
-            "} act_table_entry_t;",
-            "",
-            "// Forward declarations for component action functions",
-            "// Generated from JSON bot configuration"
-        ]
-        
         for comp in self.components:
-            content.append(f"void {comp['act_func']}(uint64_t loopCount);")
+            content.append(f"void {comp['act_func']}(void);")
         
         content.extend([
             "",
-            "// JSON-generated action table with timing from bot configuration",
-            f"#define ACT_TABLE_SIZE {len(self.components)}",
-            "extern act_table_entry_t actTable[ACT_TABLE_SIZE];",
+            "// ============================================================================",
+            "// Dispatch Tables",
+            "// ============================================================================",
             "",
-            "#endif // ACT_TABLE_H"
+            "// Initialization table - called once at startup in order",
+            "extern init_func_t initTable[COMPONENT_TABLE_SIZE];",
+            "",
+            "// Action table - function pointers (NO ARGUMENTS)",
+            "// Parallel to hitCountTable - both indexed by same i",
+            "extern act_func_t actTable[COMPONENT_TABLE_SIZE];",
+            "",
+            "// Timing table - execution frequency control",
+            "// actTable[i] executes when g_loopCount % hitCountTable[i] == 0",
+            "extern uint32_t hitCountTable[COMPONENT_TABLE_SIZE];",
+            "",
+            "#endif // P32_COMPONENT_TABLES_H"
         ])
         
         return "\n".join(content)
     
-    def generate_init_table_implementation(self) -> str:
-        """Generate initTable.c implementation file content"""
+    def generate_unified_implementation(self) -> str:
+        """Generate unified p32_component_tables.c implementation file content"""
         content = [
-            '#include "initTable.h"',
+            '#include "p32_component_tables.h"',
             "",
-            "// JSON-generated initialization table",
-            "// Auto-generated from bot JSON configuration",
-            f"init_func_t initTable[INIT_TABLE_SIZE] = {{"
+            "// ============================================================================",
+            "// P32 Component Dispatch Tables - Implementation",
+            "// Auto-generated from JSON bot configuration",
+            "// ============================================================================",
+            "",
+            "// ============================================================================",
+            "// Initialization Table",
+            "// ============================================================================",
+            "",
+            f"init_func_t initTable[COMPONENT_TABLE_SIZE] = {{"
         ]
         
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
             content.append(f"    {comp['init_func']}{comma}")
         
-        content.append("};")
-        return "\n".join(content)
-    
-    def generate_act_table_implementation(self) -> str:
-        """Generate actTable.c implementation file content"""
-        content = [
-            '#include "actTable.h"',
+        content.extend([
+            "};",
             "",
-            "// JSON-generated action table with timing from bot configuration",
-            "// Auto-generated from bot JSON with hitCount values from config",
-            f"act_table_entry_t actTable[ACT_TABLE_SIZE] = {{"
-        ]
+            "// ============================================================================",
+            "// Action Table - Function Pointers (NO ARGUMENTS)",
+            "// ============================================================================",
+            "",
+            f"act_func_t actTable[COMPONENT_TABLE_SIZE] = {{"
+        ])
         
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
-            comment = f"// {comp['description']}"
-            content.append(f"    {{ {comp['act_func']}, {comp['hitCount']:2d} }}{comma:1s}    {comment}")
+            comment = f"// [{i}] {comp['description']}"
+            content.append(f"    {comp['act_func']}{comma:1s}    {comment}")
         
-        content.append("};")
+        content.extend([
+            "};",
+            "",
+            "// ============================================================================",
+            "// Timing Table - Execution Frequency Control",
+            "// ============================================================================",
+            "",
+            f"uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {{"
+        ])
+        
+        for i, comp in enumerate(self.components):
+            comma = "," if i < len(self.components) - 1 else ""
+            # Calculate frequency: 120,000 iterations/sec ÷ hitCount
+            frequency = 120000.0 / comp['hitCount']
+            if frequency >= 1000:
+                freq_str = f"{frequency:.0f} Hz"
+            elif frequency >= 1:
+                freq_str = f"{frequency:.1f} Hz"
+            else:
+                period = comp['hitCount'] / 120000.0
+                freq_str = f"{period*1000:.1f}ms period"
+            comment = f"// [{i}] {comp['name']} - every {comp['hitCount']} loops ({freq_str})"
+            content.append(f"    {comp['hitCount']}{comma:1s}    {comment}")
+        
+        content.extend([
+            "};",
+            ""
+        ])
+        
         return "\n".join(content)
     
     def generate_component_stub(self, comp_type: str) -> str:
@@ -218,8 +267,7 @@ class P32ComponentGenerator:
             filename = "bot_components.c"
         
         content = [
-            '#include "initTable.h"',
-            '#include "actTable.h"',
+            '#include "p32_component_tables.h"',
             '#include "esp_log.h"',
             "",
             f"// {comp_type.title()} component implementations",
@@ -241,9 +289,10 @@ class P32ComponentGenerator:
         for comp in components:
             tag = comp['name'].upper()
             
-            # Init function
+            # Init function - Allman style braces
             content.extend([
-                f"esp_err_t {comp['init_func']}(void) {{",
+                f"esp_err_t {comp['init_func']}(void)",
+                "{",
                 "#ifdef SIMPLE_TEST",
                 f'    printf("INIT: {comp["name"]} - {comp["description"]}\\n");',
                 "    return ESP_OK;",
@@ -254,37 +303,21 @@ class P32ComponentGenerator:
                 ""
             ])
             
-            # Act function - special handling for network_monitor
-            if comp['name'] == 'network_monitor':
-                content.extend([
-                    f"void {comp['act_func']}(uint64_t loopCount) {{",
-                    "#ifdef SIMPLE_TEST",
-                    "    // Send timing packet to server every 100,000 loops for server-side timing measurement",
-                    "    static uint32_t packet_counter = 0;", 
-                    "    if (loopCount % 100000 == 0 && loopCount > 0) {",
-                    "        printf(\"TIMING_PACKET: loop=%llu, packet=%lu\\n\", loopCount, packet_counter++);",
-                    "        // TODO: Send actual network packet to server with loopCount and packet_counter",
-                    "        // Server will measure time between packets to calculate loop performance",
-                    "    }",
-                    f'    if (loopCount % {comp["hitCount"]} == 0) printf("ACT[%llu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
-                    "    return;",
-                    "#endif",
-                    f'    ESP_LOGI(TAG_{tag}, "Loop %llu: {comp["description"]}", loopCount);',
-                    "    // TODO: Implement actual network monitoring and server communication",
-                    "}",
-                    ""
-                ])
-            else:
-                content.extend([
-                    f"void {comp['act_func']}(uint64_t loopCount) {{",
-                    "#ifdef SIMPLE_TEST",
-                    f'    printf("ACT[%llu]: {comp["name"]} - hitCount:{comp["hitCount"]}\\n", loopCount);',
-                    "    return;",
-                    "#endif",
-                    f'    ESP_LOGI(TAG_{tag}, "Loop %llu: {comp["description"]}", loopCount);',
-                    "}",
-                    ""
-                ])
+            # Act function - NO ARGUMENTS - accesses g_loopCount from globals - Allman style
+            content.extend([
+                f"void {comp['act_func']}(void)",
+                "{",
+                f'    // Component: {comp["name"]} - {comp["description"]}',
+                f'    // Timing: Execute every {comp["hitCount"]} loops',
+                "#ifdef SIMPLE_TEST",
+                f'    printf("ACT: {comp["name"]} - hitCount:{comp["hitCount"]}\\n");',
+                "    return;",
+                "#endif",
+                f'    ESP_LOGI(TAG_{tag}, "{comp["description"]}");',
+                "    // TODO: Implement actual component logic",
+                "}",
+                ""
+            ])
         
         return "\n".join(content)
     
@@ -293,25 +326,21 @@ class P32ComponentGenerator:
         self.output_dir.mkdir(exist_ok=True)
         self.include_dir.mkdir(exist_ok=True)
         
-        # Header files go in include/, source files go in src/
-        header_files = [
-            ("initTable.h", self.generate_init_table_header()),
-            ("actTable.h", self.generate_act_table_header())
-        ]
+        # Single unified header file
+        header_file = ("p32_component_tables.h", self.generate_unified_header())
         
+        # Source files
         source_files = [
-            ("initTable.c", self.generate_init_table_implementation()),
-            ("actTable.c", self.generate_act_table_implementation()),
+            ("p32_component_tables.c", self.generate_unified_implementation()),
             ("system_components.c", self.generate_component_stub("system")),
             ("bot_components.c", self.generate_component_stub("positioned"))
         ]
         
-        # Write header files to include/
-        for filename, content in header_files:
-            filepath = self.include_dir / filename
-            with open(filepath, 'w') as f:
-                f.write(content)
-            print(f"Generated: {filepath}")
+        # Write unified header to include/
+        filepath = self.include_dir / header_file[0]
+        with open(filepath, 'w') as f:
+            f.write(header_file[1])
+        print(f"Generated: {filepath}")
         
         # Write source files to src/
         for filename, content in source_files:

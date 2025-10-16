@@ -1,97 +1,167 @@
-#include "initTable.h"
-#include "actTable.h"
+#include "p32_component_tables.h"
 #include "esp_log.h"
 
 // Positioned component implementations
 // Generated from JSON bot configuration
 
-static const char *TAG_POWER_MANAGER = "POWER_MANAGER";
-static const char *TAG_MESH_COORDINATOR = "MESH_COORDINATOR";
-static const char *TAG_MASTER_CONTROLLER = "MASTER_CONTROLLER";
-static const char *TAG_MESH_SOFTWARE_COORDINATOR = "MESH_SOFTWARE_COORDINATOR";
-static const char *TAG_SPINE_LOWER = "SPINE_LOWER";
+static const char *TAG_LEFT_EYE = "LEFT_EYE";
+static const char *TAG_RIGHT_EYE = "RIGHT_EYE";
+static const char *TAG_MOUTH = "MOUTH";
+static const char *TAG_SPEAKER = "SPEAKER";
+static const char *TAG_NOSE_SENSOR = "NOSE_SENSOR";
+static const char *TAG_LEFT_EAR_MICROPHONE = "LEFT_EAR_MICROPHONE";
+static const char *TAG_RIGHT_EAR_MICROPHONE = "RIGHT_EAR_MICROPHONE";
 
-esp_err_t p32_comp_power_manager_init(void) {
+esp_err_t p32_comp_left_eye_init(void)
+{
 #ifdef SIMPLE_TEST
-    printf("INIT: power_manager - Battery monitoring and power distribution control\n");
+    printf("INIT: left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_POWER_MANAGER, "Battery monitoring and power distribution control initialized");
+    ESP_LOGI(TAG_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware initialized");
     return ESP_OK;
 }
 
-void p32_comp_power_manager_act(uint64_t loopCount) {
+void p32_comp_left_eye_act(void)
+{
+    // Component: left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware
+    // Timing: Execute every 5 loops
 #ifdef SIMPLE_TEST
-    printf("ACT[%llu]: power_manager - hitCount:100\n", loopCount);
+    printf("ACT: left_eye - hitCount:5\n");
     return;
 #endif
-    ESP_LOGI(TAG_POWER_MANAGER, "Loop %llu: Battery monitoring and power distribution control", loopCount);
+    ESP_LOGI(TAG_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware");
+    // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_mesh_coordinator_init(void) {
+esp_err_t p32_comp_right_eye_init(void)
+{
 #ifdef SIMPLE_TEST
-    printf("INIT: mesh_coordinator - ESP-NOW mesh network master controller\n");
+    printf("INIT: right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_MESH_COORDINATOR, "ESP-NOW mesh network master controller initialized");
+    ESP_LOGI(TAG_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware initialized");
     return ESP_OK;
 }
 
-void p32_comp_mesh_coordinator_act(uint64_t loopCount) {
+void p32_comp_right_eye_act(void)
+{
+    // Component: right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware
+    // Timing: Execute every 5 loops
 #ifdef SIMPLE_TEST
-    printf("ACT[%llu]: mesh_coordinator - hitCount:10\n", loopCount);
+    printf("ACT: right_eye - hitCount:5\n");
     return;
 #endif
-    ESP_LOGI(TAG_MESH_COORDINATOR, "Loop %llu: ESP-NOW mesh network master controller", loopCount);
+    ESP_LOGI(TAG_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware");
+    // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_master_controller_init(void) {
+esp_err_t p32_comp_mouth_init(void)
+{
 #ifdef SIMPLE_TEST
-    printf("INIT: master_controller - Master controller for coordinating all subsystems via mesh network\n");
+    printf("INIT: mouth - Mouth display animation - goblin variant with wide grin expressions\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_MASTER_CONTROLLER, "Master controller for coordinating all subsystems via mesh network initialized");
+    ESP_LOGI(TAG_MOUTH, "Mouth display animation - goblin variant with wide grin expressions initialized");
     return ESP_OK;
 }
 
-void p32_comp_master_controller_act(uint64_t loopCount) {
+void p32_comp_mouth_act(void)
+{
+    // Component: mouth - Mouth display animation - goblin variant with wide grin expressions
+    // Timing: Execute every 3 loops
 #ifdef SIMPLE_TEST
-    printf("ACT[%llu]: master_controller - hitCount:50\n", loopCount);
+    printf("ACT: mouth - hitCount:3\n");
     return;
 #endif
-    ESP_LOGI(TAG_MASTER_CONTROLLER, "Loop %llu: Master controller for coordinating all subsystems via mesh network", loopCount);
+    ESP_LOGI(TAG_MOUTH, "Mouth display animation - goblin variant with wide grin expressions");
+    // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_mesh_software_coordinator_init(void) {
+esp_err_t p32_comp_speaker_init(void)
+{
 #ifdef SIMPLE_TEST
-    printf("INIT: mesh_software_coordinator - High-level software coordination logic for distributed robot mesh network\n");
+    printf("INIT: speaker - Audio output processing - goblin variant with guttural sound profile\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_MESH_SOFTWARE_COORDINATOR, "High-level software coordination logic for distributed robot mesh network initialized");
+    ESP_LOGI(TAG_SPEAKER, "Audio output processing - goblin variant with guttural sound profile initialized");
     return ESP_OK;
 }
 
-void p32_comp_mesh_software_coordinator_act(uint64_t loopCount) {
+void p32_comp_speaker_act(void)
+{
+    // Component: speaker - Audio output processing - goblin variant with guttural sound profile
+    // Timing: Execute every 7 loops
 #ifdef SIMPLE_TEST
-    printf("ACT[%llu]: mesh_software_coordinator - hitCount:20\n", loopCount);
+    printf("ACT: speaker - hitCount:7\n");
     return;
 #endif
-    ESP_LOGI(TAG_MESH_SOFTWARE_COORDINATOR, "Loop %llu: High-level software coordination logic for distributed robot mesh network", loopCount);
+    ESP_LOGI(TAG_SPEAKER, "Audio output processing - goblin variant with guttural sound profile");
+    // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_spine_lower_init(void) {
+esp_err_t p32_comp_nose_sensor_init(void)
+{
 #ifdef SIMPLE_TEST
-    printf("INIT: spine_lower - Lower spine flexion/extension control\n");
+    printf("INIT: nose_sensor - Proximity sensor monitoring - goblin hard nose variant\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_SPINE_LOWER, "Lower spine flexion/extension control initialized");
+    ESP_LOGI(TAG_NOSE_SENSOR, "Proximity sensor monitoring - goblin hard nose variant initialized");
     return ESP_OK;
 }
 
-void p32_comp_spine_lower_act(uint64_t loopCount) {
+void p32_comp_nose_sensor_act(void)
+{
+    // Component: nose_sensor - Proximity sensor monitoring - goblin hard nose variant
+    // Timing: Execute every 15 loops
 #ifdef SIMPLE_TEST
-    printf("ACT[%llu]: spine_lower - hitCount:20\n", loopCount);
+    printf("ACT: nose_sensor - hitCount:15\n");
     return;
 #endif
-    ESP_LOGI(TAG_SPINE_LOWER, "Loop %llu: Lower spine flexion/extension control", loopCount);
+    ESP_LOGI(TAG_NOSE_SENSOR, "Proximity sensor monitoring - goblin hard nose variant");
+    // TODO: Implement actual component logic
+}
+
+esp_err_t p32_comp_left_ear_microphone_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: left_ear_microphone - Left ear HW-496 microphone for directional audio input\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_LEFT_EAR_MICROPHONE, "Left ear HW-496 microphone for directional audio input initialized");
+    return ESP_OK;
+}
+
+void p32_comp_left_ear_microphone_act(void)
+{
+    // Component: left_ear_microphone - Left ear HW-496 microphone for directional audio input
+    // Timing: Execute every 20 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: left_ear_microphone - hitCount:20\n");
+    return;
+#endif
+    ESP_LOGI(TAG_LEFT_EAR_MICROPHONE, "Left ear HW-496 microphone for directional audio input");
+    // TODO: Implement actual component logic
+}
+
+esp_err_t p32_comp_right_ear_microphone_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: right_ear_microphone - Right ear HW-496 microphone for directional audio input\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_RIGHT_EAR_MICROPHONE, "Right ear HW-496 microphone for directional audio input initialized");
+    return ESP_OK;
+}
+
+void p32_comp_right_ear_microphone_act(void)
+{
+    // Component: right_ear_microphone - Right ear HW-496 microphone for directional audio input
+    // Timing: Execute every 20 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: right_ear_microphone - hitCount:20\n");
+    return;
+#endif
+    ESP_LOGI(TAG_RIGHT_EAR_MICROPHONE, "Right ear HW-496 microphone for directional audio input");
+    // TODO: Implement actual component logic
 }

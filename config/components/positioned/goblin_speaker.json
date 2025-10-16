@@ -21,6 +21,6 @@
   "component_name": "audio",
   "description": "Audio output processing",
   "timing": {
-    "hitCount": 7
+    "hitCount": 84000
   }
 }

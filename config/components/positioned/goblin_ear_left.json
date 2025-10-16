@@ -17,5 +17,8 @@
     "rotation": "-30 DEGREES",
     "roll": "0 DEGREES"
   },
-  "function": "left_ear_audio_input"
+  "function": "left_ear_audio_input",
+  "timing": {
+    "hitCount": 24000
+  }
 }

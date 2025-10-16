@@ -11,8 +11,7 @@
 #include "esp_timer.h"
 #include "p32_eye_display.h"
 #include "p32_web_client.h"
-#include "p32_mood_transitions.h"
-// Note: Removed p32_mood_palette.h - using direct RGB565 colors now
+// Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
 static const char *TAG = "GOBLIN_EYE_RIGHT";
 static eye_display_t right_eye_display;

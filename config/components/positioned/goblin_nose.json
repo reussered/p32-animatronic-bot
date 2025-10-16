@@ -26,6 +26,6 @@
   "component_name": "nose_sensor",
   "description": "Proximity sensor monitoring",
   "timing": {
-    "hitCount": 15
+    "hitCount": 180000
   }
 }

@@ -1,5 +1,11 @@
 # P32 Animatronic Bot - AI Coding Agent Instructions
 
+## 🚨 CRITICAL: READ AI-AGENT-RULES.md FIRST 🚨
+
+**Before doing ANYTHING, read and follow: `.github/AI-AGENT-RULES.md`**
+
+These are ironclad rules that must NEVER be broken. They exist because of repeated violations.
+
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.
 

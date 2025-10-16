@@ -9,6 +9,8 @@ set(P32_CORE_SOURCES
 # P32 Individual Components - Comment out to exclude from build
 set(P32_COMPONENT_SOURCES
     p32_component_tables.c          # Generated table definitions (always needed)
+    system_components.c             # Generated system components (heartbeat, network_monitor)
+    bot_components.c                # Generated bot-specific components (eyes, nose, mouth, etc.)
     p32_eye_display.c               # Eye animation system
     p32_web_client.c                # Web client for PC streaming (test mode)
     Mood.cpp                        # C++ Mood system with efficient delta calculations

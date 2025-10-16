@@ -4,8 +4,10 @@
 #include "p32_shared_state.h"
 #include <string.h>
 
-// Global loop counter (increments every 100ms in main loop)
-uint32_t g_loopCount = 0;
+// Global loop counter (64-bit to prevent overflow at 120,000 iterations/sec)
+// NOTE: Non-const definition here, allows main.c to write via extern declaration
+// Components see it as const via p32_shared_state.h
+uint64_t g_loopCount = 0;
 
 // Global shared state (synchronized via ESP-NOW mesh across all subsystems)
 p32_shared_state_t g_shared_state = {
