@@ -9,6 +9,7 @@
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
+#include "p32_shared_state.h"
 #include "p32_eye_display.h"
 #include "p32_web_client.h"
 // Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
@@ -51,7 +52,7 @@ esp_err_t goblin_eye_left_init(void) {
 }
 
 // Component action function - executes every 50 loops
-void goblin_eye_left_act(uint32_t loopCount) {
+void goblin_eye_left_act(void) {
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000); // Convert to ms
     
 #ifdef SIMPLE_TEST
@@ -65,8 +66,8 @@ void goblin_eye_left_act(uint32_t loopCount) {
     web_client_send_animation_data_for_component("LEFT_EYE", &left_eye_display);
     
     // Render local display every few loops to avoid spam
-    if (loopCount % 50 == 0) { // Every 5 seconds at 100ms loop delay  
-        printf("\n=== LEFT EYE (Loop %lu) ===\n", loopCount);
+    if (g_loopCount % 50 == 0) { // Every 5 seconds at 100ms loop delay  
+        printf("\n=== LEFT EYE (Loop %lu) ===\n", (unsigned long)g_loopCount);
         eye_display_render(&left_eye_display);
         
         // Start new animations periodically for demo
@@ -97,7 +98,7 @@ void goblin_eye_left_act(uint32_t loopCount) {
     eye_display_update(&left_eye_display, current_time);
     
     // Render to actual SPI display (TODO: implement SPI driver calls)
-    if (loopCount % 5 == 0) { // Update display at ~20 FPS (every 500ms / 5 loops)
+    if (g_loopCount % 5 == 0) { // Update display at ~20 FPS (every 500ms / 5 loops)
         ESP_LOGD(TAG, "Updating SPI display - openness: %.2f", 
                  left_eye_display.current_frame.eye_openness);
     }

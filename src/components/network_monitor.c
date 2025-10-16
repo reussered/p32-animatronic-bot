@@ -4,6 +4,7 @@
 
 #include "esp_log.h"
 #include "esp_err.h"
+#include "p32_shared_state.h"
 
 static const char *TAG = "NETWORK_MONITOR";
 
@@ -20,16 +21,16 @@ esp_err_t network_monitor_init(void) {
 }
 
 // Component action function - executes every 5000 loops
-void network_monitor_act(uint32_t loopCount) {
+void network_monitor_act(void) {
 #ifdef SIMPLE_TEST
-    if (loopCount % 10000 == 0) {
-        printf("ACT: network_monitor - checking network (loop %lu)\n", loopCount);
+    if (g_loopCount % 10000 == 0) {
+        printf("ACT: network_monitor - checking network (loop %lu)\n", (unsigned long)g_loopCount);
     }
     return;
 #endif
 
     // Network status check
-    if (loopCount % 10000 == 0) {
-        ESP_LOGD(TAG, "Network status check - loop %lu", loopCount);
+    if (g_loopCount % 10000 == 0) {
+        ESP_LOGD(TAG, "Network status check - loop %lu", (unsigned long)g_loopCount);
     }
 }
