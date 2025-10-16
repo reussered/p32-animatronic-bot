@@ -64,10 +64,8 @@ void goblin_speaker_act(void) {
         ESP_LOGD(TAG, "  Mood excitement increased for visual feedback");
         
     } else {
-        // Idle state - log periodically
-        if (g_loopCount % 100 == 0) {  // Every 10 seconds
-            ESP_LOGD(TAG, "⏸️  Audio idle (no playback requested)");
-        }
+        // Idle state (called at hitCount rate - no extra throttling needed)
+        ESP_LOGV(TAG, "⏸️  Audio idle (no playback requested)");
     }
     
     // Simulate audio-driven animations

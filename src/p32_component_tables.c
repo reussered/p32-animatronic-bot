@@ -1,10 +1,35 @@
 #include "p32_component_tables.h"
+#include "p32_shared_state.h"
 
 // ============================================================================
 // Global Loop Counter - Written by main.c, read by all components
 // ============================================================================
 
 uint64_t g_loopCount = 0;
+
+// ============================================================================
+// Global Shared State - Synchronized across all subsystems via ESP-NOW mesh
+// ============================================================================
+
+p32_shared_state_t g_shared_state = {
+    .version = 0,
+    .timestamp_ms = 0,
+    .source_node_id = 0,
+    .distance_cm = 100,  // Initialize to "far away" (idle mode)
+    .touch_detected = false,
+    .temperature_c = 20,
+    .light_level = 0.5f,
+    .is_speaking = false,
+    .is_moving = false,
+    .current_behavior = 0,
+    .attention_target = 0,
+    .battery_percent = 100,
+    .uptime_seconds = 0,
+    .wifi_connected = false,
+    .mesh_healthy = false,
+    .cpu_usage_percent = 0,
+    .checksum = 0
+};
 
 // ============================================================================
 // P32 Component Dispatch Tables - Implementation
@@ -48,13 +73,13 @@ act_func_t actTable[COMPONENT_TABLE_SIZE] = {
 // ============================================================================
 
 uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
-    1,    // [0] heartbeat - every 1 loops (120000 Hz)
-    1,    // [1] network_monitor - every 1 loops (120000 Hz)
-    5,    // [2] left_eye - every 5 loops (24000 Hz)
-    5,    // [3] right_eye - every 5 loops (24000 Hz)
-    3,    // [4] mouth - every 3 loops (40000 Hz)
-    7,    // [5] speaker - every 7 loops (17143 Hz)
-    15,    // [6] nose_sensor - every 15 loops (8000 Hz)
-    20,    // [7] left_ear_microphone - every 20 loops (6000 Hz)
-    20     // [8] right_ear_microphone - every 20 loops (6000 Hz)
+    120000,    // [0] heartbeat - every 120000 loops (1 Hz / 1 second)
+    60000,     // [1] network_monitor - every 60000 loops (2 Hz / 500ms)
+    6000,      // [2] left_eye - every 6000 loops (20 Hz / 50ms) - smooth animation
+    6000,      // [3] right_eye - every 6000 loops (20 Hz / 50ms) - smooth animation
+    4000,      // [4] mouth - every 4000 loops (30 Hz / 33ms) - smooth speech
+    12000,     // [5] speaker - every 12000 loops (10 Hz / 100ms) - audio chunks
+    24000,     // [6] nose_sensor - every 24000 loops (5 Hz / 200ms) - sensor polling
+    30000,     // [7] left_ear_microphone - every 30000 loops (4 Hz / 250ms)
+    30000      // [8] right_ear_microphone - every 30000 loops (4 Hz / 250ms)
 };

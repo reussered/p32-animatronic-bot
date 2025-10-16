@@ -25,8 +25,8 @@ void p32_comp_heartbeat_act(void)
     printf("ACT: heartbeat - hitCount:1\n");
     return;
 #endif
-    ESP_LOGI(TAG_HEARTBEAT, "System heartbeat");
-    // TODO: Implement actual component logic
+    // Runs every loop - minimal work, no logging
+    // TODO: Implement watchdog reset or health check
 }
 
 esp_err_t p32_comp_network_monitor_init(void)

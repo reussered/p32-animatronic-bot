@@ -39,7 +39,7 @@ void goblin_mouth_act(void) {
     // - Synchronize with speech audio
     // - Update GC9A01 display via SPI_DEVICE_3
     
-    ESP_LOGV(TAG, "Mouth act (STUB) at loop %u - hardware pending", g_loopCount);
+    ESP_LOGV(TAG, "Mouth act (STUB) - hardware pending");
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

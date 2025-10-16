@@ -12,48 +12,32 @@ static const char *TAG_NOSE_SENSOR = "NOSE_SENSOR";
 static const char *TAG_LEFT_EAR_MICROPHONE = "LEFT_EAR_MICROPHONE";
 static const char *TAG_RIGHT_EAR_MICROPHONE = "RIGHT_EAR_MICROPHONE";
 
+// Forward declarations from actual implementations
+extern esp_err_t goblin_eye_left_init(void);
+extern void goblin_eye_left_act(void);
+extern esp_err_t goblin_eye_right_init(void);
+extern void goblin_eye_right_act(void);
+extern esp_err_t goblin_nose_init(void);
+extern void goblin_nose_act(void);
+
 esp_err_t p32_comp_left_eye_init(void)
 {
-#ifdef SIMPLE_TEST
-    printf("INIT: left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware\n");
-    return ESP_OK;
-#endif
-    ESP_LOGI(TAG_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware initialized");
-    return ESP_OK;
+    return goblin_eye_left_init();  // Call real implementation
 }
 
 void p32_comp_left_eye_act(void)
 {
-    // Component: left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware
-    // Timing: Execute every 5 loops
-#ifdef SIMPLE_TEST
-    printf("ACT: left_eye - hitCount:5\n");
-    return;
-#endif
-    ESP_LOGI(TAG_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware");
-    // TODO: Implement actual component logic
+    goblin_eye_left_act();  // Call real implementation
 }
 
 esp_err_t p32_comp_right_eye_init(void)
 {
-#ifdef SIMPLE_TEST
-    printf("INIT: right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware\n");
-    return ESP_OK;
-#endif
-    ESP_LOGI(TAG_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware initialized");
-    return ESP_OK;
+    return goblin_eye_right_init();  // Call real implementation
 }
 
 void p32_comp_right_eye_act(void)
 {
-    // Component: right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware
-    // Timing: Execute every 5 loops
-#ifdef SIMPLE_TEST
-    printf("ACT: right_eye - hitCount:5\n");
-    return;
-#endif
-    ESP_LOGI(TAG_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware");
-    // TODO: Implement actual component logic
+    goblin_eye_right_act();  // Call real implementation
 }
 
 esp_err_t p32_comp_mouth_init(void)
@@ -102,24 +86,12 @@ void p32_comp_speaker_act(void)
 
 esp_err_t p32_comp_nose_sensor_init(void)
 {
-#ifdef SIMPLE_TEST
-    printf("INIT: nose_sensor - Proximity sensor monitoring - goblin hard nose variant\n");
-    return ESP_OK;
-#endif
-    ESP_LOGI(TAG_NOSE_SENSOR, "Proximity sensor monitoring - goblin hard nose variant initialized");
-    return ESP_OK;
+    return goblin_nose_init();  // Call real implementation
 }
 
 void p32_comp_nose_sensor_act(void)
 {
-    // Component: nose_sensor - Proximity sensor monitoring - goblin hard nose variant
-    // Timing: Execute every 15 loops
-#ifdef SIMPLE_TEST
-    printf("ACT: nose_sensor - hitCount:15\n");
-    return;
-#endif
-    ESP_LOGI(TAG_NOSE_SENSOR, "Proximity sensor monitoring - goblin hard nose variant");
-    // TODO: Implement actual component logic
+    goblin_nose_act();  // Call real implementation
 }
 
 esp_err_t p32_comp_left_ear_microphone_init(void)

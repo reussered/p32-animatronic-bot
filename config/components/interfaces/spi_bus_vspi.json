@@ -5,9 +5,9 @@
   "interface_id": "SPI_BUS_VSPI",
   "interface_type": "SPI_BUS",
   "pins": {
-    "miso": 12,
+    "miso": -1,
     "mosi": 13,
-    "clk": 14
+    "clk": 12
   },
   "bus_config": {
     "frequency": "10000000",

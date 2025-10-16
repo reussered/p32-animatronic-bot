@@ -2,6 +2,7 @@
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
+#include "p32_shared_state.h"
 #include "esp_log.h"
 #include "esp_err.h"
 
@@ -19,17 +20,14 @@ esp_err_t network_monitor_init(void) {
     return ESP_OK;
 }
 
-// Component action function - executes every 5000 loops
-void network_monitor_act(uint32_t loopCount) {
+// Component action function - NO ARGUMENTS
+void network_monitor_act(void)
+{
 #ifdef SIMPLE_TEST
-    if (loopCount % 10000 == 0) {
-        printf("ACT: network_monitor - checking network (loop %lu)\n", loopCount);
-    }
+    printf("ACT: network_monitor - checking network\n");
     return;
 #endif
 
-    // Network status check
-    if (loopCount % 10000 == 0) {
-        ESP_LOGD(TAG, "Network status check - loop %lu", loopCount);
-    }
+    // Network status check (called at hitCount rate)
+    ESP_LOGD(TAG, "Network status check");
 }

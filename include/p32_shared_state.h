@@ -14,9 +14,8 @@ extern "C" {
 
 // Global loop counter (64-bit to prevent overflow)
 // At 120,000 iterations/second: 32-bit overflows in ~10 hours, 64-bit in 4.8 million years
-// Components can READ this directly, but ONLY main.c can write it
-// Declared as const here to prevent accidental modification in components
-extern const uint64_t g_loopCount;
+// Components can READ this directly, but ONLY main.c should write it
+extern uint64_t g_loopCount;
 
 // Shared state structure (synchronized via ESP-NOW mesh across all subsystems)
 // This is a PLAIN C STRUCT - no C++ objects, only POD types for ESP-NOW transmission
