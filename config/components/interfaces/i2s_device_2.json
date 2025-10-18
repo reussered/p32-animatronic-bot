@@ -9,8 +9,8 @@
   
   "bus_reference": "config/components/interfaces/i2s_bus_0.json",
   
-  "device_specific_pins": {
-    "data_pin": "GPIO_26"
+  "pins": {
+    "data": 41
   },
   
   "device_configuration": {

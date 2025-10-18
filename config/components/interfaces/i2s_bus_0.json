@@ -6,8 +6,8 @@
   "interface_type": "I2S_BUS",
   "tested": true,
   "pins": {
-    "bclk": 4,
-    "ws": 5
+    "bclk": 1,
+    "ws": 2
   },
   "bus_config": {
     "sample_rate": "44100",
