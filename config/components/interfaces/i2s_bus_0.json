@@ -4,6 +4,7 @@
   "author": "config/author.json",
   "interface_id": "I2S_BUS_0",
   "interface_type": "I2S_BUS",
+  "tested": true,
   "pins": {
     "bclk": 4,
     "ws": 5
