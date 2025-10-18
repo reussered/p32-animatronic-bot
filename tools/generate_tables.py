@@ -77,9 +77,9 @@ class P32ComponentGenerator:
     
     def generate_function_name(self, component_name: str, func_type: str) -> str:
         """Generate standardized function names from component names"""
-        # Convert component name to function name format
+        # Convert component name to function name format - ALL LOWERCASE
         name = component_name.lower().replace(' ', '_').replace('-', '_')
-        return f"p32_comp_{name}_{func_type}"
+        return f"{name}_{func_type}"
     
     def extract_component_info(self, components: List[Dict[str, Any]]) -> None:
         """Extract component information and build function lists"""

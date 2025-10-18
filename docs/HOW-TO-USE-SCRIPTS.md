@@ -70,6 +70,30 @@ humanoid_base.json → goblin_family.json → goblin_warrior.json → resolved\g
 
 ### 📝 Naming Convention Enforcement
 
+## 🔤 **P32 Naming Convention Rules**
+
+### **Core Naming Rules:**
+1. **All generated function names → lowercase**
+   - `component_name_init()`, `component_name_act()`
+2. **All JSON component names → lowercase**  
+   - `testpicker.json`, `gc9a01_display_driver.json`
+3. **All C++ filenames → lowercase**
+   - `testpicker.cpp`, `main.cpp`, `component_tables.cpp`
+4. **EXCEPTION: Class-containing files → keep uppercase**
+   - `SystemTest.hpp`, `Mood.cpp`, `GlobalSharedMemory.hpp`
+
+### **Examples:**
+```
+✅ CORRECT:
+- testpicker.json → testpicker_init(), testpicker_act()
+- gc9a01_display_driver.json → gc9a01_display_driver_init()
+- SystemTest.hpp (contains SystemTest class)
+
+❌ INCORRECT:  
+- TestPicker.json, p32_comp_testpicker_init()
+- GC9A01_Display.cpp, TESTPICKER_ACT()
+```
+
 #### `check_cpp_naming.py` - Validate C++ Naming
 **Purpose**: Ensures CPP filenames match their init/act function prefixes
 

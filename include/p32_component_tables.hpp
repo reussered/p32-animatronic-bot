@@ -14,21 +14,28 @@ typedef esp_err_t (*init_func_t)(void);
 typedef void (*act_func_t)(void);
 
 // Table size - all three tables have same size (one entry per component)
-#define COMPONENT_TABLE_SIZE 8
+#define COMPONENT_TABLE_SIZE 15
 
 // ============================================================================
 // Forward Declarations - Init Functions (C linkage)
 // ============================================================================
 
 extern "C" {
-    esp_err_t p32_comp_system_core_init(void);
-    esp_err_t p32_comp_network_monitor_init(void);
-    esp_err_t p32_comp_display_test_init(void);
-    esp_err_t p32_comp_testpicker_init(void);
-    esp_err_t p32_comp_power_monitor_init(void);
-    esp_err_t p32_comp_watchdog_init(void);
-    esp_err_t p32_comp_serial_console_init(void);
-    esp_err_t p32_comp_simple_core_test_init(void);
+    esp_err_t system_core_init(void);
+    esp_err_t network_monitor_init(void);
+    esp_err_t display_test_init(void);
+    esp_err_t testpicker_init(void);
+    esp_err_t power_monitor_init(void);
+    esp_err_t watchdog_init(void);
+    esp_err_t serial_console_init(void);
+    esp_err_t left_eye_init(void);
+    esp_err_t right_eye_init(void);
+    esp_err_t mouth_init(void);
+    esp_err_t nose_sensor_init(void);
+    esp_err_t unknown_init(void);
+    esp_err_t unknown_init(void);
+    esp_err_t audio_init(void);
+    esp_err_t left_eye_init(void);
 }
 
 // ============================================================================
@@ -36,14 +43,21 @@ extern "C" {
 // ============================================================================
 
 extern "C" {
-    void p32_comp_system_core_act(void);
-    void p32_comp_network_monitor_act(void);
-    void p32_comp_display_test_act(void);
-    void p32_comp_testpicker_act(void);
-    void p32_comp_power_monitor_act(void);
-    void p32_comp_watchdog_act(void);
-    void p32_comp_serial_console_act(void);
-    void p32_comp_simple_core_test_act(void);
+    void system_core_act(void);
+    void network_monitor_act(void);
+    void display_test_act(void);
+    void testpicker_act(void);
+    void power_monitor_act(void);
+    void watchdog_act(void);
+    void serial_console_act(void);
+    void left_eye_act(void);
+    void right_eye_act(void);
+    void mouth_act(void);
+    void nose_sensor_act(void);
+    void unknown_act(void);
+    void unknown_act(void);
+    void audio_act(void);
+    void left_eye_act(void);
 }
 
 // ============================================================================

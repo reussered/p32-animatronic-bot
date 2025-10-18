@@ -28,31 +28,38 @@
   },
   
   "responsibilities": [
-    "Populate SystemTest global variable with comprehensive test cases",
-    "Register GC9A01 display test cases",
-    "Add component validation tests",
-    "Provide system health check tests",
-    "Monitor test execution readiness"
+    "Read SystemTest from GSM g_Test variable",
+    "Add GC9A01 display test cases to SystemTest",
+    "Write updated SystemTest back to GSM g_Test",
+    "Manage test execution queue via GSM",
+    "Monitor test completion status"
   ],
   
-  "test_categories": [
-    "GC9A01_Left_Eye_Init",
-    "GC9A01_Right_Eye_Init", 
-    "GC9A01_Mouth_Init",
-    "GC9A01_Clear_Screen_Test",
-    "GC9A01_Color_Fill_Test",
-    "GC9A01_Pixel_Draw_Test",
-    "Eye_Animation_Blink_Test",
-    "Eye_Animation_Movement_Test",
-    "Mouth_Animation_Test",
-    "SPI_Communication_Test"
+  "test_cases_to_add": [
+    "DisplayTest_1",
+    "DisplayTest_2", 
+    "DisplayTest_3",
+    "GC9A01_Clear_Screen",
+    "GC9A01_Color_Fill_Red",
+    "GC9A01_Color_Fill_Green", 
+    "GC9A01_Color_Fill_Blue",
+    "GC9A01_Pixel_Draw",
+    "GC9A01_Text_Render",
+    "GC9A01_SPI_Test"
   ],
   
   "integration_points": {
-    "global_variables": ["SystemTest"],
-    "hardware_components": ["gc9a01_display"],
-    "test_framework": "GSM",
-    "display_system": "GC9A01"
+    "gsm_variables": ["g_Test"],
+    "gsm_operations": ["gsm.read()", "gsm.write()"],
+    "test_framework": "SystemTest via GSM",
+    "coordination": "GC9A01 display driver"
+  },
+  
+  "gsm_operations": {
+    "read_operation": "gsm.read('g_Test', &test)",
+    "write_operation": "gsm.write('g_Test', &test)",
+    "test_management": "test.addTest(test_name)",
+    "variable_name": "g_Test"
   },
   
   "initialization_priority": "high",
