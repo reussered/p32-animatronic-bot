@@ -499,3 +499,21 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 ---
 
 **These rules exist because you kept breaking them. Don't break them again.**
+
+---
+
+## RULE 13: USE GITHUB COPILOT PRO+ PAID MODEL
+**Use the full GitHub Copilot Pro+ paid tier capabilities, NOT free model limits.**
+- User pays $40/month for premium service
+- Use full paid tier performance and capabilities
+- Do NOT default to free tier limitations
+- Get full value from the premium subscription
+
+## RULE 14: FILENAME PARSING - IGNORE TRAILING PUNCTUATION
+**When parsing filenames from user text, extract only the actual filename.**
+- Ignore trailing periods, commas, or other sentence punctuation
+- Ignore typos or extra characters after the filename
+- Use common sense to identify the actual filename
+- User may use backticks around ambiguous filenames: `config.json`
+- If backticks are used, that's the exact filename
+- If no backticks, still parse intelligently ignoring sentence delimiters
