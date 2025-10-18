@@ -5,9 +5,26 @@
   "interface_id": "SPI_BUS_VSPI",
   "interface_type": "SPI_BUS",
   "pins": {
-    "miso": -1,
-    "mosi": 13,
-    "clk": 14
+    "rst": {
+      "gpio": 4,
+      "naming_style": "i2c_generic",
+      "common_names": ["RST", "RESET"]
+    },
+    "dc": {
+      "gpio": 2,
+      "naming_style": "i2c_generic",
+      "common_names": ["DC", "A0", "CMD"]
+    },
+    "scl": {
+      "gpio": 14,
+      "naming_style": "i2c_generic",
+      "common_names": ["SCL", "CLK", "SCLK"]
+    },
+    "sda": {
+      "gpio": 13,
+      "naming_style": "i2c_generic",
+      "common_names": ["SDA", "MOSI", "DIN"]
+    }
   },
   "bus_config": {
     "frequency": "10000000",
