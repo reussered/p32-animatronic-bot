@@ -74,29 +74,41 @@ void app_main(void)
 **JSON Configuration**: None required - hardcoded in system
 
 **Code Pattern**:
-```c
-// src/components/system_core.c
-#include "p32_component_config.h"
+```cpp
+// src/components/SystemCore.cpp
+#include "SystemCore.hpp"
 #include "p32_shared_state.h"  // Access to g_loopCount and all globals
 
-#ifdef ENABLE_SYSTEM_COMPONENTS
-
-esp_err_t system_core_init(void) {
+extern "C" esp_err_t SystemCore_init(void) {
     // NO ARGUMENTS - access globals directly
-    ESP_LOGI(TAG, "System core initializing...");
+    ESP_LOGI(TAG, "SystemCore initializing...");
     // Initialize core subsystems
     return ESP_OK;
 }
 
-void system_core_act(void) {
+extern "C" void SystemCore_act(void) {
     // NO ARGUMENTS - access g_loopCount from global shared state
     if (g_loopCount % 100 == 0) {
         // Check system health every 10 seconds
         ESP_LOGI(TAG, "System health check at loop %u", g_loopCount);
     }
 }
+```
 
-#endif // ENABLE_SYSTEM_COMPONENTS
+**Header Pattern**:
+```cpp
+// include/components/SystemCore.hpp
+#ifndef SYSTEM_CORE_HPP
+#define SYSTEM_CORE_HPP
+
+#include "esp_err.h"
+
+extern "C" {
+    esp_err_t SystemCore_init(void);
+    void SystemCore_act(void);
+}
+
+#endif // SYSTEM_CORE_HPP
 ```
 
 ### Level 2: Family Components (Shared Across Bot Family)

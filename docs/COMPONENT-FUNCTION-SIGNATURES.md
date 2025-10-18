@@ -94,17 +94,15 @@ inline void mood_deserialize() {
 
 ### Component Implementation
 
-```c
-// src/components/example_component.c
+```cpp
+// src/components/ExampleComponent.cpp
 
-#include "p32_component_config.h"
+#include "ExampleComponent.hpp"
 #include "p32_shared_state.h"      // ◄── ALWAYS include this
 
-#ifdef ENABLE_{FAMILY}_COMPONENTS
-
 // Init function: NO ARGUMENTS
-esp_err_t example_component_init(void) {
-    ESP_LOGI(TAG, "Initializing example component...");
+extern "C" esp_err_t ExampleComponent_init(void) {
+    ESP_LOGI(TAG, "Initializing ExampleComponent...");
     
     // Access globals directly if needed during init
     ESP_LOGI(TAG, "Starting at loop count: %u", g_loopCount);
@@ -115,7 +113,7 @@ esp_err_t example_component_init(void) {
 }
 
 // Act function: NO ARGUMENTS
-void example_component_act(void) {
+extern "C" void ExampleComponent_act(void) {
     // Access g_loopCount from global
     // (component executes when g_loopCount % hitCount == 0)
     
@@ -136,8 +134,25 @@ void example_component_act(void) {
     
     ESP_LOGD(TAG, "Component executed at loop %u", g_loopCount);
 }
+```
 
-#endif // ENABLE_{FAMILY}_COMPONENTS
+### Component Header
+
+```cpp
+// include/components/ExampleComponent.hpp
+
+#ifndef EXAMPLE_COMPONENT_HPP
+#define EXAMPLE_COMPONENT_HPP
+
+#include "esp_err.h"
+
+// Component function declarations with C linkage
+extern "C" {
+    esp_err_t ExampleComponent_init(void);
+    void ExampleComponent_act(void);
+}
+
+#endif // EXAMPLE_COMPONENT_HPP
 ```
 
 ## Component Registration Tables
@@ -183,21 +198,27 @@ extern act_table_entry_t actTable[ACT_TABLE_SIZE];
 
 #include "p32_component_registry.h"
 
-// Forward declarations: ALL use void signature
-extern esp_err_t system_core_init(void);
-extern void system_core_act(void);
+// Forward declarations: ALL use void signature and ComponentName pattern
+extern esp_err_t SystemCore_init(void);
+extern void SystemCore_act(void);
 
-extern esp_err_t esp_now_mesh_init(void);
-extern void esp_now_mesh_act(void);
+extern esp_err_t EspNowMesh_init(void);
+extern void EspNowMesh_act(void);
 
-extern esp_err_t goblin_personality_init(void);
-extern void goblin_personality_act(void);
+extern esp_err_t GoblinPersonality_init(void);
+extern void GoblinPersonality_act(void);
 
-extern esp_err_t goblin_eye_left_init(void);
-extern void goblin_eye_left_act(void);
+extern esp_err_t GoblinEyeLeft_init(void);
+extern void GoblinEyeLeft_act(void);
 
-// Init table
+// Init table - ComponentName_init pattern
 init_func_t initTable[INIT_TABLE_SIZE] = {
+    SystemCore_init,
+    EspNowMesh_init,
+    GoblinPersonality_init,
+    GoblinEyeLeft_init,
+    // ... more components
+};
     system_core_init,
     esp_now_mesh_init,
     goblin_personality_init,

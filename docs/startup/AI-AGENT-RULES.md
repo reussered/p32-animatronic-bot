@@ -21,105 +21,237 @@
 
 ---
 
+## 🚨 RULE -0.5: THOUGHTFUL IMPLEMENTATION 🚨
+
+**GOING OFF AND IMPLEMENTING CHANGES ALMOST ALWAYS REQUIRES A LITTLE THOUGHT PROCESS.**
+
 ```
 ████████████████████████████████████████████████████████████████
 █                                                              █
-█  🔥🔥🔥 RULE -1: NEVER ADD DELAYS TO main.cpp 🔥🔥🔥       █
+█  🧠🧠🧠 THINK BEFORE IMPLEMENTING 🧠🧠🧠                  █
 █                                                              █
-█  IF YOU ARE THINKING ABOUT ADDING vTaskDelay() TO main.cpp: █
+█  FOR SIGNIFICANT CHANGES:                                    █
+█  1. ASK CLARIFYING QUESTIONS                                 █
+█  2. UNDERSTAND THE FULL CONTEXT                              █
+█  3. PROPOSE YOUR APPROACH                                    █
+█  4. WAIT FOR APPROVAL                                        █
 █                                                              █
-█  ❌ STOP                                                     █
-█  ❌ DO NOT DO IT                                            █
-█  ❌ NOT EVEN "JUST TO TEST"                                 █
-█  ❌ NOT EVEN "TEMPORARILY"                                  █
-█  ❌ NEVER                                                    █
+█  FOR SMALL CHANGES: EXPLAIN YOUR REASONING                   █
 █                                                              █
-█  THIS RULE HAS BEEN VIOLATED 10+ TIMES                      █
-█  USER IS READY TO SET HAIR ON FIRE                          █
-█  DO NOT BE THE 11TH VIOLATION                               █
-█                                                              █
-█  WANT TO SLOW DOWN EXECUTION?                               █
-█  ✅ ONLY SOLUTION: Increase hitCount in JSON                █
-█  ✅ Regenerate tables                                       █
-█  ✅ That's it. That's the only way.                         █
-█                                                              █
-█  WHY? BECAUSE USER SAID SO. THAT'S ALL YOU NEED TO KNOW.   █
+█  AGENTS RUNNING OFF HALF-COCKED IS VERY ANNOYING            █
 █                                                              █
 ████████████████████████████████████████████████████████████████
 ```
 
-## 🔥 RULE -1 DETAILS: main.cpp IS IMMUTABLE 🔥
+### **WHEN TO DISCUSS vs WHEN TO IMPLEMENT:**
 
-**main.cpp IS IMMUTABLE. IT RUNS AT MAXIMUM SPEED. NO DELAYS. EVER.**
+#### **🚨 ALWAYS DISCUSS FIRST (Significant Changes):**
+- Architectural modifications
+- Multiple file changes
+- New features or systems
+- Bug fixes affecting core logic
+- Changes to established patterns
+- Anything that could break existing functionality
 
-### Why This Architecture Exists:
+#### **✅ IMPLEMENT WITH EXPLANATION (Small Changes):**
+- Documentation updates
+- Comment improvements  
+- Variable renaming
+- Formatting fixes
+- Single-line bug fixes
+- Adding debug logging
 
-**Single-threaded, single-purpose design:**
-- NO FreeRTOS tasks (ever)
-- NO competing threads (ever)
-- NO other processes sharing CPU (ever)
-- 100% of CPU dedicated to this one control loop
+### **IMPLEMENTATION PATTERNS:**
 
-**The Philosophy:**
-- **Maximum responsiveness** - Visit component code as fast as possible
-- **Efficient filtering** - hitCount modulo operation is ultra-fast (~nanoseconds)
-- **Components decide timing** - Each component's hitCount controls its frequency
-- **Zero waste** - Adding delays just burns cycles with NO benefit (no other threads to yield to!)
-
-**Why hitCount is brilliant:**
+#### **Pattern: Explain Your Reasoning**
 ```
-Cost of modulo check: ~1-5 nanoseconds
-Cost of vTaskDelay(1ms): 1,000,000 nanoseconds WASTED
+✅ "I'm going to fix this typo in the comment because it says 'initalize' 
+   instead of 'initialize' on line 23 of SystemCore.cpp"
+
+✅ "I'll add a debug log statement to track when the component initializes,
+   which will help with the timing issue you mentioned"
+
+✅ "I need to update the function signature documentation to match 
+   the actual ComponentName_init() pattern we discussed"
 ```
 
-The modulo check costs virtually nothing. We can check 1 million components per second.
-Adding a delay just throws away CPU cycles when NO OTHER CODE needs them.
+#### **Pattern: Significant Change Discussion**
+```
+User: "The timing system needs work"
 
-**This decision was made after 40+ hours of design. It is FINAL.**
+✅ "I see timing needs attention. Let me understand:
+   - Are you seeing performance issues with the 103Hz loop rate?
+   - Is this about specific components executing too frequently?
+   - Should I analyze the current hitCount values first?
+   
+   I'm thinking we might need to adjust hitCount values in the JSON configs,
+   but I want to understand the specific issue before making changes."
 
-**All functionality goes through components:**
-- Want something to run every 100ms? hitCount in JSON
-- Want something to run every second? hitCount in JSON
-- Want something to wait internally? Component can use vTaskDelay INSIDE its act() function
-- Main loop NEVER waits - it iterates at max speed
+❌ *immediately starts modifying timing code*
+```
 
-**If LED blinks too fast / components execute too often:**
-- ❌ NEVER add vTaskDelay() to main.cpp
-- ❌ NEVER add any sleep/wait/delay to the core loop
-- ❌ NEVER modify main.cpp timing AT ALL
-- ❌ DO NOT suggest "we should yield to other tasks" (there are no other tasks!)
-- ✅ ONLY adjust hitCount values in component JSON files
-- ✅ ONLY modify component act() functions if they need internal delays
+### **THOUGHT PROCESS EXAMPLES:**
 
-**The main loop architecture:**
-```cpp
-while (true) {
-    for (int i = 0; i < COMPONENT_TABLE_SIZE; i++) {
-        if (g_loopCount % hitCountTable[i] == 0) {
-            actTable[i]();
-        }
-    }
-    g_loopCount++;
-    // NO DELAY HERE - SINGLE-THREADED, NO OTHER CODE TO SHARE WITH
+**Small Change:**
+```
+"I notice the include guard in SystemCore.hpp uses lowercase. I'll update it 
+to match the SYSTEM_CORE_HPP pattern for consistency."
+```
+
+**Medium Change:**
+```
+"You mentioned the display flickering. I think this might be SPI timing related.
+Should I:
+1. Check the SPI clock rate settings first?
+2. Look at the component hitCount values?  
+3. Examine the frame buffer timing?
+
+I lean toward checking SPI settings first since that's the most common cause."
+```
+
+**Large Change:**
+```
+"This looks like it might need refactoring the component registration system.
+Before I dive in, let me understand:
+- Is the issue with the table generation process?
+- Are you seeing problems with component discovery?
+- Should I map out the current flow first?"
+```
+
+### **KEY PRINCIPLE: PROPORTIONAL THINKING**
+
+- � **Small changes**: Brief explanation of reasoning
+- 🏠 **Medium changes**: Quick check-in on approach
+- 🏢 **Large changes**: Full discussion and approval
+
+**The goal is thoughtful development, not process overhead.**
+
+---
+
+## 🚨 RULE -1: IMMUTABLE CODEBASE PROTECTION 🚨
+
+**CRITICAL: This project has lost 3/4 of its code due to agents randomly refactoring and deleting files.**
+
+```
+████████████████████████████████████████████████████████████████
+█                                                              █
+█  🔥🔥🔥 ALL EXISTING CODE IS IMMUTABLE BY DEFAULT 🔥🔥🔥   █
+█                                                              █
+█  ❌ CANNOT MODIFY any existing file without explicit checkout █
+█  ❌ CANNOT DELETE any existing file under any circumstances   █
+█  ❌ CANNOT MOVE/RENAME any existing file locations           █
+█  ❌ CANNOT REFACTOR existing working code                    █
+█                                                              █
+█  ALL EXISTING FILES ARE IN TESTED STATE = FINAL VERSION     █
+█                                                              █
+█  THIS RULE REPLACES THE OLD main.cpp RULE                   █
+█  NOW PROTECTS THE ENTIRE CODEBASE                           █
+█                                                              █
+████████████████████████████████████████████████████████████████
+```
+
+### **WHY THIS RULE EXISTS:**
+- Agents have destroyed working code through "improvements"
+- Random refactoring has caused data loss
+- File deletions have eliminated hours of work
+- Location changes break dependencies
+- "Optimization" attempts corrupt tested systems
+
+### **PROTECTED FILE TYPES:**
+- ✅ **ALL .cpp/.hpp files** - Component implementations
+- ✅ **ALL .json files** - Configuration and component definitions  
+- ✅ **ALL .py/.ps1 scripts** - Build and utility tools
+- ✅ **ALL .md documentation** - Architecture specifications
+- ✅ **ALL .scad/.stl files** - 3D models and manufacturing
+- ✅ **EVERYTHING** - Assume it's tested and working
+
+### **CHECKOUT WORKFLOW (ONLY Way to Modify Files):**
+
+#### **Step 1: Create Working File List**
+```powershell
+# Create checkout list with files you plan to modify
+echo "src/components/ComponentName.cpp" >> .working-files.txt
+echo "config/components/positioned/component_name.json" >> .working-files.txt
+echo "docs/SOME-SPEC.md" >> .working-files.txt
+```
+
+#### **Step 2: Backup to Temp Directory**  
+```powershell
+# MANDATORY: Backup ALL files before ANY modification
+mkdir temp-backup-$(Get-Date -Format "yyyy-MM-dd-HHmm")
+foreach($file in Get-Content .working-files.txt) {
+    $dest = "temp-backup-$(Get-Date -Format "yyyy-MM-dd-HHmm")/$file"
+    New-Item -ItemType Directory -Path (Split-Path $dest) -Force
+    Copy-Item $file $dest
 }
 ```
 
-**Timing is controlled by hitCount ONLY:**
-- Loop runs at ~1-2 million iterations/second (measured)
-- hitCount = 120000 → executes ~10x per second
-- hitCount = 1200000 → executes ~1x per second
-- Want slower? INCREASE hitCount in JSON, regenerate tables
+#### **Step 3: NOW Files Are Fair Game**
+```markdown
+✅ Files in .working-files.txt can now be modified
+✅ Files are backed up in temp directory  
+✅ Can add/remove/edit content in checked-out files
+✅ Can test and verify changes
+```
 
-**main.cpp is NEVER modified because:**
-- Forces ALL changes through component system
-- Ensures architectural consistency
-- Prevents ad-hoc logic creep
-- Makes testing predictable
-- Component table is the ONLY interface
+#### **Step 4: Verification & Commit**
+```powershell
+# Test the changes thoroughly
+python tools/check_json_naming.py
+python tools/check_cpp_naming.py  
+pio run -t upload -t monitor
 
-**See:** `docs/CORE-LOOP-SPEC.md` for full explanation
+# If everything works:
+git add (Get-Content .working-files.txt)
+git commit -m "Verified changes to checked-out files"
+Remove-Item .working-files.txt
+Remove-Item temp-backup-* -Recurse
+```
 
-**THIS RULE HAS BEEN VIOLATED 10+ TIMES. DO NOT VIOLATE IT AGAIN.**
+### **EMERGENCY RESTORE:**
+```powershell
+# If changes break something:
+foreach($file in Get-Content .working-files.txt) {
+    Copy-Item "temp-backup-*/$file" $file -Force
+}
+```
+
+### **CHECKOUT ENTIRE PROJECT (Allowed):**
+```powershell
+# Get ALL files in project
+Get-ChildItem -Recurse -File | Where-Object { 
+    $_.Extension -match "\.(cpp|hpp|json|py|ps1|md|scad|stl)$" 
+} | ForEach-Object { $_.FullName.Replace((Get-Location).Path + "\", "") } >> .working-files.txt
+
+# Backup everything (will be large but safe)
+# Then proceed with modifications
+```
+
+### **VALIDATION TOOLS:**
+
+```powershell
+# Check if protection system is working
+python tools/validate-protection.py
+
+# Expected output when violations detected:
+# ❌ Files modified without any checkout: ['src/main.cpp', 'docs/SOME-SPEC.md']
+```
+
+### **EXAMPLE: PROPER CHECKOUT WORKFLOW**
+
+```powershell
+# Step 1: Check current protection status
+python tools/validate-protection.py
+
+# Step 2: Check out files you want to modify
+.\tools\checkout-files.ps1 -Files "src/main.cpp","docs/COMPONENT-FUNCTION-SIGNATURES.md"
+
+# Step 3: Now files are safely backed up and can be modified
+# (Make your changes here)
+
+# Step 4: Validate and commit
+.\tools\checkout-files.ps1 -Commit
+```
 
 ---
 
@@ -147,7 +279,22 @@ while (true) {
 4. Ask: "I found X is already implemented at [location]. Should I modify it or create new?"
 5. WAIT for answer
 
-**NO ASSUMPTIONS. NO GUESSING. CHECK THE CODE.**
+**CRITICAL ADDITION: NEVER CREATE WHAT ALREADY EXISTS**
+
+**Before creating ANY new file, script, or functionality:**
+1. **SEARCH** the entire codebase for existing implementations
+2. **CHECK** tools/, scripts/, utilities directories first
+3. **EXAMINE** similar functionality that might already exist
+4. **UNDERSTAND** why existing solutions were created that way
+5. **ASK** before duplicating effort
+
+**Example violation:**
+- Created `validate_naming_conventions.py` without checking tools/ directory
+- Found existing scripts: `check_json_naming.py`, `fix_json_naming.py`, `check_cpp_naming.py`, `fix_cpp_naming.py`
+- These scripts were already working and comprehensive
+- Wasted effort creating duplicate functionality
+
+**NO ASSUMPTIONS. NO GUESSING. CHECK THE CODE FIRST. ALWAYS.**
 
 ## RULE 0B: SYNCHRONIZE DOCUMENTATION WITH CODE CHANGES
 

@@ -1,0 +1,115 @@
+{
+  "relative_filename": "config/components/hardware/gc9a01_display.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "hardware_type": "GC9A01_DISPLAY",
+  "component_name": "GC9A01 Circular LCD Display",
+  "physical_specs": {
+    "diameter": "1.28 INCH",
+    "thickness": "0.08 INCH",
+    "resolution": "240x240",
+    "mounting_holes": {
+      "count": 4,
+      "diameter": "0.1 INCH",
+      "spacing": "1.1 INCH"
+    }
+  },
+  "electrical_specs": {
+    "supply_voltage": "3.3V",
+    "interface": "SPI",
+    "current_consumption": "50mA"
+  },
+  "pin_mapping": {
+    "description": "GC9A01 displays have varying pin labels depending on manufacturer. All alternate names map to standard SPI signals.",
+    "pins": {
+      "CLK": {
+        "standard_name": "SPI_CLK",
+        "alternate_names": ["SCK", "SCLK", "CLK"],
+        "function": "SPI Clock",
+        "required": true
+      },
+      "MOSI": {
+        "standard_name": "SPI_MOSI",
+        "alternate_names": ["SDA", "SDI", "DIN", "MOSI"],
+        "function": "SPI Master Out Slave In (Data)",
+        "required": true
+      },
+      "DC": {
+        "standard_name": "DATA_COMMAND",
+        "alternate_names": ["DC", "D/C", "RS", "A0"],
+        "function": "Data/Command Select",
+        "required": true
+      },
+      "CS": {
+        "standard_name": "SPI_CS",
+        "alternate_names": ["CS", "SS", "CE"],
+        "function": "Chip Select (Slave Select)",
+        "required": true
+      },
+      "RST": {
+        "standard_name": "RESET",
+        "alternate_names": ["RST", "RESET", "RES"],
+        "function": "Hardware Reset",
+        "required": true
+      },
+      "BL": {
+        "standard_name": "BACKLIGHT",
+        "alternate_names": ["BL", "BLK", "LED"],
+        "function": "Backlight Control (PWM)",
+        "required": false
+      },
+      "VCC": {
+        "standard_name": "POWER",
+        "alternate_names": ["VCC", "VDD", "3V3", "+3.3V"],
+        "function": "Power Supply (3.3V)",
+        "required": true
+      },
+      "GND": {
+        "standard_name": "GROUND",
+        "alternate_names": ["GND", "VSS", "0V"],
+        "function": "Ground Reference",
+        "required": true
+      }
+    },
+    "common_manufacturer_variations": {
+      "variation_1": {
+        "description": "Most common pinout (your displays)",
+        "pins_exposed": ["SCK", "SDA", "DC", "CS", "RST", "VCC", "GND"]
+      },
+      "variation_2": {
+        "description": "Waveshare/Adafruit style",
+        "pins_exposed": ["CLK", "MOSI", "DC", "CS", "RST", "BL", "VCC", "GND"]
+      },
+      "variation_3": {
+        "description": "Generic Chinese modules",
+        "pins_exposed": ["SCLK", "SDI", "RS", "CS", "RESET", "LED", "VDD", "GND"]
+      }
+    }
+  },
+  "driver_config": {
+    "rotation": 0,
+    "invert_colors": false,
+    "backlight_pwm": true
+  },
+  "color_specifications": {
+    "color_mode": "full_color",
+    "bit_depth": 16,
+    "color_space": "RGB565",
+    "colors_supported": 65536,
+    "description": "Full color 16-bit RGB display"
+  },
+  "mood_color_response": {
+    "supports_dynamic_colors": true,
+    "full_spectrum_available": true,
+    "mood_mapping": {
+      "ANGER": "#FF0000",
+      "FEAR": "#800080", 
+      "HAPPINESS": "#FFFF00",
+      "CONTENTMENT": "#00FF00",
+      "CURIOSITY": "#0080FF",
+      "IRRITATION": "#FF8000",
+      "HUNGER": "#FF0080",
+      "AFFECTION": "#FF69B4"
+    }
+  }
+}

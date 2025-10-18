@@ -8,6 +8,7 @@ namespace {
     constexpr const char* TAG_SYSTEM_CORE = "SYSTEM_CORE";
     constexpr const char* TAG_NETWORK_MONITOR = "NETWORK_MONITOR";
     constexpr const char* TAG_DISPLAY_TEST = "DISPLAY_TEST";
+    constexpr const char* TAG_TESTPICKER = "TESTPICKER";
     constexpr const char* TAG_POWER_MONITOR = "POWER_MONITOR";
     constexpr const char* TAG_WATCHDOG = "WATCHDOG";
     constexpr const char* TAG_SERIAL_CONSOLE = "SERIAL_CONSOLE";
@@ -58,7 +59,49 @@ extern "C" void p32_comp_network_monitor_act(void)
     // TODO: Implement actual component logic
 }
 
-// display_test component functions are implemented in src/components/p32_comp_display_test.cpp
+extern "C" esp_err_t p32_comp_display_test_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: display_test - Display GSM test integration - manages test names and coordinates display testing\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_DISPLAY_TEST, "Display GSM test integration - manages test names and coordinates display testing initialized");
+    return ESP_OK;
+}
+
+extern "C" void p32_comp_display_test_act(void)
+{
+    // Component: display_test - Display GSM test integration - manages test names and coordinates display testing
+    // Timing: Execute every 120000 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: display_test - hitCount:120000\n");
+    return;
+#endif
+    ESP_LOGI(TAG_DISPLAY_TEST, "Display GSM test integration - manages test names and coordinates display testing");
+    // TODO: Implement actual component logic
+}
+
+extern "C" esp_err_t p32_comp_testpicker_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: testpicker - Test case picker - populates SystemTest global variable with comprehensive test cases for GC9A01 displays and system validation\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_TESTPICKER, "Test case picker - populates SystemTest global variable with comprehensive test cases for GC9A01 displays and system validation initialized");
+    return ESP_OK;
+}
+
+extern "C" void p32_comp_testpicker_act(void)
+{
+    // Component: testpicker - Test case picker - populates SystemTest global variable with comprehensive test cases for GC9A01 displays and system validation
+    // Timing: Execute every 240000 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: testpicker - hitCount:240000\n");
+    return;
+#endif
+    ESP_LOGI(TAG_TESTPICKER, "Test case picker - populates SystemTest global variable with comprehensive test cases for GC9A01 displays and system validation");
+    // TODO: Implement actual component logic
+}
 
 extern "C" esp_err_t p32_comp_power_monitor_init(void)
 {

@@ -12,7 +12,6 @@
     "config/components/system/system_core.json",
     "config/components/system/network_monitor.json",
     "config/components/system/display_test.json",
-    "config/components/system/testpicker.json",
     "config/components/system/power_monitor.json",
     "config/components/system/watchdog.json",
     "config/components/system/serial_console.json"

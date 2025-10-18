@@ -1,0 +1,61 @@
+{
+  "relative_filename": "config/components/system/testpicker.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "component_name": "testpicker",
+  "component_type": "SYSTEM_LEVEL",
+  "description": "Test case picker - populates SystemTest global variable with comprehensive test cases for GC9A01 displays and system validation",
+  "created": "2025-10-18",
+  
+  "timing": {
+    "hitCount": 240000,
+    "description": "Test picker status check every 2 seconds"
+  },
+  
+  "system_requirements": {
+    "min_controller": "ESP32",
+    "required_features": ["BASIC_IO"],
+    "memory_footprint_kb": "4",
+    "cpu_usage_percent": "0.1"
+  },
+  
+  "testing_capabilities": {
+    "test_case_registration": true,
+    "system_test_population": true,
+    "gc9a01_test_management": true,
+    "test_status_monitoring": true
+  },
+  
+  "responsibilities": [
+    "Populate SystemTest global variable with comprehensive test cases",
+    "Register GC9A01 display test cases",
+    "Add component validation tests",
+    "Provide system health check tests",
+    "Monitor test execution readiness"
+  ],
+  
+  "test_categories": [
+    "GC9A01_Left_Eye_Init",
+    "GC9A01_Right_Eye_Init", 
+    "GC9A01_Mouth_Init",
+    "GC9A01_Clear_Screen_Test",
+    "GC9A01_Color_Fill_Test",
+    "GC9A01_Pixel_Draw_Test",
+    "Eye_Animation_Blink_Test",
+    "Eye_Animation_Movement_Test",
+    "Mouth_Animation_Test",
+    "SPI_Communication_Test"
+  ],
+  
+  "integration_points": {
+    "global_variables": ["SystemTest"],
+    "hardware_components": ["gc9a01_display"],
+    "test_framework": "GSM",
+    "display_system": "GC9A01"
+  },
+  
+  "initialization_priority": "high",
+  "scope": "system_global",
+  "mandatory": false
+}
