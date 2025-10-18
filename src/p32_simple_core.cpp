@@ -70,7 +70,7 @@ void p32_simple_main_loop(void) {
     
     // Heartbeat every 5 seconds
     if (current_time - g_simple_system.last_heartbeat > 5000) {
-        ESP_LOGI(TAG, "Simple system heartbeat - Loop %lu, Free heap: %lu bytes", 
+        ESP_LOGI(TAG, "FreeRTOS System - Loop %lu, Free heap: %lu bytes", 
                  g_simple_system.loop_count, esp_get_free_heap_size());
         g_simple_system.last_heartbeat = current_time;
     }

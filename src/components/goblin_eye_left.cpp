@@ -138,7 +138,8 @@ static void gc9a01_render_test_pattern(uint16_t color)
 }
 
 // Component: Left eye display animation
-esp_err_t goblin_eye_left_init(void)
+// C linkage required for component dispatch system
+extern "C" esp_err_t goblin_eye_left_init(void)
 {
     esp_err_t ret;
     
@@ -243,7 +244,8 @@ esp_err_t goblin_eye_left_init(void)
 }
 
 // Component action function - NO ARGUMENTS
-void goblin_eye_left_act(void)
+// C linkage required for component dispatch system
+extern "C" void goblin_eye_left_act(void)
 {
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000);
     

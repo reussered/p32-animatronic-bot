@@ -14,6 +14,7 @@
 #include "p32_shared_state.hpp"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+#include "GlobalSharedMemoryTest.hpp"
 // Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
 static const char *TAG = "GOBLIN_EYE_RIGHT";
