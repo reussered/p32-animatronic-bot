@@ -5,18 +5,20 @@
 // Auto-generated from JSON bot configuration
 // ============================================================================
 
-// Global loop counter defined in p32_shared_state.cpp
-extern uint64_t g_loopCount;
+// Global loop counter - defined in p32_shared_state.cpp, declared as extern in headers
 
 // ============================================================================
 // Initialization Table
 // ============================================================================
 
 init_func_t initTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_init,
+    p32_comp_system_core_init,
     p32_comp_network_monitor_init,
-    p32_comp_left_eye_init,
-    gsm_test_init
+    p32_comp_display_test_init,
+    p32_comp_power_monitor_init,
+    p32_comp_watchdog_init,
+    p32_comp_serial_console_init,
+    p32_comp_simple_core_test_init
 };
 
 // ============================================================================
@@ -24,10 +26,13 @@ init_func_t initTable[COMPONENT_TABLE_SIZE] = {
 // ============================================================================
 
 act_func_t actTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_act,        // [0] System heartbeat
-    p32_comp_network_monitor_act,  // [1] Network monitoring and loop timing  
-    p32_comp_left_eye_act,         // [2] Left eye display animation
-    gsm_test_act                   // [3] GlobalSharedMemory test component
+    p32_comp_system_core_act,    // [0] Core system management - initialization, health checks, error handling
+    p32_comp_network_monitor_act,    // [1] Network connectivity monitoring - WiFi signal strength, connection status
+    p32_comp_display_test_act,    // [2] Display GSM test integration - manages test names and coordinates display testing
+    p32_comp_power_monitor_act,    // [3] Power monitoring - battery voltage, current consumption, remaining capacity
+    p32_comp_watchdog_act,    // [4] Hardware watchdog timer - system health monitoring and automatic recovery
+    p32_comp_serial_console_act,    // [5] Serial console interface - debug commands and telemetry output
+    p32_comp_simple_core_test_act     // [6] Simple blink test to verify ESP32-S3 can execute code - blinks onboard LED
 };
 
 // ============================================================================
@@ -35,8 +40,11 @@ act_func_t actTable[COMPONENT_TABLE_SIZE] = {
 // ============================================================================
 
 uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
-    60000,    // [0] heartbeat - every 60000 loops (2.0 Hz)
-    60000,    // [1] network_monitor - every 60000 loops (2.0 Hz)
-    60000,    // [2] left_eye - every 60000 loops (2.0 Hz)
-    30000     // [3] gsm_test - every 30000 loops (4.0 Hz) - faster for testing
+    100,    // [0] system_core - every 100 loops (1200 Hz)
+    50,    // [1] network_monitor - every 50 loops (2400 Hz)
+    120000,    // [2] display_test - every 120000 loops (1.0 Hz)
+    200,    // [3] power_monitor - every 200 loops (600.0 Hz)
+    500,    // [4] watchdog - every 500 loops (240.0 Hz)
+    25,    // [5] serial_console - every 25 loops (4800 Hz)
+    762000     // [6] simple_core_test - every 762000 loops (6350.0ms period)
 };

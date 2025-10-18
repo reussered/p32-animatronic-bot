@@ -1,0 +1,42 @@
+{
+  "relative_filename": "config/system.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "component_name": "system",
+  "component_type": "SYSTEM_ROOT",
+  "description": "Root system component - defines all universal system-level components",
+  "created": "2025-10-18",
+  
+  "system_components": [
+    "config/components/system/system_core.json",
+    "config/components/system/network_monitor.json",
+    "config/components/system/display_test.json",
+    "config/components/system/power_monitor.json",
+    "config/components/system/watchdog.json",
+    "config/components/system/serial_console.json"
+  ],
+  
+  "timing": {
+    "hitCount": 1,
+    "description": "System root - initialized once at startup"
+  },
+  
+  "system_requirements": {
+    "min_controller": "ESP32",
+    "required_features": ["BASIC_IO"],
+    "memory_footprint_kb": "0",
+    "cpu_usage_percent": "0"
+  },
+  
+  "responsibilities": [
+    "Define system-wide component dependencies",
+    "Ensure all universal components are loaded",
+    "Provide system-level component registry",
+    "Coordinate system initialization order"
+  ],
+  
+  "initialization_order": "system_components_first",
+  "scope": "global",
+  "mandatory": true
+}

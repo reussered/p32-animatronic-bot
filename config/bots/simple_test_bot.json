@@ -8,6 +8,8 @@
   "description": "Minimal test bot - just blinks LED to verify ESP32-S3 works",
   "created": "2025-10-16",
   
+  "family": "config/bots/bot_families/test_family.json",
+  
   "subsystem_components": [
   ],
   

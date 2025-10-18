@@ -264,3 +264,8 @@ size_t GlobalSharedMemory::get_total_memory() const {
     }
     return total;
 }
+
+size_t GlobalSharedMemory::get_variable_count() const {
+    // Note: Can't lock mutex in const function, assuming single-threaded access for reading
+    return memory_blocks.size();
+}

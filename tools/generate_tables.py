@@ -17,52 +17,61 @@ from typing import Dict, List, Any
 
 class P32ComponentGenerator:
     def __init__(self, config_dir: str, output_dir: str):
-        self.config_dir = Path(config_dir)
         self.output_dir = Path(output_dir)
         self.include_dir = Path(output_dir).parent / "include"
         self.components = []
         self.init_functions = []
         self.act_functions = []
         
-    def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
-        """Load bot configuration from JSON file"""
-        # Try multiple locations: bots/, subsystems/, or direct path
-        possible_paths = [
-            self.config_dir / "bots" / f"{bot_name}.json",
-            self.config_dir / "subsystems" / f"{bot_name}.json",
-            Path(bot_name)  # Direct path
-        ]
+    def load_json_file(self, json_path: str) -> Dict[str, Any]:
+        """Load any JSON file from given path"""
+        json_file = Path(json_path)
+        if not json_file.exists():
+            raise FileNotFoundError(f"JSON file not found: {json_path}")
         
-        bot_file = None
-        for path in possible_paths:
-            if path.exists():
-                bot_file = path
-                break
-        
-        if bot_file is None:
-            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, and direct path)")
-        
-        print(f"DEBUG: Loading bot config from: {bot_file}")
-        with open(bot_file, 'r') as f:
+        with open(json_file, 'r') as f:
             return json.load(f)
     
-    def load_positioned_components(self, bot_config: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Load all positioned components referenced in bot config"""
+    def load_system_components(self) -> List[Dict[str, Any]]:
+        """Load system components from config/system.json"""
+        system_config = self.load_json_file("config/system.json")
         components = []
         
-        if "positioned_components" in bot_config:
-            for component_ref in bot_config["positioned_components"]:
-                # Remove 'config/' prefix if present since config_dir already points to config/
-                clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
-                component_file = self.config_dir / clean_ref
-                if component_file.exists():
-                    print(f"DEBUG: Loading component: {component_file}")
-                    with open(component_file, 'r') as f:
-                        component_data = json.load(f)
-                        component_data['config_file'] = component_ref
-                        components.append(component_data)
-                else:
-                    print(f"Warning: Component file not found: {component_file}")
+        if "system_components" in system_config:
+            for component_ref in system_config["system_components"]:
+                component_data = self.load_json_file(component_ref)
+                components.append(component_data)
+        
+        return components
+    
+    def load_family_components(self, family_path: str) -> List[Dict[str, Any]]:
+        """Load family components from family JSON"""
+        family_config = self.load_json_file(family_path)
+        components = []
+        
+        if "default_components" in family_config:
+            for component_ref in family_config["default_components"]:
+                component_data = self.load_json_file(component_ref)
+                components.append(component_data)
+        
+        return components
+    
+    def load_positioned_components(self, creature_config: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Load all positioned components referenced in creature config"""
+        components = []
+        
+        if "positioned_components" in creature_config:
+            for component_ref in creature_config["positioned_components"]:
+                component_data = self.load_json_file(component_ref)
+                components.append(component_data)
+        
+        if "subsystem_components" in creature_config:
+            for subsystem_ref in creature_config["subsystem_components"]:
+                subsystem_data = self.load_json_file(subsystem_ref)
+                # Recursively load components from subsystem
+                if "positioned_components" in subsystem_data:
+                    subsystem_components = self.load_positioned_components(subsystem_data)
+                    components.extend(subsystem_components)
         
         return components
     
@@ -77,26 +86,6 @@ class P32ComponentGenerator:
         self.components = []
         self.init_functions = []
         self.act_functions = []
-        
-        # Add system-level components (always present)
-        # Default hitCount of 60000 (~500ms at 120k iterations/sec)
-        system_components = [
-            {"name": "heartbeat", "hitCount": 60000, "description": "System heartbeat"},
-            {"name": "network_monitor", "hitCount": 60000, "description": "Network monitoring and loop timing"}
-        ]
-        
-        for comp in system_components:
-            init_func = self.generate_function_name(comp["name"], "init")
-            act_func = self.generate_function_name(comp["name"], "act")
-            
-            self.components.append({
-                "name": comp["name"],
-                "init_func": init_func,
-                "act_func": act_func,
-                "hitCount": comp["hitCount"],
-                "description": comp["description"],
-                "type": "system"
-            })
         
         # Process positioned components from JSON
         for component in components:
@@ -366,20 +355,37 @@ class P32ComponentGenerator:
                 f.write(content)
             print(f"Generated: {filepath}")
     
-    def generate_from_bot(self, bot_name: str) -> None:
-        """Main generation process for a specific bot"""
-        print(f"Generating P32 component tables for bot: {bot_name}")
+    def generate_from_creature_json(self, creature_json_path: str) -> None:
+        """Main generation process from creature JSON file"""
+        print(f"Generating P32 component tables from: {creature_json_path}")
         
-        # Load bot configuration
-        bot_config = self.load_bot_config(bot_name)
-        print(f"Loaded bot config: {bot_config.get('bot_name', 'Unknown')}")
+        # Load creature configuration
+        creature_config = self.load_json_file(creature_json_path)
+        print(f"Loaded creature config: {creature_config.get('component_name', creature_config.get('bot_id', 'Unknown'))}")
         
-        # Load positioned components
-        components = self.load_positioned_components(bot_config)
-        print(f"Found {len(components)} positioned components")
+        all_components = []
         
-        # Extract component information
-        self.extract_component_info(components)
+        # 1. Load system components first
+        print("Loading system components...")
+        system_components = self.load_system_components()
+        all_components.extend(system_components)
+        print(f"Loaded {len(system_components)} system components")
+        
+        # 2. Load family components if specified
+        if "family" in creature_config:
+            print(f"Loading family components from: {creature_config['family']}")
+            family_components = self.load_family_components(creature_config["family"])
+            all_components.extend(family_components)
+            print(f"Loaded {len(family_components)} family components")
+        
+        # 3. Load creature-specific positioned components
+        print("Loading creature-specific components...")
+        creature_components = self.load_positioned_components(creature_config)
+        all_components.extend(creature_components)
+        print(f"Loaded {len(creature_components)} creature-specific components")
+        
+        # Extract component information and generate
+        self.extract_component_info(all_components)
         print(f"Generated {len(self.components)} total components")
         
         # Write generated files
@@ -388,17 +394,16 @@ class P32ComponentGenerator:
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: python generate_tables.py <bot_name> <output_dir>")
-        print("Example: python generate_tables.py goblin_full src/")
+        print("Usage: python generate_tables.py <creature_json_path> <output_dir>")
+        print("Example: python generate_tables.py config/bots/bot_families/goblins/goblin_full.json src/")
         sys.exit(1)
     
-    bot_name = sys.argv[1]
+    creature_json_path = sys.argv[1]
     output_dir = sys.argv[2]
-    config_dir = "config"  # Relative to current directory
     
     try:
-        generator = P32ComponentGenerator(config_dir, output_dir)
-        generator.generate_from_bot(bot_name)
+        generator = P32ComponentGenerator("", output_dir)  # No config_dir needed now
+        generator.generate_from_creature_json(creature_json_path)
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

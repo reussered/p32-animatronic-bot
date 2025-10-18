@@ -14,6 +14,7 @@
 #include "p32_shared_state.hpp"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+#include "components/p32_comp_display_test.hpp"
 // #include "testing_framework.hpp"  // Will implement later for Halloween goblin!
 // Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
@@ -250,6 +251,19 @@ extern "C" void goblin_eye_left_act(void)
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000);
     
     // Testing framework will be implemented later - for now, always do real hardware action
+    
+    // Run GSM display tests periodically (every ~10 seconds)
+    static uint32_t last_test_time = 0;
+    if (current_time - last_test_time > 10000) {
+        ESP_LOGI(TAG, "🧪 Running GSM display tests...");
+        bool test_result = run_display_gsm_tests();
+        if (test_result) {
+            ESP_LOGI(TAG, "✅ GSM display tests passed");
+        } else {
+            ESP_LOGW(TAG, "⚠️ GSM display tests had issues");
+        }
+        last_test_time = current_time;
+    }
     
     // ===== PROXIMITY-BASED BEHAVIOR =====
     // Read distance from shared state (updated by nose sensor)

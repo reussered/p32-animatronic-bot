@@ -20,6 +20,7 @@ set(P32_COMPONENT_SOURCES
     components/system_core.cpp
     components/network_monitor.cpp  
     components/simple_core_test.cpp  # Simple LED blink test
+    components/p32_comp_display_test.cpp  # Display test component for GSM integration
     components/goblin_eye_left.cpp
     components/goblin_eye_right.cpp
     components/goblin_nose.cpp

@@ -1,0 +1,19 @@
+{
+  "relative_filename": "config/bots/bot_families/test_family.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "family_type": "TEST",
+  "family_category": "test_creatures", 
+  "description": "Simple test family for development and validation",
+  "created": "2025-10-18",
+  "template_type": "family_template",
+  
+  "default_components": [
+  ],
+  
+  "common_settings": {
+    "test_mode": true,
+    "debug_output": true
+  }
+}

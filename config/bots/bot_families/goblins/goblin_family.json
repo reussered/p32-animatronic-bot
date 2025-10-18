@@ -18,7 +18,7 @@
     "mechanical_precision": "moderate_tolerance"
   },
   
-  "common_components": [
+  "default_components": [
     "config/components/positioned/goblineye_left.json",
     "config/components/positioned/goblineye_right.json",
     "config/components/positioned/goblin_mouth.json",

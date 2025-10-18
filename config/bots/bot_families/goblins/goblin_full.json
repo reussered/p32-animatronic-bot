@@ -7,6 +7,8 @@
   "description": "Full-featured scary goblin with unified proportional scaling system",
   "created": "2025-10-05",
   
+  "family": "config/bots/bot_families/goblins/goblin_family.json",
+  
   "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
   "creature_variant": "standard_goblin",
   "horizontal_scale": "0.7",

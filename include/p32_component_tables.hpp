@@ -14,17 +14,20 @@ typedef esp_err_t (*init_func_t)(void);
 typedef void (*act_func_t)(void);
 
 // Table size - all three tables have same size (one entry per component)
-#define COMPONENT_TABLE_SIZE 4
+#define COMPONENT_TABLE_SIZE 7
 
 // ============================================================================
 // Forward Declarations - Init Functions (C linkage)
 // ============================================================================
 
 extern "C" {
-    esp_err_t p32_comp_heartbeat_init(void);
+    esp_err_t p32_comp_system_core_init(void);
     esp_err_t p32_comp_network_monitor_init(void);
-    esp_err_t p32_comp_left_eye_init(void);
-    esp_err_t gsm_test_init(void);
+    esp_err_t p32_comp_display_test_init(void);
+    esp_err_t p32_comp_power_monitor_init(void);
+    esp_err_t p32_comp_watchdog_init(void);
+    esp_err_t p32_comp_serial_console_init(void);
+    esp_err_t p32_comp_simple_core_test_init(void);
 }
 
 // ============================================================================
@@ -32,10 +35,13 @@ extern "C" {
 // ============================================================================
 
 extern "C" {
-    void p32_comp_heartbeat_act(void);
+    void p32_comp_system_core_act(void);
     void p32_comp_network_monitor_act(void);
-    void p32_comp_left_eye_act(void);
-    void gsm_test_act(void);
+    void p32_comp_display_test_act(void);
+    void p32_comp_power_monitor_act(void);
+    void p32_comp_watchdog_act(void);
+    void p32_comp_serial_console_act(void);
+    void p32_comp_simple_core_test_act(void);
 }
 
 // ============================================================================
