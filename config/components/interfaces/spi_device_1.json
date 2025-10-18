@@ -6,7 +6,7 @@
   "interface_type": "SPI_DEVICE",
   "bus_reference": "SPI_BUS_VSPI",
   "pins": {
-    "cs": 15
+    "cs": 5
   },
   "device_config": {
     "cs_active_low": true

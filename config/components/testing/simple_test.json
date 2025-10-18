@@ -1,0 +1,28 @@
+{
+    "component_name": "simple_test",
+    "description": "Runtime Testing Framework Orchestrator - Add/remove to enable/disable all testing",
+    "category": "testing",
+    "priority": 1,
+    "hitCount": 25,
+    "init_function": "simple_test_init",
+    "act_function": "simple_test_act",
+    "source_file": "src/components/simple_test.cpp",
+    "header_dependencies": [
+        "testing_framework.h"
+    ],
+    "notes": [
+        "This component controls g_Testing variable globally",
+        "Automatically cycles through test modes every 5 seconds",
+        "Remove this component to run in production mode",
+        "Add this component to enable comprehensive testing",
+        "All other components check g_Testing at runtime"
+    ],
+    "test_sequence": [
+        "TEST_MODE_SIMPLE: printf-based output",
+        "TEST_MODE_ANIMATION: Animation testing without hardware", 
+        "TEST_MODE_HARDWARE: Hardware testing with detailed logging",
+        "TEST_MODE_SIMULATION: Full simulation with mock data",
+        "TEST_MODE_DISABLED: Production mode",
+        "Cycles automatically every 5 seconds"
+    ]
+}

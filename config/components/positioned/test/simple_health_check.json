@@ -1,0 +1,23 @@
+{
+  "relative_filename": "config/components/positioned/test/simple_health_check.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "component_name": "simple_health_check",
+  "component_type": "TEST",
+  "description": "Simple health check test component after smoke incident",
+  "hitCount": 10,
+  
+  "init_function": "simple_health_check_init",
+  "act_function": "simple_health_check_act",
+  
+  "source_file": "src/components/simple_health_check.cpp",
+  
+  "gpio_pins": [],
+  "interfaces": [],
+  
+  "notes": [
+    "Tests ESP32-S3 basic functionality",
+    "No external hardware required",
+    "Outputs heartbeat messages every second"
+  ]
+}

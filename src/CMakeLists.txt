@@ -18,6 +18,7 @@ set(P32_COMPONENT_SOURCES
     FrameProcessor.cpp              # C++ Frame processing with mood-based optimization
     components/system_core.cpp
     components/network_monitor.cpp  
+    components/simple_core_test.cpp  # Simple LED blink test
     components/goblin_eye_left.cpp
     components/goblin_eye_right.cpp
     components/goblin_nose.cpp

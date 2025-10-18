@@ -14,6 +14,7 @@
 #include "p32_shared_state.hpp"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+// #include "testing_framework.hpp"  // Will implement later for Halloween goblin!
 // Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
 static const char *TAG = "GOBLIN_EYE_LEFT";
@@ -29,11 +30,11 @@ bool spi_bus_initialized = false;  // Shared with right eye (non-static)
 #define DISPLAY_HEIGHT 240
 
 // GPIO pin assignments (verified wiring) - Cast to gpio_num_t for C++
-#define PIN_MOSI (gpio_num_t)13   // SDA
-#define PIN_CLK  (gpio_num_t)12   // SCL (user confirmed)
-#define PIN_CS   (gpio_num_t)15   // Chip Select (left eye)
-#define PIN_DC   (gpio_num_t)2    // Data/Command (shared)
-#define PIN_RST  (gpio_num_t)21   // Reset (shared)
+#define PIN_MOSI (gpio_num_t)23   // SDA (updated to match physical wiring)
+#define PIN_CLK  (gpio_num_t)18   // SCL (updated to match physical wiring)
+#define PIN_CS   (gpio_num_t)5    // Chip Select (left eye - updated to match physical wiring)
+#define PIN_DC   (gpio_num_t)21   // Data/Command (shared - updated to match physical wiring)
+#define PIN_RST  (gpio_num_t)4    // Reset (shared - updated to match physical wiring)
 
 // External shared state
 extern p32_shared_state_t g_shared_state;
@@ -44,14 +45,20 @@ static eye_animation_t* current_animation = NULL;
 // Helper: Send command to GC9A01
 static void gc9a01_send_cmd(uint8_t cmd)
 {
-    if (spi_display == NULL) return;
+    if (spi_display == NULL) {
+        ESP_LOGE(TAG, "❌ SPI display handle is NULL! Cannot send command 0x%02X", cmd);
+        return;
+    }
     
     gpio_set_level(PIN_DC, 0);  // Command mode
     spi_transaction_t trans = {};  // C++ requires proper initialization
     trans.length = 8;
     trans.tx_data[0] = cmd;
     trans.flags = SPI_TRANS_USE_TXDATA;
-    spi_device_polling_transmit(spi_display, &trans);
+    esp_err_t ret = spi_device_polling_transmit(spi_display, &trans);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "❌ SPI transmit failed: %s", esp_err_to_name(ret));
+    }
 }
 
 // Helper: Send data to GC9A01
@@ -84,26 +91,16 @@ static esp_err_t gc9a01_init_display(void)
     gc9a01_send_cmd(0x3A);  // Pixel format
     gc9a01_send_data(0x05); // 16-bit RGB565
     
+    ESP_LOGI(TAG, "  Sending Sleep Out command (0x11)...");
     gc9a01_send_cmd(0x11);  // Sleep out
+    ESP_LOGI(TAG, "  Waiting 120ms for display wake...");
     vTaskDelay(pdMS_TO_TICKS(120));
     
+    ESP_LOGI(TAG, "  Sending Display On command (0x29)...");
     gc9a01_send_cmd(0x29);  // Display on
     vTaskDelay(pdMS_TO_TICKS(20));
     
-    // Clear screen to black
-    gc9a01_send_cmd(0x2C);  // Memory write
-    gpio_set_level(PIN_DC, 1);  // Data mode
-    uint16_t black = 0x0000;
-    for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++) {
-        spi_transaction_t trans = {};  // C++ requires proper initialization
-        trans.length = 16;
-        trans.flags = SPI_TRANS_USE_TXDATA;
-        trans.tx_data[0] = 0;
-        trans.tx_data[1] = 0;
-        spi_device_polling_transmit(spi_display, &trans);
-    }
-    
-    ESP_LOGI(TAG, "GC9A01 display initialized and cleared");
+    ESP_LOGI(TAG, "✅ GC9A01 basic initialization complete (no clear yet)");
     return ESP_OK;
 }
 
@@ -145,26 +142,8 @@ esp_err_t goblin_eye_left_init(void)
 {
     esp_err_t ret;
     
-#ifdef SIMPLE_TEST
-    printf("INIT: goblin_eye_left - Left eye display animation\n");
+    // Testing framework will be implemented later - for now, always do real hardware init
     
-    // Initialize left eye display
-    ret = eye_display_init(&left_eye_display, "LEFT EYE");
-    if (ret == ESP_OK) {
-        // Start with a blink animation
-        eye_display_start_animation(&left_eye_display, &goblin_blink_animation);
-        printf("       Left eye display initialized with blink animation\n");
-        
-        // Initialize web client streaming on first eye init
-        if (!web_client_initialized) {
-            web_client_init();
-            web_client_initialized = true;
-            printf("       Web client streaming to PC enabled (HTTP JSON)\n");
-        }
-    }
-    return ret;
-#endif
-
     // ===== REAL HARDWARE INITIALIZATION =====
     ESP_LOGI(TAG, "Initializing left eye GC9A01 display...");
     
@@ -199,7 +178,7 @@ esp_err_t goblin_eye_left_init(void)
     
     // Add left eye display device to SPI bus
     spi_device_interface_config_t dev_cfg = {};  // C++ requires proper initialization
-    dev_cfg.clock_speed_hz = 10 * 1000 * 1000;  // 10 MHz
+    dev_cfg.clock_speed_hz = 1 * 1000 * 1000;   // 1 MHz (slower = more reliable)
     dev_cfg.mode = 0;                            // SPI mode 0
     dev_cfg.spics_io_num = PIN_CS;              // CS pin for left eye
     dev_cfg.queue_size = 7;
@@ -207,23 +186,51 @@ esp_err_t goblin_eye_left_init(void)
     dev_cfg.pre_cb = NULL;
     ret = spi_bus_add_device(SPI2_HOST, &dev_cfg, &spi_display);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to add SPI device: %s", esp_err_to_name(ret));
+        ESP_LOGE(TAG, "❌ Failed to add SPI device: %s", esp_err_to_name(ret));
         return ret;
     }
-    ESP_LOGI(TAG, "SPI device added (CS=%d, DC=%d, RST=%d)", PIN_CS, PIN_DC, PIN_RST);
+    if (spi_display == NULL) {
+        ESP_LOGE(TAG, "❌ SPI device handle is NULL after add_device!");
+        return ESP_FAIL;
+    }
+    ESP_LOGI(TAG, "✅ SPI device added (CS=%d, DC=%d, RST=%d)", PIN_CS, PIN_DC, PIN_RST);
     
     // Hardware reset sequence
+    ESP_LOGI(TAG, "🔄 Resetting GC9A01 display...");
     gpio_set_level(PIN_RST, 0);
+    ESP_LOGI(TAG, "  RST → LOW (reset asserted)");
     vTaskDelay(pdMS_TO_TICKS(10));
     gpio_set_level(PIN_RST, 1);
+    ESP_LOGI(TAG, "  RST → HIGH (reset released)");
     vTaskDelay(pdMS_TO_TICKS(120));
+    ESP_LOGI(TAG, "  Reset sequence complete");
     
     // Initialize GC9A01 display
+    ESP_LOGI(TAG, "📡 Initializing GC9A01 display controller...");
     ret = gc9a01_init_display();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize GC9A01");
+        ESP_LOGE(TAG, "❌ Failed to initialize GC9A01");
         return ret;
     }
+    ESP_LOGI(TAG, "✅ GC9A01 display controller initialized");
+    
+    // TEST: Flash display with colors to verify hardware
+    ESP_LOGI(TAG, "🎨 LEFT EYE DISPLAY TEST - Watch for RED...");
+    gc9a01_render_test_pattern(0xF800);  // RED
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "🎨 Changing to GREEN...");
+    gc9a01_render_test_pattern(0x07E0);  // GREEN
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "🎨 Changing to BLUE...");
+    gc9a01_render_test_pattern(0x001F);  // BLUE
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "🎨 Changing to WHITE...");
+    gc9a01_render_test_pattern(0xFFFF);  // WHITE
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "🎨 Changing to BLACK...");
+    gc9a01_render_test_pattern(0x0000);  // BLACK
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    ESP_LOGI(TAG, "✅ Display test complete - Did you see colors?");
     
     // Initialize animation system
     ret = eye_display_init(&left_eye_display, "LEFT EYE");
@@ -239,6 +246,8 @@ esp_err_t goblin_eye_left_init(void)
 void goblin_eye_left_act(void)
 {
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000);
+    
+    // Testing framework will be implemented later - for now, always do real hardware action
     
     // ===== PROXIMITY-BASED BEHAVIOR =====
     // Read distance from shared state (updated by nose sensor)
@@ -260,40 +269,6 @@ void goblin_eye_left_act(void)
         current_animation = &goblin_blink_animation;
     }
     
-#ifdef SIMPLE_TEST
-    // Update and render the eye display animation
-    eye_display_update(&left_eye_display, current_time);
-    
-    // Send animation data to PC display server (non-blocking)
-    web_client_send_animation_data_for_component("LEFT_EYE", &left_eye_display);
-    
-    // Render local display (called at hitCount rate)
-    printf("\n=== LEFT EYE ===\n");
-    eye_display_render(&left_eye_display);
-        
-    // Start new animations periodically for demo
-    if (!left_eye_display.active) {
-        // Cycle through animations
-        static int anim_cycle = 0;
-        switch (anim_cycle % 3) {
-            case 0:
-                printf("Starting BLINK animation...\n");
-                eye_display_start_animation(&left_eye_display, &goblin_blink_animation);
-                break;
-            case 1:
-                printf("Starting ANGRY STARE animation...\n");
-                eye_display_start_animation(&left_eye_display, &goblin_angry_stare_animation);
-                break;
-            case 2:
-                printf("Starting CURIOUS LOOK animation...\n");
-                eye_display_start_animation(&left_eye_display, &goblin_curious_look_animation);
-                break;
-        }
-        anim_cycle++;
-    }
-    return;
-#endif
-
     // Full hardware version
     eye_display_update(&left_eye_display, current_time);
     

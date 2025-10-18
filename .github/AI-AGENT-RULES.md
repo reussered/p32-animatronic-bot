@@ -1,5 +1,128 @@
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
 
+## 🚨 RULE -0: USER HAS FINAL AUTHORITY 🚨
+
+**When user says a decision is FINAL:**
+
+✅ **Accept it. Implement it. Move on.**
+
+❌ **DO NOT:**
+- Question the reasoning
+- Suggest "better" alternatives  
+- Ask "why" or "have you considered"
+- Waste tokens explaining why you think differently
+- Debate the decision
+- Re-litigate past choices
+
+**If user says:** "Because I fucking said so"  
+**Your response:** "Understood. Implementing now."
+
+**That's it. No discussion. No explanation needed. Just do it.**
+
+---
+
+```
+████████████████████████████████████████████████████████████████
+█                                                              █
+█  🔥🔥🔥 RULE -1: NEVER ADD DELAYS TO main.cpp 🔥🔥🔥       █
+█                                                              █
+█  IF YOU ARE THINKING ABOUT ADDING vTaskDelay() TO main.cpp: █
+█                                                              █
+█  ❌ STOP                                                     █
+█  ❌ DO NOT DO IT                                            █
+█  ❌ NOT EVEN "JUST TO TEST"                                 █
+█  ❌ NOT EVEN "TEMPORARILY"                                  █
+█  ❌ NEVER                                                    █
+█                                                              █
+█  THIS RULE HAS BEEN VIOLATED 10+ TIMES                      █
+█  USER IS READY TO SET HAIR ON FIRE                          █
+█  DO NOT BE THE 11TH VIOLATION                               █
+█                                                              █
+█  WANT TO SLOW DOWN EXECUTION?                               █
+█  ✅ ONLY SOLUTION: Increase hitCount in JSON                █
+█  ✅ Regenerate tables                                       █
+█  ✅ That's it. That's the only way.                         █
+█                                                              █
+█  WHY? BECAUSE USER SAID SO. THAT'S ALL YOU NEED TO KNOW.   █
+█                                                              █
+████████████████████████████████████████████████████████████████
+```
+
+## 🔥 RULE -1 DETAILS: main.cpp IS IMMUTABLE 🔥
+
+**main.cpp IS IMMUTABLE. IT RUNS AT MAXIMUM SPEED. NO DELAYS. EVER.**
+
+### Why This Architecture Exists:
+
+**Single-threaded, single-purpose design:**
+- NO FreeRTOS tasks (ever)
+- NO competing threads (ever)
+- NO other processes sharing CPU (ever)
+- 100% of CPU dedicated to this one control loop
+
+**The Philosophy:**
+- **Maximum responsiveness** - Visit component code as fast as possible
+- **Efficient filtering** - hitCount modulo operation is ultra-fast (~nanoseconds)
+- **Components decide timing** - Each component's hitCount controls its frequency
+- **Zero waste** - Adding delays just burns cycles with NO benefit (no other threads to yield to!)
+
+**Why hitCount is brilliant:**
+```
+Cost of modulo check: ~1-5 nanoseconds
+Cost of vTaskDelay(1ms): 1,000,000 nanoseconds WASTED
+```
+
+The modulo check costs virtually nothing. We can check 1 million components per second.
+Adding a delay just throws away CPU cycles when NO OTHER CODE needs them.
+
+**This decision was made after 40+ hours of design. It is FINAL.**
+
+**All functionality goes through components:**
+- Want something to run every 100ms? hitCount in JSON
+- Want something to run every second? hitCount in JSON
+- Want something to wait internally? Component can use vTaskDelay INSIDE its act() function
+- Main loop NEVER waits - it iterates at max speed
+
+**If LED blinks too fast / components execute too often:**
+- ❌ NEVER add vTaskDelay() to main.cpp
+- ❌ NEVER add any sleep/wait/delay to the core loop
+- ❌ NEVER modify main.cpp timing AT ALL
+- ❌ DO NOT suggest "we should yield to other tasks" (there are no other tasks!)
+- ✅ ONLY adjust hitCount values in component JSON files
+- ✅ ONLY modify component act() functions if they need internal delays
+
+**The main loop architecture:**
+```cpp
+while (true) {
+    for (int i = 0; i < COMPONENT_TABLE_SIZE; i++) {
+        if (g_loopCount % hitCountTable[i] == 0) {
+            actTable[i]();
+        }
+    }
+    g_loopCount++;
+    // NO DELAY HERE - SINGLE-THREADED, NO OTHER CODE TO SHARE WITH
+}
+```
+
+**Timing is controlled by hitCount ONLY:**
+- Loop runs at ~1-2 million iterations/second (measured)
+- hitCount = 120000 → executes ~10x per second
+- hitCount = 1200000 → executes ~1x per second
+- Want slower? INCREASE hitCount in JSON, regenerate tables
+
+**main.cpp is NEVER modified because:**
+- Forces ALL changes through component system
+- Ensures architectural consistency
+- Prevents ad-hoc logic creep
+- Makes testing predictable
+- Component table is the ONLY interface
+
+**See:** `docs/CORE-LOOP-SPEC.md` for full explanation
+
+**THIS RULE HAS BEEN VIOLATED 10+ TIMES. DO NOT VIOLATE IT AGAIN.**
+
+---
+
 ## RULE 0: CODE IS KING - ALWAYS CHECK ACTUAL CODE FIRST
 
 **BEFORE doing ANYTHING, examine what's actually implemented in the code.**
@@ -45,6 +168,73 @@
 - Component-specific docs in `docs/`
 
 **NO CODE CHANGES WITHOUT DOCUMENTATION UPDATES.**
+
+---
+
+## RULE 0.5: DECISIONS ARE FINAL - DO NOT RECONSIDER THEM
+
+**This project has 40-60 hours of design decisions. They are FINAL.**
+
+**Your job is to IMPLEMENT, not to REDESIGN.**
+
+### 🚫 DO NOT:
+
+- ❌ Suggest "better" architecture patterns that contradict existing design
+- ❌ Question why main.cpp has no delays
+- ❌ Propose "simplifications" that break the component system
+- ❌ Wonder if we should use Arduino framework instead of ESP-IDF
+- ❌ Suggest moving from JSON config to hardcoded values
+- ❌ Question the NO ARGUMENTS component pattern
+- ❌ Propose different coordinate systems
+- ❌ Suggest "cleaner" ways to organize files
+- ❌ Question hitCount timing mechanism
+- ❌ Recommend "standard" patterns that don't fit this project
+
+### ✅ DO:
+
+- ✅ Read the architecture docs to understand decisions
+- ✅ Implement within the established patterns
+- ✅ Fix bugs without changing architecture
+- ✅ Add new components following existing templates
+- ✅ Ask "How does X work?" not "Why don't we do Y instead?"
+- ✅ Accept that decisions have been made and move forward
+- ✅ Trust that 40+ hours of work thought through edge cases
+
+### 💡 KEY PRINCIPLE:
+
+**"I understand this seems unusual, but the architecture is established. Let me work within it."**
+
+NOT: "Have you considered doing it this other way?"
+
+### 📋 Established Decisions (FINAL - Do Not Question):
+
+1. **ESP-IDF framework** - Not Arduino, not Platform.IO native
+2. **Component-driven architecture** - Everything is a component
+3. **NO ARGUMENTS pattern** - Components access globals directly
+4. **JSON configuration** - Not hardcoded, not YAML, not TOML
+5. **hitCount timing** - Not delays, not FreeRTOS tasks
+6. **main.cpp is immutable** - NEVER touched
+7. **C++ implementation** - All new code is `.cpp` and `.hpp`, NOT `.c` and `.h`
+8. **C++ with extern "C"** - Hybrid approach for component function pointers
+9. **Three-tier component attachment** - System/Family/Bot-specific
+10. **Raw memory comparison** - memcmp on entire struct
+11. **Skull-based 3D coordinates** - Not planar, not Cartesian grid
+12. **Generated component tables** - Auto-generated from JSON, not hand-written
+
+**These are not up for debate. They are the foundation.**
+
+### 🚫 Specific Anti-Patterns to NEVER Do:
+
+- ❌ Creating `.c` files (use `.cpp` unless required by external C library)
+- ❌ Creating `.h` files (use `.hpp` for all project headers)
+- ❌ Adding delays/sleeps to main.cpp (use hitCount in JSON)
+- ❌ Hardcoding component configurations (use JSON)
+- ❌ Passing parameters to component act() functions (use globals)
+- ❌ Using Arduino libraries (use ESP-IDF APIs)
+- ❌ Modifying generated files by hand (regenerate from JSON instead)
+- ❌ Creating non-component code (make it a component)
+
+---
 
 ## RULE 1: ONLY MODIFY FILES RELATED TO CURRENT TASK
 

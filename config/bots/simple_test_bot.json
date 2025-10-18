@@ -1,0 +1,29 @@
+{
+  "relative_filename": "config/bots/simple_test_bot.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "bot_type": "SIMPLE_TEST",
+  "bot_id": "simple_test_v1",
+  "description": "Minimal test bot - just blinks LED to verify ESP32-S3 works",
+  "created": "2025-10-16",
+  
+  "subsystem_components": [
+  ],
+  
+  "positioned_components": [
+    "config/components/test/simple_core_test.json"
+  ],
+  
+  "test_mode": true,
+  "test_purpose": "Hardware smoke test before complex component testing",
+  
+  "expected_output": [
+    "Serial: Loop count incrementing",
+    "Serial: Blink messages every second",
+    "LED: Visible blinking (GPIO48 RGB or GPIO2 fallback)"
+  ],
+  
+  "prototype_status": "smoke_test",
+  "tested": false
+}

@@ -1,0 +1,32 @@
+{
+  "relative_filename": "config/components/test/simple_core_test.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "component_name": "simple_core_test",
+  "component_type": "SYSTEM_TEST",
+  "description": "Simple blink test to verify ESP32-S3 can execute code - blinks onboard LED",
+  "created": "2025-10-16",
+  
+  "timing": {
+    "hitCount": 762000,
+    "description": "Blink LED every 1 second (MEASURED: 16k loops = 21ms → 762k loops/sec actual speed)"
+  },
+  
+  "hardware": {
+    "type": "ONBOARD_LED",
+    "gpio_pin": 48,
+    "description": "ESP32-S3-DevKitC-1 has RGB LED on GPIO48 (addressable WS2812)",
+    "note": "If no RGB LED, we'll use GPIO2 as fallback"
+  },
+  
+  "test_behavior": {
+    "pattern": "simple_blink",
+    "on_duration_ms": 500,
+    "off_duration_ms": 500,
+    "message": "Blink test running - LED should toggle every second"
+  },
+  
+  "code_file": "src/components/simple_core_test.cpp",
+  "header_file": "include/components/simple_core_test.hpp"
+}

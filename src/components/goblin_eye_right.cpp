@@ -143,7 +143,7 @@ esp_err_t goblin_eye_right_init(void)
     
     // Add right eye display device to SPI bus
     spi_device_interface_config_t dev_cfg = {};  // C++ requires proper initialization
-    dev_cfg.clock_speed_hz = 10 * 1000 * 1000;  // 10 MHz
+    dev_cfg.clock_speed_hz = 1 * 1000 * 1000;   // 1 MHz (slower = more reliable)
     dev_cfg.mode = 0;                            // SPI mode 0
     dev_cfg.spics_io_num = PIN_CS;              // CS pin for RIGHT eye (GPIO16)
     dev_cfg.queue_size = 7;
@@ -162,6 +162,19 @@ esp_err_t goblin_eye_right_init(void)
         ESP_LOGE(TAG, "Failed to initialize GC9A01");
         return ret;
     }
+    
+    // TEST: Flash display with colors to verify hardware
+    ESP_LOGI(TAG, "🎨 RIGHT EYE DISPLAY TEST - Watch for colors!");
+    gc9a01_render_test_pattern(0xF800);  // RED
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    gc9a01_render_test_pattern(0x07E0);  // GREEN
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    gc9a01_render_test_pattern(0x001F);  // BLUE
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    gc9a01_render_test_pattern(0xFFFF);  // WHITE
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    gc9a01_render_test_pattern(0x0000);  // BLACK
+    ESP_LOGI(TAG, "✅ Display test complete");
     
     // Initialize animation system
     ret = eye_display_init(&right_eye_display, "RIGHT EYE");

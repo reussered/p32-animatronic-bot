@@ -1,5 +1,23 @@
 # Session Startup Checklist - October 16, 2025
 
+## 🚨 CRITICAL: READ FIRST - MANDATORY DOCUMENTS
+
+**BEFORE doing ANYTHING else, read these documents in this order:**
+
+1. **`.github/AI-AGENT-RULES.md`** - Ironclad rules that must NEVER be broken
+2. **`docs/LESSONS-LEARNED-BUILD-ERRORS.md`** - ⭐ **NEW** - Mistakes already made, solutions documented, NEVER repeat them
+3. **`docs/CORE-LOOP-SPEC.md`** - main.cpp is IMMUTABLE, never touch it
+
+### Why Lessons Learned is Critical
+
+The `LESSONS-LEARNED-BUILD-ERRORS.md` document captures:
+- ✅ Mistakes already made and fixed
+- ✅ Root causes and solutions
+- ✅ Verification steps to prevent recurrence
+- ✅ Patterns that must be followed
+
+**Reading this document saves time and prevents repeating errors that have already been solved.**
+
 ## Quick Context Recovery
 
 ### Current Project State
@@ -11,10 +29,11 @@
 
 ### Key Files to Review (30 seconds)
 
-1. **Architecture Overview**: `docs/STATE-SYNCHRONIZATION-IMPLEMENTATION-SUMMARY.md`
-2. **Component Pattern**: `docs/COMPONENT-FUNCTION-SIGNATURES.md`
-3. **Memory Pattern**: `docs/RAW-MEMORY-BLOCK-PATTERN.md`
-4. **Skull Design**: `assets/shapes/descriptions/aggressive_goblin_skull.md`
+1. **`docs/LESSONS-LEARNED-BUILD-ERRORS.md`** - ⭐ Read this FIRST to avoid repeating mistakes
+2. **Architecture Overview**: `docs/STATE-SYNCHRONIZATION-IMPLEMENTATION-SUMMARY.md`
+3. **Component Pattern**: `docs/COMPONENT-FUNCTION-SIGNATURES.md`
+4. **Memory Pattern**: `docs/RAW-MEMORY-BLOCK-PATTERN.md`
+5. **Skull Design**: `assets/shapes/descriptions/aggressive_goblin_skull.md`
 
 ### Critical Patterns Established
 

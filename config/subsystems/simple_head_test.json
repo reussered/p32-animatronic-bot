@@ -1,0 +1,42 @@
+{
+  "relative_filename": "config/subsystems/simple_head_test.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "subsystem_type": "TEST_HEAD",
+  "subsystem_id": "simple_head_test_v1",
+  "description": "Minimal test subsystem with only LED blink - verifies ESP32-S3 basic functionality",
+  "created": "2025-10-16",
+  
+  "controller_hardware": "ESP32_S3_DEVKITC_1",
+  "mesh_role": "STANDALONE_TEST",
+  "mesh_capabilities": [
+    "NO_MESH",
+    "UART_ONLY"
+  ],
+  
+  "component_name": "simple_head_test",
+  "component_type": "TEST_SUBSYSTEM",
+  "timing": {
+    "hitCount": 100,
+    "description": "Subsystem check every 10 seconds (rarely used in test)"
+  },
+  
+  "positioned_components": [
+    "config/components/test/simple_core_test.json"
+  ],
+  
+  "test_config": {
+    "purpose": "Hardware smoke test - verify ESP32 can execute and blink LED",
+    "expected_behavior": "LED blinks every 1 second, serial output shows loop count",
+    "pass_criteria": "Stable blinking for 30+ seconds without crashes",
+    "uart_baud": 115200
+  },
+  
+  "notes": [
+    "This is a minimal test subsystem",
+    "NO displays, NO sensors, NO mesh networking",
+    "ONLY tests basic code execution and GPIO control",
+    "Power via USB UART only - no external power needed"
+  ]
+}

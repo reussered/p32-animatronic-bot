@@ -1,0 +1,44 @@
+{
+  "relative_filename": "config/bots/goblin_left_eye_only.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "bot_type": "GOBLINSIMPLE",
+  "bot_id": "goblin_left_eye_only_v1",
+  "description": "Single left eye goblin for P32 testing - left eye display only",
+  "created": "2025-10-16",
+
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center",
+  "eye_spacing": "3.0 INCH",
+
+  "positioned_components": [
+    "config/components/positioned/goblineye_left.json"
+  ],
+
+  "mood_defaults": {
+    "FEAR": 20,
+    "ANGER": 10,
+    "CURIOSITY": 40,
+    "CONTENTMENT": 30
+  },
+
+  "behavior_config": {
+    "simple_mode": true,
+    "auto_sleep_timeout_seconds": 60,
+    "interaction_range_cm": 100
+  },
+
+  "hardware_config": {
+    "display_update_rate_fps": 15,
+    "sensor_poll_rate_hz": 5,
+    "power_management": "simple"
+  },
+
+  "prototype_status": "testing",
+  "tested": false,
+  "notes": [
+    "Single left eye only for hardware testing",
+    "Uses SPI_DEVICE_1 (CS=GPIO5) configuration",
+    "Pin mapping: CLK=18, SDA=23, CS=5, DC=21, RST=4"
+  ]
+}

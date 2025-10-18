@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
 P32 Component Table Generator
-Reads JSON bot configuration and generates initTable.h, actTable.h and component files
+Reads JSON bot configuration and generates C++ component tables and implementation stubs
+
+CRITICAL: This project uses C++, NOT C
+- All generated files use .cpp and .hpp extensions
+- All functions use extern "C" for component table compatibility
+- Never generate .c or .h files (except when interfacing with pure C libraries)
 """
 
 import json
@@ -74,9 +79,10 @@ class P32ComponentGenerator:
         self.act_functions = []
         
         # Add system-level components (always present)
+        # Default hitCount of 60000 (~500ms at 120k iterations/sec)
         system_components = [
-            {"name": "heartbeat", "hitCount": 1, "description": "System heartbeat"},
-            {"name": "network_monitor", "hitCount": 1, "description": "Network monitoring and loop timing"}
+            {"name": "heartbeat", "hitCount": 60000, "description": "System heartbeat"},
+            {"name": "network_monitor", "hitCount": 60000, "description": "Network monitoring and loop timing"}
         ]
         
         for comp in system_components:
@@ -95,12 +101,12 @@ class P32ComponentGenerator:
         # Process positioned components from JSON
         for component in components:
             comp_name = component.get("component_name", "unknown")
-            # Default hitCount = 1 if not specified (executes every loop)
+            # Default hitCount = 60000 if not specified (~500ms, reasonable default)
             timing = component.get("timing", {})
             hit_count = timing.get("hitCount")
             if hit_count is None:
-                print(f"Warning: Component '{comp_name}' has no hitCount defined, defaulting to 1 (every loop)")
-                hit_count = 1
+                print(f"Warning: Component '{comp_name}' has no hitCount defined, defaulting to 60000 (~500ms)")
+                hit_count = 60000
             description = component.get("description", f"{comp_name} component")
             
             # Check for explicit function declarations first
@@ -128,10 +134,10 @@ class P32ComponentGenerator:
             })
     
     def generate_unified_header(self) -> str:
-        """Generate unified p32_component_tables.h header file content"""
+        """Generate unified p32_component_tables.hpp header file content"""
         content = [
-            "#ifndef P32_COMPONENT_TABLES_H",
-            "#define P32_COMPONENT_TABLES_H",
+            "#ifndef P32_COMPONENT_TABLES_HPP",
+            "#define P32_COMPONENT_TABLES_HPP",
             "",
             '#include "esp_err.h"',
             '#include <stdint.h>',
@@ -149,26 +155,30 @@ class P32ComponentGenerator:
             f"#define COMPONENT_TABLE_SIZE {len(self.components)}",
             "",
             "// ============================================================================",
-            "// Forward Declarations - Init Functions",
+            "// Forward Declarations - Init Functions (C linkage)",
             "// ============================================================================",
-            ""
+            "",
+            'extern "C" {'
         ]
         
         for comp in self.components:
-            content.append(f"esp_err_t {comp['init_func']}(void);")
+            content.append(f"    esp_err_t {comp['init_func']}(void);")
         
         content.extend([
+            "}",
             "",
             "// ============================================================================",
-            "// Forward Declarations - Act Functions (NO ARGUMENTS)",
+            "// Forward Declarations - Act Functions (NO ARGUMENTS, C linkage)",
             "// ============================================================================",
-            ""
+            "",
+            'extern "C" {'
         ])
         
         for comp in self.components:
-            content.append(f"void {comp['act_func']}(void);")
+            content.append(f"    void {comp['act_func']}(void);")
         
         content.extend([
+            "}",
             "",
             "// ============================================================================",
             "// Dispatch Tables",
@@ -185,20 +195,23 @@ class P32ComponentGenerator:
             "// actTable[i] executes when g_loopCount % hitCountTable[i] == 0",
             "extern uint32_t hitCountTable[COMPONENT_TABLE_SIZE];",
             "",
-            "#endif // P32_COMPONENT_TABLES_H"
+            "#endif // P32_COMPONENT_TABLES_HPP"
         ])
         
         return "\n".join(content)
     
     def generate_unified_implementation(self) -> str:
-        """Generate unified p32_component_tables.c implementation file content"""
+        """Generate unified p32_component_tables.cpp implementation file content"""
         content = [
-            '#include "p32_component_tables.h"',
+            '#include "p32_component_tables.hpp"',
             "",
             "// ============================================================================",
             "// P32 Component Dispatch Tables - Implementation",
             "// Auto-generated from JSON bot configuration",
             "// ============================================================================",
+            "",
+            "// Global loop counter - incremented by main.cpp core loop",
+            "uint64_t g_loopCount = 0;",
             "",
             "// ============================================================================",
             "// Initialization Table",
@@ -258,40 +271,44 @@ class P32ComponentGenerator:
         return "\n".join(content)
     
     def generate_component_stub(self, comp_type: str) -> str:
-        """Generate component implementation stub file"""
+        """Generate component implementation stub file - C++ style"""
         if comp_type == "system":
             components = [c for c in self.components if c['type'] == 'system']
-            filename = "system_components.c"
+            filename = "system_components.cpp"
         else:
             components = [c for c in self.components if c['type'] == 'positioned']
-            filename = "bot_components.c"
+            filename = "bot_components.cpp"
         
         content = [
-            '#include "p32_component_tables.h"',
+            '#include "p32_component_tables.hpp"',
             '#include "esp_log.h"',
             "",
-            f"// {comp_type.title()} component implementations",
+            f"// {comp_type.title()} component implementations - C++",
             f"// Generated from JSON bot configuration",
-            ""
+            "",
+            "namespace {"
         ]
         
-        # Generate TAG definitions
+        # Generate TAG constants in anonymous namespace
         tags = set()
         for comp in components:
             tag = comp['name'].upper()
             if tag not in tags:
-                content.append(f'static const char *TAG_{tag} = "{tag}";')
+                content.append(f'    constexpr const char* TAG_{tag} = "{tag}";')
                 tags.add(tag)
         
-        content.append("")
+        content.extend([
+            "}",
+            ""
+        ])
         
-        # Generate function implementations
+        # Generate function implementations with extern "C" linkage
         for comp in components:
             tag = comp['name'].upper()
             
-            # Init function - Allman style braces
+            # Init function - C linkage, C++ implementation
             content.extend([
-                f"esp_err_t {comp['init_func']}(void)",
+                f'extern "C" esp_err_t {comp["init_func"]}(void)',
                 "{",
                 "#ifdef SIMPLE_TEST",
                 f'    printf("INIT: {comp["name"]} - {comp["description"]}\\n");',
@@ -303,9 +320,9 @@ class P32ComponentGenerator:
                 ""
             ])
             
-            # Act function - NO ARGUMENTS - accesses g_loopCount from globals - Allman style
+            # Act function - C linkage, C++ implementation
             content.extend([
-                f"void {comp['act_func']}(void)",
+                f'extern "C" void {comp["act_func"]}(void)',
                 "{",
                 f'    // Component: {comp["name"]} - {comp["description"]}',
                 f'    // Timing: Execute every {comp["hitCount"]} loops',
@@ -327,13 +344,13 @@ class P32ComponentGenerator:
         self.include_dir.mkdir(exist_ok=True)
         
         # Single unified header file
-        header_file = ("p32_component_tables.h", self.generate_unified_header())
+        header_file = ("p32_component_tables.hpp", self.generate_unified_header())
         
-        # Source files
+        # Source files - ALL C++ now (.cpp extensions)
         source_files = [
-            ("p32_component_tables.c", self.generate_unified_implementation()),
-            ("system_components.c", self.generate_component_stub("system")),
-            ("bot_components.c", self.generate_component_stub("positioned"))
+            ("p32_component_tables.cpp", self.generate_unified_implementation()),
+            ("system_components.cpp", self.generate_component_stub("system")),
+            ("bot_components.cpp", self.generate_component_stub("positioned"))
         ]
         
         # Write unified header to include/

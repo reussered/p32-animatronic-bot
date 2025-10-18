@@ -1,10 +1,32 @@
 # P32 Animatronic Bot - AI Coding Agent Instructions
 
-## 🚨 CRITICAL: READ AI-AGENT-RULES.md FIRST 🚨
+## �🔥🔥 CRITICAL WARNING 🔥🔥🔥
+
+**NEVER ADD DELAYS TO main.cpp - THIS HAS BEEN VIOLATED 10+ TIMES**
+
+If you're thinking about adding `vTaskDelay()` to main.cpp: **STOP. DON'T.**
+
+Timing is controlled by hitCount in JSON files ONLY. See `.github/AI-AGENT-RULES.md` RULE -1.
+
+---
+
+## �🚨 CRITICAL: READ AI-AGENT-RULES.md FIRST 🚨
 
 **Before doing ANYTHING, read and follow: `.github/AI-AGENT-RULES.md`**
 
 These are ironclad rules that must NEVER be broken. They exist because of repeated violations.
+
+## 🚨 CRITICAL: READ LESSONS LEARNED SECOND 🚨
+
+**Immediately after AI-AGENT-RULES.md, read: `docs/LESSONS-LEARNED-BUILD-ERRORS.md`**
+
+This document captures:
+- ✅ All mistakes previously made and their solutions
+- ✅ Patterns that must be followed to prevent errors
+- ✅ Verification steps for common issues
+- ✅ Critical rules learned through experience
+
+**Reading this saves hours of debugging repeated mistakes!**
 
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.

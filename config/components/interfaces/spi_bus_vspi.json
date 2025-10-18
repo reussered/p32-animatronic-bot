@@ -7,7 +7,7 @@
   "pins": {
     "miso": -1,
     "mosi": 13,
-    "clk": 12
+    "clk": 14
   },
   "bus_config": {
     "frequency": "10000000",

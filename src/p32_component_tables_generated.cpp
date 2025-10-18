@@ -5,9 +5,6 @@
 // Auto-generated from JSON bot configuration
 // ============================================================================
 
-// Global loop counter - incremented by main.cpp core loop
-uint64_t g_loopCount = 0;
-
 // ============================================================================
 // Initialization Table
 // ============================================================================
@@ -15,7 +12,7 @@ uint64_t g_loopCount = 0;
 init_func_t initTable[COMPONENT_TABLE_SIZE] = {
     p32_comp_heartbeat_init,
     p32_comp_network_monitor_init,
-    p32_comp_left_eye_init
+    p32_comp_simple_core_test_init
 };
 
 // ============================================================================
@@ -25,7 +22,7 @@ init_func_t initTable[COMPONENT_TABLE_SIZE] = {
 act_func_t actTable[COMPONENT_TABLE_SIZE] = {
     p32_comp_heartbeat_act,    // [0] System heartbeat
     p32_comp_network_monitor_act,    // [1] Network monitoring and loop timing
-    p32_comp_left_eye_act     // [2] Left eye display animation
+    p32_comp_simple_core_test_act     // [2] Simple blink test to verify ESP32-S3 can execute code - blinks onboard LED
 };
 
 // ============================================================================
@@ -33,7 +30,7 @@ act_func_t actTable[COMPONENT_TABLE_SIZE] = {
 // ============================================================================
 
 uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
-    60000,    // [0] heartbeat - every 60000 loops (2.0 Hz)
-    60000,    // [1] network_monitor - every 60000 loops (2.0 Hz)
-    60000     // [2] left_eye - every 60000 loops (2.0 Hz)
+    1,    // [0] heartbeat - every 1 loops (120000 Hz)
+    1,    // [1] network_monitor - every 1 loops (120000 Hz)
+    10     // [2] simple_core_test - every 10 loops (12000 Hz)
 };
