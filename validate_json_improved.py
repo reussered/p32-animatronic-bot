@@ -1,18 +1,32 @@
-?#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 IMPROVED JSON Path Validation and Component Compliance Script
 Fixes JSON encoding issues, creates missing components, handles file names properly
+
+Usage:
+    python validate_json_improved.py [component_name] [root_directory]
+    
+Arguments:
+    component_name (optional): Specific component to process (e.g., "goblin_pirate")
+    root_directory (optional): Root directory containing the project (defaults to current directory)
+    
+Examples:
+    python validate_json_improved.py                           # Process all components in current directory
+    python validate_json_improved.py goblin_pirate             # Process only goblin_pirate component
+    python validate_json_improved.py goblin_pirate /path/to/project  # Process goblin_pirate in specific directory
 """
 
 import os
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
 class ImprovedJsonValidator:
-    def __init__(self, root_dir: str):
+    def __init__(self, root_dir: str, target_component: str = None):
         self.root_dir = Path(root_dir)
+        self.target_component = target_component  # Only process this component if specified
         self.exclude_patterns = ['.venv', 'node_modules', '__pycache__', '.git']
         self.missing_files = []
         self.invalid_json_files = []
@@ -203,7 +217,10 @@ void {safe_name}_act(void) {{
         
     def validate_all_json_files(self):
         """Main validation function"""
-        print(" Starting improved JSON validation...")
+        if self.target_component:
+            print(f" Starting improved JSON validation for component: {self.target_component}")
+        else:
+            print(" Starting improved JSON validation for all components...")
         
         json_files = self.find_json_files()
         
@@ -219,6 +236,13 @@ void {safe_name}_act(void) {{
             if 'component_name' in data:
                 component_name = data['component_name']
                 safe_name = self.sanitize_component_name(component_name)
+                
+                # If target_component is specified, only process matching components
+                if self.target_component:
+                    # Check if this component or its dependencies match the target
+                    if not self.should_process_component(component_name, data):
+                        print(f"    Skipping non-target component: {component_name}")
+                        continue
                 
                 # Avoid duplicates
                 if safe_name in self.created_components:
@@ -241,6 +265,36 @@ void {safe_name}_act(void) {{
                         print(f"   Need to create: {file_path}")
                         
                 self.created_components.add(safe_name)
+                        
+    def should_process_component(self, component_name: str, data: Dict) -> bool:
+        """Determine if this component should be processed based on target_component filter"""
+        if not self.target_component:
+            return True  # Process all components if no target specified
+            
+        # Direct match
+        if component_name == self.target_component:
+            return True
+            
+        # Check if this component contains the target (for bots that contain components)
+        if 'contains' in data:
+            contains_list = data['contains']
+            for contained_item in contains_list:
+                if isinstance(contained_item, str):
+                    if contained_item == self.target_component:
+                        return True
+                elif isinstance(contained_item, dict):
+                    if contained_item.get('component_name') == self.target_component:
+                        return True
+                        
+        # Check if component name contains target as substring (e.g., goblin_pirate_head contains goblin_pirate)
+        if self.target_component in component_name:
+            return True
+            
+        # Check if target contains this component (dependency relationship)
+        if component_name in self.target_component:
+            return True
+            
+        return False
                         
     def execute_fixes(self):
         """Execute all fixes and create missing files"""
@@ -642,8 +696,50 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
             for comp in sorted(self.created_components):
                 print(f"  {comp}")
 
+def print_usage():
+    """Print usage information"""
+    print("""
+Usage: python validate_json_improved.py [component_name] [root_directory]
+
+Arguments:
+    component_name (optional): Specific component to process (e.g., "goblin_pirate")
+    root_directory (optional): Root directory containing the project (defaults to current directory)
+
+Examples:
+    python validate_json_improved.py                           # Process all components in current directory
+    python validate_json_improved.py goblin_pirate             # Process only goblin_pirate component
+    python validate_json_improved.py goblin_pirate /path/to/project  # Process goblin_pirate in specific directory
+    """)
+
 if __name__ == "__main__":
-    validator = ImprovedJsonValidator("f:/GitHub/p32-animatronic-bot")
+    # Parse command line arguments
+    component_name = None
+    root_directory = os.getcwd()  # Default to current directory
+    
+    if len(sys.argv) > 1:
+        if sys.argv[1] in ['-h', '--help', 'help']:
+            print_usage()
+            sys.exit(0)
+        component_name = sys.argv[1]
+        
+    if len(sys.argv) > 2:
+        root_directory = sys.argv[2]
+        
+    # Validate root directory exists
+    if not os.path.exists(root_directory):
+        print(f"Error: Root directory '{root_directory}' does not exist")
+        sys.exit(1)
+        
+    # Print what we're doing
+    if component_name:
+        print(f"Processing component: {component_name}")
+        print(f"Root directory: {root_directory}")
+    else:
+        print(f"Processing all components")
+        print(f"Root directory: {root_directory}")
+        
+    # Execute validation and generation
+    validator = ImprovedJsonValidator(root_directory, component_name)
     validator.validate_all_json_files()
     validator.execute_fixes()
     validator.generate_report()

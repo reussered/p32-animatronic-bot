@@ -18,9 +18,13 @@
   "compression_factor": 0.7,
   
   "family_level_components": [
-    "config/components/functional/goblin_personality.json",
+    "config/components/functional/goblin_pirate_personality.json",
     "config/components/functional/goblin_mood.json",
     "config/components/functional/goblin_behavior_engine.json"
+  ],
+  
+  "subsystems": [
+    "config/subsystems/goblin_pirate_head.json"
   ],
   
   "positioned_components": [

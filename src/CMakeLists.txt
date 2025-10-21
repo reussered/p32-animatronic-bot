@@ -34,6 +34,8 @@ set(P32_COMPONENT_SOURCES
     components/goblin_mouth_STUB.cpp
     components/goblin_nose.cpp
     components/goblin_personality.cpp
+    components/goblin_pirate_head.cpp
+    components/goblin_pirate_personality.cpp
     components/goblin_right_eye.cpp
     components/goblin_speaker_STUB.cpp
     components/goblin_torso.cpp
