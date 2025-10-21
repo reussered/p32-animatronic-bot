@@ -8,19 +8,18 @@ set(P32_CORE_SOURCES
 
 # P32 Individual Components - Comment out to exclude from build
 set(P32_COMPONENT_SOURCES
-    p32_component_tables.c          # Generated table definitions (always needed)
-    system_components.c             # Generated system components (heartbeat, network_monitor)
-    bot_components.c                # Generated bot-specific components (eyes, nose, mouth, etc.)
-    p32_eye_display.c               # Eye animation system
-    p32_web_client.c                # Web client for PC streaming (test mode)
+    p32_dispatch_tables.cpp         # Generated dispatch tables (initTable, actTable, hitCountTable)
+    p32_component_functions.cpp     # Aggregates all individual component implementations
+    p32_eye_display.cpp             # Eye animation system
+    p32_web_client.cpp              # Web client for PC streaming (test mode)
     Mood.cpp                        # C++ Mood system with efficient delta calculations
     FrameProcessor.cpp              # C++ Frame processing with mood-based optimization
     core/memory/SharedMemory.cpp    # SharedMemory ESP-NOW mesh communication
-    components/system_core.c
-    components/network_monitor.c  
-    components/goblin_eye_left.c
-    components/goblin_eye_right.c
-    components/goblin_nose.c
+    components/system_core.cpp
+    components/network_monitor.cpp  
+    components/goblin_eye_left.cpp
+    components/goblin_eye_right.cpp
+    components/goblin_nose.cpp
 )
 
 # For memory analysis - uncomment this minimal set:

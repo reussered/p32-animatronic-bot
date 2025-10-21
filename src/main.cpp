@@ -2,7 +2,7 @@
 // Works with any bot configuration via generated component tables
 
 #include <stdbool.h>
-#include "p32_component_tables.h"
+#include "p32_dispatch_tables.hpp"
 #include "core/memory/SharedMemory.hpp"
 
 // Loop counter - main.cpp has WRITE access, components have READ-ONLY via p32_shared_state.h
