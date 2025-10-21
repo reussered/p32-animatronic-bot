@@ -1,4 +1,4 @@
-# P32 Animatronic Bot - Complete STL Generation System
+﻿# P32 Animatronic Bot - Complete STL Generation System
 # Generates all 3D printable components for humanoid subsystems
 
 param(
@@ -97,13 +97,13 @@ function Generate-STL {
         if ($exitCode -eq 0) {
             $endTime = Get-Date
             $duration = ($endTime - $startTime).TotalSeconds
-            Write-Host "  ✓ Generated in $([math]::Round($duration, 1))s" -ForegroundColor Green
+            Write-Host "   Generated in $([math]::Round($duration, 1))s" -ForegroundColor Green
         } else {
-            Write-Host "  ✗ Generation failed" -ForegroundColor Red
+            Write-Host "   Generation failed" -ForegroundColor Red
         }
     } catch {
         $errorMsg = $_.Exception.Message
-        Write-Host "  ✗ Error: $errorMsg" -ForegroundColor Red
+        Write-Host "   Error: $errorMsg" -ForegroundColor Red
     }
 }
 
@@ -444,9 +444,9 @@ if ($ValidateModels -or $AllSubsystems) {
     foreach ($file in $stlFiles) {
         $sizeKB = [math]::Round($file.Length / 1KB, 1)
         if ($file.Length -gt 0) {
-            Write-Host "✓ $($file.Name) ($sizeKB KB)" -ForegroundColor Green
+            Write-Host " $($file.Name) ($sizeKB KB)" -ForegroundColor Green
         } else {
-            Write-Host "✗ $($file.Name) (0 KB - Generation Failed)" -ForegroundColor Red
+            Write-Host " $($file.Name) (0 KB - Generation Failed)" -ForegroundColor Red
         }
     }
     Write-Host ""

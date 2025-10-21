@@ -1,4 +1,4 @@
-# P32 Distance-Based Eye Focusing Animation Generator
+﻿# P32 Distance-Based Eye Focusing Animation Generator
 # Creates eye animations that focus based on HC-SR04 proximity sensor data
 
 param(
@@ -217,7 +217,7 @@ if ($Demo) {
     Write-Host "`nGenerated $generatedCount distance-based eye focus animations!" -ForegroundColor Green
     Write-Host "`nIntegration Notes:" -ForegroundColor Yellow
     Write-Host "- Animations triggered by HC-SR04 sensor data from goblin_nose component" -ForegroundColor White
-    Write-Host "- Eye convergence angles: 0° (parallel) to ±25° (cross-eyed)" -ForegroundColor White  
+    Write-Host "- Eye convergence angles: 0 (parallel) to 25 (cross-eyed)" -ForegroundColor White  
     Write-Host "- Pupil size varies: 0.5 (far) to 0.9 (very close)" -ForegroundColor White
     Write-Host "- Smooth transitions between distance ranges" -ForegroundColor White
 } else {
@@ -228,6 +228,6 @@ if ($Demo) {
     $config = $EyeFocusConfig[$Character]
     foreach ($rangeName in $config.convergence_ranges.Keys) {
         $range = $config.convergence_ranges[$rangeName]
-        Write-Host "  $rangeName`: $($range.distance_cm_min)-$($range.distance_cm_max)cm (±$($range.left_eye_angle)°)" -ForegroundColor White
+        Write-Host "  $rangeName`: $($range.distance_cm_min)-$($range.distance_cm_max)cm ($($range.left_eye_angle))" -ForegroundColor White
     }
 }

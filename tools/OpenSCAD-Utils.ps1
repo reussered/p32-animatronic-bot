@@ -1,4 +1,4 @@
-# OpenSCAD Utility Functions for P32 Tools
+﻿# OpenSCAD Utility Functions for P32 Tools
 # Always use executable names from PATH to ensure permanent environment variables work
 
 function Test-OpenSCADAvailable {
@@ -75,11 +75,11 @@ function Test-PermanentPATH {
     Warns user if PATH appears to be temporarily modified vs permanently set
     #>
     if (Test-OpenSCADAvailable) {
-        Write-Host "✅ openscad.exe found in PATH" -ForegroundColor Green
+        Write-Host " openscad.exe found in PATH" -ForegroundColor Green
         Write-Host "Note: This could be from session modification or permanent PATH" -ForegroundColor Yellow
         Write-Host "To verify permanent PATH: restart terminal and test again" -ForegroundColor Cyan
     } else {
-        Write-Host "❌ openscad.exe not found in PATH" -ForegroundColor Red
+        Write-Host " openscad.exe not found in PATH" -ForegroundColor Red
         Write-Host "Add to permanent PATH or use session modification" -ForegroundColor Yellow
     }
 }

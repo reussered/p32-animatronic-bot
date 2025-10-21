@@ -1,4 +1,4 @@
-# P32 Animatronic Bot - STL Generation System (Simplified)
+﻿# P32 Animatronic Bot - STL Generation System (Simplified)
 param(
     [switch]$AllSubsystems,
     [string]$OutputDir = "assets/shapes/stl"
@@ -47,12 +47,12 @@ function Generate-STL {
     try {
         $process = Start-Process -FilePath $OpenSCAD -ArgumentList @("-o", $StlFile, $ScadFile) -Wait -PassThru -WindowStyle Hidden
         if ($process.ExitCode -eq 0) {
-            Write-Host "  ✓ Generated successfully" -ForegroundColor Green
+            Write-Host "   Generated successfully" -ForegroundColor Green
         } else {
-            Write-Host "  ✗ Generation failed" -ForegroundColor Red
+            Write-Host "   Generation failed" -ForegroundColor Red
         }
     } catch {
-        Write-Host "  ✗ Error: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "   Error: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
@@ -191,7 +191,7 @@ if ($stlFiles) {
     foreach ($file in $stlFiles) {
         $sizeKB = [math]::Round($file.Length / 1KB, 1)
         $relativePath = $file.FullName.Replace($pwd.Path + "\", "")
-        Write-Host "  ✓ $relativePath ($sizeKB KB)" -ForegroundColor Green
+        Write-Host "   $relativePath ($sizeKB KB)" -ForegroundColor Green
     }
 } else {
     Write-Host "No STL files were generated." -ForegroundColor Red

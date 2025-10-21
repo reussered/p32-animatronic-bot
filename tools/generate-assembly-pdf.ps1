@@ -1,6 +1,6 @@
-# P32 Animatronic Bot - Assembly Guide PDF Generator
+﻿# P32 Animatronic Bot - Assembly Guide PDF Generator
 # Converts markdown wiring guides to professional PDF with diagrams
-# Uses Pandoc for markdown→HTML→PDF conversion
+# Uses Pandoc for markdownHTMLPDF conversion
 
 param(
     [switch]$InstallPandoc,
@@ -11,14 +11,14 @@ param(
 $ErrorActionPreference = "Stop"
 
 # Color output functions
-function Write-Success { param([string]$msg) Write-Host "✓ $msg" -ForegroundColor Green }
-function Write-Info { param([string]$msg) Write-Host "ℹ $msg" -ForegroundColor Cyan }
-function Write-Warning { param([string]$msg) Write-Host "⚠ $msg" -ForegroundColor Yellow }
-function Write-Error { param([string]$msg) Write-Host "✗ $msg" -ForegroundColor Red }
+function Write-Success { param([string]$msg) Write-Host " $msg" -ForegroundColor Green }
+function Write-Info { param([string]$msg) Write-Host " $msg" -ForegroundColor Cyan }
+function Write-Warning { param([string]$msg) Write-Host " $msg" -ForegroundColor Yellow }
+function Write-Error { param([string]$msg) Write-Host " $msg" -ForegroundColor Red }
 
-Write-Host "`n═══════════════════════════════════════════════════════" -ForegroundColor Magenta
+Write-Host "`n" -ForegroundColor Magenta
 Write-Host "  P32 Assembly Guide PDF Generator" -ForegroundColor Magenta
-Write-Host "═══════════════════════════════════════════════════════`n" -ForegroundColor Magenta
+Write-Host "`n" -ForegroundColor Magenta
 
 # Check for Pandoc installation
 function Test-Pandoc {
@@ -255,7 +255,7 @@ function Convert-MarkdownToPDF {
         [string]$Title
     )
     
-    Write-Info "Converting: $(Split-Path $InputMarkdown -Leaf) → $(Split-Path $OutputPDF -Leaf)"
+    Write-Info "Converting: $(Split-Path $InputMarkdown -Leaf)  $(Split-Path $OutputPDF -Leaf)"
     
     # Pandoc command with professional settings
     $pandocArgs = @(
@@ -304,7 +304,7 @@ function Convert-MarkdownToHTML {
         [string]$Title
     )
     
-    Write-Info "Converting to HTML: $(Split-Path $InputMarkdown -Leaf) → $(Split-Path $OutputHTML -Leaf)"
+    Write-Info "Converting to HTML: $(Split-Path $InputMarkdown -Leaf)  $(Split-Path $OutputHTML -Leaf)"
     
     $pandocArgs = @(
         $InputMarkdown,
@@ -404,7 +404,7 @@ try {
         Write-Info "Or use browser 'Print to PDF' from generated HTML files"
     }
     
-    Write-Host "`n" + ("─" * 60) + "`n"
+    Write-Host "`n" + ("" * 60) + "`n"
     
     # Process each guide
     $successCount = 0
@@ -428,7 +428,7 @@ try {
         }
     }
     
-    Write-Host "`n" + ("─" * 60) + "`n"
+    Write-Host "`n" + ("" * 60) + "`n"
     
     # Summary
     Write-Success "Generation complete: $successCount of $($guides.Count) guides processed"

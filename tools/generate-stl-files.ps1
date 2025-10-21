@@ -1,4 +1,4 @@
-# Generate STL/3MF files from OpenSCAD mounting system with multi-color support
+﻿# Generate STL/3MF files from OpenSCAD mounting system with multi-color support
 # Requires OpenSCAD to be installed and in PATH
 
 param(
@@ -121,17 +121,17 @@ function Generate-ShapeFile($ScadFile, $OutputPath, $ConstructionType, $ColorPal
         $Result = & openscad @Arguments 2>&1
         
         if ($LASTEXITCODE -eq 0 -and (Test-Path $OutputPath)) {
-            Write-Host "  ✓ Generated successfully" -ForegroundColor Green
+            Write-Host "   Generated successfully" -ForegroundColor Green
             return $true
         } else {
-            Write-Host "  ✗ Generation failed" -ForegroundColor Red
+            Write-Host "   Generation failed" -ForegroundColor Red
             if ($Result) {
                 Write-Host "    Error: $Result" -ForegroundColor Red
             }
             return $false
         }
     } catch {
-        Write-Host "  ✗ Exception during generation: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "   Exception during generation: $($_.Exception.Message)" -ForegroundColor Red
         return $false
     }
 }
@@ -325,8 +325,8 @@ if ($SearchPaths.Count -gt 0) {
 # Multi-color usage instructions
 if ($MultiColor) {
     Write-Host "`nMulti-Color 3MF Usage:" -ForegroundColor Green
-    Write-Host "  • Open 3MF files in PrusaSlicer or Bambu Studio" -ForegroundColor Cyan
-    Write-Host "  • Assign filament colors to match bot family palette" -ForegroundColor Cyan
-    Write-Host "  • Use automatic color change commands for layer transitions" -ForegroundColor Cyan
-    Write-Host "  • Preview colors before printing to verify assignments" -ForegroundColor Cyan
+    Write-Host "   Open 3MF files in PrusaSlicer or Bambu Studio" -ForegroundColor Cyan
+    Write-Host "   Assign filament colors to match bot family palette" -ForegroundColor Cyan
+    Write-Host "   Use automatic color change commands for layer transitions" -ForegroundColor Cyan
+    Write-Host "   Preview colors before printing to verify assignments" -ForegroundColor Cyan
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/env pwsh
+﻿#!/usr/bin/env pwsh
 # P32 Animatronic Bot - Build Script
 # Cleans and builds the project
 
@@ -10,7 +10,7 @@ pio run -t clean
 
 if ($LASTEXITCODE -ne 0)
 {
-    Write-Host "`n❌ Clean failed!" -ForegroundColor Red
+    Write-Host "`n Clean failed!" -ForegroundColor Red
     exit 1
 }
 
@@ -21,9 +21,9 @@ pio run
 
 if ($LASTEXITCODE -ne 0)
 {
-    Write-Host "`n❌ Build failed!" -ForegroundColor Red
+    Write-Host "`n Build failed!" -ForegroundColor Red
     exit 1
 }
 
-Write-Host "`n✅ Build successful!" -ForegroundColor Green
+Write-Host "`n Build successful!" -ForegroundColor Green
 Write-Host "`nFirmware ready at: .pio\build\esp32-s3-devkitc-1\firmware.bin" -ForegroundColor Cyan

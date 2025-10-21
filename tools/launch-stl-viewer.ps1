@@ -46,7 +46,7 @@ function Launch-MultiColorViewer($FilePath, $ViewerType) {
             foreach ($path in $PrusaPaths) {
                 if (Test-Path $path) {
                     Start-Process $path -ArgumentList "`"$FilePath`""
-                    Write-Host "✓ Opened in PrusaSlicer" -ForegroundColor Green
+                    Write-Host " Opened in PrusaSlicer" -ForegroundColor Green
                     return $true
                 }
             }
@@ -60,7 +60,7 @@ function Launch-MultiColorViewer($FilePath, $ViewerType) {
             foreach ($path in $BambuPaths) {
                 if (Test-Path $path) {
                     Start-Process $path -ArgumentList "`"$FilePath`""
-                    Write-Host "✓ Opened in Bambu Studio" -ForegroundColor Green
+                    Write-Host " Opened in Bambu Studio" -ForegroundColor Green
                     return $true
                 }
             }
@@ -69,7 +69,7 @@ function Launch-MultiColorViewer($FilePath, $ViewerType) {
             if ($Extension -eq ".3mf") {
                 try {
                     Start-Process "ms-3dviewer:" -ArgumentList $FilePath
-                    Write-Host "✓ Opened in Microsoft 3D Viewer" -ForegroundColor Green
+                    Write-Host " Opened in Microsoft 3D Viewer" -ForegroundColor Green
                     return $true
                 } catch {
                     # 3D Viewer not available
@@ -99,9 +99,9 @@ function Launch-WebViewer($STLFile) {
     Start-Process $ViewerURL
     
     if ($STLFile -and (Test-Path $STLFile)) {
-        Write-Host "✓ Web viewer opened - use Choose File button to load: $STLFile" -ForegroundColor Green
+        Write-Host " Web viewer opened - use Choose File button to load: $STLFile" -ForegroundColor Green
     } else {
-        Write-Host "✓ Web viewer opened successfully" -ForegroundColor Green
+        Write-Host " Web viewer opened successfully" -ForegroundColor Green
     }
     return $true
 }
@@ -152,12 +152,12 @@ if ($Extension -eq ".3mf" -or $Extension -eq ".amf") {
     
     if (-not $Success) {
         Write-Host ""
-        Write-Host "⚠️  No suitable multi-color viewer found!" -ForegroundColor Red
+        Write-Host "  No suitable multi-color viewer found!" -ForegroundColor Red
         Write-Host ""
         Write-Host "Recommended installations:" -ForegroundColor Yellow
-        Write-Host "  • PrusaSlicer: https://www.prusa3d.com/prusaslicer/" -ForegroundColor Cyan
-        Write-Host "  • Bambu Studio: https://bambulab.com/en/download/studio" -ForegroundColor Cyan
-        Write-Host "  • Windows 3D Viewer: Available via Microsoft Store" -ForegroundColor Cyan
+        Write-Host "   PrusaSlicer: https://www.prusa3d.com/prusaslicer/" -ForegroundColor Cyan
+        Write-Host "   Bambu Studio: https://bambulab.com/en/download/studio" -ForegroundColor Cyan
+        Write-Host "   Windows 3D Viewer: Available via Microsoft Store" -ForegroundColor Cyan
         Write-Host ""
         Write-Host "These viewers provide full multi-color support with material assignment." -ForegroundColor White
     }

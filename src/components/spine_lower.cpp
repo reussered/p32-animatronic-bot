@@ -1,0 +1,43 @@
+/**
+ * @file spine_lower.cpp
+ * @brief Lower spine flexion/extension control
+ * @author Auto-generated from JSON specification
+ */
+
+#include "components/spine_lower.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "core/gsm.hpp"
+#include "p32_shared_state.h"
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize spine_lower component
+ * Called once during system startup
+ */
+void spine_lower_init(void) {
+    // Component initialization logic
+    // Access global state via g_loopCount and shared state via GSM
+    
+    // Example: Read shared memory
+    // auto shared_data = GSM.read<SomeSharedDataType>();
+    
+    // TODO: Implement component-specific initialization
+}
+
+/**
+ * @brief Execute spine_lower component logic  
+ * Called every loop iteration based on hitCount: 1
+ */
+void spine_lower_act(void) {
+    // Component execution logic
+    // Access global state via g_loopCount and shared state via GSM
+    
+    // Example: Update shared memory
+    // auto shared_data = GSM.read<SomeSharedDataType>();
+    // // Modify shared_data...
+    // GSM.write<SomeSharedDataType>(shared_data);
+    
+    // TODO: Implement component-specific behavior
+}

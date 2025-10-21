@@ -1,4 +1,4 @@
-# P32 Animatronic Bot - Environment Setup Script
+﻿# P32 Animatronic Bot - Environment Setup Script
 # Sets up all required PATH variables and verifies installation
 
 Write-Host "=== P32 Animatronic Bot Environment Setup ===" -ForegroundColor Cyan
@@ -18,17 +18,17 @@ $OpenSCADPath = "C:\Program Files\OpenSCAD"
 $OpenSCADExe = Join-Path $OpenSCADPath "openscad.exe"
 
 if (Test-Path $OpenSCADExe) {
-    Write-Host "  ✓ OpenSCAD found: $OpenSCADExe" -ForegroundColor Green
+    Write-Host "   OpenSCAD found: $OpenSCADExe" -ForegroundColor Green
     
     if ($PathEntries -notcontains $OpenSCADPath) {
         Write-Host "  + Adding to PATH: $OpenSCADPath" -ForegroundColor Cyan
         $PathEntries += $OpenSCADPath
         $Modified = $true
     } else {
-        Write-Host "  ✓ Already in PATH" -ForegroundColor Green
+        Write-Host "   Already in PATH" -ForegroundColor Green
     }
 } else {
-    Write-Host "  ✗ OpenSCAD NOT FOUND at $OpenSCADPath" -ForegroundColor Red
+    Write-Host "   OpenSCAD NOT FOUND at $OpenSCADPath" -ForegroundColor Red
     Write-Host "    Please install from: https://openscad.org/" -ForegroundColor Yellow
     Write-Host "    Or update the path in this script if installed elsewhere" -ForegroundColor Yellow
 }
@@ -43,17 +43,17 @@ $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $ToolsPath = Join-Path $ProjectRoot "tools"
 
 if (Test-Path $ToolsPath) {
-    Write-Host "  ✓ Tools directory found: $ToolsPath" -ForegroundColor Green
+    Write-Host "   Tools directory found: $ToolsPath" -ForegroundColor Green
     
     if ($PathEntries -notcontains $ToolsPath) {
         Write-Host "  + Adding to PATH: $ToolsPath" -ForegroundColor Cyan
         $PathEntries += $ToolsPath
         $Modified = $true
     } else {
-        Write-Host "  ✓ Already in PATH" -ForegroundColor Green
+        Write-Host "   Already in PATH" -ForegroundColor Green
     }
 } else {
-    Write-Host "  ✗ Tools directory NOT FOUND: $ToolsPath" -ForegroundColor Red
+    Write-Host "   Tools directory NOT FOUND: $ToolsPath" -ForegroundColor Red
 }
 
 # =============================================================================
@@ -65,10 +65,10 @@ Write-Host "Checking Python installation (optional)..." -ForegroundColor Yellow
 $PythonCmd = Get-Command python -ErrorAction SilentlyContinue
 if ($PythonCmd) {
     $PythonVersion = & python --version 2>&1
-    Write-Host "  ✓ Python found: $PythonVersion" -ForegroundColor Green
+    Write-Host "   Python found: $PythonVersion" -ForegroundColor Green
     Write-Host "    Location: $($PythonCmd.Source)" -ForegroundColor Gray
 } else {
-    Write-Host "  ⚠ Python not found in PATH" -ForegroundColor Yellow
+    Write-Host "   Python not found in PATH" -ForegroundColor Yellow
     Write-Host "    Required for STL visualization tools" -ForegroundColor Gray
     Write-Host "    Install from: https://www.python.org/" -ForegroundColor Gray
 }
@@ -82,9 +82,9 @@ Write-Host "Checking Git LFS installation..." -ForegroundColor Yellow
 $GitLFSCmd = Get-Command git-lfs -ErrorAction SilentlyContinue
 if ($GitLFSCmd) {
     $GitLFSVersion = & git-lfs version 2>&1
-    Write-Host "  ✓ Git LFS found: $GitLFSVersion" -ForegroundColor Green
+    Write-Host "   Git LFS found: $GitLFSVersion" -ForegroundColor Green
 } else {
-    Write-Host "  ⚠ Git LFS not found" -ForegroundColor Yellow
+    Write-Host "   Git LFS not found" -ForegroundColor Yellow
     Write-Host "    Required for managing large STL files" -ForegroundColor Gray
     Write-Host "    Run: git lfs install" -ForegroundColor Gray
 }
@@ -103,7 +103,7 @@ if ($Modified) {
     $NewPath = $CleanPath -join ';'
     [Environment]::SetEnvironmentVariable("Path", $NewPath, "User")
     
-    Write-Host "  ✓ PATH updated successfully!" -ForegroundColor Green
+    Write-Host "   PATH updated successfully!" -ForegroundColor Green
     Write-Host ""
     Write-Host "IMPORTANT: You must restart your terminal/IDE for changes to take effect!" -ForegroundColor Yellow
     Write-Host "  - Close all PowerShell windows" -ForegroundColor Cyan
@@ -122,7 +122,7 @@ Write-Host "=== Current User PATH Entries ===" -ForegroundColor Cyan
 $CurrentPath = [Environment]::GetEnvironmentVariable("Path", "User")
 $CurrentPath -split ';' | ForEach-Object {
     if ($_ -match "OpenSCAD|p32-animatronic-bot") {
-        Write-Host "  → $_" -ForegroundColor Green
+        Write-Host "   $_" -ForegroundColor Green
     } else {
         Write-Host "    $_" -ForegroundColor Gray
     }

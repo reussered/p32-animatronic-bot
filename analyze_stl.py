@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Simple STL Header Reader - Quick analysis of STL files
 """
@@ -34,9 +34,9 @@ def analyze_stl_file(stl_path):
             print(f"Expected size: {expected_size:,} bytes")
             
             if file_size == expected_size:
-                print("✓ Valid binary STL format")
+                print(" Valid binary STL format")
             else:
-                print("⚠ Size mismatch - may be ASCII STL")
+                print(" Size mismatch - may be ASCII STL")
                 
             # Read first triangle to show actual geometry
             if triangle_count > 0:
@@ -67,7 +67,7 @@ def analyze_stl_file(stl_path):
                 print(f"First line (ASCII attempt): {first_line}")
                 
                 if first_line.lower().startswith('solid'):
-                    print("✓ Appears to be ASCII STL format")
+                    print(" Appears to be ASCII STL format")
                     
                     # Count facets
                     f.seek(0)

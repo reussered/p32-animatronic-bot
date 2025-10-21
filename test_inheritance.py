@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Quick test of inheritance processor"""
 
 import sys
@@ -14,33 +14,33 @@ proc = P32InheritanceProcessor('config')
 # Test 1: Load family template
 try:
     family_template = proc.load_template('templates/families/goblin_family.json')
-    print("✓ Successfully loaded family template")
+    print(" Successfully loaded family template")
     print(f"  Family type: {family_template.get('family_type', 'unknown')}")
 except Exception as e:
-    print(f"✗ Error loading family template: {e}")
+    print(f" Error loading family template: {e}")
 
 # Test 2: Load base template  
 try:
     base_template = proc.load_template('templates/base/humanoid_head_base.json')
-    print("✓ Successfully loaded base template")
+    print(" Successfully loaded base template")
     print(f"  Template type: {base_template.get('template_type', 'unknown')}")
 except Exception as e:
-    print(f"✗ Error loading base template: {e}")
+    print(f" Error loading base template: {e}")
 
 # Test 3: Load creature
 try:
     creature = proc.load_template('creatures/goblin_warrior_head.json')
-    print("✓ Successfully loaded creature")
+    print(" Successfully loaded creature")
     print(f"  Bot ID: {creature.get('bot_id', 'unknown')}")
 except Exception as e:
-    print(f"✗ Error loading creature: {e}")
+    print(f" Error loading creature: {e}")
 
 # Test 4: Full inheritance resolution
 try:
     print("\nTesting full inheritance resolution...")
     creature = proc.load_template('creatures/goblin_warrior_head.json')
     resolved = proc.resolve_inheritance_chain(creature)
-    print("✓ Successfully resolved inheritance chain!")
+    print(" Successfully resolved inheritance chain!")
     
     print(f"  Final bot ID: {resolved.get('bot_id', 'unknown')}")
     print(f"  Components count: {len(resolved.get('positioned_components', []))}")
@@ -51,9 +51,9 @@ try:
     import json
     with open('config/resolved/goblin_warrior_head_resolved.json', 'w') as f:
         json.dump(resolved, f, indent=2)
-    print("  ✓ Saved resolved configuration to config/resolved/")
+    print("   Saved resolved configuration to config/resolved/")
     
 except Exception as e:
-    print(f"✗ Error in inheritance resolution: {e}")
+    print(f" Error in inheritance resolution: {e}")
 
 print("\nTest complete!")

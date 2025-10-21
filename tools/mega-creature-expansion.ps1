@@ -1,4 +1,4 @@
-# P32 MEGA CREATURE EXPANSION - Master Script
+﻿# P32 MEGA CREATURE EXPANSION - Master Script
 # Orchestrates the complete expansion from 55 to 440 creatures
 
 param(
@@ -8,7 +8,7 @@ param(
 )
 
 Write-Host "=== P32 MEGA CREATURE EXPANSION ===" -ForegroundColor Magenta
-Write-Host "Target: 55 → 440 creatures (8x expansion)" -ForegroundColor Yellow
+Write-Host "Target: 55  440 creatures (8x expansion)" -ForegroundColor Yellow
 
 # Get current count
 $currentCount = (Get-ChildItem "config\bots\bot_families" -Recurse -Name "*.json" | Where-Object { $_ -notlike "*_family.json" } | Measure-Object).Count
@@ -57,11 +57,11 @@ if (-not $DryRun) {
     Write-Host "Expansion factor: ${multiplier}x" -ForegroundColor Cyan
     
     if ($newCount -ge 400) {
-        Write-Host "🎯 TARGET ACHIEVED! 400+ creatures created!" -ForegroundColor Magenta
+        Write-Host " TARGET ACHIEVED! 400+ creatures created!" -ForegroundColor Magenta
     } elseif ($newCount -ge 300) {
-        Write-Host "🎉 EXCELLENT PROGRESS! 300+ creatures created!" -ForegroundColor Green
+        Write-Host " EXCELLENT PROGRESS! 300+ creatures created!" -ForegroundColor Green
     } else {
-        Write-Host "📈 Good progress, consider running additional expansions." -ForegroundColor Yellow
+        Write-Host " Good progress, consider running additional expansions." -ForegroundColor Yellow
     }
 } else {
     Write-Host "[DRY RUN] No files were created. Run without -DryRun to execute." -ForegroundColor Yellow

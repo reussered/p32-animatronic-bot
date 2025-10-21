@@ -1,4 +1,4 @@
-# P32 Animatronic Bot - STL Generation System (FIXED VERSION)
+﻿# P32 Animatronic Bot - STL Generation System (FIXED VERSION)
 param(
     [switch]$AllSubsystems,
     [switch]$Test,
@@ -124,9 +124,9 @@ if ($Test) {
     $success = New-STLFile -ScadFile "test_component.scad" -StlFile "$OutputDir/test_component.stl" -Description "Test Component"
     
     if ($success) {
-        Write-Host "✓ STL generation system working!" -ForegroundColor Green
+        Write-Host " STL generation system working!" -ForegroundColor Green
     } else {
-        Write-Host "✗ STL generation failed" -ForegroundColor Red
+        Write-Host " STL generation failed" -ForegroundColor Red
     }
     
     # Clean up

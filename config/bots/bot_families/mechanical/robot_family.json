@@ -1,13 +1,13 @@
 {
   "relative_filename": "config/bots/bot_families/mechanical/robot_family.json",
-  "version": "1.0.0",
+  "version": "1.0",
   "author": "config/author.json",
+  "family_name": "Robot",
   "family_type": "ROBOT",
-  "family_category": "mechanical", 
+  "family_category": "mechanical",
   "description": "Advanced robots with LED displays, servo mechanisms, and AI-inspired behaviors",
   "created": "2025-10-12",
   "template_type": "family_template",
-  
   "coordinate_system": "planar_2d",
   "reference_point": "nose_center",
   "baseline_dimensions": {
@@ -15,7 +15,6 @@
     "face_height": "8.0 INCH",
     "component_spacing": "1.5 INCH"
   },
-  
   "default_components": [
     "config/components/positioned/robot_chest_matrix.json",
     "config/components/positioned/robot_status_oled.json",
@@ -23,7 +22,6 @@
     "config/components/positioned/robot_speaker_array.json",
     "config/components/positioned/robot_led_strips.json"
   ],
-  
   "family_mood_profile": {
     "FEAR": 5,
     "ANGER": 10,
@@ -32,10 +30,8 @@
     "CONTENTMENT": 20,
     "HUNGER": 0,
     "CURIOSITY": 25,
-    "AFFECTION": 5,
-    "EXCITEMENT": 15
+    "AFFECTION": 5
   },
-  
   "family_behavior_patterns": {
     "threat_response_enabled": true,
     "auto_sleep_timeout_seconds": 1800,
@@ -46,283 +42,8 @@
       "logical",
       "methodical",
       "helpful",
-      "precise", 
+      "precise",
       "analytical"
     ]
-
-  },      "aggressive_threshold": 90,      "aggressive_threshold": 90,
-
-  
-
-  "subfamily_variants": [      "movement_style": "precise_mechanical",      "movement_style": "precise_mechanical",
-
-    {
-
-      "subfamily_name": "COMBAT_ROBOT",      "attention_span_seconds": 300,      "attention_span_seconds": 300,
-
-      "description": "Military-grade combat robot with weapon systems and armor plating",
-
-      "mood_adjustments": {      "processing_delays": "computational_pauses"      "processing_delays": "computational_pauses"
-
-        "ANGER": "+15",
-
-        "FEAR": "-5",    },    },
-
-        "CURIOSITY": "-10"
-
-      },        
-
-      "specialized_components": [
-
-        "laser_targeting_system",    "aesthetic_profile": {    "aesthetic_profile": {
-
-        "plasma_cannon_simulator", 
-
-        "armor_plating_actuators",      "color_scheme": "metallic_chrome",      "color_scheme": "metallic_chrome",
-
-        "tactical_display_array"
-
-      ]      "weathering_effects": false,      "weathering_effects": false,
-
-    },
-
-    {      "mouth_style": "speaker_grille",      "mouth_style": "speaker_grille",
-
-      "subfamily_name": "SERVICE_ROBOT",
-
-      "description": "Helpful service robot designed for human assistance and interaction",      "eye_style": "led_matrix",      "eye_style": "led_matrix",
-
-      "mood_adjustments": {
-
-        "HAPPINESS": "+10",      "feature_asymmetry": false,      "feature_asymmetry": false,
-
-        "AFFECTION": "+15",
-
-        "CONTENTMENT": "+5"      "surface_texture": "brushed_metal",      "surface_texture": "brushed_metal",
-
-      },
-
-      "specialized_components": [      "nose_style": "sensor_array"      "nose_style": "sensor_array"
-
-        "service_tray_actuator",
-
-        "gentle_grip_manipulators",    },    },
-
-        "social_interaction_leds",
-
-        "comfort_voice_module"        
-
-      ]
-
-    },    "audio_profile": {    "audio_profile": {
-
-    {
-
-      "subfamily_name": "INDUSTRIAL_ROBOT",      "primary_sounds": ["servo_whirring", "electronic_beeps", "processing_hums", "data_transmission"],      "primary_sounds": ["servo_whirring", "electronic_beeps", "processing_hums", "data_transmission"],
-
-      "description": "Heavy-duty industrial robot with powerful actuators and precision tools",
-
-      "mood_adjustments": {      "volume_range": [50, 100],      "volume_range": [50, 100],
-
-        "IRRITATION": "+10",
-
-        "CONTENTMENT": "+10",      "frequency_preference": "electronic_spectrum",      "frequency_preference": "electronic_spectrum",
-
-        "CURIOSITY": "-5"
-
-      },      "digital_processing": true,      "digital_processing": true,
-
-      "specialized_components": [
-
-        "heavy_duty_servo_clusters",      "bit_rate": "high_fidelity"      "bit_rate": "high_fidelity"
-
-        "precision_tool_attachments",
-
-        "industrial_safety_systems",    }    }
-
-        "load_bearing_framework"
-
-      ]  },  },
-
-    }
-
-  ],    DT_GUARD", 
-
-  
-
-  "construction_types": {  "subfamily_variants": {    "submarine_robot": {
-
-    "hard_shell": {
-
-      "description": "3D printed robot chassis with metallic finish and integrated electronics",    "combat_robot": {      "description": "Deep-sea exploration robot with waterproof systems",  
-
-      "materials": ["Metallic PLA", "Carbon fiber PETG", "Aluminum inserts", "Clear acrylic"],
-
-      "color_palette": {      "description": "Military-grade robot with defensive capabilities and tactical awareness",      "color_scheme": "ocean_blue_metal",
-
-        "primary": "SteelBlue",
-
-        "secondary": "DarkSlateGray",      "color_scheme": "tactical_black",      "environmental_adaptation": "aquatic",
-
-        "accent": "CornflowerBlue",
-
-        "highlight": "LightSteelBlue"      "combat_readiness": "high",      "special_equipment": "sonar_navigation",
-
-      },
-
-      "special_features": [      "armor_plating": "reinforced_kevlar",      "pressure_resistance": "deep_sea_rated"
-
-        "Metallic spray finish for authentic robot appearance",
-
-        "Integrated LED channels for status displays",      "weapon_systems": "non_lethal_deterrent"    }
-
-        "Precision servo mounting points",
-
-        "Multi-color 3D printing uses 4-color HTML palette system"    },  },
-
-      ]
-
-    },      
-
-    "soft_body": {
-
-      "description": "Fabric robot costume with rigid internal framework and LED integration",    "service_robot": {  "baseline_dimensions": {
-
-      "materials": ["Metallic fabric", "Neoprene padding", "LED strips", "Rigid framework"],
-
-      "color_palette": {      "description": "Helpful domestic robot focused on assistance and companionship",    "eye_spacing": "3.4 INCH",
-
-        "primary": "SteelBlue",
-
-        "secondary": "DarkSlateGray",      "color_scheme": "friendly_white",    "compression_factor": 1.0,
-
-        "accent": "CornflowerBlue", 
-
-        "highlight": "LightSteelBlue"      "combat_readiness": "low",    "skull_scale": 1.2,
-
-      },
-
-      "special_features": [      "service_functions": "household_tasks",    "mechanical_precision": "high_tolerance"
-
-        "Metallic fabric outer shell with robot panel lines",
-
-        "Integrated LED strips for display effects",      "personality_matrix": "helpful_companion"  },
-
-        "Rigid internal framework for shape retention",
-
-        "Padded joints for smooth movement"    },  
-
-      ]
-
-    }      "common_components": [
-
-  },
-
-      "exploration_robot": {    "config/components/positioned/robot_led_matrix_eyes.json",
-
-  "prototype_status": "design_complete",
-
-  "tested": false,      "description": "Deep-sea exploration robot with waterproof systems",    "config/components/positioned/robot_servo_actuators.json",
-
-  "notes": [
-
-    "Mechanical family focused on advanced robot archetypes",      "color_scheme": "ocean_blue_metal",    "config/components/positioned/robot_sensor_array.json"
-
-    "Emphasizes precision, electronic systems, and AI behaviors",
-
-    "Subfamily variants cover different robot specializations",      "environmental_adaptation": "aquatic",  ],
-
-    "Audio effects create authentic mechanical ambiance",
-
-    "Construction types support both hard metallic shells and flexible fabric approaches"      "special_equipment": "sonar_navigation",  
-
-  ]
-
-}      "pressure_resistance": "deep_sea_rated"  "mechanical_features": {
-
-    }    "actuator_systems": {
-
-  },      "servo_motors": "high_precision",
-
-        "joint_articulation": "multi_axis",
-
-  "baseline_dimensions": {      "movement_speed": "variable_control"
-
-    "eye_spacing": "3.4 INCH",    },
-
-    "compression_factor": 1.0,    
-
-    "skull_scale": 1.2,    "electronic_systems": {
-
-    "mechanical_precision": "high_tolerance"      "led_displays": "matrix_configuration",
-
-  },      "sensor_integration": "multi_modal",
-
-        "processing_unit": "embedded_controller"
-
-  "common_components": [    },
-
-    "config/components/positioned/robot_led_matrix_eyes.json",    
-
-    "config/components/positioned/robot_servo_actuators.json",    "structural_elements": {
-
-    "config/components/positioned/robot_sensor_array.json"      "frame_material": "aluminum_alloy",
-
-  ],      "joint_bearings": "precision_ball_bearing",
-
-        "protective_housing": "impact_resistant"
-
-  "mechanical_features": {    }
-
-    "actuator_systems": {  },
-
-      "servo_motors": "high_precision",  
-
-      "joint_articulation": "multi_axis",  "thematic_elements": {
-
-      "movement_speed": "variable_control"    "artificial_intelligence": "learning_algorithms",
-
-    },    "human_robot_interaction": "social_protocols",
-
-        "task_specialization": "function_optimization",
-
-    "electronic_systems": {    "technological_evolution": "upgrade_compatibility"
-
-      "led_displays": "matrix_configuration",  },
-
-      "sensor_integration": "multi_modal",  
-
-      "processing_unit": "embedded_controller"  "prototype_status": "design_complete",
-
-    },  "tested": false,
-
-      "notes": [
-
-    "structural_elements": {    "Mechanical family focused on advanced robot archetypes",
-
-      "frame_material": "aluminum_alloy",    "Emphasizes precision, electronic systems, and AI behaviors",
-
-      "joint_bearings": "precision_ball_bearing",    "Subfamily variants cover different robot specializations",
-
-      "protective_housing": "impact_resistant"    "Audio effects create authentic mechanical ambiance"
-
-    }  ]
-
-  },}
-  
-  "thematic_elements": {
-    "artificial_intelligence": "learning_algorithms",
-    "human_robot_interaction": "social_protocols",
-    "task_specialization": "function_optimization",
-    "technological_evolution": "upgrade_compatibility"
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Mechanical family focused on advanced robot archetypes",
-    "Emphasizes precision, electronic systems, and AI behaviors",
-    "Subfamily variants cover different robot specializations",
-    "Audio effects create authentic mechanical ambiance"
-  ]
+  }
 }

@@ -1,4 +1,4 @@
-# Skull Assembly Viewer Launcher
+﻿# Skull Assembly Viewer Launcher
 # Opens the interactive 3D skull assembly viewer
 
 param(
@@ -37,7 +37,7 @@ Write-Host "Creature Type: $CreatureType" -ForegroundColor Yellow
 
 # Check if viewer file exists
 if (-not (Test-Path $ViewerFile)) {
-    Write-Host "❌ Error: Viewer file not found: $ViewerFile" -ForegroundColor Red
+    Write-Host " Error: Viewer file not found: $ViewerFile" -ForegroundColor Red
     Write-Host "Make sure you're running this from the project root directory." -ForegroundColor Yellow
     return
 }
@@ -47,7 +47,7 @@ if ($AutoGenerate) {
     Write-Host "Auto-generating STL files..." -ForegroundColor Yellow
     
     if (-not (Test-Path $ScadFile)) {
-        Write-Host "❌ Error: OpenSCAD file not found: $ScadFile" -ForegroundColor Red
+        Write-Host " Error: OpenSCAD file not found: $ScadFile" -ForegroundColor Red
         return
     }
     
@@ -95,11 +95,11 @@ try {
     Write-Host "Viewer launched successfully!" -ForegroundColor Green
     Write-Host ""
     Write-Host "VIEWER CONTROLS:" -ForegroundColor Yellow
-    Write-Host "• Mouse drag: Rotate view"
-    Write-Host "• Mouse wheel: Zoom in/out"
-    Write-Host "• Dropdown: Switch creature types"
-    Write-Host "• Buttons: Toggle components, labels, measurements"
-    Write-Host "• Generate STL: Export current assembly to STL file"
+    Write-Host " Mouse drag: Rotate view"
+    Write-Host " Mouse wheel: Zoom in/out"
+    Write-Host " Dropdown: Switch creature types"
+    Write-Host " Buttons: Toggle components, labels, measurements"
+    Write-Host " Generate STL: Export current assembly to STL file"
     Write-Host ""
 } catch {
     Write-Host "Error launching viewer: $($_.Exception.Message)" -ForegroundColor Red

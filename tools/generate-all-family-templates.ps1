@@ -1,4 +1,4 @@
-# Complete Family Template Generator
+﻿# Complete Family Template Generator
 # Creates all family.json files for the P32 bot ecosystem
 
 Write-Host "=== P32 Complete Family Template Generator ===" -ForegroundColor Cyan
@@ -202,5 +202,5 @@ foreach ($Category in $Families.Keys) {
     }
 }
 
-Write-Host "`n✅ All family templates generated successfully!" -ForegroundColor Cyan
-Write-Host "📁 Family structure ready for bot organization" -ForegroundColor Green
+Write-Host "`n All family templates generated successfully!" -ForegroundColor Cyan
+Write-Host " Family structure ready for bot organization" -ForegroundColor Green

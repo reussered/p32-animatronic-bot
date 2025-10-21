@@ -1,0 +1,43 @@
+/**
+ * @file esp_now_mesh.cpp
+ * @brief ESP-NOW mesh network master coordinator - manages all slave node communications
+ * @author Auto-generated from JSON specification
+ */
+
+#include "components/esp_now_mesh.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "core/gsm.hpp"
+#include "p32_shared_state.h"
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize esp_now_mesh component
+ * Called once during system startup
+ */
+void esp_now_mesh_init(void) {
+    // Component initialization logic
+    // Access global state via g_loopCount and shared state via GSM
+    
+    // Example: Read shared memory
+    // auto shared_data = GSM.read<SomeSharedDataType>();
+    
+    // TODO: Implement component-specific initialization
+}
+
+/**
+ * @brief Execute esp_now_mesh component logic  
+ * Called every loop iteration based on hitCount: 1
+ */
+void esp_now_mesh_act(void) {
+    // Component execution logic
+    // Access global state via g_loopCount and shared state via GSM
+    
+    // Example: Update shared memory
+    // auto shared_data = GSM.read<SomeSharedDataType>();
+    // // Modify shared_data...
+    // GSM.write<SomeSharedDataType>(shared_data);
+    
+    // TODO: Implement component-specific behavior
+}
