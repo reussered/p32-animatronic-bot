@@ -1,7 +1,7 @@
 // P32 Eye Display Animation Implementation
 // Simulates 200x200 display window with eye animations
 
-#include "p32_eye_display.h"
+#include "p32_eye_display.hpp"
 #include "esp_log.h"
 #include "esp_timer.h"
 #include <string.h>

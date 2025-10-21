@@ -1,5 +1,5 @@
 // P32 Web Client Implementation - ESP32 sends to PC server
-#include "p32_web_client.h"
+#include "p32_web_client.hpp"
 #include "esp_wifi.h"
 #include "esp_http_client.h"
 #include "esp_log.h"
@@ -84,11 +84,8 @@ esp_err_t web_client_connect_wifi(void) {
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL));
     ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL));
     
-    wifi_config_t wifi_config = {
-        .sta = {
-            .threshold.authmode = WIFI_AUTH_WPA2_PSK,
-        },
-    };
+    wifi_config_t wifi_config = {0};
+    wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
     
     strcpy((char*)wifi_config.sta.ssid, client_config.wifi_ssid);
     strcpy((char*)wifi_config.sta.password, client_config.wifi_password);

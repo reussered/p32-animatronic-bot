@@ -1,4 +1,4 @@
-#include "p32_component_tables.h"
+#include "p32_component_tables.hpp"
 #include "esp_log.h"
 
 // Positioned component implementations

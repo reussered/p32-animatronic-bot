@@ -56,7 +56,7 @@ void goblin_personality_act(void)
 // saves Mood value in the global store.
 Mood lastMood = memcpy( SharedMemory.read("g_Mood" ), sizeof(Mood));
  
-void goblin_eye_left_act(void) {
+void goblin_left_eye_act(void) {
     Mood *currentMood = SharedMemory.read("g_Mood" );
     
     if (*currentMood != lastMood) {
@@ -68,7 +68,7 @@ void goblin_eye_left_act(void) {
 
 **Example**:
 ```cpp
-void goblin_eye_left_act(void) 
+void goblin_left_eye_act(void) 
 {
     Environment *envir = SharedMemory.read("g_Envir" );
 

@@ -1,27 +1,26 @@
-#ifndef AUDIO_HPP
-#define AUDIO_HPP
+#ifndef GC9A01_HPP
+#define GC9A01_HPP
 
 /**
- * @file audio.hpp
- * @brief Audio output processing
+ * @file gc9a01.hpp
+ * @brief gc9a01 component
  * @author Auto-generated from JSON specification
  */
 
 #include "core/memory/SharedMemory.hpp"
 
-
 // Component-specific includes would go here
 
 /**
- * @brief Initialize audio component
+ * @brief Initialize gc9a01 component
  * Called once during system startup
  */
-void audio_init(void);
+void gc9a01_init(void);
 
 /**
- * @brief Execute audio component logic
+ * @brief Execute gc9a01 component logic
  * Called every loop iteration based on hitCount
  */
-void audio_act(void);
+void gc9a01_act(void);
 
-#endif // AUDIO_HPP
+#endif // GC9A01_HPP

@@ -6,7 +6,7 @@
 
 #include "components/GC9A01 Circular LCD Display.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
+
 #include "p32_shared_state.h"
 
 // External GSM instance

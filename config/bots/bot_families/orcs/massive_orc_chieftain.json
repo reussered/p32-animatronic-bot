@@ -25,8 +25,8 @@
   "eye_spacing": "4.5 INCH",
   
   "components": [
-    "config/components/positioned/goblineye_left.json",
-    "config/components/positioned/goblineye_right.json",
+    "config/components/positioned/goblin_left_eye.json",
+    "config/components/positioned/goblin_right_eye.json",
     "config/components/positioned/goblin_mouth.json",
     "config/components/positioned/goblin_speaker.json",
     "config/components/positioned/goblin_nose.json"

@@ -88,7 +88,7 @@ class ImprovedJsonValidator:
             return False, {}
             
     def sanitize_component_name(self, name: str) -> str:
-        """Convert component name to valid file name"""
+        """Convert component name to valid C++ identifier"""
         # Replace spaces and special chars with underscores
         sanitized = re.sub(r'[^a-zA-Z0-9_]', '_', name)
         # Remove multiple consecutive underscores
@@ -96,7 +96,11 @@ class ImprovedJsonValidator:
         # Remove leading/trailing underscores
         sanitized = sanitized.strip('_')
         # Convert to lowercase
-        return sanitized.lower()
+        sanitized = sanitized.lower()
+        # Ensure it doesn't start with a number (C++ requirement)
+        if sanitized and sanitized[0].isdigit():
+            sanitized = 'component_' + sanitized
+        return sanitized
         
     def determine_component_files_needed(self, component_name: str, json_path: Path, json_data: Dict) -> List[Tuple[str, str]]:
         """Determine what .cpp/.hpp files should exist for a component"""
@@ -133,7 +137,6 @@ class ImprovedJsonValidator:
  */
 
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 
 // Component-specific includes would go here
 
@@ -160,7 +163,6 @@ void {safe_name}_act(void);
 
 #include "components/{safe_name}.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 #include "p32_shared_state.h"
 
 // External GSM instance
@@ -259,17 +261,102 @@ void {safe_name}_act(void) {{
         # Generate dispatch tables after creating components
         self.generate_dispatch_tables()
         
+    def get_component_hierarchy_level(self, component_name: str) -> int:
+        """Determine the hierarchy level of a component for proper initialization order"""
+        # System Level (Level 1): Core platform components - always present
+        system_components = [
+            'system_core', 'watchdog', 'serial_console', 'power_manager', 
+            'power_monitor', 'wifi_station', 'esp_now_mesh', 'network_monitor',
+            'telemetry_hub', 'mesh_coordinator', 'mesh_software_coordinator',
+            'master_controller', 'bluetooth_central'
+        ]
+        
+        # Family Level (Level 2): Behavior/personality shared across bot family
+        family_components = [
+            'goblin_personality', 'goblin_mood', 'goblin_behavior_engine',
+            'goblin_head', 'goblin_torso'
+        ]
+        
+        # Hardware/Template Level (Level 3): Reusable hardware components
+        hardware_components = [
+            'gc9a01_circular_lcd_display', 'hc_sr04_ultrasonic_distance_sensor',
+            'i2s_digital_speaker_module', 'audio', 'forehead_leds',
+            'component_2_5x1_5_inch_tft_lcd_display'
+        ]
+        
+        # Bot-Specific Level (Level 4): Positioned hardware instances
+        # These are the actual eyes, ears, nose, mouth, speaker components
+        
+        if component_name in system_components:
+            return 1
+        elif component_name in family_components:
+            return 2
+        elif component_name in hardware_components:
+            return 3
+        else:
+            return 4  # Bot-specific positioned components
+            
+    def get_bot_specific_order(self, component_name: str) -> int:
+        """Define the order within Bot-Specific Level for logical initialization"""
+        # Eyes should be initialized first (display components)
+        eye_components = ['left_eye', 'right_eye', 'center_eye']
+        # Then ears (audio input)
+        ear_components = ['left_ear', 'right_ear', 'left_ear_microphone', 'right_ear_microphone']
+        # Then nose (sensor input)
+        nose_components = ['nose_sensor']
+        # Then mouth (display output)
+        mouth_components = ['mouth']
+        # Then speaker (audio output)
+        speaker_components = ['speaker']
+        # Then body parts (movement components)
+        body_components = [
+            'shoulder_flexion', 'elbow_flexion', 'wrist_flexion', 'index_finger', 'thumb',
+            'spine_lower', 'hip_flexion', 'knee_flexion'
+        ]
+        
+        if component_name in eye_components:
+            return 1
+        elif component_name in ear_components:
+            return 2
+        elif component_name in nose_components:
+            return 3
+        elif component_name in mouth_components:
+            return 4
+        elif component_name in speaker_components:
+            return 5
+        elif component_name in body_components:
+            return 6
+        else:
+            return 7  # Unknown components last
+            
     def generate_dispatch_tables(self):
         """Generate the 4 dispatch table files"""
         print(f"\n📋 Generating dispatch tables...")
         
         # Use ALL discovered components (not just components being created)
-        # Remove duplicates and sort by sanitized name
+        # Remove duplicates and sort by hierarchy level, then by bot-specific order, then by name
         unique_components = list(set(self.all_components))
-        unique_components.sort(key=lambda x: x[0])  # Sort by sanitized name
         
-        print(f"Including {len(unique_components)} components in dispatch tables:")
+        # Sort by hierarchy level first, then by bot-specific order for level 4, then alphabetically
+        def sort_key(component_tuple):
+            comp_name = component_tuple[0]
+            hierarchy_level = self.get_component_hierarchy_level(comp_name)
+            if hierarchy_level == 4:  # Bot-specific level
+                bot_order = self.get_bot_specific_order(comp_name)
+                return (hierarchy_level, bot_order, comp_name)
+            else:
+                return (hierarchy_level, 0, comp_name)
+        
+        unique_components.sort(key=sort_key)
+        
+        print(f"Including {len(unique_components)} components in dispatch tables (hierarchical order):")
+        current_level = 0
         for comp_name, hit_count, description, original_name in unique_components:
+            level = self.get_component_hierarchy_level(comp_name)
+            if level != current_level:
+                current_level = level
+                level_names = {1: "System Level", 2: "Family Level", 3: "Hardware Level", 4: "Bot-Specific Level"}
+                print(f"\n  ═══ {level_names.get(level, f'Level {level}')} ═══")
             print(f"  - {comp_name} (hitCount={hit_count}) [{original_name}]")
         
         # Generate p32_dispatch_tables.hpp
@@ -283,6 +370,65 @@ void {safe_name}_act(void) {{
         
         # Generate p32_component_functions.cpp
         self.create_component_functions_implementation(unique_components)
+        
+        # Update CMakeLists.txt to include all component files
+        self.update_cmake_lists()
+        
+    def update_cmake_lists(self):
+        """Update src/CMakeLists.txt to include all component files"""
+        cmake_file = self.root_dir / "src" / "CMakeLists.txt"
+        
+        if not cmake_file.exists():
+            print(f"Warning: CMakeLists.txt not found at {cmake_file}")
+            return
+            
+        # Get all component .cpp files
+        components_dir = self.root_dir / "src" / "components"
+        if not components_dir.exists():
+            print(f"Warning: Components directory not found at {components_dir}")
+            return
+            
+        # Find all .cpp files in components directory (excluding subdirectories for now)
+        component_files = []
+        for cpp_file in components_dir.glob("*.cpp"):
+            relative_path = f"components/{cpp_file.name}"
+            component_files.append(relative_path)
+        
+        component_files.sort()  # Sort for consistent output
+        
+        # Read current CMakeLists.txt
+        content = cmake_file.read_text()
+        
+        # Create the new component sources section
+        component_sources_section = """# P32 Individual Components - Auto-generated to include all components
+set(P32_COMPONENT_SOURCES
+    p32_dispatch_tables.cpp         # Generated dispatch tables (initTable, actTable, hitCountTable)
+    p32_component_functions.cpp     # Aggregates all individual component implementations
+    p32_eye_display.cpp             # Eye animation system
+    p32_web_client.cpp              # Web client for PC streaming (test mode)
+    Mood.cpp                        # C++ Mood system with efficient delta calculations
+    FrameProcessor.cpp              # C++ Frame processing with mood-based optimization
+    core/memory/SharedMemory.cpp    # SharedMemory ESP-NOW mesh communication"""
+
+        # Add all component files
+        for comp_file in component_files:
+            component_sources_section += f"\n    {comp_file}"
+            
+        component_sources_section += "\n)"
+        
+        # Find the P32_COMPONENT_SOURCES section and replace it
+        import re
+        pattern = r'# P32 Individual Components.*?set\(P32_COMPONENT_SOURCES.*?\n\)'
+        
+        if re.search(pattern, content, re.DOTALL):
+            new_content = re.sub(pattern, component_sources_section, content, flags=re.DOTALL)
+            
+            # Write the updated content
+            cmake_file.write_text(new_content)
+            print(f" CMAKE_UPDATED: {cmake_file}")
+            print(f"   Added {len(component_files)} component files to build")
+        else:
+            print(f"Warning: Could not find P32_COMPONENT_SOURCES section in {cmake_file}")
         
     def create_dispatch_tables_header(self, components):
         """Create p32_dispatch_tables.hpp"""
@@ -298,7 +444,7 @@ void {safe_name}_act(void) {{
 // ============================================================================
 
 // Component function type signatures - NO ARGUMENTS pattern
-typedef esp_err_t (*init_func_t)(void);
+typedef void (*init_func_t)(void);
 typedef void (*act_func_t)(void);
 
 // Table size - all three tables have same size (one entry per component)
@@ -311,7 +457,7 @@ typedef void (*act_func_t)(void);
 '''
         
         for sanitized_name, _, _, _ in components:
-            content += f"esp_err_t {sanitized_name}_init(void);\n"
+            content += f"void {sanitized_name}_init(void);\n"
             
         content += '''
 // ============================================================================

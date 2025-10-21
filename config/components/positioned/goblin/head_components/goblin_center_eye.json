@@ -1,8 +1,8 @@
 {
-  "relative_filename": "config/components/positioned/goblin/head_components/goblin_eye_right.json",
+  "relative_filename": "config/components/positioned/goblin/head_components/goblin_center_eye.json",
   "version": "2.0.0",
   "author": "config/author.json",
-  "component_id": "goblin_eye_right",
+  "component_id": "goblin_center_eye",
   
   "template_inheritance": {
     "hardware_template": "config/components/hardware/gc9a01_display.json",
@@ -11,12 +11,12 @@
     "mount_template": "assets/shapes/scad/basic_mounts/gc9a01_circular_mount.scad"
   },
   
-  "interface_assignment": "SPI_DEVICE_2",
+  "interface_assignment": "SPI_DEVICE_4",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {
-    "x": "+1.05 INCH",
-    "y": "+0.7 INCH",
+    "x": "0.0 INCH",
+    "y": "+1.2 INCH",
     "z": "-0.35 INCH"
   },
   "orientation": {
@@ -31,9 +31,9 @@
     "expression_range": "MENACING_TO_CURIOUS"
   },
   
-  "function": "primary_display_right",
-  "component_name": "right_eye",
-  "description": "Right eye display animation - goblin variant using standard GC9A01 hardware",
+  "function": "primary_display_center",
+  "component_name": "center_eye",
+  "description": "Center eye display animation - third eye for goblin test variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5
   }

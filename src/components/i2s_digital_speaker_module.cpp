@@ -6,7 +6,7 @@
 
 #include "components/i2s_digital_speaker_module.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
+
 #include "p32_shared_state.h"
 
 // External GSM instance

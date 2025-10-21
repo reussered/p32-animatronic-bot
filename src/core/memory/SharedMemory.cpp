@@ -69,11 +69,11 @@ void SharedMemory::espnow_init()
     ESP_ERROR_CHECK(esp_wifi_start());
     ESP_ERROR_CHECK(esp_now_init());
     
-    ESP_ERROR_CHECK(esp_now_register_send_cb([](const uint8_t* mac_addr, esp_now_send_status_t status) {
-        SharedMemory::on_data_sent(mac_addr, status);
+    ESP_ERROR_CHECK(esp_now_register_send_cb([](const esp_now_send_info_t* send_info, esp_now_send_status_t status) {
+        SharedMemory::on_data_sent(send_info->des_addr, status);
     }));
-    ESP_ERROR_CHECK(esp_now_register_recv_cb([](const uint8_t* mac_addr, const uint8_t* data, int len) {
-        SharedMemory::on_data_recv(mac_addr, data, len);
+    ESP_ERROR_CHECK(esp_now_register_recv_cb([](const esp_now_recv_info_t* recv_info, const uint8_t* data, int len) {
+        SharedMemory::on_data_recv(recv_info->src_addr, data, len);
     }));
     
     // Add broadcast peer

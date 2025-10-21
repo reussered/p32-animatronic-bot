@@ -137,7 +137,6 @@ class JsonValidator:
  */
 
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 
 // Component-specific includes would go here
 
@@ -162,9 +161,8 @@ void {component_name}_act(void);
  * @author Auto-generated from JSON specification
  */
 
-#include "components/{component_name}.hpp"
+#include "components/{safe_name}.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 #include "p32_shared_state.h"
 
 // External GSM instance

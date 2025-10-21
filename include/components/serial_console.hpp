@@ -8,7 +8,7 @@
  */
 
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
+
 
 // Component-specific includes would go here
 

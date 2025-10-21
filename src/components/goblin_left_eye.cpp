@@ -1,4 +1,4 @@
-// P32 Component: goblin_eye_left
+// P32 Component: goblin_left_eye
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
@@ -13,16 +13,16 @@
 #include "p32_web_client.h"
 // Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
 
-static const char *TAG = "GOBLIN_EYE_LEFT";
+static const char *TAG = "GOBLIN_LEFT_EYE";
 static eye_display_t left_eye_display;
 static bool web_client_initialized = false;
 
 // Component: Left eye display animation
-esp_err_t goblin_eye_left_init(void) {
+esp_err_t goblin_left_eye_init(void) {
     esp_err_t ret;
     
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_eye_left - Left eye display animation\n");
+    printf("INIT: goblin_left_eye - Left eye display animation\n");
     
     // Initialize left eye display
     ret = eye_display_init(&left_eye_display, "LEFT EYE");
@@ -51,7 +51,7 @@ esp_err_t goblin_eye_left_init(void) {
 }
 
 // Component action function - executes every 50 loops
-void goblin_eye_left_act(uint32_t loopCount) {
+void goblin_left_eye_act(uint32_t loopCount) {
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000); // Convert to ms
     
 #ifdef SIMPLE_TEST

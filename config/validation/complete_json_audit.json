@@ -51,7 +51,7 @@
         "positioned_components": {
           "files": 7,
           "status": "COMPLETE ✅",
-          "list": ["goblin_ear_left/right.json", "goblin_mouth.json", "goblin_nose.json", "goblin_speaker.json", "goblineye_left/right.json"]
+          "list": ["goblin_ear_left/right.json", "goblin_mouth.json", "goblin_nose.json", "goblin_speaker.json", "goblin_left_eye/right_eye.json"]
         }
       }
     },

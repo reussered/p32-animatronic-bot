@@ -32,9 +32,9 @@ esp_err_t p32_display_init(void) {
     for (int i = 0; i < g_p32_system.current_bot.component_count; i++) {
         p32_component_config_t* comp = &g_p32_system.current_bot.components[i];
         
-        if (strcmp(comp->component_id, "goblineye_left") == 0) {
+        if (strcmp(comp->component_id, "goblin_left_eye") == 0) {
             ESP_ERROR_CHECK(p32_display_setup_device(&g_display_system.left_eye, comp));
-        } else if (strcmp(comp->component_id, "goblineye_right") == 0) {
+        } else if (strcmp(comp->component_id, "goblin_right_eye") == 0) {
             ESP_ERROR_CHECK(p32_display_setup_device(&g_display_system.right_eye, comp));
         } else if (strcmp(comp->component_id, "goblin_mouth") == 0) {
             ESP_ERROR_CHECK(p32_display_setup_device(&g_display_system.mouth, comp));

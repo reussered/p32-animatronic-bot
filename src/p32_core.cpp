@@ -70,7 +70,7 @@ esp_err_t p32_load_bot_config(const char* bot_file) {
         
         // Configure left eye (SPI Device 1)
         p32_component_config_t* left_eye = &g_p32_system.current_bot.components[0];
-        strncpy(left_eye->component_id, "goblineye_left", sizeof(left_eye->component_id));
+        strncpy(left_eye->component_id, "goblin_left_eye", sizeof(left_eye->component_id));
         left_eye->type = COMPONENT_DISPLAY;
         left_eye->position_x = -1.5f;
         left_eye->position_y = 0.5f;
@@ -81,7 +81,7 @@ esp_err_t p32_load_bot_config(const char* bot_file) {
         
         // Configure right eye (SPI Device 2)
         p32_component_config_t* right_eye = &g_p32_system.current_bot.components[1];
-        strncpy(right_eye->component_id, "goblineye_right", sizeof(right_eye->component_id));
+        strncpy(right_eye->component_id, "goblin_right_eye", sizeof(right_eye->component_id));
         right_eye->type = COMPONENT_DISPLAY;
         right_eye->position_x = 1.5f;
         right_eye->position_y = 0.5f;

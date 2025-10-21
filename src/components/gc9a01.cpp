@@ -1,22 +1,21 @@
 /**
- * @file 2.5x1.5 Inch TFT LCD Display.cpp
- * @brief 2.5x1.5 Inch TFT LCD Display component implementation
+ * @file gc9a01.cpp
+ * @brief gc9a01 component implementation
  * @author Auto-generated from JSON specification
  */
 
-#include "components/2.5x1.5 Inch TFT LCD Display.hpp"
+#include "components/gc9a01.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 #include "p32_shared_state.h"
 
 // External GSM instance
 extern SharedMemory GSM;
 
 /**
- * @brief Initialize 2.5x1.5 Inch TFT LCD Display component
+ * @brief Initialize gc9a01 component
  * Called once during system startup
  */
-void 2.5x1.5 Inch TFT LCD Display_init(void) {
+void gc9a01_init(void) {
     // Component initialization logic
     // Access global state via g_loopCount and shared state via GSM
     
@@ -27,10 +26,10 @@ void 2.5x1.5 Inch TFT LCD Display_init(void) {
 }
 
 /**
- * @brief Execute 2.5x1.5 Inch TFT LCD Display component logic  
+ * @brief Execute gc9a01 component logic  
  * Called every loop iteration based on hitCount: 1
  */
-void 2.5x1.5 Inch TFT LCD Display_act(void) {
+void gc9a01_act(void) {
     // Component execution logic
     // Access global state via g_loopCount and shared state via GSM
     

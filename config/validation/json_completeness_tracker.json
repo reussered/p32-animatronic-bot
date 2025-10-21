@@ -180,13 +180,13 @@
           "validation": "SCHEMA_VALID_POSITIONED_COMPONENT"
         },
         {
-          "file": "config/components/positioned/goblineye_left.json",
+          "file": "config/components/positioned/goblin_left_eye.json",
           "status": "COMPLETE",
           "description": "Left eye display with 3D skull coordinates",
           "validation": "SCHEMA_VALID_POSITIONED_COMPONENT"
         },
         {
-          "file": "config/components/positioned/goblineye_right.json", 
+          "file": "config/components/positioned/goblin_right_eye.json", 
           "status": "COMPLETE",
           "description": "Right eye display with 3D skull coordinates",
           "validation": "SCHEMA_VALID_POSITIONED_COMPONENT"

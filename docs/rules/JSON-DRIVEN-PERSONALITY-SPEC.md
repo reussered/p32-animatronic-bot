@@ -747,9 +747,9 @@ void arm_left_controller_act(void) {
 ### Example: Display Brightness Reduction
 
 ```cpp
-// src/components/goblin_eye_left.cpp
+// src/components/goblin_left_eye.cpp
 
-void goblin_eye_left_act(void) {
+void goblin_left_eye_act(void) {
     // Read environment
     Environment currentEnvir;
     read("g_Envir", &currentEnvir, sizeof(Environment));

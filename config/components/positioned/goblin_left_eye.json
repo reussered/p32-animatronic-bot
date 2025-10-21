@@ -1,14 +1,14 @@
 {
-  "relative_filename": "config/components/positioned/goblineye_left.json",
+  "relative_filename": "config/components/positioned/goblin_left_eye.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "component_id": "goblin_eye_left",
+  "component_id": "goblin_left_eye",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
   "interface_assignment": "SPI_DEVICE_1",
   "mounting_architecture": {
     "type": "two_tier",
     "hardware_mount": "display_basic_mount",
-    "decorative_shell": "goblin_eye_left_shell"
+    "decorative_shell": "goblin_left_eye_shell"
   },
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",

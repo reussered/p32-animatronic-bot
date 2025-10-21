@@ -1,22 +1,21 @@
 /**
- * @file 2_5x1_5_inch_tft_lcd_display.cpp
+ * @file component_2_5x1_5_inch_tft_lcd_display.cpp
  * @brief 2.5x1.5 Inch TFT LCD Display component implementation
  * @author Auto-generated from JSON specification
  */
 
-#include "components/2_5x1_5_inch_tft_lcd_display.hpp"
+#include "components/component_2_5x1_5_inch_tft_lcd_display.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "core/gsm.hpp"
 #include "p32_shared_state.h"
 
 // External GSM instance
 extern SharedMemory GSM;
 
 /**
- * @brief Initialize 2_5x1_5_inch_tft_lcd_display component
+ * @brief Initialize component_2_5x1_5_inch_tft_lcd_display component
  * Called once during system startup
  */
-void 2_5x1_5_inch_tft_lcd_display_init(void) {
+void component_2_5x1_5_inch_tft_lcd_display_init(void) {
     // Component initialization logic
     // Access global state via g_loopCount and shared state via GSM
     
@@ -27,10 +26,10 @@ void 2_5x1_5_inch_tft_lcd_display_init(void) {
 }
 
 /**
- * @brief Execute 2_5x1_5_inch_tft_lcd_display component logic  
+ * @brief Execute component_2_5x1_5_inch_tft_lcd_display component logic  
  * Called every loop iteration based on hitCount: 1
  */
-void 2_5x1_5_inch_tft_lcd_display_act(void) {
+void component_2_5x1_5_inch_tft_lcd_display_act(void) {
     // Component execution logic
     // Access global state via g_loopCount and shared state via GSM
     

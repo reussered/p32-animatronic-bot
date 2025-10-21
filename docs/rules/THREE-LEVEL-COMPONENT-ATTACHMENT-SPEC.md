@@ -131,8 +131,8 @@ void goblin_personality_act(void) {
 - Directly controls physical hardware (displays, sensors, motors)
 
 **Examples**:
-- `goblin_eye_left` - Left eye GC9A01 display at [-26.67, 17.78, -8.89] (hitCount: 5)
-- `goblin_eye_right` - Right eye GC9A01 display at [26.67, 17.78, -8.89] (hitCount: 5)
+- `goblin_left_eye` - Left eye GC9A01 display at [-26.67, 17.78, -8.89] (hitCount: 5)
+- `goblin_right_eye` - Right eye GC9A01 display at [26.67, 17.78, -8.89] (hitCount: 5)
 - `goblin_nose` - HC-SR04 sensor at [0, 0, 6.35] (hitCount: 15)
 - `goblin_mouth` - Mouth display at [0, -26.67, 0] (hitCount: 3)
 - `goblin_speaker` - 40mm speaker audio (hitCount: 7)
@@ -140,7 +140,7 @@ void goblin_personality_act(void) {
 **JSON Configuration**:
 ```json
 {
-  "relative_filename": "config/components/positioned/goblineye_left.json",
+  "relative_filename": "config/components/positioned/goblin_left_eye.json",
   "component_name": "left_eye",
   "description": "Left eye GC9A01 display",
   "timing": {
@@ -160,13 +160,13 @@ void goblin_personality_act(void) {
 
 **Code Pattern**:
 ```c
-// src/components/goblin_eye_left.c
+// src/components/goblin_left_eye.c
 #include "p32_component_config.h"
 #include "p32_shared_state.h"  // Access to g_loopCount and all globals
 
 #ifdef ENABLE_GOBLIN_COMPONENTS
 
-esp_err_t goblin_eye_left_init(void) {
+esp_err_t goblin_left_eye_init(void) {
     // NO ARGUMENTS - access globals directly
     ESP_LOGI(TAG, "Left eye initializing at [-26.67, 17.78, -8.89]...");
     // Initialize GC9A01 display via SPI_DEVICE_1
@@ -174,7 +174,7 @@ esp_err_t goblin_eye_left_init(void) {
     return ESP_OK;
 }
 
-void goblin_eye_left_act(void) {
+void goblin_left_eye_act(void) {
     // NO ARGUMENTS - access g_loopCount and mood from global shared state
     // Update display every 500ms (hitCount: 5 means called every 5 loops)
     
@@ -250,8 +250,8 @@ init_func_t initTable[INIT_TABLE_SIZE] = {
     network_monitor_init,       // Level 1: System
     goblin_personality_init,    // Level 2: Family
     goblin_mood_init,           // Level 2: Family
-    goblin_eye_left_init,       // Level 3: Bot-specific
-    goblin_eye_right_init,      // Level 3: Bot-specific
+    goblin_left_eye_init,       // Level 3: Bot-specific
+    goblin_right_eye_init,      // Level 3: Bot-specific
     goblin_nose_init            // Level 3: Bot-specific
 };
 ```
@@ -275,8 +275,8 @@ act_table_entry_t actTable[ACT_TABLE_SIZE] = {
     {network_monitor_act,     50, "network_monitor"},
     {goblin_personality_act,  25, "goblin_personality"},
     {goblin_mood_act,         15, "goblin_mood"},
-    {goblin_eye_left_act,      5, "left_eye"},
-    {goblin_eye_right_act,     5, "right_eye"},
+    {goblin_left_eye_act,      5, "left_eye"},
+    {goblin_right_eye_act,     5, "right_eye"},
     {goblin_nose_act,         15, "nose_sensor"}
 };
 ```
@@ -298,8 +298,8 @@ build_flags =
 ```c
 // All component files wrapped in family guards
 #ifdef ENABLE_GOBLIN_COMPONENTS
-esp_err_t goblin_eye_left_init(void) { ... }  // NO ARGUMENTS
-void goblin_eye_left_act(void) { ... }         // NO ARGUMENTS
+esp_err_t goblin_left_eye_init(void) { ... }  // NO ARGUMENTS
+void goblin_left_eye_act(void) { ... }         // NO ARGUMENTS
 #endif
 ```
 
@@ -339,8 +339,8 @@ Loop Period (100ms) >= Sum of all component execution times triggered this loop
 - `network_monitor_act()` executes (100 % 50 == 0) → ~5ms
 - `goblin_personality_act()` executes (100 % 25 == 0) → ~3ms
 - `goblin_mood_act()` executes (100 % 10 == 0) → ~1ms
-- `goblin_eye_left_act()` executes (100 % 5 == 0) → ~8ms
-- `goblin_eye_right_act()` executes (100 % 5 == 0) → ~8ms
+- `goblin_left_eye_act()` executes (100 % 5 == 0) → ~8ms
+- `goblin_right_eye_act()` executes (100 % 5 == 0) → ~8ms
 - `goblin_nose_act()` executes (100 % 15 == 0) → ~2ms
 
 **Total**: ~29ms (fits within 100ms budget with 71ms margin)
@@ -559,7 +559,7 @@ build_flags =
 ### Execution Time Profiling
 
 ```c
-void goblin_eye_left_act(void) {
+void goblin_left_eye_act(void) {
     // NO ARGUMENTS - access globals directly
     uint64_t start = esp_timer_get_time();
     

@@ -1,14 +1,14 @@
 {
-  "relative_filename": "config/bots/goblin_full.json",
+  "relative_filename": "config/bots/bot_families/goblins/goblin_test.json",
   "version": "2.0.0",
   "author": "config/author.json",
-  "bot_type": "GOBLINFULL",
-  "bot_id": "goblin_full_v2",
-  "description": "Full-featured scary goblin with unified proportional scaling system",
-  "created": "2025-10-05",
+  "bot_type": "GOBLINTEST",
+  "bot_id": "goblin_test_v1",
+  "description": "Three-eyed goblin test creature - identical to goblin_full but with center eye for testing automated system",
+  "created": "2025-10-21",
   
   "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
-  "creature_variant": "standard_goblin",
+  "creature_variant": "test_goblin_three_eyes",
   "horizontal_scale": "0.7",
   "vertical_scale": "0.6",
   
@@ -26,6 +26,7 @@
   "positioned_components": [
     "config/components/positioned/goblin/head_components/goblin_left_eye.json",
     "config/components/positioned/goblin/head_components/goblin_right_eye.json",
+    "config/components/positioned/goblin/head_components/goblin_center_eye.json",
     "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "config/components/positioned/goblin/head_components/goblin_speaker.json",
     "config/components/positioned/goblin/head_components/goblin_nose.json",
@@ -33,21 +34,21 @@
     "config/components/positioned/goblin/head_components/goblin_right_ear.json"
   ],
   "mood_defaults": {
-    "FEAR": 20,
-    "ANGER": 10,
-    "IRRITATION": 15,
-    "HAPPINESS": 0,
-    "CONTENTMENT": 30,
-    "HUNGER": 0,
-    "CURIOSITY": 40,
-    "AFFECTION": 0
+    "FEAR": 25,
+    "ANGER": 15,
+    "IRRITATION": 20,
+    "HAPPINESS": 5,
+    "CONTENTMENT": 25,
+    "HUNGER": 5,
+    "CURIOSITY": 50,
+    "AFFECTION": 5
   },
   "behavior_config": {
     "threat_response_enabled": true,
     "auto_sleep_timeout_seconds": 300,
     "interaction_range_cm": 200,
-    "aggressive_threshold": 70,
-    "calm_threshold": 20
+    "aggressive_threshold": 75,
+    "calm_threshold": 15
   },
   "hardware_config": {
     "i2s_sample_rate": 44100,
@@ -55,12 +56,13 @@
     "sensor_poll_rate_hz": 10,
     "power_management": "balanced"
   },
-  "prototype_status": "in_development",
+  "prototype_status": "test_creature",
   "tested": false,
   "notes": [
-    "Updated to use skull_3d coordinate system",
-    "Uses new bus+device interface architecture",
-    "Components now reference positioned JSON files",
-    "12 GPIO pins total for complete functionality"
+    "Three-eyed goblin test creature for validation",
+    "Uses skull_3d coordinate system with center eye",
+    "Uses bus+device interface architecture", 
+    "Center eye positioned at forehead for mystical appearance",
+    "All components should auto-generate dispatch table entries"
   ]
 }

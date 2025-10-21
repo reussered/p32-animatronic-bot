@@ -1,26 +1,26 @@
 {
-  "relative_filename": "config/components/positioned/goblin/head_components/goblin_ear_right.json",
+  "relative_filename": "config/components/positioned/goblin/head_components/goblin_left_ear.json",
   "version": "2.0.0",
   "author": "config/author.json",
-  "component_id": "goblin_ear_right",
+  "component_id": "goblin_left_ear",
   
   "template_inheritance": {
     "hardware_template": "config/components/hardware/hw496_microphone.json",
-    "creature_shell": "assets/shapes/scad/creature_shells/goblin/goblin_ear_right_shell.scad",
+    "creature_shell": "assets/shapes/scad/creature_shells/goblin/goblin_ear_left_shell.scad",
     "mount_template": "assets/shapes/scad/basic_mounts/microphone_basic_mount.scad"
   },
   
-  "interface_assignment": "ADC_PIN_36",
+  "interface_assignment": "ADC_PIN_35",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {
-    "x": "+1.5 INCH",
-    "y": "+0.5 INCH",
+    "x": "-1.5 INCH",
+    "y": "+0.5 INCH", 
     "z": "+0.1 INCH"
   },
   "orientation": {
     "tilt": "15 DEGREES",
-    "rotation": "+30 DEGREES",
+    "rotation": "-30 DEGREES",
     "roll": "0 DEGREES"
   },
   
@@ -30,9 +30,9 @@
     "sensitivity": "HIGH"
   },
   
-  "function": "right_ear_audio_input",
-  "component_name": "right_ear_microphone",
-  "description": "Right ear HW-496 microphone for directional audio input",
+  "function": "left_ear_audio_input",
+  "component_name": "left_ear_microphone",
+  "description": "Left ear HW-496 microphone for directional audio input",
   "timing": {
     "hitCount": 20
   }

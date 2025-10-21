@@ -11,20 +11,19 @@
 #include "p32_component_config.h"
 #include "p32_shared_state.h"  // Access to g_loopCount and all globals
 #include <esp_log.h>
+#include <esp_err.h>
 
 #ifdef ENABLE_GOBLIN_COMPONENTS
 
 static const char *TAG = "goblin_mouth";
 
 // Stub initialization - does nothing but log
-esp_err_t goblin_mouth_init(void) {
+void goblin_mouth_init(void) {
     // NO ARGUMENTS - access globals directly
     ESP_LOGI(TAG, "Goblin mouth component initializing (STUB - hardware not available)");
     ESP_LOGI(TAG, "Position: [0, -1.05 INCH, 0] (below nose center)");
     ESP_LOGI(TAG, "Interface: SPI_DEVICE_3 (not yet wired)");
     ESP_LOGI(TAG, "Future: May become autonomous ESP32 mesh subsystem node");
-    
-    return ESP_OK;
 }
 
 // Stub act function - does nothing (placeholder for future mouth animations)

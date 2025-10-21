@@ -14,15 +14,15 @@ typedef void (*act_func_t)(void);
 // Initialization functions - NO ARGUMENTS
 esp_err_t system_core_init(void);
 esp_err_t network_monitor_init(void);
-esp_err_t goblin_eye_left_init(void);
-esp_err_t goblin_eye_right_init(void);
+esp_err_t goblin_left_eye_init(void);
+esp_err_t goblin_right_eye_init(void);
 esp_err_t goblin_nose_init(void);
 
 // Action functions - NO ARGUMENTS
 void system_core_act(void);
 void network_monitor_act(void);
-void goblin_eye_left_act(void);
-void goblin_eye_right_act(void);
+void goblin_left_eye_act(void);
+void goblin_right_eye_act(void);
 void goblin_nose_act(void);
 
 // Three parallel tables (populated from JSON)
