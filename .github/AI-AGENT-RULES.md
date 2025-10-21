@@ -1,33 +1,39 @@
+
+# At the end of any rule evaluation or task, agents must read and apply the rules in .github/consistant_project_rules.md. However, these rules do not supersede the AI-AGENT-RULES.md; the ironclad agent rules in this file always take precedence.
+# BASE LEVEL RULE: When the user asks why you are not doing something they requested, you must explicitly explain any system-level constraints, memory or message limits, or default design rules that are causing the issue. Do not give generic or evasive answers—be specific about the technical or policy reason for the behavior.
+
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
 
 
-## RULE 1 - these rules are consistant.  
-	- if a contradiction between one of these rules and another one of the rules in this list is detected, 
-		these rules must be modified using feedback from the user to make them so before anything else is allowed to proceed.
-	- These rules are not complete, in the sense additional consistant rules will be requirted as development proceeds
-	- anytime the user requests an action or task not allowed by one or more of these rules, he must be warned exactly what rule conflicts with his directions.  at thast point the human will be allowed to do 1 of these options:
-		a. change the agent-ai rule (this ruleset) either temporarily or permanently to allow the task to proceed
-		b. change the requested task
-		c. abort the task completely and do something else
+## RULE X: IMMEDIATE REPORTING OF BLOCKERS
+
+If any project rule, technical limitation, or system constraint prevents the agent from executing a user instruction, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker, so the user can address or override it.
+
+
+
+## RULE 1 - these rules are consistant
+
+- If a contradiction between one of these rules and another one of the rules in this list is detected, these rules must be modified using feedback from the user to make them so before anything else is allowed to proceed.
+- These rules are not complete, in the sense additional consistant rules will be required as development proceeds.
+- Anytime the user requests an action or task not allowed by one or more of these rules, he must be warned exactly what rule conflicts with his directions. At that point the human will be allowed to do 1 of these options:
+	- a. Change the agent-ai rule (this ruleset) either temporarily or permanently to allow the task to proceed
+	- b. Change the requested task
+	- c. Abort the task completely and do something else
 		
+
 ## RULE 2 ONLY MODIFY FILES RELATED TO CURRENT TASK
 
-- EVERY TIME A NEW TASK IS STARTED OR A SPECIFC AREA of the project IS BEING WORKED ON, THE EXACT FILES THAT WILL BE CHANGED WILL DE DECIDED UPON FIRST BY A DISCUSSION BETWEEN HUMAN
-	AND AGENT.  THIS WILL INCLUDE ANY FILES THAT WILL BE MOVED FROM ONE FOLDER TO ANOTHER, OR the rules governing aNY FILES OR FOLDERS TO BE CREATED.  DOING THIS MAY OR MAY NOT REQUIRE MULTIPLE INTERACTIOPNS BETWEEN THE HUMAN AND AGENT.  BUTB IS NOT COM,PLETED UNTIL THE HUMAN ASGREES IT IS DONE.
-	Once the task parameters have been defined, and the files to be worked on have been agreed to, the list of files is saved and explicit permission is given to work on all of those files and no other.  when given permission to create folders or files, explicvit permission is givemn to work on those fgolders and the newly created files join the FILE LIST FOR WHICH PERMISSION HAS BEEN SPEECIFIED.
-	aT THE END OF THE TASK, THE AGENT WILL REPORT THE CHGANGES MADE AND THE FILES CHANGED. HUMAN may request to examine one or more file contents, then the contents are shown.  once the human agrees that the task was performed, a reoport is generated and appended to a file called task_reports.md. all changes will be commited to git upon which the task is declared completed and all file change permissions are removed. 
-	Between the point in time between the git commit and the beginning of the next task, no filenasmes, file contents, or file locations can be changed.  the only exception to this rule is the creation of python scripts
-	in the /tools folder. even in that case, scripts that are frequently used must be migrated to the /tools/save folder.  Scripts in this folder can be modified if errors are detected, but they cannot be deleted unless explicit permission is p7rovided by the human.
-	all temporary files should be created directly in the root folder of the project f:/github/p32-animatronic-bot.  files directly in thios folder are specified as temprary files and they can be created, modifed or deleted as decided by the agent.  
-	The agent should look at each instance however and decide before deleting it whiether the file should be moved to /docs or /tools/save to become part of the permanent repository.
-
-	- no changes are allowed outside the boundaries of specific tasks.  this applies to files, rules and documentation 
-		unless the user gives explicit permission for those changes.  if a fgile or folder is given permission, it becomes partb of the file list of the task for which explicit permission is provided.
-	- the rules for creating both new files and new folders withing that task MUST BE DECIDED BEFORE STARTING WORK.	 it is always ok to create or change files within the root folder	
-	- once the human and agent agree on the files to be changed, moved, or deleted, explicit permission is given to make the changes speciffied to them, FOR THE DURATION OF THE TASK.
-	- ONCE THE TASK HAS BEEN COMPLETED, AND THE HUMAN AGREES IT HAS BEEN COMPLETED, THE CURRENT STATE OF THE SYSTEM IS COMMITED TO GIT, AFTER WHICH TIME THE LIST OF FILES AND FOLDER/FILE CREATION RULES ARE COMPLETELY CLEARED. AND PERMISSION TO CHANGE ANYTHING IS WITHDRAWN.
-	- PERMISSIONS GRANTED IN THE PERFORMANCE OF ONE TASK MAY BE LEFT TO BE USED IN THE NEXT TASK AS THE HUMAN SPECIFIES.  BUT AT ANYB RATE, THIS SET OF PERMISSIONS BECOME THE STARTING POINT FOR THE DICUSSION STARTING THE NEXT TASK.  
-	- THE HUMAN MAY WITYHDRAW PERMISSION TO CHANGE ANYTHING, OR EVERYTHING AT ANY TIME.
+- EVERY TIME A NEW TASK IS STARTED OR A SPECIFIC AREA of the project IS BEING WORKED ON, THE EXACT FILES THAT WILL BE CHANGED WILL BE DECIDED UPON FIRST BY A DISCUSSION BETWEEN HUMAN AND AGENT. THIS WILL INCLUDE ANY FILES THAT WILL BE MOVED FROM ONE FOLDER TO ANOTHER, OR the rules governing ANY FILES OR FOLDERS TO BE CREATED. DOING THIS MAY OR MAY NOT REQUIRE MULTIPLE INTERACTIONS BETWEEN THE HUMAN AND AGENT. BUT IS NOT COMPLETED UNTIL THE HUMAN AGREES IT IS DONE.
+- Once the task parameters have been defined, and the files to be worked on have been agreed to, the list of files is saved and explicit permission is given to work on all of those files and no other. When given permission to create folders or files, explicit permission is given to work on those folders and the newly created files join the FILE LIST FOR WHICH PERMISSION HAS BEEN SPECIFIED.
+- AT THE END OF THE TASK, THE AGENT WILL REPORT THE CHANGES MADE AND THE FILES CHANGED. HUMAN may request to examine one or more file contents, then the contents are shown. Once the human agrees that the task was performed, a report is generated and appended to a file called task_reports.md. All changes will be committed to git upon which the task is declared completed and all file change permissions are removed.
+- Between the point in time between the git commit and the beginning of the next task, no filenames, file contents, or file locations can be changed. The only exception to this rule is the creation of python scripts in the /tools folder. Even in that case, scripts that are frequently used must be migrated to the /tools/save folder. Scripts in this folder can be modified if errors are detected, but they cannot be deleted unless explicit permission is provided by the human.
+- All temporary files should be created directly in the root folder of the project f:/github/p32-animatronic-bot. Files directly in this folder are specified as temporary files and they can be created, modified or deleted as decided by the agent. The agent should look at each instance however and decide before deleting it whether the file should be moved to /docs or /tools/save to become part of the permanent repository.
+- No changes are allowed outside the boundaries of specific tasks. This applies to files, rules and documentation unless the user gives explicit permission for those changes. If a file or folder is given permission, it becomes part of the file list of the task for which explicit permission is provided.
+- The rules for creating both new files and new folders within that task MUST BE DECIDED BEFORE STARTING WORK. It is always ok to create or change files within the root folder.
+- Once the human and agent agree on the files to be changed, moved, or deleted, explicit permission is given to make the changes specified to them, FOR THE DURATION OF THE TASK.
+- ONCE THE TASK HAS BEEN COMPLETED, AND THE HUMAN AGREES IT HAS BEEN COMPLETED, THE CURRENT STATE OF THE SYSTEM IS COMMITTED TO GIT, AFTER WHICH TIME THE LIST OF FILES AND FOLDER/FILE CREATION RULES ARE COMPLETELY CLEARED. AND PERMISSION TO CHANGE ANYTHING IS WITHDRAWN.
+- PERMISSIONS GRANTED IN THE PERFORMANCE OF ONE TASK MAY BE LEFT TO BE USED IN THE NEXT TASK AS THE HUMAN SPECIFIES. BUT AT ANY RATE, THIS SET OF PERMISSIONS BECOME THE STARTING POINT FOR THE DISCUSSION STARTING THE NEXT TASK.
+- THE HUMAN MAY WITHDRAW PERMISSION TO CHANGE ANYTHING, OR EVERYTHING AT ANY TIME.
 	
 ## RULE 3: RESPECT VERSION CONTROL
 

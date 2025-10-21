@@ -46,25 +46,28 @@ public:
         if (it != memory_map.end()) {
             return static_cast<T*>(it->second);
         } else {
-            T temp;
-            write<T>(name, &temp);
+            write<T>(name );
             return static_cast<T*>(memory_map[name]);
         }
     }
 
     template<typename T>
-    int write(const std::string& name, T* data) {
+    int write(const std::string& name ) {
         auto it = memory_map.find(name);
-        if (it != memory_map.end()) {
-            std::memcpy(it->second, data, sizeof(T));
-        } else {
-            void* new_mem = malloc(sizeof(T));
+        void* new_mem;
+        if (it == memory_map.end()) {
+            new_mem = new T();
             if (!new_mem) return -1;
-            std::memcpy(new_mem, data, sizeof(T));
             memory_map[name] = new_mem;
         }
+        else
+        {
+            new_mem = it->second;
+        }
+
+
         // Broadcast to other ESP32s
-        espnow_broadcast(name, memory_map[name], sizeof(T));
+        espnow_broadcast(name, new_mem, sizeof(T));
         return ESP_OK;
     }
 #endif

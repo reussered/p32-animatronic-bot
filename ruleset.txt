@@ -1,0 +1,123 @@
+# CORE-LOOP-SPEC.md
+The core loop must initialize all components once, then repeatedly execute act functions with no delays or waits.
+All components must have init() and act() functions with NO ARGUMENTS.
+Timing is controlled by g_loopCount and component hitCount values.
+Components must access shared state via p32_shared_state.h and must not block or delay.
+All functionality must be implemented in components; the core loop only executes them.
+# CORE_LOOP_IMMUTABLE_SPEC.md
+The core execution loop is immutable and must never be modified.
+No delays, I/O, blocking calls, or additional logic are allowed in the core loop.
+Timing is controlled by component hitCount, not by modifying the loop.
+All debugging, logging, or development aids must be added outside the core loop.
+Modifying the core loop breaks universal firmware compatibility and system performance guarantees.
+# CPP-CLASS-SERIALIZATION-PATTERN.md
+Components must use C++ class instances as working globals and serialize to POD struct for mesh transmission.
+Serialization and deserialization between C++ class and POD struct must use memcpy for speed.
+Change detection must use memcmp on the entire POD struct buffer.
+Global state header must define all required POD fields for mesh transmission.
+All classes must be serialized before broadcast and deserialized after receive.
+# DIRECTORY-ORGANIZATION-UPDATE.md
+Finished PDFs must be placed in docs/assembly_guides_pdf/ and committed to Git.
+Temporary build artifacts must be ignored by Git.
+README must explain distribution workflow.
+PDF generator script must output to the distribution directory.
+.gitignore must distinguish between temp and finished files.
+# DISTRIBUTED-PROCESSING-ARCHITECTURE.md
+System-level components must be attached to the torso subsystem.
+Head subsystem must focus on real-time rendering and exclude system-level components.
+CPU utilization estimates must be documented for each subsystem.
+Responsibilities must be clearly separated between torso and head.
+Excluded responsibilities for head must be handled by torso.
+# END-TO-END-DISTANCE-EYE-TEST.md
+Torso must update g_Envir with distance sensor data.
+Personality must read g_Envir and update g_MOOD based on distance.
+Mesh must broadcast g_Envir and g_MOOD to head subsystem.
+Eye component must read g_MOOD and render expression on display.
+Test code must use shared header and mesh packet structure.
+# esp32-humanoid-adaptation-guide.md
+Mechanical STL files from open-source projects can be used directly with required modifications for ESP32 mounting.
+Controller mapping must translate original controllers to ESP32-S3 equivalents.
+Servo replacement strategy must compare original and ESP32-compatible servos.
+Power system must be simplified for ESP32 use.
+Firmware stack must include ESP-NOW mesh network and ESP-IDF RTOS kernel.
+# ESP32_OPTIMIZATION_STRATEGY.md
+Optimal ESP32 chip selection must be based on GPIO pin availability and memory capacity.
+Subsystem GPIO requirements must be analyzed and documented.
+Standard I2C/SPI bus allocation must be followed for all subsystems.
+Component consolidation opportunities must be considered for efficiency.
+Memory upgrade scenarios must be evaluated when requirements exceed chip capacity.
+# FAST-CHANGE-DETECTION-EXAMPLE.md
+POD struct for ESP-NOW transmission must be defined in include/p32_shared_state.h.
+Global loop counter and shared state must be accessible.
+Fast serialization and deserialization between C++ class and POD array must use memcpy.
+Change detection must use memcmp on the entire POD struct buffer.
+All classes must be serialized before broadcast and deserialized after receive.
+# FINAL_PART_COUNT.md
+All electronics and 3D printed parts must be listed and costed in the BOM.
+All components must be wired according to the specified GPIO pin usage summary.
+Pins remaining for expansion must be documented.
+Actuators and motor control components must be specified for full humanoid expansion.
+Additional controllers must be listed for distributed control.
+# FOOT_SUBSYSTEM_GUIDE.md
+Each foot must feature 5-toe articulation, pressure-sensitive contact points, and dynamic balance control.
+Contact points: 8 pressure sensors per foot (heel, ball, 5 toes) are required.
+Toe articulation: 5DOF per foot (individual toe control) must be implemented.
+Load capacity: 100kg total load (50kg per foot maximum) must be supported.
+Controller: ESP32-C3 with tactile sensor processing is required for each foot.
+Material: TPU flexible structure with rigid mounting points must be used.
+Response time: <5ms pressure detection, 20ms toe actuation must be achieved.
+Ground clearance: 15mm minimum for obstacle navigation must be maintained.
+# FULL_INTEGRATION_GUIDE.md
+All subsystems (torso, arms, hands, legs, feet) must be complete and tested before integration.
+ESP32-S3 master and ESP32-C3 subsystem controllers must be installed and configured as specified.
+Power distribution system must use 51.8V battery to 6V/5V rails.
+All mounting points must be prepared for arm and leg attachment.
+Cable routing must use spiral cable wrap and strain relief at joint interfaces.
+Assembly tools, electrical tools, and safety equipment must be available before starting.
+# GLOBAL-SHARED-MEMORY-API.md
+Components allocate named memory blocks during init().
+Components read/write using string names; mesh system automatically synchronizes across all subsystems.
+read() is just memcpy from global pool to local variable; NO mesh communication happens here.
+write() triggers mesh broadcast and synchronizes to all other subsystems.
+Components can call read() as often as needed with ZERO network overhead; only write() triggers mesh traffic.
+Allocation of shared memory must occur in init() functions only.
+# COMPONENT-ARCHITECTURE-DIAGRAM.md
+System-level components (WiFi, Serial, Watchdog) must always be present and attached to the torso subsystem.
+Head subsystem must focus exclusively on real-time rendering (displays, audio, sensors).
+Component functions must use NO ARGUMENTS and access shared state from p32_shared_state.h directly.
+All components must be registered in generated component tables.
+The core loop in app_main() must iterate through all attached components' init functions once, then repeatedly through all act functions only, with no application logic.
+Component timing is managed via hitCount, not loop delays.
+# COMPLETE-GOBLIN-HEAD-BUILD-GUIDE.md
+All mounting points for electronic components must be positioned per P32 coordinate system.
+GC9A01 displays must be used for eyes and mouth.
+HC-SR04 ultrasonic sensor must be used for proximity detection.
+ESP32-S3-DevKitC-1 must be used as the main controller.
+I2S audio output capability must be present.
+NEMA 17 motor mounts must be included for head articulation.
+Material, print time, and assembly time must be documented for all 3D printed components.
+# COMPLETE_BUILD_GUIDE.md
+All components must be wired according to the GPIO diagram and pin assignments.
+3D printed parts must be generated from config and assembled as specified.
+Component table scan must take ~8 microseconds per iteration.
+Only components with matching hitCount execute in the core loop.
+init() and act() functions must have NO ARGUMENTS and be called as specified.
+Components must access globals via p32_shared_state.h and must NOT block or delay.
+All functionality lives in components; the core loop just executes them.
+# COMPLETE_FULL_BODY_ACHIEVEMENT.md
+Specification Completeness: 100% Full-Body Coverage
+All joints and components must be fully defined and documented before integration.
+Emergency Systems: Overload detection and instant shutdown must be implemented.
+Collision Detection: Torque spike monitoring on all joints is required.
+Fail-Safe Design: Redundant position feedback systems must be present.
+Load Monitoring: Real-time structural stress analysis is required.
+Behavior Engine: Mood-driven decision making system must be present for AI integration.
+Sensor Fusion: Camera arrays, microphones, IMUs, ultrasonic sensors must be integrated for full control capabilities.
+# COMPLETE_VISUAL_BUILD_GUIDE.md
+Critical: All components share common 5V and Ground rails
+Assembly Order (Follow This Sequence!)
+Power Setup First: Breadboard and power rails must be set up before connecting any components.
+ESP32 Connection: VIN and GND must be connected to power rails and verified with a multimeter before proceeding.
+SPI Bus Wiring: Shared lines must be connected before individual chip selects.
+Individual Chip Selects: Each display must have a unique CS pin.
+Audio System: I2S wiring must follow the specified GPIO assignments.

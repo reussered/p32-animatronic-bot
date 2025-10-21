@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P32 Goblin Full - Complete Build Guide with Pictures</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0066cc; text-align: center; margin-bottom: 30px; }
+        h2 { color: #0066cc; border-bottom: 2px solid #e6f3ff; padding-bottom: 5px; }
+        h3 { color: #cc6600; }
+        .diagram { 
+            text-align: center; 
+            margin: 30px 0; 
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .gpio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .gpio-table th, .gpio-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .gpio-table th {
+            background: #0066cc;
+            color: white;
+        }
+        .gpio-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .step-box {
+            background: #e6f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 5px solid #0066cc;
+        }
+        .warning {
+            background: #fff2e6;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #ff6600;
+            margin: 15px 0;
+        }
+        .success {
+            background: #e6ffe6;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #00cc00;
+            margin: 15px 0;
+        }
+        .print-button {
+            background: #0066cc;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .print-button:hover { background: #0052a3; }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .print-button { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 P32 Goblin Full - Complete Visual Build Guide</h1>
+        
+        <div class="success">
+            <h3>✅ What You're Building:</h3>
+            <ul>
+                <li><strong>3 Animated Displays</strong> (2 eyes + 1 mouth) with real-time mood-driven animations</li>
+                <li><strong>Distance Sensing</strong> with proximity-triggered emotional responses</li>
+                <li><strong>Audio Output</strong> with I2S digital audio and speaker</li>
+                <li><strong>9 Emotional States</strong> that automatically change based on interaction</li>
+            </ul>
+        </div>
+        
+        <button class="print-button" onclick="window.print()">🖨️ Print This Complete Guide</button>
+        
+        <h2>🔌 Zero-Crossover Professional Wiring Diagram</h2>
+        
+        <div class="diagram">
+            <svg width="1000" height="750" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <style>
+                  .component { fill: #e6f3ff; stroke: #0066cc; stroke-width: 2; }
+                  .display { fill: #ffe6e6; stroke: #cc0000; stroke-width: 2; }
+                  .audio { fill: #e6ffe6; stroke: #00cc00; stroke-width: 2; }
+                  .sensor { fill: #fff2e6; stroke: #ff6600; stroke-width: 2; }
+                  .wire-spi { stroke: #0066cc; stroke-width: 3; }
+                  .wire-cs { stroke: #ff6600; stroke-width: 2; stroke-dasharray: 5,5; }
+                  .wire-i2s { stroke: #cc0000; stroke-width: 2; }
+                  .wire-sensor { stroke: #666666; stroke-width: 2; }
+                  .wire-power { stroke: #ff0000; stroke-width: 4; }
+                  .wire-ground { stroke: #000000; stroke-width: 4; }
+                  .label { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+                  .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #000; }
+                  .pin-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+                  .legend-bg { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; }
+                </style>
+              </defs>
+              
+              <!-- Title -->
+              <text x="450" y="30" class="title" text-anchor="middle">P32 Goblin Full - Professional Wiring Diagram</text>
+              
+              <!-- ESP32-S3-DevKitC-1 (Moved slightly right for better wire routing) -->
+              <rect x="80" y="250" width="140" height="220" class="component" rx="5"/>
+              <text x="150" y="270" class="label" text-anchor="middle" font-weight="bold">ESP32-S3</text>
+              <text x="150" y="285" class="label" text-anchor="middle">DevKitC-1</text>
+              
+              <!-- GPIO Pin Labels on ESP32 (positioned for clear wire routing) -->
+              <text x="225" y="300" class="pin-label">GPIO 4 (I2S BCLK)</text>
+              <text x="225" y="315" class="pin-label">GPIO 5 (I2S WS)</text>
+              <text x="225" y="330" class="pin-label">GPIO 6 (I2S DATA)</text>
+              <text x="225" y="345" class="pin-label">GPIO 9 (TRIG)</text>
+              <text x="225" y="360" class="pin-label">GPIO 10 (ECHO)</text>
+              <text x="225" y="375" class="pin-label">GPIO 12 (SPI MISO)</text>
+              <text x="225" y="390" class="pin-label">GPIO 13 (SPI MOSI)</text>
+              <text x="225" y="405" class="pin-label">GPIO 14 (SPI CLK)</text>
+              <text x="225" y="420" class="pin-label">GPIO 15 (CS1)</text>
+              <text x="225" y="435" class="pin-label">GPIO 16 (CS2)</text>
+              <text x="60" y="300" class="pin-label">VIN (5V)</text>
+              <text x="60" y="435" class="pin-label">GND</text>
+              
+              <!-- Left Eye Display (positioned to avoid wire crossings) -->
+              <circle cx="400" cy="120" r="45" class="display"/>
+              <text x="400" y="115" class="label" text-anchor="middle" font-weight="bold">Left Eye</text>
+              <text x="400" y="130" class="label" text-anchor="middle">GC9A01</text>
+              
+              <!-- Right Eye Display -->
+              <circle cx="600" cy="120" r="45" class="display"/>
+              <text x="600" y="115" class="label" text-anchor="middle" font-weight="bold">Right Eye</text>
+              <text x="600" y="130" class="label" text-anchor="middle">GC9A01</text>
+              
+              <!-- Mouth Display (positioned lower to avoid crossings) -->
+              <circle cx="500" cy="200" r="45" class="display"/>
+              <text x="500" y="195" class="label" text-anchor="middle" font-weight="bold">Mouth</text>
+              <text x="500" y="210" class="label" text-anchor="middle">GC9A01</text>
+              
+              <!-- Audio Amplifier (moved for cleaner routing) -->
+              <rect x="650" y="280" width="120" height="70" class="audio" rx="5"/>
+              <text x="710" y="305" class="label" text-anchor="middle" font-weight="bold">MAX98357A</text>
+              <text x="710" y="320" class="label" text-anchor="middle">Audio Amp</text>
+              <text x="710" y="335" class="label" text-anchor="middle">+ Speaker</text>
+              
+              <!-- HC-SR04 Sensor (positioned for clean routing) -->
+              <rect x="650" y="380" width="120" height="70" class="sensor" rx="5"/>
+              <text x="710" y="405" class="label" text-anchor="middle" font-weight="bold">HC-SR04</text>
+              <text x="710" y="420" class="label" text-anchor="middle">Distance</text>
+              <text x="710" y="435" class="label" text-anchor="middle">Sensor</text>
+              
+              <!-- Power Distribution (routed around components, not through them) -->
+              <!-- Main power rail along bottom -->
+              <line x1="80" y1="300" x2="50" y2="300" class="wire-power"/>
+              <line x1="50" y1="300" x2="50" y2="550" class="wire-power"/>
+              <line x1="50" y1="550" x2="800" y2="550" class="wire-power"/>
+              
+              <!-- Power to displays via top routing -->
+              <line x1="800" y1="550" x2="800" y2="50" class="wire-power"/>
+              <line x1="800" y1="50" x2="350" y2="50" class="wire-power"/>
+              <line x1="400" y1="50" x2="400" y2="75" class="wire-power"/>
+              <line x1="500" y1="50" x2="500" y2="155" class="wire-power"/>
+              <line x1="600" y1="50" x2="600" y2="75" class="wire-power"/>
+              
+              <!-- Power to audio/sensor via right side -->
+              <line x1="800" y1="300" x2="770" y2="300" class="wire-power"/>
+              <line x1="800" y1="400" x2="770" y2="400" class="wire-power"/>
+              
+              <!-- Ground Distribution (similar routing avoiding components) -->
+              <line x1="80" y1="435" x2="50" y2="435" class="wire-ground"/>
+              <line x1="50" y1="435" x2="50" y2="570" class="wire-ground"/>
+              <line x1="50" y1="570" x2="820" y2="570" class="wire-ground"/>
+              
+              <!-- Ground to displays via top -->
+              <line x1="820" y1="570" x2="820" y2="30" class="wire-ground"/>
+              <line x1="820" y1="30" x2="350" y2="30" class="wire-ground"/>
+              <line x1="400" y1="30" x2="400" y2="75" class="wire-ground"/>
+              <line x1="500" y1="30" x2="500" y2="155" class="wire-ground"/>
+              <line x1="600" y1="30" x2="600" y2="75" class="wire-ground"/>
+              
+              <!-- Ground to audio/sensor -->
+              <line x1="820" y1="320" x2="770" y2="320" class="wire-ground"/>
+              <line x1="820" y1="420" x2="770" y2="420" class="wire-ground"/>
+              
+              <!-- SPI Bus Lines (routed cleanly around components) -->
+              <!-- MISO (GPIO 12) -->
+              <line x1="220" y1="375" x2="280" y2="375" class="wire-spi"/>
+              <line x1="280" y1="375" x2="280" y2="90" class="wire-spi"/>
+              <line x1="280" y1="90" x2="630" y2="90" class="wire-spi"/>
+              <!-- Connect to displays via vertical drops -->
+              <line x1="400" y1="90" x2="400" y2="75" class="wire-spi"/>
+              <line x1="500" y1="90" x2="500" y2="155" class="wire-spi"/>
+              <line x1="600" y1="90" x2="600" y2="75" class="wire-spi"/>
+              
+              <!-- MOSI (GPIO 13) -->
+              <line x1="220" y1="390" x2="300" y2="390" class="wire-spi"/>
+              <line x1="300" y1="390" x2="300" y2="110" class="wire-spi"/>
+              <line x1="300" y1="110" x2="630" y2="110" class="wire-spi"/>
+              <!-- Connect to displays -->
+              <line x1="400" y1="110" x2="400" y2="75" class="wire-spi"/>
+              <line x1="500" y1="110" x2="500" y2="155" class="wire-spi"/>
+              <line x1="600" y1="110" x2="600" y2="75" class="wire-spi"/>
+              
+              <!-- CLK (GPIO 14) -->
+              <line x1="220" y1="405" x2="320" y2="405" class="wire-spi"/>
+              <line x1="320" y1="405" x2="320" y2="130" class="wire-spi"/>
+              <line x1="320" y1="130" x2="630" y2="130" class="wire-spi"/>
+              <!-- Connect to displays -->
+              <line x1="400" y1="130" x2="400" y2="75" class="wire-spi"/>
+              <line x1="500" y1="130" x2="500" y2="155" class="wire-spi"/>
+              <line x1="600" y1="130" x2="600" y2="75" class="wire-spi"/>
+              
+              <!-- Individual Chip Select Lines (routed to avoid crossings) -->
+              <!-- CS1 to Left Eye -->
+              <line x1="220" y1="420" x2="340" y2="420" class="wire-cs"/>
+              <line x1="340" y1="420" x2="340" y2="150" class="wire-cs"/>
+              <line x1="340" y1="150" x2="355" y2="150" class="wire-cs"/>
+              
+              <!-- CS2 to Right Eye -->
+              <line x1="220" y1="435" x2="360" y2="435" class="wire-cs"/>
+              <line x1="360" y1="435" x2="360" y2="70" class="wire-cs"/>
+              <line x1="360" y1="70" x2="645" y2="70" class="wire-cs"/>
+              
+              <!-- CS3 to Mouth (from expansion pin) -->
+              <line x1="80" y1="350" x2="30" y2="350" class="wire-cs"/>
+              <line x1="30" y1="350" x2="30" y2="480" class="wire-cs"/>
+              <line x1="30" y1="480" x2="480" y2="480" class="wire-cs"/>
+              <line x1="480" y1="480" x2="480" y2="245" class="wire-cs"/>
+              
+              <!-- I2S Audio Lines (clean routing to audio amp) -->
+              <line x1="220" y1="300" x2="620" y2="300" class="wire-i2s"/>
+              <line x1="620" y1="300" x2="620" y2="295" class="wire-i2s"/>
+              <line x1="620" y1="295" x2="650" y2="295" class="wire-i2s"/>
+              
+              <line x1="220" y1="315" x2="630" y2="315" class="wire-i2s"/>
+              <line x1="630" y1="315" x2="630" y2="310" class="wire-i2s"/>
+              <line x1="630" y1="310" x2="650" y2="310" class="wire-i2s"/>
+              
+              <line x1="220" y1="330" x2="640" y2="330" class="wire-i2s"/>
+              <line x1="640" y1="330" x2="640" y2="325" class="wire-i2s"/>
+              <line x1="640" y1="325" x2="650" y2="325" class="wire-i2s"/>
+              
+              <!-- Sensor Lines (clean routing) -->
+              <line x1="220" y1="345" x2="610" y2="345" class="wire-sensor"/>
+              <line x1="610" y1="345" x2="610" y2="395" class="wire-sensor"/>
+              <line x1="610" y1="395" x2="650" y2="395" class="wire-sensor"/>
+              
+              <line x1="220" y1="360" x2="600" y2="360" class="wire-sensor"/>
+              <line x1="600" y1="360" x2="600" y2="410" class="wire-sensor"/>
+              <line x1="600" y1="410" x2="650" y2="410" class="wire-sensor"/>
+              
+              <!-- Legend (moved to upper right corner to avoid wire interference) -->
+              <rect x="480" y="480" width="380" height="140" class="legend-bg" rx="5"/>
+              <text x="490" y="500" class="label" font-weight="bold">Professional Wire Legend:</text>
+              
+              <line x1="490" y1="520" x2="520" y2="520" class="wire-power"/>
+              <text x="530" y="525" class="pin-label">5V Power Distribution (Red - 4AWG)</text>
+              
+              <line x1="490" y1="535" x2="520" y2="535" class="wire-ground"/>
+              <text x="530" y="540" class="pin-label">Ground Distribution (Black - 4AWG)</text>
+              
+              <line x1="490" y1="550" x2="520" y2="550" class="wire-spi"/>
+              <text x="530" y="555" class="pin-label">SPI Bus: MISO/MOSI/CLK (22AWG)</text>
+              
+              <line x1="490" y1="565" x2="520" y2="565" class="wire-cs"/>
+              <text x="530" y="570" class="pin-label">Chip Select Lines (22AWG)</text>
+              
+              <line x1="490" y1="580" x2="520" y2="580" class="wire-i2s"/>
+              <text x="530" y="585" class="pin-label">I2S Audio: BCLK/WS/DATA (22AWG)</text>
+              
+              <line x1="490" y1="595" x2="520" y2="595" class="wire-sensor"/>
+              <text x="530" y="600" class="pin-label">HC-SR04: TRIG/ECHO (22AWG)</text>
+              
+              <!-- Technical specifications -->
+              <text x="680" y="520" class="pin-label">• Total GPIO: 11 pins used</text>
+              <text x="680" y="535" class="pin-label">• Power: 5V @ 3A recommended</text>
+              <text x="680" y="550" class="pin-label">• Available GPIO: 30+ for expansion</text>
+              <text x="680" y="565" class="pin-label">• Wire management: No crossovers</text>
+              <text x="680" y="580" class="pin-label">• Professional routing standards</text>
+              <text x="680" y="595" class="pin-label">• Expansion-ready architecture</text>
+              
+            </svg>
+        </div>
+        
+        <h2>📍 GPIO Pin Assignment Reference</h2>
+        
+        <table class="gpio-table">
+            <thead>
+                <tr>
+                    <th>GPIO Pin</th>
+                    <th>Component</th>
+                    <th>Function</th>
+                    <th>Wire Color</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>4</td><td>Audio Amp</td><td>I2S BCLK</td><td>Red</td><td>Bit clock</td></tr>
+                <tr><td>5</td><td>Audio Amp</td><td>I2S WS</td><td>Black</td><td>Word select</td></tr>
+                <tr><td>6</td><td>Audio Amp</td><td>I2S DATA</td><td>White</td><td>Digital audio data</td></tr>
+                <tr><td>9</td><td>HC-SR04</td><td>TRIG</td><td>Gray</td><td>Trigger pulse</td></tr>
+                <tr><td>10</td><td>HC-SR04</td><td>ECHO</td><td>Pink</td><td>Echo response</td></tr>
+                <tr><td>12</td><td>All Displays</td><td>SPI MISO</td><td>Blue</td><td>Shared bus</td></tr>
+                <tr><td>13</td><td>All Displays</td><td>SPI MOSI</td><td>Green</td><td>Shared bus</td></tr>
+                <tr><td>14</td><td>All Displays</td><td>SPI CLK</td><td>Yellow</td><td>Shared bus</td></tr>
+                <tr><td>15</td><td>Left Eye</td><td>CS</td><td>Orange</td><td>Chip select</td></tr>
+                <tr><td>16</td><td>Right Eye</td><td>CS</td><td>Purple</td><td>Chip select</td></tr>
+                <tr><td>17</td><td>Mouth</td><td>CS</td><td>Brown</td><td>Chip select</td></tr>
+            </tbody>
+        </table>
+
+        <h2>⚡ Step-by-Step Assembly</h2>
+
+        <div class="step-box">
+            <h3>Step 1: Power Distribution Setup</h3>
+            <div class="warning">
+                <strong>⚠️ CRITICAL:</strong> Complete power setup first. All components require 5V and common ground.
+            </div>
+            <ol>
+                <li>Connect <strong>5V supply positive</strong> to breadboard <strong>red power rail</strong></li>
+                <li>Connect <strong>5V supply ground</strong> to breadboard <strong>black power rail</strong></li>
+                <li>Connect <strong>ESP32 VIN</strong> to breadboard <strong>red power rail</strong></li>
+                <li>Connect <strong>ESP32 GND</strong> to breadboard <strong>black power rail</strong></li>
+                <li><strong>Test with multimeter:</strong> Verify 5V on red rail before proceeding</li>
+            </ol>
+        </div>
+
+        <div class="step-box">
+            <h3>Step 2: SPI Display Wiring (Shared Bus)</h3>
+            <p>All three displays share SPI bus lines but need individual chip select pins:</p>
+            
+            <h4>Shared SPI Connections (to ALL displays):</h4>
+            <ul>
+                <li><code>GPIO 12 (Blue)</code> → All displays <strong>SDO pin</strong></li>
+                <li><code>GPIO 13 (Green)</code> → All displays <strong>SDA pin</strong></li>
+                <li><code>GPIO 14 (Yellow)</code> → All displays <strong>SCL pin</strong></li>
+            </ul>
+            
+            <h4>Individual Chip Select Lines:</h4>
+            <ul>
+                <li><code>GPIO 15 (Orange)</code> → Left eye display <strong>CS pin</strong></li>
+                <li><code>GPIO 16 (Purple)</code> → Right eye display <strong>CS pin</strong></li>
+                <li><code>GPIO 17 (Brown)</code> → Mouth display <strong>CS pin</strong></li>
+            </ul>
+            
+            <h4>Power Connections (each display):</h4>
+            <ul>
+                <li>Red power rail → <strong>VCC pin</strong></li>
+                <li>Black power rail → <strong>GND pin</strong></li>
+                <li>ESP32 3.3V → <strong>RES pin</strong> (reset)</li>
+                <li>ESP32 3.3V → <strong>DC pin</strong> (data/command)</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Step 3: I2S Audio System</h3>
+            <h4>MAX98357A Audio Amplifier:</h4>
+            <ul>
+                <li><code>GPIO 4 (Red)</code> → <strong>BCLK pin</strong></li>
+                <li><code>GPIO 5 (Black)</code> → <strong>LRCK pin</strong></li>
+                <li><code>GPIO 6 (White)</code> → <strong>DIN pin</strong></li>
+                <li>Red power rail → <strong>VCC pin</strong></li>
+                <li>Black power rail → <strong>GND pin</strong></li>
+            </ul>
+            
+            <h4>Speaker Connection:</h4>
+            <ul>
+                <li>Amplifier <strong>+ output</strong> → Speaker positive terminal</li>
+                <li>Amplifier <strong>- output</strong> → Speaker negative terminal</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Step 4: HC-SR04 Distance Sensor</h3>
+            <ul>
+                <li><code>GPIO 9 (Gray)</code> → <strong>TRIG pin</strong></li>
+                <li><code>GPIO 10 (Pink)</code> → <strong>ECHO pin</strong></li>
+                <li>Red power rail → <strong>VCC pin</strong> (5V required!)</li>
+                <li>Black power rail → <strong>GND pin</strong></li>
+            </ul>
+            
+            <div class="warning">
+                <strong>⚠️ Important:</strong> HC-SR04 requires full 5V power. 3.3V will not work reliably.
+            </div>
+        </div>
+
+        <h2>🧪 Testing Checklist</h2>
+
+        <div class="step-box">
+            <h3>Power Verification (Use Multimeter)</h3>
+            <ul>
+                <li>☐ 5V present on ESP32 VIN pin</li>
+                <li>☐ 5V present on all display VCC pins</li>
+                <li>☐ 5V present on audio amplifier VCC pin</li>
+                <li>☐ 5V present on sensor VCC pin</li>
+                <li>☐ Continuity verified on all GND connections</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Software Build & Upload</h3>
+            <ol>
+                <li>Open project in VS Code with PlatformIO</li>
+                <li>Verify <code>ENABLE_GOBLIN_COMPONENTS</code> is defined in <code>src/p32_component_config.h</code></li>
+                <li>Build firmware: <code>pio run</code> (should show ~5.8% RAM, ~51.7% Flash usage)</li>
+                <li>Connect ESP32-S3 via USB-C cable</li>
+                <li>Upload firmware: <code>pio run -t upload</code></li>
+                <li>Start serial monitor: <code>pio device monitor</code></li>
+            </ol>
+        </div>
+
+        <div class="step-box">
+            <h3>System Function Tests</h3>
+            <ul>
+                <li>☐ All three displays show animated content</li>
+                <li>☐ Eye displays cycle through blink animation</li>
+                <li>☐ Mouth display shows color changes</li>
+                <li>☐ Speaker produces clear startup sounds</li>
+                <li>☐ Distance sensor readings change when objects approach</li>
+                <li>☐ Serial monitor shows continuous loop execution</li>
+                <li>☐ Mood system automatically cycles through emotions</li>
+            </ul>
+        </div>
+
+        <h2>🎭 9-Emotion Mood System</h2>
+
+        <table class="gpio-table">
+            <thead>
+                <tr>
+                    <th>Emotion</th>
+                    <th>Visual Effect</th>
+                    <th>Trigger Condition</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>😨 FEAR</td><td>Pale colors, rapid blinking</td><td>Sudden proximity</td><td>5-10 seconds</td></tr>
+                <tr><td>😠 ANGER</td><td>Red colors, intense stare</td><td>Sustained proximity</td><td>15-30 seconds</td></tr>
+                <tr><td>😤 IRRITATION</td><td>Orange tints, narrow eyes</td><td>Repeated interaction</td><td>10-20 seconds</td></tr>
+                <tr><td>😊 HAPPINESS</td><td>Bright colors, wide eyes</td><td>Positive interaction</td><td>30-60 seconds</td></tr>
+                <tr><td>😌 CONTENTMENT</td><td>Soft blue, relaxed</td><td>Extended calm</td><td>60+ seconds</td></tr>
+                <tr><td>🍽️ HUNGER</td><td>Green tints, searching</td><td>Time-based cycle</td><td>20-40 seconds</td></tr>
+                <tr><td>🤔 CURIOSITY</td><td>Blue tints, alert look</td><td>Motion detection</td><td>10-30 seconds</td></tr>
+                <tr><td>💖 AFFECTION</td><td>Pink tints, gentle gaze</td><td>Gentle interaction</td><td>45-90 seconds</td></tr>
+                <tr><td>🤩 EXCITEMENT</td><td>Rapid color flashing</td><td>High activity</td><td>5-15 seconds</td></tr>
+            </tbody>
+        </table>
+
+        <h2>🚨 Troubleshooting Guide</h2>
+
+        <div class="warning">
+            <h3>No Display Output (Black Screens)</h3>
+            <p><strong>Check:</strong></p>
+            <ul>
+                <li>5V power on all display VCC pins (use multimeter)</li>
+                <li>SPI bus connections (GPIO 12, 13, 14 to all displays)</li>
+                <li>Individual CS pin assignments (GPIO 15, 16, 17)</li>
+                <li>Ground connections on all displays</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>Compilation/Upload Errors</h3>
+            <p><strong>Check:</strong></p>
+            <ul>
+                <li><code>p32_component_config.h</code> contains <code>#define ENABLE_GOBLIN_COMPONENTS</code></li>
+                <li>USB-C cable properly connected to ESP32</li>
+                <li>Correct COM port detected by PlatformIO</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>No Audio Output</h3>
+            <p><strong>Check:</strong></p>
+            <ul>
+                <li>I2S connections (GPIO 4, 5, 6 to audio amplifier)</li>
+                <li>5V power to MAX98357A amplifier</li>
+                <li>Speaker connections (+ and - terminals)</li>
+                <li>Speaker impedance (4-8 ohms recommended)</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>Distance Sensor Not Working</h3>
+            <p><strong>Check:</strong></p>
+            <ul>
+                <li>HC-SR04 has full 5V power (3.3V won't work reliably)</li>
+                <li>GPIO 9, 10 connections to TRIG and ECHO pins</li>
+                <li>No obstructions in front of sensor</li>
+                <li>Sensor mounting is stable (vibration affects readings)</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h2>🎉 Congratulations!</h2>
+            <p>You've successfully built a complete P32 Goblin Full animatronic system with:</p>
+            <ul>
+                <li>✅ <strong>Mood-driven behavioral engine</strong> with 9 emotional states</li>
+                <li>✅ <strong>Interactive proximity sensing</strong> that triggers emotional responses</li>
+                <li>✅ <strong>Multi-display animation system</strong> with synchronized eye and mouth movements</li>
+                <li>✅ <strong>Digital audio output</strong> with clear sound quality</li>
+                <li>✅ <strong>Expandable architecture</strong> with 26+ unused GPIO pins for future enhancements</li>
+            </ul>
+            
+            <p><strong>Next Steps:</strong> Consider adding servo-controlled neck movement, LED accent lighting, or camera integration using the available GPIO pins!</p>
+        </div>
+
+        <button class="print-button" onclick="window.print()">🖨️ Print This Complete Guide</button>
+    </div>
+</body>
+</html>

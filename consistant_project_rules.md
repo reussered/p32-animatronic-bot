@@ -1,0 +1,1 @@
+If a contradiction between one of these rules and another one of the rules in this list is detected, these rules must be modified using feedback from the user to make them consistant before doing anything else.

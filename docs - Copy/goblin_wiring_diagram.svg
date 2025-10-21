@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .component { fill: #e6f3ff; stroke: #0066cc; stroke-width: 2; }
+      .display { fill: #ffe6e6; stroke: #cc0000; stroke-width: 2; }
+      .audio { fill: #e6ffe6; stroke: #00cc00; stroke-width: 2; }
+      .sensor { fill: #fff2e6; stroke: #ff6600; stroke-width: 2; }
+      .wire-spi { stroke: #0066cc; stroke-width: 3; }
+      .wire-cs { stroke: #ff6600; stroke-width: 2; stroke-dasharray: 5,5; }
+      .wire-i2s { stroke: #cc0000; stroke-width: 2; }
+      .wire-sensor { stroke: #666666; stroke-width: 2; }
+      .wire-power { stroke: #ff0000; stroke-width: 4; }
+      .wire-ground { stroke: #000000; stroke-width: 4; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #000; }
+      .pin-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" class="title" text-anchor="middle">P32 Goblin Full - Complete Wiring Diagram</text>
+  
+  <!-- ESP32-S3-DevKitC-1 -->
+  <rect x="50" y="200" width="120" height="200" class="component" rx="5"/>
+  <text x="110" y="220" class="label" text-anchor="middle" font-weight="bold">ESP32-S3</text>
+  <text x="110" y="235" class="label" text-anchor="middle">DevKitC-1</text>
+  
+  <!-- GPIO Pin Labels on ESP32 -->
+  <text x="170" y="250" class="pin-label">GPIO 4 (I2S BCLK)</text>
+  <text x="170" y="265" class="pin-label">GPIO 5 (I2S WS)</text>
+  <text x="170" y="280" class="pin-label">GPIO 6 (I2S DATA)</text>
+  <text x="170" y="295" class="pin-label">GPIO 9 (TRIG)</text>
+  <text x="170" y="310" class="pin-label">GPIO 10 (ECHO)</text>
+  <text x="170" y="325" class="pin-label">GPIO 12 (SPI MISO)</text>
+  <text x="170" y="340" class="pin-label">GPIO 13 (SPI MOSI)</text>
+  <text x="170" y="355" class="pin-label">GPIO 14 (SPI CLK)</text>
+  <text x="170" y="370" class="pin-label">GPIO 15 (CS1)</text>
+  <text x="170" y="385" class="pin-label">GPIO 16 (CS2)</text>
+  <text x="30" y="250" class="pin-label">VIN (5V)</text>
+  <text x="30" y="385" class="pin-label">GND</text>
+  
+  <!-- Left Eye Display -->
+  <circle cx="350" cy="120" r="40" class="display"/>
+  <text x="350" y="115" class="label" text-anchor="middle" font-weight="bold">Left Eye</text>
+  <text x="350" y="130" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Right Eye Display -->
+  <circle cx="550" cy="120" r="40" class="display"/>
+  <text x="550" y="115" class="label" text-anchor="middle" font-weight="bold">Right Eye</text>
+  <text x="550" y="130" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Mouth Display -->
+  <circle cx="450" cy="280" r="40" class="display"/>
+  <text x="450" y="275" class="label" text-anchor="middle" font-weight="bold">Mouth</text>
+  <text x="450" y="290" class="label" text-anchor="middle">GC9A01</text>
+  
+  <!-- Audio Amplifier -->
+  <rect x="600" y="200" width="100" height="60" class="audio" rx="5"/>
+  <text x="650" y="220" class="label" text-anchor="middle" font-weight="bold">MAX98357A</text>
+  <text x="650" y="235" class="label" text-anchor="middle">Audio Amp</text>
+  <text x="650" y="250" class="label" text-anchor="middle">+ Speaker</text>
+  
+  <!-- HC-SR04 Sensor -->
+  <rect x="600" y="320" width="100" height="60" class="sensor" rx="5"/>
+  <text x="650" y="340" class="label" text-anchor="middle" font-weight="bold">HC-SR04</text>
+  <text x="650" y="355" class="label" text-anchor="middle">Distance</text>
+  <text x="650" y="370" class="label" text-anchor="middle">Sensor</text>
+  
+  <!-- Power Distribution (5V) -->
+  <line x1="50" y1="250" x2="30" y2="250" class="wire-power"/>
+  <line x1="30" y1="250" x2="30" y2="500" class="wire-power"/>
+  <line x1="30" y1="500" x2="750" y2="500" class="wire-power"/>
+  <line x1="750" y1="500" x2="750" y2="120" class="wire-power"/>
+  <line x1="750" y1="120" x2="590" y2="120" class="wire-power"/>
+  <line x1="310" y1="120" x2="390" y2="120" class="wire-power"/>
+  <line x1="510" y1="120" x2="590" y2="120" class="wire-power"/>
+  <line x1="410" y1="280" x2="750" y2="280" class="wire-power"/>
+  <line x1="700" y1="200" x2="750" y2="200" class="wire-power"/>
+  <line x1="700" y1="320" x2="750" y2="320" class="wire-power"/>
+  
+  <!-- Ground Distribution -->
+  <line x1="50" y1="385" x2="30" y2="385" class="wire-ground"/>
+  <line x1="30" y1="385" x2="30" y2="520" class="wire-ground"/>
+  <line x1="30" y1="520" x2="770" y2="520" class="wire-ground"/>
+  <line x1="770" y1="520" x2="770" y2="160" class="wire-ground"/>
+  <line x1="770" y1="160" x2="590" y2="160" class="wire-ground"/>
+  <line x1="310" y1="160" x2="390" y2="160" class="wire-ground"/>
+  <line x1="510" y1="160" x2="590" y2="160" class="wire-ground"/>
+  <line x1="410" y1="320" x2="770" y2="320" class="wire-ground"/>
+  <line x1="700" y1="260" x2="770" y2="260" class="wire-ground"/>
+  <line x1="700" y1="380" x2="770" y2="380" class="wire-ground"/>
+  
+  <!-- SPI Bus (Shared Lines) -->
+  <line x1="170" y1="325" x2="320" y2="325" class="wire-spi"/>
+  <line x1="320" y1="325" x2="320" y2="100" class="wire-spi"/>
+  <line x1="320" y1="100" x2="580" y2="100" class="wire-spi"/>
+  <line x1="350" y1="100" x2="350" y2="80" class="wire-spi"/>
+  <line x1="450" y1="100" x2="450" y2="240" class="wire-spi"/>
+  <line x1="550" y1="100" x2="550" y2="80" class="wire-spi"/>
+  
+  <line x1="170" y1="340" x2="340" y2="340" class="wire-spi"/>
+  <line x1="340" y1="340" x2="340" y2="85" class="wire-spi"/>
+  <line x1="340" y1="85" x2="580" y2="85" class="wire-spi"/>
+  <line x1="350" y1="85" x2="350" y2="80" class="wire-spi"/>
+  <line x1="450" y1="85" x2="450" y2="240" class="wire-spi"/>
+  <line x1="550" y1="85" x2="550" y2="80" class="wire-spi"/>
+  
+  <line x1="170" y1="355" x2="360" y2="355" class="wire-spi"/>
+  <line x1="360" y1="355" x2="360" y2="70" class="wire-spi"/>
+  <line x1="360" y1="70" x2="580" y2="70" class="wire-spi"/>
+  <line x1="350" y1="70" x2="350" y2="80" class="wire-spi"/>
+  <line x1="450" y1="70" x2="450" y2="240" class="wire-spi"/>
+  <line x1="550" y1="70" x2="550" y2="80" class="wire-spi"/>
+  
+  <!-- Individual Chip Select Lines -->
+  <line x1="170" y1="370" x2="350" y2="370" class="wire-cs"/>
+  <line x1="350" y1="370" x2="350" y2="160" class="wire-cs"/>
+  
+  <line x1="170" y1="385" x2="380" y2="385" class="wire-cs"/>
+  <line x1="380" y1="385" x2="380" y2="60" class="wire-cs"/>
+  <line x1="380" y1="60" x2="550" y2="60" class="wire-cs"/>
+  <line x1="550" y1="60" x2="550" y2="80" class="wire-cs"/>
+  
+  <line x1="50" y1="300" x2="40" y2="300" class="wire-cs"/>
+  <line x1="40" y1="300" x2="40" y2="400" class="wire-cs"/>
+  <line x1="40" y1="400" x2="400" y2="400" class="wire-cs"/>
+  <line x1="400" y1="400" x2="400" y2="320" class="wire-cs"/>
+  <line x1="400" y1="320" x2="410" y2="320" class="wire-cs"/>
+  
+  <!-- I2S Audio Lines -->
+  <line x1="170" y1="250" x2="580" y2="250" class="wire-i2s"/>
+  <line x1="580" y1="250" x2="580" y2="220" class="wire-i2s"/>
+  <line x1="580" y1="220" x2="600" y2="220" class="wire-i2s"/>
+  
+  <line x1="170" y1="265" x2="570" y2="265" class="wire-i2s"/>
+  <line x1="570" y1="265" x2="570" y2="235" class="wire-i2s"/>
+  <line x1="570" y1="235" x2="600" y2="235" class="wire-i2s"/>
+  
+  <line x1="170" y1="280" x2="560" y2="280" class="wire-i2s"/>
+  <line x1="560" y1="280" x2="560" y2="250" class="wire-i2s"/>
+  <line x1="560" y1="250" x2="600" y2="250" class="wire-i2s"/>
+  
+  <!-- Sensor Lines -->
+  <line x1="170" y1="295" x2="590" y2="295" class="wire-sensor"/>
+  <line x1="590" y1="295" x2="590" y2="340" class="wire-sensor"/>
+  <line x1="590" y1="340" x2="600" y2="340" class="wire-sensor"/>
+  
+  <line x1="170" y1="310" x2="585" y2="310" class="wire-sensor"/>
+  <line x1="585" y1="310" x2="585" y2="355" class="wire-sensor"/>
+  <line x1="585" y1="355" x2="600" y2="355" class="wire-sensor"/>
+  
+  <!-- Legend -->
+  <rect x="50" y="450" width="400" height="120" fill="#f9f9f9" stroke="#ccc" stroke-width="1" rx="5"/>
+  <text x="60" y="470" class="label" font-weight="bold">Wire Legend:</text>
+  
+  <line x1="60" y1="485" x2="90" y2="485" class="wire-power"/>
+  <text x="95" y="490" class="pin-label">5V Power (Red)</text>
+  
+  <line x1="60" y1="500" x2="90" y2="500" class="wire-ground"/>
+  <text x="95" y="505" class="pin-label">Ground (Black)</text>
+  
+  <line x1="60" y1="515" x2="90" y2="515" class="wire-spi"/>
+  <text x="95" y="520" class="pin-label">SPI Bus (Blue/Green/Yellow)</text>
+  
+  <line x1="60" y1="530" x2="90" y2="530" class="wire-cs"/>
+  <text x="95" y="535" class="pin-label">Chip Select (Orange/Purple/Brown)</text>
+  
+  <line x1="60" y1="545" x2="90" y2="545" class="wire-i2s"/>
+  <text x="95" y="550" class="pin-label">I2S Audio (Red)</text>
+  
+  <line x1="60" y1="560" x2="90" y2="560" class="wire-sensor"/>
+  <text x="95" y="565" class="pin-label">Sensor (Gray)</text>
+  
+  <text x="250" y="485" class="pin-label">Total GPIO Used: 11 pins</text>
+  <text x="250" y="500" class="pin-label">Power: 5V @ 2A minimum</text>
+  <text x="250" y="515" class="pin-label">All components share power rails</text>
+  <text x="250" y="530" class="pin-label">SPI displays share MISO/MOSI/CLK</text>
+  <text x="250" y="545" class="pin-label">Each display needs unique CS pin</text>
+  <text x="250" y="560" class="pin-label">Available GPIO: 26+ for expansion</text>
+  
+</svg>
