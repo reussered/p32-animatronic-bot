@@ -23,13 +23,15 @@
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
                           │
-                          │ ESP-NOW Mesh (100ms sync)
+                          │ SharedMemory Mesh (100ms sync)
+
+> All state synchronization between brain and mouth subsystems is performed using the SharedMemory class, which abstracts ESP-NOW mesh networking. Application code should use SharedMemory.read() and SharedMemory.write() for all inter-subsystem communication.
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  HEAD ESP32-S3 (MOUTH)                                      │
 │  ────────────────────────────────────────────────────────── │
 │                                                              │
-│  // goblin_mouth.c                                          │
+│  // goblin_mouth.cpp                                       │
 │  void goblin_mouth_act(void) {                              │
 │      if (g_shared_state.is_speaking) {                      │
 │          render_mouth_shape(g_shared_state.speech_phoneme); │
@@ -54,7 +56,7 @@
 
 Add speech fields to `p32_shared_state.h`:
 
-```c
+```cpp
 // include/p32_shared_state.h
 
 typedef enum {
@@ -108,8 +110,8 @@ typedef struct {
 
 ## Brain Component (Torso)
 
-```c
-// src/components/speech_controller.c
+```cpp
+// src/components/speech_controller.cpp
 // Runs on TORSO ESP32-S3, coordinates speech output
 
 #include "p32_shared_state.h"
@@ -198,8 +200,8 @@ void say_hello(void) {
 
 ## Mouth Component (Head)
 
-```c
-// src/components/goblin_mouth.c
+```cpp
+// src/components/goblin_mouth.cpp
 // Runs on HEAD ESP32-S3, renders mouth shapes on GC9A01 display
 
 #include "p32_shared_state.h"
@@ -357,8 +359,8 @@ void send_framebuffer_to_display(spi_device_handle_t spi, uint16_t *fb) {
 
 ## Behavior Trigger (Example)
 
-```c
-// src/components/goblin_behavior_engine.c
+```cpp
+// src/components/goblin_behavior_engine.cpp
 // Runs on TORSO, decides when to speak
 
 #include "p32_shared_state.h"
@@ -403,7 +405,7 @@ Time    Phoneme      Display
 
 ## Next Evolution: Audio Synchronization
 
-```c
+```cpp
 // Later: Add audio playback component
 void speech_controller_act(void) {
     // Update phoneme in shared state
@@ -425,8 +427,8 @@ void speech_controller_act(void) {
 
 1. **Phase 1**: Prove mesh works (from HARDWARE-VALIDATION-TEST-PLAN.md)
 2. **Phase 2**: Add speech fields to p32_shared_state.h
-3. **Phase 3**: Implement speech_controller.c on torso
-4. **Phase 4**: Implement goblin_mouth.c on head
+3. **Phase 3**: Implement speech_controller.cpp on torso
+4. **Phase 4**: Implement goblin_mouth.cpp on head
 5. **Phase 5**: Trigger say_hello() manually via serial command
 6. **Phase 6**: Watch mouth display cycle through phonemes for "Hello"
 

@@ -149,7 +149,7 @@ Scanning dependencies...
 Dependency Graph
 |-- ArduinoJson @ 7.0.4
 Building in release mode
-Compiling .pio/build/esp32-s3-devkitc-1/src/main.c.o
+Compiling .pio/build/esp32-s3-devkitc-1/src/main.cpp.o
 Linking .pio/build/esp32-s3-devkitc-1/firmware.elf
 Retrieving maximum program size .pio/build/esp32-s3-devkitc-1/firmware.elf
 Checking size .pio/build/esp32-s3-devkitc-1/firmware.elf
@@ -229,7 +229,9 @@ The build process compiles a complete animatronic system:
 - **12 Bilateral Servo Controllers** (precise motor control)
 - **13 Goblin Character Components** (facial expressions)
 - **JSON Configuration System** (personality variants)
-- **ESP-NOW Mesh Networking** (distributed control)
+- **SharedMemory Mesh Networking** (distributed control via ESP-NOW)
+
+> All subsystem communication and distributed control is performed using the SharedMemory class, which internally uses ESP-NOW for mesh networking. Direct ESP-NOW calls are not used in application code; all state sync and messaging is abstracted through SharedMemory.read() and SharedMemory.write().
 - **Mood-Driven Behaviors** (AI personality system)
 
 ### **Hardware Requirements:**

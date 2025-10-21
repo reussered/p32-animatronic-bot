@@ -18,7 +18,7 @@ void app_main(void)
     {
         for (int i = 0; i < COMPONENT_TABLE_SIZE; i++)
         {
-            if (g_loopCount % hitCountTable[i] == 0)
+            if (hitCountTable[i] > 0 && g_loopCount % hitCountTable[i] == 0)
             {
                 actTable[i]();
             }

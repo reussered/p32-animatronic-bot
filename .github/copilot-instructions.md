@@ -11,14 +11,6 @@ ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF frame
 
 ## CRITICAL: Pure Component-Driven Architecture
 
-**READ FIRST**: 
-- `docs/THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md`
-- `docs/HIERARCHICAL-COMPONENT-COMPOSITION-SPEC.md`
-- `docs/COMPONENT-FUNCTION-SIGNATURES.md` (NO ARGUMENTS pattern)
-- `docs/MESH-STATE-SYNCHRONIZATION-SPEC.md` (Distributed global state)
-- `docs/CPP-CLASS-SERIALIZATION-PATTERN.md` (C++ classes + POD serialization)
-- `docs/RAW-MEMORY-BLOCK-PATTERN.md` (Simplest memcmp/memcpy pattern)
-- `docs/FAST-CHANGE-DETECTION-EXAMPLE.md` (Complete working code)
 
 **NOTHING executes unless it's a component with init() and act() functions.**
 
@@ -31,31 +23,32 @@ ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF frame
 - **Subsystem Assembly** (`goblin_head.json`) contains **Hardware Components** (`left_eye.json`, `nose.json`)
 - **A single JSON file defines the entire creature** via recursive composition
 
-**Every feature requires**:
+**Every creature requires**:
 1. Component JSON file with `component_name` and `hitCount` timing
-2. Component C code with `{name}_init(void)` and `{name}_act(void)` functions **WITH NO ARGUMENTS**
+2. Component CPP code with `{name}_init(void)` and `{name}_act(void)` functions **WITH NO ARGUMENTS**  if the component has the keyword hardware_only set to true, these functions are not created.
 3. Include `p32_shared_state.h` to access `g_loopCount` and all global shared state
 4. Attachment at appropriate level (System/Family/Subsystem/Hardware)
 5. Registration in generated component tables
 
-The core loop in `app_main()` ONLY iterates through components - it contains no application logic.
+The core loop in `app_main()` interates once through all of the attached components init functions, then repeatedly through all of the components act functions ONLY- it contains no application logic.
 
-**CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.
+**CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.  Those values that are common to all subsystems are read and updated though the SharedMemory class.  This class contains an internal version of the ESP NOW bluetooth system and is used to communicvate between all of the various subsystems controled by a separate esp32 chip.  the protocol for using this code is to declate a local copy of the class variable, thern read its current state.  this read is purely local code and doesn't affect the state of any other subsystem.  when the local code has made any changes to the shared state, it then calls the write function of the class, which updates the local copy and also sends out an ESP NOW message to all other subsystems to update their copies of the shared state.
 
-**Shape assemblies are referenced by components**: The head component references `goblin_skull.scad`, which defines the mounting framework for eyes/nose/mouth components.
+**Shapes are defined using scad and stl files.  if the shape parameterr is missing, this component only affects software.  The component must have a shape parameter if it is designated a hardware_only component.
+
+	- for example, The goblin_head component has a shape key that specifies `g1oblin_skull.scad` which defines the mounting framework for eyes/nose/mouth components.  The corresponding stl files are also saved into git to reduce creature generation time.
+	
 
 **System components distributed strategically**:
 - **Torso subsystem** hosts system-level components (WiFi, ESP-NOW mesh, telemetry)
 - **Head subsystem** focuses exclusively on real-time rendering (displays, audio, sensors)
 - **Load balanced**: Torso 50% CPU (coordination), Head 75% CPU (rendering)
 
-📘 **[Distributed Processing Architecture](../docs/DISTRIBUTED-PROCESSING-ARCHITECTURE.md)**
-📘 **[Component Function Signatures](../docs/COMPONENT-FUNCTION-SIGNATURES.md)** - NO ARGUMENTS pattern
-
 ## Architecture Patterns
 
 ### Configuration-Driven Design
-- **Bot Definitions**: `config/bots/*.json` define complete animatronic characters with spatial coordinates, mood defaults, and behavior configs
+- **Bot Definitions**: bots are defined as being part of a specific family.  for example /config/bots/bot_families/goblins contains all of the bots that define different goblins.  each JSON file in the ../goblins folder defines  
+		complete animatronic characters with spatial coordinates, mood defaults, and behavior parameters
 - **Component Library**: Three-tier system:
   - `config/components/hardware/` - Physical device specs (displays, sensors)  
   - `config/components/interfaces/` - Connection definitions (SPI buses, I2S, GPIO mappings)
@@ -81,7 +74,7 @@ Two coordinate systems supported:
 ### Universal Head Architecture (CRITICAL DESIGN PATTERN)
 **Skull Framework + Component Modules = Complete Head**
 - **Skull Responsibility**: Provides mounting framework at P32 coordinates, creature-specific silhouette
-- **Component Responsibility**: Contains electronics + detailed creature features (eye shells, nose shapes, etc.)
+- **Component Responsibility**: Contains electronics + detailed creature features (eye shells, nose shapes, etc.) as ell as the software required to drive the electronics.
 - **Standard Mounting**: 26mm eye/mouth rings, 22x17mm nose bracket, creature-specific ear points
 - **Modularity**: Same electronics work across all creatures (goblin, cat, bear) via component shell changes
 - **File Pattern**: `{creature}_skull.scad` + `{creature}_eye_shells.scad` + `{creature}_nose_shell.scad`
@@ -140,6 +133,26 @@ Two coordinate systems supported:
 - Each component instance maps to hardware definitions via interface assignments
 - SPI displays use sequential device assignments: SPI_DEVICE_1 (left eye), SPI_DEVICE_2 (right eye), SPI_DEVICE_3 (mouth)
 - Mood system uses 8 emotional states: FEAR, ANGER, IRRITATION, HAPPINESS, CONTENTMENT, HUNGER, CURIOSITY, AFFECTION
+- as an example of how component definitions nest take the example provided by the goblinm head.  the head contains 2 eyes (left/right) 2 ears (left/right), a nose, and a mouth.
+goblin_left_eye contains goblin_eye contains gd9a01 while goblin_right_eye also contains goblin_eye contains gc9a01.
+the ultimate act table created is
+	goblin_left_eye_act
+	goblin_right_eye_act
+	goblin_nose_act
+	goblin_mouth_act
+	
+	goblin_eye_act
+	gcda01_act
+	
+	the fact that the goblin_eye and gc9a01 components are included twice in the hiearchy is detected and only one act function for each is included.
+	the goblin_left_eye loads the aniomation for the left eye into a buffer, the goblin_right_eye creates a second buffer.  as these buffers are alocated, they are pushed ionto a stack.
+	the goblin_eye component specifies the goblins eye shape, while its act component acts on every buffer in the stack to modify the frame, by using the Mood class contents.
+	the gc9a01_act function looks at each buffer and displays the contents to the interface deined in the specific eye.  SPI_DEVICE_1 for the left eye and SPI_DEVICE_2 for the right.  all of these things are passed down as partb of the task stack created by the higher level components
+	
+the shape part is defined in goblin_eye.  this is a goblin specific shape.  the gc9a01 shape defines the miounting bracket used for all displays of that type.
+
+
+this architecture allows creatures with different number of eyes that just 2
 
 ### Hardware Abstraction
 - Interface definitions separate bus config from device config

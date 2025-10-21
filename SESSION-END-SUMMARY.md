@@ -1,3 +1,34 @@
+# Session End Summary - ESP-NOW/SharedMemory Refactor & Documentation Consistency
+
+## Key Changes
+
+### Codebase
+- Created `src/core/SharedMemory.cpp` for ESP-NOW setup, broadcast, and callbacks.
+- Updated `include/core/SharedMemory.hpp` to encapsulate all ESP-NOW logic and expose `espnow_init()` as public.
+- Added system-level component: `GlobalSharedMemory` (`src/system/GlobalSharedMemory.cpp`, `include/system/GlobalSharedMemory.hpp`).
+  - `GlobalSharedMemory_init()` calls `espnow_init()` for mesh setup.
+  - `GlobalSharedMemory_act()` is a stub.
+- Updated `src/main.c` loop to only call act functions if `hitCount > 0`, eliminating need for stub act functions.
+- Confirmed act/dispatch tables and init tables always match in size; stub entries use `0` for both act and hitCount.
+
+### Documentation
+- All `.md` files in `/docs` now consistently reference C++ conventions and SharedMemory for ESP-NOW mesh networking.
+- Removed all direct ESP-NOW references from documentation; clarified SharedMemory abstraction.
+- Updated documentation to reflect new stub logic and table requirements.
+
+## Architecture Guarantees
+- No act function is called for components with `hitCount == 0` or null act entry.
+- All subsystem mesh setup is performed via `GlobalSharedMemory` and SharedMemory class.
+- Dispatch tables and init tables are always the same size.
+- No stub code required for skipped components.
+
+## Next Steps
+- All changes ready for git commit.
+- Next task will focus on further updates to `.md` documentation files.
+
+---
+
+**Task Complete. All changes are checked and ready for review.**
 # Session End Summary - October 15, 2025
 
 ## Today's Accomplishments 🎉

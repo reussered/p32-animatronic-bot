@@ -202,12 +202,6 @@ ARM SUBSYSTEM POWER DISTRIBUTION
    RIGHT_ARM_DISTAL_CONTROLLER = 0x13
    ```
 
-2. **Configure ESP-NOW communication**:
-   ```cpp
-   esp_now_add_peer(MASTER_CONTROLLER, channel, key);
-   esp_now_register_recv_cb(arm_command_handler);
-   esp_now_register_send_cb(arm_response_handler);
-   ```
 
 3. **Setup safety systems**:
    - Emergency stop input on GPIO 1 for all controllers

@@ -1,119 +1,75 @@
-# P32 Component Code Requirements
+# Component Code Requirements
 
 ## Overview
 This document defines the mandatory structure and requirements for all P32 animatronic component source files to ensure proper compilation, initialization, and execution within the component system.
 
 📘 **[Three-Level Component Attachment Architecture](THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md)** - READ FIRST
 
-**CRITICAL PRINCIPLE**: Every feature must be a component with `init()` and `act(loopCount)` functions. The core loop in `app_main()` contains NO application logic - it ONLY iterates through registered components.
+**CRITICAL PRINCIPLE**: Every feature must be a component with `init()` and `act()` functions. The core loop in `app_main()` contains NO application logic - it ONLY iterates through registered components.
 
 ## Architecture: C/C++ Hybrid System
 
-The P32 system uses a **hybrid C/C++ architecture** which is supported and recommended by ESP-IDF:
-
-### C++ Core Systems (High-Level Logic)
-- **Mood System** (`Mood.cpp/.hpp`) - Advanced mood calculations with floating-point precision
-- **Frame Processor** (`FrameProcessor.cpp/.hpp`) - Efficient mood-based rendering engine
-- **Frame Mood Processor** (`FrameMoodProcessor.hpp`) - Integration layer for mood-driven animations
-
-### C Component Layer (Hardware Interface)
-- **Component Files** (`src/components/*.c`) - Individual component implementations
-- **Hardware Drivers** - GPIO, SPI, I2S, sensor interfaces
-- **ESP-IDF Integration** - FreeRTOS tasks, system calls
-- **Component Tables** - Init/action function registration
-
-### Integration Pattern
-C component files call C++ systems through proper C linkage:
-```c
-// C component calls C++ mood system
-extern "C" {
-    void update_mood_from_c(float mood_values[8]);
-    void process_frame_from_c(uint8_t* pixel_data, int width, int height);
-}
-```
+All component files must be implemented in C++ (`.cpp`).
+Hardware drivers and ESP-IDF integration should use C++ wrappers if needed.
+Use `extern "C"` linkage only for interfacing with ESP-IDF or legacy C APIs.
 
 ## Component File Structure Requirements
 
 ### 1. File Naming Convention
-- **Pattern**: `{component_name}.c`
+
+- **Pattern**: `{component_name}.cpp`
 - **Location**: `src/components/`
-- **Examples**: 
-  - `goblin_eye_left.c`
-  - `goblin_eye_right.c` 
-  - `goblin_nose.c`
-  - `system_core.c`
-  - `network_monitor.c`
+
+- **Examples**:
+    - `goblin_left_eye.cpp`
+    - `goblin_right_eye.cpp`
 
 ### 2. Language Selection: C vs C++
 
-#### When to Use C (.c files)
-- Hardware interface components (GPIO, SPI, I2S)
-- ESP-IDF API integration
-- Simple sensor reading/actuator control
-- Component system registration (init/act functions)
-
-#### When to Use C++ (.cpp files)  
-- Complex algorithms (mood calculations, pathfinding)
-- Object-oriented designs (animation systems, AI behaviors)
-- Mathematical computations with floating-point precision
-- STL containers and advanced language features
-
-#### C/C++ Interoperability
-For C components that need C++ functionality:
-```c
-// In C component file - call C++ functions
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-// C-compatible function declarations
-void update_mood_from_component(float mood_values[8]);
-void process_animation_frame(uint8_t* pixels, int width, int height);
-
-#ifdef __cplusplus
-}
-#endif
-```
+#### All component source files must use C++ (`.cpp`)
+Use C++ for all logic, including hardware interface and ESP-IDF integration. Use `extern "C"` only for linkage to C APIs.
 
 ### 3. Mandatory Header Structure
 
 Every component file MUST include the following header structure:
 
-```c
+```cpp
+// P32 Component: {component_name}
+
+#### All component source files must use C++ (`.cpp`).
+Use C++ for all logic, including hardware interface and ESP-IDF integration. Use `extern "C"` only for linkage to C APIs.
+
+### 3. Mandatory Header Structure
+
+Every component file MUST include the following header structure:
+
+```cpp
 // P32 Component: {component_name}
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
-#include "p32_component_config.h"
 
-#ifdef ENABLE_{FAMILY}_COMPONENTS
-
+#include "SharedMemory.hpp"
 #include "esp_log.h"
 #include "esp_err.h"
-// ... other required includes
+# ... other required includes
+
 ```
 
-### 3. Required Preprocessor Guards
-
-#### Top-Level Guard
-- **REQUIRED**: Every component file MUST be wrapped in an `#ifdef` guard
-- **Pattern**: `#ifdef ENABLE_{FAMILY}_COMPONENTS`
-- **Examples**:
-  - `#ifdef ENABLE_GOBLIN_COMPONENTS`
-  - `#ifdef ENABLE_SYSTEM_COMPONENTS`
-  - `#ifdef ENABLE_ROBOT_COMPONENTS`
-
-#### Guard Placement
-- **Opening**: After includes, before any code
-- **Closing**: At end of file with comment: `#endif // ENABLE_{FAMILY}_COMPONENTS`
 
 ### 4. Mandatory Function Definitions
 
 Each component file MUST define exactly two functions:
 
+
 #### A. Initialization Function
-```c
-esp_err_t p32_comp_{component_name}_init(void) {
+
+```cpp
+esp_err_t {component_name}_init(void) {
+    // Initialization code here
+    return ESP_OK; // or appropriate error code
+}
+```
     // Initialization code here
     return ESP_OK; // or appropriate error code
 }
@@ -121,57 +77,117 @@ esp_err_t p32_comp_{component_name}_init(void) {
 
 **Requirements**:
 - Return type: `esp_err_t`
-- Naming pattern: `p32_comp_{component_name}_init`
+- Naming pattern: `{component_name}_init`
 - Parameter: `void`
 - Must return `ESP_OK` on success or appropriate ESP error code
 
-#### B. Action Function  
-```c
-void p32_comp_{component_name}_act(uint32_t loopCount) {
+
+#### B. Action Function
+
+```cpp
+esp_err_t {component_name}_act(void) {
     // Action/loop code here
+    return ESP_OK;
 }
 ```
 
+
 **Requirements**:
-- Return type: `void`
-- Naming pattern: `p32_comp_{component_name}_act`
-- Parameter: `uint32_t loopCount`
+
+- Return type: `esp_err_t`
+- Naming pattern: `{component_name}_act`
 - Called repeatedly in main loop
+
 
 ### 5. Function Name Mapping
 
 The function names MUST match the entries in the component tables:
 
-#### Init Table (`src/initTable.c`)
-```c
-init_func_t initTable[INIT_TABLE_SIZE] = {
-    p32_comp_{component_name}_init,
+  
+
+
+
+
+
+```cpp
+component_func_t initTable[TABLE_SIZE]
+{
+    {component_name}_init,
     // ... other init functions
 };
-```
 
-#### Action Table (`src/actTable.c`)
-```c
-act_table_entry_t actTable[ACT_TABLE_SIZE] = {
-    { p32_comp_{component_name}_act, hitCount },
+component_func_t actTable[TABLE_SIZE]
+{
+    {component_name}_act,
     // ... other action functions
 };
+
+_uint64_t hitTable[TABLE_SIZE]
+{
+    {component_name}.hitCount,
+    // the rest of the component hitCount values
+}
+```
+
+The function names MUST match the entries in the component tables:
+#### Component Table (`src/ComponentTable.cpp`)
+```cpp
+component_func_t initTable[TABLE_SIZE]
+{
+    {component_name}_init,
+    // ... other init functions
+};
+
+component_func_t actTable[TABLE_SIZE]
+{
+    {component_name}_act,
+    // ... other action functions
+};
+
+_uint64_t hitTable[TABLE_SIZE]
+{
+    {component_name}.hitCount,
+    // the rest of the component hitCount values
+}
 ```
 
 ### 6. Header File Declarations
 
 Component functions MUST be declared in the appropriate header files:
 
-#### Init Table Header (`include/initTable.h`)
-```c
+
+
+
+```cpp
 // Forward declarations for component init functions
-esp_err_t p32_comp_{component_name}_init(void);
+component_func_t esp_err_t (void);
 ```
 
-#### Action Table Header (`include/actTable.h`) 
-```c
+
+
+
+
+```cpp
 // Forward declarations for component action functions
-void p32_comp_{component_name}_act(uint32_t loopCount);
+void p32_comp_{component_name}_act(void);
+```
+
+Component functions MUST be declared in the appropriate header files:
+
+
+#### Init Table Header (`include/ComponentTable.hpp`)
+
+```cpp
+// Forward declarations for component init functions
+component_func_t esp_err_t (void);
+```
+
+
+#### Action Table Header (`include/actTable.hpp`)
+
+```cpp
+// Forward declarations for component action functions
+void p32_comp_{component_name}_act(void);
 ```
 
 ## Component Configuration Requirements
@@ -200,7 +216,7 @@ Components MUST be registered in the appropriate tables:
 The following checks MUST be performed during build validation:
 
 #### 1. File Structure Validation
-- ✅ All `.c` files in `src/components/` have proper header structure
+- ✅ All `.cpp` files in `src/components/` have proper header structure
 - ✅ All component files have top-level `#ifdef` guards
 - ✅ All component files have closing `#endif` with proper comment
 
@@ -312,12 +328,12 @@ The build system is properly configured for C/C++ mixing:
 
 #### CMakeLists.txt Configuration
 ```cmake
-# Both C and C++ sources supported
+# Only C++ sources supported
 set(P32_COMPONENT_SOURCES
     Mood.cpp                        # C++ Mood system
     FrameProcessor.cpp              # C++ Frame processing  
-    components/goblin_eye_left.c    # C hardware component
-    components/goblin_eye_right.c   # C hardware component
+    components/goblin_eye_left.cpp  # C++ hardware component
+    components/goblin_eye_right.cpp # C++ hardware component
 )
 ```
 

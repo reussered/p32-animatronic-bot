@@ -94,8 +94,8 @@ inline void mood_deserialize() {
 
 ### Component Implementation
 
-```c
-// src/components/example_component.c
+```cpp
+// src/components/example_component.cpp
 
 #include "p32_component_config.h"
 #include "p32_shared_state.h"      // ◄── ALWAYS include this
@@ -105,12 +105,9 @@ inline void mood_deserialize() {
 // Init function: NO ARGUMENTS
 esp_err_t example_component_init(void) {
     ESP_LOGI(TAG, "Initializing example component...");
-    
     // Access globals directly if needed during init
     ESP_LOGI(TAG, "Starting at loop count: %u", g_loopCount);
-    
     // Initialize hardware, allocate resources, etc.
-    
     return ESP_OK;
 }
 
@@ -118,22 +115,17 @@ esp_err_t example_component_init(void) {
 void example_component_act(void) {
     // Access g_loopCount from global
     // (component executes when g_loopCount % hitCount == 0)
-    
     // Read shared state
     float happiness = g_shared_state.mood_values[MOOD_HAPPINESS];
     uint8_t distance = g_shared_state.distance_cm;
-    
     // Component logic
     if (distance < 30) {
         do_something();
     }
-    
     // Modify shared state
     g_shared_state.mood_values[MOOD_CURIOSITY] = 0.7f;
-    
     // Mark state dirty to trigger ESP-NOW broadcast
     mesh_mark_state_dirty();
-    
     ESP_LOGD(TAG, "Component executed at loop %u", g_loopCount);
 }
 
@@ -178,8 +170,8 @@ extern act_table_entry_t actTable[ACT_TABLE_SIZE];
 
 ### Generated Implementation
 
-```c
-// src/component_tables.c (GENERATED)
+```cpp
+// src/component_tables.cpp (GENERATED)
 
 #include "p32_component_registry.h"
 
@@ -217,8 +209,8 @@ act_table_entry_t actTable[ACT_TABLE_SIZE] = {
 
 ## Main Loop
 
-```c
-// src/main.c
+```cpp
+// src/main.cpp
 
 #include "p32_component_registry.h"
 #include "p32_shared_state.h"
@@ -232,11 +224,9 @@ p32_shared_state_t g_shared_state = {0};
 void app_main(void)
 {
     ESP_LOGI(TAG, "P32 Animatronic System Starting...");
-    
     // Initialize shared state
     g_shared_state.version = 0;
     g_shared_state.timestamp_ms = 0;
-    
     // Initialize all components
     ESP_LOGI(TAG, "Initializing %d components...", INIT_TABLE_SIZE);
     for (int i = 0; i < INIT_TABLE_SIZE; i++) {
@@ -247,9 +237,7 @@ void app_main(void)
             }
         }
     }
-    
     ESP_LOGI(TAG, "All components initialized, starting main loop");
-    
     // Main component loop
     while (true) {
         // Execute components based on timing
@@ -260,10 +248,8 @@ void app_main(void)
                 }
             }
         }
-        
         // Increment global loop counter
         g_loopCount++;
-        
         // 100ms loop period (10 Hz base rate)
         vTaskDelay(pdMS_TO_TICKS(100));
     }
