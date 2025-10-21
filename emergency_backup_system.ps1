@@ -1,4 +1,4 @@
-﻿#  EMERGENCY BACKUP SYSTEM - PREVENT WORK LOSS
+?#  EMERGENCY BACKUP SYSTEM - PREVENT WORK LOSS
 # This script MUST be run before any major operations
 # Created: October 21, 2025
 # Purpose: Prevent loss of dozens of hours of work

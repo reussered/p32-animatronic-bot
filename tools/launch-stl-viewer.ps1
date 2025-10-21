@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - Enhanced Shape Viewer Launcher
+?# P32 Animatronic Bot - Enhanced Shape Viewer Launcher
 # Supports both single-color STL and multi-color 3MF/AMF files
 
 param(

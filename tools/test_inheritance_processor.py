@@ -283,25 +283,25 @@ def run_integration_test():
     for template_path in templates_to_test:
         try:
             config = processor.load_template(template_path)
-            print(f"✓ Loaded: {template_path}")
+            print(f"OK Loaded: {template_path}")
             
             # Check if this has inheritance fields
             has_inheritance = any(field in config for field in ["base_template", "family_template", "inherits_from"])
             
             if has_inheritance:
-                print(f"  → Has inheritance - testing resolution...")
+                print(f"  -> Has inheritance - testing resolution...")
                 resolved = processor.resolve_inheritance_chain(config)
                 errors = processor.validate_resolution(resolved)
                 
                 if errors:
-                    print(f"  ✗ Validation errors: {errors}")
+                    print(f"  ERROR Validation errors: {errors}")
                 else:
-                    print(f"  ✓ Resolved successfully")
+                    print(f"  OK Resolved successfully")
             else:
-                print(f"  → No inheritance fields")
+                print(f"  -> No inheritance fields")
                 
         except Exception as e:
-            print(f"✗ Error loading {template_path}: {e}")
+            print(f"ERROR Error loading {template_path}: {e}")
             
     print("\nIntegration test complete!")
 

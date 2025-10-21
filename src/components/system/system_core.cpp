@@ -45,7 +45,7 @@ esp_err_t system_core_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void system_core_act(void) {
-    // hitCount: 100 → executes every 10 seconds
+    // hitCount: 100 -> executes every 10 seconds
     
     // Update system status in shared state
     g_shared_state.uptime_seconds = esp_timer_get_time() / 1000000;

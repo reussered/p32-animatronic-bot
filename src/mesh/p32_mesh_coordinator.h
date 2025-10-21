@@ -89,7 +89,7 @@ typedef struct __attribute__((packed)) {
     uint8_t node_status;      // p32_node_status_t
     uint8_t battery_level;    // 0-100 percent
     uint8_t cpu_load;         // 0-100 percent
-    uint8_t temperature;      // Celsius (offset by 40, so 0 = -40°C)
+    uint8_t temperature;      // Celsius (offset by 40, so 0 = -40 degC)
     uint32_t uptime_sec;      // Uptime in seconds
     uint16_t error_count;     // Total error count since boot
     uint16_t component_mask;  // Bitmask of active components

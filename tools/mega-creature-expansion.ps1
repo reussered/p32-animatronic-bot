@@ -1,4 +1,4 @@
-﻿# P32 MEGA CREATURE EXPANSION - Master Script
+?# P32 MEGA CREATURE EXPANSION - Master Script
 # Orchestrates the complete expansion from 55 to 440 creatures
 
 param(

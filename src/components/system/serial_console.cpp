@@ -61,7 +61,7 @@ esp_err_t serial_console_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void serial_console_act(void) {
-    // hitCount: 25 → executes every 2.5 seconds
+    // hitCount: 25 -> executes every 2.5 seconds
     
     // Check for incoming commands
     uint8_t data[128];

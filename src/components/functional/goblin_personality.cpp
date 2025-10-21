@@ -42,7 +42,7 @@ extern "C" esp_err_t goblin_personality_init(void) {
 
 // NO ARGUMENTS - Act function signature
 extern "C" void goblin_personality_act(void) {
-    // hitCount: 25 → executes every 2.5 seconds
+    // hitCount: 25 -> executes every 2.5 seconds
     
     // Apply personality-driven mood adjustments based on sensor inputs
     uint8_t distance = g_shared_state.distance_cm;

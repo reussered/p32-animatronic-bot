@@ -29,11 +29,11 @@ static bool s_initialized = false;
  * 4. Test audio output
  */
 void goblin_speaker_init(void) {
-    ESP_LOGW(TAG, "╔════════════════════════════════════════════════════════╗");
-    ESP_LOGW(TAG, "║  SPEAKER STUB ACTIVE - Hardware not available         ║");
-    ESP_LOGW(TAG, "║  Audio output will be logged to serial console only   ║");
-    ESP_LOGW(TAG, "║  Visual feedback via eye displays will substitute     ║");
-    ESP_LOGW(TAG, "╚════════════════════════════════════════════════════════╝");
+    ESP_LOGW(TAG, "+========================================================+");
+    ESP_LOGW(TAG, "|  SPEAKER STUB ACTIVE - Hardware not available         |");
+    ESP_LOGW(TAG, "|  Audio output will be logged to serial console only   |");
+    ESP_LOGW(TAG, "|  Visual feedback via eye displays will substitute     |");
+    ESP_LOGW(TAG, "+========================================================+");
     
     s_initialized = true;
 }
@@ -54,7 +54,7 @@ void goblin_speaker_act(void) {
     // Check if system wants to play audio
     if (g_shared_state.is_speaking) {
         // Log audio event (substitute for actual playback)
-        ESP_LOGI(TAG, "🔊 AUDIO EVENT [%.3f sec]: Speaking (volume: simulated)", 
+        ESP_LOGI(TAG, "? AUDIO EVENT [%.3f sec]: Speaking (volume: simulated)", 
             esp_timer_get_time() / 1000000.0);
         
         // Simulate audio level for visual feedback
@@ -72,7 +72,7 @@ void goblin_speaker_act(void) {
     } else {
         // Idle state - log periodically
         if (g_loopCount % 100 == 0) {  // Every 10 seconds
-            ESP_LOGD(TAG, "⏸️  Audio idle (no playback requested)");
+            ESP_LOGD(TAG, "??  Audio idle (no playback requested)");
         }
     }
     

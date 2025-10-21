@@ -36,10 +36,10 @@ extern "C" esp_err_t goblin_behavior_engine_init(void) {
     ESP_LOGI(TAG, "Initializing goblin behavior engine...");
     ESP_LOGI(TAG, "Behavior States: IDLE, CURIOUS, AGGRESSIVE, FEARFUL, CONTENT");
     ESP_LOGI(TAG, "Transition thresholds:");
-    ESP_LOGI(TAG, "  Idle→Curious: %d", IDLE_TO_CURIOUS_THRESHOLD);
-    ESP_LOGI(TAG, "  Curious→Aggressive: %d", CURIOUS_TO_AGGRESSIVE_THRESHOLD);
-    ESP_LOGI(TAG, "  Aggressive→Fearful: %d", AGGRESSIVE_TO_FEARFUL_THRESHOLD);
-    ESP_LOGI(TAG, "  Any→Content: %d", ANY_TO_CONTENT_THRESHOLD);
+    ESP_LOGI(TAG, "  Idle->Curious: %d", IDLE_TO_CURIOUS_THRESHOLD);
+    ESP_LOGI(TAG, "  Curious->Aggressive: %d", CURIOUS_TO_AGGRESSIVE_THRESHOLD);
+    ESP_LOGI(TAG, "  Aggressive->Fearful: %d", AGGRESSIVE_TO_FEARFUL_THRESHOLD);
+    ESP_LOGI(TAG, "  Any->Content: %d", ANY_TO_CONTENT_THRESHOLD);
     
     s_current_behavior = BEHAVIOR_IDLE;
     s_behavior_start_loop = g_loopCount;
@@ -62,7 +62,7 @@ static const char* behavior_to_string(behavior_state_t behavior) {
 
 // NO ARGUMENTS - Act function signature
 extern "C" void goblin_behavior_engine_act(void) {
-    // hitCount: 10 → executes every 1 second
+    // hitCount: 10 -> executes every 1 second
     
     // Read current mood values
     int anger = g_mood.getAnger();
@@ -97,7 +97,7 @@ extern "C" void goblin_behavior_engine_act(void) {
     
     // Log behavior transition
     if (new_behavior != s_current_behavior) {
-        ESP_LOGI(TAG, "Behavior transition at loop %u: %s → %s",
+        ESP_LOGI(TAG, "Behavior transition at loop %u: %s -> %s",
                  g_loopCount,
                  behavior_to_string(s_current_behavior),
                  behavior_to_string(new_behavior));

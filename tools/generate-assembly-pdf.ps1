@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - Assembly Guide PDF Generator
+?# P32 Animatronic Bot - Assembly Guide PDF Generator
 # Converts markdown wiring guides to professional PDF with diagrams
 # Uses Pandoc for markdownHTMLPDF conversion
 

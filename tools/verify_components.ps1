@@ -1,4 +1,4 @@
-﻿# Component Verification Script
+?# Component Verification Script
 # Validates all required components for P32 Animatronic Bot
 
 Write-Host "P32 Animatronic Bot - Component Verification" -ForegroundColor Green

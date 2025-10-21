@@ -296,7 +296,7 @@ esp_err_t p32_mesh_send_status(void)
     message.payload.status.node_status = P32_STATUS_ACTIVE;
     message.payload.status.battery_level = 85; // Mock battery level
     message.payload.status.cpu_load = 45;      // Mock CPU load
-    message.payload.status.temperature = 65;   // 25°C (65-40)
+    message.payload.status.temperature = 65;   // 25 degC (65-40)
     message.payload.status.uptime_sec = (p32_mesh_get_timestamp_ms() - g_mesh_network.network_start_time) / 1000;
     message.payload.status.error_count = 0;    // Mock error count
     message.payload.status.component_mask = 0xFF; // All components active

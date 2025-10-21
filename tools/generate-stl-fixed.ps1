@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - STL Generation System (FIXED VERSION)
+?# P32 Animatronic Bot - STL Generation System (FIXED VERSION)
 param(
     [switch]$AllSubsystems,
     [switch]$Test,

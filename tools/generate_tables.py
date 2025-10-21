@@ -238,7 +238,7 @@ class P32ComponentGenerator:
         
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
-            # Calculate frequency: 120,000 iterations/sec ÷ hitCount
+            # Calculate frequency: 120,000 iterations/sec ? hitCount
             frequency = 120000.0 / comp['hitCount']
             if frequency >= 1000:
                 freq_str = f"{frequency:.0f} Hz"

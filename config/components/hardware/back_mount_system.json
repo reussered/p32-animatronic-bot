@@ -103,7 +103,7 @@
     "operational_limits": {
       "max_wind_speed": "30 MPH",
       "max_tilt_angle": "15 DEG",
-      "temperature_range": "-10°C to 60°C"
+      "temperature_range": "-10 degC to 60 degC"
     }
   },
   

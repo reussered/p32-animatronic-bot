@@ -16,9 +16,9 @@
  * 
  * Physical Wiring Optimization:
  * - Controller mounted in ankle joint housing
- * - FSR sensors: 8 wires × 8cm average = 64cm total sensor wiring
- * - Toe servos: 2 wires × 5cm = 10cm servo wiring
- * - Power: Single 5V feed from leg controller (2 wires × 15cm = 30cm)
+ * - FSR sensors: 8 wires x 8cm average = 64cm total sensor wiring
+ * - Toe servos: 2 wires x 5cm = 10cm servo wiring
+ * - Power: Single 5V feed from leg controller (2 wires x 15cm = 30cm)
  * - Total physical wiring: ~104cm vs ~300cm if integrated with leg controller
  * 
  * Hardware Configuration:
@@ -191,7 +191,7 @@ static esp_err_t set_toe_servo_position(toe_servo_id_t toe_id, float angle_degre
     if (angle_degrees > 90.0f) angle_degrees = 90.0f;
     
     // Convert angle to duty cycle
-    // SG90 servo: 1ms (0°) to 2ms (180°) pulse width at 50Hz
+    // SG90 servo: 1ms (0 deg) to 2ms (180 deg) pulse width at 50Hz
     // 13-bit resolution at 50Hz: 8192 counts per 20ms period
     // 1ms = 409 counts, 2ms = 819 counts
     uint32_t duty = 409 + (uint32_t)((angle_degrees + 90.0f) * 410.0f / 180.0f);
@@ -229,7 +229,7 @@ static uint16_t read_pressure_sensor(uint8_t channel) {
     uint8_t rx_data[3] = {0};
     
     spi_transaction_t trans = {
-        .length = 24,  // 3 bytes × 8 bits
+        .length = 24,  // 3 bytes x 8 bits
         .tx_buffer = tx_data,
         .rx_buffer = rx_data
     };
@@ -415,7 +415,7 @@ static void foot_control_task(void* pvParameters) {
                     for (int i = 0; i < TOE_SERVO_COUNT; i++) {
                         set_toe_servo_position(i, command.toe_angles[i]);
                     }
-                    ESP_LOGD(TAG, "Set toe angles: big=%.1f°, other=%.1f°", 
+                    ESP_LOGD(TAG, "Set toe angles: big=%.1f deg, other=%.1f deg", 
                              command.toe_angles[0], command.toe_angles[1]);
                     break;
                     

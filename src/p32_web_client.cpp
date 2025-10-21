@@ -57,7 +57,7 @@ esp_err_t web_client_init_full(const char* device_id, const char* display_type,
     client_config.connected = false;
     client_config.registered = false;
     
-    ESP_LOGI(TAG, "Web client initialized - Device: %s (%s %dx%d) → %s:%d", 
+    ESP_LOGI(TAG, "Web client initialized - Device: %s (%s %dx%d) -> %s:%d", 
              device_id, display_type, width, height, pc_ip, pc_port);
     
     // Print PC server setup code

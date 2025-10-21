@@ -29,7 +29,7 @@ void goblin_mouth_init(void) {
 // Stub act function - does nothing (placeholder for future mouth animations)
 void goblin_mouth_act(void) {
     // NO ARGUMENTS - access g_loopCount from global shared state
-    // hitCount: 3 → executes every 300ms (for smooth mouth animation when implemented)
+    // hitCount: 3 -> executes every 300ms (for smooth mouth animation when implemented)
     
     // Currently does nothing - waiting for hardware
     // Future implementation will:

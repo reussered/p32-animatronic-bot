@@ -65,7 +65,7 @@ esp_err_t bluetooth_central_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void bluetooth_central_act(void) {
-    // hitCount: 75 → executes every 7.5 seconds
+    // hitCount: 75 -> executes every 7.5 seconds
     
     if (!s_ble_initialized) {
         return;

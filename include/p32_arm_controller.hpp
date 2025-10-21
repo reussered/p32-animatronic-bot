@@ -89,7 +89,7 @@ typedef struct {
     float joint_angles[7];              // Current joint angles
     float target_angles[7];             // Target joint angles
     p32_vector3_t end_effector_pos;     // Current end effector position
-    float gait_phase;                   // Walking gait phase (0-2π)
+    float gait_phase;                   // Walking gait phase (0-2PI)
     float total_current;                // Total servo current
     uint64_t uptime_ms;                 // Controller uptime
     uint64_t last_movement_time;        // Last movement timestamp

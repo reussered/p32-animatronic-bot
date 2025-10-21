@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - Environment Setup Script
+?# P32 Animatronic Bot - Environment Setup Script
 # Sets up all required PATH variables and verifies installation
 
 Write-Host "=== P32 Animatronic Bot Environment Setup ===" -ForegroundColor Cyan

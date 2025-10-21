@@ -71,7 +71,7 @@ esp_err_t power_monitor_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void power_monitor_act(void) {
-    // hitCount: 200 → executes every 20 seconds
+    // hitCount: 200 -> executes every 20 seconds
     
     if (s_adc_handle == NULL) {
         return;

@@ -1,4 +1,4 @@
-﻿# P32 Distance-Based Eye Focusing Animation Generator
+?# P32 Distance-Based Eye Focusing Animation Generator
 # Creates eye animations that focus based on HC-SR04 proximity sensor data
 
 param(

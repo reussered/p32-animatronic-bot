@@ -207,10 +207,10 @@ esp_err_t p32_torso_set_spine_curve(float spine_curve[6], uint32_t transition_ti
     
     // Calculate servo positions for each vertebra
     for (int i = 0; i < TORSO_SERVO_COUNT; i++) {
-        // Clamp angle to safe range (-45° to +45°)
+        // Clamp angle to safe range (-45 deg to +45 deg)
         float angle = fmaxf(-45.0f, fminf(45.0f, spine_curve[i]));
         
-        // Convert angle to PWM value (1000-2000µs)
+        // Convert angle to PWM value (1000-2000?s)
         uint16_t pwm_value = p32_torso_angle_to_pwm(angle);
         
         // Apply servo command
@@ -337,7 +337,7 @@ static void p32_torso_espnow_recv_cb(const uint8_t *mac_addr, const uint8_t *dat
 
 // Utility functions
 static uint16_t p32_torso_angle_to_pwm(float angle) {
-    // Convert angle (-45° to +45°) to PWM value (1000-2000µs)
+    // Convert angle (-45 deg to +45 deg) to PWM value (1000-2000?s)
     float pwm_range = TORSO_SERVO_MAX_PWM - TORSO_SERVO_MIN_PWM;
     float normalized_angle = (angle + 45.0f) / 90.0f; // 0.0 to 1.0
     return TORSO_SERVO_MIN_PWM + (uint16_t)(normalized_angle * pwm_range);

@@ -28,7 +28,7 @@ esp_err_t network_monitor_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void network_monitor_act(void) {
-    // hitCount: 50 → executes every 5 seconds
+    // hitCount: 50 -> executes every 5 seconds
     
     // Check WiFi connection status
     wifi_ap_record_t ap_info;

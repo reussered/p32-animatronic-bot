@@ -182,9 +182,9 @@
   
   "performance_abstraction": {
     "position_accuracy": {
-      "pwm_servo": "±2_DEGREES_TYPICAL", 
-      "dynamixel": "±0.29_DEGREES_TYPICAL",
-      "encoder_servo": "±0.5_DEGREES_ACHIEVABLE"
+      "pwm_servo": "+/-2_DEGREES_TYPICAL", 
+      "dynamixel": "+/-0.29_DEGREES_TYPICAL",
+      "encoder_servo": "+/-0.5_DEGREES_ACHIEVABLE"
     },
     
     "update_rate": {

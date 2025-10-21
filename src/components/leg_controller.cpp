@@ -189,7 +189,7 @@ static esp_err_t init_mpu6050_imu(void) {
     i2c_master_start(cmd);
     i2c_master_write_byte(cmd, (MPU6050_ADDRESS << 1) | I2C_MASTER_WRITE, true);
     i2c_master_write_byte(cmd, MPU6050_ACCEL_CONFIG, true);
-    i2c_master_write_byte(cmd, 0x00, true);  // ±2g range
+    i2c_master_write_byte(cmd, 0x00, true);  // +/-2g range
     i2c_master_stop(cmd);
     ret = i2c_master_cmd_begin(I2C_NUM_0, cmd, pdMS_TO_TICKS(100));
     i2c_cmd_link_delete(cmd);
@@ -265,11 +265,11 @@ static esp_err_t set_joint_position(uint8_t joint_id, float angle_degrees) {
     // Apply safety limits
     const joint_limits_t* limits = &g_joint_limits[joint_id];
     if (angle_degrees < limits->min_angle) {
-        ESP_LOGW(TAG, "Joint %d angle %.1f° below limit %.1f°", 
+        ESP_LOGW(TAG, "Joint %d angle %.1f deg below limit %.1f deg", 
                  joint_id, angle_degrees, limits->min_angle);
         angle_degrees = limits->min_angle;
     } else if (angle_degrees > limits->max_angle) {
-        ESP_LOGW(TAG, "Joint %d angle %.1f° above limit %.1f°", 
+        ESP_LOGW(TAG, "Joint %d angle %.1f deg above limit %.1f deg", 
                  joint_id, angle_degrees, limits->max_angle);
         angle_degrees = limits->max_angle;
     }
@@ -493,7 +493,7 @@ static void gait_control_task(void* pvParameters) {
                 target_pose.x += g_walking_params.foot_separation / 2.0f;
             } else {
                 target_pose.x -= g_walking_params.foot_separation / 2.0f;
-                gait_phase = fmodf(gait_phase + 0.5f, 1.0f);  // 180° phase offset
+                gait_phase = fmodf(gait_phase + 0.5f, 1.0f);  // 180 deg phase offset
             }
             
             // Calculate inverse kinematics

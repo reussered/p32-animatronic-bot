@@ -1,4 +1,4 @@
-﻿# Canon Printer Keep-Alive Script
+?# Canon Printer Keep-Alive Script
 # Keeps LBP632C awake by pinging it every 90 seconds
 
 param(

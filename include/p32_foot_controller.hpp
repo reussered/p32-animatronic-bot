@@ -12,9 +12,9 @@
  * - Enables modular foot replacement and maintenance
  * 
  * Wiring Optimization Analysis:
- * - FSR Sensors: 8 × 8cm = 64cm total sensor wiring
- * - Toe Servos: 2 × 5cm = 10cm servo control wiring  
- * - Power Feed: 2 × 15cm = 30cm from leg controller
+ * - FSR Sensors: 8 x 8cm = 64cm total sensor wiring
+ * - Toe Servos: 2 x 5cm = 10cm servo control wiring  
+ * - Power Feed: 2 x 15cm = 30cm from leg controller
  * - ESP-NOW: 0cm (wireless mesh to leg controller)
  * - Total Physical Wiring: 104cm vs 300cm+ if integrated
  * 

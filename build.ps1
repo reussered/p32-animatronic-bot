@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env pwsh
+?#!/usr/bin/env pwsh
 # P32 Animatronic Bot - Build Script
 # Cleans and builds the project
 

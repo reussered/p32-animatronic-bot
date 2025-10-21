@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+?#!/usr/bin/env python3
 """
 Complete JSON Path Validation and Component Compliance Script
 Validates all JSON files, creates missing components, renames .c/.h to .cpp/.hpp

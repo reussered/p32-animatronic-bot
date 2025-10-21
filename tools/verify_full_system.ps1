@@ -1,4 +1,4 @@
-﻿Write-Host "P32 Animatronic Bot - Comprehensive System Verification" -ForegroundColor Green
+?Write-Host "P32 Animatronic Bot - Comprehensive System Verification" -ForegroundColor Green
 Write-Host "=======================================================" -ForegroundColor Green
 Write-Host ""
 

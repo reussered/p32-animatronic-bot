@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - STL Generation System (Simplified)
+?# P32 Animatronic Bot - STL Generation System (Simplified)
 param(
     [switch]$AllSubsystems,
     [string]$OutputDir = "assets/shapes/stl"

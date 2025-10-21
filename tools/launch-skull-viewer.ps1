@@ -1,4 +1,4 @@
-﻿# Skull Assembly Viewer Launcher
+?# Skull Assembly Viewer Launcher
 # Opens the interactive 3D skull assembly viewer
 
 param(

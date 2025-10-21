@@ -1,4 +1,4 @@
-﻿# P32 Creature Expansion Strategy
+?# P32 Creature Expansion Strategy
 # Target: 440 Individual Creatures (55  4  2)
 
 Write-Host "=== P32 MEGA CREATURE EXPANSION PLAN ===" -ForegroundColor Magenta

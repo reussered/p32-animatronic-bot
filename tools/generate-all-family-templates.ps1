@@ -1,4 +1,4 @@
-﻿# Complete Family Template Generator
+?# Complete Family Template Generator
 # Creates all family.json files for the P32 bot ecosystem
 
 Write-Host "=== P32 Complete Family Template Generator ===" -ForegroundColor Cyan

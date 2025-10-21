@@ -46,7 +46,7 @@ esp_err_t watchdog_init(void) {
 
 // NO ARGUMENTS - Act function signature
 void watchdog_act(void) {
-    // hitCount: 500 → executes every 50 seconds (before 60 sec timeout)
+    // hitCount: 500 -> executes every 50 seconds (before 60 sec timeout)
     
     // Reset watchdog timer
     if (s_wdt_handle != NULL) {

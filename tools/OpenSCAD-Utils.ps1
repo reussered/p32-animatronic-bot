@@ -1,4 +1,4 @@
-﻿# OpenSCAD Utility Functions for P32 Tools
+?# OpenSCAD Utility Functions for P32 Tools
 # Always use executable names from PATH to ensure permanent environment variables work
 
 function Test-OpenSCADAvailable {

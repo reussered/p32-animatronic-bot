@@ -95,7 +95,7 @@
   "distributed_control_scenarios": {
     "hand_control_example": {
       "master_command": "grasp_object(force=50%, shape=cylinder)",
-      "mesh_routing": "MASTER → ARM_RELAY → HAND_LEAF",
+      "mesh_routing": "MASTER -> ARM_RELAY -> HAND_LEAF",
       "local_processing": {
         "hand_controller": "ESP32_C3_IN_WRIST", 
         "fingers": "5x_SERVO_CONTROL_LOCALLY",

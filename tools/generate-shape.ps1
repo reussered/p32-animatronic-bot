@@ -1,4 +1,4 @@
-﻿# OpenSCAD Shape Generator
+?# OpenSCAD Shape Generator
 param([string]$ScadFile, [string]$OutputSTL = "", [switch]$ViewAfter)
 
 $openscadPath = "C:\Program Files\OpenSCAD\openscad.exe"

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+?#!/usr/bin/env python3
 """
 IMPROVED JSON Path Validation and Component Compliance Script
 Fixes JSON encoding issues, creates missing components, handles file names properly
@@ -244,7 +244,7 @@ void {safe_name}_act(void) {{
                         
     def execute_fixes(self):
         """Execute all fixes and create missing files"""
-        print(f"\n🔧 Executing fixes...")
+        print(f"\n[TOOL] Executing fixes...")
         
         # Create missing component files
         for component_name, file_path, file_type, json_data, sanitized_name in self.components_to_create:
@@ -331,7 +331,7 @@ void {safe_name}_act(void) {{
             
     def generate_dispatch_tables(self):
         """Generate the 4 dispatch table files"""
-        print(f"\n📋 Generating dispatch tables...")
+        print(f"\n[CHECKLIST] Generating dispatch tables...")
         
         # Use ALL discovered components (not just components being created)
         # Remove duplicates and sort by hierarchy level, then by bot-specific order, then by name
@@ -356,7 +356,7 @@ void {safe_name}_act(void) {{
             if level != current_level:
                 current_level = level
                 level_names = {1: "System Level", 2: "Family Level", 3: "Hardware Level", 4: "Bot-Specific Level"}
-                print(f"\n  ═══ {level_names.get(level, f'Level {level}')} ═══")
+                print(f"\n  === {level_names.get(level, f'Level {level}')} ===")
             print(f"  - {comp_name} (hitCount={hit_count}) [{original_name}]")
         
         # Generate p32_dispatch_tables.hpp

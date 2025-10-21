@@ -1,4 +1,4 @@
-﻿# ASCII and Filename Validation Script
+?# ASCII and Filename Validation Script
 # Enforces project coding standards for character usage and file naming
 
 param(

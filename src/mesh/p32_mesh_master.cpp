@@ -225,7 +225,7 @@ static void p32_master_on_message_received(const p32_mesh_message_t* message, co
                 subsystem->component_mask = message->payload.status.component_mask;
                 subsystem->last_status_time = esp_timer_get_time() / 1000;
 
-                ESP_LOGD(TAG, "Status update from %s: battery=%d%%, cpu=%d%%, temp=%d°C",
+                ESP_LOGD(TAG, "Status update from %s: battery=%d%%, cpu=%d%%, temp=%d degC",
                         p32_mesh_role_to_string(message->header.source_role),
                         subsystem->battery_level, subsystem->cpu_load, subsystem->temperature);
             }

@@ -42,7 +42,7 @@ extern "C" esp_err_t goblin_mood_init(void) {
 
 // NO ARGUMENTS - Act function signature
 extern "C" void goblin_mood_act(void) {
-    // hitCount: 15 → executes every 1.5 seconds
+    // hitCount: 15 -> executes every 1.5 seconds
     
     // Apply natural mood decay
     // Moods decay toward neutral (0) over time

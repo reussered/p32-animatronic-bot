@@ -53,7 +53,7 @@ def check_folder_consistency(folder_path: Path) -> Tuple[bool, List[str]]:
             missing = reference_keys - current_keys
             extra = current_keys - reference_keys
             
-            error_msg = f"  ✗ {json_file.name} has inconsistent keys"
+            error_msg = f"  ERROR {json_file.name} has inconsistent keys"
             if missing:
                 error_msg += f"\n    Missing keys: {sorted(missing)}"
             if extra:
@@ -67,11 +67,11 @@ def main():
     """Main validation function."""
     config_dir = Path(__file__).parent
     
-    print("🤖 p32-animatronic-bot Configuration Validator\n")
+    print("p32-animatronic-bot Configuration Validator\n")
     print("=" * 60)
     
     # Step 1: Validate JSON syntax
-    print("\n📋 Step 1: Validating JSON syntax...")
+    print("\nStep 1: Validating JSON syntax...")
     syntax_errors = []
     
     for json_file in config_dir.rglob('*.json'):
@@ -79,21 +79,21 @@ def main():
         relative_path = json_file.relative_to(config_dir)
         
         if is_valid:
-            print(f"  ✓ {relative_path}")
+            print(f"  OK {relative_path}")
         else:
-            print(f"  ✗ {relative_path}")
+            print(f"  ERROR {relative_path}")
             syntax_errors.append(f"    {error}")
     
     if syntax_errors:
-        print("\n❌ JSON syntax errors found:")
+        print("\nERROR: JSON syntax errors found:")
         for error in syntax_errors:
             print(error)
         return 1
     
-    print("\n✅ All JSON files have valid syntax")
+    print("\nSUCCESS: All JSON files have valid syntax")
     
     # Step 2: Check consistency within folders
-    print("\n📋 Step 2: Checking consistency within folders...")
+    print("\nStep 2: Checking consistency within folders...")
     
     folders = {
         'moods': config_dir / 'moods',
@@ -105,29 +105,29 @@ def main():
     
     for folder_name, folder_path in folders.items():
         if not folder_path.exists():
-            print(f"  ⚠ {folder_name}/ folder not found")
+            print(f"  WARNING {folder_name}/ folder not found")
             continue
         
         is_consistent, errors = check_folder_consistency(folder_path)
         
         if is_consistent:
             json_count = len(list(folder_path.glob('*.json')))
-            print(f"  ✓ {folder_name}/ ({json_count} files)")
+            print(f"  OK {folder_name}/ ({json_count} files)")
         else:
-            print(f"  ✗ {folder_name}/ has inconsistencies:")
+            print(f"  ERROR {folder_name}/ has inconsistencies:")
             consistency_errors.extend(errors)
             for error in errors:
                 print(error)
     
     if consistency_errors:
-        print("\n❌ Consistency errors found")
+        print("\nERROR: Consistency errors found")
         return 1
     
-    print("\n✅ All folders have consistent structure")
+    print("\nSUCCESS: All folders have consistent structure")
     
     # Summary
     print("\n" + "=" * 60)
-    print("✅ All validations passed!")
+    print("SUCCESS: All validations passed!")
     print("\nConfiguration structure:")
     
     for folder_name, folder_path in folders.items():

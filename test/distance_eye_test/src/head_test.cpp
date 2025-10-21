@@ -28,7 +28,7 @@ Adafruit_GC9A01A tft(TFT_CS, TFT_DC, TFT_RST);
 void on_data_received(const uint8_t *mac, const uint8_t *data, int len) {
     mesh_packet_t *packet = (mesh_packet_t*)data;
     
-    Serial.printf("📡 Received '%s' (%d bytes) from ", packet->name, packet->size);
+    Serial.printf("[SIGNAL] Received '%s' (%d bytes) from ", packet->name, packet->size);
     for (int i = 0; i < 6; i++) {
         Serial.printf("%02X", mac[i]);
         if (i < 5) Serial.print(":");
@@ -38,13 +38,13 @@ void on_data_received(const uint8_t *mac, const uint8_t *data, int len) {
     // Update local global memory
     if (strcmp(packet->name, "g_Envir") == 0) {
         memcpy(&g_Envir, packet->data, packet->size);
-        Serial.printf("   📏 Distance: %d cm %s\n", 
+        Serial.printf("   [RULER] Distance: %d cm %s\n", 
             g_Envir.distance_cm,
-            g_Envir.target_detected ? "🎯" : "");
+            g_Envir.target_detected ? "[TARGET]" : "");
         
     } else if (strcmp(packet->name, "g_MOOD") == 0) {
         memcpy(&g_MOOD, packet->data, packet->size);
-        Serial.printf("   😊 Mood: HAPPY=%+3d, CURIOUS=%+3d, FEAR=%+3d\n",
+        Serial.printf("   [HAPPY] Mood: HAPPY=%+3d, CURIOUS=%+3d, FEAR=%+3d\n",
             g_MOOD.happiness, g_MOOD.curiosity, g_MOOD.fear);
         
         // Render eye expression based on new mood!
@@ -73,26 +73,26 @@ void setup() {
     tft.setCursor(60, 110);
     tft.println("READY");
     
-    Serial.println("✓ Display initialized (240×240 circular)");
+    Serial.println("OK Display initialized (240x240 circular)");
     
     // Initialize WiFi in station mode
     WiFi.mode(WIFI_STA);
-    Serial.print("✓ WiFi initialized - Head MAC: ");
+    Serial.print("OK WiFi initialized - Head MAC: ");
     Serial.println(WiFi.macAddress());
     Serial.println("  ^^^ COPY THIS MAC ADDRESS TO torso_test.cpp! ^^^");
     
     // Initialize ESP-NOW
     if (esp_now_init() != ESP_OK) {
-        Serial.println("✗ ERROR: ESP-NOW init failed!");
+        Serial.println("ERROR ERROR: ESP-NOW init failed!");
         while(1) delay(1000);  // Halt
     }
-    Serial.println("✓ ESP-NOW initialized");
+    Serial.println("OK ESP-NOW initialized");
     
     // Register receive callback
     esp_now_register_recv_cb(on_data_received);
-    Serial.println("✓ Receive callback registered");
+    Serial.println("OK Receive callback registered");
     
-    Serial.println("\n🚀 System ready, waiting for mesh data from torso...\n");
+    Serial.println("\n[ROCKET] System ready, waiting for mesh data from torso...\n");
     
     delay(2000);  // Show "READY" for 2 seconds
     
@@ -175,7 +175,7 @@ void render_eye() {
     
     unsigned long render_time = millis() - start;
     
-    Serial.printf("👁️  Eye rendered in %lu ms:\n", render_time);
+    Serial.printf("[EYE]  Eye rendered in %lu ms:\n", render_time);
     Serial.printf("   Color: %s, Pupil: %s (%dpx), Eye: %s (%dpx)\n",
         color_name, pupil_desc, pupil_radius, eye_desc, eye_radius);
 }

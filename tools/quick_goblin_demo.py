@@ -130,19 +130,19 @@ class GoblinDemo:
         self.info_window.geometry("400x200+275+450")
         
         info_text = """
-🧙‍♂️ P32 Animatronic Goblin Demo 🧙‍♂️
+???? P32 Animatronic Goblin Demo ????
 
-✅ C++ Mood System: ACTIVE (9 components)
-✅ Memory Optimization: <1KB (was 57KB)
-✅ ESP32-S3 Compilation: SUCCESS
-✅ Animation System: LIVE
+OK C++ Mood System: ACTIVE (9 components)
+OK Memory Optimization: <1KB (was 57KB)
+OK ESP32-S3 Compilation: SUCCESS
+OK Animation System: LIVE
 
 Features Demonstrated:
-• Dynamic eye opening/closing (blink cycles)
-• Pupil size breathing effect
-• Color-shifting mood transitions
-• Goblin-specific eye details (veins)
-• Real-time animation at 20fps
+? Dynamic eye opening/closing (blink cycles)
+? Pupil size breathing effect
+? Color-shifting mood transitions
+? Goblin-specific eye details (veins)
+? Real-time animation at 20fps
 
 This simulates the ESP32 mood system output!
         """
@@ -151,17 +151,17 @@ This simulates the ESP32 mood system output!
                 font=('Consolas', 10), bg='black', fg='lime').pack(padx=10, pady=10)
     
     def run(self):
-        print("🧙‍♂️ P32 Goblin Demo Starting!")
-        print("✅ C++ Mood System Active")
-        print("✅ Efficient Memory Usage (<1KB)")
-        print("✅ Real-time Animation")
-        print("👀 Watch the goblin eyes come to life!")
+        print("???? P32 Goblin Demo Starting!")
+        print("OK C++ Mood System Active")
+        print("OK Efficient Memory Usage (<1KB)")
+        print("OK Real-time Animation")
+        print("? Watch the goblin eyes come to life!")
         print("Press Ctrl+C or close windows to stop")
         
         try:
             self.root.mainloop()
         except KeyboardInterrupt:
-            print("\n🧙‍♂️ Goblin says goodbye!")
+            print("\n???? Goblin says goodbye!")
 
 if __name__ == "__main__":
     demo = GoblinDemo()

@@ -1,4 +1,4 @@
-﻿#  CRITICAL DIRECTORY MONITORING SYSTEM
+?#  CRITICAL DIRECTORY MONITORING SYSTEM
 # Detects and prevents dangerous repository nesting/duplication
 # Prevents the "nested repository" problem that caused work loss
 

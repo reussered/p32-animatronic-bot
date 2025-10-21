@@ -77,7 +77,7 @@ MoodColorDelta calculateMoodDelta(const Mood& oldMood, const Mood& newMood) {
             totalDelta.green_delta += greenContrib;
             totalDelta.blue_delta += blueContrib;
             
-            printf("  %s delta: %+d → R:%+d G:%+d B:%+d\n", 
+            printf("  %s delta: %+d -> R:%+d G:%+d B:%+d\n", 
                    Mood::getComponentName(i), (int)componentDelta, 
                    (int)redContrib, (int)greenContrib, (int)blueContrib);
         }

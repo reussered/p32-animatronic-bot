@@ -21,25 +21,25 @@ void setup() {
     Serial.begin(115200);
     delay(1000);  // Wait for serial to stabilize
     
-    Serial.println("\n\n=== TORSO (Master) - Distance → Mood Test ===");
+    Serial.println("\n\n=== TORSO (Master) - Distance -> Mood Test ===");
     Serial.println("================================================\n");
     
     // Initialize HC-SR04 sensor
     pinMode(TRIG_PIN, OUTPUT);
     pinMode(ECHO_PIN, INPUT);
-    Serial.println("✓ HC-SR04 sensor initialized (TRIG=18, ECHO=19)");
+    Serial.println("OK HC-SR04 sensor initialized (TRIG=18, ECHO=19)");
     
     // Initialize WiFi in station mode (required for ESP-NOW)
     WiFi.mode(WIFI_STA);
-    Serial.print("✓ WiFi initialized - Torso MAC: ");
+    Serial.print("OK WiFi initialized - Torso MAC: ");
     Serial.println(WiFi.macAddress());
     
     // Initialize ESP-NOW
     if (esp_now_init() != ESP_OK) {
-        Serial.println("✗ ERROR: ESP-NOW init failed!");
+        Serial.println("ERROR ERROR: ESP-NOW init failed!");
         while(1) delay(1000);  // Halt
     }
-    Serial.println("✓ ESP-NOW initialized");
+    Serial.println("OK ESP-NOW initialized");
     
     // Register head as peer
     memcpy(peerInfo.peer_addr, head_mac, 6);
@@ -47,12 +47,12 @@ void setup() {
     peerInfo.encrypt = false;
     
     if (esp_now_add_peer(&peerInfo) != ESP_OK) {
-        Serial.println("✗ ERROR: Failed to add head peer!");
+        Serial.println("ERROR ERROR: Failed to add head peer!");
         Serial.println("  Did you update head_mac[] with the correct MAC address?");
         Serial.println("  Run head_test.cpp first to get the head MAC address!");
         while(1) delay(1000);  // Halt
     }
-    Serial.println("✓ Head peer registered");
+    Serial.println("OK Head peer registered");
     
     // Initialize global state
     g_Envir.distance_cm = 255;
@@ -61,7 +61,7 @@ void setup() {
     g_MOOD.curiosity = 0;
     g_MOOD.fear = 0;
     
-    Serial.println("\n🚀 System ready! Move your face near the sensor...\n");
+    Serial.println("\n[ROCKET] System ready! Move your face near the sensor...\n");
 }
 
 uint8_t measure_distance() {
@@ -95,9 +95,9 @@ void broadcast_state(const char *name, void *data, size_t size) {
     esp_err_t result = esp_now_send(head_mac, (uint8_t*)&packet, sizeof(packet));
     
     if (result == ESP_OK) {
-        Serial.printf("  ✓ Broadcast '%s' (%d bytes)\n", name, size);
+        Serial.printf("  OK Broadcast '%s' (%d bytes)\n", name, size);
     } else {
-        Serial.printf("  ✗ Broadcast '%s' FAILED (error %d)\n", name, result);
+        Serial.printf("  ERROR Broadcast '%s' FAILED (error %d)\n", name, result);
     }
 }
 
@@ -110,9 +110,9 @@ void loop() {
     g_Envir.target_detected = (distance < 100);  // Within 1 meter
     
     if (changed) {
-        Serial.printf("📏 Distance: %3d cm %s\n", 
+        Serial.printf("[RULER] Distance: %3d cm %s\n", 
             distance, 
-            g_Envir.target_detected ? "🎯 (TARGET DETECTED)" : "");
+            g_Envir.target_detected ? "[TARGET] (TARGET DETECTED)" : "");
         
         // Broadcast environment state
         broadcast_state("g_Envir", &g_Envir, sizeof(Environment));
@@ -123,23 +123,23 @@ void loop() {
     
     if (g_Envir.target_detected) {
         if (distance < 30) {
-            // Very close (< 30cm) → Curious + Happy
+            // Very close (< 30cm) -> Curious + Happy
             g_MOOD.curiosity = 80;
             g_MOOD.happiness = 60;
             g_MOOD.fear = 0;
         } else if (distance < 60) {
-            // Close (30-60cm) → Moderately curious
+            // Close (30-60cm) -> Moderately curious
             g_MOOD.curiosity = 50;
             g_MOOD.happiness = 30;
             g_MOOD.fear = 10;
         } else {
-            // Far (60-100cm) → Slightly curious
+            // Far (60-100cm) -> Slightly curious
             g_MOOD.curiosity = 20;
             g_MOOD.happiness = 10;
             g_MOOD.fear = 30;
         }
     } else {
-        // No target → Neutral/bored
+        // No target -> Neutral/bored
         g_MOOD.curiosity = 0;
         g_MOOD.happiness = 0;
         g_MOOD.fear = 0;
@@ -147,7 +147,7 @@ void loop() {
     
     // Only broadcast if mood changed
     if (memcmp(&g_MOOD, &oldMood, sizeof(Mood)) != 0) {
-        Serial.printf("😊 Mood updated: HAPPY=%+3d, CURIOUS=%+3d, FEAR=%+3d\n",
+        Serial.printf("[HAPPY] Mood updated: HAPPY=%+3d, CURIOUS=%+3d, FEAR=%+3d\n",
             g_MOOD.happiness, g_MOOD.curiosity, g_MOOD.fear);
         
         // Broadcast mood state

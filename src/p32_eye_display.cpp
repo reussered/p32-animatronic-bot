@@ -172,47 +172,47 @@ esp_err_t eye_display_render(eye_display_t* display) {
     }
     
     // Simulate display window output
-    printf("\n┌────────────────────────────────┐\n");
-    printf("│ %s (200x200)      │\n", display->title);
-    printf("├────────────────────────────────┤\n");
-    printf("│                                │\n");
+    printf("\n??????????????????????????????????\n");
+    printf("? %s (200x200)      ?\n", display->title);
+    printf("??????????????????????????????????\n");
+    printf("?                                ?\n");
     
     // Eye visualization based on openness
     if (frame->eye_openness > 0.8f) {
-        printf("│        ●●●●●●●●●●●●●●        │\n");
-        printf("│      ●●               ●●      │\n"); 
-        printf("│    ●●    ◉◉◉◉◉◉◉◉    ●●    │\n");
-        printf("│  ●●      ◉◉◉◉◉◉◉◉      ●●  │\n");
-        printf("│    ●●    ◉◉◉◉◉◉◉◉    ●●    │\n");
-        printf("│      ●●               ●●      │\n");
-        printf("│        ●●●●●●●●●●●●●●        │\n");
+        printf("?        ??????????????        ?\n");
+        printf("?      ??               ??      ?\n"); 
+        printf("?    ??    ????????    ??    ?\n");
+        printf("?  ??      ????????      ??  ?\n");
+        printf("?    ??    ????????    ??    ?\n");
+        printf("?      ??               ??      ?\n");
+        printf("?        ??????????????        ?\n");
     } else if (frame->eye_openness > 0.4f) {
-        printf("│                                │\n");
-        printf("│        ████████████████        │\n");
-        printf("│      ██    ◉◉◉◉◉◉    ██      │\n");
-        printf("│        ████████████████        │\n");
-        printf("│                                │\n");
+        printf("?                                ?\n");
+        printf("?        ????????????????        ?\n");
+        printf("?      ??    ??????    ??      ?\n");
+        printf("?        ????????????????        ?\n");
+        printf("?                                ?\n");
     } else if (frame->eye_openness > 0.1f) {
-        printf("│                                │\n");
-        printf("│                                │\n");
-        printf("│        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄        │\n");
-        printf("│                                │\n");
-        printf("│                                │\n");
+        printf("?                                ?\n");
+        printf("?                                ?\n");
+        printf("?        ??????????????        ?\n");
+        printf("?                                ?\n");
+        printf("?                                ?\n");
     } else {
-        printf("│                                │\n");
-        printf("│                                │\n");
-        printf("│        ________________        │\n");
-        printf("│                                │\n");
-        printf("│                                │\n");
+        printf("?                                ?\n");
+        printf("?                                ?\n");
+        printf("?        ________________        ?\n");
+        printf("?                                ?\n");
+        printf("?                                ?\n");
     }
     
-    printf("│                                │\n");
-    printf("├────────────────────────────────┤\n");
-    printf("│ %s | Open:%.1f | Pupil:%.1f │\n", 
+    printf("?                                ?\n");
+    printf("??????????????????????????????????\n");
+    printf("? %s | Open:%.1f | Pupil:%.1f ?\n", 
            expression_str, frame->eye_openness, frame->pupil_size);
-    printf("│ Color: #%06" PRIx32 " | Time: %" PRIu32 "ms    │\n", 
+    printf("? Color: #%06" PRIx32 " | Time: %" PRIu32 "ms    ?\n", 
            frame->color, frame->time_ms);
-    printf("└────────────────────────────────┘\n");
+    printf("??????????????????????????????????\n");
     
     return ESP_OK;
 }

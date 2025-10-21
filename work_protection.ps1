@@ -1,4 +1,4 @@
-﻿#  WORK PROTECTION SYSTEM
+?#  WORK PROTECTION SYSTEM
 # AUTOMATIC BACKUP BEFORE ANY RISKY OPERATIONS
 # This script prevents loss of work by creating backups before dangerous operations
 

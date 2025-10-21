@@ -136,14 +136,14 @@
       "change_servo_model": {
         "from": "MG996R",
         "to": "Dynamixel_MX28",
-        "required_change": "servo_type: pwm_standard_servo → smart_servo_dynamixel",
+        "required_change": "servo_type: pwm_standard_servo -> smart_servo_dynamixel",
         "code_impact": "ZERO_APPLICATION_CODE_CHANGES"
       },
       
       "change_communication": {
         "from": "esp_now_mesh", 
         "to": "can_bus_interface",
-        "required_change": "communication_interface: esp_now_mesh.json → can_bus_interface.json",
+        "required_change": "communication_interface: esp_now_mesh.json -> can_bus_interface.json",
         "code_impact": "ZERO_APPLICATION_CODE_CHANGES"
       }
     }

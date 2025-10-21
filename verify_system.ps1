@@ -1,4 +1,4 @@
-﻿Write-Host "=== P32 Animatronic Bot Complete System Verification ===" -ForegroundColor Cyan
+?Write-Host "=== P32 Animatronic Bot Complete System Verification ===" -ForegroundColor Cyan
 Write-Host ""
 
 $ComponentCount = 0

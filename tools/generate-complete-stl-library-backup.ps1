@@ -1,4 +1,4 @@
-﻿# P32 Animatronic Bot - Complete STL Generation System
+?# P32 Animatronic Bot - Complete STL Generation System
 # Generates all 3D printable components for humanoid subsystems
 
 param(

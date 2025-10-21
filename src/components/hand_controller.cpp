@@ -207,7 +207,7 @@ static esp_err_t init_mcp3008_adc(void) {
  */
 static esp_err_t set_servo_position(uint8_t channel, uint16_t angle_degrees) {
     // Convert angle to PWM value
-    // SG90 servos: 500us (0°) to 2400us (180°) pulse width
+    // SG90 servos: 500us (0 deg) to 2400us (180 deg) pulse width
     // At 50Hz: 4096 counts per 20ms period
     // 500us = 102 counts, 2400us = 491 counts
     uint16_t pwm_value = 102 + (angle_degrees * (491 - 102)) / 180;
