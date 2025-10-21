@@ -48,13 +48,20 @@ Every component file MUST include the following header structure:
 // Auto-generated individual component file
 // Memory footprint can be measured independently
 
-
-#include "SharedMemory.hpp"
+#include "p32_component_config.h"
+#include "core/memory/SharedMemory.hpp"  // For GSM access
 #include "esp_log.h"
 #include "esp_err.h"
-# ... other required includes
-
+// Additional includes for shared classes:
+// #include "shared/Mood.hpp"        // If component uses Mood
+// #include "shared/Environment.hpp" // If component uses Environment
+// ... other required includes
 ```
+
+**GSM (Global Shared Memory) Include Requirements:**
+- **MANDATORY**: Any component that references `GSM` must include `"core/memory/SharedMemory.hpp"`
+- **MANDATORY**: Any component that accesses shared classes (Mood, Environment, etc.) must include the corresponding shared class headers
+- **Example**: Component using `GSM.read<Mood>("g_Mood")` requires both `SharedMemory.hpp` and `Mood.hpp`
 
 
 ### 4. Mandatory Function Definitions

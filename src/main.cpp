@@ -3,17 +3,26 @@
 
 #include <stdbool.h>
 #include "p32_component_tables.h"
+#include "core/memory/SharedMemory.hpp"
 
-// Loop counter - main.c has WRITE access, components have READ-ONLY via p32_shared_state.h
+// Loop counter - main.cpp has WRITE access, components have READ-ONLY via p32_shared_state.h
 extern uint64_t g_loopCount;
 
-void app_main(void)
+// Global SharedMemory instance - one per ESP32 core module
+SharedMemory GSM;
+
+extern "C" void app_main(void)
 {
+    // Initialize ESP-NOW for mesh communication
+    GSM.espnow_init();
+    
+    // Initialize all components
     for (int i = 0; i < COMPONENT_TABLE_SIZE; i++)
     {
         initTable[i]();
     }
     
+    // Main execution loop
     while (true)
     {
         for (int i = 0; i < COMPONENT_TABLE_SIZE; i++)

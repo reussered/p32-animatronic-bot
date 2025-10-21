@@ -3,7 +3,7 @@
 
 # Core P32 source (always included)
 set(P32_CORE_SOURCES
-    main.c
+    main.cpp
 )
 
 # P32 Individual Components - Comment out to exclude from build
@@ -15,6 +15,7 @@ set(P32_COMPONENT_SOURCES
     p32_web_client.c                # Web client for PC streaming (test mode)
     Mood.cpp                        # C++ Mood system with efficient delta calculations
     FrameProcessor.cpp              # C++ Frame processing with mood-based optimization
+    core/memory/SharedMemory.cpp    # SharedMemory ESP-NOW mesh communication
     components/system_core.c
     components/network_monitor.c  
     components/goblin_eye_left.c

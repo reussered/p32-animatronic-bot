@@ -6,49 +6,88 @@
 #include <cstring>
 #include <memory>
 
-// ESP-NOW stub (replace with actual ESP-IDF includes and logic)
-void espnow_broadcast(const std::string& name, void* data, size_t size);
+
+#ifdef ESP_PLATFORM
+#include <esp_now.h>
+#include <esp_wifi.h>
+#include <esp_log.h>
+#endif
 
 class SharedMemory {
 private:
     std::map<std::string, void*> memory_map;
+    static SharedMemory* instance;  // For static callback access
+    
+#ifdef ESP_PLATFORM
+    static void on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status);
+    static void on_data_recv(const uint8_t* mac_addr, const uint8_t* data, int len);
+    void espnow_broadcast(const std::string& name, void* data, size_t size);
+#endif
 
 public:
-    SharedMemory() = default;
-    ~SharedMemory() {
+#ifdef ESP_PLATFORM
+    void espnow_init();
+#endif
+
+    SharedMemory() 
+    {
+        instance = this;  // Set static instance for callback access
+    }
+    
+    ~SharedMemory() 
+	{
         // Free all allocated memory
-        for (auto& entry : memory_map) {
-            free(entry.second);
+        for (auto& entry : memory_map) 
+		{
+            delete[] static_cast<uint8_t*>(entry.second);  // Use delete[] for raw bytes
         }
     }
 
     template<typename T>
-    T* read(const std::string& name) {
+    T* read(const std::string& name) 
+	{
         auto it = memory_map.find(name);
-        if (it != memory_map.end()) {
+        if (it != memory_map.end()) 
+		{
             return static_cast<T*>(it->second);
-        } else {
-            T temp{};
-            write<T>(name, &temp);
-            return static_cast<T*>(memory_map[name]);
+        } 
+		else 
+		{
+		    // Create new instance with default constructor
+            T* new_mem = new T();
+            if (!new_mem) return nullptr;
+            memory_map[name] = new_mem;
+            
+#ifdef ESP_PLATFORM
+            // Broadcast the new default instance to other nodes
+            espnow_broadcast(name, new_mem, sizeof(T));
+#endif
+            return new_mem;
         }
     }
 
     template<typename T>
-    int write(const std::string& name, T* data) {
+    int write(const std::string& name) 
+    {
         auto it = memory_map.find(name);
-        if (it != memory_map.end()) {
-            std::memcpy(it->second, data, sizeof(T));
-        } else {
-            void* new_mem = malloc(sizeof(T));
-            if (!new_mem) return -1;
-            std::memcpy(new_mem, data, sizeof(T));
-            memory_map[name] = new_mem;
+        if (it == memory_map.end()) 
+		{
+            // Entry doesn't exist, this shouldn't happen in normal usage
+            return -1;
         }
-        // Broadcast to other ESP32s
-        espnow_broadcast(name, memory_map[name], sizeof(T));
-        return 0;
+        
+#ifdef ESP_PLATFORM
+        // Broadcast current data to other ESP32s
+        espnow_broadcast(name, it->second, sizeof(T));
+#endif
+        return 0;  // Success
     }
+    
+private:
+    // Internal method to update memory from received ESP-NOW data
+    void update_memory_from_network(const std::string& name, const uint8_t* data, size_t size);
+    
 };
+#define GSM SharedMemory
 
 #endif // SHARED_MEMORY_HPP
