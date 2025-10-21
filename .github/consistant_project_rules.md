@@ -7,5 +7,6 @@ This file contains the up-to-date, consistent rules for the p32-animatronic-bot 
 3. All rules in this file supersede conflicting rules elsewhere in the documentation.
 4. If a rule is unclear or inconsistent, report it immediately and halt further action until resolved.
 5. The agent must always check this file first before executing any project-related task.
+6. **DISPATCH TABLE GENERATION**: All dispatch table generation must follow the rules in `docs/DISPATCH-TABLE-GENERATION-RULES-SPEC.md`. The validation script MUST auto-generate exactly 4 files from JSON configurations: `src/p32_dispatch_tables.cpp`, `include/p32_dispatch_tables.hpp`, `src/p32_component_functions.cpp`, `include/p32_component_functions.hpp`. All 4 files MUST be in .gitignore as auto-generated content.
 
 (Continue adding consistent rules as they are validated.)
