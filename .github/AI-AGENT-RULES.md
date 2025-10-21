@@ -152,35 +152,9 @@ if (condition) {                                    // ❌ NO - K&R style (brace
 
 ## RULE 9: JSON FILES MUST BE ASCII ENCODED (NO BOM)
 
-**ALL JSON configuration files MUST be saved as pure ASCII without UTF-8 BOM.**
+**Reference:** See `docs/component-json-requirements.md` for complete JSON parsing rules and validation requirements.
 
-**PROBLEM:**
-- UTF-8 BOM (bytes `EF BB BF`) at start of file breaks Python JSON parser
-- Error: "Expecting value: line 1 column 1 (char 0)"
-- We've debugged this multiple times
-
-**CORRECT FILE FORMAT:**
-```powershell
-# Save JSON as ASCII without BOM
-[System.IO.File]::WriteAllText($path, $content, [System.Text.Encoding]::ASCII)
-```
-
-**DETECTION:**
-```powershell
-# Check for BOM corruption
-$bytes = [System.IO.File]::ReadAllBytes($jsonFile)
-if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
-    Write-Host "UTF-8 BOM DETECTED - File is corrupted!" -ForegroundColor Red
-}
-```
-
-**When creating/editing JSON files:**
-- Always use ASCII encoding
-- Never use UTF-8 with BOM
-- Verify first 3 bytes are NOT `239, 187, 191`
-- First byte should be `123` (the `{` character)
-
-**This has caused build failures multiple times. Check encoding EVERY time.**
+**CRITICAL:** ALL JSON configuration files MUST be saved as pure ASCII without UTF-8 BOM. This has caused build failures multiple times.
 
 
 
