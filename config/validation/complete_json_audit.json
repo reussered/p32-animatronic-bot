@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/validation/complete_json_audit.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -48,7 +48,7 @@
           "status": "COMPLETE OK", 
           "list": ["gpio_pair_1.json", "i2s_bus_0.json", "i2s_device_1-3.json", "skeletal_power_distribution.json", "spi_bus_vspi.json", "spi_device_1-3.json"]
         },
-        "positioned_components": {
+        "contained_components": {
           "files": 7,
           "status": "COMPLETE OK",
           "list": ["goblin_ear_left/right.json", "goblin_mouth.json", "goblin_nose.json", "goblin_speaker.json", "goblin_left_eye/right_eye.json"]
