@@ -1,5 +1,5 @@
 // P32 Component: goblin_left_eye
-// Auto-generated individual component file
+// Auto-generated individual component file with integrated pixel processing
 // Memory footprint can be measured independently
 
 #include "p32_component_config.h"
@@ -10,98 +10,122 @@
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
-#include "p32_eye_display.h"
-#include "p32_web_client.h"
-// Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
+#include "components/goblin_eye.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 static const char *TAG = "GOBLIN_LEFT_EYE";
-static eye_display_t left_eye_display;
-static bool web_client_initialized = false;
 
-// Component: Left eye display animation
+// Private static animation buffer for left eye
+static uint8_t left_eye_animation_buffer[PIXELS_PER_FRAME];
+static uint32_t left_eye_current_frame = 0;
+static uint32_t left_eye_frame_count = 4; // Blink animation frames
+
+// External GSM instance
+extern SharedMemory GSM;
+
+// Function declarations
+void load_left_eye_animation(void);
+void load_current_frame_to_buffer(void);
+
+// Component: Left eye display animation with integrated pixel processing
 esp_err_t goblin_left_eye_init(void) {
-    esp_err_t ret;
+    ESP_LOGI(TAG, "Initializing left eye at position [-26.67, 17.78, -8.89] mm");
     
-#ifdef SIMPLE_TEST
-    printf("INIT: goblin_left_eye - Left eye display animation\n");
+    // Initialize shared goblin eye resources (palette, etc.)
+    goblin_eye_init();
     
-    // Initialize left eye display
-    ret = eye_display_init(&left_eye_display, "LEFT EYE");
-    if (ret == ESP_OK) {
-        // Start with a blink animation
-        eye_display_start_animation(&left_eye_display, &goblin_blink_animation);
-        printf("       Left eye display initialized with blink animation\n");
-        
-        // Initialize web client streaming on first eye init
-        if (!web_client_initialized) {
-            web_client_init();
-            web_client_initialized = true;
-            printf("       Web client streaming to PC enabled (HTTP JSON)\n");
-        }
-    }
-    return ret;
-#endif
-
-    // Full initialization for real hardware
-    ret = eye_display_init(&left_eye_display, "LEFT EYE");
-    if (ret == ESP_OK) {
-        ESP_LOGI(TAG, "Left eye display initialized");
-        eye_display_start_animation(&left_eye_display, &goblin_blink_animation);
-    }
-    return ret;
+    // Load simple blink animation frames into buffer
+    load_left_eye_animation();
+    
+    ESP_LOGI(TAG, "Left eye initialized with %u animation frames", left_eye_frame_count);
+    return ESP_OK;
 }
 
 // Component action function - executes every 5 loops
 void goblin_left_eye_act(void) {
-    uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000); // Convert to ms
+    // Advance animation frame based on loop count
+    uint32_t animation_speed = 30; // Change frame every 30 loops
+    uint32_t new_frame = (g_loopCount / animation_speed) % left_eye_frame_count;
     
-#ifdef SIMPLE_TEST
-    // Update and render the eye display animation
-    eye_display_update(&left_eye_display, current_time);
-    
-    // TODO: Integrate new C++ Mood and FrameProcessor system here
-    // The old frame cache system has been replaced with efficient mood-based transitions
-    
-    // Send animation data to PC display server (non-blocking)
-    web_client_send_animation_data_for_component("LEFT_EYE", &left_eye_display);
-    
-    // Render local display every few loops to avoid spam
-    if (loopCount % 50 == 0) { // Every 5 seconds at 100ms loop delay  
-        printf("\n=== LEFT EYE (Loop %lu) ===\n", loopCount);
-        eye_display_render(&left_eye_display);
-        
-        // Start new animations periodically for demo
-        if (!left_eye_display.active) {
-            // Cycle through animations
-            static int anim_cycle = 0;
-            switch (anim_cycle % 3) {
-                case 0:
-                    printf("Starting BLINK animation...\n");
-                    eye_display_start_animation(&left_eye_display, &goblin_blink_animation);
-                    break;
-                case 1:
-                    printf("Starting ANGRY STARE animation...\n");
-                    eye_display_start_animation(&left_eye_display, &goblin_angry_stare_animation);
-                    break;
-                case 2:
-                    printf("Starting CURIOUS LOOK animation...\n");
-                    eye_display_start_animation(&left_eye_display, &goblin_curious_look_animation);
-                    break;
-            }
-            anim_cycle++;
-        }
+    if (new_frame != left_eye_current_frame) {
+        left_eye_current_frame = new_frame;
+        load_current_frame_to_buffer();
     }
-    return;
-#endif
+    
+    // Set context for shared processing (SPI device for left eye)
+    current_spi_device = 1; // SPI_DEVICE_1 for left eye
+    currentFrame = left_eye_animation_buffer;
+    current_frame_size = PIXELS_PER_FRAME;
+    
+    ESP_LOGV(TAG, "Left eye frame %u ready for processing at loop %u", 
+             left_eye_current_frame, g_loopCount);
+}
 
-    // Full hardware version
-    eye_display_update(&left_eye_display, current_time);
+/**
+ * @brief Load blink animation frames for left eye
+ */
+void load_left_eye_animation(void) {
+    ESP_LOGI(TAG, "Loading left eye blink animation");
     
-    // Render to actual SPI display (TODO: implement SPI driver calls)
-    if (loopCount % 5 == 0) { // Update display at ~20 FPS (every 500ms / 5 loops)
-        ESP_LOGD(TAG, "Updating SPI display - openness: %.2f", 
-                 left_eye_display.current_frame.eye_openness);
+    // Initialize with simple blink pattern
+    // Frame 0: Fully open eye
+    for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+        left_eye_animation_buffer[i] = 255; // Start with white
     }
+    
+    left_eye_current_frame = 0;
+    ESP_LOGI(TAG, "Left eye animation loaded");
+}
+
+/**
+ * @brief Load current animation frame to processing buffer
+ */
+void load_current_frame_to_buffer(void) {
+    // Simple blink animation pattern
+    switch (left_eye_current_frame) {
+        case 0: // Fully open
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 60 && y < 180) {
+                    left_eye_animation_buffer[i] = 64; // Brown iris
+                } else {
+                    left_eye_animation_buffer[i] = 255; // White sclera
+                }
+            }
+            break;
+            
+        case 1: // Partially closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 80 && y < 160) {
+                    left_eye_animation_buffer[i] = 64; // Brown iris
+                } else if (y > 70 && y < 170) {
+                    left_eye_animation_buffer[i] = 224; // Light gray
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 2: // Nearly closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 110 && y < 130) {
+                    left_eye_animation_buffer[i] = 32; // Dark slit
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 3: // Fully closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                left_eye_animation_buffer[i] = 0; // All black
+            }
+            break;
+    }
+    
+    ESP_LOGV(TAG, "Loaded frame %u to left eye buffer", left_eye_current_frame);
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

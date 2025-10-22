@@ -1,5 +1,5 @@
 // P32 Component: goblin_right_eye
-// Auto-generated individual component file
+// Auto-generated individual component file with integrated pixel processing
 // Memory footprint can be measured independently
 
 #include "p32_component_config.h"
@@ -10,90 +10,203 @@
 #include "esp_log.h"
 #include "esp_err.h"
 #include "esp_timer.h"
-#include "p32_eye_display.h"
-#include "p32_web_client.h"
-// Note: Using FrameProcessor.hpp for direct RGB565 pixel manipulation
+#include "components/goblin_eye.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 static const char *TAG = "GOBLIN_RIGHT_EYE";
-static eye_display_t right_eye_display;
 
-// Component: Right eye display animation
+// Private static animation buffer for right eye
+static uint8_t right_eye_animation_buffer[PIXELS_PER_FRAME];
+static uint32_t right_eye_current_frame = 0;
+static uint32_t right_eye_frame_count = 6; // Curious look animation frames
+
+// External GSM instance
+extern SharedMemory GSM;
+
+// Function declarations
+void load_right_eye_animation(void);
+void load_current_frame_to_buffer(void);
+
+// Component: Right eye display animation with integrated pixel processing
 esp_err_t goblin_right_eye_init(void) {
-    esp_err_t ret;
+    ESP_LOGI(TAG, "Initializing right eye at position [26.67, 17.78, -8.89] mm");
     
-#ifdef SIMPLE_TEST
-    printf("INIT: goblin_right_eye - Right eye display animation\n");
+    // Shared goblin eye resources already initialized by left eye
+    // Load curious look animation frames into buffer
+    load_right_eye_animation();
     
-    // Initialize right eye display  
-    ret = eye_display_init(&right_eye_display, "RIGHT EYE");
-    if (ret == ESP_OK) {
-        // Start with curious look (different from left eye)
-        eye_display_start_animation(&right_eye_display, &goblin_curious_look_animation);
-        printf("       Right eye display initialized with curious look\n");
-    }
-    return ret;
-#endif
-
-    // Full initialization for real hardware
-    ret = eye_display_init(&right_eye_display, "RIGHT EYE");
-    if (ret == ESP_OK) {
-        ESP_LOGI(TAG, "Right eye display initialized");
-        eye_display_start_animation(&right_eye_display, &goblin_curious_look_animation);
-    }
-    return ret;
+    ESP_LOGI(TAG, "Right eye initialized with %u animation frames", right_eye_frame_count);
+    return ESP_OK;
 }
 
-// Component action function - executes every 50 loops
+// Component action function - executes every 50 loops (slower than left eye)
 void goblin_right_eye_act(void) {
-    uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000); // Convert to ms
+    // Advance animation frame based on loop count (slower pace than left eye)
+    uint32_t animation_speed = 45; // Change frame every 45 loops (slower)
+    uint32_t new_frame = (g_loopCount / animation_speed) % right_eye_frame_count;
     
-#ifdef SIMPLE_TEST
-    // Update and render the eye display animation
-    eye_display_update(&right_eye_display, current_time);
-    
-    // TODO: Integrate new C++ Mood and FrameProcessor system here
-    // The old frame cache system has been replaced with efficient mood-based transitions
-    
-    // Send animation data to PC display server (non-blocking)
-    web_client_send_animation_data_for_component("RIGHT_EYE", &right_eye_display);
-    
-    // Render display every few loops, offset from left eye
-    if ((loopCount + 10) % 20 == 0) { // Offset by 10 loops from left eye
-        printf("\n=== RIGHT EYE (Loop %lu) ===\n", loopCount);
-        eye_display_render(&right_eye_display);
-        
-        // Start new animations when current finishes
-        if (!right_eye_display.active) {
-            // Different cycle pattern from left eye
-            static int anim_cycle = 1; // Start offset
-            switch (anim_cycle % 3) {
-                case 0:
-                    printf("Starting CURIOUS LOOK animation...\n");
-                    eye_display_start_animation(&right_eye_display, &goblin_curious_look_animation);
-                    break;
-                case 1:
-                    printf("Starting BLINK animation...\n");
-                    eye_display_start_animation(&right_eye_display, &goblin_blink_animation);
-                    break;
-                case 2:
-                    printf("Starting ANGRY STARE animation...\n");
-                    eye_display_start_animation(&right_eye_display, &goblin_angry_stare_animation);
-                    break;
-            }
-            anim_cycle++;
-        }
+    if (new_frame != right_eye_current_frame) {
+        right_eye_current_frame = new_frame;
+        load_current_frame_to_buffer();
     }
-    return;
-#endif
+    
+    // Set context for shared processing (SPI device for right eye)
+    current_spi_device = 2; // SPI_DEVICE_2 for right eye
+    currentFrame = right_eye_animation_buffer;
+    current_frame_size = PIXELS_PER_FRAME;
+    
+    ESP_LOGV(TAG, "Right eye frame %u ready for processing at loop %u", 
+             right_eye_current_frame, g_loopCount);
+}
 
-    // Full hardware version
-    eye_display_update(&right_eye_display, current_time);
+/**
+ * @brief Load curious look animation frames for right eye
+ */
+void load_right_eye_animation(void) {
+    ESP_LOGI(TAG, "Loading right eye curious look animation");
     
-    // Render to actual SPI display (TODO: implement SPI driver calls)
-    if ((loopCount + 2) % 5 == 0) { // Slightly offset from left eye
-        ESP_LOGD(TAG, "Updating SPI display - openness: %.2f", 
-                 right_eye_display.current_frame.eye_openness);
+    // Initialize with curious look pattern
+    // Frame 0: Normal gaze
+    for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+        right_eye_animation_buffer[i] = 255; // Start with white
     }
+    
+    right_eye_current_frame = 0;
+    ESP_LOGI(TAG, "Right eye animation loaded");
+}
+
+/**
+ * @brief Load current animation frame to processing buffer for right eye
+ */
+void load_current_frame_to_buffer(void) {
+    // Curious look animation pattern (more complex than left eye blink)
+    switch (right_eye_current_frame) {
+        case 0: // Normal open eye
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t x = i % FRAME_WIDTH;
+                uint32_t y = i / FRAME_WIDTH;
+                uint32_t center_x = FRAME_WIDTH / 2;
+                uint32_t center_y = FRAME_HEIGHT / 2;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < 1600) { // Inner iris
+                    right_eye_animation_buffer[i] = 96; // Red-brown iris
+                } else if (distance < 4900) { // Outer iris
+                    right_eye_animation_buffer[i] = 64; // Brown iris
+                } else if (distance < 10000) { // Sclera
+                    right_eye_animation_buffer[i] = 255; // White
+                } else {
+                    right_eye_animation_buffer[i] = 0; // Black edge
+                }
+            }
+            break;
+            
+        case 1: // Slight squint
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 50 && y < 190) {
+                    uint32_t x = i % FRAME_WIDTH;
+                    uint32_t center_x = FRAME_WIDTH / 2;
+                    uint32_t center_y = FRAME_HEIGHT / 2;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    if (distance < 1600) {
+                        right_eye_animation_buffer[i] = 128; // Green-curious
+                    } else if (distance < 3600) {
+                        right_eye_animation_buffer[i] = 96; // Red-brown
+                    } else {
+                        right_eye_animation_buffer[i] = 224; // Light gray
+                    }
+                } else {
+                    right_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 2: // Wide curious look
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t x = i % FRAME_WIDTH;
+                uint32_t y = i / FRAME_WIDTH;
+                uint32_t center_x = FRAME_WIDTH / 2;
+                uint32_t center_y = FRAME_HEIGHT / 2;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < 900) { // Small pupil
+                    right_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < 2500) { // Bright iris
+                    right_eye_animation_buffer[i] = 160; // Blue-curious
+                } else if (distance < 6400) { // Outer iris
+                    right_eye_animation_buffer[i] = 128; // Green
+                } else if (distance < 12100) { // Wide sclera
+                    right_eye_animation_buffer[i] = 255; // Bright white
+                } else {
+                    right_eye_animation_buffer[i] = 32; // Dark edge
+                }
+            }
+            break;
+            
+        case 3: // Narrowed focus
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 70 && y < 170) {
+                    uint32_t x = i % FRAME_WIDTH;
+                    uint32_t center_x = FRAME_WIDTH / 2;
+                    uint32_t center_y = FRAME_HEIGHT / 2;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    if (distance < 2500) {
+                        right_eye_animation_buffer[i] = 96; // Red focus
+                    } else {
+                        right_eye_animation_buffer[i] = 192; // Purple intensity
+                    }
+                } else {
+                    right_eye_animation_buffer[i] = 16; // Dark eyelid
+                }
+            }
+            break;
+            
+        case 4: // Return to normal
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t x = i % FRAME_WIDTH;
+                uint32_t y = i / FRAME_WIDTH;
+                uint32_t center_x = FRAME_WIDTH / 2;
+                uint32_t center_y = FRAME_HEIGHT / 2;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < 1600) {
+                    right_eye_animation_buffer[i] = 64; // Brown iris
+                } else if (distance < 4900) {
+                    right_eye_animation_buffer[i] = 224; // Light
+                } else if (distance < 10000) {
+                    right_eye_animation_buffer[i] = 255; // White
+                } else {
+                    right_eye_animation_buffer[i] = 0; // Black
+                }
+            }
+            break;
+            
+        case 5: // Satisfied look
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 40 && y < 200) {
+                    uint32_t x = i % FRAME_WIDTH;
+                    uint32_t center_x = FRAME_WIDTH / 2;
+                    uint32_t center_y = FRAME_HEIGHT / 2;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    if (distance < 3600) {
+                        right_eye_animation_buffer[i] = 192; // Purple satisfaction
+                    } else {
+                        right_eye_animation_buffer[i] = 255; // Bright white
+                    }
+                } else {
+                    right_eye_animation_buffer[i] = 0; // Black
+                }
+            }
+            break;
+    }
+    
+    ESP_LOGV(TAG, "Loaded frame %u to right eye buffer", right_eye_current_frame);
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

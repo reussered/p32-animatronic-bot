@@ -1,42 +1,181 @@
 /**
  * @file gc9a01.cpp
- * @brief gc9a01 component implementation
- * @author Auto-generated from JSON specification
+ * @brief GC9A01 240x240 circular display hardware driver implementation
+ * @author P32 Animatronic Bot Project
  */
 
 #include "components/gc9a01.hpp"
+#include "components/goblin_eye.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "p32_shared_state.h"
+#include "esp_log.h"
+#include "driver/spi_master.h"
+#include "driver/gpio.h"
+
+static const char *TAG = "GC9A01";
 
 // External GSM instance
 extern SharedMemory GSM;
 
+// SPI handles for the displays
+static spi_device_handle_t spi_device_1 = NULL; // Left eye
+static spi_device_handle_t spi_device_2 = NULL; // Right eye
+static spi_device_handle_t spi_device_3 = NULL; // Mouth (future)
+
+// GPIO pin definitions (from wiring guide)
+#define SPI_SCK_PIN     14
+#define SPI_MOSI_PIN    13
+#define SPI_MISO_PIN    12
+#define LEFT_EYE_CS     15
+#define LEFT_EYE_DC     18
+#define LEFT_EYE_RST    21
+#define RIGHT_EYE_CS    5
+#define RIGHT_EYE_DC    19
+#define RIGHT_EYE_RST   22
+
 /**
- * @brief Initialize gc9a01 component
- * Called once during system startup
+ * @brief Initialize GC9A01 hardware driver
  */
 void gc9a01_init(void) {
-    // Component initialization logic
-    // Access global state via g_loopCount and shared state via GSM
+    ESP_LOGI(TAG, "Initializing GC9A01 hardware driver");
     
-    // Example: Read shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
+    // Initialize SPI interface
+    gc9a01_spi_init();
     
-    // TODO: Implement component-specific initialization
+    ESP_LOGI(TAG, "GC9A01 driver initialized");
 }
 
 /**
- * @brief Execute gc9a01 component logic  
- * Called every loop iteration based on hitCount: 1
+ * @brief Send current frame buffer to GC9A01 display
+ * Reads currentFrame and current_spi_device set by higher-level components
  */
 void gc9a01_act(void) {
-    // Component execution logic
-    // Access global state via g_loopCount and shared state via GSM
+    // Only process if we have a valid frame and device context
+    if (currentFrame == nullptr || current_spi_device == 0) {
+        return;
+    }
     
-    // Example: Update shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
-    // // Modify shared_data...
-    // GSM.write<SomeSharedDataType>(shared_data);
+    // Send the RGB565 frame buffer to the appropriate display
+    gc9a01_send_frame(current_spi_device, (uint16_t*)currentFrame, current_frame_size);
     
-    // TODO: Implement component-specific behavior
+    ESP_LOGV(TAG, "Frame sent to SPI device %u at loop %u", current_spi_device, g_loopCount);
+}
+
+/**
+ * @brief Initialize SPI interface for GC9A01 displays
+ */
+void gc9a01_spi_init(void) {
+    esp_err_t ret;
+    
+    // Configure SPI bus
+    spi_bus_config_t buscfg = {
+        .mosi_io_num = SPI_MOSI_PIN,
+        .miso_io_num = SPI_MISO_PIN,
+        .sclk_io_num = SPI_SCK_PIN,
+        .quadwp_io_num = -1,
+        .quadhd_io_num = -1,
+        .max_transfer_sz = 240 * 240 * 2, // Max frame size in bytes
+    };
+    
+    // Initialize SPI bus
+    ret = spi_bus_initialize(VSPI_HOST, &buscfg, SPI_DMA_CH_AUTO);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize SPI bus: %s", esp_err_to_name(ret));
+        return;
+    }
+    
+    // Configure left eye display (SPI_DEVICE_1)
+    spi_device_interface_config_t devcfg_left = {
+        .clock_speed_hz = 20000000,        // 20 MHz
+        .mode = 0,                         // SPI mode 0
+        .spics_io_num = LEFT_EYE_CS,      // CS pin
+        .queue_size = 1,                   // Queue only one transaction at a time
+    };
+    
+    ret = spi_bus_add_device(VSPI_HOST, &devcfg_left, &spi_device_1);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to add left eye SPI device: %s", esp_err_to_name(ret));
+        return;
+    }
+    
+    // Configure right eye display (SPI_DEVICE_2)
+    spi_device_interface_config_t devcfg_right = {
+        .clock_speed_hz = 20000000,        // 20 MHz
+        .mode = 0,                         // SPI mode 0
+        .spics_io_num = RIGHT_EYE_CS,     // CS pin
+        .queue_size = 1,                   // Queue only one transaction at a time
+    };
+    
+    ret = spi_bus_add_device(VSPI_HOST, &devcfg_right, &spi_device_2);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to add right eye SPI device: %s", esp_err_to_name(ret));
+        return;
+    }
+    
+    // Configure GPIO pins for DC and RST
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << LEFT_EYE_DC) | (1ULL << LEFT_EYE_RST) | 
+                       (1ULL << RIGHT_EYE_DC) | (1ULL << RIGHT_EYE_RST),
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+    gpio_config(&io_conf);
+    
+    // Reset displays
+    gpio_set_level(LEFT_EYE_RST, 0);
+    gpio_set_level(RIGHT_EYE_RST, 0);
+    vTaskDelay(pdMS_TO_TICKS(10));
+    gpio_set_level(LEFT_EYE_RST, 1);
+    gpio_set_level(RIGHT_EYE_RST, 1);
+    vTaskDelay(pdMS_TO_TICKS(120));
+    
+    ESP_LOGI(TAG, "SPI interface initialized for GC9A01 displays");
+}
+
+/**
+ * @brief Send RGB565 frame buffer to specific SPI device
+ */
+void gc9a01_send_frame(uint32_t spi_device, uint16_t* frame_buffer, uint32_t pixel_count) {
+    spi_device_handle_t device = NULL;
+    gpio_num_t dc_pin;
+    
+    // Select the appropriate SPI device and DC pin
+    switch (spi_device) {
+        case 1: // Left eye
+            device = spi_device_1;
+            dc_pin = (gpio_num_t)LEFT_EYE_DC;
+            break;
+        case 2: // Right eye
+            device = spi_device_2;
+            dc_pin = (gpio_num_t)RIGHT_EYE_DC;
+            break;
+        default:
+            ESP_LOGE(TAG, "Invalid SPI device: %u", spi_device);
+            return;
+    }
+    
+    if (device == NULL) {
+        ESP_LOGE(TAG, "SPI device %u not initialized", spi_device);
+        return;
+    }
+    
+    // Set DC pin high for data transmission
+    gpio_set_level(dc_pin, 1);
+    
+    // Prepare SPI transaction
+    spi_transaction_t trans = {
+        .length = pixel_count * 16,  // Length in bits
+        .tx_buffer = frame_buffer,
+        .rx_buffer = NULL,
+    };
+    
+    // Send frame buffer to display
+    esp_err_t ret = spi_device_transmit(device, &trans);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to transmit frame to device %u: %s", spi_device, esp_err_to_name(ret));
+    }
+    
+    ESP_LOGV(TAG, "Sent %u pixels to SPI device %u", pixel_count, spi_device);
 }
