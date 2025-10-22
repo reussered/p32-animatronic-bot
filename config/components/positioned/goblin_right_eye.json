@@ -6,6 +6,9 @@
   "subsystem": "HEAD",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
   "interface_assignment": "SPI_DEVICE_2",
+  "contained_components": [
+    "config/components/creature_specific/goblin_eye.json"
+  ],
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {
@@ -19,8 +22,13 @@
     "roll": "0 DEGREES"
   },
   "function": "primary_display_right",
-  "component_name": "goblin_right_eye",
   "description": "Right eye display animation",
+  "animatronic_cache": {
+    "animation_buffers": "RIGHT_EYE_BUFFER",
+    "buffer_allocation": "STACK_PUSH",
+    "coordinates": "RIGHT_POSITION",
+    "interface_binding": "SPI_DEVICE_2"
+  },
   "timing": {
     "hitCount": 60000
   }

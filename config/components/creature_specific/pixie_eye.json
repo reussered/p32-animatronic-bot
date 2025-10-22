@@ -1,0 +1,110 @@
+{
+  "relative_filename": "config/components/creature_specific/pixie_eye.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "component_name": "pixie_eye",
+  "subsystem": "HEAD",
+  "component_type": "CREATURE_SPECIFIC_DISPLAY",
+  "description": "Shared pixie eye processing logic with small OLED and magical mood-based rendering",
+  "created": "2025-10-22",
+  
+  "contained_components": [
+    "config/components/hardware/gmt12864_display.json"
+  ],
+  
+  "creature_display_profile": {
+    "species": "PIXIE",
+    "eye_color_base": "MAGICAL_VIOLET",
+    "pupil_style": "SPARKLING_ROUND",
+    "expression_range": "MISCHIEVOUS_TO_ENCHANTING",
+    "mood_responsiveness": "HYPERSENSITIVE"
+  },
+  
+  "small_oled_config": {
+    "display_type": "GMT12864_COLOR_OLED",
+    "resolution": "128x64",
+    "color_depth": "16BIT_RGB565",
+    "size_factor": "SMALL_DELICATE"
+  },
+  
+  "palette_system": {
+    "palette_size": 128,
+    "color_ranges": {
+      "eyelid_pupil": "0-15",
+      "iris_base": "16-31", 
+      "magical_sparkles": "32-47",
+      "joy_pinks": "48-63",
+      "curiosity_violets": "64-79",
+      "mischief_greens": "80-95",
+      "enchantment_blues": "96-111",
+      "special_effects": "112-127"
+    }
+  },
+  
+  "mood_color_mapping": {
+    "ANGER": {
+      "primary_range": "80-95",
+      "intensity_multiplier": 1.3,
+      "mischief_sparkle": "ENABLED"
+    },
+    "CURIOSITY": {
+      "primary_range": "64-79", 
+      "intensity_multiplier": 1.6,
+      "magical_shimmer": "ENABLED"
+    },
+    "FEAR": {
+      "primary_range": "96-111",
+      "intensity_multiplier": 1.4,
+      "hiding_effect": "ENABLED"
+    },
+    "HAPPINESS": {
+      "primary_range": "48-63",
+      "intensity_multiplier": 1.8,
+      "joy_burst": "ENABLED"
+    }
+  },
+  
+  "magical_effects": {
+    "sparkle_generation": "RANDOM_TWINKLE",
+    "enchantment_glow": "SOFT_AURA",
+    "mischief_patterns": "PLAYFUL_WINK",
+    "size_compensation": "BRIGHTNESS_BOOST"
+  },
+  
+  "frame_processing": {
+    "buffer_stack_support": "ENABLED",
+    "multi_eye_coordination": "ENABLED",
+    "mood_based_adjustments": "HYPERACTIVE",
+    "color_space": "RGB565",
+    "small_display_optimization": "ENABLED"
+  },
+  
+  "animatronic_cache": {
+    "animation_buffers": "LEFT_RIGHT_COORDINATED",
+    "frame_interpolation": "MAGICAL_SMOOTH",
+    "mood_transition_ms": 150,
+    "expression_blend_mode": "SPARKLE_TRANSITION"
+  },
+  
+  "timing": {
+    "hitCount": 1,
+    "description": "Process all frames in buffer stack every loop"
+  },
+  
+  "software": {
+    "init_function": "pixie_eye_init",
+    "act_function": "pixie_eye_act"
+  },
+  
+  "prototype_status": "needs_implementation",
+  "tested": false,
+  "notes": [
+    "Software-only component - no physical shape",
+    "Code pattern based on goblin_eye.cpp/hpp but adapted for small OLED",
+    "Handles mood-based color palette adjustments with magical effects",
+    "Supports buffer stack processing for left/right eye coordination",
+    "Compact 128-color palette optimized for small display",
+    "Real-time frame processing with SharedMemory mood integration",
+    "High responsiveness and magical visual effects"
+  ]
+}

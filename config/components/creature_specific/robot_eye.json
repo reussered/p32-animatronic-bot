@@ -1,0 +1,87 @@
+{
+  "relative_filename": "config/components/creature_specific/robot_eye.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "component_name": "robot_eye",
+  "subsystem": "HEAD",
+  "component_type": "CREATURE_SPECIFIC_DISPLAY",
+  "description": "Shared robot eye processing logic with LED matrix and mood-based rendering",
+  "created": "2025-10-22",
+  
+  "contained_components": [
+    "config/components/hardware/neopixel_matrix_8x8.json"
+  ],
+  
+  "creature_display_profile": {
+    "species": "ROBOT",
+    "eye_color_base": "ELECTRIC_BLUE",
+    "pupil_style": "DIGITAL_SQUARE",
+    "expression_range": "ANALYTICAL_TO_AGGRESSIVE",
+    "mood_responsiveness": "DIGITAL_PRECISE"
+  },
+  
+  "led_matrix_config": {
+    "matrix_size": "8x8",
+    "pixel_count": 64,
+    "brightness_levels": 256,
+    "update_frequency": "60_HZ"
+  },
+  
+  "mood_pattern_mapping": {
+    "ANGER": {
+      "color": "RED_PULSE",
+      "pattern": "SHARP_GEOMETRIC",
+      "animation": "RAPID_STROBE"
+    },
+    "CURIOSITY": {
+      "color": "CYAN_BLUE", 
+      "pattern": "SCANNING_LINES",
+      "animation": "SMOOTH_SWEEP"
+    },
+    "FEAR": {
+      "color": "YELLOW_WARNING",
+      "pattern": "ERROR_STATIC",
+      "animation": "CHAOTIC_FLICKER"
+    },
+    "HAPPINESS": {
+      "color": "GREEN_POSITIVE",
+      "pattern": "FLOWING_PIXELS",
+      "animation": "GENTLE_WAVE"
+    }
+  },
+  
+  "frame_processing": {
+    "buffer_stack_support": "ENABLED",
+    "multi_eye_coordination": "ENABLED",
+    "mood_based_adjustments": "REALTIME",
+    "color_space": "RGB888"
+  },
+  
+  "animatronic_cache": {
+    "animation_buffers": "LEFT_RIGHT_COORDINATED",
+    "frame_interpolation": "DIGITAL_PRECISE",
+    "mood_transition_ms": 100,
+    "expression_blend_mode": "HARD_CUT"
+  },
+  
+  "timing": {
+    "hitCount": 1,
+    "description": "Process all frames in buffer stack every loop"
+  },
+  
+  "software": {
+    "init_function": "robot_eye_init",
+    "act_function": "robot_eye_act"
+  },
+  
+  "prototype_status": "needs_implementation",
+  "tested": false,
+  "notes": [
+    "Software-only component - no physical shape",
+    "Code pattern based on goblin_eye.cpp/hpp but adapted for LED matrix",
+    "Handles mood-based LED pattern generation",
+    "Supports buffer stack processing for left/right eye coordination",
+    "Digital-style animations with precise timing",
+    "Real-time pattern processing with SharedMemory mood integration"
+  ]
+}

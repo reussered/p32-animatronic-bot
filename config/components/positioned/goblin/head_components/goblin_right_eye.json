@@ -4,6 +4,10 @@
   "author": "config/author.json",
   "component_name": "goblin_right_eye",
   
+  "contained_components": [
+    "config/components/creature_specific/goblin_eye.json"
+  ],
+  
   "template_inheritance": {
     "hardware_template": "config/components/hardware/gc9a01_display.json",
     "display_type": "CIRCULAR_LCD_FULL_COLOR",
@@ -32,7 +36,6 @@
   },
   
   "function": "primary_display_right",
-  "component_name": "goblin_head_right_eye",
   "description": "Right eye display animation - goblin variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5

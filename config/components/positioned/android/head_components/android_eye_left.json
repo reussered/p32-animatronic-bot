@@ -4,6 +4,10 @@
   "author": "config/author.json",
   "component_name": "android_eye_left",
   
+  "contained_components": [
+    "config/components/creature_specific/android_eye.json"
+  ],
+  
   "template_inheritance": {
     "hardware_template": "config/components/hardware/led_matrix_small.json",
     "creature_shell": "assets/shapes/scad/creature_shells/android/android_eye_shell.scad",

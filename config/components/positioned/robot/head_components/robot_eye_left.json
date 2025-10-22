@@ -9,6 +9,10 @@
   "component_name": "robot_eye_left",
   "subsystem": "HEAD",
 
+  "contained_components": [
+    "config/components/creature_specific/robot_eye.json"
+  ],
+
   
 
   "template_inheritance": {
@@ -66,9 +70,6 @@
   
 
   "function": "primary_display_left",
-
-  "component_name": "robot_left_eye",
-  "subsystem": "HEAD",
 
   "description": "Left eye display animation - robot variant using RGB LED matrix hardware", 
 

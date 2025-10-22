@@ -6,6 +6,9 @@
   "subsystem": "HEAD",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
   "interface_assignment": "SPI_DEVICE_1",
+  "contained_components": [
+    "config/components/creature_specific/goblin_eye.json"
+  ],
   "mounting_architecture": {
     "type": "two_tier",
     "hardware_mount": "display_basic_mount",
@@ -25,6 +28,12 @@
   },
   "function": "primary_display_left",
   "description": "Left eye display animation",
+  "animatronic_cache": {
+    "animation_buffers": "LEFT_EYE_BUFFER",
+    "buffer_allocation": "STACK_PUSH",
+    "coordinates": "LEFT_POSITION",
+    "interface_binding": "SPI_DEVICE_1"
+  },
   "timing": {
     "hitCount": 60000
   }

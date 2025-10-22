@@ -9,6 +9,10 @@
   "component_name": "goblin_center_eye",
   "subsystem": "HEAD",
 
+  "contained_components": [
+    "config/components/creature_specific/goblin_eye.json"
+  ],
+
   
 
   "template_inheritance": {
@@ -66,9 +70,6 @@
   
 
   "function": "primary_display_center",
-
-  "component_name": "goblin_center_eye",
-  "subsystem": "HEAD",
 
   "description": "Center eye display animation - third eye for goblin test variant using standard GC9A01 hardware",
 

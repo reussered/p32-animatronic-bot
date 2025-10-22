@@ -9,6 +9,10 @@
   "component_name": "bear_eye_right",
   "subsystem": "HEAD",
 
+  "contained_components": [
+    "config/components/creature_specific/bear_eye.json"
+  ],
+
   
 
   "template_inheritance": {
