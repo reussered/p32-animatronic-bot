@@ -146,5 +146,28 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 
 **Reference:** See `docs/component-json-requirements.md` for complete JSON parsing rules and validation requirements.
 
-read all of the rules files in docs/rules.  make sure none of the rules contridict any othe rules. 
+## RULE 10: DEVELOPMENT ENVIRONMENT REQUIREMENTS
+
+**Operating System:** Windows  
+**Default Shell:** PowerShell (Windows PowerShell v5.1)
+
+**CRITICAL PowerShell Syntax Rules:**
+
+- Use semicolon (`;`) to join commands on single line - **NOT** double ampersand (`&&`)
+- Example: `command1; command2` ✅ **CORRECT**
+- Example: `command1 && command2` ❌ **WRONG** (this is bash syntax)
+
+**When generating terminal commands:**
+
+- Generate commands correctly for PowerShell syntax
+- Never use bash operators (`&&`, `||`) in PowerShell commands
+- Agent must learn from syntax mistakes and not repeat them
+
+**Build System:**
+
+- Primary: PlatformIO with ESP-IDF framework
+- Target: ESP32-S3-DevKitC-1
+- Commands: `pio run` for builds, `pio run -t upload` for flashing
+
+read all of the rules files in docs/rules. make sure none of the rules contridict any othe rules.
 
