@@ -1,4 +1,4 @@
-#include "p32_component_tables.hpp"
+#include "p32_component_tables.h"
 #include "esp_log.h"
 
 // System component implementations
@@ -7,7 +7,7 @@
 static const char *TAG_HEARTBEAT = "HEARTBEAT";
 static const char *TAG_NETWORK_MONITOR = "NETWORK_MONITOR";
 
-esp_err_t p32_comp_heartbeat_init(void)
+esp_err_t heartbeat_init(void)
 {
 #ifdef SIMPLE_TEST
     printf("INIT: heartbeat - System heartbeat\n");
@@ -17,7 +17,7 @@ esp_err_t p32_comp_heartbeat_init(void)
     return ESP_OK;
 }
 
-void p32_comp_heartbeat_act(void)
+void heartbeat_act(void)
 {
     // Component: heartbeat - System heartbeat
     // Timing: Execute every 1 loops
@@ -29,7 +29,7 @@ void p32_comp_heartbeat_act(void)
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_network_monitor_init(void)
+esp_err_t network_monitor_init(void)
 {
 #ifdef SIMPLE_TEST
     printf("INIT: network_monitor - Network monitoring and loop timing\n");
@@ -39,7 +39,7 @@ esp_err_t p32_comp_network_monitor_init(void)
     return ESP_OK;
 }
 
-void p32_comp_network_monitor_act(void)
+void network_monitor_act(void)
 {
     // Component: network_monitor - Network monitoring and loop timing
     // Timing: Execute every 1 loops
