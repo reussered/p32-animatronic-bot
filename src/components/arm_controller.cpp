@@ -10,7 +10,7 @@
  * - Coordinated bilateral arm movement
  */
 
-#include "p32_arm_controller.h"
+#include "p32_arm_controller.hpp"
 #include "esp_now.h"
 #include "esp_wifi.h"
 #include "driver/i2c.h"

@@ -169,5 +169,53 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 - Target: ESP32-S3-DevKitC-1
 - Commands: `pio run` for builds, `pio run -t upload` for flashing
 
+## RULE 11: COMPONENT GENERATION IS MANDATORY
+
+**ALL component code MUST be generated via scripts - NEVER manually created**
+
+**CRITICAL ARCHITECTURE REQUIREMENT:**
+
+```
+IF creating_component_code THEN
+    → Use generate_tables.py or generate_individual_components.py
+    → NEVER manually create .cpp/.hpp files in src/components/
+    → NEVER manually edit generated dispatch tables
+ELSE
+    → Build will fail with missing headers
+    → Inconsistent naming conventions  
+    → Architecture violations
+```
+
+**Component Generation Commands:**
+
+- Generate for specific bot: `python tools\generate_tables.py config\bots\bot_families\goblins\goblin_full.json src`
+- Individual components: `python tools\generate_individual_components.py`
+
+**Manual component creation ALWAYS fails** - the generation system is required for:
+
+- Consistent naming conventions
+- Proper header file generation
+- Dispatch table integration
+- Multi-ESP32 variant support
+
+## RULE 12: MULTI-ESP32 ENVIRONMENT SELECTION  
+
+**Each subsystem targets optimal ESP32 variant for cost/performance**
+
+```
+IF gpio_needed <= 22 AND memory_needed <= 350KB THEN
+    → Use ESP32-C3 environment (cost-optimized $2-3)
+ELSIF gpio_needed <= 34 AND memory_needed <= 500KB THEN  
+    → Use ESP32 environment (balanced $4-5)
+ELSE
+    → Use ESP32-S3 environment (high-performance $6-8)
+```
+
+**Build Commands:**
+
+- Specific environment: `pio run -e goblin_head`
+- Chip type group: `pio run -e left_arm -e right_arm` (all ESP32-C3)
+- All environments: `pio run`
+
 read all of the rules files in docs/rules. make sure none of the rules contridict any othe rules.
 

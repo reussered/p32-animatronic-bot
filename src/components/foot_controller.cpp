@@ -46,7 +46,7 @@
 #include <driver/ledc.h>
 #include <esp_now.h>
 
-#include "p32_foot_controller.h"
+#include "p32_foot_controller.hpp"
 #include "p32_core.h"
 
 #ifdef P32_COMP_FOOT_CONTROLLER
