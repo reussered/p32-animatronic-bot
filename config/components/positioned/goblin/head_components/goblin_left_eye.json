@@ -32,7 +32,7 @@
   },
   
   "function": "primary_display_left",
-  "component_name": "left_eye", 
+  "component_name": "goblin_left_eye", 
   "description": "Left eye display animation - goblin variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5

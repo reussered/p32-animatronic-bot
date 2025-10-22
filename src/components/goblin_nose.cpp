@@ -3,6 +3,7 @@
 // Memory footprint can be measured independently
 
 #include "p32_component_config.h"
+#include "p32_shared_state.h"
 
 #ifdef ENABLE_GOBLIN_COMPONENTS
 
@@ -28,7 +29,7 @@ esp_err_t goblin_nose_init(void) {
 }
 
 // Component action function - executes every 100 loops
-void goblin_nose_act(uint32_t loopCount) {
+void goblin_nose_act(void) {
     uint32_t current_time = (uint32_t)(esp_timer_get_time() / 1000); // Convert to ms
     
 #ifdef SIMPLE_TEST

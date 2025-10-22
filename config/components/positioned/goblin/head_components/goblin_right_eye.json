@@ -32,7 +32,7 @@
   },
   
   "function": "primary_display_right",
-  "component_name": "right_eye",
+  "component_name": "goblin_right_eye",
   "description": "Right eye display animation - goblin variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5

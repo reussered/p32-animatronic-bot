@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "author": "config/author.json",
   
+  "component_name": "torso_integrated_power_system",
   "component_id": "TORSO_INTEGRATED_POWER_SYSTEM",
   "component_type": "STRUCTURAL_BATTERY_SYSTEM",
   "description": "Commercial lithium-ion battery pack integrated into aluminum skeletal structure with future aluminum battery compatibility",
+  "hitCount": 10,
   
   "current_battery_technology": {
     "primary_battery_pack": {

@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "author": "config/author.json",
   
+  "component_name": "mg996r_servo",
   "component_id": "MG996R_SERVO",
   "component_type": "SERVO_MOTOR",
   "description": "Standard servo motor replacing expensive Dynamixel servos in ESP32-S3 adaptation",
+  "hitCount": 1,
   
   "physical_specifications": {
     "torque": "11 KG-CM",

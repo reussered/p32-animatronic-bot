@@ -54,6 +54,7 @@ set(P32_COMPONENT_SOURCES
     components/master_controller.cpp
     components/mesh_coordinator.cpp
     components/mesh_software_coordinator.cpp
+    components/mg996r_servo.cpp
     components/mouth.cpp
     components/network_monitor.cpp
     components/nose_sensor.cpp
@@ -65,6 +66,7 @@ set(P32_COMPONENT_SOURCES
     components/right_ear_microphone.cpp
     components/right_eye.cpp
     components/serial_console.cpp
+    components/servo_sg90_micro.cpp
     components/shoulder_flexion.cpp
     components/speaker.cpp
     components/spine_lower.cpp
@@ -73,6 +75,7 @@ set(P32_COMPONENT_SOURCES
     components/telemetry_hub.cpp
     components/thumb.cpp
     components/torso_controller.cpp
+    components/torso_integrated_power_system.cpp
     components/watchdog.cpp
     components/wifi_station.cpp
     components/wrist_flexion.cpp

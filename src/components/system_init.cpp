@@ -4,6 +4,7 @@
 
 #include "esp_log.h"
 #include "esp_err.h"
+#include "p32_shared_state.h"
 
 static const char *TAG = "SYSTEM_INIT";
 
@@ -20,7 +21,7 @@ esp_err_t system_init_init(void) {
 }
 
 // Component action function - executes every 1000 loops
-void system_init_act(uint32_t loopCount) {
+void system_init_act(void) {
 #ifdef SIMPLE_TEST
     if (loopCount % 1000 == 0) {
         printf("ACT: system_init - active (loop %lu)\n", loopCount);
