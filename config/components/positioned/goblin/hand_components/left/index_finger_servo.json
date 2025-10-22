@@ -1,41 +1,83 @@
 {
+
   "relative_filename": "config/components/positioned/goblin/hand_components/left/index_finger_servo.json",
+
   "version": "2.0.0",
+
   "author": "config/author.json", 
-  "component_id": "index_finger_servo_left",
+
+  "component_name": "index_finger_servo_left",
+  "subsystem": "HAND",
+
   
+
   "template_inheritance": {
+
     "hardware_template": "config/components/hardware/servo_sg90_micro.json",
+
     "creature_shell": "assets/shapes/scad/creature_shells/goblin/index_finger_joint_mount.scad",
+
     "mount_template": "assets/shapes/scad/basic_mounts/servo_micro_mount.scad"
+
   },
+
   
+
   "interface_assignment": "PWM_CHANNEL_2",
+
   "coordinate_system": "humanoid_3d",
+
   "reference_point": "wrist_joint_left", 
+
   "position": {
+
     "x": "+0.3 INCH",
+
     "y": "+2.8 INCH", 
+
     "z": "0 INCH"
+
   },
+
   "orientation": {
+
     "tilt": "0 DEGREES",
+
     "rotation": "0 DEGREES",
+
     "roll": "0 DEGREES"
+
   },
+
   
+
   "servo_specific_config": {
+
     "joint_type": "FINGER_FLEXION_EXTENSION", 
+
     "range_degrees": "120",
+
     "center_position": "60",
+
     "movement_direction": "CURL_STRAIGHTEN",
+
     "max_torque_required_kg_cm": "1.5"
+
   },
+
   
+
   "function": "index_finger_control",
+
   "component_name": "goblin_left_index_finger",
+  "subsystem": "HAND",
+
   "description": "Left index finger servo - primary pointing and manipulation",
+
   "timing": {
+
     "hitCount": 12
+
   }
+
 }

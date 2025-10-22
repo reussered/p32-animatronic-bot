@@ -28,20 +28,24 @@ set(P32_COMPONENT_SOURCES
     components/gc9a01_circular_lcd_display.cpp
     components/gc9a01_circular_lcd_display_verbose.cpp
     components/goblin_behavior_engine.cpp
+    components/goblin_eye.cpp
     components/goblin_head.cpp
     components/goblin_left_eye.cpp
     components/goblin_mood.cpp
+    components/goblin_mouth.cpp
     components/goblin_mouth_STUB.cpp
     components/goblin_nose.cpp
     components/goblin_personality.cpp
     components/goblin_pirate_head.cpp
     components/goblin_pirate_personality.cpp
     components/goblin_right_eye.cpp
+    components/goblin_speaker.cpp
     components/goblin_speaker_STUB.cpp
     components/goblin_torso.cpp
     components/hand_controller.cpp
     components/hc_sr04_ultrasonic_distance_sensor.cpp
     components/hc_sr04_ultrasonic_distance_sensor_verbose.cpp
+    components/heartbeat.cpp
     components/hip_flexion.cpp
     components/i2s_digital_speaker_module.cpp
     components/i2s_digital_speaker_module_verbose.cpp
@@ -76,6 +80,7 @@ set(P32_COMPONENT_SOURCES
     components/thumb.cpp
     components/torso_controller.cpp
     components/torso_integrated_power_system.cpp
+    components/unknown.cpp
     components/watchdog.cpp
     components/wifi_station.cpp
     components/wrist_flexion.cpp

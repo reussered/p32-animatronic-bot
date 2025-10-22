@@ -11,7 +11,7 @@
   "reference_point": "nose_center",
   "eye_spacing": "3.0 INCH",
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin_left_eye.json",
     "config/components/positioned/goblin_right_eye.json",
     "config/components/positioned/goblin_nose.json"

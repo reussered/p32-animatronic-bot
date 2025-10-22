@@ -1,31 +1,63 @@
 {
+
   "relative_filename": "config/components/positioned/goblin_nose.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
-  "component_id": "goblin_nose",
-  "hardware_reference": "config/components/hardware/hc_sr04_sensor.json",
-  "interface_assignment": "GPIO_PAIR_1",
-  "mounting_architecture": {
-    "type": "two_tier",
-    "hardware_mount": "sensor_basic_mount",
-    "decorative_shell": "goblin_nose_shell"
-  },
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "position": {
-    "x": "0 INCH",
-    "y": "0 INCH",
-    "z": "+0.25 INCH"
-  },
-  "orientation": {
-    "tilt": "0 DEGREES",
-    "rotation": "0 DEGREES",
-    "roll": "0 DEGREES"
-  },
-  "function": "proximity_sensor",
+
   "component_name": "goblin_nose",
+  "subsystem": "HEAD",
+
+  "hardware_reference": "config/components/hardware/hc_sr04_sensor.json",
+
+  "interface_assignment": "GPIO_PAIR_1",
+
+  "mounting_architecture": {
+
+    "type": "two_tier",
+
+    "hardware_mount": "sensor_basic_mount",
+
+    "decorative_shell": "goblin_nose_shell"
+
+  },
+
+  "coordinate_system": "skull_3d",
+
+  "reference_point": "nose_center",
+
+  "position": {
+
+    "x": "0 INCH",
+
+    "y": "0 INCH",
+
+    "z": "+0.25 INCH"
+
+  },
+
+  "orientation": {
+
+    "tilt": "0 DEGREES",
+
+    "rotation": "0 DEGREES",
+
+    "roll": "0 DEGREES"
+
+  },
+
+  "function": "proximity_sensor",
+
+  "component_name": "goblin_nose",
+  "subsystem": "HEAD",
+
   "description": "Proximity sensor monitoring",
+
   "timing": {
+
     "hitCount": 180000
+
   }
+
 }

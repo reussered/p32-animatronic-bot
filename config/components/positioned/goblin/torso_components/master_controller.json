@@ -1,45 +1,91 @@
 {
+
   "relative_filename": "config/components/positioned/goblin/torso_components/master_controller.json",
+
   "version": "1.0.0", 
+
   "author": "config/author.json",
-  "component_id": "master_controller",
-  "hardware_reference": "config/components/hardware/esp32_s3_devkit.json",
-  "interface_assignment": "MASTER_CONTROLLER_INTERFACE",
-  "coordinate_system": "humanoid_3d",
-  "reference_point": "pelvis_center",
-  "position": {
-    "x": "0 INCH",
-    "y": "0 INCH", 
-    "z": "0 INCH"
-  },
-  "orientation": {
-    "tilt": "0 DEGREES",
-    "rotation": "0 DEGREES", 
-    "roll": "0 DEGREES"
-  },
-  "function": "subsystem_coordination",
+
   "component_name": "master_controller",
+  "subsystem": "TORSO",
+
+  "hardware_reference": "config/components/hardware/esp32_s3_devkit.json",
+
+  "interface_assignment": "MASTER_CONTROLLER_INTERFACE",
+
+  "coordinate_system": "humanoid_3d",
+
+  "reference_point": "pelvis_center",
+
+  "position": {
+
+    "x": "0 INCH",
+
+    "y": "0 INCH", 
+
+    "z": "0 INCH"
+
+  },
+
+  "orientation": {
+
+    "tilt": "0 DEGREES",
+
+    "rotation": "0 DEGREES", 
+
+    "roll": "0 DEGREES"
+
+  },
+
+  "function": "subsystem_coordination",
+
+  "component_name": "master_controller",
+  "subsystem": "TORSO",
+
   "description": "Master controller for coordinating all subsystems via mesh network",
+
   "timing": {
+
     "hitCount": 50
+
   },
+
   "function_declarations": {
+
     "init_function": "p32_comp_master_controller_init",
+
     "act_function": "p32_comp_master_controller_act"
+
   },
+
   "controller_config": {
+
     "expected_subsystems": 6,
+
     "status_request_interval_ms": 10000,
+
     "subsystem_timeout_ms": 15000,
+
     "mood_update_interval_ms": 5000
+
   },
+
   "subsystem_roles": [
+
     "SLAVE_HEAD",
+
     "SLAVE_ARM_LEFT",
+
     "SLAVE_ARM_RIGHT", 
+
     "SLAVE_LEG_LEFT",
+
     "SLAVE_LEG_RIGHT",
+
     "SLAVE_HAND_LEFT",
+
     "SLAVE_HAND_RIGHT"
+
   ]
+
 }

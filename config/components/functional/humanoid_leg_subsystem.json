@@ -1,131 +1,262 @@
 {
+
   "relative_filename": "config/components/functional/humanoid_leg_subsystem.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
+
   
-  "component_id": "HUMANOID_LEG_SUBSYSTEM",
+
+  "component_name": "HUMANOID_LEG_SUBSYSTEM",
+  "subsystem": "LEG",
+
   "component_type": "FUNCTIONAL_SUBSYSTEM",
+
   "description": "Complete leg subsystem using component-based architecture with separated concerns",
+
   
+
   "subsystem_architecture": {
+
     "controller_component": "config/components/hardware/esp32_s3_controller.json",
+
     "communication_interface": "config/components/interfaces/esp_now_mesh.json", 
+
     "servo_hardware": "config/components/hardware/mg996r_servo.json",
+
     "sensor_components": [
+
       "config/components/hardware/mpu6050_imu.json",
+
       "config/components/hardware/pressure_sensor.json"
+
     ],
+
     "power_interface": "config/components/interfaces/power_6v_regulated.json"
+
   },
+
   
+
   "abstraction_layers": {
+
     "hardware_abstraction": {
+
       "description": "Hardware-specific drivers isolated from business logic",
+
       "components": [
+
         "servo_driver_mg996r",
+
         "imu_driver_mpu6050", 
+
         "pressure_sensor_driver",
+
         "esp32_gpio_driver"
+
       ]
+
     },
+
     
+
     "communication_abstraction": {
+
       "description": "Communication protocol separated from hardware control",
+
       "interface": "esp_now_mesh_protocol",
+
       "message_types": ["SERVO_COMMANDS", "SENSOR_DATA", "STATUS_UPDATES"],
+
       "failover": "CAN_BUS_BACKUP"
+
     },
+
     
+
     "functional_abstraction": {
+
       "description": "High-level leg functions independent of implementation",
+
       "functions": [
+
         "walk_forward(speed)",
+
         "balance_on_one_foot(duration)",
+
         "kick_motion(direction, force)",
+
         "step_over_obstacle(height)"
+
       ]
+
     }
+
   },
+
   
+
   "servo_mapping": {
+
     "left_leg": {
+
       "hip_yaw": {
+
         "hardware_component": "mg996r_servo",
+
         "gpio_pin": "GPIO_01",
+
         "pwm_channel": "LEDC_CHANNEL_0",
+
         "range": "[-45, 45] DEGREES"
+
       },
+
       "hip_roll": {
+
         "hardware_component": "mg996r_servo", 
+
         "gpio_pin": "GPIO_02",
+
         "pwm_channel": "LEDC_CHANNEL_1",
+
         "range": "[-25, 25] DEGREES"
+
       },
+
       "hip_pitch": {
+
         "hardware_component": "mg996r_servo",
+
         "gpio_pin": "GPIO_03", 
+
         "pwm_channel": "LEDC_CHANNEL_2",
+
         "range": "[-90, 90] DEGREES"
+
       },
+
       "knee_pitch": {
+
         "hardware_component": "mg996r_servo",
+
         "gpio_pin": "GPIO_04",
+
         "pwm_channel": "LEDC_CHANNEL_3", 
+
         "range": "[0, 150] DEGREES"
+
       },
+
       "ankle_pitch": {
+
         "hardware_component": "mg996r_servo",
+
         "gpio_pin": "GPIO_05",
+
         "pwm_channel": "LEDC_CHANNEL_4",
+
         "range": "[-30, 30] DEGREES"
+
       },
+
       "ankle_roll": {
+
         "hardware_component": "mg996r_servo",
+
         "gpio_pin": "GPIO_06", 
+
         "pwm_channel": "LEDC_CHANNEL_5",
+
         "range": "[-20, 20] DEGREES"
+
       }
+
     },
+
     
+
     "right_leg": {
+
       "hip_yaw": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_07", "pwm_channel": "LEDC_CHANNEL_6"},
+
       "hip_roll": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_08", "pwm_channel": "LEDC_CHANNEL_7"},
+
       "hip_pitch": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_09", "pwm_channel": "LEDC_CHANNEL_8"},
+
       "knee_pitch": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_10", "pwm_channel": "LEDC_CHANNEL_9"},
+
       "ankle_pitch": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_11", "pwm_channel": "LEDC_CHANNEL_10"},
+
       "ankle_roll": {"hardware_component": "mg996r_servo", "gpio_pin": "GPIO_12", "pwm_channel": "LEDC_CHANNEL_11"}
+
     }
+
   },
+
   
+
   "communication_independence": {
+
     "current_protocol": "esp_now_mesh", 
+
     "alternative_protocols": [
+
       "can_bus_interface",
+
       "rs485_serial", 
+
       "wifi_tcp_ip",
+
       "bluetooth_low_energy"
+
     ],
+
     "protocol_switching": "COMPILE_TIME_CONFIGURABLE",
+
     "message_format": "PROTOCOL_AGNOSTIC_JSON"
+
   },
+
   
+
   "hardware_independence": {
+
     "current_servo": "mg996r",
+
     "alternative_servos": [
+
       "dynamixel_mx28",
+
       "mg90s_micro", 
+
       "hitec_hs805bb",
+
       "servo_city_continuous"
+
     ],
+
     "servo_switching": "CONFIGURATION_FILE_CHANGE",
+
     "control_abstraction": "POSITION_VELOCITY_TORQUE_MODES"
+
   },
+
   
+
   "modular_benefits": {
+
     "hardware_upgrades": "CHANGE_SERVO_CONFIG_WITHOUT_CODE_CHANGES",
+
     "communication_upgrades": "SWITCH_PROTOCOLS_WITHOUT_HARDWARE_CHANGES", 
+
     "testing": "MOCK_COMPONENTS_FOR_SIMULATION",
+
     "maintenance": "REPLACE_FAILED_COMPONENTS_INDEPENDENTLY",
+
     "scaling": "ADD_MORE_SERVOS_WITHOUT_ARCHITECTURE_CHANGES"
+
   }
+
 }

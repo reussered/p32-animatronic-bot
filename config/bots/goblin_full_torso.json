@@ -15,7 +15,7 @@
   "reference_point": "pelvis_center",
   "units": "INCHES",
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin/torso_components/power_management_system.json",
     "config/components/positioned/goblin/torso_components/main_battery_monitor.json",
     "config/components/positioned/goblin/torso_components/external_wifi_communication.json",

@@ -1,96 +1,192 @@
 {
+
   "relative_filename": "config/components/positioned/robot_solar_parasol.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
+
   "component_type": "POSITIONED_SOLAR_PARASOL",
-  "component_id": "ROBOT_SOLAR_PARASOL_MOUNT",
+
+  "component_name": "ROBOT_SOLAR_PARASOL_MOUNT",
+  "subsystem": "UNKNOWN",
+
   "description": "Shoulder-mounted deployable solar parasol system for autonomous power generation",
+
   "created": "2025-10-13",
+
   
+
   "hardware_reference": "config/components/hardware/solar_parasol_system.json",
+
   "interface_assignment": "config/components/interfaces/parasol_controller_interface.json",
+
   
+
   "spatial_coordinates": {
+
     "coordinate_system": "planar_2d",
+
     "reference_point": "nose_center",
+
     "mount_position": {
+
       "x": "0.0 INCH",
+
       "y": "-8.0 INCH", 
+
       "z": "2.0 INCH"
+
     },
+
     "deployed_center": {
+
       "x": "0.0 INCH",
+
       "y": "-8.0 INCH",
+
       "z": "16.0 INCH"  
+
     },
+
     "clearance_radius": "42.0 INCH"
+
   },
+
   
+
   "mounting_specifications": {
+
     "mount_type": "back_spine_attachment",
+
     "load_capacity": "15 KG", 
+
     "pivot_range": "90 DEG",
+
     "retraction_clearance": "back_profile_flush",
+
     "wind_load_rating": "30 MPH",
+
     "transport_position": "horizontal_collapsed"
+
   },
+
   
+
   "deployment_sequence": {
+
     "step_1": {
+
       "action": "check_environmental_conditions",
+
       "duration": "3 SEC",
+
       "safety_checks": ["wind_speed", "obstacle_detection", "battery_level"]
+
     },
+
     "step_2": {
+
       "action": "rotate_from_back_to_vertical", 
+
       "duration": "12 SEC",
+
       "servo_positions": {"spine_pivot": "90_DEG", "parasol_elevation": "VERTICAL"}
+
     },
+
     "step_3": {
+
       "action": "deploy_parasol_ribs",
+
       "duration": "15 SEC", 
+
       "rib_sequence": "sequential_radial_deployment"
+
     },
+
     "step_4": {
+
       "action": "unfurl_solar_panels",
+
       "duration": "12 SEC",
+
       "panel_tensioning": "progressive_stretch"
+
     },
+
     "step_5": {
+
       "action": "activate_sun_tracking",
+
       "duration": "7 SEC",
+
       "initial_positioning": "calculate_optimal_angle"
+
     }
+
   },
+
   
+
   "operational_modes": {
+
     "power_generation": {
+
       "tracking_enabled": true,
+
       "weather_monitoring": true,
+
       "power_output_priority": "maximum"
+
     },
+
     "shade_service": {
+
       "tracking_enabled": false,
+
       "fixed_position": "user_comfort_angle", 
+
       "interaction_mode": "social"
+
     },
+
     "weather_protection": {
+
       "automatic_retraction": true,
+
       "wind_threshold": "15 MPH",
+
       "rain_detection": "immediate_response"
+
     }
+
   },
+
   
+
   "behavioral_integration": {
+
     "power_aware": true,
+
     "weather_responsive": true,
+
     "user_service_priority": true,
+
     "emergency_protocols": ["rapid_retract", "power_disconnect", "safe_mode"]
+
   },
+
   
+
   "family_compatibility": {
+
     "robot": "ESSENTIAL",
+
     "android": "EXCELLENT",
+
     "steampunk": "GOOD"
+
   }
+
 }

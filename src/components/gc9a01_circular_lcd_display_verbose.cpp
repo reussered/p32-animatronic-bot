@@ -4,7 +4,7 @@
  * @author Auto-generated from JSON specification
  */
 
-#include "components/GC9A01 Circular LCD Display.hpp"
+#include "components/gc9a01_circular_lcd_display.hpp"
 #include "core/memory/SharedMemory.hpp"
 
 #include "p32_shared_state.h"

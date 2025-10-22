@@ -1,41 +1,83 @@
 {
+
   "relative_filename": "config/components/positioned/goblin/leg_components/left/knee_flexion_servo.json",
+
   "version": "2.0.0",
+
   "author": "config/author.json",
-  "component_id": "knee_flexion_servo_left",
+
+  "component_name": "knee_flexion_servo_left",
+  "subsystem": "LEG",
+
   
+
   "template_inheritance": {
+
     "hardware_template": "config/components/hardware/mg996r_servo.json",
+
     "creature_shell": "assets/shapes/scad/creature_shells/goblin/knee_flexion_mount.scad",
+
     "mount_template": "assets/shapes/scad/basic_mounts/servo_heavy_duty_mount.scad"
+
   },
+
   
+
   "interface_assignment": "PWM_CHANNEL_4", 
+
   "coordinate_system": "humanoid_3d",
+
   "reference_point": "hip_socket_left",
+
   "position": {
+
     "x": "0 INCH",
+
     "y": "0 INCH",
+
     "z": "-12.0 INCH"
+
   },
+
   "orientation": {
+
     "tilt": "0 DEGREES",
+
     "rotation": "0 DEGREES", 
+
     "roll": "0 DEGREES"
+
   },
+
   
+
   "servo_specific_config": {
+
     "joint_type": "KNEE_FLEXION_EXTENSION",
+
     "range_degrees": "150",
+
     "center_position": "90",
+
     "movement_direction": "BEND_STRAIGHTEN",
+
     "max_torque_required_kg_cm": "20"
+
   },
+
   
+
   "function": "knee_bend_control", 
+
   "component_name": "goblin_left_knee_flexion",
+  "subsystem": "LEG",
+
   "description": "Left knee flexion/extension servo - shin bend control for walking",
+
   "timing": {
+
     "hitCount": 5
+
   }
+
 }

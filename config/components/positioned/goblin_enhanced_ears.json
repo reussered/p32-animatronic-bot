@@ -1,80 +1,160 @@
 {
+
   "relative_filename": "config/components/positioned/goblin_enhanced_ears.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
-  "component_id": "GOBLIN_ENHANCED_EARS",
+
+  "component_name": "GOBLIN_ENHANCED_EARS",
+  "subsystem": "HEAD",
+
   "component_type": "sensory_enhancement",
+
   "description": "Enlarged and enhanced ears for scout goblin superior hearing",
+
   "created": "2025-10-12",
+
   
+
   "hardware_reference": "config/components/hardware/directional_microphone.json",
+
   "interface_reference": "config/components/interfaces/i2s_device_2.json",
+
   
+
   "coordinate_system": "skull_3d",
+
   "reference_point": "nose_center",
+
   
+
   "ear_positions": [
+
     {
+
       "ear_id": "left_enhanced",
+
       "position": {
+
         "x": "-2.0 INCH",
+
         "y": "0.5 INCH",
+
         "z": "0.2 INCH"
+
       },
+
       "dimensions": {
+
         "length": "2.5 INCH",
+
         "width": "1.2 INCH",
+
         "height": "3.0 INCH"
+
       },
+
       "enhancement_factor": 1.4,
+
       "directional_capability": true
+
     },
+
     {
+
       "ear_id": "right_enhanced", 
+
       "position": {
+
         "x": "2.0 INCH",
+
         "y": "0.5 INCH",
+
         "z": "0.2 INCH"
+
       },
+
       "dimensions": {
+
         "length": "2.5 INCH",
+
         "width": "1.2 INCH",
+
         "height": "3.0 INCH"
+
       },
+
       "enhancement_factor": 1.4,
+
       "directional_capability": true
+
     }
+
   ],
+
   
+
   "acoustic_properties": {
+
     "frequency_range": {
+
       "low": "20 Hz",
+
       "high": "25000 Hz"
+
     },
+
     "directional_sensitivity": "high",
+
     "noise_filtering": "adaptive",
+
     "gain_control": "automatic"
+
   },
+
   
+
   "morphological_features": {
+
     "ear_point_extension": "1.2 INCH",
+
     "inner_ear_ridges": 5,
+
     "cartilage_definition": "prominent",
+
     "hair_tufts": "sparse_tactical"
+
   },
+
   
+
   "gpio_mapping": {
+
     "left_ear_mic": "I2S_WS_PIN",
+
     "right_ear_mic": "I2S_SD_PIN",
+
     "directional_control": "GPIO_26"
+
   },
+
   
+
   "prototype_status": "design_complete", 
+
   "tested": false,
+
   "notes": [
+
     "Enhanced hearing capability for scout reconnaissance",
+
     "Enlarged ear structure for improved sound collection",
+
     "Directional microphone integration",
+
     "Adaptive noise filtering for environment focus"
+
   ]
+
 }

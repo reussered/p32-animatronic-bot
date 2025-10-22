@@ -1,113 +1,226 @@
 {
+
   "relative_filename": "config/components/positioned/goblin_spirit_runes.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
-  "component_id": "GOBLIN_SPIRIT_RUNES",
+
+  "component_name": "GOBLIN_SPIRIT_RUNES",
+  "subsystem": "UNKNOWN",
+
   "component_type": "mystical_display",
+
   "description": "Glowing mystical runes for shaman goblin spiritual communication",
+
   "created": "2025-10-12",
+
   
+
   "hardware_reference": "config/components/hardware/led_matrix_small.json",
+
   "interface_reference": "config/components/interfaces/spi_device_3.json",
+
   
+
   "coordinate_system": "skull_3d",
+
   "reference_point": "nose_center",
+
   
+
   "rune_positions": [
+
     {
+
       "rune_id": "forehead_wisdom",
+
       "position": {
+
         "x": "0.0 INCH",
+
         "y": "1.4 INCH",
+
         "z": "0.1 INCH"
+
       },
+
       "dimensions": {
+
         "diameter": "0.6 INCH"
+
       },
+
       "rune_symbol": "ancient_wisdom",
+
       "glow_color": "mystical_blue",
+
       "activation_trigger": "spiritual_communication"
+
     },
+
     {
+
       "rune_id": "left_temple_power",
+
       "position": {
+
         "x": "-1.1 INCH",
+
         "y": "0.8 INCH",
+
         "z": "0.05 INCH"
+
       },
+
       "dimensions": {
+
         "diameter": "0.4 INCH"
+
       },
+
       "rune_symbol": "elemental_earth",
+
       "glow_color": "earth_green",
+
       "activation_trigger": "nature_attunement"
+
     },
+
     {
+
       "rune_id": "right_temple_spirit",
+
       "position": {
+
         "x": "1.1 INCH",
+
         "y": "0.8 INCH", 
+
         "z": "0.05 INCH"
+
       },
+
       "dimensions": {
+
         "diameter": "0.4 INCH"
+
       },
+
       "rune_symbol": "spirit_channel",
+
       "glow_color": "spirit_silver",
+
       "activation_trigger": "ritual_casting"
+
     },
+
     {
+
       "rune_id": "chin_protection",
+
       "position": {
+
         "x": "0.0 INCH",
+
         "y": "-1.6 INCH",
+
         "z": "0.3 INCH"
+
       },
+
       "dimensions": {
+
         "diameter": "0.3 INCH"
+
       },
+
       "rune_symbol": "protective_ward",
+
       "glow_color": "ward_gold",
+
       "activation_trigger": "protective_casting"
+
     }
+
   ],
+
   
+
   "mystical_properties": {
+
     "glow_colors": {
+
       "mystical_blue": "#4169E1",
+
       "earth_green": "#8FBC8F",
+
       "spirit_silver": "#C0C0C0",
+
       "ward_gold": "#FFD700"
+
     },
+
     "animation_patterns": {
+
       "pulse": "rhythmic_breathing",
+
       "flicker": "spiritual_energy",
+
       "spiral": "power_gathering",
+
       "flash": "spell_activation"
+
     },
+
     "intensity_levels": ["dormant", "active", "channeling", "maximum_power"]
+
   },
+
   
+
   "spiritual_meanings": {
+
     "ancient_wisdom": "connection_to_ancestral_knowledge",
+
     "elemental_earth": "harmony_with_natural_forces",
+
     "spirit_channel": "communication_with_otherworld",
+
     "protective_ward": "defense_against_evil_spirits"
+
   },
+
   
+
   "gpio_mapping": {
+
     "rune_matrix_data": "SPI_MOSI",
+
     "rune_matrix_clock": "SPI_SCK",
+
     "rune_select": "GPIO_28",
+
     "power_control": "GPIO_29"
+
   },
+
   
+
   "prototype_status": "design_complete",
+
   "tested": false,
+
   "notes": [
+
     "Mystical rune display system for shaman abilities",
+
     "Multiple activation triggers based on spiritual state",
+
     "Culturally significant ancient goblin symbols",
+
     "LED matrix integration for dynamic glow effects"
+
   ]
+
 }

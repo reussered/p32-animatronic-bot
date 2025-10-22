@@ -4,16 +4,17 @@
 
 **RULE**: The validation script (`validate_json_improved.py`) MUST auto-generate exactly 4 files from JSON component configurations:
 
-### Required Generated Files:
+### Required Generated Files
 
 1. **`src/p32_dispatch_tables.cpp`** - Implementation with tables
 2. **`include/p32_dispatch_tables.hpp`** - Header with declarations  
 3. **`src/p32_component_functions.cpp`** - Component implementation aggregator
 4. **`include/p32_component_functions.hpp`** - Component header aggregator
 
-### Version Control Rules:
+### Version Control Rules
 
 **RULE**: ALL four generated files MUST be in `.gitignore` since they are script-generated:
+
 ```gitignore
 # Auto-generated dispatch tables - created by validate_json_improved.py
 src/p32_dispatch_tables.cpp
@@ -24,9 +25,10 @@ include/p32_component_functions.hpp
 
 ## Component Function Signature Rules
 
-### NO ARGUMENTS Pattern (IMMUTABLE):
+### NO ARGUMENTS Pattern (IMMUTABLE)
 
 **RULE**: ALL component functions MUST follow the NO ARGUMENTS pattern:
+
 ```cpp
 // CORRECT - Component init functions
 esp_err_t component_name_init(void);
@@ -36,13 +38,15 @@ void component_name_act(void);
 ```
 
 **RULE**: Components access shared state via `#include "p32_shared_state.h"`:
+
 - `g_loopCount` - Global loop counter (read-only for components)
 - SharedMemory class - ESP-NOW mesh state synchronization
 - All other global state variables
 
-### Function Naming Convention:
+### Function Naming Convention
 
 **RULE**: Function names MUST follow this exact pattern:
+
 ```cpp
 // Pattern: {component_name}_{function_type}
 esp_err_t heartbeat_init(void);
@@ -52,9 +56,10 @@ esp_err_t goblin_left_eye_init(void);
 void goblin_left_eye_act(void);
 ```
 
-### Component Naming Requirements:
+### Component Naming Requirements
 
 **RULE**: All component names MUST be globally unique across the entire system:
+
 - **No duplicates allowed** - each component name can only exist once
 - **Consistent naming pattern**: `{creature}_{position}_{part}` for positioned components
 - **Examples**: `robot_left_eye`, `goblin_right_ear`, `cyclops_center_eye`
@@ -62,7 +67,7 @@ void goblin_left_eye_act(void);
 
 ## Dispatch Table Structure Rules
 
-### Three Table Architecture:
+### Three Table Architecture
 
 **RULE**: Generate exactly 3 parallel dispatch tables with SAME indexing:
 
@@ -89,15 +94,16 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 };
 ```
 
-### Parallel Indexing Rule:
+### Parallel Indexing Rule
 
 **RULE**: `initTable[i]`, `actTable[i]`, and `hitCountTable[i]` MUST refer to the SAME component
+
 - Component execution: `if (g_loopCount % hitCountTable[i] == 0) actTable[i]()`
 - Component at index `i` has init, act, and hitCount all at same array position
 
 ## Component Hierarchy Processing Rules
 
-### Depth-First Component Resolution:
+### Depth-First Component Resolution
 
 **RULE**: Process component hierarchy to create flat execution order:
 
@@ -118,25 +124,28 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 ]
 ```
 
-### Component Inclusion Rule:
+### Component Inclusion Rule
 
 **RULE**: Dispatch tables vs Function definitions have different deduplication rules:
 
-#### **Dispatch Tables** (NO deduplication):
+#### **Dispatch Tables** (NO deduplication)
+
 - `goblin_eye` component appears MULTIPLE times in dispatch tables (once for left_eye, once for right_eye)
 - `gc9a01` driver appears MULTIPLE times in dispatch tables (once for left_eye display, once for right_eye display)
 - Each dispatch table entry can point to the same function but execute independently
 - Each instance maintains separate timing via `hitCount` values
 
-#### **Function Definitions** (WITH deduplication):
+#### **Function Definitions** (WITH deduplication)
+
 - `goblin_eye_init()` function defined only ONCE in `p32_component_functions.cpp`
 - `gc9a01_init()` function defined only ONCE in `p32_component_functions.cpp`
 - Multiple dispatch table entries can reference the same function implementation
 - Required for compilation - duplicate function definitions would cause linker errors
 
-### Component Type Processing Priority:
+### Component Type Processing Priority
 
 **RULE**: Process components in this exact order:
+
 1. **System Components** (always present): heartbeat, network_monitor
 2. **Family Components** (from family_template): goblin_behavior, goblin_mood  
 3. **Positioned Components** (spatial instances): goblin_left_eye, goblin_right_eye
@@ -145,9 +154,10 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 
 ## Hardware-Only Component Rules
 
-### Shape-Only Components:
+### Shape-Only Components
 
 **RULE**: Components with `"hardware_only": true` do NOT generate init/act functions:
+
 ```json
 {
   "component_name": "goblin_skull",
@@ -158,15 +168,17 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 ```
 
 **RULE**: Shape parameter MUST be present for hardware-only components:
+
 - Required: `"shape": "component_shape.scad"`
 - Purpose: Defines physical mounting framework for child components
 - No software functionality - pure mechanical structure
 
 ## File Generation Content Rules
 
-### Dispatch Tables Header (p32_dispatch_tables.hpp):
+### Dispatch Tables Header (p32_dispatch_tables.hpp)
 
 **RULE**: Header MUST contain:
+
 ```cpp
 #ifndef P32_DISPATCH_TABLES_HPP
 #define P32_DISPATCH_TABLES_HPP
@@ -196,9 +208,10 @@ extern uint64_t g_loopCount;
 #endif
 ```
 
-### Dispatch Tables Implementation (p32_dispatch_tables.cpp):
+### Dispatch Tables Implementation (p32_dispatch_tables.cpp)
 
 **RULE**: Implementation MUST contain:
+
 ```cpp
 #include "p32_dispatch_tables.hpp"
 
@@ -219,9 +232,10 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 };
 ```
 
-### Component Functions Aggregator Rules:
+### Component Functions Aggregator Rules
 
 **RULE**: p32_component_functions.hpp MUST include ALL unique component headers:
+
 ```cpp
 // Auto-generated component function aggregator
 #ifndef P32_COMPONENT_FUNCTIONS_HPP
@@ -237,6 +251,7 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 ```
 
 **RULE**: p32_component_functions.cpp provides empty implementation stub:
+
 ```cpp
 #include "p32_component_functions.hpp"
 // Implementation provided by individual component files
@@ -244,9 +259,10 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 
 ## Integration Rules
 
-### Build System Integration:
+### Build System Integration
 
 **RULE**: Generated files MUST be included in build system:
+
 ```cmake
 # CMakeLists.txt MUST include auto-generated files
 set(SOURCES
@@ -257,9 +273,10 @@ set(SOURCES
 )
 ```
 
-### Main Loop Integration:
+### Main Loop Integration
 
 **RULE**: `main.cpp` MUST include dispatch tables header:
+
 ```cpp
 #include "p32_dispatch_tables.hpp"
 
@@ -286,18 +303,20 @@ void app_main(void) {
 
 ## Validation Script Requirements
 
-### Script Execution Rules:
+### Script Execution Rules
 
 **RULE**: `validate_json_improved.py` MUST:
+
 1. Scan all JSON component configurations
 2. Build hierarchical component tree
 3. Flatten to execution order with deduplication
 4. Generate all 4 files atomically (success/failure together)
 5. Report component counts and changes made
 
-### Error Handling Rules:
+### Error Handling Rules
 
 **RULE**: Script MUST validate:
+
 - JSON syntax and structure
 - Component reference resolution
 - Circular dependency detection  
@@ -305,9 +324,10 @@ void app_main(void) {
 - hardware_only components have shape parameter
 - **GLOBAL COMPONENT NAME UNIQUENESS** - no duplicate component names across all JSON files
 
-### Execution Output Rules:
+### Execution Output Rules
 
 **RULE**: Script MUST report:
+
 ```bash
 Components processed: N
 Unique component names: N  
@@ -320,9 +340,10 @@ Generated: include/p32_component_functions.hpp
 
 ## Architecture Compliance Rules
 
-### Component Execution Model:
+### Component Execution Model
 
 **RULE**: Dispatch tables enable the IMMUTABLE core loop:
+
 ```cpp
 // THE ENTIRE SYSTEM (5 lines - NEVER changes)
 void app_main(void) {
@@ -336,9 +357,10 @@ void app_main(void) {
 }
 ```
 
-### NO ARGUMENTS Architecture:
+### NO ARGUMENTS Architecture
 
 **RULE**: Components communicate via shared state, not function parameters:
+
 - All functions take `void` - no arguments passed
 - Components read `g_loopCount` and shared state directly
 - ESP-NOW mesh communication via SharedMemory class
@@ -346,17 +368,19 @@ void app_main(void) {
 
 ## Usage Pattern Rules
 
-### Development Workflow:
+### Development Workflow
 
 **RULE**: After JSON configuration changes:
+
 1. Run `python validate_json_improved.py`
 2. Verify 4 files generated successfully
 3. Build with `pio run` to test compilation
 4. Commit only JSON changes (generated files ignored)
 
-### Debugging Rules:
+### Debugging Rules
 
 **RULE**: For dispatch table debugging:
+
 - Check COMPONENT_TABLE_SIZE matches actual component count
 - Verify parallel indexing: initTable[i] ↔ actTable[i] ↔ hitCountTable[i]
 - Validate all function declarations have implementations

@@ -4,6 +4,7 @@
   "author": "config/author.json",
   "hardware_type": "GC9A01_DISPLAY",
   "component_name": "gc9a01",
+  "subsystem": "HEAD",
   "physical_specs": {
     "diameter": "1.28 INCH",
     "thickness": "0.08 INCH",

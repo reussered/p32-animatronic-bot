@@ -1,37 +1,75 @@
 {
+
   "relative_filename": "config/components/positioned/goblin/torso_components/esp_now_mesh_coordinator.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
-  "component_id": "esp_now_mesh_coordinator",
+
+  "component_name": "esp_now_mesh_coordinator",
+  "subsystem": "TORSO",
+
   "hardware_reference": "config/components/hardware/esp32_s3_wifi.json",
+
   "interface_assignment": "WIFI_INTERFACE",
+
   "coordinate_system": "humanoid_3d",
+
   "reference_point": "pelvis_center",
+
   "position": {
+
     "x": "0 INCH",
+
     "y": "+1.0 INCH",
+
     "z": "10.0 INCH"
+
   },
+
   "orientation": {
+
     "tilt": "0 DEGREES",
+
     "rotation": "0 DEGREES",
+
     "roll": "0 DEGREES"
+
   },
+
   "function": "mesh_network_coordination",
+
   "component_name": "mesh_coordinator", 
+  "subsystem": "TORSO",
+
   "description": "ESP-NOW mesh network master controller",
+
   "timing": {
+
     "hitCount": 10
+
   },
+
   "function_declarations": {
+
     "init_function": "p32_comp_mesh_coordinator_init",
+
     "act_function": "p32_comp_mesh_coordinator_act"
+
   },
+
   "mesh_config": {
+
     "node_role": "MASTER_CONTROLLER",
+
     "mesh_key": "P32_GOBLIN_MESH_2025", 
+
     "channel": 1,
+
     "max_nodes": 8,
+
     "heartbeat_interval_ms": 1000
+
   }
+
 }

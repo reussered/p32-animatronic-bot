@@ -25,7 +25,7 @@ ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF frame
 
 **Every creature requires**:
 1. Component JSON file with `component_name` and `hitCount` timing
-2. Component CPP code with `{name}_init(void)` and `{name}_act(void)` functions **WITH NO ARGUMENTS**  if the component has the keyword hardware_only set to true, these functions are not created.
+2. Component CPP code with `{name}_init(void)` and `{name}_act(void)` functions **WITH NO ARGUMENTS**. If both init_function and act_function are set to "STUB" in the software section, this indicates a hardware-only component and these functions are not created.
 3. Include `p32_shared_state.h` to access `g_loopCount` and all global shared state
 4. Attachment at appropriate level (System/Family/Subsystem/Hardware)
 5. Registration in generated component tables
@@ -34,9 +34,9 @@ The core loop in `app_main()` interates once through all of the attached compone
 
 **CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.  Those values that are common to all subsystems are read and updated though the SharedMemory class.  This class contains an internal version of the ESP NOW bluetooth system and is used to communicvate between all of the various subsystems controled by a separate esp32 chip.  the protocol for using this code is to declate a local copy of the class variable, thern read its current state.  this read is purely local code and doesn't affect the state of any other subsystem.  when the local code has made any changes to the shared state, it then calls the write function of the class, which updates the local copy and also sends out an ESP NOW message to all other subsystems to update their copies of the shared state.
 
-**Shapes are defined using scad and stl files.  if the shape parameterr is missing, this component only affects software.  The component must have a shape parameter if it is designated a hardware_only component.
+**Shapes are defined using scad and stl files. If the shape parameter is missing, this component only affects software. The component must have a shape parameter if both init_function and act_function are set to "STUB" (hardware-only component).**
 
-	- for example, The goblin_head component has a shape key that specifies `g1oblin_skull.scad` which defines the mounting framework for eyes/nose/mouth components.  The corresponding stl files are also saved into git to reduce creature generation time.
+- for example, The goblin_head component has a shape key that specifies `goblin_skull.scad` which defines the mounting framework for eyes/nose/mouth components. The corresponding stl files are also saved into git to reduce creature generation time.
 	
 
 **System components distributed strategically**:

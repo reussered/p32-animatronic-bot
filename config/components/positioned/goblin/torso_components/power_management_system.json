@@ -1,26 +1,53 @@
 {
+
   "relative_filename": "config/components/positioned/goblin/torso_components/power_management_system.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
-  "component_id": "power_management_system",
+
+  "component_name": "power_management_system",
+  "subsystem": "TORSO",
+
   "hardware_reference": "config/components/hardware/power_management_unit.json",
+
   "interface_assignment": "I2C_BUS_1",
+
   "coordinate_system": "humanoid_3d",
+
   "reference_point": "pelvis_center",
+
   "position": {
+
     "x": "0 INCH",
+
     "y": "+2.0 INCH",
+
     "z": "8.0 INCH"
+
   },
+
   "orientation": {
+
     "tilt": "0 DEGREES",
+
     "rotation": "0 DEGREES",
+
     "roll": "0 DEGREES"
+
   },
+
   "function": "power_distribution_monitoring",
+
   "component_name": "power_manager",
+  "subsystem": "TORSO",
+
   "description": "Battery monitoring and power distribution control",
+
   "timing": {
+
     "hitCount": 100
+
   }
+
 }

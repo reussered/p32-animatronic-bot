@@ -1,24 +1,109 @@
 {
+
   "relative_filename": "config/components/positioned/goblin_ear_right.json",
-  "version": "1.0.0",
+
+  "version": "3.0.0",
+
   "author": "config/author.json",
-  "component_id": "goblin_ear_right",
-  "hardware_reference": "config/components/hardware/directional_microphone.json",
-  "interface_assignment": "I2S_DEVICE_3",
+
+  "component_name": "goblin_ear_right",
+  "subsystem": "HEAD",
+
+  "component_type": "POSITIONED_AUDIO_INPUT",
+
+  "description": "Right ear positioned microphone with goblin-specific directional processing",
+
+  "created": "2025-10-22",
+
+  
+
+  "contained_components": [
+
+    "config/components/creature_specific/goblin_ear.json"
+
+  ],
+
+  
+
+  "interface_assignment": "ADC_RIGHT_EAR",
+
   "coordinate_system": "skull_3d",
+
   "reference_point": "nose_center",
+
   "position": {
+
     "x": "1.5 INCH",
+
     "y": "0.5 INCH",
+
     "z": "0.1 INCH"
+
   },
+
   "orientation": {
+
     "tilt": "15 DEGREES",
+
     "rotation": "30 DEGREES",
+
     "roll": "0 DEGREES"
+
   },
+
+  
+
+  "positioning_specific_config": {
+
+    "ear_side": "RIGHT",
+
+    "directional_bias": "RIGHT_HEMISPHERE",
+
+    "spatial_priority": "POSITIVE_X_AXIS",
+
+    "cross_correlation_role": "SECONDARY_REFERENCE"
+
+  },
+
+  
+
   "function": "right_ear_audio_input",
+
   "timing": {
-    "hitCount": 24000
-  }
+
+    "hitCount": 10,
+
+    "description": "Right ear sampling every 10 loops"
+
+  },
+
+  
+
+  "software": {
+
+    "init_function": "goblin_ear_right_init",
+
+    "act_function": "goblin_ear_right_act"
+
+  },
+
+  
+
+  "shape": {
+
+    "scad_file": "assets/shapes/scad/creature_shells/goblin/goblin_ear_right_shell.scad",
+
+    "stl_file": "assets/shapes/stl/creature_shells/goblin/goblin_ear_right_shell.stl",
+
+    "description": "Pointed goblin ear shell with integrated microphone mount"
+
+  },
+
+  
+
+  "prototype_status": "configured",
+
+  "tested": false
+
 }
+

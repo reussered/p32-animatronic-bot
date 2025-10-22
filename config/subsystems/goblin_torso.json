@@ -39,7 +39,7 @@
     "config/components/system/power_monitor.json"
   ],
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/spine_flexion_servo.json",
     "config/components/positioned/spine_extension_servo.json",
     "config/components/positioned/waist_rotation_servo.json",

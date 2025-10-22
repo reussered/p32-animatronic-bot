@@ -17,17 +17,11 @@
   "eye_spacing": "3.0 INCH",
   "compression_factor": 0.7,
   
-  "family_level_components": [
+  "contained_components": [
     "config/components/functional/goblin_pirate_personality.json",
     "config/components/functional/goblin_mood.json",
-    "config/components/functional/goblin_behavior_engine.json"
-  ],
-  
-  "subsystems": [
-    "config/subsystems/goblin_pirate_head.json"
-  ],
-  
-  "positioned_components": [
+    "config/components/functional/goblin_behavior_engine.json",
+    "config/subsystems/goblin_pirate_head.json",
     "config/components/positioned/goblin/head_components/goblin_left_eye.json",
     "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "config/components/positioned/goblin/head_components/goblin_speaker.json",

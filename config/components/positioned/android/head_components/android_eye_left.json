@@ -2,7 +2,7 @@
   "relative_filename": "config/components/positioned/android/head_components/android_eye_left.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "component_id": "android_eye_left",
+  "component_name": "android_eye_left",
   
   "template_inheritance": {
     "hardware_template": "config/components/hardware/led_matrix_small.json",

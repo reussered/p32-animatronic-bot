@@ -15,7 +15,7 @@
   "reference_point": "shoulder_socket_right",
   "units": "INCHES",
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin/arm_components/right/shoulder_flexion_servo.json",
     "config/components/positioned/goblin/arm_components/right/shoulder_abduction_servo.json",
     "config/components/positioned/goblin/arm_components/right/shoulder_rotation_servo.json", 

@@ -15,7 +15,7 @@
   "reference_point": "wrist_joint_left",
   "units": "INCHES",
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin/hand_components/left/thumb_servo.json",
     "config/components/positioned/goblin/hand_components/left/index_finger_servo.json",
     "config/components/positioned/goblin/hand_components/left/middle_finger_servo.json", 

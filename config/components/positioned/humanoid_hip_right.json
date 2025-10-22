@@ -1,99 +1,198 @@
 {
+
   "relative_filename": "config/components/positioned/humanoid_hip_right.json",
+
   "version": "1.0.0",
+
   "author": "config/author.json",
+
   
-  "component_id": "HUMANOID_HIP_RIGHT",
+
+  "component_name": "HUMANOID_HIP_RIGHT",
+  "subsystem": "LEG",
+
   "component_type": "POSITIONED_COMPONENT", 
+
   "description": "Right hip joint with 3 DOF for leg attachment and bipedal locomotion",
+
   
+
   "physical_component": "config/components/hardware/servo_assembly.json",
+
   "interface_assignments": {
+
     "primary_interface": "config/components/interfaces/servo_controller_right_hip.json"
+
   },
+
   
+
   "coordinate_system": "skull_3d", 
+
   "reference_point": "nose_center",
+
   "position": {
+
     "x": "3.0 INCH",
+
     "y": "0.0 INCH",
+
     "z": "-12.0 INCH", 
+
     "description": "Right hip attachment point on pelvis"
+
   },
+
   
+
   "scaling_behavior": {
+
     "scales_with_creature": true,
+
     "scaling_reference": "eye_spacing_baseline",
+
     "position_scaling": "PROPORTIONAL_XYZ",
+
     "component_scaling": "MASS_BASED_SERVO_SELECTION"
+
   },
+
   
+
   "joint_specifications": {
+
     "degrees_of_freedom": 3,
+
     "joint_names": ["hip_flex_extend", "hip_abduct_adduct", "hip_internal_external_rotation"],
+
     
+
     "hip_flex_extend": {
+
       "axis": "FRONTAL_PLANE_ROTATION", 
+
       "range_of_motion": "-30_TO_120_DEGREES",
+
       "servo_type": "NEMA17_WITH_100_1_GEARBOX",
+
       "torque_requirement": "23.6_NM_PEAK",
+
       "position_feedback": "AS5600_ABSOLUTE_ENCODER",
+
       "walking_primary": "MAIN_GAIT_GENERATION_AXIS"
+
     },
+
     
+
     "hip_abduct_adduct": {
+
       "axis": "SAGITTAL_PLANE_ROTATION",
+
       "range_of_motion": "-45_TO_45_DEGREES", 
+
       "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+
       "torque_requirement": "11.8_NM_PEAK",
+
       "position_feedback": "AS5600_ABSOLUTE_ENCODER",
+
       "walking_secondary": "LATERAL_BALANCE_AND_STRIDE_WIDTH"
+
     },
+
     
+
     "hip_internal_external_rotation": {
+
       "axis": "FEMORAL_LONGITUDINAL_AXIS",
+
       "range_of_motion": "-45_TO_45_DEGREES",
+
       "servo_type": "DS3218_SERVO", 
+
       "torque_requirement": "2.2_NM_PEAK",
+
       "position_feedback": "INTEGRATED_POTENTIOMETER",
+
       "walking_tertiary": "FOOT_ORIENTATION_AND_TURNING"
+
     }
+
   },
+
   
+
   "load_specifications": {
+
     "vertical_load_capacity": "150_KG_DYNAMIC_WALKING", 
+
     "impact_absorption": "PNEUMATIC_DAMPER_INTEGRATED",
+
     "emergency_systems": {
+
       "overload_detection": "STRAIN_GAUGE_MONITORING",
+
       "emergency_stop": "INSTANT_SERVO_DISABLE_ON_FAULT"
+
     }
+
   },
+
   
+
   "attachment_points": {
+
     "connects_to_pelvis": {
+
       "component_reference": "config/components/positioned/humanoid_pelvis_assembly.json",
+
       "attachment_method": "M10_HIP_SOCKET_ASSEMBLY" 
+
     },
+
     "connects_to_upper_leg": {
+
       "component_reference": "config/components/positioned/humanoid_knee_right.json",
+
       "attachment_method": "M8_FEMUR_COUPLING"
+
     }
+
   },
+
   
+
   "control_specifications": {
+
     "controller_assignment": "ESP32_S3_GAIT_MASTER_CONTROLLER",
+
     "control_loop_frequency": "2000_HZ",
+
     "coordinate_with": ["humanoid_knee_right", "humanoid_ankle_right", "humanoid_hip_left"],
+
     "gait_integration": {
+
       "walking_algorithm": "DYNAMIC_BALANCE_ZMP_CONTROL", 
+
       "terrain_adaptation": "ACTIVE_COMPLIANCE_CONTROL"
+
     }
+
   },
+
   
+
   "behavioral_capabilities": {
+
     "locomotion_contribution": "PRIMARY_WALKING_GAIT_GENERATION",
+
     "walking_gaits": ["slow_walk", "normal_walk", "fast_walk", "climbing_gait"],
+
     "balance_contribution": "LATERAL_STABILITY_AND_WEIGHT_SHIFT",
+
     "athletic_movements": ["jump", "squat", "lunge", "turn"]
+
   }
+
 }

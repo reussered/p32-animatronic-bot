@@ -3,12 +3,17 @@
 # BASE LEVEL RULE: When the user asks why you are not doing something they requested, you must explicitly explain any system-level constraints, memory or message limits, or default design rules that are causing the issue. Do not give generic or evasive answers—be specific about the technical or policy reason for the behavior.
 
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
+- always read and make sure you understand any file before changing it.
+- if the filename or contents of a file are not consistant with what is expected because of appying any rule, either one from the system or the user, never change the ciontents of a 
+	file or its filename unless that is within the exoplicit purpose of the current task.  Unless its obvious the file contents or filename should be changed as part of the current tyask,
+	ask for permission from the human before changing or deleting the file.
+
 
 
 ## RULE: IMMEDIATE REPORTING OF BLOCKERS
 
-If any project rule, technical limitation, or system constraint prevents the agent from executing a user instruction, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker, so the user can address or override it.
-
+If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker, so the user can address or override it.
+	the current task being worked on.
 
 
 <!-- ## RULE 1 - these rules are consistant
@@ -24,7 +29,7 @@ If any project rule, technical limitation, or system constraint prevents the age
 ## RULE 2 TRANSPARENT DEVELOPMENT
 
 - Agent will clearly communicate what files will be modified before making changes
-- Agent has permission to modify any files necessary to complete the requested task
+- Agent has permission to modify any files necessary to complete the task specified by the human
 - Agent will report all changes made at the end of each task
 - Human can stop or redirect at any time during development
 - All changes will be committed to git when the task is completed -->
@@ -41,13 +46,17 @@ If any project rule, technical limitation, or system constraint prevents the age
 - ESP-IDF native APIs
 - FreeRTOS
 
-## RULE 5 System uses components for all functionality.
+## RULE 5 System uses components defined in json files for all functionality.
 
-- the ComponentName is called name here to simplify sermantics.
-- all component names are unique
-- each component has 2 functions, an init function named {name}_init( void ), and {name}_act(void ) 
-- the files these two functions are defined in are named like name.hpp and name.cpp.  they are located in the /src/components and /include/components folders.
-- for example, if the component name is GC9A01, the functions are gc9a01_init()  and gc9a01_act() located in src/components/gc9a01.cpp and /include/components/gc9a01.hpp
+- all component names are unique.
+- every component has the following files.  if any component is worked on that is missing one of these files, the user is immiedietly notified and all processing must stop.  
+	these files are {ComponentName}.json, {ComponentName}.cpp, and {ComponentName}.hpp
+- each component has 2 functions, an init function named {name}_init( void ), and {name}_act(void ) that are defined in {ComponentName}.hpp and implemented in {ComponentName}.cpp
+- {ComponentName}.hpp is located in and {ComponentName}.cpp is located in the root/src/components and root/include/components folders.
+- for example, if the component name is GC9A01, the functions are gc9a01_init()  and gc9a01_act() located in root/src/components/gc9a01.cpp and root/include/components/gc9a01.hpp
+- all components that have a shape defined have a file called {ComponentName}.scad and {ComponentName}.stl.  these files are locatedn in the root/assets/shapes/scad and root//assets/shapes/stl directories.
+- every creature is defined by a single json file and all of the json files defined by recursive composition using the components contained within that file.  the rules used to compose the creature are defined inside markup files in the root/docs folder.  
+	never use the contents of the in the /docs/obsolete folder
 
 
 

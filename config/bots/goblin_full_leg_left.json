@@ -15,7 +15,7 @@
   "reference_point": "hip_socket_left",
   "units": "INCHES",
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin/leg_components/left/hip_flexion_servo.json",
     "config/components/positioned/goblin/leg_components/left/hip_abduction_servo.json",
     "config/components/positioned/goblin/leg_components/left/hip_rotation_servo.json", 

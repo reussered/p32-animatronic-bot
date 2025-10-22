@@ -29,7 +29,7 @@
     "description": "Pirate head coordination every 2.5 seconds"
   },
   
-  "positioned_components": [
+  "contained_components": [
     "config/components/positioned/goblin/head_components/goblin_left_eye.json",
     "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "config/components/positioned/goblin/head_components/goblin_speaker.json",

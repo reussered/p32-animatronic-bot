@@ -2,7 +2,8 @@
   "relative_filename": "config/components/positioned/goblin_left_eye.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "component_id": "goblin_left_eye",
+  "component_name": "goblin_left_eye",
+  "subsystem": "HEAD",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
   "interface_assignment": "SPI_DEVICE_1",
   "mounting_architecture": {
@@ -23,7 +24,6 @@
     "roll": "0 DEGREES"
   },
   "function": "primary_display_left",
-  "component_name": "goblin_left_eye",
   "description": "Left eye display animation",
   "timing": {
     "hitCount": 60000
