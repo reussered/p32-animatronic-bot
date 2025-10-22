@@ -32,7 +32,7 @@
   },
   
   "function": "primary_display_center",
-  "component_name": "center_eye",
+  "component_name": "goblin_center_eye",
   "description": "Center eye display animation - third eye for goblin test variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5

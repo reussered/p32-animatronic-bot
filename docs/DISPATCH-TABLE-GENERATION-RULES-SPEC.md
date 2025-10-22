@@ -44,13 +44,21 @@ void component_name_act(void);
 
 **RULE**: Function names MUST follow this exact pattern:
 ```cpp
-// Pattern: p32_comp_{component_name}_{function_type}
-esp_err_t p32_comp_heartbeat_init(void);
-void p32_comp_heartbeat_act(void);
+// Pattern: {component_name}_{function_type}
+esp_err_t heartbeat_init(void);
+void heartbeat_act(void);
 
-esp_err_t p32_comp_goblin_left_eye_init(void);
-void p32_comp_goblin_left_eye_act(void);
+esp_err_t goblin_left_eye_init(void);
+void goblin_left_eye_act(void);
 ```
+
+### Component Naming Requirements:
+
+**RULE**: All component names MUST be globally unique across the entire system:
+- **No duplicates allowed** - each component name can only exist once
+- **Consistent naming pattern**: `{creature}_{position}_{part}` for positioned components
+- **Examples**: `robot_left_eye`, `goblin_right_ear`, `cyclops_center_eye`
+- **Validation required**: Script must verify global uniqueness before generating dispatch tables
 
 ## Dispatch Table Structure Rules
 
@@ -61,15 +69,15 @@ void p32_comp_goblin_left_eye_act(void);
 ```cpp
 // Table 1: Initialization functions (called once at startup)
 init_func_t initTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_init,
-    p32_comp_goblin_left_eye_init,
+    heartbeat_init,
+    goblin_left_eye_init,
     // ... parallel to other tables
 };
 
 // Table 2: Action functions (called based on timing)
 act_func_t actTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_act,
-    p32_comp_goblin_left_eye_act,
+    heartbeat_act,
+    goblin_left_eye_act,
     // ... parallel to other tables
 };
 
@@ -105,17 +113,26 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
   "goblin_eye",          // Level 4: shared component (first instance)
   "gc9a01",              // Level 5: hardware driver (first instance)
   "goblin_right_eye",    // Level 3: positioned component
-  // goblin_eye SKIPPED  // Level 4: already processed (deduplication)
-  // gc9a01 SKIPPED     // Level 5: already processed (deduplication)
+  "goblin_eye",          // Level 4: shared component (second instance)
+  "gc9a01",              // Level 5: hardware driver (second instance)
 ]
 ```
 
-### Component Deduplication Rule:
+### Component Inclusion Rule:
 
-**RULE**: Shared components appear only ONCE in dispatch tables:
-- `goblin_eye` component shared by left_eye + right_eye → included once
-- `gc9a01` driver shared by left_eye + right_eye → included once
-- Execution order: positioning components first, then shared components
+**RULE**: Dispatch tables vs Function definitions have different deduplication rules:
+
+#### **Dispatch Tables** (NO deduplication):
+- `goblin_eye` component appears MULTIPLE times in dispatch tables (once for left_eye, once for right_eye)
+- `gc9a01` driver appears MULTIPLE times in dispatch tables (once for left_eye display, once for right_eye display)
+- Each dispatch table entry can point to the same function but execute independently
+- Each instance maintains separate timing via `hitCount` values
+
+#### **Function Definitions** (WITH deduplication):
+- `goblin_eye_init()` function defined only ONCE in `p32_component_functions.cpp`
+- `gc9a01_init()` function defined only ONCE in `p32_component_functions.cpp`
+- Multiple dispatch table entries can reference the same function implementation
+- Required for compilation - duplicate function definitions would cause linker errors
 
 ### Component Type Processing Priority:
 
@@ -123,7 +140,7 @@ uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
 1. **System Components** (always present): heartbeat, network_monitor
 2. **Family Components** (from family_template): goblin_behavior, goblin_mood  
 3. **Positioned Components** (spatial instances): goblin_left_eye, goblin_right_eye
-4. **Shared Components** (deduplicated): goblin_eye, gc9a01
+4. **Shared Components** (included multiple times): goblin_eye, gc9a01
 5. **Hardware Drivers** (device-specific): i2s_audio, spi_display
 
 ## Hardware-Only Component Rules
@@ -165,8 +182,8 @@ typedef void (*act_func_t)(void);
 #define COMPONENT_TABLE_SIZE N
 
 // Forward declarations for ALL component functions
-esp_err_t p32_comp_component_name_init(void);
-void p32_comp_component_name_act(void);
+esp_err_t component_name_init(void);
+void component_name_act(void);
 
 // External table declarations
 extern init_func_t initTable[COMPONENT_TABLE_SIZE];
@@ -286,6 +303,7 @@ void app_main(void) {
 - Circular dependency detection  
 - Missing hitCount or component_name fields
 - hardware_only components have shape parameter
+- **GLOBAL COMPONENT NAME UNIQUENESS** - no duplicate component names across all JSON files
 
 ### Execution Output Rules:
 

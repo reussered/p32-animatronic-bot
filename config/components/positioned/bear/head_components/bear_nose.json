@@ -32,7 +32,7 @@
   },
   
   "function": "proximity_sensor", 
-  "component_name": "nose_sensor",
+  "component_name": "bear_nose",
   "description": "Proximity sensor monitoring - bear soft nose variant",
   "timing": {
     "hitCount": 15

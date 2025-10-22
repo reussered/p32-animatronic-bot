@@ -33,7 +33,7 @@
   },
   
   "function": "wrist_articulation",
-  "component_name": "wrist_flexion",
+  "component_name": "goblin_left_wrist_flexion",
   "description": "Left wrist flexion/extension servo - hand positioning",
   "timing": {
     "hitCount": 12

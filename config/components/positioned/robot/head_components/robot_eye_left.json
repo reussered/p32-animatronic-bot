@@ -32,7 +32,7 @@
   },
   
   "function": "primary_display_left",
-  "component_name": "left_eye",
+  "component_name": "robot_left_eye",
   "description": "Left eye display animation - robot variant using RGB LED matrix hardware", 
   "timing": {
     "hitCount": 6

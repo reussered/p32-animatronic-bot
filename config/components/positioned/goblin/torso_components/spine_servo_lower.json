@@ -18,7 +18,7 @@
     "roll": "0 DEGREES"
   },
   "function": "spine_flexion_extension",
-  "component_name": "spine_lower",
+  "component_name": "goblin_lower_spine",
   "description": "Lower spine flexion/extension control",
   "timing": {
     "hitCount": 20

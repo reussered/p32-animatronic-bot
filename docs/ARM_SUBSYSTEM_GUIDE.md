@@ -218,7 +218,7 @@ ARM SUBSYSTEM POWER DISTRIBUTION
 #ifdef ENABLE_ARM_COMPONENTS
 
 // Left shoulder component
-esp_err_t p32_comp_left_shoulder_init(void) {
+esp_err_t left_shoulder_init(void) {
     // Initialize 2x NEMA17 steppers
     stepper_init(SHOULDER_FLEX_EXTEND, GPIO_2, GPIO_3, GPIO_4);
     stepper_init(SHOULDER_ABD_ADD, GPIO_5, GPIO_6, GPIO_7);
@@ -236,7 +236,7 @@ esp_err_t p32_comp_left_shoulder_init(void) {
     return ESP_OK;
 }
 
-void p32_comp_left_shoulder_act(uint32_t loopCount) {
+void left_shoulder_act(void) {
     // Process mesh commands from master controller  
     mesh_command_t cmd;
     if (mesh_receive_command(&cmd)) {
@@ -266,12 +266,12 @@ void p32_comp_left_shoulder_act(uint32_t loopCount) {
 }
 
 // Right shoulder component (mirrored)
-esp_err_t p32_comp_right_shoulder_init(void) {
+esp_err_t right_shoulder_init(void) {
     // Same as left shoulder but with RIGHT_SHOULDER_CONTROLLER ID
     // and mirrored joint angle calculations
 }
 
-void p32_comp_right_shoulder_act(uint32_t loopCount) {
+void right_shoulder_act(void) {
     // Mirror of left shoulder with coordinate system flip
 }
 
@@ -284,7 +284,7 @@ void p32_comp_right_shoulder_act(uint32_t loopCount) {
 #ifdef ENABLE_ARM_COMPONENTS
 
 // Left arm distal (elbow + wrist) component
-esp_err_t p32_comp_left_arm_distal_init(void) {
+esp_err_t left_arm_distal_init(void) {
     // Initialize elbow NEMA17 stepper
     stepper_init(ELBOW_FLEX_EXTEND, GPIO_2, GPIO_3, GPIO_4);
     
@@ -307,7 +307,7 @@ esp_err_t p32_comp_left_arm_distal_init(void) {
     return ESP_OK;
 }
 
-void p32_comp_left_arm_distal_act(uint32_t loopCount) {
+void left_arm_distal_act(void) {
     // Process commands from master and shoulder controllers
     process_arm_distal_commands();
     

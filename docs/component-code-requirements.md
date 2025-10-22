@@ -276,7 +276,7 @@ Before accepting component code changes:
 
 3. **Mismatched Table Entries**
    ```c
-   // initTable.c references p32_comp_left_eye_init
+   // initTable.c references left_eye_init
    // but source file defines goblin_eye_left_init
    ```
 
@@ -297,12 +297,12 @@ Before accepting component code changes:
 #include "esp_log.h"
 #include "esp_err.h"
 
-esp_err_t p32_comp_left_eye_init(void) {
+esp_err_t left_eye_init(void) {
     // Initialization code
     return ESP_OK;
 }
 
-void p32_comp_left_eye_act(uint32_t loopCount) {
+void left_eye_act(void) {
     // Action code
 }
 

@@ -18,7 +18,7 @@
     "roll": "0 DEGREES"
   },
   "function": "primary_audio_output",
-  "component_name": "audio",
+  "component_name": "goblin_speaker",
   "description": "Audio output processing",
   "timing": {
     "hitCount": 84000

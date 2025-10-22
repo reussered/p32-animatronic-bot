@@ -8,8 +8,9 @@
 
 ✅ **Fixed Function Name Collisions**:
 - Changed system component names: `serial` → `heartbeat`, `wifi` → `network_monitor`
-- Added `p32_comp_` prefix to generated functions to avoid conflicts with existing code
-- Functions now generate as: `p32_comp_heartbeat_init()`, `p32_comp_left_eye_act()`, etc.
+- Functions follow correct naming: `{component_name}_{function_type}(void)`
+- Functions now generate as: `heartbeat_init()`, `left_eye_act()`, etc.
+- All functions use NO ARGUMENTS pattern per AI-AGENT-RULES.md
 
 ✅ **Working Component Generator**:
 - `tools/generate_tables.py` successfully reads JSON and generates C code
@@ -38,7 +39,7 @@
 When eventually adding components with I2S interfaces:
 - Current goblin_simple uses no I2S (only eyes + sensor)
 - Future audio components (goblin_speaker.json) use "audio" component_name
-- This generates `p32_comp_audio_init()` - should be safe
+- This generates `audio_init()` - should be safe
 - If conflicts arise, change component_name in JSON (e.g., "speaker_output")
 
 ## Architecture Success

@@ -18,7 +18,7 @@
     "roll": "0 DEGREES"
   },
   "function": "primary_display_right",
-  "component_name": "right_eye",
+  "component_name": "goblin_right_eye",
   "description": "Right eye display animation",
   "timing": {
     "hitCount": 60000

@@ -33,7 +33,7 @@
   },
   
   "function": "shoulder_primary_movement",
-  "component_name": "shoulder_flexion",
+  "component_name": "goblin_left_shoulder_flexion",
   "description": "Left shoulder flexion/extension servo - primary arm lift",
   "timing": {
     "hitCount": 10

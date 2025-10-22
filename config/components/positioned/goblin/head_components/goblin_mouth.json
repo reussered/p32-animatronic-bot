@@ -33,7 +33,7 @@
   },
   
   "function": "mouth_display",
-  "component_name": "mouth",
+  "component_name": "goblin_head_mouth",
   "description": "Mouth display animation - goblin variant with wide grin expressions",
   "timing": {
     "hitCount": 3

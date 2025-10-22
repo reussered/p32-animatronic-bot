@@ -32,7 +32,7 @@
   },
   
   "function": "primary_display_left",
-  "component_name": "left_eye",
+  "component_name": "pixie_left_eye",
   "description": "Left eye display animation - pixie variant using small color OLED hardware",
   "timing": {
     "hitCount": 8

@@ -33,7 +33,7 @@
   },
   
   "function": "elbow_bend_control",
-  "component_name": "elbow_flexion",
+  "component_name": "goblin_left_elbow_flexion",
   "description": "Left elbow flexion/extension servo - forearm bend control", 
   "timing": {
     "hitCount": 8

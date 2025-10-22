@@ -33,7 +33,7 @@
   },
   
   "function": "thumb_control",
-  "component_name": "thumb",
+  "component_name": "goblin_left_thumb",
   "description": "Left thumb servo - opposition and grip control",
   "timing": {
     "hitCount": 15

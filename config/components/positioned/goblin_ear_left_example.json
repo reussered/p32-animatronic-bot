@@ -23,7 +23,7 @@
     "roll": "0 DEGREES"
   },
   "function": "audio_output_left",
-  "component_name": "left_ear",
+  "component_name": "goblin_left_ear_example",
   "description": "Left ear speaker with integrated goblin ear aesthetics",
   "timing": {
     "hitCount": 3

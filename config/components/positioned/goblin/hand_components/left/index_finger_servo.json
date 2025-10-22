@@ -33,7 +33,7 @@
   },
   
   "function": "index_finger_control",
-  "component_name": "index_finger",
+  "component_name": "goblin_left_index_finger",
   "description": "Left index finger servo - primary pointing and manipulation",
   "timing": {
     "hitCount": 12

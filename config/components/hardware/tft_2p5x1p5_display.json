@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "config/author.json",
   "hardware_type": "TFT_2P5X1P5_DISPLAY",
-  "component_name": "2.5x1.5 Inch TFT LCD Display",
+  "component_name": "tft_2p5x1p5_display",
   
   "usage_categories": {
     "large_creature_eyes": "portrait_320x240",

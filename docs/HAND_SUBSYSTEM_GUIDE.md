@@ -218,7 +218,7 @@ TACTILE FEEDBACK SYSTEM
 #ifdef ENABLE_HAND_COMPONENTS
 
 // Hand subsystem initialization
-esp_err_t p32_comp_hand_left_init(void) {
+esp_err_t hand_left_init(void) {
     // Initialize PCA9685 PWM expander
     pca9685_init(I2C_PORT, PCA9685_ADDRESS, GPIO_4, GPIO_5);
     pca9685_set_freq(PCA9685_ADDRESS, 50); // 50Hz for servos
@@ -245,7 +245,7 @@ esp_err_t p32_comp_hand_left_init(void) {
     return ESP_OK;
 }
 
-void p32_comp_hand_left_act(uint32_t loopCount) {
+void hand_left_act(void) {
     // Read tactile sensors
     tactile_data_t tactile = hand_read_tactile_sensors();
     

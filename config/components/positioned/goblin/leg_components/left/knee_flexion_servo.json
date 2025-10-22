@@ -33,7 +33,7 @@
   },
   
   "function": "knee_bend_control", 
-  "component_name": "knee_flexion",
+  "component_name": "goblin_left_knee_flexion",
   "description": "Left knee flexion/extension servo - shin bend control for walking",
   "timing": {
     "hitCount": 5

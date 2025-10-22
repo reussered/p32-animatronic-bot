@@ -31,7 +31,7 @@
   },
   
   "function": "primary_audio_output",
-  "component_name": "speaker",
+  "component_name": "goblin_head_speaker",
   "description": "Audio output processing - goblin variant with guttural sound profile",
   "timing": {
     "hitCount": 7

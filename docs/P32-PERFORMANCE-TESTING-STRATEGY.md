@@ -40,13 +40,14 @@ Use network_monitor to send timing packets every 100,000 loops:
 static uint32_t timing_start = 0;
 static uint32_t packet_counter = 0;
 
-void p32_comp_network_monitor_act(uint32_t loopCount) {
-    if (loopCount % 100000 == 0) {
+void network_monitor_act(void) {
+    // Access g_loopCount from p32_shared_state.h
+    if (g_loopCount % 100000 == 0) {
         uint32_t timing_end = esp_timer_get_time();
         float loop_time_us = (timing_end - timing_start) / 100000.0f;
         
         // Send timing packet to attached server
-        send_timing_packet(packet_counter++, loop_time_us, loopCount);
+        send_timing_packet(packet_counter++, loop_time_us, g_loopCount);
         
         timing_start = timing_end;
     }

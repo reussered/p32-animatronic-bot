@@ -137,9 +137,9 @@ system_components = [
 
 #### Spinal Base Controller Response
 ```c
-void p32_comp_choreography_processor_act(uint32_t loopCount) {
+void choreography_processor_act(void) {
     #ifdef SIMPLE_TEST
-    printf("ACT[%lu]: choreography_processor - executing server sequence\n", loopCount);
+    printf("ACT[%lu]: choreography_processor - executing server sequence\n", g_loopCount);
     return;
     #endif
     

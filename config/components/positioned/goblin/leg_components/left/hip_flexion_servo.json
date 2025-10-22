@@ -33,7 +33,7 @@
   },
   
   "function": "hip_primary_movement",
-  "component_name": "hip_flexion", 
+  "component_name": "goblin_left_hip_flexion", 
   "description": "Left hip flexion/extension servo - primary leg lift for walking",
   "timing": {
     "hitCount": 5

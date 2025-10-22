@@ -22,7 +22,7 @@
     "roll": "0 DEGREES"
   },
   "function": "status_indicator",
-  "component_name": "forehead_leds",
+  "component_name": "goblin_status_leds_example",
   "description": "Status LED strip using adhesive mounting",
   "timing": {
     "refresh_rate": "30fps"

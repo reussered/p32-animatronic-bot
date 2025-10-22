@@ -34,7 +34,7 @@
   },
   
   "function": "primary_display_center",
-  "component_name": "center_eye",
+  "component_name": "cyclops_center_eye",
   "description": "Central cyclops eye - large TFT display in portrait orientation",
   "timing": {
     "hitCount": 4

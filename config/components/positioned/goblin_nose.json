@@ -23,7 +23,7 @@
     "roll": "0 DEGREES"
   },
   "function": "proximity_sensor",
-  "component_name": "nose_sensor",
+  "component_name": "goblin_nose",
   "description": "Proximity sensor monitoring",
   "timing": {
     "hitCount": 180000

@@ -23,7 +23,7 @@
     "roll": "0 DEGREES"
   },
   "function": "primary_display_left",
-  "component_name": "left_eye",
+  "component_name": "goblin_left_eye",
   "description": "Left eye display animation",
   "timing": {
     "hitCount": 60000

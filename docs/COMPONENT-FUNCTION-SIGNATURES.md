@@ -454,7 +454,7 @@ void mesh_mark_state_dirty(void) {
 **OLD PATTERN (Rejected)**:
 ```c
 esp_err_t component_init(void);
-void component_act(uint32_t loopCount);  // ❌ loopCount passed as parameter
+void component_act(void);  // ✅ NO ARGUMENTS pattern per AI-AGENT-RULES.md
 
 // Main loop
 actTable[i].act_func(loopCount);  // Pass parameter

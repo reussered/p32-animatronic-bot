@@ -32,7 +32,7 @@
   },
   
   "function": "proximity_sensor",
-  "component_name": "goblin_nose",
+  "component_name": "goblin_head_nose",
   "description": "Proximity sensor monitoring - goblin hard nose variant",
   "timing": {
     "hitCount": 15

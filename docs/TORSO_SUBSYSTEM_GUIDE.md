@@ -174,39 +174,39 @@ spine_left_right:       GPIO 20 (±30° lateral bend)
 #ifdef ENABLE_TORSO_COMPONENTS
 
 // Pelvis structural foundation component
-esp_err_t p32_comp_pelvis_init(void) {
+esp_err_t pelvis_init(void) {
     // Initialize structural monitoring
     // Setup power distribution monitoring  
     // Configure safety systems
 }
 
-void p32_comp_pelvis_act(uint32_t loopCount) {
+void pelvis_act(void) {
     // Monitor structural loads
     // Check power system health
     // Coordinate with subsystem controllers
 }
 
 // Spine articulation component  
-esp_err_t p32_comp_spine_init(void) {
+esp_err_t spine_init(void) {
     // Initialize 3 spine servos
     // Setup position feedback
     // Configure range limits
 }
 
-void p32_comp_spine_act(uint32_t loopCount) {
+void spine_act(void) {
     // Execute spine movements based on mood
     // Maintain balance and posture
     // Coordinate with walking gait
 }
 
 // Master coordination component
-esp_err_t p32_comp_master_controller_init(void) {
+esp_err_t master_controller_init(void) {
     // Initialize ESP-NOW mesh network
     // Setup subsystem communication
     // Configure AI mood engine
 }
 
-void p32_comp_master_controller_act(uint32_t loopCount) {
+void master_controller_act(void) {
     // Process AI behaviors and decisions
     // Coordinate all subsystem controllers
     // Monitor system health and safety

@@ -31,7 +31,7 @@
   },
   
   "function": "primary_display_left",
-  "component_name": "left_eye",
+  "component_name": "bear_left_eye",
   "description": "Left eye display animation - bear variant using standard GC9A01 hardware",
   "timing": {
     "hitCount": 5

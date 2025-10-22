@@ -93,9 +93,9 @@ void app_main(void) {
 
 ### Component Function Generation
 **Same naming pattern across all chips:**
-- Head chip: `p32_comp_left_eye_init()`, `p32_comp_mouth_act()`
-- Hand chip: `p32_comp_thumb_servo_init()`, `p32_comp_grip_sensor_act()`
-- Base chip: `p32_comp_wheel_motor_init()`, `p32_comp_navigation_act()`
+- Head chip: `left_eye_init()`, `mouth_act()`
+- Hand chip: `thumb_servo_init()`, `grip_sensor_act()`
+- Base chip: `wheel_motor_init()`, `navigation_act()`
 
 ### Development & Deployment Benefits
 

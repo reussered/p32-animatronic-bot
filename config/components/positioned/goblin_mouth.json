@@ -18,7 +18,7 @@
     "roll": "0 DEGREES"
   },
   "function": "mouth_display",
-  "component_name": "mouth",
+  "component_name": "goblin_mouth",
   "description": "Mouth display animation",
   "timing": {
     "hitCount": 36000
