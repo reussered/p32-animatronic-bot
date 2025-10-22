@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/templates/base/arm_base.json", 
   "version": "1.0.0",
   "author": "config/author.json",
@@ -8,8 +8,6 @@
   
   "subsystem_type": "ARM_CONTROLLER",
   "controller_hardware": "ESP32_C3_MINI",
-  "mesh_role": "SLAVE_CONTROLLER",
-  
   "coordinate_system": "humanoid_3d",
   "reference_point": "shoulder_socket",
   "units": "INCHES",
@@ -52,7 +50,6 @@
   },
   
   "communication_defaults": {
-    "esp_now_enabled": true,
     "command_response_timeout_ms": "100",
     "position_report_rate_hz": "20"
   }

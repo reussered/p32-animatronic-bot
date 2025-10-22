@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/bots/quadruped_walker_mk1.json",
   "version": "1.0.0", 
   "author": "config/author.json",
@@ -42,37 +42,27 @@
         "controller_id": "FRONT_LEFT_LEG",
         "component": "config/components/positioned/esp32c3_leg_controller_fl.json", 
         "position": {"x": "12.0", "y": "9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS",
-        "mesh_role": "SLAVE_NODE_1"
-      },
+        "dof_controlled": "4_LEG_JOINTS"},
       {
         "controller_id": "FRONT_RIGHT_LEG",
         "component": "config/components/positioned/esp32c3_leg_controller_fr.json",
         "position": {"x": "12.0", "y": "-9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS", 
-        "mesh_role": "SLAVE_NODE_2"
-      },
+        "dof_controlled": "4_LEG_JOINTS"},
       {
         "controller_id": "REAR_LEFT_LEG",
         "component": "config/components/positioned/esp32c3_leg_controller_rl.json",
         "position": {"x": "-12.0", "y": "9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS",
-        "mesh_role": "SLAVE_NODE_3"
-      },
+        "dof_controlled": "4_LEG_JOINTS"},
       {
         "controller_id": "REAR_RIGHT_LEG",
         "component": "config/components/positioned/esp32c3_leg_controller_rr.json",
         "position": {"x": "-12.0", "y": "-9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS",
-        "mesh_role": "SLAVE_NODE_4"
-      },
+        "dof_controlled": "4_LEG_JOINTS"},
       {
         "controller_id": "HEAD_SENSORS",
         "component": "config/components/positioned/esp32c3_head_controller.json",
         "position": {"x": "18.0", "y": "0.0", "z": "12.0"},
-        "dof_controlled": "2_HEAD_NECK_PLUS_SENSORS",
-        "mesh_role": "SLAVE_NODE_5"
-      }
+        "dof_controlled": "2_HEAD_NECK_PLUS_SENSORS"}
     ]
   },
   

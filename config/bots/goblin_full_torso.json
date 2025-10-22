@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/bots/goblin_full_torso.json",
   "version": "2.0.0",
   "author": "config/author.json",
@@ -9,8 +9,6 @@
   
   "subsystem_type": "TORSO_CONTROLLER",
   "controller_hardware": "ESP32_S3_DEVKIT",
-  "mesh_role": "MASTER_CONTROLLER",
-  
   "coordinate_system": "humanoid_3d",
   "reference_point": "pelvis_center",
   "units": "INCHES",
@@ -44,8 +42,6 @@
   
   "communication_config": {
     "wifi_ssid": "GOBLIN_MESH_NETWORK",
-    "esp_now_channel": "1", 
-    "mesh_node_count": "6",
     "external_api_enabled": true,
     "telemetry_broadcast_rate_hz": "10"
   },

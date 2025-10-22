@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/bots/goblin_full_arm_left.json",
   "version": "2.0.0",
   "author": "config/author.json",
@@ -9,8 +9,6 @@
   
   "subsystem_type": "ARM_CONTROLLER_LEFT",
   "controller_hardware": "ESP32_C3_MINI",
-  "mesh_role": "SLAVE_NODE_2",
-  
   "coordinate_system": "humanoid_3d",
   "reference_point": "shoulder_socket_left",
   "units": "INCHES",

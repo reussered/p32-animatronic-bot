@@ -1,4 +1,4 @@
-{
+﻿{
 
   "relative_filename": "config/components/positioned/esp32c3_torso_spine_controller.json",
 
@@ -202,8 +202,6 @@
     
 
     "bluetooth_mesh_integration": {
-
-      "mesh_role": "CRITICAL_BALANCE_NODE",
 
       "communication_priority": "HIGH_PRIORITY_SPINE_STABILITY",
 

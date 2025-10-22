@@ -23,15 +23,15 @@ static spi_device_handle_t spi_device_2 = NULL; // Right eye
 static spi_device_handle_t spi_device_3 = NULL; // Mouth (future)
 
 // GPIO pin definitions (from wiring guide)
-#define SPI_SCK_PIN     14
-#define SPI_MOSI_PIN    13
-#define SPI_MISO_PIN    12
-#define LEFT_EYE_CS     15
-#define LEFT_EYE_DC     18
-#define LEFT_EYE_RST    21
-#define RIGHT_EYE_CS    5
-#define RIGHT_EYE_DC    19
-#define RIGHT_EYE_RST   22
+#define SPI_SCK_PIN     (gpio_num_t)14
+#define SPI_MOSI_PIN    (gpio_num_t)13
+#define SPI_MISO_PIN    (gpio_num_t)12
+#define LEFT_EYE_CS     (gpio_num_t)15
+#define LEFT_EYE_DC     (gpio_num_t)18
+#define LEFT_EYE_RST    (gpio_num_t)21
+#define RIGHT_EYE_CS    (gpio_num_t)5
+#define RIGHT_EYE_DC    (gpio_num_t)19
+#define RIGHT_EYE_RST   (gpio_num_t)22
 
 /**
  * @brief Initialize GC9A01 hardware driver
@@ -74,11 +74,18 @@ void gc9a01_spi_init(void) {
         .sclk_io_num = SPI_SCK_PIN,
         .quadwp_io_num = -1,
         .quadhd_io_num = -1,
+        .data4_io_num = -1,
+        .data5_io_num = -1,
+        .data6_io_num = -1,
+        .data7_io_num = -1,
         .max_transfer_sz = 240 * 240 * 2, // Max frame size in bytes
+        .flags = 0,
+        .isr_cpu_id = ESP_INTR_CPU_AFFINITY_AUTO,
+        .intr_flags = 0
     };
     
     // Initialize SPI bus
-    ret = spi_bus_initialize(VSPI_HOST, &buscfg, SPI_DMA_CH_AUTO);
+    ret = spi_bus_initialize(SPI3_HOST, &buscfg, SPI_DMA_CH_AUTO);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to initialize SPI bus: %s", esp_err_to_name(ret));
         return;
@@ -86,13 +93,24 @@ void gc9a01_spi_init(void) {
     
     // Configure left eye display (SPI_DEVICE_1)
     spi_device_interface_config_t devcfg_left = {
-        .clock_speed_hz = 20000000,        // 20 MHz
+        .command_bits = 0,
+        .address_bits = 0,
+        .dummy_bits = 0,
         .mode = 0,                         // SPI mode 0
+        .clock_source = SPI_CLK_SRC_DEFAULT,
+        .duty_cycle_pos = 0,
+        .cs_ena_pretrans = 0,
+        .cs_ena_posttrans = 0,
+        .clock_speed_hz = 20000000,        // 20 MHz
+        .input_delay_ns = 0,
         .spics_io_num = LEFT_EYE_CS,      // CS pin
+        .flags = 0,
         .queue_size = 1,                   // Queue only one transaction at a time
+        .pre_cb = NULL,
+        .post_cb = NULL
     };
     
-    ret = spi_bus_add_device(VSPI_HOST, &devcfg_left, &spi_device_1);
+    ret = spi_bus_add_device(SPI3_HOST, &devcfg_left, &spi_device_1);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to add left eye SPI device: %s", esp_err_to_name(ret));
         return;
@@ -100,13 +118,24 @@ void gc9a01_spi_init(void) {
     
     // Configure right eye display (SPI_DEVICE_2)
     spi_device_interface_config_t devcfg_right = {
-        .clock_speed_hz = 20000000,        // 20 MHz
+        .command_bits = 0,
+        .address_bits = 0,
+        .dummy_bits = 0,
         .mode = 0,                         // SPI mode 0
+        .clock_source = SPI_CLK_SRC_DEFAULT,
+        .duty_cycle_pos = 0,
+        .cs_ena_pretrans = 0,
+        .cs_ena_posttrans = 0,
+        .clock_speed_hz = 20000000,        // 20 MHz
+        .input_delay_ns = 0,
         .spics_io_num = RIGHT_EYE_CS,     // CS pin
+        .flags = 0,
         .queue_size = 1,                   // Queue only one transaction at a time
+        .pre_cb = NULL,
+        .post_cb = NULL
     };
     
-    ret = spi_bus_add_device(VSPI_HOST, &devcfg_right, &spi_device_2);
+    ret = spi_bus_add_device(SPI3_HOST, &devcfg_right, &spi_device_2);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to add right eye SPI device: %s", esp_err_to_name(ret));
         return;
@@ -166,9 +195,14 @@ void gc9a01_send_frame(uint32_t spi_device, uint16_t* frame_buffer, uint32_t pix
     
     // Prepare SPI transaction
     spi_transaction_t trans = {
+        .flags = 0,
+        .cmd = 0,
+        .addr = 0,
         .length = pixel_count * 16,  // Length in bits
+        .rxlength = 0,
+        .user = NULL,
         .tx_buffer = frame_buffer,
-        .rx_buffer = NULL,
+        .rx_buffer = NULL
     };
     
     // Send frame buffer to display

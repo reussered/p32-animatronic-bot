@@ -13,10 +13,16 @@
 #include "components/goblin_eye.hpp"
 #include "core/memory/SharedMemory.hpp"
 
+// Display constants for GC9A01 240x240 circular display
+#define DISPLAY_WIDTH  240
+#define DISPLAY_HEIGHT 240
+#define PIXELS_PER_FRAME (240 * 240)  // 57600 pixels
+#define BYTES_PER_PIXEL 2  // RGB565 format
+
 static const char *TAG = "GOBLIN_LEFT_EYE";
 
 // Private static animation buffer for left eye
-static uint8_t left_eye_animation_buffer[PIXELS_PER_FRAME];
+static uint8_t left_eye_animation_buffer[57600];  // 240x240 pixels
 static uint32_t left_eye_current_frame = 0;
 static uint32_t left_eye_frame_count = 4; // Blink animation frames
 

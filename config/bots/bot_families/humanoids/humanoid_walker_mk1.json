@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/bots/humanoid_walker_mk1.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -41,44 +41,32 @@
         "controller_id": "HEAD_CONTROLLER",
         "component": "config/components/positioned/esp32c3_head_controller.json",
         "position": {"x": "0.0", "y": "0.0", "z": "24.0"},
-        "dof_controlled": "3_HEAD_NECK",
-        "mesh_role": "SLAVE_NODE_1"
-      },
+        "dof_controlled": "3_HEAD_NECK"},
       {
         "controller_id": "LEFT_ARM_CONTROLLER", 
         "component": "config/components/positioned/esp32c3_arm_controller_left.json",
         "position": {"x": "-8.0", "y": "0.0", "z": "18.0"},
-        "dof_controlled": "7_ARM_DOF",
-        "mesh_role": "SLAVE_NODE_2"
-      },
+        "dof_controlled": "7_ARM_DOF"},
       {
         "controller_id": "RIGHT_ARM_CONTROLLER",
         "component": "config/components/positioned/esp32c3_arm_controller_right.json", 
         "position": {"x": "8.0", "y": "0.0", "z": "18.0"},
-        "dof_controlled": "7_ARM_DOF",
-        "mesh_role": "SLAVE_NODE_3"
-      },
+        "dof_controlled": "7_ARM_DOF"},
       {
         "controller_id": "LEFT_LEG_CONTROLLER",
         "component": "config/components/positioned/esp32c3_leg_controller_left.json",
         "position": {"x": "-3.0", "y": "0.0", "z": "-12.0"},
-        "dof_controlled": "6_LEG_DOF", 
-        "mesh_role": "SLAVE_NODE_4"
-      },
+        "dof_controlled": "6_LEG_DOF"},
       {
         "controller_id": "RIGHT_LEG_CONTROLLER",
         "component": "config/components/positioned/esp32c3_leg_controller_right.json",
         "position": {"x": "3.0", "y": "0.0", "z": "-12.0"},
-        "dof_controlled": "6_LEG_DOF",
-        "mesh_role": "SLAVE_NODE_5"
-      },
+        "dof_controlled": "6_LEG_DOF"},
       {
         "controller_id": "TORSO_BALANCE_CONTROLLER",
         "component": "config/components/positioned/esp32c3_torso_controller.json",
         "position": {"x": "0.0", "y": "0.0", "z": "6.0"}, 
-        "dof_controlled": "3_SPINE_DOF",
-        "mesh_role": "SLAVE_NODE_6"
-      }
+        "dof_controlled": "3_SPINE_DOF"}
     ]
   },
   

@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/creatures/goblin_warrior_head.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -7,7 +7,6 @@
   "created": "2025-10-13",
   "subsystem_type": "HEAD_CONTROLLER",
   "controller_hardware": "ESP32_S3_DEVKIT",
-  "mesh_role": "SLAVE_CONTROLLER",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "units": "INCHES",
@@ -50,7 +49,6 @@
     "sleep_mode_supported": true
   },
   "communication_defaults": {
-    "esp_now_enabled": true,
     "heartbeat_rate_hz": "1",
     "status_broadcast_rate_hz": "0.1"
   },

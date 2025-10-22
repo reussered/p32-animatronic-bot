@@ -1,4 +1,4 @@
-{
+﻿{
   "relative_filename": "config/templates/base/humanoid_head_base.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -8,8 +8,6 @@
   
   "subsystem_type": "HEAD_CONTROLLER",
   "controller_hardware": "ESP32_S3_DEVKIT",
-  "mesh_role": "SLAVE_CONTROLLER",
-  
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "units": "INCHES",
@@ -58,7 +56,6 @@
   },
   
   "communication_defaults": {
-    "esp_now_enabled": true,
     "heartbeat_rate_hz": "1",
     "status_broadcast_rate_hz": "0.1"
   }
