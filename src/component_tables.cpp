@@ -1,44 +1,44 @@
-// P32 Component Table Definitions
-// Three parallel tables populated from JSON component configurations
+// ============================================================================
+// P32 Component Dispatch Tables - Implementation
+// Auto-generated from JSON bot configuration
+// ============================================================================
 
-#include "p32_component_registry.h"
+#include "p32_component_registry.hpp"
 
-// Component function declarations - NO ARGUMENTS
-extern esp_err_t system_core_init(void);
-extern esp_err_t network_monitor_init(void);
-extern esp_err_t goblin_left_eye_init(void);
-extern esp_err_t goblin_right_eye_init(void);
-extern esp_err_t goblin_nose_init(void);
+#include "heartbeat.hpp"
+#include "network_monitor.hpp"
+#include "goblin_head.hpp"
+#include "goblin_torso.hpp"
 
-extern void system_core_act(void);
-extern void network_monitor_act(void);
-extern void goblin_left_eye_act(void);
-extern void goblin_right_eye_act(void);
-extern void goblin_nose_act(void);
+// ============================================================================
+// Initialization Table
+// ============================================================================
 
-// Table 1: Init function pointers (from JSON component list)
-init_func_t initTable[INIT_TABLE_SIZE] = {
-    system_core_init,
+esp_err_t (*initTable[INIT_TABLE_SIZE])(void) = {
+    heartbeat_init,
     network_monitor_init,
-    goblin_left_eye_init,
-    goblin_right_eye_init,
-    goblin_nose_init
+    goblin_head_init,
+    goblin_torso_init
 };
 
-// Table 2: Act function pointers (from JSON component list)
-act_func_t actTable[ACT_TABLE_SIZE] = {
-    system_core_act,
-    network_monitor_act,
-    goblin_left_eye_act,
-    goblin_right_eye_act,
-    goblin_nose_act
+// ============================================================================
+// Action Table
+// ============================================================================
+
+void (*actTable[ACT_TABLE_SIZE])(void) = {
+    heartbeat_act,    // [0] System heartbeat
+    network_monitor_act,    // [1] Network monitoring and loop timing
+    goblin_head_act,    // [2] Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing
+    goblin_torso_act     // [3] Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination
 };
 
-// Table 3: hitCount values (from JSON "timing": {"hitCount": N})
+// ============================================================================
+// Timing Table - Execution Frequency Control
+// ============================================================================
+
 uint32_t hitCountTable[ACT_TABLE_SIZE] = {
-    1000,  // system_core_act - every 1000 loops
-    5000,  // network_monitor_act - every 5000 loops
-    50,    // goblin_left_eye_act - every 50 loops
-    50,    // goblin_right_eye_act - every 50 loops
-    200    // goblin_nose_act - every 200 loops
+    1,    // [0] heartbeat - every 1 loops
+    1,    // [1] network_monitor - every 1 loops
+    25,    // [2] goblin_head - every 25 loops
+    50     // [3] goblin_torso - every 50 loops
 };

@@ -21,10 +21,13 @@ class P32ComponentGenerator:
         
     def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
         """Load bot configuration from JSON file"""
-        # Try multiple locations: bots/, subsystems/, or direct path
+        # Try multiple locations: bots/, subsystems/, families, or direct path
         possible_paths = [
             self.config_dir / "bots" / f"{bot_name}.json",
             self.config_dir / "subsystems" / f"{bot_name}.json",
+            self.config_dir / "bots" / "bot_families" / "goblins" / f"{bot_name}.json",
+            self.config_dir / "bots" / "bot_families" / "cats" / f"{bot_name}.json",
+            self.config_dir / "bots" / "bot_families" / "bears" / f"{bot_name}.json",
             Path(bot_name)  # Direct path
         ]
         
@@ -35,7 +38,7 @@ class P32ComponentGenerator:
                 break
         
         if bot_file is None:
-            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, and direct path)")
+            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, families, and direct path)")
         
         print(f"DEBUG: Loading bot config from: {bot_file}")
         with open(bot_file, 'r') as f:
@@ -175,104 +178,94 @@ class P32ComponentGenerator:
             })
     
     def generate_unified_header(self) -> str:
-        """Generate unified p32_component_tables.h header file content"""
+        """Generate unified p32_component_registry.hpp header file content"""
         content = [
-            "#ifndef P32_COMPONENT_TABLES_H",
-            "#define P32_COMPONENT_TABLES_H",
+            "#ifndef P32_COMPONENT_REGISTRY_HPP",
+            "#define P32_COMPONENT_REGISTRY_HPP",
             "",
             '#include "esp_err.h"',
             '#include <stdint.h>',
             "",
             "// ============================================================================",
-            "// P32 Component Dispatch Tables",
+            "// P32 Component Registry - Function Declarations",
             "// Auto-generated from JSON bot configuration",
             "// ============================================================================",
             "",
-            "// Component function type signatures - NO ARGUMENTS pattern",
-            "typedef esp_err_t (*init_func_t)(void);",
-            "typedef void (*act_func_t)(void);",
-            "",
-            "// Table size - all three tables have same size (one entry per component)",
-            f"#define COMPONENT_TABLE_SIZE {len(self.components)}",
-            "",
-            "// ============================================================================",
-            "// Forward Declarations - Init Functions",
-            "// ============================================================================",
+            "// Forward Declarations - Init Functions (from individual component files)",
             ""
         ]
-        
+
         for comp in self.components:
             content.append(f"esp_err_t {comp['init_func']}(void);")
-        
+
         content.extend([
             "",
-            "// ============================================================================",
-            "// Forward Declarations - Act Functions (NO ARGUMENTS)",
-            "// ============================================================================",
+            "// Forward Declarations - Act Functions (from individual component files)",
             ""
         ])
-        
+
         for comp in self.components:
             content.append(f"void {comp['act_func']}(void);")
-        
+
         content.extend([
             "",
-            "// ============================================================================",
-            "// Dispatch Tables",
-            "// ============================================================================",
+            "// Table size constants",
+            f"#define INIT_TABLE_SIZE {len(self.components)}",
+            f"#define ACT_TABLE_SIZE {len(self.components)}",
             "",
-            "// Initialization table - called once at startup in order",
-            "extern init_func_t initTable[COMPONENT_TABLE_SIZE];",
-            "",
-            "// Action table - function pointers (NO ARGUMENTS)",
-            "// Parallel to hitCountTable - both indexed by same i",
-            "extern act_func_t actTable[COMPONENT_TABLE_SIZE];",
-            "",
-            "// Timing table - execution frequency control",
-            "// actTable[i] executes when g_loopCount % hitCountTable[i] == 0",
-            "extern uint32_t hitCountTable[COMPONENT_TABLE_SIZE];",
-            "",
-            "#endif // P32_COMPONENT_TABLES_H"
+            "#endif // P32_COMPONENT_REGISTRY_HPP"
         ])
-        
+
         return "\n".join(content)
     
     def generate_unified_implementation(self) -> str:
-        """Generate unified p32_component_tables.c implementation file content"""
+        """Generate unified component_tables.cpp implementation file content"""
         content = [
-            '#include "p32_component_tables.h"',
-            "",
             "// ============================================================================",
             "// P32 Component Dispatch Tables - Implementation",
             "// Auto-generated from JSON bot configuration",
             "// ============================================================================",
             "",
+            '#include "p32_component_registry.hpp"',
+            ""
+        ]
+
+        # Include individual component headers (RULE 5 compliance)
+        includes = set()
+        for comp in self.components:
+            include_file = f'"{comp["name"]}.hpp"'
+            if include_file not in includes:
+                content.append(f"#include {include_file}")
+                includes.add(include_file)
+
+        content.extend([
+            "",
             "// ============================================================================",
             "// Initialization Table",
             "// ============================================================================",
             "",
-            f"init_func_t initTable[COMPONENT_TABLE_SIZE] = {{"
-        ]
-        
+            f"esp_err_t (*initTable[INIT_TABLE_SIZE])(void) = {{"
+        ])
+
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
             content.append(f"    {comp['init_func']}{comma}")
-        
+
         content.extend([
             "};",
             "",
             "// ============================================================================",
-            "// Action Table - Function Pointers (NO ARGUMENTS)",
+            "// Action Table",
             "// ============================================================================",
             "",
-            f"act_func_t actTable[COMPONENT_TABLE_SIZE] = {{"
+            f"void (*actTable[ACT_TABLE_SIZE])(void) = {{"
         ])
-        
+
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
             comment = f"// [{i}] {comp['description']}"
             content.append(f"    {comp['act_func']}{comma:1s}    {comment}")
-        
+
         content.extend([
             "};",
             "",
@@ -280,38 +273,29 @@ class P32ComponentGenerator:
             "// Timing Table - Execution Frequency Control",
             "// ============================================================================",
             "",
-            f"uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {{"
+            f"uint32_t hitCountTable[ACT_TABLE_SIZE] = {{"
         ])
-        
+
         for i, comp in enumerate(self.components):
             comma = "," if i < len(self.components) - 1 else ""
-            # Calculate frequency: 120,000 iterations/sec ? hitCount
-            frequency = 120000.0 / comp['hitCount']
-            if frequency >= 1000:
-                freq_str = f"{frequency:.0f} Hz"
-            elif frequency >= 1:
-                freq_str = f"{frequency:.1f} Hz"
-            else:
-                period = comp['hitCount'] / 120000.0
-                freq_str = f"{period*1000:.1f}ms period"
-            comment = f"// [{i}] {comp['name']} - every {comp['hitCount']} loops ({freq_str})"
+            comment = f"// [{i}] {comp['name']} - every {comp['hitCount']} loops"
             content.append(f"    {comp['hitCount']}{comma:1s}    {comment}")
-        
+
         content.extend([
             "};",
             ""
         ])
-        
+
         return "\n".join(content)
     
     def generate_component_stub(self, comp_type: str) -> str:
         """Generate component implementation stub file"""
         if comp_type == "system":
             components = [c for c in self.components if c['type'] == 'system']
-            filename = "system_components.c"
+            filename = "system_components.cpp"
         else:
             components = [c for c in self.components if c['type'] == 'positioned']
-            filename = "bot_components.c"
+            filename = "bot_components.cpp"
         
         content = [
             '#include "p32_component_tables.h"',
@@ -372,30 +356,28 @@ class P32ComponentGenerator:
         """Write all generated files to appropriate directories"""
         self.output_dir.mkdir(exist_ok=True)
         self.include_dir.mkdir(exist_ok=True)
-        
-        # Single unified header file
-        header_file = ("p32_component_tables.h", self.generate_unified_header())
-        
-        # Source files
+
+        # Use correct filename per existing architecture
+        header_file = ("p32_component_registry.hpp", self.generate_unified_header())
+
+        # Source files - only generate the dispatch table, not individual components
         source_files = [
-            ("p32_component_tables.c", self.generate_unified_implementation()),
-            ("system_components.c", self.generate_component_stub("system")),
-            ("bot_components.c", self.generate_component_stub("positioned"))
+            ("component_tables.cpp", self.generate_unified_implementation())
         ]
-        
+
         # Write unified header to include/
         filepath = self.include_dir / header_file[0]
         with open(filepath, 'w') as f:
             f.write(header_file[1])
         print(f"Generated: {filepath}")
-        
+
         # Write source files to src/
         for filename, content in source_files:
             filepath = self.output_dir / filename
             with open(filepath, 'w') as f:
                 f.write(content)
             print(f"Generated: {filepath}")
-    
+
     def generate_from_bot(self, bot_name: str) -> None:
         """Main generation process for a specific bot"""
         print(f"Generating P32 component tables for bot: {bot_name}")

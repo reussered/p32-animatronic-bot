@@ -119,7 +119,7 @@ class P32IndividualComponentGenerator:
             'act_func': 'system_core_act',
             'description': 'Core system initialization',
             'hitCount': 1000,  # Every 1000 loops
-            'filename': 'system_core.c'
+            'filename': 'system_core.cpp'
         })
         
         components.append({
@@ -129,7 +129,7 @@ class P32IndividualComponentGenerator:
             'act_func': 'network_monitor_act',
             'description': 'Network status monitoring',
             'hitCount': 5000,  # Every 5000 loops
-            'filename': 'network_monitor.c'
+            'filename': 'network_monitor.cpp'
         })
         
         # Add positioned components
@@ -154,7 +154,7 @@ class P32IndividualComponentGenerator:
                 'description': comp_data.get('description', f'{comp_name} component'),
                 'hitCount': hitCount,
                 'config_data': comp_data,
-                'filename': f'{safe_name}.c'
+                'filename': f'{safe_name}.cpp'
             })
         
         return components
@@ -422,7 +422,7 @@ class P32IndividualComponentGenerator:
         
         # Generate component tables
         tables_source = self.generate_component_tables()
-        tables_file = self.output_dir / "p32_component_tables.c"
+        tables_file = self.output_dir / "p32_component_tables.cpp"
         
         with open(tables_file, 'w') as f:
             f.write(tables_source)
@@ -440,7 +440,7 @@ class P32IndividualComponentGenerator:
             cmake_content.append(f'    components/{comp["filename"]}')
         
         cmake_content.extend([
-            '    p32_component_tables.c',
+            '    p32_component_tables.cpp',
             ')',
             '',
             '# Individual component targets for memory analysis',
