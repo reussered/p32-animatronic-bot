@@ -1,11 +1,18 @@
 {
-  "relative_filename": "config/bots/goblin_full.json",
-  "version": "2.0.0",
+  "relative_filename": "config/bots/bot_families/goblins/goblin_full.json",
+  "version": "3.0.0",
   "author": "config/author.json",
   "bot_type": "GOBLINFULL",
-  "bot_id": "goblin_full_v2",
-  "description": "Full-featured scary goblin with unified proportional scaling system",
-  "created": "2025-10-05",
+  "bot_id": "goblin_full_v3",
+  "description": "Complete goblin creature assembly via recursive composition",
+  "created": "2025-10-22",
+  
+  "component_name": "goblin_full",
+  "component_type": "CREATURE_ASSEMBLY",
+  "timing": {
+    "hitCount": 100,
+    "description": "Full creature coordination every 10 seconds"
+  },
   
   "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
   "creature_variant": "standard_goblin",
@@ -19,19 +26,15 @@
   
   "family_level_components": [
     "config/components/functional/goblin_personality.json",
-    "config/components/functional/goblin_mood.json",
+    "config/components/functional/goblin_mood.json", 
     "config/components/functional/goblin_behavior_engine.json"
   ],
   
-  "positioned_components": [
-    "config/components/positioned/goblin/head_components/goblin_left_eye.json",
-    "config/components/positioned/goblin/head_components/goblin_right_eye.json",
-    "config/components/positioned/goblin/head_components/goblin_mouth.json",
-    "config/components/positioned/goblin/head_components/goblin_speaker.json",
-    "config/components/positioned/goblin/head_components/goblin_nose.json",
-    "config/components/positioned/goblin/head_components/goblin_left_ear.json",
-    "config/components/positioned/goblin/head_components/goblin_right_ear.json"
+  "subsystem_assemblies": [
+    "config/subsystems/goblin_head.json",
+    "config/subsystems/goblin_torso.json"
   ],
+  
   "mood_defaults": {
     "FEAR": 20,
     "ANGER": 10,
@@ -49,18 +52,14 @@
     "aggressive_threshold": 70,
     "calm_threshold": 20
   },
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 30,
-    "sensor_poll_rate_hz": 10,
-    "power_management": "balanced"
+  
+  "shape_assembly": {
+    "type": "FULL_CREATURE",
+    "scad_file": "assets/shapes/scad/creatures/goblin_full.scad",
+    "stl_file": "assets/shapes/stl/creatures/goblin_full.stl",
+    "description": "Complete goblin creature with head and torso assemblies"
   },
+  
   "prototype_status": "in_development",
-  "tested": false,
-  "notes": [
-    "Updated to use skull_3d coordinate system",
-    "Uses new bus+device interface architecture",
-    "Components now reference positioned JSON files",
-    "12 GPIO pins total for complete functionality"
-  ]
+  "tested": false
 }

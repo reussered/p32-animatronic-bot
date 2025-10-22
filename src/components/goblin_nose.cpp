@@ -37,19 +37,19 @@ void goblin_nose_act(void) {
     simulated_distance = 20.0f + 10.0f * sinf((float)current_time / 2000.0f); // 20-30cm range
     
     // Send sensor data to PC display server every few loops
-    web_client_send_sensor_data_for_component("NOSE_SENSOR", simulated_distance, loopCount);
+    web_client_send_sensor_data_for_component("NOSE_SENSOR", simulated_distance, g_loopCount);
     
-    if (loopCount % 1000 == 0) {
-        printf("ACT: goblin_nose - distance %.1fcm (loop %lu)\n", simulated_distance, loopCount);
+    if (g_loopCount % 1000 == 0) {
+        printf("ACT: goblin_nose - distance %.1fcm (loop %llu)\n", simulated_distance, g_loopCount);
     }
     return;
 #endif
 
     // Real hardware: read HC-SR04 ultrasonic sensor (TODO: implement driver)
     // For now, send simulated data to PC display
-    web_client_send_sensor_data_for_component("NOSE_SENSOR", simulated_distance, loopCount);
+    web_client_send_sensor_data_for_component("NOSE_SENSOR", simulated_distance, g_loopCount);
     
-    ESP_LOGD(TAG, "Proximity sensor reading: %.1f cm - loop %lu", simulated_distance, loopCount);
+    ESP_LOGD(TAG, "Proximity sensor reading: %.1f cm - loop %llu", simulated_distance, g_loopCount);
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

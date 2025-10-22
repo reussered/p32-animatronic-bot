@@ -42,30 +42,77 @@ class P32ComponentGenerator:
             return json.load(f)
     
     def load_positioned_components(self, bot_config: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Load all positioned components referenced in bot config"""
+        """Load all positioned components referenced in bot config - handles recursive composition"""
         components = []
         
+        # Handle direct positioned_components (backward compatibility)
         if "positioned_components" in bot_config:
             for component_ref in bot_config["positioned_components"]:
-                # Remove 'config/' prefix if present since config_dir already points to config/
-                clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
-                component_file = self.config_dir / clean_ref
-                if component_file.exists():
-                    print(f"DEBUG: Loading component: {component_file}")
-                    with open(component_file, 'r') as f:
-                        component_data = json.load(f)
-                        component_data['config_file'] = component_ref
-                        components.append(component_data)
-                else:
-                    print(f"Warning: Component file not found: {component_file}")
+                components.extend(self._load_component_recursive(component_ref))
+        
+        # Handle new subsystem_assemblies structure (recursive composition)
+        if "subsystem_assemblies" in bot_config:
+            for subsystem_ref in bot_config["subsystem_assemblies"]:
+                components.extend(self._load_subsystem_recursive(subsystem_ref))
+        
+        return components
+    
+    def _load_component_recursive(self, component_ref: str) -> List[Dict[str, Any]]:
+        """Recursively load a single component and its nested components"""
+        components = []
+        
+        # Remove 'config/' prefix if present since config_dir already points to config/
+        clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
+        component_file = self.config_dir / clean_ref
+        
+        if component_file.exists():
+            print(f"DEBUG: Loading component: {component_file}")
+            with open(component_file, 'r') as f:
+                component_data = json.load(f)
+                component_data['config_file'] = component_ref
+                components.append(component_data)
+                
+                # Recursively load nested positioned_components if present
+                if "positioned_components" in component_data:
+                    for nested_ref in component_data["positioned_components"]:
+                        components.extend(self._load_component_recursive(nested_ref))
+        else:
+            print(f"Warning: Component file not found: {component_file}")
+        
+        return components
+    
+    def _load_subsystem_recursive(self, subsystem_ref: str) -> List[Dict[str, Any]]:
+        """Recursively load a subsystem and all its components"""
+        components = []
+        
+        # Remove 'config/' prefix if present since config_dir already points to config/
+        clean_ref = subsystem_ref.replace("config/", "") if subsystem_ref.startswith("config/") else subsystem_ref
+        subsystem_file = self.config_dir / clean_ref
+        
+        if subsystem_file.exists():
+            print(f"DEBUG: Loading subsystem: {subsystem_file}")
+            with open(subsystem_file, 'r') as f:
+                subsystem_data = json.load(f)
+                subsystem_data['config_file'] = subsystem_ref
+                
+                # Add the subsystem itself as a component
+                components.append(subsystem_data)
+                
+                # Recursively load positioned_components within the subsystem
+                if "positioned_components" in subsystem_data:
+                    for component_ref in subsystem_data["positioned_components"]:
+                        components.extend(self._load_component_recursive(component_ref))
+        else:
+            print(f"Warning: Subsystem file not found: {subsystem_file}")
         
         return components
     
     def generate_function_name(self, component_name: str, func_type: str) -> str:
         """Generate standardized function names from component names"""
         # Convert component name to function name format
+        # RULE 5: Functions should be {name}_init() and {name}_act() - NO p32_comp_ prefix
         name = component_name.lower().replace(' ', '_').replace('-', '_')
-        return f"p32_comp_{name}_{func_type}"
+        return f"{name}_{func_type}"
     
     def extract_component_info(self, components: List[Dict[str, Any]]) -> None:
         """Extract component information and build function lists"""

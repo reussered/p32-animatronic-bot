@@ -23,30 +23,87 @@ class P32IndividualComponentGenerator:
         
     def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
         """Load bot configuration from JSON file"""
-        bot_file = self.config_dir / "bots" / f"{bot_name}.json"
+        # Try multiple locations: bots/, subsystems/, or direct path
+        possible_paths = [
+            self.config_dir / "bots" / f"{bot_name}.json",
+            self.config_dir / "subsystems" / f"{bot_name}.json",
+            Path(bot_name)  # Direct path
+        ]
         
-        if not bot_file.exists():
-            raise FileNotFoundError(f"Bot config not found: {bot_file}")
-            
+        bot_file = None
+        for path in possible_paths:
+            if path.exists():
+                bot_file = path
+                break
+        
+        if bot_file is None:
+            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, and direct path)")
+        
+        print(f"DEBUG: Loading bot config from: {bot_file}")
         with open(bot_file, 'r') as f:
             return json.load(f)
     
     def load_positioned_components(self, bot_config: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Load all positioned components referenced in bot config"""
+        """Load all positioned components referenced in bot config - handles recursive composition"""
         components = []
         
+        # Handle direct positioned_components (backward compatibility)
         if "positioned_components" in bot_config:
             for component_ref in bot_config["positioned_components"]:
-                # Remove 'config/' prefix if present since config_dir already points to config/
-                clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
-                component_file = self.config_dir / clean_ref
-                if component_file.exists():
-                    with open(component_file, 'r') as f:
-                        component_data = json.load(f)
-                        component_data['config_file'] = component_ref
-                        components.append(component_data)
-                else:
-                    print(f"Warning: Component file not found: {component_file}")
+                components.extend(self._load_component_recursive(component_ref))
+        
+        # Handle new subsystem_assemblies structure (recursive composition)
+        if "subsystem_assemblies" in bot_config:
+            for subsystem_ref in bot_config["subsystem_assemblies"]:
+                components.extend(self._load_subsystem_recursive(subsystem_ref))
+        
+        return components
+    
+    def _load_component_recursive(self, component_ref: str) -> List[Dict[str, Any]]:
+        """Recursively load a single component and its nested components"""
+        components = []
+        
+        # Remove 'config/' prefix if present since config_dir already points to config/
+        clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
+        component_file = self.config_dir / clean_ref
+        
+        if component_file.exists():
+            with open(component_file, 'r') as f:
+                component_data = json.load(f)
+                component_data['config_file'] = component_ref
+                components.append(component_data)
+                
+                # Recursively load nested positioned_components if present
+                if "positioned_components" in component_data:
+                    for nested_ref in component_data["positioned_components"]:
+                        components.extend(self._load_component_recursive(nested_ref))
+        else:
+            print(f"Warning: Component file not found: {component_file}")
+        
+        return components
+    
+    def _load_subsystem_recursive(self, subsystem_ref: str) -> List[Dict[str, Any]]:
+        """Recursively load a subsystem and all its components"""
+        components = []
+        
+        # Remove 'config/' prefix if present since config_dir already points to config/
+        clean_ref = subsystem_ref.replace("config/", "") if subsystem_ref.startswith("config/") else subsystem_ref
+        subsystem_file = self.config_dir / clean_ref
+        
+        if subsystem_file.exists():
+            with open(subsystem_file, 'r') as f:
+                subsystem_data = json.load(f)
+                subsystem_data['config_file'] = subsystem_ref
+                
+                # Add the subsystem itself as a component
+                components.append(subsystem_data)
+                
+                # Recursively load positioned_components within the subsystem
+                if "positioned_components" in subsystem_data:
+                    for component_ref in subsystem_data["positioned_components"]:
+                        components.extend(self._load_component_recursive(component_ref))
+        else:
+            print(f"Warning: Subsystem file not found: {subsystem_file}")
         
         return components
 
@@ -114,6 +171,7 @@ class P32IndividualComponentGenerator:
             '',
             '#include "esp_log.h"',
             '#include "esp_err.h"',
+            '#include "p32_shared_state.h"',
             '',
             f'static const char *TAG = "{tag}";',
             '',
@@ -176,21 +234,22 @@ class P32IndividualComponentGenerator:
             '}',
             '',
             f'// Component action function - executes every {component["hitCount"]} loops',
-            f'void {component["act_func"]}(uint64_t loopCount) {{',
+            f'// NO ARGUMENTS - accesses g_loopCount from p32_shared_state.h',
+            f'void {component["act_func"]}(void) {{',
             '#ifdef SIMPLE_TEST'
         ])
         
         # Simple test mode action
         if 'network' in name:
             content.extend([
-                '    if (loopCount % 10000 == 0) {',
-                f'        printf("ACT: {name} - checking network (loop %llu)\\n", loopCount);',
+                '    if (g_loopCount % 10000 == 0) {',
+                f'        printf("ACT: {name} - checking network (loop %llu)\\n", g_loopCount);',
                 '    }',
             ])
         else:
             content.extend([
-                '    if (loopCount % 1000 == 0) {',
-                f'        printf("ACT: {name} - active (loop %llu)\\n", loopCount);',
+                '    if (g_loopCount % 1000 == 0) {',
+                f'        printf("ACT: {name} - active (loop %llu)\\n", g_loopCount);',
                 '    }',
             ])
         
@@ -205,15 +264,15 @@ class P32IndividualComponentGenerator:
             if 'network' in name:
                 content.extend([
                     '    // Network status check',
-                    '    if (loopCount % 10000 == 0) {',
-                    '        ESP_LOGD(TAG, "Network status check - loop %llu", loopCount);',
+                    '    if (g_loopCount % 10000 == 0) {',
+                    '        ESP_LOGD(TAG, "Network status check - loop %llu", g_loopCount);',
                     '    }',
                 ])
             else:
                 content.extend([
                     '    // System maintenance tasks',
-                    '    if (loopCount % 5000 == 0) {',
-                    '        ESP_LOGD(TAG, "System maintenance - loop %llu", loopCount);', 
+                    '    if (g_loopCount % 5000 == 0) {',
+                    '        ESP_LOGD(TAG, "System maintenance - loop %llu", g_loopCount);', 
                     '    }',
                 ])
         else:
@@ -225,19 +284,19 @@ class P32IndividualComponentGenerator:
                 content.extend([
                     '    // Display update logic',
                     '    // TODO: Update display content based on mood/state',
-                    '    ESP_LOGD(TAG, "Display update - loop %llu", loopCount);',
+                    '    ESP_LOGD(TAG, "Display update - loop %llu", g_loopCount);',
                 ])
             elif 'sensor' in hardware_ref.lower():
                 content.extend([
                     '    // Sensor reading logic',
                     '    // TODO: Read sensor data and process',
-                    '    ESP_LOGD(TAG, "Sensor reading - loop %llu", loopCount);',
+                    '    ESP_LOGD(TAG, "Sensor reading - loop %llu", g_loopCount);',
                 ])
             elif 'speaker' in hardware_ref.lower():
                 content.extend([
                     '    // Audio processing logic',
                     '    // TODO: Handle audio playback and effects',
-                    '    ESP_LOGD(TAG, "Audio processing - loop %llu", loopCount);',
+                    '    ESP_LOGD(TAG, "Audio processing - loop %llu", g_loopCount);',
                 ])
             else:
                 content.extend([

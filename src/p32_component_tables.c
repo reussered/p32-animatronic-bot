@@ -10,15 +10,17 @@
 // ============================================================================
 
 init_func_t initTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_init,
-    p32_comp_network_monitor_init,
-    p32_comp_goblin_head_left_eye_init,
-    p32_comp_goblin_head_right_eye_init,
-    p32_comp_goblin_head_mouth_init,
-    p32_comp_goblin_head_speaker_init,
-    p32_comp_goblin_head_nose_init,
-    p32_comp_left_ear_microphone_init,
-    p32_comp_right_ear_microphone_init
+    heartbeat_init,
+    network_monitor_init,
+    goblin_head_init,
+    goblin_left_eye_init,
+    goblin_right_eye_init,
+    goblin_nose_init,
+    goblin_mouth_init,
+    goblin_speaker_init,
+    unknown_init,
+    unknown_init,
+    goblin_torso_init
 };
 
 // ============================================================================
@@ -26,15 +28,17 @@ init_func_t initTable[COMPONENT_TABLE_SIZE] = {
 // ============================================================================
 
 act_func_t actTable[COMPONENT_TABLE_SIZE] = {
-    p32_comp_heartbeat_act,    // [0] System heartbeat
-    p32_comp_network_monitor_act,    // [1] Network monitoring and loop timing
-    p32_comp_goblin_head_left_eye_act,    // [2] Left eye display animation - goblin variant using standard GC9A01 hardware
-    p32_comp_goblin_head_right_eye_act,    // [3] Right eye display animation - goblin variant using standard GC9A01 hardware
-    p32_comp_goblin_head_mouth_act,    // [4] Mouth display animation - goblin variant with wide grin expressions
-    p32_comp_goblin_head_speaker_act,    // [5] Audio output processing - goblin variant with guttural sound profile
-    p32_comp_goblin_head_nose_act,    // [6] Proximity sensor monitoring - goblin hard nose variant
-    p32_comp_left_ear_microphone_act,    // [7] Left ear HW-496 microphone for directional audio input
-    p32_comp_right_ear_microphone_act     // [8] Right ear HW-496 microphone for directional audio input
+    heartbeat_act,    // [0] System heartbeat
+    network_monitor_act,    // [1] Network monitoring and loop timing
+    goblin_head_act,    // [2] Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing
+    goblin_left_eye_act,    // [3] Left eye display animation
+    goblin_right_eye_act,    // [4] Right eye display animation
+    goblin_nose_act,    // [5] Proximity sensor monitoring
+    goblin_mouth_act,    // [6] Mouth display animation
+    goblin_speaker_act,    // [7] Audio output processing
+    unknown_act,    // [8] unknown component
+    unknown_act,    // [9] unknown component
+    goblin_torso_act     // [10] Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination
 };
 
 // ============================================================================
@@ -44,11 +48,13 @@ act_func_t actTable[COMPONENT_TABLE_SIZE] = {
 uint32_t hitCountTable[COMPONENT_TABLE_SIZE] = {
     1,    // [0] heartbeat - every 1 loops (120000 Hz)
     1,    // [1] network_monitor - every 1 loops (120000 Hz)
-    5,    // [2] goblin_head_left_eye - every 5 loops (24000 Hz)
-    5,    // [3] goblin_head_right_eye - every 5 loops (24000 Hz)
-    3,    // [4] goblin_head_mouth - every 3 loops (40000 Hz)
-    7,    // [5] goblin_head_speaker - every 7 loops (17143 Hz)
-    15,    // [6] goblin_head_nose - every 15 loops (8000 Hz)
-    20,    // [7] left_ear_microphone - every 20 loops (6000 Hz)
-    20     // [8] right_ear_microphone - every 20 loops (6000 Hz)
+    25,    // [2] goblin_head - every 25 loops (4800 Hz)
+    60000,    // [3] goblin_left_eye - every 60000 loops (2.0 Hz)
+    60000,    // [4] goblin_right_eye - every 60000 loops (2.0 Hz)
+    180000,    // [5] goblin_nose - every 180000 loops (1500.0ms period)
+    36000,    // [6] goblin_mouth - every 36000 loops (3.3 Hz)
+    84000,    // [7] goblin_speaker - every 84000 loops (1.4 Hz)
+    24000,    // [8] unknown - every 24000 loops (5.0 Hz)
+    24000,    // [9] unknown - every 24000 loops (5.0 Hz)
+    50     // [10] goblin_torso - every 50 loops (2400 Hz)
 };

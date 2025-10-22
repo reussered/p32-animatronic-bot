@@ -14,35 +14,39 @@ typedef esp_err_t (*init_func_t)(void);
 typedef void (*act_func_t)(void);
 
 // Table size - all three tables have same size (one entry per component)
-#define COMPONENT_TABLE_SIZE 9
+#define COMPONENT_TABLE_SIZE 11
 
 // ============================================================================
 // Forward Declarations - Init Functions
 // ============================================================================
 
-esp_err_t p32_comp_heartbeat_init(void);
-esp_err_t p32_comp_network_monitor_init(void);
-esp_err_t p32_comp_goblin_head_left_eye_init(void);
-esp_err_t p32_comp_goblin_head_right_eye_init(void);
-esp_err_t p32_comp_goblin_head_mouth_init(void);
-esp_err_t p32_comp_goblin_head_speaker_init(void);
-esp_err_t p32_comp_goblin_head_nose_init(void);
-esp_err_t p32_comp_left_ear_microphone_init(void);
-esp_err_t p32_comp_right_ear_microphone_init(void);
+esp_err_t heartbeat_init(void);
+esp_err_t network_monitor_init(void);
+esp_err_t goblin_head_init(void);
+esp_err_t goblin_left_eye_init(void);
+esp_err_t goblin_right_eye_init(void);
+esp_err_t goblin_nose_init(void);
+esp_err_t goblin_mouth_init(void);
+esp_err_t goblin_speaker_init(void);
+esp_err_t unknown_init(void);
+esp_err_t unknown_init(void);
+esp_err_t goblin_torso_init(void);
 
 // ============================================================================
 // Forward Declarations - Act Functions (NO ARGUMENTS)
 // ============================================================================
 
-void p32_comp_heartbeat_act(void);
-void p32_comp_network_monitor_act(void);
-void p32_comp_goblin_head_left_eye_act(void);
-void p32_comp_goblin_head_right_eye_act(void);
-void p32_comp_goblin_head_mouth_act(void);
-void p32_comp_goblin_head_speaker_act(void);
-void p32_comp_goblin_head_nose_act(void);
-void p32_comp_left_ear_microphone_act(void);
-void p32_comp_right_ear_microphone_act(void);
+void heartbeat_act(void);
+void network_monitor_act(void);
+void goblin_head_act(void);
+void goblin_left_eye_act(void);
+void goblin_right_eye_act(void);
+void goblin_nose_act(void);
+void goblin_mouth_act(void);
+void goblin_speaker_act(void);
+void unknown_act(void);
+void unknown_act(void);
+void goblin_torso_act(void);
 
 // ============================================================================
 // Dispatch Tables

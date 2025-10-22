@@ -4,164 +4,209 @@
 // Positioned component implementations
 // Generated from JSON bot configuration
 
-static const char *TAG_GOBLIN_HEAD_LEFT_EYE = "GOBLIN_HEAD_LEFT_EYE";
-static const char *TAG_GOBLIN_HEAD_RIGHT_EYE = "GOBLIN_HEAD_RIGHT_EYE";
-static const char *TAG_GOBLIN_HEAD_MOUTH = "GOBLIN_HEAD_MOUTH";
-static const char *TAG_GOBLIN_HEAD_SPEAKER = "GOBLIN_HEAD_SPEAKER";
-static const char *TAG_GOBLIN_HEAD_NOSE = "GOBLIN_HEAD_NOSE";
-static const char *TAG_LEFT_EAR_MICROPHONE = "LEFT_EAR_MICROPHONE";
-static const char *TAG_RIGHT_EAR_MICROPHONE = "RIGHT_EAR_MICROPHONE";
+static const char *TAG_GOBLIN_HEAD = "GOBLIN_HEAD";
+static const char *TAG_GOBLIN_LEFT_EYE = "GOBLIN_LEFT_EYE";
+static const char *TAG_GOBLIN_RIGHT_EYE = "GOBLIN_RIGHT_EYE";
+static const char *TAG_GOBLIN_NOSE = "GOBLIN_NOSE";
+static const char *TAG_GOBLIN_MOUTH = "GOBLIN_MOUTH";
+static const char *TAG_GOBLIN_SPEAKER = "GOBLIN_SPEAKER";
+static const char *TAG_UNKNOWN = "UNKNOWN";
+static const char *TAG_GOBLIN_TORSO = "GOBLIN_TORSO";
 
-esp_err_t p32_comp_goblin_head_left_eye_init(void)
+esp_err_t goblin_head_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_head_left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware\n");
+    printf("INIT: goblin_head - Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware initialized");
+    ESP_LOGI(TAG_GOBLIN_HEAD, "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing initialized");
     return ESP_OK;
 }
 
-void p32_comp_goblin_head_left_eye_act(void)
+void goblin_head_act(void)
 {
-    // Component: goblin_head_left_eye - Left eye display animation - goblin variant using standard GC9A01 hardware
-    // Timing: Execute every 5 loops
+    // Component: goblin_head - Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing
+    // Timing: Execute every 25 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: goblin_head_left_eye - hitCount:5\n");
+    printf("ACT: goblin_head - hitCount:25\n");
     return;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_LEFT_EYE, "Left eye display animation - goblin variant using standard GC9A01 hardware");
+    ESP_LOGI(TAG_GOBLIN_HEAD, "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_goblin_head_right_eye_init(void)
+esp_err_t goblin_left_eye_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_head_right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware\n");
+    printf("INIT: goblin_left_eye - Left eye display animation\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware initialized");
+    ESP_LOGI(TAG_GOBLIN_LEFT_EYE, "Left eye display animation initialized");
     return ESP_OK;
 }
 
-void p32_comp_goblin_head_right_eye_act(void)
+void goblin_left_eye_act(void)
 {
-    // Component: goblin_head_right_eye - Right eye display animation - goblin variant using standard GC9A01 hardware
-    // Timing: Execute every 5 loops
+    // Component: goblin_left_eye - Left eye display animation
+    // Timing: Execute every 60000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: goblin_head_right_eye - hitCount:5\n");
+    printf("ACT: goblin_left_eye - hitCount:60000\n");
     return;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_RIGHT_EYE, "Right eye display animation - goblin variant using standard GC9A01 hardware");
+    ESP_LOGI(TAG_GOBLIN_LEFT_EYE, "Left eye display animation");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_goblin_head_mouth_init(void)
+esp_err_t goblin_right_eye_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_head_mouth - Mouth display animation - goblin variant with wide grin expressions\n");
+    printf("INIT: goblin_right_eye - Right eye display animation\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_MOUTH, "Mouth display animation - goblin variant with wide grin expressions initialized");
+    ESP_LOGI(TAG_GOBLIN_RIGHT_EYE, "Right eye display animation initialized");
     return ESP_OK;
 }
 
-void p32_comp_goblin_head_mouth_act(void)
+void goblin_right_eye_act(void)
 {
-    // Component: goblin_head_mouth - Mouth display animation - goblin variant with wide grin expressions
-    // Timing: Execute every 3 loops
+    // Component: goblin_right_eye - Right eye display animation
+    // Timing: Execute every 60000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: goblin_head_mouth - hitCount:3\n");
+    printf("ACT: goblin_right_eye - hitCount:60000\n");
     return;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_MOUTH, "Mouth display animation - goblin variant with wide grin expressions");
+    ESP_LOGI(TAG_GOBLIN_RIGHT_EYE, "Right eye display animation");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_goblin_head_speaker_init(void)
+esp_err_t goblin_nose_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_head_speaker - Audio output processing - goblin variant with guttural sound profile\n");
+    printf("INIT: goblin_nose - Proximity sensor monitoring\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_SPEAKER, "Audio output processing - goblin variant with guttural sound profile initialized");
+    ESP_LOGI(TAG_GOBLIN_NOSE, "Proximity sensor monitoring initialized");
     return ESP_OK;
 }
 
-void p32_comp_goblin_head_speaker_act(void)
+void goblin_nose_act(void)
 {
-    // Component: goblin_head_speaker - Audio output processing - goblin variant with guttural sound profile
-    // Timing: Execute every 7 loops
+    // Component: goblin_nose - Proximity sensor monitoring
+    // Timing: Execute every 180000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: goblin_head_speaker - hitCount:7\n");
+    printf("ACT: goblin_nose - hitCount:180000\n");
     return;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_SPEAKER, "Audio output processing - goblin variant with guttural sound profile");
+    ESP_LOGI(TAG_GOBLIN_NOSE, "Proximity sensor monitoring");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_goblin_head_nose_init(void)
+esp_err_t goblin_mouth_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: goblin_head_nose - Proximity sensor monitoring - goblin hard nose variant\n");
+    printf("INIT: goblin_mouth - Mouth display animation\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_NOSE, "Proximity sensor monitoring - goblin hard nose variant initialized");
+    ESP_LOGI(TAG_GOBLIN_MOUTH, "Mouth display animation initialized");
     return ESP_OK;
 }
 
-void p32_comp_goblin_head_nose_act(void)
+void goblin_mouth_act(void)
 {
-    // Component: goblin_head_nose - Proximity sensor monitoring - goblin hard nose variant
-    // Timing: Execute every 15 loops
+    // Component: goblin_mouth - Mouth display animation
+    // Timing: Execute every 36000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: goblin_head_nose - hitCount:15\n");
+    printf("ACT: goblin_mouth - hitCount:36000\n");
     return;
 #endif
-    ESP_LOGI(TAG_GOBLIN_HEAD_NOSE, "Proximity sensor monitoring - goblin hard nose variant");
+    ESP_LOGI(TAG_GOBLIN_MOUTH, "Mouth display animation");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_left_ear_microphone_init(void)
+esp_err_t goblin_speaker_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: left_ear_microphone - Left ear HW-496 microphone for directional audio input\n");
+    printf("INIT: goblin_speaker - Audio output processing\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_LEFT_EAR_MICROPHONE, "Left ear HW-496 microphone for directional audio input initialized");
+    ESP_LOGI(TAG_GOBLIN_SPEAKER, "Audio output processing initialized");
     return ESP_OK;
 }
 
-void p32_comp_left_ear_microphone_act(void)
+void goblin_speaker_act(void)
 {
-    // Component: left_ear_microphone - Left ear HW-496 microphone for directional audio input
-    // Timing: Execute every 20 loops
+    // Component: goblin_speaker - Audio output processing
+    // Timing: Execute every 84000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: left_ear_microphone - hitCount:20\n");
+    printf("ACT: goblin_speaker - hitCount:84000\n");
     return;
 #endif
-    ESP_LOGI(TAG_LEFT_EAR_MICROPHONE, "Left ear HW-496 microphone for directional audio input");
+    ESP_LOGI(TAG_GOBLIN_SPEAKER, "Audio output processing");
     // TODO: Implement actual component logic
 }
 
-esp_err_t p32_comp_right_ear_microphone_init(void)
+esp_err_t unknown_init(void)
 {
 #ifdef SIMPLE_TEST
-    printf("INIT: right_ear_microphone - Right ear HW-496 microphone for directional audio input\n");
+    printf("INIT: unknown - unknown component\n");
     return ESP_OK;
 #endif
-    ESP_LOGI(TAG_RIGHT_EAR_MICROPHONE, "Right ear HW-496 microphone for directional audio input initialized");
+    ESP_LOGI(TAG_UNKNOWN, "unknown component initialized");
     return ESP_OK;
 }
 
-void p32_comp_right_ear_microphone_act(void)
+void unknown_act(void)
 {
-    // Component: right_ear_microphone - Right ear HW-496 microphone for directional audio input
-    // Timing: Execute every 20 loops
+    // Component: unknown - unknown component
+    // Timing: Execute every 24000 loops
 #ifdef SIMPLE_TEST
-    printf("ACT: right_ear_microphone - hitCount:20\n");
+    printf("ACT: unknown - hitCount:24000\n");
     return;
 #endif
-    ESP_LOGI(TAG_RIGHT_EAR_MICROPHONE, "Right ear HW-496 microphone for directional audio input");
+    ESP_LOGI(TAG_UNKNOWN, "unknown component");
+    // TODO: Implement actual component logic
+}
+
+esp_err_t unknown_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: unknown - unknown component\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_UNKNOWN, "unknown component initialized");
+    return ESP_OK;
+}
+
+void unknown_act(void)
+{
+    // Component: unknown - unknown component
+    // Timing: Execute every 24000 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: unknown - hitCount:24000\n");
+    return;
+#endif
+    ESP_LOGI(TAG_UNKNOWN, "unknown component");
+    // TODO: Implement actual component logic
+}
+
+esp_err_t goblin_torso_init(void)
+{
+#ifdef SIMPLE_TEST
+    printf("INIT: goblin_torso - Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination\n");
+    return ESP_OK;
+#endif
+    ESP_LOGI(TAG_GOBLIN_TORSO, "Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination initialized");
+    return ESP_OK;
+}
+
+void goblin_torso_act(void)
+{
+    // Component: goblin_torso - Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination
+    // Timing: Execute every 50 loops
+#ifdef SIMPLE_TEST
+    printf("ACT: goblin_torso - hitCount:50\n");
+    return;
+#endif
+    ESP_LOGI(TAG_GOBLIN_TORSO, "Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination");
     // TODO: Implement actual component logic
 }
