@@ -228,3 +228,102 @@ ELSE
 
 read all of the rules files in docs/rules. make sure none of the rules contridict any othe rules.
 
+## RULE: WINDOWS DEVELOPMENT ENVIRONMENT REQUIREMENTS
+
+**Environment Specifications:**
+- Windows PowerShell environment (powershell.exe v5.1)
+- ASCII encoding ONLY - NO UTF-8 ENCODING - NO UNICODE ANYWHERE
+- Windows NTFS file system with backslash paths
+- CRLF line endings (not LF)
+- Current directory: F:\GitHub\p32-animatronic-bot
+
+**Mandatory Development Practices:**
+
+1. Use Windows PowerShell syntax only
+2. Use backslash paths: F:\GitHub\p32-animatronic-bot\config\file.json
+3. NO Linux/Unix commands ever
+4. Create files that work natively on Windows
+5. Use simple PowerShell commands, not complex scripts
+6. ASCII encoding only - NO UTF-8 - never Unicode
+7. Test before scaling up
+8. One file at a time if complex operations fail
+9. Never validate VS Code config files (.vscode/*) as project JSON - exclude from consistency checks
+10. Respect .gitignore files - files and folders listed in .gitignore are NOT part of the project and must be excluded from all validation and processing
+
+**Token Cost Awareness:**
+- Failed commands cost tokens from user budget
+- Repeated mistakes are expensive
+- Test approach before implementing at scale
+- Use proven patterns that work except when they contradict one of the rules established for this project
+
+## RULE: PROJECT NAVIGATION AND KEY LOCATIONS
+
+**Script Locations:**
+- Component table generation: `tools\generate_tables.py`
+- Individual component creation: `tools\generate_individual_components.py`
+- File structure analysis: `generate_file_structure.ps1` (root directory)
+- STL generation: `tools\generate-stl-files.ps1`
+- System verification: `tools\verify_full_system.ps1`
+
+**Configuration Structure:**
+- **Creatures/Bots**: `config\bots\bot_families\{family}\{bot_name}.json` (goblins, cats, bears, robots, etc.)
+- **Hardware specs**: `config\hardware\{component_type}.json` (servo_9g_micro.json, gc9a01_display.json, etc.)
+- **Interface definitions**: `config\interfaces\{interface_type}.json` (spi_device_1.json, pwm_channel_3.json, etc.)
+- **Positioned components**: `config\components\positioned\{subsystem}\{component}.json`
+- **Subsystem assemblies**: `config\subsystems\{subsystem_name}.json` (goblin_head.json, goblin_torso.json)
+- **Component templates**: `config\components\templates\{type}\{template}.json`
+- **Behaviors**: `config\behaviors\{behavior_name}.json`
+- **Moods**: `config\moods\{mood_config}.json`
+
+**Generated Code Structure:**
+- **Component implementations**: `src\components\{component_name}.cpp`
+- **Component headers**: `include\components\{component_name}.hpp`
+- **Dispatch tables**: `src\subsystems\{subsystem}\{subsystem}_dispatch_tables.hpp/.cpp`
+- **Shared classes**: `shared\{ClassName}.hpp` (Mood, Environment, SysTest, etc.)
+- **Core system**: `src\core\memory\SharedMemory.hpp/.cpp`
+- **Main application**: `src\main.cpp`
+
+**Asset Structure:**
+- **3D Models**: `assets\shapes\scad\{category}\{model}.scad` and `assets\shapes\stl\{category}\{model}.stl`
+- **Animations**: `assets\animations\{creature_family}\{animation_name}.json`
+- **Sounds**: `assets\sounds\{creature_family}\{sound_file}.wav`
+- **Manufacturing**: `config\manufacturing\{process}\{specification}.json`
+
+**Documentation Structure:**
+- **Build guides**: `docs\build_guides\{guide_name}.md`
+- **Architecture docs**: `docs\{system}_ARCHITECTURE.md`
+- **Specifications**: `docs\{component}-spec.md`
+- **Wiring diagrams**: `docs\wiring\{system}_wiring.md`
+
+**Family Categories Available:**
+- `config\bots\bot_families\goblins\` - Goblin creatures
+- `config\bots\bot_families\cats\` - Cat creatures  
+- `config\bots\bot_families\bears\` - Bear creatures
+- `config\bots\bot_families\robots\` - Test/mechanical bots
+- `config\bots\bot_families\tests\` - Hardware validation and system test bots
+- `config\bots\bot_families\dragons\` - Dragon creatures
+- `config\bots\bot_families\horror\` - Horror creatures
+- `config\bots\bot_families\fantasy\` - Fantasy creatures
+
+**Key Generation Commands:**
+- Generate dispatch tables: `python tools\generate_tables.py config\bots\bot_families\{family}\{bot}.json src`
+- Create missing components: `python tools\generate_individual_components.py`
+- Validate JSON consistency: `.\generate_file_structure.ps1`
+- Example: `python tools\generate_tables.py config\bots\bot_families\tests\test_bot.json src`
+
+**File Organization Rules:**
+- Hardware specifications → `config\hardware\`
+- Interface definitions → `config\interfaces\`  
+- Positioned components reference hardware via `hardware_reference` field
+- Interface assignments via `interface_assignment` field
+- All paths use Windows backslash format
+- **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
+
+**Current Project Status (Updated: 2025-10-23):**
+- **Active Development**: Test bot with dual GC9A01 displays for hardware validation
+- **Test Components Created**: test_left_eye, test_right_eye in `src\components\test\`
+- **SysTest Class**: New shared class for system testing in `shared\SysTest.hpp`
+- **Test Bot Family**: `config\bots\bot_families\tests\test_bot.json` for validation testing
+- **Power System**: Stable 3.16V delivery via ATX PSU + breakout board
+- **Hardware Status**: 2x GC9A01 displays connected and cool-running
+
