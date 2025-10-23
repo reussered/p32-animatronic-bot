@@ -318,6 +318,7 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Interface assignments via `interface_assignment` field
 - All paths use Windows backslash format
 - **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
+- **COMMIT RULE**: After updating AI-AGENT-RULES.md, always commit that file alone to git repository with descriptive message
 
 **Current Project Status (Updated: 2025-10-23):**
 - **Active Development**: Test bot with dual GC9A01 displays for hardware validation
