@@ -71,5 +71,47 @@ Behavior: approach_cautiously=true, seek_alternative=true
 - Confidence-based rule application
 - Statistical confidence building over time
 
+## Dedicated Safety/Monitoring Subsystem Concept
+
+### Architecture
+- **Separate ESP32** dedicated to monitoring and safety rules
+- **Rule-based response system** similar to component architecture
+- **Continuous monitoring** of all subsystem states via ESP-NOW
+- **Emergency intervention** capability when problems detected
+
+### Rule-Based Safety Responses
+```
+Rule: motor_current > safe_threshold AND duration > 2_seconds
+Action: emergency_motor_shutdown, alert_main_system
+Priority: CRITICAL
+
+Rule: battery_voltage < critical_level AND charging_unavailable  
+Action: hibernate_non_essential, seek_power_source
+Priority: HIGH
+
+Rule: temperature > overheat_threshold
+Action: reduce_performance, increase_cooling, log_thermal_event
+Priority: HIGH
+
+Rule: communication_lost_with_subsystem > 5_seconds
+Action: attempt_reconnect, log_failure, switch_to_backup_mode
+Priority: MEDIUM
+```
+
+### Monitoring Capabilities
+- **Real-time state monitoring** of all subsystems
+- **Fault detection** and automatic response
+- **Performance degradation** early warning
+- **Resource management** (power, thermal, communication)
+- **Emergency protocols** when critical failures occur
+- **System health logging** for diagnostics
+
+### Integration with Main System
+- Uses **same component isolation principles**
+- **ESP-NOW communication** with other subsystems
+- **Rule engine** processes monitoring data
+- **Intervention capability** when safety thresholds exceeded
+- **Independent operation** - doesn't depend on main system functioning
+
 ---
 **STATUS: CONCEPTUAL ONLY - DO NOT IMPLEMENT WITHOUT EXPLICIT HUMAN AUTHORIZATION**
