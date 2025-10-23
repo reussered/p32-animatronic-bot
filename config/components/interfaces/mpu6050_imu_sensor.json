@@ -1,0 +1,303 @@
+{
+  "relative_filename": "config/components/interfaces/mpu6050_imu_sensor.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "interface_id": "MPU6050_IMU_SENSOR",
+  "interface_type": "INERTIAL_MEASUREMENT_UNIT",
+  "description": "MPU6050 6-axis IMU with 3-axis gyroscope and 3-axis accelerometer",
+  
+  "hardware_specifications": {
+    "sensor_type": "6_AXIS_INERTIAL_MEASUREMENT_UNIT",
+    "operating_voltage": "2.375V_TO_3.46V",
+    "io_voltage": "1.8V_TO_VDD",
+    "operating_current": "3.9mA_TYPICAL_ALL_SENSORS_ON",
+    "power_consumption": "11.7mW_AT_3V_TYPICAL",
+    "standby_current": "10uA_TYPICAL",
+    "standby_power": "30uW_AT_3V",
+    "sleep_current": "8uA_TYPICAL",
+    "sleep_power": "24uW_AT_3V",
+    "package": "24_PIN_QFN_4x4mm",
+    "weight": "0.5g_IC_ONLY",
+    "module_weight": "2g_TYPICAL_BREAKOUT_BOARD"
+  },
+  
+  "pin_requirements": {
+    "vcc_pin": {
+      "function": "power_supply",
+      "generic_name": "vcc",
+      "description": "Power supply input",
+      "voltage_level": "3.3V_TYPICAL",
+      "voltage_range": "2.375V_TO_3.46V",
+      "current_consumption": "3.9mA_ACTIVE_10uA_STANDBY",
+      "power_consumption": "11.7mW_ACTIVE_30uW_STANDBY"
+    },
+    "gnd_pin": {
+      "function": "ground_reference",
+      "generic_name": "gnd",
+      "description": "Ground reference",
+      "voltage_level": "0V"
+    },
+    "scl_pin": {
+      "function": "i2c_clock",
+      "generic_name": "scl",
+      "description": "I2C clock line",
+      "voltage_level": "3.3V_5V_TOLERANT",
+      "signal_type": "I2C_CLOCK",
+      "max_frequency": "400kHz_FAST_MODE",
+      "pull_up_required": "4.7k_OHM_TYPICAL"
+    },
+    "sda_pin": {
+      "function": "i2c_data",
+      "generic_name": "sda",
+      "description": "I2C data line",
+      "voltage_level": "3.3V_5V_TOLERANT",
+      "signal_type": "I2C_DATA_BIDIRECTIONAL",
+      "pull_up_required": "4.7k_OHM_TYPICAL"
+    }
+  },
+  
+  "optional_pins": {
+    "interrupt_pin": {
+      "function": "interrupt_output",
+      "generic_name": "int",
+      "description": "Interrupt output pin",
+      "voltage_level": "VDD_LEVEL",
+      "signal_type": "DIGITAL_OUTPUT",
+      "active_logic": "CONFIGURABLE_HIGH_OR_LOW",
+      "optional": true
+    },
+    "ad0_pin": {
+      "function": "address_select",
+      "generic_name": "ad0",
+      "description": "I2C address selection pin",
+      "voltage_level": "VDD_OR_GND",
+      "signal_type": "DIGITAL_INPUT",
+      "address_selection": "LOW_0x68_HIGH_0x69",
+      "optional": true
+    },
+    "aux_scl_pin": {
+      "function": "auxiliary_i2c_clock",
+      "generic_name": "aux_scl",
+      "description": "Auxiliary I2C master clock output",
+      "voltage_level": "VDD_LEVEL",
+      "signal_type": "I2C_CLOCK_OUTPUT",
+      "optional": true
+    },
+    "aux_sda_pin": {
+      "function": "auxiliary_i2c_data",
+      "generic_name": "aux_sda",
+      "description": "Auxiliary I2C master data",
+      "voltage_level": "VDD_LEVEL",
+      "signal_type": "I2C_DATA_BIDIRECTIONAL",
+      "optional": true
+    }
+  },
+  
+  "sensor_specifications": {
+    "accelerometer": {
+      "type": "3_AXIS_ACCELEROMETER",
+      "full_scale_range": ["2g", "4g", "8g", "16g"],
+      "sensitivity": {
+        "2g": "16384_LSB_per_g",
+        "4g": "8192_LSB_per_g", 
+        "8g": "4096_LSB_per_g",
+        "16g": "2048_LSB_per_g"
+      },
+      "resolution": "16_BIT_ADC",
+      "bandwidth": "5Hz_TO_260Hz_CONFIGURABLE",
+      "noise": "400_uG_per_sqrt_Hz",
+      "power_consumption": "500uA_TYPICAL"
+    },
+    "gyroscope": {
+      "type": "3_AXIS_GYROSCOPE",
+      "full_scale_range": ["250_dps", "500_dps", "1000_dps", "2000_dps"],
+      "sensitivity": {
+        "250_dps": "131_LSB_per_dps",
+        "500_dps": "65.5_LSB_per_dps",
+        "1000_dps": "32.8_LSB_per_dps",
+        "2000_dps": "16.4_LSB_per_dps"
+      },
+      "resolution": "16_BIT_ADC",
+      "bandwidth": "5Hz_TO_256Hz_CONFIGURABLE",
+      "noise": "0.05_dps_per_sqrt_Hz",
+      "power_consumption": "3.2mA_TYPICAL"
+    },
+    "temperature_sensor": {
+      "type": "INTERNAL_TEMPERATURE_SENSOR",
+      "range": "-40C_TO_85C",
+      "sensitivity": "340_LSB_per_degree_C",
+      "accuracy": "PLUS_MINUS_1_DEGREE_C",
+      "resolution": "16_BIT_ADC",
+      "power_consumption": "INCLUDED_IN_TOTAL"
+    }
+  },
+  
+  "communication_interface": {
+    "protocol": "I2C_INTERFACE",
+    "clock_frequency": {
+      "standard_mode": "100kHz",
+      "fast_mode": "400kHz_MAXIMUM"
+    },
+    "address": {
+      "default": "0x68_WHEN_AD0_LOW",
+      "alternate": "0x69_WHEN_AD0_HIGH"
+    },
+    "data_format": "16_BIT_TWOS_COMPLEMENT",
+    "byte_order": "BIG_ENDIAN_MSB_FIRST"
+  },
+  
+  "power_modes": {
+    "normal_mode": {
+      "description": "All sensors active",
+      "power_consumption": "11.7mW_AT_3V",
+      "current_consumption": "3.9mA",
+      "accelerometer": "ACTIVE",
+      "gyroscope": "ACTIVE",
+      "temperature": "ACTIVE"
+    },
+    "low_power_mode": {
+      "description": "Accelerometer only, gyroscope off",
+      "power_consumption": "1.5mW_AT_3V",
+      "current_consumption": "500uA",
+      "accelerometer": "ACTIVE_LOW_POWER",
+      "gyroscope": "OFF",
+      "temperature": "ACTIVE"
+    },
+    "standby_mode": {
+      "description": "All sensors off, registers accessible",
+      "power_consumption": "30uW_AT_3V",
+      "current_consumption": "10uA",
+      "accelerometer": "OFF",
+      "gyroscope": "OFF",
+      "temperature": "OFF"
+    },
+    "sleep_mode": {
+      "description": "Minimal power consumption",
+      "power_consumption": "24uW_AT_3V",
+      "current_consumption": "8uA",
+      "wake_up_time": "IMMEDIATE_VIA_I2C"
+    }
+  },
+  
+  "sampling_rates": {
+    "accelerometer_rates": ["1.25Hz", "5Hz", "10Hz", "20Hz", "41Hz", "83Hz", "166Hz", "333Hz", "666Hz", "1.33kHz"],
+    "gyroscope_rates": ["3.9Hz", "7.8Hz", "15.6Hz", "31.25Hz", "62.5Hz", "125Hz", "250Hz", "500Hz", "1kHz", "2kHz", "4kHz", "8kHz"],
+    "maximum_output_rate": "1kHz_SENSOR_FUSION",
+    "fifo_buffer_size": "1024_BYTES"
+  },
+  
+  "digital_features": {
+    "digital_motion_processor": {
+      "description": "On-chip motion processing",
+      "features": ["SENSOR_FUSION", "QUATERNION_OUTPUT", "GESTURE_RECOGNITION"],
+      "power_consumption": "ADDITIONAL_2mA_WHEN_ACTIVE"
+    },
+    "fifo_buffer": {
+      "size": "1024_BYTES",
+      "purpose": "SENSOR_DATA_BUFFERING",
+      "overflow_protection": "CONFIGURABLE_BEHAVIOR"
+    },
+    "interrupts": {
+      "data_ready": "NEW_SENSOR_DATA_AVAILABLE",
+      "motion_detection": "CONFIGURABLE_MOTION_THRESHOLD",
+      "zero_motion": "DEVICE_AT_REST_DETECTION",
+      "fifo_overflow": "BUFFER_FULL_INDICATION"
+    }
+  },
+  
+  "calibration_requirements": {
+    "gyroscope_offset": {
+      "description": "Zero-rate offset calibration",
+      "procedure": "STATIONARY_CALIBRATION_AT_STARTUP",
+      "drift": "PLUS_MINUS_20_dps_OVER_TEMPERATURE"
+    },
+    "accelerometer_offset": {
+      "description": "Zero-g offset calibration", 
+      "procedure": "6_POSITION_CALIBRATION_RECOMMENDED",
+      "accuracy": "PLUS_MINUS_50mg_AFTER_CALIBRATION"
+    },
+    "magnetometer_note": {
+      "description": "NO_MAGNETOMETER_IN_MPU6050",
+      "upgrade_option": "USE_MPU9250_FOR_9_AXIS_WITH_MAGNETOMETER"
+    }
+  },
+  
+  "manufacturer_pin_mappings": {
+    "generic_mpu6050_module": {
+      "vcc": ["VCC", "3V3", "POWER"],
+      "gnd": ["GND", "GROUND"],
+      "scl": ["SCL", "CLOCK"],
+      "sda": ["SDA", "DATA"],
+      "interrupt": ["INT"],
+      "ad0": ["AD0", "ADDR"]
+    },
+    "gy_521_module": {
+      "vcc": ["VCC"],
+      "gnd": ["GND"],
+      "scl": ["SCL"],
+      "sda": ["SDA"],
+      "xda": ["XDA"],
+      "xcl": ["XCL"],
+      "ad0": ["AD0"],
+      "int": ["INT"]
+    },
+    "sparkfun_mpu6050": {
+      "power": ["3V3", "GND"],
+      "i2c": ["SDA", "SCL"],
+      "interrupt": ["INT"],
+      "address": ["AD0"]
+    }
+  },
+  
+  "application_examples": {
+    "head_stabilization": {
+      "mounting_location": "HEAD_CENTER_OF_MASS",
+      "power_consumption": "11.7mW_CONTINUOUS",
+      "sampling_rate": "100Hz",
+      "sensors_used": ["GYROSCOPE", "ACCELEROMETER"],
+      "use_case": "SMOOTH_HEAD_MOVEMENT_COMPENSATION",
+      "processing": "COMPLEMENTARY_FILTER_FOR_TILT"
+    },
+    "fall_detection": {
+      "mounting_location": "TORSO_CENTER",
+      "power_consumption": "1.5mW_LOW_POWER_MODE",
+      "sampling_rate": "10Hz_MOTION_TRIGGERED_100Hz",
+      "sensors_used": ["ACCELEROMETER_PRIMARY"],
+      "use_case": "DETECT_ROBOT_FALLING_OVER",
+      "threshold": "FREE_FALL_DETECTION_0.5g"
+    },
+    "gesture_recognition": {
+      "mounting_location": "WRIST_OR_HAND",
+      "power_consumption": "11.7mW_WITH_DMP",
+      "sampling_rate": "200Hz",
+      "sensors_used": ["GYROSCOPE", "ACCELEROMETER", "DMP"],
+      "use_case": "HAND_GESTURE_INPUT_CONTROL",
+      "processing": "ON_CHIP_MOTION_PROCESSOR"
+    },
+    "platform_balancing": {
+      "mounting_location": "PLATFORM_BASE_CENTER",
+      "power_consumption": "11.7mW_CONTINUOUS",
+      "sampling_rate": "250Hz",
+      "sensors_used": ["ACCELEROMETER", "GYROSCOPE"],
+      "use_case": "SELF_BALANCING_ROBOT_CONTROL",
+      "processing": "PID_CONTROL_LOOP_FEEDBACK"
+    },
+    "activity_monitoring": {
+      "mounting_location": "TORSO_CHEST_AREA",
+      "power_consumption": "1.5mW_LOW_POWER_AVERAGE",
+      "sampling_rate": "25Hz_ACCELEROMETER_ONLY",
+      "sensors_used": ["ACCELEROMETER_LOW_POWER"],
+      "use_case": "ACTIVITY_LEVEL_MONITORING",
+      "processing": "STEP_COUNTING_ACTIVITY_CLASSIFICATION"
+    }
+  },
+  
+  "environmental_specifications": {
+    "operating_temperature": "-40C_TO_85C",
+    "storage_temperature": "-65C_TO_150C",
+    "humidity": "NON_CONDENSING",
+    "shock_rating": "10000g_SURVIVAL",
+    "vibration_immunity": "EXCELLENT_MEMS_TECHNOLOGY"
+  }
+}

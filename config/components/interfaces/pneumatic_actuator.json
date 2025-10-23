@@ -1,0 +1,193 @@
+{
+  "relative_filename": "config/components/interfaces/pneumatic_actuator.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  
+  "interface_id": "PNEUMATIC_ACTUATOR",
+  "interface_type": "PNEUMATIC_CONTROLLER",
+  "description": "Pneumatic cylinder and valve interface for high-force linear actuators",
+  
+  "hardware_specifications": {
+    "actuator_types": ["LINEAR_CYLINDER", "ROTARY_ACTUATOR", "GRIPPER", "MUSCLE"],
+    "pressure_range": "0_TO_120_PSI",
+    "force_range": "10N_TO_5000N",
+    "stroke_length": "10mm_TO_1000mm",
+    "response_time": "50ms_TO_500ms",
+    "air_consumption": "0.1_TO_50_SCFM"
+  },
+  
+  "pin_requirements": {
+    "extend_valve_pin": {
+      "function": "extend_control",
+      "generic_name": "extend",
+      "description": "Valve control for cylinder extension",
+      "voltage_level": "3.3V_5V_12V_24V",
+      "current_requirement": "DEPENDS_ON_VALVE_TYPE"
+    },
+    "retract_valve_pin": {
+      "function": "retract_control", 
+      "generic_name": "retract",
+      "description": "Valve control for cylinder retraction",
+      "voltage_level": "3.3V_5V_12V_24V",
+      "current_requirement": "DEPENDS_ON_VALVE_TYPE"
+    }
+  },
+  
+  "optional_pins": {
+    "pressure_sensor_pin": {
+      "function": "pressure_feedback",
+      "generic_name": "pressure_sense",
+      "description": "System pressure monitoring",
+      "direction": "INPUT",
+      "signal_type": "ANALOG_0_TO_5V"
+    },
+    "position_sensor_pin": {
+      "function": "position_feedback",
+      "generic_name": "position_sense", 
+      "description": "Actuator position feedback",
+      "direction": "INPUT",
+      "signal_type": "ANALOG_POTENTIOMETER"
+    },
+    "extend_limit_pin": {
+      "function": "full_extension_detection",
+      "generic_name": "extend_limit",
+      "description": "End of stroke limit switch",
+      "direction": "INPUT",
+      "signal_type": "DIGITAL_SWITCH"
+    },
+    "retract_limit_pin": {
+      "function": "full_retraction_detection",
+      "generic_name": "retract_limit",
+      "description": "Home position limit switch", 
+      "direction": "INPUT",
+      "signal_type": "DIGITAL_SWITCH"
+    }
+  },
+  
+  "valve_types": {
+    "solenoid_3_2": {
+      "type": "THREE_WAY_TWO_POSITION",
+      "ports": ["SUPPLY", "CYLINDER", "EXHAUST"],
+      "positions": ["EXTEND", "RETRACT_EXHAUST"],
+      "control_voltage": "12V_24V_DC",
+      "response_time": "10_TO_50_MILLISECONDS"
+    },
+    "solenoid_5_2": {
+      "type": "FIVE_WAY_TWO_POSITION",
+      "ports": ["SUPPLY", "CYLINDER_A", "CYLINDER_B", "EXHAUST_A", "EXHAUST_B"],
+      "positions": ["EXTEND", "RETRACT"],
+      "control_voltage": "12V_24V_DC",
+      "response_time": "10_TO_50_MILLISECONDS"
+    },
+    "proportional_valve": {
+      "type": "PROPORTIONAL_FLOW_CONTROL",
+      "control_signal": "PWM_0_TO_10V_4_TO_20mA",
+      "flow_control": "VARIABLE_SPEED_CONTROL",
+      "response_time": "5_TO_20_MILLISECONDS",
+      "precision": "HIGH"
+    }
+  },
+  
+  "cylinder_specifications": {
+    "bore_diameter": {
+      "miniature": "6mm_TO_25mm",
+      "compact": "32mm_TO_63mm", 
+      "standard": "80mm_TO_250mm",
+      "heavy_duty": "320mm_TO_500mm"
+    },
+    "stroke_length": {
+      "short": "10mm_TO_100mm",
+      "medium": "125mm_TO_500mm",
+      "long": "600mm_TO_1000mm",
+      "extended": "1200mm_TO_2000mm"
+    },
+    "mounting_styles": [
+      "FOOT_MOUNT",
+      "FLANGE_MOUNT", 
+      "TRUNNION_MOUNT",
+      "CLEVIS_MOUNT",
+      "LUG_MOUNT"
+    ]
+  },
+  
+  "control_strategies": {
+    "bang_bang": {
+      "description": "Simple on/off valve control",
+      "advantages": ["SIMPLE_CONTROL", "FAST_RESPONSE", "LOW_COST"],
+      "disadvantages": ["NO_SPEED_CONTROL", "HARSH_MOVEMENT", "HIGH_AIR_CONSUMPTION"],
+      "use_cases": ["GRIPPERS", "CLAMPS", "SIMPLE_POSITIONING"]
+    },
+    "proportional": {
+      "description": "Variable flow control for smooth motion",
+      "advantages": ["SMOOTH_MOVEMENT", "SPEED_CONTROL", "PRECISE_POSITIONING"],
+      "disadvantages": ["COMPLEX_CONTROL", "HIGHER_COST", "REQUIRES_FEEDBACK"],
+      "use_cases": ["ARM_JOINTS", "PRECISE_POSITIONING", "FORCE_CONTROL"]
+    },
+    "servo_pneumatic": {
+      "description": "Closed-loop position control with feedback",
+      "advantages": ["PRECISE_POSITIONING", "REPEATABILITY", "FORCE_FEEDBACK"],
+      "disadvantages": ["COMPLEX_SYSTEM", "HIGH_COST", "REQUIRES_SENSORS"],
+      "use_cases": ["ROBOTIC_ARMS", "ASSEMBLY_SYSTEMS", "RESEARCH_APPLICATIONS"]
+    }
+  },
+  
+  "manufacturer_pin_mappings": {
+    "festo": {
+      "extend": ["A", "PORT_A", "EXTEND"],
+      "retract": ["B", "PORT_B", "RETRACT"],
+      "supply": ["P", "SUPPLY", "PRESSURE"],
+      "exhaust": ["R", "EXHAUST", "RETURN"]
+    },
+    "smc": {
+      "extend": ["A", "OUT_A"],
+      "retract": ["B", "OUT_B"], 
+      "supply": ["P", "SUPPLY"],
+      "exhaust": ["R", "EXHAUST"]
+    },
+    "parker": {
+      "extend": ["PORT_A", "A"],
+      "retract": ["PORT_B", "B"],
+      "supply": ["PORT_P", "P"],
+      "exhaust": ["PORT_T", "T"]
+    }
+  },
+  
+  "safety_considerations": {
+    "pressure_relief": "ALWAYS_REQUIRED_120_PSI_MAX",
+    "emergency_stop": "PNEUMATIC_E_STOP_VALVE",
+    "lockout_tagout": "ISOLATION_VALVES_REQUIRED",
+    "force_limiting": "PRESSURE_REGULATORS_RECOMMENDED",
+    "noise_control": "MUFFLERS_ON_EXHAUST_PORTS"
+  },
+  
+  "application_examples": {
+    "jaw_crusher": {
+      "cylinder_type": "COMPACT_32mm_BORE",
+      "stroke": "50mm",
+      "force": "500N",
+      "pressure": "80_PSI",
+      "use_case": "POWERFUL_JAW_BITE_MECHANISM"
+    },
+    "arm_lift": {
+      "cylinder_type": "STANDARD_63mm_BORE",
+      "stroke": "200mm",
+      "force": "2000N",
+      "pressure": "100_PSI",
+      "use_case": "ARM_SHOULDER_ELEVATION"
+    },
+    "gripper_fingers": {
+      "cylinder_type": "MINIATURE_16mm_BORE",
+      "stroke": "25mm", 
+      "force": "100N",
+      "pressure": "60_PSI",
+      "use_case": "PRECISE_OBJECT_GRIPPING"
+    },
+    "leg_extension": {
+      "cylinder_type": "HEAVY_DUTY_100mm_BORE",
+      "stroke": "300mm",
+      "force": "5000N", 
+      "pressure": "120_PSI",
+      "use_case": "LOCOMOTIVE_LEG_SUPPORT"
+    }
+  }
+}

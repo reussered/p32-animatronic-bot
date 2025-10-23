@@ -1,0 +1,99 @@
+{
+  "relative_filename": "config/components/interfaces/MakerNames.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "description": "Maps manufacturer-specific pin names to generic functional names across all interface types",
+  "global_manufacturer_preference": "waveshare",
+  "manufacturer_ecosystems": {
+    "waveshare": {
+      "company_info": {
+        "name": "Waveshare Electronics",
+        "common_naming_conventions": "Uses I2C-style names (SDA/SCL) even for SPI"
+      },
+      "spi_display_pins": {
+        "SDA": "data_input",
+        "SCL": "clock",
+        "CS": "chip_select", 
+        "DC": "data_command",
+        "RST": "reset",
+        "VCC": "power_positive",
+        "GND": "power_ground"
+      },
+      "i2c_sensor_pins": {
+        "SDA": "data_bidirectional",
+        "SCL": "clock",
+        "VCC": "power_positive",
+        "GND": "power_ground"
+      },
+      "uart_module_pins": {
+        "TX": "transmit_data",
+        "RX": "receive_data",
+        "VCC": "power_positive", 
+        "GND": "power_ground"
+      }
+    },
+    "adafruit": {
+      "company_info": {
+        "name": "Adafruit Industries",
+        "common_naming_conventions": "Uses standard SPI names (MOSI/MISO/CLK)"
+      },
+      "spi_display_pins": {
+        "MOSI": "data_input",
+        "MISO": "data_output",
+        "CLK": "clock",
+        "CS": "chip_select",
+        "DC": "data_command",
+        "RST": "reset",
+        "VIN": "power_positive",
+        "GND": "power_ground"
+      },
+      "i2c_sensor_pins": {
+        "SDA": "data_bidirectional",
+        "SCL": "clock",
+        "VIN": "power_positive",
+        "GND": "power_ground"
+      },
+      "uart_module_pins": {
+        "TX": "transmit_data",
+        "RX": "receive_data", 
+        "VIN": "power_positive",
+        "GND": "power_ground"
+      }
+    },
+    "sparkfun": {
+      "company_info": {
+        "name": "SparkFun Electronics",
+        "common_naming_conventions": "Varies by product line"
+      },
+      "spi_display_pins": {
+        "MOSI": "data_input",
+        "MISO": "data_output",
+        "SCLK": "clock",
+        "CS": "chip_select",
+        "DC": "data_command",
+        "RES": "reset",
+        "VCC": "power_positive",
+        "GND": "power_ground"
+      },
+      "i2c_sensor_pins": {
+        "SDA": "data_bidirectional",
+        "SCL": "clock", 
+        "3V3": "power_positive",
+        "GND": "power_ground"
+      }
+    }
+  },
+  "generic_function_definitions": {
+    "data_input": "MOSI signal from controller to device",
+    "data_output": "MISO signal from device to controller (rarely used)",
+    "data_bidirectional": "I2C SDA signal (bidirectional data)",
+    "clock": "Clock signal (SPI CLK or I2C SCL)",
+    "chip_select": "SPI chip select / slave select signal",
+    "data_command": "Display data/command control signal",
+    "reset": "Hardware reset signal",
+    "transmit_data": "UART transmit data (TX)",
+    "receive_data": "UART receive data (RX)",
+    "power_positive": "Positive power supply",
+    "power_ground": "Ground connection"
+  }
+}
