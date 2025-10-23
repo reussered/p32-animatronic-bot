@@ -1,4 +1,32 @@
 
+# 🚨 CRITICAL: EMBEDDED SYSTEMS DEVELOPMENT CONTEXT 🚨
+
+**THIS IS NOT WEB DEVELOPMENT - THIS IS EMBEDDED MICROCONTROLLER PROGRAMMING**
+
+**Target Hardware**: ESP32-S3 microcontroller (512KB RAM, 8MB Flash)
+**Framework**: ESP-IDF native APIs (NOT Arduino, NOT web frameworks)
+**Memory Constraints**: Resource-constrained embedded environment
+**Encoding**: ASCII-only for toolchain compatibility (NO UTF-8, NO Unicode)
+**Dependencies**: Hardware drivers, FreeRTOS, SPI/I2S protocols
+**Toolchain**: PlatformIO + ESP-IDF, GCC cross-compiler
+**Debugging**: Serial console, hardware debugger (NOT browser dev tools)
+**Performance**: Real-time constraints, interrupt-driven (NOT async/await patterns)
+
+**NEVER THINK LIKE A WEB DEVELOPER:**
+- NO npm packages, node_modules, or JavaScript patterns
+- NO web servers, REST APIs, or HTTP frameworks  
+- NO browser compatibility concerns or DOM manipulation
+- NO database ORMs or cloud service integrations
+- NO UTF-8 encoding assumptions or web character sets
+
+**ALWAYS THINK LIKE AN EMBEDDED DEVELOPER:**
+- Memory usage in bytes, not megabytes
+- CPU cycles matter, power consumption matters
+- Hardware registers, GPIO pins, SPI buses
+- Interrupt handlers, task priorities, timing constraints
+- Component datasheets, electrical specifications
+- ASCII encoding, fixed-point math, lookup tables
+
 # At the end of any rule evaluation or task, agents must read and apply the rules in .github/consistant_project_rules.md. However, these rules do not supersede the AI-AGENT-RULES.md; the ironclad agent rules in this file always take precedence.
 # BASE LEVEL RULE: When the user asks why you are not doing something they requested, you must explicitly explain any system-level constraints, memory or message limits, or default design rules that are causing the issue. Do not give generic or evasive answers—be specific about the technical or policy reason for the behavior.
 
