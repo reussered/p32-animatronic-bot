@@ -64,7 +64,7 @@ function New-PositionedComponent {
 
 }    New-Item -ItemType File -Path $Path -Value $content -Force | Out-Null
 
-    Write-Host "  ✓ Created: $ComponentName" -ForegroundColor Green
+    Write-Host "  ? Created: $ComponentName" -ForegroundColor Green
 
 # ARM COMPONENTS - LEFT}
 
@@ -104,7 +104,7 @@ New-PositionedComponent "config/components/positioned/goblin/arm_components/righ
 
 Create-PositionedComponent "config/components/positioned/goblin/arm_components/right/wrist_rotation_servo.json" "goblin_right_wrist_rotation_servo" "config/components/hardware/servo_9g_micro.json" "PWM_CHANNEL_15" "shoulder_socket_right" "0.0 INCH" "-5.5 INCH" "0.0 INCH"
 
-Write-Host "🚀 SPRINT COMPLETE! 28 components created!" -ForegroundColor GreenCreate-PositionedComponent "config/components/positioned/goblin/arm_components/right/arm_status_led.json" "goblin_right_arm_status_led" "config/components/hardware/led_neopixel_ring.json" "GPIO_PIN_27" "shoulder_socket_right" "0.0 INCH" "-2.0 INCH" "0.5 INCH"
+Write-Host "? SPRINT COMPLETE! 28 components created!" -ForegroundColor GreenCreate-PositionedComponent "config/components/positioned/goblin/arm_components/right/arm_status_led.json" "goblin_right_arm_status_led" "config/components/hardware/led_neopixel_ring.json" "GPIO_PIN_27" "shoulder_socket_right" "0.0 INCH" "-2.0 INCH" "0.5 INCH"
 
 # HAND COMPONENTS - LEFT
 Write-Host "Creating LEFT HAND components..." -ForegroundColor Cyan
@@ -129,7 +129,7 @@ Create-PositionedComponent "config/components/positioned/goblin/torso_components
 Create-PositionedComponent "config/components/positioned/goblin/torso_components/spine_servo_middle.json" "goblin_spine_servo_middle" "config/components/hardware/servo_9g_micro.json" "PWM_CHANNEL_23" "pelvis_center" "0.0 INCH" "2.0 INCH" "0.0 INCH"
 Create-PositionedComponent "config/components/positioned/goblin/torso_components/spine_servo_upper.json" "goblin_spine_servo_upper" "config/components/hardware/servo_9g_micro.json" "PWM_CHANNEL_24" "pelvis_center" "0.0 INCH" "4.0 INCH" "0.0 INCH"
 
-Write-Host "`n🚀 FINAL SPRINT COMPLETE! Created ALL missing goblin components!" -ForegroundColor Green
+Write-Host "`n? FINAL SPRINT COMPLETE! Created ALL missing goblin components!" -ForegroundColor Green
 Write-Host "   - 5 Left arm components" -ForegroundColor White
 Write-Host "   - 8 Right arm components" -ForegroundColor White  
 Write-Host "   - 4 Left hand components" -ForegroundColor White

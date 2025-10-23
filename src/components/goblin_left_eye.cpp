@@ -48,7 +48,7 @@ static void lcd_cmd(uint8_t cmd)
     memset(&t, 0, sizeof(t));
     t.length = 8;
     t.tx_buffer = &cmd;
-    gpio_set_level((gpio_num_t)PIN_NUM_DC, 0); // Command mode
+    gpio_set_level(PIN_NUM_DC, 0); // Command mode
     ret = spi_device_polling_transmit(spi_handle, &t);
     assert(ret == ESP_OK);
 }
@@ -340,44 +340,99 @@ esp_err_t goblin_left_eye_init(void)
     return ESP_OK;
 }
 
-// Frame buffer for left eye (240x240 = 57600 pixels)
-#define PIXELS_PER_FRAME (240 * 240)
-#define FRAME_WIDTH 240
-static uint16_t left_eye_frame_buffer[PIXELS_PER_FRAME];
-
-// Function to send frame buffer to display
-void send_frame_to_display(void) {
-    // Send frame buffer to SPI_DEVICE_1 (left eye)
-    // This will be handled by the actual SPI display code
-    ESP_LOGV(TAG, "Sending left eye frame to SPI_DEVICE_1");
-    
-    // For now, just fill with solid color for testing
-    fill_screen(test_colors[current_color]);
-}
-
-// Component action function - integrates with goblin_eye
+// Component action function - cycles through colors
 void goblin_left_eye_act(void)
 {
-    // Create frame buffer for left eye
-    uint16_t* frame_buffer = left_eye_frame_buffer;
+    // Change color every time this function is called
+    current_color = (current_color + 1) % 7;
+    fill_screen(test_colors[current_color]);
     
-    // Set up context for goblin_eye processing
-    // This will be replaced with proper frame stack once implemented
+    ESP_LOGI(TAG, "Display updated with color %d", current_color);
+}
+void goblin_left_eye_act(void) {
+    // Advance animation frame based on loop count
+    uint32_t animation_speed = 30; // Change frame every 30 loops
+    uint32_t new_frame = (g_loopCount / animation_speed) % left_eye_frame_count;
     
-    // Call goblin_eye to render eyeball into our buffer
-    // For now, simulate eyeball processing by cycling colors slowly
-    static uint32_t last_color_change = 0;
-    if (g_loopCount - last_color_change > 100) { // Change every 100 loops
-        current_color = (current_color + 1) % 7;
-        last_color_change = g_loopCount;
+    if (new_frame != left_eye_current_frame) {
+        left_eye_current_frame = new_frame;
+        load_current_frame_to_buffer();
     }
     
-    // Send the processed frame to the display
-    send_frame_to_display();
+    // Set context for shared processing (SPI device for left eye)
+    current_spi_device = 1; // SPI_DEVICE_1 for left eye
+    currentFrame = left_eye_animation_buffer;
+    current_frame_size = PIXELS_PER_FRAME;
     
-    ESP_LOGV(TAG, "Left eye updated at loop %u with color %d", g_loopCount, current_color);
+    ESP_LOGV(TAG, "Left eye frame %u ready for processing at loop %u", 
+             left_eye_current_frame, g_loopCount);
 }
 
+/**
+ * @brief Load blink animation frames for left eye
+ */
+void load_left_eye_animation(void) {
+    ESP_LOGI(TAG, "Loading left eye blink animation");
+    
+    // Initialize with simple blink pattern
+    // Frame 0: Fully open eye
+    for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+        left_eye_animation_buffer[i] = 255; // Start with white
+    }
+    
+    left_eye_current_frame = 0;
+    ESP_LOGI(TAG, "Left eye animation loaded");
+}
 
+/**
+ * @brief Load current animation frame to processing buffer
+ */
+void load_current_frame_to_buffer(void) {
+    // Simple blink animation pattern
+    switch (left_eye_current_frame) {
+        case 0: // Fully open
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 60 && y < 180) {
+                    left_eye_animation_buffer[i] = 64; // Brown iris
+                } else {
+                    left_eye_animation_buffer[i] = 255; // White sclera
+                }
+            }
+            break;
+            
+        case 1: // Partially closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 80 && y < 160) {
+                    left_eye_animation_buffer[i] = 64; // Brown iris
+                } else if (y > 70 && y < 170) {
+                    left_eye_animation_buffer[i] = 224; // Light gray
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 2: // Nearly closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                uint32_t y = i / FRAME_WIDTH;
+                if (y > 110 && y < 130) {
+                    left_eye_animation_buffer[i] = 32; // Dark slit
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 3: // Fully closed
+            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
+                left_eye_animation_buffer[i] = 0; // All black
+            }
+            break;
+    }
+    
+    ESP_LOGV(TAG, "Loaded frame %u to left eye buffer", left_eye_current_frame);
+}
 
 #endif // ENABLE_GOBLIN_COMPONENTS

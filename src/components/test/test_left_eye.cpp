@@ -5,7 +5,6 @@
  */
 
 #include "components/test/test_left_eye.hpp"
-#include "components/goblin_eye.hpp"
 #include "p32_shared_state.h"
 #include "core/memory/SharedMemory.hpp"
 
@@ -280,46 +279,22 @@ void test_left_eye_act(void)
         return;  // Not initialized
     }
     
-    // Allocate frame buffer for this eye
-    static uint16_t left_eye_frame_buffer[DISPLAY_WIDTH * DISPLAY_HEIGHT];
+    // Simple color cycling test
+    static uint32_t cycle_count = 0;
+    static uint16_t current_color = COLOR_BLACK;
     
-    // Set up frame buffer context for goblin_eye to use
-    currentFrame = (uint8_t*)left_eye_frame_buffer;
-    current_frame_size = DISPLAY_WIDTH * DISPLAY_HEIGHT;
-    current_spi_device = 1; // SPI_DEVICE_1 for left eye
-    
-    // Let goblin_eye render the eyeball
-    goblin_eye_act();
-    
-    // Send the rendered frame to the display
-    send_frame_to_display(left_eye_frame_buffer);
-    
-    ESP_LOGV(TAG, "Left eye frame rendered and sent to display");
-}
-
-/**
- * @brief Send RGB565 frame buffer to GC9A01 display
- */
-static void send_frame_to_display(uint16_t* frame_buffer)
-{
-    // Set full screen area
-    lcd_cmd(0x2A);
-    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
-    lcd_data(col_data, 4);
-    
-    lcd_cmd(0x2B);
-    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
-    lcd_data(row_data, 4);
-    
-    // Start memory write
-    lcd_cmd(0x2C);
-    
-    // Send entire frame buffer
-    for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++) {
-        uint8_t color_bytes[2] = {
-            (frame_buffer[i] >> 8) & 0xFF,
-            frame_buffer[i] & 0xFF
-        };
-        lcd_data(color_bytes, 2);
+    // Change color every 60 cycles (roughly 1 second at 60Hz)
+    if (cycle_count % 60 == 0) {
+        switch ((cycle_count / 60) % 5) {
+            case 0: current_color = COLOR_RED; break;
+            case 1: current_color = COLOR_GREEN; break;
+            case 2: current_color = COLOR_BLUE; break;
+            case 3: current_color = COLOR_WHITE; break;
+            case 4: current_color = COLOR_BLACK; break;
+        }
+        fill_screen(current_color);
+        ESP_LOGI(TAG, "Left eye color cycle: %d", (cycle_count / 60) % 5);
     }
+    
+    cycle_count++;
 }

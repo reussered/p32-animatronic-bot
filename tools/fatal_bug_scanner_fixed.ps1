@@ -10,7 +10,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "🔍 COMPONENT INTEGRITY SCANNER - P32 ANIMATRONIC SYSTEM" -ForegroundColor Cyan -BackgroundColor Black
+Write-Host "? COMPONENT INTEGRITY SCANNER - P32 ANIMATRONIC SYSTEM" -ForegroundColor Cyan -BackgroundColor Black
 Write-Host "=" * 70 -ForegroundColor Cyan
 
 $fatalErrors = @()
@@ -18,28 +18,28 @@ $configIssues = @()
 $warningCount = 0
 
 # SCAN 1: Unknown component source files (INDICATES INCOMPLETE JSON DEFINITIONS)
-Write-Host "🔍 Scanning for unknown component files (JSON definition issues)..." -ForegroundColor Yellow
+Write-Host "? Scanning for unknown component files (JSON definition issues)..." -ForegroundColor Yellow
 $unknownSources = Get-ChildItem -Path "src" -Recurse -Filter "*.cpp" -ErrorAction SilentlyContinue | Where-Object { 
     $_.Name -match "unknown.*\.cpp$"
 }
 
 if ($unknownSources) {
-    $fatalErrors += "🚨 CRITICAL: Unknown component files detected (indicates incomplete JSON):"
+    $fatalErrors += "? CRITICAL: Unknown component files detected (indicates incomplete JSON):"
     $unknownSources | ForEach-Object { 
         $fatalErrors += "   - $($_.FullName)" 
     }
     $configIssues += "ROOT_CAUSE: Component generation script found JSON files with missing definitions"
     
     if ($FixMode) {
-        Write-Host "🔧 FIX MODE: Removing auto-generated unknown files..." -ForegroundColor Cyan
+        Write-Host "? FIX MODE: Removing auto-generated unknown files..." -ForegroundColor Cyan
         $unknownSources | Remove-Item -Force
-        Write-Host "✅ Deleted $($unknownSources.Count) unknown source files" -ForegroundColor Green
+        Write-Host "? Deleted $($unknownSources.Count) unknown source files" -ForegroundColor Green
         $configIssues += "ACTION_TAKEN: Deleted auto-generated unknown component files"
     }
 }
 
 # SCAN 2: Identify JSON files with incomplete definitions
-Write-Host "🔍 Scanning JSON files for incomplete component definitions..." -ForegroundColor Yellow
+Write-Host "? Scanning JSON files for incomplete component definitions..." -ForegroundColor Yellow
 $componentJsons = Get-ChildItem -Path "config/components" -Recurse -Filter "*.json" -ErrorAction SilentlyContinue
 $incompleteJsons = @()
 
@@ -91,13 +91,13 @@ foreach ($jsonFile in $componentJsons) {
             }
         }
     } catch {
-        $configIssues += "⚠️ JSON PARSE ERROR: $($jsonFile.FullName) - $($_.Exception.Message)"
+        $configIssues += "?? JSON PARSE ERROR: $($jsonFile.FullName) - $($_.Exception.Message)"
         $warningCount++
     }
 }
 
 if ($incompleteJsons.Count -gt 0) {
-    $configIssues += "🔧 INCOMPLETE JSON DEFINITIONS FOUND:"
+    $configIssues += "? INCOMPLETE JSON DEFINITIONS FOUND:"
     foreach ($incomplete in $incompleteJsons) {
         $configIssues += "   FILE: $($incomplete.File)"
         if ($incomplete.MissingFields.Count -gt 0) {
@@ -110,68 +110,68 @@ if ($incompleteJsons.Count -gt 0) {
 }
 
 # SCAN 3: Component generation validation
-Write-Host "🔍 Validating component generation results..." -ForegroundColor Yellow
+Write-Host "? Validating component generation results..." -ForegroundColor Yellow
 $componentTables = Get-ChildItem -Path "src" -Recurse -Filter "*component*table*.cpp" -ErrorAction SilentlyContinue
 foreach ($table in $componentTables) {
     try {
         $content = Get-Content $table.FullName -ErrorAction SilentlyContinue
         if ($content -match "unknown_component" -or $content -match "UNKNOWN_COMPONENT") {
-            $fatalErrors += "🚨 CRITICAL: Component table contains unknown entries: $($table.FullName)"
+            $fatalErrors += "? CRITICAL: Component table contains unknown entries: $($table.FullName)"
             $configIssues += "ROOT_CAUSE: Component generation script couldn't resolve some JSON definitions"
         }
     } catch {
-        $configIssues += "⚠️ Unable to scan component table: $($table.FullName)"
+        $configIssues += "?? Unable to scan component table: $($table.FullName)"
         $warningCount++
     }
 }
 
 # SCAN 4: Header file validation
-Write-Host "🔍 Checking for unknown component headers..." -ForegroundColor Yellow
+Write-Host "? Checking for unknown component headers..." -ForegroundColor Yellow
 $unknownHeaders = Get-ChildItem -Path "src" -Recurse -Filter "*.h" -ErrorAction SilentlyContinue | Where-Object { 
     $_.Name -match "unknown.*\.h$"
 }
 
 if ($unknownHeaders) {
-    $fatalErrors += "🚨 CRITICAL: Unknown component headers detected:"
+    $fatalErrors += "? CRITICAL: Unknown component headers detected:"
     $unknownHeaders | ForEach-Object { 
         $fatalErrors += "   - $($_.FullName)" 
     }
     
     if ($FixMode) {
-        Write-Host "🔧 FIX MODE: Deleting unknown header files..." -ForegroundColor Cyan
+        Write-Host "? FIX MODE: Deleting unknown header files..." -ForegroundColor Cyan
         $unknownHeaders | Remove-Item -Force
-        Write-Host "✅ Deleted $($unknownHeaders.Count) unknown header files" -ForegroundColor Green
+        Write-Host "? Deleted $($unknownHeaders.Count) unknown header files" -ForegroundColor Green
     }
 }
 
 # SCAN 5: Include file validation
-Write-Host "🔍 Scanning source files for unknown component includes..." -ForegroundColor Yellow
+Write-Host "? Scanning source files for unknown component includes..." -ForegroundColor Yellow
 $sourceFiles = Get-ChildItem -Path "src" -Recurse -Filter "*.cpp" -ErrorAction SilentlyContinue
 foreach ($sourceFile in $sourceFiles) {
     try {
         $content = Get-Content $sourceFile.FullName -ErrorAction SilentlyContinue
         if ($content -match '#include.*unknown.*\.h') {
-            $fatalErrors += "🚨 CRITICAL: Source file includes unknown component: $($sourceFile.FullName)"
+            $fatalErrors += "? CRITICAL: Source file includes unknown component: $($sourceFile.FullName)"
             $configIssues += "ROOT_CAUSE: Incomplete JSON definition caused unknown component generation"
         }
     } catch {
-        $configIssues += "⚠️ Unable to scan source file: $($sourceFile.FullName)"
+        $configIssues += "?? Unable to scan source file: $($sourceFile.FullName)"
         $warningCount++
     }
 }
 
 # SCAN 6: Build artifact validation
-Write-Host "🔍 Checking build artifacts for unknown components..." -ForegroundColor Yellow
+Write-Host "? Checking build artifacts for unknown components..." -ForegroundColor Yellow
 $buildLog = Get-ChildItem -Path ".pio" -Recurse -Filter "*.log" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 if ($buildLog) {
     try {
         $logContent = Get-Content $buildLog.FullName -ErrorAction SilentlyContinue
         if ($logContent -match "unknown_component|UNKNOWN_COMPONENT") {
-            $fatalErrors += "🚨 CRITICAL: Build log contains unknown component references"
+            $fatalErrors += "? CRITICAL: Build log contains unknown component references"
             $configIssues += "ROOT_CAUSE: Build system is trying to compile auto-generated unknown components"
         }
     } catch {
-        $configIssues += "⚠️ Unable to scan build log"
+        $configIssues += "?? Unable to scan build log"
         $warningCount++
     }
 }
@@ -181,22 +181,22 @@ Write-Host "`n" -ForegroundColor White
 Write-Host "=" * 70 -ForegroundColor Cyan
 
 if ($fatalErrors.Count -eq 0 -and $configIssues.Count -eq 0) {
-    Write-Host "✅ SYSTEM INTEGRITY: EXCELLENT" -ForegroundColor Green -BackgroundColor Black
-    Write-Host "🎯 All component definitions are complete" -ForegroundColor Green
-    Write-Host "🎯 No unknown components detected" -ForegroundColor Green
-    Write-Host "🎯 JSON configurations are valid" -ForegroundColor Green
-    Write-Host "🎯 Component generation is clean" -ForegroundColor Green
+    Write-Host "? SYSTEM INTEGRITY: EXCELLENT" -ForegroundColor Green -BackgroundColor Black
+    Write-Host "? All component definitions are complete" -ForegroundColor Green
+    Write-Host "? No unknown components detected" -ForegroundColor Green
+    Write-Host "? JSON configurations are valid" -ForegroundColor Green
+    Write-Host "? Component generation is clean" -ForegroundColor Green
     
     if ($warningCount -gt 0) {
-        Write-Host "⚠️  $warningCount minor warnings (non-critical)" -ForegroundColor Yellow
+        Write-Host "??  $warningCount minor warnings (non-critical)" -ForegroundColor Yellow
     }
     
-    Write-Host "`n✨ STATUS: PASSED" -ForegroundColor Green -BackgroundColor Black
+    Write-Host "`n? STATUS: PASSED" -ForegroundColor Green -BackgroundColor Black
     exit 0
 }
 
 if ($configIssues.Count -gt 0 -and $fatalErrors.Count -eq 0) {
-    Write-Host "⚠️  CONFIGURATION ISSUES DETECTED" -ForegroundColor Yellow -BackgroundColor Black
+    Write-Host "??  CONFIGURATION ISSUES DETECTED" -ForegroundColor Yellow -BackgroundColor Black
     Write-Host "These are likely the ROOT CAUSE of unknown components:" -ForegroundColor Yellow
     Write-Host ""
     
@@ -205,19 +205,19 @@ if ($configIssues.Count -gt 0 -and $fatalErrors.Count -eq 0) {
     }
     
     Write-Host ""
-    Write-Host "📋 RECOMMENDED ACTIONS:" -ForegroundColor Cyan
+    Write-Host "? RECOMMENDED ACTIONS:" -ForegroundColor Cyan
     Write-Host "   1. Complete the incomplete JSON definitions listed above" -ForegroundColor White
     Write-Host "   2. Run: .\tools\generate_tables.py to regenerate components" -ForegroundColor White
     Write-Host "   3. Re-run this scanner to verify fixes" -ForegroundColor White
     Write-Host ""
-    Write-Host "💡 TIP: Unknown components are usually auto-generated when JSON is incomplete" -ForegroundColor Cyan
+    Write-Host "? TIP: Unknown components are usually auto-generated when JSON is incomplete" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "⚠️  STATUS: NEEDS_ATTENTION" -ForegroundColor Yellow -BackgroundColor Black
+    Write-Host "??  STATUS: NEEDS_ATTENTION" -ForegroundColor Yellow -BackgroundColor Black
     exit 0
 }
 
 if ($fatalErrors.Count -gt 0) {
-    Write-Host "🚨 CRITICAL SYSTEM ISSUES" -ForegroundColor Red -BackgroundColor Yellow
+    Write-Host "? CRITICAL SYSTEM ISSUES" -ForegroundColor Red -BackgroundColor Yellow
     Write-Host "$($fatalErrors.Count) CRITICAL PROBLEMS FOUND:" -ForegroundColor Red
     Write-Host ""
     
@@ -234,15 +234,15 @@ if ($fatalErrors.Count -gt 0) {
     }
     
     Write-Host ""
-    Write-Host "🛠️  CRITICAL REPAIR ACTIONS:" -ForegroundColor Red
+    Write-Host "??  CRITICAL REPAIR ACTIONS:" -ForegroundColor Red
     Write-Host "   1. Fix incomplete JSON definitions (listed above)" -ForegroundColor White
     Write-Host "   2. Delete unknown component files: .\tools\fatal_bug_scanner_fixed.ps1 -FixMode" -ForegroundColor White
     Write-Host "   3. Regenerate components: .\tools\generate_tables.py" -ForegroundColor White
     Write-Host "   4. Clean build: pio run --clean-first" -ForegroundColor White
     Write-Host "   5. Re-run this scanner to verify" -ForegroundColor White
     Write-Host ""
-    Write-Host "💡 ROOT CAUSE: Unknown components = Incomplete JSON definitions" -ForegroundColor Cyan
+    Write-Host "? ROOT CAUSE: Unknown components = Incomplete JSON definitions" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "💥 STATUS: FAILED" -ForegroundColor Red -BackgroundColor Yellow
+    Write-Host "? STATUS: FAILED" -ForegroundColor Red -BackgroundColor Yellow
     exit 1
 }

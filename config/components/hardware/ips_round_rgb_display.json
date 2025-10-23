@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/hardware/ips_round_rgb_display.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -67,7 +67,7 @@
     "ordering_information":  {
                                  "primary_supplier":  "Waveshare",
                                  "part_number":  "1.28inch-LCD-Module",
-                                 "product_name":  "1.28inch round LCD Module, 240×240, SPI",
+                                 "product_name":  "1.28inch round LCD Module, 240?240, SPI",
                                  "price_usd":  "16.99",
                                  "availability":  "IN_STOCK",
                                  "shipping":  "7-14_DAYS",

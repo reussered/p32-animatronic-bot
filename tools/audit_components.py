@@ -166,14 +166,14 @@ class P32ComponentFileAuditor:
             
             status = []
             if has_init:
-                status.append("✓ init")
+                status.append("? init")
             else:
-                status.append("✗ init")
+                status.append("? init")
                 
             if has_act:
-                status.append("✓ act")
+                status.append("? act")
             else:
-                status.append("✗ act")
+                status.append("? act")
             
             print(f"  {comp_name}: {' '.join(status)} ({len(content)} chars)")
             

@@ -1,6 +1,6 @@
 #!/usr/bin/env powershell
 
-Write-Host "🔧 Bulk Path Mismatch Repair" -ForegroundColor Blue
+Write-Host "? Bulk Path Mismatch Repair" -ForegroundColor Blue
 
 $configPath = Resolve-Path "config"
 $jsonFiles = Get-ChildItem -Path "config" -Recurse -Filter "*.json" -File

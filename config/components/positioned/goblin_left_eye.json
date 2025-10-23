@@ -1,10 +1,9 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin_left_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "goblin_left_eye",
     "subsystem":  "HEAD",
-    "hardware_reference":  "config/components/hardware/gc9a01_display.json",
     "interface_assignment":  "SPI_DEVICE_1",
     "contained_components":  [
                                  "config/components/creature_specific/goblin_eye.json"

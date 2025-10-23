@@ -15,7 +15,7 @@ $ErrorActionPreference = "Stop"
 
 # FATAL BUG DETECTION FUNCTIONS
 function Test-FatalBugs {
-    Write-Host "🔍 SCANNING FOR FATAL BUGS..." -ForegroundColor Red
+    Write-Host "? SCANNING FOR FATAL BUGS..." -ForegroundColor Red
     
     $fatalErrors = @()
     
@@ -25,7 +25,7 @@ function Test-FatalBugs {
     }
     
     if ($unknownComponents) {
-        $fatalErrors += "🚨 FATAL: Unknown component files detected:"
+        $fatalErrors += "? FATAL: Unknown component files detected:"
         $unknownComponents | ForEach-Object { $fatalErrors += "   - $($_.FullName)" }
     }
     
@@ -35,11 +35,11 @@ function Test-FatalBugs {
         try {
             $content = Get-Content $jsonFile.FullName -Raw
             if ($content -match '"unknown[^"]*"' -or $content -match '"UNKNOWN[^"]*"') {
-                $fatalErrors += "🚨 FATAL: Unknown references in JSON: $($jsonFile.FullName)"
+                $fatalErrors += "? FATAL: Unknown references in JSON: $($jsonFile.FullName)"
             }
         }
         catch {
-            $fatalErrors += "🚨 FATAL: Corrupted JSON file: $($jsonFile.FullName)"
+            $fatalErrors += "? FATAL: Corrupted JSON file: $($jsonFile.FullName)"
         }
     }
     
@@ -49,7 +49,7 @@ function Test-FatalBugs {
     }
     
     if ($includeFiles) {
-        $fatalErrors += "🚨 FATAL: Unknown component references in headers:"
+        $fatalErrors += "? FATAL: Unknown component references in headers:"
         $includeFiles | ForEach-Object { $fatalErrors += "   - $($_.FullName)" }
     }
     
@@ -58,29 +58,29 @@ function Test-FatalBugs {
     foreach ($table in $componentTables) {
         $content = Get-Content $table.FullName -ErrorAction SilentlyContinue
         if ($content -match "unknown_component" -or $content -match "UNKNOWN_COMPONENT") {
-            $fatalErrors += "🚨 FATAL: Broken component table: $($table.FullName)"
+            $fatalErrors += "? FATAL: Broken component table: $($table.FullName)"
         }
     }
     
     if ($fatalErrors.Count -gt 0) {
         Write-Host "`n" -ForegroundColor Red
-        Write-Host "💀💀💀 FATAL BUGS DETECTED - TERMINATING 💀💀💀" -ForegroundColor Red -BackgroundColor Yellow
+        Write-Host "??? FATAL BUGS DETECTED - TERMINATING ???" -ForegroundColor Red -BackgroundColor Yellow
         Write-Host "=" * 60 -ForegroundColor Red
         foreach ($fatalError in $fatalErrors) {
             Write-Host $fatalError -ForegroundColor Red
         }
         Write-Host "=" * 60 -ForegroundColor Red
-        Write-Host "`n🛑 BUILD STATE CORRUPTED - FIX IMMEDIATELY" -ForegroundColor Red -BackgroundColor Yellow
-        Write-Host "📋 REQUIRED ACTIONS:" -ForegroundColor Yellow
+        Write-Host "`n? BUILD STATE CORRUPTED - FIX IMMEDIATELY" -ForegroundColor Red -BackgroundColor Yellow
+        Write-Host "? REQUIRED ACTIONS:" -ForegroundColor Yellow
         Write-Host "   1. Delete all files containing 'unknown_component'" -ForegroundColor White
         Write-Host "   2. Run component generation scripts to rebuild" -ForegroundColor White
         Write-Host "   3. Verify all JSON files for unknown references" -ForegroundColor White
         Write-Host "   4. Re-run this script after cleanup" -ForegroundColor White
-        Write-Host "`n💥 SCRIPT TERMINATED - STATUS: FAILED" -ForegroundColor Red -BackgroundColor Yellow
+        Write-Host "`n? SCRIPT TERMINATED - STATUS: FAILED" -ForegroundColor Red -BackgroundColor Yellow
         exit 1
     }
     
-    Write-Host "✅ No fatal bugs detected - system clean" -ForegroundColor Green
+    Write-Host "? No fatal bugs detected - system clean" -ForegroundColor Green
 }
 
 function Get-ComponentFiles {

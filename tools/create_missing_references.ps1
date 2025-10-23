@@ -33,11 +33,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 # Color functions for output
-function Write-Success { param($Message) Write-Host "✅ $Message" -ForegroundColor Green }
-function Write-Warning { param($Message) Write-Host "⚠️  $Message" -ForegroundColor Yellow }
-function Write-Error { param($Message) Write-Host "❌ $Message" -ForegroundColor Red }
-function Write-Info { param($Message) Write-Host "ℹ️  $Message" -ForegroundColor Cyan }
-function Write-Progress { param($Message) Write-Host "🔧 $Message" -ForegroundColor Blue }
+function Write-Success { param($Message) Write-Host "? $Message" -ForegroundColor Green }
+function Write-Warning { param($Message) Write-Host "??  $Message" -ForegroundColor Yellow }
+function Write-Error { param($Message) Write-Host "? $Message" -ForegroundColor Red }
+function Write-Info { param($Message) Write-Host "??  $Message" -ForegroundColor Cyan }
+function Write-Progress { param($Message) Write-Host "? $Message" -ForegroundColor Blue }
 
 Write-Info "P32 Animatronic Bot - Missing References Creator"
 Write-Info "Target: $ProjectRoot | DryRun: $DryRun | Verbose: $Verbose"
@@ -85,8 +85,8 @@ $HardwareDefinitions = @{
         description = "HC-SR04 ultrasonic distance sensor"
         specifications = @{
             sensing_range = "2-400cm"
-            accuracy = "±3mm"
-            measuring_angle = "15°"
+            accuracy = "?3mm"
+            measuring_angle = "15?"
             frequency = "40kHz"
             power_consumption = @{
                 voltage = "5V"
@@ -114,9 +114,9 @@ $HardwareDefinitions = @{
         author = "config/author.json"
         component_name = "speaker"
         hardware_type = "AUDIO_SPEAKER"
-        description = "40mm 8Ω full-range speaker"
+        description = "40mm 8? full-range speaker"
         specifications = @{
-            impedance = "8Ω"
+            impedance = "8?"
             power_rating = "3W"
             frequency_response = "100Hz-18kHz"
             sensitivity = "85dB"
@@ -184,7 +184,7 @@ $HardwareDefinitions = @{
             torque_kg_cm = 10.0
             rotation_degrees = 180
             control_signal = "PWM"
-            operating_speed = "0.17sec/60°"
+            operating_speed = "0.17sec/60?"
             power_consumption = @{
                 voltage = "6V"
                 current_draw = "900mA"

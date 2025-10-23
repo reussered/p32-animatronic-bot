@@ -3,18 +3,18 @@ Write-Host "=======================================================" -Foreground
 Write-Host ""
 
 # CRITICAL: Run fatal bug detection first
-Write-Host "🔍 RUNNING FATAL BUG DETECTION..." -ForegroundColor Red
+Write-Host "? RUNNING FATAL BUG DETECTION..." -ForegroundColor Red
 try {
     & ".\tools\fatal_bug_scanner.ps1"
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "💀 FATAL BUGS DETECTED - VERIFICATION TERMINATED" -ForegroundColor Red -BackgroundColor Yellow
+        Write-Host "? FATAL BUGS DETECTED - VERIFICATION TERMINATED" -ForegroundColor Red -BackgroundColor Yellow
         exit 1
     }
-    Write-Host "✅ Fatal bug scan passed - continuing verification" -ForegroundColor Green
+    Write-Host "? Fatal bug scan passed - continuing verification" -ForegroundColor Green
 }
 catch {
-    Write-Host "💥 Could not run fatal bug scanner: $($_.Exception.Message)" -ForegroundColor Red
-    Write-Host "⚠️  Proceeding with verification (scanner may not exist)" -ForegroundColor Yellow
+    Write-Host "? Could not run fatal bug scanner: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "??  Proceeding with verification (scanner may not exist)" -ForegroundColor Yellow
 }
 Write-Host ""
 

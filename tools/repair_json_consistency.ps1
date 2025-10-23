@@ -39,11 +39,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 # Color functions for output
-function Write-Success { param($Message) Write-Host "✅ $Message" -ForegroundColor Green }
-function Write-Warning { param($Message) Write-Host "⚠️  $Message" -ForegroundColor Yellow }
-function Write-Error { param($Message) Write-Host "❌ $Message" -ForegroundColor Red }
-function Write-Info { param($Message) Write-Host "ℹ️  $Message" -ForegroundColor Cyan }
-function Write-Progress { param($Message) Write-Host "🔧 $Message" -ForegroundColor Blue }
+function Write-Success { param($Message) Write-Host "? $Message" -ForegroundColor Green }
+function Write-Warning { param($Message) Write-Host "??  $Message" -ForegroundColor Yellow }
+function Write-Error { param($Message) Write-Host "? $Message" -ForegroundColor Red }
+function Write-Info { param($Message) Write-Host "??  $Message" -ForegroundColor Cyan }
+function Write-Progress { param($Message) Write-Host "? $Message" -ForegroundColor Blue }
 
 # Repair counters
 $RepairStats = @{
@@ -180,7 +180,7 @@ function Get-HardwareTemplate {
         }
         "sensor" {
             $baseTemplate.specifications.sensing_range = "2-400cm"
-            $baseTemplate.specifications.accuracy = "±3mm"
+            $baseTemplate.specifications.accuracy = "?3mm"
             $baseTemplate.cost_performance.unit_cost_usd = 8.99
         }
         "esp32|controller" {

@@ -76,11 +76,11 @@ foreach ($file in $jsonFiles) {
         
         # Write back to file
         Set-Content -Path $file.FullName -Value $finalContent -NoNewline
-        Write-Host "  ✓ Processed successfully" -ForegroundColor Green
+        Write-Host "  ? Processed successfully" -ForegroundColor Green
         $processedCount++
         
     } catch {
-        Write-Host "  ✗ Error processing file: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "  ? Error processing file: $($_.Exception.Message)" -ForegroundColor Red
         $errorCount++
     }
 }

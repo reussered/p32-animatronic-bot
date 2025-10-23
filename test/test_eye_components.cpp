@@ -28,7 +28,7 @@ void test_eye_processing_pipeline(void) {
     goblin_left_eye_init();
     goblin_right_eye_init();
     gc9a01_init();
-    ESP_LOGI(TAG, "✓ All eye components initialized");
+    ESP_LOGI(TAG, "? All eye components initialized");
     
     // Test 2: Test mood changes with frame processing
     ESP_LOGI(TAG, "Test 2: Testing mood-based frame processing");
@@ -52,7 +52,7 @@ void test_eye_processing_pipeline(void) {
         goblin_eye_act();
         gc9a01_act();
     }
-    ESP_LOGI(TAG, "✓ Neutral mood processing completed");
+    ESP_LOGI(TAG, "? Neutral mood processing completed");
     
     // Test 3: Test with angry mood
     ESP_LOGI(TAG, "Test 3: Testing angry mood effects");
@@ -70,7 +70,7 @@ void test_eye_processing_pipeline(void) {
         goblin_eye_act();
         gc9a01_act();
     }
-    ESP_LOGI(TAG, "✓ Angry mood processing completed");
+    ESP_LOGI(TAG, "? Angry mood processing completed");
     
     // Test 4: Test with happy mood
     ESP_LOGI(TAG, "Test 4: Testing happy mood effects");
@@ -89,7 +89,7 @@ void test_eye_processing_pipeline(void) {
         goblin_eye_act();
         gc9a01_act();
     }
-    ESP_LOGI(TAG, "✓ Happy mood processing completed");
+    ESP_LOGI(TAG, "? Happy mood processing completed");
     
     // Test 5: Test with complex mixed mood
     ESP_LOGI(TAG, "Test 5: Testing complex mixed mood");
@@ -110,7 +110,7 @@ void test_eye_processing_pipeline(void) {
         goblin_eye_act();
         gc9a01_act();
     }
-    ESP_LOGI(TAG, "✓ Mixed mood processing completed");
+    ESP_LOGI(TAG, "? Mixed mood processing completed");
     
     ESP_LOGI(TAG, "=== ALL EYE TESTS PASSED ===");
 }
@@ -137,7 +137,7 @@ void test_animation_frames(void) {
         ESP_LOGI(TAG, "Loop %u: Right eye frame loaded", loop);
     }
     
-    ESP_LOGI(TAG, "✓ Animation frame tests completed");
+    ESP_LOGI(TAG, "? Animation frame tests completed");
 }
 
 /**
@@ -161,7 +161,7 @@ void test_palette_system(void) {
     ESP_LOGI(TAG, "White range (224-254): %04X", goblin_eye_palette[224].value);
     ESP_LOGI(TAG, "Pure white (255): %04X", goblin_eye_palette[255].value);
     
-    ESP_LOGI(TAG, "✓ Palette system test completed");
+    ESP_LOGI(TAG, "? Palette system test completed");
 }
 
 /**
@@ -174,6 +174,6 @@ void run_eye_component_tests(void) {
     test_animation_frames();
     test_eye_processing_pipeline();
     
-    ESP_LOGI(TAG, "🎉 ALL EYE COMPONENT TESTS COMPLETED SUCCESSFULLY! 🎉");
+    ESP_LOGI(TAG, "? ALL EYE COMPONENT TESTS COMPLETED SUCCESSFULLY! ?");
     ESP_LOGI(TAG, "Eye implementations are ready for integration");
 }
