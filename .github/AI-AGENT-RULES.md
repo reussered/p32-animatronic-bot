@@ -388,3 +388,48 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - **Power System**: Stable 3.16V delivery via ATX PSU + breakout board
 - **Hardware Status**: 2x GC9A01 displays connected and cool-running
 
+## RULE 5B: COMPONENT COORDINATION THROUGH SHARED STATE
+
+**Core Principle**: Components only act on information they alone have access to, coordinating through shared state variables without breaking isolation.
+
+**Two Levels of State Sharing:**
+1. **Local Subsystem Memory** - Direct memory variables for coordination between components within same subsystem (e.g., head subsystem)
+2. **SharedMemory Class** - ESP-NOW communication for coordination between different subsystems (head ↔ torso ↔ other ESP32 controllers)
+
+**Component Buffer Management Pattern:**
+
+```cpp
+// In display component (generated once even if referenced multiple times)
+uint8_t *frame_ptr;  // used for all eye operations
+const uint32_t FRAME_ROW = 240;
+const uint32_t ROW_COUNT = 240; 
+const uint32_t FRAME_SIZE = FRAME_ROW * ROW_COUNT;
+uint32_t current_spi_channel;
+
+// In goblin_left_eye component
+const uint8_t left_eye_buffer[FRAME_SIZE];
+
+// In goblin_right_eye component  
+const uint8_t right_eye_buffer[FRAME_SIZE];
+```
+
+**Initialization Order (reverse dependency):**
+
+1. **display_init()** - establishes frame specifications and shared variables
+2. **goblin_eye_init()** - does nothing (shared logic component)
+3. **goblin_left_eye_init()** / **goblin_right_eye_init()** - sets frame_ptr to respective buffer
+
+**Execution Flow Pattern:**
+
+- **Eye components** (left/right): Set frame_ptr to their buffer, set current_spi_channel, bounds check only
+- **Shared processor** (goblin_eye): Modifies frame based on Mood/Environment/Personality
+- **Display component**: Transfers frame via current_spi_channel, advances frame_ptr
+
+**Critical Rules:**
+
+- Each component only accesses data it owns or global shared state
+- No component calls functions on other components
+- Display component doesn't care about frame contents or buffer boundaries
+- Eye components reset frame_ptr when bounds exceeded
+- Code generation must handle duplicate component detection (display referenced by multiple eyes)
+
