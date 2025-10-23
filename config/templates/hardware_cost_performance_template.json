@@ -1,0 +1,127 @@
+{
+  "relative_filename": "config/templates/hardware_cost_performance_template.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "template_type": "HARDWARE_COST_PERFORMANCE_ANALYSIS",
+  "description": "Template for analyzing cost and memory/speed requirements for ALL hardware components",
+  
+  "cost_analysis": {
+    "component_cost_usd": "ACTUAL_RETAIL_PRICE",
+    "bulk_discount_available": "TRUE/FALSE",
+    "bulk_price_breaks": {
+      "quantity_10": "PRICE_PER_UNIT",
+      "quantity_50": "PRICE_PER_UNIT", 
+      "quantity_100": "PRICE_PER_UNIT"
+    },
+    "total_cost_impact": {
+      "single_creature": "COST_FOR_ONE_COMPLETE_CREATURE",
+      "creature_family": "COST_FOR_MULTIPLE_SAME_TYPE",
+      "percentage_of_total_build": "PERCENT_OF_TOTAL_CREATURE_COST"
+    }
+  },
+  
+  "memory_requirements": {
+    "esp32_ram_usage": {
+      "driver_ram_kb": "DRIVER_MEMORY_FOOTPRINT",
+      "frame_buffer_kb": "DISPLAY_BUFFER_SIZE",
+      "animation_cache_kb": "ANIMATION_STORAGE_REQUIREMENTS",
+      "total_ram_impact_kb": "TOTAL_ESP32_RAM_USED"
+    },
+    "esp32_flash_usage": {
+      "driver_code_kb": "COMPILED_DRIVER_SIZE",
+      "assets_storage_kb": "GRAPHICS_AUDIO_ASSETS",
+      "total_flash_impact_kb": "TOTAL_ESP32_FLASH_USED"
+    },
+    "shared_memory_usage": {
+      "esp_now_overhead_kb": "MESH_COMMUNICATION_MEMORY",
+      "state_synchronization_kb": "CROSS_SUBSYSTEM_DATA"
+    }
+  },
+  
+  "speed_requirements": {
+    "spi_bandwidth": {
+      "minimum_clock_mhz": "MINIMUM_FUNCTIONAL_SPEED",
+      "optimal_clock_mhz": "RECOMMENDED_OPERATING_SPEED",
+      "maximum_clock_mhz": "HARDWARE_SPEED_LIMIT",
+      "bandwidth_utilization": "PERCENTAGE_OF_ESP32_SPI_CAPACITY"
+    },
+    "cpu_utilization": {
+      "driver_cpu_percent": "CPU_TIME_FOR_DRIVER_OPERATIONS", 
+      "rendering_cpu_percent": "CPU_TIME_FOR_GRAPHICS_RENDERING",
+      "animation_cpu_percent": "CPU_TIME_FOR_ANIMATION_PROCESSING",
+      "total_cpu_impact_percent": "TOTAL_ESP32_CPU_USAGE"
+    },
+    "real_time_constraints": {
+      "update_frequency_hz": "REQUIRED_REFRESH_RATE",
+      "latency_tolerance_ms": "MAXIMUM_ACCEPTABLE_DELAY",
+      "timing_critical": "TRUE/FALSE"
+    }
+  },
+  
+  "scalability_analysis": {
+    "multiple_components": {
+      "max_components_per_esp32": "HARDWARE_LIMIT_COUNT",
+      "recommended_components_per_esp32": "PRACTICAL_LIMIT_COUNT", 
+      "resource_bottleneck": "CPU/MEMORY/BANDWIDTH_LIMITING_FACTOR"
+    },
+    "system_impact": {
+      "subsystem_loading": "HEAD/TORSO/LIMB_RESOURCE_USAGE",
+      "mesh_network_overhead": "ESP_NOW_BANDWIDTH_IMPACT",
+      "power_scaling": "POWER_CONSUMPTION_MULTIPLICATION"
+    }
+  },
+  
+  "optimization_opportunities": {
+    "cost_reduction": [
+      "BULK_PURCHASING_STRATEGIES",
+      "ALTERNATIVE_SUPPLIERS",
+      "FEATURE_REDUCTION_OPTIONS"
+    ],
+    "memory_optimization": [
+      "BUFFER_SHARING_TECHNIQUES", 
+      "COMPRESSION_STRATEGIES",
+      "LAZY_LOADING_APPROACHES"
+    ],
+    "speed_optimization": [
+      "HARDWARE_ACCELERATION_USAGE",
+      "PARALLEL_PROCESSING_OPTIONS",
+      "CACHING_STRATEGIES"
+    ]
+  },
+  
+  "decision_matrix": {
+    "cost_vs_performance": {
+      "budget_tier": "MINIMUM_VIABLE_OPTION",
+      "balanced_tier": "OPTIMAL_COST_PERFORMANCE_RATIO", 
+      "premium_tier": "MAXIMUM_CAPABILITY_OPTION"
+    },
+    "creature_size_scaling": {
+      "micro_creatures": "COMPONENT_RECOMMENDATIONS",
+      "small_creatures": "COMPONENT_RECOMMENDATIONS",
+      "medium_creatures": "COMPONENT_RECOMMENDATIONS", 
+      "large_creatures": "COMPONENT_RECOMMENDATIONS",
+      "giant_creatures": "COMPONENT_RECOMMENDATIONS"
+    }
+  },
+  
+  "required_analysis_sections": [
+    "ALL hardware components MUST include cost_analysis section",
+    "ALL hardware components MUST include memory_requirements section", 
+    "ALL hardware components MUST include speed_requirements section",
+    "ALL hardware components MUST include scalability_analysis section",
+    "ALL hardware components MUST include optimization_opportunities section",
+    "ALL hardware components MUST include decision_matrix section"
+  ],
+  
+  "components_requiring_analysis": [
+    "ALL displays (OLED, TFT, LED matrices)",
+    "ALL sensors (ultrasonic, IMU, temperature, etc.)",
+    "ALL actuators (servos, steppers, linear actuators)",
+    "ALL motor drivers (A4988, DRV8825, ULN2003, etc.)",
+    "ALL audio components (speakers, amplifiers, microphones)",
+    "ALL power components (regulators, batteries, charging)",
+    "ALL communication components (ESP-NOW, WiFi, Bluetooth)",
+    "ALL control interfaces (buttons, encoders, switches)",
+    "ALL mechanical components (bearings, gears, linkages)"
+  ]
+}

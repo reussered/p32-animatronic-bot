@@ -1,43 +1,37 @@
-/**
- * @file network_monitor.cpp
- * @brief Network connectivity monitoring - WiFi signal strength, connection status
- * @author Auto-generated from JSON specification
- */
+// P32 Component: network_monitor
+// Auto-generated individual component file
+// Memory footprint can be measured independently
 
-#include "components/network_monitor.hpp"
-#include "core/memory/SharedMemory.hpp"
-
+#include "esp_log.h"
+#include "esp_err.h"
 #include "p32_shared_state.h"
 
-// External GSM instance
-extern SharedMemory GSM;
+static const char *TAG = "NETWORK_MONITOR";
 
-/**
- * @brief Initialize network_monitor component
- * Called once during system startup
- */
-void network_monitor_init(void) {
-    // Component initialization logic
-    // Access global state via g_loopCount and shared state via GSM
-    
-    // Example: Read shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
-    
-    // TODO: Implement component-specific initialization
+// Component: Network status monitoring
+esp_err_t network_monitor_init(void) {
+#ifdef SIMPLE_TEST
+    printf("INIT: network_monitor - Network status monitoring\n");
+    return ESP_OK;
+#endif
+
+    // Network monitoring initialization
+    ESP_LOGI(TAG, "Network monitor initialized");
+    return ESP_OK;
 }
 
-/**
- * @brief Execute network_monitor component logic  
- * Called every loop iteration based on hitCount: 1
- */
+// Component action function - executes every 5000 loops
+// NO ARGUMENTS - accesses g_loopCount from p32_shared_state.h
 void network_monitor_act(void) {
-    // Component execution logic
-    // Access global state via g_loopCount and shared state via GSM
-    
-    // Example: Update shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
-    // // Modify shared_data...
-    // GSM.write<SomeSharedDataType>(shared_data);
-    
-    // TODO: Implement component-specific behavior
+#ifdef SIMPLE_TEST
+    if (g_loopCount % 10000 == 0) {
+        printf("ACT: network_monitor - checking network (loop %llu)\n", g_loopCount);
+    }
+    return;
+#endif
+
+    // Network status check
+    if (g_loopCount % 10000 == 0) {
+        ESP_LOGD(TAG, "Network status check - loop %llu", g_loopCount);
+    }
 }

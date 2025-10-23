@@ -6,9 +6,12 @@
   "interface_type": "SPI_DEVICE",
   "bus_reference": "SPI_BUS_VSPI",
   "pins": {
-    "cs": 15
+    "chip_select_1": 15,
+    "data_command_1": 2,
+    "reset_1": 4
   },
   "device_config": {
-    "cs_active_low": true
+    "cs_active_low": true,
+    "manufacturer_variant": "waveshare_gc9a01"
   }
 }

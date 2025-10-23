@@ -1,34 +1,28 @@
-// P32 Component: goblin_left_eye
-// Simple test implementation for GC9A01 display
+// Simple GC9A01 Display Test
+// Direct implementation for testing single display
 
-#include "p32_component_config.h"
-#include "p32_shared_state.h"
-
-#ifdef ENABLE_GOBLIN_COMPONENTS
-
-#include "esp_log.h"
-#include "esp_err.h"
-#include "driver/spi_master.h"
-#include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "driver/spi_master.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
 
-// SPI pins for the display (from interface configs)
-#define PIN_NUM_MISO   12
-#define PIN_NUM_MOSI   13  
-#define PIN_NUM_CLK    14
-#define PIN_NUM_CS     15
-#define PIN_NUM_DC     2   // Data/Command pin
-#define PIN_NUM_RST    4   // Reset pin
+// Pin definitions based on your configuration
+#define PIN_NUM_MISO   (gpio_num_t)12
+#define PIN_NUM_MOSI   (gpio_num_t)13  
+#define PIN_NUM_CLK    (gpio_num_t)14
+#define PIN_NUM_CS     (gpio_num_t)15
+#define PIN_NUM_DC     (gpio_num_t)2   // Data/Command pin
+#define PIN_NUM_RST    (gpio_num_t)4   // Reset pin
 
-// Display constants for GC9A01 240x240 circular display
+// Display constants
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 240
 
-static const char *TAG = "GOBLIN_LEFT_EYE";
+static const char *TAG = "DISPLAY_TEST";
 static spi_device_handle_t spi_handle;
 
-// Simple test pattern data
+// Test colors
 static uint16_t test_colors[] = {
     0xF800, // Red
     0x07E0, // Green  
@@ -38,45 +32,42 @@ static uint16_t test_colors[] = {
     0x07FF, // Cyan
     0xFFFF  // White
 };
-static int current_color = 0;
 
-// Function to send command to display
+// Send command to display
 static void lcd_cmd(uint8_t cmd)
 {
-    esp_err_t ret;
     spi_transaction_t t;
     memset(&t, 0, sizeof(t));
     t.length = 8;
     t.tx_buffer = &cmd;
     gpio_set_level(PIN_NUM_DC, 0); // Command mode
-    ret = spi_device_polling_transmit(spi_handle, &t);
-    assert(ret == ESP_OK);
+    spi_device_polling_transmit(spi_handle, &t);
 }
 
-// Function to send data to display
+// Send data to display
 static void lcd_data(uint8_t *data, int len)
 {
-    esp_err_t ret;
-    spi_transaction_t t;
     if (len == 0) return;
+    spi_transaction_t t;
     memset(&t, 0, sizeof(t));
     t.length = len * 8;
     t.tx_buffer = data;
     gpio_set_level(PIN_NUM_DC, 1); // Data mode
-    ret = spi_device_polling_transmit(spi_handle, &t);
-    assert(ret == ESP_OK);
+    spi_device_polling_transmit(spi_handle, &t);
 }
 
-// Initialize the GC9A01 display
-static void gc9a01_init(void)
+// Initialize GC9A01 display
+static void init_display(void)
 {
-    // Reset the display
+    ESP_LOGI(TAG, "Initializing display...");
+    
+    // Reset display
     gpio_set_level(PIN_NUM_RST, 0);
     vTaskDelay(100 / portTICK_PERIOD_MS);
     gpio_set_level(PIN_NUM_RST, 1);
     vTaskDelay(100 / portTICK_PERIOD_MS);
 
-    // Basic initialization commands for GC9A01
+    // Basic initialization commands
     lcd_cmd(0xEF);
     lcd_cmd(0xEB);
     uint8_t data1 = 0x14;
@@ -137,15 +128,17 @@ static void gc9a01_init(void)
     uint8_t data14 = 0xFF;
     lcd_data(&data14, 1);
     
-    // Display ON
-    lcd_cmd(0x36); // Memory Access Control
+    // Memory Access Control
+    lcd_cmd(0x36);
     uint8_t madctl = 0x48;
     lcd_data(&madctl, 1);
     
-    lcd_cmd(0x3A); // Pixel Format
-    uint8_t pixfmt = 0x05; // 16-bit RGB565
+    // Pixel Format (RGB565)
+    lcd_cmd(0x3A);
+    uint8_t pixfmt = 0x05;
     lcd_data(&pixfmt, 1);
     
+    // Display settings
     lcd_cmd(0x90);
     uint8_t gamma1[] = {0x08, 0x08, 0x08, 0x08};
     lcd_data(gamma1, 4);
@@ -215,7 +208,6 @@ static void gc9a01_init(void)
     uint8_t cd[] = {0x63};
     lcd_data(cd, 1);
     
-    // Set display area
     lcd_cmd(0x70);
     uint8_t area1[] = {0x07, 0x07, 0x04, 0x0E, 0x0F, 0x09, 0x07, 0x08, 0x03};
     lcd_data(area1, 9);
@@ -260,19 +252,21 @@ static void gc9a01_init(void)
     
     lcd_cmd(0x29); // Display on
     vTaskDelay(120 / portTICK_PERIOD_MS);
+    
+    ESP_LOGI(TAG, "Display initialized successfully!");
 }
 
 // Fill screen with solid color
 static void fill_screen(uint16_t color)
 {
-    // Set column address
+    // Set column address (0-239)
     lcd_cmd(0x2A);
-    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF}; // 0-239
+    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
     lcd_data(col_data, 4);
     
-    // Set row address  
+    // Set row address (0-239)
     lcd_cmd(0x2B);
-    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF}; // 0-239
+    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
     lcd_data(row_data, 4);
     
     // Write to RAM
@@ -283,21 +277,18 @@ static void fill_screen(uint16_t color)
     // Send color data for entire screen
     for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
     {
-        uint8_t color_bytes[] = {(color >> 8) & 0xFF, color & 0xFF};
-        esp_err_t ret;
+        uint8_t color_bytes[] = {(uint8_t)((color >> 8) & 0xFF), (uint8_t)(color & 0xFF)};
         spi_transaction_t t;
         memset(&t, 0, sizeof(t));
         t.length = 16;
         t.tx_buffer = color_bytes;
-        ret = spi_device_polling_transmit(spi_handle, &t);
-        assert(ret == ESP_OK);
+        spi_device_polling_transmit(spi_handle, &t);
     }
 }
 
-// Component initialization function
-esp_err_t goblin_left_eye_init(void)
+extern "C" void app_main(void)
 {
-    ESP_LOGI(TAG, "Initializing goblin left eye display...");
+    ESP_LOGI(TAG, "Starting GC9A01 Display Test");
     
     // Configure GPIO pins
     gpio_config_t io_conf = {};
@@ -317,8 +308,7 @@ esp_err_t goblin_left_eye_init(void)
     buscfg.quadhd_io_num = -1;
     buscfg.max_transfer_sz = DISPLAY_WIDTH * DISPLAY_HEIGHT * 2;
     
-    esp_err_t ret = spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO);
-    ESP_ERROR_CHECK(ret);
+    ESP_ERROR_CHECK(spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO));
     
     // Configure SPI device
     spi_device_interface_config_t devcfg = {};
@@ -327,112 +317,24 @@ esp_err_t goblin_left_eye_init(void)
     devcfg.spics_io_num = PIN_NUM_CS;
     devcfg.queue_size = 7;
     
-    ret = spi_bus_add_device(SPI2_HOST, &devcfg, &spi_handle);
-    ESP_ERROR_CHECK(ret);
+    ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &devcfg, &spi_handle));
     
     // Initialize the display
-    gc9a01_init();
+    init_display();
     
-    // Fill screen with initial color (red)
-    fill_screen(test_colors[0]);
+    ESP_LOGI(TAG, "Starting color cycle test...");
     
-    ESP_LOGI(TAG, "Goblin left eye display initialized successfully!");
-    return ESP_OK;
-}
-
-// Component action function - cycles through colors
-void goblin_left_eye_act(void)
-{
-    // Change color every time this function is called
-    current_color = (current_color + 1) % 7;
-    fill_screen(test_colors[current_color]);
-    
-    ESP_LOGI(TAG, "Display updated with color %d", current_color);
-}
-void goblin_left_eye_act(void) {
-    // Advance animation frame based on loop count
-    uint32_t animation_speed = 30; // Change frame every 30 loops
-    uint32_t new_frame = (g_loopCount / animation_speed) % left_eye_frame_count;
-    
-    if (new_frame != left_eye_current_frame) {
-        left_eye_current_frame = new_frame;
-        load_current_frame_to_buffer();
+    int color_index = 0;
+    while (true)
+    {
+        // Change color
+        fill_screen(test_colors[color_index]);
+        ESP_LOGI(TAG, "Display showing color %d", color_index);
+        
+        // Next color
+        color_index = (color_index + 1) % 7;
+        
+        // Wait 2 seconds
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
-    
-    // Set context for shared processing (SPI device for left eye)
-    current_spi_device = 1; // SPI_DEVICE_1 for left eye
-    currentFrame = left_eye_animation_buffer;
-    current_frame_size = PIXELS_PER_FRAME;
-    
-    ESP_LOGV(TAG, "Left eye frame %u ready for processing at loop %u", 
-             left_eye_current_frame, g_loopCount);
 }
-
-/**
- * @brief Load blink animation frames for left eye
- */
-void load_left_eye_animation(void) {
-    ESP_LOGI(TAG, "Loading left eye blink animation");
-    
-    // Initialize with simple blink pattern
-    // Frame 0: Fully open eye
-    for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-        left_eye_animation_buffer[i] = 255; // Start with white
-    }
-    
-    left_eye_current_frame = 0;
-    ESP_LOGI(TAG, "Left eye animation loaded");
-}
-
-/**
- * @brief Load current animation frame to processing buffer
- */
-void load_current_frame_to_buffer(void) {
-    // Simple blink animation pattern
-    switch (left_eye_current_frame) {
-        case 0: // Fully open
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 60 && y < 180) {
-                    left_eye_animation_buffer[i] = 64; // Brown iris
-                } else {
-                    left_eye_animation_buffer[i] = 255; // White sclera
-                }
-            }
-            break;
-            
-        case 1: // Partially closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 80 && y < 160) {
-                    left_eye_animation_buffer[i] = 64; // Brown iris
-                } else if (y > 70 && y < 170) {
-                    left_eye_animation_buffer[i] = 224; // Light gray
-                } else {
-                    left_eye_animation_buffer[i] = 0; // Black eyelid
-                }
-            }
-            break;
-            
-        case 2: // Nearly closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 110 && y < 130) {
-                    left_eye_animation_buffer[i] = 32; // Dark slit
-                } else {
-                    left_eye_animation_buffer[i] = 0; // Black eyelid
-                }
-            }
-            break;
-            
-        case 3: // Fully closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                left_eye_animation_buffer[i] = 0; // All black
-            }
-            break;
-    }
-    
-    ESP_LOGV(TAG, "Loaded frame %u to left eye buffer", left_eye_current_frame);
-}
-
-#endif // ENABLE_GOBLIN_COMPONENTS

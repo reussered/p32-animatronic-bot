@@ -1,0 +1,241 @@
+; PlatformIO Project Configuration File - Multi-ESP32 Subsystem Support
+; Documentation: https://docs.platformio.org/page/projectconf.html
+;
+; ESP32 Variant Strategy:
+; - ESP32-C3: Cost-optimized single subsystems (arms, legs)
+; - ESP32-S3: High-performance subsystems (head, torso master)
+; - ESP32: Standard dual-core subsystems (complex arms)
+
+; =============================================================================
+; SHARED CONFIGURATION - Common settings for all ESP32 variants
+; =============================================================================
+
+[common]
+platform = espressif32
+framework = espidf
+lib_deps = 
+    bblanchon/ArduinoJson @ ^7.0.4
+monitor_speed = 115200
+monitor_filters = esp32_exception_decoder
+upload_speed = 921600
+build_flags = 
+    -DSIMPLE_TEST
+    -DPROJECT_P32_ANIMATRONIC=1
+
+; =============================================================================
+; ESP32-C3 BASE CONFIGURATION - Cost-optimized single subsystems
+; =============================================================================
+
+[common_esp32c3]
+extends = common
+build_flags = 
+    ${common.build_flags}
+    -DESP32_CHIP_TYPE_C3=1
+    -DCONFIG_ESP32C3_DEFAULT_CPU_FREQ_160=1
+    -DCHIP_GPIO_COUNT=22
+    -DCHIP_SRAM_SIZE=400000
+
+; =============================================================================
+; ESP32 STANDARD BASE CONFIGURATION - Balanced dual-core subsystems
+; =============================================================================
+
+[common_esp32]
+extends = common
+build_flags = 
+    ${common.build_flags}
+    -DESP32_CHIP_TYPE_STANDARD=1
+    -DCONFIG_ESP32_DEFAULT_CPU_FREQ_240=1
+    -DCHIP_GPIO_COUNT=34
+    -DCHIP_SRAM_SIZE=520000
+
+; =============================================================================
+; ESP32-S3 BASE CONFIGURATION - High-performance with PSRAM
+; =============================================================================
+
+[common_esp32s3]
+extends = common
+build_flags = 
+    ${common.build_flags}
+    -DESP32_CHIP_TYPE_S3=1
+    -DCONFIG_ESP32S3_SPIRAM_SUPPORT=1
+    -DCONFIG_ESP32S3_DEFAULT_CPU_FREQ_240=1
+    -DCHIP_GPIO_COUNT=45
+    -DCHIP_SRAM_SIZE=512000
+    -DCHIP_HAS_PSRAM=1
+
+; =============================================================================
+; ESP32-S3 SUBSYSTEMS - High-performance subsystems
+; =============================================================================
+
+[env:goblin_head]
+extends = common_esp32s3
+board = esp32-s3-devkitc-1
+build_flags = 
+    ${common_esp32s3.build_flags}
+    -DSUBSYSTEM_GOBLIN_HEAD=1
+    -DHEAD_DUAL_DISPLAYS=1
+    -DAUDIO_I2S_ENABLED=1
+    -DENABLE_LEFT_EYE=1
+    -DENABLE_RIGHT_EYE=1
+    -DENABLE_MOUTH=1
+    -DENABLE_NOSE_SENSOR=1
+build_src_filter = 
+    +<*>
+    -<components/>
+    +<components/goblin_left_eye.cpp>
+    +<components/goblin_right_eye.cpp>
+    +<components/goblin_nose.cpp>
+    +<components/goblin_eye.cpp>
+    +<components/gc9a01.cpp>
+    +<subsystems/goblin_head/>
+upload_port = COM3
+
+[env:goblin_torso]
+extends = common_esp32s3
+board = esp32-s3-devkitc-1
+build_flags = 
+    ${common_esp32s3.build_flags}
+    -DSUBSYSTEM_GOBLIN_TORSO=1
+    -DMASTER_CONTROLLER=1
+    -DESP_NOW_MESH_ENABLED=1
+    -DPOWER_MANAGEMENT=1
+    -DSYSTEM_COORDINATION=1
+upload_port = COM4
+
+; =============================================================================
+; ESP32-C3 SUBSYSTEMS - Cost-optimized single subsystems
+; =============================================================================
+
+[env:left_arm]
+extends = common_esp32c3
+board = esp32-c3-devkitm-1
+build_flags = 
+    ${common_esp32c3.build_flags}
+    -DSUBSYSTEM_LEFT_ARM=1
+    -DARM_BASIC_CONTROL=1
+    -DMAX_SERVO_COUNT=8
+    -DENABLE_SHOULDER=1
+    -DENABLE_ELBOW=1
+upload_port = COM5
+
+[env:right_arm]
+extends = common_esp32c3
+board = esp32-c3-devkitm-1
+build_flags = 
+    ${common_esp32c3.build_flags}
+    -DSUBSYSTEM_RIGHT_ARM=1
+    -DARM_BASIC_CONTROL=1
+    -DMAX_SERVO_COUNT=8
+    -DENABLE_SHOULDER=1
+    -DENABLE_ELBOW=1
+upload_port = COM6
+
+[env:left_leg]
+extends = common_esp32c3
+board = esp32-c3-devkitm-1
+build_flags = 
+    ${common_esp32c3.build_flags}
+    -DSUBSYSTEM_LEFT_LEG=1
+    -DLEG_FOOT_INTEGRATION=1
+    -DENABLE_HIP=1
+    -DENABLE_KNEE=1
+    -DENABLE_ANKLE=1
+    -DENABLE_FOOT_SENSORS=1
+upload_port = COM7
+
+[env:right_leg]
+extends = common_esp32c3
+board = esp32-c3-devkitm-1
+build_flags = 
+    ${common_esp32c3.build_flags}
+    -DSUBSYSTEM_RIGHT_LEG=1
+    -DLEG_FOOT_INTEGRATION=1
+    -DENABLE_HIP=1
+    -DENABLE_KNEE=1
+    -DENABLE_ANKLE=1
+    -DENABLE_FOOT_SENSORS=1
+upload_port = COM8
+
+; =============================================================================
+; ESP32 STANDARD SUBSYSTEMS - Advanced dual-core subsystems
+; =============================================================================
+
+[env:left_arm_advanced]
+extends = common_esp32
+board = esp32dev
+build_flags = 
+    ${common_esp32.build_flags}
+    -DSUBSYSTEM_LEFT_ARM=1
+    -DARM_ADVANCED_CONTROL=1
+    -DINVERSE_KINEMATICS_ENABLED=1
+    -DFORCE_FEEDBACK=1
+    -DENABLE_SHOULDER=1
+    -DENABLE_ELBOW=1
+    -DENABLE_HAND=1
+upload_port = COM9
+
+[env:right_arm_advanced]
+extends = common_esp32
+board = esp32dev
+build_flags = 
+    ${common_esp32.build_flags}
+    -DSUBSYSTEM_RIGHT_ARM=1
+    -DARM_ADVANCED_CONTROL=1
+    -DINVERSE_KINEMATICS_ENABLED=1
+    -DFORCE_FEEDBACK=1
+    -DENABLE_SHOULDER=1
+    -DENABLE_ELBOW=1
+    -DENABLE_HAND=1
+upload_port = COM10
+
+; =============================================================================
+; DEVELOPMENT ENVIRONMENTS - Prototyping and testing
+; =============================================================================
+
+[env:dev_all_s3]
+extends = common_esp32s3
+board = esp32-s3-devkitc-1
+build_flags = 
+    ${common_esp32s3.build_flags}
+    -DDEV_MODE_ALL_SUBSYSTEMS=1
+    -DENABLE_ALL_FEATURES=1
+    -DDEBUG_MODE=1
+    -DVERBOSE_LOGGING=1
+upload_port = COM11
+
+[env:legacy_single_chip]
+extends = common_esp32s3
+board = esp32-s3-devkitc-1
+build_flags = 
+    ${common_esp32s3.build_flags}
+    -DLEGACY_MODE=1
+    -DENABLE_ALL_SUBSYSTEMS=1
+upload_port = COM12
+
+; =============================================================================
+; BUILD TESTING - Validate all configurations
+; =============================================================================
+
+[env:test_esp32c3]
+extends = common_esp32c3
+board = esp32-c3-devkitm-1
+build_flags = 
+    ${common_esp32c3.build_flags}
+    -DTEST_MODE=1
+    -DVALIDATE_GPIO_LIMITS=1
+
+[env:test_esp32s3]
+extends = common_esp32s3
+board = esp32-s3-devkitc-1
+build_flags = 
+    ${common_esp32s3.build_flags}
+    -DTEST_MODE=1
+    -DVALIDATE_PSRAM=1
+
+[env:test_esp32]
+extends = common_esp32
+board = esp32dev
+build_flags = 
+    ${common_esp32.build_flags}
+    -DTEST_MODE=1
+    -DVALIDATE_DUAL_CORE=1

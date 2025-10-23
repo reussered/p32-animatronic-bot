@@ -28,6 +28,10 @@
   },
   "function": "primary_display_left",
   "description": "Left eye display animation",
+  "software": {
+    "init_function": "goblin_left_eye_init",
+    "act_function": "goblin_left_eye_act"
+  },
   "animatronic_cache": {
     "animation_buffers": "LEFT_EYE_BUFFER",
     "buffer_allocation": "STACK_PUSH",
@@ -35,6 +39,6 @@
     "interface_binding": "SPI_DEVICE_1"
   },
   "timing": {
-    "hitCount": 60000
+    "hitCount": 1
   }
 }

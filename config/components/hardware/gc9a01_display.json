@@ -21,55 +21,48 @@
     "current_consumption": "50mA"
   },
   "pin_mapping": {
-    "description": "GC9A01 displays have varying pin labels depending on manufacturer. All alternate names map to standard SPI signals.",
-    "pins": {
-      "CLK": {
-        "standard_name": "SPI_CLK",
-        "alternate_names": ["SCK", "SCLK", "CLK"],
+    "description": "GC9A01 displays have varying pin labels depending on manufacturer. See MakerNames.json for complete mapping.",
+    "manufacturer_mapping_reference": "config/components/interfaces/MakerNames.json",
+    "generic_pins": {
+      "clock": {
         "function": "SPI Clock",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["CLK", "SCK", "SCLK", "SCL"]
       },
-      "MOSI": {
-        "standard_name": "SPI_MOSI",
-        "alternate_names": ["SDA", "SDI", "DIN", "MOSI"],
+      "data_input": {
         "function": "SPI Master Out Slave In (Data)",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["MOSI", "SDA", "SDI", "DIN"]
       },
-      "DC": {
-        "standard_name": "DATA_COMMAND",
-        "alternate_names": ["DC", "D/C", "RS", "A0"],
+      "data_command": {
         "function": "Data/Command Select",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["DC", "D/C", "RS", "A0"]
       },
-      "CS": {
-        "standard_name": "SPI_CS",
-        "alternate_names": ["CS", "SS", "CE"],
+      "chip_select": {
         "function": "Chip Select (Slave Select)",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["CS", "SS", "CE"]
       },
-      "RST": {
-        "standard_name": "RESET",
-        "alternate_names": ["RST", "RESET", "RES"],
+      "reset": {
         "function": "Hardware Reset",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["RST", "RESET", "RES"]
       },
-      "BL": {
-        "standard_name": "BACKLIGHT",
-        "alternate_names": ["BL", "BLK", "LED"],
+      "backlight": {
         "function": "Backlight Control (PWM)",
-        "required": false
+        "required": false,
+        "manufacturer_labels": ["BL", "BLK", "LED"]
       },
-      "VCC": {
-        "standard_name": "POWER",
-        "alternate_names": ["VCC", "VDD", "3V3", "+3.3V"],
+      "power_positive": {
         "function": "Power Supply (3.3V)",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["VCC", "VDD", "3V3", "+3.3V"]
       },
-      "GND": {
-        "standard_name": "GROUND",
-        "alternate_names": ["GND", "VSS", "0V"],
+      "power_ground": {
         "function": "Ground Reference",
-        "required": true
+        "required": true,
+        "manufacturer_labels": ["GND", "VSS", "0V"]
       }
     },
     "common_manufacturer_variations": {

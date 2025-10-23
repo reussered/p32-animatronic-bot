@@ -1,43 +1,37 @@
-/**
- * @file system_core.cpp
- * @brief Core system management - initialization, health checks, error handling
- * @author Auto-generated from JSON specification
- */
+// P32 Component: system_core
+// Auto-generated individual component file
+// Memory footprint can be measured independently
 
-#include "components/system_core.hpp"
-#include "core/memory/SharedMemory.hpp"
-
+#include "esp_log.h"
+#include "esp_err.h"
 #include "p32_shared_state.h"
 
-// External GSM instance
-extern SharedMemory GSM;
+static const char *TAG = "SYSTEM_CORE";
 
-/**
- * @brief Initialize system_core component
- * Called once during system startup
- */
-void system_core_init(void) {
-    // Component initialization logic
-    // Access global state via g_loopCount and shared state via GSM
-    
-    // Example: Read shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
-    
-    // TODO: Implement component-specific initialization
+// Component: Core system initialization
+esp_err_t system_core_init(void) {
+#ifdef SIMPLE_TEST
+    printf("INIT: system_core - Core system initialization\n");
+    return ESP_OK;
+#endif
+
+    // System component initialization
+    ESP_LOGI(TAG, "System component initialized");
+    return ESP_OK;
 }
 
-/**
- * @brief Execute system_core component logic  
- * Called every loop iteration based on hitCount: 1
- */
+// Component action function - executes every 1000 loops
+// NO ARGUMENTS - accesses g_loopCount from p32_shared_state.h
 void system_core_act(void) {
-    // Component execution logic
-    // Access global state via g_loopCount and shared state via GSM
-    
-    // Example: Update shared memory
-    // auto shared_data = GSM.read<SomeSharedDataType>();
-    // // Modify shared_data...
-    // GSM.write<SomeSharedDataType>(shared_data);
-    
-    // TODO: Implement component-specific behavior
+#ifdef SIMPLE_TEST
+    if (g_loopCount % 1000 == 0) {
+        printf("ACT: system_core - active (loop %llu)\n", g_loopCount);
+    }
+    return;
+#endif
+
+    // System maintenance tasks
+    if (g_loopCount % 5000 == 0) {
+        ESP_LOGD(TAG, "System maintenance - loop %llu", g_loopCount);
+    }
 }

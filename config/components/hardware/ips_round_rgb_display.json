@@ -1,0 +1,136 @@
+{
+  "relative_filename": "config/components/hardware/ips_round_rgb_display.json",
+  "version": "1.0.0",
+  "author": "config/author.json",
+  "hardware_type": "IPS_ROUND_RGB_DISPLAY",
+  "component_name": "ips_round_rgb_display",
+  
+  "description": "1.28\" Round IPS RGB display - PERFECT EYE SHAPE with full color",
+  "perfect_eye_champion": "TRUE - Ideal round shape for creature eyes",
+  
+  "physical_specifications": {
+    "screen_width": "1.28 INCH",
+    "screen_height": "1.28 INCH", 
+    "screen_shape": "round",
+    "diagonal": "1.28 INCH",
+    "resolution": "240x240",
+    "pixel_density": "188 PPI",
+    "thickness": "0.08 INCH",
+    "weight": "5 GRAMS",
+    "active_area": {
+      "diameter_mm": 32.5
+    }
+  },
+  
+  "color_specifications": {
+    "color_depth": "262K_COLORS_18BIT",
+    "bits_per_pixel": 18, 
+    "red_bits": 6,
+    "green_bits": 6,
+    "blue_bits": 6,
+    "color_gamut": "RGB666",
+    "brightness": "400_CD_M2",
+    "contrast_ratio": "1000:1_IPS",
+    "viewing_angle": "170_DEGREES"
+  },
+  
+  "electrical_specifications": {
+    "supply_voltage": "3.3V",
+    "logic_voltage": "3.3V",
+    "interface": "SPI",
+    "current_consumption_ma": "100", 
+    "backlight_current_ma": "80",
+    "spi_clock_max_mhz": "40"
+  },
+  
+  "display_controller": {
+    "driver_ic": "GC9A01A",
+    "manufacturer": "GalaxyCore",
+    "built_in_ram": "240x240x18_bits",
+    "refresh_rate_hz": "60",
+    "hardware_acceleration": ["circular_display_optimization", "smooth_scroll"]
+  },
+  
+  "pin_assignments": {
+    "vcc": "3V3_POWER",
+    "gnd": "GROUND", 
+    "cs": "CHIP_SELECT_PIN",
+    "reset": "RESET_PIN",
+    "dc": "DATA_COMMAND_PIN",
+    "mosi": "SPI_MOSI",
+    "sck": "SPI_CLOCK",
+    "led": "BACKLIGHT_PWM_PIN"
+  },
+  
+  "usage_categories": {
+    "creature_eyes": "perfect_round_shape",
+    "robotic_eyes": "mechanical_eye_simulation",
+    "watch_faces": "circular_ui_elements", 
+    "porthole_displays": "round_viewing_windows"
+  },
+  
+  "ordering_information": {
+    "primary_supplier": "Waveshare",
+    "part_number": "1.28inch-LCD-Module",
+    "product_name": "1.28inch round LCD Module, 240×240, SPI",
+    "price_usd": "16.99",
+    "availability": "IN_STOCK",
+    "shipping": "7-14_DAYS",
+    "datasheet_url": "https://www.waveshare.com/w/upload/5/5e/1.28inch_LCD_Module_datasheet.pdf", 
+    "product_url": "https://www.waveshare.com/1.28inch-lcd-module.htm"
+  },
+  
+  "alternative_suppliers": [
+    {
+      "supplier": "AliExpress",
+      "part_number": "GC9A01-Round-240x240",
+      "price_usd": "8.99",
+      "stock_status": "AVAILABLE",
+      "note": "Budget option, same driver"
+    },
+    {
+      "supplier": "Amazon",
+      "part_number": "Various Round LCD", 
+      "price_usd": "12.99",
+      "stock_status": "AVAILABLE",
+      "note": "Multiple sellers available"
+    },
+    {
+      "supplier": "Seeed Studio",
+      "part_number": "104020132",
+      "price_usd": "19.90",
+      "stock_status": "AVAILABLE",
+      "note": "Premium quality option"
+    }
+  ],
+  
+  "technical_advantages": [
+    "Perfect round shape for realistic eyes",
+    "High resolution (240x240) in compact size", 
+    "IPS technology - excellent viewing angles",
+    "Bright display suitable for various lighting",
+    "Full 262K color capability",
+    "Optimized for circular content",
+    "Low profile design",
+    "Good driver support (GC9A01A)"
+  ],
+  
+  "creature_sizing": {
+    "perfect_for": ["realistic_eyes", "creature_pupils", "robotic_vision"],
+    "excellent_for": ["medium_creatures", "eye_replacements", "circular_features"],
+    "size_match": ["cat_eyes", "goblin_eyes", "humanoid_eyes"]
+  },
+  
+  "special_features": {
+    "round_optimization": "Driver specifically designed for circular displays",
+    "eye_simulation": "Perfect for biomimetic eye designs", 
+    "smooth_animation": "Ideal for pupil dilation and eye movement effects",
+    "color_temperature": "Adjustable for different creature types"
+  },
+  
+  "stl_reference": "assets/shapes/stl/basic_mounts/round_ips_display_mount.stl",
+  "scad_template": "assets/shapes/scad/templates/hardware_mounts/round_ips_mount_template.scad",
+  
+  "compatible_creatures": ["realistic_creatures", "humanoid_robots", "animal_animatronics", "eye_focused_builds"],
+  "estimated_cost_usd": "16.99"
+}

@@ -1,0 +1,122 @@
+{
+  "relative_filename": "config/components/hardware/ssd1331_micro_rgb_oled.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "hardware_type": "SSD1331_MICRO_RGB_OLED",
+  "component_name": "ssd1331_micro_rgb_oled",
+  
+  "description": "0.95\" Micro RGB OLED with SSD1331 driver - TINY with FULL COLOR",
+  "micro_size_champion": "TRUE - Smallest RGB OLED available",
+  
+  "physical_specifications": {
+    "screen_width": "0.95 INCH",
+    "screen_height": "0.61 INCH",
+    "screen_shape": "rectangular", 
+    "diagonal": "0.95 INCH",
+    "resolution": "96x64",
+    "pixel_density": "101 PPI",
+    "thickness": "0.08 INCH",
+    "weight": "3 GRAMS",
+    "active_area": {
+      "width_mm": 18.66,
+      "height_mm": 11.9
+    }
+  },
+  
+  "color_specifications": {
+    "color_depth": "65K_COLORS_16BIT",
+    "bits_per_pixel": 16,
+    "red_bits": 5,
+    "green_bits": 6,
+    "blue_bits": 5, 
+    "color_gamut": "RGB565",
+    "brightness": "150_CD_M2",
+    "contrast_ratio": "INFINITE_OLED",
+    "viewing_angle": "160_DEGREES"
+  },
+  
+  "electrical_specifications": {
+    "supply_voltage": "3.3V",
+    "logic_voltage": "3.3V",
+    "interface": "SPI", 
+    "current_consumption_ma": "60",
+    "current_max_ma": "90",
+    "spi_clock_max_mhz": "25"
+  },
+  
+  "display_controller": {
+    "driver_ic": "SSD1331",
+    "manufacturer": "Solomon Systech", 
+    "built_in_ram": "96x64x16_bits",
+    "refresh_rate_hz": "90",
+    "hardware_acceleration": ["rectangle_fill", "line_drawing", "copy_area", "fade_scroll"]
+  },
+  
+  "pin_assignments": {
+    "vcc": "3V3_POWER",
+    "gnd": "GROUND",
+    "cs": "CHIP_SELECT_PIN", 
+    "reset": "RESET_PIN",
+    "dc": "DATA_COMMAND_PIN",
+    "mosi": "SPI_MOSI",
+    "sck": "SPI_CLOCK"
+  },
+  
+  "usage_categories": {
+    "fairy_eyes": "perfect_micro_size",
+    "insect_features": "tiny_full_color",
+    "status_dots": "rich_indicators", 
+    "accent_lights": "color_detail_work",
+    "micro_displays": "smallest_rgb_option"
+  },
+  
+  "ordering_information": {
+    "primary_supplier": "Adafruit",
+    "part_number": "684",
+    "product_name": "0.95\" RGB OLED 96x64 Dot Matrix Display Module",
+    "price_usd": "24.95",
+    "availability": "IN_STOCK", 
+    "shipping": "IMMEDIATE",
+    "datasheet_url": "https://cdn-shop.adafruit.com/datasheets/SSD1331_1.2.pdf",
+    "product_url": "https://www.adafruit.com/product/684"
+  },
+  
+  "alternative_suppliers": [
+    {
+      "supplier": "Waveshare", 
+      "part_number": "0.95inch-RGB-OLED-A",
+      "price_usd": "16.99",
+      "stock_status": "AVAILABLE",
+      "note": "Budget option with same driver"
+    },
+    {
+      "supplier": "Pimoroni",
+      "part_number": "PIM374",
+      "price_usd": "22.50", 
+      "stock_status": "AVAILABLE",
+      "note": "European supplier"
+    }
+  ],
+  
+  "technical_advantages": [
+    "Smallest RGB OLED available commercially",
+    "Full 65K color capability per pixel",
+    "Extremely low power consumption",
+    "Fast refresh rate for smooth animation", 
+    "Hardware graphics acceleration",
+    "Tiny form factor for detail work",
+    "High pixel density for sharp images"
+  ],
+  
+  "creature_sizing": {
+    "perfect_for": ["fairy_eyes", "insect_creatures", "detail_accents"],
+    "too_small_for": ["main_displays", "creature_mouths", "primary_features"],
+    "ideal_applications": ["micro_features", "indicator_lights", "fairy_magic"]
+  },
+  
+  "stl_reference": "assets/shapes/stl/basic_mounts/ssd1331_micro_mount.stl",
+  "scad_template": "assets/shapes/scad/templates/hardware_mounts/ssd1331_micro_mount_template.scad",
+  
+  "compatible_creatures": ["fairy", "firefly", "micro_insects", "detail_accents"],
+  "estimated_cost_usd": "24.95"
+}

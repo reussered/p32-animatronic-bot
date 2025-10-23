@@ -6,9 +6,12 @@
   "interface_type": "SPI_DEVICE",
   "bus_reference": "SPI_BUS_VSPI",
   "pins": {
-    "cs": 4
+    "chip_select": 4,
+    "data_command": 5,
+    "reset": 6
   },
   "device_config": {
-    "cs_active_low": true
+    "cs_active_low": true,
+    "manufacturer_variant": "waveshare"
   }
 }
