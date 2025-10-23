@@ -183,6 +183,25 @@ python config/validate_families.py
 }
 ```
 
+## Component Composition Rules
+
+### Wildcard Component Parsing
+The P32 component generation system automatically detects component composition using wildcard patterns:
+
+**Pattern**: Any JSON field ending with `*_components` triggers recursive component inclusion
+- `"left_eye_components": "config/components/positioned/goblin_left_eye.json"`
+- `"right_eye_components": "config/components/positioned/goblin_right_eye.json"`
+- `"subsystem_components": "config/components/assemblies/goblin_head.json"`
+
+**Processing**: Component generator parses these fields to:
+1. Load referenced JSON configuration
+2. Extract component hierarchy and dependencies  
+3. Generate dispatch table entries (init/act functions)
+4. Handle duplicate component detection across composition tree
+5. Create proper include statements for generated source code
+
+**Example**: `goblin_head.json` contains multiple `*_components` fields that automatically compose the complete head subsystem from individual positioned components.
+
 ## Files Updated So Far
 - `goblineye_left.json` - left_eye, hitCount: 5
 - `goblineye_right.json` - right_eye, hitCount: 5  
