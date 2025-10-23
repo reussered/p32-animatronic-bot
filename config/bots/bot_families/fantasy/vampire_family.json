@@ -1,154 +1,168 @@
-{
-  "relative_filename": "config/bots/bot_families/fantasy/vampire_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_type": "VAMPIRE",
-  "family_category": "fantasy", 
-  "description": "Elegant, pale vampire family with fanged features and dramatic expressions",
-  "created": "2025-10-12",
-  "template_type": "family_template",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "2.8 INCH",
-    "compression_factor": 0.9,
-    "skull_scale": 1.0,
-    "fang_extension": "0.8 INCH"
-  },
-  
-  "default_components": [
-    "config/components/positioned/vampire_eye_left.json",
-    "config/components/positioned/vampire_eye_right.json",
-    "config/components/positioned/vampire_mouth.json",
-    "config/components/positioned/vampire_speaker.json"
-  ],
-  
-  "family_mood_profile": {
-    "FEAR": 5,
-    "ANGER": 25,
-    "IRRITATION": 20,
-    "HAPPINESS": 10,
-    "CONTENTMENT": 15,
-    "HUNGER": 40,
-    "CURIOSITY": 30,
-    "AFFECTION": 5
-  },
-  
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 900,
-    "interaction_range_cm": 250,
-    "aggressive_threshold": 60, 
-    "calm_threshold": 25,
-    "personality_traits": [
-      "aristocratic",
-      "predatory",
-      "charismatic",
-      "calculating",
-      "ancient_wisdom"
-    ]
-  },
-  
-  "hardware_preferences": {
-    "coordinate_system": "skull_3d",
-    "spi_device_assignments": {
-      "left_eye": "SPI_DEVICE_1",
-      "right_eye": "SPI_DEVICE_2",
-      "mouth": "SPI_DEVICE_3"
-    },
-    "i2s_device_assignments": {
-      "primary_speaker": "I2S_DEVICE_1"
-    }
-  },
-  
-  "aesthetic_profile": {
-    "surface_texture": "pale_marble",
-    "color_scheme": "pale_crimson",
-    "eye_style": "hypnotic_deep",
-    "nose_style": "aristocratic_narrow",
-    "mouth_style": "fanged_elegant",
-    "feature_asymmetry": false,
-    "weathering_effects": false
-  },
-  
-  "sound_characteristics": {
-    "voice_pitch": "cultured_baritone",
-    "breathing_pattern": "minimal_controlled",
-    "seductive_sounds": ["whisper", "chuckle", "purr"],
-    "threat_sounds": ["hiss", "snarl", "intimidating_laugh"],
-    "ambient_volume": 0.4,
-    "reaction_volume": 0.8
-  },
-  
-  "animation_style": {
-    "movement_speed": "graceful_fluid",
-    "eye_tracking": "hypnotic_locking",
-    "idle_behaviors": ["contemplative_gaze", "predatory_smile"],
-    "threat_responses": ["fang_display", "mesmerizing_stare"],
-    "expression_intensity": "dramatic"
-  },
-  
-  "subfamily_variants": {
-    "nosferatu": {
-      "color_scheme": "corpse_pale",
-      "aesthetic_modifiers": {
-        "surface_texture": "aged_parchment",
-        "feature_asymmetry": true
-      },
-      "personality_modifiers": {
-        "ANGER": "+10",
-        "AFFECTION": "-10"
-      }
-    },
-    "dhampir": {
-      "color_scheme": "living_pale",
-      "personality_modifiers": {
-        "HAPPINESS": "+10",
-        "HUNGER": "-15"
-      }
-    },
-    "ancient_elder": {
-      "size_scale": 1.2,
-      "personality_modifiers": {
-        "CURIOSITY": "+20",
-        "IRRITATION": "-10"
-      }
-    }
-  },
-  
-  "construction_types": {
-    "hard_shell": {
-      "description": "3D printed vampire with aristocratic features and elegant proportions",
-      "materials": ["Marble PLA", "Crimson PETG", "Metallic accents", "Clear red resin"],
-      "color_palette": {
-        "primary": "Ivory",
-        "secondary": "DarkRed",
-        "accent": "Goldenrod",
-        "highlight": "Crimson"
-      },
-      "special_features": [
-        "Pale marble finish with subtle veining",
-        "Crimson accent details for lips and eyes",
-        "Metallic golden jewelry and trim",
-        "Multi-color 3D printing uses 4-color HTML palette system"
-      ]
-    },
-    "soft_body": {
-      "description": "Fabric vampire costume with elegant draping and aristocratic styling",
-      "materials": ["Velvet fabric", "Silk lining", "Lace details", "Metallic thread"],
-      "color_palette": {
-        "primary": "Ivory",
-        "secondary": "DarkRed",
-        "accent": "Goldenrod",
-        "highlight": "Crimson"
-      },
-      "special_features": [
-        "Rich velvet outer fabric in deep colors",
-        "Silk lining for luxurious feel",
-        "Lace and metallic embroidery details",
-        "Flowing cape and aristocratic collar"
-      ]
-    }
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/fantasy/vampire_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "VAMPIRE",
+    "family_category":  "fantasy",
+    "description":  "Elegant, pale vampire family with fanged features and dramatic expressions",
+    "created":  "2025-10-12",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "2.8 INCH",
+                                "compression_factor":  0.9,
+                                "skull_scale":  1.0,
+                                "fang_extension":  "0.8 INCH"
+                            },
+    "default_components":  [
+                               "config/components/positioned/vampire_eye_left.json",
+                               "config/components/positioned/vampire_eye_right.json",
+                               "config/components/positioned/vampire_mouth.json",
+                               "config/components/positioned/vampire_speaker.json"
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  5,
+                                "ANGER":  25,
+                                "IRRITATION":  20,
+                                "HAPPINESS":  10,
+                                "CONTENTMENT":  15,
+                                "HUNGER":  40,
+                                "CURIOSITY":  30,
+                                "AFFECTION":  5
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  900,
+                                     "interaction_range_cm":  250,
+                                     "aggressive_threshold":  60,
+                                     "calm_threshold":  25,
+                                     "personality_traits":  [
+                                                                "aristocratic",
+                                                                "predatory",
+                                                                "charismatic",
+                                                                "calculating",
+                                                                "ancient_wisdom"
+                                                            ]
+                                 },
+    "hardware_preferences":  {
+                                 "coordinate_system":  "skull_3d",
+                                 "spi_device_assignments":  {
+                                                                "left_eye":  "SPI_DEVICE_1",
+                                                                "right_eye":  "SPI_DEVICE_2",
+                                                                "mouth":  "SPI_DEVICE_3"
+                                                            },
+                                 "i2s_device_assignments":  {
+                                                                "primary_speaker":  "I2S_DEVICE_1"
+                                                            }
+                             },
+    "aesthetic_profile":  {
+                              "surface_texture":  "pale_marble",
+                              "color_scheme":  "pale_crimson",
+                              "eye_style":  "hypnotic_deep",
+                              "nose_style":  "aristocratic_narrow",
+                              "mouth_style":  "fanged_elegant",
+                              "feature_asymmetry":  false,
+                              "weathering_effects":  false
+                          },
+    "sound_characteristics":  {
+                                  "voice_pitch":  "cultured_baritone",
+                                  "breathing_pattern":  "minimal_controlled",
+                                  "seductive_sounds":  [
+                                                           "whisper",
+                                                           "chuckle",
+                                                           "purr"
+                                                       ],
+                                  "threat_sounds":  [
+                                                        "hiss",
+                                                        "snarl",
+                                                        "intimidating_laugh"
+                                                    ],
+                                  "ambient_volume":  0.4,
+                                  "reaction_volume":  0.8
+                              },
+    "animation_style":  {
+                            "movement_speed":  "graceful_fluid",
+                            "eye_tracking":  "hypnotic_locking",
+                            "idle_behaviors":  [
+                                                   "contemplative_gaze",
+                                                   "predatory_smile"
+                                               ],
+                            "threat_responses":  [
+                                                     "fang_display",
+                                                     "mesmerizing_stare"
+                                                 ],
+                            "expression_intensity":  "dramatic"
+                        },
+    "subfamily_variants":  {
+                               "nosferatu":  {
+                                                 "color_scheme":  "corpse_pale",
+                                                 "aesthetic_modifiers":  {
+                                                                             "surface_texture":  "aged_parchment",
+                                                                             "feature_asymmetry":  true
+                                                                         },
+                                                 "personality_modifiers":  {
+                                                                               "ANGER":  "+10",
+                                                                               "AFFECTION":  "-10"
+                                                                           }
+                                             },
+                               "dhampir":  {
+                                               "color_scheme":  "living_pale",
+                                               "personality_modifiers":  {
+                                                                             "HAPPINESS":  "+10",
+                                                                             "HUNGER":  "-15"
+                                                                         }
+                                           },
+                               "ancient_elder":  {
+                                                     "size_scale":  1.2,
+                                                     "personality_modifiers":  {
+                                                                                   "CURIOSITY":  "+20",
+                                                                                   "IRRITATION":  "-10"
+                                                                               }
+                                                 }
+                           },
+    "construction_types":  {
+                               "hard_shell":  {
+                                                  "description":  "3D printed vampire with aristocratic features and elegant proportions",
+                                                  "materials":  [
+                                                                    "Marble PLA",
+                                                                    "Crimson PETG",
+                                                                    "Metallic accents",
+                                                                    "Clear red resin"
+                                                                ],
+                                                  "color_palette":  {
+                                                                        "primary":  "Ivory",
+                                                                        "secondary":  "DarkRed",
+                                                                        "accent":  "Goldenrod",
+                                                                        "highlight":  "Crimson"
+                                                                    },
+                                                  "special_features":  [
+                                                                           "Pale marble finish with subtle veining",
+                                                                           "Crimson accent details for lips and eyes",
+                                                                           "Metallic golden jewelry and trim",
+                                                                           "Multi-color 3D printing uses 4-color HTML palette system"
+                                                                       ]
+                                              },
+                               "soft_body":  {
+                                                 "description":  "Fabric vampire costume with elegant draping and aristocratic styling",
+                                                 "materials":  [
+                                                                   "Velvet fabric",
+                                                                   "Silk lining",
+                                                                   "Lace details",
+                                                                   "Metallic thread"
+                                                               ],
+                                                 "color_palette":  {
+                                                                       "primary":  "Ivory",
+                                                                       "secondary":  "DarkRed",
+                                                                       "accent":  "Goldenrod",
+                                                                       "highlight":  "Crimson"
+                                                                   },
+                                                 "special_features":  [
+                                                                          "Rich velvet outer fabric in deep colors",
+                                                                          "Silk lining for luxurious feel",
+                                                                          "Lace and metallic embroidery details",
+                                                                          "Flowing cape and aristocratic collar"
+                                                                      ]
+                                             }
+                           }
 }

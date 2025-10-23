@@ -1,56 +1,49 @@
 ﻿{
-  "relative_filename": "config/templates/base/arm_base.json", 
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "template_type": "base_template",
-  "description": "Base template for arm subsystems - shoulder, elbow, wrist servos",
-  "created": "2025-10-13",
-  
-  "subsystem_type": "ARM_CONTROLLER",
-  "controller_hardware": "ESP32_C3_MINI",
-  "coordinate_system": "humanoid_3d",
-  "reference_point": "shoulder_socket",
-  "units": "INCHES",
-  
-  "base_components": [
-    "config/components/positioned/base_shoulder_servo.json",
-    "config/components/positioned/base_elbow_servo.json", 
-    "config/components/positioned/base_wrist_servo.json",
-    "config/components/positioned/base_arm_status_led.json"
-  ],
-  
-  "degrees_of_freedom_defaults": {
-    "shoulder_dof": "2",
-    "elbow_dof": "1", 
-    "wrist_dof": "2",
-    "total_controlled_dof": "5"
-  },
-  
-  "servo_specifications": {
-    "shoulder_servo_type": "MG996R_SERVO",
-    "elbow_servo_type": "MG996R_SERVO",
-    "wrist_servo_type": "SG90_MICRO_SERVO",
-    "servo_power_voltage": "6V_REGULATED",
-    "max_servo_current": "2.5A_TOTAL"
-  },
-  
-  "timing_defaults": {
-    "servo_update_hitCount": 20,
-    "position_feedback_hitCount": 10,
-    "safety_check_hitCount": 5,
-    "status_led_hitCount": 100
-  },
-  
-  "safety_limits": {
-    "shoulder_range_degrees": "180",
-    "elbow_range_degrees": "150",
-    "wrist_range_degrees": "270", 
-    "max_velocity_deg_per_sec": "90",
-    "collision_detection_enabled": true
-  },
-  
-  "communication_defaults": {
-    "command_response_timeout_ms": "100",
-    "position_report_rate_hz": "20"
-  }
+    "relative_filename":  "config/templates/base/arm_base.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "template_type":  "base_template",
+    "description":  "Base template for arm subsystems - shoulder, elbow, wrist servos",
+    "created":  "2025-10-13",
+    "subsystem_type":  "ARM_CONTROLLER",
+    "controller_hardware":  "ESP32_C3_MINI",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "shoulder_socket",
+    "units":  "INCHES",
+    "base_components":  [
+                            "config/components/positioned/base_shoulder_servo.json",
+                            "config/components/positioned/base_elbow_servo.json",
+                            "config/components/positioned/base_wrist_servo.json",
+                            "config/components/positioned/base_arm_status_led.json"
+                        ],
+    "degrees_of_freedom_defaults":  {
+                                        "shoulder_dof":  "2",
+                                        "elbow_dof":  "1",
+                                        "wrist_dof":  "2",
+                                        "total_controlled_dof":  "5"
+                                    },
+    "servo_specifications":  {
+                                 "shoulder_servo_type":  "MG996R_SERVO",
+                                 "elbow_servo_type":  "MG996R_SERVO",
+                                 "wrist_servo_type":  "SG90_MICRO_SERVO",
+                                 "servo_power_voltage":  "6V_REGULATED",
+                                 "max_servo_current":  "2.5A_TOTAL"
+                             },
+    "timing_defaults":  {
+                            "servo_update_hitCount":  20,
+                            "position_feedback_hitCount":  10,
+                            "safety_check_hitCount":  5,
+                            "status_led_hitCount":  100
+                        },
+    "safety_limits":  {
+                          "shoulder_range_degrees":  "180",
+                          "elbow_range_degrees":  "150",
+                          "wrist_range_degrees":  "270",
+                          "max_velocity_deg_per_sec":  "90",
+                          "collision_detection_enabled":  true
+                      },
+    "communication_defaults":  {
+                                   "command_response_timeout_ms":  "100",
+                                   "position_report_rate_hz":  "20"
+                               }
 }

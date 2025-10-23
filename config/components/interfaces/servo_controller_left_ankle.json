@@ -1,45 +1,38 @@
-{
-  "relative_filename": "config/components/interfaces/servo_controller_left_ankle.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "SERVO_CONTROLLER_LEFT_ANKLE",
-  "interface_type": "MULTI_SERVO_CONTROLLER",
-  "description": "Three-servo controller interface for left ankle 3DOF joint",
-  
-  "controller_assignment": "ESP32_C3_LEG_CONTROLLER_LEFT", 
-  "servo_count": 3,
-  "control_frequency": "2000_HZ",
-  
-  "servo_assignments": {
-    "ankle_dorsi_plantar_flexion": {
-      "servo_type": "DS3218_SERVO",
-      "pwm_pin": "GPIO_41",
-      "feedback_pin": "GPIO_A8"
-    },
-    
-    "ankle_inversion_eversion": {
-      "servo_type": "MG996R_SERVO",
-      "pwm_pin": "GPIO_42",
-      "feedback_pin": "GPIO_A9"
-    },
-    
-    "ankle_internal_external_rotation": {
-      "servo_type": "MG996R_SERVO", 
-      "pwm_pin": "GPIO_43",
-      "feedback_pin": "GPIO_A10"
-    }
-  },
-  
-  "balance_integration": {
-    "imu_interface": "MPU6050_FOR_TILT_FEEDBACK",
-    "balance_algorithm": "PID_WITH_FEEDFORWARD_COMPENSATION",
-    "response_time": "UNDER_50MS_CORRECTION_LATENCY"
-  },
-  
-  "safety_configuration": {
-    "emergency_stop_pin": "GPIO_0",
-    "balance_monitoring": "CONTINUOUS_TILT_DETECTION", 
-    "terrain_sensing": "PRESSURE_SENSITIVE_FOOT_CONTACT"
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/servo_controller_left_ankle.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "SERVO_CONTROLLER_LEFT_ANKLE",
+    "interface_type":  "MULTI_SERVO_CONTROLLER",
+    "description":  "Three-servo controller interface for left ankle 3DOF joint",
+    "controller_assignment":  "ESP32_C3_LEG_CONTROLLER_LEFT",
+    "servo_count":  3,
+    "control_frequency":  "2000_HZ",
+    "servo_assignments":  {
+                              "ankle_dorsi_plantar_flexion":  {
+                                                                  "servo_type":  "DS3218_SERVO",
+                                                                  "pwm_pin":  "GPIO_41",
+                                                                  "feedback_pin":  "GPIO_A8"
+                                                              },
+                              "ankle_inversion_eversion":  {
+                                                               "servo_type":  "MG996R_SERVO",
+                                                               "pwm_pin":  "GPIO_42",
+                                                               "feedback_pin":  "GPIO_A9"
+                                                           },
+                              "ankle_internal_external_rotation":  {
+                                                                       "servo_type":  "MG996R_SERVO",
+                                                                       "pwm_pin":  "GPIO_43",
+                                                                       "feedback_pin":  "GPIO_A10"
+                                                                   }
+                          },
+    "balance_integration":  {
+                                "imu_interface":  "MPU6050_FOR_TILT_FEEDBACK",
+                                "balance_algorithm":  "PID_WITH_FEEDFORWARD_COMPENSATION",
+                                "response_time":  "UNDER_50MS_CORRECTION_LATENCY"
+                            },
+    "safety_configuration":  {
+                                 "emergency_stop_pin":  "GPIO_0",
+                                 "balance_monitoring":  "CONTINUOUS_TILT_DETECTION",
+                                 "terrain_sensing":  "PRESSURE_SENSITIVE_FOOT_CONTACT"
+                             }
 }

@@ -1,67 +1,60 @@
-{
-  "relative_filename": "config/components/hardware/servo_assembly.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "hardware_id": "SERVO_ASSEMBLY",
-  "hardware_type": "ARTICULATED_JOINT_HARDWARE",
-  "description": "Generic servo assembly hardware specification for humanoid joints",
-  
-  "servo_types": {
-    "NEMA17_WITH_50_1_GEARBOX": {
-      "motor_type": "STEPPER_MOTOR",
-      "model": "NEMA17_1.7A_59Ncm",
-      "gearbox_ratio": "50:1",
-      "final_torque": "11.8_NM",
-      "position_feedback": "AS5600_ABSOLUTE_ENCODER",
-      "control_method": "STEP_DIRECTION_ENABLE"
-    },
-    
-    "NEMA17_WITH_27_1_GEARBOX": {
-      "motor_type": "STEPPER_MOTOR", 
-      "model": "NEMA17_1.7A_59Ncm",
-      "gearbox_ratio": "27:1",
-      "final_torque": "6.7_NM",
-      "position_feedback": "AS5600_ABSOLUTE_ENCODER",
-      "control_method": "STEP_DIRECTION_ENABLE"
-    },
-    
-    "NEMA17_WITH_100_1_GEARBOX": {
-      "motor_type": "STEPPER_MOTOR",
-      "model": "NEMA17_1.7A_59Ncm", 
-      "gearbox_ratio": "100:1",
-      "final_torque": "23.6_NM",
-      "position_feedback": "AS5600_ABSOLUTE_ENCODER",
-      "control_method": "STEP_DIRECTION_ENABLE"
-    },
-    
-    "DS3218_SERVO": {
-      "motor_type": "RC_SERVO",
-      "model": "DS3218MG_DIGITAL_SERVO",
-      "stall_torque": "2.2_NM",
-      "position_feedback": "INTEGRATED_POTENTIOMETER", 
-      "control_method": "PWM_SIGNAL"
-    },
-    
-    "MG996R_SERVO": {
-      "motor_type": "RC_SERVO",
-      "model": "MG996R_METAL_GEAR_SERVO",
-      "stall_torque": "1.3_NM",
-      "position_feedback": "INTEGRATED_POTENTIOMETER",
-      "control_method": "PWM_SIGNAL"
-    }
-  },
-  
-  "mechanical_specifications": {
-    "mounting_pattern": "STANDARD_SERVO_HORN_ATTACHMENT",
-    "bearing_type": "DUAL_BALL_BEARING_SUPPORT",
-    "backlash_specification": "UNDER_0.5_DEGREES",
-    "operating_temperature": "-20C_TO_60C"
-  },
-  
-  "electrical_specifications": {
-    "voltage_range": "6V_TO_8.4V_NOMINAL",
-    "current_consumption": "UP_TO_2.5A_PEAK_PER_SERVO", 
-    "control_signal": "3.3V_LOGIC_COMPATIBLE"
-  }
+﻿{
+    "relative_filename":  "config/components/hardware/servo_assembly.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_id":  "SERVO_ASSEMBLY",
+    "hardware_type":  "ARTICULATED_JOINT_HARDWARE",
+    "description":  "Generic servo assembly hardware specification for humanoid joints",
+    "servo_types":  {
+                        "NEMA17_WITH_50_1_GEARBOX":  {
+                                                         "motor_type":  "STEPPER_MOTOR",
+                                                         "model":  "NEMA17_1.7A_59Ncm",
+                                                         "gearbox_ratio":  "50:1",
+                                                         "final_torque":  "11.8_NM",
+                                                         "position_feedback":  "AS5600_ABSOLUTE_ENCODER",
+                                                         "control_method":  "STEP_DIRECTION_ENABLE"
+                                                     },
+                        "NEMA17_WITH_27_1_GEARBOX":  {
+                                                         "motor_type":  "STEPPER_MOTOR",
+                                                         "model":  "NEMA17_1.7A_59Ncm",
+                                                         "gearbox_ratio":  "27:1",
+                                                         "final_torque":  "6.7_NM",
+                                                         "position_feedback":  "AS5600_ABSOLUTE_ENCODER",
+                                                         "control_method":  "STEP_DIRECTION_ENABLE"
+                                                     },
+                        "NEMA17_WITH_100_1_GEARBOX":  {
+                                                          "motor_type":  "STEPPER_MOTOR",
+                                                          "model":  "NEMA17_1.7A_59Ncm",
+                                                          "gearbox_ratio":  "100:1",
+                                                          "final_torque":  "23.6_NM",
+                                                          "position_feedback":  "AS5600_ABSOLUTE_ENCODER",
+                                                          "control_method":  "STEP_DIRECTION_ENABLE"
+                                                      },
+                        "DS3218_SERVO":  {
+                                             "motor_type":  "RC_SERVO",
+                                             "model":  "DS3218MG_DIGITAL_SERVO",
+                                             "stall_torque":  "2.2_NM",
+                                             "position_feedback":  "INTEGRATED_POTENTIOMETER",
+                                             "control_method":  "PWM_SIGNAL"
+                                         },
+                        "MG996R_SERVO":  {
+                                             "motor_type":  "RC_SERVO",
+                                             "model":  "MG996R_METAL_GEAR_SERVO",
+                                             "stall_torque":  "1.3_NM",
+                                             "position_feedback":  "INTEGRATED_POTENTIOMETER",
+                                             "control_method":  "PWM_SIGNAL"
+                                         }
+                    },
+    "mechanical_specifications":  {
+                                      "mounting_pattern":  "STANDARD_SERVO_HORN_ATTACHMENT",
+                                      "bearing_type":  "DUAL_BALL_BEARING_SUPPORT",
+                                      "backlash_specification":  "UNDER_0.5_DEGREES",
+                                      "operating_temperature":  "-20C_TO_60C"
+                                  },
+    "electrical_specifications":  {
+                                      "voltage_range":  "6V_TO_8.4V_NOMINAL",
+                                      "current_consumption":  "UP_TO_2.5A_PEAK_PER_SERVO",
+                                      "control_signal":  "3.3V_LOGIC_COMPATIBLE"
+                                  },
+    "component_name":  "SERVO_ASSEMBLY"
 }

@@ -1,184 +1,239 @@
-{
-  "relative_filename": "config/components/interfaces/pwm_motor_controller.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "PWM_MOTOR_CONTROLLER",
-  "interface_type": "DC_MOTOR_CONTROLLER",
-  "description": "PWM-controlled DC motor interface for variable speed control and direction",
-  
-  "hardware_specifications": {
-    "motor_types": ["BRUSHED_DC", "GEARED_DC", "WINDOW_MOTOR"],
-    "voltage_range": "3V_TO_24V",
-    "current_range": "100mA_TO_10A",
-    "pwm_frequency": "1KHz_TO_20KHz",
-    "pwm_resolution": "8_TO_16_BIT"
-  },
-  
-  "pin_requirements": {
-    "pwm_pin": {
-      "function": "speed_control",
-      "generic_name": "pwm",
-      "description": "PWM signal for speed control",
-      "voltage_level": "3.3V_5V",
-      "frequency_range": "1KHz_20KHz",
-      "duty_cycle_range": "0_TO_100_PERCENT"
-    },
-    "direction_pin": {
-      "function": "rotation_direction",
-      "generic_name": "direction",
-      "description": "High/Low sets rotation direction",
-      "voltage_level": "3.3V_5V",
-      "optional": true
-    },
-    "enable_pin": {
-      "function": "motor_enable",
-      "generic_name": "enable",
-      "description": "Enable/disable motor operation",
-      "voltage_level": "3.3V_5V",
-      "default_state": "LOW_DISABLED",
-      "optional": true
-    }
-  },
-  
-  "optional_pins": {
-    "brake_pin": {
-      "function": "motor_brake",
-      "generic_name": "brake",
-      "description": "Active brake control",
-      "voltage_level": "3.3V_5V",
-      "active_state": "HIGH"
-    },
-    "fault_pin": {
-      "function": "fault_detection",
-      "generic_name": "fault",
-      "description": "Motor driver fault indication",
-      "direction": "INPUT",
-      "active_state": "LOW"
-    },
-    "current_sense_pin": {
-      "function": "current_feedback",
-      "generic_name": "current_sense",
-      "description": "Motor current sensing",
-      "direction": "INPUT",
-      "signal_type": "ANALOG"
-    }
-  },
-  
-  "driver_compatibility": {
-    "l298n": {
-      "type": "H_BRIDGE_DUAL",
-      "channels": 2,
-      "max_current": "2A_CONTINUOUS",
-      "max_voltage": "46V",
-      "pwm_input": true,
-      "direction_control": true,
-      "enable_control": true
-    },
-    "l9110s": {
-      "type": "H_BRIDGE_DUAL",
-      "channels": 2,
-      "max_current": "800mA_CONTINUOUS",
-      "max_voltage": "12V",
-      "simplified_control": true,
-      "pwm_input": true
-    },
-    "drv8833": {
-      "type": "H_BRIDGE_DUAL",
-      "channels": 2,
-      "max_current": "1.2A_CONTINUOUS",
-      "max_voltage": "10.8V",
-      "low_voltage_operation": true,
-      "thermal_protection": true,
-      "current_limiting": true
-    },
-    "bts7960": {
-      "type": "H_BRIDGE_HIGH_CURRENT",
-      "channels": 1,
-      "max_current": "43A_CONTINUOUS",
-      "max_voltage": "27V",
-      "current_sense": true,
-      "thermal_protection": true,
-      "fault_indication": true
-    }
-  },
-  
-  "control_modes": {
-    "single_pwm_direction": {
-      "pins_required": ["pwm", "direction"],
-      "description": "PWM controls speed, separate pin controls direction",
-      "advantages": ["SIMPLE_CONTROL", "CLEAR_DIRECTION_LOGIC"],
-      "disadvantages": ["REQUIRES_TWO_PINS"]
-    },
-    "dual_pwm": {
-      "pins_required": ["pwm_forward", "pwm_reverse"],
-      "description": "Two PWM signals control forward/reverse speed",
-      "advantages": ["SMOOTH_DIRECTION_CHANGES", "BRAKE_CAPABILITY"],
-      "disadvantages": ["REQUIRES_TWO_PWM_PINS"]
-    },
-    "single_pwm_signed": {
-      "pins_required": ["pwm"],
-      "description": "Single PWM with center point for direction",
-      "advantages": ["SINGLE_PIN_CONTROL"],
-      "disadvantages": ["COMPLEX_DRIVER_REQUIRED", "REDUCED_RESOLUTION"]
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "l298n_module": {
-      "pwm": ["ENA", "ENB", "PWM"],
-      "direction": ["IN1_IN2", "IN3_IN4", "DIR"],
-      "enable": ["ENA", "ENB"],
-      "power": ["VCC", "12V"]
-    },
-    "l9110s_module": {
-      "pwm_forward": ["IA", "IB"],
-      "pwm_reverse": ["IA", "IB"],
-      "power": ["VCC", "VDD"]
-    },
-    "drv8833_breakout": {
-      "pwm": ["AIN1", "AIN2", "BIN1", "BIN2"],
-      "enable": ["ENABLE", "EN"],
-      "fault": ["FAULT", "FLT"],
-      "power": ["VIN", "VCC"]
-    }
-  },
-  
-  "timing_specifications": {
-    "pwm_frequency": "1KHz_TO_20KHz",
-    "direction_change_delay": "10_MILLISECONDS",
-    "enable_to_pwm_delay": "1_MILLISECOND",
-    "brake_response_time": "50_MILLISECONDS"
-  },
-  
-  "application_examples": {
-    "jaw_movement": {
-      "motor_type": "MICRO_GEARED_DC",
-      "voltage": "6V",
-      "current": "200mA",
-      "speed_range": "10_TO_100_RPM",
-      "use_case": "PRECISE_MOUTH_ANIMATION"
-    },
-    "ear_wiggle": {
-      "motor_type": "MICRO_SERVO_CONTINUOUS",
-      "voltage": "5V",
-      "current": "150mA",
-      "speed_range": "5_TO_60_RPM",
-      "use_case": "EXPRESSIVE_EAR_MOVEMENT"
-    },
-    "tail_wag": {
-      "motor_type": "WINDOW_MOTOR_SMALL",
-      "voltage": "12V",
-      "current": "1A",
-      "speed_range": "30_TO_200_RPM",
-      "use_case": "ROBUST_TAIL_ARTICULATION"
-    },
-    "platform_drive": {
-      "motor_type": "GEARED_DC_MOTOR",
-      "voltage": "12V",
-      "current": "3A",
-      "speed_range": "50_TO_300_RPM",
-      "use_case": "MOBILE_PLATFORM_LOCOMOTION"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/pwm_motor_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "PWM_MOTOR_CONTROLLER",
+    "interface_type":  "DC_MOTOR_CONTROLLER",
+    "description":  "PWM-controlled DC motor interface for variable speed control and direction",
+    "hardware_specifications":  {
+                                    "motor_types":  [
+                                                        "BRUSHED_DC",
+                                                        "GEARED_DC",
+                                                        "WINDOW_MOTOR"
+                                                    ],
+                                    "voltage_range":  "3V_TO_24V",
+                                    "current_range":  "100mA_TO_10A",
+                                    "pwm_frequency":  "1KHz_TO_20KHz",
+                                    "pwm_resolution":  "8_TO_16_BIT"
+                                },
+    "pin_requirements":  {
+                             "pwm_pin":  {
+                                             "function":  "speed_control",
+                                             "generic_name":  "pwm",
+                                             "description":  "PWM signal for speed control",
+                                             "voltage_level":  "3.3V_5V",
+                                             "frequency_range":  "1KHz_20KHz",
+                                             "duty_cycle_range":  "0_TO_100_PERCENT"
+                                         },
+                             "direction_pin":  {
+                                                   "function":  "rotation_direction",
+                                                   "generic_name":  "direction",
+                                                   "description":  "High/Low sets rotation direction",
+                                                   "voltage_level":  "3.3V_5V",
+                                                   "optional":  true
+                                               },
+                             "enable_pin":  {
+                                                "function":  "motor_enable",
+                                                "generic_name":  "enable",
+                                                "description":  "Enable/disable motor operation",
+                                                "voltage_level":  "3.3V_5V",
+                                                "default_state":  "LOW_DISABLED",
+                                                "optional":  true
+                                            }
+                         },
+    "optional_pins":  {
+                          "brake_pin":  {
+                                            "function":  "motor_brake",
+                                            "generic_name":  "brake",
+                                            "description":  "Active brake control",
+                                            "voltage_level":  "3.3V_5V",
+                                            "active_state":  "HIGH"
+                                        },
+                          "fault_pin":  {
+                                            "function":  "fault_detection",
+                                            "generic_name":  "fault",
+                                            "description":  "Motor driver fault indication",
+                                            "direction":  "INPUT",
+                                            "active_state":  "LOW"
+                                        },
+                          "current_sense_pin":  {
+                                                    "function":  "current_feedback",
+                                                    "generic_name":  "current_sense",
+                                                    "description":  "Motor current sensing",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "ANALOG"
+                                                }
+                      },
+    "driver_compatibility":  {
+                                 "l298n":  {
+                                               "type":  "H_BRIDGE_DUAL",
+                                               "channels":  2,
+                                               "max_current":  "2A_CONTINUOUS",
+                                               "max_voltage":  "46V",
+                                               "pwm_input":  true,
+                                               "direction_control":  true,
+                                               "enable_control":  true
+                                           },
+                                 "l9110s":  {
+                                                "type":  "H_BRIDGE_DUAL",
+                                                "channels":  2,
+                                                "max_current":  "800mA_CONTINUOUS",
+                                                "max_voltage":  "12V",
+                                                "simplified_control":  true,
+                                                "pwm_input":  true
+                                            },
+                                 "drv8833":  {
+                                                 "type":  "H_BRIDGE_DUAL",
+                                                 "channels":  2,
+                                                 "max_current":  "1.2A_CONTINUOUS",
+                                                 "max_voltage":  "10.8V",
+                                                 "low_voltage_operation":  true,
+                                                 "thermal_protection":  true,
+                                                 "current_limiting":  true
+                                             },
+                                 "bts7960":  {
+                                                 "type":  "H_BRIDGE_HIGH_CURRENT",
+                                                 "channels":  1,
+                                                 "max_current":  "43A_CONTINUOUS",
+                                                 "max_voltage":  "27V",
+                                                 "current_sense":  true,
+                                                 "thermal_protection":  true,
+                                                 "fault_indication":  true
+                                             }
+                             },
+    "control_modes":  {
+                          "single_pwm_direction":  {
+                                                       "pins_required":  [
+                                                                             "pwm",
+                                                                             "direction"
+                                                                         ],
+                                                       "description":  "PWM controls speed, separate pin controls direction",
+                                                       "advantages":  [
+                                                                          "SIMPLE_CONTROL",
+                                                                          "CLEAR_DIRECTION_LOGIC"
+                                                                      ],
+                                                       "disadvantages":  [
+                                                                             "REQUIRES_TWO_PINS"
+                                                                         ]
+                                                   },
+                          "dual_pwm":  {
+                                           "pins_required":  [
+                                                                 "pwm_forward",
+                                                                 "pwm_reverse"
+                                                             ],
+                                           "description":  "Two PWM signals control forward/reverse speed",
+                                           "advantages":  [
+                                                              "SMOOTH_DIRECTION_CHANGES",
+                                                              "BRAKE_CAPABILITY"
+                                                          ],
+                                           "disadvantages":  [
+                                                                 "REQUIRES_TWO_PWM_PINS"
+                                                             ]
+                                       },
+                          "single_pwm_signed":  {
+                                                    "pins_required":  [
+                                                                          "pwm"
+                                                                      ],
+                                                    "description":  "Single PWM with center point for direction",
+                                                    "advantages":  [
+                                                                       "SINGLE_PIN_CONTROL"
+                                                                   ],
+                                                    "disadvantages":  [
+                                                                          "COMPLEX_DRIVER_REQUIRED",
+                                                                          "REDUCED_RESOLUTION"
+                                                                      ]
+                                                }
+                      },
+    "manufacturer_pin_mappings":  {
+                                      "l298n_module":  {
+                                                           "pwm":  [
+                                                                       "ENA",
+                                                                       "ENB",
+                                                                       "PWM"
+                                                                   ],
+                                                           "direction":  [
+                                                                             "IN1_IN2",
+                                                                             "IN3_IN4",
+                                                                             "DIR"
+                                                                         ],
+                                                           "enable":  [
+                                                                          "ENA",
+                                                                          "ENB"
+                                                                      ],
+                                                           "power":  [
+                                                                         "VCC",
+                                                                         "12V"
+                                                                     ]
+                                                       },
+                                      "l9110s_module":  {
+                                                            "pwm_forward":  [
+                                                                                "IA",
+                                                                                "IB"
+                                                                            ],
+                                                            "pwm_reverse":  [
+                                                                                "IA",
+                                                                                "IB"
+                                                                            ],
+                                                            "power":  [
+                                                                          "VCC",
+                                                                          "VDD"
+                                                                      ]
+                                                        },
+                                      "drv8833_breakout":  {
+                                                               "pwm":  [
+                                                                           "AIN1",
+                                                                           "AIN2",
+                                                                           "BIN1",
+                                                                           "BIN2"
+                                                                       ],
+                                                               "enable":  [
+                                                                              "ENABLE",
+                                                                              "EN"
+                                                                          ],
+                                                               "fault":  [
+                                                                             "FAULT",
+                                                                             "FLT"
+                                                                         ],
+                                                               "power":  [
+                                                                             "VIN",
+                                                                             "VCC"
+                                                                         ]
+                                                           }
+                                  },
+    "timing_specifications":  {
+                                  "pwm_frequency":  "1KHz_TO_20KHz",
+                                  "direction_change_delay":  "10_MILLISECONDS",
+                                  "enable_to_pwm_delay":  "1_MILLISECOND",
+                                  "brake_response_time":  "50_MILLISECONDS"
+                              },
+    "application_examples":  {
+                                 "jaw_movement":  {
+                                                      "motor_type":  "MICRO_GEARED_DC",
+                                                      "voltage":  "6V",
+                                                      "current":  "200mA",
+                                                      "speed_range":  "10_TO_100_RPM",
+                                                      "use_case":  "PRECISE_MOUTH_ANIMATION"
+                                                  },
+                                 "ear_wiggle":  {
+                                                    "motor_type":  "MICRO_SERVO_CONTINUOUS",
+                                                    "voltage":  "5V",
+                                                    "current":  "150mA",
+                                                    "speed_range":  "5_TO_60_RPM",
+                                                    "use_case":  "EXPRESSIVE_EAR_MOVEMENT"
+                                                },
+                                 "tail_wag":  {
+                                                  "motor_type":  "WINDOW_MOTOR_SMALL",
+                                                  "voltage":  "12V",
+                                                  "current":  "1A",
+                                                  "speed_range":  "30_TO_200_RPM",
+                                                  "use_case":  "ROBUST_TAIL_ARTICULATION"
+                                              },
+                                 "platform_drive":  {
+                                                        "motor_type":  "GEARED_DC_MOTOR",
+                                                        "voltage":  "12V",
+                                                        "current":  "3A",
+                                                        "speed_range":  "50_TO_300_RPM",
+                                                        "use_case":  "MOBILE_PLATFORM_LOCOMOTION"
+                                                    }
+                             }
 }

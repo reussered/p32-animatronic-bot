@@ -1,116 +1,131 @@
-{
-  "relative_filename": "config/bots/goblin_warrior.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
-  "bot_type": "GOBLINWARRIOR",
-  "bot_id": "goblin_warrior_v1",
-  "description": "Battle-hardened goblin warrior with enhanced aggression and combat instincts",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "warrior_goblin",
-  
-  "overrides": {
-    "mood_defaults": {
-      "FEAR": 5,
-      "ANGER": 30,
-      "IRRITATION": 20,
-      "HAPPINESS": 5,
-      "CONTENTMENT": 10,
-      "HUNGER": 15,
-      "CURIOSITY": 15,
-      "AFFECTION": 0
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 180,
-      "interaction_range_cm": 250,
-      "aggressive_threshold": 40,
-      "calm_threshold": 5,
-      "combat_ready": true,
-      "pack_loyalty": true
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "battle_scarred_green",
-      "weathering_effects": true,
-      "battle_damage": {
-        "facial_scars": 4,
-        "chipped_fangs": true,
-        "damaged_left_eye": true,
-        "war_paint": "red_streaks"
-      },
-      "size_modifier": 1.1
-    },
-    
-    "sound_characteristics": {
-      "voice_pitch": "deep_battle_roar",
-      "breathing_pattern": "aggressive_snort",
-      "threat_sounds": ["war_cry", "battle_roar", "weapon_clang", "intimidating_growl"],
-      "idle_sounds": ["armor_rattle", "blade_sharpen", "hostile_mutter"],
-      "ambient_volume": 0.7,
-      "reaction_volume": 1.0
-    },
-    
-    "animation_style": {
-      "movement_speed": "aggressive_swift",
-      "eye_tracking": "combat_scanning",
-      "idle_behaviors": ["weapon_ready", "territory_patrol", "threat_assessment"],
-      "threat_responses": ["attack_stance", "war_cry_display", "intimidation_lunge"],
-      "expression_intensity": "maximum"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/goblin_battle_scars.json",
-    "config/components/positioned/goblin_war_paint.json"
-  ],
-  
-  "custom_behaviors": {
-    "combat_ready_stance": {
-      "trigger": "proximity_alert",
-      "eyes": "aggressive_glow_red",
-      "mouth": "fanged_snarl",
-      "sounds": ["challenge_roar"],
-      "duration_ms": 4000,
-      "priority": "high"
-    },
-    "victory_celebration": {
-      "trigger": "threat_eliminated",
-      "eyes": "triumphant_flash",
-      "mouth": "victory_grin",
-      "sounds": ["victory_howl", "weapon_clash"],
-      "duration_ms": 6000,
-      "priority": "medium"
-    },
-    "pack_rally": {
-      "trigger": "group_formation",
-      "eyes": "pack_coordination",
-      "mouth": "rallying_call",
-      "sounds": ["war_horn", "pack_howl"],
-      "duration_ms": 8000,
-      "priority": "high"
-    }
-  },
-  
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 45,
-    "sensor_poll_rate_hz": 15,
-    "power_management": "performance",
-    "audio_amplification": 1.2
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Inherits from goblin_family.json with warrior subfamily selection",
-    "Enhanced aggression levels and reduced fear responses",
-    "Battle-scarred aesthetic with war paint details",
-    "Combat-focused behaviors and high-priority threat responses",
-    "Increased sensor polling for combat awareness",
-    "Higher audio amplification for intimidation factor"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_warrior.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "bot_type":  "GOBLINWARRIOR",
+    "bot_id":  "goblin_warrior_v1",
+    "description":  "Battle-hardened goblin warrior with enhanced aggression and combat instincts",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "warrior_goblin",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "FEAR":  5,
+                                            "ANGER":  30,
+                                            "IRRITATION":  20,
+                                            "HAPPINESS":  5,
+                                            "CONTENTMENT":  10,
+                                            "HUNGER":  15,
+                                            "CURIOSITY":  15,
+                                            "AFFECTION":  0
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  true,
+                                              "auto_sleep_timeout_seconds":  180,
+                                              "interaction_range_cm":  250,
+                                              "aggressive_threshold":  40,
+                                              "calm_threshold":  5,
+                                              "combat_ready":  true,
+                                              "pack_loyalty":  true
+                                          },
+                      "aesthetic_profile":  {
+                                                "color_scheme":  "battle_scarred_green",
+                                                "weathering_effects":  true,
+                                                "battle_damage":  {
+                                                                      "facial_scars":  4,
+                                                                      "chipped_fangs":  true,
+                                                                      "damaged_left_eye":  true,
+                                                                      "war_paint":  "red_streaks"
+                                                                  },
+                                                "size_modifier":  1.1
+                                            },
+                      "sound_characteristics":  {
+                                                    "voice_pitch":  "deep_battle_roar",
+                                                    "breathing_pattern":  "aggressive_snort",
+                                                    "threat_sounds":  [
+                                                                          "war_cry",
+                                                                          "battle_roar",
+                                                                          "weapon_clang",
+                                                                          "intimidating_growl"
+                                                                      ],
+                                                    "idle_sounds":  [
+                                                                        "armor_rattle",
+                                                                        "blade_sharpen",
+                                                                        "hostile_mutter"
+                                                                    ],
+                                                    "ambient_volume":  0.7,
+                                                    "reaction_volume":  1.0
+                                                },
+                      "animation_style":  {
+                                              "movement_speed":  "aggressive_swift",
+                                              "eye_tracking":  "combat_scanning",
+                                              "idle_behaviors":  [
+                                                                     "weapon_ready",
+                                                                     "territory_patrol",
+                                                                     "threat_assessment"
+                                                                 ],
+                                              "threat_responses":  [
+                                                                       "attack_stance",
+                                                                       "war_cry_display",
+                                                                       "intimidation_lunge"
+                                                                   ],
+                                              "expression_intensity":  "maximum"
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/goblin_battle_scars.json",
+                                  "config/components/positioned/goblin_war_paint.json"
+                              ],
+    "custom_behaviors":  {
+                             "combat_ready_stance":  {
+                                                         "trigger":  "proximity_alert",
+                                                         "eyes":  "aggressive_glow_red",
+                                                         "mouth":  "fanged_snarl",
+                                                         "sounds":  [
+                                                                        "challenge_roar"
+                                                                    ],
+                                                         "duration_ms":  4000,
+                                                         "priority":  "high"
+                                                     },
+                             "victory_celebration":  {
+                                                         "trigger":  "threat_eliminated",
+                                                         "eyes":  "triumphant_flash",
+                                                         "mouth":  "victory_grin",
+                                                         "sounds":  [
+                                                                        "victory_howl",
+                                                                        "weapon_clash"
+                                                                    ],
+                                                         "duration_ms":  6000,
+                                                         "priority":  "medium"
+                                                     },
+                             "pack_rally":  {
+                                                "trigger":  "group_formation",
+                                                "eyes":  "pack_coordination",
+                                                "mouth":  "rallying_call",
+                                                "sounds":  [
+                                                               "war_horn",
+                                                               "pack_howl"
+                                                           ],
+                                                "duration_ms":  8000,
+                                                "priority":  "high"
+                                            }
+                         },
+    "hardware_config":  {
+                            "i2s_sample_rate":  44100,
+                            "display_update_rate_fps":  45,
+                            "sensor_poll_rate_hz":  15,
+                            "power_management":  "performance",
+                            "audio_amplification":  1.2
+                        },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Inherits from goblin_family.json with warrior subfamily selection",
+                  "Enhanced aggression levels and reduced fear responses",
+                  "Battle-scarred aesthetic with war paint details",
+                  "Combat-focused behaviors and high-priority threat responses",
+                  "Increased sensor polling for combat awareness",
+                  "Higher audio amplification for intimidation factor"
+              ]
 }

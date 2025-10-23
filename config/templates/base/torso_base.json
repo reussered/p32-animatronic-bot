@@ -1,52 +1,45 @@
 ﻿{
-  "relative_filename": "config/templates/base/torso_base.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "template_type": "base_template",
-  "description": "Base template for torso subsystems - power, navigation, communication, spine",
-  "created": "2025-10-13",
-  
-  "subsystem_type": "TORSO_CONTROLLER",
-  "controller_hardware": "ESP32_S3_DEVKIT",
-  "coordinate_system": "humanoid_3d",
-  "reference_point": "pelvis_center",
-  "units": "INCHES",
-  
-  "base_components": [
-    "config/components/positioned/base_power_management.json",
-    "config/components/positioned/base_battery_monitor.json",
-    "config/components/positioned/base_mesh_coordinator.json",
-    "config/components/positioned/base_status_led.json"
-  ],
-  
-  "degrees_of_freedom_defaults": {
-    "spine_dof": "3",
-    "total_controlled_dof": "3"
-  },
-  
-  "power_specifications": {
-    "battery_voltage": "12V_3S_LITHIUM",
-    "battery_capacity": "5000_MAH",
-    "servo_power_rail": "6V_REGULATED", 
-    "logic_power_rail": "3.3V_ESP32",
-    "estimated_runtime_hours": "4.0"
-  },
-  
-  "communication_defaults": {
-    "wifi_ssid": "ROBOT_MESH_NETWORK",
-    "external_api_enabled": true,
-    "telemetry_broadcast_rate_hz": "10"
-  },
-  
-  "timing_defaults": {
-    "power_monitor_hitCount": 10,
-    "spine_servo_hitCount": 20,
-    "status_led_hitCount": 50
-  },
-  
-  "servo_defaults": {
-    "spine_servo_type": "NEMA17_STEPPER",
-    "spine_servo_current_limit": "1.5A",
-    "spine_positioning_precision": "0.1_DEGREES"
-  }
+    "relative_filename":  "config/templates/base/torso_base.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "template_type":  "base_template",
+    "description":  "Base template for torso subsystems - power, navigation, communication, spine",
+    "created":  "2025-10-13",
+    "subsystem_type":  "TORSO_CONTROLLER",
+    "controller_hardware":  "ESP32_S3_DEVKIT",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "units":  "INCHES",
+    "base_components":  [
+                            "config/components/positioned/base_power_management.json",
+                            "config/components/positioned/base_battery_monitor.json",
+                            "config/components/positioned/base_mesh_coordinator.json",
+                            "config/components/positioned/base_status_led.json"
+                        ],
+    "degrees_of_freedom_defaults":  {
+                                        "spine_dof":  "3",
+                                        "total_controlled_dof":  "3"
+                                    },
+    "power_specifications":  {
+                                 "battery_voltage":  "12V_3S_LITHIUM",
+                                 "battery_capacity":  "5000_MAH",
+                                 "servo_power_rail":  "6V_REGULATED",
+                                 "logic_power_rail":  "3.3V_ESP32",
+                                 "estimated_runtime_hours":  "4.0"
+                             },
+    "communication_defaults":  {
+                                   "wifi_ssid":  "ROBOT_MESH_NETWORK",
+                                   "external_api_enabled":  true,
+                                   "telemetry_broadcast_rate_hz":  "10"
+                               },
+    "timing_defaults":  {
+                            "power_monitor_hitCount":  10,
+                            "spine_servo_hitCount":  20,
+                            "status_led_hitCount":  50
+                        },
+    "servo_defaults":  {
+                           "spine_servo_type":  "NEMA17_STEPPER",
+                           "spine_servo_current_limit":  "1.5A",
+                           "spine_positioning_precision":  "0.1_DEGREES"
+                       }
 }

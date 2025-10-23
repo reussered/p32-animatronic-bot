@@ -1,385 +1,407 @@
-{
-  "relative_filename": "config/manufacturing/complete_bom_and_stl_master.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "document_id": "COMPLETE_BOM_AND_STL_MASTER",
-  "document_type": "MANUFACTURING_SPECIFICATION",
-  "description": "Complete bill of materials and STL file mappings for all robot variants with assembly instructions",
-  
-  "robot_variants_summary": {
-    "humanoid_walker_mk1": {
-      "total_cost": "$2380.00_WITH_INTEGRATED_POWER_SYSTEM",
-      "build_complexity": "ADVANCED_32_DOF_FULL_HUMANOID",
-      "build_time_estimate": "120_HOURS_COMPLETE_ASSEMBLY",
-      "skill_level_required": "INTERMEDIATE_TO_ADVANCED_MAKER"
-    },
-    "quadruped_walker_mk1": {
-      "total_cost": "$1380.00_WITH_SKELETAL_POWER",
-      "build_complexity": "MODERATE_20_DOF_FOUR_LEG",
-      "build_time_estimate": "80_HOURS_COMPLETE_ASSEMBLY",
-      "skill_level_required": "INTERMEDIATE_MAKER"
-    }
-  },
-  
-  "complete_bill_of_materials": {
-    "microcontrollers_and_electronics": {
-      "esp32_s3_master_controller": {
-        "part_number": "ESP32-S3-DevKitC-1",
-        "supplier": "ESPRESSIF_DIRECT_OR_DIGIKEY",
-        "quantity_humanoid": "1",
-        "quantity_quadruped": "1",
-        "unit_cost": "$15.00",
-        "function": "MASTER_GAIT_BALANCE_COORDINATION"
-      },
-      "esp32_c3_slave_controllers": {
-        "part_number": "ESP32-C3-MINI-1-N4",
-        "supplier": "ESPRESSIF_DIRECT_OR_MOUSER",
-        "quantity_humanoid": "6_CONTROLLERS",
-        "quantity_quadruped": "5_CONTROLLERS",
-        "unit_cost": "$4.00",
-        "function": "DISTRIBUTED_JOINT_CLUSTER_CONTROL"
-      },
-      "servo_expansion_boards": {
-        "part_number": "PCA9685_16_CHANNEL_PWM_BOARD",
-        "supplier": "ADAFRUIT_OR_EQUIVALENT",
-        "quantity_humanoid": "8_BOARDS_128_CHANNELS",
-        "quantity_quadruped": "4_BOARDS_64_CHANNELS", 
-        "unit_cost": "$12.00",
-        "function": "GPIO_EXPANSION_SERVO_CONTROL"
-      },
-      "stepper_motor_drivers": {
-        "part_number": "TMC2209_STEPPER_DRIVER_SPI",
-        "supplier": "TRINAMIC_OR_BIGTREETECH",
-        "quantity_humanoid": "12_DRIVERS",
-        "quantity_quadruped": "8_DRIVERS",
-        "unit_cost": "$8.00",
-        "function": "PRECISE_STEPPER_CONTROL_HIGH_TORQUE_JOINTS"
-      }
-    },
-    
-    "servo_motors_and_actuators": {
-      "high_torque_steppers_legs": {
-        "part_number": "NEMA17_17HS19-2004S1_WITH_50_1_GEARBOX",
-        "supplier": "STEPPERONLINE_OR_OOZNEST",
-        "quantity_humanoid": "6_STEPPERS_LEG_JOINTS",
-        "quantity_quadruped": "8_STEPPERS_LEG_JOINTS",
-        "unit_cost": "$35.00",
-        "specifications": "59NCM_TORQUE_1.8_DEGREE_STEP_50_1_REDUCTION"
-      },
-      "medium_torque_steppers_arms": {
-        "part_number": "NEMA17_17HS19-2004S1_WITH_30_1_GEARBOX",
-        "supplier": "STEPPERONLINE_OR_OOZNEST", 
-        "quantity_humanoid": "6_STEPPERS_ARM_JOINTS",
-        "quantity_quadruped": "0",
-        "unit_cost": "$30.00",
-        "specifications": "35NCM_TORQUE_1.8_DEGREE_STEP_30_1_REDUCTION"
-      },
-      "standard_servo_motors": {
-        "part_number": "TOWERPRO_MG996R_DIGITAL_SERVO",
-        "supplier": "TOWERPRO_DIRECT_OR_AMAZON",
-        "quantity_humanoid": "14_SERVOS_MEDIUM_JOINTS",
-        "quantity_quadruped": "8_SERVOS_ANKLE_WRIST",
-        "unit_cost": "$12.00",
-        "specifications": "15KG_TORQUE_0.15SEC_60DEG_METAL_GEARS"
-      },
-      "micro_servo_motors": {
-        "part_number": "TOWERPRO_MG90S_MICRO_SERVO",
-        "supplier": "TOWERPRO_DIRECT_OR_HOBBYKING",
-        "quantity_humanoid": "6_SERVOS_FINE_CONTROL",
-        "quantity_quadruped": "2_SERVOS_HEAD_TAIL",
-        "unit_cost": "$8.00",
-        "specifications": "2.5KG_TORQUE_0.1SEC_60DEG_METAL_GEARS"
-      }
-    },
-    
-    "sensors_and_feedback": {
-      "primary_imu_sensors": {
-        "part_number": "GY-521_MPU6050_6DOF_IMU",
-        "supplier": "INVENSENSE_OR_GENERIC_BREAKOUT",
-        "quantity_humanoid": "2_TORSO_AND_HEAD",
-        "quantity_quadruped": "1_BODY_CENTER",
-        "unit_cost": "$5.00",
-        "specifications": "3_AXIS_GYRO_3_AXIS_ACCEL_I2C_INTERFACE"
-      },
-      "foot_pressure_sensors": {
-        "part_number": "INTERLINK_FSR402_FORCE_SENSITIVE_RESISTOR",
-        "supplier": "INTERLINK_ELECTRONICS_OR_ADAFRUIT",
-        "quantity_humanoid": "8_SENSORS_4_PER_FOOT",
-        "quantity_quadruped": "16_SENSORS_4_PER_PAW",
-        "unit_cost": "$15.00",
-        "specifications": "0_TO_10KG_FORCE_RANGE_ANALOG_OUTPUT"
-      },
-      "absolute_position_encoders": {
-        "part_number": "AS5600_MAGNETIC_ABSOLUTE_ENCODER",
-        "supplier": "AMS_OR_ADAFRUIT_BREAKOUT",
-        "quantity_humanoid": "16_ENCODERS_CRITICAL_JOINTS",
-        "quantity_quadruped": "12_ENCODERS_MAJOR_JOINTS",
-        "unit_cost": "$8.00", 
-        "specifications": "12_BIT_RESOLUTION_I2C_INTERFACE_MAGNETIC"
-      }
-    },
-    
-    "structural_aluminum_system": {
-      "main_spine_extrusion": {
-        "part_number": "8020_1010_1_INCH_X_1_INCH_T_SLOT",
-        "supplier": "8020_INC_OR_MISUMI",
-        "quantity_humanoid": "4_FEET_SPINE_STRUCTURE",
-        "quantity_quadruped": "3_FEET_BODY_SPINE",
-        "unit_cost": "$8.00_PER_FOOT",
-        "specifications": "6061_ALUMINUM_T_SLOT_STRUCTURAL_AND_ELECTRICAL"
-      },
-      "limb_support_extrusion": {
-        "part_number": "8020_2020_20MM_X_20MM_T_SLOT",
-        "supplier": "8020_INC_OR_MISUMI",
-        "quantity_humanoid": "12_FEET_ARM_LEG_STRUCTURE",
-        "quantity_quadruped": "8_FEET_LEG_STRUCTURE",
-        "unit_cost": "$4.00_PER_FOOT",
-        "specifications": "6061_ALUMINUM_LIGHTER_DUTY_BRANCHES"
-      },
-      "cross_bracing_angle": {
-        "part_number": "GENERIC_15MM_X_15MM_ALUMINUM_ANGLE",
-        "supplier": "LOCAL_METAL_SUPPLIER_OR_ONLINE",
-        "quantity_humanoid": "20_FEET_CROSS_BRACING",
-        "quantity_quadruped": "15_FEET_CROSS_BRACING",
-        "unit_cost": "$2.00_PER_FOOT",
-        "specifications": "6061_ALUMINUM_GROUND_RETURN_NETWORK"
-      }
-    },
-    
-    "power_system_components": {
-      "lithium_ion_cells": {
-        "part_number": "PANASONIC_NCR18650B_3400MAH",
-        "supplier": "PANASONIC_OR_BATTERY_JUNCTION",
-        "quantity_humanoid": "56_CELLS_14S4P_PACK",
-        "quantity_quadruped": "40_CELLS_10S4P_PACK",
-        "unit_cost": "$5.00",
-        "specifications": "3.7V_NOMINAL_3400MAH_10A_DISCHARGE"
-      },
-      "battery_management_system": {
-        "part_number": "DALY_BMS_14S_60A_BLUETOOTH",
-        "supplier": "DALY_BMS_DIRECT_OR_ALIEXPRESS",
-        "quantity_humanoid": "1_BMS_MAIN_PACK",
-        "quantity_quadruped": "1_BMS_MAIN_PACK",
-        "unit_cost": "$150.00",
-        "specifications": "CELL_BALANCING_BLUETOOTH_MONITORING_PROTECTION"
-      },
-      "power_distribution_connectors": {
-        "part_number": "ANDERSON_POWERPOLE_PP45_CONNECTOR_PAIRS",
-        "supplier": "ANDERSON_POWER_OR_POWERWERX",
-        "quantity_humanoid": "30_PAIRS_HIGH_CURRENT",
-        "quantity_quadruped": "20_PAIRS_HIGH_CURRENT",
-        "unit_cost": "$3.00_PER_PAIR",
-        "specifications": "45_AMP_RATING_GENDERLESS_MODULAR"
-      },
-      "voltage_regulators": {
-        "part_number": "LM2596_BUCK_CONVERTER_MODULE_ADJUSTABLE",
-        "supplier": "GENERIC_CHINESE_OR_POLOLU",
-        "quantity_humanoid": "20_CONVERTERS_DISTRIBUTED",
-        "quantity_quadruped": "15_CONVERTERS_DISTRIBUTED",
-        "unit_cost": "$3.00",
-        "specifications": "3A_OUTPUT_ADJUSTABLE_1.25V_TO_35V"
-      }
-    },
-    
-    "mechanical_hardware": {
-      "precision_bearings": {
-        "part_number": "608ZZ_DEEP_GROOVE_BALL_BEARING",
-        "supplier": "SKF_OR_GENERIC_BEARING_SUPPLIER",
-        "quantity_humanoid": "64_BEARINGS_JOINT_PIVOTS",
-        "quantity_quadruped": "40_BEARINGS_JOINT_PIVOTS",
-        "unit_cost": "$2.00",
-        "specifications": "8MM_ID_22MM_OD_7MM_WIDTH_SEALED"
-      },
-      "threaded_fasteners": {
-        "part_number": "M8_X_20MM_SOCKET_HEAD_CAP_SCREW_316SS",
-        "supplier": "MCMASTER_CARR_OR_FASTENAL",
-        "quantity_humanoid": "200_SCREWS_STRUCTURAL_ASSEMBLY",
-        "quantity_quadruped": "150_SCREWS_STRUCTURAL_ASSEMBLY",
-        "unit_cost": "$0.50",
-        "specifications": "STAINLESS_STEEL_CORROSION_RESISTANT"
-      },
-      "t_slot_nuts": {
-        "part_number": "8020_T_SLOT_NUT_M8_SLIDING",
-        "supplier": "8020_INC_OR_GENERIC_T_SLOT_SUPPLIER",
-        "quantity_humanoid": "400_NUTS_T_SLOT_CONNECTIONS",
-        "quantity_quadruped": "300_NUTS_T_SLOT_CONNECTIONS",
-        "unit_cost": "$0.25",
-        "specifications": "ZINC_PLATED_STEEL_T_SLOT_COMPATIBLE"
-      }
-    }
-  },
-  
-  "complete_stl_file_mapping": {
-    "humanoid_walker_stl_files": {
-      "skeletal_frame_components": [
-        "assets/shapes/stl/humanoid/spine_vertebrae_c1_c7.stl",
-        "assets/shapes/stl/humanoid/spine_vertebrae_t1_t12.stl", 
-        "assets/shapes/stl/humanoid/spine_vertebrae_l1_l5.stl",
-        "assets/shapes/stl/humanoid/pelvis_assembly_with_battery_box.stl",
-        "assets/shapes/stl/humanoid/ribcage_frame_electronics_mounts.stl"
-      ],
-      "leg_assembly_components": [
-        "assets/shapes/stl/humanoid/hip_joint_housing_3dof.stl",
-        "assets/shapes/stl/humanoid/femur_upper_servo_mounts.stl",
-        "assets/shapes/stl/humanoid/knee_joint_housing_stepper_mount.stl",
-        "assets/shapes/stl/humanoid/tibia_lower_leg_assembly.stl",
-        "assets/shapes/stl/humanoid/ankle_joint_2dof_housing.stl",
-        "assets/shapes/stl/humanoid/foot_assembly_pressure_sensors.stl"
-      ],
-      "arm_assembly_components": [
-        "assets/shapes/stl/humanoid/shoulder_complex_3dof_assembly.stl",
-        "assets/shapes/stl/humanoid/humerus_upper_arm_servo_mounts.stl",
-        "assets/shapes/stl/humanoid/elbow_joint_stepper_housing.stl",
-        "assets/shapes/stl/humanoid/forearm_assembly_electronics.stl",
-        "assets/shapes/stl/humanoid/wrist_joint_2dof_housing.stl",
-        "assets/shapes/stl/humanoid/hand_assembly_finger_actuators.stl"
-      ],
-      "head_neck_components": [
-        "assets/shapes/stl/humanoid/neck_rotation_bearing_assembly.stl",
-        "assets/shapes/stl/humanoid/head_shell_sensor_mounts.stl",
-        "assets/shapes/stl/humanoid/face_display_mounting_bracket.stl"
-      ],
-      "electronics_housings": [
-        "assets/shapes/stl/electronics/esp32_s3_master_housing.stl",
-        "assets/shapes/stl/electronics/esp32_c3_distributed_housings.stl",
-        "assets/shapes/stl/electronics/servo_driver_board_mounts.stl",
-        "assets/shapes/stl/electronics/sensor_mounting_brackets.stl",
-        "assets/shapes/stl/electronics/power_tap_connector_blocks.stl"
-      ]
-    },
-    
-    "quadruped_walker_stl_files": {
-      "body_frame_components": [
-        "assets/shapes/stl/quadruped/main_spine_assembly_50mm.stl",
-        "assets/shapes/stl/quadruped/leg_mounting_brackets_25mm.stl",
-        "assets/shapes/stl/quadruped/battery_housing_ventral_mount.stl",
-        "assets/shapes/stl/quadruped/electronics_bay_dorsal_mount.stl"
-      ],
-      "leg_assembly_components": [
-        "assets/shapes/stl/quadruped/shoulder_hip_joint_4dof.stl",
-        "assets/shapes/stl/quadruped/upper_leg_femur_stepper_mount.stl",
-        "assets/shapes/stl/quadruped/knee_elbow_joint_housing.stl",
-        "assets/shapes/stl/quadruped/lower_leg_tibia_assembly.stl",
-        "assets/shapes/stl/quadruped/paw_foot_assembly_sensors.stl"
-      ],
-      "head_tail_components": [
-        "assets/shapes/stl/quadruped/head_assembly_sensor_array.stl",
-        "assets/shapes/stl/quadruped/neck_2dof_articulation.stl",
-        "assets/shapes/stl/quadruped/tail_assembly_optional_2dof.stl"
-      ]
-    },
-    
-    "shared_components": [
-      "assets/shapes/stl/basic_mounts/servo_bracket_mg996r.stl",
-      "assets/shapes/stl/basic_mounts/stepper_mount_nema17.stl",
-      "assets/shapes/stl/basic_mounts/bearing_housing_608zz.stl",
-      "assets/shapes/stl/basic_mounts/t_slot_connector_blocks.stl",
-      "assets/shapes/stl/basic_mounts/power_tap_mounting_blocks.stl"
-    ]
-  },
-  
-  "manufacturing_instructions": {
-    "3d_printing_specifications": {
-      "recommended_printer": "PRUSA_I3_MK3S_OR_EQUIVALENT_250MM_BUILD",
-      "material_primary": "PETG_CARBON_FIBER_FILLED_STRUCTURAL",
-      "material_secondary": "PLA_PLUS_NON_CRITICAL_COMPONENTS",
-      "layer_height": "0.2MM_BALANCE_STRENGTH_SPEED",
-      "infill_percentage": "30_PERCENT_GYROID_PATTERN",
-      "support_material": "SOLUBLE_PVA_FOR_COMPLEX_GEOMETRIES",
-      "post_processing": "ACETONE_VAPOR_SMOOTH_CRITICAL_SURFACES"
-    },
-    
-    "aluminum_fabrication": {
-      "cutting_method": "MITER_SAW_CARBIDE_BLADE_ALUMINUM",
-      "drilling_method": "CARBIDE_DRILL_BITS_CUTTING_FLUID",
-      "tapping": "M8_TAP_T_SLOT_NUT_COMPATIBILITY",
-      "deburring": "HAND_FILES_SMOOTH_ALL_CUT_EDGES",
-      "surface_prep": "SCOTCHBRITE_CLEAN_CONDUCTIVE_GREASE"
-    },
-    
-    "electrical_assembly": {
-      "soldering_requirements": "60_40_ROSIN_CORE_SOLDER_15_30W_IRON",
-      "connector_crimping": "PROPER_CRIMPING_TOOL_ANDERSON_CONNECTORS",
-      "wire_management": "SPIRAL_WRAP_STRAIN_RELIEF_PROPER_ROUTING",
-      "testing_procedures": "MULTIMETER_CONTINUITY_RESISTANCE_CHECKS"
-    }
-  },
-  
-  "assembly_sequence_overview": {
-    "phase_1_structural_frame": {
-      "duration": "16_HOURS_FRAME_ASSEMBLY",
-      "components": ["ALUMINUM_EXTRUSION_CUTTING", "T_SLOT_ASSEMBLY", "BEARING_INSTALLATION"],
-      "tools_required": ["MITER_SAW", "DRILL_PRESS", "T_SLOT_WRENCHES"],
-      "critical_measurements": "PRECISION_JOINT_SPACING_ALIGNMENT"
-    },
-    "phase_2_power_distribution": {
-      "duration": "12_HOURS_ELECTRICAL_INTEGRATION",
-      "components": ["SKELETAL_POWER_INSTALLATION", "CONNECTOR_MOUNTING", "VOLTAGE_REGULATION"],
-      "tools_required": ["MULTIMETER", "CRIMPING_TOOLS", "HEAT_SHRINK_GUN"],
-      "testing": "VOLTAGE_RAIL_VERIFICATION_ISOLATION_CHECKS"
-    },
-    "phase_3_servo_installation": {
-      "duration": "20_HOURS_ACTUATOR_MOUNTING",
-      "components": ["STEPPER_MOTORS", "SERVO_MOTORS", "DRIVER_BOARDS"],
-      "tools_required": ["PRECISION_SCREWDRIVERS", "TORQUE_WRENCH", "OSCILLOSCOPE"],
-      "calibration": "SERVO_RANGE_CALIBRATION_ENCODER_ALIGNMENT"
-    },
-    "phase_4_controller_integration": {
-      "duration": "16_HOURS_ELECTRONICS_PROGRAMMING",
-      "components": ["ESP32_CONTROLLERS", "SENSOR_ARRAYS", "COMMUNICATION_MESH"],
-      "tools_required": ["PROGRAMMING_CABLES", "LOGIC_ANALYZER", "WIFI_ANALYZER"],
-      "testing": "MESH_COMMUNICATION_LATENCY_VERIFICATION"
-    },
-    "phase_5_software_integration": {
-      "duration": "24_HOURS_PROGRAMMING_CALIBRATION",
-      "components": ["GAIT_ALGORITHMS", "BALANCE_CONTROL", "SAFETY_SYSTEMS"],
-      "tools_required": ["DEVELOPMENT_ENVIRONMENT", "DEBUGGING_TOOLS", "MOTION_CAPTURE"],
-      "validation": "FULL_SYSTEM_FUNCTIONAL_TESTING"
-    }
-  },
-  
-  "cost_breakdown_summary": {
-    "humanoid_walker_mk1_total": {
-      "controllers_electronics": "$485.00",
-      "servo_motors_actuators": "$680.00",
-      "sensors_feedback": "$290.00",
-      "structural_aluminum": "$165.00",
-      "power_system": "$930.00",
-      "mechanical_hardware": "$180.00",
-      "3d_printed_components": "$150.00_MATERIAL_COST",
-      "total_material_cost": "$2880.00",
-      "estimated_shipping": "$200.00",
-      "grand_total": "$3080.00_COMPLETE_HUMANOID"
-    },
-    
-    "quadruped_walker_mk1_total": {
-      "controllers_electronics": "$285.00",
-      "servo_motors_actuators": "$400.00", 
-      "sensors_feedback": "$210.00",
-      "structural_aluminum": "$125.00",
-      "power_system": "$680.00",
-      "mechanical_hardware": "$140.00",
-      "3d_printed_components": "$100.00_MATERIAL_COST",
-      "total_material_cost": "$1940.00",
-      "estimated_shipping": "$150.00",
-      "grand_total": "$2090.00_COMPLETE_QUADRUPED"
-    }
-  },
-  
-  "supplier_recommendations": {
-    "primary_suppliers": {
-      "electronics": "DIGIKEY_MOUSER_ADAFRUIT_COMPREHENSIVE_STOCK",
-      "aluminum_extrusion": "8020_INC_MISUMI_PROFESSIONAL_QUALITY",
-      "servo_motors": "STEPPERONLINE_TOWERPRO_DIRECT_BEST_PRICES",
-      "mechanical_hardware": "MCMASTER_CARR_PREMIUM_QUALITY_FAST_SHIP",
-      "3d_printing_materials": "PRUSA_RESEARCH_HATCHBOX_QUALITY_FILAMENTS"
-    },
-    "budget_alternatives": {
-      "electronics": "ALIEXPRESS_BANGGOOD_LONGER_SHIP_TIMES",
-      "aluminum": "LOCAL_METAL_SUPPLIERS_CUSTOM_CUTTING",
-      "servos": "HOBBYKING_AMAZON_GENERIC_BRANDS",
-      "hardware": "BOLT_DEPOT_BULK_FASTENER_SAVINGS"
-    }
-  }
+﻿{
+    "relative_filename":  "config/manufacturing/complete_bom_and_stl_master.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "document_id":  "COMPLETE_BOM_AND_STL_MASTER",
+    "document_type":  "MANUFACTURING_SPECIFICATION",
+    "description":  "Complete bill of materials and STL file mappings for all robot variants with assembly instructions",
+    "robot_variants_summary":  {
+                                   "humanoid_walker_mk1":  {
+                                                               "total_cost":  "$2380.00_WITH_INTEGRATED_POWER_SYSTEM",
+                                                               "build_complexity":  "ADVANCED_32_DOF_FULL_HUMANOID",
+                                                               "build_time_estimate":  "120_HOURS_COMPLETE_ASSEMBLY",
+                                                               "skill_level_required":  "INTERMEDIATE_TO_ADVANCED_MAKER"
+                                                           },
+                                   "quadruped_walker_mk1":  {
+                                                                "total_cost":  "$1380.00_WITH_SKELETAL_POWER",
+                                                                "build_complexity":  "MODERATE_20_DOF_FOUR_LEG",
+                                                                "build_time_estimate":  "80_HOURS_COMPLETE_ASSEMBLY",
+                                                                "skill_level_required":  "INTERMEDIATE_MAKER"
+                                                            }
+                               },
+    "complete_bill_of_materials":  {
+                                       "microcontrollers_and_electronics":  {
+                                                                                "esp32_s3_master_controller":  {
+                                                                                                                   "part_number":  "ESP32-S3-DevKitC-1",
+                                                                                                                   "supplier":  "ESPRESSIF_DIRECT_OR_DIGIKEY",
+                                                                                                                   "quantity_humanoid":  "1",
+                                                                                                                   "quantity_quadruped":  "1",
+                                                                                                                   "unit_cost":  "$15.00",
+                                                                                                                   "function":  "MASTER_GAIT_BALANCE_COORDINATION"
+                                                                                                               },
+                                                                                "esp32_c3_slave_controllers":  {
+                                                                                                                   "part_number":  "ESP32-C3-MINI-1-N4",
+                                                                                                                   "supplier":  "ESPRESSIF_DIRECT_OR_MOUSER",
+                                                                                                                   "quantity_humanoid":  "6_CONTROLLERS",
+                                                                                                                   "quantity_quadruped":  "5_CONTROLLERS",
+                                                                                                                   "unit_cost":  "$4.00",
+                                                                                                                   "function":  "DISTRIBUTED_JOINT_CLUSTER_CONTROL"
+                                                                                                               },
+                                                                                "servo_expansion_boards":  {
+                                                                                                               "part_number":  "PCA9685_16_CHANNEL_PWM_BOARD",
+                                                                                                               "supplier":  "ADAFRUIT_OR_EQUIVALENT",
+                                                                                                               "quantity_humanoid":  "8_BOARDS_128_CHANNELS",
+                                                                                                               "quantity_quadruped":  "4_BOARDS_64_CHANNELS",
+                                                                                                               "unit_cost":  "$12.00",
+                                                                                                               "function":  "GPIO_EXPANSION_SERVO_CONTROL"
+                                                                                                           },
+                                                                                "stepper_motor_drivers":  {
+                                                                                                              "part_number":  "TMC2209_STEPPER_DRIVER_SPI",
+                                                                                                              "supplier":  "TRINAMIC_OR_BIGTREETECH",
+                                                                                                              "quantity_humanoid":  "12_DRIVERS",
+                                                                                                              "quantity_quadruped":  "8_DRIVERS",
+                                                                                                              "unit_cost":  "$8.00",
+                                                                                                              "function":  "PRECISE_STEPPER_CONTROL_HIGH_TORQUE_JOINTS"
+                                                                                                          }
+                                                                            },
+                                       "servo_motors_and_actuators":  {
+                                                                          "high_torque_steppers_legs":  {
+                                                                                                            "part_number":  "NEMA17_17HS19-2004S1_WITH_50_1_GEARBOX",
+                                                                                                            "supplier":  "STEPPERONLINE_OR_OOZNEST",
+                                                                                                            "quantity_humanoid":  "6_STEPPERS_LEG_JOINTS",
+                                                                                                            "quantity_quadruped":  "8_STEPPERS_LEG_JOINTS",
+                                                                                                            "unit_cost":  "$35.00",
+                                                                                                            "specifications":  "59NCM_TORQUE_1.8_DEGREE_STEP_50_1_REDUCTION"
+                                                                                                        },
+                                                                          "medium_torque_steppers_arms":  {
+                                                                                                              "part_number":  "NEMA17_17HS19-2004S1_WITH_30_1_GEARBOX",
+                                                                                                              "supplier":  "STEPPERONLINE_OR_OOZNEST",
+                                                                                                              "quantity_humanoid":  "6_STEPPERS_ARM_JOINTS",
+                                                                                                              "quantity_quadruped":  "0",
+                                                                                                              "unit_cost":  "$30.00",
+                                                                                                              "specifications":  "35NCM_TORQUE_1.8_DEGREE_STEP_30_1_REDUCTION"
+                                                                                                          },
+                                                                          "standard_servo_motors":  {
+                                                                                                        "part_number":  "TOWERPRO_MG996R_DIGITAL_SERVO",
+                                                                                                        "supplier":  "TOWERPRO_DIRECT_OR_AMAZON",
+                                                                                                        "quantity_humanoid":  "14_SERVOS_MEDIUM_JOINTS",
+                                                                                                        "quantity_quadruped":  "8_SERVOS_ANKLE_WRIST",
+                                                                                                        "unit_cost":  "$12.00",
+                                                                                                        "specifications":  "15KG_TORQUE_0.15SEC_60DEG_METAL_GEARS"
+                                                                                                    },
+                                                                          "micro_servo_motors":  {
+                                                                                                     "part_number":  "TOWERPRO_MG90S_MICRO_SERVO",
+                                                                                                     "supplier":  "TOWERPRO_DIRECT_OR_HOBBYKING",
+                                                                                                     "quantity_humanoid":  "6_SERVOS_FINE_CONTROL",
+                                                                                                     "quantity_quadruped":  "2_SERVOS_HEAD_TAIL",
+                                                                                                     "unit_cost":  "$8.00",
+                                                                                                     "specifications":  "2.5KG_TORQUE_0.1SEC_60DEG_METAL_GEARS"
+                                                                                                 }
+                                                                      },
+                                       "sensors_and_feedback":  {
+                                                                    "primary_imu_sensors":  {
+                                                                                                "part_number":  "GY-521_MPU6050_6DOF_IMU",
+                                                                                                "supplier":  "INVENSENSE_OR_GENERIC_BREAKOUT",
+                                                                                                "quantity_humanoid":  "2_TORSO_AND_HEAD",
+                                                                                                "quantity_quadruped":  "1_BODY_CENTER",
+                                                                                                "unit_cost":  "$5.00",
+                                                                                                "specifications":  "3_AXIS_GYRO_3_AXIS_ACCEL_I2C_INTERFACE"
+                                                                                            },
+                                                                    "foot_pressure_sensors":  {
+                                                                                                  "part_number":  "INTERLINK_FSR402_FORCE_SENSITIVE_RESISTOR",
+                                                                                                  "supplier":  "INTERLINK_ELECTRONICS_OR_ADAFRUIT",
+                                                                                                  "quantity_humanoid":  "8_SENSORS_4_PER_FOOT",
+                                                                                                  "quantity_quadruped":  "16_SENSORS_4_PER_PAW",
+                                                                                                  "unit_cost":  "$15.00",
+                                                                                                  "specifications":  "0_TO_10KG_FORCE_RANGE_ANALOG_OUTPUT"
+                                                                                              },
+                                                                    "absolute_position_encoders":  {
+                                                                                                       "part_number":  "AS5600_MAGNETIC_ABSOLUTE_ENCODER",
+                                                                                                       "supplier":  "AMS_OR_ADAFRUIT_BREAKOUT",
+                                                                                                       "quantity_humanoid":  "16_ENCODERS_CRITICAL_JOINTS",
+                                                                                                       "quantity_quadruped":  "12_ENCODERS_MAJOR_JOINTS",
+                                                                                                       "unit_cost":  "$8.00",
+                                                                                                       "specifications":  "12_BIT_RESOLUTION_I2C_INTERFACE_MAGNETIC"
+                                                                                                   }
+                                                                },
+                                       "structural_aluminum_system":  {
+                                                                          "main_spine_extrusion":  {
+                                                                                                       "part_number":  "8020_1010_1_INCH_X_1_INCH_T_SLOT",
+                                                                                                       "supplier":  "8020_INC_OR_MISUMI",
+                                                                                                       "quantity_humanoid":  "4_FEET_SPINE_STRUCTURE",
+                                                                                                       "quantity_quadruped":  "3_FEET_BODY_SPINE",
+                                                                                                       "unit_cost":  "$8.00_PER_FOOT",
+                                                                                                       "specifications":  "6061_ALUMINUM_T_SLOT_STRUCTURAL_AND_ELECTRICAL"
+                                                                                                   },
+                                                                          "limb_support_extrusion":  {
+                                                                                                         "part_number":  "8020_2020_20MM_X_20MM_T_SLOT",
+                                                                                                         "supplier":  "8020_INC_OR_MISUMI",
+                                                                                                         "quantity_humanoid":  "12_FEET_ARM_LEG_STRUCTURE",
+                                                                                                         "quantity_quadruped":  "8_FEET_LEG_STRUCTURE",
+                                                                                                         "unit_cost":  "$4.00_PER_FOOT",
+                                                                                                         "specifications":  "6061_ALUMINUM_LIGHTER_DUTY_BRANCHES"
+                                                                                                     },
+                                                                          "cross_bracing_angle":  {
+                                                                                                      "part_number":  "GENERIC_15MM_X_15MM_ALUMINUM_ANGLE",
+                                                                                                      "supplier":  "LOCAL_METAL_SUPPLIER_OR_ONLINE",
+                                                                                                      "quantity_humanoid":  "20_FEET_CROSS_BRACING",
+                                                                                                      "quantity_quadruped":  "15_FEET_CROSS_BRACING",
+                                                                                                      "unit_cost":  "$2.00_PER_FOOT",
+                                                                                                      "specifications":  "6061_ALUMINUM_GROUND_RETURN_NETWORK"
+                                                                                                  }
+                                                                      },
+                                       "power_system_components":  {
+                                                                       "lithium_ion_cells":  {
+                                                                                                 "part_number":  "PANASONIC_NCR18650B_3400MAH",
+                                                                                                 "supplier":  "PANASONIC_OR_BATTERY_JUNCTION",
+                                                                                                 "quantity_humanoid":  "56_CELLS_14S4P_PACK",
+                                                                                                 "quantity_quadruped":  "40_CELLS_10S4P_PACK",
+                                                                                                 "unit_cost":  "$5.00",
+                                                                                                 "specifications":  "3.7V_NOMINAL_3400MAH_10A_DISCHARGE"
+                                                                                             },
+                                                                       "battery_management_system":  {
+                                                                                                         "part_number":  "DALY_BMS_14S_60A_BLUETOOTH",
+                                                                                                         "supplier":  "DALY_BMS_DIRECT_OR_ALIEXPRESS",
+                                                                                                         "quantity_humanoid":  "1_BMS_MAIN_PACK",
+                                                                                                         "quantity_quadruped":  "1_BMS_MAIN_PACK",
+                                                                                                         "unit_cost":  "$150.00",
+                                                                                                         "specifications":  "CELL_BALANCING_BLUETOOTH_MONITORING_PROTECTION"
+                                                                                                     },
+                                                                       "power_distribution_connectors":  {
+                                                                                                             "part_number":  "ANDERSON_POWERPOLE_PP45_CONNECTOR_PAIRS",
+                                                                                                             "supplier":  "ANDERSON_POWER_OR_POWERWERX",
+                                                                                                             "quantity_humanoid":  "30_PAIRS_HIGH_CURRENT",
+                                                                                                             "quantity_quadruped":  "20_PAIRS_HIGH_CURRENT",
+                                                                                                             "unit_cost":  "$3.00_PER_PAIR",
+                                                                                                             "specifications":  "45_AMP_RATING_GENDERLESS_MODULAR"
+                                                                                                         },
+                                                                       "voltage_regulators":  {
+                                                                                                  "part_number":  "LM2596_BUCK_CONVERTER_MODULE_ADJUSTABLE",
+                                                                                                  "supplier":  "GENERIC_CHINESE_OR_POLOLU",
+                                                                                                  "quantity_humanoid":  "20_CONVERTERS_DISTRIBUTED",
+                                                                                                  "quantity_quadruped":  "15_CONVERTERS_DISTRIBUTED",
+                                                                                                  "unit_cost":  "$3.00",
+                                                                                                  "specifications":  "3A_OUTPUT_ADJUSTABLE_1.25V_TO_35V"
+                                                                                              }
+                                                                   },
+                                       "mechanical_hardware":  {
+                                                                   "precision_bearings":  {
+                                                                                              "part_number":  "608ZZ_DEEP_GROOVE_BALL_BEARING",
+                                                                                              "supplier":  "SKF_OR_GENERIC_BEARING_SUPPLIER",
+                                                                                              "quantity_humanoid":  "64_BEARINGS_JOINT_PIVOTS",
+                                                                                              "quantity_quadruped":  "40_BEARINGS_JOINT_PIVOTS",
+                                                                                              "unit_cost":  "$2.00",
+                                                                                              "specifications":  "8MM_ID_22MM_OD_7MM_WIDTH_SEALED"
+                                                                                          },
+                                                                   "threaded_fasteners":  {
+                                                                                              "part_number":  "M8_X_20MM_SOCKET_HEAD_CAP_SCREW_316SS",
+                                                                                              "supplier":  "MCMASTER_CARR_OR_FASTENAL",
+                                                                                              "quantity_humanoid":  "200_SCREWS_STRUCTURAL_ASSEMBLY",
+                                                                                              "quantity_quadruped":  "150_SCREWS_STRUCTURAL_ASSEMBLY",
+                                                                                              "unit_cost":  "$0.50",
+                                                                                              "specifications":  "STAINLESS_STEEL_CORROSION_RESISTANT"
+                                                                                          },
+                                                                   "t_slot_nuts":  {
+                                                                                       "part_number":  "8020_T_SLOT_NUT_M8_SLIDING",
+                                                                                       "supplier":  "8020_INC_OR_GENERIC_T_SLOT_SUPPLIER",
+                                                                                       "quantity_humanoid":  "400_NUTS_T_SLOT_CONNECTIONS",
+                                                                                       "quantity_quadruped":  "300_NUTS_T_SLOT_CONNECTIONS",
+                                                                                       "unit_cost":  "$0.25",
+                                                                                       "specifications":  "ZINC_PLATED_STEEL_T_SLOT_COMPATIBLE"
+                                                                                   }
+                                                               }
+                                   },
+    "complete_stl_file_mapping":  {
+                                      "humanoid_walker_stl_files":  {
+                                                                        "skeletal_frame_components":  [
+                                                                                                          "assets/shapes/stl/humanoid/spine_vertebrae_c1_c7.stl",
+                                                                                                          "assets/shapes/stl/humanoid/spine_vertebrae_t1_t12.stl",
+                                                                                                          "assets/shapes/stl/humanoid/spine_vertebrae_l1_l5.stl",
+                                                                                                          "assets/shapes/stl/humanoid/pelvis_assembly_with_battery_box.stl",
+                                                                                                          "assets/shapes/stl/humanoid/ribcage_frame_electronics_mounts.stl"
+                                                                                                      ],
+                                                                        "leg_assembly_components":  [
+                                                                                                        "assets/shapes/stl/humanoid/hip_joint_housing_3dof.stl",
+                                                                                                        "assets/shapes/stl/humanoid/femur_upper_servo_mounts.stl",
+                                                                                                        "assets/shapes/stl/humanoid/knee_joint_housing_stepper_mount.stl",
+                                                                                                        "assets/shapes/stl/humanoid/tibia_lower_leg_assembly.stl",
+                                                                                                        "assets/shapes/stl/humanoid/ankle_joint_2dof_housing.stl",
+                                                                                                        "assets/shapes/stl/humanoid/foot_assembly_pressure_sensors.stl"
+                                                                                                    ],
+                                                                        "arm_assembly_components":  [
+                                                                                                        "assets/shapes/stl/humanoid/shoulder_complex_3dof_assembly.stl",
+                                                                                                        "assets/shapes/stl/humanoid/humerus_upper_arm_servo_mounts.stl",
+                                                                                                        "assets/shapes/stl/humanoid/elbow_joint_stepper_housing.stl",
+                                                                                                        "assets/shapes/stl/humanoid/forearm_assembly_electronics.stl",
+                                                                                                        "assets/shapes/stl/humanoid/wrist_joint_2dof_housing.stl",
+                                                                                                        "assets/shapes/stl/humanoid/hand_assembly_finger_actuators.stl"
+                                                                                                    ],
+                                                                        "head_neck_components":  [
+                                                                                                     "assets/shapes/stl/humanoid/neck_rotation_bearing_assembly.stl",
+                                                                                                     "assets/shapes/stl/humanoid/head_shell_sensor_mounts.stl",
+                                                                                                     "assets/shapes/stl/humanoid/face_display_mounting_bracket.stl"
+                                                                                                 ],
+                                                                        "electronics_housings":  [
+                                                                                                     "assets/shapes/stl/electronics/esp32_s3_master_housing.stl",
+                                                                                                     "assets/shapes/stl/electronics/esp32_c3_distributed_housings.stl",
+                                                                                                     "assets/shapes/stl/electronics/servo_driver_board_mounts.stl",
+                                                                                                     "assets/shapes/stl/electronics/sensor_mounting_brackets.stl",
+                                                                                                     "assets/shapes/stl/electronics/power_tap_connector_blocks.stl"
+                                                                                                 ]
+                                                                    },
+                                      "quadruped_walker_stl_files":  {
+                                                                         "body_frame_components":  [
+                                                                                                       "assets/shapes/stl/quadruped/main_spine_assembly_50mm.stl",
+                                                                                                       "assets/shapes/stl/quadruped/leg_mounting_brackets_25mm.stl",
+                                                                                                       "assets/shapes/stl/quadruped/battery_housing_ventral_mount.stl",
+                                                                                                       "assets/shapes/stl/quadruped/electronics_bay_dorsal_mount.stl"
+                                                                                                   ],
+                                                                         "leg_assembly_components":  [
+                                                                                                         "assets/shapes/stl/quadruped/shoulder_hip_joint_4dof.stl",
+                                                                                                         "assets/shapes/stl/quadruped/upper_leg_femur_stepper_mount.stl",
+                                                                                                         "assets/shapes/stl/quadruped/knee_elbow_joint_housing.stl",
+                                                                                                         "assets/shapes/stl/quadruped/lower_leg_tibia_assembly.stl",
+                                                                                                         "assets/shapes/stl/quadruped/paw_foot_assembly_sensors.stl"
+                                                                                                     ],
+                                                                         "head_tail_components":  [
+                                                                                                      "assets/shapes/stl/quadruped/head_assembly_sensor_array.stl",
+                                                                                                      "assets/shapes/stl/quadruped/neck_2dof_articulation.stl",
+                                                                                                      "assets/shapes/stl/quadruped/tail_assembly_optional_2dof.stl"
+                                                                                                  ]
+                                                                     },
+                                      "shared_components":  [
+                                                                "assets/shapes/stl/basic_mounts/servo_bracket_mg996r.stl",
+                                                                "assets/shapes/stl/basic_mounts/stepper_mount_nema17.stl",
+                                                                "assets/shapes/stl/basic_mounts/bearing_housing_608zz.stl",
+                                                                "assets/shapes/stl/basic_mounts/t_slot_connector_blocks.stl",
+                                                                "assets/shapes/stl/basic_mounts/power_tap_mounting_blocks.stl"
+                                                            ]
+                                  },
+    "manufacturing_instructions":  {
+                                       "3d_printing_specifications":  {
+                                                                          "recommended_printer":  "PRUSA_I3_MK3S_OR_EQUIVALENT_250MM_BUILD",
+                                                                          "material_primary":  "PETG_CARBON_FIBER_FILLED_STRUCTURAL",
+                                                                          "material_secondary":  "PLA_PLUS_NON_CRITICAL_COMPONENTS",
+                                                                          "layer_height":  "0.2MM_BALANCE_STRENGTH_SPEED",
+                                                                          "infill_percentage":  "30_PERCENT_GYROID_PATTERN",
+                                                                          "support_material":  "SOLUBLE_PVA_FOR_COMPLEX_GEOMETRIES",
+                                                                          "post_processing":  "ACETONE_VAPOR_SMOOTH_CRITICAL_SURFACES"
+                                                                      },
+                                       "aluminum_fabrication":  {
+                                                                    "cutting_method":  "MITER_SAW_CARBIDE_BLADE_ALUMINUM",
+                                                                    "drilling_method":  "CARBIDE_DRILL_BITS_CUTTING_FLUID",
+                                                                    "tapping":  "M8_TAP_T_SLOT_NUT_COMPATIBILITY",
+                                                                    "deburring":  "HAND_FILES_SMOOTH_ALL_CUT_EDGES",
+                                                                    "surface_prep":  "SCOTCHBRITE_CLEAN_CONDUCTIVE_GREASE"
+                                                                },
+                                       "electrical_assembly":  {
+                                                                   "soldering_requirements":  "60_40_ROSIN_CORE_SOLDER_15_30W_IRON",
+                                                                   "connector_crimping":  "PROPER_CRIMPING_TOOL_ANDERSON_CONNECTORS",
+                                                                   "wire_management":  "SPIRAL_WRAP_STRAIN_RELIEF_PROPER_ROUTING",
+                                                                   "testing_procedures":  "MULTIMETER_CONTINUITY_RESISTANCE_CHECKS"
+                                                               }
+                                   },
+    "assembly_sequence_overview":  {
+                                       "phase_1_structural_frame":  {
+                                                                        "duration":  "16_HOURS_FRAME_ASSEMBLY",
+                                                                        "components":  [
+                                                                                           "ALUMINUM_EXTRUSION_CUTTING",
+                                                                                           "T_SLOT_ASSEMBLY",
+                                                                                           "BEARING_INSTALLATION"
+                                                                                       ],
+                                                                        "tools_required":  [
+                                                                                               "MITER_SAW",
+                                                                                               "DRILL_PRESS",
+                                                                                               "T_SLOT_WRENCHES"
+                                                                                           ],
+                                                                        "critical_measurements":  "PRECISION_JOINT_SPACING_ALIGNMENT"
+                                                                    },
+                                       "phase_2_power_distribution":  {
+                                                                          "duration":  "12_HOURS_ELECTRICAL_INTEGRATION",
+                                                                          "components":  [
+                                                                                             "SKELETAL_POWER_INSTALLATION",
+                                                                                             "CONNECTOR_MOUNTING",
+                                                                                             "VOLTAGE_REGULATION"
+                                                                                         ],
+                                                                          "tools_required":  [
+                                                                                                 "MULTIMETER",
+                                                                                                 "CRIMPING_TOOLS",
+                                                                                                 "HEAT_SHRINK_GUN"
+                                                                                             ],
+                                                                          "testing":  "VOLTAGE_RAIL_VERIFICATION_ISOLATION_CHECKS"
+                                                                      },
+                                       "phase_3_servo_installation":  {
+                                                                          "duration":  "20_HOURS_ACTUATOR_MOUNTING",
+                                                                          "components":  [
+                                                                                             "STEPPER_MOTORS",
+                                                                                             "SERVO_MOTORS",
+                                                                                             "DRIVER_BOARDS"
+                                                                                         ],
+                                                                          "tools_required":  [
+                                                                                                 "PRECISION_SCREWDRIVERS",
+                                                                                                 "TORQUE_WRENCH",
+                                                                                                 "OSCILLOSCOPE"
+                                                                                             ],
+                                                                          "calibration":  "SERVO_RANGE_CALIBRATION_ENCODER_ALIGNMENT"
+                                                                      },
+                                       "phase_4_controller_integration":  {
+                                                                              "duration":  "16_HOURS_ELECTRONICS_PROGRAMMING",
+                                                                              "components":  [
+                                                                                                 "ESP32_CONTROLLERS",
+                                                                                                 "SENSOR_ARRAYS",
+                                                                                                 "COMMUNICATION_MESH"
+                                                                                             ],
+                                                                              "tools_required":  [
+                                                                                                     "PROGRAMMING_CABLES",
+                                                                                                     "LOGIC_ANALYZER",
+                                                                                                     "WIFI_ANALYZER"
+                                                                                                 ],
+                                                                              "testing":  "MESH_COMMUNICATION_LATENCY_VERIFICATION"
+                                                                          },
+                                       "phase_5_software_integration":  {
+                                                                            "duration":  "24_HOURS_PROGRAMMING_CALIBRATION",
+                                                                            "components":  [
+                                                                                               "GAIT_ALGORITHMS",
+                                                                                               "BALANCE_CONTROL",
+                                                                                               "SAFETY_SYSTEMS"
+                                                                                           ],
+                                                                            "tools_required":  [
+                                                                                                   "DEVELOPMENT_ENVIRONMENT",
+                                                                                                   "DEBUGGING_TOOLS",
+                                                                                                   "MOTION_CAPTURE"
+                                                                                               ],
+                                                                            "validation":  "FULL_SYSTEM_FUNCTIONAL_TESTING"
+                                                                        }
+                                   },
+    "cost_breakdown_summary":  {
+                                   "humanoid_walker_mk1_total":  {
+                                                                     "controllers_electronics":  "$485.00",
+                                                                     "servo_motors_actuators":  "$680.00",
+                                                                     "sensors_feedback":  "$290.00",
+                                                                     "structural_aluminum":  "$165.00",
+                                                                     "power_system":  "$930.00",
+                                                                     "mechanical_hardware":  "$180.00",
+                                                                     "3d_printed_components":  "$150.00_MATERIAL_COST",
+                                                                     "total_material_cost":  "$2880.00",
+                                                                     "estimated_shipping":  "$200.00",
+                                                                     "grand_total":  "$3080.00_COMPLETE_HUMANOID"
+                                                                 },
+                                   "quadruped_walker_mk1_total":  {
+                                                                      "controllers_electronics":  "$285.00",
+                                                                      "servo_motors_actuators":  "$400.00",
+                                                                      "sensors_feedback":  "$210.00",
+                                                                      "structural_aluminum":  "$125.00",
+                                                                      "power_system":  "$680.00",
+                                                                      "mechanical_hardware":  "$140.00",
+                                                                      "3d_printed_components":  "$100.00_MATERIAL_COST",
+                                                                      "total_material_cost":  "$1940.00",
+                                                                      "estimated_shipping":  "$150.00",
+                                                                      "grand_total":  "$2090.00_COMPLETE_QUADRUPED"
+                                                                  }
+                               },
+    "supplier_recommendations":  {
+                                     "primary_suppliers":  {
+                                                               "electronics":  "DIGIKEY_MOUSER_ADAFRUIT_COMPREHENSIVE_STOCK",
+                                                               "aluminum_extrusion":  "8020_INC_MISUMI_PROFESSIONAL_QUALITY",
+                                                               "servo_motors":  "STEPPERONLINE_TOWERPRO_DIRECT_BEST_PRICES",
+                                                               "mechanical_hardware":  "MCMASTER_CARR_PREMIUM_QUALITY_FAST_SHIP",
+                                                               "3d_printing_materials":  "PRUSA_RESEARCH_HATCHBOX_QUALITY_FILAMENTS"
+                                                           },
+                                     "budget_alternatives":  {
+                                                                 "electronics":  "ALIEXPRESS_BANGGOOD_LONGER_SHIP_TIMES",
+                                                                 "aluminum":  "LOCAL_METAL_SUPPLIERS_CUSTOM_CUTTING",
+                                                                 "servos":  "HOBBYKING_AMAZON_GENERIC_BRANDS",
+                                                                 "hardware":  "BOLT_DEPOT_BULK_FASTENER_SAVINGS"
+                                                             }
+                                 }
 }

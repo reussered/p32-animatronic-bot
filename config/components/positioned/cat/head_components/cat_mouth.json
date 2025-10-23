@@ -1,86 +1,41 @@
-{
-
-  "relative_filename": "config/components/positioned/cat/head_components/cat_mouth.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "cat_mouth",
-  "subsystem": "HEAD",
-
-  
-
-  "template_inheritance": {
-
-    "hardware_template": "config/components/hardware/oled_ssd1306_128x64.json",
-
-    "creature_shell": "assets/shapes/scad/creature_shells/cat/cat_mouth_shell.scad",
-
-    "mount_template": "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
-
-  },
-
-  
-
-  "interface_assignment": "I2C_DEVICE_1",
-
-  "coordinate_system": "skull_3d",
-
-  "reference_point": "nose_center",
-
-  "position": {
-
-    "x": "0.0 INCH",
-
-    "y": "-1.0 INCH",
-
-    "z": "+0.2 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "-10 DEGREES",
-
-    "rotation": "0 DEGREES",
-
-    "roll": "0 DEGREES"
-
-  },
-
-  
-
-  "creature_specific_config": {
-
-    "mouth_type": "SMALL_FELINE",
-
-    "whisker_display": "ANIMATED_LINES",
-
-    "expression_range": "PURR_TO_HISS",
-
-    "teeth_style": "SMALL_FANGS",
-
-    "tongue_animation": "PINK_LICKING"
-
-  },
-
-  
-
-  "animation_library": {
-
-    "default": "cat_content_mouth.anim",
-
-    "purring": "cat_happy_purr.anim",
-
-    "hissing": "cat_defensive_hiss.anim",
-
-    "meowing": "cat_vocal_meow.anim",
-
-    "eating": "cat_delicate_nibble.anim",
-
-    "grooming": "cat_tongue_cleaning.anim"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/cat/head_components/cat_mouth.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "cat_mouth",
+    "subsystem":  "HEAD",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/oled_ssd1306_128x64.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/cat/cat_mouth_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
+                             },
+    "interface_assignment":  "I2C_DEVICE_1",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0.0 INCH",
+                     "y":  "-1.0 INCH",
+                     "z":  "+0.2 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "-10 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "mouth_type":  "SMALL_FELINE",
+                                     "whisker_display":  "ANIMATED_LINES",
+                                     "expression_range":  "PURR_TO_HISS",
+                                     "teeth_style":  "SMALL_FANGS",
+                                     "tongue_animation":  "PINK_LICKING"
+                                 },
+    "animation_library":  {
+                              "default":  "cat_content_mouth.anim",
+                              "purring":  "cat_happy_purr.anim",
+                              "hissing":  "cat_defensive_hiss.anim",
+                              "meowing":  "cat_vocal_meow.anim",
+                              "eating":  "cat_delicate_nibble.anim",
+                              "grooming":  "cat_tongue_cleaning.anim"
+                          },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

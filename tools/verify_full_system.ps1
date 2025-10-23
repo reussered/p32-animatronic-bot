@@ -2,6 +2,22 @@
 Write-Host "=======================================================" -ForegroundColor Green
 Write-Host ""
 
+# CRITICAL: Run fatal bug detection first
+Write-Host "🔍 RUNNING FATAL BUG DETECTION..." -ForegroundColor Red
+try {
+    & ".\tools\fatal_bug_scanner.ps1"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "💀 FATAL BUGS DETECTED - VERIFICATION TERMINATED" -ForegroundColor Red -BackgroundColor Yellow
+        exit 1
+    }
+    Write-Host "✅ Fatal bug scan passed - continuing verification" -ForegroundColor Green
+}
+catch {
+    Write-Host "💥 Could not run fatal bug scanner: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "⚠️  Proceeding with verification (scanner may not exist)" -ForegroundColor Yellow
+}
+Write-Host ""
+
 # Humanoid Components (16 required)
 Write-Host "HUMANOID COMPONENTS (16 required):" -ForegroundColor Cyan
 $humanoidComponents = Get-ChildItem config/components/positioned/humanoid*.json

@@ -1,0 +1,33 @@
+﻿{
+    "version":  "1.0.0",
+    "specifications":  {
+                           "processor":  "ESP32-S3",
+                           "power_consumption":  {
+                                                     "voltage":  "5V",
+                                                     "current_draw":  "500mA",
+                                                     "power_watts":  "2.5W"
+                                                 },
+                           "physical_dimensions":  {
+                                                       "weight":  "25g",
+                                                       "width":  "25.5mm",
+                                                       "depth":  "13.2mm",
+                                                       "height":  "69.8mm"
+                                                   },
+                           "wifi_standard":  "802.11 b/g/n",
+                           "memory_ram_kb":  512,
+                           "bluetooth":  "Bluetooth LE 5.0",
+                           "memory_flash_mb":  16,
+                           "gpio_pins":  45
+                       },
+    "component_name":  "esp32_s3_devkit",
+    "relative_filename":  "config/components/hardware/esp32_s3_devkit.json",
+    "description":  "ESP32-S3-DevKitC-1 development board",
+    "cost_performance":  {
+                             "lead_time_days":  7,
+                             "availability":  "COMMON",
+                             "unit_cost_usd":  45.99,
+                             "last_updated":  "2025-10-22"
+                         },
+    "author":  "config/author.json",
+    "hardware_type":  "MICROCONTROLLER"
+}

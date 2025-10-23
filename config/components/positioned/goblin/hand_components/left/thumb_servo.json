@@ -1,83 +1,38 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin/hand_components/left/thumb_servo.json",
-
-  "version": "2.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "thumb_servo_left",
-  "subsystem": "HAND",
-
-  
-
-  "template_inheritance": {
-
-    "hardware_template": "config/components/hardware/servo_sg90_micro.json",
-
-    "creature_shell": "assets/shapes/scad/creature_shells/goblin/thumb_joint_mount.scad",
-
-    "mount_template": "assets/shapes/scad/basic_mounts/servo_micro_mount.scad"
-
-  },
-
-  
-
-  "interface_assignment": "PWM_CHANNEL_1",
-
-  "coordinate_system": "humanoid_3d",
-
-  "reference_point": "wrist_joint_left",
-
-  "position": {
-
-    "x": "+0.8 INCH", 
-
-    "y": "+1.2 INCH",
-
-    "z": "0 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "45 DEGREES",
-
-    "rotation": "0 DEGREES",
-
-    "roll": "0 DEGREES"
-
-  },
-
-  
-
-  "servo_specific_config": {
-
-    "joint_type": "THUMB_OPPOSITION",
-
-    "range_degrees": "90",
-
-    "center_position": "45",
-
-    "movement_direction": "OPPOSE_RELEASE",
-
-    "max_torque_required_kg_cm": "2"
-
-  },
-
-  
-
-  "function": "thumb_control",
-
-  "component_name": "goblin_left_thumb",
-  "subsystem": "HAND",
-
-  "description": "Left thumb servo - opposition and grip control",
-
-  "timing": {
-
-    "hitCount": 15
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/hand_components/left/thumb_servo.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_left_thumb",
+    "subsystem":  "HAND",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/servo_sg90_micro.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/goblin/thumb_joint_mount.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/servo_micro_mount.scad"
+                             },
+    "interface_assignment":  "PWM_CHANNEL_1",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "wrist_joint_left",
+    "position":  {
+                     "x":  "+0.8 INCH",
+                     "y":  "+1.2 INCH",
+                     "z":  "0 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "45 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "servo_specific_config":  {
+                                  "joint_type":  "THUMB_OPPOSITION",
+                                  "range_degrees":  "90",
+                                  "center_position":  "45",
+                                  "movement_direction":  "OPPOSE_RELEASE",
+                                  "max_torque_required_kg_cm":  "2"
+                              },
+    "function":  "thumb_control",
+    "description":  "Left thumb servo - opposition and grip control",
+    "timing":  {
+                   "hitCount":  15
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

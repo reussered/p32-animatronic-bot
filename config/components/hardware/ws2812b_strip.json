@@ -1,0 +1,33 @@
+﻿{
+    "version":  "1.0.0",
+    "specifications":  {
+                           "interface_requirements":  {
+                                                          "power_pins":  2,
+                                                          "control_pins":  2,
+                                                          "data_pins":  1,
+                                                          "communication_protocol":  "SPI"
+                                                      },
+                           "power_consumption":  {
+                                                     "voltage":  "3.3V",
+                                                     "current_draw":  "50mA",
+                                                     "power_watts":  "0.165W"
+                                                 },
+                           "physical_dimensions":  {
+                                                       "weight":  "5g",
+                                                       "width":  "20mm",
+                                                       "depth":  "10mm",
+                                                       "height":  "15mm"
+                                                   }
+                       },
+    "component_name":  "ws2812b_strip",
+    "relative_filename":  "config/components/hardware/ws2812b_strip.json",
+    "description":  "Generated hardware component for ws2812b_strip",
+    "cost_performance":  {
+                             "lead_time_days":  7,
+                             "availability":  "COMMON",
+                             "unit_cost_usd":  15.99,
+                             "last_updated":  "2025-10-22"
+                         },
+    "author":  "config/author.json",
+    "hardware_type":  "HARDWARE"
+}

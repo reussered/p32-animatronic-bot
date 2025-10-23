@@ -1,65 +1,57 @@
-{
-  "relative_filename": "config/bots/bot_families/goblins/goblin_full.json",
-  "version": "3.0.0",
-  "author": "config/author.json",
-  "bot_type": "GOBLINFULL",
-  "bot_id": "goblin_full_v3",
-  "description": "Complete goblin creature assembly via recursive composition",
-  "created": "2025-10-22",
-  
-  "component_name": "goblin_full",
-  "component_type": "CREATURE_ASSEMBLY",
-  "timing": {
-    "hitCount": 100,
-    "description": "Full creature coordination every 10 seconds"
-  },
-  
-  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
-  "creature_variant": "standard_goblin",
-  "horizontal_scale": "0.7",
-  "vertical_scale": "0.6",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "eye_spacing": "3.0 INCH",
-  "compression_factor": 0.7,
-  
-  "family_level_components": [
-    "config/components/functional/goblin_personality.json",
-    "config/components/functional/goblin_mood.json", 
-    "config/components/functional/goblin_behavior_engine.json"
-  ],
-  
-  "subsystem_assemblies": [
-    "config/subsystems/goblin_head.json",
-    "config/subsystems/goblin_torso.json"
-  ],
-  
-  "mood_defaults": {
-    "FEAR": 20,
-    "ANGER": 10,
-    "IRRITATION": 15,
-    "HAPPINESS": 0,
-    "CONTENTMENT": 30,
-    "HUNGER": 0,
-    "CURIOSITY": 40,
-    "AFFECTION": 0
-  },
-  "behavior_config": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 300,
-    "interaction_range_cm": 200,
-    "aggressive_threshold": 70,
-    "calm_threshold": 20
-  },
-  
-  "shape_assembly": {
-    "type": "FULL_CREATURE",
-    "scad_file": "assets/shapes/scad/creatures/goblin_full.scad",
-    "stl_file": "assets/shapes/stl/creatures/goblin_full.stl",
-    "description": "Complete goblin creature with head and torso assemblies"
-  },
-  
-  "prototype_status": "in_development",
-  "tested": false
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_full.json",
+    "version":  "3.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "GOBLINFULL",
+    "bot_id":  "goblin_full_v3",
+    "description":  "Complete goblin creature assembly via recursive composition",
+    "created":  "2025-10-22",
+    "component_name":  "goblin_full",
+    "component_type":  "CREATURE_ASSEMBLY",
+    "timing":  {
+                   "hitCount":  100,
+                   "description":  "Full creature coordination every 10 seconds"
+               },
+    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant":  "standard_goblin",
+    "horizontal_scale":  "0.7",
+    "vertical_scale":  "0.6",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "3.0 INCH",
+    "compression_factor":  0.7,
+    "family_level_components":  [
+                                    "config/components/functional/goblin_personality.json",
+                                    "config/components/functional/goblin_mood.json",
+                                    "config/components/functional/goblin_behavior_engine.json"
+                                ],
+    "subsystem_assemblies":  [
+                                 "config/subsystems/goblin_head.json",
+                                 "config/subsystems/goblin_torso.json"
+                             ],
+    "mood_defaults":  {
+                          "FEAR":  20,
+                          "ANGER":  10,
+                          "IRRITATION":  15,
+                          "HAPPINESS":  0,
+                          "CONTENTMENT":  30,
+                          "HUNGER":  0,
+                          "CURIOSITY":  40,
+                          "AFFECTION":  0
+                      },
+    "behavior_config":  {
+                            "threat_response_enabled":  true,
+                            "auto_sleep_timeout_seconds":  300,
+                            "interaction_range_cm":  200,
+                            "aggressive_threshold":  70,
+                            "calm_threshold":  20
+                        },
+    "shape_assembly":  {
+                           "type":  "FULL_CREATURE",
+                           "scad_file":  "assets/shapes/scad/creatures/goblin_full.scad",
+                           "stl_file":  "assets/shapes/stl/creatures/goblin_full.stl",
+                           "description":  "Complete goblin creature with head and torso assemblies"
+                       },
+    "prototype_status":  "in_development",
+    "tested":  false
 }

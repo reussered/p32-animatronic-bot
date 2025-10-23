@@ -1,289 +1,351 @@
 ﻿{
-  "relative_filename": "config/bots/quadruped_walker_mk1.json",
-  "version": "1.0.0", 
-  "author": "config/author.json",
-  
-  "bot_id": "QUADRUPED_WALKER_MK1",
-  "bot_type": "FOUR_LEGGED_WALKING_ROBOT",
-  "description": "Stable four-legged walker with skeletal power distribution and wireless control",
-  
-  "physical_specifications": {
-    "body_length": "36.0 INCHES",
-    "body_width": "18.0 INCHES", 
-    "body_height": "24.0 INCHES",
-    "total_weight": "35.0 POUNDS",
-    "walking_speed_max": "3.5 MPH",
-    "step_length_max": "12.0 INCHES",
-    "stability_margin": "INHERENT_FOUR_LEG_STABILITY"
-  },
-  
-  "degrees_of_freedom": {
-    "total_dof": "20",
-    "head_neck": "2_DOF_PITCH_YAW",
-    "legs_total": "16_DOF_4_LEGS_X_4_JOINTS",
-    "tail": "2_DOF_OPTIONAL"
-  },
-  
-  "coordinate_system": {
-    "type": "quadruped_3d",
-    "reference_point": "body_center_of_mass",
-    "units": "INCHES"
-  },
-  
-  "distributed_control_architecture": {
-    "master_controller": {
-      "component": "config/components/hardware/esp32_s3_devkit.json",
-      "position": "BODY_CENTER_SPINE",
-      "responsibilities": ["GAIT_COORDINATION", "STABILITY_CONTROL", "MESH_MASTER", "NAVIGATION"]
-    },
-    
-    "subsystem_controllers": [
-      {
-        "controller_id": "FRONT_LEFT_LEG",
-        "component": "config/components/positioned/esp32c3_leg_controller_fl.json", 
-        "position": {"x": "12.0", "y": "9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS"},
-      {
-        "controller_id": "FRONT_RIGHT_LEG",
-        "component": "config/components/positioned/esp32c3_leg_controller_fr.json",
-        "position": {"x": "12.0", "y": "-9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS"},
-      {
-        "controller_id": "REAR_LEFT_LEG",
-        "component": "config/components/positioned/esp32c3_leg_controller_rl.json",
-        "position": {"x": "-12.0", "y": "9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS"},
-      {
-        "controller_id": "REAR_RIGHT_LEG",
-        "component": "config/components/positioned/esp32c3_leg_controller_rr.json",
-        "position": {"x": "-12.0", "y": "-9.0", "z": "0.0"},
-        "dof_controlled": "4_LEG_JOINTS"},
-      {
-        "controller_id": "HEAD_SENSORS",
-        "component": "config/components/positioned/esp32c3_head_controller.json",
-        "position": {"x": "18.0", "y": "0.0", "z": "12.0"},
-        "dof_controlled": "2_HEAD_NECK_PLUS_SENSORS"}
-    ]
-  },
-  
-  "skeletal_power_system": {
-    "power_interface": "config/components/interfaces/skeletal_power_distribution.json",
-    "quadruped_spine_topology": {
-      "main_spine_rail": {
-        "structural_member": "50MM_X_50MM_ALUMINUM_EXTRUSION",
-        "electrical_function": "24V_MAIN_POWER_BUS",
-        "length": "36_INCHES_BODY_LENGTH",
-        "current_capacity": "60_AMPS_TOTAL"
-      },
-      "leg_distribution_rails": {
-        "structural_member": "25MM_X_25MM_ALUMINUM_EXTRUSION", 
-        "electrical_function": "24V_BRANCH_CIRCUITS_TO_LEGS",
-        "configuration": "4_RAILS_PERPENDICULAR_TO_SPINE",
-        "current_capacity": "15_AMPS_PER_LEG_RAIL"
-      },
-      "cross_bracing_ground": {
-        "structural_member": "20MM_X_20MM_ALUMINUM_ANGLE",
-        "electrical_function": "GROUND_RETURN_NETWORK",
-        "configuration": "WELDED_CONTINUOUS_GROUND_PLANE",
-        "emi_shielding": "COMPLETE_FARADAY_CAGE_BODY"
-      }
-    }
-  },
-  
-  "leg_specifications": {
-    "quadruped_leg_design": {
-      "shoulder_hip_flexion": {
-        "servo_type": "NEMA17_STEPPER_GEARED_30_1",
-        "range_degrees": "90_FORWARD_BACKWARD",
-        "max_torque_nm": "10.0",
-        "structural_mount": "T_SLOT_SERVO_BRACKET",
-        "power_tap": "ANDERSON_POWERPOLE_24V"
-      },
-      "shoulder_hip_abduction": {
-        "servo_type": "MG996R_HIGH_TORQUE_SERVO",
-        "range_degrees": "45_INWARD_OUTWARD", 
-        "max_torque_nm": "1.8",
-        "structural_mount": "T_SLOT_SERVO_BRACKET",
-        "power_tap": "XT30_6V_REGULATED"
-      },
-      "elbow_knee_flexion": {
-        "servo_type": "NEMA17_STEPPER_GEARED_30_1",
-        "range_degrees": "120_FOLD_EXTEND",
-        "max_torque_nm": "8.0",
-        "structural_mount": "ALUMINUM_ANGLE_BRACKET",
-        "power_tap": "ANDERSON_POWERPOLE_24V"
-      },
-      "ankle_wrist_flexion": {
-        "servo_type": "MG996R_SERVO",
-        "range_degrees": "90_UP_DOWN",
-        "max_torque_nm": "1.5",
-        "structural_mount": "3D_PRINTED_FOOT_ASSEMBLY", 
-        "power_tap": "XT30_6V_REGULATED"
-      }
-    }
-  },
-  
-  "movement_capabilities": {
-    "basic_locomotion": "config/behaviors/walking_gait_controllers.json",
-    "advanced_dynamics": "config/behaviors/advanced_dynamic_movements.json",
-    
-    "quadruped_performance_envelope": {
-      "walking_speeds": "1.5_TO_5.0_MPH_GAIT_DEPENDENT",
-      "vertical_leap": "24_INCHES_FOUR_LEG_ADVANTAGE",
-      "horizontal_pounce": "48_INCHES_RUNNING_ATTACK",
-      "rearing_display": "5_SECONDS_BIPEDAL_BALANCE",
-      "dance_capability": "RHYTHMIC_STEPPING_PATTERNS",
-      "terrain_climbing": "15_DEGREE_SLOPES_STABLE"
-    },
-    
-    "gait_specifications": {
-      "walk_gait": {
-        "description": "CLASSIC_FOUR_BEAT_WALK",
-        "leg_sequence": ["FL", "RR", "FR", "RL"],
-        "duty_cycle": "75_PERCENT_GROUND_CONTACT",
-        "max_speed": "1.5_MPH",
-        "stability": "MAXIMUM_ALWAYS_3_LEGS_GROUND"
-      },
-      "trot_gait": {
-        "description": "DIAGONAL_PAIRS_SYNCHRONIZED",
-        "leg_sequence": ["FL+RR", "FR+RL"],
-        "duty_cycle": "50_PERCENT_GROUND_CONTACT", 
-        "max_speed": "3.5_MPH",
-        "stability": "DYNAMIC_2_LEGS_GROUND"
-      },
-      "bound_gait": {
-        "description": "FRONT_PAIR_THEN_REAR_PAIR",
-        "leg_sequence": ["FL+FR", "RL+RR"],
-        "duty_cycle": "40_PERCENT_GROUND_CONTACT",
-        "max_speed": "5.0_MPH",
-        "stability": "DYNAMIC_BALLISTIC_PHASES"
-      }
-    },
-    
-    "dynamic_movement_modes": {
-      "predatory_behaviors": ["STALKING_APPROACH", "EXPLOSIVE_POUNCE", "TARGET_ACQUISITION"],
-      "display_behaviors": ["REARING_DISPLAYS", "RHYTHMIC_DANCE", "TERRITORIAL_POSTURING"],
-      "acrobatic_moves": ["FOUR_LEG_LEAPS", "SIDE_ROLLS", "QUICK_DIRECTION_CHANGES"],
-      "performance_integration": "COORDINATED_PACK_BEHAVIORS"
-    },
-    
-    "stability_sensors": {
-      "primary_imu": {
-        "sensor_type": "MPU6050",
-        "position": "BODY_CENTER_OF_MASS",
-        "update_rate": "1000_HZ"
-      },
-      "leg_force_sensors": {
-        "sensor_type": "LOAD_CELL_100KG",
-        "position": "EACH_FOOT_4_SENSORS_TOTAL",
-        "update_rate": "500_HZ"
-      }
-    }
-  },
-  
-  "mechanical_specifications": {
-    "body_frame": {
-      "main_spine": {
-        "material": "50MM_X_50MM_6061_ALUMINUM_EXTRUSION",
-        "length": "36_INCHES",
-        "function": "PRIMARY_STRUCTURE_AND_24V_POWER_BUS"
-      },
-      "leg_mounting_points": {
-        "material": "25MM_X_25MM_6061_ALUMINUM_EXTRUSION", 
-        "configuration": "4_PERPENDICULAR_RAILS_12_INCHES_EACH",
-        "function": "LEG_ATTACHMENT_AND_POWER_DISTRIBUTION"
-      },
-      "battery_housing": {
-        "material": "3D_PRINTED_PETG_ENCLOSURE",
-        "position": "BODY_CENTER_VENTRAL_SIDE", 
-        "capacity": "2X_LIPO_6S_5AH_BATTERIES"
-      }
-    }
-  },
-  
-  "power_system": {
-    "skeletal_power_distribution": "config/components/interfaces/skeletal_power_distribution.json",
-    "battery_configuration": {
-      "type": "DUAL_LIPO_6S_5000MAH",
-      "voltage": "24V_REGULATED_SWITCHING_SUPPLY",
-      "capacity": "10000MAH_TOTAL_PARALLEL",
-      "runtime_walking": "5.0_HOURS_CONTINUOUS",
-      "position": "VENTRAL_BODY_CENTER_PROTECTED"
-    },
-    "quadruped_power_routing": {
-      "spine_main_24v": "50MM_EXTRUSION_60_AMP_CAPACITY",
-      "leg_branch_24v": "25MM_EXTRUSION_15_AMP_PER_LEG", 
-      "logic_power_12v": "DISTRIBUTED_BUCK_CONVERTERS",
-      "ground_return": "20MM_ANGLE_CONTINUOUS_PLANE"
-    }
-  },
-  
-  "stl_file_mapping": {
-    "body_frame": [
-      "assets/shapes/stl/quadruped/spine_assembly.stl",
-      "assets/shapes/stl/quadruped/leg_mounting_brackets.stl",
-      "assets/shapes/stl/quadruped/battery_housing.stl"
-    ],
-    "legs": [
-      "assets/shapes/stl/quadruped/shoulder_joint_housing.stl",
-      "assets/shapes/stl/quadruped/upper_leg_segment.stl",
-      "assets/shapes/stl/quadruped/knee_joint_housing.stl", 
-      "assets/shapes/stl/quadruped/lower_leg_segment.stl",
-      "assets/shapes/stl/quadruped/foot_assembly.stl"
-    ],
-    "electronics": [
-      "assets/shapes/stl/quadruped/esp32_controller_housings.stl",
-      "assets/shapes/stl/quadruped/sensor_mounts.stl",
-      "assets/shapes/stl/quadruped/power_tap_blocks.stl"
-    ]
-  },
-  
-  "bill_of_materials": {
-    "controllers": {
-      "esp32_s3_master": {"qty": 1, "part_number": "ESP32-S3-DevKitC-1", "cost_usd": "15.00"},
-      "esp32_c3_leg_controllers": {"qty": 5, "part_number": "ESP32-C3-MINI-1", "cost_usd": "4.00_EACH"}
-    },
-    "servos": {
-      "nema17_geared_30_1": {"qty": 8, "part_number": "17HS19-2004S1_GEARED", "cost_usd": "30.00_EACH"},
-      "mg996r_servos": {"qty": 8, "part_number": "TOWERPRO_MG996R", "cost_usd": "12.00_EACH"}
-    },
-    "structural_aluminum": {
-      "spine_50x50mm": {"qty": "3_FEET", "part_number": "8020_50MM_EXTRUSION", "cost_usd": "25.00_PER_FOOT"},
-      "leg_rails_25x25mm": {"qty": "4_FEET", "part_number": "8020_25MM_EXTRUSION", "cost_usd": "12.00_PER_FOOT"},
-      "bracing_20x20mm": {"qty": "8_FEET", "part_number": "8020_20MM_ANGLE", "cost_usd": "8.00_PER_FOOT"}
-    },
-    "power_system": {
-      "skeletal_power_components": "FROM_SKELETAL_POWER_DISTRIBUTION_CONFIG",
-      "batteries_lipo_6s": {"qty": 2, "part_number": "TURNIGY_6S_5000MAH", "cost_usd": "85.00_EACH"}
-    },
-    "estimated_total_cost": "$950.00_USD"
-  },
-  
-  "assembly_advantages": {
-    "stability_benefits": {
-      "inherent_stability": "ALWAYS_3_LEGS_MINIMUM_GROUND_CONTACT",
-      "no_balance_required": "STATIC_STABILITY_DURING_WALKING",
-      "simpler_control": "NO_DYNAMIC_BALANCE_ALGORITHMS_NEEDED"
-    },
-    "skeletal_power_benefits": {
-      "zero_leg_wiring": "POWER_THROUGH_STRUCTURAL_ALUMINUM",
-      "bluetooth_only_control": "NO_CONTROL_CABLES_WHATSOEVER", 
-      "modular_legs": "BOLT_ON_BOLT_OFF_LEG_ASSEMBLIES",
-      "emi_immunity": "ALUMINUM_FARADAY_CAGE_PROTECTION"
-    }
-  },
-  
-  "comparison_to_bipedal": {
-    "advantages": {
-      "inherent_stability": "NO_BALANCE_SENSORS_REQUIRED",
-      "simpler_gait_control": "STATICALLY_STABLE_GAITS",
-      "higher_payload": "BETTER_WEIGHT_DISTRIBUTION",
-      "easier_construction": "FEWER_PRECISION_REQUIREMENTS"
-    },
-    "trade_offs": {
-      "human_interaction": "LESS_ANTHROPOMORPHIC_APPEARANCE", 
-      "stair_climbing": "LIMITED_TO_RAMPS_AND_LOW_STEPS",
-      "manipulation": "REQUIRES_SEPARATE_ARM_MODULES"
-    }
-  }
+    "relative_filename":  "config/bots/bot_families/humanoids/quadruped_walker_mk1.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_id":  "QUADRUPED_WALKER_MK1",
+    "bot_type":  "FOUR_LEGGED_WALKING_ROBOT",
+    "description":  "Stable four-legged walker with skeletal power distribution and wireless control",
+    "physical_specifications":  {
+                                    "body_length":  "36.0 INCHES",
+                                    "body_width":  "18.0 INCHES",
+                                    "body_height":  "24.0 INCHES",
+                                    "total_weight":  "35.0 POUNDS",
+                                    "walking_speed_max":  "3.5 MPH",
+                                    "step_length_max":  "12.0 INCHES",
+                                    "stability_margin":  "INHERENT_FOUR_LEG_STABILITY"
+                                },
+    "degrees_of_freedom":  {
+                               "total_dof":  "20",
+                               "head_neck":  "2_DOF_PITCH_YAW",
+                               "legs_total":  "16_DOF_4_LEGS_X_4_JOINTS",
+                               "tail":  "2_DOF_OPTIONAL"
+                           },
+    "coordinate_system":  "skull_3d",
+    "distributed_control_architecture":  {
+                                             "master_controller":  {
+                                                                       "component":  "config/components/hardware/esp32_s3_devkit.json",
+                                                                       "position":  "BODY_CENTER_SPINE",
+                                                                       "responsibilities":  [
+                                                                                                "GAIT_COORDINATION",
+                                                                                                "STABILITY_CONTROL",
+                                                                                                "MESH_MASTER",
+                                                                                                "NAVIGATION"
+                                                                                            ]
+                                                                   },
+                                             "subsystem_controllers":  [
+                                                                           {
+                                                                               "controller_id":  "FRONT_LEFT_LEG",
+                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_fl.json",
+                                                                               "position":  {
+                                                                                                "x":  "12.0",
+                                                                                                "y":  "9.0",
+                                                                                                "z":  "0.0"
+                                                                                            },
+                                                                               "dof_controlled":  "4_LEG_JOINTS"
+                                                                           },
+                                                                           {
+                                                                               "controller_id":  "FRONT_RIGHT_LEG",
+                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_fr.json",
+                                                                               "position":  {
+                                                                                                "x":  "12.0",
+                                                                                                "y":  "-9.0",
+                                                                                                "z":  "0.0"
+                                                                                            },
+                                                                               "dof_controlled":  "4_LEG_JOINTS"
+                                                                           },
+                                                                           {
+                                                                               "controller_id":  "REAR_LEFT_LEG",
+                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_rl.json",
+                                                                               "position":  {
+                                                                                                "x":  "-12.0",
+                                                                                                "y":  "9.0",
+                                                                                                "z":  "0.0"
+                                                                                            },
+                                                                               "dof_controlled":  "4_LEG_JOINTS"
+                                                                           },
+                                                                           {
+                                                                               "controller_id":  "REAR_RIGHT_LEG",
+                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_rr.json",
+                                                                               "position":  {
+                                                                                                "x":  "-12.0",
+                                                                                                "y":  "-9.0",
+                                                                                                "z":  "0.0"
+                                                                                            },
+                                                                               "dof_controlled":  "4_LEG_JOINTS"
+                                                                           },
+                                                                           {
+                                                                               "controller_id":  "HEAD_SENSORS",
+                                                                               "component":  "config/components/positioned/esp32c3_head_controller.json",
+                                                                               "position":  {
+                                                                                                "x":  "18.0",
+                                                                                                "y":  "0.0",
+                                                                                                "z":  "12.0"
+                                                                                            },
+                                                                               "dof_controlled":  "2_HEAD_NECK_PLUS_SENSORS"
+                                                                           }
+                                                                       ]
+                                         },
+    "skeletal_power_system":  {
+                                  "power_interface":  "config/components/interfaces/skeletal_power_distribution.json",
+                                  "quadruped_spine_topology":  {
+                                                                   "main_spine_rail":  {
+                                                                                           "structural_member":  "50MM_X_50MM_ALUMINUM_EXTRUSION",
+                                                                                           "electrical_function":  "24V_MAIN_POWER_BUS",
+                                                                                           "length":  "36_INCHES_BODY_LENGTH",
+                                                                                           "current_capacity":  "60_AMPS_TOTAL"
+                                                                                       },
+                                                                   "leg_distribution_rails":  {
+                                                                                                  "structural_member":  "25MM_X_25MM_ALUMINUM_EXTRUSION",
+                                                                                                  "electrical_function":  "24V_BRANCH_CIRCUITS_TO_LEGS",
+                                                                                                  "configuration":  "4_RAILS_PERPENDICULAR_TO_SPINE",
+                                                                                                  "current_capacity":  "15_AMPS_PER_LEG_RAIL"
+                                                                                              },
+                                                                   "cross_bracing_ground":  {
+                                                                                                "structural_member":  "20MM_X_20MM_ALUMINUM_ANGLE",
+                                                                                                "electrical_function":  "GROUND_RETURN_NETWORK",
+                                                                                                "configuration":  "WELDED_CONTINUOUS_GROUND_PLANE",
+                                                                                                "emi_shielding":  "COMPLETE_FARADAY_CAGE_BODY"
+                                                                                            }
+                                                               }
+                              },
+    "leg_specifications":  {
+                               "quadruped_leg_design":  {
+                                                            "shoulder_hip_flexion":  {
+                                                                                         "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
+                                                                                         "range_degrees":  "90_FORWARD_BACKWARD",
+                                                                                         "max_torque_nm":  "10.0",
+                                                                                         "structural_mount":  "T_SLOT_SERVO_BRACKET",
+                                                                                         "power_tap":  "ANDERSON_POWERPOLE_24V"
+                                                                                     },
+                                                            "shoulder_hip_abduction":  {
+                                                                                           "servo_type":  "MG996R_HIGH_TORQUE_SERVO",
+                                                                                           "range_degrees":  "45_INWARD_OUTWARD",
+                                                                                           "max_torque_nm":  "1.8",
+                                                                                           "structural_mount":  "T_SLOT_SERVO_BRACKET",
+                                                                                           "power_tap":  "XT30_6V_REGULATED"
+                                                                                       },
+                                                            "elbow_knee_flexion":  {
+                                                                                       "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
+                                                                                       "range_degrees":  "120_FOLD_EXTEND",
+                                                                                       "max_torque_nm":  "8.0",
+                                                                                       "structural_mount":  "ALUMINUM_ANGLE_BRACKET",
+                                                                                       "power_tap":  "ANDERSON_POWERPOLE_24V"
+                                                                                   },
+                                                            "ankle_wrist_flexion":  {
+                                                                                        "servo_type":  "MG996R_SERVO",
+                                                                                        "range_degrees":  "90_UP_DOWN",
+                                                                                        "max_torque_nm":  "1.5",
+                                                                                        "structural_mount":  "3D_PRINTED_FOOT_ASSEMBLY",
+                                                                                        "power_tap":  "XT30_6V_REGULATED"
+                                                                                    }
+                                                        }
+                           },
+    "movement_capabilities":  {
+                                  "basic_locomotion":  "config/behaviors/walking_gait_controllers.json",
+                                  "advanced_dynamics":  "config/behaviors/advanced_dynamic_movements.json",
+                                  "quadruped_performance_envelope":  {
+                                                                         "walking_speeds":  "1.5_TO_5.0_MPH_GAIT_DEPENDENT",
+                                                                         "vertical_leap":  "24_INCHES_FOUR_LEG_ADVANTAGE",
+                                                                         "horizontal_pounce":  "48_INCHES_RUNNING_ATTACK",
+                                                                         "rearing_display":  "5_SECONDS_BIPEDAL_BALANCE",
+                                                                         "dance_capability":  "RHYTHMIC_STEPPING_PATTERNS",
+                                                                         "terrain_climbing":  "15_DEGREE_SLOPES_STABLE"
+                                                                     },
+                                  "gait_specifications":  {
+                                                              "walk_gait":  {
+                                                                                "description":  "CLASSIC_FOUR_BEAT_WALK",
+                                                                                "leg_sequence":  [
+                                                                                                     "FL",
+                                                                                                     "RR",
+                                                                                                     "FR",
+                                                                                                     "RL"
+                                                                                                 ],
+                                                                                "duty_cycle":  "75_PERCENT_GROUND_CONTACT",
+                                                                                "max_speed":  "1.5_MPH",
+                                                                                "stability":  "MAXIMUM_ALWAYS_3_LEGS_GROUND"
+                                                                            },
+                                                              "trot_gait":  {
+                                                                                "description":  "DIAGONAL_PAIRS_SYNCHRONIZED",
+                                                                                "leg_sequence":  [
+                                                                                                     "FL+RR",
+                                                                                                     "FR+RL"
+                                                                                                 ],
+                                                                                "duty_cycle":  "50_PERCENT_GROUND_CONTACT",
+                                                                                "max_speed":  "3.5_MPH",
+                                                                                "stability":  "DYNAMIC_2_LEGS_GROUND"
+                                                                            },
+                                                              "bound_gait":  {
+                                                                                 "description":  "FRONT_PAIR_THEN_REAR_PAIR",
+                                                                                 "leg_sequence":  [
+                                                                                                      "FL+FR",
+                                                                                                      "RL+RR"
+                                                                                                  ],
+                                                                                 "duty_cycle":  "40_PERCENT_GROUND_CONTACT",
+                                                                                 "max_speed":  "5.0_MPH",
+                                                                                 "stability":  "DYNAMIC_BALLISTIC_PHASES"
+                                                                             }
+                                                          },
+                                  "dynamic_movement_modes":  {
+                                                                 "predatory_behaviors":  [
+                                                                                             "STALKING_APPROACH",
+                                                                                             "EXPLOSIVE_POUNCE",
+                                                                                             "TARGET_ACQUISITION"
+                                                                                         ],
+                                                                 "display_behaviors":  [
+                                                                                           "REARING_DISPLAYS",
+                                                                                           "RHYTHMIC_DANCE",
+                                                                                           "TERRITORIAL_POSTURING"
+                                                                                       ],
+                                                                 "acrobatic_moves":  [
+                                                                                         "FOUR_LEG_LEAPS",
+                                                                                         "SIDE_ROLLS",
+                                                                                         "QUICK_DIRECTION_CHANGES"
+                                                                                     ],
+                                                                 "performance_integration":  "COORDINATED_PACK_BEHAVIORS"
+                                                             },
+                                  "stability_sensors":  {
+                                                            "primary_imu":  {
+                                                                                "sensor_type":  "MPU6050",
+                                                                                "position":  "BODY_CENTER_OF_MASS",
+                                                                                "update_rate":  "1000_HZ"
+                                                                            },
+                                                            "leg_force_sensors":  {
+                                                                                      "sensor_type":  "LOAD_CELL_100KG",
+                                                                                      "position":  "EACH_FOOT_4_SENSORS_TOTAL",
+                                                                                      "update_rate":  "500_HZ"
+                                                                                  }
+                                                        }
+                              },
+    "mechanical_specifications":  {
+                                      "body_frame":  {
+                                                         "main_spine":  {
+                                                                            "material":  "50MM_X_50MM_6061_ALUMINUM_EXTRUSION",
+                                                                            "length":  "36_INCHES",
+                                                                            "function":  "PRIMARY_STRUCTURE_AND_24V_POWER_BUS"
+                                                                        },
+                                                         "leg_mounting_points":  {
+                                                                                     "material":  "25MM_X_25MM_6061_ALUMINUM_EXTRUSION",
+                                                                                     "configuration":  "4_PERPENDICULAR_RAILS_12_INCHES_EACH",
+                                                                                     "function":  "LEG_ATTACHMENT_AND_POWER_DISTRIBUTION"
+                                                                                 },
+                                                         "battery_housing":  {
+                                                                                 "material":  "3D_PRINTED_PETG_ENCLOSURE",
+                                                                                 "position":  "BODY_CENTER_VENTRAL_SIDE",
+                                                                                 "capacity":  "2X_LIPO_6S_5AH_BATTERIES"
+                                                                             }
+                                                     }
+                                  },
+    "power_system":  {
+                         "skeletal_power_distribution":  "config/components/interfaces/skeletal_power_distribution.json",
+                         "battery_configuration":  {
+                                                       "type":  "DUAL_LIPO_6S_5000MAH",
+                                                       "voltage":  "24V_REGULATED_SWITCHING_SUPPLY",
+                                                       "capacity":  "10000MAH_TOTAL_PARALLEL",
+                                                       "runtime_walking":  "5.0_HOURS_CONTINUOUS",
+                                                       "position":  "VENTRAL_BODY_CENTER_PROTECTED"
+                                                   },
+                         "quadruped_power_routing":  {
+                                                         "spine_main_24v":  "50MM_EXTRUSION_60_AMP_CAPACITY",
+                                                         "leg_branch_24v":  "25MM_EXTRUSION_15_AMP_PER_LEG",
+                                                         "logic_power_12v":  "DISTRIBUTED_BUCK_CONVERTERS",
+                                                         "ground_return":  "20MM_ANGLE_CONTINUOUS_PLANE"
+                                                     }
+                     },
+    "stl_file_mapping":  {
+                             "body_frame":  [
+                                                "assets/shapes/stl/quadruped/spine_assembly.stl",
+                                                "assets/shapes/stl/quadruped/leg_mounting_brackets.stl",
+                                                "assets/shapes/stl/quadruped/battery_housing.stl"
+                                            ],
+                             "legs":  [
+                                          "assets/shapes/stl/quadruped/shoulder_joint_housing.stl",
+                                          "assets/shapes/stl/quadruped/upper_leg_segment.stl",
+                                          "assets/shapes/stl/quadruped/knee_joint_housing.stl",
+                                          "assets/shapes/stl/quadruped/lower_leg_segment.stl",
+                                          "assets/shapes/stl/quadruped/foot_assembly.stl"
+                                      ],
+                             "electronics":  [
+                                                 "assets/shapes/stl/quadruped/esp32_controller_housings.stl",
+                                                 "assets/shapes/stl/quadruped/sensor_mounts.stl",
+                                                 "assets/shapes/stl/quadruped/power_tap_blocks.stl"
+                                             ]
+                         },
+    "bill_of_materials":  {
+                              "controllers":  {
+                                                  "esp32_s3_master":  {
+                                                                          "qty":  1,
+                                                                          "part_number":  "ESP32-S3-DevKitC-1",
+                                                                          "cost_usd":  "15.00"
+                                                                      },
+                                                  "esp32_c3_leg_controllers":  {
+                                                                                   "qty":  5,
+                                                                                   "part_number":  "ESP32-C3-MINI-1",
+                                                                                   "cost_usd":  "4.00_EACH"
+                                                                               }
+                                              },
+                              "servos":  {
+                                             "nema17_geared_30_1":  {
+                                                                        "qty":  8,
+                                                                        "part_number":  "17HS19-2004S1_GEARED",
+                                                                        "cost_usd":  "30.00_EACH"
+                                                                    },
+                                             "mg996r_servos":  {
+                                                                   "qty":  8,
+                                                                   "part_number":  "TOWERPRO_MG996R",
+                                                                   "cost_usd":  "12.00_EACH"
+                                                               }
+                                         },
+                              "structural_aluminum":  {
+                                                          "spine_50x50mm":  {
+                                                                                "qty":  "3_FEET",
+                                                                                "part_number":  "8020_50MM_EXTRUSION",
+                                                                                "cost_usd":  "25.00_PER_FOOT"
+                                                                            },
+                                                          "leg_rails_25x25mm":  {
+                                                                                    "qty":  "4_FEET",
+                                                                                    "part_number":  "8020_25MM_EXTRUSION",
+                                                                                    "cost_usd":  "12.00_PER_FOOT"
+                                                                                },
+                                                          "bracing_20x20mm":  {
+                                                                                  "qty":  "8_FEET",
+                                                                                  "part_number":  "8020_20MM_ANGLE",
+                                                                                  "cost_usd":  "8.00_PER_FOOT"
+                                                                              }
+                                                      },
+                              "power_system":  {
+                                                   "skeletal_power_components":  "FROM_SKELETAL_POWER_DISTRIBUTION_CONFIG",
+                                                   "batteries_lipo_6s":  {
+                                                                             "qty":  2,
+                                                                             "part_number":  "TURNIGY_6S_5000MAH",
+                                                                             "cost_usd":  "85.00_EACH"
+                                                                         }
+                                               },
+                              "estimated_total_cost":  "$950.00_USD"
+                          },
+    "assembly_advantages":  {
+                                "stability_benefits":  {
+                                                           "inherent_stability":  "ALWAYS_3_LEGS_MINIMUM_GROUND_CONTACT",
+                                                           "no_balance_required":  "STATIC_STABILITY_DURING_WALKING",
+                                                           "simpler_control":  "NO_DYNAMIC_BALANCE_ALGORITHMS_NEEDED"
+                                                       },
+                                "skeletal_power_benefits":  {
+                                                                "zero_leg_wiring":  "POWER_THROUGH_STRUCTURAL_ALUMINUM",
+                                                                "bluetooth_only_control":  "NO_CONTROL_CABLES_WHATSOEVER",
+                                                                "modular_legs":  "BOLT_ON_BOLT_OFF_LEG_ASSEMBLIES",
+                                                                "emi_immunity":  "ALUMINUM_FARADAY_CAGE_PROTECTION"
+                                                            }
+                            },
+    "comparison_to_bipedal":  {
+                                  "advantages":  {
+                                                     "inherent_stability":  "NO_BALANCE_SENSORS_REQUIRED",
+                                                     "simpler_gait_control":  "STATICALLY_STABLE_GAITS",
+                                                     "higher_payload":  "BETTER_WEIGHT_DISTRIBUTION",
+                                                     "easier_construction":  "FEWER_PRECISION_REQUIREMENTS"
+                                                 },
+                                  "trade_offs":  {
+                                                     "human_interaction":  "LESS_ANTHROPOMORPHIC_APPEARANCE",
+                                                     "stair_climbing":  "LIMITED_TO_RAMPS_AND_LOW_STEPS",
+                                                     "manipulation":  "REQUIRES_SEPARATE_ARM_MODULES"
+                                                 }
+                              }
 }

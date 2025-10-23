@@ -1,174 +1,202 @@
-{
-  "relative_filename": "config/bots/bot_families/fantasy/goblin_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_type": "GOBLIN",
-  "family_category": "fantasy",
-  "description": "Dark, aggressive goblin family with skull-based 3D coordinate system and warty features",
-  "created": "2025-10-12",
-  "template_type": "family_template",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "3.0 INCH",
-    "compression_factor": 0.7,
-    "skull_scale": 1.0
-  },
-  
-  "default_components": [
-    "config/components/positioned/goblin_left_eye.json",
-    "config/components/positioned/goblin_right_eye.json", 
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_speaker.json",
-    "config/components/positioned/goblin_nose.json"
-  ],
-  
-  "family_mood_profile": {
-    "FEAR": 20,
-    "ANGER": 10,
-    "IRRITATION": 15,
-    "HAPPINESS": 0,
-    "CONTENTMENT": 30,
-    "HUNGER": 0,
-    "CURIOSITY": 40,
-    "AFFECTION": 0
-  },
-  
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 300,
-    "interaction_range_cm": 200,
-    "aggressive_threshold": 70,
-    "calm_threshold": 20,
-    "personality_traits": [
-      "territorial",
-      "suspicious", 
-      "easily_startled",
-      "vindictive",
-      "cunning"
-    ]
-  },
-  
-  "hardware_preferences": {
-    "coordinate_system": "skull_3d",
-    "spi_device_assignments": {
-      "left_eye": "SPI_DEVICE_1",
-      "right_eye": "SPI_DEVICE_2", 
-      "mouth": "SPI_DEVICE_3"
-    },
-    "i2s_device_assignments": {
-      "primary_speaker": "I2S_DEVICE_1"
-    },
-    "sensor_assignments": {
-      "proximity": "GPIO_PAIR_1"
-    }
-  },
-  
-  "aesthetic_profile": {
-    "surface_texture": "rough_organic",
-    "color_scheme": "dark_green",
-    "eye_style": "craggy_socket",
-    "nose_style": "warty_protrusion", 
-    "mouth_style": "fanged_maw",
-    "feature_asymmetry": true,
-    "weathering_effects": true
-  },
-  
-  "sound_characteristics": {
-    "voice_pitch": "low_gravelly",
-    "breathing_pattern": "heavy_wheeze",
-    "threat_sounds": ["growl", "hiss", "snarl"],
-    "idle_sounds": ["snort", "grunt", "mutter"],
-    "ambient_volume": 0.6,
-    "reaction_volume": 0.8
-  },
-  
-  "animation_style": {
-    "movement_speed": "medium",
-    "eye_tracking": "jerky_predatory",
-    "idle_behaviors": ["suspicious_scan", "territorial_glare"],
-    "threat_responses": ["aggressive_stare", "defensive_crouch"],
-    "expression_intensity": "high"
-  },
-  
-  "variation_guidelines": {
-    "size_scaling": {
-      "min_scale": 0.7,
-      "max_scale": 1.4,
-      "proportional_scaling": true
-    },
-    "mood_variance": {
-      "anger_range": [5, 50],
-      "fear_range": [10, 40], 
-      "curiosity_range": [20, 60]
-    },
-    "component_flexibility": {
-      "eye_count": [1, 2],
-      "additional_sensors": ["motion", "sound", "temperature"],
-      "optional_components": ["ear_articulation", "jaw_movement"]
-    }
-  },
-  
-  "subfamily_variants": {
-    "forest_goblin": {
-      "color_scheme": "moss_green",
-      "personality_modifiers": {
-        "CURIOSITY": "+10",
-        "FEAR": "-5"
-      }
-    },
-    "cave_goblin": {
-      "color_scheme": "pale_gray", 
-      "eye_sensitivity": "high",
-      "personality_modifiers": {
-        "FEAR": "+15",
-        "ANGER": "-5"
-      }
-    },
-    "warrior_goblin": {
-      "color_scheme": "battle_scarred",
-      "personality_modifiers": {
-        "ANGER": "+20",
-        "AFFECTION": "-10"
-      }
-    }
-  },
-  
-  "construction_types": {
-    "hard_shell": {
-      "material": "3d_printed_abs",
-      "color_palette": {
-        "primary": "DarkOliveGreen",
-        "secondary": "SaddleBrown", 
-        "accent": "Goldenrod",
-        "highlight": "OrangeRed"
-      },
-      "finish": "matte_textured",
-      "durability": "high_impact_resistant",
-      "use_cases": ["display", "intimidation", "interactive_horror"]
-    },
-    
-    "soft_body": {
-      "material": "plush_fabric",
-      "color_palette": {
-        "primary": "ForestGreen",
-        "secondary": "BurlyWood",
-        "accent": "Khaki", 
-        "highlight": "Crimson"
-      },
-      "finish": "soft_cuddly",
-      "durability": "child_safe_washable",
-      "use_cases": ["companionship", "therapy", "educational_play"]
-    }
-  },
-  
-  "technical_notes": [
-    "Skull_3d coordinate system with 30% vertical compression",
-    "3.0 inch eye spacing baseline for proportional scaling", 
-    "Asymmetric features enhance creepy uncanny valley effect",
-    "High-contrast mood swings create dramatic character interactions",
-    "Multi-color 3D printing uses 4-color HTML palette system",
-    "Construction type determines mounting system and user interaction model"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "GOBLIN",
+    "family_category":  "fantasy",
+    "description":  "Dark, aggressive goblin family with skull-based 3D coordinate system and warty features",
+    "created":  "2025-10-12",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "3.0 INCH",
+                                "compression_factor":  0.7,
+                                "skull_scale":  1.0
+                            },
+    "default_components":  [
+                               "config/components/positioned/goblin_left_eye.json",
+                               "config/components/positioned/goblin_right_eye.json",
+                               "config/components/positioned/goblin_mouth.json",
+                               "config/components/positioned/goblin_speaker.json",
+                               "config/components/positioned/goblin_nose.json"
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  20,
+                                "ANGER":  10,
+                                "IRRITATION":  15,
+                                "HAPPINESS":  0,
+                                "CONTENTMENT":  30,
+                                "HUNGER":  0,
+                                "CURIOSITY":  40,
+                                "AFFECTION":  0
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  300,
+                                     "interaction_range_cm":  200,
+                                     "aggressive_threshold":  70,
+                                     "calm_threshold":  20,
+                                     "personality_traits":  [
+                                                                "territorial",
+                                                                "suspicious",
+                                                                "easily_startled",
+                                                                "vindictive",
+                                                                "cunning"
+                                                            ]
+                                 },
+    "hardware_preferences":  {
+                                 "coordinate_system":  "skull_3d",
+                                 "spi_device_assignments":  {
+                                                                "left_eye":  "SPI_DEVICE_1",
+                                                                "right_eye":  "SPI_DEVICE_2",
+                                                                "mouth":  "SPI_DEVICE_3"
+                                                            },
+                                 "i2s_device_assignments":  {
+                                                                "primary_speaker":  "I2S_DEVICE_1"
+                                                            },
+                                 "sensor_assignments":  {
+                                                            "proximity":  "GPIO_PAIR_1"
+                                                        }
+                             },
+    "aesthetic_profile":  {
+                              "surface_texture":  "rough_organic",
+                              "color_scheme":  "dark_green",
+                              "eye_style":  "craggy_socket",
+                              "nose_style":  "warty_protrusion",
+                              "mouth_style":  "fanged_maw",
+                              "feature_asymmetry":  true,
+                              "weathering_effects":  true
+                          },
+    "sound_characteristics":  {
+                                  "voice_pitch":  "low_gravelly",
+                                  "breathing_pattern":  "heavy_wheeze",
+                                  "threat_sounds":  [
+                                                        "growl",
+                                                        "hiss",
+                                                        "snarl"
+                                                    ],
+                                  "idle_sounds":  [
+                                                      "snort",
+                                                      "grunt",
+                                                      "mutter"
+                                                  ],
+                                  "ambient_volume":  0.6,
+                                  "reaction_volume":  0.8
+                              },
+    "animation_style":  {
+                            "movement_speed":  "medium",
+                            "eye_tracking":  "jerky_predatory",
+                            "idle_behaviors":  [
+                                                   "suspicious_scan",
+                                                   "territorial_glare"
+                                               ],
+                            "threat_responses":  [
+                                                     "aggressive_stare",
+                                                     "defensive_crouch"
+                                                 ],
+                            "expression_intensity":  "high"
+                        },
+    "variation_guidelines":  {
+                                 "size_scaling":  {
+                                                      "min_scale":  0.7,
+                                                      "max_scale":  1.4,
+                                                      "proportional_scaling":  true
+                                                  },
+                                 "mood_variance":  {
+                                                       "anger_range":  [
+                                                                           5,
+                                                                           50
+                                                                       ],
+                                                       "fear_range":  [
+                                                                          10,
+                                                                          40
+                                                                      ],
+                                                       "curiosity_range":  [
+                                                                               20,
+                                                                               60
+                                                                           ]
+                                                   },
+                                 "component_flexibility":  {
+                                                               "eye_count":  [
+                                                                                 1,
+                                                                                 2
+                                                                             ],
+                                                               "additional_sensors":  [
+                                                                                          "motion",
+                                                                                          "sound",
+                                                                                          "temperature"
+                                                                                      ],
+                                                               "optional_components":  [
+                                                                                           "ear_articulation",
+                                                                                           "jaw_movement"
+                                                                                       ]
+                                                           }
+                             },
+    "subfamily_variants":  {
+                               "forest_goblin":  {
+                                                     "color_scheme":  "moss_green",
+                                                     "personality_modifiers":  {
+                                                                                   "CURIOSITY":  "+10",
+                                                                                   "FEAR":  "-5"
+                                                                               }
+                                                 },
+                               "cave_goblin":  {
+                                                   "color_scheme":  "pale_gray",
+                                                   "eye_sensitivity":  "high",
+                                                   "personality_modifiers":  {
+                                                                                 "FEAR":  "+15",
+                                                                                 "ANGER":  "-5"
+                                                                             }
+                                               },
+                               "warrior_goblin":  {
+                                                      "color_scheme":  "battle_scarred",
+                                                      "personality_modifiers":  {
+                                                                                    "ANGER":  "+20",
+                                                                                    "AFFECTION":  "-10"
+                                                                                }
+                                                  }
+                           },
+    "construction_types":  {
+                               "hard_shell":  {
+                                                  "material":  "3d_printed_abs",
+                                                  "color_palette":  {
+                                                                        "primary":  "DarkOliveGreen",
+                                                                        "secondary":  "SaddleBrown",
+                                                                        "accent":  "Goldenrod",
+                                                                        "highlight":  "OrangeRed"
+                                                                    },
+                                                  "finish":  "matte_textured",
+                                                  "durability":  "high_impact_resistant",
+                                                  "use_cases":  [
+                                                                    "display",
+                                                                    "intimidation",
+                                                                    "interactive_horror"
+                                                                ]
+                                              },
+                               "soft_body":  {
+                                                 "material":  "plush_fabric",
+                                                 "color_palette":  {
+                                                                       "primary":  "ForestGreen",
+                                                                       "secondary":  "BurlyWood",
+                                                                       "accent":  "Khaki",
+                                                                       "highlight":  "Crimson"
+                                                                   },
+                                                 "finish":  "soft_cuddly",
+                                                 "durability":  "child_safe_washable",
+                                                 "use_cases":  [
+                                                                   "companionship",
+                                                                   "therapy",
+                                                                   "educational_play"
+                                                               ]
+                                             }
+                           },
+    "technical_notes":  [
+                            "Skull_3d coordinate system with 30% vertical compression",
+                            "3.0 inch eye spacing baseline for proportional scaling",
+                            "Asymmetric features enhance creepy uncanny valley effect",
+                            "High-contrast mood swings create dramatic character interactions",
+                            "Multi-color 3D printing uses 4-color HTML palette system",
+                            "Construction type determines mounting system and user interaction model"
+                        ]
 }

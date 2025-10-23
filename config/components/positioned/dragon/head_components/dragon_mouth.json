@@ -1,56 +1,52 @@
-{
-  "relative_filename": "config/components/positioned/dragon/head_components/dragon_mouth.json", 
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "positioned_component_type": "TFT_DISPLAY",
-  "display_id": "DRAGON_MOUTH_DISPLAY", 
-  "display_role": "MOUTH_ANIMATION",
-  
-  "hardware_template": "config/components/hardware/tft_2p5x1p5_display.json",
-  "creature_shell": "config/shapes/scad/bot_shells/dragon_mouth_shell.scad",
-  "mount_template": "config/shapes/scad/basic_mounts/display_basic_mount.scad",
-  
-  "position": {
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "x": "0.0 INCH", 
-    "y": "-3.0 INCH",
-    "z": "1.2 INCH",
-    "rotation_x": "-25 DEG",
-    "rotation_y": "0 DEG",
-    "rotation_z": "0 DEG"
-  },
-  
-  "orientation": {
-    "display_mode": "LANDSCAPE",
-    "vertical_pixels": 240, 
-    "horizontal_pixels": 320,
-    "viewing_angle": "forward_facing",
-    "tilt_down": "25 DEG"
-  },
-  
-  "interface_assignment": {
-    "controller_type": "INTEGRATED_ESP32_WROOM",
-    "primary_interface": "NATIVE_SPI",
-    "power_interface": "DIRECT_5V_3V3",
-    "communication": "ESP_NOW_MESH"
-  },
-  
-  "dragon_specific": {
-    "creature_size": "LARGE", 
-    "mouth_type": "REPTILIAN_MUZZLE",
-    "fang_display": "MASSIVE_CURVED_FANGS",
-    "flame_animation": "FIRE_BREATHING_CAPABLE",
-    "roar_capability": "EARTH_SHAKING",
-    "scale_texture": "RENDERED_DETAILS",
-    "intimidation_level": "MAXIMUM"
-  },
-  
-  "display_content": {
-    "default_animation": "assets/animations/dragon/smoldering_breath.json",
-    "flame_animation": "assets/animations/dragon/fire_blast.json", 
-    "roar_animation": "assets/animations/dragon/ancient_roar.json",
-    "threat_animation": "assets/animations/dragon/fang_display.json",
-    "sleep_animation": "assets/animations/dragon/dormant_smoke.json"
-  }
+﻿{
+    "relative_filename":  "config/components/positioned/dragon/head_components/dragon_mouth.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "positioned_component_type":  "TFT_DISPLAY",
+    "display_id":  "DRAGON_MOUTH_DISPLAY",
+    "display_role":  "MOUTH_ANIMATION",
+    "hardware_template":  "config/components/hardware/tft_2p5x1p5_display.json",
+    "creature_shell":  "config/shapes/scad/bot_shells/dragon_mouth_shell.scad",
+    "mount_template":  "config/shapes/scad/basic_mounts/display_basic_mount.scad",
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "nose_center",
+                     "x":  "0.0 INCH",
+                     "y":  "-3.0 INCH",
+                     "z":  "1.2 INCH",
+                     "rotation_x":  "-25 DEG",
+                     "rotation_y":  "0 DEG",
+                     "rotation_z":  "0 DEG"
+                 },
+    "orientation":  {
+                        "display_mode":  "LANDSCAPE",
+                        "vertical_pixels":  240,
+                        "horizontal_pixels":  320,
+                        "viewing_angle":  "forward_facing",
+                        "tilt_down":  "25 DEG"
+                    },
+    "interface_assignment":  {
+                                 "controller_type":  "INTEGRATED_ESP32_WROOM",
+                                 "primary_interface":  "NATIVE_SPI",
+                                 "power_interface":  "DIRECT_5V_3V3",
+                                 "communication":  "ESP_NOW_MESH"
+                             },
+    "dragon_specific":  {
+                            "creature_size":  "LARGE",
+                            "mouth_type":  "REPTILIAN_MUZZLE",
+                            "fang_display":  "MASSIVE_CURVED_FANGS",
+                            "flame_animation":  "FIRE_BREATHING_CAPABLE",
+                            "roar_capability":  "EARTH_SHAKING",
+                            "scale_texture":  "RENDERED_DETAILS",
+                            "intimidation_level":  "MAXIMUM"
+                        },
+    "display_content":  {
+                            "default_animation":  "assets/animations/dragon/smoldering_breath.json",
+                            "flame_animation":  "assets/animations/dragon/fire_blast.json",
+                            "roar_animation":  "assets/animations/dragon/ancient_roar.json",
+                            "threat_animation":  "assets/animations/dragon/fang_display.json",
+                            "sleep_animation":  "assets/animations/dragon/dormant_smoke.json"
+                        },
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "component_name":  "DRAGON_MOUTH"
 }

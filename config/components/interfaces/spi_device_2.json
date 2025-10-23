@@ -1,17 +1,17 @@
-{
-  "relative_filename": "config/components/interfaces/spi_device_2.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "interface_id": "SPI_DEVICE_2",
-  "interface_type": "SPI_DEVICE",
-  "bus_reference": "SPI_BUS_VSPI",
-  "pins": {
-    "chip_select_2": 16,
-    "data_command_2": 21,
-    "reset_2": 22
-  },
-  "device_config": {
-    "cs_active_low": true,
-    "manufacturer_variant": "waveshare"
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/spi_device_2.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "SPI_DEVICE_2",
+    "interface_type":  "SPI_DEVICE",
+    "bus_reference":  "SPI_BUS_VSPI",
+    "pins":  {
+                 "chip_select_2":  16,
+                 "data_command_2":  21,
+                 "reset_2":  22
+             },
+    "device_config":  {
+                          "cs_active_low":  true,
+                          "manufacturer_variant":  "waveshare"
+                      }
 }

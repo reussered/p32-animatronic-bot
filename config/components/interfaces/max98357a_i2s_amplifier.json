@@ -1,313 +1,351 @@
-{
-  "relative_filename": "config/components/interfaces/max98357a_i2s_amplifier.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "MAX98357A_I2S_AMPLIFIER",
-  "interface_type": "I2S_AUDIO_AMPLIFIER",
-  "description": "MAX98357A I2S digital audio amplifier with Class D output for speakers",
-  
-  "hardware_specifications": {
-    "amplifier_type": "CLASS_D_DIGITAL_AUDIO_AMPLIFIER",
-    "input_interface": "I2S_DIGITAL_AUDIO",
-    "output_power": "3.2W_INTO_4_OHM_AT_5V",
-    "operating_voltage": "2.5V_TO_5.5V",
-    "quiescent_current": "2.4mA_AT_3.3V",
-    "shutdown_current": "0.6uA_TYPICAL",
-    "quiescent_power": "7.92mW_AT_3.3V",
-    "shutdown_power": "1.98uW_AT_3.3V",
-    "efficiency": "87_PERCENT_TYPICAL_AT_1W",
-    "package": "16_PIN_TQFN_3x3mm",
-    "module_dimensions": "25x20mm_TYPICAL_BREAKOUT"
-  },
-  
-  "pin_requirements": {
-    "vin_pin": {
-      "function": "power_supply",
-      "generic_name": "vin",
-      "description": "Power supply input",
-      "voltage_range": "2.5V_TO_5.5V",
-      "voltage_optimal": "5V_FOR_MAXIMUM_POWER",
-      "current_consumption": "2.4mA_QUIESCENT_PLUS_LOAD_CURRENT",
-      "power_consumption": "12mW_QUIESCENT_AT_5V"
-    },
-    "gnd_pin": {
-      "function": "ground_reference",
-      "generic_name": "gnd",
-      "description": "Ground reference",
-      "voltage_level": "0V"
-    },
-    "lrclk_pin": {
-      "function": "i2s_left_right_clock",
-      "generic_name": "lrclk",
-      "description": "I2S Left/Right clock (Word Select)",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "I2S_WORD_SELECT",
-      "frequency": "AUDIO_SAMPLE_RATE_8KHZ_TO_96KHZ"
-    },
-    "bclk_pin": {
-      "function": "i2s_bit_clock",
-      "generic_name": "bclk",
-      "description": "I2S Bit clock",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "I2S_BIT_CLOCK",
-      "frequency": "64X_SAMPLE_RATE_TYPICAL"
-    },
-    "din_pin": {
-      "function": "i2s_data_input",
-      "generic_name": "din",
-      "description": "I2S Digital audio data input",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "I2S_SERIAL_DATA",
-      "format": "MSB_FIRST_LEFT_JUSTIFIED"
-    }
-  },
-  
-  "speaker_output_pins": {
-    "outp_pin": {
-      "function": "speaker_positive_output",
-      "generic_name": "out_plus",
-      "description": "Speaker positive terminal",
-      "output_type": "CLASS_D_PWM_DIFFERENTIAL",
-      "current_capacity": "800mA_PEAK"
-    },
-    "outn_pin": {
-      "function": "speaker_negative_output",
-      "generic_name": "out_minus",
-      "description": "Speaker negative terminal",
-      "output_type": "CLASS_D_PWM_DIFFERENTIAL",
-      "current_capacity": "800mA_PEAK"
-    }
-  },
-  
-  "optional_pins": {
-    "sd_pin": {
-      "function": "shutdown_control",
-      "generic_name": "shutdown",
-      "description": "Shutdown control pin",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL",
-      "logic": "HIGH_ENABLE_LOW_SHUTDOWN",
-      "power_saving": "0.6uA_WHEN_LOW",
-      "optional": true
-    },
-    "gain_pin": {
-      "function": "gain_select",
-      "generic_name": "gain",
-      "description": "Gain setting selection",
-      "voltage_level": "STRAP_TO_VDD_OR_GND",
-      "signal_type": "DIGITAL_STRAP",
-      "gain_options": "9dB_WHEN_HIGH_15dB_WHEN_LOW",
-      "optional": true
-    }
-  },
-  
-  "audio_specifications": {
-    "supported_sample_rates": ["8kHz", "16kHz", "32kHz", "44.1kHz", "48kHz", "88.2kHz", "96kHz"],
-    "supported_bit_depths": ["16_BIT", "24_BIT", "32_BIT"],
-    "i2s_format": "LEFT_JUSTIFIED_MSB_FIRST",
-    "channel_configuration": "MONO_LEFT_CHANNEL_RIGHT_CHANNEL_IGNORED",
-    "frequency_response": "20Hz_TO_20kHz_PLUS_MINUS_1dB",
-    "thd_n": "0.013_PERCENT_TYPICAL_AT_1W",
-    "snr": "100dB_TYPICAL",
-    "psrr": "77dB_TYPICAL_AT_217Hz"
-  },
-  
-  "power_output_specifications": {
-    "at_2_5v_supply": {
-      "max_power_4_ohm": "1.4W_10_PERCENT_THD",
-      "max_power_8_ohm": "0.7W_10_PERCENT_THD",
-      "efficiency": "85_PERCENT_TYPICAL"
-    },
-    "at_3_3v_supply": {
-      "max_power_4_ohm": "2.4W_10_PERCENT_THD", 
-      "max_power_8_ohm": "1.2W_10_PERCENT_THD",
-      "efficiency": "86_PERCENT_TYPICAL"
-    },
-    "at_5v_supply": {
-      "max_power_4_ohm": "3.2W_10_PERCENT_THD",
-      "max_power_8_ohm": "1.6W_10_PERCENT_THD",
-      "efficiency": "87_PERCENT_TYPICAL"
-    }
-  },
-  
-  "power_consumption_analysis": {
-    "shutdown_mode": {
-      "description": "Amplifier in shutdown mode",
-      "current": "0.6uA_AT_3.3V",
-      "power": "1.98uW",
-      "wake_up_time": "IMMEDIATE_VIA_SD_PIN"
-    },
-    "idle_no_audio": {
-      "description": "Amplifier enabled but no audio signal",
-      "current": "2.4mA_AT_3.3V",
-      "power": "7.92mW",
-      "speaker_current": "0mA"
-    },
-    "low_volume_audio": {
-      "description": "Playing audio at 10% volume",
-      "current": "20mA_TO_50mA_AT_3.3V",
-      "power": "66mW_TO_165mW",
-      "speaker_power": "APPROXIMATELY_0.1W"
-    },
-    "moderate_volume_audio": {
-      "description": "Playing audio at 50% volume",
-      "current": "200mA_TO_400mA_AT_3.3V",
-      "power": "0.66W_TO_1.32W",
-      "speaker_power": "APPROXIMATELY_0.5W_TO_1W"
-    },
-    "maximum_volume_audio": {
-      "description": "Playing audio at maximum volume",
-      "current": "600mA_TO_800mA_AT_3.3V",
-      "power": "1.98W_TO_2.64W",
-      "speaker_power": "APPROXIMATELY_2W_TO_3W"
-    }
-  },
-  
-  "thermal_characteristics": {
-    "junction_temperature_max": "150C",
-    "thermal_resistance_jc": "26_C_PER_W",
-    "thermal_resistance_ja": "140_C_PER_W_NO_HEATSINK",
-    "power_derating": "ABOVE_85C_AMBIENT",
-    "thermal_protection": "AUTOMATIC_THERMAL_SHUTDOWN"
-  },
-  
-  "i2s_timing_specifications": {
-    "bclk_frequency": {
-      "minimum": "256kHz_FOR_8kHz_SAMPLE_RATE",
-      "typical": "64X_SAMPLE_RATE",
-      "maximum": "6.144MHz_FOR_96kHz_SAMPLE_RATE"
-    },
-    "lrclk_frequency": {
-      "range": "8kHz_TO_96kHz",
-      "duty_cycle": "50_PERCENT_TYPICAL"
-    },
-    "setup_hold_times": {
-      "din_setup_time": "10ns_MINIMUM",
-      "din_hold_time": "10ns_MINIMUM",
-      "lrclk_setup_time": "10ns_MINIMUM"
-    }
-  },
-  
-  "speaker_requirements": {
-    "impedance": {
-      "minimum": "4_OHM",
-      "recommended": "4_OHM_TO_8_OHM",
-      "maximum": "32_OHM"
-    },
-    "power_handling": {
-      "minimum": "5W_RECOMMENDED_FOR_HEADROOM",
-      "optimal": "10W_TO_20W_FOR_GOOD_THERMAL_MARGIN"
-    },
-    "frequency_response": {
-      "woofer": "FULL_RANGE_50Hz_TO_20kHz_PREFERRED",
-      "tweeter": "HIGH_FREQUENCY_2kHz_TO_20kHz_WITH_CROSSOVER"
-    }
-  },
-  
-  "filtering_and_components": {
-    "output_filtering": {
-      "description": "LC filter required for speaker connection",
-      "inductor": "22uH_TO_47uH_LOW_DCR",
-      "capacitor": "220uF_TO_470uF_LOW_ESR",
-      "purpose": "REMOVE_SWITCHING_FREQUENCY_CONTENT"
-    },
-    "power_supply_filtering": {
-      "input_capacitor": "10uF_TO_100uF_CERAMIC_OR_TANTALUM",
-      "bypass_capacitor": "0.1uF_CERAMIC_CLOSE_TO_IC",
-      "bulk_capacitor": "220uF_TO_1000uF_ELECTROLYTIC"
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "adafruit_max98357a": {
-      "power": ["VIN", "GND"],
-      "i2s_input": ["LRC", "BCLK", "DIN"],
-      "control": ["SD", "GAIN"],
-      "speaker_output": ["+", "-", "SPEAKER_TERMINALS"]
-    },
-    "generic_max98357a_module": {
-      "power": ["VCC", "VIN", "GND"],
-      "audio_input": ["LRCLK", "BCLK", "DIN"],
-      "enable": ["SD", "SHUTDOWN"],
-      "gain": ["GAIN"],
-      "output": ["OUT+", "OUT-"]
-    },
-    "dfrobot_max98357a": {
-      "power": ["VCC", "GND"],
-      "i2s": ["WS", "BCK", "DATA"],
-      "control": ["EN"],
-      "speaker": ["SPK+", "SPK-"]
-    }
-  },
-  
-  "application_examples": {
-    "goblin_voice_output": {
-      "speaker": "40mm_4_OHM_5W_FULL_RANGE",
-      "power_consumption": "1.5W_TYPICAL_SPEECH",
-      "volume_level": "MODERATE_FOR_CLEAR_SPEECH",
-      "sample_rate": "44.1kHz_16_BIT",
-      "use_case": "GOBLIN_VOICE_AND_SOUND_EFFECTS",
-      "mounting": "HEAD_OR_CHEST_CAVITY"
-    },
-    "ambient_sound_effects": {
-      "speaker": "28mm_8_OHM_2W_WIDE_RANGE",
-      "power_consumption": "0.5W_BACKGROUND_AUDIO",
-      "volume_level": "LOW_AMBIENT_SOUNDS",
-      "sample_rate": "22kHz_16_BIT_COMPRESSED",
-      "use_case": "BREATHING_HEARTBEAT_AMBIENT",
-      "mounting": "TORSO_INTERNAL"
-    },
-    "interactive_audio_response": {
-      "speaker": "50mm_4_OHM_10W_FULL_RANGE",
-      "power_consumption": "2W_DYNAMIC_AUDIO",
-      "volume_level": "HIGH_FOR_INTERACTION",
-      "sample_rate": "48kHz_16_BIT",
-      "use_case": "MUSIC_RESPONSES_LOUD_EFFECTS",
-      "mounting": "EXTERNAL_SPEAKER_ENCLOSURE"
-    },
-    "whisper_mode_audio": {
-      "speaker": "20mm_32_OHM_1W_MINIATURE",
-      "power_consumption": "100mW_QUIET_AUDIO",
-      "volume_level": "VERY_LOW_WHISPER_LEVEL",
-      "sample_rate": "16kHz_16_BIT",
-      "use_case": "CLOSE_PROXIMITY_WHISPERS",
-      "mounting": "NEAR_MOUTH_MECHANISM"
-    }
-  },
-  
-  "vs_other_amplifiers": {
-    "advantages": {
-      "digital_input": "NO_DAC_REQUIRED_DIRECT_I2S",
-      "high_efficiency": "87_PERCENT_CLASS_D_LOW_HEAT",
-      "small_size": "TINY_PACKAGE_MINIMAL_COMPONENTS",
-      "low_power": "2.4mA_QUIESCENT_GOOD_FOR_BATTERY",
-      "shutdown_mode": "0.6uA_EXCELLENT_POWER_SAVING"
-    },
-    "limitations": {
-      "mono_output": "SINGLE_CHANNEL_ONLY",
-      "fixed_gain": "LIMITED_GAIN_OPTIONS",
-      "speaker_impedance": "4_OHM_MINIMUM_LIMITATION",
-      "no_volume_control": "DIGITAL_VOLUME_CONTROL_IN_SOURCE"
-    }
-  },
-  
-  "design_considerations": {
-    "pcb_layout": {
-      "ground_plane": "SOLID_GROUND_PLANE_FOR_THERMAL_AND_EMI",
-      "power_traces": "WIDE_TRACES_FOR_SPEAKER_CURRENT",
-      "bypass_capacitors": "CLOSE_TO_IC_SHORT_TRACES",
-      "speaker_traces": "TWISTED_PAIR_OR_DIFFERENTIAL_ROUTING"
-    },
-    "emi_considerations": {
-      "switching_frequency": "INHERENT_CLASS_D_SWITCHING_NOISE",
-      "output_filtering": "LC_FILTER_MANDATORY_FOR_EMI_COMPLIANCE",
-      "shielding": "CONSIDER_SHIELDING_FOR_SENSITIVE_CIRCUITS"
-    },
-    "thermal_management": {
-      "power_dissipation": "LOW_DUE_TO_HIGH_EFFICIENCY",
-      "heat_sinking": "THERMAL_VIAS_TO_GROUND_PLANE",
-      "airflow": "NATURAL_CONVECTION_USUALLY_ADEQUATE"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/max98357a_i2s_amplifier.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "MAX98357A_I2S_AMPLIFIER",
+    "interface_type":  "I2S_AUDIO_AMPLIFIER",
+    "description":  "MAX98357A I2S digital audio amplifier with Class D output for speakers",
+    "hardware_specifications":  {
+                                    "amplifier_type":  "CLASS_D_DIGITAL_AUDIO_AMPLIFIER",
+                                    "input_interface":  "I2S_DIGITAL_AUDIO",
+                                    "output_power":  "3.2W_INTO_4_OHM_AT_5V",
+                                    "operating_voltage":  "2.5V_TO_5.5V",
+                                    "quiescent_current":  "2.4mA_AT_3.3V",
+                                    "shutdown_current":  "0.6uA_TYPICAL",
+                                    "quiescent_power":  "7.92mW_AT_3.3V",
+                                    "shutdown_power":  "1.98uW_AT_3.3V",
+                                    "efficiency":  "87_PERCENT_TYPICAL_AT_1W",
+                                    "package":  "16_PIN_TQFN_3x3mm",
+                                    "module_dimensions":  "25x20mm_TYPICAL_BREAKOUT"
+                                },
+    "pin_requirements":  {
+                             "vin_pin":  {
+                                             "function":  "power_supply",
+                                             "generic_name":  "vin",
+                                             "description":  "Power supply input",
+                                             "voltage_range":  "2.5V_TO_5.5V",
+                                             "voltage_optimal":  "5V_FOR_MAXIMUM_POWER",
+                                             "current_consumption":  "2.4mA_QUIESCENT_PLUS_LOAD_CURRENT",
+                                             "power_consumption":  "12mW_QUIESCENT_AT_5V"
+                                         },
+                             "gnd_pin":  {
+                                             "function":  "ground_reference",
+                                             "generic_name":  "gnd",
+                                             "description":  "Ground reference",
+                                             "voltage_level":  "0V"
+                                         },
+                             "lrclk_pin":  {
+                                               "function":  "i2s_left_right_clock",
+                                               "generic_name":  "lrclk",
+                                               "description":  "I2S Left/Right clock (Word Select)",
+                                               "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                               "signal_type":  "I2S_WORD_SELECT",
+                                               "frequency":  "AUDIO_SAMPLE_RATE_8KHZ_TO_96KHZ"
+                                           },
+                             "bclk_pin":  {
+                                              "function":  "i2s_bit_clock",
+                                              "generic_name":  "bclk",
+                                              "description":  "I2S Bit clock",
+                                              "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                              "signal_type":  "I2S_BIT_CLOCK",
+                                              "frequency":  "64X_SAMPLE_RATE_TYPICAL"
+                                          },
+                             "din_pin":  {
+                                             "function":  "i2s_data_input",
+                                             "generic_name":  "din",
+                                             "description":  "I2S Digital audio data input",
+                                             "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                             "signal_type":  "I2S_SERIAL_DATA",
+                                             "format":  "MSB_FIRST_LEFT_JUSTIFIED"
+                                         }
+                         },
+    "speaker_output_pins":  {
+                                "outp_pin":  {
+                                                 "function":  "speaker_positive_output",
+                                                 "generic_name":  "out_plus",
+                                                 "description":  "Speaker positive terminal",
+                                                 "output_type":  "CLASS_D_PWM_DIFFERENTIAL",
+                                                 "current_capacity":  "800mA_PEAK"
+                                             },
+                                "outn_pin":  {
+                                                 "function":  "speaker_negative_output",
+                                                 "generic_name":  "out_minus",
+                                                 "description":  "Speaker negative terminal",
+                                                 "output_type":  "CLASS_D_PWM_DIFFERENTIAL",
+                                                 "current_capacity":  "800mA_PEAK"
+                                             }
+                            },
+    "optional_pins":  {
+                          "sd_pin":  {
+                                         "function":  "shutdown_control",
+                                         "generic_name":  "shutdown",
+                                         "description":  "Shutdown control pin",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL",
+                                         "logic":  "HIGH_ENABLE_LOW_SHUTDOWN",
+                                         "power_saving":  "0.6uA_WHEN_LOW",
+                                         "optional":  true
+                                     },
+                          "gain_pin":  {
+                                           "function":  "gain_select",
+                                           "generic_name":  "gain",
+                                           "description":  "Gain setting selection",
+                                           "voltage_level":  "STRAP_TO_VDD_OR_GND",
+                                           "signal_type":  "DIGITAL_STRAP",
+                                           "gain_options":  "9dB_WHEN_HIGH_15dB_WHEN_LOW",
+                                           "optional":  true
+                                       }
+                      },
+    "audio_specifications":  {
+                                 "supported_sample_rates":  [
+                                                                "8kHz",
+                                                                "16kHz",
+                                                                "32kHz",
+                                                                "44.1kHz",
+                                                                "48kHz",
+                                                                "88.2kHz",
+                                                                "96kHz"
+                                                            ],
+                                 "supported_bit_depths":  [
+                                                              "16_BIT",
+                                                              "24_BIT",
+                                                              "32_BIT"
+                                                          ],
+                                 "i2s_format":  "LEFT_JUSTIFIED_MSB_FIRST",
+                                 "channel_configuration":  "MONO_LEFT_CHANNEL_RIGHT_CHANNEL_IGNORED",
+                                 "frequency_response":  "20Hz_TO_20kHz_PLUS_MINUS_1dB",
+                                 "thd_n":  "0.013_PERCENT_TYPICAL_AT_1W",
+                                 "snr":  "100dB_TYPICAL",
+                                 "psrr":  "77dB_TYPICAL_AT_217Hz"
+                             },
+    "power_output_specifications":  {
+                                        "at_2_5v_supply":  {
+                                                               "max_power_4_ohm":  "1.4W_10_PERCENT_THD",
+                                                               "max_power_8_ohm":  "0.7W_10_PERCENT_THD",
+                                                               "efficiency":  "85_PERCENT_TYPICAL"
+                                                           },
+                                        "at_3_3v_supply":  {
+                                                               "max_power_4_ohm":  "2.4W_10_PERCENT_THD",
+                                                               "max_power_8_ohm":  "1.2W_10_PERCENT_THD",
+                                                               "efficiency":  "86_PERCENT_TYPICAL"
+                                                           },
+                                        "at_5v_supply":  {
+                                                             "max_power_4_ohm":  "3.2W_10_PERCENT_THD",
+                                                             "max_power_8_ohm":  "1.6W_10_PERCENT_THD",
+                                                             "efficiency":  "87_PERCENT_TYPICAL"
+                                                         }
+                                    },
+    "power_consumption_analysis":  {
+                                       "shutdown_mode":  {
+                                                             "description":  "Amplifier in shutdown mode",
+                                                             "current":  "0.6uA_AT_3.3V",
+                                                             "power":  "1.98uW",
+                                                             "wake_up_time":  "IMMEDIATE_VIA_SD_PIN"
+                                                         },
+                                       "idle_no_audio":  {
+                                                             "description":  "Amplifier enabled but no audio signal",
+                                                             "current":  "2.4mA_AT_3.3V",
+                                                             "power":  "7.92mW",
+                                                             "speaker_current":  "0mA"
+                                                         },
+                                       "low_volume_audio":  {
+                                                                "description":  "Playing audio at 10% volume",
+                                                                "current":  "20mA_TO_50mA_AT_3.3V",
+                                                                "power":  "66mW_TO_165mW",
+                                                                "speaker_power":  "APPROXIMATELY_0.1W"
+                                                            },
+                                       "moderate_volume_audio":  {
+                                                                     "description":  "Playing audio at 50% volume",
+                                                                     "current":  "200mA_TO_400mA_AT_3.3V",
+                                                                     "power":  "0.66W_TO_1.32W",
+                                                                     "speaker_power":  "APPROXIMATELY_0.5W_TO_1W"
+                                                                 },
+                                       "maximum_volume_audio":  {
+                                                                    "description":  "Playing audio at maximum volume",
+                                                                    "current":  "600mA_TO_800mA_AT_3.3V",
+                                                                    "power":  "1.98W_TO_2.64W",
+                                                                    "speaker_power":  "APPROXIMATELY_2W_TO_3W"
+                                                                }
+                                   },
+    "thermal_characteristics":  {
+                                    "junction_temperature_max":  "150C",
+                                    "thermal_resistance_jc":  "26_C_PER_W",
+                                    "thermal_resistance_ja":  "140_C_PER_W_NO_HEATSINK",
+                                    "power_derating":  "ABOVE_85C_AMBIENT",
+                                    "thermal_protection":  "AUTOMATIC_THERMAL_SHUTDOWN"
+                                },
+    "i2s_timing_specifications":  {
+                                      "bclk_frequency":  {
+                                                             "minimum":  "256kHz_FOR_8kHz_SAMPLE_RATE",
+                                                             "typical":  "64X_SAMPLE_RATE",
+                                                             "maximum":  "6.144MHz_FOR_96kHz_SAMPLE_RATE"
+                                                         },
+                                      "lrclk_frequency":  {
+                                                              "range":  "8kHz_TO_96kHz",
+                                                              "duty_cycle":  "50_PERCENT_TYPICAL"
+                                                          },
+                                      "setup_hold_times":  {
+                                                               "din_setup_time":  "10ns_MINIMUM",
+                                                               "din_hold_time":  "10ns_MINIMUM",
+                                                               "lrclk_setup_time":  "10ns_MINIMUM"
+                                                           }
+                                  },
+    "speaker_requirements":  {
+                                 "impedance":  {
+                                                   "minimum":  "4_OHM",
+                                                   "recommended":  "4_OHM_TO_8_OHM",
+                                                   "maximum":  "32_OHM"
+                                               },
+                                 "power_handling":  {
+                                                        "minimum":  "5W_RECOMMENDED_FOR_HEADROOM",
+                                                        "optimal":  "10W_TO_20W_FOR_GOOD_THERMAL_MARGIN"
+                                                    },
+                                 "frequency_response":  {
+                                                            "woofer":  "FULL_RANGE_50Hz_TO_20kHz_PREFERRED",
+                                                            "tweeter":  "HIGH_FREQUENCY_2kHz_TO_20kHz_WITH_CROSSOVER"
+                                                        }
+                             },
+    "filtering_and_components":  {
+                                     "output_filtering":  {
+                                                              "description":  "LC filter required for speaker connection",
+                                                              "inductor":  "22uH_TO_47uH_LOW_DCR",
+                                                              "capacitor":  "220uF_TO_470uF_LOW_ESR",
+                                                              "purpose":  "REMOVE_SWITCHING_FREQUENCY_CONTENT"
+                                                          },
+                                     "power_supply_filtering":  {
+                                                                    "input_capacitor":  "10uF_TO_100uF_CERAMIC_OR_TANTALUM",
+                                                                    "bypass_capacitor":  "0.1uF_CERAMIC_CLOSE_TO_IC",
+                                                                    "bulk_capacitor":  "220uF_TO_1000uF_ELECTROLYTIC"
+                                                                }
+                                 },
+    "manufacturer_pin_mappings":  {
+                                      "adafruit_max98357a":  {
+                                                                 "power":  [
+                                                                               "VIN",
+                                                                               "GND"
+                                                                           ],
+                                                                 "i2s_input":  [
+                                                                                   "LRC",
+                                                                                   "BCLK",
+                                                                                   "DIN"
+                                                                               ],
+                                                                 "control":  [
+                                                                                 "SD",
+                                                                                 "GAIN"
+                                                                             ],
+                                                                 "speaker_output":  [
+                                                                                        "+",
+                                                                                        "-",
+                                                                                        "SPEAKER_TERMINALS"
+                                                                                    ]
+                                                             },
+                                      "generic_max98357a_module":  {
+                                                                       "power":  [
+                                                                                     "VCC",
+                                                                                     "VIN",
+                                                                                     "GND"
+                                                                                 ],
+                                                                       "audio_input":  [
+                                                                                           "LRCLK",
+                                                                                           "BCLK",
+                                                                                           "DIN"
+                                                                                       ],
+                                                                       "enable":  [
+                                                                                      "SD",
+                                                                                      "SHUTDOWN"
+                                                                                  ],
+                                                                       "gain":  [
+                                                                                    "GAIN"
+                                                                                ],
+                                                                       "output":  [
+                                                                                      "OUT+",
+                                                                                      "OUT-"
+                                                                                  ]
+                                                                   },
+                                      "dfrobot_max98357a":  {
+                                                                "power":  [
+                                                                              "VCC",
+                                                                              "GND"
+                                                                          ],
+                                                                "i2s":  [
+                                                                            "WS",
+                                                                            "BCK",
+                                                                            "DATA"
+                                                                        ],
+                                                                "control":  [
+                                                                                "EN"
+                                                                            ],
+                                                                "speaker":  [
+                                                                                "SPK+",
+                                                                                "SPK-"
+                                                                            ]
+                                                            }
+                                  },
+    "application_examples":  {
+                                 "goblin_voice_output":  {
+                                                             "speaker":  "40mm_4_OHM_5W_FULL_RANGE",
+                                                             "power_consumption":  "1.5W_TYPICAL_SPEECH",
+                                                             "volume_level":  "MODERATE_FOR_CLEAR_SPEECH",
+                                                             "sample_rate":  "44.1kHz_16_BIT",
+                                                             "use_case":  "GOBLIN_VOICE_AND_SOUND_EFFECTS",
+                                                             "mounting":  "HEAD_OR_CHEST_CAVITY"
+                                                         },
+                                 "ambient_sound_effects":  {
+                                                               "speaker":  "28mm_8_OHM_2W_WIDE_RANGE",
+                                                               "power_consumption":  "0.5W_BACKGROUND_AUDIO",
+                                                               "volume_level":  "LOW_AMBIENT_SOUNDS",
+                                                               "sample_rate":  "22kHz_16_BIT_COMPRESSED",
+                                                               "use_case":  "BREATHING_HEARTBEAT_AMBIENT",
+                                                               "mounting":  "TORSO_INTERNAL"
+                                                           },
+                                 "interactive_audio_response":  {
+                                                                    "speaker":  "50mm_4_OHM_10W_FULL_RANGE",
+                                                                    "power_consumption":  "2W_DYNAMIC_AUDIO",
+                                                                    "volume_level":  "HIGH_FOR_INTERACTION",
+                                                                    "sample_rate":  "48kHz_16_BIT",
+                                                                    "use_case":  "MUSIC_RESPONSES_LOUD_EFFECTS",
+                                                                    "mounting":  "EXTERNAL_SPEAKER_ENCLOSURE"
+                                                                },
+                                 "whisper_mode_audio":  {
+                                                            "speaker":  "20mm_32_OHM_1W_MINIATURE",
+                                                            "power_consumption":  "100mW_QUIET_AUDIO",
+                                                            "volume_level":  "VERY_LOW_WHISPER_LEVEL",
+                                                            "sample_rate":  "16kHz_16_BIT",
+                                                            "use_case":  "CLOSE_PROXIMITY_WHISPERS",
+                                                            "mounting":  "NEAR_MOUTH_MECHANISM"
+                                                        }
+                             },
+    "vs_other_amplifiers":  {
+                                "advantages":  {
+                                                   "digital_input":  "NO_DAC_REQUIRED_DIRECT_I2S",
+                                                   "high_efficiency":  "87_PERCENT_CLASS_D_LOW_HEAT",
+                                                   "small_size":  "TINY_PACKAGE_MINIMAL_COMPONENTS",
+                                                   "low_power":  "2.4mA_QUIESCENT_GOOD_FOR_BATTERY",
+                                                   "shutdown_mode":  "0.6uA_EXCELLENT_POWER_SAVING"
+                                               },
+                                "limitations":  {
+                                                    "mono_output":  "SINGLE_CHANNEL_ONLY",
+                                                    "fixed_gain":  "LIMITED_GAIN_OPTIONS",
+                                                    "speaker_impedance":  "4_OHM_MINIMUM_LIMITATION",
+                                                    "no_volume_control":  "DIGITAL_VOLUME_CONTROL_IN_SOURCE"
+                                                }
+                            },
+    "design_considerations":  {
+                                  "pcb_layout":  {
+                                                     "ground_plane":  "SOLID_GROUND_PLANE_FOR_THERMAL_AND_EMI",
+                                                     "power_traces":  "WIDE_TRACES_FOR_SPEAKER_CURRENT",
+                                                     "bypass_capacitors":  "CLOSE_TO_IC_SHORT_TRACES",
+                                                     "speaker_traces":  "TWISTED_PAIR_OR_DIFFERENTIAL_ROUTING"
+                                                 },
+                                  "emi_considerations":  {
+                                                             "switching_frequency":  "INHERENT_CLASS_D_SWITCHING_NOISE",
+                                                             "output_filtering":  "LC_FILTER_MANDATORY_FOR_EMI_COMPLIANCE",
+                                                             "shielding":  "CONSIDER_SHIELDING_FOR_SENSITIVE_CIRCUITS"
+                                                         },
+                                  "thermal_management":  {
+                                                             "power_dissipation":  "LOW_DUE_TO_HIGH_EFFICIENCY",
+                                                             "heat_sinking":  "THERMAL_VIAS_TO_GROUND_PLANE",
+                                                             "airflow":  "NATURAL_CONVECTION_USUALLY_ADEQUATE"
+                                                         }
+                              }
 }

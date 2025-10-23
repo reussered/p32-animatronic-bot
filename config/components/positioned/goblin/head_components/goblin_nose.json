@@ -1,81 +1,37 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin/head_components/goblin_nose.json",
-
-  "version": "2.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "goblin_nose",
-  "subsystem": "HEAD",
-
-  
-
-  "template_inheritance": {
-
-    "hardware_template": "config/components/hardware/hc_sr04_sensor.json",
-
-    "creature_shell": "assets/shapes/scad/creature_shells/goblin/goblin_nose_shell.scad",
-
-    "mount_template": "assets/shapes/scad/basic_mounts/sensor_basic_mount.scad",
-
-    "mount_type": "HARD_NOSE_MOUNT"
-
-  },
-
-  
-
-  "interface_assignment": "GPIO_PAIR_1",
-
-  "coordinate_system": "skull_3d",
-
-  "reference_point": "nose_center",
-
-  "position": {
-
-    "x": "0 INCH",
-
-    "y": "0 INCH", 
-
-    "z": "+0.25 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "0 DEGREES",
-
-    "rotation": "0 DEGREES",
-
-    "roll": "0 DEGREES"
-
-  },
-
-  
-
-  "creature_specific_config": {
-
-    "nose_texture": "ROUGH_SCALED",
-
-    "sensor_visibility": "PARTIALLY_HIDDEN",
-
-    "breathing_animation": "SUBTLE_FLARE"
-
-  },
-
-  
-
-  "function": "proximity_sensor",
-
-  "component_name": "goblin_head_nose",
-  "subsystem": "HEAD",
-
-  "description": "Proximity sensor monitoring - goblin hard nose variant",
-
-  "timing": {
-
-    "hitCount": 15
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/head_components/goblin_nose.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_head_nose",
+    "subsystem":  "HEAD",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/hc_sr04_sensor.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_nose_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/sensor_basic_mount.scad",
+                                 "mount_type":  "HARD_NOSE_MOUNT"
+                             },
+    "interface_assignment":  "GPIO_PAIR_1",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "0 INCH",
+                     "z":  "+0.25 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "nose_texture":  "ROUGH_SCALED",
+                                     "sensor_visibility":  "PARTIALLY_HIDDEN",
+                                     "breathing_animation":  "SUBTLE_FLARE"
+                                 },
+    "function":  "proximity_sensor",
+    "description":  "Proximity sensor monitoring - goblin hard nose variant",
+    "timing":  {
+                   "hitCount":  15
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

@@ -1,216 +1,248 @@
-{
-  "relative_filename": "config/components/interfaces/servo_hardware_abstraction.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "SERVO_HARDWARE_ABSTRACTION", 
-  "interface_type": "HARDWARE_ABSTRACTION_LAYER",
-  "description": "Hardware-agnostic servo interface allowing swapping between different servo types",
-  
-  "abstraction_principle": {
-    "concept": "UNIFORM_SERVO_INTERFACE",
-    "goal": "Application code works with any servo type",
-    "implementation": "Driver pattern with common API",
-    "benefit": "Hardware upgrades without software changes"
-  },
-  
-  "unified_servo_interface": {
-    "basic_control": {
-      "set_position": {
-        "function": "servo_set_position(servo_id, angle_degrees)",
-        "parameters": "servo_id: UINT8, angle_degrees: FLOAT32",
-        "return": "SUCCESS_OR_ERROR_CODE",
-        "range": "SERVO_SPECIFIC_LIMITS"
-      },
-      
-      "get_position": {
-        "function": "servo_get_position(servo_id)",
-        "return": "FLOAT32_CURRENT_ANGLE", 
-        "availability": "DEPENDS_ON_SERVO_FEEDBACK",
-        "fallback": "LAST_COMMANDED_POSITION"
-      },
-      
-      "set_speed": {
-        "function": "servo_set_speed(servo_id, degrees_per_second)",
-        "implementation": "SERVO_SPECIFIC_METHOD",
-        "pwm_servos": "INTERPOLATED_POSITION_STEPS",
-        "smart_servos": "NATIVE_SPEED_COMMAND"
-      }
-    },
-    
-    "advanced_control": {
-      "set_torque_limit": {
-        "function": "servo_set_torque_limit(servo_id, percentage)",
-        "smart_servos": "NATIVE_TORQUE_CONTROL",
-        "pwm_servos": "CURRENT_LIMITING_SIMULATION"
-      },
-      
-      "enable_compliance": {
-        "function": "servo_enable_compliance(servo_id, enabled)",
-        "smart_servos": "HARDWARE_COMPLIANCE_MODE", 
-        "pwm_servos": "SOFTWARE_BACKDRIVE_DETECTION"
-      },
-      
-      "get_load": {
-        "function": "servo_get_load(servo_id)",
-        "smart_servos": "HARDWARE_CURRENT_SENSOR",
-        "pwm_servos": "ESTIMATED_FROM_ERROR"
-      }
-    }
-  },
-  
-  "supported_servo_types": {
-    "pwm_standard_servo": {
-      "examples": ["MG996R", "MG90S", "Hitec_HS805BB"],
-      "driver": "pwm_servo_driver.cpp", 
-      "control_method": "PWM_PULSE_WIDTH",
-      "feedback": "NONE_POSITION_ESTIMATION_ONLY",
-      "cost": "LOW_$3_TO_$15",
-      "advantages": ["CHEAP", "SIMPLE", "WIDELY_AVAILABLE"],
-      "limitations": ["NO_FEEDBACK", "LIMITED_PRECISION", "NO_COMPLIANCE"]
-    },
-    
-    "smart_servo_dynamixel": {
-      "examples": ["MX28-AT", "AX12-A", "MX64-AT"],
-      "driver": "dynamixel_servo_driver.cpp",
-      "control_method": "SERIAL_PROTOCOL", 
-      "feedback": "POSITION_VELOCITY_LOAD",
-      "cost": "HIGH_$150_TO_$400",
-      "advantages": ["PRECISE_FEEDBACK", "COMPLIANCE_MODE", "DAISY_CHAIN"],
-      "limitations": ["EXPENSIVE", "COMPLEX_PROTOCOL", "PROPRIETARY"]
-    },
-    
-    "encoder_feedback_servo": {
-      "examples": ["Custom_MG996R_with_encoder"],
-      "driver": "encoder_servo_driver.cpp",
-      "control_method": "PWM_PLUS_ENCODER_FEEDBACK",
-      "feedback": "POSITION_VELOCITY_CALCULATED",
-      "cost": "MEDIUM_$15_TO_$50", 
-      "advantages": ["FEEDBACK_AVAILABLE", "STILL_AFFORDABLE", "CUSTOM_TUNING"],
-      "limitations": ["REQUIRES_MODIFICATION", "MORE_WIRING", "CUSTOM_MOUNTING"]
-    },
-    
-    "stepper_motor_servo": {
-      "examples": ["NEMA17_with_gearing"],
-      "driver": "stepper_servo_driver.cpp", 
-      "control_method": "STEP_DIR_SIGNALS",
-      "feedback": "STEP_COUNTING_POSITION_TRACKING",
-      "cost": "MEDIUM_$20_TO_$60",
-      "advantages": ["HIGH_TORQUE", "NO_SLIP", "PRECISE_POSITIONING"],
-      "limitations": ["REQUIRES_GEARING", "POWER_HUNGRY", "VIBRATION"]
-    }
-  },
-  
-  "driver_implementation_pattern": {
-    "base_driver_interface": {
-      "class_name": "ServoDriverBase",
-      "pure_virtual_functions": [
-        "init(servo_id, config)",
-        "set_position(angle)",
-        "get_position()",
-        "set_speed(speed)",
-        "get_status()"
-      ]
-    },
-    
-    "concrete_implementations": {
-      "pwm_servo_driver": {
-        "inherits": "ServoDriverBase",
-        "hardware_dependencies": ["ESP32_LEDC", "PWM_OUTPUT"],
-        "configuration": "pwm_channel, gpio_pin, min_pulse, max_pulse"
-      },
-      
-      "dynamixel_driver": {
-        "inherits": "ServoDriverBase", 
-        "hardware_dependencies": ["UART", "HALF_DUPLEX_TRANSCEIVER"],
-        "configuration": "uart_port, baud_rate, servo_id"
-      }
-    }
-  },
-  
-  "configuration_based_selection": {
-    "servo_mapping_config": {
-      "servo_definitions": {
-        "leg_hip_left": {
-          "servo_type": "pwm_standard_servo",
-          "model": "MG996R",
-          "gpio_pin": "GPIO_01", 
-          "pwm_channel": "LEDC_CHANNEL_0",
-          "min_pulse": "1000_US",
-          "max_pulse": "2000_US",
-          "angle_range": "[-45, 45]"
-        },
-        
-        "arm_shoulder_left": {
-          "servo_type": "smart_servo_dynamixel",
-          "model": "MX28-AT",
-          "uart_port": "UART1",
-          "servo_id": "10", 
-          "baud_rate": "1000000"
-        }
-      }
-    },
-    
-    "runtime_driver_creation": {
-      "factory_pattern": {
-        "function": "create_servo_driver(servo_config)",
-        "logic": "switch(servo_config.type) { case PWM: return new PWMServoDriver(); case DYNAMIXEL: return new DynamixelDriver(); }",
-        "benefit": "AUTOMATIC_DRIVER_SELECTION"
-      }
-    }
-  },
-  
-  "migration_scenarios": {
-    "prototype_to_production": {
-      "prototype": "PWM servos for cost-effective development",
-      "production": "Dynamixel servos for precision applications",
-      "migration": "CONFIGURATION_FILE_CHANGE_ONLY"
-    },
-    
-    "hardware_upgrade": {
-      "original": "MG996R standard servos",
-      "upgrade": "MG996R with added encoders", 
-      "migration": "UPDATE_SERVO_TYPE_IN_CONFIG"
-    },
-    
-    "cost_optimization": {
-      "expensive": "All Dynamixel servos ($5000 total)",
-      "optimized": "Critical joints Dynamixel, others PWM ($1200 total)",
-      "migration": "PER_SERVO_CONFIGURATION_TUNING"
-    }
-  },
-  
-  "performance_abstraction": {
-    "position_accuracy": {
-      "pwm_servo": "+/-2_DEGREES_TYPICAL", 
-      "dynamixel": "+/-0.29_DEGREES_TYPICAL",
-      "encoder_servo": "+/-0.5_DEGREES_ACHIEVABLE"
-    },
-    
-    "update_rate": {
-      "pwm_servo": "50_HZ_PWM_LIMITED",
-      "dynamixel": "200_HZ_PROTOCOL_LIMITED", 
-      "encoder_servo": "1000_HZ_FEEDBACK_CONTROL"
-    },
-    
-    "torque_control": {
-      "pwm_servo": "OPEN_LOOP_POSITION_ONLY",
-      "dynamixel": "CLOSED_LOOP_TORQUE_LIMITING",
-      "encoder_servo": "SOFTWARE_CURRENT_CONTROL"
-    }
-  },
-  
-  "testing_and_simulation": {
-    "mock_servo_driver": {
-      "purpose": "UNIT_TESTING_WITHOUT_HARDWARE",
-      "implementation": "SIMULATED_SERVO_PHYSICS_MODEL",
-      "benefits": ["CONTINUOUS_INTEGRATION", "ALGORITHM_TESTING", "DEBUGGING"]
-    },
-    
-    "hardware_in_the_loop": {
-      "purpose": "VALIDATE_REAL_SERVO_PERFORMANCE", 
-      "implementation": "ACTUAL_DRIVERS_WITH_LOGGING",
-      "benefits": ["PERFORMANCE_CHARACTERIZATION", "CALIBRATION", "VALIDATION"]
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/servo_hardware_abstraction.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "SERVO_HARDWARE_ABSTRACTION",
+    "interface_type":  "HARDWARE_ABSTRACTION_LAYER",
+    "description":  "Hardware-agnostic servo interface allowing swapping between different servo types",
+    "abstraction_principle":  {
+                                  "concept":  "UNIFORM_SERVO_INTERFACE",
+                                  "goal":  "Application code works with any servo type",
+                                  "implementation":  "Driver pattern with common API",
+                                  "benefit":  "Hardware upgrades without software changes"
+                              },
+    "unified_servo_interface":  {
+                                    "basic_control":  {
+                                                          "set_position":  {
+                                                                               "function":  "servo_set_position(servo_id, angle_degrees)",
+                                                                               "parameters":  "servo_id: UINT8, angle_degrees: FLOAT32",
+                                                                               "return":  "SUCCESS_OR_ERROR_CODE",
+                                                                               "range":  "SERVO_SPECIFIC_LIMITS"
+                                                                           },
+                                                          "get_position":  {
+                                                                               "function":  "servo_get_position(servo_id)",
+                                                                               "return":  "FLOAT32_CURRENT_ANGLE",
+                                                                               "availability":  "DEPENDS_ON_SERVO_FEEDBACK",
+                                                                               "fallback":  "LAST_COMMANDED_POSITION"
+                                                                           },
+                                                          "set_speed":  {
+                                                                            "function":  "servo_set_speed(servo_id, degrees_per_second)",
+                                                                            "implementation":  "SERVO_SPECIFIC_METHOD",
+                                                                            "pwm_servos":  "INTERPOLATED_POSITION_STEPS",
+                                                                            "smart_servos":  "NATIVE_SPEED_COMMAND"
+                                                                        }
+                                                      },
+                                    "advanced_control":  {
+                                                             "set_torque_limit":  {
+                                                                                      "function":  "servo_set_torque_limit(servo_id, percentage)",
+                                                                                      "smart_servos":  "NATIVE_TORQUE_CONTROL",
+                                                                                      "pwm_servos":  "CURRENT_LIMITING_SIMULATION"
+                                                                                  },
+                                                             "enable_compliance":  {
+                                                                                       "function":  "servo_enable_compliance(servo_id, enabled)",
+                                                                                       "smart_servos":  "HARDWARE_COMPLIANCE_MODE",
+                                                                                       "pwm_servos":  "SOFTWARE_BACKDRIVE_DETECTION"
+                                                                                   },
+                                                             "get_load":  {
+                                                                              "function":  "servo_get_load(servo_id)",
+                                                                              "smart_servos":  "HARDWARE_CURRENT_SENSOR",
+                                                                              "pwm_servos":  "ESTIMATED_FROM_ERROR"
+                                                                          }
+                                                         }
+                                },
+    "supported_servo_types":  {
+                                  "pwm_standard_servo":  {
+                                                             "examples":  [
+                                                                              "MG996R",
+                                                                              "MG90S",
+                                                                              "Hitec_HS805BB"
+                                                                          ],
+                                                             "driver":  "pwm_servo_driver.cpp",
+                                                             "control_method":  "PWM_PULSE_WIDTH",
+                                                             "feedback":  "NONE_POSITION_ESTIMATION_ONLY",
+                                                             "cost":  "LOW_$3_TO_$15",
+                                                             "advantages":  [
+                                                                                "CHEAP",
+                                                                                "SIMPLE",
+                                                                                "WIDELY_AVAILABLE"
+                                                                            ],
+                                                             "limitations":  [
+                                                                                 "NO_FEEDBACK",
+                                                                                 "LIMITED_PRECISION",
+                                                                                 "NO_COMPLIANCE"
+                                                                             ]
+                                                         },
+                                  "smart_servo_dynamixel":  {
+                                                                "examples":  [
+                                                                                 "MX28-AT",
+                                                                                 "AX12-A",
+                                                                                 "MX64-AT"
+                                                                             ],
+                                                                "driver":  "dynamixel_servo_driver.cpp",
+                                                                "control_method":  "SERIAL_PROTOCOL",
+                                                                "feedback":  "POSITION_VELOCITY_LOAD",
+                                                                "cost":  "HIGH_$150_TO_$400",
+                                                                "advantages":  [
+                                                                                   "PRECISE_FEEDBACK",
+                                                                                   "COMPLIANCE_MODE",
+                                                                                   "DAISY_CHAIN"
+                                                                               ],
+                                                                "limitations":  [
+                                                                                    "EXPENSIVE",
+                                                                                    "COMPLEX_PROTOCOL",
+                                                                                    "PROPRIETARY"
+                                                                                ]
+                                                            },
+                                  "encoder_feedback_servo":  {
+                                                                 "examples":  [
+                                                                                  "Custom_MG996R_with_encoder"
+                                                                              ],
+                                                                 "driver":  "encoder_servo_driver.cpp",
+                                                                 "control_method":  "PWM_PLUS_ENCODER_FEEDBACK",
+                                                                 "feedback":  "POSITION_VELOCITY_CALCULATED",
+                                                                 "cost":  "MEDIUM_$15_TO_$50",
+                                                                 "advantages":  [
+                                                                                    "FEEDBACK_AVAILABLE",
+                                                                                    "STILL_AFFORDABLE",
+                                                                                    "CUSTOM_TUNING"
+                                                                                ],
+                                                                 "limitations":  [
+                                                                                     "REQUIRES_MODIFICATION",
+                                                                                     "MORE_WIRING",
+                                                                                     "CUSTOM_MOUNTING"
+                                                                                 ]
+                                                             },
+                                  "stepper_motor_servo":  {
+                                                              "examples":  [
+                                                                               "NEMA17_with_gearing"
+                                                                           ],
+                                                              "driver":  "stepper_servo_driver.cpp",
+                                                              "control_method":  "STEP_DIR_SIGNALS",
+                                                              "feedback":  "STEP_COUNTING_POSITION_TRACKING",
+                                                              "cost":  "MEDIUM_$20_TO_$60",
+                                                              "advantages":  [
+                                                                                 "HIGH_TORQUE",
+                                                                                 "NO_SLIP",
+                                                                                 "PRECISE_POSITIONING"
+                                                                             ],
+                                                              "limitations":  [
+                                                                                  "REQUIRES_GEARING",
+                                                                                  "POWER_HUNGRY",
+                                                                                  "VIBRATION"
+                                                                              ]
+                                                          }
+                              },
+    "driver_implementation_pattern":  {
+                                          "base_driver_interface":  {
+                                                                        "class_name":  "ServoDriverBase",
+                                                                        "pure_virtual_functions":  [
+                                                                                                       "init(servo_id, config)",
+                                                                                                       "set_position(angle)",
+                                                                                                       "get_position()",
+                                                                                                       "set_speed(speed)",
+                                                                                                       "get_status()"
+                                                                                                   ]
+                                                                    },
+                                          "concrete_implementations":  {
+                                                                           "pwm_servo_driver":  {
+                                                                                                    "inherits":  "ServoDriverBase",
+                                                                                                    "hardware_dependencies":  [
+                                                                                                                                  "ESP32_LEDC",
+                                                                                                                                  "PWM_OUTPUT"
+                                                                                                                              ],
+                                                                                                    "configuration":  "pwm_channel, gpio_pin, min_pulse, max_pulse"
+                                                                                                },
+                                                                           "dynamixel_driver":  {
+                                                                                                    "inherits":  "ServoDriverBase",
+                                                                                                    "hardware_dependencies":  [
+                                                                                                                                  "UART",
+                                                                                                                                  "HALF_DUPLEX_TRANSCEIVER"
+                                                                                                                              ],
+                                                                                                    "configuration":  "uart_port, baud_rate, servo_id"
+                                                                                                }
+                                                                       }
+                                      },
+    "configuration_based_selection":  {
+                                          "servo_mapping_config":  {
+                                                                       "servo_definitions":  {
+                                                                                                 "leg_hip_left":  {
+                                                                                                                      "servo_type":  "pwm_standard_servo",
+                                                                                                                      "model":  "MG996R",
+                                                                                                                      "gpio_pin":  "GPIO_01",
+                                                                                                                      "pwm_channel":  "LEDC_CHANNEL_0",
+                                                                                                                      "min_pulse":  "1000_US",
+                                                                                                                      "max_pulse":  "2000_US",
+                                                                                                                      "angle_range":  "[-45, 45]"
+                                                                                                                  },
+                                                                                                 "arm_shoulder_left":  {
+                                                                                                                           "servo_type":  "smart_servo_dynamixel",
+                                                                                                                           "model":  "MX28-AT",
+                                                                                                                           "uart_port":  "UART1",
+                                                                                                                           "servo_id":  "10",
+                                                                                                                           "baud_rate":  "1000000"
+                                                                                                                       }
+                                                                                             }
+                                                                   },
+                                          "runtime_driver_creation":  {
+                                                                          "factory_pattern":  {
+                                                                                                  "function":  "create_servo_driver(servo_config)",
+                                                                                                  "logic":  "switch(servo_config.type) { case PWM: return new PWMServoDriver(); case DYNAMIXEL: return new DynamixelDriver(); }",
+                                                                                                  "benefit":  "AUTOMATIC_DRIVER_SELECTION"
+                                                                                              }
+                                                                      }
+                                      },
+    "migration_scenarios":  {
+                                "prototype_to_production":  {
+                                                                "prototype":  "PWM servos for cost-effective development",
+                                                                "production":  "Dynamixel servos for precision applications",
+                                                                "migration":  "CONFIGURATION_FILE_CHANGE_ONLY"
+                                                            },
+                                "hardware_upgrade":  {
+                                                         "original":  "MG996R standard servos",
+                                                         "upgrade":  "MG996R with added encoders",
+                                                         "migration":  "UPDATE_SERVO_TYPE_IN_CONFIG"
+                                                     },
+                                "cost_optimization":  {
+                                                          "expensive":  "All Dynamixel servos ($5000 total)",
+                                                          "optimized":  "Critical joints Dynamixel, others PWM ($1200 total)",
+                                                          "migration":  "PER_SERVO_CONFIGURATION_TUNING"
+                                                      }
+                            },
+    "performance_abstraction":  {
+                                    "position_accuracy":  {
+                                                              "pwm_servo":  "+/-2_DEGREES_TYPICAL",
+                                                              "dynamixel":  "+/-0.29_DEGREES_TYPICAL",
+                                                              "encoder_servo":  "+/-0.5_DEGREES_ACHIEVABLE"
+                                                          },
+                                    "update_rate":  {
+                                                        "pwm_servo":  "50_HZ_PWM_LIMITED",
+                                                        "dynamixel":  "200_HZ_PROTOCOL_LIMITED",
+                                                        "encoder_servo":  "1000_HZ_FEEDBACK_CONTROL"
+                                                    },
+                                    "torque_control":  {
+                                                           "pwm_servo":  "OPEN_LOOP_POSITION_ONLY",
+                                                           "dynamixel":  "CLOSED_LOOP_TORQUE_LIMITING",
+                                                           "encoder_servo":  "SOFTWARE_CURRENT_CONTROL"
+                                                       }
+                                },
+    "testing_and_simulation":  {
+                                   "mock_servo_driver":  {
+                                                             "purpose":  "UNIT_TESTING_WITHOUT_HARDWARE",
+                                                             "implementation":  "SIMULATED_SERVO_PHYSICS_MODEL",
+                                                             "benefits":  [
+                                                                              "CONTINUOUS_INTEGRATION",
+                                                                              "ALGORITHM_TESTING",
+                                                                              "DEBUGGING"
+                                                                          ]
+                                                         },
+                                   "hardware_in_the_loop":  {
+                                                                "purpose":  "VALIDATE_REAL_SERVO_PERFORMANCE",
+                                                                "implementation":  "ACTUAL_DRIVERS_WITH_LOGGING",
+                                                                "benefits":  [
+                                                                                 "PERFORMANCE_CHARACTERIZATION",
+                                                                                 "CALIBRATION",
+                                                                                 "VALIDATION"
+                                                                             ]
+                                                            }
+                               }
 }

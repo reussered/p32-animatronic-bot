@@ -1,135 +1,139 @@
-{
-  "relative_filename": "config/components/hardware/st7735_tft_rgb.json",
-  "version": "1.0.0",
-  "author": "config/author.json", 
-  "hardware_type": "ST7735_TFT_RGB",
-  "component_name": "st7735_tft_rgb",
-  
-  "description": "1.8\" TFT RGB display with ST7735 driver - FULL COLOR budget option",
-  "budget_rgb_champion": "TRUE - Affordable full color display",
-  
-  "physical_specifications": {
-    "screen_width": "1.8 INCH",
-    "screen_height": "1.44 INCH",
-    "screen_shape": "rectangular",
-    "diagonal": "1.8 INCH", 
-    "resolution": "128x160",
-    "pixel_density": "114 PPI",
-    "thickness": "0.12 INCH",
-    "weight": "12 GRAMS",
-    "active_area": {
-      "width_mm": 28.03,
-      "height_mm": 35.04
-    }
-  },
-  
-  "color_specifications": {
-    "color_depth": "262K_COLORS_18BIT",
-    "bits_per_pixel": 18,
-    "red_bits": 6,
-    "green_bits": 6,
-    "blue_bits": 6,
-    "color_gamut": "RGB666", 
-    "brightness": "220_CD_M2",
-    "contrast_ratio": "500:1_TFT",
-    "viewing_angle": "140_DEGREES"
-  },
-  
-  "electrical_specifications": {
-    "supply_voltage": "3.3V",
-    "logic_voltage": "3.3V",
-    "interface": "SPI",
-    "current_consumption_ma": "80", 
-    "backlight_current_ma": "40",
-    "spi_clock_max_mhz": "32"
-  },
-  
-  "display_controller": {
-    "driver_ic": "ST7735S",
-    "manufacturer": "Sitronix",
-    "built_in_ram": "128x160x18_bits",
-    "refresh_rate_hz": "60", 
-    "hardware_acceleration": ["window_scroll", "partial_update"]
-  },
-  
-  "pin_assignments": {
-    "vcc": "3V3_POWER",
-    "gnd": "GROUND",
-    "cs": "CHIP_SELECT_PIN",
-    "reset": "RESET_PIN",
-    "dc": "DATA_COMMAND_PIN",
-    "mosi": "SPI_MOSI", 
-    "sck": "SPI_CLOCK",
-    "led": "BACKLIGHT_PWM_PIN"
-  },
-  
-  "usage_categories": {
-    "small_creature_eyes": "budget_full_color",
-    "medium_creature_features": "affordable_rgb",
-    "prototype_displays": "cheap_testing",
-    "secondary_features": "cost_effective_accents" 
-  },
-  
-  "ordering_information": {
-    "primary_supplier": "Adafruit",
-    "part_number": "358",
-    "product_name": "1.8\" Color TFT LCD display with MicroSD - ST7735R",
-    "price_usd": "19.95",
-    "availability": "IN_STOCK",
-    "shipping": "IMMEDIATE", 
-    "datasheet_url": "https://cdn-shop.adafruit.com/datasheets/ST7735R_V0.2.pdf",
-    "product_url": "https://www.adafruit.com/product/358"
-  },
-  
-  "alternative_suppliers": [
-    {
-      "supplier": "SparkFun",
-      "part_number": "LCD-11735",
-      "price_usd": "17.95",
-      "stock_status": "AVAILABLE"
-    },
-    {
-      "supplier": "AliExpress Generic", 
-      "part_number": "ST7735-1.8-TFT",
-      "price_usd": "3.99",
-      "stock_status": "AVAILABLE", 
-      "note": "Ultra budget option - quality varies"
-    },
-    {
-      "supplier": "Amazon Generic",
-      "part_number": "Various",
-      "price_usd": "8.99",
-      "stock_status": "AVAILABLE",
-      "note": "Multiple sellers, moderate quality"
-    }
-  ],
-  
-  "technical_advantages": [
-    "Extremely affordable full color option",
-    "Good color depth (262K colors)",
-    "Widely available and supported", 
-    "Fast SPI interface",
-    "Optional microSD card slot on some variants",
-    "Controllable backlight",
-    "Large ecosystem of libraries"
-  ],
-  
-  "technical_limitations": [
-    "TFT technology - not as vibrant as OLED",
-    "Requires backlight power",
-    "Viewing angles limited compared to OLED",
-    "Slightly larger than equivalent OLED options"
-  ],
-  
-  "creature_sizing": {
-    "perfect_for": ["budget_builds", "prototype_creatures", "secondary_features"], 
-    "good_for": ["small_creature_eyes", "testing_setups"],
-    "consider_alternatives_for": ["premium_builds", "main_features"]
-  },
-  
-  "stl_reference": "assets/shapes/stl/basic_mounts/st7735_tft_mount.stl",
-  "scad_template": "assets/shapes/scad/templates/hardware_mounts/st7735_mount_template.scad",
-  
-  "compatible_creatures": ["budget_goblins", "prototype_cats", "testing_builds", "secondary_features"],
-  "estimated_cost_usd": "19.95"
+﻿{
+    "relative_filename":  "config/components/hardware/st7735_tft_rgb.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "ST7735_TFT_RGB",
+    "component_name":  "st7735_tft_rgb",
+    "description":  "1.8\" TFT RGB display with ST7735 driver - FULL COLOR budget option",
+    "budget_rgb_champion":  "TRUE - Affordable full color display",
+    "physical_specifications":  {
+                                    "screen_width":  "1.8 INCH",
+                                    "screen_height":  "1.44 INCH",
+                                    "screen_shape":  "rectangular",
+                                    "diagonal":  "1.8 INCH",
+                                    "resolution":  "128x160",
+                                    "pixel_density":  "114 PPI",
+                                    "thickness":  "0.12 INCH",
+                                    "weight":  "12 GRAMS",
+                                    "active_area":  {
+                                                        "width_mm":  28.03,
+                                                        "height_mm":  35.04
+                                                    }
+                                },
+    "color_specifications":  {
+                                 "color_depth":  "262K_COLORS_18BIT",
+                                 "bits_per_pixel":  18,
+                                 "red_bits":  6,
+                                 "green_bits":  6,
+                                 "blue_bits":  6,
+                                 "color_gamut":  "RGB666",
+                                 "brightness":  "220_CD_M2",
+                                 "contrast_ratio":  "500:1_TFT",
+                                 "viewing_angle":  "140_DEGREES"
+                             },
+    "electrical_specifications":  {
+                                      "supply_voltage":  "3.3V",
+                                      "logic_voltage":  "3.3V",
+                                      "interface":  "SPI",
+                                      "current_consumption_ma":  "80",
+                                      "backlight_current_ma":  "40",
+                                      "spi_clock_max_mhz":  "32"
+                                  },
+    "display_controller":  {
+                               "driver_ic":  "ST7735S",
+                               "manufacturer":  "Sitronix",
+                               "built_in_ram":  "128x160x18_bits",
+                               "refresh_rate_hz":  "60",
+                               "hardware_acceleration":  [
+                                                             "window_scroll",
+                                                             "partial_update"
+                                                         ]
+                           },
+    "pin_assignments":  {
+                            "vcc":  "3V3_POWER",
+                            "gnd":  "GROUND",
+                            "cs":  "CHIP_SELECT_PIN",
+                            "reset":  "RESET_PIN",
+                            "dc":  "DATA_COMMAND_PIN",
+                            "mosi":  "SPI_MOSI",
+                            "sck":  "SPI_CLOCK",
+                            "led":  "BACKLIGHT_PWM_PIN"
+                        },
+    "usage_categories":  {
+                             "small_creature_eyes":  "budget_full_color",
+                             "medium_creature_features":  "affordable_rgb",
+                             "prototype_displays":  "cheap_testing",
+                             "secondary_features":  "cost_effective_accents"
+                         },
+    "ordering_information":  {
+                                 "primary_supplier":  "Adafruit",
+                                 "part_number":  "358",
+                                 "product_name":  "1.8\" Color TFT LCD display with MicroSD - ST7735R",
+                                 "price_usd":  "19.95",
+                                 "availability":  "IN_STOCK",
+                                 "shipping":  "IMMEDIATE",
+                                 "datasheet_url":  "https://cdn-shop.adafruit.com/datasheets/ST7735R_V0.2.pdf",
+                                 "product_url":  "https://www.adafruit.com/product/358"
+                             },
+    "alternative_suppliers":  [
+                                  {
+                                      "supplier":  "SparkFun",
+                                      "part_number":  "LCD-11735",
+                                      "price_usd":  "17.95",
+                                      "stock_status":  "AVAILABLE"
+                                  },
+                                  {
+                                      "supplier":  "AliExpress Generic",
+                                      "part_number":  "ST7735-1.8-TFT",
+                                      "price_usd":  "3.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Ultra budget option - quality varies"
+                                  },
+                                  {
+                                      "supplier":  "Amazon Generic",
+                                      "part_number":  "Various",
+                                      "price_usd":  "8.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Multiple sellers, moderate quality"
+                                  }
+                              ],
+    "technical_advantages":  [
+                                 "Extremely affordable full color option",
+                                 "Good color depth (262K colors)",
+                                 "Widely available and supported",
+                                 "Fast SPI interface",
+                                 "Optional microSD card slot on some variants",
+                                 "Controllable backlight",
+                                 "Large ecosystem of libraries"
+                             ],
+    "technical_limitations":  [
+                                  "TFT technology - not as vibrant as OLED",
+                                  "Requires backlight power",
+                                  "Viewing angles limited compared to OLED",
+                                  "Slightly larger than equivalent OLED options"
+                              ],
+    "creature_sizing":  {
+                            "perfect_for":  [
+                                                "budget_builds",
+                                                "prototype_creatures",
+                                                "secondary_features"
+                                            ],
+                            "good_for":  [
+                                             "small_creature_eyes",
+                                             "testing_setups"
+                                         ],
+                            "consider_alternatives_for":  [
+                                                              "premium_builds",
+                                                              "main_features"
+                                                          ]
+                        },
+    "stl_reference":  "assets/shapes/stl/basic_mounts/st7735_tft_mount.stl",
+    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/st7735_mount_template.scad",
+    "compatible_creatures":  [
+                                 "budget_goblins",
+                                 "prototype_cats",
+                                 "testing_builds",
+                                 "secondary_features"
+                             ],
+    "estimated_cost_usd":  "19.95"
 }

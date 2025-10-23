@@ -1,35 +1,32 @@
-{
-  "relative_filename": "config/test_single_eye.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "bot_type": "TEST_SINGLE_EYE",
-  "bot_id": "test_single_eye",
-  "description": "Simple test configuration for single goblin left eye",
-  "created": "2025-10-22",
-  
-  "component_name": "test_single_eye",
-  "component_type": "TEST_ASSEMBLY",
-  "timing": {
-    "hitCount": 1,
-    "description": "Test assembly every loop"
-  },
-  
-  "software": {
-    "init_function": "test_single_eye_init",
-    "act_function": "test_single_eye_act"
-  },
-  
-  "contained_components": [
-    "config/components/positioned/goblin_left_eye.json"
-  ],
-  
-  "subsystem_manifest": {
-    "HEAD": {
-      "controller": "ESP32-S3",
-      "components": ["goblin_left_eye"]
-    }
-  },
-  
-  "prototype_status": "testing",
-  "tested": false
+﻿{
+    "relative_filename":  "config/test_single_eye.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "TEST_SINGLE_EYE",
+    "bot_id":  "test_single_eye",
+    "description":  "Simple test configuration for single goblin left eye",
+    "created":  "2025-10-22",
+    "component_name":  "test_single_eye",
+    "component_type":  "TEST_ASSEMBLY",
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Test assembly every loop"
+               },
+    "software":  {
+                     "init_function":  "test_single_eye_init",
+                     "act_function":  "test_single_eye_act"
+                 },
+    "contained_components":  [
+                                 "config/components/positioned/goblin_left_eye.json"
+                             ],
+    "subsystem_manifest":  {
+                               "HEAD":  {
+                                            "controller":  "ESP32-S3",
+                                            "components":  [
+                                                               "goblin_left_eye"
+                                                           ]
+                                        }
+                           },
+    "prototype_status":  "testing",
+    "tested":  false
 }

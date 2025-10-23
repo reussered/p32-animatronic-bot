@@ -1,206 +1,104 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin_battle_scars.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "GOBLIN_BATTLE_SCARS",
-  "subsystem": "UNKNOWN",
-
-  "component_type": "aesthetic_overlay",
-
-  "description": "Battle damage scars and war markings for warrior goblins",
-
-  "created": "2025-10-12",
-
-  
-
-  "hardware_reference": "config/components/hardware/aesthetic_overlay.json",
-
-  "interface_reference": "config/components/interfaces/gpio_pair_1.json",
-
-  
-
-  "coordinate_system": "skull_3d",
-
-  "reference_point": "nose_center",
-
-  
-
-  "scar_positions": [
-
-    {
-
-      "scar_id": "left_eye_slash",
-
-      "position": {
-
-        "x": "-1.2 INCH",
-
-        "y": "0.8 INCH", 
-
-        "z": "0.4 INCH"
-
-      },
-
-      "dimensions": {
-
-        "length": "1.5 INCH",
-
-        "width": "0.1 INCH",
-
-        "depth": "0.05 INCH"
-
-      },
-
-      "orientation": {
-
-        "angle": 45,
-
-        "direction": "diagonal_down"
-
-      }
-
-    },
-
-    {
-
-      "scar_id": "cheek_claw_marks",
-
-      "position": {
-
-        "x": "0.8 INCH",
-
-        "y": "-0.3 INCH",
-
-        "z": "0.2 INCH"
-
-      },
-
-      "dimensions": {
-
-        "length": "1.0 INCH",
-
-        "width": "0.08 INCH", 
-
-        "depth": "0.03 INCH"
-
-      },
-
-      "pattern": "three_parallel_lines",
-
-      "spacing": "0.2 INCH"
-
-    },
-
-    {
-
-      "scar_id": "forehead_sword_cut",
-
-      "position": {
-
-        "x": "0.0 INCH",
-
-        "y": "1.5 INCH",
-
-        "z": "0.1 INCH"
-
-      },
-
-      "dimensions": {
-
-        "length": "2.0 INCH",
-
-        "width": "0.12 INCH",
-
-        "depth": "0.08 INCH"
-
-      },
-
-      "orientation": {
-
-        "angle": 15,
-
-        "direction": "slight_arc"
-
-      }
-
-    },
-
-    {
-
-      "scar_id": "chin_battle_nick",
-
-      "position": {
-
-        "x": "0.2 INCH",
-
-        "y": "-1.8 INCH",
-
-        "z": "0.6 INCH"
-
-      },
-
-      "dimensions": {
-
-        "length": "0.5 INCH",
-
-        "width": "0.15 INCH",
-
-        "depth": "0.1 INCH"
-
-      },
-
-      "shape": "jagged_notch"
-
-    }
-
-  ],
-
-  
-
-  "rendering_properties": {
-
-    "scar_color": "#8B4513",
-
-    "highlight_color": "#D2691E", 
-
-    "shadow_color": "#654321",
-
-    "texture": "raised_tissue",
-
-    "weathering": "battle_worn"
-
-  },
-
-  
-
-  "gpio_mapping": {
-
-    "scar_led_control": "GPIO_22",
-
-    "battle_damage_sensor": "GPIO_23"
-
-  },
-
-  
-
-  "prototype_status": "design_complete",
-
-  "tested": false,
-
-  "notes": [
-
-    "Aesthetic overlay component for warrior goblin battle damage",
-
-    "Positioned relative to skull_3d coordinate system",
-
-    "Scars positioned to avoid interference with core components",
-
-    "LED control for dramatic battle scar highlighting"
-
-  ]
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin_battle_scars.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "GOBLIN_BATTLE_SCARS",
+    "subsystem":  "UNKNOWN",
+    "component_type":  "aesthetic_overlay",
+    "description":  "Battle damage scars and war markings for warrior goblins",
+    "created":  "2025-10-12",
+    "hardware_reference":  "config/components/hardware/aesthetic_overlay.json",
+    "interface_reference":  "config/components/interfaces/gpio_pair_1.json",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "scar_positions":  [
+                           {
+                               "scar_id":  "left_eye_slash",
+                               "position":  {
+                                                "x":  "-1.2 INCH",
+                                                "y":  "0.8 INCH",
+                                                "z":  "0.4 INCH"
+                                            },
+                               "dimensions":  {
+                                                  "length":  "1.5 INCH",
+                                                  "width":  "0.1 INCH",
+                                                  "depth":  "0.05 INCH"
+                                              },
+                               "orientation":  {
+                                                   "angle":  45,
+                                                   "direction":  "diagonal_down"
+                                               }
+                           },
+                           {
+                               "scar_id":  "cheek_claw_marks",
+                               "position":  {
+                                                "x":  "0.8 INCH",
+                                                "y":  "-0.3 INCH",
+                                                "z":  "0.2 INCH"
+                                            },
+                               "dimensions":  {
+                                                  "length":  "1.0 INCH",
+                                                  "width":  "0.08 INCH",
+                                                  "depth":  "0.03 INCH"
+                                              },
+                               "pattern":  "three_parallel_lines",
+                               "spacing":  "0.2 INCH"
+                           },
+                           {
+                               "scar_id":  "forehead_sword_cut",
+                               "position":  {
+                                                "x":  "0.0 INCH",
+                                                "y":  "1.5 INCH",
+                                                "z":  "0.1 INCH"
+                                            },
+                               "dimensions":  {
+                                                  "length":  "2.0 INCH",
+                                                  "width":  "0.12 INCH",
+                                                  "depth":  "0.08 INCH"
+                                              },
+                               "orientation":  {
+                                                   "angle":  15,
+                                                   "direction":  "slight_arc"
+                                               }
+                           },
+                           {
+                               "scar_id":  "chin_battle_nick",
+                               "position":  {
+                                                "x":  "0.2 INCH",
+                                                "y":  "-1.8 INCH",
+                                                "z":  "0.6 INCH"
+                                            },
+                               "dimensions":  {
+                                                  "length":  "0.5 INCH",
+                                                  "width":  "0.15 INCH",
+                                                  "depth":  "0.1 INCH"
+                                              },
+                               "shape":  "jagged_notch"
+                           }
+                       ],
+    "rendering_properties":  {
+                                 "scar_color":  "#8B4513",
+                                 "highlight_color":  "#D2691E",
+                                 "shadow_color":  "#654321",
+                                 "texture":  "raised_tissue",
+                                 "weathering":  "battle_worn"
+                             },
+    "gpio_mapping":  {
+                         "scar_led_control":  "GPIO_22",
+                         "battle_damage_sensor":  "GPIO_23"
+                     },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Aesthetic overlay component for warrior goblin battle damage",
+                  "Positioned relative to skull_3d coordinate system",
+                  "Scars positioned to avoid interference with core components",
+                  "LED control for dramatic battle scar highlighting"
+              ],
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "position":  {
+                     "y":  "0.0 INCH",
+                     "z":  "0.0 INCH",
+                     "x":  "0.0 INCH"
+                 }
 }

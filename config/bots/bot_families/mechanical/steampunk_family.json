@@ -1,87 +1,87 @@
-{
-  "relative_filename": "config/bots/bot_families/mechanical/steampunk_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_type": "STEAMPUNK",
-  "family_category": "mechanical",
-  "description": "steampunk family with mechanical characteristics",
-  "created": "2025-10-13",
-  "template_type": "family_template",
-  "coordinate_system": "planar_2d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "face_width": "6.0 INCH",
-    "face_height": "8.0 INCH",
-    "component_spacing": "1.5 INCH"
-  },
-  "default_components": [
-    "config/components/positioned/steampunk_eye_left.json",
-    "config/components/positioned/steampunk_eye_right.json",
-    "config/components/positioned/steampunk_nose.json",
-    "config/components/positioned/steampunk_mouth.json",
-    "config/components/positioned/steampunk_speaker.json"
-  ],
-  "family_mood_profile": {
-    "FEAR": 15,
-    "ANGER": 10,
-    "IRRITATION": 15,
-    "HAPPINESS": 20,
-    "CONTENTMENT": 20,
-    "HUNGER": 15,
-    "CURIOSITY": 25,
-    "AFFECTION": 15
-  },
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 300,
-    "interaction_range_cm": 150,
-    "aggressive_threshold": 50,
-    "calm_threshold": 30,
-    "personality_traits": [
-      "steampunk_trait_1",
-      "steampunk_trait_2",
-      "steampunk_trait_3"
-    ]
-  },
-  "hardware_preferences": {
-    "coordinate_system": "planar_2d",
-    "spi_device_assignments": {
-      "left_eye": "SPI_DEVICE_1",
-      "right_eye": "SPI_DEVICE_2",
-      "mouth_display": "SPI_DEVICE_3"
-    },
-    "i2s_device_assignments": {
-      "primary_speaker": "I2S_DEVICE_1"
-    }
-  },
-  "aesthetic_profile": {
-    "surface_texture": "steampunk_texture",
-    "color_scheme": "steampunk_colors",
-    "eye_style": "steampunk_eyes",
-    "nose_style": "steampunk_nose",
-    "mouth_style": "steampunk_mouth"
-  },
-  "sound_characteristics": {
-    "voice_pitch": "steampunk_voice",
-    "breathing_pattern": "steampunk_breathing",
-    "comfort_sounds": [
-      "sound1",
-      "sound2"
-    ],
-    "alert_sounds": [
-      "alert1",
-      "alert2"
-    ]
-  },
-  "animation_style": {
-    "movement_speed": "steampunk_movement",
-    "eye_tracking": "steampunk_tracking",
-    "idle_behaviors": [
-      "idle1",
-      "idle2"
-    ],
-    "expression_intensity": "moderate"
-  },
-  "prototype_status": "template_generated",
-  "tested": false
+﻿{
+    "relative_filename":  "config/bots/bot_families/mechanical/steampunk_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "STEAMPUNK",
+    "family_category":  "mechanical",
+    "description":  "steampunk family with mechanical characteristics",
+    "created":  "2025-10-13",
+    "template_type":  "family_template",
+    "coordinate_system":  "planar_2d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "face_width":  "6.0 INCH",
+                                "face_height":  "8.0 INCH",
+                                "component_spacing":  "1.5 INCH"
+                            },
+    "default_components":  [
+                               "config/components/positioned/steampunk_eye_left.json",
+                               "config/components/positioned/steampunk_eye_right.json",
+                               "config/components/positioned/steampunk_nose.json",
+                               "config/components/positioned/steampunk_mouth.json",
+                               "config/components/positioned/steampunk_speaker.json"
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  15,
+                                "ANGER":  10,
+                                "IRRITATION":  15,
+                                "HAPPINESS":  20,
+                                "CONTENTMENT":  20,
+                                "HUNGER":  15,
+                                "CURIOSITY":  25,
+                                "AFFECTION":  15
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  300,
+                                     "interaction_range_cm":  150,
+                                     "aggressive_threshold":  50,
+                                     "calm_threshold":  30,
+                                     "personality_traits":  [
+                                                                "steampunk_trait_1",
+                                                                "steampunk_trait_2",
+                                                                "steampunk_trait_3"
+                                                            ]
+                                 },
+    "hardware_preferences":  {
+                                 "coordinate_system":  "planar_2d",
+                                 "spi_device_assignments":  {
+                                                                "left_eye":  "SPI_DEVICE_1",
+                                                                "right_eye":  "SPI_DEVICE_2",
+                                                                "mouth_display":  "SPI_DEVICE_3"
+                                                            },
+                                 "i2s_device_assignments":  {
+                                                                "primary_speaker":  "I2S_DEVICE_1"
+                                                            }
+                             },
+    "aesthetic_profile":  {
+                              "surface_texture":  "steampunk_texture",
+                              "color_scheme":  "steampunk_colors",
+                              "eye_style":  "steampunk_eyes",
+                              "nose_style":  "steampunk_nose",
+                              "mouth_style":  "steampunk_mouth"
+                          },
+    "sound_characteristics":  {
+                                  "voice_pitch":  "steampunk_voice",
+                                  "breathing_pattern":  "steampunk_breathing",
+                                  "comfort_sounds":  [
+                                                         "sound1",
+                                                         "sound2"
+                                                     ],
+                                  "alert_sounds":  [
+                                                       "alert1",
+                                                       "alert2"
+                                                   ]
+                              },
+    "animation_style":  {
+                            "movement_speed":  "steampunk_movement",
+                            "eye_tracking":  "steampunk_tracking",
+                            "idle_behaviors":  [
+                                                   "idle1",
+                                                   "idle2"
+                                               ],
+                            "expression_intensity":  "moderate"
+                        },
+    "prototype_status":  "template_generated",
+    "tested":  false
 }

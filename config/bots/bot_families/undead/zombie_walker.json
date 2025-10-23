@@ -1,75 +1,66 @@
-{
-  "relative_filename": "config/bots/zombie_walker.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/horror/zombie_family.json",
-  "bot_type": "ZOMBIEWALKER",
-  "bot_id": "zombie_walker_v1",
-  "description": "Standard shambling zombie with moderate decay and basic motor functions",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "fresh_zombie",
-  
-  "overrides": {
-    "mood_defaults": {
-      "FEAR": 3,
-      "ANGER": 20,
-      "IRRITATION": 15,
-      "HAPPINESS": 0,
-      "CONTENTMENT": 2,
-      "HUNGER": 45,
-      "CURIOSITY": 10,
-      "AFFECTION": 5
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": false,
-      "auto_sleep_timeout_seconds": 200,
-      "interaction_range_cm": 80,
-      "aggressive_threshold": 30,
-      "shamble_speed": "slow_steady"
-    },
-    
-    "decay_progression": {
-      "flesh_deterioration": "moderate",
-      "mobility_impairment": "slight_limp",
-      "cognitive_function": "basic_instincts"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/zombie_rotting_flesh.json",
-    "config/components/positioned/zombie_shamble_actuator.json"
-  ],
-  
-  "custom_behaviors": {
-    "hunger_response": {
-      "trigger": "living_presence_detected",
-      "response": "pursue_shamble",
-      "persistence": "relentless"
-    },
-    
-    "horde_calling": {
-      "trigger": "feeding_opportunity",
-      "response": "groaning_call",
-      "range_meters": 50
-    }
-  },
-  
-  "decay_effects": {
-    "visual_deterioration": "patchy_skin_loss",
-    "oozing_wounds": "minimal_seepage",
-    "bone_exposure": "occasional_glimpses",
-    "clothing_tattered": "worn_remnants"
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Basic zombie variant for standard horror scenarios",
-    "Moderate decay allows for clear facial recognition",
-    "Shambling gait creates authentic zombie movement",
-    "Hunger-driven behaviors dominate decision making"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/undead/zombie_walker.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/horror/zombie_family.json",
+    "bot_type":  "ZOMBIEWALKER",
+    "bot_id":  "zombie_walker_v1",
+    "description":  "Standard shambling zombie with moderate decay and basic motor functions",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "fresh_zombie",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "FEAR":  3,
+                                            "ANGER":  20,
+                                            "IRRITATION":  15,
+                                            "HAPPINESS":  0,
+                                            "CONTENTMENT":  2,
+                                            "HUNGER":  45,
+                                            "CURIOSITY":  10,
+                                            "AFFECTION":  5
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  false,
+                                              "auto_sleep_timeout_seconds":  200,
+                                              "interaction_range_cm":  80,
+                                              "aggressive_threshold":  30,
+                                              "shamble_speed":  "slow_steady"
+                                          },
+                      "decay_progression":  {
+                                                "flesh_deterioration":  "moderate",
+                                                "mobility_impairment":  "slight_limp",
+                                                "cognitive_function":  "basic_instincts"
+                                            }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/zombie_rotting_flesh.json",
+                                  "config/components/positioned/zombie_shamble_actuator.json"
+                              ],
+    "custom_behaviors":  {
+                             "hunger_response":  {
+                                                     "trigger":  "living_presence_detected",
+                                                     "response":  "pursue_shamble",
+                                                     "persistence":  "relentless"
+                                                 },
+                             "horde_calling":  {
+                                                   "trigger":  "feeding_opportunity",
+                                                   "response":  "groaning_call",
+                                                   "range_meters":  50
+                                               }
+                         },
+    "decay_effects":  {
+                          "visual_deterioration":  "patchy_skin_loss",
+                          "oozing_wounds":  "minimal_seepage",
+                          "bone_exposure":  "occasional_glimpses",
+                          "clothing_tattered":  "worn_remnants"
+                      },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Basic zombie variant for standard horror scenarios",
+                  "Moderate decay allows for clear facial recognition",
+                  "Shambling gait creates authentic zombie movement",
+                  "Hunger-driven behaviors dominate decision making"
+              ]
 }

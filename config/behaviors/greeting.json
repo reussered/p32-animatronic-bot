@@ -1,33 +1,37 @@
-{
-  "name": "greeting",
-  "displayName": "Greeting",
-  "description": "Welcome behavior when detecting new person",
-  "type": "interactive",
-  "sequence": [
-    {
-      "action": "look_at_target",
-      "duration": 500
-    },
-    {
-      "action": "wave",
-      "duration": 1000,
-      "params": {
-        "repetitions": 2
-      }
-    },
-    {
-      "action": "play_sound",
-      "duration": 2000,
-      "params": {
-        "sound": "hello"
-      }
-    }
-  ],
-  "moodModifier": {
-    "happy": 20,
-    "neutral": 10
-  },
-  "cooldown": 10000,
-  "enabled": true,
-  "triggers": ["person_detected", "motion_sensor"]
+﻿{
+    "name":  "greeting",
+    "displayName":  "Greeting",
+    "description":  "Welcome behavior when detecting new person",
+    "type":  "interactive",
+    "sequence":  [
+                     {
+                         "action":  "look_at_target",
+                         "duration":  500
+                     },
+                     {
+                         "action":  "wave",
+                         "duration":  1000,
+                         "params":  {
+                                        "repetitions":  2
+                                    }
+                     },
+                     {
+                         "action":  "play_sound",
+                         "duration":  2000,
+                         "params":  {
+                                        "sound":  "hello"
+                                    }
+                     }
+                 ],
+    "moodModifier":  {
+                         "happy":  20,
+                         "neutral":  10
+                     },
+    "cooldown":  10000,
+    "enabled":  true,
+    "triggers":  [
+                     "person_detected",
+                     "motion_sensor"
+                 ],
+    "version":  "1.0.0"
 }

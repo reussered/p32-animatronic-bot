@@ -1,87 +1,79 @@
-{
-  "relative_filename": "config/components/creature_specific/goblin_eye.json",
-  "version": "1.0.0", 
-  "author": "config/author.json",
-  "component_name": "goblin_eye",
-  "subsystem": "HEAD",
-  "component_type": "CREATURE_SPECIFIC_DISPLAY",
-  "description": "Shared goblin eye processing logic with palette and mood-based rendering",
-  "created": "2025-10-22",
-  
-  "contained_components": [
-    "config/components/hardware/gc9a01_display.json"
-  ],
-  
-  "creature_display_profile": {
-    "species": "GOBLIN",
-    "eye_color_base": "AMBER_GOLD",
-    "pupil_style": "VERTICAL_SLIT",
-    "expression_range": "MENACING_TO_CURIOUS",
-    "mood_responsiveness": "HIGH"
-  },
-  
-  "palette_system": {
-    "palette_size": 256,
-    "color_ranges": {
-      "eyelid_pupil": "0-31",
-      "iris_base": "32-63", 
-      "highlights": "64-95",
-      "anger_reds": "96-127",
-      "curiosity_greens": "128-159",
-      "fear_blues": "160-191",
-      "happiness_yellows": "192-223",
-      "special_effects": "224-255"
-    }
-  },
-  
-  "mood_color_mapping": {
-    "ANGER": {
-      "primary_range": "96-127",
-      "intensity_multiplier": 1.5,
-      "glow_effect": "ENABLED"
-    },
-    "CURIOSITY": {
-      "primary_range": "128-159", 
-      "intensity_multiplier": 1.2,
-      "sparkle_effect": "ENABLED"
-    },
-    "FEAR": {
-      "primary_range": "160-191",
-      "intensity_multiplier": 1.8,
-      "dilation_effect": "ENABLED"
-    },
-    "HAPPINESS": {
-      "primary_range": "192-223",
-      "intensity_multiplier": 1.1,
-      "warmth_effect": "ENABLED"
-    }
-  },
-  
-  "frame_processing": {
-    "buffer_stack_support": "ENABLED",
-    "multi_eye_coordination": "ENABLED",
-    "mood_based_adjustments": "REALTIME",
-    "color_space": "RGB565"
-  },
-  
-  "timing": {
-    "hitCount": 1,
-    "description": "Process all frames in buffer stack every loop"
-  },
-  
-  "software": {
-    "init_function": "goblin_eye_init",
-    "act_function": "goblin_eye_act"
-  },
-  
-  "prototype_status": "implemented",
-  "tested": true,
-  "notes": [
-    "Software-only component - no physical shape",
-    "Code already fully implemented in goblin_eye.cpp/hpp",
-    "Handles mood-based color palette adjustments",
-    "Supports buffer stack processing for left/right eye coordination",
-    "256-color organized palette with distinct mood ranges",
-    "Real-time frame processing with SharedMemory mood integration"
-  ]
+﻿{
+    "relative_filename":  "config/components/creature_specific/goblin_eye.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_eye",
+    "subsystem":  "HEAD",
+    "component_type":  "CREATURE_SPECIFIC_DISPLAY",
+    "description":  "Shared goblin eye processing logic with palette and mood-based rendering",
+    "created":  "2025-10-22",
+    "contained_components":  [
+                                 "config/components/hardware/gc9a01_display.json"
+                             ],
+    "creature_display_profile":  {
+                                     "species":  "GOBLIN",
+                                     "eye_color_base":  "AMBER_GOLD",
+                                     "pupil_style":  "VERTICAL_SLIT",
+                                     "expression_range":  "MENACING_TO_CURIOUS",
+                                     "mood_responsiveness":  "HIGH"
+                                 },
+    "palette_system":  {
+                           "palette_size":  256,
+                           "color_ranges":  {
+                                                "eyelid_pupil":  "0-31",
+                                                "iris_base":  "32-63",
+                                                "highlights":  "64-95",
+                                                "anger_reds":  "96-127",
+                                                "curiosity_greens":  "128-159",
+                                                "fear_blues":  "160-191",
+                                                "happiness_yellows":  "192-223",
+                                                "special_effects":  "224-255"
+                                            }
+                       },
+    "mood_color_mapping":  {
+                               "ANGER":  {
+                                             "primary_range":  "96-127",
+                                             "intensity_multiplier":  1.5,
+                                             "glow_effect":  "ENABLED"
+                                         },
+                               "CURIOSITY":  {
+                                                 "primary_range":  "128-159",
+                                                 "intensity_multiplier":  1.2,
+                                                 "sparkle_effect":  "ENABLED"
+                                             },
+                               "FEAR":  {
+                                            "primary_range":  "160-191",
+                                            "intensity_multiplier":  1.8,
+                                            "dilation_effect":  "ENABLED"
+                                        },
+                               "HAPPINESS":  {
+                                                 "primary_range":  "192-223",
+                                                 "intensity_multiplier":  1.1,
+                                                 "warmth_effect":  "ENABLED"
+                                             }
+                           },
+    "frame_processing":  {
+                             "buffer_stack_support":  "ENABLED",
+                             "multi_eye_coordination":  "ENABLED",
+                             "mood_based_adjustments":  "REALTIME",
+                             "color_space":  "RGB565"
+                         },
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Process all frames in buffer stack every loop"
+               },
+    "software":  {
+                     "init_function":  "goblin_eye_init",
+                     "act_function":  "goblin_eye_act"
+                 },
+    "prototype_status":  "implemented",
+    "tested":  true,
+    "notes":  [
+                  "Software-only component - no physical shape",
+                  "Code already fully implemented in goblin_eye.cpp/hpp",
+                  "Handles mood-based color palette adjustments",
+                  "Supports buffer stack processing for left/right eye coordination",
+                  "256-color organized palette with distinct mood ranges",
+                  "Real-time frame processing with SharedMemory mood integration"
+              ]
 }

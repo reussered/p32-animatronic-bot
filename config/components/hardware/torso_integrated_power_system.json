@@ -1,385 +1,171 @@
-{
-
-  "relative_filename": "config/components/hardware/torso_integrated_power_system.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  
-
-  "component_name": "torso_integrated_power_system",
-  "subsystem": "TORSO",
-
-  "component_name": "TORSO_INTEGRATED_POWER_SYSTEM",
-  "subsystem": "TORSO",
-
-  "component_type": "STRUCTURAL_BATTERY_SYSTEM",
-
-  "description": "Commercial lithium-ion battery pack integrated into aluminum skeletal structure with future aluminum battery compatibility",
-
-  "hitCount": 10,
-
-  
-
-  "current_battery_technology": {
-
-    "primary_battery_pack": {
-
-      "battery_type": "COMMERCIAL_LITHIUM_ION_18650_CELLS",
-
-      "configuration": "14S4P_TESLA_MODEL_S_STYLE_PACK",
-
-      "nominal_voltage": "51.8V_14S_CONFIGURATION",
-
-      "capacity": "13600MAH_4P_PARALLEL_3400MAH_CELLS",
-
-      "max_discharge_current": "54_AMPS_CONTINUOUS_80_AMPS_PEAK",
-
-      "cell_part_number": "PANASONIC_NCR18650B_3400MAH",
-
-      "bms_system": "DALY_BMS_14S_60A_BLUETOOTH_MONITORING"
-
-    },
-
-    
-
-    "secondary_backup_pack": {
-
-      "battery_type": "LIPO_6S_5000MAH_BACKUP", 
-
-      "configuration": "DUAL_PARALLEL_6S_PACKS",
-
-      "nominal_voltage": "22.2V_6S_CONFIGURATION",
-
-      "capacity": "10000MAH_TOTAL_BACKUP_POWER",
-
-      "function": "EMERGENCY_BACKUP_AND_HOT_SWAP_CAPABILITY",
-
-      "charge_time": "45_MINUTES_FAST_CHARGE"
-
-    }
-
-  },
-
-  
-
-  "future_aluminum_battery_integration": {
-
-    "tesla_aluminum_battery_compatibility": {
-
-      "form_factor": "MODULAR_CELLS_SAME_18650_DIMENSIONS",
-
-      "voltage_per_cell": "2.0V_ALUMINUM_ION_CHEMISTRY",
-
-      "capacity_improvement": "3X_ENERGY_DENSITY_VS_LITHIUM",
-
-      "charge_speed": "UNDER_1_MINUTE_FULL_CHARGE",
-
-      "cycle_life": "OVER_100000_CYCLES_VS_3000_LITHIUM",
-
-      "temperature_range": "MINUS_40C_TO_PLUS_80C_OPERATION"
-
-    },
-
-    
-
-    "retrofit_compatibility": {
-
-      "mechanical_compatibility": "SAME_18650_FORM_FACTOR_DROP_IN",
-
-      "electrical_adaptation": "BMS_FIRMWARE_UPDATE_ONLY",
-
-      "voltage_adaptation": "SERIES_COUNT_CHANGE_28S_VS_14S",
-
-      "capacity_benefit": "SAME_PACK_SIZE_3X_RUNTIME"
-
-    }
-
-  },
-
-  
-
-  "torso_integration_design": {
-
-    "structural_battery_housing": {
-
-      "housing_material": "ALUMINUM_EXTRUSION_BATTERY_BOX", 
-
-      "integration_method": "BATTERIES_ARE_STRUCTURAL_MEMBERS",
-
-      "mounting_location": "TORSO_SPINE_INTEGRATED_DESIGN",
-
-      "thermal_management": "ALUMINUM_HEAT_SPREADING_TO_FRAME",
-
-      "protection_level": "IP65_DUST_WATER_PROTECTION"
-
-    },
-
-    
-
-    "skeletal_power_distribution_integration": {
-
-      "battery_to_spine_connection": {
-
-        "positive_rail": "DIRECT_CONNECTION_TO_SPINE_ALUMINUM_BUS",
-
-        "negative_rail": "CHASSIS_GROUND_ALUMINUM_FRAMEWORK", 
-
-        "main_fusing": "150A_MEGA_FUSE_MAIN_PROTECTION",
-
-        "emergency_disconnect": "MANUAL_KNIFE_SWITCH_TORSO_ACCESS"
-
-      },
-
-      
-
-      "voltage_regulation_cascade": {
-
-        "battery_output": "51.8V_LITHIUM_OR_56V_ALUMINUM",
-
-        "spine_bus_regulated": "48V_SWITCHING_REGULATOR_HIGH_EFFICIENCY",
-
-        "high_power_rail": "24V_BUCK_CONVERTER_STEPPER_MOTORS",
-
-        "logic_power_rail": "12V_DISTRIBUTED_CONVERTERS",
-
-        "sensor_power_rail": "3.3V_LINEAR_FINAL_STAGE"
-
-      }
-
-    }
-
-  },
-
-  
-
-  "power_management_system": {
-
-    "intelligent_bms_features": {
-
-      "bluetooth_monitoring": "REAL_TIME_CELL_VOLTAGE_CURRENT_TEMP",
-
-      "predictive_maintenance": "CELL_DEGRADATION_TRACKING",
-
-      "load_balancing": "DYNAMIC_POWER_DISTRIBUTION_OPTIMIZATION",
-
-      "safety_systems": "AUTOMATIC_SHUTDOWN_PROTECTION"
-
-    },
-
-    
-
-    "charging_infrastructure": {
-
-      "primary_charging": {
-
-        "charger_type": "SMART_CC_CV_LITHIUM_CHARGER_15A",
-
-        "charge_time": "3_HOURS_80_PERCENT_4_HOURS_100_PERCENT",
-
-        "charge_connector": "ANDERSON_SB350_HIGH_CURRENT", 
-
-        "charge_port_location": "TORSO_REAR_ACCESS_PANEL"
-
-      },
-
-      
-
-      "future_aluminum_charging": {
-
-        "ultra_fast_charging": "500A_CAPABLE_CHARGING_SYSTEM",
-
-        "charge_time": "UNDER_1_MINUTE_FULL_CHARGE",
-
-        "thermal_management": "LIQUID_COOLING_DURING_FAST_CHARGE",
-
-        "grid_integration": "REGENERATIVE_BRAKING_ENERGY_RECOVERY"
-
-      }
-
-    }
-
-  },
-
-  
-
-  "runtime_and_performance": {
-
-    "lithium_ion_performance": {
-
-      "walking_runtime": "8_HOURS_CONTINUOUS_MODERATE_WALKING",
-
-      "standby_runtime": "24_HOURS_IDLE_MONITORING",
-
-      "heavy_load_runtime": "4_HOURS_STAIR_CLIMBING_MANIPULATION",
-
-      "weight_penalty": "15_POUNDS_BATTERY_SYSTEM_TOTAL"
-
-    },
-
-    
-
-    "aluminum_battery_projected": {
-
-      "walking_runtime": "24_HOURS_CONTINUOUS_SAME_WEIGHT",
-
-      "standby_runtime": "72_HOURS_EXTENDED_MISSIONS", 
-
-      "heavy_load_runtime": "12_HOURS_INTENSIVE_OPERATIONS",
-
-      "weight_benefit": "SAME_15_POUNDS_3X_ENERGY_STORAGE"
-
-    }
-
-  },
-
-  
-
-  "mechanical_integration_specifications": {
-
-    "battery_as_structure": {
-
-      "load_bearing_role": "BATTERIES_FORM_TORSO_STRUCTURAL_CORE",
-
-      "aluminum_housing": "6061_ALUMINUM_WELDED_BATTERY_BOX",
-
-      "mounting_points": "T_SLOT_COMPATIBLE_BATTERY_HOUSING",
-
-      "access_panels": "REMOVABLE_PANELS_MAINTENANCE_ACCESS"
-
-    },
-
-    
-
-    "thermal_management": {
-
-      "heat_dissipation": "ALUMINUM_TORSO_ACTS_AS_HEAT_SINK",
-
-      "airflow_design": "CONVECTION_COOLING_THROUGH_FRAME",
-
-      "temperature_monitoring": "THERMAL_SENSORS_EACH_CELL_GROUP",
-
-      "cooling_fan_backup": "12V_FANS_FOR_EXTREME_CONDITIONS"
-
-    },
-
-    
-
-    "modular_replacement": {
-
-      "hot_swap_capability": "SECONDARY_PACK_ONLINE_DURING_SWAP",
-
-      "tool_free_removal": "QUARTER_TURN_FASTENERS_ONLY",
-
-      "field_serviceable": "NO_SPECIAL_TOOLS_REQUIRED",
-
-      "upgrade_path": "ALUMINUM_BATTERY_DROP_IN_REPLACEMENT"
-
-    }
-
-  },
-
-  
-
-  "safety_and_protection": {
-
-    "electrical_protection": {
-
-      "overcurrent_protection": "FUSES_AT_EVERY_DISTRIBUTION_POINT",
-
-      "overvoltage_protection": "SURGE_SUPPRESSORS_MAIN_BUS",
-
-      "short_circuit_protection": "FAST_ACTING_BREAKERS",
-
-      "ground_fault_protection": "DIFFERENTIAL_CURRENT_MONITORING"
-
-    },
-
-    
-
-    "mechanical_protection": {
-
-      "impact_protection": "ALUMINUM_CAGE_SURROUNDS_BATTERIES",
-
-      "water_protection": "IP65_SEALED_HOUSING_DESIGN",
-
-      "fire_suppression": "HALON_ALTERNATIVE_AUTOMATIC_SYSTEM",
-
-      "emergency_access": "EXTERNAL_EMERGENCY_DISCONNECT_SWITCH"
-
-    }
-
-  },
-
-  
-
-  "cost_analysis": {
-
-    "lithium_ion_system_current": {
-
-      "18650_cells_56_pieces": "$5.00_EACH = $280.00",
-
-      "bms_system": "$150.00_DALY_14S_BLUETOOTH", 
-
-      "aluminum_housing": "$200.00_CUSTOM_FABRICATION",
-
-      "charging_system": "$180.00_SMART_CHARGER",
-
-      "protection_systems": "$120.00_FUSES_BREAKERS",
-
-      "total_current_system": "$930.00"
-
-    },
-
-    
-
-    "aluminum_battery_projected": {
-
-      "aluminum_cells_estimated": "$2.00_EACH = $112.00_WHEN_AVAILABLE",
-
-      "bms_adaptation": "$50.00_FIRMWARE_UPDATE_ONLY",
-
-      "same_housing_reused": "$0.00_RETROFIT_COMPATIBLE", 
-
-      "upgraded_charger": "$300.00_HIGH_CURRENT_CAPABILITY",
-
-      "total_aluminum_upgrade": "$462.00_50_PERCENT_COST_REDUCTION"
-
-    }
-
-  },
-
-  
-
-  "integration_with_existing_systems": {
-
-    "skeletal_power_compatibility": {
-
-      "spine_bus_integration": "SEAMLESS_CONNECTION_TO_ALUMINUM_RAILS",
-
-      "distributed_taps": "COMPATIBLE_WITH_ALL_POWER_TAP_SYSTEMS",
-
-      "voltage_levels": "MAINTAINS_ALL_REQUIRED_VOLTAGE_RAILS",
-
-      "current_capacity": "EXCEEDS_ALL_SUBSYSTEM_REQUIREMENTS"
-
-    },
-
-    
-
-    "bluetooth_mesh_integration": {
-
-      "power_status_reporting": "BMS_DATA_VIA_BLUETOOTH_TO_MASTER",
-
-      "predictive_power_management": "AI_OPTIMIZED_POWER_DISTRIBUTION",
-
-      "emergency_communications": "LOW_POWER_MODE_MESH_MAINTENANCE",
-
-      "charge_status_display": "REAL_TIME_REMAINING_RUNTIME_DISPLAY"
-
-    }
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/hardware/torso_integrated_power_system.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "TORSO_INTEGRATED_POWER_SYSTEM",
+    "subsystem":  "TORSO",
+    "component_type":  "STRUCTURAL_BATTERY_SYSTEM",
+    "description":  "Commercial lithium-ion battery pack integrated into aluminum skeletal structure with future aluminum battery compatibility",
+    "hitCount":  10,
+    "current_battery_technology":  {
+                                       "primary_battery_pack":  {
+                                                                    "battery_type":  "COMMERCIAL_LITHIUM_ION_18650_CELLS",
+                                                                    "configuration":  "14S4P_TESLA_MODEL_S_STYLE_PACK",
+                                                                    "nominal_voltage":  "51.8V_14S_CONFIGURATION",
+                                                                    "capacity":  "13600MAH_4P_PARALLEL_3400MAH_CELLS",
+                                                                    "max_discharge_current":  "54_AMPS_CONTINUOUS_80_AMPS_PEAK",
+                                                                    "cell_part_number":  "PANASONIC_NCR18650B_3400MAH",
+                                                                    "bms_system":  "DALY_BMS_14S_60A_BLUETOOTH_MONITORING"
+                                                                },
+                                       "secondary_backup_pack":  {
+                                                                     "battery_type":  "LIPO_6S_5000MAH_BACKUP",
+                                                                     "configuration":  "DUAL_PARALLEL_6S_PACKS",
+                                                                     "nominal_voltage":  "22.2V_6S_CONFIGURATION",
+                                                                     "capacity":  "10000MAH_TOTAL_BACKUP_POWER",
+                                                                     "function":  "EMERGENCY_BACKUP_AND_HOT_SWAP_CAPABILITY",
+                                                                     "charge_time":  "45_MINUTES_FAST_CHARGE"
+                                                                 }
+                                   },
+    "future_aluminum_battery_integration":  {
+                                                "tesla_aluminum_battery_compatibility":  {
+                                                                                             "form_factor":  "MODULAR_CELLS_SAME_18650_DIMENSIONS",
+                                                                                             "voltage_per_cell":  "2.0V_ALUMINUM_ION_CHEMISTRY",
+                                                                                             "capacity_improvement":  "3X_ENERGY_DENSITY_VS_LITHIUM",
+                                                                                             "charge_speed":  "UNDER_1_MINUTE_FULL_CHARGE",
+                                                                                             "cycle_life":  "OVER_100000_CYCLES_VS_3000_LITHIUM",
+                                                                                             "temperature_range":  "MINUS_40C_TO_PLUS_80C_OPERATION"
+                                                                                         },
+                                                "retrofit_compatibility":  {
+                                                                               "mechanical_compatibility":  "SAME_18650_FORM_FACTOR_DROP_IN",
+                                                                               "electrical_adaptation":  "BMS_FIRMWARE_UPDATE_ONLY",
+                                                                               "voltage_adaptation":  "SERIES_COUNT_CHANGE_28S_VS_14S",
+                                                                               "capacity_benefit":  "SAME_PACK_SIZE_3X_RUNTIME"
+                                                                           }
+                                            },
+    "torso_integration_design":  {
+                                     "structural_battery_housing":  {
+                                                                        "housing_material":  "ALUMINUM_EXTRUSION_BATTERY_BOX",
+                                                                        "integration_method":  "BATTERIES_ARE_STRUCTURAL_MEMBERS",
+                                                                        "mounting_location":  "TORSO_SPINE_INTEGRATED_DESIGN",
+                                                                        "thermal_management":  "ALUMINUM_HEAT_SPREADING_TO_FRAME",
+                                                                        "protection_level":  "IP65_DUST_WATER_PROTECTION"
+                                                                    },
+                                     "skeletal_power_distribution_integration":  {
+                                                                                     "battery_to_spine_connection":  {
+                                                                                                                         "positive_rail":  "DIRECT_CONNECTION_TO_SPINE_ALUMINUM_BUS",
+                                                                                                                         "negative_rail":  "CHASSIS_GROUND_ALUMINUM_FRAMEWORK",
+                                                                                                                         "main_fusing":  "150A_MEGA_FUSE_MAIN_PROTECTION",
+                                                                                                                         "emergency_disconnect":  "MANUAL_KNIFE_SWITCH_TORSO_ACCESS"
+                                                                                                                     },
+                                                                                     "voltage_regulation_cascade":  {
+                                                                                                                        "battery_output":  "51.8V_LITHIUM_OR_56V_ALUMINUM",
+                                                                                                                        "spine_bus_regulated":  "48V_SWITCHING_REGULATOR_HIGH_EFFICIENCY",
+                                                                                                                        "high_power_rail":  "24V_BUCK_CONVERTER_STEPPER_MOTORS",
+                                                                                                                        "logic_power_rail":  "12V_DISTRIBUTED_CONVERTERS",
+                                                                                                                        "sensor_power_rail":  "3.3V_LINEAR_FINAL_STAGE"
+                                                                                                                    }
+                                                                                 }
+                                 },
+    "power_management_system":  {
+                                    "intelligent_bms_features":  {
+                                                                     "bluetooth_monitoring":  "REAL_TIME_CELL_VOLTAGE_CURRENT_TEMP",
+                                                                     "predictive_maintenance":  "CELL_DEGRADATION_TRACKING",
+                                                                     "load_balancing":  "DYNAMIC_POWER_DISTRIBUTION_OPTIMIZATION",
+                                                                     "safety_systems":  "AUTOMATIC_SHUTDOWN_PROTECTION"
+                                                                 },
+                                    "charging_infrastructure":  {
+                                                                    "primary_charging":  {
+                                                                                             "charger_type":  "SMART_CC_CV_LITHIUM_CHARGER_15A",
+                                                                                             "charge_time":  "3_HOURS_80_PERCENT_4_HOURS_100_PERCENT",
+                                                                                             "charge_connector":  "ANDERSON_SB350_HIGH_CURRENT",
+                                                                                             "charge_port_location":  "TORSO_REAR_ACCESS_PANEL"
+                                                                                         },
+                                                                    "future_aluminum_charging":  {
+                                                                                                     "ultra_fast_charging":  "500A_CAPABLE_CHARGING_SYSTEM",
+                                                                                                     "charge_time":  "UNDER_1_MINUTE_FULL_CHARGE",
+                                                                                                     "thermal_management":  "LIQUID_COOLING_DURING_FAST_CHARGE",
+                                                                                                     "grid_integration":  "REGENERATIVE_BRAKING_ENERGY_RECOVERY"
+                                                                                                 }
+                                                                }
+                                },
+    "runtime_and_performance":  {
+                                    "lithium_ion_performance":  {
+                                                                    "walking_runtime":  "8_HOURS_CONTINUOUS_MODERATE_WALKING",
+                                                                    "standby_runtime":  "24_HOURS_IDLE_MONITORING",
+                                                                    "heavy_load_runtime":  "4_HOURS_STAIR_CLIMBING_MANIPULATION",
+                                                                    "weight_penalty":  "15_POUNDS_BATTERY_SYSTEM_TOTAL"
+                                                                },
+                                    "aluminum_battery_projected":  {
+                                                                       "walking_runtime":  "24_HOURS_CONTINUOUS_SAME_WEIGHT",
+                                                                       "standby_runtime":  "72_HOURS_EXTENDED_MISSIONS",
+                                                                       "heavy_load_runtime":  "12_HOURS_INTENSIVE_OPERATIONS",
+                                                                       "weight_benefit":  "SAME_15_POUNDS_3X_ENERGY_STORAGE"
+                                                                   }
+                                },
+    "mechanical_integration_specifications":  {
+                                                  "battery_as_structure":  {
+                                                                               "load_bearing_role":  "BATTERIES_FORM_TORSO_STRUCTURAL_CORE",
+                                                                               "aluminum_housing":  "6061_ALUMINUM_WELDED_BATTERY_BOX",
+                                                                               "mounting_points":  "T_SLOT_COMPATIBLE_BATTERY_HOUSING",
+                                                                               "access_panels":  "REMOVABLE_PANELS_MAINTENANCE_ACCESS"
+                                                                           },
+                                                  "thermal_management":  {
+                                                                             "heat_dissipation":  "ALUMINUM_TORSO_ACTS_AS_HEAT_SINK",
+                                                                             "airflow_design":  "CONVECTION_COOLING_THROUGH_FRAME",
+                                                                             "temperature_monitoring":  "THERMAL_SENSORS_EACH_CELL_GROUP",
+                                                                             "cooling_fan_backup":  "12V_FANS_FOR_EXTREME_CONDITIONS"
+                                                                         },
+                                                  "modular_replacement":  {
+                                                                              "hot_swap_capability":  "SECONDARY_PACK_ONLINE_DURING_SWAP",
+                                                                              "tool_free_removal":  "QUARTER_TURN_FASTENERS_ONLY",
+                                                                              "field_serviceable":  "NO_SPECIAL_TOOLS_REQUIRED",
+                                                                              "upgrade_path":  "ALUMINUM_BATTERY_DROP_IN_REPLACEMENT"
+                                                                          }
+                                              },
+    "safety_and_protection":  {
+                                  "electrical_protection":  {
+                                                                "overcurrent_protection":  "FUSES_AT_EVERY_DISTRIBUTION_POINT",
+                                                                "overvoltage_protection":  "SURGE_SUPPRESSORS_MAIN_BUS",
+                                                                "short_circuit_protection":  "FAST_ACTING_BREAKERS",
+                                                                "ground_fault_protection":  "DIFFERENTIAL_CURRENT_MONITORING"
+                                                            },
+                                  "mechanical_protection":  {
+                                                                "impact_protection":  "ALUMINUM_CAGE_SURROUNDS_BATTERIES",
+                                                                "water_protection":  "IP65_SEALED_HOUSING_DESIGN",
+                                                                "fire_suppression":  "HALON_ALTERNATIVE_AUTOMATIC_SYSTEM",
+                                                                "emergency_access":  "EXTERNAL_EMERGENCY_DISCONNECT_SWITCH"
+                                                            }
+                              },
+    "cost_analysis":  {
+                          "lithium_ion_system_current":  {
+                                                             "18650_cells_56_pieces":  "$5.00_EACH = $280.00",
+                                                             "bms_system":  "$150.00_DALY_14S_BLUETOOTH",
+                                                             "aluminum_housing":  "$200.00_CUSTOM_FABRICATION",
+                                                             "charging_system":  "$180.00_SMART_CHARGER",
+                                                             "protection_systems":  "$120.00_FUSES_BREAKERS",
+                                                             "total_current_system":  "$930.00"
+                                                         },
+                          "aluminum_battery_projected":  {
+                                                             "aluminum_cells_estimated":  "$2.00_EACH = $112.00_WHEN_AVAILABLE",
+                                                             "bms_adaptation":  "$50.00_FIRMWARE_UPDATE_ONLY",
+                                                             "same_housing_reused":  "$0.00_RETROFIT_COMPATIBLE",
+                                                             "upgraded_charger":  "$300.00_HIGH_CURRENT_CAPABILITY",
+                                                             "total_aluminum_upgrade":  "$462.00_50_PERCENT_COST_REDUCTION"
+                                                         }
+                      },
+    "integration_with_existing_systems":  {
+                                              "skeletal_power_compatibility":  {
+                                                                                   "spine_bus_integration":  "SEAMLESS_CONNECTION_TO_ALUMINUM_RAILS",
+                                                                                   "distributed_taps":  "COMPATIBLE_WITH_ALL_POWER_TAP_SYSTEMS",
+                                                                                   "voltage_levels":  "MAINTAINS_ALL_REQUIRED_VOLTAGE_RAILS",
+                                                                                   "current_capacity":  "EXCEEDS_ALL_SUBSYSTEM_REQUIREMENTS"
+                                                                               },
+                                              "bluetooth_mesh_integration":  {
+                                                                                 "power_status_reporting":  "BMS_DATA_VIA_BLUETOOTH_TO_MASTER",
+                                                                                 "predictive_power_management":  "AI_OPTIMIZED_POWER_DISTRIBUTION",
+                                                                                 "emergency_communications":  "LOW_POWER_MODE_MESH_MAINTENANCE",
+                                                                                 "charge_status_display":  "REAL_TIME_REMAINING_RUNTIME_DISPLAY"
+                                                                             }
+                                          },
+    "hardware_type":  "STRUCTURAL_BATTERY_SYSTEM"
 }

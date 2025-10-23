@@ -1,121 +1,126 @@
-{
-  "relative_filename": "config/bots/bot_families/fantasy/dragon_family.json",
-  "version": "1.0.0", 
-  "author": "config/author.json",
-  "family_type": "DRAGON",
-  "family_category": "fantasy",
-  "description": "Reptilian dragon family with scaled features and fire-breathing capabilities",
-  "created": "2025-10-12",
-  "template_type": "family_template",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "3.5 INCH",
-    "compression_factor": 0.6,
-    "skull_scale": 1.3,
-    "snout_extension": "2.5 INCH"
-  },
-  
-  "default_components": [
-    "config/components/positioned/dragon_eye_left.json",
-    "config/components/positioned/dragon_eye_right.json", 
-    "config/components/positioned/dragon_snout.json",
-    "config/components/positioned/dragon_speaker.json",
-    "config/components/positioned/dragon_nostril_left.json",
-    "config/components/positioned/dragon_nostril_right.json"
-  ],
-  
-  "family_mood_profile": {
-    "FEAR": 2,
-    "ANGER": 35,
-    "IRRITATION": 25,
-    "HAPPINESS": 15,
-    "CONTENTMENT": 20,
-    "HUNGER": 30,
-    "CURIOSITY": 25,
-    "AFFECTION": 5
-  },
-  
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 1200,
-    "interaction_range_cm": 400,
-    "aggressive_threshold": 40,
-    "calm_threshold": 15,
-    "personality_traits": [
-      "ancient_pride",
-      "territorial_supreme",
-      "hoarder_instinct", 
-      "wise_arrogant",
-      "elemental_power"
-    ]
-  },
-  
-  "hardware_preferences": {
-    "coordinate_system": "skull_3d",
-    "spi_device_assignments": {
-      "left_eye": "SPI_DEVICE_1",
-      "right_eye": "SPI_DEVICE_2",
-      "snout_display": "SPI_DEVICE_3"
-    },
-    "i2s_device_assignments": {
-      "primary_speaker": "I2S_DEVICE_1",
-      "flame_effects": "I2S_DEVICE_2"
-    }
-  },
-  
-  "aesthetic_profile": {
-    "surface_texture": "scaled_reptilian",
-    "color_scheme": "emerald_gold",
-    "eye_style": "slitted_reptilian",
-    "nose_style": "flared_nostrils",
-    "mouth_style": "fanged_maw_large",
-    "feature_asymmetry": false,
-    "weathering_effects": true
-  },
-  
-  "sound_characteristics": {
-    "voice_pitch": "deep_rumbling",
-    "breathing_pattern": "smoky_exhale",
-    "majestic_sounds": ["roar", "rumble", "hiss"],
-    "flame_sounds": ["whoosh", "crackle", "steam_hiss"],
-    "ambient_volume": 0.6,
-    "reaction_volume": 1.0
-  },
-  
-  "animation_style": {
-    "movement_speed": "majestic_deliberate",
-    "eye_tracking": "imperial_survey",
-    "idle_behaviors": ["treasure_gaze", "smoke_wisp"],
-    "threat_responses": ["flame_display", "territorial_roar"],
-    "expression_intensity": "maximum"
-  },
-  
-  "subfamily_variants": {
-    "fire_dragon": {
-      "color_scheme": "red_orange_flame",
-      "element": "fire",
-      "personality_modifiers": {
-        "ANGER": "+15",
-        "CURIOSITY": "-5"
-      }
-    },
-    "ice_dragon": {
-      "color_scheme": "blue_white_frost",
-      "element": "ice",
-      "personality_modifiers": {
-        "CONTENTMENT": "+10",
-        "ANGER": "-10"
-      }
-    },
-    "earth_dragon": {
-      "color_scheme": "brown_stone_green",
-      "element": "earth",
-      "personality_modifiers": {
-        "CONTENTMENT": "+15",
-        "IRRITATION": "-10"
-      }
-    }
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/fantasy/dragon_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "DRAGON",
+    "family_category":  "fantasy",
+    "description":  "Reptilian dragon family with scaled features and fire-breathing capabilities",
+    "created":  "2025-10-12",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "3.5 INCH",
+                                "compression_factor":  0.6,
+                                "skull_scale":  1.3,
+                                "snout_extension":  "2.5 INCH"
+                            },
+    "default_components":  [
+                               "config/components/positioned/dragon_eye_left.json",
+                               "config/components/positioned/dragon_eye_right.json",
+                               "config/components/positioned/dragon_snout.json",
+                               "config/components/positioned/dragon_speaker.json",
+                               "config/components/positioned/dragon_nostril_left.json",
+                               "config/components/positioned/dragon_nostril_right.json"
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  2,
+                                "ANGER":  35,
+                                "IRRITATION":  25,
+                                "HAPPINESS":  15,
+                                "CONTENTMENT":  20,
+                                "HUNGER":  30,
+                                "CURIOSITY":  25,
+                                "AFFECTION":  5
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  1200,
+                                     "interaction_range_cm":  400,
+                                     "aggressive_threshold":  40,
+                                     "calm_threshold":  15,
+                                     "personality_traits":  [
+                                                                "ancient_pride",
+                                                                "territorial_supreme",
+                                                                "hoarder_instinct",
+                                                                "wise_arrogant",
+                                                                "elemental_power"
+                                                            ]
+                                 },
+    "hardware_preferences":  {
+                                 "coordinate_system":  "skull_3d",
+                                 "spi_device_assignments":  {
+                                                                "left_eye":  "SPI_DEVICE_1",
+                                                                "right_eye":  "SPI_DEVICE_2",
+                                                                "snout_display":  "SPI_DEVICE_3"
+                                                            },
+                                 "i2s_device_assignments":  {
+                                                                "primary_speaker":  "I2S_DEVICE_1",
+                                                                "flame_effects":  "I2S_DEVICE_2"
+                                                            }
+                             },
+    "aesthetic_profile":  {
+                              "surface_texture":  "scaled_reptilian",
+                              "color_scheme":  "emerald_gold",
+                              "eye_style":  "slitted_reptilian",
+                              "nose_style":  "flared_nostrils",
+                              "mouth_style":  "fanged_maw_large",
+                              "feature_asymmetry":  false,
+                              "weathering_effects":  true
+                          },
+    "sound_characteristics":  {
+                                  "voice_pitch":  "deep_rumbling",
+                                  "breathing_pattern":  "smoky_exhale",
+                                  "majestic_sounds":  [
+                                                          "roar",
+                                                          "rumble",
+                                                          "hiss"
+                                                      ],
+                                  "flame_sounds":  [
+                                                       "whoosh",
+                                                       "crackle",
+                                                       "steam_hiss"
+                                                   ],
+                                  "ambient_volume":  0.6,
+                                  "reaction_volume":  1.0
+                              },
+    "animation_style":  {
+                            "movement_speed":  "majestic_deliberate",
+                            "eye_tracking":  "imperial_survey",
+                            "idle_behaviors":  [
+                                                   "treasure_gaze",
+                                                   "smoke_wisp"
+                                               ],
+                            "threat_responses":  [
+                                                     "flame_display",
+                                                     "territorial_roar"
+                                                 ],
+                            "expression_intensity":  "maximum"
+                        },
+    "subfamily_variants":  {
+                               "fire_dragon":  {
+                                                   "color_scheme":  "red_orange_flame",
+                                                   "element":  "fire",
+                                                   "personality_modifiers":  {
+                                                                                 "ANGER":  "+15",
+                                                                                 "CURIOSITY":  "-5"
+                                                                             }
+                                               },
+                               "ice_dragon":  {
+                                                  "color_scheme":  "blue_white_frost",
+                                                  "element":  "ice",
+                                                  "personality_modifiers":  {
+                                                                                "CONTENTMENT":  "+10",
+                                                                                "ANGER":  "-10"
+                                                                            }
+                                              },
+                               "earth_dragon":  {
+                                                    "color_scheme":  "brown_stone_green",
+                                                    "element":  "earth",
+                                                    "personality_modifiers":  {
+                                                                                  "CONTENTMENT":  "+15",
+                                                                                  "IRRITATION":  "-10"
+                                                                              }
+                                                }
+                           }
 }

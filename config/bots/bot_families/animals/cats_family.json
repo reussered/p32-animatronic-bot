@@ -1,41 +1,43 @@
-{
-  "relative_filename": "config/bots/bot_families/animals/cats_family.json",
-  "version": "1.0",
-  "author": "config/author.json",
-  "family_name": "Cats",
-  "family_type": "CATS",
-  "family_category": "animals",
-  "description": "Cats family - placeholder configuration",
-  "created": "2025-10-21",
-  "template_type": "family_template",
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "3.0 INCH",
-    "skull_height": "8.0 INCH",
-    "skull_depth": "6.0 INCH"
-  },
-  "default_components": [],
-  "family_mood_profile": {
-    "FEAR": 10,
-    "ANGER": 15,
-    "IRRITATION": 20,
-    "HAPPINESS": 25,
-    "CONTENTMENT": 15,
-    "HUNGER": 10,
-    "CURIOSITY": 25,
-    "AFFECTION": 20
-  },
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 1800,
-    "interaction_range_cm": 150,
-    "aggressive_threshold": 70,
-    "calm_threshold": 30,
-    "personality_traits": [
-      "curious",
-      "friendly",
-      "responsive"
-    ]
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/animals/cats_family.json",
+    "version":  "1.0",
+    "author":  "config/author.json",
+    "family_name":  "Cats",
+    "family_type":  "CATS",
+    "family_category":  "animals",
+    "description":  "Cats family - placeholder configuration",
+    "created":  "2025-10-21",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "3.0 INCH",
+                                "skull_height":  "8.0 INCH",
+                                "skull_depth":  "6.0 INCH"
+                            },
+    "default_components":  [
+
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  10,
+                                "ANGER":  15,
+                                "IRRITATION":  20,
+                                "HAPPINESS":  25,
+                                "CONTENTMENT":  15,
+                                "HUNGER":  10,
+                                "CURIOSITY":  25,
+                                "AFFECTION":  20
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  1800,
+                                     "interaction_range_cm":  150,
+                                     "aggressive_threshold":  70,
+                                     "calm_threshold":  30,
+                                     "personality_traits":  [
+                                                                "curious",
+                                                                "friendly",
+                                                                "responsive"
+                                                            ]
+                                 }
 }

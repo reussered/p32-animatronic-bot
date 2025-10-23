@@ -1,152 +1,151 @@
-{
-  "relative_filename": "config/bots/bot_families/horror/zombie_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_name": "ZOMBIE",
-  "family_category": "horror",
-  "description": "Undead zombies with decay, shambling movement, and horror elements",
-  "created": "2025-10-12",
-  
-  "base_characteristics": {
-    "mood_defaults": {
-      "FEAR": 5,
-      "ANGER": 25,
-      "IRRITATION": 20,
-      "HAPPINESS": 0,
-      "CONTENTMENT": 5,
-      "HUNGER": 35,
-      "CURIOSITY": 5,
-      "AFFECTION": 5
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 300,
-      "interaction_range_cm": 100,
-      "aggressive_threshold": 70,
-      "movement_style": "shambling_slow",
-      "attention_span_seconds": 45
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "decaying_flesh",
-      "weathering_effects": true,
-      "mouth_style": "rotting_maw",
-      "eye_style": "sunken_hollow",
-      "feature_asymmetry": true,
-      "surface_texture": "deteriorated_flesh",
-      "nose_style": "partially_missing"
-    },
-    
-    "audio_profile": {
-      "primary_sounds": ["groaning", "shambling", "bone_creaking"],
-      "volume_range": [60, 90],
-      "frequency_preference": "low_guttural",
-      "echo_effects": true,
-      "distortion_level": 0.6
-    }
-  },
-  
-  "subfamily_variants": {
-    "fresh_zombie": {
-      "description": "Recently turned zombie with some remaining human features",
-      "color_scheme": "pale_decay",
-      "decay_level": "minimal",
-      "mobility": "moderate_shamble",
-      "intelligence_remnants": "basic_recognition"
-    },
-    
-    "ancient_zombie": {
-      "description": "Long-dead zombie with advanced decay and bone exposure",
-      "color_scheme": "bone_and_rot",
-      "decay_level": "extreme",
-      "mobility": "slow_shuffle",
-      "bone_visibility": "prominent_exposure"
-    },
-    
-    "plague_zombie": {
-      "description": "Disease-carrying zombie with toxic elements",
-      "color_scheme": "sickly_green",
-      "decay_level": "festering",
-      "special_effects": "toxic_ooze",
-      "contagion_factor": "high"
-    }
-  },
-  
-  "baseline_dimensions": {
-    "eye_spacing": "2.8 INCH",
-    "compression_factor": 0.85,
-    "skull_scale": 1.1
-  },
-  
-  "common_components": [
-    "config/components/positioned/zombie_rotting_flesh.json",
-    "config/components/positioned/zombie_exposed_bone.json",
-    "config/components/positioned/zombie_oozing_wounds.json"
-  ],
-  
-  "horror_features": {
-    "decay_effects": {
-      "flesh_deterioration": "progressive",
-      "bone_exposure": "selective",
-      "wound_simulation": "oozing"
-    },
-    
-    "movement_characteristics": {
-      "gait_pattern": "irregular_shamble",
-      "balance_issues": "simulated_stumbling",
-      "reaction_time": "delayed_responses"
-    },
-    
-    "sensory_degradation": {
-      "vision_impairment": "clouded_eyes",
-      "hearing_reduction": "muffled_response",
-      "touch_sensitivity": "numbed"
-    }
-  },
-  
-  "construction_types": {
-    "hard_shell": {
-      "material": "3d_printed_abs",
-      "color_palette": {
-        "primary": "DimGray",
-        "secondary": "DarkRed",
-        "accent": "BurlyWood", 
-        "special": "Yellow"
-      },
-      "finish": "weathered_distressed",
-      "durability": "horror_attraction_grade",
-      "use_cases": ["haunted_house", "horror_display", "jump_scare_interactive"]
-    },
-    
-    "soft_body": {
-      "material": "plush_fabric",
-      "color_palette": {
-        "primary": "LightGray",
-        "secondary": "IndianRed",
-        "accent": "Wheat",
-        "special": "LightYellow"
-      },
-      "finish": "distressed_fabric",
-      "durability": "child_safe_horror_play",
-      "use_cases": ["horror_comedy", "educational_monster", "safe_scary_play"]
-    }
-  },
-
-  "thematic_elements": {
-    "apocalypse_survival": "post_outbreak_scenario",
-    "infection_mechanics": "bite_transmission_lore",
-    "pack_behavior": "horde_mentality",
-    "human_remnants": "memory_fragments"
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Horror family focused on undead zombie archetypes",
-    "Emphasizes decay, shambling movement, and hunger",
-    "Subfamily variants cover different stages of decomposition",
-    "Audio effects create atmospheric horror ambiance",
-    "Hard shell for realistic horror, soft body for safe scary fun"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/horror/zombie_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_name":  "ZOMBIE",
+    "family_category":  "horror",
+    "description":  "Undead zombies with decay, shambling movement, and horror elements",
+    "created":  "2025-10-12",
+    "base_characteristics":  {
+                                 "mood_defaults":  {
+                                                       "FEAR":  5,
+                                                       "ANGER":  25,
+                                                       "IRRITATION":  20,
+                                                       "HAPPINESS":  0,
+                                                       "CONTENTMENT":  5,
+                                                       "HUNGER":  35,
+                                                       "CURIOSITY":  5,
+                                                       "AFFECTION":  5
+                                                   },
+                                 "behavior_config":  {
+                                                         "threat_response_enabled":  true,
+                                                         "auto_sleep_timeout_seconds":  300,
+                                                         "interaction_range_cm":  100,
+                                                         "aggressive_threshold":  70,
+                                                         "movement_style":  "shambling_slow",
+                                                         "attention_span_seconds":  45
+                                                     },
+                                 "aesthetic_profile":  {
+                                                           "color_scheme":  "decaying_flesh",
+                                                           "weathering_effects":  true,
+                                                           "mouth_style":  "rotting_maw",
+                                                           "eye_style":  "sunken_hollow",
+                                                           "feature_asymmetry":  true,
+                                                           "surface_texture":  "deteriorated_flesh",
+                                                           "nose_style":  "partially_missing"
+                                                       },
+                                 "audio_profile":  {
+                                                       "primary_sounds":  [
+                                                                              "groaning",
+                                                                              "shambling",
+                                                                              "bone_creaking"
+                                                                          ],
+                                                       "volume_range":  [
+                                                                            60,
+                                                                            90
+                                                                        ],
+                                                       "frequency_preference":  "low_guttural",
+                                                       "echo_effects":  true,
+                                                       "distortion_level":  0.6
+                                                   }
+                             },
+    "subfamily_variants":  {
+                               "fresh_zombie":  {
+                                                    "description":  "Recently turned zombie with some remaining human features",
+                                                    "color_scheme":  "pale_decay",
+                                                    "decay_level":  "minimal",
+                                                    "mobility":  "moderate_shamble",
+                                                    "intelligence_remnants":  "basic_recognition"
+                                                },
+                               "ancient_zombie":  {
+                                                      "description":  "Long-dead zombie with advanced decay and bone exposure",
+                                                      "color_scheme":  "bone_and_rot",
+                                                      "decay_level":  "extreme",
+                                                      "mobility":  "slow_shuffle",
+                                                      "bone_visibility":  "prominent_exposure"
+                                                  },
+                               "plague_zombie":  {
+                                                     "description":  "Disease-carrying zombie with toxic elements",
+                                                     "color_scheme":  "sickly_green",
+                                                     "decay_level":  "festering",
+                                                     "special_effects":  "toxic_ooze",
+                                                     "contagion_factor":  "high"
+                                                 }
+                           },
+    "baseline_dimensions":  {
+                                "eye_spacing":  "2.8 INCH",
+                                "compression_factor":  0.85,
+                                "skull_scale":  1.1
+                            },
+    "common_components":  [
+                              "config/components/positioned/zombie_rotting_flesh.json",
+                              "config/components/positioned/zombie_exposed_bone.json",
+                              "config/components/positioned/zombie_oozing_wounds.json"
+                          ],
+    "horror_features":  {
+                            "decay_effects":  {
+                                                  "flesh_deterioration":  "progressive",
+                                                  "bone_exposure":  "selective",
+                                                  "wound_simulation":  "oozing"
+                                              },
+                            "movement_characteristics":  {
+                                                             "gait_pattern":  "irregular_shamble",
+                                                             "balance_issues":  "simulated_stumbling",
+                                                             "reaction_time":  "delayed_responses"
+                                                         },
+                            "sensory_degradation":  {
+                                                        "vision_impairment":  "clouded_eyes",
+                                                        "hearing_reduction":  "muffled_response",
+                                                        "touch_sensitivity":  "numbed"
+                                                    }
+                        },
+    "construction_types":  {
+                               "hard_shell":  {
+                                                  "material":  "3d_printed_abs",
+                                                  "color_palette":  {
+                                                                        "primary":  "DimGray",
+                                                                        "secondary":  "DarkRed",
+                                                                        "accent":  "BurlyWood",
+                                                                        "special":  "Yellow"
+                                                                    },
+                                                  "finish":  "weathered_distressed",
+                                                  "durability":  "horror_attraction_grade",
+                                                  "use_cases":  [
+                                                                    "haunted_house",
+                                                                    "horror_display",
+                                                                    "jump_scare_interactive"
+                                                                ]
+                                              },
+                               "soft_body":  {
+                                                 "material":  "plush_fabric",
+                                                 "color_palette":  {
+                                                                       "primary":  "LightGray",
+                                                                       "secondary":  "IndianRed",
+                                                                       "accent":  "Wheat",
+                                                                       "special":  "LightYellow"
+                                                                   },
+                                                 "finish":  "distressed_fabric",
+                                                 "durability":  "child_safe_horror_play",
+                                                 "use_cases":  [
+                                                                   "horror_comedy",
+                                                                   "educational_monster",
+                                                                   "safe_scary_play"
+                                                               ]
+                                             }
+                           },
+    "thematic_elements":  {
+                              "apocalypse_survival":  "post_outbreak_scenario",
+                              "infection_mechanics":  "bite_transmission_lore",
+                              "pack_behavior":  "horde_mentality",
+                              "human_remnants":  "memory_fragments"
+                          },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Horror family focused on undead zombie archetypes",
+                  "Emphasizes decay, shambling movement, and hunger",
+                  "Subfamily variants cover different stages of decomposition",
+                  "Audio effects create atmospheric horror ambiance",
+                  "Hard shell for realistic horror, soft body for safe scary fun"
+              ]
 }

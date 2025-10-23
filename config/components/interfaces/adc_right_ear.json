@@ -1,41 +1,35 @@
-{
-  "relative_filename": "config/components/interfaces/adc_right_ear.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "interface_id": "ADC_RIGHT_EAR",
-  "interface_type": "ADC",
-  "description": "Right ear microphone ADC input for stereo audio localization",
-  "created": "2025-10-22",
-  
-  "gpio_assignments": {
-    "adc_pin": 2,
-    "adc_channel": "ADC1_CH1"
-  },
-  
-  "adc_config": {
-    "resolution": "12_BIT",
-    "attenuation": "11dB",
-    "sample_rate_hz": 8000,
-    "read_mode": "continuous"
-  },
-  
-  "audio_processing": {
-    "gain_amplification": "20dB",
-    "high_pass_filter": "100Hz",
-    "noise_gate_threshold": "-40dB"
-  },
-  
-  "timing": {
-    "sample_buffer_size": 256,
-    "processing_interval_ms": 32
-  },
-  
-  "directional_config": {
-    "ear_position": "RIGHT",
-    "time_delay_analysis": true,
-    "correlation_window_ms": 10
-  },
-  
-  "prototype_status": "configured",
-  "tested": false
+﻿{
+    "relative_filename":  "config/components/interfaces/adc_right_ear.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "ADC_RIGHT_EAR",
+    "interface_type":  "ADC",
+    "description":  "Right ear microphone ADC input for stereo audio localization",
+    "created":  "2025-10-22",
+    "gpio_assignments":  {
+                             "adc_pin":  2,
+                             "adc_channel":  "ADC1_CH1"
+                         },
+    "adc_config":  {
+                       "resolution":  "12_BIT",
+                       "attenuation":  "11dB",
+                       "sample_rate_hz":  8000,
+                       "read_mode":  "continuous"
+                   },
+    "audio_processing":  {
+                             "gain_amplification":  "20dB",
+                             "high_pass_filter":  "100Hz",
+                             "noise_gate_threshold":  "-40dB"
+                         },
+    "timing":  {
+                   "sample_buffer_size":  256,
+                   "processing_interval_ms":  32
+               },
+    "directional_config":  {
+                               "ear_position":  "RIGHT",
+                               "time_delay_analysis":  true,
+                               "correlation_window_ms":  10
+                           },
+    "prototype_status":  "configured",
+    "tested":  false
 }

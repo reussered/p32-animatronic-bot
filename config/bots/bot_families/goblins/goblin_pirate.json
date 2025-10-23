@@ -1,76 +1,73 @@
-{
-  "relative_filename": "config/bots/bot_families/goblins/goblin_pirate.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "bot_type": "GOBLINPIRATE",
-  "bot_id": "goblin_pirate_v1",
-  "description": "Battle-scarred goblin pirate who lost his right eye in a pre-dawn raid - one-eyed terror of the seas",
-  "created": "2025-10-21",
-  
-  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
-  "creature_variant": "pirate_goblin",
-  "horizontal_scale": "0.7",
-  "vertical_scale": "0.6",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "eye_spacing": "3.0 INCH",
-  "compression_factor": 0.7,
-  
-  "contained_components": [
-    "config/components/functional/goblin_pirate_personality.json",
-    "config/components/functional/goblin_mood.json",
-    "config/components/functional/goblin_behavior_engine.json",
-    "config/subsystems/goblin_pirate_head.json",
-    "config/components/positioned/goblin/head_components/goblin_left_eye.json",
-    "config/components/positioned/goblin/head_components/goblin_mouth.json",
-    "config/components/positioned/goblin/head_components/goblin_speaker.json",
-    "config/components/positioned/goblin/head_components/goblin_nose.json",
-    "config/components/positioned/goblin/head_components/goblin_left_ear.json",
-    "config/components/positioned/goblin/head_components/goblin_right_ear.json"
-  ],
-  "mood_defaults": {
-    "FEAR": 5,
-    "ANGER": 35,
-    "IRRITATION": 25,
-    "HAPPINESS": 0,
-    "CONTENTMENT": 15,
-    "HUNGER": 30,
-    "CURIOSITY": 20,
-    "AFFECTION": 0
-  },
-  "behavior_config": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 180,
-    "interaction_range_cm": 250,
-    "aggressive_threshold": 60,
-    "calm_threshold": 10
-  },
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 30,
-    "sensor_poll_rate_hz": 10,
-    "power_management": "aggressive"
-  },
-  "pirate_characteristics": {
-    "missing_eye": "right_eye_lost_in_raid",
-    "battle_scars": "multiple_facial_scars",
-    "personality_traits": [
-      "gruff_and_weathered",
-      "suspicious_of_strangers", 
-      "quick_to_anger",
-      "treasure_obsessed"
-    ],
-    "backstory": "Lost right eye during a failed pre-dawn raid on a merchant vessel. Now sports a permanent scowl and trusts no one."
-  },
-  "prototype_status": "design_phase",
-  "tested": false,
-  "notes": [
-    "Single-eye variant of goblin_full",
-    "Right eye component deliberately removed",
-    "Enhanced aggression and suspicion in mood defaults",
-    "Pirate-themed personality adjustments",
-    "Reduced GPIO requirements - only 10 pins needed",
-    "More aggressive power management due to battle-hardened nature"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_pirate.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "GOBLINPIRATE",
+    "bot_id":  "goblin_pirate_v1",
+    "description":  "Battle-scarred goblin pirate who lost his right eye in a pre-dawn raid - one-eyed terror of the seas",
+    "created":  "2025-10-21",
+    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant":  "pirate_goblin",
+    "horizontal_scale":  "0.7",
+    "vertical_scale":  "0.6",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "3.0 INCH",
+    "compression_factor":  0.7,
+    "contained_components":  [
+                                 "config/components/functional/goblin_pirate_personality.json",
+                                 "config/components/functional/goblin_mood.json",
+                                 "config/components/functional/goblin_behavior_engine.json",
+                                 "config/subsystems/goblin_pirate_head.json",
+                                 "config/components/positioned/goblin/head_components/goblin_left_eye.json",
+                                 "config/components/positioned/goblin/head_components/goblin_mouth.json",
+                                 "config/components/positioned/goblin/head_components/goblin_speaker.json",
+                                 "config/components/positioned/goblin/head_components/goblin_nose.json",
+                                 "config/components/positioned/goblin/head_components/goblin_left_ear.json",
+                                 "config/components/positioned/goblin/head_components/goblin_right_ear.json"
+                             ],
+    "mood_defaults":  {
+                          "FEAR":  5,
+                          "ANGER":  35,
+                          "IRRITATION":  25,
+                          "HAPPINESS":  0,
+                          "CONTENTMENT":  15,
+                          "HUNGER":  30,
+                          "CURIOSITY":  20,
+                          "AFFECTION":  0
+                      },
+    "behavior_config":  {
+                            "threat_response_enabled":  true,
+                            "auto_sleep_timeout_seconds":  180,
+                            "interaction_range_cm":  250,
+                            "aggressive_threshold":  60,
+                            "calm_threshold":  10
+                        },
+    "hardware_config":  {
+                            "i2s_sample_rate":  44100,
+                            "display_update_rate_fps":  30,
+                            "sensor_poll_rate_hz":  10,
+                            "power_management":  "aggressive"
+                        },
+    "pirate_characteristics":  {
+                                   "missing_eye":  "right_eye_lost_in_raid",
+                                   "battle_scars":  "multiple_facial_scars",
+                                   "personality_traits":  [
+                                                              "gruff_and_weathered",
+                                                              "suspicious_of_strangers",
+                                                              "quick_to_anger",
+                                                              "treasure_obsessed"
+                                                          ],
+                                   "backstory":  "Lost right eye during a failed pre-dawn raid on a merchant vessel. Now sports a permanent scowl and trusts no one."
+                               },
+    "prototype_status":  "design_phase",
+    "tested":  false,
+    "notes":  [
+                  "Single-eye variant of goblin_full",
+                  "Right eye component deliberately removed",
+                  "Enhanced aggression and suspicion in mood defaults",
+                  "Pirate-themed personality adjustments",
+                  "Reduced GPIO requirements - only 10 pins needed",
+                  "More aggressive power management due to battle-hardened nature"
+              ]
 }

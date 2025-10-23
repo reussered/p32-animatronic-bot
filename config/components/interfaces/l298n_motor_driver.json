@@ -1,355 +1,422 @@
-{
-  "relative_filename": "config/components/interfaces/l298n_motor_driver.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "L298N_MOTOR_DRIVER",
-  "interface_type": "DUAL_H_BRIDGE_MOTOR_DRIVER",
-  "description": "L298N dual H-bridge motor driver for DC motors and stepper motors up to 2A per channel",
-  
-  "hardware_specifications": {
-    "driver_type": "DUAL_H_BRIDGE_MOTOR_DRIVER",
-    "channels": 2,
-    "operating_voltage": "5V_TO_35V_MOTOR_SUPPLY",
-    "logic_voltage": "5V",
-    "current_per_channel": "2A_CONTINUOUS_3A_PEAK",
-    "total_power_dissipation": "25W_WITH_HEATSINK",
-    "quiescent_current": "13mA_TYPICAL",
-    "standby_current": "6mA_TYPICAL",
-    "logic_power_consumption": "65mW_AT_5V_LOGIC",
-    "package": "15_PIN_MULTIWATT",
-    "thermal_resistance": "3_C_PER_W_WITH_HEATSINK",
-    "module_dimensions": "55x49x30mm_TYPICAL_BREAKOUT"
-  },
-  
-  "pin_requirements": {
-    "vcc_motor_pin": {
-      "function": "motor_power_supply",
-      "generic_name": "vcc_motor",
-      "description": "Motor power supply input",
-      "voltage_range": "7V_TO_35V",
-      "voltage_optimal": "12V_TO_24V",
-      "current_capacity": "4A_TOTAL_BOTH_CHANNELS",
-      "power_capacity": "50W_MAXIMUM_WITH_COOLING"
-    },
-    "vcc_logic_pin": {
-      "function": "logic_power_supply",
-      "generic_name": "vcc_logic",
-      "description": "Logic power supply input",
-      "voltage_level": "5V",
-      "current_consumption": "13mA_QUIESCENT",
-      "power_consumption": "65mW_TYPICAL",
-      "regulation": "ONBOARD_5V_REGULATOR_IF_VCC_MOTOR_ABOVE_12V"
-    },
-    "gnd_pin": {
-      "function": "ground_reference",
-      "generic_name": "gnd",
-      "description": "Ground reference for logic and power",
-      "voltage_level": "0V"
-    }
-  },
-  
-  "motor_a_pins": {
-    "in1_pin": {
-      "function": "motor_a_direction_control_1",
-      "generic_name": "in1",
-      "description": "Motor A direction control input 1",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "in2_pin": {
-      "function": "motor_a_direction_control_2",
-      "generic_name": "in2",
-      "description": "Motor A direction control input 2",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "ena_pin": {
-      "function": "motor_a_enable_speed",
-      "generic_name": "ena",
-      "description": "Motor A enable and speed control",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL_PWM",
-      "pwm_frequency": "1kHz_TO_20kHz_OPTIMAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "out1_pin": {
-      "function": "motor_a_output_1",
-      "generic_name": "out1",
-      "description": "Motor A output terminal 1",
-      "current_capacity": "2A_CONTINUOUS_3A_PEAK",
-      "voltage_drop": "1.8V_TO_3.2V_AT_2A"
-    },
-    "out2_pin": {
-      "function": "motor_a_output_2",
-      "generic_name": "out2",
-      "description": "Motor A output terminal 2",
-      "current_capacity": "2A_CONTINUOUS_3A_PEAK",
-      "voltage_drop": "1.8V_TO_3.2V_AT_2A"
-    }
-  },
-  
-  "motor_b_pins": {
-    "in3_pin": {
-      "function": "motor_b_direction_control_1",
-      "generic_name": "in3",
-      "description": "Motor B direction control input 3",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "in4_pin": {
-      "function": "motor_b_direction_control_2",
-      "generic_name": "in4",
-      "description": "Motor B direction control input 4",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "enb_pin": {
-      "function": "motor_b_enable_speed",
-      "generic_name": "enb",
-      "description": "Motor B enable and speed control",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL_PWM",
-      "pwm_frequency": "1kHz_TO_20kHz_OPTIMAL",
-      "current_consumption": "1.6mA_HIGH"
-    },
-    "out3_pin": {
-      "function": "motor_b_output_1",
-      "generic_name": "out3",
-      "description": "Motor B output terminal 1",
-      "current_capacity": "2A_CONTINUOUS_3A_PEAK",
-      "voltage_drop": "1.8V_TO_3.2V_AT_2A"
-    },
-    "out4_pin": {
-      "function": "motor_b_output_2",
-      "generic_name": "out4",
-      "description": "Motor B output terminal 2",
-      "current_capacity": "2A_CONTINUOUS_3A_PEAK",
-      "voltage_drop": "1.8V_TO_3.2V_AT_2A"
-    }
-  },
-  
-  "control_logic": {
-    "motor_control_truth_table": {
-      "forward": {
-        "in1": "HIGH",
-        "in2": "LOW",
-        "ena": "HIGH_OR_PWM",
-        "description": "MOTOR_FORWARD_ROTATION"
-      },
-      "reverse": {
-        "in1": "LOW",
-        "in2": "HIGH",
-        "ena": "HIGH_OR_PWM",
-        "description": "MOTOR_REVERSE_ROTATION"
-      },
-      "brake": {
-        "in1": "HIGH",
-        "in2": "HIGH",
-        "ena": "HIGH",
-        "description": "MOTOR_BRAKE_SHORT_CIRCUIT"
-      },
-      "coast": {
-        "in1": "LOW",
-        "in2": "LOW",
-        "ena": "HIGH",
-        "description": "MOTOR_COAST_FREE_RUNNING"
-      },
-      "stop": {
-        "in1": "DONT_CARE",
-        "in2": "DONT_CARE",
-        "ena": "LOW",
-        "description": "MOTOR_DISABLED_HIGH_IMPEDANCE"
-      }
-    },
-    "pwm_speed_control": {
-      "ena_pwm_duty_cycle": "0_TO_100_PERCENT",
-      "speed_proportional": "DUTY_CYCLE_PROPORTIONAL_TO_SPEED",
-      "frequency_recommendation": "1kHz_TO_20kHz",
-      "resolution": "8_BIT_256_STEPS_TYPICAL"
-    }
-  },
-  
-  "power_consumption_analysis": {
-    "quiescent_power": {
-      "description": "Driver powered but motors disabled",
-      "logic_current": "13mA_AT_5V",
-      "logic_power": "65mW",
-      "motor_current": "0mA",
-      "total_power": "65mW_PLUS_MOTOR_SUPPLY_QUIESCENT"
-    },
-    "light_load_operation": {
-      "description": "Motors running at 500mA each",
-      "logic_power": "65mW",
-      "motor_power_loss": "1.8V_DROP_X_1A_TOTAL_1.8W",
-      "efficiency": "APPROXIMATELY_85_PERCENT_AT_12V",
-      "total_driver_loss": "1.865W"
-    },
-    "full_load_operation": {
-      "description": "Motors running at 2A each",
-      "logic_power": "65mW",
-      "motor_power_loss": "3.2V_DROP_X_4A_TOTAL_12.8W",
-      "efficiency": "APPROXIMATELY_73_PERCENT_AT_12V",
-      "total_driver_loss": "12.865W",
-      "cooling_required": "HEATSINK_AND_FAN_MANDATORY"
-    }
-  },
-  
-  "thermal_management": {
-    "junction_temperature_max": "150C",
-    "thermal_shutdown": "AUTOMATIC_AT_OVERTEMPERATURE",
-    "thermal_resistance": {
-      "junction_to_case": "1.5_C_PER_W",
-      "case_to_heatsink": "0.5_C_PER_W_WITH_THERMAL_COMPOUND",
-      "heatsink_to_ambient": "3_C_PER_W_TYPICAL_HEATSINK"
-    },
-    "cooling_requirements": {
-      "under_5w": "NATURAL_CONVECTION_ADEQUATE",
-      "5w_to_15w": "HEATSINK_REQUIRED",
-      "over_15w": "HEATSINK_PLUS_FORCED_AIR_COOLING"
-    }
-  },
-  
-  "protection_features": {
-    "thermal_protection": {
-      "description": "Automatic thermal shutdown",
-      "threshold": "JUNCTION_TEMPERATURE_150C",
-      "hysteresis": "15C_TYPICAL",
-      "recovery": "AUTOMATIC_WHEN_COOLED"
-    },
-    "overcurrent_protection": {
-      "description": "Current limiting protection",
-      "threshold": "APPROXIMATELY_3A_PER_CHANNEL",
-      "action": "CURRENT_LIMITING_NOT_SHUTDOWN"
-    },
-    "undervoltage_lockout": {
-      "vcc_motor_threshold": "6V_MINIMUM_FOR_OPERATION",
-      "vcc_logic_threshold": "4.5V_MINIMUM_FOR_OPERATION"
-    }
-  },
-  
-  "stepper_motor_configuration": {
-    "bipolar_stepper_wiring": {
-      "coil_a": "OUT1_TO_OUT2",
-      "coil_b": "OUT3_TO_OUT4",
-      "control_method": "FULL_STEP_HALF_STEP_SEQUENCES",
-      "current_per_coil": "2A_MAXIMUM"
-    },
-    "step_sequences": {
-      "full_step": [
-        {"in1": "HIGH", "in2": "LOW", "in3": "HIGH", "in4": "LOW"},
-        {"in1": "LOW", "in2": "HIGH", "in3": "HIGH", "in4": "LOW"},
-        {"in1": "LOW", "in2": "HIGH", "in3": "LOW", "in4": "HIGH"},
-        {"in1": "HIGH", "in2": "LOW", "in3": "LOW", "in4": "HIGH"}
-      ],
-      "half_step": "INTERLEAVED_FULL_STEP_WITH_SINGLE_COIL_STEPS"
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "generic_l298n_module": {
-      "motor_supply": ["VCC", "MOTOR_POWER", "12V"],
-      "logic_supply": ["5V", "VCC_LOGIC"],
-      "ground": ["GND", "GROUND"],
-      "motor_a_control": ["IN1", "IN2", "ENA"],
-      "motor_b_control": ["IN3", "IN4", "ENB"],
-      "motor_a_output": ["OUT1", "OUT2"],
-      "motor_b_output": ["OUT3", "OUT4"]
-    },
-    "robotdyn_l298n": {
-      "power_input": ["VIN", "GND"],
-      "logic_input": ["5V", "GND"],
-      "motor_control": ["IN1", "IN2", "IN3", "IN4"],
-      "enable_pins": ["ENA", "ENB"],
-      "motor_outputs": ["MOTOR_A", "MOTOR_B"]
-    },
-    "pololu_l298n": {
-      "power": ["VIN", "GND"],
-      "logic": ["VCC", "GND"],
-      "controls": ["AIN1", "AIN2", "BIN1", "BIN2"],
-      "enables": ["A_EN", "B_EN"]
-    }
-  },
-  
-  "application_examples": {
-    "dual_wheel_drive": {
-      "motors": "2X_DC_GEARED_MOTORS_12V_1A_EACH",
-      "power_consumption": "2.5W_DRIVER_LOSS_PLUS_12W_MOTOR_POWER",
-      "total_power": "14.5W_AT_1A_PER_MOTOR",
-      "use_case": "ROBOT_PLATFORM_LOCOMOTION",
-      "control": "DIFFERENTIAL_STEERING_PWM_SPEED",
-      "cooling": "HEATSINK_RECOMMENDED"
-    },
-    "jaw_articulation_motor": {
-      "motor": "DC_GEARED_MOTOR_12V_500mA",
-      "power_consumption": "900mW_DRIVER_LOSS_PLUS_6W_MOTOR",
-      "total_power": "6.9W",
-      "use_case": "JAW_OPENING_CLOSING_MECHANISM",
-      "control": "POSITION_CONTROL_WITH_FEEDBACK",
-      "advantages": ["PRECISE_SPEED_CONTROL", "BIDIRECTIONAL"]
-    },
-    "arm_joint_actuation": {
-      "motor": "DC_GEARED_MOTOR_24V_1.5A",
-      "power_consumption": "4.8W_DRIVER_LOSS_PLUS_36W_MOTOR",
-      "total_power": "40.8W",
-      "use_case": "ARM_SHOULDER_JOINT_MOVEMENT",
-      "control": "VARIABLE_SPEED_POSITION_CONTROL",
-      "cooling": "HEATSINK_AND_FAN_REQUIRED"
-    },
-    "bipolar_stepper_drive": {
-      "motor": "NEMA17_BIPOLAR_STEPPER_2A_PER_COIL",
-      "power_consumption": "12.8W_DRIVER_LOSS_PLUS_STEPPER_POWER",
-      "total_power": "VARIES_WITH_STEP_RATE",
-      "use_case": "PRECISE_POSITIONING_APPLICATIONS",
-      "control": "MICROSTEPPING_WITH_EXTERNAL_CONTROLLER",
-      "limitations": ["NO_MICROSTEPPING_CAPABILITY", "FULL_HALF_STEP_ONLY"]
-    },
-    "winch_mechanism": {
-      "motor": "HIGH_TORQUE_DC_MOTOR_12V_2A",
-      "power_consumption": "6.4W_DRIVER_LOSS_PLUS_24W_MOTOR",
-      "total_power": "30.4W",
-      "use_case": "CABLE_WINCH_FOR_LIMB_ACTUATION",
-      "control": "SPEED_CONTROL_WITH_CURRENT_LIMITING",
-      "cooling": "FORCED_AIR_COOLING_REQUIRED"
-    }
-  },
-  
-  "vs_other_drivers": {
-    "advantages": {
-      "dual_channel": "TWO_MOTORS_ONE_DRIVER",
-      "high_current": "2A_PER_CHANNEL_ADEQUATE_FOR_MEDIUM_MOTORS",
-      "bidirectional": "FULL_H_BRIDGE_BOTH_DIRECTIONS",
-      "pwm_compatible": "SPEED_CONTROL_CAPABILITY",
-      "cost_effective": "LOW_COST_FOR_DUAL_CHANNEL"
-    },
-    "disadvantages": {
-      "voltage_drop": "HIGH_VOLTAGE_DROP_REDUCES_EFFICIENCY",
-      "heat_generation": "SIGNIFICANT_HEAT_AT_HIGH_CURRENTS",
-      "no_microstepping": "LIMITED_FOR_STEPPER_APPLICATIONS",
-      "no_current_sense": "NO_BUILT_IN_CURRENT_FEEDBACK",
-      "fixed_logic_voltage": "5V_LOGIC_ONLY"
-    }
-  },
-  
-  "design_considerations": {
-    "power_supply_sizing": {
-      "motor_voltage": "7V_TO_35V_RANGE",
-      "current_capacity": "SUM_OF_MOTOR_CURRENTS_PLUS_25_PERCENT",
-      "voltage_regulation": "REGULATED_SUPPLY_RECOMMENDED"
-    },
-    "pcb_layout": {
-      "thermal_vias": "MULTIPLE_THERMAL_VIAS_UNDER_IC",
-      "ground_plane": "SOLID_GROUND_PLANE_FOR_HEAT_DISSIPATION",
-      "trace_width": "WIDE_TRACES_FOR_MOTOR_CURRENT_PATHS"
-    },
-    "noise_considerations": {
-      "motor_noise": "MOTOR_SWITCHING_GENERATES_EMI",
-      "filtering": "CAPACITORS_ON_MOTOR_LEADS_RECOMMENDED",
-      "isolation": "OPTOISOLATION_FOR_SENSITIVE_CIRCUITS"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/l298n_motor_driver.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "L298N_MOTOR_DRIVER",
+    "interface_type":  "DUAL_H_BRIDGE_MOTOR_DRIVER",
+    "description":  "L298N dual H-bridge motor driver for DC motors and stepper motors up to 2A per channel",
+    "hardware_specifications":  {
+                                    "driver_type":  "DUAL_H_BRIDGE_MOTOR_DRIVER",
+                                    "channels":  2,
+                                    "operating_voltage":  "5V_TO_35V_MOTOR_SUPPLY",
+                                    "logic_voltage":  "5V",
+                                    "current_per_channel":  "2A_CONTINUOUS_3A_PEAK",
+                                    "total_power_dissipation":  "25W_WITH_HEATSINK",
+                                    "quiescent_current":  "13mA_TYPICAL",
+                                    "standby_current":  "6mA_TYPICAL",
+                                    "logic_power_consumption":  "65mW_AT_5V_LOGIC",
+                                    "package":  "15_PIN_MULTIWATT",
+                                    "thermal_resistance":  "3_C_PER_W_WITH_HEATSINK",
+                                    "module_dimensions":  "55x49x30mm_TYPICAL_BREAKOUT"
+                                },
+    "pin_requirements":  {
+                             "vcc_motor_pin":  {
+                                                   "function":  "motor_power_supply",
+                                                   "generic_name":  "vcc_motor",
+                                                   "description":  "Motor power supply input",
+                                                   "voltage_range":  "7V_TO_35V",
+                                                   "voltage_optimal":  "12V_TO_24V",
+                                                   "current_capacity":  "4A_TOTAL_BOTH_CHANNELS",
+                                                   "power_capacity":  "50W_MAXIMUM_WITH_COOLING"
+                                               },
+                             "vcc_logic_pin":  {
+                                                   "function":  "logic_power_supply",
+                                                   "generic_name":  "vcc_logic",
+                                                   "description":  "Logic power supply input",
+                                                   "voltage_level":  "5V",
+                                                   "current_consumption":  "13mA_QUIESCENT",
+                                                   "power_consumption":  "65mW_TYPICAL",
+                                                   "regulation":  "ONBOARD_5V_REGULATOR_IF_VCC_MOTOR_ABOVE_12V"
+                                               },
+                             "gnd_pin":  {
+                                             "function":  "ground_reference",
+                                             "generic_name":  "gnd",
+                                             "description":  "Ground reference for logic and power",
+                                             "voltage_level":  "0V"
+                                         }
+                         },
+    "motor_a_pins":  {
+                         "in1_pin":  {
+                                         "function":  "motor_a_direction_control_1",
+                                         "generic_name":  "in1",
+                                         "description":  "Motor A direction control input 1",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "in2_pin":  {
+                                         "function":  "motor_a_direction_control_2",
+                                         "generic_name":  "in2",
+                                         "description":  "Motor A direction control input 2",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "ena_pin":  {
+                                         "function":  "motor_a_enable_speed",
+                                         "generic_name":  "ena",
+                                         "description":  "Motor A enable and speed control",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL_PWM",
+                                         "pwm_frequency":  "1kHz_TO_20kHz_OPTIMAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "out1_pin":  {
+                                          "function":  "motor_a_output_1",
+                                          "generic_name":  "out1",
+                                          "description":  "Motor A output terminal 1",
+                                          "current_capacity":  "2A_CONTINUOUS_3A_PEAK",
+                                          "voltage_drop":  "1.8V_TO_3.2V_AT_2A"
+                                      },
+                         "out2_pin":  {
+                                          "function":  "motor_a_output_2",
+                                          "generic_name":  "out2",
+                                          "description":  "Motor A output terminal 2",
+                                          "current_capacity":  "2A_CONTINUOUS_3A_PEAK",
+                                          "voltage_drop":  "1.8V_TO_3.2V_AT_2A"
+                                      }
+                     },
+    "motor_b_pins":  {
+                         "in3_pin":  {
+                                         "function":  "motor_b_direction_control_1",
+                                         "generic_name":  "in3",
+                                         "description":  "Motor B direction control input 3",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "in4_pin":  {
+                                         "function":  "motor_b_direction_control_2",
+                                         "generic_name":  "in4",
+                                         "description":  "Motor B direction control input 4",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "enb_pin":  {
+                                         "function":  "motor_b_enable_speed",
+                                         "generic_name":  "enb",
+                                         "description":  "Motor B enable and speed control",
+                                         "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                         "signal_type":  "DIGITAL_PWM",
+                                         "pwm_frequency":  "1kHz_TO_20kHz_OPTIMAL",
+                                         "current_consumption":  "1.6mA_HIGH"
+                                     },
+                         "out3_pin":  {
+                                          "function":  "motor_b_output_1",
+                                          "generic_name":  "out3",
+                                          "description":  "Motor B output terminal 1",
+                                          "current_capacity":  "2A_CONTINUOUS_3A_PEAK",
+                                          "voltage_drop":  "1.8V_TO_3.2V_AT_2A"
+                                      },
+                         "out4_pin":  {
+                                          "function":  "motor_b_output_2",
+                                          "generic_name":  "out4",
+                                          "description":  "Motor B output terminal 2",
+                                          "current_capacity":  "2A_CONTINUOUS_3A_PEAK",
+                                          "voltage_drop":  "1.8V_TO_3.2V_AT_2A"
+                                      }
+                     },
+    "control_logic":  {
+                          "motor_control_truth_table":  {
+                                                            "forward":  {
+                                                                            "in1":  "HIGH",
+                                                                            "in2":  "LOW",
+                                                                            "ena":  "HIGH_OR_PWM",
+                                                                            "description":  "MOTOR_FORWARD_ROTATION"
+                                                                        },
+                                                            "reverse":  {
+                                                                            "in1":  "LOW",
+                                                                            "in2":  "HIGH",
+                                                                            "ena":  "HIGH_OR_PWM",
+                                                                            "description":  "MOTOR_REVERSE_ROTATION"
+                                                                        },
+                                                            "brake":  {
+                                                                          "in1":  "HIGH",
+                                                                          "in2":  "HIGH",
+                                                                          "ena":  "HIGH",
+                                                                          "description":  "MOTOR_BRAKE_SHORT_CIRCUIT"
+                                                                      },
+                                                            "coast":  {
+                                                                          "in1":  "LOW",
+                                                                          "in2":  "LOW",
+                                                                          "ena":  "HIGH",
+                                                                          "description":  "MOTOR_COAST_FREE_RUNNING"
+                                                                      },
+                                                            "stop":  {
+                                                                         "in1":  "DONT_CARE",
+                                                                         "in2":  "DONT_CARE",
+                                                                         "ena":  "LOW",
+                                                                         "description":  "MOTOR_DISABLED_HIGH_IMPEDANCE"
+                                                                     }
+                                                        },
+                          "pwm_speed_control":  {
+                                                    "ena_pwm_duty_cycle":  "0_TO_100_PERCENT",
+                                                    "speed_proportional":  "DUTY_CYCLE_PROPORTIONAL_TO_SPEED",
+                                                    "frequency_recommendation":  "1kHz_TO_20kHz",
+                                                    "resolution":  "8_BIT_256_STEPS_TYPICAL"
+                                                }
+                      },
+    "power_consumption_analysis":  {
+                                       "quiescent_power":  {
+                                                               "description":  "Driver powered but motors disabled",
+                                                               "logic_current":  "13mA_AT_5V",
+                                                               "logic_power":  "65mW",
+                                                               "motor_current":  "0mA",
+                                                               "total_power":  "65mW_PLUS_MOTOR_SUPPLY_QUIESCENT"
+                                                           },
+                                       "light_load_operation":  {
+                                                                    "description":  "Motors running at 500mA each",
+                                                                    "logic_power":  "65mW",
+                                                                    "motor_power_loss":  "1.8V_DROP_X_1A_TOTAL_1.8W",
+                                                                    "efficiency":  "APPROXIMATELY_85_PERCENT_AT_12V",
+                                                                    "total_driver_loss":  "1.865W"
+                                                                },
+                                       "full_load_operation":  {
+                                                                   "description":  "Motors running at 2A each",
+                                                                   "logic_power":  "65mW",
+                                                                   "motor_power_loss":  "3.2V_DROP_X_4A_TOTAL_12.8W",
+                                                                   "efficiency":  "APPROXIMATELY_73_PERCENT_AT_12V",
+                                                                   "total_driver_loss":  "12.865W",
+                                                                   "cooling_required":  "HEATSINK_AND_FAN_MANDATORY"
+                                                               }
+                                   },
+    "thermal_management":  {
+                               "junction_temperature_max":  "150C",
+                               "thermal_shutdown":  "AUTOMATIC_AT_OVERTEMPERATURE",
+                               "thermal_resistance":  {
+                                                          "junction_to_case":  "1.5_C_PER_W",
+                                                          "case_to_heatsink":  "0.5_C_PER_W_WITH_THERMAL_COMPOUND",
+                                                          "heatsink_to_ambient":  "3_C_PER_W_TYPICAL_HEATSINK"
+                                                      },
+                               "cooling_requirements":  {
+                                                            "under_5w":  "NATURAL_CONVECTION_ADEQUATE",
+                                                            "5w_to_15w":  "HEATSINK_REQUIRED",
+                                                            "over_15w":  "HEATSINK_PLUS_FORCED_AIR_COOLING"
+                                                        }
+                           },
+    "protection_features":  {
+                                "thermal_protection":  {
+                                                           "description":  "Automatic thermal shutdown",
+                                                           "threshold":  "JUNCTION_TEMPERATURE_150C",
+                                                           "hysteresis":  "15C_TYPICAL",
+                                                           "recovery":  "AUTOMATIC_WHEN_COOLED"
+                                                       },
+                                "overcurrent_protection":  {
+                                                               "description":  "Current limiting protection",
+                                                               "threshold":  "APPROXIMATELY_3A_PER_CHANNEL",
+                                                               "action":  "CURRENT_LIMITING_NOT_SHUTDOWN"
+                                                           },
+                                "undervoltage_lockout":  {
+                                                             "vcc_motor_threshold":  "6V_MINIMUM_FOR_OPERATION",
+                                                             "vcc_logic_threshold":  "4.5V_MINIMUM_FOR_OPERATION"
+                                                         }
+                            },
+    "stepper_motor_configuration":  {
+                                        "bipolar_stepper_wiring":  {
+                                                                       "coil_a":  "OUT1_TO_OUT2",
+                                                                       "coil_b":  "OUT3_TO_OUT4",
+                                                                       "control_method":  "FULL_STEP_HALF_STEP_SEQUENCES",
+                                                                       "current_per_coil":  "2A_MAXIMUM"
+                                                                   },
+                                        "step_sequences":  {
+                                                               "full_step":  [
+                                                                                 {
+                                                                                     "in1":  "HIGH",
+                                                                                     "in2":  "LOW",
+                                                                                     "in3":  "HIGH",
+                                                                                     "in4":  "LOW"
+                                                                                 },
+                                                                                 {
+                                                                                     "in1":  "LOW",
+                                                                                     "in2":  "HIGH",
+                                                                                     "in3":  "HIGH",
+                                                                                     "in4":  "LOW"
+                                                                                 },
+                                                                                 {
+                                                                                     "in1":  "LOW",
+                                                                                     "in2":  "HIGH",
+                                                                                     "in3":  "LOW",
+                                                                                     "in4":  "HIGH"
+                                                                                 },
+                                                                                 {
+                                                                                     "in1":  "HIGH",
+                                                                                     "in2":  "LOW",
+                                                                                     "in3":  "LOW",
+                                                                                     "in4":  "HIGH"
+                                                                                 }
+                                                                             ],
+                                                               "half_step":  "INTERLEAVED_FULL_STEP_WITH_SINGLE_COIL_STEPS"
+                                                           }
+                                    },
+    "manufacturer_pin_mappings":  {
+                                      "generic_l298n_module":  {
+                                                                   "motor_supply":  [
+                                                                                        "VCC",
+                                                                                        "MOTOR_POWER",
+                                                                                        "12V"
+                                                                                    ],
+                                                                   "logic_supply":  [
+                                                                                        "5V",
+                                                                                        "VCC_LOGIC"
+                                                                                    ],
+                                                                   "ground":  [
+                                                                                  "GND",
+                                                                                  "GROUND"
+                                                                              ],
+                                                                   "motor_a_control":  [
+                                                                                           "IN1",
+                                                                                           "IN2",
+                                                                                           "ENA"
+                                                                                       ],
+                                                                   "motor_b_control":  [
+                                                                                           "IN3",
+                                                                                           "IN4",
+                                                                                           "ENB"
+                                                                                       ],
+                                                                   "motor_a_output":  [
+                                                                                          "OUT1",
+                                                                                          "OUT2"
+                                                                                      ],
+                                                                   "motor_b_output":  [
+                                                                                          "OUT3",
+                                                                                          "OUT4"
+                                                                                      ]
+                                                               },
+                                      "robotdyn_l298n":  {
+                                                             "power_input":  [
+                                                                                 "VIN",
+                                                                                 "GND"
+                                                                             ],
+                                                             "logic_input":  [
+                                                                                 "5V",
+                                                                                 "GND"
+                                                                             ],
+                                                             "motor_control":  [
+                                                                                   "IN1",
+                                                                                   "IN2",
+                                                                                   "IN3",
+                                                                                   "IN4"
+                                                                               ],
+                                                             "enable_pins":  [
+                                                                                 "ENA",
+                                                                                 "ENB"
+                                                                             ],
+                                                             "motor_outputs":  [
+                                                                                   "MOTOR_A",
+                                                                                   "MOTOR_B"
+                                                                               ]
+                                                         },
+                                      "pololu_l298n":  {
+                                                           "power":  [
+                                                                         "VIN",
+                                                                         "GND"
+                                                                     ],
+                                                           "logic":  [
+                                                                         "VCC",
+                                                                         "GND"
+                                                                     ],
+                                                           "controls":  [
+                                                                            "AIN1",
+                                                                            "AIN2",
+                                                                            "BIN1",
+                                                                            "BIN2"
+                                                                        ],
+                                                           "enables":  [
+                                                                           "A_EN",
+                                                                           "B_EN"
+                                                                       ]
+                                                       }
+                                  },
+    "application_examples":  {
+                                 "dual_wheel_drive":  {
+                                                          "motors":  "2X_DC_GEARED_MOTORS_12V_1A_EACH",
+                                                          "power_consumption":  "2.5W_DRIVER_LOSS_PLUS_12W_MOTOR_POWER",
+                                                          "total_power":  "14.5W_AT_1A_PER_MOTOR",
+                                                          "use_case":  "ROBOT_PLATFORM_LOCOMOTION",
+                                                          "control":  "DIFFERENTIAL_STEERING_PWM_SPEED",
+                                                          "cooling":  "HEATSINK_RECOMMENDED"
+                                                      },
+                                 "jaw_articulation_motor":  {
+                                                                "motor":  "DC_GEARED_MOTOR_12V_500mA",
+                                                                "power_consumption":  "900mW_DRIVER_LOSS_PLUS_6W_MOTOR",
+                                                                "total_power":  "6.9W",
+                                                                "use_case":  "JAW_OPENING_CLOSING_MECHANISM",
+                                                                "control":  "POSITION_CONTROL_WITH_FEEDBACK",
+                                                                "advantages":  [
+                                                                                   "PRECISE_SPEED_CONTROL",
+                                                                                   "BIDIRECTIONAL"
+                                                                               ]
+                                                            },
+                                 "arm_joint_actuation":  {
+                                                             "motor":  "DC_GEARED_MOTOR_24V_1.5A",
+                                                             "power_consumption":  "4.8W_DRIVER_LOSS_PLUS_36W_MOTOR",
+                                                             "total_power":  "40.8W",
+                                                             "use_case":  "ARM_SHOULDER_JOINT_MOVEMENT",
+                                                             "control":  "VARIABLE_SPEED_POSITION_CONTROL",
+                                                             "cooling":  "HEATSINK_AND_FAN_REQUIRED"
+                                                         },
+                                 "bipolar_stepper_drive":  {
+                                                               "motor":  "NEMA17_BIPOLAR_STEPPER_2A_PER_COIL",
+                                                               "power_consumption":  "12.8W_DRIVER_LOSS_PLUS_STEPPER_POWER",
+                                                               "total_power":  "VARIES_WITH_STEP_RATE",
+                                                               "use_case":  "PRECISE_POSITIONING_APPLICATIONS",
+                                                               "control":  "MICROSTEPPING_WITH_EXTERNAL_CONTROLLER",
+                                                               "limitations":  [
+                                                                                   "NO_MICROSTEPPING_CAPABILITY",
+                                                                                   "FULL_HALF_STEP_ONLY"
+                                                                               ]
+                                                           },
+                                 "winch_mechanism":  {
+                                                         "motor":  "HIGH_TORQUE_DC_MOTOR_12V_2A",
+                                                         "power_consumption":  "6.4W_DRIVER_LOSS_PLUS_24W_MOTOR",
+                                                         "total_power":  "30.4W",
+                                                         "use_case":  "CABLE_WINCH_FOR_LIMB_ACTUATION",
+                                                         "control":  "SPEED_CONTROL_WITH_CURRENT_LIMITING",
+                                                         "cooling":  "FORCED_AIR_COOLING_REQUIRED"
+                                                     }
+                             },
+    "vs_other_drivers":  {
+                             "advantages":  {
+                                                "dual_channel":  "TWO_MOTORS_ONE_DRIVER",
+                                                "high_current":  "2A_PER_CHANNEL_ADEQUATE_FOR_MEDIUM_MOTORS",
+                                                "bidirectional":  "FULL_H_BRIDGE_BOTH_DIRECTIONS",
+                                                "pwm_compatible":  "SPEED_CONTROL_CAPABILITY",
+                                                "cost_effective":  "LOW_COST_FOR_DUAL_CHANNEL"
+                                            },
+                             "disadvantages":  {
+                                                   "voltage_drop":  "HIGH_VOLTAGE_DROP_REDUCES_EFFICIENCY",
+                                                   "heat_generation":  "SIGNIFICANT_HEAT_AT_HIGH_CURRENTS",
+                                                   "no_microstepping":  "LIMITED_FOR_STEPPER_APPLICATIONS",
+                                                   "no_current_sense":  "NO_BUILT_IN_CURRENT_FEEDBACK",
+                                                   "fixed_logic_voltage":  "5V_LOGIC_ONLY"
+                                               }
+                         },
+    "design_considerations":  {
+                                  "power_supply_sizing":  {
+                                                              "motor_voltage":  "7V_TO_35V_RANGE",
+                                                              "current_capacity":  "SUM_OF_MOTOR_CURRENTS_PLUS_25_PERCENT",
+                                                              "voltage_regulation":  "REGULATED_SUPPLY_RECOMMENDED"
+                                                          },
+                                  "pcb_layout":  {
+                                                     "thermal_vias":  "MULTIPLE_THERMAL_VIAS_UNDER_IC",
+                                                     "ground_plane":  "SOLID_GROUND_PLANE_FOR_HEAT_DISSIPATION",
+                                                     "trace_width":  "WIDE_TRACES_FOR_MOTOR_CURRENT_PATHS"
+                                                 },
+                                  "noise_considerations":  {
+                                                               "motor_noise":  "MOTOR_SWITCHING_GENERATES_EMI",
+                                                               "filtering":  "CAPACITORS_ON_MOTOR_LEADS_RECOMMENDED",
+                                                               "isolation":  "OPTOISOLATION_FOR_SENSITIVE_CIRCUITS"
+                                                           }
+                              }
 }

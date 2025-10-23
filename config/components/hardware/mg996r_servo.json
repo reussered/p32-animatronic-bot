@@ -1,185 +1,82 @@
-{
-
-  "relative_filename": "config/components/hardware/mg996r_servo.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  
-
-  "component_name": "mg996r_servo",
-  "subsystem": "UNKNOWN",
-
-  "component_name": "MG996R_SERVO",
-  "subsystem": "UNKNOWN",
-
-  "component_type": "SERVO_MOTOR",
-
-  "description": "Standard servo motor replacing expensive Dynamixel servos in ESP32-S3 adaptation",
-
-  "hitCount": 1,
-
-  
-
-  "physical_specifications": {
-
-    "torque": "11 KG-CM",
-
-    "operating_voltage": "4.8V - 7.2V",
-
-    "operating_current": "1.5A MAX",
-
-    "speed": "0.19 SEC/60_DEGREES_AT_6V",
-
-    "weight": "55 GRAMS",
-
-    "dimensions": {
-
-      "length": "40.7 MM",
-
-      "width": "19.7 MM", 
-
-      "height": "42.9 MM"
-
-    }
-
-  },
-
-  
-
-  "control_specifications": {
-
-    "control_signal": "PWM",
-
-    "pulse_width_min": "1000 MICROSECONDS",
-
-    "pulse_width_max": "2000 MICROSECONDS",
-
-    "pulse_width_center": "1500 MICROSECONDS",
-
-    "pwm_frequency": "50 HZ",
-
-    "rotation_range": "180 DEGREES"
-
-  },
-
-  
-
-  "esp32_integration": {
-
-    "gpio_requirements": "1 PWM PIN",
-
-    "power_supply": "6V REGULATED",
-
-    "current_protection": "RECOMMENDED",
-
-    "position_feedback": "NONE_PWM_ONLY",
-
-    "esp32_pwm_channel": "LEDC_CHANNEL"
-
-  },
-
-  
-
-  "cost_comparison": {
-
-    "mg996r_cost": "$8 USD",
-
-    "dynamixel_mx28_cost": "$200 USD", 
-
-    "cost_savings": "96% REDUCTION",
-
-    "performance_ratio": "COMPARABLE_TORQUE"
-
-  },
-
-  
-
-  "applications_in_humanoid": {
-
-    "heavy_duty_joints": [
-
-      "HIP_YAW",
-
-      "HIP_PITCH", 
-
-      "HIP_ROLL",
-
-      "KNEE_PITCH",
-
-      "SHOULDER_PITCH",
-
-      "SHOULDER_ROLL"
-
-    ],
-
-    
-
-    "mounting_adaptation": {
-
-      "original_dynamixel_mount": "CUSTOM_BRACKET_REQUIRED",
-
-      "stl_modification": "SERVO_HORN_ADAPTER", 
-
-      "bearing_integration": "STANDARD_BEARINGS"
-
-    }
-
-  },
-
-  
-
-  "esp32_control_code": {
-
-    "initialization": "ledcSetup(channel, 50, 16)",
-
-    "angle_control": "ledcWrite(channel, pulseWidth)",
-
-    "angle_to_pulse": "map(angle, 0, 180, 1000, 2000)"
-
-  },
-
-  
-
-  "advantages_over_dynamixel": {
-
-    "cost": "DRAMATICALLY_LOWER",
-
-    "availability": "STANDARD_HOBBY_SERVO",
-
-    "debugging": "SIMPLE_PWM_SIGNAL", 
-
-    "replacement": "EASY_TO_SOURCE",
-
-    "power": "STANDARD_6V_SUPPLY"
-
-  },
-
-  
-
-  "limitations": {
-
-    "position_feedback": "NO_BUILT_IN_ENCODER",
-
-    "communication": "PWM_ONLY_NO_SERIAL", 
-
-    "precision": "LOWER_THAN_DYNAMIXEL",
-
-    "advanced_features": "NO_COMPLIANCE_MODE"
-
-  },
-
-  
-
-  "mitigation_strategies": {
-
-    "position_feedback": "EXTERNAL_POTENTIOMETER_OR_ENCODER",
-
-    "precision": "CLOSED_LOOP_CONTROL_WITH_FEEDBACK",
-
-    "compliance": "SOFTWARE_CURRENT_LIMITING"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/hardware/mg996r_servo.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "MG996R_SERVO",
+    "subsystem":  "UNKNOWN",
+    "component_type":  "SERVO_MOTOR",
+    "description":  "Standard servo motor replacing expensive Dynamixel servos in ESP32-S3 adaptation",
+    "hitCount":  1,
+    "physical_specifications":  {
+                                    "torque":  "11 KG-CM",
+                                    "operating_voltage":  "4.8V - 7.2V",
+                                    "operating_current":  "1.5A MAX",
+                                    "speed":  "0.19 SEC/60_DEGREES_AT_6V",
+                                    "weight":  "55 GRAMS",
+                                    "dimensions":  {
+                                                       "length":  "40.7 MM",
+                                                       "width":  "19.7 MM",
+                                                       "height":  "42.9 MM"
+                                                   }
+                                },
+    "control_specifications":  {
+                                   "control_signal":  "PWM",
+                                   "pulse_width_min":  "1000 MICROSECONDS",
+                                   "pulse_width_max":  "2000 MICROSECONDS",
+                                   "pulse_width_center":  "1500 MICROSECONDS",
+                                   "pwm_frequency":  "50 HZ",
+                                   "rotation_range":  "180 DEGREES"
+                               },
+    "esp32_integration":  {
+                              "gpio_requirements":  "1 PWM PIN",
+                              "power_supply":  "6V REGULATED",
+                              "current_protection":  "RECOMMENDED",
+                              "position_feedback":  "NONE_PWM_ONLY",
+                              "esp32_pwm_channel":  "LEDC_CHANNEL"
+                          },
+    "cost_comparison":  {
+                            "mg996r_cost":  "$8 USD",
+                            "dynamixel_mx28_cost":  "$200 USD",
+                            "cost_savings":  "96% REDUCTION",
+                            "performance_ratio":  "COMPARABLE_TORQUE"
+                        },
+    "applications_in_humanoid":  {
+                                     "heavy_duty_joints":  [
+                                                               "HIP_YAW",
+                                                               "HIP_PITCH",
+                                                               "HIP_ROLL",
+                                                               "KNEE_PITCH",
+                                                               "SHOULDER_PITCH",
+                                                               "SHOULDER_ROLL"
+                                                           ],
+                                     "mounting_adaptation":  {
+                                                                 "original_dynamixel_mount":  "CUSTOM_BRACKET_REQUIRED",
+                                                                 "stl_modification":  "SERVO_HORN_ADAPTER",
+                                                                 "bearing_integration":  "STANDARD_BEARINGS"
+                                                             }
+                                 },
+    "esp32_control_code":  {
+                               "initialization":  "ledcSetup(channel, 50, 16)",
+                               "angle_control":  "ledcWrite(channel, pulseWidth)",
+                               "angle_to_pulse":  "map(angle, 0, 180, 1000, 2000)"
+                           },
+    "advantages_over_dynamixel":  {
+                                      "cost":  "DRAMATICALLY_LOWER",
+                                      "availability":  "STANDARD_HOBBY_SERVO",
+                                      "debugging":  "SIMPLE_PWM_SIGNAL",
+                                      "replacement":  "EASY_TO_SOURCE",
+                                      "power":  "STANDARD_6V_SUPPLY"
+                                  },
+    "limitations":  {
+                        "position_feedback":  "NO_BUILT_IN_ENCODER",
+                        "communication":  "PWM_ONLY_NO_SERIAL",
+                        "precision":  "LOWER_THAN_DYNAMIXEL",
+                        "advanced_features":  "NO_COMPLIANCE_MODE"
+                    },
+    "mitigation_strategies":  {
+                                  "position_feedback":  "EXTERNAL_POTENTIOMETER_OR_ENCODER",
+                                  "precision":  "CLOSED_LOOP_CONTROL_WITH_FEEDBACK",
+                                  "compliance":  "SOFTWARE_CURRENT_LIMITING"
+                              },
+    "hardware_type":  "SERVO_MOTOR"
 }

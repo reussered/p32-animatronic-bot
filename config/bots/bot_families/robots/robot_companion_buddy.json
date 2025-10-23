@@ -1,94 +1,85 @@
-{
-  "relative_filename": "config/bots/robot_companion_buddy.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "bot_id": "ROBOT_BUDDY_V3",
-  "bot_type": "COMPANION_ROBOT",
-  "description": "Friendly companion robot designed for social interaction and emotional support",
-  "created": "2025-10-12",
-  
-  "family_template": "config/bots/bot_families/mechanical/robot_family_enhanced.json",
-  "subfamily_variant": "companion_robot",
-  
-  "overrides": {
-    "mood_defaults": {
-      "HAPPINESS": 35,
-      "AFFECTION": 30,
-      "CURIOSITY": 30,
-      "CONTENTMENT": 25, 
-      "EXCITEMENT": 20,
-      "FEAR": 5,
-      "ANGER": 0,
-      "IRRITATION": 5
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": false,
-      "auto_sleep_timeout_seconds": 600,
-      "interaction_range_cm": 150,
-      "social_mode_enabled": true,
-      "emotion_mimicry_enabled": true,
-      "learning_enabled": true
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/emotion_camera.json",
-    "config/components/positioned/touch_sensor_array.json",
-    "config/components/positioned/comfort_speaker.json",
-    "config/components/positioned/pet_simulation_servos.json"
-  ],
-  
-  "social_behaviors": {
-    "greeting_patterns": [
-      "enthusiastic_wave",
-      "friendly_nod",
-      "cheerful_chirp",
-      "light_show"
-    ],
-    "comfort_responses": [
-      "empathetic_sounds",
-      "warm_light_glow",
-      "gentle_movement",
-      "soothing_music"
-    ],
-    "play_modes": [
-      "interactive_games",
-      "storytelling",
-      "music_sharing",
-      "movement_mirroring"
-    ]
-  },
-  
-  "personality_traits": {
-    "empathy_level": "high",
-    "patience_level": "very_high",
-    "playfulness": "moderate_high",
-    "protective_instinct": "moderate",
-    "learning_curiosity": "high"
-  },
-  
-  "aesthetic_customization": {
-    "color_scheme": "friendly_pastels",
-    "soft_lighting": true,
-    "rounded_features": true,
-    "approachable_design": true
-  },
-  
-  "interaction_capabilities": {
-    "voice_recognition": true,
-    "facial_expression_reading": true,
-    "gesture_interpretation": true,
-    "emotional_state_detection": true,
-    "memory_of_users": true,
-    "preference_learning": true
-  },
-  
-  "safety_features": {
-    "child_safe_materials": true,
-    "rounded_edges": true,
-    "emergency_stop": true,
-    "privacy_protection": true,
-    "supervised_learning": true
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/robots/robot_companion_buddy.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_id":  "ROBOT_BUDDY_V3",
+    "bot_type":  "COMPANION_ROBOT",
+    "description":  "Friendly companion robot designed for social interaction and emotional support",
+    "created":  "2025-10-12",
+    "family_template":  "config/bots/bot_families/mechanical/robot_family_enhanced.json",
+    "subfamily_variant":  "companion_robot",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "HAPPINESS":  35,
+                                            "AFFECTION":  30,
+                                            "CURIOSITY":  30,
+                                            "CONTENTMENT":  25,
+                                            "EXCITEMENT":  20,
+                                            "FEAR":  5,
+                                            "ANGER":  0,
+                                            "IRRITATION":  5
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  false,
+                                              "auto_sleep_timeout_seconds":  600,
+                                              "interaction_range_cm":  150,
+                                              "social_mode_enabled":  true,
+                                              "emotion_mimicry_enabled":  true,
+                                              "learning_enabled":  true
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/emotion_camera.json",
+                                  "config/components/positioned/touch_sensor_array.json",
+                                  "config/components/positioned/comfort_speaker.json",
+                                  "config/components/positioned/pet_simulation_servos.json"
+                              ],
+    "social_behaviors":  {
+                             "greeting_patterns":  [
+                                                       "enthusiastic_wave",
+                                                       "friendly_nod",
+                                                       "cheerful_chirp",
+                                                       "light_show"
+                                                   ],
+                             "comfort_responses":  [
+                                                       "empathetic_sounds",
+                                                       "warm_light_glow",
+                                                       "gentle_movement",
+                                                       "soothing_music"
+                                                   ],
+                             "play_modes":  [
+                                                "interactive_games",
+                                                "storytelling",
+                                                "music_sharing",
+                                                "movement_mirroring"
+                                            ]
+                         },
+    "personality_traits":  {
+                               "empathy_level":  "high",
+                               "patience_level":  "very_high",
+                               "playfulness":  "moderate_high",
+                               "protective_instinct":  "moderate",
+                               "learning_curiosity":  "high"
+                           },
+    "aesthetic_customization":  {
+                                    "color_scheme":  "friendly_pastels",
+                                    "soft_lighting":  true,
+                                    "rounded_features":  true,
+                                    "approachable_design":  true
+                                },
+    "interaction_capabilities":  {
+                                     "voice_recognition":  true,
+                                     "facial_expression_reading":  true,
+                                     "gesture_interpretation":  true,
+                                     "emotional_state_detection":  true,
+                                     "memory_of_users":  true,
+                                     "preference_learning":  true
+                                 },
+    "safety_features":  {
+                            "child_safe_materials":  true,
+                            "rounded_edges":  true,
+                            "emergency_stop":  true,
+                            "privacy_protection":  true,
+                            "supervised_learning":  true
+                        }
 }

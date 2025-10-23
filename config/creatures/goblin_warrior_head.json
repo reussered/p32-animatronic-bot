@@ -1,56 +1,55 @@
-{
-  "relative_filename": "config/creatures/goblin_warrior_head.json",
-  "version": "1.0.0", 
-  "author": "config/author.json",
-  "bot_id": "goblin_warrior_head_001",
-  "bot_type": "GOBLIN_WARRIOR_HEAD",
-  "description": "Aggressive goblin warrior head subsystem with battle scars and fierce expression",
-  "created": "2025-10-13",
-  
-  "family_template": "config/templates/families/goblin_family.json",
-  
-  "individual_characteristics": {
-    "name": "Skarfang",
-    "personality": "aggressive_territorial",
-    "battle_experience": "veteran",
-    "scar_pattern": "left_eye_diagonal"
-  },
-  
-  "individual_mood_overrides": {
-    "ANGER": 20,
-    "IRRITATION": 22,
-    "FEAR": 5,
-    "AFFECTION": 3
-  },
-  
-  "individual_components": [
-    "config/components/positioned/goblin_warrior_battle_scar_left.json",
-    "config/components/positioned/goblin_warrior_tooth_fang.json"
-  ],
-  
-  "aesthetic_overrides": {
-    "color_scheme": "dark_green_red",
-    "weathering_effects": true,
-    "battle_damage": "moderate",
-    "eye_glow_intensity": 0.8
-  },
-  
-  "behavioral_overrides": {
-    "aggression_threshold": "low",
-    "attention_span_seconds": "8",
-    "territorial_radius_inches": "24"
-  },
-  
-  "sound_overrides": {
-    "voice_pitch": "low_menacing",
-    "comfort_sounds": ["low_growl", "territorial_grunt"],
-    "alert_sounds": ["battle_roar", "threat_snarl", "challenge_howl"],
-    "ambient_volume": 0.8
-  },
-  
-  "timing_overrides": {
-    "eye_blink_hitCount": 120,
-    "mood_update_hitCount": 25,
-    "threat_assessment_hitCount": 10
-  }
+﻿{
+    "relative_filename":  "config/creatures/goblin_warrior_head.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_id":  "goblin_warrior_head_001",
+    "bot_type":  "GOBLIN_WARRIOR_HEAD",
+    "description":  "Aggressive goblin warrior head subsystem with battle scars and fierce expression",
+    "created":  "2025-10-13",
+    "family_template":  "config/templates/families/goblin_family.json",
+    "individual_characteristics":  {
+                                       "name":  "Skarfang",
+                                       "personality":  "aggressive_territorial",
+                                       "battle_experience":  "veteran",
+                                       "scar_pattern":  "left_eye_diagonal"
+                                   },
+    "individual_mood_overrides":  {
+                                      "ANGER":  20,
+                                      "IRRITATION":  22,
+                                      "FEAR":  5,
+                                      "AFFECTION":  3
+                                  },
+    "individual_components":  [
+                                  "config/components/positioned/goblin_warrior_battle_scar_left.json",
+                                  "config/components/positioned/goblin_warrior_tooth_fang.json"
+                              ],
+    "aesthetic_overrides":  {
+                                "color_scheme":  "dark_green_red",
+                                "weathering_effects":  true,
+                                "battle_damage":  "moderate",
+                                "eye_glow_intensity":  0.8
+                            },
+    "behavioral_overrides":  {
+                                 "aggression_threshold":  "low",
+                                 "attention_span_seconds":  "8",
+                                 "territorial_radius_inches":  "24"
+                             },
+    "sound_overrides":  {
+                            "voice_pitch":  "low_menacing",
+                            "comfort_sounds":  [
+                                                   "low_growl",
+                                                   "territorial_grunt"
+                                               ],
+                            "alert_sounds":  [
+                                                 "battle_roar",
+                                                 "threat_snarl",
+                                                 "challenge_howl"
+                                             ],
+                            "ambient_volume":  0.8
+                        },
+    "timing_overrides":  {
+                             "eye_blink_hitCount":  120,
+                             "mood_update_hitCount":  25,
+                             "threat_assessment_hitCount":  10
+                         }
 }

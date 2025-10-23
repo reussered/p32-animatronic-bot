@@ -1,147 +1,154 @@
-{
-  "relative_filename": "config/components/hardware/ili9486_4inch_tft.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "hardware_type": "ILI9486_4INCH_TFT",
-  "component_name": "ili9486_4inch_tft",
-  
-  "description": "4.0\" TFT RGB display with ILI9486 driver - LARGE creature mouth/primary display",
-  "large_display_champion": "TRUE - Perfect for dragon mouths and large creature features",
-  
-  "physical_specifications": {
-    "screen_width": "4.0 INCH",
-    "screen_height": "3.0 INCH",
-    "screen_shape": "rectangular",
-    "diagonal": "4.0 INCH",
-    "resolution": "480x320",
-    "pixel_density": "120 PPI",
-    "thickness": "0.2 INCH",
-    "weight": "45 GRAMS",
-    "active_area": {
-      "width_mm": 95.04,
-      "height_mm": 63.36
-    }
-  },
-  
-  "color_specifications": {
-    "color_depth": "262K_COLORS_18BIT",
-    "bits_per_pixel": 18,
-    "red_bits": 6,
-    "green_bits": 6,
-    "blue_bits": 6,
-    "color_gamut": "RGB666",
-    "brightness": "400_CD_M2",
-    "contrast_ratio": "800:1_TFT",
-    "viewing_angle": "140_DEGREES"
-  },
-  
-  "electrical_specifications": {
-    "supply_voltage": "3.3V",
-    "logic_voltage": "3.3V",
-    "interface": "SPI",
-    "current_consumption_ma": "180",
-    "backlight_current_ma": "120",
-    "spi_clock_max_mhz": "40",
-    "power_consumption_watts": "1.0"
-  },
-  
-  "display_controller": {
-    "driver_ic": "ILI9486",
-    "manufacturer": "Ilitek",
-    "built_in_ram": "480x320x18_bits",
-    "refresh_rate_hz": "60",
-    "hardware_acceleration": ["rectangle_fill", "scroll", "gamma_correction"]
-  },
-  
-  "pin_assignments": {
-    "vcc": "3V3_POWER",
-    "gnd": "GROUND",
-    "cs": "CHIP_SELECT_PIN",
-    "reset": "RESET_PIN",
-    "dc": "DATA_COMMAND_PIN",
-    "mosi": "SPI_MOSI",
-    "sck": "SPI_CLOCK",
-    "led": "BACKLIGHT_PWM_PIN",
-    "miso": "SPI_MISO_OPTIONAL"
-  },
-  
-  "usage_categories": {
-    "large_creature_mouths": "perfect_size_for_expressions",
-    "dragon_features": "theatrical_scale_displays",
-    "primary_creature_displays": "main_interaction_screen",
-    "status_dashboards": "creature_health_monitoring",
-    "large_eyes": "giant_creature_vision"
-  },
-  
-  "ordering_information": {
-    "primary_supplier": "Adafruit",
-    "part_number": "1932",
-    "product_name": "Adafruit 4.0\" TFT Touch Screen for Raspberry Pi",
-    "price_usd": "45.00",
-    "availability": "IN_STOCK",
-    "shipping": "IMMEDIATE",
-    "datasheet_url": "https://cdn-shop.adafruit.com/datasheets/ILI9486.pdf",
-    "product_url": "https://www.adafruit.com/product/1932"
-  },
-  
-  "alternative_suppliers": [
-    {
-      "supplier": "Waveshare",
-      "part_number": "4inch-TFT-Touch-Shield",
-      "price_usd": "32.99",
-      "stock_status": "AVAILABLE",
-      "note": "Good value option with touch capability"
-    },
-    {
-      "supplier": "AliExpress Generic",
-      "part_number": "ILI9486-4.0-TFT",
-      "price_usd": "18.99",
-      "stock_status": "AVAILABLE",
-      "note": "Budget option - quality varies"
-    },
-    {
-      "supplier": "Amazon Generic",
-      "part_number": "Various 4inch TFT",
-      "price_usd": "25.99",
-      "stock_status": "AVAILABLE",
-      "note": "Multiple sellers available"
-    }
-  ],
-  
-  "technical_advantages": [
-    "Large screen area for detailed expressions",
-    "Full 262K color support per pixel",
-    "Good resolution for size (480x320)",
-    "Bright backlight for visibility",
-    "Fast SPI interface with high bandwidth",
-    "Touch capability on many variants",
-    "Wide ecosystem support"
-  ],
-  
-  "creature_sizing": {
-    "perfect_for": ["dragon_mouths", "giant_creature_features", "primary_displays"],
-    "excellent_for": ["large_animatronics", "theatrical_creatures", "main_interfaces"],
-    "overkill_for": ["small_creatures", "accent_features", "secondary_displays"],
-    "power_considerations": "Requires substantial power supply"
-  },
-  
-  "power_requirements": {
-    "idle_power_watts": "0.6",
-    "active_power_watts": "1.0",
-    "peak_power_watts": "1.2",
-    "recommended_supply": "5V_2A_minimum"
-  },
-  
-  "mounting_considerations": {
-    "weight": "Heavier than small displays - requires sturdy mounting",
-    "size": "Large footprint - plan creature size accordingly",
-    "heat": "Generates more heat - consider ventilation",
-    "vibration": "More susceptible to damage from movement"
-  },
-  
-  "stl_reference": "assets/shapes/stl/basic_mounts/ili9486_4inch_mount.stl",
-  "scad_template": "assets/shapes/scad/templates/hardware_mounts/ili9486_large_mount_template.scad",
-  
-  "compatible_creatures": ["dragons", "giants", "large_animatronics", "theatrical_builds", "primary_interfaces"],
-  "estimated_cost_usd": "45.00"
+﻿{
+    "relative_filename":  "config/components/hardware/ili9486_4inch_tft.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "ILI9486_4INCH_TFT",
+    "component_name":  "ili9486_4inch_tft",
+    "description":  "4.0\" TFT RGB display with ILI9486 driver - LARGE creature mouth/primary display",
+    "large_display_champion":  "TRUE - Perfect for dragon mouths and large creature features",
+    "physical_specifications":  {
+                                    "screen_width":  "4.0 INCH",
+                                    "screen_height":  "3.0 INCH",
+                                    "screen_shape":  "rectangular",
+                                    "diagonal":  "4.0 INCH",
+                                    "resolution":  "480x320",
+                                    "pixel_density":  "120 PPI",
+                                    "thickness":  "0.2 INCH",
+                                    "weight":  "45 GRAMS",
+                                    "active_area":  {
+                                                        "width_mm":  95.04,
+                                                        "height_mm":  63.36
+                                                    }
+                                },
+    "color_specifications":  {
+                                 "color_depth":  "262K_COLORS_18BIT",
+                                 "bits_per_pixel":  18,
+                                 "red_bits":  6,
+                                 "green_bits":  6,
+                                 "blue_bits":  6,
+                                 "color_gamut":  "RGB666",
+                                 "brightness":  "400_CD_M2",
+                                 "contrast_ratio":  "800:1_TFT",
+                                 "viewing_angle":  "140_DEGREES"
+                             },
+    "electrical_specifications":  {
+                                      "supply_voltage":  "3.3V",
+                                      "logic_voltage":  "3.3V",
+                                      "interface":  "SPI",
+                                      "current_consumption_ma":  "180",
+                                      "backlight_current_ma":  "120",
+                                      "spi_clock_max_mhz":  "40",
+                                      "power_consumption_watts":  "1.0"
+                                  },
+    "display_controller":  {
+                               "driver_ic":  "ILI9486",
+                               "manufacturer":  "Ilitek",
+                               "built_in_ram":  "480x320x18_bits",
+                               "refresh_rate_hz":  "60",
+                               "hardware_acceleration":  [
+                                                             "rectangle_fill",
+                                                             "scroll",
+                                                             "gamma_correction"
+                                                         ]
+                           },
+    "pin_assignments":  {
+                            "vcc":  "3V3_POWER",
+                            "gnd":  "GROUND",
+                            "cs":  "CHIP_SELECT_PIN",
+                            "reset":  "RESET_PIN",
+                            "dc":  "DATA_COMMAND_PIN",
+                            "mosi":  "SPI_MOSI",
+                            "sck":  "SPI_CLOCK",
+                            "led":  "BACKLIGHT_PWM_PIN",
+                            "miso":  "SPI_MISO_OPTIONAL"
+                        },
+    "usage_categories":  {
+                             "large_creature_mouths":  "perfect_size_for_expressions",
+                             "dragon_features":  "theatrical_scale_displays",
+                             "primary_creature_displays":  "main_interaction_screen",
+                             "status_dashboards":  "creature_health_monitoring",
+                             "large_eyes":  "giant_creature_vision"
+                         },
+    "ordering_information":  {
+                                 "primary_supplier":  "Adafruit",
+                                 "part_number":  "1932",
+                                 "product_name":  "Adafruit 4.0\" TFT Touch Screen for Raspberry Pi",
+                                 "price_usd":  "45.00",
+                                 "availability":  "IN_STOCK",
+                                 "shipping":  "IMMEDIATE",
+                                 "datasheet_url":  "https://cdn-shop.adafruit.com/datasheets/ILI9486.pdf",
+                                 "product_url":  "https://www.adafruit.com/product/1932"
+                             },
+    "alternative_suppliers":  [
+                                  {
+                                      "supplier":  "Waveshare",
+                                      "part_number":  "4inch-TFT-Touch-Shield",
+                                      "price_usd":  "32.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Good value option with touch capability"
+                                  },
+                                  {
+                                      "supplier":  "AliExpress Generic",
+                                      "part_number":  "ILI9486-4.0-TFT",
+                                      "price_usd":  "18.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Budget option - quality varies"
+                                  },
+                                  {
+                                      "supplier":  "Amazon Generic",
+                                      "part_number":  "Various 4inch TFT",
+                                      "price_usd":  "25.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Multiple sellers available"
+                                  }
+                              ],
+    "technical_advantages":  [
+                                 "Large screen area for detailed expressions",
+                                 "Full 262K color support per pixel",
+                                 "Good resolution for size (480x320)",
+                                 "Bright backlight for visibility",
+                                 "Fast SPI interface with high bandwidth",
+                                 "Touch capability on many variants",
+                                 "Wide ecosystem support"
+                             ],
+    "creature_sizing":  {
+                            "perfect_for":  [
+                                                "dragon_mouths",
+                                                "giant_creature_features",
+                                                "primary_displays"
+                                            ],
+                            "excellent_for":  [
+                                                  "large_animatronics",
+                                                  "theatrical_creatures",
+                                                  "main_interfaces"
+                                              ],
+                            "overkill_for":  [
+                                                 "small_creatures",
+                                                 "accent_features",
+                                                 "secondary_displays"
+                                             ],
+                            "power_considerations":  "Requires substantial power supply"
+                        },
+    "power_requirements":  {
+                               "idle_power_watts":  "0.6",
+                               "active_power_watts":  "1.0",
+                               "peak_power_watts":  "1.2",
+                               "recommended_supply":  "5V_2A_minimum"
+                           },
+    "mounting_considerations":  {
+                                    "weight":  "Heavier than small displays - requires sturdy mounting",
+                                    "size":  "Large footprint - plan creature size accordingly",
+                                    "heat":  "Generates more heat - consider ventilation",
+                                    "vibration":  "More susceptible to damage from movement"
+                                },
+    "stl_reference":  "assets/shapes/stl/basic_mounts/ili9486_4inch_mount.stl",
+    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/ili9486_large_mount_template.scad",
+    "compatible_creatures":  [
+                                 "dragons",
+                                 "giants",
+                                 "large_animatronics",
+                                 "theatrical_builds",
+                                 "primary_interfaces"
+                             ],
+    "estimated_cost_usd":  "45.00"
 }

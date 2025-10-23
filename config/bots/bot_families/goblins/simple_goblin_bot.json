@@ -1,294 +1,159 @@
-{
-
-    "relative_filename": "config/bots/simple_goblin_bot.json",
-
-    "version": "1.0.0",
-
-    "author": "config/author.json",
-
-    
-
-    "bot_type": "SIMPLE_GOBLIN",
-
-    "bot_name": "Simple Goblin Bot",
-
-    "description": "Basic goblin animatronic using simple component implementations for immediate testing",
-
-    
-
-    "coordinate_system": "skull_3d",
-
-    "reference_point": "nose_center",
-
-    "units": "INCH",
-
-    
-
-    "default_mood": "CONTENTMENT",
-
-    "mood_system": {
-
-        "enabled": true,
-
-        "states": ["FEAR", "ANGER", "IRRITATION", "HAPPINESS", "CONTENTMENT", "HUNGER", "CURIOSITY", "AFFECTION"],
-
-        "default_transitions": {
-
-            "CURIOSITY": ["HAPPINESS", "CONTENTMENT"],
-
-            "HAPPINESS": ["CONTENTMENT", "AFFECTION"],
-
-            "CONTENTMENT": ["CURIOSITY", "HAPPINESS"],
-
-            "IRRITATION": ["ANGER", "CONTENTMENT"]
-
-        }
-
-    },
-
-    
-
-    "components": [
-
-        {
-
-            "component_name": "left_eye_display",
-  "subsystem": "UNKNOWN",
-
-            "component_type": "SIMPLE_DISPLAY",
-
-            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
-
-            "hardware_reference": "config/components/hardware/gc9a01_display.json",
-
-            "interface_reference": "config/components/interfaces/spi_device_1.json",
-
-            "position": {
-
-                "x": "-1.5 INCH",
-
-                "y": "0.5 INCH", 
-
-                "z": "0.0 INCH"
-
-            },
-
-            "init_function": "simple_display_init",
-
-            "functions": {
-
-                "show_expression": "simple_display_show_eyes"
-
-            }
-
-        },
-
-        
-
-        {
-
-            "component_name": "right_eye_display", 
-  "subsystem": "UNKNOWN",
-
-            "component_type": "SIMPLE_DISPLAY",
-
-            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
-
-            "hardware_reference": "config/components/hardware/gc9a01_display.json",
-
-            "interface_reference": "config/components/interfaces/spi_device_2.json",
-
-            "position": {
-
-                "x": "1.5 INCH",
-
-                "y": "0.5 INCH",
-
-                "z": "0.0 INCH" 
-
-            },
-
-            "init_function": "simple_display_init",
-
-            "functions": {
-
-                "show_expression": "simple_display_show_eyes"
-
-            }
-
-        },
-
-        
-
-        {
-
-            "component_name": "mouth_display",
-  "subsystem": "UNKNOWN",
-
-            "component_type": "SIMPLE_DISPLAY",
-
-            "ifdef_variable": "ENABLE_SIMPLE_DISPLAY", 
-
-            "hardware_reference": "config/components/hardware/gc9a01_display.json",
-
-            "interface_reference": "config/components/interfaces/spi_device_3.json",
-
-            "position": {
-
-                "x": "0.0 INCH",
-
-                "y": "-1.8 INCH",
-
-                "z": "0.0 INCH"
-
-            },
-
-            "init_function": "simple_display_init",
-
-            "functions": {
-
-                "show_expression": "simple_display_show_mouth"
-
-            }
-
-        },
-
-        
-
-        {
-
-            "component_name": "nose_sensor",
-  "subsystem": "UNKNOWN",
-
-            "component_type": "SIMPLE_SENSOR",
-
-            "ifdef_variable": "ENABLE_SIMPLE_SENSOR",
-
-            "hardware_reference": "config/components/hardware/hc_sr04_sensor.json", 
-
-            "interface_reference": "config/components/interfaces/gpio_pair_1.json",
-
-            "position": {
-
-                "x": "0.0 INCH",
-
-                "y": "0.0 INCH",
-
-                "z": "0.0 INCH"
-
-            },
-
-            "init_function": "simple_sensor_init",
-
-            "functions": {
-
-                "read_distance": "simple_sensor_read_distance"
-
-            }
-
-        },
-
-        
-
-        {
-
-            "component_name": "main_speaker",
-  "subsystem": "UNKNOWN",
-
-            "component_type": "SIMPLE_AUDIO",
-
-            "ifdef_variable": "ENABLE_SIMPLE_AUDIO",
-
-            "hardware_reference": "config/components/hardware/speaker.json",
-
-            "interface_reference": "config/components/interfaces/i2s_device_1.json", 
-
-            "position": {
-
-                "x": "0.0 INCH",
-
-                "y": "-2.5 INCH",
-
-                "z": "-1.0 INCH"
-
-            },
-
-            "init_function": "simple_audio_init",
-
-            "functions": {
-
-                "play_sound": "simple_audio_play"
-
-            }
-
-        }
-
-    ],
-
-    
-
-    "behaviors": [
-
-        {
-
-            "behavior_id": "distance_reaction",
-
-            "trigger": "sensor_reading",
-
-            "component_function": "simple_goblin_react_to_distance",
-
-            "frequency_ms": 200,
-
-            "enabled": true
-
-        },
-
-        
-
-        {
-
-            "behavior_id": "random_mischief",
-
-            "trigger": "timer",
-
-            "component_function": "simple_goblin_random_behavior", 
-
-            "frequency_ms": 3000,
-
-            "enabled": true
-
-        }
-
-    ],
-
-    
-
-    "initialization_sequence": [
-
-        "simple_display_init",
-
-        "simple_audio_init", 
-
-        "simple_sensor_init",
-
-        "simple_mood_init",
-
-        "simple_goblin_init"
-
-    ],
-
-    
-
-    "startup_greeting": {
-
-        "eyes": "bright_happy",
-
-        "mouth": "big_smile", 
-
-        "sound": "goblin_hello",
-
-        "mood": "HAPPINESS"
-
-    }
-
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/simple_goblin_bot.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "SIMPLE_GOBLIN",
+    "bot_name":  "Simple Goblin Bot",
+    "description":  "Basic goblin animatronic using simple component implementations for immediate testing",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "units":  "INCH",
+    "default_mood":  "CONTENTMENT",
+    "mood_system":  {
+                        "enabled":  true,
+                        "states":  [
+                                       "FEAR",
+                                       "ANGER",
+                                       "IRRITATION",
+                                       "HAPPINESS",
+                                       "CONTENTMENT",
+                                       "HUNGER",
+                                       "CURIOSITY",
+                                       "AFFECTION"
+                                   ],
+                        "default_transitions":  {
+                                                    "CURIOSITY":  [
+                                                                      "HAPPINESS",
+                                                                      "CONTENTMENT"
+                                                                  ],
+                                                    "HAPPINESS":  [
+                                                                      "CONTENTMENT",
+                                                                      "AFFECTION"
+                                                                  ],
+                                                    "CONTENTMENT":  [
+                                                                        "CURIOSITY",
+                                                                        "HAPPINESS"
+                                                                    ],
+                                                    "IRRITATION":  [
+                                                                       "ANGER",
+                                                                       "CONTENTMENT"
+                                                                   ]
+                                                }
+                    },
+    "components":  [
+                       {
+                           "component_name":  "left_eye_display",
+                           "subsystem":  "UNKNOWN",
+                           "component_type":  "SIMPLE_DISPLAY",
+                           "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
+                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "interface_reference":  "config/components/interfaces/spi_device_1.json",
+                           "position":  {
+                                            "x":  "-1.5 INCH",
+                                            "y":  "0.5 INCH",
+                                            "z":  "0.0 INCH"
+                                        },
+                           "init_function":  "simple_display_init",
+                           "functions":  {
+                                             "show_expression":  "simple_display_show_eyes"
+                                         }
+                       },
+                       {
+                           "component_name":  "right_eye_display",
+                           "subsystem":  "UNKNOWN",
+                           "component_type":  "SIMPLE_DISPLAY",
+                           "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
+                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "interface_reference":  "config/components/interfaces/spi_device_2.json",
+                           "position":  {
+                                            "x":  "1.5 INCH",
+                                            "y":  "0.5 INCH",
+                                            "z":  "0.0 INCH"
+                                        },
+                           "init_function":  "simple_display_init",
+                           "functions":  {
+                                             "show_expression":  "simple_display_show_eyes"
+                                         }
+                       },
+                       {
+                           "component_name":  "mouth_display",
+                           "subsystem":  "UNKNOWN",
+                           "component_type":  "SIMPLE_DISPLAY",
+                           "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
+                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "interface_reference":  "config/components/interfaces/spi_device_3.json",
+                           "position":  {
+                                            "x":  "0.0 INCH",
+                                            "y":  "-1.8 INCH",
+                                            "z":  "0.0 INCH"
+                                        },
+                           "init_function":  "simple_display_init",
+                           "functions":  {
+                                             "show_expression":  "simple_display_show_mouth"
+                                         }
+                       },
+                       {
+                           "component_name":  "nose_sensor",
+                           "subsystem":  "UNKNOWN",
+                           "component_type":  "SIMPLE_SENSOR",
+                           "ifdef_variable":  "ENABLE_SIMPLE_SENSOR",
+                           "hardware_reference":  "config/components/hardware/hc_sr04_sensor.json",
+                           "interface_reference":  "config/components/interfaces/gpio_pair_1.json",
+                           "position":  {
+                                            "x":  "0.0 INCH",
+                                            "y":  "0.0 INCH",
+                                            "z":  "0.0 INCH"
+                                        },
+                           "init_function":  "simple_sensor_init",
+                           "functions":  {
+                                             "read_distance":  "simple_sensor_read_distance"
+                                         }
+                       },
+                       {
+                           "component_name":  "main_speaker",
+                           "subsystem":  "UNKNOWN",
+                           "component_type":  "SIMPLE_AUDIO",
+                           "ifdef_variable":  "ENABLE_SIMPLE_AUDIO",
+                           "hardware_reference":  "config/components/hardware/speaker.json",
+                           "interface_reference":  "config/components/interfaces/i2s_device_1.json",
+                           "position":  {
+                                            "x":  "0.0 INCH",
+                                            "y":  "-2.5 INCH",
+                                            "z":  "-1.0 INCH"
+                                        },
+                           "init_function":  "simple_audio_init",
+                           "functions":  {
+                                             "play_sound":  "simple_audio_play"
+                                         }
+                       }
+                   ],
+    "behaviors":  [
+                      {
+                          "behavior_id":  "distance_reaction",
+                          "trigger":  "sensor_reading",
+                          "component_function":  "simple_goblin_react_to_distance",
+                          "frequency_ms":  200,
+                          "enabled":  true
+                      },
+                      {
+                          "behavior_id":  "random_mischief",
+                          "trigger":  "timer",
+                          "component_function":  "simple_goblin_random_behavior",
+                          "frequency_ms":  3000,
+                          "enabled":  true
+                      }
+                  ],
+    "initialization_sequence":  [
+                                    "simple_display_init",
+                                    "simple_audio_init",
+                                    "simple_sensor_init",
+                                    "simple_mood_init",
+                                    "simple_goblin_init"
+                                ],
+    "startup_greeting":  {
+                             "eyes":  "bright_happy",
+                             "mouth":  "big_smile",
+                             "sound":  "goblin_hello",
+                             "mood":  "HAPPINESS"
+                         }
 }

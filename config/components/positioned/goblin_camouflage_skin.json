@@ -1,158 +1,93 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin_camouflage_skin.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "GOBLIN_CAMOUFLAGE_SKIN",
-  "subsystem": "UNKNOWN",
-
-  "component_type": "adaptive_camouflage",
-
-  "description": "Forest camouflage skin patterns for scout goblin stealth",
-
-  "created": "2025-10-12",
-
-  
-
-  "hardware_reference": "config/components/hardware/color_changing_leds.json",
-
-  "interface_reference": "config/components/interfaces/spi_device_3.json",
-
-  
-
-  "coordinate_system": "skull_3d",
-
-  "reference_point": "nose_center",
-
-  
-
-  "camouflage_zones": [
-
-    {
-
-      "zone_id": "facial_base",
-
-      "coverage_area": {
-
-        "x_range": "-1.8 INCH to 1.8 INCH",
-
-        "y_range": "-2.0 INCH to 2.0 INCH",
-
-        "z_range": "-0.5 INCH to 1.0 INCH"
-
-      },
-
-      "pattern_type": "forest_mottled",
-
-      "base_colors": ["forest_green", "bark_brown", "shadow_black"]
-
-    },
-
-    {
-
-      "zone_id": "forehead_canopy",
-
-      "coverage_area": {
-
-        "x_range": "-1.2 INCH to 1.2 INCH",
-
-        "y_range": "0.8 INCH to 1.6 INCH",
-
-        "z_range": "-0.2 INCH to 0.8 INCH"
-
-      },
-
-      "pattern_type": "leaf_shadow",
-
-      "adaptive_patterns": ["dappled_light", "deep_shade"]
-
-    },
-
-    {
-
-      "zone_id": "cheek_patches",
-
-      "coverage_area": {
-
-        "x_range": "-1.5 INCH to 1.5 INCH",
-
-        "y_range": "-0.8 INCH to 0.5 INCH",
-
-        "z_range": "0.0 INCH to 0.6 INCH"
-
-      },
-
-      "pattern_type": "bark_texture",
-
-      "texture_elements": ["rough_grooves", "moss_spots"]
-
-    }
-
-  ],
-
-  
-
-  "color_palette": {
-
-    "forest_green": "#228B22",
-
-    "bark_brown": "#8B4513",
-
-    "shadow_black": "#2F4F2F",
-
-    "moss_green": "#ADFF2F",
-
-    "leaf_highlight": "#9ACD32"
-
-  },
-
-  
-
-  "adaptive_capabilities": {
-
-    "environment_sensing": true,
-
-    "light_level_adjustment": "automatic",
-
-    "seasonal_variation": ["spring", "summer", "autumn"],
-
-    "pattern_morphing": "gradual_transition"
-
-  },
-
-  
-
-  "gpio_mapping": {
-
-    "color_control_r": "SPI_MOSI",
-
-    "color_control_g": "SPI_MISO", 
-
-    "color_control_b": "SPI_SCK",
-
-    "pattern_select": "GPIO_27"
-
-  },
-
-  
-
-  "prototype_status": "design_complete",
-
-  "tested": false,
-
-  "notes": [
-
-    "Adaptive camouflage for forest reconnaissance",
-
-    "Multi-zone color control system",
-
-    "Environment-responsive pattern switching",
-
-    "Natural forest texture integration"
-
-  ]
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin_camouflage_skin.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "GOBLIN_CAMOUFLAGE_SKIN",
+    "subsystem":  "UNKNOWN",
+    "component_type":  "adaptive_camouflage",
+    "description":  "Forest camouflage skin patterns for scout goblin stealth",
+    "created":  "2025-10-12",
+    "hardware_reference":  "config/components/hardware/color_changing_leds.json",
+    "interface_reference":  "config/components/interfaces/spi_device_3.json",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "camouflage_zones":  [
+                             {
+                                 "zone_id":  "facial_base",
+                                 "coverage_area":  {
+                                                       "x_range":  "-1.8 INCH to 1.8 INCH",
+                                                       "y_range":  "-2.0 INCH to 2.0 INCH",
+                                                       "z_range":  "-0.5 INCH to 1.0 INCH"
+                                                   },
+                                 "pattern_type":  "forest_mottled",
+                                 "base_colors":  [
+                                                     "forest_green",
+                                                     "bark_brown",
+                                                     "shadow_black"
+                                                 ]
+                             },
+                             {
+                                 "zone_id":  "forehead_canopy",
+                                 "coverage_area":  {
+                                                       "x_range":  "-1.2 INCH to 1.2 INCH",
+                                                       "y_range":  "0.8 INCH to 1.6 INCH",
+                                                       "z_range":  "-0.2 INCH to 0.8 INCH"
+                                                   },
+                                 "pattern_type":  "leaf_shadow",
+                                 "adaptive_patterns":  [
+                                                           "dappled_light",
+                                                           "deep_shade"
+                                                       ]
+                             },
+                             {
+                                 "zone_id":  "cheek_patches",
+                                 "coverage_area":  {
+                                                       "x_range":  "-1.5 INCH to 1.5 INCH",
+                                                       "y_range":  "-0.8 INCH to 0.5 INCH",
+                                                       "z_range":  "0.0 INCH to 0.6 INCH"
+                                                   },
+                                 "pattern_type":  "bark_texture",
+                                 "texture_elements":  [
+                                                          "rough_grooves",
+                                                          "moss_spots"
+                                                      ]
+                             }
+                         ],
+    "color_palette":  {
+                          "forest_green":  "#228B22",
+                          "bark_brown":  "#8B4513",
+                          "shadow_black":  "#2F4F2F",
+                          "moss_green":  "#ADFF2F",
+                          "leaf_highlight":  "#9ACD32"
+                      },
+    "adaptive_capabilities":  {
+                                  "environment_sensing":  true,
+                                  "light_level_adjustment":  "automatic",
+                                  "seasonal_variation":  [
+                                                             "spring",
+                                                             "summer",
+                                                             "autumn"
+                                                         ],
+                                  "pattern_morphing":  "gradual_transition"
+                              },
+    "gpio_mapping":  {
+                         "color_control_r":  "SPI_MOSI",
+                         "color_control_g":  "SPI_MISO",
+                         "color_control_b":  "SPI_SCK",
+                         "pattern_select":  "GPIO_27"
+                     },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Adaptive camouflage for forest reconnaissance",
+                  "Multi-zone color control system",
+                  "Environment-responsive pattern switching",
+                  "Natural forest texture integration"
+              ],
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "position":  {
+                     "y":  "0.0 INCH",
+                     "z":  "0.0 INCH",
+                     "x":  "0.0 INCH"
+                 }
 }

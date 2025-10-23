@@ -1,55 +1,51 @@
-{
-  "relative_filename": "config/components/positioned/orc/head_components/orc_mouth.json",
-  "version": "1.0.0",
-  "author": "config/author.json", 
-  "positioned_component_type": "TFT_DISPLAY",
-  "display_id": "ORC_MOUTH_DISPLAY",
-  "display_role": "MOUTH_ANIMATION",
-  
-  "hardware_template": "config/components/hardware/tft_2p5x1p5_display.json",
-  "creature_shell": "config/shapes/scad/bot_shells/orc_mouth_shell.scad",
-  "mount_template": "config/shapes/scad/basic_mounts/display_basic_mount.scad",
-  
-  "position": {
-    "coordinate_system": "skull_3d", 
-    "reference_point": "nose_center",
-    "x": "0.0 INCH",
-    "y": "-2.2 INCH",
-    "z": "0.6 INCH", 
-    "rotation_x": "-15 DEG",
-    "rotation_y": "0 DEG",
-    "rotation_z": "0 DEG"
-  },
-  
-  "orientation": {
-    "display_mode": "LANDSCAPE",
-    "vertical_pixels": 240,
-    "horizontal_pixels": 320,
-    "viewing_angle": "forward_facing",
-    "tilt_down": "15 DEG"
-  },
-  
-  "interface_assignment": {
-    "controller_type": "INTEGRATED_ESP32_WROOM",
-    "primary_interface": "NATIVE_SPI",
-    "power_interface": "DIRECT_5V_3V3", 
-    "communication": "ESP_NOW_MESH"
-  },
-  
-  "orc_specific": {
-    "creature_size": "MEDIUM",
-    "mouth_type": "TUSKED_HUMANOID",
-    "tusk_display": "PROMINENT_LOWER_FANGS",
-    "snarl_animation": "AGGRESSIVE_LIP_CURL",
-    "war_cry_capability": "FULL_ROAR",
-    "intimidation_level": "HIGH"
-  },
-  
-  "display_content": {
-    "default_animation": "assets/animations/orc/menacing_grin.json",
-    "anger_animation": "assets/animations/orc/battle_snarl.json",
-    "roar_animation": "assets/animations/orc/war_cry.json",
-    "eating_animation": "assets/animations/orc/tearing_bite.json",
-    "threat_animation": "assets/animations/orc/tusk_display.json"
-  }
+﻿{
+    "relative_filename":  "config/components/positioned/orc/head_components/orc_mouth.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "positioned_component_type":  "TFT_DISPLAY",
+    "display_id":  "ORC_MOUTH_DISPLAY",
+    "display_role":  "MOUTH_ANIMATION",
+    "hardware_template":  "config/components/hardware/tft_2p5x1p5_display.json",
+    "creature_shell":  "config/shapes/scad/bot_shells/orc_mouth_shell.scad",
+    "mount_template":  "config/shapes/scad/basic_mounts/display_basic_mount.scad",
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "nose_center",
+                     "x":  "0.0 INCH",
+                     "y":  "-2.2 INCH",
+                     "z":  "0.6 INCH",
+                     "rotation_x":  "-15 DEG",
+                     "rotation_y":  "0 DEG",
+                     "rotation_z":  "0 DEG"
+                 },
+    "orientation":  {
+                        "display_mode":  "LANDSCAPE",
+                        "vertical_pixels":  240,
+                        "horizontal_pixels":  320,
+                        "viewing_angle":  "forward_facing",
+                        "tilt_down":  "15 DEG"
+                    },
+    "interface_assignment":  {
+                                 "controller_type":  "INTEGRATED_ESP32_WROOM",
+                                 "primary_interface":  "NATIVE_SPI",
+                                 "power_interface":  "DIRECT_5V_3V3",
+                                 "communication":  "ESP_NOW_MESH"
+                             },
+    "orc_specific":  {
+                         "creature_size":  "MEDIUM",
+                         "mouth_type":  "TUSKED_HUMANOID",
+                         "tusk_display":  "PROMINENT_LOWER_FANGS",
+                         "snarl_animation":  "AGGRESSIVE_LIP_CURL",
+                         "war_cry_capability":  "FULL_ROAR",
+                         "intimidation_level":  "HIGH"
+                     },
+    "display_content":  {
+                            "default_animation":  "assets/animations/orc/menacing_grin.json",
+                            "anger_animation":  "assets/animations/orc/battle_snarl.json",
+                            "roar_animation":  "assets/animations/orc/war_cry.json",
+                            "eating_animation":  "assets/animations/orc/tearing_bite.json",
+                            "threat_animation":  "assets/animations/orc/tusk_display.json"
+                        },
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "component_name":  "ORC_MOUTH"
 }

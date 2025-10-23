@@ -1,164 +1,196 @@
-{
-  "relative_filename": "config/bots/goblin_shaman.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
-  "bot_type": "GOBLINSHAMAN",
-  "bot_id": "goblin_shaman_v1",
-  "description": "Mystical goblin shaman with magical behaviors and spiritual communication abilities",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "forest_goblin",
-  
-  "overrides": {
-    "mood_defaults": {
-      "FEAR": 5,
-      "ANGER": 10,
-      "IRRITATION": 3,
-      "HAPPINESS": 15,
-      "CONTENTMENT": 25,
-      "HUNGER": 5,
-      "CURIOSITY": 25,
-      "AFFECTION": 12
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 600,
-      "interaction_range_cm": 180,
-      "aggressive_threshold": 90,
-      "calm_threshold": 60,
-      "mystical_presence": true,
-      "spiritual_communication": true,
-      "ritual_behaviors": true
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "mystical_forest_green",
-      "weathering_effects": true,
-      "mystical_features": {
-        "glowing_eye_runes": true,
-        "ceremonial_scars": true,
-        "spirit_markings": "blue_silver",
-        "weathered_wisdom_lines": true,
-        "bone_ornaments": true
-      },
-      "size_modifier": 1.0,
-      "age_appearance": "ancient_wise"
-    },
-    
-    "sound_characteristics": {
-      "voice_pitch": "mystical_resonant",
-      "breathing_pattern": "ritual_rhythm",
-      "magical_sounds": ["chant_low", "spirit_whisper", "rune_hum", "crystal_ring"],
-      "ritual_sounds": ["bone_rattle", "herb_crackle", "wind_call", "earth_rumble"],
-      "idle_sounds": ["meditative_hum", "spirit_listen", "wisdom_mutter"],
-      "ambient_volume": 0.5,
-      "reaction_volume": 0.8,
-      "harmonic_layering": true
-    },
-    
-    "animation_style": {
-      "movement_speed": "deliberate_mystical",
-      "eye_tracking": "spirit_world_gaze",
-      "idle_behaviors": ["meditation_trance", "spirit_communication", "rune_reading"],
-      "threat_responses": ["protective_ward", "spirit_summon", "mystical_barrier"],
-      "expression_intensity": "otherworldly"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/goblin_spirit_runes.json",
-    "config/components/positioned/goblin_ritual_scars.json",
-    "config/components/positioned/goblin_bone_ornaments.json",
-    "config/components/positioned/goblin_mystical_glow.json"
-  ],
-  
-  "custom_behaviors": {
-    "ritual_casting": {
-      "trigger": "lunar_cycle",
-      "eyes": "mystical_glow_blue",
-      "mouth": "ancient_chant",
-      "sounds": ["power_buildup", "spell_weave", "energy_release"],
-      "duration_ms": 15000,
-      "priority": "high",
-      "repeating_cycle": true
-    },
-    "spirit_communion": {
-      "trigger": "meditation_mode",
-      "eyes": "spirit_world_sight",
-      "mouth": "whispered_conversation",
-      "sounds": ["spirit_whisper", "ethereal_response"],
-      "duration_ms": 10000,
-      "priority": "medium",
-      "trance_state": true
-    },
-    "protective_ward": {
-      "trigger": "pack_threat",
-      "eyes": "protective_flare",
-      "mouth": "ward_incantation",
-      "sounds": ["barrier_hum", "protection_chant"],
-      "duration_ms": 8000,
-      "priority": "critical",
-      "area_effect": true
-    },
-    "wisdom_sharing": {
-      "trigger": "knowledge_request",
-      "eyes": "ancient_knowing",
-      "mouth": "sage_speaking",
-      "sounds": ["wisdom_tone", "teaching_rhythm"],
-      "duration_ms": 12000,
-      "priority": "medium"
-    },
-    "nature_attunement": {
-      "trigger": "environmental_change",
-      "eyes": "nature_sensing",
-      "mouth": "elemental_whisper",
-      "sounds": ["wind_listen", "earth_feel", "water_hear"],
-      "duration_ms": 6000,
-      "priority": "low",
-      "environmental_response": true
-    }
-  },
-  
-  "magical_abilities": {
-    "elemental_affinity": ["earth", "forest", "spirit"],
-    "ritual_knowledge": {
-      "protection_wards": true,
-      "spirit_communication": true,
-      "nature_sensing": true,
-      "healing_herbs": true,
-      "ancestor_wisdom": true
-    },
-    "mystical_sensors": {
-      "spiritual_energy_detection": true,
-      "lunar_phase_awareness": true,
-      "elemental_balance_sensing": true,
-      "life_force_monitoring": true
-    }
-  },
-  
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 20,
-    "sensor_poll_rate_hz": 5,
-    "power_management": "mystical_efficiency",
-    "audio_amplification": 0.8,
-    "harmonic_processing": true,
-    "ambient_light_sensitivity": "high"
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Inherits from goblin_family.json with forest_goblin subfamily",
-    "Mystical personality with high curiosity and contentment",
-    "Ritual-focused behaviors with spiritual themes",
-    "Unique harmonic sound processing for chants",
-    "Ancient wisdom aesthetic with mystical markings",
-    "Environmental awareness for nature attunement",
-    "Lower sensor polling for meditative states",
-    "Specialized magical ability system integration"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_shaman.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "bot_type":  "GOBLINSHAMAN",
+    "bot_id":  "goblin_shaman_v1",
+    "description":  "Mystical goblin shaman with magical behaviors and spiritual communication abilities",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "forest_goblin",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "FEAR":  5,
+                                            "ANGER":  10,
+                                            "IRRITATION":  3,
+                                            "HAPPINESS":  15,
+                                            "CONTENTMENT":  25,
+                                            "HUNGER":  5,
+                                            "CURIOSITY":  25,
+                                            "AFFECTION":  12
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  true,
+                                              "auto_sleep_timeout_seconds":  600,
+                                              "interaction_range_cm":  180,
+                                              "aggressive_threshold":  90,
+                                              "calm_threshold":  60,
+                                              "mystical_presence":  true,
+                                              "spiritual_communication":  true,
+                                              "ritual_behaviors":  true
+                                          },
+                      "aesthetic_profile":  {
+                                                "color_scheme":  "mystical_forest_green",
+                                                "weathering_effects":  true,
+                                                "mystical_features":  {
+                                                                          "glowing_eye_runes":  true,
+                                                                          "ceremonial_scars":  true,
+                                                                          "spirit_markings":  "blue_silver",
+                                                                          "weathered_wisdom_lines":  true,
+                                                                          "bone_ornaments":  true
+                                                                      },
+                                                "size_modifier":  1.0,
+                                                "age_appearance":  "ancient_wise"
+                                            },
+                      "sound_characteristics":  {
+                                                    "voice_pitch":  "mystical_resonant",
+                                                    "breathing_pattern":  "ritual_rhythm",
+                                                    "magical_sounds":  [
+                                                                           "chant_low",
+                                                                           "spirit_whisper",
+                                                                           "rune_hum",
+                                                                           "crystal_ring"
+                                                                       ],
+                                                    "ritual_sounds":  [
+                                                                          "bone_rattle",
+                                                                          "herb_crackle",
+                                                                          "wind_call",
+                                                                          "earth_rumble"
+                                                                      ],
+                                                    "idle_sounds":  [
+                                                                        "meditative_hum",
+                                                                        "spirit_listen",
+                                                                        "wisdom_mutter"
+                                                                    ],
+                                                    "ambient_volume":  0.5,
+                                                    "reaction_volume":  0.8,
+                                                    "harmonic_layering":  true
+                                                },
+                      "animation_style":  {
+                                              "movement_speed":  "deliberate_mystical",
+                                              "eye_tracking":  "spirit_world_gaze",
+                                              "idle_behaviors":  [
+                                                                     "meditation_trance",
+                                                                     "spirit_communication",
+                                                                     "rune_reading"
+                                                                 ],
+                                              "threat_responses":  [
+                                                                       "protective_ward",
+                                                                       "spirit_summon",
+                                                                       "mystical_barrier"
+                                                                   ],
+                                              "expression_intensity":  "otherworldly"
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/goblin_spirit_runes.json",
+                                  "config/components/positioned/goblin_ritual_scars.json",
+                                  "config/components/positioned/goblin_bone_ornaments.json",
+                                  "config/components/positioned/goblin_mystical_glow.json"
+                              ],
+    "custom_behaviors":  {
+                             "ritual_casting":  {
+                                                    "trigger":  "lunar_cycle",
+                                                    "eyes":  "mystical_glow_blue",
+                                                    "mouth":  "ancient_chant",
+                                                    "sounds":  [
+                                                                   "power_buildup",
+                                                                   "spell_weave",
+                                                                   "energy_release"
+                                                               ],
+                                                    "duration_ms":  15000,
+                                                    "priority":  "high",
+                                                    "repeating_cycle":  true
+                                                },
+                             "spirit_communion":  {
+                                                      "trigger":  "meditation_mode",
+                                                      "eyes":  "spirit_world_sight",
+                                                      "mouth":  "whispered_conversation",
+                                                      "sounds":  [
+                                                                     "spirit_whisper",
+                                                                     "ethereal_response"
+                                                                 ],
+                                                      "duration_ms":  10000,
+                                                      "priority":  "medium",
+                                                      "trance_state":  true
+                                                  },
+                             "protective_ward":  {
+                                                     "trigger":  "pack_threat",
+                                                     "eyes":  "protective_flare",
+                                                     "mouth":  "ward_incantation",
+                                                     "sounds":  [
+                                                                    "barrier_hum",
+                                                                    "protection_chant"
+                                                                ],
+                                                     "duration_ms":  8000,
+                                                     "priority":  "critical",
+                                                     "area_effect":  true
+                                                 },
+                             "wisdom_sharing":  {
+                                                    "trigger":  "knowledge_request",
+                                                    "eyes":  "ancient_knowing",
+                                                    "mouth":  "sage_speaking",
+                                                    "sounds":  [
+                                                                   "wisdom_tone",
+                                                                   "teaching_rhythm"
+                                                               ],
+                                                    "duration_ms":  12000,
+                                                    "priority":  "medium"
+                                                },
+                             "nature_attunement":  {
+                                                       "trigger":  "environmental_change",
+                                                       "eyes":  "nature_sensing",
+                                                       "mouth":  "elemental_whisper",
+                                                       "sounds":  [
+                                                                      "wind_listen",
+                                                                      "earth_feel",
+                                                                      "water_hear"
+                                                                  ],
+                                                       "duration_ms":  6000,
+                                                       "priority":  "low",
+                                                       "environmental_response":  true
+                                                   }
+                         },
+    "magical_abilities":  {
+                              "elemental_affinity":  [
+                                                         "earth",
+                                                         "forest",
+                                                         "spirit"
+                                                     ],
+                              "ritual_knowledge":  {
+                                                       "protection_wards":  true,
+                                                       "spirit_communication":  true,
+                                                       "nature_sensing":  true,
+                                                       "healing_herbs":  true,
+                                                       "ancestor_wisdom":  true
+                                                   },
+                              "mystical_sensors":  {
+                                                       "spiritual_energy_detection":  true,
+                                                       "lunar_phase_awareness":  true,
+                                                       "elemental_balance_sensing":  true,
+                                                       "life_force_monitoring":  true
+                                                   }
+                          },
+    "hardware_config":  {
+                            "i2s_sample_rate":  44100,
+                            "display_update_rate_fps":  20,
+                            "sensor_poll_rate_hz":  5,
+                            "power_management":  "mystical_efficiency",
+                            "audio_amplification":  0.8,
+                            "harmonic_processing":  true,
+                            "ambient_light_sensitivity":  "high"
+                        },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Inherits from goblin_family.json with forest_goblin subfamily",
+                  "Mystical personality with high curiosity and contentment",
+                  "Ritual-focused behaviors with spiritual themes",
+                  "Unique harmonic sound processing for chants",
+                  "Ancient wisdom aesthetic with mystical markings",
+                  "Environmental awareness for nature attunement",
+                  "Lower sensor polling for meditative states",
+                  "Specialized magical ability system integration"
+              ]
 }

@@ -1,36 +1,40 @@
-{
-  "name": "celebration",
-  "displayName": "Celebration",
-  "description": "Excited celebration behavior",
-  "type": "interactive",
-  "sequence": [
-    {
-      "action": "jump",
-      "duration": 500,
-      "params": {
-        "height": 10
-      }
-    },
-    {
-      "action": "spin",
-      "duration": 1500,
-      "params": {
-        "rotations": 1
-      }
-    },
-    {
-      "action": "play_sound",
-      "duration": 2000,
-      "params": {
-        "sound": "cheer"
-      }
-    }
-  ],
-  "moodModifier": {
-    "happy": 30,
-    "neutral": 15
-  },
-  "cooldown": 20000,
-  "enabled": true,
-  "triggers": ["achievement", "positive_feedback"]
+﻿{
+    "name":  "celebration",
+    "displayName":  "Celebration",
+    "description":  "Excited celebration behavior",
+    "type":  "interactive",
+    "sequence":  [
+                     {
+                         "action":  "jump",
+                         "duration":  500,
+                         "params":  {
+                                        "height":  10
+                                    }
+                     },
+                     {
+                         "action":  "spin",
+                         "duration":  1500,
+                         "params":  {
+                                        "rotations":  1
+                                    }
+                     },
+                     {
+                         "action":  "play_sound",
+                         "duration":  2000,
+                         "params":  {
+                                        "sound":  "cheer"
+                                    }
+                     }
+                 ],
+    "moodModifier":  {
+                         "happy":  30,
+                         "neutral":  15
+                     },
+    "cooldown":  20000,
+    "enabled":  true,
+    "triggers":  [
+                     "achievement",
+                     "positive_feedback"
+                 ],
+    "version":  "1.0.0"
 }

@@ -1,131 +1,151 @@
-{
-  "relative_filename": "config/bots/goblin_berserker.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
-  "bot_type": "GOBLINBERSERKER",
-  "bot_id": "goblin_berserker_v1",
-  "description": "Rage-driven goblin berserker with uncontrollable fury and battle madness",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "warrior_goblin",
-  
-  "overrides": {
-    "mood_defaults": {
-      "FEAR": 5,
-      "ANGER": 40,
-      "IRRITATION": 25,
-      "HAPPINESS": 5,
-      "CONTENTMENT": 3,
-      "HUNGER": 12,
-      "CURIOSITY": 5,
-      "AFFECTION": 5
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 60,
-      "interaction_range_cm": 150,
-      "aggressive_threshold": 10,
-      "calm_threshold": 0,
-      "berserker_rage": true,
-      "self_control": "minimal",
-      "violence_escalation": "rapid"
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "blood_rage_red",
-      "weathering_effects": true,
-      "berserker_features": {
-        "foam_mouth": true,
-        "bloodshot_eyes": true,
-        "rage_veins": "prominent_purple",
-        "self_inflicted_wounds": 6,
-        "wild_hair": true,
-        "crazed_expression": "permanent"
-      },
-      "size_modifier": 1.15,
-      "intimidation_factor": "terrifying"
-    },
-    
-    "sound_characteristics": {
-      "voice_pitch": "rage_scream",
-      "breathing_pattern": "hyperventilating_fury",
-      "rage_sounds": ["berserker_scream", "fury_roar", "madness_laugh", "blood_lust_howl"],
-      "violence_sounds": ["weapon_frenzy", "destruction_crash", "rage_pant"],
-      "idle_sounds": ["angry_mutter", "violence_anticipation", "rage_build"],
-      "ambient_volume": 0.9,
-      "reaction_volume": 1.0,
-      "distortion_effects": true
-    },
-    
-    "animation_style": {
-      "movement_speed": "frenzied_wild",
-      "eye_tracking": "rage_locked",
-      "idle_behaviors": ["anger_build", "violence_preparation", "rage_twitch"],
-      "threat_responses": ["berserker_charge", "fury_unleash", "destruction_frenzy"],
-      "expression_intensity": "unhinged"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/goblin_rage_foam.json",
-    "config/components/positioned/goblin_bloodshot_eyes.json",
-    "config/components/positioned/goblin_self_wounds.json",
-    "config/components/positioned/goblin_fury_veins.json"
-  ],
-  
-  "custom_behaviors": {
-    "berserker_frenzy": {
-      "trigger": "combat_initiated",
-      "eyes": "blood_red_fury",
-      "mouth": "foam_rage_scream",
-      "sounds": ["frenzy_roar", "destruction_cry"],
-      "duration_ms": 20000,
-      "priority": "critical",
-      "uncontrollable": true
-    },
-    "rage_building": {
-      "trigger": "irritation_accumulation",
-      "eyes": "anger_intensifying",
-      "mouth": "rage_grimace",
-      "sounds": ["fury_build", "violence_anticipation"],
-      "duration_ms": 8000,
-      "priority": "high",
-      "escalation_state": true
-    },
-    "destruction_spree": {
-      "trigger": "object_detected",
-      "eyes": "target_destruction",
-      "mouth": "destroy_snarl",
-      "sounds": ["smash_intent", "break_fury"],
-      "duration_ms": 12000,
-      "priority": "high",
-      "destructive_mode": true
-    }
-  },
-  
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 60,
-    "sensor_poll_rate_hz": 30,
-    "power_management": "maximum_performance",
-    "audio_amplification": 1.0,
-    "bass_boost": "extreme",
-    "distortion_processing": true
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "EXTREME aggression variant - handle with caution",
-    "Minimal self-control with rapid violence escalation",
-    "Berserker rage state with uncontrollable behaviors",
-    "Maximum performance hardware for intense reactions",
-    "Blood-rage aesthetic with self-inflicted wounds",
-    "Distortion effects for unhinged audio character",
-    "Short timeout periods due to constant agitation",
-    "NOT RECOMMENDED for family-friendly environments"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_berserker.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "bot_type":  "GOBLINBERSERKER",
+    "bot_id":  "goblin_berserker_v1",
+    "description":  "Rage-driven goblin berserker with uncontrollable fury and battle madness",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "warrior_goblin",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "FEAR":  5,
+                                            "ANGER":  40,
+                                            "IRRITATION":  25,
+                                            "HAPPINESS":  5,
+                                            "CONTENTMENT":  3,
+                                            "HUNGER":  12,
+                                            "CURIOSITY":  5,
+                                            "AFFECTION":  5
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  true,
+                                              "auto_sleep_timeout_seconds":  60,
+                                              "interaction_range_cm":  150,
+                                              "aggressive_threshold":  10,
+                                              "calm_threshold":  0,
+                                              "berserker_rage":  true,
+                                              "self_control":  "minimal",
+                                              "violence_escalation":  "rapid"
+                                          },
+                      "aesthetic_profile":  {
+                                                "color_scheme":  "blood_rage_red",
+                                                "weathering_effects":  true,
+                                                "berserker_features":  {
+                                                                           "foam_mouth":  true,
+                                                                           "bloodshot_eyes":  true,
+                                                                           "rage_veins":  "prominent_purple",
+                                                                           "self_inflicted_wounds":  6,
+                                                                           "wild_hair":  true,
+                                                                           "crazed_expression":  "permanent"
+                                                                       },
+                                                "size_modifier":  1.15,
+                                                "intimidation_factor":  "terrifying"
+                                            },
+                      "sound_characteristics":  {
+                                                    "voice_pitch":  "rage_scream",
+                                                    "breathing_pattern":  "hyperventilating_fury",
+                                                    "rage_sounds":  [
+                                                                        "berserker_scream",
+                                                                        "fury_roar",
+                                                                        "madness_laugh",
+                                                                        "blood_lust_howl"
+                                                                    ],
+                                                    "violence_sounds":  [
+                                                                            "weapon_frenzy",
+                                                                            "destruction_crash",
+                                                                            "rage_pant"
+                                                                        ],
+                                                    "idle_sounds":  [
+                                                                        "angry_mutter",
+                                                                        "violence_anticipation",
+                                                                        "rage_build"
+                                                                    ],
+                                                    "ambient_volume":  0.9,
+                                                    "reaction_volume":  1.0,
+                                                    "distortion_effects":  true
+                                                },
+                      "animation_style":  {
+                                              "movement_speed":  "frenzied_wild",
+                                              "eye_tracking":  "rage_locked",
+                                              "idle_behaviors":  [
+                                                                     "anger_build",
+                                                                     "violence_preparation",
+                                                                     "rage_twitch"
+                                                                 ],
+                                              "threat_responses":  [
+                                                                       "berserker_charge",
+                                                                       "fury_unleash",
+                                                                       "destruction_frenzy"
+                                                                   ],
+                                              "expression_intensity":  "unhinged"
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/goblin_rage_foam.json",
+                                  "config/components/positioned/goblin_bloodshot_eyes.json",
+                                  "config/components/positioned/goblin_self_wounds.json",
+                                  "config/components/positioned/goblin_fury_veins.json"
+                              ],
+    "custom_behaviors":  {
+                             "berserker_frenzy":  {
+                                                      "trigger":  "combat_initiated",
+                                                      "eyes":  "blood_red_fury",
+                                                      "mouth":  "foam_rage_scream",
+                                                      "sounds":  [
+                                                                     "frenzy_roar",
+                                                                     "destruction_cry"
+                                                                 ],
+                                                      "duration_ms":  20000,
+                                                      "priority":  "critical",
+                                                      "uncontrollable":  true
+                                                  },
+                             "rage_building":  {
+                                                   "trigger":  "irritation_accumulation",
+                                                   "eyes":  "anger_intensifying",
+                                                   "mouth":  "rage_grimace",
+                                                   "sounds":  [
+                                                                  "fury_build",
+                                                                  "violence_anticipation"
+                                                              ],
+                                                   "duration_ms":  8000,
+                                                   "priority":  "high",
+                                                   "escalation_state":  true
+                                               },
+                             "destruction_spree":  {
+                                                       "trigger":  "object_detected",
+                                                       "eyes":  "target_destruction",
+                                                       "mouth":  "destroy_snarl",
+                                                       "sounds":  [
+                                                                      "smash_intent",
+                                                                      "break_fury"
+                                                                  ],
+                                                       "duration_ms":  12000,
+                                                       "priority":  "high",
+                                                       "destructive_mode":  true
+                                                   }
+                         },
+    "hardware_config":  {
+                            "i2s_sample_rate":  44100,
+                            "display_update_rate_fps":  60,
+                            "sensor_poll_rate_hz":  30,
+                            "power_management":  "maximum_performance",
+                            "audio_amplification":  1.0,
+                            "bass_boost":  "extreme",
+                            "distortion_processing":  true
+                        },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "EXTREME aggression variant - handle with caution",
+                  "Minimal self-control with rapid violence escalation",
+                  "Berserker rage state with uncontrollable behaviors",
+                  "Maximum performance hardware for intense reactions",
+                  "Blood-rage aesthetic with self-inflicted wounds",
+                  "Distortion effects for unhinged audio character",
+                  "Short timeout periods due to constant agitation",
+                  "NOT RECOMMENDED for family-friendly environments"
+              ]
 }

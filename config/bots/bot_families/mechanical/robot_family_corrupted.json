@@ -1,41 +1,43 @@
-{
-  "relative_filename": "config/bots/bot_families/mechanical/robot_family_corrupted.json",
-  "version": "1.0",
-  "author": "config/author.json",
-  "family_name": "Robot Corrupted",
-  "family_type": "ROBOT_CORRUPTED",
-  "family_category": "mechanical",
-  "description": "Corrupted robot family - previously damaged data restored",
-  "created": "2025-10-21",
-  "template_type": "family_template",
-  "coordinate_system": "planar_2d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "face_width": "6.0 INCH",
-    "face_height": "8.0 INCH",
-    "component_spacing": "1.5 INCH"
-  },
-  "default_components": [],
-  "family_mood_profile": {
-    "FEAR": 30,
-    "ANGER": 25,
-    "IRRITATION": 35,
-    "HAPPINESS": 5,
-    "CONTENTMENT": 5,
-    "HUNGER": 0,
-    "CURIOSITY": 10,
-    "AFFECTION": 0
-  },
-  "family_behavior_patterns": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 900,
-    "interaction_range_cm": 100,
-    "aggressive_threshold": 80,
-    "calm_threshold": 10,
-    "personality_traits": [
-      "unpredictable",
-      "glitchy",
-      "aggressive"
-    ]
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/mechanical/robot_family_corrupted.json",
+    "version":  "1.0",
+    "author":  "config/author.json",
+    "family_name":  "Robot Corrupted",
+    "family_type":  "ROBOT_CORRUPTED",
+    "family_category":  "mechanical",
+    "description":  "Corrupted robot family - previously damaged data restored",
+    "created":  "2025-10-21",
+    "template_type":  "family_template",
+    "coordinate_system":  "planar_2d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "face_width":  "6.0 INCH",
+                                "face_height":  "8.0 INCH",
+                                "component_spacing":  "1.5 INCH"
+                            },
+    "default_components":  [
+
+                           ],
+    "family_mood_profile":  {
+                                "FEAR":  30,
+                                "ANGER":  25,
+                                "IRRITATION":  35,
+                                "HAPPINESS":  5,
+                                "CONTENTMENT":  5,
+                                "HUNGER":  0,
+                                "CURIOSITY":  10,
+                                "AFFECTION":  0
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  900,
+                                     "interaction_range_cm":  100,
+                                     "aggressive_threshold":  80,
+                                     "calm_threshold":  10,
+                                     "personality_traits":  [
+                                                                "unpredictable",
+                                                                "glitchy",
+                                                                "aggressive"
+                                                            ]
+                                 }
 }

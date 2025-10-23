@@ -1,83 +1,90 @@
-{
-  "relative_filename": "config/bots/bot_families/goblins/goblin_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "family_type": "GOBLIN",
-  "family_category": "fantasy_creatures",
-  "description": "Mischievous, cunning humanoid creatures with grotesque features and tribal behaviors",
-  "created": "2025-10-13",
-  "template_type": "family_template",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "3.0 INCH",
-    "compression_factor": 0.7,
-    "skull_scale": 1.0,
-    "mechanical_precision": "moderate_tolerance"
-  },
-  
-  "common_components": [
-    "config/components/positioned/goblin_left_eye.json",
-    "config/components/positioned/goblin_right_eye.json",
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_nose.json",
-    "config/components/positioned/goblin_ear_left.json",
-    "config/components/positioned/goblin_ear_right.json",
-    "config/components/positioned/goblin_speaker.json"
-  ],
-  
-  "family_characteristics": {
-    "physical_features": {
-      "skin_texture": "rough_warty",
-      "facial_structure": "angular_harsh",
-      "ear_style": "large_pointed", 
-      "eye_style": "beady_glowing",
-      "mouth_style": "wide_grimace_fanged",
-      "nose_style": "hooked_prominent"
-    },
-    
-    "behavioral_traits": {
-      "default_mood": "MISCHIEVOUS_CUNNING",
-      "aggression_level": "MODERATE_TO_HIGH",
-      "intelligence": "CUNNING_TACTICAL", 
-      "social_behavior": "TRIBAL_PACK",
-      "activity_pattern": "NOCTURNAL_PREFERRED"
-    },
-    
-    "size_variants": {
-      "pocket_goblin": "21_INCH_HEIGHT",
-      "standard_goblin": "36_INCH_HEIGHT", 
-      "large_goblin": "48_INCH_HEIGHT",
-      "hobgoblin": "60_INCH_HEIGHT"
-    }
-  },
-  
-  "mood_preferences": [
-    "ANGER", "IRRITATION", "CURIOSITY", "HUNGER", "MISCHIEF"
-  ],
-  
-  "animation_styles": {
-    "idle": "shifty_suspicious_glancing",
-    "alert": "ears_perked_eyes_darting",
-    "aggressive": "snarling_fang_display", 
-    "curious": "head_tilting_eye_widening",
-    "pleased": "wicked_grinning"
-  },
-  
-  "sound_profiles": {
-    "vocalizations": ["growls", "snarls", "cackles", "hisses"],
-    "ambient": ["cave_echoes", "tribal_drums", "bone_rattling"],
-    "combat": ["battle_cries", "weapon_clashing", "armor_clanking"]
-  },
-  
-  "family_compatibility": {
-    "orcs": "EXCELLENT",
-    "hobgoblins": "EXCELLENT", 
-    "undead": "GOOD",
-    "dragons": "NEUTRAL",
-    "elves": "HOSTILE",
-    "humans": "SUSPICIOUS"
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "GOBLIN",
+    "family_category":  "fantasy_creatures",
+    "description":  "Mischievous, cunning humanoid creatures with grotesque features and tribal behaviors",
+    "created":  "2025-10-13",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "3.0 INCH",
+                                "compression_factor":  0.7,
+                                "skull_scale":  1.0,
+                                "mechanical_precision":  "moderate_tolerance"
+                            },
+    "common_components":  [
+                              "config/components/positioned/goblin_left_eye.json",
+                              "config/components/positioned/goblin_right_eye.json",
+                              "config/components/positioned/goblin_mouth.json",
+                              "config/components/positioned/goblin_nose.json",
+                              "config/components/positioned/goblin_ear_left.json",
+                              "config/components/positioned/goblin_ear_right.json",
+                              "config/components/positioned/goblin_speaker.json"
+                          ],
+    "family_characteristics":  {
+                                   "physical_features":  {
+                                                             "skin_texture":  "rough_warty",
+                                                             "facial_structure":  "angular_harsh",
+                                                             "ear_style":  "large_pointed",
+                                                             "eye_style":  "beady_glowing",
+                                                             "mouth_style":  "wide_grimace_fanged",
+                                                             "nose_style":  "hooked_prominent"
+                                                         },
+                                   "behavioral_traits":  {
+                                                             "default_mood":  "MISCHIEVOUS_CUNNING",
+                                                             "aggression_level":  "MODERATE_TO_HIGH",
+                                                             "intelligence":  "CUNNING_TACTICAL",
+                                                             "social_behavior":  "TRIBAL_PACK",
+                                                             "activity_pattern":  "NOCTURNAL_PREFERRED"
+                                                         },
+                                   "size_variants":  {
+                                                         "pocket_goblin":  "21_INCH_HEIGHT",
+                                                         "standard_goblin":  "36_INCH_HEIGHT",
+                                                         "large_goblin":  "48_INCH_HEIGHT",
+                                                         "hobgoblin":  "60_INCH_HEIGHT"
+                                                     }
+                               },
+    "mood_preferences":  [
+                             "ANGER",
+                             "IRRITATION",
+                             "CURIOSITY",
+                             "HUNGER",
+                             "MISCHIEF"
+                         ],
+    "animation_styles":  {
+                             "idle":  "shifty_suspicious_glancing",
+                             "alert":  "ears_perked_eyes_darting",
+                             "aggressive":  "snarling_fang_display",
+                             "curious":  "head_tilting_eye_widening",
+                             "pleased":  "wicked_grinning"
+                         },
+    "sound_profiles":  {
+                           "vocalizations":  [
+                                                 "growls",
+                                                 "snarls",
+                                                 "cackles",
+                                                 "hisses"
+                                             ],
+                           "ambient":  [
+                                           "cave_echoes",
+                                           "tribal_drums",
+                                           "bone_rattling"
+                                       ],
+                           "combat":  [
+                                          "battle_cries",
+                                          "weapon_clashing",
+                                          "armor_clanking"
+                                      ]
+                       },
+    "family_compatibility":  {
+                                 "orcs":  "EXCELLENT",
+                                 "hobgoblins":  "EXCELLENT",
+                                 "undead":  "GOOD",
+                                 "dragons":  "NEUTRAL",
+                                 "elves":  "HOSTILE",
+                                 "humans":  "SUSPICIOUS"
+                             }
 }

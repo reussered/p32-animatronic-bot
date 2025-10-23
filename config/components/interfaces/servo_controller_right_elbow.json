@@ -1,39 +1,36 @@
-{
-  "relative_filename": "config/components/interfaces/servo_controller_right_elbow.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "SERVO_CONTROLLER_RIGHT_ELBOW",
-  "interface_type": "SINGLE_SERVO_CONTROLLER", 
-  "description": "Single-servo controller interface for right elbow 1DOF joint",
-  
-  "controller_assignment": "ESP32_C3_ARM_CONTROLLER_RIGHT",
-  "servo_count": 1,
-  "control_frequency": "1000_HZ",
-  
-  "servo_assignments": {
-    "elbow_flex_extend": {
-      "servo_type": "NEMA17_WITH_27_1_GEARBOX",
-      "step_pin": "GPIO_9",
-      "direction_pin": "GPIO_10",
-      "enable_pin": "GPIO_11", 
-      "encoder_sda": "GPIO_21",
-      "encoder_scl": "GPIO_22"
-    }
-  },
-  
-  "shared_resources": {
-    "i2c_bus": {
-      "sda_pin": "GPIO_21",
-      "scl_pin": "GPIO_22", 
-      "frequency": "400_KHZ",
-      "shared_by": ["elbow_flex_extend_encoder"]
-    }
-  },
-  
-  "safety_configuration": {
-    "emergency_stop_pin": "GPIO_0",
-    "overload_detection": "CURRENT_SENSING_ADC_CHANNEL_2", 
-    "collision_detection": "TORQUE_SPIKE_MONITORING"
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/servo_controller_right_elbow.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "SERVO_CONTROLLER_RIGHT_ELBOW",
+    "interface_type":  "SINGLE_SERVO_CONTROLLER",
+    "description":  "Single-servo controller interface for right elbow 1DOF joint",
+    "controller_assignment":  "ESP32_C3_ARM_CONTROLLER_RIGHT",
+    "servo_count":  1,
+    "control_frequency":  "1000_HZ",
+    "servo_assignments":  {
+                              "elbow_flex_extend":  {
+                                                        "servo_type":  "NEMA17_WITH_27_1_GEARBOX",
+                                                        "step_pin":  "GPIO_9",
+                                                        "direction_pin":  "GPIO_10",
+                                                        "enable_pin":  "GPIO_11",
+                                                        "encoder_sda":  "GPIO_21",
+                                                        "encoder_scl":  "GPIO_22"
+                                                    }
+                          },
+    "shared_resources":  {
+                             "i2c_bus":  {
+                                             "sda_pin":  "GPIO_21",
+                                             "scl_pin":  "GPIO_22",
+                                             "frequency":  "400_KHZ",
+                                             "shared_by":  [
+                                                               "elbow_flex_extend_encoder"
+                                                           ]
+                                         }
+                         },
+    "safety_configuration":  {
+                                 "emergency_stop_pin":  "GPIO_0",
+                                 "overload_detection":  "CURRENT_SENSING_ADC_CHANNEL_2",
+                                 "collision_detection":  "TORQUE_SPIKE_MONITORING"
+                             }
 }

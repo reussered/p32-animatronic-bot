@@ -1,296 +1,161 @@
-{
-
-  "relative_filename": "config/components/hardware/esp32_c3_mini_controller.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  
-
-  "component_name": "ESP32_C3_MINI_CONTROLLER",
-  "subsystem": "TORSO",
-
-  "component_type": "MICRO_CONTROLLER_MODULE",
-
-  "description": "Ultra-compact ESP32-C3 for distributed control in joints and extremities",
-
-  
-
-  "physical_specifications": {
-
-    "chip": "ESP32-C3FH4",
-
-    "module_size": "13x16.5mm",
-
-    "thickness": "2.4mm", 
-
-    "weight": "0.8_GRAMS",
-
-    "mounting": "CASTELLATED_PADS_OR_PINS",
-
-    "form_factor": "SMALLER_THAN_QUARTER"
-
-  },
-
-  
-
-  "capabilities": {
-
-    "cpu": "RISC-V_32BIT_160MHZ",
-
-    "memory": {
-
-      "flash": "4MB_BUILT_IN",
-
-      "ram": "400KB_SRAM", 
-
-      "rtc_memory": "8KB_RTC_SLOW"
-
-    },
-
-    "wireless": {
-
-      "wifi": "802.11_B_G_N",
-
-      "bluetooth": "BLUETOOTH_5_LE", 
-
-      "mesh": "ESP_MESH_AND_BLE_MESH_CAPABLE"
-
-    },
-
-    "gpio": "22_PROGRAMMABLE_PINS",
-
-    "gpio_limitations": "LIMITED_PINS_REQUIRE_EXPANSION",
-
-    "peripherals": ["SPI", "I2C", "UART", "PWM", "ADC"],
-
-    "expansion_strategy": "LEVERAGE_EXISTING_SPI_I2S_DEVICE_ARCHITECTURE"
-
-  },
-
-  
-
-  "gpio_expansion_using_existing_components": {
-
-    "spi_servo_expansion": {
-
-      "component": "config/components/interfaces/spi_device_1.json",
-
-      "expander_chip": "PCA9685_16_CHANNEL_PWM",
-
-      "gpio_cost": "3_PINS_SPI_PLUS_1_CS",
-
-      "servo_capacity": "16_SERVOS_PER_EXPANDER",
-
-      "cascading": "MULTIPLE_PCA9685_ON_SAME_SPI_BUS"
-
-    },
-
-    
-
-    "i2c_sensor_expansion": {
-
-      "component": "config/components/interfaces/i2c_bus_0.json", 
-
-      "gpio_cost": "2_PINS_SDA_SCL",
-
-      "device_capacity": "127_I2C_ADDRESSES",
-
-      "examples": ["MPU6050_IMU", "AS5600_ENCODER", "ADS1115_ADC"]
-
-    },
-
-    
-
-    "i2s_audio_expansion": {
-
-      "component": "config/components/interfaces/i2s_device_1.json",
-
-      "gpio_cost": "3_PINS_BCLK_WS_DATA", 
-
-      "capability": "AUDIO_INPUT_OUTPUT_PROCESSING",
-
-      "examples": ["MICROPHONE_ARRAY", "SPEAKER_OUTPUT"]
-
-    }
-
-  },
-
-  
-
-  "power_specifications": {
-
-    "operating_voltage": "3.0V_TO_3.6V",
-
-    "active_current": "80MA_TYPICAL",
-
-    "sleep_current": "5_MICROAMPS", 
-
-    "deep_sleep": "2.5_MICROAMPS",
-
-    "battery_friendly": "EXTREMELY_LOW_POWER"
-
-  },
-
-  
-
-  "applications_in_humanoid": {
-
-    "hand_controllers": {
-
-      "location": "EMBEDDED_IN_WRIST_OR_PALM",
-
-      "servo_count": "5_FINGERS",
-
-      "sensors": ["PRESSURE_FINGERTIPS", "FLEX_SENSORS"], 
-
-      "communication": "BLE_MESH_TO_ARM_CONTROLLER",
-
-      "power": "SHARED_ARM_POWER_OR_SMALL_BATTERY",
-
-      "gpio_usage": {
-
-        "spi_bus": {
-
-          "pins_used": "GPIO_6_7_8_MOSI_MISO_SCK",
-
-          "expander": "PCA9685_CS_GPIO_9",
-
-          "servo_control": "16_SERVOS_VIA_SPI_EXPANSION"
-
-        },
-
-        "i2c_bus": {
-
-          "pins_used": "GPIO_4_5_SDA_SCL", 
-
-          "sensors": "AS5600_ENCODERS_PRESSURE_SENSORS",
-
-          "addresses": "UP_TO_8_I2C_DEVICES"
-
-        },
-
-        "bluetooth_mesh": {
-
-          "pins_used": "INTERNAL_RADIO_NO_GPIO",
-
-          "communication": "WIRELESS_MESH_COORDINATION"
-
-        },
-
-        "remaining_gpio": "12_PINS_FOR_DIRECT_CONNECTIONS"
-
-      }
-
-    },
-
-    
-
-    "shoulder_controllers": {
-
-      "location": "EMBEDDED_IN_SHOULDER_JOINT",
-
-      "servo_count": "3_SHOULDER_AXES", 
-
-      "sensors": ["POSITION_ENCODERS", "CURRENT_SENSE"],
-
-      "communication": "BLE_MESH_TO_TORSO_CONTROLLER",
-
-      "benefits": "NO_WIRES_THROUGH_ROTATING_JOINT"
-
-    },
-
-    
-
-    "foot_controllers": {
-
-      "location": "EMBEDDED_IN_ANKLE_OR_FOOT",
-
-      "servo_count": "2_ANKLE_AXES",
-
-      "sensors": ["PRESSURE_ARRAY", "IMU_BALANCE"], 
-
-      "communication": "BLE_MESH_TO_LEG_CONTROLLER",
-
-      "benefits": "WIRELESS_FOOT_SENSOR_DATA"
-
-    },
-
-    
-
-    "head_controllers": {
-
-      "location": "EMBEDDED_IN_NECK_OR_JAW",
-
-      "servo_count": "4_HEAD_NECK_JAW",
-
-      "sensors": ["CAMERA", "MICROPHONE", "SPEAKER"],
-
-      "communication": "BLE_MESH_TO_MASTER_CONTROLLER", 
-
-      "benefits": "INDEPENDENT_HEAD_PROCESSING"
-
-    }
-
-  },
-
-  
-
-  "size_comparison": {
-
-    "esp32_s3_devkit": "25.4x53.3mm",
-
-    "esp32_c3_super_mini": "13x16.5mm", 
-
-    "size_reduction": "85%_SMALLER",
-
-    "integration_benefit": "FITS_INSIDE_SERVO_HOUSINGS"
-
-  },
-
-  
-
-  "cost_analysis": {
-
-    "esp32_c3_module_cost": "$2_USD_IN_QUANTITY",
-
-    "vs_arduino_nano": "$3_USD", 
-
-    "vs_esp32_s3": "$8_USD",
-
-    "benefit": "CHEAPEST_WIRELESS_OPTION"
-
-  },
-
-  
-
-  "programming_compatibility": {
-
-    "framework": "ESP_IDF_AND_ARDUINO_IDE",
-
-    "language": "C_CPP_MICROPYTHON",
-
-    "libraries": "SAME_AS_FULL_ESP32",
-
-    "ota_updates": "WIRELESS_FIRMWARE_UPDATES" 
-
-  },
-
-  
-
-  "mesh_networking_advantages": {
-
-    "no_wiring": "ELIMINATE_SERVO_CONTROL_WIRES",
-
-    "self_healing": "AUTOMATIC_ROUTE_DISCOVERY",
-
-    "scalable": "ADD_MORE_NODES_EASILY", 
-
-    "redundant": "MULTIPLE_PATHS_TO_MASTER",
-
-    "low_latency": "DIRECT_MESH_COMMUNICATION"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/hardware/esp32_c3_mini_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "ESP32_C3_MINI_CONTROLLER",
+    "subsystem":  "TORSO",
+    "component_type":  "MICRO_CONTROLLER_MODULE",
+    "description":  "Ultra-compact ESP32-C3 for distributed control in joints and extremities",
+    "physical_specifications":  {
+                                    "chip":  "ESP32-C3FH4",
+                                    "module_size":  "13x16.5mm",
+                                    "thickness":  "2.4mm",
+                                    "weight":  "0.8_GRAMS",
+                                    "mounting":  "CASTELLATED_PADS_OR_PINS",
+                                    "form_factor":  "SMALLER_THAN_QUARTER"
+                                },
+    "capabilities":  {
+                         "cpu":  "RISC-V_32BIT_160MHZ",
+                         "memory":  {
+                                        "flash":  "4MB_BUILT_IN",
+                                        "ram":  "400KB_SRAM",
+                                        "rtc_memory":  "8KB_RTC_SLOW"
+                                    },
+                         "wireless":  {
+                                          "wifi":  "802.11_B_G_N",
+                                          "bluetooth":  "BLUETOOTH_5_LE",
+                                          "mesh":  "ESP_MESH_AND_BLE_MESH_CAPABLE"
+                                      },
+                         "gpio":  "22_PROGRAMMABLE_PINS",
+                         "gpio_limitations":  "LIMITED_PINS_REQUIRE_EXPANSION",
+                         "peripherals":  [
+                                             "SPI",
+                                             "I2C",
+                                             "UART",
+                                             "PWM",
+                                             "ADC"
+                                         ],
+                         "expansion_strategy":  "LEVERAGE_EXISTING_SPI_I2S_DEVICE_ARCHITECTURE"
+                     },
+    "gpio_expansion_using_existing_components":  {
+                                                     "spi_servo_expansion":  {
+                                                                                 "component":  "config/components/interfaces/spi_device_1.json",
+                                                                                 "expander_chip":  "PCA9685_16_CHANNEL_PWM",
+                                                                                 "gpio_cost":  "3_PINS_SPI_PLUS_1_CS",
+                                                                                 "servo_capacity":  "16_SERVOS_PER_EXPANDER",
+                                                                                 "cascading":  "MULTIPLE_PCA9685_ON_SAME_SPI_BUS"
+                                                                             },
+                                                     "i2c_sensor_expansion":  {
+                                                                                  "component":  "config/components/interfaces/i2c_bus_0.json",
+                                                                                  "gpio_cost":  "2_PINS_SDA_SCL",
+                                                                                  "device_capacity":  "127_I2C_ADDRESSES",
+                                                                                  "examples":  [
+                                                                                                   "MPU6050_IMU",
+                                                                                                   "AS5600_ENCODER",
+                                                                                                   "ADS1115_ADC"
+                                                                                               ]
+                                                                              },
+                                                     "i2s_audio_expansion":  {
+                                                                                 "component":  "config/components/interfaces/i2s_device_1.json",
+                                                                                 "gpio_cost":  "3_PINS_BCLK_WS_DATA",
+                                                                                 "capability":  "AUDIO_INPUT_OUTPUT_PROCESSING",
+                                                                                 "examples":  [
+                                                                                                  "MICROPHONE_ARRAY",
+                                                                                                  "SPEAKER_OUTPUT"
+                                                                                              ]
+                                                                             }
+                                                 },
+    "power_specifications":  {
+                                 "operating_voltage":  "3.0V_TO_3.6V",
+                                 "active_current":  "80MA_TYPICAL",
+                                 "sleep_current":  "5_MICROAMPS",
+                                 "deep_sleep":  "2.5_MICROAMPS",
+                                 "battery_friendly":  "EXTREMELY_LOW_POWER"
+                             },
+    "applications_in_humanoid":  {
+                                     "hand_controllers":  {
+                                                              "location":  "EMBEDDED_IN_WRIST_OR_PALM",
+                                                              "servo_count":  "5_FINGERS",
+                                                              "sensors":  [
+                                                                              "PRESSURE_FINGERTIPS",
+                                                                              "FLEX_SENSORS"
+                                                                          ],
+                                                              "communication":  "BLE_MESH_TO_ARM_CONTROLLER",
+                                                              "power":  "SHARED_ARM_POWER_OR_SMALL_BATTERY",
+                                                              "gpio_usage":  {
+                                                                                 "spi_bus":  {
+                                                                                                 "pins_used":  "GPIO_6_7_8_MOSI_MISO_SCK",
+                                                                                                 "expander":  "PCA9685_CS_GPIO_9",
+                                                                                                 "servo_control":  "16_SERVOS_VIA_SPI_EXPANSION"
+                                                                                             },
+                                                                                 "i2c_bus":  {
+                                                                                                 "pins_used":  "GPIO_4_5_SDA_SCL",
+                                                                                                 "sensors":  "AS5600_ENCODERS_PRESSURE_SENSORS",
+                                                                                                 "addresses":  "UP_TO_8_I2C_DEVICES"
+                                                                                             },
+                                                                                 "bluetooth_mesh":  {
+                                                                                                        "pins_used":  "INTERNAL_RADIO_NO_GPIO",
+                                                                                                        "communication":  "WIRELESS_MESH_COORDINATION"
+                                                                                                    },
+                                                                                 "remaining_gpio":  "12_PINS_FOR_DIRECT_CONNECTIONS"
+                                                                             }
+                                                          },
+                                     "shoulder_controllers":  {
+                                                                  "location":  "EMBEDDED_IN_SHOULDER_JOINT",
+                                                                  "servo_count":  "3_SHOULDER_AXES",
+                                                                  "sensors":  [
+                                                                                  "POSITION_ENCODERS",
+                                                                                  "CURRENT_SENSE"
+                                                                              ],
+                                                                  "communication":  "BLE_MESH_TO_TORSO_CONTROLLER",
+                                                                  "benefits":  "NO_WIRES_THROUGH_ROTATING_JOINT"
+                                                              },
+                                     "foot_controllers":  {
+                                                              "location":  "EMBEDDED_IN_ANKLE_OR_FOOT",
+                                                              "servo_count":  "2_ANKLE_AXES",
+                                                              "sensors":  [
+                                                                              "PRESSURE_ARRAY",
+                                                                              "IMU_BALANCE"
+                                                                          ],
+                                                              "communication":  "BLE_MESH_TO_LEG_CONTROLLER",
+                                                              "benefits":  "WIRELESS_FOOT_SENSOR_DATA"
+                                                          },
+                                     "head_controllers":  {
+                                                              "location":  "EMBEDDED_IN_NECK_OR_JAW",
+                                                              "servo_count":  "4_HEAD_NECK_JAW",
+                                                              "sensors":  [
+                                                                              "CAMERA",
+                                                                              "MICROPHONE",
+                                                                              "SPEAKER"
+                                                                          ],
+                                                              "communication":  "BLE_MESH_TO_MASTER_CONTROLLER",
+                                                              "benefits":  "INDEPENDENT_HEAD_PROCESSING"
+                                                          }
+                                 },
+    "size_comparison":  {
+                            "esp32_s3_devkit":  "25.4x53.3mm",
+                            "esp32_c3_super_mini":  "13x16.5mm",
+                            "size_reduction":  "85%_SMALLER",
+                            "integration_benefit":  "FITS_INSIDE_SERVO_HOUSINGS"
+                        },
+    "cost_analysis":  {
+                          "esp32_c3_module_cost":  "$2_USD_IN_QUANTITY",
+                          "vs_arduino_nano":  "$3_USD",
+                          "vs_esp32_s3":  "$8_USD",
+                          "benefit":  "CHEAPEST_WIRELESS_OPTION"
+                      },
+    "programming_compatibility":  {
+                                      "framework":  "ESP_IDF_AND_ARDUINO_IDE",
+                                      "language":  "C_CPP_MICROPYTHON",
+                                      "libraries":  "SAME_AS_FULL_ESP32",
+                                      "ota_updates":  "WIRELESS_FIRMWARE_UPDATES"
+                                  },
+    "mesh_networking_advantages":  {
+                                       "no_wiring":  "ELIMINATE_SERVO_CONTROL_WIRES",
+                                       "self_healing":  "AUTOMATIC_ROUTE_DISCOVERY",
+                                       "scalable":  "ADD_MORE_NODES_EASILY",
+                                       "redundant":  "MULTIPLE_PATHS_TO_MASTER",
+                                       "low_latency":  "DIRECT_MESH_COMMUNICATION"
+                                   },
+    "hardware_type":  "MICRO_CONTROLLER_MODULE"
 }

@@ -1,176 +1,95 @@
-{
-
-  "relative_filename": "config/components/positioned/humanoid_ankle_left.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  
-
-  "component_name": "HUMANOID_ANKLE_LEFT",
-  "subsystem": "LEG",
-
-  "component_type": "ARTICULATED_JOINT_2DOF",
-
-  "description": "Left ankle joint with 2 degrees of freedom for balance and terrain adaptation",
-
-  
-
-  "coordinate_system": "humanoid_3d",
-
-  "reference_point": "pelvis_center",
-
-  "position": {
-
-    "x": "-4.5 INCH",
-
-    "y": "0.0 INCH",
-
-    "z": "-34.0 INCH",
-
-    "scaling_applies": true
-
-  },
-
-  
-
-  "hardware_reference": "config/components/hardware/ankle_joint_assembly.json",
-
-  "interface_assignments": {
-
-    "servo_dorsiflexion_plantarflexion": "config/components/interfaces/servo_ankle_flex_left.json",
-
-    "servo_inversion_eversion": "config/components/interfaces/servo_ankle_inv_left.json",
-
-    "position_feedback_1": "config/components/interfaces/encoder_ankle_1_left.json",
-
-    "position_feedback_2": "config/components/interfaces/encoder_ankle_2_left.json", 
-
-    "power_connection": "config/components/interfaces/power_tap_ankle_left.json",
-
-    "pressure_sensors": "config/components/interfaces/pressure_array_foot_left.json"
-
-  },
-
-  
-
-  "degrees_of_freedom": {
-
-    "total_dof": 2,
-
-    "joint_1_dorsiflexion_plantarflexion": {
-
-      "servo_type": "DS3218_HIGH_TORQUE",
-
-      "range_degrees": {"min": -45, "max": 30},
-
-      "default_position": -5,
-
-      "max_speed_deg_per_sec": 120,
-
-      "holding_torque_nm": 2.2,
-
-      "balance_critical": true
-
-    },
-
-    "joint_2_inversion_eversion": {
-
-      "servo_type": "MG996R_STANDARD",
-
-      "range_degrees": {"min": -25, "max": 25},
-
-      "default_position": 0,
-
-      "max_speed_deg_per_sec": 150,
-
-      "holding_torque_nm": 1.3,
-
-      "balance_critical": true
-
-    }
-
-  },
-
-  
-
-  "attachment_points": {
-
-    "lower_leg_connection": {
-
-      "position": {"x": "0.0", "y": "0.0", "z": "0.0"},
-
-      "mounting_hardware": "M6_BOLT_ASSEMBLY",
-
-      "component_reference": "config/components/positioned/humanoid_lower_leg_left.json"
-
-    },
-
-    "foot_connection": {
-
-      "position": {"x": "0.0", "y": "2.0", "z": "-3.0"},
-
-      "mounting_hardware": "M6_BOLT_ASSEMBLY",
-
-      "component_reference": "config/components/positioned/humanoid_foot_left.json"
-
-    }
-
-  },
-
-  
-
-  "balance_specifications": {
-
-    "balance_response_time_ms": 50,
-
-    "max_correction_angle": 20,
-
-    "center_of_pressure_range": "4.0_INCH_DIAMETER",
-
-    "ground_contact_detection": "PRESSURE_SENSOR_ARRAY"
-
-  },
-
-  
-
-  "structural_specifications": {
-
-    "material": "ALUMINUM_7075_T6",
-
-    "weight_grams": 420,
-
-    "safety_factor": 4.0,
-
-    "expected_cycles": 20000000,
-
-    "maintenance_interval_hours": 500
-
-  },
-
-  
-
-  "terrain_adaptation": {
-
-    "max_slope_degrees": 15,
-
-    "uneven_surface_adaptation": "ACTIVE_ANKLE_STRATEGY",
-
-    "shock_absorption": "ELASTOMER_DAMPENING"
-
-  },
-
-  
-
-  "scaling_behavior": {
-
-    "position_scaling": "APPLIES_TO_ALL_XYZ_COORDINATES",
-
-    "servo_selection": "SCALES_WITH_CREATURE_WEIGHT_AND_BALANCE_NEEDS", 
-
-    "structural_scaling": "BALANCE_PERFORMANCE_SCALES_WITH_SIZE"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/humanoid_ankle_left.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "HUMANOID_ANKLE_LEFT",
+    "subsystem":  "LEG",
+    "component_type":  "ARTICULATED_JOINT_2DOF",
+    "description":  "Left ankle joint with 2 degrees of freedom for balance and terrain adaptation",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "position":  {
+                     "x":  "-4.5 INCH",
+                     "y":  "0.0 INCH",
+                     "z":  "-34.0 INCH",
+                     "scaling_applies":  true
+                 },
+    "hardware_reference":  "config/components/hardware/ankle_joint_assembly.json",
+    "interface_assignments":  {
+                                  "servo_dorsiflexion_plantarflexion":  "config/components/interfaces/servo_ankle_flex_left.json",
+                                  "servo_inversion_eversion":  "config/components/interfaces/servo_ankle_inv_left.json",
+                                  "position_feedback_1":  "config/components/interfaces/encoder_ankle_1_left.json",
+                                  "position_feedback_2":  "config/components/interfaces/encoder_ankle_2_left.json",
+                                  "power_connection":  "config/components/interfaces/power_tap_ankle_left.json",
+                                  "pressure_sensors":  "config/components/interfaces/pressure_array_foot_left.json"
+                              },
+    "degrees_of_freedom":  {
+                               "total_dof":  2,
+                               "joint_1_dorsiflexion_plantarflexion":  {
+                                                                           "servo_type":  "DS3218_HIGH_TORQUE",
+                                                                           "range_degrees":  {
+                                                                                                 "min":  -45,
+                                                                                                 "max":  30
+                                                                                             },
+                                                                           "default_position":  -5,
+                                                                           "max_speed_deg_per_sec":  120,
+                                                                           "holding_torque_nm":  2.2,
+                                                                           "balance_critical":  true
+                                                                       },
+                               "joint_2_inversion_eversion":  {
+                                                                  "servo_type":  "MG996R_STANDARD",
+                                                                  "range_degrees":  {
+                                                                                        "min":  -25,
+                                                                                        "max":  25
+                                                                                    },
+                                                                  "default_position":  0,
+                                                                  "max_speed_deg_per_sec":  150,
+                                                                  "holding_torque_nm":  1.3,
+                                                                  "balance_critical":  true
+                                                              }
+                           },
+    "attachment_points":  {
+                              "lower_leg_connection":  {
+                                                           "position":  {
+                                                                            "x":  "0.0",
+                                                                            "y":  "0.0",
+                                                                            "z":  "0.0"
+                                                                        },
+                                                           "mounting_hardware":  "M6_BOLT_ASSEMBLY",
+                                                           "component_reference":  "config/components/positioned/humanoid_lower_leg_left.json"
+                                                       },
+                              "foot_connection":  {
+                                                      "position":  {
+                                                                       "x":  "0.0",
+                                                                       "y":  "2.0",
+                                                                       "z":  "-3.0"
+                                                                   },
+                                                      "mounting_hardware":  "M6_BOLT_ASSEMBLY",
+                                                      "component_reference":  "config/components/positioned/humanoid_foot_left.json"
+                                                  }
+                          },
+    "balance_specifications":  {
+                                   "balance_response_time_ms":  50,
+                                   "max_correction_angle":  20,
+                                   "center_of_pressure_range":  "4.0_INCH_DIAMETER",
+                                   "ground_contact_detection":  "PRESSURE_SENSOR_ARRAY"
+                               },
+    "structural_specifications":  {
+                                      "material":  "ALUMINUM_7075_T6",
+                                      "weight_grams":  420,
+                                      "safety_factor":  4.0,
+                                      "expected_cycles":  20000000,
+                                      "maintenance_interval_hours":  500
+                                  },
+    "terrain_adaptation":  {
+                               "max_slope_degrees":  15,
+                               "uneven_surface_adaptation":  "ACTIVE_ANKLE_STRATEGY",
+                               "shock_absorption":  "ELASTOMER_DAMPENING"
+                           },
+    "scaling_behavior":  {
+                             "position_scaling":  "APPLIES_TO_ALL_XYZ_COORDINATES",
+                             "servo_selection":  "SCALES_WITH_CREATURE_WEIGHT_AND_BALANCE_NEEDS",
+                             "structural_scaling":  "BALANCE_PERFORMANCE_SCALES_WITH_SIZE"
+                         },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

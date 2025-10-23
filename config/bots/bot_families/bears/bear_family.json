@@ -1,57 +1,68 @@
-{
-  "relative_filename": "config/bots/bot_families/bears/bear_family.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "family_type": "BEAR",
-  "family_category": "animals",
-  "description": "Large, powerful mammals with thick fur and omnivorous behaviors",
-  "created": "2025-10-13",
-  "template_type": "family_template",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center", 
-  "baseline_dimensions": {
-    "eye_spacing": "4.0 INCH",
-    "compression_factor": 0.9,
-    "skull_scale": 1.3,
-    "mechanical_precision": "moderate_tolerance"
-  },
-  
-  "family_characteristics": {
-    "physical_features": {
-      "fur_texture": "thick_coarse",
-      "facial_structure": "broad_muzzled",
-      "ear_style": "small_rounded",
-      "eye_style": "small_dark_intelligent",
-      "mouth_style": "wide_powerful_jawed",
-      "nose_style": "large_wet_sensitive"
-    },
-    
-    "behavioral_traits": {
-      "default_mood": "CALM_PROTECTIVE",
-      "aggression_level": "LOW_BUT_DANGEROUS_WHEN_PROVOKED",
-      "intelligence": "HIGH_PROBLEM_SOLVING",
-      "social_behavior": "SOLITARY_OR_FAMILY_GROUPS",
-      "activity_pattern": "VARIES_BY_SEASON"
-    },
-    
-    "size_variants": {
-      "cub": "18_INCH_HEIGHT",
-      "black_bear": "36_INCH_HEIGHT",
-      "brown_bear": "48_INCH_HEIGHT", 
-      "grizzly": "60_INCH_HEIGHT",
-      "polar_bear": "72_INCH_HEIGHT"
-    }
-  },
-  
-  "mood_preferences": [
-    "CONTENTMENT", "CURIOSITY", "HUNGER", "PROTECTIVENESS", "SLEEPINESS"
-  ],
-  
-  "sound_profiles": {
-    "vocalizations": ["growls", "huffs", "roars", "grunts", "woofs"],
-    "ambient": ["forest_sounds", "river_flowing", "wind_rustling"],
-    "feeding": ["honey_dripping", "fish_splashing", "berry_munching"]
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/bears/bear_family.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_type":  "BEAR",
+    "family_category":  "animals",
+    "description":  "Large, powerful mammals with thick fur and omnivorous behaviors",
+    "created":  "2025-10-13",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "4.0 INCH",
+                                "compression_factor":  0.9,
+                                "skull_scale":  1.3,
+                                "mechanical_precision":  "moderate_tolerance"
+                            },
+    "family_characteristics":  {
+                                   "physical_features":  {
+                                                             "fur_texture":  "thick_coarse",
+                                                             "facial_structure":  "broad_muzzled",
+                                                             "ear_style":  "small_rounded",
+                                                             "eye_style":  "small_dark_intelligent",
+                                                             "mouth_style":  "wide_powerful_jawed",
+                                                             "nose_style":  "large_wet_sensitive"
+                                                         },
+                                   "behavioral_traits":  {
+                                                             "default_mood":  "CALM_PROTECTIVE",
+                                                             "aggression_level":  "LOW_BUT_DANGEROUS_WHEN_PROVOKED",
+                                                             "intelligence":  "HIGH_PROBLEM_SOLVING",
+                                                             "social_behavior":  "SOLITARY_OR_FAMILY_GROUPS",
+                                                             "activity_pattern":  "VARIES_BY_SEASON"
+                                                         },
+                                   "size_variants":  {
+                                                         "cub":  "18_INCH_HEIGHT",
+                                                         "black_bear":  "36_INCH_HEIGHT",
+                                                         "brown_bear":  "48_INCH_HEIGHT",
+                                                         "grizzly":  "60_INCH_HEIGHT",
+                                                         "polar_bear":  "72_INCH_HEIGHT"
+                                                     }
+                               },
+    "mood_preferences":  [
+                             "CONTENTMENT",
+                             "CURIOSITY",
+                             "HUNGER",
+                             "PROTECTIVENESS",
+                             "SLEEPINESS"
+                         ],
+    "sound_profiles":  {
+                           "vocalizations":  [
+                                                 "growls",
+                                                 "huffs",
+                                                 "roars",
+                                                 "grunts",
+                                                 "woofs"
+                                             ],
+                           "ambient":  [
+                                           "forest_sounds",
+                                           "river_flowing",
+                                           "wind_rustling"
+                                       ],
+                           "feeding":  [
+                                           "honey_dripping",
+                                           "fish_splashing",
+                                           "berry_munching"
+                                       ]
+                       }
 }

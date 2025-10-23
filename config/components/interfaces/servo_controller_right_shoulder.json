@@ -1,54 +1,50 @@
-{
-  "relative_filename": "config/components/interfaces/servo_controller_right_shoulder.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "SERVO_CONTROLLER_RIGHT_SHOULDER", 
-  "interface_type": "MULTI_SERVO_CONTROLLER",
-  "description": "Three-servo controller interface for right shoulder 3DOF joint",
-  
-  "controller_assignment": "ESP32_C3_ARM_CONTROLLER_RIGHT",
-  "servo_count": 3,
-  "control_frequency": "1000_HZ",
-  
-  "servo_assignments": {
-    "shoulder_flex_extend": {
-      "servo_type": "NEMA17_WITH_50_1_GEARBOX",
-      "step_pin": "GPIO_2",
-      "direction_pin": "GPIO_3", 
-      "enable_pin": "GPIO_4",
-      "encoder_sda": "GPIO_21",
-      "encoder_scl": "GPIO_22"
-    },
-    
-    "shoulder_abduct_adduct": {
-      "servo_type": "NEMA17_WITH_50_1_GEARBOX", 
-      "step_pin": "GPIO_5",
-      "direction_pin": "GPIO_6",
-      "enable_pin": "GPIO_7",
-      "encoder_sda": "GPIO_21",
-      "encoder_scl": "GPIO_22"
-    },
-    
-    "shoulder_internal_external_rotation": {
-      "servo_type": "DS3218_SERVO",
-      "pwm_pin": "GPIO_8",
-      "feedback_pin": "GPIO_A0"
-    }
-  },
-  
-  "shared_resources": {
-    "i2c_bus": {
-      "sda_pin": "GPIO_21", 
-      "scl_pin": "GPIO_22",
-      "frequency": "400_KHZ",
-      "shared_by": ["shoulder_flex_extend_encoder", "shoulder_abduct_adduct_encoder"]
-    }
-  },
-  
-  "safety_configuration": {
-    "emergency_stop_pin": "GPIO_0",
-    "overload_detection": "CURRENT_SENSING_ADC_CHANNEL_1",
-    "position_limits": "SOFTWARE_AND_HARDWARE_COMBINED"
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/servo_controller_right_shoulder.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "SERVO_CONTROLLER_RIGHT_SHOULDER",
+    "interface_type":  "MULTI_SERVO_CONTROLLER",
+    "description":  "Three-servo controller interface for right shoulder 3DOF joint",
+    "controller_assignment":  "ESP32_C3_ARM_CONTROLLER_RIGHT",
+    "servo_count":  3,
+    "control_frequency":  "1000_HZ",
+    "servo_assignments":  {
+                              "shoulder_flex_extend":  {
+                                                           "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
+                                                           "step_pin":  "GPIO_2",
+                                                           "direction_pin":  "GPIO_3",
+                                                           "enable_pin":  "GPIO_4",
+                                                           "encoder_sda":  "GPIO_21",
+                                                           "encoder_scl":  "GPIO_22"
+                                                       },
+                              "shoulder_abduct_adduct":  {
+                                                             "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
+                                                             "step_pin":  "GPIO_5",
+                                                             "direction_pin":  "GPIO_6",
+                                                             "enable_pin":  "GPIO_7",
+                                                             "encoder_sda":  "GPIO_21",
+                                                             "encoder_scl":  "GPIO_22"
+                                                         },
+                              "shoulder_internal_external_rotation":  {
+                                                                          "servo_type":  "DS3218_SERVO",
+                                                                          "pwm_pin":  "GPIO_8",
+                                                                          "feedback_pin":  "GPIO_A0"
+                                                                      }
+                          },
+    "shared_resources":  {
+                             "i2c_bus":  {
+                                             "sda_pin":  "GPIO_21",
+                                             "scl_pin":  "GPIO_22",
+                                             "frequency":  "400_KHZ",
+                                             "shared_by":  [
+                                                               "shoulder_flex_extend_encoder",
+                                                               "shoulder_abduct_adduct_encoder"
+                                                           ]
+                                         }
+                         },
+    "safety_configuration":  {
+                                 "emergency_stop_pin":  "GPIO_0",
+                                 "overload_detection":  "CURRENT_SENSING_ADC_CHANNEL_1",
+                                 "position_limits":  "SOFTWARE_AND_HARDWARE_COMBINED"
+                             }
 }

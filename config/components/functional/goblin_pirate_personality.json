@@ -1,110 +1,100 @@
-{
-  "relative_filename": "config/components/functional/goblin_pirate_personality.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "component_name": "goblin_pirate_personality",
-  "component_type": "PERSONALITY_ENGINE",
-  "description": "Battle-scarred pirate personality with enhanced aggression and treasure obsession",
-  "created": "2025-10-21",
-  
-  "timing": {
-    "hitCount": 30,
-    "description": "Pirate personality updates every 3 seconds"
-  },
-  
-  "personality_traits": {
-    "base_archetype": "PIRATE_SCOUNDREL",
-    "primary_motivations": [
-      "TREASURE_ACQUISITION",
-      "TERRITORIAL_DOMINANCE", 
-      "BATTLE_PREPARATION",
-      "THREAT_ASSESSMENT"
-    ],
-    "behavioral_modifiers": {
-      "suspicion_level": 0.8,
-      "aggression_threshold": 0.6,
-      "greed_factor": 0.9,
-      "loyalty_factor": 0.3,
-      "cunning_level": 0.7
-    }
-  },
-  
-  "pirate_specific_behaviors": {
-    "eye_loss_trauma": {
-      "triggers_heightened_awareness": true,
-      "compensatory_hearing_boost": 1.5,
-      "defensive_positioning_bias": "LEFT_SIDE_PROTECTION"
-    },
-    "treasure_responses": {
-      "metal_detection_excitement": 0.9,
-      "shiny_object_fixation": 0.8,
-      "hoarding_instinct": 0.7
-    },
-    "combat_readiness": {
-      "threat_escalation_speed": 2.0,
-      "retreat_threshold": 0.2,
-      "intimidation_factor": 1.8
-    }
-  },
-  
-  "mood_influences": {
-    "ANGER": {
-      "base_modifier": 1.5,
-      "trigger_threshold": 20,
-      "decay_rate": 0.8
-    },
-    "FEAR": {
-      "base_modifier": 0.3,
-      "trigger_threshold": 80,
-      "decay_rate": 1.2
-    },
-    "CURIOSITY": {
-      "base_modifier": 1.2,
-      "trigger_threshold": 30,
-      "decay_rate": 0.9,
-      "treasure_boost": 2.0
-    },
-    "HUNGER": {
-      "base_modifier": 1.8,
-      "trigger_threshold": 15,
-      "decay_rate": 0.7
-    }
-  },
-  
-  "voice_characteristics": {
-    "roughness_factor": 0.9,
-    "gruff_modulation": true,
-    "accent_pattern": "SEAFARING_ROUGH",
-    "volume_preference": "AGGRESSIVE_PROJECTION"
-  },
-  
-  "interaction_patterns": {
-    "stranger_approach": "SUSPICIOUS_DEFENSIVE",
-    "familiar_presence": "CAUTIOUSLY_TOLERANT", 
-    "threat_response": "IMMEDIATE_AGGRESSIVE",
-    "resource_guarding": "FIERCE_PROTECTIVE"
-  },
-  
-  "hardware_requirements": {
-    "single_eye_compensation": true,
-    "enhanced_audio_processing": true,
-    "rapid_mood_transitions": true
-  },
-  
-  "backstory_elements": {
-    "missing_eye_cause": "PRE_DAWN_RAID_BATTLE",
-    "scarring_pattern": "MULTIPLE_FACIAL_SCARS",
-    "experience_level": "SEASONED_VETERAN",
-    "reputation": "FEARED_TERROR_OF_THE_SEAS"
-  },
-  
-  "prototype_status": "design_phase",
-  "tested": false,
-  "notes": [
-    "Pirate-specific personality engine for one-eyed goblin variants",
-    "Enhanced aggression and territorial behaviors",
-    "Compensatory mechanisms for missing right eye",
-    "Treasure obsession and cunning behavioral patterns"
-  ]
+﻿{
+    "relative_filename":  "config/components/functional/goblin_pirate_personality.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_pirate_personality",
+    "component_type":  "PERSONALITY_ENGINE",
+    "description":  "Battle-scarred pirate personality with enhanced aggression and treasure obsession",
+    "created":  "2025-10-21",
+    "timing":  {
+                   "hitCount":  30,
+                   "description":  "Pirate personality updates every 3 seconds"
+               },
+    "personality_traits":  {
+                               "base_archetype":  "PIRATE_SCOUNDREL",
+                               "primary_motivations":  [
+                                                           "TREASURE_ACQUISITION",
+                                                           "TERRITORIAL_DOMINANCE",
+                                                           "BATTLE_PREPARATION",
+                                                           "THREAT_ASSESSMENT"
+                                                       ],
+                               "behavioral_modifiers":  {
+                                                            "suspicion_level":  0.8,
+                                                            "aggression_threshold":  0.6,
+                                                            "greed_factor":  0.9,
+                                                            "loyalty_factor":  0.3,
+                                                            "cunning_level":  0.7
+                                                        }
+                           },
+    "pirate_specific_behaviors":  {
+                                      "eye_loss_trauma":  {
+                                                              "triggers_heightened_awareness":  true,
+                                                              "compensatory_hearing_boost":  1.5,
+                                                              "defensive_positioning_bias":  "LEFT_SIDE_PROTECTION"
+                                                          },
+                                      "treasure_responses":  {
+                                                                 "metal_detection_excitement":  0.9,
+                                                                 "shiny_object_fixation":  0.8,
+                                                                 "hoarding_instinct":  0.7
+                                                             },
+                                      "combat_readiness":  {
+                                                               "threat_escalation_speed":  2.0,
+                                                               "retreat_threshold":  0.2,
+                                                               "intimidation_factor":  1.8
+                                                           }
+                                  },
+    "mood_influences":  {
+                            "ANGER":  {
+                                          "base_modifier":  1.5,
+                                          "trigger_threshold":  20,
+                                          "decay_rate":  0.8
+                                      },
+                            "FEAR":  {
+                                         "base_modifier":  0.3,
+                                         "trigger_threshold":  80,
+                                         "decay_rate":  1.2
+                                     },
+                            "CURIOSITY":  {
+                                              "base_modifier":  1.2,
+                                              "trigger_threshold":  30,
+                                              "decay_rate":  0.9,
+                                              "treasure_boost":  2.0
+                                          },
+                            "HUNGER":  {
+                                           "base_modifier":  1.8,
+                                           "trigger_threshold":  15,
+                                           "decay_rate":  0.7
+                                       }
+                        },
+    "voice_characteristics":  {
+                                  "roughness_factor":  0.9,
+                                  "gruff_modulation":  true,
+                                  "accent_pattern":  "SEAFARING_ROUGH",
+                                  "volume_preference":  "AGGRESSIVE_PROJECTION"
+                              },
+    "interaction_patterns":  {
+                                 "stranger_approach":  "SUSPICIOUS_DEFENSIVE",
+                                 "familiar_presence":  "CAUTIOUSLY_TOLERANT",
+                                 "threat_response":  "IMMEDIATE_AGGRESSIVE",
+                                 "resource_guarding":  "FIERCE_PROTECTIVE"
+                             },
+    "hardware_requirements":  {
+                                  "single_eye_compensation":  true,
+                                  "enhanced_audio_processing":  true,
+                                  "rapid_mood_transitions":  true
+                              },
+    "backstory_elements":  {
+                               "missing_eye_cause":  "PRE_DAWN_RAID_BATTLE",
+                               "scarring_pattern":  "MULTIPLE_FACIAL_SCARS",
+                               "experience_level":  "SEASONED_VETERAN",
+                               "reputation":  "FEARED_TERROR_OF_THE_SEAS"
+                           },
+    "prototype_status":  "design_phase",
+    "tested":  false,
+    "notes":  [
+                  "Pirate-specific personality engine for one-eyed goblin variants",
+                  "Enhanced aggression and territorial behaviors",
+                  "Compensatory mechanisms for missing right eye",
+                  "Treasure obsession and cunning behavioral patterns"
+              ]
 }

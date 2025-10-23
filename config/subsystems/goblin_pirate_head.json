@@ -1,105 +1,93 @@
 ﻿{
-  "relative_filename": "config/subsystems/goblin_pirate_head.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "subsystem_type": "HEAD",
-  "subsystem_id": "goblin_pirate_head_v1",
-  "description": "Pirate goblin head subsystem - single left eye with enhanced audio processing for missing right eye compensation",
-  "created": "2025-10-21",
-  
-  "controller_hardware": "ESP32_S3_DEVKITC_1",
-  "mesh_role": "SLAVE_NODE_HIGH_PRIORITY",
-  "mesh_capabilities": [
-    "ESP_NOW_SLAVE",
-    "DUAL_CORE_PROCESSING",
-    "HIGH_SPEED_SPI",
-    "I2S_AUDIO",
-    "SINGLE_EYE_OPTIMIZED"
-  ],
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "units": "MILLIMETERS",
-  
-  "component_name": "goblin_pirate_head",
-  "component_type": "SUBSYSTEM_ASSEMBLY",
-  "timing": {
-    "hitCount": 25,
-    "description": "Pirate head coordination every 2.5 seconds"
-  },
-  
-  "contained_components": [
-    "config/components/positioned/goblin/head_components/goblin_left_eye.json",
-    "config/components/positioned/goblin/head_components/goblin_mouth.json",
-    "config/components/positioned/goblin/head_components/goblin_speaker.json",
-    "config/components/positioned/goblin/head_components/goblin_nose.json",
-    "config/components/positioned/goblin/head_components/goblin_left_ear.json",
-    "config/components/positioned/goblin/head_components/goblin_right_ear.json"
-  ],
-  
-  "pirate_specific_features": {
-    "missing_eye_compensation": {
-      "enhanced_left_eye_processing": true,
-      "increased_audio_sensitivity": 1.5,
-      "left_side_protective_bias": true
-    },
-    "battle_scarring": {
-      "right_eye_socket_covered": true,
-      "facial_scar_patterns": "MULTIPLE_COMBAT_SCARS",
-      "weathered_appearance": true
-    },
-    "personality_integration": {
-      "uses_pirate_personality_engine": true,
-      "aggressive_mood_amplification": true,
-      "treasure_detection_behaviors": true
-    }
-  },
-  
-  "hardware_optimization": {
-    "gpio_pins_required": 10,
-    "spi_devices_used": 2,
-    "power_consumption": "REDUCED_SINGLE_EYE",
-    "processing_load": "75_PERCENT_VISUAL_25_PERCENT_AUDIO"
-  },
-  
-  "interface_assignments": {
-    "left_eye_spi": "SPI_DEVICE_1",
-    "mouth_spi": "SPI_DEVICE_3", 
-    "speaker_i2s": "I2S_DEVICE_1",
-    "nose_sensor": "GPIO_PAIR_1",
-    "left_ear_adc": "ADC_PIN_35",
-    "right_ear_adc": "ADC_PIN_36"
-  },
-  
-  "mesh_communication": {
-    "reports_to": "TORSO_MASTER",
-    "update_frequency": "100MS_CRITICAL_EVENTS",
-    "message_priority": "HIGH_COMBAT_READINESS",
-    "data_compression": "PIRATE_OPTIMIZED"
-  },
-  
-  "performance_targets": {
-    "left_eye_fps": 30,
-    "audio_response_time": "50MS_MAX",
-    "sensor_polling_rate": "10HZ_CONTINUOUS",
-    "mood_update_interval": "3_SECONDS"
-  },
-  
-  "shape": "goblin_pirate_skull.scad",
-  "decorative_elements": [
-    "battle_scars.stl",
-    "eye_patch_mount.stl", 
-    "weathered_texture.stl"
-  ],
-  
-  "prototype_status": "design_phase",
-  "tested": false,
-  "notes": [
-    "Single-eye optimized head subsystem for pirate variant",
-    "Enhanced audio processing compensates for missing right eye",
-    "Aggressive personality engine integration",
-    "10 GPIO pins total vs 12 for dual-eye variants",
-    "Battle-scarred aesthetic with pirate-themed elements"
-  ]
+    "relative_filename":  "config/subsystems/goblin_pirate_head.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "subsystem_type":  "HEAD",
+    "subsystem_id":  "goblin_pirate_head_v1",
+    "description":  "Pirate goblin head subsystem - single left eye with enhanced audio processing for missing right eye compensation",
+    "created":  "2025-10-21",
+    "controller_hardware":  "ESP32_S3_DEVKITC_1",
+    "mesh_role":  "SLAVE_NODE_HIGH_PRIORITY",
+    "mesh_capabilities":  [
+                              "ESP_NOW_SLAVE",
+                              "DUAL_CORE_PROCESSING",
+                              "HIGH_SPEED_SPI",
+                              "I2S_AUDIO",
+                              "SINGLE_EYE_OPTIMIZED"
+                          ],
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "units":  "MILLIMETERS",
+    "component_name":  "goblin_pirate_head",
+    "component_type":  "SUBSYSTEM_ASSEMBLY",
+    "timing":  {
+                   "hitCount":  25,
+                   "description":  "Pirate head coordination every 2.5 seconds"
+               },
+    "contained_components":  [
+                                 "config/components/positioned/goblin/head_components/goblin_left_eye.json",
+                                 "config/components/positioned/goblin/head_components/goblin_mouth.json",
+                                 "config/components/positioned/goblin/head_components/goblin_speaker.json",
+                                 "config/components/positioned/goblin/head_components/goblin_nose.json",
+                                 "config/components/positioned/goblin/head_components/goblin_left_ear.json",
+                                 "config/components/positioned/goblin/head_components/goblin_right_ear.json"
+                             ],
+    "pirate_specific_features":  {
+                                     "missing_eye_compensation":  {
+                                                                      "enhanced_left_eye_processing":  true,
+                                                                      "increased_audio_sensitivity":  1.5,
+                                                                      "left_side_protective_bias":  true
+                                                                  },
+                                     "battle_scarring":  {
+                                                             "right_eye_socket_covered":  true,
+                                                             "facial_scar_patterns":  "MULTIPLE_COMBAT_SCARS",
+                                                             "weathered_appearance":  true
+                                                         },
+                                     "personality_integration":  {
+                                                                     "uses_pirate_personality_engine":  true,
+                                                                     "aggressive_mood_amplification":  true,
+                                                                     "treasure_detection_behaviors":  true
+                                                                 }
+                                 },
+    "hardware_optimization":  {
+                                  "gpio_pins_required":  10,
+                                  "spi_devices_used":  2,
+                                  "power_consumption":  "REDUCED_SINGLE_EYE",
+                                  "processing_load":  "75_PERCENT_VISUAL_25_PERCENT_AUDIO"
+                              },
+    "interface_assignments":  {
+                                  "left_eye_spi":  "SPI_DEVICE_1",
+                                  "mouth_spi":  "SPI_DEVICE_3",
+                                  "speaker_i2s":  "I2S_DEVICE_1",
+                                  "nose_sensor":  "GPIO_PAIR_1",
+                                  "left_ear_adc":  "ADC_PIN_35",
+                                  "right_ear_adc":  "ADC_PIN_36"
+                              },
+    "mesh_communication":  {
+                               "reports_to":  "TORSO_MASTER",
+                               "update_frequency":  "100MS_CRITICAL_EVENTS",
+                               "message_priority":  "HIGH_COMBAT_READINESS",
+                               "data_compression":  "PIRATE_OPTIMIZED"
+                           },
+    "performance_targets":  {
+                                "left_eye_fps":  30,
+                                "audio_response_time":  "50MS_MAX",
+                                "sensor_polling_rate":  "10HZ_CONTINUOUS",
+                                "mood_update_interval":  "3_SECONDS"
+                            },
+    "shape":  "goblin_pirate_skull.scad",
+    "decorative_elements":  [
+                                "battle_scars.stl",
+                                "eye_patch_mount.stl",
+                                "weathered_texture.stl"
+                            ],
+    "prototype_status":  "design_phase",
+    "tested":  false,
+    "notes":  [
+                  "Single-eye optimized head subsystem for pirate variant",
+                  "Enhanced audio processing compensates for missing right eye",
+                  "Aggressive personality engine integration",
+                  "10 GPIO pins total vs 12 for dual-eye variants",
+                  "Battle-scarred aesthetic with pirate-themed elements"
+              ]
 }

@@ -1,154 +1,158 @@
-{
-  "relative_filename": "config/bots/esp32_humanoid_full.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "bot_type": "ESP32_HUMANOID_FULL",
-  "description": "Complete humanoid robot adapted from Poppy/OpenArm designs using ESP32-S3 control",
-  "coordinate_system": "skull_3d",
-  "reference_point": "pelvis_center",
-  "eye_spacing": "6.0 INCH",
-  "scale_factor": 1.0,
-  
-  "hardware_architecture": {
-    "primary_controller": "ESP32-S3",
-    "secondary_controllers": ["ESP32-S3_LEGS", "ESP32-S3_ARMS", "ESP32-S3_HEAD"],
-    "communication": "ESP-NOW_MESH",
-    "power_distribution": "12V_BUS_REGULATED"
-  },
-  
-  "subsystems": {
-    "legs": {
-      "controller": "ESP32-S3_LEGS",
-      "servo_count": 12,
-      "dof_per_leg": 6,
-      "adapted_from": "poppy_humanoid_legs",
-      "stl_source": "https://github.com/poppy-project/poppy-humanoid/releases"
-    },
-    
-    "arms": {
-      "controller": "ESP32-S3_ARMS", 
-      "servo_count": 14,
-      "dof_per_arm": 7,
-      "adapted_from": "openarm_7dof",
-      "stl_source": "https://github.com/enactive/openarm_hardware"
-    },
-    
-    "torso": {
-      "controller": "ESP32-S3_TORSO",
-      "servo_count": 8,
-      "dof": 8,
-      "adapted_from": "poppy_humanoid_torso",
-      "stl_source": "https://github.com/poppy-project/poppy-humanoid/releases"
-    },
-    
-    "head": {
-      "controller": "ESP32-S3_HEAD",
-      "servo_count": 4,
-      "dof": 4,
-      "adapted_from": "inmoov_head",
-      "stl_source": "https://inmoov.fr/inmoov-stl-parts-viewer/"
-    }
-  },
-  
-  "servo_specifications": {
-    "heavy_duty": {
-      "model": "MG996R",
-      "torque": "11 KG-CM", 
-      "voltage": "6V",
-      "cost": "$8_USD",
-      "usage": "legs_hips_shoulders"
-    },
-    
-    "standard": {
-      "model": "MG90S",
-      "torque": "2.5 KG-CM",
-      "voltage": "6V", 
-      "cost": "$3_USD",
-      "usage": "arms_hands_head"
-    }
-  },
-  
-  "esp32_control_mapping": {
-    "legs_controller": {
-      "chip": "ESP32-S3-DevKitC-1",
-      "servo_channels": 12,
-      "pwm_frequency": "50_HZ",
-      "communication": "ESP_NOW_TO_MASTER",
-      "sensors": ["IMU_MPU6050", "PRESSURE_FEET"]
-    },
-    
-    "arms_controller": {
-      "chip": "ESP32-S3-DevKitC-1", 
-      "servo_channels": 14,
-      "expansion_boards": "PCA9685",
-      "communication": "ESP_NOW_TO_MASTER",
-      "sensors": ["CURRENT_SENSE", "POSITION_FEEDBACK"]
-    },
-    
-    "master_controller": {
-      "chip": "ESP32-S3-DevKitC-1",
-      "role": "COORDINATION_PLANNING", 
-      "communication": ["ESP_NOW_MESH", "WIFI_ROS", "BLUETOOTH_HMI"],
-      "sensors": ["CAMERA_OV2640", "MICROPHONE_I2S"],
-      "outputs": ["SPEAKER_I2S", "DISPLAY_SPI"]
-    }
-  },
-  
-  "cost_analysis": {
-    "mechanical_parts": {
-      "3d_printing_filament": "$100_USD",
-      "bearings_hardware": "$150_USD", 
-      "total_mechanical": "$250_USD"
-    },
-    
-    "electronics": {
-      "esp32_boards": "$80_USD",
-      "servos_38x": "$250_USD",
-      "sensors_misc": "$100_USD",
-      "power_supplies": "$75_USD", 
-      "total_electronics": "$505_USD"
-    },
-    
-    "total_system_cost": "$755_USD",
-    "vs_original_poppy": "$7245_SAVINGS"
-  },
-  
-  "software_stack": {
-    "firmware": "ESP-IDF_RTOS",
-    "communication": "ESP_NOW_PROTOCOL", 
-    "motion_control": "CUSTOM_KINEMATICS_ESP32",
-    "higher_level": "ROS2_BRIDGE_OPTIONAL",
-    "languages": ["C++", "PYTHON_HOST"]
-  },
-  
-  "build_phases": {
-    "phase_1_legs": {
-      "description": "Walking bipedal base using Poppy leg design",
-      "stl_files": "poppy_legs_adapted_esp32",
-      "servo_count": 12,
-      "estimated_cost": "$300_USD"
-    },
-    
-    "phase_2_torso": {
-      "description": "Add torso structure and balance control", 
-      "stl_files": "poppy_torso_adapted_esp32",
-      "servo_count": 8,
-      "estimated_cost": "$200_USD" 
-    },
-    
-    "phase_3_arms": {
-      "description": "Add OpenArm 7DOF arms for manipulation",
-      "stl_files": "openarm_adapted_esp32", 
-      "servo_count": 14,
-      "estimated_cost": "$200_USD"
-    },
-    
-    "phase_4_head": {
-      "description": "Add InMoov head for expression and sensors",
-      "stl_files": "inmoov_head_adapted_esp32",
-      "servo_count": 4, 
-      "estimated_cost": "$55_USD"
-    }
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/humanoids/esp32_humanoid_full.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "ESP32_HUMANOID_FULL",
+    "description":  "Complete humanoid robot adapted from Poppy/OpenArm designs using ESP32-S3 control",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "eye_spacing":  "6.0 INCH",
+    "scale_factor":  1.0,
+    "hardware_architecture":  {
+                                  "primary_controller":  "ESP32-S3",
+                                  "secondary_controllers":  [
+                                                                "ESP32-S3_LEGS",
+                                                                "ESP32-S3_ARMS",
+                                                                "ESP32-S3_HEAD"
+                                                            ],
+                                  "communication":  "ESP-NOW_MESH",
+                                  "power_distribution":  "12V_BUS_REGULATED"
+                              },
+    "subsystems":  {
+                       "legs":  {
+                                    "controller":  "ESP32-S3_LEGS",
+                                    "servo_count":  12,
+                                    "dof_per_leg":  6,
+                                    "adapted_from":  "poppy_humanoid_legs",
+                                    "stl_source":  "https://github.com/poppy-project/poppy-humanoid/releases"
+                                },
+                       "arms":  {
+                                    "controller":  "ESP32-S3_ARMS",
+                                    "servo_count":  14,
+                                    "dof_per_arm":  7,
+                                    "adapted_from":  "openarm_7dof",
+                                    "stl_source":  "https://github.com/enactive/openarm_hardware"
+                                },
+                       "torso":  {
+                                     "controller":  "ESP32-S3_TORSO",
+                                     "servo_count":  8,
+                                     "dof":  8,
+                                     "adapted_from":  "poppy_humanoid_torso",
+                                     "stl_source":  "https://github.com/poppy-project/poppy-humanoid/releases"
+                                 },
+                       "head":  {
+                                    "controller":  "ESP32-S3_HEAD",
+                                    "servo_count":  4,
+                                    "dof":  4,
+                                    "adapted_from":  "inmoov_head",
+                                    "stl_source":  "https://inmoov.fr/inmoov-stl-parts-viewer/"
+                                }
+                   },
+    "servo_specifications":  {
+                                 "heavy_duty":  {
+                                                    "model":  "MG996R",
+                                                    "torque":  "11 KG-CM",
+                                                    "voltage":  "6V",
+                                                    "cost":  "$8_USD",
+                                                    "usage":  "legs_hips_shoulders"
+                                                },
+                                 "standard":  {
+                                                  "model":  "MG90S",
+                                                  "torque":  "2.5 KG-CM",
+                                                  "voltage":  "6V",
+                                                  "cost":  "$3_USD",
+                                                  "usage":  "arms_hands_head"
+                                              }
+                             },
+    "esp32_control_mapping":  {
+                                  "legs_controller":  {
+                                                          "chip":  "ESP32-S3-DevKitC-1",
+                                                          "servo_channels":  12,
+                                                          "pwm_frequency":  "50_HZ",
+                                                          "communication":  "ESP_NOW_TO_MASTER",
+                                                          "sensors":  [
+                                                                          "IMU_MPU6050",
+                                                                          "PRESSURE_FEET"
+                                                                      ]
+                                                      },
+                                  "arms_controller":  {
+                                                          "chip":  "ESP32-S3-DevKitC-1",
+                                                          "servo_channels":  14,
+                                                          "expansion_boards":  "PCA9685",
+                                                          "communication":  "ESP_NOW_TO_MASTER",
+                                                          "sensors":  [
+                                                                          "CURRENT_SENSE",
+                                                                          "POSITION_FEEDBACK"
+                                                                      ]
+                                                      },
+                                  "master_controller":  {
+                                                            "chip":  "ESP32-S3-DevKitC-1",
+                                                            "role":  "COORDINATION_PLANNING",
+                                                            "communication":  [
+                                                                                  "ESP_NOW_MESH",
+                                                                                  "WIFI_ROS",
+                                                                                  "BLUETOOTH_HMI"
+                                                                              ],
+                                                            "sensors":  [
+                                                                            "CAMERA_OV2640",
+                                                                            "MICROPHONE_I2S"
+                                                                        ],
+                                                            "outputs":  [
+                                                                            "SPEAKER_I2S",
+                                                                            "DISPLAY_SPI"
+                                                                        ]
+                                                        }
+                              },
+    "cost_analysis":  {
+                          "mechanical_parts":  {
+                                                   "3d_printing_filament":  "$100_USD",
+                                                   "bearings_hardware":  "$150_USD",
+                                                   "total_mechanical":  "$250_USD"
+                                               },
+                          "electronics":  {
+                                              "esp32_boards":  "$80_USD",
+                                              "servos_38x":  "$250_USD",
+                                              "sensors_misc":  "$100_USD",
+                                              "power_supplies":  "$75_USD",
+                                              "total_electronics":  "$505_USD"
+                                          },
+                          "total_system_cost":  "$755_USD",
+                          "vs_original_poppy":  "$7245_SAVINGS"
+                      },
+    "software_stack":  {
+                           "firmware":  "ESP-IDF_RTOS",
+                           "communication":  "ESP_NOW_PROTOCOL",
+                           "motion_control":  "CUSTOM_KINEMATICS_ESP32",
+                           "higher_level":  "ROS2_BRIDGE_OPTIONAL",
+                           "languages":  [
+                                             "C++",
+                                             "PYTHON_HOST"
+                                         ]
+                       },
+    "build_phases":  {
+                         "phase_1_legs":  {
+                                              "description":  "Walking bipedal base using Poppy leg design",
+                                              "stl_files":  "poppy_legs_adapted_esp32",
+                                              "servo_count":  12,
+                                              "estimated_cost":  "$300_USD"
+                                          },
+                         "phase_2_torso":  {
+                                               "description":  "Add torso structure and balance control",
+                                               "stl_files":  "poppy_torso_adapted_esp32",
+                                               "servo_count":  8,
+                                               "estimated_cost":  "$200_USD"
+                                           },
+                         "phase_3_arms":  {
+                                              "description":  "Add OpenArm 7DOF arms for manipulation",
+                                              "stl_files":  "openarm_adapted_esp32",
+                                              "servo_count":  14,
+                                              "estimated_cost":  "$200_USD"
+                                          },
+                         "phase_4_head":  {
+                                              "description":  "Add InMoov head for expression and sensors",
+                                              "stl_files":  "inmoov_head_adapted_esp32",
+                                              "servo_count":  4,
+                                              "estimated_cost":  "$55_USD"
+                                          }
+                     }
 }

@@ -1,236 +1,261 @@
-{
-  "relative_filename": "config/components/interfaces/hc_sr04_ultrasonic_sensor.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "HC_SR04_ULTRASONIC_SENSOR",
-  "interface_type": "ULTRASONIC_DISTANCE_SENSOR",
-  "description": "HC-SR04 ultrasonic distance sensor for proximity detection and ranging",
-  
-  "hardware_specifications": {
-    "sensor_type": "ULTRASONIC_RANGING_MODULE",
-    "operating_voltage": "5V_DC",
-    "operating_current": "15mA_TYPICAL",
-    "power_consumption": "75mW_TYPICAL_AT_5V",
-    "standby_current": "2mA",
-    "standby_power": "10mW_AT_5V",
-    "measuring_range": "2cm_TO_400cm",
-    "measuring_accuracy": "3mm",
-    "measuring_angle": "15_DEGREES_CONE",
-    "ultrasonic_frequency": "40kHz",
-    "dimensions": "45x20x15mm",
-    "weight": "8g"
-  },
-  
-  "pin_requirements": {
-    "vcc_pin": {
-      "function": "power_supply",
-      "generic_name": "vcc",
-      "description": "5V power supply input",
-      "voltage_level": "5V_DC",
-      "current_consumption": "15mA_MEASURING_2mA_STANDBY",
-      "power_consumption": "75mW_MEASURING_10mW_STANDBY"
-    },
-    "gnd_pin": {
-      "function": "ground_reference",
-      "generic_name": "gnd",
-      "description": "Ground reference",
-      "voltage_level": "0V"
-    },
-    "trigger_pin": {
-      "function": "measurement_trigger",
-      "generic_name": "trigger",
-      "description": "Trigger pulse input to start measurement",
-      "voltage_level": "3.3V_5V_COMPATIBLE",
-      "signal_type": "DIGITAL_PULSE",
-      "pulse_width": "10us_MINIMUM",
-      "direction": "INPUT_TO_SENSOR"
-    },
-    "echo_pin": {
-      "function": "distance_measurement_output",
-      "generic_name": "echo",
-      "description": "Echo pulse output proportional to distance",
-      "voltage_level": "5V_OUTPUT",
-      "signal_type": "DIGITAL_PULSE_WIDTH_MODULATED",
-      "pulse_width": "150us_TO_25ms",
-      "direction": "OUTPUT_FROM_SENSOR"
-    }
-  },
-  
-  "electrical_characteristics": {
-    "supply_voltage": {
-      "minimum": "4.5V",
-      "typical": "5.0V",
-      "maximum": "5.5V"
-    },
-    "supply_current": {
-      "measuring_mode": "15mA_TYPICAL",
-      "standby_mode": "2mA_TYPICAL",
-      "peak_current": "20mA_DURING_ULTRASONIC_BURST"
-    },
-    "power_consumption": {
-      "measuring_mode": "75mW_AT_5V",
-      "standby_mode": "10mW_AT_5V",
-      "peak_power": "100mW_DURING_BURST"
-    },
-    "output_characteristics": {
-      "echo_high_level": "5V",
-      "echo_low_level": "0V",
-      "echo_pulse_width": "DISTANCE_CM_X_58us",
-      "update_rate": "40Hz_MAXIMUM"
-    }
-  },
-  
-  "timing_specifications": {
-    "trigger_pulse": {
-      "minimum_width": "10us",
-      "recommended_width": "10us_TO_20us",
-      "setup_time": "1ms_BETWEEN_MEASUREMENTS"
-    },
-    "echo_response": {
-      "delay_time": "150us_TO_25ms_BASED_ON_DISTANCE",
-      "timeout": "30ms_IF_NO_OBSTACLE_DETECTED",
-      "minimum_echo_width": "150us_AT_2cm",
-      "maximum_echo_width": "23200us_AT_400cm"
-    },
-    "measurement_cycle": {
-      "minimum_interval": "60ms_RECOMMENDED",
-      "maximum_frequency": "16Hz_RELIABLE",
-      "settling_time": "1ms_AFTER_POWER_ON"
-    }
-  },
-  
-  "measurement_calculations": {
-    "distance_formula": "DISTANCE_CM = ECHO_PULSE_WIDTH_US / 58",
-    "speed_of_sound": "343_METERS_PER_SECOND_AT_20C",
-    "temperature_compensation": "SPEED_VARIES_0.6_METERS_PER_SECOND_PER_DEGREE_C",
-    "resolution": "0.3cm_THEORETICAL",
-    "practical_accuracy": "PLUS_MINUS_3mm_UNDER_IDEAL_CONDITIONS"
-  },
-  
-  "environmental_specifications": {
-    "operating_temperature": "-15C_TO_70C",
-    "storage_temperature": "-30C_TO_85C",
-    "humidity": "5_TO_95_PERCENT_NON_CONDENSING",
-    "acoustic_environment": "AFFECTED_BY_AMBIENT_NOISE_ABOVE_40KHZ"
-  },
-  
-  "detection_characteristics": {
-    "minimum_detection_distance": "2cm",
-    "maximum_detection_distance": "400cm_IDEAL_CONDITIONS",
-    "practical_range": "5cm_TO_300cm_RELIABLE",
-    "beam_angle": "15_DEGREES_TOTAL_CONE",
-    "target_requirements": {
-      "minimum_surface_area": "0.5_SQUARE_METERS_AT_MAX_RANGE",
-      "surface_material": "HARD_SURFACES_BEST_SOFT_SURFACES_REDUCED_RANGE",
-      "surface_angle": "PERPENDICULAR_SURFACES_OPTIMAL"
-    }
-  },
-  
-  "power_modes": {
-    "continuous_mode": {
-      "description": "Continuous measurements at regular intervals",
-      "power_consumption": "75mW_AVERAGE",
-      "measurement_rate": "10Hz_TO_16Hz",
-      "use_case": "REAL_TIME_OBSTACLE_DETECTION"
-    },
-    "triggered_mode": {
-      "description": "Measurements only when triggered",
-      "power_consumption": "10mW_STANDBY_PLUS_75mW_PER_MEASUREMENT",
-      "measurement_rate": "USER_CONTROLLED",
-      "use_case": "BATTERY_POWERED_APPLICATIONS"
-    },
-    "burst_mode": {
-      "description": "Multiple rapid measurements then sleep",
-      "power_consumption": "VARIABLE_BASED_ON_DUTY_CYCLE",
-      "measurement_rate": "BURST_THEN_SLEEP_CYCLE",
-      "use_case": "PERIODIC_MONITORING_LOW_POWER"
-    }
-  },
-  
-  "interface_considerations": {
-    "voltage_level_compatibility": {
-      "trigger_input": "3.3V_AND_5V_TOLERANT",
-      "echo_output": "5V_LEVEL_REQUIRES_LEVEL_SHIFTER_FOR_3.3V_MCU",
-      "protection": "VOLTAGE_DIVIDER_OR_LEVEL_SHIFTER_RECOMMENDED"
-    },
-    "gpio_requirements": {
-      "trigger_pin": "ANY_DIGITAL_OUTPUT_PIN",
-      "echo_pin": "INTERRUPT_CAPABLE_INPUT_PIN_RECOMMENDED",
-      "total_gpio_pins": "2_MINIMUM"
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "generic_hc_sr04": {
-      "vcc": ["VCC", "5V", "POWER"],
-      "gnd": ["GND", "GROUND"],
-      "trigger": ["TRIG", "TRIGGER", "T"],
-      "echo": ["ECHO", "E", "OUT"]
-    },
-    "hc_sr04_plus": {
-      "vcc": ["VCC"],
-      "gnd": ["GND"],
-      "trigger": ["TRIG"],
-      "echo": ["ECHO"],
-      "additional_features": ["TEMPERATURE_COMPENSATION", "IMPROVED_ACCURACY"]
-    },
-    "us_100_compatible": {
-      "vcc": ["VCC", "5V"],
-      "gnd": ["GND"],
-      "trigger": ["TRIG"],
-      "echo": ["ECHO"],
-      "improvements": ["WEATHER_RESISTANT", "WIDER_VOLTAGE_RANGE"]
-    }
-  },
-  
-  "application_examples": {
-    "goblin_proximity_detection": {
-      "mounting_location": "NOSE_FRONT_FACING",
-      "detection_range": "10cm_TO_200cm",
-      "power_consumption": "75mW_CONTINUOUS",
-      "measurement_rate": "10Hz",
-      "use_case": "OBSTACLE_AVOIDANCE_NAVIGATION",
-      "behavior_trigger": "BACKUP_WHEN_OBSTACLE_WITHIN_30cm"
-    },
-    "arm_reach_sensing": {
-      "mounting_location": "FOREARM_FORWARD_FACING",
-      "detection_range": "5cm_TO_150cm",
-      "power_consumption": "30mW_AVERAGE_TRIGGERED_MODE",
-      "measurement_rate": "5Hz_WHEN_ARM_MOVING",
-      "use_case": "GRASPING_DISTANCE_MEASUREMENT",
-      "behavior_trigger": "SLOW_ARM_WHEN_OBJECT_WITHIN_20cm"
-    },
-    "floor_cliff_detection": {
-      "mounting_location": "PLATFORM_BOTTOM_DOWNWARD_FACING",
-      "detection_range": "5cm_TO_50cm",
-      "power_consumption": "50mW_AVERAGE_BURST_MODE",
-      "measurement_rate": "2Hz_CONTINUOUS_WHILE_MOVING",
-      "use_case": "CLIFF_EDGE_DETECTION_SAFETY",
-      "behavior_trigger": "EMERGENCY_STOP_IF_NO_FLOOR_DETECTED"
-    },
-    "interactive_response": {
-      "mounting_location": "HEAD_FRONT_FACING",
-      "detection_range": "20cm_TO_300cm",
-      "power_consumption": "75mW_CONTINUOUS",
-      "measurement_rate": "15Hz",
-      "use_case": "HUMAN_APPROACH_DETECTION",
-      "behavior_trigger": "WAKE_UP_WHEN_HUMAN_WITHIN_100cm"
-    }
-  },
-  
-  "limitations_and_considerations": {
-    "acoustic_limitations": {
-      "soft_materials": "FOAM_FABRIC_ABSORB_ULTRASOUND_REDUCED_RANGE",
-      "angled_surfaces": "SPECULAR_REFLECTION_MAY_MISS_ANGLED_TARGETS",
-      "small_objects": "OBJECTS_SMALLER_THAN_BEAM_WIDTH_MAY_BE_MISSED",
-      "multiple_sensors": "CROSSTALK_POSSIBLE_STAGGER_MEASUREMENTS"
-    },
-    "environmental_factors": {
-      "temperature": "AFFECTS_SPEED_OF_SOUND_CALIBRATION_NEEDED",
-      "humidity": "AFFECTS_ULTRASONIC_PROPAGATION",
-      "air_currents": "STRONG_WINDS_CAN_AFFECT_MEASUREMENTS",
-      "acoustic_noise": "40KHZ_NOISE_CAN_INTERFERE"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/hc_sr04_ultrasonic_sensor.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "HC_SR04_ULTRASONIC_SENSOR",
+    "interface_type":  "ULTRASONIC_DISTANCE_SENSOR",
+    "description":  "HC-SR04 ultrasonic distance sensor for proximity detection and ranging",
+    "hardware_specifications":  {
+                                    "sensor_type":  "ULTRASONIC_RANGING_MODULE",
+                                    "operating_voltage":  "5V_DC",
+                                    "operating_current":  "15mA_TYPICAL",
+                                    "power_consumption":  "75mW_TYPICAL_AT_5V",
+                                    "standby_current":  "2mA",
+                                    "standby_power":  "10mW_AT_5V",
+                                    "measuring_range":  "2cm_TO_400cm",
+                                    "measuring_accuracy":  "3mm",
+                                    "measuring_angle":  "15_DEGREES_CONE",
+                                    "ultrasonic_frequency":  "40kHz",
+                                    "dimensions":  "45x20x15mm",
+                                    "weight":  "8g"
+                                },
+    "pin_requirements":  {
+                             "vcc_pin":  {
+                                             "function":  "power_supply",
+                                             "generic_name":  "vcc",
+                                             "description":  "5V power supply input",
+                                             "voltage_level":  "5V_DC",
+                                             "current_consumption":  "15mA_MEASURING_2mA_STANDBY",
+                                             "power_consumption":  "75mW_MEASURING_10mW_STANDBY"
+                                         },
+                             "gnd_pin":  {
+                                             "function":  "ground_reference",
+                                             "generic_name":  "gnd",
+                                             "description":  "Ground reference",
+                                             "voltage_level":  "0V"
+                                         },
+                             "trigger_pin":  {
+                                                 "function":  "measurement_trigger",
+                                                 "generic_name":  "trigger",
+                                                 "description":  "Trigger pulse input to start measurement",
+                                                 "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                                 "signal_type":  "DIGITAL_PULSE",
+                                                 "pulse_width":  "10us_MINIMUM",
+                                                 "direction":  "INPUT_TO_SENSOR"
+                                             },
+                             "echo_pin":  {
+                                              "function":  "distance_measurement_output",
+                                              "generic_name":  "echo",
+                                              "description":  "Echo pulse output proportional to distance",
+                                              "voltage_level":  "5V_OUTPUT",
+                                              "signal_type":  "DIGITAL_PULSE_WIDTH_MODULATED",
+                                              "pulse_width":  "150us_TO_25ms",
+                                              "direction":  "OUTPUT_FROM_SENSOR"
+                                          }
+                         },
+    "electrical_characteristics":  {
+                                       "supply_voltage":  {
+                                                              "minimum":  "4.5V",
+                                                              "typical":  "5.0V",
+                                                              "maximum":  "5.5V"
+                                                          },
+                                       "supply_current":  {
+                                                              "measuring_mode":  "15mA_TYPICAL",
+                                                              "standby_mode":  "2mA_TYPICAL",
+                                                              "peak_current":  "20mA_DURING_ULTRASONIC_BURST"
+                                                          },
+                                       "power_consumption":  {
+                                                                 "measuring_mode":  "75mW_AT_5V",
+                                                                 "standby_mode":  "10mW_AT_5V",
+                                                                 "peak_power":  "100mW_DURING_BURST"
+                                                             },
+                                       "output_characteristics":  {
+                                                                      "echo_high_level":  "5V",
+                                                                      "echo_low_level":  "0V",
+                                                                      "echo_pulse_width":  "DISTANCE_CM_X_58us",
+                                                                      "update_rate":  "40Hz_MAXIMUM"
+                                                                  }
+                                   },
+    "timing_specifications":  {
+                                  "trigger_pulse":  {
+                                                        "minimum_width":  "10us",
+                                                        "recommended_width":  "10us_TO_20us",
+                                                        "setup_time":  "1ms_BETWEEN_MEASUREMENTS"
+                                                    },
+                                  "echo_response":  {
+                                                        "delay_time":  "150us_TO_25ms_BASED_ON_DISTANCE",
+                                                        "timeout":  "30ms_IF_NO_OBSTACLE_DETECTED",
+                                                        "minimum_echo_width":  "150us_AT_2cm",
+                                                        "maximum_echo_width":  "23200us_AT_400cm"
+                                                    },
+                                  "measurement_cycle":  {
+                                                            "minimum_interval":  "60ms_RECOMMENDED",
+                                                            "maximum_frequency":  "16Hz_RELIABLE",
+                                                            "settling_time":  "1ms_AFTER_POWER_ON"
+                                                        }
+                              },
+    "measurement_calculations":  {
+                                     "distance_formula":  "DISTANCE_CM = ECHO_PULSE_WIDTH_US / 58",
+                                     "speed_of_sound":  "343_METERS_PER_SECOND_AT_20C",
+                                     "temperature_compensation":  "SPEED_VARIES_0.6_METERS_PER_SECOND_PER_DEGREE_C",
+                                     "resolution":  "0.3cm_THEORETICAL",
+                                     "practical_accuracy":  "PLUS_MINUS_3mm_UNDER_IDEAL_CONDITIONS"
+                                 },
+    "environmental_specifications":  {
+                                         "operating_temperature":  "-15C_TO_70C",
+                                         "storage_temperature":  "-30C_TO_85C",
+                                         "humidity":  "5_TO_95_PERCENT_NON_CONDENSING",
+                                         "acoustic_environment":  "AFFECTED_BY_AMBIENT_NOISE_ABOVE_40KHZ"
+                                     },
+    "detection_characteristics":  {
+                                      "minimum_detection_distance":  "2cm",
+                                      "maximum_detection_distance":  "400cm_IDEAL_CONDITIONS",
+                                      "practical_range":  "5cm_TO_300cm_RELIABLE",
+                                      "beam_angle":  "15_DEGREES_TOTAL_CONE",
+                                      "target_requirements":  {
+                                                                  "minimum_surface_area":  "0.5_SQUARE_METERS_AT_MAX_RANGE",
+                                                                  "surface_material":  "HARD_SURFACES_BEST_SOFT_SURFACES_REDUCED_RANGE",
+                                                                  "surface_angle":  "PERPENDICULAR_SURFACES_OPTIMAL"
+                                                              }
+                                  },
+    "power_modes":  {
+                        "continuous_mode":  {
+                                                "description":  "Continuous measurements at regular intervals",
+                                                "power_consumption":  "75mW_AVERAGE",
+                                                "measurement_rate":  "10Hz_TO_16Hz",
+                                                "use_case":  "REAL_TIME_OBSTACLE_DETECTION"
+                                            },
+                        "triggered_mode":  {
+                                               "description":  "Measurements only when triggered",
+                                               "power_consumption":  "10mW_STANDBY_PLUS_75mW_PER_MEASUREMENT",
+                                               "measurement_rate":  "USER_CONTROLLED",
+                                               "use_case":  "BATTERY_POWERED_APPLICATIONS"
+                                           },
+                        "burst_mode":  {
+                                           "description":  "Multiple rapid measurements then sleep",
+                                           "power_consumption":  "VARIABLE_BASED_ON_DUTY_CYCLE",
+                                           "measurement_rate":  "BURST_THEN_SLEEP_CYCLE",
+                                           "use_case":  "PERIODIC_MONITORING_LOW_POWER"
+                                       }
+                    },
+    "interface_considerations":  {
+                                     "voltage_level_compatibility":  {
+                                                                         "trigger_input":  "3.3V_AND_5V_TOLERANT",
+                                                                         "echo_output":  "5V_LEVEL_REQUIRES_LEVEL_SHIFTER_FOR_3.3V_MCU",
+                                                                         "protection":  "VOLTAGE_DIVIDER_OR_LEVEL_SHIFTER_RECOMMENDED"
+                                                                     },
+                                     "gpio_requirements":  {
+                                                               "trigger_pin":  "ANY_DIGITAL_OUTPUT_PIN",
+                                                               "echo_pin":  "INTERRUPT_CAPABLE_INPUT_PIN_RECOMMENDED",
+                                                               "total_gpio_pins":  "2_MINIMUM"
+                                                           }
+                                 },
+    "manufacturer_pin_mappings":  {
+                                      "generic_hc_sr04":  {
+                                                              "vcc":  [
+                                                                          "VCC",
+                                                                          "5V",
+                                                                          "POWER"
+                                                                      ],
+                                                              "gnd":  [
+                                                                          "GND",
+                                                                          "GROUND"
+                                                                      ],
+                                                              "trigger":  [
+                                                                              "TRIG",
+                                                                              "TRIGGER",
+                                                                              "T"
+                                                                          ],
+                                                              "echo":  [
+                                                                           "ECHO",
+                                                                           "E",
+                                                                           "OUT"
+                                                                       ]
+                                                          },
+                                      "hc_sr04_plus":  {
+                                                           "vcc":  [
+                                                                       "VCC"
+                                                                   ],
+                                                           "gnd":  [
+                                                                       "GND"
+                                                                   ],
+                                                           "trigger":  [
+                                                                           "TRIG"
+                                                                       ],
+                                                           "echo":  [
+                                                                        "ECHO"
+                                                                    ],
+                                                           "additional_features":  [
+                                                                                       "TEMPERATURE_COMPENSATION",
+                                                                                       "IMPROVED_ACCURACY"
+                                                                                   ]
+                                                       },
+                                      "us_100_compatible":  {
+                                                                "vcc":  [
+                                                                            "VCC",
+                                                                            "5V"
+                                                                        ],
+                                                                "gnd":  [
+                                                                            "GND"
+                                                                        ],
+                                                                "trigger":  [
+                                                                                "TRIG"
+                                                                            ],
+                                                                "echo":  [
+                                                                             "ECHO"
+                                                                         ],
+                                                                "improvements":  [
+                                                                                     "WEATHER_RESISTANT",
+                                                                                     "WIDER_VOLTAGE_RANGE"
+                                                                                 ]
+                                                            }
+                                  },
+    "application_examples":  {
+                                 "goblin_proximity_detection":  {
+                                                                    "mounting_location":  "NOSE_FRONT_FACING",
+                                                                    "detection_range":  "10cm_TO_200cm",
+                                                                    "power_consumption":  "75mW_CONTINUOUS",
+                                                                    "measurement_rate":  "10Hz",
+                                                                    "use_case":  "OBSTACLE_AVOIDANCE_NAVIGATION",
+                                                                    "behavior_trigger":  "BACKUP_WHEN_OBSTACLE_WITHIN_30cm"
+                                                                },
+                                 "arm_reach_sensing":  {
+                                                           "mounting_location":  "FOREARM_FORWARD_FACING",
+                                                           "detection_range":  "5cm_TO_150cm",
+                                                           "power_consumption":  "30mW_AVERAGE_TRIGGERED_MODE",
+                                                           "measurement_rate":  "5Hz_WHEN_ARM_MOVING",
+                                                           "use_case":  "GRASPING_DISTANCE_MEASUREMENT",
+                                                           "behavior_trigger":  "SLOW_ARM_WHEN_OBJECT_WITHIN_20cm"
+                                                       },
+                                 "floor_cliff_detection":  {
+                                                               "mounting_location":  "PLATFORM_BOTTOM_DOWNWARD_FACING",
+                                                               "detection_range":  "5cm_TO_50cm",
+                                                               "power_consumption":  "50mW_AVERAGE_BURST_MODE",
+                                                               "measurement_rate":  "2Hz_CONTINUOUS_WHILE_MOVING",
+                                                               "use_case":  "CLIFF_EDGE_DETECTION_SAFETY",
+                                                               "behavior_trigger":  "EMERGENCY_STOP_IF_NO_FLOOR_DETECTED"
+                                                           },
+                                 "interactive_response":  {
+                                                              "mounting_location":  "HEAD_FRONT_FACING",
+                                                              "detection_range":  "20cm_TO_300cm",
+                                                              "power_consumption":  "75mW_CONTINUOUS",
+                                                              "measurement_rate":  "15Hz",
+                                                              "use_case":  "HUMAN_APPROACH_DETECTION",
+                                                              "behavior_trigger":  "WAKE_UP_WHEN_HUMAN_WITHIN_100cm"
+                                                          }
+                             },
+    "limitations_and_considerations":  {
+                                           "acoustic_limitations":  {
+                                                                        "soft_materials":  "FOAM_FABRIC_ABSORB_ULTRASOUND_REDUCED_RANGE",
+                                                                        "angled_surfaces":  "SPECULAR_REFLECTION_MAY_MISS_ANGLED_TARGETS",
+                                                                        "small_objects":  "OBJECTS_SMALLER_THAN_BEAM_WIDTH_MAY_BE_MISSED",
+                                                                        "multiple_sensors":  "CROSSTALK_POSSIBLE_STAGGER_MEASUREMENTS"
+                                                                    },
+                                           "environmental_factors":  {
+                                                                         "temperature":  "AFFECTS_SPEED_OF_SOUND_CALIBRATION_NEEDED",
+                                                                         "humidity":  "AFFECTS_ULTRASONIC_PROPAGATION",
+                                                                         "air_currents":  "STRONG_WINDS_CAN_AFFECT_MEASUREMENTS",
+                                                                         "acoustic_noise":  "40KHZ_NOISE_CAN_INTERFERE"
+                                                                     }
+                                       }
 }

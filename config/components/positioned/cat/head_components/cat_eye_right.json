@@ -1,90 +1,44 @@
-{
-
-  "relative_filename": "config/components/positioned/cat/head_components/cat_eye_right.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "cat_eye_right",
-  "subsystem": "HEAD",
-
-  "contained_components": [
-    "config/components/creature_specific/cat_eye.json"
-  ],
-
-  
-
-  "template_inheritance": {
-
-    "hardware_template": "config/components/hardware/gc9a01_display.json",
-
-    "creature_shell": "assets/shapes/scad/creature_shells/cat/cat_eye_shell.scad",
-
-    "mount_template": "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
-
-  },
-
-  
-
-  "interface_assignment": "SPI_DEVICE_2",
-
-  "coordinate_system": "skull_3d",
-
-  "reference_point": "nose_center",
-
-  "position": {
-
-    "x": "+1.2 INCH",
-
-    "y": "+0.8 INCH", 
-
-    "z": "-0.2 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "-5 DEGREES",
-
-    "rotation": "-10 DEGREES", 
-
-    "roll": "0 DEGREES"
-
-  },
-
-  
-
-  "creature_specific_config": {
-
-    "eye_color": "CAT_GREEN",
-
-    "pupil_style": "VERTICAL_SLIT",
-
-    "expression_range": "SLEEPY_TO_PREDATOR",
-
-    "night_vision_simulation": "ENHANCED_PUPILS",
-
-    "tracking_speed": "FAST_FELINE",
-
-    "blink_synchronization": "COORDINATED_WITH_LEFT"
-
-  },
-
-  
-
-  "animation_library": {
-
-    "default": "cat_alert_right_eye.anim",
-
-    "hunting": "cat_predator_right_eye.anim",
-
-    "sleepy": "cat_drowsy_right_eye.anim", 
-
-    "playful": "cat_curious_right_eye.anim",
-
-    "affectionate": "cat_loving_right_eye.anim"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/cat/head_components/cat_eye_right.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "cat_eye_right",
+    "subsystem":  "HEAD",
+    "contained_components":  [
+                                 "config/components/creature_specific/cat_eye.json"
+                             ],
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/gc9a01_display.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/cat/cat_eye_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
+                             },
+    "interface_assignment":  "SPI_DEVICE_2",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "+1.2 INCH",
+                     "y":  "+0.8 INCH",
+                     "z":  "-0.2 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "-5 DEGREES",
+                        "rotation":  "-10 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "eye_color":  "CAT_GREEN",
+                                     "pupil_style":  "VERTICAL_SLIT",
+                                     "expression_range":  "SLEEPY_TO_PREDATOR",
+                                     "night_vision_simulation":  "ENHANCED_PUPILS",
+                                     "tracking_speed":  "FAST_FELINE",
+                                     "blink_synchronization":  "COORDINATED_WITH_LEFT"
+                                 },
+    "animation_library":  {
+                              "default":  "cat_alert_right_eye.anim",
+                              "hunting":  "cat_predator_right_eye.anim",
+                              "sleepy":  "cat_drowsy_right_eye.anim",
+                              "playful":  "cat_curious_right_eye.anim",
+                              "affectionate":  "cat_loving_right_eye.anim"
+                          },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

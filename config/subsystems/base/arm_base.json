@@ -1,94 +1,96 @@
-{
-  "relative_filename": "config/subsystems/base/arm_base.json",
-  "version": "1.0.0",
-  "author": "config/author.json", 
-  "subsystem_type": "ARM_CONTROLLER",
-  "description": "Universal base template for arm subsystem controllers across all creatures",
-  
-  "controller_hardware": {
-    "processor": "ESP32_C3_MINI",
-    "flash_memory": "4MB", 
-    "ram": "400KB",
-    "gpio_pins": 22,
-    "adc_channels": 6,
-    "pwm_channels": 6,
-    "spi_interfaces": 1,
-    "i2c_interfaces": 1
-  },
-  
-  "power_specifications": {
-    "input_voltage": "5V_FROM_TORSO",
-    "logic_voltage": "3.3V",
-    "servo_voltage": "5V_6V",
-    "max_current_draw": "3000_MA",
-    "power_rails": ["SERVO_POWER", "3.3V", "GND"]
-  },
-  
-  "mesh_configuration": {
-    "role": "SLAVE_NODE",
-    "protocol": "ESP_NOW", 
-    "master_controller": "HEAD_ESP32_S3",
-    "coordination_functions": ["MANIPULATION_CONTROL", "BALANCE_COMPENSATION", "COLLISION_AVOIDANCE"]
-  },
-  
-  "standard_components": [
-    {
-      "component_type": "MESH_NETWORK",
-      "function_name": "mesh_network_update",
-      "default_hitCount": 5,
-      "role": "slave_node",
-      "required": true
-    },
-    {
-      "component_type": "COORDINATION_ENGINE",
-      "function_name": "coordination_update",
-      "default_hitCount": 10,
-      "role": "balance_compensation",
-      "required": true
-    },
-    {
-      "component_type": "SAFETY_MONITOR", 
-      "function_name": "safety_monitor_update",
-      "default_hitCount": 2,
-      "role": "collision_detection",
-      "required": true
-    }
-  ],
-  
-  "servo_specifications": {
-    "shoulder_joint": {
-      "servo_type": "MG996R_HIGH_TORQUE",
-      "pwm_channel": 0,
-      "min_pulse": 1000,
-      "max_pulse": 2000, 
-      "range_degrees": 180,
-      "default_hitCount": 10
-    },
-    "elbow_joint": {
-      "servo_type": "MG996R_HIGH_TORQUE", 
-      "pwm_channel": 1,
-      "min_pulse": 1000,
-      "max_pulse": 2000,
-      "range_degrees": 150,
-      "default_hitCount": 10
-    },
-    "wrist_joint": {
-      "servo_type": "SG90_MICRO",
-      "pwm_channel": 2, 
-      "min_pulse": 600,
-      "max_pulse": 2400,
-      "range_degrees": 120,
-      "default_hitCount": 15
-    }
-  },
-  
-  "interface_assignments": {
-    "pwm_0": "SHOULDER_SERVO",
-    "pwm_1": "ELBOW_SERVO",
-    "pwm_2": "WRIST_SERVO",
-    "adc_0": "SHOULDER_FEEDBACK",
-    "adc_1": "ELBOW_FEEDBACK", 
-    "i2c_0": "SENSOR_BUS",
-    "uart_0": "DEBUG_MESH"
-  }
+﻿{
+    "relative_filename":  "config/subsystems/base/arm_base.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "subsystem_type":  "ARM_CONTROLLER",
+    "description":  "Universal base template for arm subsystem controllers across all creatures",
+    "controller_hardware":  {
+                                "processor":  "ESP32_C3_MINI",
+                                "flash_memory":  "4MB",
+                                "ram":  "400KB",
+                                "gpio_pins":  22,
+                                "adc_channels":  6,
+                                "pwm_channels":  6,
+                                "spi_interfaces":  1,
+                                "i2c_interfaces":  1
+                            },
+    "power_specifications":  {
+                                 "input_voltage":  "5V_FROM_TORSO",
+                                 "logic_voltage":  "3.3V",
+                                 "servo_voltage":  "5V_6V",
+                                 "max_current_draw":  "3000_MA",
+                                 "power_rails":  [
+                                                     "SERVO_POWER",
+                                                     "3.3V",
+                                                     "GND"
+                                                 ]
+                             },
+    "mesh_configuration":  {
+                               "role":  "SLAVE_NODE",
+                               "protocol":  "ESP_NOW",
+                               "master_controller":  "HEAD_ESP32_S3",
+                               "coordination_functions":  [
+                                                              "MANIPULATION_CONTROL",
+                                                              "BALANCE_COMPENSATION",
+                                                              "COLLISION_AVOIDANCE"
+                                                          ]
+                           },
+    "standard_components":  [
+                                {
+                                    "component_type":  "MESH_NETWORK",
+                                    "function_name":  "mesh_network_update",
+                                    "default_hitCount":  5,
+                                    "role":  "slave_node",
+                                    "required":  true
+                                },
+                                {
+                                    "component_type":  "COORDINATION_ENGINE",
+                                    "function_name":  "coordination_update",
+                                    "default_hitCount":  10,
+                                    "role":  "balance_compensation",
+                                    "required":  true
+                                },
+                                {
+                                    "component_type":  "SAFETY_MONITOR",
+                                    "function_name":  "safety_monitor_update",
+                                    "default_hitCount":  2,
+                                    "role":  "collision_detection",
+                                    "required":  true
+                                }
+                            ],
+    "servo_specifications":  {
+                                 "shoulder_joint":  {
+                                                        "servo_type":  "MG996R_HIGH_TORQUE",
+                                                        "pwm_channel":  0,
+                                                        "min_pulse":  1000,
+                                                        "max_pulse":  2000,
+                                                        "range_degrees":  180,
+                                                        "default_hitCount":  10
+                                                    },
+                                 "elbow_joint":  {
+                                                     "servo_type":  "MG996R_HIGH_TORQUE",
+                                                     "pwm_channel":  1,
+                                                     "min_pulse":  1000,
+                                                     "max_pulse":  2000,
+                                                     "range_degrees":  150,
+                                                     "default_hitCount":  10
+                                                 },
+                                 "wrist_joint":  {
+                                                     "servo_type":  "SG90_MICRO",
+                                                     "pwm_channel":  2,
+                                                     "min_pulse":  600,
+                                                     "max_pulse":  2400,
+                                                     "range_degrees":  120,
+                                                     "default_hitCount":  15
+                                                 }
+                             },
+    "interface_assignments":  {
+                                  "pwm_0":  "SHOULDER_SERVO",
+                                  "pwm_1":  "ELBOW_SERVO",
+                                  "pwm_2":  "WRIST_SERVO",
+                                  "adc_0":  "SHOULDER_FEEDBACK",
+                                  "adc_1":  "ELBOW_FEEDBACK",
+                                  "i2c_0":  "SENSOR_BUS",
+                                  "uart_0":  "DEBUG_MESH"
+                              }
 }

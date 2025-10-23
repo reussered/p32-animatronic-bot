@@ -1,68 +1,63 @@
-{
-  "relative_filename": "config/bots/hobgoblin_captain.json", 
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "bot_type": "HOBGOBLIN_CAPTAIN",
-  "bot_id": "hobgoblin_captain_v1",
-  "description": "Disciplined military hobgoblin captain using unified proportional scaling",
-  
-  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
-  "creature_variant": "large_hobgoblin", 
-  "horizontal_scale": "1.0",
-  "vertical_scale": "0.9",
-  
-  "calculated_dimensions": {
-    "total_height": "63.0 INCHES",
-    "shoulder_width": "18.0 INCHES",
-    "head_height": "8.1 INCHES",
-    "leg_length": "31.5 INCHES", 
-    "character": "DISCIPLINED_MILITARY_BEARING"
-  },
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "eye_spacing": "3.6 INCH",
-  
-  "components": [
-    "config/components/positioned/goblin_left_eye.json",
-    "config/components/positioned/goblin_right_eye.json",
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_speaker.json", 
-    "config/components/positioned/goblin_nose.json"
-  ],
-  
-  "servo_specifications": {
-    "primary_servos": "DS3218_HIGH_TORQUE_SERVOS",
-    "secondary_servos": "NEMA17_SERVO_MOTORS",
-    "stepper_motors": "NEMA17_HIGH_GEAR_RATIOS",
-    "power_system": "LITHIUM_ION_10S4P_PACK"
-  },
-  
-  "mood_defaults": {
-    "FEAR": 5,
-    "ANGER": 30,
-    "IRRITATION": 20,
-    "HAPPINESS": 10, 
-    "CONTENTMENT": 40,
-    "HUNGER": 10,
-    "CURIOSITY": 20,
-    "AFFECTION": 5,
-    "DISCIPLINE": 90,
-    "LOYALTY": 80,
-    "TACTICAL_THINKING": 85
-  },
-  
-  "behavior_config": {
-    "movement_style": "PRECISE_COORDINATED_MILITARY",
-    "personality": "DISCIPLINED_TACTICAL_LOYAL",
-    "specializations": ["FORMATION_COORDINATION", "STRATEGIC_PLANNING", "TEAM_LEADERSHIP"],
-    "voice_characteristics": "CLEAR_COMMANDING_AUTHORITATIVE"
-  },
-  
-  "military_capabilities": {
-    "formation_control": "COORDINATE_MULTIPLE_UNIT_MOVEMENTS",
-    "tactical_assessment": "ANALYZE_SITUATIONS_MAKE_DECISIONS", 
-    "communication": "RELAY_COMMANDS_STATUS_REPORTS"
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/hobgoblin_captain.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "HOBGOBLIN_CAPTAIN",
+    "bot_id":  "hobgoblin_captain_v1",
+    "description":  "Disciplined military hobgoblin captain using unified proportional scaling",
+    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant":  "large_hobgoblin",
+    "horizontal_scale":  "1.0",
+    "vertical_scale":  "0.9",
+    "calculated_dimensions":  {
+                                  "total_height":  "63.0 INCHES",
+                                  "shoulder_width":  "18.0 INCHES",
+                                  "head_height":  "8.1 INCHES",
+                                  "leg_length":  "31.5 INCHES",
+                                  "character":  "DISCIPLINED_MILITARY_BEARING"
+                              },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "3.6 INCH",
+    "components":  [
+                       "config/components/positioned/goblin_left_eye.json",
+                       "config/components/positioned/goblin_right_eye.json",
+                       "config/components/positioned/goblin_mouth.json",
+                       "config/components/positioned/goblin_speaker.json",
+                       "config/components/positioned/goblin_nose.json"
+                   ],
+    "servo_specifications":  {
+                                 "primary_servos":  "DS3218_HIGH_TORQUE_SERVOS",
+                                 "secondary_servos":  "NEMA17_SERVO_MOTORS",
+                                 "stepper_motors":  "NEMA17_HIGH_GEAR_RATIOS",
+                                 "power_system":  "LITHIUM_ION_10S4P_PACK"
+                             },
+    "mood_defaults":  {
+                          "FEAR":  5,
+                          "ANGER":  30,
+                          "IRRITATION":  20,
+                          "HAPPINESS":  10,
+                          "CONTENTMENT":  40,
+                          "HUNGER":  10,
+                          "CURIOSITY":  20,
+                          "AFFECTION":  5,
+                          "DISCIPLINE":  90,
+                          "LOYALTY":  80,
+                          "TACTICAL_THINKING":  85
+                      },
+    "behavior_config":  {
+                            "movement_style":  "PRECISE_COORDINATED_MILITARY",
+                            "personality":  "DISCIPLINED_TACTICAL_LOYAL",
+                            "specializations":  [
+                                                    "FORMATION_COORDINATION",
+                                                    "STRATEGIC_PLANNING",
+                                                    "TEAM_LEADERSHIP"
+                                                ],
+                            "voice_characteristics":  "CLEAR_COMMANDING_AUTHORITATIVE"
+                        },
+    "military_capabilities":  {
+                                  "formation_control":  "COORDINATE_MULTIPLE_UNIT_MOVEMENTS",
+                                  "tactical_assessment":  "ANALYZE_SITUATIONS_MAKE_DECISIONS",
+                                  "communication":  "RELAY_COMMANDS_STATUS_REPORTS"
+                              }
 }

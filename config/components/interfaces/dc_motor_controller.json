@@ -1,294 +1,503 @@
-{
-  "relative_filename": "config/components/interfaces/dc_motor_controller.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "DC_MOTOR_CONTROLLER",
-  "interface_type": "DC_MOTOR_DRIVER",
-  "description": "DC motor controller interface for variable speed and direction control",
-  
-  "hardware_specifications": {
-    "motor_types": ["BRUSHED_DC", "BRUSHLESS_DC", "GEARED_DC", "PLANETARY_GEARED"],
-    "voltage_range": "3V_TO_48V_DC",
-    "current_range": "100mA_TO_100A",
-    "power_range": "1W_TO_5000W",
-    "speed_range": "1RPM_TO_50000RPM",
-    "gear_ratios": "1_1_TO_1000_1",
-    "encoder_resolution": "NONE_TO_4096_PPR"
-  },
-  
-  "pin_requirements": {
-    "motor_positive_pin": {
-      "function": "motor_positive_terminal",
-      "generic_name": "motor_plus",
-      "description": "Motor positive terminal connection",
-      "voltage_level": "MOTOR_VOLTAGE",
-      "current_capacity": "MOTOR_RATED_CURRENT"
-    },
-    "motor_negative_pin": {
-      "function": "motor_negative_terminal", 
-      "generic_name": "motor_minus",
-      "description": "Motor negative terminal connection",
-      "voltage_level": "MOTOR_VOLTAGE",
-      "current_capacity": "MOTOR_RATED_CURRENT"
-    },
-    "enable_pin": {
-      "function": "motor_enable",
-      "generic_name": "enable",
-      "description": "Enable/disable motor operation",
-      "voltage_level": "3.3V_5V",
-      "default_state": "LOW_DISABLED"
-    }
-  },
-  
-  "control_pins": {
-    "pwm_speed_pin": {
-      "function": "speed_control",
-      "generic_name": "pwm_speed",
-      "description": "PWM signal for motor speed control",
-      "voltage_level": "3.3V_5V",
-      "signal_type": "PWM_100HZ_TO_50KHZ",
-      "duty_cycle": "0_TO_100_PERCENT"
-    },
-    "direction_pin": {
-      "function": "rotation_direction",
-      "generic_name": "direction",
-      "description": "Motor rotation direction control",
-      "voltage_level": "3.3V_5V",
-      "signal_type": "DIGITAL",
-      "logic": "HIGH_CLOCKWISE_LOW_COUNTERCLOCKWISE"
-    },
-    "brake_pin": {
-      "function": "dynamic_braking",
-      "generic_name": "brake",
-      "description": "Motor braking control",
-      "voltage_level": "3.3V_5V",
-      "signal_type": "DIGITAL",
-      "logic": "HIGH_BRAKE_ENGAGED",
-      "optional": true
-    }
-  },
-  
-  "feedback_pins": {
-    "encoder_a_pin": {
-      "function": "encoder_channel_a",
-      "generic_name": "encoder_a",
-      "description": "Quadrature encoder channel A",
-      "direction": "INPUT",
-      "signal_type": "DIGITAL_QUADRATURE",
-      "voltage_level": "3.3V_5V",
-      "optional": true
-    },
-    "encoder_b_pin": {
-      "function": "encoder_channel_b",
-      "generic_name": "encoder_b", 
-      "description": "Quadrature encoder channel B",
-      "direction": "INPUT",
-      "signal_type": "DIGITAL_QUADRATURE",
-      "voltage_level": "3.3V_5V",
-      "optional": true
-    },
-    "encoder_index_pin": {
-      "function": "encoder_index_pulse",
-      "generic_name": "encoder_index",
-      "description": "Encoder index/home position pulse",
-      "direction": "INPUT",
-      "signal_type": "DIGITAL_PULSE",
-      "voltage_level": "3.3V_5V",
-      "optional": true
-    },
-    "current_sense_pin": {
-      "function": "motor_current_monitoring",
-      "generic_name": "current_sense",
-      "description": "Motor current sensing for load monitoring",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_0_TO_5V",
-      "scaling": "AMPS_PER_VOLT",
-      "optional": true
-    },
-    "temperature_pin": {
-      "function": "thermal_monitoring",
-      "generic_name": "temperature",
-      "description": "Motor or driver temperature sensor",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_THERMISTOR_IC",
-      "optional": true
-    }
-  },
-  
-  "driver_types": {
-    "single_motor_driver": {
-      "description": "Single DC motor H-bridge driver",
-      "pin_configuration": ["motor_plus", "motor_minus", "pwm_speed", "direction", "enable"],
-      "examples": ["L298N", "L9110S", "DRV8833", "VNH5019"],
-      "current_capacity": "1A_TO_30A",
-      "features": ["THERMAL_PROTECTION", "OVERCURRENT_PROTECTION"]
-    },
-    "dual_motor_driver": {
-      "description": "Dual motor H-bridge driver",
-      "pin_configuration": ["motor1_plus", "motor1_minus", "motor2_plus", "motor2_minus", "pwm1", "dir1", "pwm2", "dir2", "enable"],
-      "examples": ["L298N_DUAL", "TB6612FNG", "DRV8835"],
-      "current_capacity": "500mA_TO_15A_PER_CHANNEL",
-      "features": ["INDEPENDENT_CONTROL", "SHARED_POWER_SUPPLY"]
-    },
-    "brushless_controller": {
-      "description": "Brushless DC motor electronic speed controller",
-      "pin_configuration": ["motor_u", "motor_v", "motor_w", "pwm_throttle", "enable"],
-      "examples": ["ESC_20A", "ESC_30A", "ESC_60A"],
-      "current_capacity": "10A_TO_200A",
-      "features": ["THREE_PHASE_CONTROL", "HALL_SENSOR_SUPPORT", "SENSORLESS_OPERATION"]
-    }
-  },
-  
-  "control_modes": {
-    "open_loop_speed": {
-      "description": "Simple PWM speed control without feedback",
-      "pins_required": ["pwm_speed", "direction", "enable"],
-      "advantages": ["SIMPLE_IMPLEMENTATION", "LOW_COST", "FAST_RESPONSE"],
-      "disadvantages": ["NO_SPEED_REGULATION", "LOAD_DEPENDENT_SPEED", "NO_POSITION_CONTROL"]
-    },
-    "closed_loop_speed": {
-      "description": "Speed control with encoder feedback",
-      "pins_required": ["pwm_speed", "direction", "enable", "encoder_a", "encoder_b"],
-      "advantages": ["CONSTANT_SPEED", "LOAD_COMPENSATION", "PRECISE_CONTROL"],
-      "disadvantages": ["REQUIRES_ENCODER", "COMPLEX_CONTROL_ALGORITHM", "HIGHER_COST"]
-    },
-    "position_control": {
-      "description": "Precise position control with encoder feedback",
-      "pins_required": ["pwm_speed", "direction", "enable", "encoder_a", "encoder_b", "encoder_index"],
-      "advantages": ["PRECISE_POSITIONING", "REPEATABILITY", "NO_DRIFT"],
-      "disadvantages": ["COMPLEX_IMPLEMENTATION", "REQUIRES_ENCODER", "SLOWER_RESPONSE"]
-    },
-    "torque_control": {
-      "description": "Force/torque control with current sensing",
-      "pins_required": ["pwm_speed", "direction", "enable", "current_sense"],
-      "advantages": ["FORCE_LIMITING", "GENTLE_OPERATION", "SAFETY"],
-      "disadvantages": ["COMPLEX_ALGORITHM", "REQUIRES_CALIBRATION", "TEMPERATURE_DEPENDENT"]
-    }
-  },
-  
-  "pwm_specifications": {
-    "low_frequency_pwm": {
-      "frequency_range": "100Hz_TO_1KHz",
-      "applications": ["LARGE_MOTORS", "HIGH_INDUCTANCE", "AUDIO_SENSITIVE"],
-      "advantages": ["SMOOTH_OPERATION", "LOW_EMI", "GOOD_TORQUE_AT_LOW_SPEED"],
-      "disadvantages": ["AUDIBLE_NOISE", "LARGER_INDUCTORS_REQUIRED"]
-    },
-    "medium_frequency_pwm": {
-      "frequency_range": "1KHz_TO_10KHz",
-      "applications": ["GENERAL_PURPOSE", "MOST_DC_MOTORS", "BALANCED_PERFORMANCE"],
-      "advantages": ["GOOD_EFFICIENCY", "MODERATE_SWITCHING_LOSSES", "QUIET_OPERATION"],
-      "disadvantages": ["SOME_EMI", "MODERATE_HEAT_GENERATION"]
-    },
-    "high_frequency_pwm": {
-      "frequency_range": "10KHz_TO_50KHz",
-      "applications": ["SMALL_MOTORS", "PRECISION_CONTROL", "LOW_EMI_REQUIREMENTS"],
-      "advantages": ["SILENT_OPERATION", "SMOOTH_CURRENT", "SMALL_FILTER_COMPONENTS"],
-      "disadvantages": ["HIGHER_SWITCHING_LOSSES", "MORE_HEAT", "REDUCED_EFFICIENCY"]
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "l298n_module": {
-      "motor_plus": ["OUT1", "OUT3"],
-      "motor_minus": ["OUT2", "OUT4"],
-      "pwm_speed": ["ENA", "ENB"],
-      "direction": ["IN1_IN2", "IN3_IN4"],
-      "enable": ["ENABLE_JUMPER"],
-      "power": ["VCC_12V", "GND"]
-    },
-    "drv8833": {
-      "motor_plus": ["AOUT1", "BOUT1"],
-      "motor_minus": ["AOUT2", "BOUT2"],
-      "pwm_speed": ["AIN1", "BIN1"],
-      "direction": ["AIN2", "BIN2"],
-      "enable": ["SLEEP"],
-      "fault": ["FAULT"]
-    },
-    "vnh5019": {
-      "motor_plus": ["OUTA"],
-      "motor_minus": ["OUTB"],
-      "pwm_speed": ["PWM"],
-      "direction": ["INA", "INB"],
-      "enable": ["EN"],
-      "current_sense": ["CS"],
-      "fault": ["DIAGA", "DIAGB"]
-    },
-    "tb6612fng": {
-      "motor_plus": ["AO1", "BO1"],
-      "motor_minus": ["AO2", "BO2"],
-      "pwm_speed": ["PWMA", "PWMB"],
-      "direction": ["AIN1_AIN2", "BIN1_BIN2"],
-      "enable": ["STBY"],
-      "power": ["VCC", "VM", "GND"]
-    }
-  },
-  
-  "protection_features": {
-    "overcurrent_protection": {
-      "description": "Automatic shutdown on excessive current",
-      "implementation": ["CURRENT_SENSE_RESISTOR", "COMPARATOR", "SHUTDOWN_CIRCUIT"],
-      "threshold": "110_TO_150_PERCENT_RATED_CURRENT",
-      "response_time": "1us_TO_100us"
-    },
-    "thermal_protection": {
-      "description": "Temperature-based operation limiting",
-      "implementation": ["THERMAL_SENSOR", "TEMPERATURE_MONITORING", "DERATING"],
-      "threshold": "85C_TO_150C",
-      "action": ["CURRENT_LIMITING", "SHUTDOWN", "WARNING"]
-    },
-    "undervoltage_lockout": {
-      "description": "Protection against low supply voltage",
-      "threshold": "TYPICALLY_10_PERCENT_BELOW_NOMINAL",
-      "action": "DISABLE_OUTPUTS",
-      "hysteresis": "200mV_TO_500mV"
-    },
-    "shoot_through_protection": {
-      "description": "Prevents simultaneous high/low side conduction",
-      "implementation": ["DEAD_TIME_INSERTION", "BREAK_BEFORE_MAKE"],
-      "dead_time": "100ns_TO_1us"
-    }
-  },
-  
-  "application_examples": {
-    "jaw_articulation": {
-      "motor_type": "GEARED_DC_12V",
-      "gear_ratio": "50_1",
-      "torque": "5kg_cm",
-      "speed": "30RPM",
-      "control_mode": "POSITION_CONTROL",
-      "use_case": "PRECISE_JAW_MOVEMENT"
-    },
-    "ear_wiggle": {
-      "motor_type": "MICRO_GEARED_DC",
-      "gear_ratio": "100_1",
-      "torque": "1kg_cm", 
-      "speed": "60RPM",
-      "control_mode": "OPEN_LOOP_SPEED",
-      "use_case": "CUTE_EAR_ANIMATION"
-    },
-    "tail_wag": {
-      "motor_type": "STANDARD_DC_6V",
-      "gear_ratio": "20_1",
-      "torque": "3kg_cm",
-      "speed": "120RPM",
-      "control_mode": "SPEED_CONTROL",
-      "use_case": "RHYTHMIC_TAIL_MOVEMENT"
-    },
-    "platform_drive": {
-      "motor_type": "HIGH_TORQUE_DC_24V",
-      "gear_ratio": "200_1",
-      "torque": "50kg_cm",
-      "speed": "20RPM",
-      "control_mode": "CLOSED_LOOP_SPEED",
-      "use_case": "MOBILE_PLATFORM_LOCOMOTION"
-    },
-    "fan_cooling": {
-      "motor_type": "BRUSHLESS_DC_12V",
-      "torque": "0.1kg_cm",
-      "speed": "3000RPM",
-      "control_mode": "OPEN_LOOP_SPEED",
-      "use_case": "THERMAL_MANAGEMENT"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/dc_motor_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "DC_MOTOR_CONTROLLER",
+    "interface_type":  "DC_MOTOR_DRIVER",
+    "description":  "DC motor controller interface for variable speed and direction control",
+    "hardware_specifications":  {
+                                    "motor_types":  [
+                                                        "BRUSHED_DC",
+                                                        "BRUSHLESS_DC",
+                                                        "GEARED_DC",
+                                                        "PLANETARY_GEARED"
+                                                    ],
+                                    "voltage_range":  "3V_TO_48V_DC",
+                                    "current_range":  "100mA_TO_100A",
+                                    "power_range":  "1W_TO_5000W",
+                                    "speed_range":  "1RPM_TO_50000RPM",
+                                    "gear_ratios":  "1_1_TO_1000_1",
+                                    "encoder_resolution":  "NONE_TO_4096_PPR"
+                                },
+    "pin_requirements":  {
+                             "motor_positive_pin":  {
+                                                        "function":  "motor_positive_terminal",
+                                                        "generic_name":  "motor_plus",
+                                                        "description":  "Motor positive terminal connection",
+                                                        "voltage_level":  "MOTOR_VOLTAGE",
+                                                        "current_capacity":  "MOTOR_RATED_CURRENT"
+                                                    },
+                             "motor_negative_pin":  {
+                                                        "function":  "motor_negative_terminal",
+                                                        "generic_name":  "motor_minus",
+                                                        "description":  "Motor negative terminal connection",
+                                                        "voltage_level":  "MOTOR_VOLTAGE",
+                                                        "current_capacity":  "MOTOR_RATED_CURRENT"
+                                                    },
+                             "enable_pin":  {
+                                                "function":  "motor_enable",
+                                                "generic_name":  "enable",
+                                                "description":  "Enable/disable motor operation",
+                                                "voltage_level":  "3.3V_5V",
+                                                "default_state":  "LOW_DISABLED"
+                                            }
+                         },
+    "control_pins":  {
+                         "pwm_speed_pin":  {
+                                               "function":  "speed_control",
+                                               "generic_name":  "pwm_speed",
+                                               "description":  "PWM signal for motor speed control",
+                                               "voltage_level":  "3.3V_5V",
+                                               "signal_type":  "PWM_100HZ_TO_50KHZ",
+                                               "duty_cycle":  "0_TO_100_PERCENT"
+                                           },
+                         "direction_pin":  {
+                                               "function":  "rotation_direction",
+                                               "generic_name":  "direction",
+                                               "description":  "Motor rotation direction control",
+                                               "voltage_level":  "3.3V_5V",
+                                               "signal_type":  "DIGITAL",
+                                               "logic":  "HIGH_CLOCKWISE_LOW_COUNTERCLOCKWISE"
+                                           },
+                         "brake_pin":  {
+                                           "function":  "dynamic_braking",
+                                           "generic_name":  "brake",
+                                           "description":  "Motor braking control",
+                                           "voltage_level":  "3.3V_5V",
+                                           "signal_type":  "DIGITAL",
+                                           "logic":  "HIGH_BRAKE_ENGAGED",
+                                           "optional":  true
+                                       }
+                     },
+    "feedback_pins":  {
+                          "encoder_a_pin":  {
+                                                "function":  "encoder_channel_a",
+                                                "generic_name":  "encoder_a",
+                                                "description":  "Quadrature encoder channel A",
+                                                "direction":  "INPUT",
+                                                "signal_type":  "DIGITAL_QUADRATURE",
+                                                "voltage_level":  "3.3V_5V",
+                                                "optional":  true
+                                            },
+                          "encoder_b_pin":  {
+                                                "function":  "encoder_channel_b",
+                                                "generic_name":  "encoder_b",
+                                                "description":  "Quadrature encoder channel B",
+                                                "direction":  "INPUT",
+                                                "signal_type":  "DIGITAL_QUADRATURE",
+                                                "voltage_level":  "3.3V_5V",
+                                                "optional":  true
+                                            },
+                          "encoder_index_pin":  {
+                                                    "function":  "encoder_index_pulse",
+                                                    "generic_name":  "encoder_index",
+                                                    "description":  "Encoder index/home position pulse",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "DIGITAL_PULSE",
+                                                    "voltage_level":  "3.3V_5V",
+                                                    "optional":  true
+                                                },
+                          "current_sense_pin":  {
+                                                    "function":  "motor_current_monitoring",
+                                                    "generic_name":  "current_sense",
+                                                    "description":  "Motor current sensing for load monitoring",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "ANALOG_0_TO_5V",
+                                                    "scaling":  "AMPS_PER_VOLT",
+                                                    "optional":  true
+                                                },
+                          "temperature_pin":  {
+                                                  "function":  "thermal_monitoring",
+                                                  "generic_name":  "temperature",
+                                                  "description":  "Motor or driver temperature sensor",
+                                                  "direction":  "INPUT",
+                                                  "signal_type":  "ANALOG_THERMISTOR_IC",
+                                                  "optional":  true
+                                              }
+                      },
+    "driver_types":  {
+                         "single_motor_driver":  {
+                                                     "description":  "Single DC motor H-bridge driver",
+                                                     "pin_configuration":  [
+                                                                               "motor_plus",
+                                                                               "motor_minus",
+                                                                               "pwm_speed",
+                                                                               "direction",
+                                                                               "enable"
+                                                                           ],
+                                                     "examples":  [
+                                                                      "L298N",
+                                                                      "L9110S",
+                                                                      "DRV8833",
+                                                                      "VNH5019"
+                                                                  ],
+                                                     "current_capacity":  "1A_TO_30A",
+                                                     "features":  [
+                                                                      "THERMAL_PROTECTION",
+                                                                      "OVERCURRENT_PROTECTION"
+                                                                  ]
+                                                 },
+                         "dual_motor_driver":  {
+                                                   "description":  "Dual motor H-bridge driver",
+                                                   "pin_configuration":  [
+                                                                             "motor1_plus",
+                                                                             "motor1_minus",
+                                                                             "motor2_plus",
+                                                                             "motor2_minus",
+                                                                             "pwm1",
+                                                                             "dir1",
+                                                                             "pwm2",
+                                                                             "dir2",
+                                                                             "enable"
+                                                                         ],
+                                                   "examples":  [
+                                                                    "L298N_DUAL",
+                                                                    "TB6612FNG",
+                                                                    "DRV8835"
+                                                                ],
+                                                   "current_capacity":  "500mA_TO_15A_PER_CHANNEL",
+                                                   "features":  [
+                                                                    "INDEPENDENT_CONTROL",
+                                                                    "SHARED_POWER_SUPPLY"
+                                                                ]
+                                               },
+                         "brushless_controller":  {
+                                                      "description":  "Brushless DC motor electronic speed controller",
+                                                      "pin_configuration":  [
+                                                                                "motor_u",
+                                                                                "motor_v",
+                                                                                "motor_w",
+                                                                                "pwm_throttle",
+                                                                                "enable"
+                                                                            ],
+                                                      "examples":  [
+                                                                       "ESC_20A",
+                                                                       "ESC_30A",
+                                                                       "ESC_60A"
+                                                                   ],
+                                                      "current_capacity":  "10A_TO_200A",
+                                                      "features":  [
+                                                                       "THREE_PHASE_CONTROL",
+                                                                       "HALL_SENSOR_SUPPORT",
+                                                                       "SENSORLESS_OPERATION"
+                                                                   ]
+                                                  }
+                     },
+    "control_modes":  {
+                          "open_loop_speed":  {
+                                                  "description":  "Simple PWM speed control without feedback",
+                                                  "pins_required":  [
+                                                                        "pwm_speed",
+                                                                        "direction",
+                                                                        "enable"
+                                                                    ],
+                                                  "advantages":  [
+                                                                     "SIMPLE_IMPLEMENTATION",
+                                                                     "LOW_COST",
+                                                                     "FAST_RESPONSE"
+                                                                 ],
+                                                  "disadvantages":  [
+                                                                        "NO_SPEED_REGULATION",
+                                                                        "LOAD_DEPENDENT_SPEED",
+                                                                        "NO_POSITION_CONTROL"
+                                                                    ]
+                                              },
+                          "closed_loop_speed":  {
+                                                    "description":  "Speed control with encoder feedback",
+                                                    "pins_required":  [
+                                                                          "pwm_speed",
+                                                                          "direction",
+                                                                          "enable",
+                                                                          "encoder_a",
+                                                                          "encoder_b"
+                                                                      ],
+                                                    "advantages":  [
+                                                                       "CONSTANT_SPEED",
+                                                                       "LOAD_COMPENSATION",
+                                                                       "PRECISE_CONTROL"
+                                                                   ],
+                                                    "disadvantages":  [
+                                                                          "REQUIRES_ENCODER",
+                                                                          "COMPLEX_CONTROL_ALGORITHM",
+                                                                          "HIGHER_COST"
+                                                                      ]
+                                                },
+                          "position_control":  {
+                                                   "description":  "Precise position control with encoder feedback",
+                                                   "pins_required":  [
+                                                                         "pwm_speed",
+                                                                         "direction",
+                                                                         "enable",
+                                                                         "encoder_a",
+                                                                         "encoder_b",
+                                                                         "encoder_index"
+                                                                     ],
+                                                   "advantages":  [
+                                                                      "PRECISE_POSITIONING",
+                                                                      "REPEATABILITY",
+                                                                      "NO_DRIFT"
+                                                                  ],
+                                                   "disadvantages":  [
+                                                                         "COMPLEX_IMPLEMENTATION",
+                                                                         "REQUIRES_ENCODER",
+                                                                         "SLOWER_RESPONSE"
+                                                                     ]
+                                               },
+                          "torque_control":  {
+                                                 "description":  "Force/torque control with current sensing",
+                                                 "pins_required":  [
+                                                                       "pwm_speed",
+                                                                       "direction",
+                                                                       "enable",
+                                                                       "current_sense"
+                                                                   ],
+                                                 "advantages":  [
+                                                                    "FORCE_LIMITING",
+                                                                    "GENTLE_OPERATION",
+                                                                    "SAFETY"
+                                                                ],
+                                                 "disadvantages":  [
+                                                                       "COMPLEX_ALGORITHM",
+                                                                       "REQUIRES_CALIBRATION",
+                                                                       "TEMPERATURE_DEPENDENT"
+                                                                   ]
+                                             }
+                      },
+    "pwm_specifications":  {
+                               "low_frequency_pwm":  {
+                                                         "frequency_range":  "100Hz_TO_1KHz",
+                                                         "applications":  [
+                                                                              "LARGE_MOTORS",
+                                                                              "HIGH_INDUCTANCE",
+                                                                              "AUDIO_SENSITIVE"
+                                                                          ],
+                                                         "advantages":  [
+                                                                            "SMOOTH_OPERATION",
+                                                                            "LOW_EMI",
+                                                                            "GOOD_TORQUE_AT_LOW_SPEED"
+                                                                        ],
+                                                         "disadvantages":  [
+                                                                               "AUDIBLE_NOISE",
+                                                                               "LARGER_INDUCTORS_REQUIRED"
+                                                                           ]
+                                                     },
+                               "medium_frequency_pwm":  {
+                                                            "frequency_range":  "1KHz_TO_10KHz",
+                                                            "applications":  [
+                                                                                 "GENERAL_PURPOSE",
+                                                                                 "MOST_DC_MOTORS",
+                                                                                 "BALANCED_PERFORMANCE"
+                                                                             ],
+                                                            "advantages":  [
+                                                                               "GOOD_EFFICIENCY",
+                                                                               "MODERATE_SWITCHING_LOSSES",
+                                                                               "QUIET_OPERATION"
+                                                                           ],
+                                                            "disadvantages":  [
+                                                                                  "SOME_EMI",
+                                                                                  "MODERATE_HEAT_GENERATION"
+                                                                              ]
+                                                        },
+                               "high_frequency_pwm":  {
+                                                          "frequency_range":  "10KHz_TO_50KHz",
+                                                          "applications":  [
+                                                                               "SMALL_MOTORS",
+                                                                               "PRECISION_CONTROL",
+                                                                               "LOW_EMI_REQUIREMENTS"
+                                                                           ],
+                                                          "advantages":  [
+                                                                             "SILENT_OPERATION",
+                                                                             "SMOOTH_CURRENT",
+                                                                             "SMALL_FILTER_COMPONENTS"
+                                                                         ],
+                                                          "disadvantages":  [
+                                                                                "HIGHER_SWITCHING_LOSSES",
+                                                                                "MORE_HEAT",
+                                                                                "REDUCED_EFFICIENCY"
+                                                                            ]
+                                                      }
+                           },
+    "manufacturer_pin_mappings":  {
+                                      "l298n_module":  {
+                                                           "motor_plus":  [
+                                                                              "OUT1",
+                                                                              "OUT3"
+                                                                          ],
+                                                           "motor_minus":  [
+                                                                               "OUT2",
+                                                                               "OUT4"
+                                                                           ],
+                                                           "pwm_speed":  [
+                                                                             "ENA",
+                                                                             "ENB"
+                                                                         ],
+                                                           "direction":  [
+                                                                             "IN1_IN2",
+                                                                             "IN3_IN4"
+                                                                         ],
+                                                           "enable":  [
+                                                                          "ENABLE_JUMPER"
+                                                                      ],
+                                                           "power":  [
+                                                                         "VCC_12V",
+                                                                         "GND"
+                                                                     ]
+                                                       },
+                                      "drv8833":  {
+                                                      "motor_plus":  [
+                                                                         "AOUT1",
+                                                                         "BOUT1"
+                                                                     ],
+                                                      "motor_minus":  [
+                                                                          "AOUT2",
+                                                                          "BOUT2"
+                                                                      ],
+                                                      "pwm_speed":  [
+                                                                        "AIN1",
+                                                                        "BIN1"
+                                                                    ],
+                                                      "direction":  [
+                                                                        "AIN2",
+                                                                        "BIN2"
+                                                                    ],
+                                                      "enable":  [
+                                                                     "SLEEP"
+                                                                 ],
+                                                      "fault":  [
+                                                                    "FAULT"
+                                                                ]
+                                                  },
+                                      "vnh5019":  {
+                                                      "motor_plus":  [
+                                                                         "OUTA"
+                                                                     ],
+                                                      "motor_minus":  [
+                                                                          "OUTB"
+                                                                      ],
+                                                      "pwm_speed":  [
+                                                                        "PWM"
+                                                                    ],
+                                                      "direction":  [
+                                                                        "INA",
+                                                                        "INB"
+                                                                    ],
+                                                      "enable":  [
+                                                                     "EN"
+                                                                 ],
+                                                      "current_sense":  [
+                                                                            "CS"
+                                                                        ],
+                                                      "fault":  [
+                                                                    "DIAGA",
+                                                                    "DIAGB"
+                                                                ]
+                                                  },
+                                      "tb6612fng":  {
+                                                        "motor_plus":  [
+                                                                           "AO1",
+                                                                           "BO1"
+                                                                       ],
+                                                        "motor_minus":  [
+                                                                            "AO2",
+                                                                            "BO2"
+                                                                        ],
+                                                        "pwm_speed":  [
+                                                                          "PWMA",
+                                                                          "PWMB"
+                                                                      ],
+                                                        "direction":  [
+                                                                          "AIN1_AIN2",
+                                                                          "BIN1_BIN2"
+                                                                      ],
+                                                        "enable":  [
+                                                                       "STBY"
+                                                                   ],
+                                                        "power":  [
+                                                                      "VCC",
+                                                                      "VM",
+                                                                      "GND"
+                                                                  ]
+                                                    }
+                                  },
+    "protection_features":  {
+                                "overcurrent_protection":  {
+                                                               "description":  "Automatic shutdown on excessive current",
+                                                               "implementation":  [
+                                                                                      "CURRENT_SENSE_RESISTOR",
+                                                                                      "COMPARATOR",
+                                                                                      "SHUTDOWN_CIRCUIT"
+                                                                                  ],
+                                                               "threshold":  "110_TO_150_PERCENT_RATED_CURRENT",
+                                                               "response_time":  "1us_TO_100us"
+                                                           },
+                                "thermal_protection":  {
+                                                           "description":  "Temperature-based operation limiting",
+                                                           "implementation":  [
+                                                                                  "THERMAL_SENSOR",
+                                                                                  "TEMPERATURE_MONITORING",
+                                                                                  "DERATING"
+                                                                              ],
+                                                           "threshold":  "85C_TO_150C",
+                                                           "action":  [
+                                                                          "CURRENT_LIMITING",
+                                                                          "SHUTDOWN",
+                                                                          "WARNING"
+                                                                      ]
+                                                       },
+                                "undervoltage_lockout":  {
+                                                             "description":  "Protection against low supply voltage",
+                                                             "threshold":  "TYPICALLY_10_PERCENT_BELOW_NOMINAL",
+                                                             "action":  "DISABLE_OUTPUTS",
+                                                             "hysteresis":  "200mV_TO_500mV"
+                                                         },
+                                "shoot_through_protection":  {
+                                                                 "description":  "Prevents simultaneous high/low side conduction",
+                                                                 "implementation":  [
+                                                                                        "DEAD_TIME_INSERTION",
+                                                                                        "BREAK_BEFORE_MAKE"
+                                                                                    ],
+                                                                 "dead_time":  "100ns_TO_1us"
+                                                             }
+                            },
+    "application_examples":  {
+                                 "jaw_articulation":  {
+                                                          "motor_type":  "GEARED_DC_12V",
+                                                          "gear_ratio":  "50_1",
+                                                          "torque":  "5kg_cm",
+                                                          "speed":  "30RPM",
+                                                          "control_mode":  "POSITION_CONTROL",
+                                                          "use_case":  "PRECISE_JAW_MOVEMENT"
+                                                      },
+                                 "ear_wiggle":  {
+                                                    "motor_type":  "MICRO_GEARED_DC",
+                                                    "gear_ratio":  "100_1",
+                                                    "torque":  "1kg_cm",
+                                                    "speed":  "60RPM",
+                                                    "control_mode":  "OPEN_LOOP_SPEED",
+                                                    "use_case":  "CUTE_EAR_ANIMATION"
+                                                },
+                                 "tail_wag":  {
+                                                  "motor_type":  "STANDARD_DC_6V",
+                                                  "gear_ratio":  "20_1",
+                                                  "torque":  "3kg_cm",
+                                                  "speed":  "120RPM",
+                                                  "control_mode":  "SPEED_CONTROL",
+                                                  "use_case":  "RHYTHMIC_TAIL_MOVEMENT"
+                                              },
+                                 "platform_drive":  {
+                                                        "motor_type":  "HIGH_TORQUE_DC_24V",
+                                                        "gear_ratio":  "200_1",
+                                                        "torque":  "50kg_cm",
+                                                        "speed":  "20RPM",
+                                                        "control_mode":  "CLOSED_LOOP_SPEED",
+                                                        "use_case":  "MOBILE_PLATFORM_LOCOMOTION"
+                                                    },
+                                 "fan_cooling":  {
+                                                     "motor_type":  "BRUSHLESS_DC_12V",
+                                                     "torque":  "0.1kg_cm",
+                                                     "speed":  "3000RPM",
+                                                     "control_mode":  "OPEN_LOOP_SPEED",
+                                                     "use_case":  "THERMAL_MANAGEMENT"
+                                                 }
+                             }
 }

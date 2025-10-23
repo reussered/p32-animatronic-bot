@@ -1,286 +1,451 @@
-{
-  "relative_filename": "config/components/interfaces/electromagnet_controller.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "interface_id": "ELECTROMAGNET_CONTROLLER",
-  "interface_type": "ELECTROMAGNET_DRIVER",
-  "description": "Electromagnet controller interface for magnetic holding and release mechanisms",
-  
-  "hardware_specifications": {
-    "magnet_types": ["HOLDING_ELECTROMAGNET", "LIFTING_ELECTROMAGNET", "SOLENOID_ELECTROMAGNET"],
-    "voltage_range": "5V_TO_48V_DC",
-    "current_range": "100mA_TO_50A", 
-    "power_range": "1W_TO_2000W",
-    "holding_force": "1N_TO_10000N",
-    "duty_cycle": "10_PERCENT_TO_100_PERCENT_CONTINUOUS",
-    "response_time": "1ms_TO_100ms"
-  },
-  
-  "pin_requirements": {
-    "coil_positive_pin": {
-      "function": "electromagnet_positive_terminal",
-      "generic_name": "coil_plus",
-      "description": "Electromagnet coil positive terminal",
-      "voltage_level": "MAGNET_RATED_VOLTAGE",
-      "current_capacity": "MAGNET_RATED_CURRENT"
-    },
-    "coil_negative_pin": {
-      "function": "electromagnet_negative_terminal",
-      "generic_name": "coil_minus", 
-      "description": "Electromagnet coil negative terminal",
-      "voltage_level": "MAGNET_RATED_VOLTAGE",
-      "current_capacity": "MAGNET_RATED_CURRENT"
-    },
-    "control_pin": {
-      "function": "magnet_activation",
-      "generic_name": "magnet_control",
-      "description": "Electromagnet activation control",
-      "voltage_level": "3.3V_5V",
-      "signal_type": "DIGITAL_PWM",
-      "logic": "HIGH_ACTIVE"
-    }
-  },
-  
-  "driver_pins": {
-    "enable_pin": {
-      "function": "driver_enable",
-      "generic_name": "enable",
-      "description": "Enable/disable electromagnet driver",
-      "voltage_level": "3.3V_5V",
-      "default_state": "LOW_DISABLED",
-      "optional": true
-    },
-    "pwm_control_pin": {
-      "function": "power_modulation",
-      "generic_name": "pwm_power",
-      "description": "PWM control for variable magnetic force",
-      "voltage_level": "3.3V_5V",
-      "signal_type": "PWM_100HZ_TO_10KHZ",
-      "duty_cycle": "0_TO_100_PERCENT",
-      "optional": true
-    }
-  },
-  
-  "feedback_pins": {
-    "current_sense_pin": {
-      "function": "coil_current_monitoring",
-      "generic_name": "current_sense",
-      "description": "Electromagnet current sensing",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_0_TO_5V",
-      "scaling": "AMPS_PER_VOLT",
-      "optional": true
-    },
-    "temperature_pin": {
-      "function": "thermal_monitoring",
-      "generic_name": "temperature",
-      "description": "Coil temperature monitoring",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_THERMISTOR_IC",
-      "optional": true
-    },
-    "hall_sensor_pin": {
-      "function": "magnetic_field_detection",
-      "generic_name": "hall_sensor",
-      "description": "Magnetic field strength sensor",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_DIGITAL",
-      "optional": true
-    },
-    "position_sensor_pin": {
-      "function": "armature_position_detection",
-      "generic_name": "position_feedback",
-      "description": "Electromagnet armature position sensor",
-      "direction": "INPUT",
-      "signal_type": "ANALOG_DIGITAL_SWITCH",
-      "optional": true
-    }
-  },
-  
-  "electromagnet_types": {
-    "holding_electromagnet": {
-      "description": "Electromagnet designed for holding objects in place",
-      "holding_force": "10N_TO_5000N",
-      "power_consumption": "CONTINUOUS_DUTY",
-      "applications": ["GRIPPER_FINGERS", "HOLDING_CLAMPS", "MAGNETIC_LOCKS"],
-      "duty_cycle": "100_PERCENT_CONTINUOUS",
-      "thermal_considerations": "DESIGNED_FOR_CONTINUOUS_OPERATION"
-    },
-    "lifting_electromagnet": {
-      "description": "High-power electromagnet for lifting heavy objects",
-      "holding_force": "500N_TO_10000N",
-      "power_consumption": "INTERMITTENT_DUTY",
-      "applications": ["HEAVY_LIFTING", "CRANE_MAGNETS", "SCRAP_HANDLING"],
-      "duty_cycle": "25_TO_50_PERCENT",
-      "thermal_considerations": "REQUIRES_COOLING_PERIODS"
-    },
-    "solenoid_electromagnet": {
-      "description": "Linear motion electromagnet with spring return",
-      "force": "1N_TO_500N",
-      "stroke": "5mm_TO_50mm",
-      "applications": ["DOOR_LOCKS", "VALVES", "LINEAR_ACTUATORS"],
-      "duty_cycle": "10_TO_50_PERCENT",
-      "response_time": "5ms_TO_50ms"
-    }
-  },
-  
-  "driver_configurations": {
-    "simple_relay": {
-      "description": "Basic relay-based electromagnet control",
-      "pins_required": ["magnet_control", "coil_plus", "coil_minus"],
-      "advantages": ["SIMPLE_CIRCUIT", "LOW_COST", "GALVANIC_ISOLATION"],
-      "disadvantages": ["SLOW_SWITCHING", "NO_PWM_CONTROL", "CONTACT_WEAR"],
-      "current_capacity": "1A_TO_30A"
-    },
-    "mosfet_driver": {
-      "description": "MOSFET-based high-side or low-side switching",
-      "pins_required": ["magnet_control", "coil_plus", "coil_minus"],
-      "advantages": ["FAST_SWITCHING", "LOW_LOSS", "PWM_CAPABLE"],
-      "disadvantages": ["REQUIRES_FLYBACK_DIODE", "GATE_DRIVE_REQUIREMENTS"],
-      "current_capacity": "100mA_TO_100A"
-    },
-    "h_bridge_driver": {
-      "description": "Full H-bridge for bidirectional electromagnet control",
-      "pins_required": ["forward_control", "reverse_control", "coil_plus", "coil_minus"],
-      "advantages": ["BIDIRECTIONAL_CONTROL", "REGENERATIVE_BRAKING", "POLARITY_REVERSAL"],
-      "disadvantages": ["COMPLEX_CIRCUIT", "HIGHER_COST", "SHOOT_THROUGH_RISK"],
-      "applications": ["REVERSIBLE_ELECTROMAGNETS", "MAGNETIC_BEARINGS"]
-    },
-    "pwm_controller": {
-      "description": "PWM-based variable power electromagnet control",
-      "pins_required": ["pwm_power", "magnet_control", "coil_plus", "coil_minus"],
-      "advantages": ["VARIABLE_FORCE", "ENERGY_EFFICIENT", "THERMAL_MANAGEMENT"],
-      "disadvantages": ["COMPLEX_CONTROL", "EMI_GENERATION", "FILTERING_REQUIRED"],
-      "pwm_frequency": "1KHz_TO_50KHz"
-    }
-  },
-  
-  "control_strategies": {
-    "on_off_control": {
-      "description": "Simple binary electromagnet control",
-      "pins_required": ["magnet_control"],
-      "control_states": ["FULLY_OFF", "FULLY_ON"],
-      "advantages": ["SIMPLE_IMPLEMENTATION", "MAXIMUM_FORCE", "RELIABLE"],
-      "disadvantages": ["NO_FORCE_MODULATION", "HIGH_POWER_CONSUMPTION", "THERMAL_STRESS"]
-    },
-    "pwm_force_control": {
-      "description": "Variable force control using PWM",
-      "pins_required": ["pwm_power"],
-      "control_range": "0_TO_100_PERCENT_FORCE",
-      "advantages": ["VARIABLE_HOLDING_FORCE", "ENERGY_EFFICIENT", "THERMAL_MANAGEMENT"],
-      "disadvantages": ["COMPLEX_CONTROL", "EMI_CONCERNS", "FILTERING_REQUIRED"]
-    },
-    "current_control": {
-      "description": "Closed-loop current control for consistent force",
-      "pins_required": ["pwm_power", "current_sense"],
-      "advantages": ["CONSISTENT_FORCE", "TEMPERATURE_COMPENSATION", "PROTECTION"],
-      "disadvantages": ["COMPLEX_IMPLEMENTATION", "REQUIRES_CURRENT_SENSOR", "FEEDBACK_LOOP"]
-    },
-    "duty_cycle_control": {
-      "description": "Time-based on/off cycles for thermal management",
-      "timing_pattern": "ON_TIME_OFF_TIME_CYCLES",
-      "advantages": ["THERMAL_PROTECTION", "EXTENDED_OPERATION", "SIMPLE_CONTROL"],
-      "disadvantages": ["INTERMITTENT_FORCE", "TIMING_CRITICAL", "NOT_SUITABLE_FOR_HOLDING"]
-    }
-  },
-  
-  "protection_features": {
-    "flyback_protection": {
-      "description": "Protection against inductive voltage spikes",
-      "implementation": ["FLYBACK_DIODE", "TVS_DIODE", "VARISTOR"],
-      "importance": "CRITICAL_FOR_MOSFET_PROTECTION",
-      "voltage_rating": "1.5_TO_2_TIMES_SUPPLY_VOLTAGE"
-    },
-    "thermal_protection": {
-      "description": "Overtemperature protection for coil and driver",
-      "implementation": ["THERMAL_SENSOR", "CURRENT_LIMITING", "SHUTDOWN"],
-      "threshold": "COIL_RATED_TEMPERATURE_PLUS_20C",
-      "action": ["WARNING", "CURRENT_REDUCTION", "SHUTDOWN"]
-    },
-    "overcurrent_protection": {
-      "description": "Protection against excessive coil current",
-      "implementation": ["CURRENT_SENSE_RESISTOR", "COMPARATOR", "SHUTDOWN"],
-      "threshold": "110_TO_150_PERCENT_RATED_CURRENT",
-      "response_time": "1us_TO_10us"
-    },
-    "undervoltage_lockout": {
-      "description": "Protection against insufficient supply voltage",
-      "threshold": "85_TO_90_PERCENT_NOMINAL_VOLTAGE",
-      "action": "DISABLE_MAGNET_OPERATION",
-      "hysteresis": "5_TO_10_PERCENT"
-    }
-  },
-  
-  "manufacturer_pin_mappings": {
-    "relay_module": {
-      "magnet_control": ["IN", "SIGNAL", "TRIGGER"],
-      "coil_plus": ["COM", "NO"],
-      "coil_minus": ["NC", "COMMON"],
-      "power": ["VCC", "GND"]
-    },
-    "mosfet_driver": {
-      "magnet_control": ["GATE", "IN", "CONTROL"],
-      "coil_plus": ["DRAIN", "OUT+"],
-      "coil_minus": ["SOURCE", "OUT-"],
-      "enable": ["EN", "ENABLE"]
-    },
-    "irf520_module": {
-      "magnet_control": ["SIG", "SIGNAL"],
-      "coil_plus": ["V+", "VIN"],
-      "coil_minus": ["V-", "VOUT"],
-      "power": ["VCC", "GND"]
-    },
-    "l298n_magnet": {
-      "magnet_control": ["IN1", "IN2"],
-      "coil_plus": ["OUT1"],
-      "coil_minus": ["OUT2"],
-      "enable": ["ENA"],
-      "power": ["12V", "GND"]
-    }
-  },
-  
-  "application_examples": {
-    "gripper_fingers": {
-      "magnet_type": "HOLDING_ELECTROMAGNET",
-      "holding_force": "100N",
-      "voltage": "12V",
-      "current": "2A",
-      "duty_cycle": "100_PERCENT_CONTINUOUS",
-      "use_case": "MAGNETIC_GRIPPER_HOLDING"
-    },
-    "door_lock": {
-      "magnet_type": "SOLENOID_ELECTROMAGNET",
-      "force": "50N",
-      "stroke": "15mm",
-      "voltage": "24V",
-      "current": "1.5A",
-      "duty_cycle": "10_PERCENT_INTERMITTENT",
-      "use_case": "MAGNETIC_DOOR_LOCK_RELEASE"
-    },
-    "jaw_latch": {
-      "magnet_type": "HOLDING_ELECTROMAGNET",
-      "holding_force": "200N",
-      "voltage": "24V",
-      "current": "3A",
-      "duty_cycle": "50_PERCENT",
-      "use_case": "JAW_LOCKING_MECHANISM"
-    },
-    "magnetic_coupling": {
-      "magnet_type": "LIFTING_ELECTROMAGNET",
-      "holding_force": "500N",
-      "voltage": "48V",
-      "current": "10A",
-      "duty_cycle": "25_PERCENT",
-      "use_case": "DETACHABLE_LIMB_CONNECTION"
-    },
-    "emergency_brake": {
-      "magnet_type": "HOLDING_ELECTROMAGNET",
-      "holding_force": "1000N",
-      "voltage": "24V",
-      "current": "8A",
-      "duty_cycle": "FAILSAFE_NORMALLY_ENGAGED",
-      "use_case": "SAFETY_BRAKE_SYSTEM"
-    }
-  }
+﻿{
+    "relative_filename":  "config/components/interfaces/electromagnet_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "interface_id":  "ELECTROMAGNET_CONTROLLER",
+    "interface_type":  "ELECTROMAGNET_DRIVER",
+    "description":  "Electromagnet controller interface for magnetic holding and release mechanisms",
+    "hardware_specifications":  {
+                                    "magnet_types":  [
+                                                         "HOLDING_ELECTROMAGNET",
+                                                         "LIFTING_ELECTROMAGNET",
+                                                         "SOLENOID_ELECTROMAGNET"
+                                                     ],
+                                    "voltage_range":  "5V_TO_48V_DC",
+                                    "current_range":  "100mA_TO_50A",
+                                    "power_range":  "1W_TO_2000W",
+                                    "holding_force":  "1N_TO_10000N",
+                                    "duty_cycle":  "10_PERCENT_TO_100_PERCENT_CONTINUOUS",
+                                    "response_time":  "1ms_TO_100ms"
+                                },
+    "pin_requirements":  {
+                             "coil_positive_pin":  {
+                                                       "function":  "electromagnet_positive_terminal",
+                                                       "generic_name":  "coil_plus",
+                                                       "description":  "Electromagnet coil positive terminal",
+                                                       "voltage_level":  "MAGNET_RATED_VOLTAGE",
+                                                       "current_capacity":  "MAGNET_RATED_CURRENT"
+                                                   },
+                             "coil_negative_pin":  {
+                                                       "function":  "electromagnet_negative_terminal",
+                                                       "generic_name":  "coil_minus",
+                                                       "description":  "Electromagnet coil negative terminal",
+                                                       "voltage_level":  "MAGNET_RATED_VOLTAGE",
+                                                       "current_capacity":  "MAGNET_RATED_CURRENT"
+                                                   },
+                             "control_pin":  {
+                                                 "function":  "magnet_activation",
+                                                 "generic_name":  "magnet_control",
+                                                 "description":  "Electromagnet activation control",
+                                                 "voltage_level":  "3.3V_5V",
+                                                 "signal_type":  "DIGITAL_PWM",
+                                                 "logic":  "HIGH_ACTIVE"
+                                             }
+                         },
+    "driver_pins":  {
+                        "enable_pin":  {
+                                           "function":  "driver_enable",
+                                           "generic_name":  "enable",
+                                           "description":  "Enable/disable electromagnet driver",
+                                           "voltage_level":  "3.3V_5V",
+                                           "default_state":  "LOW_DISABLED",
+                                           "optional":  true
+                                       },
+                        "pwm_control_pin":  {
+                                                "function":  "power_modulation",
+                                                "generic_name":  "pwm_power",
+                                                "description":  "PWM control for variable magnetic force",
+                                                "voltage_level":  "3.3V_5V",
+                                                "signal_type":  "PWM_100HZ_TO_10KHZ",
+                                                "duty_cycle":  "0_TO_100_PERCENT",
+                                                "optional":  true
+                                            }
+                    },
+    "feedback_pins":  {
+                          "current_sense_pin":  {
+                                                    "function":  "coil_current_monitoring",
+                                                    "generic_name":  "current_sense",
+                                                    "description":  "Electromagnet current sensing",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "ANALOG_0_TO_5V",
+                                                    "scaling":  "AMPS_PER_VOLT",
+                                                    "optional":  true
+                                                },
+                          "temperature_pin":  {
+                                                  "function":  "thermal_monitoring",
+                                                  "generic_name":  "temperature",
+                                                  "description":  "Coil temperature monitoring",
+                                                  "direction":  "INPUT",
+                                                  "signal_type":  "ANALOG_THERMISTOR_IC",
+                                                  "optional":  true
+                                              },
+                          "hall_sensor_pin":  {
+                                                  "function":  "magnetic_field_detection",
+                                                  "generic_name":  "hall_sensor",
+                                                  "description":  "Magnetic field strength sensor",
+                                                  "direction":  "INPUT",
+                                                  "signal_type":  "ANALOG_DIGITAL",
+                                                  "optional":  true
+                                              },
+                          "position_sensor_pin":  {
+                                                      "function":  "armature_position_detection",
+                                                      "generic_name":  "position_feedback",
+                                                      "description":  "Electromagnet armature position sensor",
+                                                      "direction":  "INPUT",
+                                                      "signal_type":  "ANALOG_DIGITAL_SWITCH",
+                                                      "optional":  true
+                                                  }
+                      },
+    "electromagnet_types":  {
+                                "holding_electromagnet":  {
+                                                              "description":  "Electromagnet designed for holding objects in place",
+                                                              "holding_force":  "10N_TO_5000N",
+                                                              "power_consumption":  "CONTINUOUS_DUTY",
+                                                              "applications":  [
+                                                                                   "GRIPPER_FINGERS",
+                                                                                   "HOLDING_CLAMPS",
+                                                                                   "MAGNETIC_LOCKS"
+                                                                               ],
+                                                              "duty_cycle":  "100_PERCENT_CONTINUOUS",
+                                                              "thermal_considerations":  "DESIGNED_FOR_CONTINUOUS_OPERATION"
+                                                          },
+                                "lifting_electromagnet":  {
+                                                              "description":  "High-power electromagnet for lifting heavy objects",
+                                                              "holding_force":  "500N_TO_10000N",
+                                                              "power_consumption":  "INTERMITTENT_DUTY",
+                                                              "applications":  [
+                                                                                   "HEAVY_LIFTING",
+                                                                                   "CRANE_MAGNETS",
+                                                                                   "SCRAP_HANDLING"
+                                                                               ],
+                                                              "duty_cycle":  "25_TO_50_PERCENT",
+                                                              "thermal_considerations":  "REQUIRES_COOLING_PERIODS"
+                                                          },
+                                "solenoid_electromagnet":  {
+                                                               "description":  "Linear motion electromagnet with spring return",
+                                                               "force":  "1N_TO_500N",
+                                                               "stroke":  "5mm_TO_50mm",
+                                                               "applications":  [
+                                                                                    "DOOR_LOCKS",
+                                                                                    "VALVES",
+                                                                                    "LINEAR_ACTUATORS"
+                                                                                ],
+                                                               "duty_cycle":  "10_TO_50_PERCENT",
+                                                               "response_time":  "5ms_TO_50ms"
+                                                           }
+                            },
+    "driver_configurations":  {
+                                  "simple_relay":  {
+                                                       "description":  "Basic relay-based electromagnet control",
+                                                       "pins_required":  [
+                                                                             "magnet_control",
+                                                                             "coil_plus",
+                                                                             "coil_minus"
+                                                                         ],
+                                                       "advantages":  [
+                                                                          "SIMPLE_CIRCUIT",
+                                                                          "LOW_COST",
+                                                                          "GALVANIC_ISOLATION"
+                                                                      ],
+                                                       "disadvantages":  [
+                                                                             "SLOW_SWITCHING",
+                                                                             "NO_PWM_CONTROL",
+                                                                             "CONTACT_WEAR"
+                                                                         ],
+                                                       "current_capacity":  "1A_TO_30A"
+                                                   },
+                                  "mosfet_driver":  {
+                                                        "description":  "MOSFET-based high-side or low-side switching",
+                                                        "pins_required":  [
+                                                                              "magnet_control",
+                                                                              "coil_plus",
+                                                                              "coil_minus"
+                                                                          ],
+                                                        "advantages":  [
+                                                                           "FAST_SWITCHING",
+                                                                           "LOW_LOSS",
+                                                                           "PWM_CAPABLE"
+                                                                       ],
+                                                        "disadvantages":  [
+                                                                              "REQUIRES_FLYBACK_DIODE",
+                                                                              "GATE_DRIVE_REQUIREMENTS"
+                                                                          ],
+                                                        "current_capacity":  "100mA_TO_100A"
+                                                    },
+                                  "h_bridge_driver":  {
+                                                          "description":  "Full H-bridge for bidirectional electromagnet control",
+                                                          "pins_required":  [
+                                                                                "forward_control",
+                                                                                "reverse_control",
+                                                                                "coil_plus",
+                                                                                "coil_minus"
+                                                                            ],
+                                                          "advantages":  [
+                                                                             "BIDIRECTIONAL_CONTROL",
+                                                                             "REGENERATIVE_BRAKING",
+                                                                             "POLARITY_REVERSAL"
+                                                                         ],
+                                                          "disadvantages":  [
+                                                                                "COMPLEX_CIRCUIT",
+                                                                                "HIGHER_COST",
+                                                                                "SHOOT_THROUGH_RISK"
+                                                                            ],
+                                                          "applications":  [
+                                                                               "REVERSIBLE_ELECTROMAGNETS",
+                                                                               "MAGNETIC_BEARINGS"
+                                                                           ]
+                                                      },
+                                  "pwm_controller":  {
+                                                         "description":  "PWM-based variable power electromagnet control",
+                                                         "pins_required":  [
+                                                                               "pwm_power",
+                                                                               "magnet_control",
+                                                                               "coil_plus",
+                                                                               "coil_minus"
+                                                                           ],
+                                                         "advantages":  [
+                                                                            "VARIABLE_FORCE",
+                                                                            "ENERGY_EFFICIENT",
+                                                                            "THERMAL_MANAGEMENT"
+                                                                        ],
+                                                         "disadvantages":  [
+                                                                               "COMPLEX_CONTROL",
+                                                                               "EMI_GENERATION",
+                                                                               "FILTERING_REQUIRED"
+                                                                           ],
+                                                         "pwm_frequency":  "1KHz_TO_50KHz"
+                                                     }
+                              },
+    "control_strategies":  {
+                               "on_off_control":  {
+                                                      "description":  "Simple binary electromagnet control",
+                                                      "pins_required":  [
+                                                                            "magnet_control"
+                                                                        ],
+                                                      "control_states":  [
+                                                                             "FULLY_OFF",
+                                                                             "FULLY_ON"
+                                                                         ],
+                                                      "advantages":  [
+                                                                         "SIMPLE_IMPLEMENTATION",
+                                                                         "MAXIMUM_FORCE",
+                                                                         "RELIABLE"
+                                                                     ],
+                                                      "disadvantages":  [
+                                                                            "NO_FORCE_MODULATION",
+                                                                            "HIGH_POWER_CONSUMPTION",
+                                                                            "THERMAL_STRESS"
+                                                                        ]
+                                                  },
+                               "pwm_force_control":  {
+                                                         "description":  "Variable force control using PWM",
+                                                         "pins_required":  [
+                                                                               "pwm_power"
+                                                                           ],
+                                                         "control_range":  "0_TO_100_PERCENT_FORCE",
+                                                         "advantages":  [
+                                                                            "VARIABLE_HOLDING_FORCE",
+                                                                            "ENERGY_EFFICIENT",
+                                                                            "THERMAL_MANAGEMENT"
+                                                                        ],
+                                                         "disadvantages":  [
+                                                                               "COMPLEX_CONTROL",
+                                                                               "EMI_CONCERNS",
+                                                                               "FILTERING_REQUIRED"
+                                                                           ]
+                                                     },
+                               "current_control":  {
+                                                       "description":  "Closed-loop current control for consistent force",
+                                                       "pins_required":  [
+                                                                             "pwm_power",
+                                                                             "current_sense"
+                                                                         ],
+                                                       "advantages":  [
+                                                                          "CONSISTENT_FORCE",
+                                                                          "TEMPERATURE_COMPENSATION",
+                                                                          "PROTECTION"
+                                                                      ],
+                                                       "disadvantages":  [
+                                                                             "COMPLEX_IMPLEMENTATION",
+                                                                             "REQUIRES_CURRENT_SENSOR",
+                                                                             "FEEDBACK_LOOP"
+                                                                         ]
+                                                   },
+                               "duty_cycle_control":  {
+                                                          "description":  "Time-based on/off cycles for thermal management",
+                                                          "timing_pattern":  "ON_TIME_OFF_TIME_CYCLES",
+                                                          "advantages":  [
+                                                                             "THERMAL_PROTECTION",
+                                                                             "EXTENDED_OPERATION",
+                                                                             "SIMPLE_CONTROL"
+                                                                         ],
+                                                          "disadvantages":  [
+                                                                                "INTERMITTENT_FORCE",
+                                                                                "TIMING_CRITICAL",
+                                                                                "NOT_SUITABLE_FOR_HOLDING"
+                                                                            ]
+                                                      }
+                           },
+    "protection_features":  {
+                                "flyback_protection":  {
+                                                           "description":  "Protection against inductive voltage spikes",
+                                                           "implementation":  [
+                                                                                  "FLYBACK_DIODE",
+                                                                                  "TVS_DIODE",
+                                                                                  "VARISTOR"
+                                                                              ],
+                                                           "importance":  "CRITICAL_FOR_MOSFET_PROTECTION",
+                                                           "voltage_rating":  "1.5_TO_2_TIMES_SUPPLY_VOLTAGE"
+                                                       },
+                                "thermal_protection":  {
+                                                           "description":  "Overtemperature protection for coil and driver",
+                                                           "implementation":  [
+                                                                                  "THERMAL_SENSOR",
+                                                                                  "CURRENT_LIMITING",
+                                                                                  "SHUTDOWN"
+                                                                              ],
+                                                           "threshold":  "COIL_RATED_TEMPERATURE_PLUS_20C",
+                                                           "action":  [
+                                                                          "WARNING",
+                                                                          "CURRENT_REDUCTION",
+                                                                          "SHUTDOWN"
+                                                                      ]
+                                                       },
+                                "overcurrent_protection":  {
+                                                               "description":  "Protection against excessive coil current",
+                                                               "implementation":  [
+                                                                                      "CURRENT_SENSE_RESISTOR",
+                                                                                      "COMPARATOR",
+                                                                                      "SHUTDOWN"
+                                                                                  ],
+                                                               "threshold":  "110_TO_150_PERCENT_RATED_CURRENT",
+                                                               "response_time":  "1us_TO_10us"
+                                                           },
+                                "undervoltage_lockout":  {
+                                                             "description":  "Protection against insufficient supply voltage",
+                                                             "threshold":  "85_TO_90_PERCENT_NOMINAL_VOLTAGE",
+                                                             "action":  "DISABLE_MAGNET_OPERATION",
+                                                             "hysteresis":  "5_TO_10_PERCENT"
+                                                         }
+                            },
+    "manufacturer_pin_mappings":  {
+                                      "relay_module":  {
+                                                           "magnet_control":  [
+                                                                                  "IN",
+                                                                                  "SIGNAL",
+                                                                                  "TRIGGER"
+                                                                              ],
+                                                           "coil_plus":  [
+                                                                             "COM",
+                                                                             "NO"
+                                                                         ],
+                                                           "coil_minus":  [
+                                                                              "NC",
+                                                                              "COMMON"
+                                                                          ],
+                                                           "power":  [
+                                                                         "VCC",
+                                                                         "GND"
+                                                                     ]
+                                                       },
+                                      "mosfet_driver":  {
+                                                            "magnet_control":  [
+                                                                                   "GATE",
+                                                                                   "IN",
+                                                                                   "CONTROL"
+                                                                               ],
+                                                            "coil_plus":  [
+                                                                              "DRAIN",
+                                                                              "OUT+"
+                                                                          ],
+                                                            "coil_minus":  [
+                                                                               "SOURCE",
+                                                                               "OUT-"
+                                                                           ],
+                                                            "enable":  [
+                                                                           "EN",
+                                                                           "ENABLE"
+                                                                       ]
+                                                        },
+                                      "irf520_module":  {
+                                                            "magnet_control":  [
+                                                                                   "SIG",
+                                                                                   "SIGNAL"
+                                                                               ],
+                                                            "coil_plus":  [
+                                                                              "V+",
+                                                                              "VIN"
+                                                                          ],
+                                                            "coil_minus":  [
+                                                                               "V-",
+                                                                               "VOUT"
+                                                                           ],
+                                                            "power":  [
+                                                                          "VCC",
+                                                                          "GND"
+                                                                      ]
+                                                        },
+                                      "l298n_magnet":  {
+                                                           "magnet_control":  [
+                                                                                  "IN1",
+                                                                                  "IN2"
+                                                                              ],
+                                                           "coil_plus":  [
+                                                                             "OUT1"
+                                                                         ],
+                                                           "coil_minus":  [
+                                                                              "OUT2"
+                                                                          ],
+                                                           "enable":  [
+                                                                          "ENA"
+                                                                      ],
+                                                           "power":  [
+                                                                         "12V",
+                                                                         "GND"
+                                                                     ]
+                                                       }
+                                  },
+    "application_examples":  {
+                                 "gripper_fingers":  {
+                                                         "magnet_type":  "HOLDING_ELECTROMAGNET",
+                                                         "holding_force":  "100N",
+                                                         "voltage":  "12V",
+                                                         "current":  "2A",
+                                                         "duty_cycle":  "100_PERCENT_CONTINUOUS",
+                                                         "use_case":  "MAGNETIC_GRIPPER_HOLDING"
+                                                     },
+                                 "door_lock":  {
+                                                   "magnet_type":  "SOLENOID_ELECTROMAGNET",
+                                                   "force":  "50N",
+                                                   "stroke":  "15mm",
+                                                   "voltage":  "24V",
+                                                   "current":  "1.5A",
+                                                   "duty_cycle":  "10_PERCENT_INTERMITTENT",
+                                                   "use_case":  "MAGNETIC_DOOR_LOCK_RELEASE"
+                                               },
+                                 "jaw_latch":  {
+                                                   "magnet_type":  "HOLDING_ELECTROMAGNET",
+                                                   "holding_force":  "200N",
+                                                   "voltage":  "24V",
+                                                   "current":  "3A",
+                                                   "duty_cycle":  "50_PERCENT",
+                                                   "use_case":  "JAW_LOCKING_MECHANISM"
+                                               },
+                                 "magnetic_coupling":  {
+                                                           "magnet_type":  "LIFTING_ELECTROMAGNET",
+                                                           "holding_force":  "500N",
+                                                           "voltage":  "48V",
+                                                           "current":  "10A",
+                                                           "duty_cycle":  "25_PERCENT",
+                                                           "use_case":  "DETACHABLE_LIMB_CONNECTION"
+                                                       },
+                                 "emergency_brake":  {
+                                                         "magnet_type":  "HOLDING_ELECTROMAGNET",
+                                                         "holding_force":  "1000N",
+                                                         "voltage":  "24V",
+                                                         "current":  "8A",
+                                                         "duty_cycle":  "FAILSAFE_NORMALLY_ENGAGED",
+                                                         "use_case":  "SAFETY_BRAKE_SYSTEM"
+                                                     }
+                             }
 }

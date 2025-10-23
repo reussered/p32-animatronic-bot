@@ -1,48 +1,44 @@
-{
-  "relative_filename": "config/components/system/wifi_station.json",
-  "version": "3.0.0",
-  "author": "config/author.json",
-  
-  "component_name": "wifi_station",
-  "component_type": "SYSTEM_LEVEL",
-  "description": "WiFi station connectivity for cloud integration and remote control",
-  "created": "2025-10-15",
-  
-  "timing": {
-    "hitCount": 50,
-    "description": "WiFi status check every 5 seconds"
-  },
-  
-  "system_requirements": {
-    "min_controller": "ESP32_S3",
-    "required_features": ["WIFI_STA"],
-    "memory_footprint_kb": "128",
-    "cpu_usage_percent": "2-5"
-  },
-  
-  "wifi_configuration": {
-    "mode": "STATION",
-    "auto_connect": true,
-    "reconnect_interval_ms": 30000,
-    "max_reconnect_attempts": 10,
-    "power_save_mode": "MODEM_SLEEP"
-  },
-  
-  "network_services": {
-    "dhcp_client": true,
-    "static_ip_fallback": true,
-    "dns_enabled": true,
-    "ntp_sync": true,
-    "mdns_responder": true
-  },
-  
-  "responsibilities": [
-    "Connect to WiFi access point",
-    "Maintain persistent connection",
-    "Handle reconnection on signal loss",
-    "Manage IP address configuration",
-    "Sync system time via NTP",
-    "Provide mDNS discovery",
-    "Report connection status to telemetry"
-  ]
+﻿{
+    "relative_filename":  "config/components/system/wifi_station.json",
+    "version":  "3.0.0",
+    "author":  "config/author.json",
+    "component_name":  "wifi_station",
+    "component_type":  "SYSTEM_LEVEL",
+    "description":  "WiFi station connectivity for cloud integration and remote control",
+    "created":  "2025-10-15",
+    "timing":  {
+                   "hitCount":  50,
+                   "description":  "WiFi status check every 5 seconds"
+               },
+    "system_requirements":  {
+                                "min_controller":  "ESP32_S3",
+                                "required_features":  [
+                                                          "WIFI_STA"
+                                                      ],
+                                "memory_footprint_kb":  "128",
+                                "cpu_usage_percent":  "2-5"
+                            },
+    "wifi_configuration":  {
+                               "mode":  "STATION",
+                               "auto_connect":  true,
+                               "reconnect_interval_ms":  30000,
+                               "max_reconnect_attempts":  10,
+                               "power_save_mode":  "MODEM_SLEEP"
+                           },
+    "network_services":  {
+                             "dhcp_client":  true,
+                             "static_ip_fallback":  true,
+                             "dns_enabled":  true,
+                             "ntp_sync":  true,
+                             "mdns_responder":  true
+                         },
+    "responsibilities":  [
+                             "Connect to WiFi access point",
+                             "Maintain persistent connection",
+                             "Handle reconnection on signal loss",
+                             "Manage IP address configuration",
+                             "Sync system time via NTP",
+                             "Provide mDNS discovery",
+                             "Report connection status to telemetry"
+                         ]
 }

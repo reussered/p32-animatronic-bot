@@ -1,83 +1,38 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin/arm_components/left/wrist_flexion_servo.json", 
-
-  "version": "2.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "wrist_flexion_servo_left",
-  "subsystem": "ARM",
-
-  
-
-  "template_inheritance": {
-
-    "hardware_template": "config/components/hardware/servo_sg90_micro.json",
-
-    "creature_shell": "assets/shapes/scad/creature_shells/goblin/wrist_flexion_mount.scad",
-
-    "mount_template": "assets/shapes/scad/basic_mounts/servo_micro_mount.scad"
-
-  },
-
-  
-
-  "interface_assignment": "PWM_CHANNEL_6",
-
-  "coordinate_system": "humanoid_3d",
-
-  "reference_point": "shoulder_socket_left", 
-
-  "position": {
-
-    "x": "0 INCH",
-
-    "y": "-19.0 INCH",
-
-    "z": "0 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "0 DEGREES",
-
-    "rotation": "0 DEGREES", 
-
-    "roll": "0 DEGREES"
-
-  },
-
-  
-
-  "servo_specific_config": {
-
-    "joint_type": "WRIST_FLEXION_EXTENSION",
-
-    "range_degrees": "90",
-
-    "center_position": "90",
-
-    "movement_direction": "UP_DOWN", 
-
-    "max_torque_required_kg_cm": "3"
-
-  },
-
-  
-
-  "function": "wrist_articulation",
-
-  "component_name": "goblin_left_wrist_flexion",
-  "subsystem": "ARM",
-
-  "description": "Left wrist flexion/extension servo - hand positioning",
-
-  "timing": {
-
-    "hitCount": 12
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/arm_components/left/wrist_flexion_servo.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_left_wrist_flexion",
+    "subsystem":  "ARM",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/servo_sg90_micro.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/goblin/wrist_flexion_mount.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/servo_micro_mount.scad"
+                             },
+    "interface_assignment":  "PWM_CHANNEL_6",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "shoulder_socket_left",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "-19.0 INCH",
+                     "z":  "0 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "servo_specific_config":  {
+                                  "joint_type":  "WRIST_FLEXION_EXTENSION",
+                                  "range_degrees":  "90",
+                                  "center_position":  "90",
+                                  "movement_direction":  "UP_DOWN",
+                                  "max_torque_required_kg_cm":  "3"
+                              },
+    "function":  "wrist_articulation",
+    "description":  "Left wrist flexion/extension servo - hand positioning",
+    "timing":  {
+                   "hitCount":  12
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

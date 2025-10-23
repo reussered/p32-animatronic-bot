@@ -1,105 +1,155 @@
-{
-  "relative_filename": "config/bots/steampunk_aristocrat_001.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "bot_type": "STEAMPUNK_ARISTOCRAT_001",
-  "family_reference": "config/bots/bot_families/mechanical/steampunk_family.json",
-  "subfamily": "aristocrat",
-  "description": "Victorian-era aristocratic automaton with elaborate steam mechanisms and refined social behaviors",
-  "created": "2025-10-12",
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "baseline_dimensions": {
-    "eye_spacing": "2.6 INCH",
-    "compression_factor": 0.85,
-    "skull_scale": 1.1
-  },
-  
-  "components": [
-    "config/components/positioned/steampunk_eye_left_aristocrat.json",
-    "config/components/positioned/steampunk_eye_right_aristocrat.json", 
-    "config/components/positioned/steampunk_mouth_aristocrat.json",
-    "config/components/positioned/steampunk_speaker_aristocrat.json"
-  ],
-  
-  "mood_profile": {
-    "FEAR": 5,
-    "ANGER": 10,
-    "IRRITATION": 20,
-    "HAPPINESS": 25,
-    "CONTENTMENT": 35,
-    "HUNGER": 0,
-    "CURIOSITY": 20,
-    "AFFECTION": 5
-  },
-  
-  "behavior_config": {
-    "threat_response_enabled": true,
-    "auto_sleep_timeout_seconds": 1800,
-    "interaction_range_cm": 200,
-    "aggressive_threshold": 90,
-    "movement_style": "refined_mechanical",
-    "attention_span_seconds": 300,
-    "social_protocols": "victorian_etiquette"
-  },
-  
-  "specialized_components": {
-    "steam_venting_system": {
-      "description": "Pressurized steam release system with brass valves creating authentic Victorian-era automation effects",
-      "implementation": "Electric steam generator with brass valve assemblies and pressure regulation for dramatic venting sequences",
-      "venting_patterns": ["polite_exhale", "contemplative_sigh", "indignant_huff", "mechanical_reset"]
-    },
-    "clockwork_precision_actuators": {
-      "description": "Visible gear and clockwork mechanisms that create precise, mechanical movement patterns",
-      "implementation": "Exposed brass gearing with servo-driven movement creating authentic clockwork automation appearance",
-      "movement_styles": ["aristocratic_precision", "mechanical_grace", "calculated_gestures", "refined_automation"]
-    },
-    "pressure_gauge_display": {
-      "description": "Functional pressure gauges and steam indicators showing internal automation status",
-      "implementation": "Analog gauge faces with servo-driven needles displaying system pressure, temperature, and operational status",
-      "status_indicators": ["steam_pressure", "boiler_temperature", "mechanical_stress", "automation_efficiency"]
-    },
-    "brass_ornamental_system": {
-      "description": "Elaborate brass decorative elements with moving parts and Victorian aesthetic details",
-      "implementation": "Hand-crafted brass fittings with servo-actuated ornamental elements creating dynamic aristocratic presentation",
-      "decorative_elements": ["rotating_monocle", "articulated_pocket_watch", "adjustable_top_hat", "mechanical_cufflinks"]
-    },
-    "social_protocol_processor": {
-      "description": "Advanced AI system programmed with Victorian-era social etiquette and aristocratic mannerisms",
-      "implementation": "Natural language processing with period-appropriate vocabulary and behavioral response patterns",
-      "social_behaviors": ["formal_greetings", "polite_conversation", "aristocratic_mannerisms", "class_consciousness"]
-    },
-    "mechanical_tea_service": {
-      "description": "Articulated serving system capable of simulating proper Victorian tea ceremony protocols",
-      "implementation": "Precision servo cluster with tea service simulation including cup positioning, pouring motions, and proper etiquette",
-      "service_functions": ["cup_presentation", "pouring_simulation", "sugar_offering", "proper_disposal"]
-    }
-  },
-  
-  "audio_profile": {
-    "primary_sounds": ["steam_hissing", "gear_clicking", "brass_chiming", "mechanical_breathing"],
-    "social_sounds": ["polite_coughing", "mechanical_clearing_throat", "brass_bell_ringing", "clockwork_chiming"],
-    "ambient_sounds": ["pressure_release", "gear_meshing", "steam_circulation", "brass_resonance"],
-    "volume_range": [35, 70],
-    "frequency_preference": "warm_mechanical",
-    "aristocratic_accent": true
-  },
-  
-  "aesthetic_customizations": {
-    "brass_finish": "polished_antique",
-    "clockwork_visibility": "prominently_displayed",
-    "color_variations": ["brass_primary", "copper_accents", "mahogany_details", "crystal_elements"],
-    "texture_details": ["engraved_patterns", "mechanical_precision", "victorian_ornamentation", "steam_patina"]
-  },
-  
-  "construction_preference": "hard_shell",
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Aristocratic steampunk variant emphasizing refined Victorian automation and social protocols",
-    "Specialized components create authentic steam-powered mechanisms with aristocratic presentation",
-    "Advanced social AI systems provide period-appropriate interaction and etiquette behaviors",
-    "Designed for historical demonstrations, theatrical productions, and immersive Victorian experiences"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/steampunk/steampunk_aristocrat_001.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "STEAMPUNK_ARISTOCRAT_001",
+    "family_reference":  "config/bots/bot_families/mechanical/steampunk_family.json",
+    "subfamily":  "aristocrat",
+    "description":  "Victorian-era aristocratic automaton with elaborate steam mechanisms and refined social behaviors",
+    "created":  "2025-10-12",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "2.6 INCH",
+                                "compression_factor":  0.85,
+                                "skull_scale":  1.1
+                            },
+    "components":  [
+                       "config/components/positioned/steampunk_eye_left_aristocrat.json",
+                       "config/components/positioned/steampunk_eye_right_aristocrat.json",
+                       "config/components/positioned/steampunk_mouth_aristocrat.json",
+                       "config/components/positioned/steampunk_speaker_aristocrat.json"
+                   ],
+    "mood_profile":  {
+                         "FEAR":  5,
+                         "ANGER":  10,
+                         "IRRITATION":  20,
+                         "HAPPINESS":  25,
+                         "CONTENTMENT":  35,
+                         "HUNGER":  0,
+                         "CURIOSITY":  20,
+                         "AFFECTION":  5
+                     },
+    "behavior_config":  {
+                            "threat_response_enabled":  true,
+                            "auto_sleep_timeout_seconds":  1800,
+                            "interaction_range_cm":  200,
+                            "aggressive_threshold":  90,
+                            "movement_style":  "refined_mechanical",
+                            "attention_span_seconds":  300,
+                            "social_protocols":  "victorian_etiquette"
+                        },
+    "specialized_components":  {
+                                   "steam_venting_system":  {
+                                                                "description":  "Pressurized steam release system with brass valves creating authentic Victorian-era automation effects",
+                                                                "implementation":  "Electric steam generator with brass valve assemblies and pressure regulation for dramatic venting sequences",
+                                                                "venting_patterns":  [
+                                                                                         "polite_exhale",
+                                                                                         "contemplative_sigh",
+                                                                                         "indignant_huff",
+                                                                                         "mechanical_reset"
+                                                                                     ]
+                                                            },
+                                   "clockwork_precision_actuators":  {
+                                                                         "description":  "Visible gear and clockwork mechanisms that create precise, mechanical movement patterns",
+                                                                         "implementation":  "Exposed brass gearing with servo-driven movement creating authentic clockwork automation appearance",
+                                                                         "movement_styles":  [
+                                                                                                 "aristocratic_precision",
+                                                                                                 "mechanical_grace",
+                                                                                                 "calculated_gestures",
+                                                                                                 "refined_automation"
+                                                                                             ]
+                                                                     },
+                                   "pressure_gauge_display":  {
+                                                                  "description":  "Functional pressure gauges and steam indicators showing internal automation status",
+                                                                  "implementation":  "Analog gauge faces with servo-driven needles displaying system pressure, temperature, and operational status",
+                                                                  "status_indicators":  [
+                                                                                            "steam_pressure",
+                                                                                            "boiler_temperature",
+                                                                                            "mechanical_stress",
+                                                                                            "automation_efficiency"
+                                                                                        ]
+                                                              },
+                                   "brass_ornamental_system":  {
+                                                                   "description":  "Elaborate brass decorative elements with moving parts and Victorian aesthetic details",
+                                                                   "implementation":  "Hand-crafted brass fittings with servo-actuated ornamental elements creating dynamic aristocratic presentation",
+                                                                   "decorative_elements":  [
+                                                                                               "rotating_monocle",
+                                                                                               "articulated_pocket_watch",
+                                                                                               "adjustable_top_hat",
+                                                                                               "mechanical_cufflinks"
+                                                                                           ]
+                                                               },
+                                   "social_protocol_processor":  {
+                                                                     "description":  "Advanced AI system programmed with Victorian-era social etiquette and aristocratic mannerisms",
+                                                                     "implementation":  "Natural language processing with period-appropriate vocabulary and behavioral response patterns",
+                                                                     "social_behaviors":  [
+                                                                                              "formal_greetings",
+                                                                                              "polite_conversation",
+                                                                                              "aristocratic_mannerisms",
+                                                                                              "class_consciousness"
+                                                                                          ]
+                                                                 },
+                                   "mechanical_tea_service":  {
+                                                                  "description":  "Articulated serving system capable of simulating proper Victorian tea ceremony protocols",
+                                                                  "implementation":  "Precision servo cluster with tea service simulation including cup positioning, pouring motions, and proper etiquette",
+                                                                  "service_functions":  [
+                                                                                            "cup_presentation",
+                                                                                            "pouring_simulation",
+                                                                                            "sugar_offering",
+                                                                                            "proper_disposal"
+                                                                                        ]
+                                                              }
+                               },
+    "audio_profile":  {
+                          "primary_sounds":  [
+                                                 "steam_hissing",
+                                                 "gear_clicking",
+                                                 "brass_chiming",
+                                                 "mechanical_breathing"
+                                             ],
+                          "social_sounds":  [
+                                                "polite_coughing",
+                                                "mechanical_clearing_throat",
+                                                "brass_bell_ringing",
+                                                "clockwork_chiming"
+                                            ],
+                          "ambient_sounds":  [
+                                                 "pressure_release",
+                                                 "gear_meshing",
+                                                 "steam_circulation",
+                                                 "brass_resonance"
+                                             ],
+                          "volume_range":  [
+                                               35,
+                                               70
+                                           ],
+                          "frequency_preference":  "warm_mechanical",
+                          "aristocratic_accent":  true
+                      },
+    "aesthetic_customizations":  {
+                                     "brass_finish":  "polished_antique",
+                                     "clockwork_visibility":  "prominently_displayed",
+                                     "color_variations":  [
+                                                              "brass_primary",
+                                                              "copper_accents",
+                                                              "mahogany_details",
+                                                              "crystal_elements"
+                                                          ],
+                                     "texture_details":  [
+                                                             "engraved_patterns",
+                                                             "mechanical_precision",
+                                                             "victorian_ornamentation",
+                                                             "steam_patina"
+                                                         ]
+                                 },
+    "construction_preference":  "hard_shell",
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Aristocratic steampunk variant emphasizing refined Victorian automation and social protocols",
+                  "Specialized components create authentic steam-powered mechanisms with aristocratic presentation",
+                  "Advanced social AI systems provide period-appropriate interaction and etiquette behaviors",
+                  "Designed for historical demonstrations, theatrical productions, and immersive Victorian experiences"
+              ]
 }

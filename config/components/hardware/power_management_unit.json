@@ -1,0 +1,28 @@
+﻿{
+    "version":  "1.0.0",
+    "specifications":  {
+                           "efficiency":  "85%",
+                           "output_voltages":  [
+                                                   "5V",
+                                                   "3.3V"
+                                               ],
+                           "input_voltage":  "7-30V",
+                           "power_consumption":  {
+                                                     "voltage":  "12V",
+                                                     "current_draw":  "50mA",
+                                                     "power_watts":  "0.6W"
+                                                 },
+                           "max_current":  "5A"
+                       },
+    "component_name":  "power_management_unit",
+    "relative_filename":  "config/components/hardware/power_management_unit.json",
+    "description":  "Battery management and power distribution system",
+    "cost_performance":  {
+                             "lead_time_days":  10,
+                             "availability":  "COMMON",
+                             "unit_cost_usd":  89.99,
+                             "last_updated":  "2025-10-22"
+                         },
+    "author":  "config/author.json",
+    "hardware_type":  "POWER_MANAGEMENT"
+}

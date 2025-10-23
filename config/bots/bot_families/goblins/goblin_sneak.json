@@ -1,172 +1,192 @@
-{
-  "relative_filename": "config/bots/goblin_sneak.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
-  "bot_type": "GOBLINSNEAK",
-  "bot_id": "goblin_sneak_v1",
-  "description": "Cave-dwelling goblin sneak with minimal sounds and extreme cautious behaviors",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "cave_goblin",
-  
-  "overrides": {
-    "mood_defaults": {
-      "FEAR": 35,
-      "ANGER": 3,
-      "IRRITATION": 20,
-      "HAPPINESS": 2,
-      "CONTENTMENT": 5,
-      "HUNGER": 25,
-      "CURIOSITY": 10,
-      "AFFECTION": 0
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 800,
-      "interaction_range_cm": 80,
-      "aggressive_threshold": 95,
-      "calm_threshold": 80,
-      "stealth_master": true,
-      "shadow_preference": true,
-      "minimal_interaction": true,
-      "survival_instinct": "maximum"
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "cave_pale_gray",
-      "weathering_effects": true,
-      "cave_adaptations": {
-        "enlarged_night_eyes": true,
-        "pale_translucent_skin": true,
-        "malnutrition_appearance": true,
-        "shadow_camouflage": true,
-        "scurrying_posture": true,
-        "nervous_twitches": true
-      },
-      "size_modifier": 0.8,
-      "light_sensitivity": "extreme"
-    },
-    
-    "sound_characteristics": {
-      "voice_pitch": "barely_whisper",
-      "breathing_pattern": "shallow_quiet",
-      "stealth_sounds": ["soft_scurry", "cautious_step", "nervous_gulp"],
-      "fear_sounds": ["frightened_squeak", "panic_breath", "terror_whimper"],
-      "idle_sounds": ["hungry_stomach", "anxious_scratch", "shadow_listen"],
-      "ambient_volume": 0.1,
-      "reaction_volume": 0.3,
-      "silence_mastery": true
-    },
-    
-    "animation_style": {
-      "movement_speed": "quick_darting",
-      "eye_tracking": "paranoid_scanning",
-      "idle_behaviors": ["shadow_hiding", "nervous_watching", "hunger_search"],
-      "threat_responses": ["instant_freeze", "panic_flee", "shadow_meld"],
-      "expression_intensity": "minimal_survival"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/goblin_enlarged_eyes.json",
-    "config/components/positioned/goblin_pale_skin.json",
-    "config/components/positioned/goblin_shadow_sensors.json",
-    "config/components/positioned/goblin_malnutrition_features.json"
-  ],
-  
-  "custom_behaviors": {
-    "shadow_meld": {
-      "trigger": "light_exposure",
-      "eyes": "light_aversion_squint",
-      "mouth": "discomfort_grimace",
-      "sounds": ["shadow_seek"],
-      "duration_ms": 5000,
-      "priority": "critical",
-      "stealth_enhancement": true
-    },
-    "hunger_desperation": {
-      "trigger": "extended_idle",
-      "eyes": "desperate_search",
-      "mouth": "hunger_pant",
-      "sounds": ["stomach_growl", "desperate_whine"],
-      "duration_ms": 8000,
-      "priority": "high",
-      "survival_mode": true
-    },
-    "paranoid_scan": {
-      "trigger": "any_movement",
-      "eyes": "rapid_dart_scan",
-      "mouth": "nervous_twitch",
-      "sounds": ["danger_assess"],
-      "duration_ms": 3000,
-      "priority": "high",
-      "hypervigilance": true
-    },
-    "panic_freeze": {
-      "trigger": "sudden_threat",
-      "eyes": "terror_wide",
-      "mouth": "fear_lock",
-      "sounds": ["panic_hold_breath"],
-      "duration_ms": 4000,
-      "priority": "critical",
-      "immobilization": true
-    },
-    "scavenge_opportunity": {
-      "trigger": "resource_detected",
-      "eyes": "opportunistic_gleam",
-      "mouth": "careful_approach",
-      "sounds": ["cautious_approach"],
-      "duration_ms": 6000,
-      "priority": "medium",
-      "resource_evaluation": true
-    }
-  },
-  
-  "survival_adaptations": {
-    "cave_dwelling": {
-      "light_sensitivity": "extreme",
-      "night_vision": "enhanced",
-      "sound_dampening": "natural",
-      "echo_navigation": true
-    },
-    "malnutrition_effects": {
-      "energy_conservation": "maximum",
-      "resource_hoarding": true,
-      "opportunistic_feeding": true,
-      "starvation_tolerance": "high"
-    },
-    "fear_responses": {
-      "flight_over_fight": true,
-      "freeze_camouflage": true,
-      "threat_avoidance": "expert",
-      "survival_paranoia": true
-    }
-  },
-  
-  "hardware_config": {
-    "i2s_sample_rate": 22050,
-    "display_update_rate_fps": 15,
-    "sensor_poll_rate_hz": 25,
-    "power_management": "survival_mode",
-    "audio_amplification": 0.1,
-    "microphone_gain": 2.0,
-    "light_sensor_sensitivity": "maximum",
-    "motion_detection_range": "close_proximity"
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Inherits from goblin_family.json with cave_goblin subfamily",
-    "Extreme fear-based personality with survival focus",
-    "Minimal audio output for stealth operation",
-    "Enhanced motion detection for threat awareness",
-    "Cave adaptation features with light sensitivity",
-    "Malnutrition aesthetic reflecting harsh survival",
-    "Power management optimized for extended hiding",
-    "Hypervigilant sensor configuration for paranoid scanning"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_sneak.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "bot_type":  "GOBLINSNEAK",
+    "bot_id":  "goblin_sneak_v1",
+    "description":  "Cave-dwelling goblin sneak with minimal sounds and extreme cautious behaviors",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "cave_goblin",
+    "overrides":  {
+                      "mood_defaults":  {
+                                            "FEAR":  35,
+                                            "ANGER":  3,
+                                            "IRRITATION":  20,
+                                            "HAPPINESS":  2,
+                                            "CONTENTMENT":  5,
+                                            "HUNGER":  25,
+                                            "CURIOSITY":  10,
+                                            "AFFECTION":  0
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  true,
+                                              "auto_sleep_timeout_seconds":  800,
+                                              "interaction_range_cm":  80,
+                                              "aggressive_threshold":  95,
+                                              "calm_threshold":  80,
+                                              "stealth_master":  true,
+                                              "shadow_preference":  true,
+                                              "minimal_interaction":  true,
+                                              "survival_instinct":  "maximum"
+                                          },
+                      "aesthetic_profile":  {
+                                                "color_scheme":  "cave_pale_gray",
+                                                "weathering_effects":  true,
+                                                "cave_adaptations":  {
+                                                                         "enlarged_night_eyes":  true,
+                                                                         "pale_translucent_skin":  true,
+                                                                         "malnutrition_appearance":  true,
+                                                                         "shadow_camouflage":  true,
+                                                                         "scurrying_posture":  true,
+                                                                         "nervous_twitches":  true
+                                                                     },
+                                                "size_modifier":  0.8,
+                                                "light_sensitivity":  "extreme"
+                                            },
+                      "sound_characteristics":  {
+                                                    "voice_pitch":  "barely_whisper",
+                                                    "breathing_pattern":  "shallow_quiet",
+                                                    "stealth_sounds":  [
+                                                                           "soft_scurry",
+                                                                           "cautious_step",
+                                                                           "nervous_gulp"
+                                                                       ],
+                                                    "fear_sounds":  [
+                                                                        "frightened_squeak",
+                                                                        "panic_breath",
+                                                                        "terror_whimper"
+                                                                    ],
+                                                    "idle_sounds":  [
+                                                                        "hungry_stomach",
+                                                                        "anxious_scratch",
+                                                                        "shadow_listen"
+                                                                    ],
+                                                    "ambient_volume":  0.1,
+                                                    "reaction_volume":  0.3,
+                                                    "silence_mastery":  true
+                                                },
+                      "animation_style":  {
+                                              "movement_speed":  "quick_darting",
+                                              "eye_tracking":  "paranoid_scanning",
+                                              "idle_behaviors":  [
+                                                                     "shadow_hiding",
+                                                                     "nervous_watching",
+                                                                     "hunger_search"
+                                                                 ],
+                                              "threat_responses":  [
+                                                                       "instant_freeze",
+                                                                       "panic_flee",
+                                                                       "shadow_meld"
+                                                                   ],
+                                              "expression_intensity":  "minimal_survival"
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/goblin_enlarged_eyes.json",
+                                  "config/components/positioned/goblin_pale_skin.json",
+                                  "config/components/positioned/goblin_shadow_sensors.json",
+                                  "config/components/positioned/goblin_malnutrition_features.json"
+                              ],
+    "custom_behaviors":  {
+                             "shadow_meld":  {
+                                                 "trigger":  "light_exposure",
+                                                 "eyes":  "light_aversion_squint",
+                                                 "mouth":  "discomfort_grimace",
+                                                 "sounds":  [
+                                                                "shadow_seek"
+                                                            ],
+                                                 "duration_ms":  5000,
+                                                 "priority":  "critical",
+                                                 "stealth_enhancement":  true
+                                             },
+                             "hunger_desperation":  {
+                                                        "trigger":  "extended_idle",
+                                                        "eyes":  "desperate_search",
+                                                        "mouth":  "hunger_pant",
+                                                        "sounds":  [
+                                                                       "stomach_growl",
+                                                                       "desperate_whine"
+                                                                   ],
+                                                        "duration_ms":  8000,
+                                                        "priority":  "high",
+                                                        "survival_mode":  true
+                                                    },
+                             "paranoid_scan":  {
+                                                   "trigger":  "any_movement",
+                                                   "eyes":  "rapid_dart_scan",
+                                                   "mouth":  "nervous_twitch",
+                                                   "sounds":  [
+                                                                  "danger_assess"
+                                                              ],
+                                                   "duration_ms":  3000,
+                                                   "priority":  "high",
+                                                   "hypervigilance":  true
+                                               },
+                             "panic_freeze":  {
+                                                  "trigger":  "sudden_threat",
+                                                  "eyes":  "terror_wide",
+                                                  "mouth":  "fear_lock",
+                                                  "sounds":  [
+                                                                 "panic_hold_breath"
+                                                             ],
+                                                  "duration_ms":  4000,
+                                                  "priority":  "critical",
+                                                  "immobilization":  true
+                                              },
+                             "scavenge_opportunity":  {
+                                                          "trigger":  "resource_detected",
+                                                          "eyes":  "opportunistic_gleam",
+                                                          "mouth":  "careful_approach",
+                                                          "sounds":  [
+                                                                         "cautious_approach"
+                                                                     ],
+                                                          "duration_ms":  6000,
+                                                          "priority":  "medium",
+                                                          "resource_evaluation":  true
+                                                      }
+                         },
+    "survival_adaptations":  {
+                                 "cave_dwelling":  {
+                                                       "light_sensitivity":  "extreme",
+                                                       "night_vision":  "enhanced",
+                                                       "sound_dampening":  "natural",
+                                                       "echo_navigation":  true
+                                                   },
+                                 "malnutrition_effects":  {
+                                                              "energy_conservation":  "maximum",
+                                                              "resource_hoarding":  true,
+                                                              "opportunistic_feeding":  true,
+                                                              "starvation_tolerance":  "high"
+                                                          },
+                                 "fear_responses":  {
+                                                        "flight_over_fight":  true,
+                                                        "freeze_camouflage":  true,
+                                                        "threat_avoidance":  "expert",
+                                                        "survival_paranoia":  true
+                                                    }
+                             },
+    "hardware_config":  {
+                            "i2s_sample_rate":  22050,
+                            "display_update_rate_fps":  15,
+                            "sensor_poll_rate_hz":  25,
+                            "power_management":  "survival_mode",
+                            "audio_amplification":  0.1,
+                            "microphone_gain":  2.0,
+                            "light_sensor_sensitivity":  "maximum",
+                            "motion_detection_range":  "close_proximity"
+                        },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Inherits from goblin_family.json with cave_goblin subfamily",
+                  "Extreme fear-based personality with survival focus",
+                  "Minimal audio output for stealth operation",
+                  "Enhanced motion detection for threat awareness",
+                  "Cave adaptation features with light sensitivity",
+                  "Malnutrition aesthetic reflecting harsh survival",
+                  "Power management optimized for extended hiding",
+                  "Hypervigilant sensor configuration for paranoid scanning"
+              ]
 }

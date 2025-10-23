@@ -1,49 +1,78 @@
-{
-    "relative_filename": "config/bots/cat_house_tabby_001.json",
-    "version": "2.1.0",
-    "author": "config/author.json",
-    "bot_type": "CAT_HOUSE_TABBY",
-    "inherits_family": "cat_family",
-    "bot_name": "Whiskers the Friendly",
-    "description": "A domestic house cat with orange tabby markings. Affectionate, playful, and loves attention from humans.",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "eye_spacing": "2.2 INCH",
-    "scale_factor": 0.8,
-    "default_mood": "CONTENTMENT",
-    "mood_defaults": {
-        "FEAR": {"duration_ms": 3000, "intensity": 0.7},
-        "ANGER": {"duration_ms": 5000, "intensity": 0.6},
-        "IRRITATION": {"duration_ms": 4000, "intensity": 0.5},
-        "HAPPINESS": {"duration_ms": 15000, "intensity": 0.9},
-        "CONTENTMENT": {"duration_ms": 25000, "intensity": 0.95},
-        "HUNGER": {"duration_ms": 12000, "intensity": 0.8},
-        "CURIOSITY": {"duration_ms": 8000, "intensity": 0.85},
-        "AFFECTION": {"duration_ms": 18000, "intensity": 0.9}
-    },
-    "personality_traits": {
-        "aggression_level": 0.2,
-        "curiosity_level": 0.8,
-        "sociability_level": 0.9,
-        "energy_level": 0.7,
-        "playfulness": 0.9,
-        "affection_seeking": 0.85
-    },
-    "behavior_config": {
-        "proximity_alert_distance": "50 CM",
-        "proximity_interact_distance": "15 CM",
-        "interaction_timeout": "10000 MS",
-        "sleep_mode_timeout": "90000 MS"
-    },
-    "audio_profile": {
-        "ambient_sounds": ["cat_purring.wav", "gentle_meow.wav"],
-        "reaction_sounds": {
-            "happy": "happy_purr_meow.wav",
-            "angry": "cat_hiss_angry.wav",
-            "curious": "questioning_meow.wav",
-            "afraid": "scared_cat_yowl.wav"
-        }
-    },
-    "component_count": 0,
-    "components": []
+﻿{
+    "relative_filename":  "config/bots/bot_families/cats/domestic/cat_house_tabby_001.json",
+    "version":  "2.1.0",
+    "author":  "config/author.json",
+    "bot_type":  "CAT_HOUSE_TABBY",
+    "inherits_family":  "cat_family",
+    "bot_name":  "Whiskers the Friendly",
+    "description":  "A domestic house cat with orange tabby markings. Affectionate, playful, and loves attention from humans.",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "2.2 INCH",
+    "scale_factor":  0.8,
+    "default_mood":  "CONTENTMENT",
+    "mood_defaults":  {
+                          "FEAR":  {
+                                       "duration_ms":  3000,
+                                       "intensity":  0.7
+                                   },
+                          "ANGER":  {
+                                        "duration_ms":  5000,
+                                        "intensity":  0.6
+                                    },
+                          "IRRITATION":  {
+                                             "duration_ms":  4000,
+                                             "intensity":  0.5
+                                         },
+                          "HAPPINESS":  {
+                                            "duration_ms":  15000,
+                                            "intensity":  0.9
+                                        },
+                          "CONTENTMENT":  {
+                                              "duration_ms":  25000,
+                                              "intensity":  0.95
+                                          },
+                          "HUNGER":  {
+                                         "duration_ms":  12000,
+                                         "intensity":  0.8
+                                     },
+                          "CURIOSITY":  {
+                                            "duration_ms":  8000,
+                                            "intensity":  0.85
+                                        },
+                          "AFFECTION":  {
+                                            "duration_ms":  18000,
+                                            "intensity":  0.9
+                                        }
+                      },
+    "personality_traits":  {
+                               "aggression_level":  0.2,
+                               "curiosity_level":  0.8,
+                               "sociability_level":  0.9,
+                               "energy_level":  0.7,
+                               "playfulness":  0.9,
+                               "affection_seeking":  0.85
+                           },
+    "behavior_config":  {
+                            "proximity_alert_distance":  "50 CM",
+                            "proximity_interact_distance":  "15 CM",
+                            "interaction_timeout":  "10000 MS",
+                            "sleep_mode_timeout":  "90000 MS"
+                        },
+    "audio_profile":  {
+                          "ambient_sounds":  [
+                                                 "cat_purring.wav",
+                                                 "gentle_meow.wav"
+                                             ],
+                          "reaction_sounds":  {
+                                                  "happy":  "happy_purr_meow.wav",
+                                                  "angry":  "cat_hiss_angry.wav",
+                                                  "curious":  "questioning_meow.wav",
+                                                  "afraid":  "scared_cat_yowl.wav"
+                                              }
+                      },
+    "component_count":  0,
+    "components":  [
+
+                   ]
 }

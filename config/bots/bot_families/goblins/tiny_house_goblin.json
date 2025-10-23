@@ -1,58 +1,54 @@
-{
-  "relative_filename": "config/bots/tiny_house_goblin.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  
-  "bot_type": "TINY_HOUSE_GOBLIN",
-  "bot_id": "tiny_house_goblin_v1", 
-  "description": "Tiny mischievous house goblin using unified proportional scaling",
-  
-  "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
-  "creature_variant": "tiny_goblin",
-  "horizontal_scale": "0.5",
-  "vertical_scale": "0.3",
-  
-  "calculated_dimensions": {
-    "total_height": "21.0 INCHES",
-    "shoulder_width": "9.0 INCHES", 
-    "head_height": "2.7 INCHES",
-    "leg_length": "10.5 INCHES",
-    "character": "EXTREMELY_COMPACT_DESK_COMPANION"
-  },
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "eye_spacing": "1.5 INCH",
-  
-  "components": [
-    "config/components/positioned/goblin_left_eye.json",
-    "config/components/positioned/goblin_right_eye.json", 
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_speaker.json",
-    "config/components/positioned/goblin_nose.json"
-  ],
-  
-  "servo_specifications": {
-    "primary_servos": "MG90S_MICRO_SERVOS_ONLY",
-    "stepper_motors": "NEMA14_SMALL_STEPPERS",
-    "power_system": "SINGLE_LIPO_3S_2200MAH"
-  },
-  
-  "mood_defaults": {
-    "FEAR": 5,
-    "ANGER": 5, 
-    "IRRITATION": 10,
-    "HAPPINESS": 30,
-    "CONTENTMENT": 40,
-    "HUNGER": 0,
-    "CURIOSITY": 60,
-    "AFFECTION": 20,
-    "MISCHIEF": 80
-  },
-  
-  "behavior_config": {
-    "movement_style": "QUICK_DARTING_MOVEMENTS",
-    "personality": "PLAYFUL_HELPFUL_CURIOUS",
-    "specializations": ["DESK_ORGANIZATION", "SMALL_OBJECT_MANIPULATION", "ENTERTAINMENT"]
-  }
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/tiny_house_goblin.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "TINY_HOUSE_GOBLIN",
+    "bot_id":  "tiny_house_goblin_v1",
+    "description":  "Tiny mischievous house goblin using unified proportional scaling",
+    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant":  "tiny_goblin",
+    "horizontal_scale":  "0.5",
+    "vertical_scale":  "0.3",
+    "calculated_dimensions":  {
+                                  "total_height":  "21.0 INCHES",
+                                  "shoulder_width":  "9.0 INCHES",
+                                  "head_height":  "2.7 INCHES",
+                                  "leg_length":  "10.5 INCHES",
+                                  "character":  "EXTREMELY_COMPACT_DESK_COMPANION"
+                              },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "1.5 INCH",
+    "components":  [
+                       "config/components/positioned/goblin_left_eye.json",
+                       "config/components/positioned/goblin_right_eye.json",
+                       "config/components/positioned/goblin_mouth.json",
+                       "config/components/positioned/goblin_speaker.json",
+                       "config/components/positioned/goblin_nose.json"
+                   ],
+    "servo_specifications":  {
+                                 "primary_servos":  "MG90S_MICRO_SERVOS_ONLY",
+                                 "stepper_motors":  "NEMA14_SMALL_STEPPERS",
+                                 "power_system":  "SINGLE_LIPO_3S_2200MAH"
+                             },
+    "mood_defaults":  {
+                          "FEAR":  5,
+                          "ANGER":  5,
+                          "IRRITATION":  10,
+                          "HAPPINESS":  30,
+                          "CONTENTMENT":  40,
+                          "HUNGER":  0,
+                          "CURIOSITY":  60,
+                          "AFFECTION":  20,
+                          "MISCHIEF":  80
+                      },
+    "behavior_config":  {
+                            "movement_style":  "QUICK_DARTING_MOVEMENTS",
+                            "personality":  "PLAYFUL_HELPFUL_CURIOUS",
+                            "specializations":  [
+                                                    "DESK_ORGANIZATION",
+                                                    "SMALL_OBJECT_MANIPULATION",
+                                                    "ENTERTAINMENT"
+                                                ]
+                        }
 }

@@ -1,177 +1,201 @@
-{
-  "relative_filename": "config/bots/goblin_chief.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
-  "bot_type": "GOBLINCHIEF",
-  "bot_id": "goblin_chief_v1",
-  "description": "Commanding goblin chief with leadership presence and territorial dominance",
-  "created": "2025-10-12",
-  
-  "template_inheritance": "extend",
-  "subfamily_selection": "warrior_goblin",
-  
-  "overrides": {
-    "baseline_dimensions": {
-      "eye_spacing": "3.5 INCH",
-      "compression_factor": 0.65,
-      "skull_scale": 1.3
-    },
-    
-    "mood_defaults": {
-      "FEAR": 2,
-      "ANGER": 22,
-      "IRRITATION": 18,
-      "HAPPINESS": 10,
-      "CONTENTMENT": 25,
-      "HUNGER": 13,
-      "CURIOSITY": 5,
-      "AFFECTION": 5
-    },
-    
-    "behavior_config": {
-      "threat_response_enabled": true,
-      "auto_sleep_timeout_seconds": 120,
-      "interaction_range_cm": 400,
-      "aggressive_threshold": 30,
-      "calm_threshold": 50,
-      "leadership_presence": true,
-      "pack_command": true,
-      "territorial_dominance": "maximum",
-      "alpha_behaviors": true
-    },
-    
-    "aesthetic_profile": {
-      "color_scheme": "dominant_dark_green",
-      "weathering_effects": true,
-      "leadership_features": {
-        "crown_of_horns": true,
-        "battle_trophy_scars": 8,
-        "authority_markings": "gold_paint",
-        "enlarged_fangs": true,
-        "commanding_brow": true,
-        "tribal_tattoos": "red_black_spiral"
-      },
-      "size_modifier": 1.3,
-      "intimidation_factor": "maximum"
-    },
-    
-    "sound_characteristics": {
-      "voice_pitch": "commanding_bass",
-      "breathing_pattern": "authoritative_heavy",
-      "command_sounds": ["alpha_roar", "pack_summon", "territory_claim", "dominance_bellow"],
-      "authority_sounds": ["throne_slam", "scepter_strike", "crown_rattle"],
-      "idle_sounds": ["royal_grunt", "power_breath", "dominance_snort"],
-      "ambient_volume": 0.8,
-      "reaction_volume": 1.0,
-      "echo_enhancement": true
-    },
-    
-    "animation_style": {
-      "movement_speed": "regal_powerful",
-      "eye_tracking": "imperial_survey",
-      "idle_behaviors": ["throne_posture", "territory_claiming", "pack_inspection"],
-      "threat_responses": ["alpha_challenge", "dominance_display", "territorial_roar"],
-      "expression_intensity": "commanding"
-    }
-  },
-  
-  "additional_components": [
-    "config/components/positioned/goblin_horn_crown.json",
-    "config/components/positioned/goblin_authority_markings.json",
-    "config/components/positioned/goblin_tribal_tattoos.json",
-    "config/components/positioned/goblin_trophy_scars.json",
-    "config/components/positioned/goblin_enlarged_fangs.json"
-  ],
-  
-  "custom_behaviors": {
-    "pack_assembly": {
-      "trigger": "leadership_call",
-      "eyes": "commanding_glow",
-      "mouth": "alpha_summon",
-      "sounds": ["pack_rally_horn", "assembly_roar"],
-      "duration_ms": 10000,
-      "priority": "critical",
-      "area_broadcast": true
-    },
-    "territory_declaration": {
-      "trigger": "new_space_entry",
-      "eyes": "territorial_sweep",
-      "mouth": "dominance_snarl",
-      "sounds": ["territory_claim", "boundary_mark"],
-      "duration_ms": 8000,
-      "priority": "high",
-      "intimidation_mode": true
-    },
-    "leadership_judgment": {
-      "trigger": "pack_dispute",
-      "eyes": "judicial_stare",
-      "mouth": "authority_pronouncement",
-      "sounds": ["judgment_tone", "final_word"],
-      "duration_ms": 6000,
-      "priority": "high"
-    },
-    "victory_celebration": {
-      "trigger": "pack_success",
-      "eyes": "triumphant_fire",
-      "mouth": "victory_howl",
-      "sounds": ["celebration_roar", "trophy_claim"],
-      "duration_ms": 12000,
-      "priority": "medium",
-      "pack_synchronization": true
-    },
-    "throne_presence": {
-      "trigger": "idle_extended",
-      "eyes": "regal_watching",
-      "mouth": "royal_composure",
-      "sounds": ["power_breathing", "throne_settle"],
-      "duration_ms": 20000,
-      "priority": "low",
-      "continuous_authority": true
-    }
-  },
-  
-  "leadership_abilities": {
-    "pack_coordination": {
-      "command_range": "extended",
-      "rally_effectiveness": "maximum",
-      "discipline_enforcement": true,
-      "strategic_planning": true
-    },
-    "territorial_control": {
-      "boundary_establishment": true,
-      "resource_management": true,
-      "threat_assessment": "comprehensive",
-      "defense_coordination": true
-    },
-    "social_hierarchy": {
-      "rank_recognition": true,
-      "subordinate_management": true,
-      "alliance_formation": true,
-      "conflict_resolution": true
-    }
-  },
-  
-  "hardware_config": {
-    "i2s_sample_rate": 44100,
-    "display_update_rate_fps": 35,
-    "sensor_poll_rate_hz": 12,
-    "power_management": "authority_mode",
-    "audio_amplification": 1.5,
-    "bass_enhancement": true,
-    "proximity_detection_boost": 1.4
-  },
-  
-  "prototype_status": "design_complete",
-  "tested": false,
-  "notes": [
-    "Inherits from goblin_family.json with warrior_goblin subfamily",
-    "Enlarged skull dimensions for commanding presence",
-    "Leadership-focused behaviors with pack coordination",
-    "Maximum intimidation factor with authority features",
-    "Enhanced audio system for long-range communication",
-    "Territorial dominance with extended interaction range",
-    "Alpha behavior patterns with judgment capabilities",
-    "Trophy scar system indicating battle experience"
-  ]
+﻿{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_chief.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "family_template":  "config/bots/bot_families/fantasy/goblin_family.json",
+    "bot_type":  "GOBLINCHIEF",
+    "bot_id":  "goblin_chief_v1",
+    "description":  "Commanding goblin chief with leadership presence and territorial dominance",
+    "created":  "2025-10-12",
+    "template_inheritance":  "extend",
+    "subfamily_selection":  "warrior_goblin",
+    "overrides":  {
+                      "baseline_dimensions":  {
+                                                  "eye_spacing":  "3.5 INCH",
+                                                  "compression_factor":  0.65,
+                                                  "skull_scale":  1.3
+                                              },
+                      "mood_defaults":  {
+                                            "FEAR":  2,
+                                            "ANGER":  22,
+                                            "IRRITATION":  18,
+                                            "HAPPINESS":  10,
+                                            "CONTENTMENT":  25,
+                                            "HUNGER":  13,
+                                            "CURIOSITY":  5,
+                                            "AFFECTION":  5
+                                        },
+                      "behavior_config":  {
+                                              "threat_response_enabled":  true,
+                                              "auto_sleep_timeout_seconds":  120,
+                                              "interaction_range_cm":  400,
+                                              "aggressive_threshold":  30,
+                                              "calm_threshold":  50,
+                                              "leadership_presence":  true,
+                                              "pack_command":  true,
+                                              "territorial_dominance":  "maximum",
+                                              "alpha_behaviors":  true
+                                          },
+                      "aesthetic_profile":  {
+                                                "color_scheme":  "dominant_dark_green",
+                                                "weathering_effects":  true,
+                                                "leadership_features":  {
+                                                                            "crown_of_horns":  true,
+                                                                            "battle_trophy_scars":  8,
+                                                                            "authority_markings":  "gold_paint",
+                                                                            "enlarged_fangs":  true,
+                                                                            "commanding_brow":  true,
+                                                                            "tribal_tattoos":  "red_black_spiral"
+                                                                        },
+                                                "size_modifier":  1.3,
+                                                "intimidation_factor":  "maximum"
+                                            },
+                      "sound_characteristics":  {
+                                                    "voice_pitch":  "commanding_bass",
+                                                    "breathing_pattern":  "authoritative_heavy",
+                                                    "command_sounds":  [
+                                                                           "alpha_roar",
+                                                                           "pack_summon",
+                                                                           "territory_claim",
+                                                                           "dominance_bellow"
+                                                                       ],
+                                                    "authority_sounds":  [
+                                                                             "throne_slam",
+                                                                             "scepter_strike",
+                                                                             "crown_rattle"
+                                                                         ],
+                                                    "idle_sounds":  [
+                                                                        "royal_grunt",
+                                                                        "power_breath",
+                                                                        "dominance_snort"
+                                                                    ],
+                                                    "ambient_volume":  0.8,
+                                                    "reaction_volume":  1.0,
+                                                    "echo_enhancement":  true
+                                                },
+                      "animation_style":  {
+                                              "movement_speed":  "regal_powerful",
+                                              "eye_tracking":  "imperial_survey",
+                                              "idle_behaviors":  [
+                                                                     "throne_posture",
+                                                                     "territory_claiming",
+                                                                     "pack_inspection"
+                                                                 ],
+                                              "threat_responses":  [
+                                                                       "alpha_challenge",
+                                                                       "dominance_display",
+                                                                       "territorial_roar"
+                                                                   ],
+                                              "expression_intensity":  "commanding"
+                                          }
+                  },
+    "additional_components":  [
+                                  "config/components/positioned/goblin_horn_crown.json",
+                                  "config/components/positioned/goblin_authority_markings.json",
+                                  "config/components/positioned/goblin_tribal_tattoos.json",
+                                  "config/components/positioned/goblin_trophy_scars.json",
+                                  "config/components/positioned/goblin_enlarged_fangs.json"
+                              ],
+    "custom_behaviors":  {
+                             "pack_assembly":  {
+                                                   "trigger":  "leadership_call",
+                                                   "eyes":  "commanding_glow",
+                                                   "mouth":  "alpha_summon",
+                                                   "sounds":  [
+                                                                  "pack_rally_horn",
+                                                                  "assembly_roar"
+                                                              ],
+                                                   "duration_ms":  10000,
+                                                   "priority":  "critical",
+                                                   "area_broadcast":  true
+                                               },
+                             "territory_declaration":  {
+                                                           "trigger":  "new_space_entry",
+                                                           "eyes":  "territorial_sweep",
+                                                           "mouth":  "dominance_snarl",
+                                                           "sounds":  [
+                                                                          "territory_claim",
+                                                                          "boundary_mark"
+                                                                      ],
+                                                           "duration_ms":  8000,
+                                                           "priority":  "high",
+                                                           "intimidation_mode":  true
+                                                       },
+                             "leadership_judgment":  {
+                                                         "trigger":  "pack_dispute",
+                                                         "eyes":  "judicial_stare",
+                                                         "mouth":  "authority_pronouncement",
+                                                         "sounds":  [
+                                                                        "judgment_tone",
+                                                                        "final_word"
+                                                                    ],
+                                                         "duration_ms":  6000,
+                                                         "priority":  "high"
+                                                     },
+                             "victory_celebration":  {
+                                                         "trigger":  "pack_success",
+                                                         "eyes":  "triumphant_fire",
+                                                         "mouth":  "victory_howl",
+                                                         "sounds":  [
+                                                                        "celebration_roar",
+                                                                        "trophy_claim"
+                                                                    ],
+                                                         "duration_ms":  12000,
+                                                         "priority":  "medium",
+                                                         "pack_synchronization":  true
+                                                     },
+                             "throne_presence":  {
+                                                     "trigger":  "idle_extended",
+                                                     "eyes":  "regal_watching",
+                                                     "mouth":  "royal_composure",
+                                                     "sounds":  [
+                                                                    "power_breathing",
+                                                                    "throne_settle"
+                                                                ],
+                                                     "duration_ms":  20000,
+                                                     "priority":  "low",
+                                                     "continuous_authority":  true
+                                                 }
+                         },
+    "leadership_abilities":  {
+                                 "pack_coordination":  {
+                                                           "command_range":  "extended",
+                                                           "rally_effectiveness":  "maximum",
+                                                           "discipline_enforcement":  true,
+                                                           "strategic_planning":  true
+                                                       },
+                                 "territorial_control":  {
+                                                             "boundary_establishment":  true,
+                                                             "resource_management":  true,
+                                                             "threat_assessment":  "comprehensive",
+                                                             "defense_coordination":  true
+                                                         },
+                                 "social_hierarchy":  {
+                                                          "rank_recognition":  true,
+                                                          "subordinate_management":  true,
+                                                          "alliance_formation":  true,
+                                                          "conflict_resolution":  true
+                                                      }
+                             },
+    "hardware_config":  {
+                            "i2s_sample_rate":  44100,
+                            "display_update_rate_fps":  35,
+                            "sensor_poll_rate_hz":  12,
+                            "power_management":  "authority_mode",
+                            "audio_amplification":  1.5,
+                            "bass_enhancement":  true,
+                            "proximity_detection_boost":  1.4
+                        },
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Inherits from goblin_family.json with warrior_goblin subfamily",
+                  "Enlarged skull dimensions for commanding presence",
+                  "Leadership-focused behaviors with pack coordination",
+                  "Maximum intimidation factor with authority features",
+                  "Enhanced audio system for long-range communication",
+                  "Territorial dominance with extended interaction range",
+                  "Alpha behavior patterns with judgment capabilities",
+                  "Trophy scar system indicating battle experience"
+              ]
 }

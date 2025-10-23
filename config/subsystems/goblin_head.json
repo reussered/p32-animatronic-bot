@@ -1,138 +1,155 @@
-{
-  "relative_filename": "config/subsystems/goblin_head.json",
-  "version": "3.0.0",
-  "author": "config/author.json",
-  
-  "subsystem_type": "HEAD",
-  "subsystem_id": "goblin_head_v1",
-  "description": "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing",
-  "created": "2025-10-15",
-  
-  "controller_hardware": "ESP32_S3_DEVKITC_1",
-  "mesh_role": "SLAVE_NODE_HIGH_PRIORITY",
-  "mesh_capabilities": [
-    "ESP_NOW_SLAVE",
-    "DUAL_CORE_PROCESSING",
-    "HIGH_SPEED_SPI",
-    "I2S_AUDIO"
-  ],
-  
-  "coordinate_system": "skull_3d",
-  "reference_point": "nose_center",
-  "units": "MILLIMETERS",
-  
-  "component_name": "goblin_head",
-  "component_type": "SUBSYSTEM_ASSEMBLY",
-  "timing": {
-    "hitCount": 25,
-    "description": "Head coordination every 2.5 seconds"
-  },
-  
-  "contained_components": [
-    "config/components/positioned/goblin_left_eye.json",
-    "config/components/positioned/goblin_right_eye.json",
-    "config/components/positioned/goblin_nose.json",
-    "config/components/positioned/goblin_mouth.json",
-    "config/components/positioned/goblin_speaker.json",
-    "config/components/positioned/goblin_left_ear.json",
-    "config/components/positioned/goblin_right_ear.json"
-  ],
-  
-  "shape_assembly": {
-    "type": "SKULL_FRAME",
-    "scad_file": "assets/shapes/scad/skull_generators/goblin_skull.scad",
-    "stl_file": "assets/shapes/stl/skull_generators/goblin_skull.stl",
-    "description": "Anatomical goblin skull frame with component mounting rings",
-    "color_palette": "config/bots/bot_families/fantasy/goblin_family.json",
-    "mounting_points": {
-      "eye_left": {
-        "type": "26mm_ring",
-        "position": [-26.67, 17.78, -8.89],
-        "units": "mm",
-        "description": "Left eye socket mounting ring"
-      },
-      "eye_right": {
-        "type": "26mm_ring",
-        "position": [26.67, 17.78, -8.89],
-        "units": "mm",
-        "description": "Right eye socket mounting ring"
-      },
-      "nose": {
-        "type": "22x17mm_bracket",
-        "position": [0, 0, 6.35],
-        "units": "mm",
-        "description": "Nose sensor bracket"
-      },
-      "mouth": {
-        "type": "26mm_ring",
-        "position": [0, -26.67, 0],
-        "units": "mm",
-        "description": "Mouth display mounting ring"
-      },
-      "ear_left": {
-        "type": "creature_specific",
-        "position": [-50, 25, 0],
-        "units": "mm",
-        "description": "Left ear attachment point (goblin-specific)"
-      },
-      "ear_right": {
-        "type": "creature_specific",
-        "position": [50, 25, 0],
-        "units": "mm",
-        "description": "Right ear attachment point (goblin-specific)"
-      }
-    }
-  },
-  
-  "articulation": {
-    "neck_servos": [
-      "config/components/positioned/neck_pan_servo.json",
-      "config/components/positioned/neck_tilt_servo.json"
-    ],
-    "degrees_of_freedom": 2,
-    "neck_pan_range_degrees": 180,
-    "neck_tilt_range_degrees": 90
-  },
-  
-  "mass_properties": {
-    "total_weight_g": "450",
-    "center_of_gravity": [0, 0, -10],
-    "balance_point": "neck_attachment"
-  },
-  
-  "power_requirements": {
-    "voltage": "5V",
-    "estimated_current_draw_a": "2.5",
-    "display_power_w": "3.0",
-    "audio_power_w": "2.0",
-    "servo_power_w": "6.0"
-  },
-  
-  "mesh_node_config": {
-    "node_id": "HEAD_NODE",
-    "master_subsystem": "goblin_torso.json",
-    "priority": "HIGH",
-    "heartbeat_response_time_ms": 100,
-    "command_buffer_size": 32,
-    "description": "High-priority slave focusing on real-time facial expressions and audio"
-  },
-  
-  "processing_responsibilities": {
-    "description": "Head focuses on high-frequency display/audio updates without system-level overhead",
-    "tasks": [
-      "Dual GC9A01 display rendering (60 FPS capable)",
-      "I2S audio playback and mixing",
-      "HC-SR04 sensor polling and filtering",
-      "Facial expression animation engine",
-      "Mood-driven display effects",
-      "Neck servo articulation control",
-      "Respond to mesh commands from torso master"
-    ],
-    "excluded_tasks": [
-      "WiFi management (handled by torso)",
-      "Mesh network coordination (handled by torso)",
-      "Telemetry aggregation (handled by torso)",
-      "System-wide behavior planning (handled by torso)"
-    ]
-  }
+﻿{
+    "relative_filename":  "config/subsystems/goblin_head.json",
+    "version":  "3.0.0",
+    "author":  "config/author.json",
+    "subsystem_type":  "HEAD",
+    "subsystem_id":  "goblin_head_v1",
+    "description":  "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing",
+    "created":  "2025-10-15",
+    "controller_hardware":  "ESP32_S3_DEVKITC_1",
+    "mesh_role":  "SLAVE_NODE_HIGH_PRIORITY",
+    "mesh_capabilities":  [
+                              "ESP_NOW_SLAVE",
+                              "DUAL_CORE_PROCESSING",
+                              "HIGH_SPEED_SPI",
+                              "I2S_AUDIO"
+                          ],
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "units":  "MILLIMETERS",
+    "component_name":  "goblin_head",
+    "component_type":  "SUBSYSTEM_ASSEMBLY",
+    "timing":  {
+                   "hitCount":  25,
+                   "description":  "Head coordination every 2.5 seconds"
+               },
+    "contained_components":  [
+                                 "config/components/positioned/goblin_left_eye.json",
+                                 "config/components/positioned/goblin_right_eye.json",
+                                 "config/components/positioned/goblin_nose.json",
+                                 "config/components/positioned/goblin_mouth.json",
+                                 "config/components/positioned/goblin_speaker.json",
+                                 "config/components/positioned/goblin_left_ear.json",
+                                 "config/components/positioned/goblin_right_ear.json"
+                             ],
+    "shape_assembly":  {
+                           "type":  "SKULL_FRAME",
+                           "scad_file":  "assets/shapes/scad/skull_generators/goblin_skull.scad",
+                           "stl_file":  "assets/shapes/stl/skull_generators/goblin_skull.stl",
+                           "description":  "Anatomical goblin skull frame with component mounting rings",
+                           "color_palette":  "config/bots/bot_families/fantasy/goblin_family.json",
+                           "mounting_points":  {
+                                                   "eye_left":  {
+                                                                    "type":  "26mm_ring",
+                                                                    "position":  [
+                                                                                     -26.67,
+                                                                                     17.78,
+                                                                                     -8.89
+                                                                                 ],
+                                                                    "units":  "mm",
+                                                                    "description":  "Left eye socket mounting ring"
+                                                                },
+                                                   "eye_right":  {
+                                                                     "type":  "26mm_ring",
+                                                                     "position":  [
+                                                                                      26.67,
+                                                                                      17.78,
+                                                                                      -8.89
+                                                                                  ],
+                                                                     "units":  "mm",
+                                                                     "description":  "Right eye socket mounting ring"
+                                                                 },
+                                                   "nose":  {
+                                                                "type":  "22x17mm_bracket",
+                                                                "position":  [
+                                                                                 0,
+                                                                                 0,
+                                                                                 6.35
+                                                                             ],
+                                                                "units":  "mm",
+                                                                "description":  "Nose sensor bracket"
+                                                            },
+                                                   "mouth":  {
+                                                                 "type":  "26mm_ring",
+                                                                 "position":  [
+                                                                                  0,
+                                                                                  -26.67,
+                                                                                  0
+                                                                              ],
+                                                                 "units":  "mm",
+                                                                 "description":  "Mouth display mounting ring"
+                                                             },
+                                                   "ear_left":  {
+                                                                    "type":  "creature_specific",
+                                                                    "position":  [
+                                                                                     -50,
+                                                                                     25,
+                                                                                     0
+                                                                                 ],
+                                                                    "units":  "mm",
+                                                                    "description":  "Left ear attachment point (goblin-specific)"
+                                                                },
+                                                   "ear_right":  {
+                                                                     "type":  "creature_specific",
+                                                                     "position":  [
+                                                                                      50,
+                                                                                      25,
+                                                                                      0
+                                                                                  ],
+                                                                     "units":  "mm",
+                                                                     "description":  "Right ear attachment point (goblin-specific)"
+                                                                 }
+                                               }
+                       },
+    "articulation":  {
+                         "neck_servos":  [
+                                             "config/components/positioned/neck_pan_servo.json",
+                                             "config/components/positioned/neck_tilt_servo.json"
+                                         ],
+                         "degrees_of_freedom":  2,
+                         "neck_pan_range_degrees":  180,
+                         "neck_tilt_range_degrees":  90
+                     },
+    "mass_properties":  {
+                            "total_weight_g":  "450",
+                            "center_of_gravity":  [
+                                                      0,
+                                                      0,
+                                                      -10
+                                                  ],
+                            "balance_point":  "neck_attachment"
+                        },
+    "power_requirements":  {
+                               "voltage":  "5V",
+                               "estimated_current_draw_a":  "2.5",
+                               "display_power_w":  "3.0",
+                               "audio_power_w":  "2.0",
+                               "servo_power_w":  "6.0"
+                           },
+    "mesh_node_config":  {
+                             "node_id":  "HEAD_NODE",
+                             "master_subsystem":  "goblin_torso.json",
+                             "priority":  "HIGH",
+                             "heartbeat_response_time_ms":  100,
+                             "command_buffer_size":  32,
+                             "description":  "High-priority slave focusing on real-time facial expressions and audio"
+                         },
+    "processing_responsibilities":  {
+                                        "description":  "Head focuses on high-frequency display/audio updates without system-level overhead",
+                                        "tasks":  [
+                                                      "Dual GC9A01 display rendering (60 FPS capable)",
+                                                      "I2S audio playback and mixing",
+                                                      "HC-SR04 sensor polling and filtering",
+                                                      "Facial expression animation engine",
+                                                      "Mood-driven display effects",
+                                                      "Neck servo articulation control",
+                                                      "Respond to mesh commands from torso master"
+                                                  ],
+                                        "excluded_tasks":  [
+                                                               "WiFi management (handled by torso)",
+                                                               "Mesh network coordination (handled by torso)",
+                                                               "Telemetry aggregation (handled by torso)",
+                                                               "System-wide behavior planning (handled by torso)"
+                                                           ]
+                                    }
 }

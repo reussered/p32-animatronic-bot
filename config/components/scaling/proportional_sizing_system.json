@@ -1,508 +1,278 @@
-{
-
-  "relative_filename": "config/components/scaling/proportional_sizing_system.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  
-
-  "component_name": "PROPORTIONAL_SIZING_SYSTEM",
-  "subsystem": "UNKNOWN",
-
-  "component_type": "SCALABLE_DESIGN_ARCHITECTURE",
-
-  "description": "Comprehensive scaling system for different creature types from tiny goblins to massive orcs",
-
-  
-
-  "scaling_philosophy": {
-
-    "proportional_scaling": "ALL_DIMENSIONS_SCALE_FROM_BASE_REFERENCE_MEASUREMENTS",
-
-    "anatomical_accuracy": "MAINTAIN_REALISTIC_PROPORTIONS_ACROSS_SIZE_RANGES", 
-
-    "mechanical_feasibility": "SERVO_TORQUE_STRUCTURAL_LIMITS_CONSIDERED",
-
-    "modular_compatibility": "SAME_COMPONENT_TYPES_DIFFERENT_SCALES"
-
-  },
-
-  
-
-  "creature_size_categories": {
-
-    "tiny_goblin": {
-
-      "height_range": "24_TO_30_INCHES",
-
-      "base_scale_factor": "0.5",
-
-      "typical_examples": ["HOUSE_GOBLIN", "GARDEN_SPRITE", "DESK_COMPANION"],
-
-      "mobility_focus": "AGILE_QUICK_MOVEMENTS",
-
-      "power_requirements": "LOW_BATTERY_EFFICIENT"
-
-    },
-
-    "standard_goblin": {
-
-      "height_range": "30_TO_42_INCHES", 
-
-      "base_scale_factor": "0.7",
-
-      "typical_examples": ["CLASSIC_GOBLIN", "WORKSHOP_ASSISTANT", "BASIC_HUMANOID"],
-
-      "mobility_focus": "BALANCED_AGILITY_STRENGTH",
-
-      "power_requirements": "MODERATE_STANDARD_SYSTEMS"
-
-    },
-
-    "large_hobgoblin": {
-
-      "height_range": "42_TO_54_INCHES",
-
-      "base_scale_factor": "0.9", 
-
-      "typical_examples": ["HOBGOBLIN_WARRIOR", "SECURITY_ROBOT", "ADULT_COMPANION"],
-
-      "mobility_focus": "STRENGTH_ENDURANCE_FOCUS",
-
-      "power_requirements": "HIGH_EXTENDED_RUNTIME"
-
-    },
-
-    "giant_orc": {
-
-      "height_range": "54_TO_72_INCHES",
-
-      "base_scale_factor": "1.2",
-
-      "typical_examples": ["ORC_CHIEFTAIN", "INDUSTRIAL_ROBOT", "INTIMIDATION_DISPLAY"],
-
-      "mobility_focus": "MAXIMUM_STRENGTH_PRESENCE", 
-
-      "power_requirements": "VERY_HIGH_INDUSTRIAL_GRADE"
-
-    },
-
-    "massive_ogre": {
-
-      "height_range": "72_TO_96_INCHES",
-
-      "base_scale_factor": "1.6",
-
-      "typical_examples": ["OGRE_GUARDIAN", "CONSTRUCTION_ROBOT", "THEATRICAL_GIANT"],
-
-      "mobility_focus": "SLOW_POWERFUL_DELIBERATE",
-
-      "power_requirements": "EXTREME_INDUSTRIAL_POWER"
-
-    }
-
-  },
-
-  
-
-  "anatomical_proportion_scaling": {
-
-    "head_proportions": {
-
-      "skull_width_to_height": "0.75_RATIO_CONSISTENT_ALL_SIZES",
-
-      "eye_spacing_reference": "SKULL_WIDTH_TIMES_0.4",
-
-      "jaw_depth_scaling": "SKULL_WIDTH_TIMES_0.6",
-
-      "neck_diameter": "SKULL_WIDTH_TIMES_0.5"
-
-    },
-
-    "torso_proportions": {
-
-      "chest_width": "HEAD_WIDTH_TIMES_2.2_BROAD_SHOULDERS",
-
-      "torso_length": "HEAD_HEIGHT_TIMES_3.5_REALISTIC_PROPORTION",
-
-      "waist_width": "CHEST_WIDTH_TIMES_0.8_TAPERED_SHAPE", 
-
-      "spine_segments": "SCALE_DEPENDENT_MORE_SEGMENTS_LARGER_CREATURES"
-
-    },
-
-    "limb_proportions": {
-
-      "arm_length_total": "TORSO_LENGTH_TIMES_1.3_REACH_PROPORTION",
-
-      "upper_arm_length": "ARM_LENGTH_TIMES_0.45_HUMERUS",
-
-      "forearm_length": "ARM_LENGTH_TIMES_0.35_RADIUS_ULNA",
-
-      "hand_length": "ARM_LENGTH_TIMES_0.2_PROPORTIONAL_GRIP",
-
-      "leg_length_total": "TORSO_LENGTH_TIMES_1.8_STANDING_HEIGHT",
-
-      "thigh_length": "LEG_LENGTH_TIMES_0.5_FEMUR",
-
-      "shin_length": "LEG_LENGTH_TIMES_0.4_TIBIA_FIBULA", 
-
-      "foot_length": "LEG_LENGTH_TIMES_0.15_GROUND_CONTACT"
-
-    }
-
-  },
-
-  
-
-  "mechanical_scaling_considerations": {
-
-    "servo_torque_scaling": {
-
-      "tiny_goblin_servos": {
-
-        "joint_torque_requirements": "0.5X_STANDARD_HUMAN_TORQUE",
-
-        "recommended_servos": "MG90S_MICRO_SERVOS_PRIMARY",
-
-        "stepper_motors": "NEMA14_OR_SMALLER_STEPPERS",
-
-        "power_efficiency": "OPTIMIZED_FOR_BATTERY_LIFE"
-
-      },
-
-      "standard_goblin_servos": {
-
-        "joint_torque_requirements": "0.7X_STANDARD_HUMAN_TORQUE", 
-
-        "recommended_servos": "MG996R_STANDARD_SERVOS",
-
-        "stepper_motors": "NEMA17_MODERATE_GEARING",
-
-        "power_balance": "PERFORMANCE_EFFICIENCY_BALANCED"
-
-      },
-
-      "large_hobgoblin_servos": {
-
-        "joint_torque_requirements": "0.9X_STANDARD_HUMAN_TORQUE",
-
-        "recommended_servos": "MG996R_PLUS_NEMA17_COMBO",
-
-        "stepper_motors": "NEMA17_HIGH_GEAR_RATIOS",
-
-        "power_focus": "PERFORMANCE_OVER_EFFICIENCY"
-
-      },
-
-      "giant_orc_servos": {
-
-        "joint_torque_requirements": "1.5X_STANDARD_HUMAN_TORQUE",
-
-        "recommended_servos": "NEMA23_STEPPERS_PRIMARY",
-
-        "stepper_motors": "NEMA23_100_1_GEAR_RATIOS",
-
-        "power_industrial": "INDUSTRIAL_GRADE_REQUIREMENTS"
-
-      },
-
-      "massive_ogre_servos": {
-
-        "joint_torque_requirements": "2.5X_STANDARD_HUMAN_TORQUE",
-
-        "recommended_servos": "NEMA34_INDUSTRIAL_STEPPERS",
-
-        "stepper_motors": "NEMA34_PLANETARY_GEARBOXES",
-
-        "power_extreme": "THREE_PHASE_INDUSTRIAL_POWER"
-
-      }
-
-    },
-
-    
-
-    "structural_scaling": {
-
-      "aluminum_extrusion_sizes": {
-
-        "tiny_goblin_structure": "15MM_X_15MM_T_SLOT_LIGHTWEIGHT",
-
-        "standard_goblin_structure": "20MM_X_20MM_T_SLOT_STANDARD",
-
-        "large_hobgoblin_structure": "30MM_X_30MM_T_SLOT_ROBUST",
-
-        "giant_orc_structure": "40MM_X_40MM_T_SLOT_HEAVY_DUTY", 
-
-        "massive_ogre_structure": "50MM_X_50MM_T_SLOT_INDUSTRIAL"
-
-      },
-
-      "bearing_sizes": {
-
-        "tiny_goblin_bearings": "604ZZ_4MM_ID_MINIATURE",
-
-        "standard_goblin_bearings": "608ZZ_8MM_ID_STANDARD", 
-
-        "large_hobgoblin_bearings": "6001ZZ_12MM_ID_MEDIUM",
-
-        "giant_orc_bearings": "6003ZZ_17MM_ID_LARGE",
-
-        "massive_ogre_bearings": "6005ZZ_25MM_ID_HEAVY_DUTY"
-
-      }
-
-    }
-
-  },
-
-  
-
-  "power_system_scaling": {
-
-    "battery_capacity_scaling": {
-
-      "tiny_goblin_power": {
-
-        "battery_type": "SINGLE_LIPO_3S_2200MAH",
-
-        "runtime_target": "4_HOURS_LIGHTWEIGHT_EFFICIENCY", 
-
-        "charging_method": "USB_C_CONVENIENT_CHARGING",
-
-        "power_distribution": "SIMPLE_BREADBOARD_RAILS"
-
-      },
-
-      "standard_goblin_power": {
-
-        "battery_type": "DUAL_LIPO_6S_5000MAH",
-
-        "runtime_target": "6_HOURS_MODERATE_USAGE",
-
-        "charging_method": "DEDICATED_CHARGER_FAST_CHARGE",
-
-        "power_distribution": "BASIC_SKELETAL_POWER_SYSTEM"
-
-      },
-
-      "large_hobgoblin_power": {
-
-        "battery_type": "LITHIUM_ION_10S4P_PACK",
-
-        "runtime_target": "8_HOURS_EXTENDED_OPERATION",
-
-        "charging_method": "SMART_CHARGER_BMS_MONITORING", 
-
-        "power_distribution": "FULL_SKELETAL_POWER_DISTRIBUTION"
-
-      },
-
-      "giant_orc_power": {
-
-        "battery_type": "LITHIUM_ION_14S6P_HIGH_CAPACITY",
-
-        "runtime_target": "10_HOURS_CONTINUOUS_OPERATION",
-
-        "charging_method": "INDUSTRIAL_CHARGER_FAST_CHARGE",
-
-        "power_distribution": "REDUNDANT_POWER_RAIL_SYSTEM"
-
-      },
-
-      "massive_ogre_power": {
-
-        "battery_type": "INDUSTRIAL_LITHIUM_18S8P_PACK",
-
-        "runtime_target": "12_HOURS_HEAVY_DUTY_CYCLE",
-
-        "charging_method": "THREE_PHASE_INDUSTRIAL_CHARGING",
-
-        "power_distribution": "TRIPLE_REDUNDANT_POWER_SYSTEMS"
-
-      }
-
-    }
-
-  },
-
-  
-
-  "stl_scaling_methodology": {
-
-    "parametric_design_approach": {
-
-      "base_reference_model": "STANDARD_GOBLIN_1.0_SCALE_FACTOR",
-
-      "scaling_parameters": "OPENSCAD_VARIABLES_DRIVE_ALL_DIMENSIONS", 
-
-      "automatic_generation": "SCRIPT_GENERATES_ALL_SIZE_VARIANTS",
-
-      "tolerance_scaling": "BEARING_FITS_SCALE_PROPORTIONALLY"
-
-    },
-
-    "size_specific_optimizations": {
-
-      "tiny_models": "THICKER_WALLS_COMPENSATE_SMALL_SCALE_WEAKNESS",
-
-      "large_models": "INTERNAL_BRACING_PREVENT_SAGGING_DEFORMATION",
-
-      "mounting_holes": "SCALE_APPROPRIATE_FASTENER_SIZES",
-
-      "support_structures": "SIZE_OPTIMIZED_SUPPORT_GEOMETRY"
-
-    }
-
-  },
-
-  
-
-  "controller_scaling_architecture": {
-
-    "esp32_controller_allocation": {
-
-      "tiny_goblin_controllers": {
-
-        "master_controller": "SINGLE_ESP32_S3_HANDLES_ALL_FUNCTIONS",
-
-        "slave_controllers": "MINIMAL_ESP32_C3_ONLY_IF_NEEDED",
-
-        "gpio_utilization": "DIRECT_GPIO_CONTROL_SUFFICIENT"
-
-      },
-
-      "standard_goblin_controllers": {
-
-        "master_controller": "ESP32_S3_COORDINATION_BALANCE",
-
-        "slave_controllers": "3_ESP32_C3_LIMB_CONTROLLERS",
-
-        "gpio_expansion": "PCA9685_SERVO_EXPANSION_BOARDS"
-
-      },
-
-      "large_hobgoblin_controllers": {
-
-        "master_controller": "ESP32_S3_PLUS_BACKUP_CONTROLLER",
-
-        "slave_controllers": "5_ESP32_C3_DISTRIBUTED_CONTROL",
-
-        "redundancy": "BACKUP_SYSTEMS_CRITICAL_FUNCTIONS"
-
-      },
-
-      "giant_orc_controllers": {
-
-        "master_controller": "DUAL_ESP32_S3_REDUNDANT_MASTERS",
-
-        "slave_controllers": "8_ESP32_C3_FULL_DISTRIBUTION",
-
-        "industrial_integration": "CAN_BUS_INDUSTRIAL_PROTOCOLS"
-
-      },
-
-      "massive_ogre_controllers": {
-
-        "master_controller": "INDUSTRIAL_PC_COORDINATION_LAYER",
-
-        "slave_controllers": "12_ESP32_C3_COMPLETE_DISTRIBUTION",
-
-        "safety_systems": "TRIPLE_REDUNDANT_SAFETY_CONTROLLERS"
-
-      }
-
-    }
-
-  },
-
-  
-
-  "cost_scaling_analysis": {
-
-    "size_vs_cost_relationship": {
-
-      "tiny_goblin_cost": "$800_SIMPLIFIED_SYSTEMS",
-
-      "standard_goblin_cost": "$2090_BASELINE_FULL_FEATURES",
-
-      "large_hobgoblin_cost": "$3500_ENHANCED_CAPABILITIES", 
-
-      "giant_orc_cost": "$6500_INDUSTRIAL_GRADE_COMPONENTS",
-
-      "massive_ogre_cost": "$12000_CUSTOM_INDUSTRIAL_SYSTEMS"
-
-    },
-
-    "cost_scaling_factors": {
-
-      "servo_costs": "EXPONENTIAL_SCALING_TORQUE_REQUIREMENTS",
-
-      "structural_costs": "LINEAR_SCALING_MATERIAL_VOLUME",
-
-      "controller_costs": "STEP_FUNCTION_COMPLEXITY_THRESHOLDS",
-
-      "battery_costs": "QUADRATIC_SCALING_CAPACITY_REQUIREMENTS"
-
-    }
-
-  },
-
-  
-
-  "creature_specific_customizations": {
-
-    "goblin_characteristics": {
-
-      "proportions": "SLIGHTLY_OVERSIZED_HEAD_HANDS_FEET",
-
-      "movement_style": "QUICK_JERKY_AGILE_MOVEMENTS",
-
-      "personality_traits": "MISCHIEVOUS_PLAYFUL_BEHAVIORS",
-
-      "size_variants": ["TINY_HOUSE_GOBLIN", "STANDARD_WORKSHOP_GOBLIN"]
-
-    },
-
-    "orc_characteristics": {
-
-      "proportions": "BROAD_SHOULDERS_THICK_LIMBS",
-
-      "movement_style": "POWERFUL_DELIBERATE_INTIMIDATING",
-
-      "personality_traits": "AGGRESSIVE_COMMANDING_PRESENCE",
-
-      "size_variants": ["WARRIOR_ORC", "CHIEFTAIN_ORC", "BERSERKER_ORC"]
-
-    },
-
-    "hobgoblin_characteristics": {
-
-      "proportions": "MILITARY_DISCIPLINED_UPRIGHT_POSTURE",
-
-      "movement_style": "PRECISE_COORDINATED_FORMATIONS",
-
-      "personality_traits": "ORGANIZED_TACTICAL_BEHAVIORS", 
-
-      "size_variants": ["SOLDIER_HOBGOBLIN", "CAPTAIN_HOBGOBLIN"]
-
-    },
-
-    "ogre_characteristics": {
-
-      "proportions": "MASSIVE_HULKING_OVERSIZED_EVERYTHING",
-
-      "movement_style": "SLOW_PONDEROUS_EARTH_SHAKING",
-
-      "personality_traits": "SIMPLE_DIRECT_OVERWHELMING_FORCE",
-
-      "size_variants": ["CAVE_OGRE", "MOUNTAIN_OGRE", "SIEGE_OGRE"]
-
-    }
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/scaling/proportional_sizing_system.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "PROPORTIONAL_SIZING_SYSTEM",
+    "subsystem":  "UNKNOWN",
+    "component_type":  "SCALABLE_DESIGN_ARCHITECTURE",
+    "description":  "Comprehensive scaling system for different creature types from tiny goblins to massive orcs",
+    "scaling_philosophy":  {
+                               "proportional_scaling":  "ALL_DIMENSIONS_SCALE_FROM_BASE_REFERENCE_MEASUREMENTS",
+                               "anatomical_accuracy":  "MAINTAIN_REALISTIC_PROPORTIONS_ACROSS_SIZE_RANGES",
+                               "mechanical_feasibility":  "SERVO_TORQUE_STRUCTURAL_LIMITS_CONSIDERED",
+                               "modular_compatibility":  "SAME_COMPONENT_TYPES_DIFFERENT_SCALES"
+                           },
+    "creature_size_categories":  {
+                                     "tiny_goblin":  {
+                                                         "height_range":  "24_TO_30_INCHES",
+                                                         "base_scale_factor":  "0.5",
+                                                         "typical_examples":  [
+                                                                                  "HOUSE_GOBLIN",
+                                                                                  "GARDEN_SPRITE",
+                                                                                  "DESK_COMPANION"
+                                                                              ],
+                                                         "mobility_focus":  "AGILE_QUICK_MOVEMENTS",
+                                                         "power_requirements":  "LOW_BATTERY_EFFICIENT"
+                                                     },
+                                     "standard_goblin":  {
+                                                             "height_range":  "30_TO_42_INCHES",
+                                                             "base_scale_factor":  "0.7",
+                                                             "typical_examples":  [
+                                                                                      "CLASSIC_GOBLIN",
+                                                                                      "WORKSHOP_ASSISTANT",
+                                                                                      "BASIC_HUMANOID"
+                                                                                  ],
+                                                             "mobility_focus":  "BALANCED_AGILITY_STRENGTH",
+                                                             "power_requirements":  "MODERATE_STANDARD_SYSTEMS"
+                                                         },
+                                     "large_hobgoblin":  {
+                                                             "height_range":  "42_TO_54_INCHES",
+                                                             "base_scale_factor":  "0.9",
+                                                             "typical_examples":  [
+                                                                                      "HOBGOBLIN_WARRIOR",
+                                                                                      "SECURITY_ROBOT",
+                                                                                      "ADULT_COMPANION"
+                                                                                  ],
+                                                             "mobility_focus":  "STRENGTH_ENDURANCE_FOCUS",
+                                                             "power_requirements":  "HIGH_EXTENDED_RUNTIME"
+                                                         },
+                                     "giant_orc":  {
+                                                       "height_range":  "54_TO_72_INCHES",
+                                                       "base_scale_factor":  "1.2",
+                                                       "typical_examples":  [
+                                                                                "ORC_CHIEFTAIN",
+                                                                                "INDUSTRIAL_ROBOT",
+                                                                                "INTIMIDATION_DISPLAY"
+                                                                            ],
+                                                       "mobility_focus":  "MAXIMUM_STRENGTH_PRESENCE",
+                                                       "power_requirements":  "VERY_HIGH_INDUSTRIAL_GRADE"
+                                                   },
+                                     "massive_ogre":  {
+                                                          "height_range":  "72_TO_96_INCHES",
+                                                          "base_scale_factor":  "1.6",
+                                                          "typical_examples":  [
+                                                                                   "OGRE_GUARDIAN",
+                                                                                   "CONSTRUCTION_ROBOT",
+                                                                                   "THEATRICAL_GIANT"
+                                                                               ],
+                                                          "mobility_focus":  "SLOW_POWERFUL_DELIBERATE",
+                                                          "power_requirements":  "EXTREME_INDUSTRIAL_POWER"
+                                                      }
+                                 },
+    "anatomical_proportion_scaling":  {
+                                          "head_proportions":  {
+                                                                   "skull_width_to_height":  "0.75_RATIO_CONSISTENT_ALL_SIZES",
+                                                                   "eye_spacing_reference":  "SKULL_WIDTH_TIMES_0.4",
+                                                                   "jaw_depth_scaling":  "SKULL_WIDTH_TIMES_0.6",
+                                                                   "neck_diameter":  "SKULL_WIDTH_TIMES_0.5"
+                                                               },
+                                          "torso_proportions":  {
+                                                                    "chest_width":  "HEAD_WIDTH_TIMES_2.2_BROAD_SHOULDERS",
+                                                                    "torso_length":  "HEAD_HEIGHT_TIMES_3.5_REALISTIC_PROPORTION",
+                                                                    "waist_width":  "CHEST_WIDTH_TIMES_0.8_TAPERED_SHAPE",
+                                                                    "spine_segments":  "SCALE_DEPENDENT_MORE_SEGMENTS_LARGER_CREATURES"
+                                                                },
+                                          "limb_proportions":  {
+                                                                   "arm_length_total":  "TORSO_LENGTH_TIMES_1.3_REACH_PROPORTION",
+                                                                   "upper_arm_length":  "ARM_LENGTH_TIMES_0.45_HUMERUS",
+                                                                   "forearm_length":  "ARM_LENGTH_TIMES_0.35_RADIUS_ULNA",
+                                                                   "hand_length":  "ARM_LENGTH_TIMES_0.2_PROPORTIONAL_GRIP",
+                                                                   "leg_length_total":  "TORSO_LENGTH_TIMES_1.8_STANDING_HEIGHT",
+                                                                   "thigh_length":  "LEG_LENGTH_TIMES_0.5_FEMUR",
+                                                                   "shin_length":  "LEG_LENGTH_TIMES_0.4_TIBIA_FIBULA",
+                                                                   "foot_length":  "LEG_LENGTH_TIMES_0.15_GROUND_CONTACT"
+                                                               }
+                                      },
+    "mechanical_scaling_considerations":  {
+                                              "servo_torque_scaling":  {
+                                                                           "tiny_goblin_servos":  {
+                                                                                                      "joint_torque_requirements":  "0.5X_STANDARD_HUMAN_TORQUE",
+                                                                                                      "recommended_servos":  "MG90S_MICRO_SERVOS_PRIMARY",
+                                                                                                      "stepper_motors":  "NEMA14_OR_SMALLER_STEPPERS",
+                                                                                                      "power_efficiency":  "OPTIMIZED_FOR_BATTERY_LIFE"
+                                                                                                  },
+                                                                           "standard_goblin_servos":  {
+                                                                                                          "joint_torque_requirements":  "0.7X_STANDARD_HUMAN_TORQUE",
+                                                                                                          "recommended_servos":  "MG996R_STANDARD_SERVOS",
+                                                                                                          "stepper_motors":  "NEMA17_MODERATE_GEARING",
+                                                                                                          "power_balance":  "PERFORMANCE_EFFICIENCY_BALANCED"
+                                                                                                      },
+                                                                           "large_hobgoblin_servos":  {
+                                                                                                          "joint_torque_requirements":  "0.9X_STANDARD_HUMAN_TORQUE",
+                                                                                                          "recommended_servos":  "MG996R_PLUS_NEMA17_COMBO",
+                                                                                                          "stepper_motors":  "NEMA17_HIGH_GEAR_RATIOS",
+                                                                                                          "power_focus":  "PERFORMANCE_OVER_EFFICIENCY"
+                                                                                                      },
+                                                                           "giant_orc_servos":  {
+                                                                                                    "joint_torque_requirements":  "1.5X_STANDARD_HUMAN_TORQUE",
+                                                                                                    "recommended_servos":  "NEMA23_STEPPERS_PRIMARY",
+                                                                                                    "stepper_motors":  "NEMA23_100_1_GEAR_RATIOS",
+                                                                                                    "power_industrial":  "INDUSTRIAL_GRADE_REQUIREMENTS"
+                                                                                                },
+                                                                           "massive_ogre_servos":  {
+                                                                                                       "joint_torque_requirements":  "2.5X_STANDARD_HUMAN_TORQUE",
+                                                                                                       "recommended_servos":  "NEMA34_INDUSTRIAL_STEPPERS",
+                                                                                                       "stepper_motors":  "NEMA34_PLANETARY_GEARBOXES",
+                                                                                                       "power_extreme":  "THREE_PHASE_INDUSTRIAL_POWER"
+                                                                                                   }
+                                                                       },
+                                              "structural_scaling":  {
+                                                                         "aluminum_extrusion_sizes":  {
+                                                                                                          "tiny_goblin_structure":  "15MM_X_15MM_T_SLOT_LIGHTWEIGHT",
+                                                                                                          "standard_goblin_structure":  "20MM_X_20MM_T_SLOT_STANDARD",
+                                                                                                          "large_hobgoblin_structure":  "30MM_X_30MM_T_SLOT_ROBUST",
+                                                                                                          "giant_orc_structure":  "40MM_X_40MM_T_SLOT_HEAVY_DUTY",
+                                                                                                          "massive_ogre_structure":  "50MM_X_50MM_T_SLOT_INDUSTRIAL"
+                                                                                                      },
+                                                                         "bearing_sizes":  {
+                                                                                               "tiny_goblin_bearings":  "604ZZ_4MM_ID_MINIATURE",
+                                                                                               "standard_goblin_bearings":  "608ZZ_8MM_ID_STANDARD",
+                                                                                               "large_hobgoblin_bearings":  "6001ZZ_12MM_ID_MEDIUM",
+                                                                                               "giant_orc_bearings":  "6003ZZ_17MM_ID_LARGE",
+                                                                                               "massive_ogre_bearings":  "6005ZZ_25MM_ID_HEAVY_DUTY"
+                                                                                           }
+                                                                     }
+                                          },
+    "power_system_scaling":  {
+                                 "battery_capacity_scaling":  {
+                                                                  "tiny_goblin_power":  {
+                                                                                            "battery_type":  "SINGLE_LIPO_3S_2200MAH",
+                                                                                            "runtime_target":  "4_HOURS_LIGHTWEIGHT_EFFICIENCY",
+                                                                                            "charging_method":  "USB_C_CONVENIENT_CHARGING",
+                                                                                            "power_distribution":  "SIMPLE_BREADBOARD_RAILS"
+                                                                                        },
+                                                                  "standard_goblin_power":  {
+                                                                                                "battery_type":  "DUAL_LIPO_6S_5000MAH",
+                                                                                                "runtime_target":  "6_HOURS_MODERATE_USAGE",
+                                                                                                "charging_method":  "DEDICATED_CHARGER_FAST_CHARGE",
+                                                                                                "power_distribution":  "BASIC_SKELETAL_POWER_SYSTEM"
+                                                                                            },
+                                                                  "large_hobgoblin_power":  {
+                                                                                                "battery_type":  "LITHIUM_ION_10S4P_PACK",
+                                                                                                "runtime_target":  "8_HOURS_EXTENDED_OPERATION",
+                                                                                                "charging_method":  "SMART_CHARGER_BMS_MONITORING",
+                                                                                                "power_distribution":  "FULL_SKELETAL_POWER_DISTRIBUTION"
+                                                                                            },
+                                                                  "giant_orc_power":  {
+                                                                                          "battery_type":  "LITHIUM_ION_14S6P_HIGH_CAPACITY",
+                                                                                          "runtime_target":  "10_HOURS_CONTINUOUS_OPERATION",
+                                                                                          "charging_method":  "INDUSTRIAL_CHARGER_FAST_CHARGE",
+                                                                                          "power_distribution":  "REDUNDANT_POWER_RAIL_SYSTEM"
+                                                                                      },
+                                                                  "massive_ogre_power":  {
+                                                                                             "battery_type":  "INDUSTRIAL_LITHIUM_18S8P_PACK",
+                                                                                             "runtime_target":  "12_HOURS_HEAVY_DUTY_CYCLE",
+                                                                                             "charging_method":  "THREE_PHASE_INDUSTRIAL_CHARGING",
+                                                                                             "power_distribution":  "TRIPLE_REDUNDANT_POWER_SYSTEMS"
+                                                                                         }
+                                                              }
+                             },
+    "stl_scaling_methodology":  {
+                                    "parametric_design_approach":  {
+                                                                       "base_reference_model":  "STANDARD_GOBLIN_1.0_SCALE_FACTOR",
+                                                                       "scaling_parameters":  "OPENSCAD_VARIABLES_DRIVE_ALL_DIMENSIONS",
+                                                                       "automatic_generation":  "SCRIPT_GENERATES_ALL_SIZE_VARIANTS",
+                                                                       "tolerance_scaling":  "BEARING_FITS_SCALE_PROPORTIONALLY"
+                                                                   },
+                                    "size_specific_optimizations":  {
+                                                                        "tiny_models":  "THICKER_WALLS_COMPENSATE_SMALL_SCALE_WEAKNESS",
+                                                                        "large_models":  "INTERNAL_BRACING_PREVENT_SAGGING_DEFORMATION",
+                                                                        "mounting_holes":  "SCALE_APPROPRIATE_FASTENER_SIZES",
+                                                                        "support_structures":  "SIZE_OPTIMIZED_SUPPORT_GEOMETRY"
+                                                                    }
+                                },
+    "controller_scaling_architecture":  {
+                                            "esp32_controller_allocation":  {
+                                                                                "tiny_goblin_controllers":  {
+                                                                                                                "master_controller":  "SINGLE_ESP32_S3_HANDLES_ALL_FUNCTIONS",
+                                                                                                                "slave_controllers":  "MINIMAL_ESP32_C3_ONLY_IF_NEEDED",
+                                                                                                                "gpio_utilization":  "DIRECT_GPIO_CONTROL_SUFFICIENT"
+                                                                                                            },
+                                                                                "standard_goblin_controllers":  {
+                                                                                                                    "master_controller":  "ESP32_S3_COORDINATION_BALANCE",
+                                                                                                                    "slave_controllers":  "3_ESP32_C3_LIMB_CONTROLLERS",
+                                                                                                                    "gpio_expansion":  "PCA9685_SERVO_EXPANSION_BOARDS"
+                                                                                                                },
+                                                                                "large_hobgoblin_controllers":  {
+                                                                                                                    "master_controller":  "ESP32_S3_PLUS_BACKUP_CONTROLLER",
+                                                                                                                    "slave_controllers":  "5_ESP32_C3_DISTRIBUTED_CONTROL",
+                                                                                                                    "redundancy":  "BACKUP_SYSTEMS_CRITICAL_FUNCTIONS"
+                                                                                                                },
+                                                                                "giant_orc_controllers":  {
+                                                                                                              "master_controller":  "DUAL_ESP32_S3_REDUNDANT_MASTERS",
+                                                                                                              "slave_controllers":  "8_ESP32_C3_FULL_DISTRIBUTION",
+                                                                                                              "industrial_integration":  "CAN_BUS_INDUSTRIAL_PROTOCOLS"
+                                                                                                          },
+                                                                                "massive_ogre_controllers":  {
+                                                                                                                 "master_controller":  "INDUSTRIAL_PC_COORDINATION_LAYER",
+                                                                                                                 "slave_controllers":  "12_ESP32_C3_COMPLETE_DISTRIBUTION",
+                                                                                                                 "safety_systems":  "TRIPLE_REDUNDANT_SAFETY_CONTROLLERS"
+                                                                                                             }
+                                                                            }
+                                        },
+    "cost_scaling_analysis":  {
+                                  "size_vs_cost_relationship":  {
+                                                                    "tiny_goblin_cost":  "$800_SIMPLIFIED_SYSTEMS",
+                                                                    "standard_goblin_cost":  "$2090_BASELINE_FULL_FEATURES",
+                                                                    "large_hobgoblin_cost":  "$3500_ENHANCED_CAPABILITIES",
+                                                                    "giant_orc_cost":  "$6500_INDUSTRIAL_GRADE_COMPONENTS",
+                                                                    "massive_ogre_cost":  "$12000_CUSTOM_INDUSTRIAL_SYSTEMS"
+                                                                },
+                                  "cost_scaling_factors":  {
+                                                               "servo_costs":  "EXPONENTIAL_SCALING_TORQUE_REQUIREMENTS",
+                                                               "structural_costs":  "LINEAR_SCALING_MATERIAL_VOLUME",
+                                                               "controller_costs":  "STEP_FUNCTION_COMPLEXITY_THRESHOLDS",
+                                                               "battery_costs":  "QUADRATIC_SCALING_CAPACITY_REQUIREMENTS"
+                                                           }
+                              },
+    "creature_specific_customizations":  {
+                                             "goblin_characteristics":  {
+                                                                            "proportions":  "SLIGHTLY_OVERSIZED_HEAD_HANDS_FEET",
+                                                                            "movement_style":  "QUICK_JERKY_AGILE_MOVEMENTS",
+                                                                            "personality_traits":  "MISCHIEVOUS_PLAYFUL_BEHAVIORS",
+                                                                            "size_variants":  [
+                                                                                                  "TINY_HOUSE_GOBLIN",
+                                                                                                  "STANDARD_WORKSHOP_GOBLIN"
+                                                                                              ]
+                                                                        },
+                                             "orc_characteristics":  {
+                                                                         "proportions":  "BROAD_SHOULDERS_THICK_LIMBS",
+                                                                         "movement_style":  "POWERFUL_DELIBERATE_INTIMIDATING",
+                                                                         "personality_traits":  "AGGRESSIVE_COMMANDING_PRESENCE",
+                                                                         "size_variants":  [
+                                                                                               "WARRIOR_ORC",
+                                                                                               "CHIEFTAIN_ORC",
+                                                                                               "BERSERKER_ORC"
+                                                                                           ]
+                                                                     },
+                                             "hobgoblin_characteristics":  {
+                                                                               "proportions":  "MILITARY_DISCIPLINED_UPRIGHT_POSTURE",
+                                                                               "movement_style":  "PRECISE_COORDINATED_FORMATIONS",
+                                                                               "personality_traits":  "ORGANIZED_TACTICAL_BEHAVIORS",
+                                                                               "size_variants":  [
+                                                                                                     "SOLDIER_HOBGOBLIN",
+                                                                                                     "CAPTAIN_HOBGOBLIN"
+                                                                                                 ]
+                                                                           },
+                                             "ogre_characteristics":  {
+                                                                          "proportions":  "MASSIVE_HULKING_OVERSIZED_EVERYTHING",
+                                                                          "movement_style":  "SLOW_PONDEROUS_EARTH_SHAKING",
+                                                                          "personality_traits":  "SIMPLE_DIRECT_OVERWHELMING_FORCE",
+                                                                          "size_variants":  [
+                                                                                                "CAVE_OGRE",
+                                                                                                "MOUNTAIN_OGRE",
+                                                                                                "SIEGE_OGRE"
+                                                                                            ]
+                                                                      }
+                                         }
 }

@@ -1,63 +1,32 @@
-{
-
-  "relative_filename": "config/components/positioned/goblin/torso_components/spine_servo_lower.json",
-
-  "version": "1.0.0",
-
-  "author": "config/author.json",
-
-  "component_name": "spine_servo_lower",
-  "subsystem": "TORSO",
-
-  "hardware_reference": "config/components/hardware/mg996r_servo.json",
-
-  "interface_assignment": "PWM_CHANNEL_1",
-
-  "coordinate_system": "humanoid_3d",
-
-  "reference_point": "pelvis_center",
-
-  "position": {
-
-    "x": "0 INCH",
-
-    "y": "-1.0 INCH",
-
-    "z": "4.0 INCH"
-
-  },
-
-  "orientation": {
-
-    "tilt": "0 DEGREES",
-
-    "rotation": "0 DEGREES",
-
-    "roll": "0 DEGREES"
-
-  },
-
-  "function": "spine_flexion_extension",
-
-  "component_name": "goblin_lower_spine",
-  "subsystem": "TORSO",
-
-  "description": "Lower spine flexion/extension control",
-
-  "timing": {
-
-    "hitCount": 20
-
-  },
-
-  "servo_specifications": {
-
-    "range_degrees": "180",
-
-    "center_position": "90",
-
-    "max_torque_kg_cm": "11"
-
-  }
-
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/torso_components/spine_servo_lower.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_lower_spine",
+    "subsystem":  "TORSO",
+    "hardware_reference":  "config/components/hardware/mg996r_servo.json",
+    "interface_assignment":  "PWM_CHANNEL_1",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "-1.0 INCH",
+                     "z":  "4.0 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "function":  "spine_flexion_extension",
+    "description":  "Lower spine flexion/extension control",
+    "timing":  {
+                   "hitCount":  20
+               },
+    "servo_specifications":  {
+                                 "range_degrees":  "180",
+                                 "center_position":  "90",
+                                 "max_torque_kg_cm":  "11"
+                             },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

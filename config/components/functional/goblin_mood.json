@@ -1,30 +1,54 @@
-{
-  "relative_filename": "config/components/functional/goblin_mood.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "component_name": "goblin_mood",
-  "component_type": "FAMILY_LEVEL",
-  "family_type": "GOBLIN",
-  "description": "Goblin 8-mood emotional state machine - integrates sensor inputs and personality",
-  "created": "2025-10-15",
-  "timing": {
-    "hitCount": 15,
-    "description": "Mood update every 1.5 seconds"
-  },
-  "mood_components": {
-    "ANGER": { "decay_rate": 5, "max_value": 127 },
-    "FEAR": { "decay_rate": 3, "max_value": 127 },
-    "HAPPINESS": { "decay_rate": 2, "max_value": 127 },
-    "SADNESS": { "decay_rate": 2, "max_value": 127 },
-    "CURIOSITY": { "decay_rate": 4, "max_value": 127 },
-    "AFFECTION": { "decay_rate": 3, "max_value": 127 },
-    "IRRITATION": { "decay_rate": 6, "max_value": 127 },
-    "CONTENTMENT": { "decay_rate": 1, "max_value": 127 }
-  },
-  "responsibilities": [
-    "Update 8-component mood state from sensor inputs",
-    "Apply natural mood decay over time",
-    "Synchronize mood state via ESP-NOW mesh",
-    "Trigger animations based on mood changes"
-  ]
+﻿{
+    "relative_filename":  "config/components/functional/goblin_mood.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_mood",
+    "component_type":  "FAMILY_LEVEL",
+    "family_type":  "GOBLIN",
+    "description":  "Goblin 8-mood emotional state machine - integrates sensor inputs and personality",
+    "created":  "2025-10-15",
+    "timing":  {
+                   "hitCount":  15,
+                   "description":  "Mood update every 1.5 seconds"
+               },
+    "mood_components":  {
+                            "ANGER":  {
+                                          "decay_rate":  5,
+                                          "max_value":  127
+                                      },
+                            "FEAR":  {
+                                         "decay_rate":  3,
+                                         "max_value":  127
+                                     },
+                            "HAPPINESS":  {
+                                              "decay_rate":  2,
+                                              "max_value":  127
+                                          },
+                            "SADNESS":  {
+                                            "decay_rate":  2,
+                                            "max_value":  127
+                                        },
+                            "CURIOSITY":  {
+                                              "decay_rate":  4,
+                                              "max_value":  127
+                                          },
+                            "AFFECTION":  {
+                                              "decay_rate":  3,
+                                              "max_value":  127
+                                          },
+                            "IRRITATION":  {
+                                               "decay_rate":  6,
+                                               "max_value":  127
+                                           },
+                            "CONTENTMENT":  {
+                                                "decay_rate":  1,
+                                                "max_value":  127
+                                            }
+                        },
+    "responsibilities":  [
+                             "Update 8-component mood state from sensor inputs",
+                             "Apply natural mood decay over time",
+                             "Synchronize mood state via ESP-NOW mesh",
+                             "Trigger animations based on mood changes"
+                         ]
 }

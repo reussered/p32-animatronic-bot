@@ -1,156 +1,166 @@
-{
-  "relative_filename": "config/components/hardware/ili9481_5inch_tft.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "hardware_type": "ILI9481_5INCH_TFT",
-  "component_name": "ili9481_5inch_tft",
-  
-  "description": "5.0\" TFT RGB display with ILI9481 driver - EXTRA LARGE theatrical displays",
-  "theatrical_champion": "TRUE - Maximum impact for giant creature features",
-  
-  "physical_specifications": {
-    "screen_width": "5.0 INCH",
-    "screen_height": "3.75 INCH",
-    "screen_shape": "rectangular",
-    "diagonal": "5.0 INCH",
-    "resolution": "800x480",
-    "pixel_density": "160 PPI",
-    "thickness": "0.25 INCH",
-    "weight": "80 GRAMS",
-    "active_area": {
-      "width_mm": 119.04,
-      "height_mm": 89.28
-    }
-  },
-  
-  "color_specifications": {
-    "color_depth": "262K_COLORS_18BIT",
-    "bits_per_pixel": 18,
-    "red_bits": 6,
-    "green_bits": 6,
-    "blue_bits": 6,
-    "color_gamut": "RGB666",
-    "brightness": "450_CD_M2",
-    "contrast_ratio": "900:1_TFT",
-    "viewing_angle": "160_DEGREES"
-  },
-  
-  "electrical_specifications": {
-    "supply_voltage": "3.3V",
-    "logic_voltage": "3.3V",
-    "interface": "SPI",
-    "current_consumption_ma": "250",
-    "backlight_current_ma": "200",
-    "spi_clock_max_mhz": "50",
-    "power_consumption_watts": "1.5"
-  },
-  
-  "display_controller": {
-    "driver_ic": "ILI9481",
-    "manufacturer": "Ilitek",
-    "built_in_ram": "800x480x18_bits",
-    "refresh_rate_hz": "60",
-    "hardware_acceleration": ["hardware_scroll", "windowing", "gamma_correction", "dithering"]
-  },
-  
-  "pin_assignments": {
-    "vcc": "3V3_POWER",
-    "gnd": "GROUND",
-    "cs": "CHIP_SELECT_PIN",
-    "reset": "RESET_PIN",
-    "dc": "DATA_COMMAND_PIN",
-    "mosi": "SPI_MOSI",
-    "sck": "SPI_CLOCK",
-    "led": "BACKLIGHT_PWM_PIN",
-    "miso": "SPI_MISO_OPTIONAL"
-  },
-  
-  "usage_categories": {
-    "giant_creature_mouths": "maximum_expression_impact",
-    "dragon_primary_features": "theatrical_scale_displays",
-    "robot_main_interfaces": "primary_user_interaction",
-    "status_dashboards": "detailed_creature_monitoring",
-    "immersive_displays": "audience_facing_screens"
-  },
-  
-  "ordering_information": {
-    "primary_supplier": "Waveshare",
-    "part_number": "5inch-HDMI-LCD",
-    "product_name": "5inch HDMI LCD 800×480 Resistive Touch Screen",
-    "price_usd": "59.99",
-    "availability": "IN_STOCK",
-    "shipping": "7-14_DAYS",
-    "datasheet_url": "https://www.waveshare.com/w/upload/4/4e/5inch_HDMI_LCD_User_Manual.pdf",
-    "product_url": "https://www.waveshare.com/5inch-hdmi-lcd.htm"
-  },
-  
-  "alternative_suppliers": [
-    {
-      "supplier": "Amazon Generic",
-      "part_number": "5inch-TFT-Display",
-      "price_usd": "45.99",
-      "stock_status": "AVAILABLE",
-      "note": "Multiple sellers, quality varies"
-    },
-    {
-      "supplier": "AliExpress Generic",
-      "part_number": "ILI9481-5.0-TFT",
-      "price_usd": "28.99",
-      "stock_status": "AVAILABLE",
-      "note": "Budget option - longer shipping"
-    },
-    {
-      "supplier": "Seeed Studio",
-      "part_number": "104020137",
-      "price_usd": "65.90",
-      "stock_status": "AVAILABLE",
-      "note": "Premium quality option"
-    }
-  ],
-  
-  "technical_advantages": [
-    "Maximum screen real estate",
-    "High resolution (800x480)",
-    "Excellent pixel density for size",
-    "Very bright display for outdoor use",
-    "Professional display driver",
-    "Touch capability standard",
-    "Wide viewing angles"
-  ],
-  
-  "technical_considerations": [
-    "High power consumption",
-    "Requires robust mounting system", 
-    "Generates significant heat",
-    "Large form factor affects creature design",
-    "May need dedicated power supply"
-  ],
-  
-  "creature_sizing": {
-    "perfect_for": ["giant_dragons", "theatrical_animatronics", "large_robots"],
-    "excellent_for": ["audience_facing_displays", "primary_interfaces"],
-    "consider_carefully": ["Power requirements", "mounting complexity", "creature size"],
-    "not_suitable_for": ["small_creatures", "battery_operation", "subtle_features"]
-  },
-  
-  "power_requirements": {
-    "idle_power_watts": "1.0",
-    "active_power_watts": "1.5",
-    "peak_power_watts": "2.0",
-    "recommended_supply": "5V_3A_minimum",
-    "power_management": "Consider PWM dimming for efficiency"
-  },
-  
-  "mechanical_considerations": {
-    "weight": "Substantial - requires strong mounting",
-    "size": "Large footprint - affects creature proportions",
-    "vibration_sensitivity": "Higher due to size and weight",
-    "cooling": "May require active cooling in enclosed spaces"
-  },
-  
-  "stl_reference": "assets/shapes/stl/basic_mounts/ili9481_5inch_heavy_mount.stl",
-  "scad_template": "assets/shapes/scad/templates/hardware_mounts/ili9481_theatrical_mount_template.scad",
-  
-  "compatible_creatures": ["giant_dragons", "theatrical_robots", "large_animatronics", "audience_displays", "professional_builds"],
-  "estimated_cost_usd": "59.99"
+﻿{
+    "relative_filename":  "config/components/hardware/ili9481_5inch_tft.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "ILI9481_5INCH_TFT",
+    "component_name":  "ili9481_5inch_tft",
+    "description":  "5.0\" TFT RGB display with ILI9481 driver - EXTRA LARGE theatrical displays",
+    "theatrical_champion":  "TRUE - Maximum impact for giant creature features",
+    "physical_specifications":  {
+                                    "screen_width":  "5.0 INCH",
+                                    "screen_height":  "3.75 INCH",
+                                    "screen_shape":  "rectangular",
+                                    "diagonal":  "5.0 INCH",
+                                    "resolution":  "800x480",
+                                    "pixel_density":  "160 PPI",
+                                    "thickness":  "0.25 INCH",
+                                    "weight":  "80 GRAMS",
+                                    "active_area":  {
+                                                        "width_mm":  119.04,
+                                                        "height_mm":  89.28
+                                                    }
+                                },
+    "color_specifications":  {
+                                 "color_depth":  "262K_COLORS_18BIT",
+                                 "bits_per_pixel":  18,
+                                 "red_bits":  6,
+                                 "green_bits":  6,
+                                 "blue_bits":  6,
+                                 "color_gamut":  "RGB666",
+                                 "brightness":  "450_CD_M2",
+                                 "contrast_ratio":  "900:1_TFT",
+                                 "viewing_angle":  "160_DEGREES"
+                             },
+    "electrical_specifications":  {
+                                      "supply_voltage":  "3.3V",
+                                      "logic_voltage":  "3.3V",
+                                      "interface":  "SPI",
+                                      "current_consumption_ma":  "250",
+                                      "backlight_current_ma":  "200",
+                                      "spi_clock_max_mhz":  "50",
+                                      "power_consumption_watts":  "1.5"
+                                  },
+    "display_controller":  {
+                               "driver_ic":  "ILI9481",
+                               "manufacturer":  "Ilitek",
+                               "built_in_ram":  "800x480x18_bits",
+                               "refresh_rate_hz":  "60",
+                               "hardware_acceleration":  [
+                                                             "hardware_scroll",
+                                                             "windowing",
+                                                             "gamma_correction",
+                                                             "dithering"
+                                                         ]
+                           },
+    "pin_assignments":  {
+                            "vcc":  "3V3_POWER",
+                            "gnd":  "GROUND",
+                            "cs":  "CHIP_SELECT_PIN",
+                            "reset":  "RESET_PIN",
+                            "dc":  "DATA_COMMAND_PIN",
+                            "mosi":  "SPI_MOSI",
+                            "sck":  "SPI_CLOCK",
+                            "led":  "BACKLIGHT_PWM_PIN",
+                            "miso":  "SPI_MISO_OPTIONAL"
+                        },
+    "usage_categories":  {
+                             "giant_creature_mouths":  "maximum_expression_impact",
+                             "dragon_primary_features":  "theatrical_scale_displays",
+                             "robot_main_interfaces":  "primary_user_interaction",
+                             "status_dashboards":  "detailed_creature_monitoring",
+                             "immersive_displays":  "audience_facing_screens"
+                         },
+    "ordering_information":  {
+                                 "primary_supplier":  "Waveshare",
+                                 "part_number":  "5inch-HDMI-LCD",
+                                 "product_name":  "5inch HDMI LCD 800×480 Resistive Touch Screen",
+                                 "price_usd":  "59.99",
+                                 "availability":  "IN_STOCK",
+                                 "shipping":  "7-14_DAYS",
+                                 "datasheet_url":  "https://www.waveshare.com/w/upload/4/4e/5inch_HDMI_LCD_User_Manual.pdf",
+                                 "product_url":  "https://www.waveshare.com/5inch-hdmi-lcd.htm"
+                             },
+    "alternative_suppliers":  [
+                                  {
+                                      "supplier":  "Amazon Generic",
+                                      "part_number":  "5inch-TFT-Display",
+                                      "price_usd":  "45.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Multiple sellers, quality varies"
+                                  },
+                                  {
+                                      "supplier":  "AliExpress Generic",
+                                      "part_number":  "ILI9481-5.0-TFT",
+                                      "price_usd":  "28.99",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Budget option - longer shipping"
+                                  },
+                                  {
+                                      "supplier":  "Seeed Studio",
+                                      "part_number":  "104020137",
+                                      "price_usd":  "65.90",
+                                      "stock_status":  "AVAILABLE",
+                                      "note":  "Premium quality option"
+                                  }
+                              ],
+    "technical_advantages":  [
+                                 "Maximum screen real estate",
+                                 "High resolution (800x480)",
+                                 "Excellent pixel density for size",
+                                 "Very bright display for outdoor use",
+                                 "Professional display driver",
+                                 "Touch capability standard",
+                                 "Wide viewing angles"
+                             ],
+    "technical_considerations":  [
+                                     "High power consumption",
+                                     "Requires robust mounting system",
+                                     "Generates significant heat",
+                                     "Large form factor affects creature design",
+                                     "May need dedicated power supply"
+                                 ],
+    "creature_sizing":  {
+                            "perfect_for":  [
+                                                "giant_dragons",
+                                                "theatrical_animatronics",
+                                                "large_robots"
+                                            ],
+                            "excellent_for":  [
+                                                  "audience_facing_displays",
+                                                  "primary_interfaces"
+                                              ],
+                            "consider_carefully":  [
+                                                       "Power requirements",
+                                                       "mounting complexity",
+                                                       "creature size"
+                                                   ],
+                            "not_suitable_for":  [
+                                                     "small_creatures",
+                                                     "battery_operation",
+                                                     "subtle_features"
+                                                 ]
+                        },
+    "power_requirements":  {
+                               "idle_power_watts":  "1.0",
+                               "active_power_watts":  "1.5",
+                               "peak_power_watts":  "2.0",
+                               "recommended_supply":  "5V_3A_minimum",
+                               "power_management":  "Consider PWM dimming for efficiency"
+                           },
+    "mechanical_considerations":  {
+                                      "weight":  "Substantial - requires strong mounting",
+                                      "size":  "Large footprint - affects creature proportions",
+                                      "vibration_sensitivity":  "Higher due to size and weight",
+                                      "cooling":  "May require active cooling in enclosed spaces"
+                                  },
+    "stl_reference":  "assets/shapes/stl/basic_mounts/ili9481_5inch_heavy_mount.stl",
+    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/ili9481_theatrical_mount_template.scad",
+    "compatible_creatures":  [
+                                 "giant_dragons",
+                                 "theatrical_robots",
+                                 "large_animatronics",
+                                 "audience_displays",
+                                 "professional_builds"
+                             ],
+    "estimated_cost_usd":  "59.99"
 }
