@@ -13,18 +13,15 @@
 
 esp_err_t heartbeat_init(void);
 esp_err_t network_monitor_init(void);
-esp_err_t goblin_head_init(void);
-esp_err_t goblin_torso_init(void);
+esp_err_t test_head_init(void);
 
 // Forward Declarations - Act Functions (from individual component files)
 
 void heartbeat_act(void);
 void network_monitor_act(void);
-void goblin_head_act(void);
-void goblin_torso_act(void);
+void test_head_act(void);
 
-// Table size constants
-#define INIT_TABLE_SIZE 4
-#define ACT_TABLE_SIZE 4
+// Table size constant - ALL TABLES MUST HAVE SAME SIZE
+#define TABLE_SIZE 3
 
 #endif // P32_COMPONENT_REGISTRY_HPP

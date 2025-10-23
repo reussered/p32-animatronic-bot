@@ -209,9 +209,8 @@ class P32ComponentGenerator:
 
         content.extend([
             "",
-            "// Table size constants",
-            f"#define INIT_TABLE_SIZE {len(self.components)}",
-            f"#define ACT_TABLE_SIZE {len(self.components)}",
+            "// Table size constant - ALL TABLES MUST HAVE SAME SIZE",
+            f"#define TABLE_SIZE {len(self.components)}",
             "",
             "#endif // P32_COMPONENT_REGISTRY_HPP"
         ])
@@ -244,7 +243,7 @@ class P32ComponentGenerator:
             "// Initialization Table",
             "// ============================================================================",
             "",
-            f"esp_err_t (*initTable[INIT_TABLE_SIZE])(void) = {{"
+            f"esp_err_t (*initTable[TABLE_SIZE])(void) = {{"
         ])
 
         for i, comp in enumerate(self.components):
@@ -255,10 +254,10 @@ class P32ComponentGenerator:
             "};",
             "",
             "// ============================================================================",
-            "// Action Table",
+            "// Action Table", 
             "// ============================================================================",
             "",
-            f"void (*actTable[ACT_TABLE_SIZE])(void) = {{"
+            f"void (*actTable[TABLE_SIZE])(void) = {{"
         ])
 
         for i, comp in enumerate(self.components):
@@ -273,7 +272,7 @@ class P32ComponentGenerator:
             "// Timing Table - Execution Frequency Control",
             "// ============================================================================",
             "",
-            f"uint32_t hitCountTable[ACT_TABLE_SIZE] = {{"
+            f"uint32_t hitCountTable[TABLE_SIZE] = {{"
         ])
 
         for i, comp in enumerate(self.components):
