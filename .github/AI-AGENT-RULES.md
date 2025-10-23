@@ -395,3 +395,325 @@ gc9a01_act()           // Called by both displays
 
 **This rule has been violated 10+ times. It is now IRONCLAD and cannot be ignored.**
 
+## RULE: GLOBAL SHARED MEMORY API - CRITICAL
+
+**The SharedMemory system is the ONLY way to communicate between subsystems.**
+
+### CRITICAL API Understanding
+
+**`read()` Does NOT Use Network:**
+- `Mood *mood = GSM.read<Mood>("global_mood");` returns pointer to local memory
+- If object doesn't exist, it's created with default constructor and auto-synchronized
+- Components can call `read()` as often as needed with ZERO network overhead
+
+**`write()` Triggers Mesh Broadcast:**
+- `GSM.write<Mood>("global_mood");` synchronizes current state to all subsystems
+- Only `write()` triggers ESP-NOW mesh traffic
+- NEVER call ESP-NOW APIs directly - use SharedMemory exclusively
+
+### Correct Usage Pattern
+
+```cpp
+void component_act(void) {
+    // Get pointer to shared state (local access only)
+    Mood *currentMood = GSM.read<Mood>("global_mood");
+    Environment *envir = GSM.read<Environment>("global_environment");
+    
+    // Modify state directly via pointer
+    if (envir->temperature_c > 80 && currentMood->contentment() > 20) {
+        currentMood->contentment() -= (envir->temperature_c - 80);
+        
+        // Broadcast changes to all subsystems
+        GSM.write<Mood>("global_mood");
+    }
+}
+```
+
+**ENFORCEMENT:** No component may directly call ESP-NOW APIs. All inter-subsystem communication MUST use SharedMemory class.
+
+## RULE: THREE-LEVEL COMPONENT ATTACHMENT - CRITICAL
+
+**NOTHING executes unless it's a component with init() and act() functions.**
+
+### Level 1: System Components (Always Attached)
+- Core platform functionality (WiFi, Serial, Watchdog)
+- Always included in every build
+- Low execution frequency (high hitCount values)
+
+### Level 2: Family Components (Shared Across Bot Family)  
+- Behavior/personality shared by family (goblin_personality, cat_behavior)
+- Defined in `config/bots/bot_families/{family}_family.json`
+- Mid-range execution frequency
+
+### Level 3: Bot-Specific Components (Positioned Hardware)
+- Physical hardware with spatial coordinates 
+- Defined in individual bot JSON files
+- High execution frequency (low hitCount values)
+
+**Component Function Signature:** ALL components must have:
+- `esp_err_t {name}_init(void)` - NO ARGUMENTS
+- `void {name}_act(void)` - NO ARGUMENTS  
+- Access globals via `#include "p32_shared_state.h"`
+
+## RULE: TWO-TIER MOUNTING ARCHITECTURE - CRITICAL
+
+**Universal hardware mounts + creature-specific decorative shells = modular system**
+
+### Tier 1: Universal Hardware Mounts (IDENTICAL across ALL creatures)
+- `sensor_basic_mount.scad/.stl` - HC-SR04 ultrasonic (ALL creatures)
+- `display_basic_mount.scad/.stl` - GC9A01 round LCD (ALL creatures) 
+- `speaker_basic_mount.scad/.stl` - 40mm I2S speaker (ALL creatures)
+- Simple geometric brackets, utilitarian design, ZERO creature features
+
+### Tier 2: Creature-Specific Decorative Shells (UNIQUE per creature)
+- `goblin_nose_shell.scad/.stl` - Warty texture + incorporates sensor_basic_mount
+- `cat_nose_shell.scad/.stl` - Pink triangle + incorporates sensor_basic_mount
+- `bear_nose_shell.scad/.stl` - Black button + incorporates sensor_basic_mount
+
+### Integration Pattern
+```openscad
+// goblin_nose_shell.scad
+use <../basic_mounts/sensor_basic_mount.scad>
+
+module goblin_nose_shell() {
+    union() {
+        sensor_basic_mount();  // Include universal hardware
+        goblin_warts();        // Add creature features
+        goblin_nostril_shape();
+    }
+}
+```
+
+**CRITICAL:** File naming must be accurate:
+- ✅ `sensor_basic_mount.stl` (universal)
+- ✅ `goblin_nose_shell.stl` (creature-specific)
+- ❌ `goblin_nose_sensor.stl` (WRONG - implies goblin-specific sensor)
+
+## RULE: JSON-DRIVEN PERSONALITY SYSTEM
+
+**Personality is entirely data-driven - no hardcoded behavior logic.**
+
+### Architecture Pattern
+- JSON defines personality traits and reaction thresholds
+- C++ code is generic - reads JSON, applies formulas  
+- Same code works for all creatures - only JSON changes
+- Artists can tweak personalities without programmer
+
+### Configuration Structure
+```json
+{
+  "personality_name": "Mischievous Goblin",
+  "mood_reactions": {
+    "close_object": {
+      "distance_threshold_cm": 30,
+      "triggers": [
+        {"mood": "CURIOSITY", "delta": 10},
+        {"mood": "EXCITEMENT", "delta": 15}
+      ]
+    }
+  }
+}
+```
+
+**Implementation uses SharedMemory exclusively - NO direct ESP-NOW calls.**
+
+## RULE: COMPONENT GENERATION IS MANDATORY
+
+**ALL component code MUST be generated via scripts - NEVER manually created.**
+
+### Generation Commands
+- Specific bot: `python tools\generate_tables.py config\bots\bot_families\goblins\goblin_full.json src`
+- Individual components: `python tools\generate_individual_components.py`
+
+**Manual component creation ALWAYS fails** - generation system required for:
+- Consistent naming conventions
+- Proper header file generation  
+- Dispatch table integration
+- Multi-ESP32 variant support
+
+**VIOLATION CONSEQUENCE:** Build failures with missing headers and architecture violations.
+
+## RULE: COORDINATE SYSTEM SPECIFICATION
+
+**Two coordinate systems supported for different physical arrangements.**
+
+### 2D Planar Coordinate System
+- **Coordinate System ID**: `"planar_2d"`
+- **Use Case**: Flat-panel arrangements, wall-mounted displays, simple layouts
+- **Reference Point**: `"nose_center"` at (0, 0, 0)
+- **Axes**: X (horizontal), Y (vertical), Z (depth - typically 0)
+
+### 3D Skull-Based Coordinate System  
+- **Coordinate System ID**: `"skull_3d"`
+- **Use Case**: Anatomical humanoid faces, realistic animatronics
+- **Reference Point**: `"nose_center"` at (0, 0, 0)
+- **Baseline**: 3.0" eye spacing as standard human proportion
+- **Scaling**: All positions scale proportionally with eye spacing changes
+
+### Goblin Full Implementation
+- **Vertical Compression**: 30% (multiply all Y coordinates by 0.7)
+- **Eye Spacing**: 3.0" baseline maintained
+- **Compression Formula**: `final_y = base_y * 0.7`
+
+### Scaling Algorithm
+```
+scale_factor = new_eye_spacing / 3.0
+final_x = base_x * scale_factor
+final_y = base_y * scale_factor * compression_factor
+final_z = base_z * scale_factor
+```
+
+### JSON Position Format
+```json
+{
+  "coordinate_system": "skull_3d",
+  "reference_point": "nose_center", 
+  "position": {
+    "x": "-1.5 INCH",
+    "y": "1.0 INCH",
+    "z": "-0.5 INCH"
+  }
+}
+```
+
+## RULE: JSON STRUCTURE REQUIREMENTS
+
+**ALL JSON files must follow strict encoding and structure requirements.**
+
+### ASCII Encoding Mandatory
+- **ALL JSON files MUST be saved as pure ASCII without UTF-8 BOM**
+- **PROBLEM**: UTF-8 BOM (bytes `EF BB BF`) breaks Python JSON parser
+- **DETECTION**: First 3 bytes must NOT be `239, 187, 191`
+- **CORRECT**: First byte should be `123` (the `{` character)
+
+### Mandatory Fields (All JSON Files)
+```json
+{
+  "relative_filename": "config/components/positioned/component_name.json",
+  "version": "1.0.0", 
+  "author": "config/author.json",
+  "component_name": "unique_component_name",
+  "description": "Human readable description",
+  "timing": {
+    "hitCount": 10
+  },
+  "software": {
+    "init_function": "component_name_init",
+    "act_function": "component_name_act"
+  }
+}
+```
+
+### Reference Pattern
+- Use `"author": "config/author.json"` for consistent metadata
+- Use relative paths for all file references
+- Component names must be unique across entire system
+
+## RULE: COMPONENT CODE REQUIREMENTS
+
+**All component files must follow mandatory structure for compilation.**
+
+### File Structure Requirements
+- **Pattern**: `{component_name}.cpp` in `src/components/`
+- **Language**: C++ (`.cpp`) - NEVER C files
+- **Headers**: `{component_name}.hpp` in `include/components/`
+
+### Mandatory Header Structure
+```cpp
+// P32 Component: {component_name}
+// Auto-generated individual component file
+
+#include "p32_component_config.h"
+#include "core/memory/SharedMemory.hpp"  // For GSM access
+#include "esp_log.h"
+#include "esp_err.h"
+// Additional includes for shared classes as needed
+```
+
+### Mandatory Function Definitions
+```cpp
+esp_err_t {component_name}_init(void) {
+    // Initialization code
+    return ESP_OK;
+}
+
+void {component_name}_act(void) {
+    // Action/loop code - NO ARGUMENTS
+    // Access g_loopCount from p32_shared_state.h
+}
+```
+
+**Function Requirements:**
+- **NO ARGUMENTS** - access globals directly from `p32_shared_state.h`
+- Return `ESP_OK` from init functions
+- Use void return for act functions
+
+## RULE: INTERFACE GPIO ASSIGNMENT
+
+**Bus + Device architecture maximizes pin efficiency through shared resources.**
+
+### Architecture Pattern
+- **Bus Components**: Define shared pins (MOSI, MISO, CLK, SDA, SCL)
+- **Device Components**: Reference bus + add unique pins (CS, data pins)
+- **Pin Efficiency**: 3 + N pins for N SPI devices, 2 + N pins for N I2S devices
+
+### SPI Interface Pattern
+- **Shared Bus Pins**: GPIO 12 (MISO), GPIO 13 (MOSI), GPIO 14 (CLK)
+- **Device CS Pins**: GPIO 15 (CS1), GPIO 16 (CS2), GPIO 17 (CS3)
+- **Total Usage**: 4 pins for 1 display, 5 pins for 2 displays
+
+### I2S Interface Pattern
+- **Shared Bus Pins**: GPIO 4 (BCLK), GPIO 5 (WS)
+- **Device Data Pins**: GPIO 6 (DATA1), GPIO 7 (DATA2), GPIO 8 (DATA3)
+
+### Configuration Files
+```json
+// SPI Bus: config/components/interfaces/spi_bus_vspi.json
+{
+  "interface_id": "SPI_BUS_VSPI",
+  "interface_type": "SPI_BUS", 
+  "pins": {
+    "miso": 12, "mosi": 13, "clk": 14
+  }
+}
+
+// SPI Device: config/components/interfaces/spi_device_1.json
+{
+  "interface_id": "SPI_DEVICE_1",
+  "interface_type": "SPI_DEVICE",
+  "bus_reference": "SPI_BUS_VSPI",
+  "pins": {
+    "cs": 15
+  }
+}
+```
+
+## RULE: UNIVERSAL HEAD ARCHITECTURE
+
+**Skull framework + component modules = complete head system.**
+
+### Design Principle
+- **Skull Responsibility**: Mounting framework at P32 coordinates, creature silhouette
+- **Component Responsibility**: Electronics + detailed creature features + software
+
+### Standardized Mounting Points
+- **Eyes**: 26mm outer diameter rings at P32 coordinates (±1.05", +0.7", -0.35")
+- **Nose**: 22x17mm bracket at (0", 0", +0.25") for HC-SR04 sensor
+- **Mouth**: 26mm outer diameter ring at (0", -1.05", 0") for GC9A01 display
+- **Ears**: Variable creature-dependent positions for speakers
+
+### Universal Application
+- Same electronics work across all creatures (goblin, cat, bear)
+- Component shells provide unique aesthetics while reusing hardware mounts
+- Modular system allows creature variations with identical electronics
+
+### File Organization
+```
+config/components/positioned/
+├── {creature}_eye_left.json      # Left eye position + shell reference
+├── {creature}_eye_right.json     # Right eye position + shell reference
+├── {creature}_nose.json          # Nose sensor position + shell reference
+├── {creature}_mouth.json         # Mouth display position + shell reference
+└── {creature}_ear_{left|right}.json  # Ear positions + shell references
+```
+

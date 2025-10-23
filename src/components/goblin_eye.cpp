@@ -126,17 +126,17 @@ void init_goblin_eye_palette(void) {
  */
 void process_frame_with_mood(void) {
     // Get current global mood from shared memory
-    Mood currentGlobalMood = GSM.read<Mood>();
+    Mood* currentGlobalMood = GSM.read<Mood>("global_mood");
     
     // Check if mood changed (optimization!)
-    if (!mood_initialized || lastMood != currentGlobalMood) {
+    if (!mood_initialized || lastMood != *currentGlobalMood) {
         // Step 1: Calculate TOTAL color delta (once per frame)
         MoodColorDelta totalDelta;
         
         if (mood_initialized) {
             // Calculate delta between old and new mood
             for(int i = 0; i < Mood::componentCount; ++i) {
-                int8_t moodDelta = currentGlobalMood.components[i] - lastMood.components[i];
+                int8_t moodDelta = currentGlobalMood->components[i] - lastMood.components[i];
                 if(moodDelta != 0) {
                     const MoodColorEffect& effect = moodColorEffects[i];
                     
@@ -155,7 +155,7 @@ void process_frame_with_mood(void) {
             // First time - calculate delta from neutral to current mood
             Mood neutralMood;
             for(int i = 0; i < Mood::componentCount; ++i) {
-                int8_t moodValue = currentGlobalMood.components[i];
+                int8_t moodValue = currentGlobalMood->components[i];
                 if(moodValue != 0) {
                     const MoodColorEffect& effect = moodColorEffects[i];
                     
@@ -184,7 +184,7 @@ void process_frame_with_mood(void) {
         }
         
         // Step 3: Remember new mood
-        lastMood = currentGlobalMood;
+        lastMood = *currentGlobalMood;
         
         ESP_LOGV(TAG, "Frame updated with mood delta R:%+d G:%+d B:%+d at loop %u", 
                  (int)totalDelta.red_delta, (int)totalDelta.green_delta, 

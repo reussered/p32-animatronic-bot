@@ -48,4 +48,20 @@ void init_goblin_eye_palette(void);
  */
 void process_frame_with_mood(void);
 
+/**
+ * @brief Draw a realistic eyeball with sclera, iris, and pupil
+ * This is the core goblin eye rendering function
+ * @param iris_offset_x Horizontal offset of iris center (-30 to +30)
+ * @param iris_offset_y Vertical offset of iris center (-30 to +30)  
+ * @param iris_color RGB565 color for the iris
+ */
+void draw_goblin_eyeball(int iris_offset_x, int iris_offset_y, uint16_t iris_color);
+
+/**
+ * @brief Generate animated eye movement pattern
+ * @param iris_x Output: horizontal iris offset
+ * @param iris_y Output: vertical iris offset
+ */
+void generate_eye_movement(int* iris_x, int* iris_y);
+
 #endif // GOBLIN_EYE_HPP
