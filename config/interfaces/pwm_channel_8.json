@@ -1,0 +1,11 @@
+{
+    "relative_filename": "config/components/interfaces/pwm_channel_8.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "interface_type": "PWM_CHANNEL",
+    "interface_id": "PWM_CHANNEL_8",
+    "hardware_bus": "LEDC_TIMER_0",
+    "channel_number": 8,
+    "frequency_hz": 50,
+    "resolution_bits": 10
+}

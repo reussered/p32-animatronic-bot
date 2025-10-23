@@ -22,17 +22,15 @@ typedef struct {
 esp_err_t system_core_init(void);
 esp_err_t network_monitor_init(void);
 esp_err_t unknown_component_init(void);
-esp_err_t unknown_component_init(void);
 
 // Action functions
 void system_core_act(uint64_t loopCount);
 void network_monitor_act(uint64_t loopCount);
 void unknown_component_act(uint64_t loopCount);
-void unknown_component_act(uint64_t loopCount);
 
 // Component tables
-#define INIT_TABLE_SIZE 4
-#define ACT_TABLE_SIZE 4
+#define INIT_TABLE_SIZE 3
+#define ACT_TABLE_SIZE 3
 
 extern init_func_t initTable[INIT_TABLE_SIZE];
 extern act_table_entry_t actTable[ACT_TABLE_SIZE];

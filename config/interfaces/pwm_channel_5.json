@@ -1,0 +1,11 @@
+{
+    "relative_filename": "config/interfaces/pwm_channel_5.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "interface_type": "PWM_CHANNEL",
+    "interface_id": "PWM_CHANNEL_5",
+    "hardware_bus": "LEDC_TIMER_0",
+    "channel_number": 5,
+    "frequency_hz": 50,
+    "resolution_bits": 10
+}

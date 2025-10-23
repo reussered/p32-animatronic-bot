@@ -1,0 +1,41 @@
+{
+    "relative_filename": "config/components/test/test_left_eye_positioned.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_name": "test_left_eye_positioned",
+    "component_type": "POSITIONED_COMPONENT",
+    "timing": {
+        "hitCount": 1,
+        "description": "Test left eye updates every cycle"
+    },
+    "hardware_reference": "config/components/hardware/gc9a01_display.json",
+    "interface_assignment": "config/interfaces/spi_device_1.json",
+    "additional_interfaces": [
+        "config/interfaces/gpio_pin_27.json",
+        "config/interfaces/gpio_pin_26.json"
+    ],
+    "position": {
+        "coordinate_system": "planar_2d",
+        "reference_point": "nose_center",
+        "x": "-1.5 INCH",
+        "y": "0.5 INCH", 
+        "z": "0.0 INCH",
+        "rotation": {
+            "yaw": "0 DEGREES",
+            "pitch": "0 DEGREES",
+            "roll": "0 DEGREES"
+        }
+    },
+    "software": {
+        "init_function": "test_left_eye_init",
+        "act_function": "test_left_eye_act",
+        "header_file": "components/test/test_left_eye.hpp",
+        "source_file": "components/test/test_left_eye.cpp"
+    },
+    "test_configuration": {
+        "test_type": "COLOR_CYCLE",
+        "cycle_interval_frames": 60,
+        "colors": ["RED", "GREEN", "BLUE", "WHITE", "BLACK"],
+        "validation_enabled": true
+    }
+}

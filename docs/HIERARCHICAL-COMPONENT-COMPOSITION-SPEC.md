@@ -11,6 +11,29 @@ The P32 system uses **recursive component composition** where:
 
 This means: **A single JSON file (goblin_full.json) defines the entire creature.**
 
+## FOLDER ORGANIZATION PRINCIPLE: Component Composition Drives Structure
+
+**The folder organization follows the compositional hierarchy.**
+
+Any section with the name of the form `xxxx_components` contains a list of components that compose that component, referenced by relative pathnames:
+
+```json
+{
+  "arm_components": [
+    "config/components/positioned/goblin/arm_components/left/shoulder_flexion_servo.json",
+    "config/components/positioned/goblin/arm_components/left/elbow_flexion_servo.json"
+  ]
+}
+```
+
+**This drives the folder structure:**
+- Components that contain other components need organized subdirectories
+- The relative pathnames in `contained_components` arrays determine folder hierarchy
+- Anatomical groupings (arm_components, leg_components) become folder names
+- Left/right variants become subfolders (left/, right/) when multiple components exist
+
+**CRITICAL**: The folder structure serves the composition - not arbitrary organization.
+
 ## Component Hierarchy Levels
 
 ```

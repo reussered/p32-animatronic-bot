@@ -1,0 +1,36 @@
+{
+    "relative_filename": "config/components/subsystem/test_head.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_name": "test_head",
+    "component_type": "SUBSYSTEM_ASSEMBLY",
+    "description": "Test head subsystem with dual displays for hardware validation",
+    "timing": {
+        "hitCount": 1,
+        "description": "Test head coordination every cycle for real-time validation"
+    },
+    "subsystem": "HEAD",
+    "coordinate_system": "planar_2d",
+    "reference_point": "nose_center",
+    "contained_components": [
+        "config/components/positioned/goblin_left_eye.json",
+        "config/components/positioned/goblin_right_eye.json"
+    ],
+    "software": {
+        "init_function": "test_head_init",
+        "act_function": "test_head_act",
+        "header_file": "components/subsystem/test_head.hpp",
+        "source_file": "components/subsystem/test_head.cpp"
+    },
+    "hardware_requirements": {
+        "spi_devices": ["SPI_DEVICE_1", "SPI_DEVICE_2"],
+        "gpio_pins": [26, 27, 33],
+        "power_consumption": "200mA @ 3.3V"
+    },
+    "test_configuration": {
+        "dual_display_test": true,
+        "synchronized_rendering": false,
+        "color_validation": true,
+        "frame_rate_target": 30
+    }
+}

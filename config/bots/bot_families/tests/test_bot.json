@@ -1,0 +1,48 @@
+{
+    "relative_filename": "config/bots/bot_families/tests/test_bot.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "TESTBOT",
+    "bot_id": "test_bot_v1",
+    "description": "Minimal test creature for hardware validation - direct component test",
+    "created": "2025-10-23",
+    "component_name": "test_bot",
+    "component_type": "TEST_ASSEMBLY",
+    "timing": {
+        "hitCount": 1,
+        "description": "Test creature runs every cycle for real-time validation"
+    },
+    "coordinate_system": "planar_2d",
+    "reference_point": "nose_center",
+    "eye_spacing": "3.0 INCH",
+    "subsystem_assemblies": [
+        "config/subsystems/test_head.json"
+    ],
+    "mood_defaults": {
+        "FEAR": 0,
+        "ANGER": 0,
+        "IRRITATION": 0,
+        "HAPPINESS": 50,
+        "CONTENTMENT": 50,
+        "HUNGER": 0,
+        "CURIOSITY": 80,
+        "AFFECTION": 0
+    },
+    "test_config": {
+        "direct_component_testing": true,
+        "verbose_logging": true,
+        "auto_cycle_colors": true,
+        "display_sync_enabled": false
+    },
+    "hardware_validation": {
+        "required_displays": 2,
+        "required_spi_devices": ["SPI_DEVICE_1", "SPI_DEVICE_2"],
+        "required_gpio_pins": [26, 27, 33],
+        "power_requirements": "3.3V @ 200mA minimum"
+    },
+    "shape_assembly": {
+        "type": "TEST_FIXTURE",
+        "description": "Minimal test fixture for display validation",
+        "shape": "config/shapes/test_fixture_mount.scad"
+    }
+}

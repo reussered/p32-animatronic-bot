@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "component_type": "POSITIONED_COMPONENT",
     "component_name": "goblin_left_shoulder_abduction_servo",
-    "hardware_reference": "config/components/hardware/servo_9g_micro.json",
+    "hardware_reference": "config/hardware/servo_9g_micro.json",
     "interface_assignment": "PWM_CHANNEL_5",
     "position": {
         "coordinate_system": "skull_3d",

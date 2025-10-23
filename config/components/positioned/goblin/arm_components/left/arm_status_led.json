@@ -1,0 +1,20 @@
+{
+    "relative_filename": "config/components/positioned/goblin/arm_components/left/arm_status_led.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_type": "POSITIONED_COMPONENT",
+    "component_name": "goblin_left_arm_status_led",
+    "hardware_reference": "config/hardware/led_neopixel_ring.json",
+    "interface_assignment": "GPIO_PIN_26",
+    "position": {
+        "coordinate_system": "skull_3d",
+        "reference_point": "shoulder_socket_left",
+        "x": "0.0 INCH",
+        "y": "-2.0 INCH",
+        "z": "0.5 INCH"
+    },
+    "software": {
+        "init_function": "goblin_left_arm_status_led_init",
+        "act_function": "goblin_left_arm_status_led_act"
+    }
+}

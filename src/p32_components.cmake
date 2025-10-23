@@ -1,16 +1,19 @@
-# P32 Individual Component List - Auto-generated
-# Use this to selectively enable/disable components for memory analysis
+# P32 Component Dispatch Tables - Auto-generated CMake
+# Includes all component source files for build system
 
 set(P32_COMPONENT_SOURCES
-    components/system_core.cpp
+    components/heartbeat.cpp
     components/network_monitor.cpp
-    components/unknown_component.cpp
-    components/unknown_component.cpp
-    p32_component_tables.cpp
+    component_tables.cpp
 )
 
-# Individual component targets for memory analysis
-foreach(component_file ${P32_COMPONENT_SOURCES})
-    get_filename_component(component_name ${component_file} NAME_WE)
-    # message(STATUS "P32 Component: ${component_name}")  
-endforeach()
+# Add component source files to build
+target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE
+    ${P32_COMPONENT_SOURCES}
+)
+
+# Component include directories
+target_include_directories(${CMAKE_PROJECT_NAME}.elf PRIVATE
+    include/components
+    include
+)

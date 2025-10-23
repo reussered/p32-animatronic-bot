@@ -70,15 +70,30 @@ class P32ComponentGenerator:
         
         if component_file.exists():
             print(f"DEBUG: Loading component: {component_file}")
-            with open(component_file, 'r') as f:
-                component_data = json.load(f)
-                component_data['config_file'] = component_ref
-                components.append(component_data)
-                
-                # Recursively load nested positioned_components if present
-                if "positioned_components" in component_data:
-                    for nested_ref in component_data["positioned_components"]:
-                        components.extend(self._load_component_recursive(nested_ref))
+            try:
+                with open(component_file, 'r', encoding='ascii') as f:
+                    component_data = json.load(f)
+                    component_data['config_file'] = component_ref
+                    components.append(component_data)
+                    
+                    # Recursively load nested contained_components if present (new wildcard parsing)
+                    if "contained_components" in component_data:
+                        for nested_ref in component_data["contained_components"]:
+                            components.extend(self._load_component_recursive(nested_ref))
+                            
+                    # Also check for legacy positioned_components (backward compatibility)
+                    if "positioned_components" in component_data:
+                        for nested_ref in component_data["positioned_components"]:
+                            components.extend(self._load_component_recursive(nested_ref))
+                            
+                    # Load hardware_reference if present (positioned components reference hardware)
+                    if "hardware_reference" in component_data:
+                        hardware_ref = component_data["hardware_reference"]
+                        components.extend(self._load_component_recursive(hardware_ref))
+            except json.JSONDecodeError as e:
+                print(f"ERROR: Invalid JSON in {component_file}: {e}")
+            except Exception as e:
+                print(f"ERROR: Failed to load {component_file}: {e}")
         else:
             print(f"Warning: Component file not found: {component_file}")
         
@@ -101,7 +116,12 @@ class P32ComponentGenerator:
                 # Add the subsystem itself as a component
                 components.append(subsystem_data)
                 
-                # Recursively load positioned_components within the subsystem
+                # Recursively load contained_components within the subsystem (new wildcard parsing)
+                if "contained_components" in subsystem_data:
+                    for component_ref in subsystem_data["contained_components"]:
+                        components.extend(self._load_component_recursive(component_ref))
+                        
+                # Also check for legacy positioned_components (backward compatibility)
                 if "positioned_components" in subsystem_data:
                     for component_ref in subsystem_data["positioned_components"]:
                         components.extend(self._load_component_recursive(component_ref))
@@ -351,6 +371,46 @@ class P32ComponentGenerator:
         
         return "\n".join(content)
     
+    def generate_cmake_files(self) -> None:
+        """Generate CMakeLists.txt with all component source files"""
+        # Create CMake content for component sources
+        cmake_content = [
+            "# P32 Component Dispatch Tables - Auto-generated CMake",
+            "# Includes all component source files for build system",
+            "",
+            "set(P32_COMPONENT_SOURCES"
+        ]
+        
+        # Add component source files
+        for comp in self.components:
+            if comp['type'] == 'system':
+                cmake_content.append(f"    components/{comp['name']}.cpp")
+            else:
+                cmake_content.append(f"    components/{comp['name']}.cpp")
+        
+        # Add dispatch table file
+        cmake_content.extend([
+            "    component_tables.cpp",
+            ")",
+            "",
+            "# Add component source files to build",
+            "target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE",
+            "    ${P32_COMPONENT_SOURCES}",
+            ")",
+            "",
+            "# Component include directories",
+            "target_include_directories(${CMAKE_PROJECT_NAME}.elf PRIVATE",
+            "    include/components",
+            "    include",
+            ")"
+        ])
+        
+        # Write CMake file
+        cmake_file = self.output_dir / "p32_components.cmake"
+        with open(cmake_file, 'w') as f:
+            f.write('\n'.join(cmake_content))
+        print(f"Generated: {cmake_file}")
+    
     def write_files(self) -> None:
         """Write all generated files to appropriate directories"""
         self.output_dir.mkdir(exist_ok=True)
@@ -395,6 +455,7 @@ class P32ComponentGenerator:
         
         # Write generated files
         self.write_files()
+        self.generate_cmake_files()
         print("Generation complete!")
 
 def main():
