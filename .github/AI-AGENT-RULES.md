@@ -356,3 +356,42 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - **Power System**: Stable 3.16V delivery via ATX PSU + breakout board
 - **Hardware Status**: 2x GC9A01 displays connected and cool-running
 
+## RULE: SHARED COMPONENT ARCHITECTURE - CRITICAL
+
+**IRONCLAD RULE: When a component appears multiple times in the component tree, it is used UNCHANGED for dispatch, but the function definitions are included ONLY ONCE to avoid duplicate function errors in compile.**
+
+**Example Architecture:**
+
+```text
+goblin_left_eye contains goblin_eye contains gc9a01
+goblin_right_eye contains goblin_eye contains gc9a01
+```
+
+**Generated Function Table:**
+
+```cpp
+// UNIQUE functions per instance
+goblin_left_eye_act()
+goblin_right_eye_act()
+
+// SHARED functions - single definition, multiple callers
+goblin_eye_act()        // Called by both left and right eye
+gc9a01_act()           // Called by both displays
+```
+
+**CRITICAL ARCHITECTURE PRINCIPLES:**
+
+1. **NEVER modify shared component code** (goblin_eye.cpp, gc9a01.cpp) when fixing build errors
+2. **Component-specific functions** get separate definitions per instance (test_left_eye_act, test_right_eye_act)
+3. **Shared processing functions** have single definition, multiple callers (goblin_eye_act, gc9a01_act)
+4. **Frame buffer management** happens in component-specific code, shared processing acts on buffers
+5. **SPI device assignment** handled in component-specific code (SPI_DEVICE_1 vs SPI_DEVICE_2)
+
+**VIOLATION CONSEQUENCES:**
+
+- Duplicate function definition errors
+- Breaking working mood/rendering systems
+- Architecture violations
+
+**This rule has been violated 10+ times. It is now IRONCLAD and cannot be ignored.**
+
