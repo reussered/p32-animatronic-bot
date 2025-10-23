@@ -1,0 +1,10 @@
+﻿{
+    "version":  "1.0.0",
+    "interface_type":  "GPIO_DIGITAL",
+    "author":  "config/author.json",
+    "pin_assignments":  {
+                            "digital_io":  "GPIO_PIN_5"
+                        },
+    "relative_filename":  "config/components/interfaces/gpio_digital_pin_5.json",
+    "interface_id":  "GPIO_DIGITAL_PIN_5"
+}

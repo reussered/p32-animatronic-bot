@@ -1,0 +1,10 @@
+﻿{
+    "version":  "1.0.0",
+    "interface_type":  "WIFI_STATION",
+    "author":  "config/author.json",
+    "pin_assignments":  {
+                            "enable":  "GPIO_PIN_2"
+                        },
+    "relative_filename":  "config/components/interfaces/wifi_interface.json",
+    "interface_id":  "WIFI_INTERFACE"
+}

@@ -13,4 +13,4 @@ Write-Host "Config path: $($configPath.Path)"
 $actualPath = $file.FullName.Replace($configPath.Path + [IO.Path]::DirectorySeparatorChar, "").Replace([IO.Path]::DirectorySeparatorChar, "/")
 Write-Host "Calculated path: '$actualPath'"
 
-Write-Host "Are they equal? $($json.relative_filename -eq $actualPath)"
+Write-Host "Are they equal? $($json.relative_filename -eq $actualPath)"                                                                                                                                     zzzzzzzz

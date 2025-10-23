@@ -1,0 +1,22 @@
+﻿{
+    "component_type":  "POSITIONED_COMPONENT",
+    "position":  {
+                     "units":  "INCH",
+                     "x":  "0.0 INCH",
+                     "coordinate_system":  "skull_3d",
+                     "z":  "0.0 INCH",
+                     "reference_point":  "nose_center",
+                     "y":  "0.0 INCH"
+                 },
+    "component_name":  "torso_status_led",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_reference":  "config/components/hardware/servo_sg90_micro.json",
+    "software":  {
+                     "act_function":  "torso_status_led_act",
+                     "init_function":  "torso_status_led_init",
+                     "hitCount":  10
+                 },
+    "interface_assignment":  "PWM_CHANNEL_1",
+    "relative_filename":  "config/components/positioned/torso_status_led.json"
+}

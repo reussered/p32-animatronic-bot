@@ -1,0 +1,15 @@
+﻿{
+    "author":  "config/author.json",
+    "version":  "1.0.0",
+    "interface_id":  "PWM_CHANNEL_6",
+    "pin_assignments":  {
+                            "pwm_output":  "GPIO_PIN_6"
+                        },
+    "interface_type":  "PWM_CHANNEL",
+    "electrical_specs":  {
+                             "frequency_range":  "1Hz-40MHz",
+                             "current_capacity":  "40mA",
+                             "voltage_range":  "3.3V"
+                         },
+    "relative_filename":  "config/components/interfaces/pwm_channel_6.json"
+}

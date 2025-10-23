@@ -1,0 +1,20 @@
+{
+    "relative_filename": "config/components/positioned/goblin/arm_components/left/shoulder_abduction_servo.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_type": "POSITIONED_COMPONENT",
+    "component_name": "goblin_left_shoulder_abduction_servo",
+    "hardware_reference": "config/components/hardware/servo_9g_micro.json",
+    "interface_assignment": "PWM_CHANNEL_5",
+    "position": {
+        "coordinate_system": "skull_3d",
+        "reference_point": "shoulder_socket_left",
+        "x": "-0.5 INCH",
+        "y": "0.0 INCH", 
+        "z": "0.0 INCH"
+    },
+    "software": {
+        "init_function": "goblin_left_shoulder_abduction_servo_init",
+        "act_function": "goblin_left_shoulder_abduction_servo_act"
+    }
+}

@@ -1,0 +1,11 @@
+﻿{
+    "version":  "1.0.0",
+    "interface_type":  "I2C_BUS",
+    "author":  "config/author.json",
+    "pin_assignments":  {
+                            "scl":  "GPIO_PIN_22",
+                            "sda":  "GPIO_PIN_21"
+                        },
+    "relative_filename":  "config/components/interfaces/i2c_bus_1.json",
+    "interface_id":  "I2C_BUS_1"
+}
