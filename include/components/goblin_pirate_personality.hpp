@@ -7,6 +7,7 @@
 #define GOBLIN_PIRATE_PERSONALITY_HPP
 
 #include "p32_shared_state.h"
+#include "core/memory/SharedMemory.hpp"
 
 /**
  * @brief Initialize the pirate personality engine

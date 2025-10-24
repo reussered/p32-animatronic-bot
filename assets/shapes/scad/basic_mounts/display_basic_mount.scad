@@ -1,5 +1,12 @@
 // Basic Display Mount - Generic GC9A01 Mounting Bracket
 // Reusable mounting solution for 1.28" circular displays
+// Multi-Color 3D Printing: Uses HTML named colors for 4-color system
+
+// Color palette parameters (can be overridden via command line)
+PRIMARY_COLOR = "DarkOliveGreen";      // Color 1: Main mounting ring
+SECONDARY_COLOR = "SaddleBrown";       // Color 2: Reinforcement tabs  
+ACCENT_COLOR = "Goldenrod";            // Color 3: (unused in basic mount)
+HIGHLIGHT_COLOR = "OrangeRed";         // Color 4: (unused in basic mount)
 
 module display_basic_mount() {
     diameter = 32.512;
@@ -50,5 +57,5 @@ module display_basic_mount() {
     }
 }
 
-// Generate the mount
-display_basic_mount();
+// Generate the mount with primary color
+color(PRIMARY_COLOR) display_basic_mount();

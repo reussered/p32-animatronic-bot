@@ -10,6 +10,16 @@
     "contained_components":  [
                                  "config/components/hardware/neopixel_matrix_8x8.json"
                              ],
+    "component_constraints":  {
+                                  "required_contained_types":  [
+                                                                   "DISPLAY_DRIVER"
+                                                               ],
+                                  "interface_requirements":  [
+                                                                 "getBuffer",
+                                                                 "getFrameSize", 
+                                                                 "getFrameRowSize"
+                                                             ]
+                              },
     "creature_display_profile":  {
                                      "species":  "ROBOT",
                                      "eye_color_base":  "ELECTRIC_BLUE",

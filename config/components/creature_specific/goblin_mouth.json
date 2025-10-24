@@ -1,0 +1,75 @@
+{
+    "relative_filename":  "config/components/creature_specific/goblin_mouth.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_mouth",
+    "subsystem":  "HEAD",
+    "component_type":  "CREATURE_SPECIFIC_DISPLAY",
+    "description":  "Shared goblin mouth processing logic with speech animation and mood-based rendering",
+    "created":  "2025-10-23",
+    "contained_components":  [
+                                 "config/components/hardware/gc9a01_display.json"
+                             ],
+    "component_constraints":  {
+                                  "required_contained_types":  [
+                                                                   "DISPLAY_DRIVER"
+                                                               ],
+                                  "interface_requirements":  [
+                                                                 "getBuffer",
+                                                                 "getFrameSize", 
+                                                                 "getFrameRowSize"
+                                                             ]
+                              },
+    "creature_display_profile":  {
+                                     "species":  "GOBLIN",
+                                     "mouth_color_base":  "DARK_RED",
+                                     "teeth_style":  "JAGGED_SHARP",
+                                     "expression_range":  "SNARL_TO_GRIN",
+                                     "speech_responsiveness":  "HIGH",
+                                     "mood_responsiveness":  "HIGH"
+                                 },
+    "palette_system":  {
+                           "palette_size":  256,
+                           "color_ranges":  {
+                                                "lips_gums":  "0-31",
+                                                "teeth_base":  "32-63",
+                                                "tongue_base":  "64-95",
+                                                "anger_reds":  "96-127",
+                                                "speaking_highlights":  "128-159",
+                                                "fear_purples":  "160-191",
+                                                "happiness_pinks":  "192-223",
+                                                "special_effects":  "224-255"
+                                            }
+                       },
+    "speech_animation":  {
+                             "phoneme_mapping":  {
+                                                     "A_E_I":  "WIDE_OPEN",
+                                                     "O_U":  "ROUND_OPEN", 
+                                                     "M_B_P":  "CLOSED",
+                                                     "F_V":  "LOWER_LIP_BITE",
+                                                     "TH":  "TONGUE_OUT",
+                                                     "L_R":  "TONGUE_UP",
+                                                     "S_Z":  "SLIGHT_OPEN"
+                                                 },
+                             "transition_speed":  "FAST",
+                             "hold_duration":  "SHORT"
+                         },
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Process mouth animation every loop for speech responsiveness"
+               },
+    "software":  {
+                     "init_function":  "goblin_mouth_init",
+                     "act_function":  "goblin_mouth_act"
+                 },
+    "prototype_status":  "designed",
+    "tested":  false,
+    "notes":  [
+                  "Software-only component - no physical shape",
+                  "Provides display driver interface abstraction for mouth displays",
+                  "Handles speech animation and mood-based mouth expressions",
+                  "Supports phoneme-based speech animation mapping",
+                  "256-color organized palette with speech and mood ranges",
+                  "Real-time speech processing with SharedMemory integration"
+              ]
+}

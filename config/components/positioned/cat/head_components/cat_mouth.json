@@ -4,12 +4,10 @@
     "author":  "config/author.json",
     "component_name":  "cat_mouth",
     "subsystem":  "HEAD",
-    "template_inheritance":  {
-                                 "hardware_template":  "config/components/hardware/oled_ssd1306_128x64.json",
-                                 "creature_shell":  "assets/shapes/scad/creature_shells/cat/cat_mouth_shell.scad",
-                                 "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
-                             },
     "interface_assignment":  "I2C_DEVICE_1",
+    "contained_components":  [
+                                 "config/components/creature_specific/cat_mouth.json"
+                             ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

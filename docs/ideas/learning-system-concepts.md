@@ -76,7 +76,7 @@ Behavior: approach_cautiously=true, seek_alternative=true
 ### Architecture
 - **Separate ESP32** dedicated to monitoring and safety rules
 - **Rule-based response system** similar to component architecture
-- **Continuous monitoring** of all subsystem states via ESP-NOW
+- **Continuous monitoring** of all subsystem states via SharedMemory
 - **Emergency intervention** capability when problems detected
 
 ### Rule-Based Safety Responses
@@ -108,7 +108,7 @@ Priority: MEDIUM
 
 ### Integration with Main System
 - Uses **same component isolation principles**
-- **ESP-NOW communication** with other subsystems
+- **SharedMemory communication** with other subsystems
 - **Rule engine** processes monitoring data
 - **Intervention capability** when safety thresholds exceeded
 - **Independent operation** - doesn't depend on main system functioning

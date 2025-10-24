@@ -38,7 +38,7 @@
 #include <esp_now.h>
 #include <math.h>
 
-#include "p32_hand_controller.h"
+#include "p32_hand_controller.hpp"
 #include "p32_core.h"
 
 #ifdef P32_COMP_HAND_CONTROLLER

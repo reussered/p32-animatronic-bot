@@ -25,6 +25,7 @@
                },
     "system_level_components":  [
                                     "config/components/system/system_core.json",
+                                    "config/components/system/debug_controller.json",
                                     "config/components/system/network_monitor.json",
                                     "config/components/system/esp_now_mesh.json",
                                     "config/components/system/wifi_station.json",

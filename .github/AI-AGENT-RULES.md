@@ -377,7 +377,79 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Positioned components reference hardware via `hardware_reference` field
 - Interface assignments via `interface_assignment` field
 - All paths use Windows backslash format
-- **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
+
+## RULE 13: INTERFACE ASSIGNMENT ARCHITECTURE
+
+**Interface System Overview:**
+The system uses a template + numbered instance pattern for hardware interface assignment, automatically managed by generation scripts.
+
+**Interface Template Structure:**
+- **Template Interfaces** define the protocol/connection type (stored in `config\interfaces\`)
+  - `spi_device.json` - Defines SPI device protocol template
+  - `gpio_pair.json` - Defines 2-pin GPIO interface template  
+  - `i2c_device.json` - Defines I2C device protocol template
+  - `1wire_device.json` - Defines 1-wire protocol template
+
+**Numbered Instance Generation:**
+- **Numbered Instances** provide specific pin assignments (auto-generated)
+  - `spi_device_1.json`, `spi_device_2.json`, etc. - Specific SPI chip select pins
+  - `gpio_pair_1.json`, `gpio_pair_2.json`, etc. - Specific GPIO pin pairs
+  - `i2c_device_1.json`, `i2c_device_2.json`, etc. - Specific I2C device addresses
+
+**Hardware Component Interface Declaration:**
+Components declare generic interface requirements in their hardware specifications:
+
+```json
+// In config/hardware/gc9a01_display.json
+{
+  "control_interface": {
+    "protocol": "spi_device",
+    "required_pins": ["MOSI", "SCK", "CS", "DC", "RST"]
+  }
+}
+
+// In config/hardware/hw500_vibration_sensor.json  
+{
+  "control_interface": {
+    "protocol": "gpio_pair",
+    "required_pins": ["digital_input", "analog_input"]
+  }
+}
+```
+
+**Automatic Interface Assignment Process:**
+1. **Bot Scanning**: Generation script scans all positioned components in a bot configuration
+2. **Interface Counting**: Counts how many components need each interface type
+3. **Sequential Assignment**: Assigns next available numbered interface instance
+   - First SPI component → `spi_device_1.json`
+   - Second SPI component → `spi_device_2.json`  
+   - First GPIO pair component → `gpio_pair_1.json`
+   - Second GPIO pair component → `gpio_pair_2.json`
+4. **Interface Generation**: Creates numbered interface files if they don't exist
+5. **Assignment Injection**: Updates positioned component configs with specific interface references
+
+**Generated Interface Assignment Example:**
+```json
+// In positioned component after generation
+{
+  "component_name": "left_eye_display",
+  "hardware_reference": "config/hardware/gc9a01_display.json",
+  "interface_assignment": {
+    "spi_device": "config/interfaces/spi_device_1.json"
+  }
+}
+```
+
+**Critical Rules:**
+- Components NEVER reference numbered interfaces directly in their definitions
+- Hardware specs declare generic interface requirements only
+- Generation script handles all specific pin assignments
+- Interface templates define electrical and protocol specifications
+- Numbered instances provide actual GPIO pin mappings
+- Pin conflict detection occurs during interface generation
+- Same interface type shared across multiple ESP32 variants with different pin mappings
+
+**UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
 - **COMMIT RULE**: After updating AI-AGENT-RULES.md, always commit that file alone to git repository with descriptive message
 
 **Current Project Status (Updated: 2025-10-23):**
@@ -432,4 +504,40 @@ const uint8_t right_eye_buffer[FRAME_SIZE];
 - Display component doesn't care about frame contents or buffer boundaries
 - Eye components reset frame_ptr when bounds exceeded
 - Code generation must handle duplicate component detection (display referenced by multiple eyes)
+
+## RULE 14: DISPLAY DRIVER INTERFACE CONTRACT
+
+**All components with `component_type: "DISPLAY_DRIVER"` MUST export these three interface functions:**
+
+```cpp
+uint8_t* getBuffer(void);       // Allocate display buffer (malloc)
+uint32_t getFrameSize(void);    // Total pixels in frame  
+uint32_t getFrameRowSize(void); // Pixels per row
+```
+
+**These functions provide hardware abstraction allowing creature components to work with any display:**
+
+- **GC9A01 (240x240 circular)**: getFrameSize() returns 57600, getFrameRowSize() returns 240
+- **SSD1306 (128x64 OLED)**: getFrameSize() returns 8192, getFrameRowSize() returns 128  
+- **ILI9341 (320x240 TFT)**: getFrameSize() returns 76800, getFrameRowSize() returns 320
+- **ST7796 (320x480 TFT)**: getFrameSize() returns 153600, getFrameRowSize() returns 320
+
+**Component Type Constraints:**
+
+- `creature_specific_display` components (like `goblin_eye`) MUST contain a `display_driver` component
+- `positioned_component` display components MUST reference `display_driver` type in their hierarchy
+- Eye/mouth/display components can call display interface functions when display_driver is in their containment chain
+
+**JSON Configuration Requirements:**
+
+```json
+{
+    "component_type": "DISPLAY_DRIVER",
+    "required_interface_functions": [
+        "getBuffer", "getFrameSize", "getFrameRowSize"
+    ]
+}
+```
+
+This enables plug-and-play display substitution while maintaining interface compatibility.
 

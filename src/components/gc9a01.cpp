@@ -7,12 +7,19 @@
 #include "components/gc9a01.hpp"
 #include "components/goblin_eye.hpp"
 #include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
 #include "p32_shared_state.h"
 #include "esp_log.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+#include <cstdlib>
 
 static const char *TAG = "GC9A01";
+
+// Display dimensions for GC9A01
+#define DISPLAY_WIDTH 240
+#define DISPLAY_HEIGHT 240
+#define FRAME_SIZE (DISPLAY_WIDTH * DISPLAY_HEIGHT)
 
 // External GSM instance
 extern SharedMemory GSM;
@@ -32,6 +39,30 @@ static spi_device_handle_t spi_device_3 = NULL; // Mouth (future)
 #define RIGHT_EYE_CS    (gpio_num_t)5
 #define RIGHT_EYE_DC    (gpio_num_t)19
 #define RIGHT_EYE_RST   (gpio_num_t)22
+
+/**
+ * @brief Display Buffer Interface - allocate buffer for eye components
+ * @return Pointer to newly allocated buffer
+ */
+uint8_t* getBuffer(void) {
+    return (uint8_t*)malloc(FRAME_SIZE);
+}
+
+/**
+ * @brief Display Buffer Interface - get total frame size in pixels
+ * @return Total number of pixels in frame
+ */
+uint32_t getFrameSize(void) {
+    return FRAME_SIZE;
+}
+
+/**
+ * @brief Display Buffer Interface - get pixels per row
+ * @return Number of pixels per row (display width)
+ */
+uint32_t getFrameRowSize(void) {
+    return DISPLAY_WIDTH;
+}
 
 /**
  * @brief Initialize GC9A01 hardware driver
@@ -58,7 +89,14 @@ void gc9a01_act(void) {
     // Send the RGB565 frame buffer to the appropriate display
     gc9a01_send_frame(current_spi_device, (uint16_t*)currentFrame, current_frame_size);
     
-    ESP_LOGV(TAG, "Frame sent to SPI device %u at loop %u", current_spi_device, g_loopCount);
+    // Conditional verbose logging based on Environment flags
+    Environment* env = GSM.read<Environment>("environment");
+    if (env && env->verbose_logging && env->display_diagnostics) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Frame sent to SPI device %u at loop %u, frame_size=%u", 
+                    current_spi_device, g_loopCount, current_frame_size);
+        }
+    }
 }
 
 /**

@@ -10,6 +10,16 @@
     "contained_components":  [
                                  "config/components/hardware/tft_2p5x1p5_display.json"
                              ],
+    "component_constraints":  {
+                                  "required_contained_types":  [
+                                                                   "DISPLAY_DRIVER"
+                                                               ],
+                                  "interface_requirements":  [
+                                                                 "getBuffer",
+                                                                 "getFrameSize", 
+                                                                 "getFrameRowSize"
+                                                             ]
+                              },
     "creature_display_profile":  {
                                      "species":  "CYCLOPS",
                                      "eye_color_base":  "DEEP_RED",

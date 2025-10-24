@@ -5,6 +5,8 @@
 #include <map>
 #include <cstring>
 #include <memory>
+#include <algorithm>
+#include <cctype>
 
 
 #ifdef ESP_PLATFORM
@@ -17,6 +19,13 @@ class SharedMemory {
 private:
     std::map<std::string, void*> memory_map;
     static SharedMemory* instance;  // For static callback access
+    
+    // Helper function to normalize key names to lowercase for case-insensitive access
+    std::string normalize_key(const std::string& name) const {
+        std::string normalized = name;
+        std::transform(normalized.begin(), normalized.end(), normalized.begin(), ::tolower);
+        return normalized;
+    }
     
 #ifdef ESP_PLATFORM
     static void on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status);
@@ -46,7 +55,8 @@ public:
     template<typename T>
     T* read(const std::string& name) 
 	{
-        auto it = memory_map.find(name);
+        std::string normalized_name = normalize_key(name);
+        auto it = memory_map.find(normalized_name);
         if (it != memory_map.end()) 
 		{
             return static_cast<T*>(it->second);
@@ -56,11 +66,11 @@ public:
 		    // Create new instance with default constructor
             T* new_mem = new T();
             if (!new_mem) return nullptr;
-            memory_map[name] = new_mem;
+            memory_map[normalized_name] = new_mem;
             
 #ifdef ESP_PLATFORM
             // Broadcast the new default instance to other nodes
-            espnow_broadcast(name, new_mem, sizeof(T));
+            espnow_broadcast(normalized_name, new_mem, sizeof(T));
 #endif
             return new_mem;
         }
@@ -69,7 +79,8 @@ public:
     template<typename T>
     int write(const std::string& name) 
     {
-        auto it = memory_map.find(name);
+        std::string normalized_name = normalize_key(name);
+        auto it = memory_map.find(normalized_name);
         if (it == memory_map.end()) 
 		{
             // Entry doesn't exist, this shouldn't happen in normal usage
@@ -78,7 +89,7 @@ public:
         
 #ifdef ESP_PLATFORM
         // Broadcast current data to other ESP32s
-        espnow_broadcast(name, it->second, sizeof(T));
+        espnow_broadcast(normalized_name, it->second, sizeof(T));
 #endif
         return 0;  // Success
     }

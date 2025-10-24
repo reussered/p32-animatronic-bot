@@ -7,9 +7,18 @@
  */
 
 #include "esp_log.h"
+#include "p32_component_config.h"
 #include "p32_shared_state.h"
+#include "Mood.hpp"
 
 static const char* TAG = "PIRATE_HEAD";
+
+// Function prototypes
+static void coordinate_single_eye_display(void);
+static void enhance_audio_processing(void);
+static void implement_defensive_scanning(void);
+static void manage_pirate_expressions(void);
+static void handle_combat_readiness(void);
 
 // Single-eye optimization parameters
 static const int LEFT_EYE_BOOST_FACTOR = 150;  // 50% enhancement for missing right eye
@@ -41,18 +50,12 @@ void goblin_pirate_head_act(void) {
     // hitCount: 25 -> executes every 2.5 seconds
     if ((g_loopCount % 25) != 0) return;
     
-    SharedMemory local_state;
-    local_state.read();
-    
-    // Pirate head coordination tasks
-    coordinate_single_eye_display(local_state);
-    enhance_audio_processing(local_state);
-    implement_defensive_scanning(local_state);
-    manage_pirate_expressions(local_state);
-    handle_combat_readiness(local_state);
-    
-    // Update shared state
-    local_state.write();
+    // Pirate head coordination tasks - using direct global access
+    coordinate_single_eye_display();
+    enhance_audio_processing();
+    implement_defensive_scanning();
+    manage_pirate_expressions();
+    handle_combat_readiness();
     
     if ((g_loopCount % 100) == 0) {  // Every 10 seconds
         ESP_LOGD(TAG, "Pirate head status: Eye_boost=%d%%, Audio_comp=%d%%, Combat=%s",
@@ -61,53 +64,56 @@ void goblin_pirate_head_act(void) {
     }
 }
 
-static void coordinate_single_eye_display(SharedMemory& state) {
+static void coordinate_single_eye_display(void) {
     // Enhanced left eye processing to compensate for missing right eye
     static uint8_t eye_scan_pattern = 0;
     
     // Wider field of view scanning since only one eye
     eye_scan_pattern = (eye_scan_pattern + 1) % 8;
     
-    // Boost visual processing for single eye
-    int enhanced_curiosity = (state.mood.CURIOSITY * LEFT_EYE_BOOST_FACTOR) / 100;
+    // Boost visual processing for single eye using direct global Mood access
+    int enhanced_curiosity = (g_mood.curiosity() * LEFT_EYE_BOOST_FACTOR) / 100;
     if (enhanced_curiosity > 100) enhanced_curiosity = 100;
     
     // Left eye works harder to cover right blind spot
-    if (state.sensor_distance > 0 && state.sensor_distance < 50) {
+    if (g_shared_state.distance_cm > 0 && g_shared_state.distance_cm < 50) {
         // Rapid scanning when threats detected
         if ((g_loopCount % 5) == 0) {  // Every 500ms
             ESP_LOGD(TAG, "ENHANCED_EYE_SCAN: Pattern=%d, Distance=%dcm", 
-                eye_scan_pattern, state.sensor_distance);
+                eye_scan_pattern, g_shared_state.distance_cm);
         }
     }
     
     // Protect blind side - bias left eye toward right coverage
     if (left_side_protection_active) {
-        // Simulate left eye compensating for right blind spot
-        state.mood.CURIOSITY = enhanced_curiosity;
+        ESP_LOGV(TAG, "Single eye enhanced scanning: curiosity boosted to %d%%", enhanced_curiosity);
+        ESP_LOGD(TAG, "Left eye compensating for blind spot protection");
     }
 }
+}
 
-static void enhance_audio_processing(SharedMemory& state) {
+static void enhance_audio_processing(void) {
     // Missing eye compensation through enhanced hearing
     
-    // Boost audio sensitivity based on threat level
-    if (state.mood.ANGER > 40 || state.mood.FEAR > 30) {
-        audio_compensation_level = 80;  // High alert
-    } else if (state.sensor_distance > 0 && state.sensor_distance < 60) {
+    // Boost audio sensitivity based on threat level using direct global access
+    if (g_shared_state.distance_cm > 0 && g_shared_state.distance_cm < 30) {
+        audio_compensation_level = 80;  // High alert - close threat
+    } else if (g_shared_state.distance_cm > 0 && g_shared_state.distance_cm < 60) {
         audio_compensation_level = 65;  // Medium alert
     } else {
         audio_compensation_level = 50;  // Baseline enhanced
     }
     
     // Simulate enhanced directional hearing
-    if (state.sensor_distance > 0) {
+    if (g_shared_state.distance_cm > 0) {
         // Audio processing boosts situational awareness
-        state.mood.CURIOSITY += (audio_compensation_level - 50) / 5;
-        if (state.mood.CURIOSITY > 100) state.mood.CURIOSITY = 100;
+        uint8_t curiosity_boost = (audio_compensation_level - 50) / 5;
+        
+        // Enhance mood based on audio compensation
+        g_mood.addCuriosity(curiosity_boost);
         
         ESP_LOGD(TAG, "AUDIO_COMPENSATION: Level=%d%%, Curiosity_boost=%d", 
-            audio_compensation_level, state.mood.CURIOSITY);
+            audio_compensation_level, curiosity_boost);
     }
     
     // Both ears work harder to compensate for missing eye
@@ -124,45 +130,45 @@ static void enhance_audio_processing(SharedMemory& state) {
     }
 }
 
-static void implement_defensive_scanning(SharedMemory& state) {
+static void implement_defensive_scanning(void) {
     // More frequent threat scanning due to blind spot
     if ((g_loopCount % DEFENSIVE_SCAN_INTERVAL) == 0) {
         last_threat_scan = g_loopCount;
         
         // Scan for threats more aggressively
-        if (state.sensor_distance == 0) {
+        if (g_shared_state.distance_cm == 0) {
             // No immediate threats - maintain vigilance
-            state.mood.CURIOSITY += 5;  // Always scanning
-        } else if (state.sensor_distance < 30) {
+            g_mood.addAnger(5);  // Always scanning
+        } else if (g_shared_state.distance_cm < 30) {
             // Close threat - high alert
-            state.mood.ANGER += 10;
-            state.mood.IRRITATION += 8;
+            g_mood.addAnger(10);
+            g_mood.addFear(8);
             combat_readiness_mode = true;
             
-            ESP_LOGW(TAG, "CLOSE_THREAT_DETECTED: %dcm - Combat ready", state.sensor_distance);
-        } else if (state.sensor_distance < 60) {
+            ESP_LOGW(TAG, "CLOSE_THREAT_DETECTED: %dcm - Combat ready", g_shared_state.distance_cm);
+        } else if (g_shared_state.distance_cm < 60) {
             // Medium distance - cautious monitoring
-            state.mood.CURIOSITY += 15;
-            state.mood.IRRITATION += 3;
+            g_mood.addCuriosity(15);
+            g_mood.addFear(3);
         }
     }
 }
 
-static void manage_pirate_expressions(SharedMemory& state) {
+static void manage_pirate_expressions(void) {
     // Pirate facial expressions emphasize the single eye
     static uint8_t expression_timer = 0;
     expression_timer++;
     
     // Aggressive scowl is default expression
-    if (state.mood.ANGER > 30) {
+    if (g_mood.anger() > 30) {
         // Fierce single-eye glare
-        ESP_LOGV(TAG, "EXPRESSION: Fierce_single_eye_glare (Anger=%d)", state.mood.ANGER);
-    } else if (state.mood.CURIOSITY > 50) {
+        ESP_LOGV(TAG, "EXPRESSION: Fierce_single_eye_glare (Anger=%d)", g_mood.anger());
+    } else if (g_mood.curiosity() > 50) {
         // Suspicious single-eye squint
-        ESP_LOGV(TAG, "EXPRESSION: Suspicious_squint (Curiosity=%d)", state.mood.CURIOSITY);
-    } else if (state.mood.HUNGER > 40) {
+        ESP_LOGV(TAG, "EXPRESSION: Suspicious_squint (Curiosity=%d)", g_mood.curiosity());
+    } else if (g_mood.anger() > 40) {
         // Greedy treasure-hunting look
-        ESP_LOGV(TAG, "EXPRESSION: Greedy_treasure_hunt (Hunger=%d)", state.mood.HUNGER);
+        ESP_LOGV(TAG, "EXPRESSION: Greedy_treasure_hunt (Anger=%d)", g_mood.anger());
     } else {
         // Default weathered pirate scowl
         if ((expression_timer % 40) == 0) {  // Every 4 seconds
@@ -171,33 +177,37 @@ static void manage_pirate_expressions(SharedMemory& state) {
     }
     
     // Mouth expressions coordinate with single eye
-    if (state.mood.ANGER > 50) {
+    if (g_mood.anger() > 50) {
         ESP_LOGV(TAG, "MOUTH: Snarling_grimace");
-    } else if (state.mood.HUNGER > 60) {
+    } else if (g_mood.curiosity() > 60) {
         ESP_LOGV(TAG, "MOUTH: Greedy_sneer");
     }
 }
 
-static void handle_combat_readiness(SharedMemory& state) {
+static void handle_combat_readiness(void) {
     // Combat mode triggered by close threats or high anger
-    bool should_be_combat_ready = (state.sensor_distance > 0 && state.sensor_distance < 25) || 
-                                  (state.mood.ANGER > 60);
+    bool should_be_combat_ready = (g_shared_state.distance_cm > 0 && g_shared_state.distance_cm < 25) || 
+                                  (g_mood.anger() > 60);
     
     if (should_be_combat_ready && !combat_readiness_mode) {
         combat_readiness_mode = true;
         ESP_LOGW(TAG, "ENTERING_COMBAT_MODE: Single eye focused, audio enhanced");
         
         // Boost all threat-detection systems
-        state.mood.ANGER += 15;
-        state.mood.CURIOSITY += 20;
-        state.mood.FEAR = (state.mood.FEAR * 2) / 3;  // Reduce fear in combat
+        g_mood.addAnger(15);
+        g_mood.addCuriosity(20);
+        // Reduce fear in combat - get current value, modify, and set back
+        int8_t current_fear = g_mood.fear();
+        g_mood.setFear((current_fear * 2) / 3);
         
     } else if (!should_be_combat_ready && combat_readiness_mode) {
         combat_readiness_mode = false;
         ESP_LOGI(TAG, "EXITING_COMBAT_MODE: Returning to patrol vigilance");
         
         // Gradually reduce heightened state
-        if (state.mood.ANGER > 20) state.mood.ANGER -= 10;
+        if (g_mood.anger() > 20) {
+            g_mood.addAnger(-10);
+        }
     }
     
     // In combat mode, coordinate all subsystems

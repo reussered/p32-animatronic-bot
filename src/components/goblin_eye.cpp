@@ -126,7 +126,8 @@ void init_goblin_eye_palette(void) {
  */
 void process_frame_with_mood(void) {
     // Get current global mood from shared memory
-    Mood currentGlobalMood = GSM.read<Mood>();
+    Mood* mood_ptr = GSM.read<Mood>("Mood");
+    Mood currentGlobalMood = (mood_ptr != nullptr) ? *mood_ptr : Mood(); // Default mood (all zeros)
     
     // Check if mood changed (optimization!)
     if (!mood_initialized || lastMood != currentGlobalMood) {

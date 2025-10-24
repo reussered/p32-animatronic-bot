@@ -2,7 +2,8 @@
     "relative_filename":  "config/components/hardware/oled_ssd1306_128x64.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_type":  "OLED_DISPLAY",
+    "component_type":  "DISPLAY_DRIVER",
+    "display_driver":  true,
     "hardware_id":  "OLED_SSD1306_128X64",
     "description":  "Monochrome OLED display for text, graphics, and simple animations",
     "created":  "2025-10-12",
@@ -88,6 +89,15 @@
                                   "requires_bezel":  "OPTIONAL",
                                   "heat_generation":  "MINIMAL"
                               },
+    "software":  {
+                     "init_function":  "ssd1306_init",
+                     "act_function":  "ssd1306_act"
+                 },
+    "required_interface_functions":  [
+                                        "getBuffer",
+                                        "getFrameSize", 
+                                        "getFrameRowSize"
+                                    ],
     "hardware_type":  "OLED_DISPLAY",
     "component_name":  "OLED_SSD1306_128X64"
 }

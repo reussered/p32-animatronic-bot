@@ -4,8 +4,10 @@
     "author":  "config/author.json",
     "component_name":  "goblin_mouth",
     "subsystem":  "HEAD",
-    "hardware_reference":  "config/components/hardware/gc9a01_display.json",
     "interface_assignment":  "SPI_DEVICE_3",
+    "contained_components":  [
+                                 "config/components/creature_specific/goblin_mouth.json"
+                             ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

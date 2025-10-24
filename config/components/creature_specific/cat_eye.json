@@ -10,6 +10,16 @@
     "contained_components":  [
                                  "config/components/hardware/gc9a01_display.json"
                              ],
+    "component_constraints":  {
+                                  "required_contained_types":  [
+                                                                   "DISPLAY_DRIVER"
+                                                               ],
+                                  "interface_requirements":  [
+                                                                 "getBuffer",
+                                                                 "getFrameSize", 
+                                                                 "getFrameRowSize"
+                                                             ]
+                              },
     "creature_display_profile":  {
                                      "species":  "CAT",
                                      "eye_color_base":  "EMERALD_GREEN",

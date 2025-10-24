@@ -27,12 +27,12 @@ module goblin_nose_shell() {
             
             // Warty surface details
             for(i = [0:wart_count-1]) {
-                wart_x = (random(i, nose_width) - nose_width/2) * 0.8;
-                wart_y = random(i+10, nose_height) * 0.7;
-                wart_z = random(i+20, nose_depth) * 0.6 + 3;
+                wart_x = (random(nose_width) - nose_width/2) * 0.8;
+                wart_y = random(nose_height) * 0.7;
+                wart_z = random(nose_depth) * 0.6 + 3;
                 
                 translate([wart_x, wart_y, wart_z])
-                    sphere(d=random(i+30, 4)+2);
+                    sphere(d=random(4)+2);
             }
             
             // Nostril ridges
@@ -87,4 +87,4 @@ module goblin_nose_shell() {
 goblin_nose_shell();
 
 // Helper function for random values
-function random(seed, max_val) = max_val * (sin(seed * 173.7 + max_val * 7.3) + 1) / 2;
+function random(max_val) = max_val * (sin(*173.7 + max_val*7.3) + 1) / 2;

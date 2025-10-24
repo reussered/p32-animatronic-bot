@@ -1,438 +1,223 @@
-// P32 Component: goblin_left_eye
-// Simple test implementation for GC9A01 display
+/**
+ * @file goblin_left_eye.cpp
+ * @brief Left eye component with animation buffer management and focusing effects
+ * Implements proper component isolation with shared state coordination
+ */
 
-#include "p32_component_config.h"
 #include "p32_shared_state.h"
-
-#ifdef ENABLE_GOBLIN_COMPONENTS
-
+#include "gc9a01.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
 #include "esp_log.h"
-#include "esp_err.h"
-#include "driver/spi_master.h"
-#include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-// SPI pins for the display (from interface configs)
-#define PIN_NUM_MISO   12
-#define PIN_NUM_MOSI   13  
-#define PIN_NUM_CLK    14
-#define PIN_NUM_CS     15
-#define PIN_NUM_DC     2   // Data/Command pin
-#define PIN_NUM_RST    4   // Reset pin
-
-// Display constants for GC9A01 240x240 circular display
-#define DISPLAY_WIDTH  240
-#define DISPLAY_HEIGHT 240
-
+// Module variables
 static const char *TAG = "GOBLIN_LEFT_EYE";
-static spi_device_handle_t spi_handle;
-
-// Simple test pattern data
-static uint16_t test_colors[] = {
-    0xF800, // Red
-    0x07E0, // Green  
-    0x001F, // Blue
-    0xFFE0, // Yellow
-    0xF81F, // Magenta
-    0x07FF, // Cyan
-    0xFFFF  // White
-};
-static int current_color = 0;
-
-// Function to send command to display
-static void lcd_cmd(uint8_t cmd)
-{
-    esp_err_t ret;
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));
-    t.length = 8;
-    t.tx_buffer = &cmd;
-    gpio_set_level(PIN_NUM_DC, 0); // Command mode
-    ret = spi_device_polling_transmit(spi_handle, &t);
-    assert(ret == ESP_OK);
-}
-
-// Function to send data to display
-static void lcd_data(uint8_t *data, int len)
-{
-    esp_err_t ret;
-    spi_transaction_t t;
-    if (len == 0) return;
-    memset(&t, 0, sizeof(t));
-    t.length = len * 8;
-    t.tx_buffer = data;
-    gpio_set_level(PIN_NUM_DC, 1); // Data mode
-    ret = spi_device_polling_transmit(spi_handle, &t);
-    assert(ret == ESP_OK);
-}
-
-// Initialize the GC9A01 display
-static void gc9a01_init(void)
-{
-    // Reset the display
-    gpio_set_level(PIN_NUM_RST, 0);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    gpio_set_level(PIN_NUM_RST, 1);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-
-    // Basic initialization commands for GC9A01
-    lcd_cmd(0xEF);
-    lcd_cmd(0xEB);
-    uint8_t data1 = 0x14;
-    lcd_data(&data1, 1);
-    
-    lcd_cmd(0xFE);
-    lcd_cmd(0xEF);
-    
-    lcd_cmd(0xEB);
-    uint8_t data2 = 0x14;
-    lcd_data(&data2, 1);
-    
-    lcd_cmd(0x84);
-    uint8_t data3 = 0x40;
-    lcd_data(&data3, 1);
-    
-    lcd_cmd(0x85);
-    uint8_t data4 = 0xFF;
-    lcd_data(&data4, 1);
-    
-    lcd_cmd(0x86);
-    uint8_t data5 = 0xFF;
-    lcd_data(&data5, 1);
-    
-    lcd_cmd(0x87);
-    uint8_t data6 = 0xFF;
-    lcd_data(&data6, 1);
-    
-    lcd_cmd(0x88);
-    uint8_t data7 = 0x0A;
-    lcd_data(&data7, 1);
-    
-    lcd_cmd(0x89);
-    uint8_t data8 = 0x21;
-    lcd_data(&data8, 1);
-    
-    lcd_cmd(0x8A);
-    uint8_t data9 = 0x00;
-    lcd_data(&data9, 1);
-    
-    lcd_cmd(0x8B);
-    uint8_t data10 = 0x80;
-    lcd_data(&data10, 1);
-    
-    lcd_cmd(0x8C);
-    uint8_t data11 = 0x01;
-    lcd_data(&data11, 1);
-    
-    lcd_cmd(0x8D);
-    uint8_t data12 = 0x01;
-    lcd_data(&data12, 1);
-    
-    lcd_cmd(0x8E);
-    uint8_t data13 = 0xFF;
-    lcd_data(&data13, 1);
-    
-    lcd_cmd(0x8F);
-    uint8_t data14 = 0xFF;
-    lcd_data(&data14, 1);
-    
-    // Display ON
-    lcd_cmd(0x36); // Memory Access Control
-    uint8_t madctl = 0x48;
-    lcd_data(&madctl, 1);
-    
-    lcd_cmd(0x3A); // Pixel Format
-    uint8_t pixfmt = 0x05; // 16-bit RGB565
-    lcd_data(&pixfmt, 1);
-    
-    lcd_cmd(0x90);
-    uint8_t gamma1[] = {0x08, 0x08, 0x08, 0x08};
-    lcd_data(gamma1, 4);
-    
-    lcd_cmd(0xBD);
-    uint8_t gamma2[] = {0x06};
-    lcd_data(gamma2, 1);
-    
-    lcd_cmd(0xBC);
-    uint8_t gamma3[] = {0x00};
-    lcd_data(gamma3, 1);
-    
-    lcd_cmd(0xFF);
-    uint8_t gamma4[] = {0x60, 0x01, 0x04};
-    lcd_data(gamma4, 3);
-    
-    lcd_cmd(0xC3);
-    uint8_t pwr1[] = {0x13};
-    lcd_data(pwr1, 1);
-    
-    lcd_cmd(0xC4);
-    uint8_t pwr2[] = {0x13};
-    lcd_data(pwr2, 1);
-    
-    lcd_cmd(0xC9);
-    uint8_t pwr3[] = {0x22};
-    lcd_data(pwr3, 1);
-    
-    lcd_cmd(0xBE);
-    uint8_t vcom[] = {0x11};
-    lcd_data(vcom, 1);
-    
-    lcd_cmd(0xE1);
-    uint8_t setn[] = {0x10, 0x0E};
-    lcd_data(setn, 2);
-    
-    lcd_cmd(0xDF);
-    uint8_t set1[] = {0x21, 0x0c, 0x02};
-    lcd_data(set1, 3);
-    
-    // Gamma correction
-    lcd_cmd(0xF0);
-    uint8_t pgamma[] = {0x45, 0x09, 0x08, 0x08, 0x26, 0x2A};
-    lcd_data(pgamma, 6);
-    
-    lcd_cmd(0xF1);
-    uint8_t ngamma[] = {0x43, 0x70, 0x72, 0x36, 0x37, 0x6F};
-    lcd_data(ngamma, 6);
-    
-    lcd_cmd(0xF2);
-    uint8_t dgamma1[] = {0x45, 0x09, 0x08, 0x08, 0x26, 0x2A};
-    lcd_data(dgamma1, 6);
-    
-    lcd_cmd(0xF3);
-    uint8_t dgamma2[] = {0x43, 0x70, 0x72, 0x36, 0x37, 0x6F};
-    lcd_data(dgamma2, 6);
-    
-    lcd_cmd(0xED);
-    uint8_t power[] = {0x1B, 0x0B};
-    lcd_data(power, 2);
-    
-    lcd_cmd(0xAE);
-    uint8_t ae[] = {0x77};
-    lcd_data(ae, 1);
-    
-    lcd_cmd(0xCD);
-    uint8_t cd[] = {0x63};
-    lcd_data(cd, 1);
-    
-    // Set display area
-    lcd_cmd(0x70);
-    uint8_t area1[] = {0x07, 0x07, 0x04, 0x0E, 0x0F, 0x09, 0x07, 0x08, 0x03};
-    lcd_data(area1, 9);
-    
-    lcd_cmd(0xE8);
-    uint8_t dtca[] = {0x34};
-    lcd_data(dtca, 1);
-    
-    lcd_cmd(0x62);
-    uint8_t area2[] = {0x18, 0x0D, 0x71, 0xED, 0x70, 0x70, 0x18, 0x0F, 0x71, 0xEF, 0x70, 0x70};
-    lcd_data(area2, 12);
-    
-    lcd_cmd(0x63);
-    uint8_t area3[] = {0x18, 0x11, 0x71, 0xF1, 0x70, 0x70, 0x18, 0x13, 0x71, 0xF3, 0x70, 0x70};
-    lcd_data(area3, 12);
-    
-    lcd_cmd(0x64);
-    uint8_t area4[] = {0x28, 0x29, 0xF1, 0x01, 0xF1, 0x00, 0x07};
-    lcd_data(area4, 7);
-    
-    lcd_cmd(0x66);
-    uint8_t area5[] = {0x3C, 0x00, 0xCD, 0x67, 0x45, 0x45, 0x10, 0x00, 0x00, 0x00};
-    lcd_data(area5, 10);
-    
-    lcd_cmd(0x67);
-    uint8_t area6[] = {0x00, 0x3C, 0x00, 0x00, 0x00, 0x01, 0x54, 0x10, 0x32, 0x98};
-    lcd_data(area6, 10);
-    
-    lcd_cmd(0x74);
-    uint8_t area7[] = {0x10, 0x85, 0x80, 0x00, 0x00, 0x4E, 0x00};
-    lcd_data(area7, 7);
-    
-    lcd_cmd(0x98);
-    uint8_t area8[] = {0x3e, 0x07};
-    lcd_data(area8, 2);
-    
-    lcd_cmd(0x35); // Tearing effect line on
-    lcd_cmd(0x21); // Display inversion on
-    
-    lcd_cmd(0x11); // Sleep out
-    vTaskDelay(120 / portTICK_PERIOD_MS);
-    
-    lcd_cmd(0x29); // Display on
-    vTaskDelay(120 / portTICK_PERIOD_MS);
-}
-
-// Fill screen with solid color
-static void fill_screen(uint16_t color)
-{
-    // Set column address
-    lcd_cmd(0x2A);
-    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF}; // 0-239
-    lcd_data(col_data, 4);
-    
-    // Set row address  
-    lcd_cmd(0x2B);
-    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF}; // 0-239
-    lcd_data(row_data, 4);
-    
-    // Write to RAM
-    lcd_cmd(0x2C);
-    
-    gpio_set_level(PIN_NUM_DC, 1); // Data mode
-    
-    // Send color data for entire screen
-    for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
-    {
-        uint8_t color_bytes[] = {(color >> 8) & 0xFF, color & 0xFF};
-        esp_err_t ret;
-        spi_transaction_t t;
-        memset(&t, 0, sizeof(t));
-        t.length = 16;
-        t.tx_buffer = color_bytes;
-        ret = spi_device_polling_transmit(spi_handle, &t);
-        assert(ret == ESP_OK);
-    }
-}
-
-// Component initialization function
-esp_err_t goblin_left_eye_init(void)
-{
-    ESP_LOGI(TAG, "Initializing goblin left eye display...");
-    
-    // Configure GPIO pins
-    gpio_config_t io_conf = {};
-    io_conf.intr_type = GPIO_INTR_DISABLE;
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pin_bit_mask = (1ULL << PIN_NUM_DC) | (1ULL << PIN_NUM_RST);
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    gpio_config(&io_conf);
-    
-    // Initialize SPI bus
-    spi_bus_config_t buscfg = {};
-    buscfg.miso_io_num = PIN_NUM_MISO;
-    buscfg.mosi_io_num = PIN_NUM_MOSI;
-    buscfg.sclk_io_num = PIN_NUM_CLK;
-    buscfg.quadwp_io_num = -1;
-    buscfg.quadhd_io_num = -1;
-    buscfg.max_transfer_sz = DISPLAY_WIDTH * DISPLAY_HEIGHT * 2;
-    
-    esp_err_t ret = spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO);
-    ESP_ERROR_CHECK(ret);
-    
-    // Configure SPI device
-    spi_device_interface_config_t devcfg = {};
-    devcfg.clock_speed_hz = 10 * 1000 * 1000; // 10 MHz
-    devcfg.mode = 0;
-    devcfg.spics_io_num = PIN_NUM_CS;
-    devcfg.queue_size = 7;
-    
-    ret = spi_bus_add_device(SPI2_HOST, &devcfg, &spi_handle);
-    ESP_ERROR_CHECK(ret);
-    
-    // Initialize the display
-    gc9a01_init();
-    
-    // Fill screen with initial color (red)
-    fill_screen(test_colors[0]);
-    
-    ESP_LOGI(TAG, "Goblin left eye display initialized successfully!");
-    return ESP_OK;
-}
-
-// Component action function - cycles through colors
-void goblin_left_eye_act(void)
-{
-    // Change color every time this function is called
-    current_color = (current_color + 1) % 7;
-    fill_screen(test_colors[current_color]);
-    
-    ESP_LOGI(TAG, "Display updated with color %d", current_color);
-}
-void goblin_left_eye_act(void) {
-    // Advance animation frame based on loop count
-    uint32_t animation_speed = 30; // Change frame every 30 loops
-    uint32_t new_frame = (g_loopCount / animation_speed) % left_eye_frame_count;
-    
-    if (new_frame != left_eye_current_frame) {
-        left_eye_current_frame = new_frame;
-        load_current_frame_to_buffer();
-    }
-    
-    // Set context for shared processing (SPI device for left eye)
-    current_spi_device = 1; // SPI_DEVICE_1 for left eye
-    currentFrame = left_eye_animation_buffer;
-    current_frame_size = PIXELS_PER_FRAME;
-    
-    ESP_LOGV(TAG, "Left eye frame %u ready for processing at loop %u", 
-             left_eye_current_frame, g_loopCount);
-}
+static uint8_t* left_eye_animation_buffer = nullptr;
+static uint32_t left_eye_current_frame = 0;
+static uint32_t left_eye_frame_timer = 0;
+static uint32_t frame_width = 0;
+static uint32_t frame_height = 0;
+static uint32_t total_pixels = 0;
 
 /**
- * @brief Load blink animation frames for left eye
+ * @brief Initialize left eye animation system
  */
-void load_left_eye_animation(void) {
-    ESP_LOGI(TAG, "Loading left eye blink animation");
+void goblin_left_eye_init(void) {
+    ESP_LOGI(TAG, "Initializing left eye animation system");
     
-    // Initialize with simple blink pattern
-    // Frame 0: Fully open eye
-    for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-        left_eye_animation_buffer[i] = 255; // Start with white
+    // Get buffer and dimensions from display component
+    left_eye_animation_buffer = getBuffer();
+    total_pixels = getFrameSize();
+    frame_width = getFrameRowSize();
+    frame_height = total_pixels / frame_width;
+    
+    if (left_eye_animation_buffer == nullptr) {
+        ESP_LOGE(TAG, "Failed to allocate animation buffer");
+        return;
+    }
+    
+    // Initialize buffer to white
+    for (uint32_t i = 0; i < total_pixels; i++) {
+        left_eye_animation_buffer[i] = 255;
     }
     
     left_eye_current_frame = 0;
-    ESP_LOGI(TAG, "Left eye animation loaded");
+    left_eye_frame_timer = 0;
+    ESP_LOGI(TAG, "Left eye animation initialized with %ux%u display", frame_width, frame_height);
 }
 
 /**
- * @brief Load current animation frame to processing buffer
+ * @brief Load current animation frame to processing buffer for left eye
+ * Mirrors right eye animation with distance-based focusing effect
  */
 void load_current_frame_to_buffer(void) {
-    // Simple blink animation pattern
+    // Declare local SharedMemory instance and read current state
+    SharedMemory local_state;
+    
+    // Get viewer distance from Environment in shared state
+    Environment* env_ptr = local_state.read<Environment>("Environment");
+    uint8_t viewer_distance = (env_ptr != nullptr) ? env_ptr->distance_cm : 128; // Default if not available
+    
+    // Calculate centers based on actual display dimensions
+    uint32_t center_x = frame_width / 2;
+    uint32_t center_y = frame_height / 2;
+    
+    // Calculate focus-dependent pupil and iris sizes (scaled to display size)
+    uint32_t base_scale = (frame_width + frame_height) / 2; // Average dimension for scaling
+    uint32_t pupil_size = (base_scale * 400 / 240) + (viewer_distance * base_scale / 60);
+    uint32_t inner_iris_size = (base_scale * 1200 / 240) + (viewer_distance * base_scale / 30);
+    uint32_t outer_iris_size = (base_scale * 3600 / 240) + (viewer_distance * base_scale / 20);
+    uint32_t sclera_size = (base_scale * 10000 / 240);
+    
+    // Mirror the right eye animation pattern with focus adaptation
     switch (left_eye_current_frame) {
-        case 0: // Fully open
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 60 && y < 180) {
-                    left_eye_animation_buffer[i] = 64; // Brown iris
+        case 0: // Normal open eye with adaptive focus
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t x = i % frame_width;
+                uint32_t y = i / frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < pupil_size) { // Adaptive pupil
+                    left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size) { // Inner iris - detailed when close
+                    left_eye_animation_buffer[i] = 96; // Red-brown iris (mood-sensitive palette)
+                } else if (distance < outer_iris_size) { // Outer iris - sharp when far
+                    left_eye_animation_buffer[i] = 64; // Brown iris (mood-sensitive palette)
+                } else if (distance < sclera_size) { // Sclera
+                    left_eye_animation_buffer[i] = 255; // White (mood-sensitive palette)
                 } else {
-                    left_eye_animation_buffer[i] = 255; // White sclera
+                    left_eye_animation_buffer[i] = 0; // Black edge
                 }
             }
             break;
             
-        case 1: // Partially closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 80 && y < 160) {
-                    left_eye_animation_buffer[i] = 64; // Brown iris
-                } else if (y > 70 && y < 170) {
-                    left_eye_animation_buffer[i] = 224; // Light gray
+        case 1: // Slight squint with focus adaptation  
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t y = i / frame_width;
+                if (y > frame_height * 0.2 && y < frame_height * 0.8) {
+                    uint32_t x = i % frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    if (distance < pupil_size) { // Adaptive pupil
+                        left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < inner_iris_size) { // Focus-adaptive iris
+                        left_eye_animation_buffer[i] = 128; // Green-curious (mood-sensitive)
+                    } else if (distance < outer_iris_size) { // Outer iris
+                        left_eye_animation_buffer[i] = 96; // Red-brown (mood-sensitive)
+                    } else {
+                        left_eye_animation_buffer[i] = 224; // Light gray sclera
+                    }
                 } else {
                     left_eye_animation_buffer[i] = 0; // Black eyelid
                 }
             }
             break;
             
-        case 2: // Nearly closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                uint32_t y = i / FRAME_WIDTH;
-                if (y > 110 && y < 130) {
-                    left_eye_animation_buffer[i] = 32; // Dark slit
+        case 2: // Wide curious look with focus adaptation
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t x = i % frame_width;
+                uint32_t y = i / frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                // Alert pupil size - smaller when surprised/focused
+                uint32_t alert_pupil_size = pupil_size * 0.6; 
+                
+                if (distance < alert_pupil_size) { // Small adaptive pupil
+                    left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size * 0.8) { // Bright inner iris
+                    left_eye_animation_buffer[i] = 160; // Blue-curious (mood-sensitive)
+                } else if (distance < outer_iris_size) { // Outer iris
+                    left_eye_animation_buffer[i] = 128; // Green (mood-sensitive)
+                } else if (distance < sclera_size * 1.2) { // Wide sclera for alert look
+                    left_eye_animation_buffer[i] = 255; // Bright white
                 } else {
-                    left_eye_animation_buffer[i] = 0; // Black eyelid
+                    left_eye_animation_buffer[i] = 32; // Dark edge
                 }
             }
             break;
             
-        case 3: // Fully closed
-            for (uint32_t i = 0; i < PIXELS_PER_FRAME; i++) {
-                left_eye_animation_buffer[i] = 0; // All black
+        case 3: // Narrowed focus with distance adaptation
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t y = i / frame_width;
+                if (y > frame_height * 0.3 && y < frame_height * 0.7) {
+                    uint32_t x = i % frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    // Concentrated focus - pupil size varies with distance
+                    uint32_t focus_pupil_size = pupil_size * 0.8;
+                    
+                    if (distance < focus_pupil_size) {
+                        left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < inner_iris_size) {
+                        left_eye_animation_buffer[i] = 96; // Red focus (mood-sensitive)
+                    } else {
+                        left_eye_animation_buffer[i] = 192; // Purple intensity (mood-sensitive)
+                    }
+                } else {
+                    left_eye_animation_buffer[i] = 16; // Dark eyelid
+                }
+            }
+            break;
+            
+        case 4: // Return to normal with focus adaptation
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t x = i % frame_width;
+                uint32_t y = i / frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < pupil_size) { // Adaptive pupil
+                    left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size) { // Inner iris
+                    left_eye_animation_buffer[i] = 64; // Brown iris (mood-sensitive)
+                } else if (distance < outer_iris_size) { // Outer iris
+                    left_eye_animation_buffer[i] = 224; // Light (mood-sensitive)
+                } else if (distance < sclera_size) { // Sclera
+                    left_eye_animation_buffer[i] = 255; // White
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black
+                }
+            }
+            break;
+            
+        case 5: // Satisfied look with focus adaptation
+            for (uint32_t i = 0; i < total_pixels; i++) {
+                uint32_t y = i / frame_width;
+                if (y > frame_height * 0.17 && y < frame_height * 0.83) {
+                    uint32_t x = i % frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    // Relaxed focus - larger pupil for contentment
+                    uint32_t relaxed_pupil_size = pupil_size * 1.2;
+                    
+                    if (distance < relaxed_pupil_size) {
+                        left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < outer_iris_size) {
+                        left_eye_animation_buffer[i] = 192; // Purple satisfaction (mood-sensitive)
+                    } else {
+                        left_eye_animation_buffer[i] = 255; // Bright white
+                    }
+                } else {
+                    left_eye_animation_buffer[i] = 0; // Black
+                }
             }
             break;
     }
-    
-    ESP_LOGV(TAG, "Loaded frame %u to left eye buffer", left_eye_current_frame);
 }
 
-#endif // ENABLE_GOBLIN_COMPONENTS
+/**
+ * @brief Main animation control function for left eye
+ * Controls frame timing and animation sequence
+ */
+void goblin_left_eye_act(void) {
+    // Frame timing control (advance every 30 loops ≈ 500ms at 60Hz)
+    left_eye_frame_timer++;
+    if (left_eye_frame_timer >= 30) {
+        left_eye_frame_timer = 0;
+        left_eye_current_frame = (left_eye_current_frame + 1) % 6; // Cycle through 6 frames
+    }
+    
+    // Load current frame to buffer and set global state
+    load_current_frame_to_buffer();
+}

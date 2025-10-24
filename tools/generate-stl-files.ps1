@@ -1,4 +1,4 @@
-?# Generate STL/3MF files from OpenSCAD mounting system with multi-color support
+# Generate STL/3MF files from OpenSCAD mounting system with multi-color support
 # Requires OpenSCAD to be installed and in PATH
 
 param(

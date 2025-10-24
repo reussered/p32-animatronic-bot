@@ -3,6 +3,8 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "GC9A01_DISPLAY",
+    "component_type":  "DISPLAY_DRIVER",
+    "display_driver":  true,
     "component_name":  "gc9a01",
     "subsystem":  "HEAD",
     "physical_specs":  {
@@ -167,5 +169,14 @@
                                                      "HUNGER":  "#FF0080",
                                                      "AFFECTION":  "#FF69B4"
                                                  }
-                            }
+                            },
+    "software":  {
+                     "init_function":  "gc9a01_init",
+                     "act_function":  "gc9a01_act"
+                 },
+    "required_interface_functions":  [
+                                        "getBuffer",
+                                        "getFrameSize", 
+                                        "getFrameRowSize"
+                                    ]
 }

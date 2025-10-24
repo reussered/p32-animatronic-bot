@@ -4,6 +4,7 @@
 
 #include "p32_component_config.h"
 #include "p32_shared_state.h"
+#include "core/memory/SharedMemory.hpp"
 #include "Mood.hpp"
 #include <esp_log.h>
 #include <esp_err.h>
@@ -51,8 +52,12 @@ void goblin_speaker_act(void) {
         return;
     }
     
+    // Access shared state through SharedMemory
+    extern SharedMemory GSM;
+    auto local_state = GSM.read<bool>("is_speaking");
+    
     // Check if system wants to play audio
-    if (g_shared_state.is_speaking) {
+    if (local_state) {
         // Log audio event (substitute for actual playback)
         ESP_LOGI(TAG, "? AUDIO EVENT [%.3f sec]: Speaking (volume: simulated)", 
             esp_timer_get_time() / 1000000.0);

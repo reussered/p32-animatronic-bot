@@ -1,0 +1,198 @@
+/**
+ * @file st7796.cpp
+ * @brief ST7796 320x480 TFT display hardware driver implementation
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "st7796.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+#include "driver/spi_master.h"
+#include "driver/gpio.h"
+#include <cstdlib>
+#include <cstring>
+
+static const char* TAG = "ST7796";
+
+// Hardware pin definitions (to be configured via interface assignment)
+static gpio_num_t st7796_cs_pin = GPIO_NUM_NC;
+static gpio_num_t st7796_dc_pin = GPIO_NUM_NC;
+static gpio_num_t st7796_rst_pin = GPIO_NUM_NC;
+static gpio_num_t st7796_bl_pin = GPIO_NUM_NC;
+
+// SPI device handle
+static spi_device_handle_t st7796_spi_device = nullptr;
+
+// Display state
+static bool st7796_initialized = false;
+static uint8_t current_rotation = 0;
+
+/**
+ * @brief Initialize ST7796 hardware driver
+ */
+void st7796_init(void) {
+    ESP_LOGI(TAG, "Initializing ST7796 320x480 TFT display");
+    
+    // TODO: Get pin assignments from interface configuration
+    // This will be populated by the component generation system
+    
+    // Configure control pins
+    if (st7796_dc_pin != GPIO_NUM_NC) {
+        gpio_config_t dc_config = {
+            .pin_bit_mask = (1ULL << st7796_dc_pin),
+            .mode = GPIO_MODE_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE
+        };
+        gpio_config(&dc_config);
+    }
+    
+    if (st7796_rst_pin != GPIO_NUM_NC) {
+        gpio_config_t rst_config = {
+            .pin_bit_mask = (1ULL << st7796_rst_pin),
+            .mode = GPIO_MODE_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE
+        };
+        gpio_config(&rst_config);
+        
+        // Hardware reset sequence
+        gpio_set_level(st7796_rst_pin, 0);
+        vTaskDelay(pdMS_TO_TICKS(10));
+        gpio_set_level(st7796_rst_pin, 1);
+        vTaskDelay(pdMS_TO_TICKS(120));
+    }
+    
+    // Configure backlight pin (PWM capable)
+    if (st7796_bl_pin != GPIO_NUM_NC) {
+        gpio_config_t bl_config = {
+            .pin_bit_mask = (1ULL << st7796_bl_pin),
+            .mode = GPIO_MODE_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE
+        };
+        gpio_config(&bl_config);
+        gpio_set_level(st7796_bl_pin, 1);  // Enable backlight
+    }
+    
+    // TODO: Initialize SPI device
+    // TODO: Send ST7796 initialization commands
+    // TODO: Set default rotation and color mode
+    
+    st7796_initialized = true;
+    ESP_LOGI(TAG, "ST7796 initialization complete - 320x480 display ready");
+}
+
+/**
+ * @brief Main action function for ST7796 display processing
+ */
+void st7796_act(void) {
+    if (!st7796_initialized) {
+        ESP_LOGW(TAG, "ST7796 not initialized, skipping act");
+        return;
+    }
+    
+    // TODO: Process any pending display updates
+    // TODO: Handle buffer transfers
+    // TODO: Manage display refresh cycles
+    
+    // Log verbose information every 5000 loops for large displays
+    if (g_loopCount % 5000 == 0) {
+        ESP_LOGV(TAG, "ST7796 display processing - loop %lu", g_loopCount);
+    }
+}
+
+/**
+ * @brief Display Buffer Interface - allocate buffer for display components
+ * @return Pointer to newly allocated buffer (307,200 bytes for 320x480x2)
+ */
+uint8_t* getBuffer(void) {
+    size_t buffer_size = ST7796_FRAME_SIZE;
+    uint8_t* buffer = (uint8_t*)malloc(buffer_size);
+    
+    if (buffer == nullptr) {
+        ESP_LOGE(TAG, "Failed to allocate ST7796 buffer (%zu bytes)", buffer_size);
+        return nullptr;
+    }
+    
+    // Initialize buffer to black
+    memset(buffer, 0, buffer_size);
+    
+    ESP_LOGD(TAG, "Allocated ST7796 buffer: %zu bytes (320x480x2)", buffer_size);
+    return buffer;
+}
+
+/**
+ * @brief Display Buffer Interface - get total frame size in pixels
+ * @return Total number of pixels in frame (153,600)
+ */
+uint32_t getFrameSize(void) {
+    return ST7796_PIXELS;
+}
+
+/**
+ * @brief Display Buffer Interface - get frame row size in pixels  
+ * @return Number of pixels per row (320)
+ */
+uint32_t getFrameRowSize(void) {
+    return ST7796_WIDTH;
+}
+
+/**
+ * @brief Set display rotation
+ * @param rotation 0=0°, 1=90°, 2=180°, 3=270°
+ */
+void st7796_set_rotation(uint8_t rotation) {
+    if (rotation > 3) {
+        ESP_LOGW(TAG, "Invalid rotation %d, using 0", rotation);
+        rotation = 0;
+    }
+    
+    current_rotation = rotation;
+    ESP_LOGI(TAG, "Set rotation to %d degrees", rotation * 90);
+    
+    // TODO: Send rotation commands to ST7796
+}
+
+/**
+ * @brief Control backlight brightness
+ * @param brightness 0-255 brightness level
+ */
+void st7796_set_backlight(uint8_t brightness) {
+    if (st7796_bl_pin == GPIO_NUM_NC) {
+        ESP_LOGW(TAG, "Backlight pin not configured");
+        return;
+    }
+    
+    // Simple on/off for now - can be enhanced with PWM
+    if (brightness > 127) {
+        gpio_set_level(st7796_bl_pin, 1);
+        ESP_LOGD(TAG, "Backlight ON");
+    } else {
+        gpio_set_level(st7796_bl_pin, 0);
+        ESP_LOGD(TAG, "Backlight OFF");
+    }
+}
+
+/**
+ * @brief Send display buffer to ST7796
+ * @param buffer Pointer to RGB565 pixel data
+ * @param size Buffer size in bytes
+ */
+void st7796_send_buffer(const uint8_t* buffer, uint32_t size) {
+    if (!st7796_initialized || buffer == nullptr) {
+        ESP_LOGW(TAG, "Cannot send buffer - not initialized or null buffer");
+        return;
+    }
+    
+    if (size != ST7796_FRAME_SIZE) {
+        ESP_LOGW(TAG, "Buffer size mismatch: expected %d, got %lu", ST7796_FRAME_SIZE, size);
+        return;
+    }
+    
+    // TODO: Send buffer via SPI to ST7796
+    ESP_LOGV(TAG, "Sent %lu bytes to ST7796 display", size);
+}
