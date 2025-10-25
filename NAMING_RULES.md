@@ -4,7 +4,27 @@
 
 This document contains the **ACTUAL SPECIFIC NAMING RULES** extracted from source documents across the P32 Animatronic Bot project. These are not descriptions - these are the exact rules that must be followed.
 
-## 🔧 GENERAL FILE NAMING CONVENTIONS
+## 📖 QUICK NAVIGATION
+
+**Quick section reference:**
+
+- 🔧 General File Naming
+- 🧩 Component Naming  
+- 🏗️ Subsystem Naming
+- 🏭 Hardware & Interface
+- 📁 File Organization
+- 🔗 Shared State
+- 📋 Class Files
+- 🛠️ Scripts & Tools
+- 📚 Documentation
+- 🚫 Prohibited Patterns
+- ✅ Validation
+- 🔄 Code Generation
+- 📝 Summary
+
+---
+
+## �🔧 GENERAL FILE NAMING CONVENTIONS
 
 ### ASCII Characters Only (MANDATORY)
 
@@ -78,32 +98,36 @@ void component_name_act(void);        // Return void, NO ARGUMENTS
 ## 🏗️ SUBSYSTEM NAMING CONVENTIONS
 
 ### JSON-Controlled Subsystem Identification
+
 **Subsystem names are determined by the 'controller' key during recursive JSON composition:**
-- Subsystems are identified when JSON components contain `'chip'` or `'controller_hardware'` fields
+
+- Subsystems are identified when JSON components contain the `'controller'` field
 - The subsystem name is derived from the component path where the controller assignment occurs
 - Generation script discovers subsystems by traversing JSON tree and finding controller assignments
 
-### Standard Subsystem Names
-- `head` (not test_head, goblin_head, etc.)
-- `torso`
-- `left_arm`
-- `right_arm`
-- `left_leg`
-- `right_leg`
-- Additional subsystems: `{descriptive_name}` (snake_case)
+### Subsystem Name Derivation
+
+**Subsystem names are derived directly from the component name that contains the 'controller' field:**
+
+- The subsystem name equals the component name where the `'controller'` field is found
+- No predefined standard names - subsystem names are determined by JSON configuration
+- Component names become subsystem names when they contain controller assignments
 
 ### Generated Subsystem Files
+
 For subsystem named `{subsystem}`:
+
 - `{subsystem}_component_functions.cpp`
 - `{subsystem}_component_functions.hpp`
 - `{subsystem}_dispatch_tables.cpp`
 - `{subsystem}_dispatch_tables.hpp`
 
 ### Subsystem File Generation Process
-1. **Discovery Phase**: JSON tree traversal finds components with `'chip'` or `'controller_hardware'` fields
-2. **Assignment Phase**: Components are assigned to subsystems based on controller boundaries
+
+1. **Discovery Phase**: JSON tree traversal finds components with the `'controller'` field
+2. **Assignment Phase**: Components are assigned to subsystems through normal JSON containment relationships
 3. **File Generation**: Separate files generated for each discovered subsystem
-4. **CMakeLists.txt**: Each subsystem gets `src/subsystems/{subsystem}/CMakeLists.txt`
+4. **CMakeLists.txt**: Each subsystem gets `{subsystem}_CMakeLists.txt` in `src/`
 
 ## 🏭 HARDWARE & INTERFACE NAMING
 
@@ -123,8 +147,10 @@ For subsystem named `{subsystem}`:
 
 ### Interface Assignment System
 
-- **Template Pattern**: `spi_device.json`, `gpio_pair.json`, `i2c_device.json`
-- **Numbered Instances**: `spi_device_1.json`, `spi_device_2.json`, `gpio_pair_1.json`
+- **Interface Keywords**: Components specify interfaces using the `interface:` keyword
+- **Bus Types**: `spi_bus`, `gpio_pair`, `i2c_bus`
+- **Example**: `interface: spi_bus` (as used in goblin_eye component)
+- **Assignment**: Interface type determines hardware connectivity and communication protocol
 
 ## 📁 FILE ORGANIZATION PATTERNS
 
@@ -133,15 +159,27 @@ For subsystem named `{subsystem}`:
 - **Creatures/Bots**: `config\bots\bot_families\{family}\{bot_name}.json`
 - **Hardware specs**: `config\hardware\{component_type}.json`
 - **Interface definitions**: `config\interfaces\{interface_type}.json`
-- **Positioned components**: `config\components\positioned\{subsystem}\{component}.json`
-- **Subsystem assemblies**: `config\subsystems\{subsystem_name}.json`
+- **Internal Components**: `config\internal\{component_name}.json`
+- **Instrumentation Components**: `config\instrumentation\{Component_Name}.json` - Components that measure and potentially report conditions as they occur in the system
+- **Test Components**:
+  - Persisted: `config\test\persisted\{ComponentName}.json`
+  - Temporary: `config\test\{component_name}.json`
+- **Subsystem Components**: `config\subsystems\{subsystem_name}.json` - Components that have the `controller` keyword
 
 ### Generated Code Structure
 
 - **Component implementations**: `src\components\{component_name}.cpp`
 - **Component headers**: `include\components\{component_name}.hpp`
-- **Dispatch tables**: `src\subsystems\{subsystem}\{subsystem}_dispatch_tables.hpp/.cpp`
+- **Generated Software**: Created by python scripts in `/tools` go into regular `src/` and `include/` folders. This includes dispatch tables and component functions `{subsystem}_dispatch_tables.hpp/.cpp` and `{subsystem}_component_functions.hpp/.cpp`. Only the last copy generated is kept. Because the folder and files are not in `.gitignore`, this means that the latest will be stored whenever we commit, which is a good thing
 - **Shared classes**: `shared\{ClassName}.hpp`
+
+### Component Software Templates
+
+- **Location**: Outside `src/` and `include/` folder hierarchies (e.g., `templates/` or `component_templates/`)
+- **Purpose**: Template .cpp/.hpp files designated by the `software` keyword section in component JSON
+- **Usage**: These files have .cpp/.hpp extensions but are **NEVER compiled or used directly**
+- **Processing**: Become part of `{subsystem}_component_functions.hpp/.cpp` files during generation
+- **Naming**: `{component_name}.cpp` and `{component_name}.hpp` (same as regular components)
 
 ### Asset Organization
 
@@ -153,11 +191,13 @@ For subsystem named `{subsystem}`:
 ## 🔗 SHARED STATE NAMING
 
 ### SharedMemory Variable Names
+
 - **Case-insensitive**: `g_Mood`, `G_MOOD`, `g_mood` all equivalent
 - **Recommended convention**: lowercase with underscores
 - **Examples**: `"g_Mood"`, `"g_Envir"`, `"g_Personality"`
 
 ### Defined Shared Classes
+
 - **Mood Class**: `"g_Mood"` - 9 emotions (ANGER, FEAR, HAPPINESS, etc.)
 - **Environment Class**: `"g_Envir"` - sensor data (distance, temperature, etc.)
 - **Personality Class**: `"g_Personality"` - personality configuration (future)
@@ -280,6 +320,6 @@ class P32_Core { ... };
 
 ---
 
-*Last Updated: October 24, 2025*
+*Last Updated: October 25, 2025*
 *Extracted from: ai rules (.github/AI-AGENT-RULES.md), project_coding_standards.md, SUBSYSTEM-GENERATION-RULES.md, component-code-requirements.md (docs/), two-tier-mounting-system.md (docs/), .github/consistant_project_rules.md*
 
