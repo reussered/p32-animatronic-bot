@@ -4,7 +4,7 @@
 
 This is **NOT** web development - this is embedded microcontroller programming for the ESP32 family of chips with strict constraints:
 
-- **Target**: ESP32 family of chips microcontroller (512KB RAM, 8MB Flash)  
+- **Target**: ESP32 family of chips microcontroller (<=512KB RAM, 2mb-8MB Flash)  
 - **Framework**: ESP-IDF native APIs (NO Arduino libraries)
 - **Environment**: Windows PowerShell, ASCII encoding only (NO UTF-8/Unicode)
 - **Architecture**: Real-time, interrupt-driven embedded system
@@ -12,17 +12,12 @@ This is **NOT** web development - this is embedded microcontroller programming f
 
 ## **IRONCLAD ARCHITECTURAL RULES**
 
-### 1. **Pure Component-Driven Architecture**
-- **NOTHING executes unless it's a component** with `init()` and `act()` functions
-- The main loop contains **ZERO application logic** - only component dispatch
-- All functionality is implemented as components with standardized interfaces
-
-### 2. **Three-Level Component Hierarchy**
+### 1. **Three-Level Component Hierarchy**
 - **System Level**: Core platform (WiFi, Serial, Watchdog) - always present
 - **Family Level**: Behavior/personality shared across bot family (Goblin, Cat, Bear)  
 - **Bot-Specific Level**: Positioned hardware components (eyes, nose, mouth, sensors)
 
-### 3. **Component Isolation & Communication**
+### 2. **Component Isolation & Communication**
 - Components **NEVER** call functions in other components directly
 - All inter-component communication through global shared state (`p32_shared_state.h`)
 - **Legal Information Sharing**: Components can use access functions exported by other components (e.g., `getBuffer()`, `getFrameSize()` from display drivers)
@@ -35,7 +30,6 @@ This is **NOT** web development - this is embedded microcontroller programming f
 
 ### Controller Assignment
 - Each subsystem runs on dedicated ESP32 chip
-- Components belong to exactly ONE subsystem/controller
 - `controller` keyword defines subsystem boundaries in JSON AND specifies the exact chip type
 - Examples: `"controller": "ESP32-C3"` or `"controller": "ESP32-S3-R8N8"`
 - Code generation creates per-subsystem dispatch tables
@@ -69,11 +63,17 @@ This is **NOT** web development - this is embedded microcontroller programming f
 ## **CODE GENERATION REQUIREMENTS**
 
 ### Mandatory Script-Based Generation
-- **ALL component code MUST be generated via Python scripts** - never manually created
-- **Component File Aggregation**: Individual component .cpp/.hpp files are NEVER compiled in isolation
-- **Python Script Process**: Parses JSON files and aggregates all component files into large composite documents
-- **Composite Output**: For subsystem named `goblin_head`, creates `goblin_head_component_functions.hpp` and `goblin_head_component_functions.cpp`
-- Generation creates 4 files: dispatch tables (.cpp/.hpp) + aggregated component functions (.cpp/.hpp)
+
+- **Component File Aggregation**: Individual component .cpp/.hpp files are NEVER compiled in isolation.  
+- **Python Script Process**: Parses JSON files and aggregates all component files into composite documents.
+- **Composite Output**: For subsystem named `goblin_head`, creates  4 files,
+	`goblin_head_component_functions.hpp`, 
+	`goblin_head_component_functions.cpp`'
+	`goblin_head_dispatch_tables.cpp`'
+	`goblin_head_dispatch_tables.hpp`'
+	The component_functions files are created by aggregating the content of the associated components .hpp and .cpp files, taking care that if the component has already been added, it isn't added again.
+		the dispatch tables are created
+	
 - All 4 generated files MUST be in `.gitignore` (auto-generated content)
 - Manual component creation always fails due to naming/integration requirements
 
