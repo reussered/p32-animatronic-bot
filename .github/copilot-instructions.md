@@ -6,6 +6,27 @@
 
 These are ironclad rules that must NEVER be broken. They exist because of repeated violations.
 
+## Quick Start
+To build and test this project:
+```powershell
+# Clone and build
+git clone https://github.com/reussered/p32-animatronic-bot.git
+cd p32-animatronic-bot
+pio run -t upload -t monitor
+
+# Run tests
+pio test
+
+# Validate configuration
+PowerShell -ExecutionPolicy Bypass -File ".\generate_file_structure.ps1"
+```
+
+**Key Commands:**
+- `pio run` - Build firmware
+- `pio run -t upload` - Flash to ESP32-S3
+- `pio test` - Run unit tests
+- `.\tools\generate-stl-files.ps1` - Generate 3D printable parts
+
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.
 
@@ -120,6 +141,16 @@ Two coordinate systems supported:
 - **STL Organization**: Generated files in `assets/shapes/stl/{basic_mounts,bot_shells}/`
 - **Personality Integration**: Character shells provide unique aesthetics while reusing hardware mounts
 
+### Testing Guidelines
+- **Test Framework**: PlatformIO Unit Testing (native ESP-IDF compatible)
+- **Test Location**: `test/` directory for unit tests
+- **Test Structure**: Each test should verify component init() and act() functions
+- **Hardware Testing**: Use `test/distance_eye_test/` as reference for component integration tests
+- **Running Tests**: Execute with `pio test` command
+- **Test Coverage**: Focus on component lifecycle (init, act cycle count behavior)
+- **Mock Strategy**: Components should be testable independently via shared state access
+- **Documentation**: See `test/README` and PlatformIO docs for advanced testing patterns
+
 ## Code Conventions
 
 ### JSON Configuration Standards
@@ -159,11 +190,29 @@ this architecture allows creatures with different number of eyes that just 2
 - Devices reference buses by ID, enabling bus sharing
 - Pin assignments centralized in interface configs
 
+### Error Handling Conventions
+- **Return Type**: All init functions return `esp_err_t` for error propagation
+- **Success Check**: Use `ESP_ERROR_CHECK()` macro for critical operations that must succeed
+- **Error Codes**: Return `ESP_OK` on success, specific error codes on failure
+- **Logging**: Use ESP-IDF logging macros: `ESP_LOGI()`, `ESP_LOGW()`, `ESP_LOGE()`
+- **Pattern**:
+```c
+esp_err_t component_init(void) {
+    esp_err_t ret = hardware_setup();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Hardware setup failed: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    return ESP_OK;
+}
+```
+
 ## Key Files Reference
 
 ### Core Configuration Files
 - `config/author.json` - Project metadata template
-- `config/bots/goblin_full.json` - Complete bot example with 3D skull coordinate system
+- `config/bots/bot_families/goblins/goblin_full.json` - Complete bot example with 3D skull coordinate system
+- `config/creatures/goblin_warrior_head.json` - Example creature configuration
 - `config/components/interfaces/spi_bus_vspi.json` - Standard ESP32 SPI bus setup
 - `config/components/interfaces/spi_device_*.json` - Individual device GPIO assignments
 
@@ -179,6 +228,50 @@ this architecture allows creatures with different number of eyes that just 2
 - `tools/generate-stl-files.ps1` - Batch converts .scad files to .stl for 3D printing
 - `tools/launch-stl-viewer.ps1` - Web-based STL viewer for design validation
 - `src/main.c` - Currently minimal ESP-IDF entry point
+
+## Performance Considerations
+- **CPU Load Balancing**: Torso subsystem 50% CPU, Head subsystem 75% CPU
+- **Component Timing**: Use `hitCount` modulo scheduling - avoid real-time delays in act() functions
+- **Memory Management**: ESP32-S3 has 512KB SRAM + 2MB PSRAM - monitor allocation patterns
+- **SPI Bus Sharing**: Multiple displays share single SPI bus (3 shared pins + unique CS pins)
+- **Power Budget**: Document in `docs/POWER-BUDGET-SPEC.md` - track current draw per component
+- **Optimization Strategy**: See `docs/ESP32_OPTIMIZATION_STRATEGY.md` for performance tuning
+- **Performance Testing**: Reference `docs/P32-PERFORMANCE-TESTING-STRATEGY.md` for measurement methodology
+- **Critical**: Never use `vTaskDelay()` or blocking calls in main loop or act() functions
+
+## Dependencies and Tools
+- **Platform**: ESP-IDF (Espressif IoT Development Framework) - NOT Arduino
+- **Build System**: PlatformIO (primary) or ESP-IDF native CMake (secondary)
+- **Target Hardware**: ESP32-S3-DevKitC-1 (dual-core, PSRAM support)
+- **JSON Library**: ArduinoJson ^7.0.4 for configuration parsing
+- **3D Modeling**: OpenSCAD for parametric shape generation
+- **Scripts**: PowerShell for Windows-based development tooling
+- **Version Control**: Git with `.gitignore` excluding build artifacts (`.pio/`, `build/`)
+- **Hardware Drivers**: Native ESP-IDF APIs (driver/spi_master.h, driver/gpio.h, driver/i2s.h)
+- **Firmware Upload**: USB serial @ 921600 baud via PlatformIO or esptool
+- **Monitoring**: ESP32 exception decoder filter for crash analysis
+
+## Common Patterns and Anti-Patterns
+
+### ✅ DO (Correct Patterns)
+- **Component Functions**: Always use `init(void)` and `act(void)` with no arguments
+- **State Access**: Access shared state via `#include "p32_shared_state.h"`
+- **Timing**: Use `if (g_loopCount % hitCount == 0)` for periodic execution
+- **Error Handling**: Return `esp_err_t` from init functions, log errors with ESP-IDF macros
+- **Configuration**: Load hardware specs from JSON at runtime
+- **Bus Sharing**: Use shared SPI/I2S buses with unique device pins
+- **File Changes**: Announce every file change before making it (see AI-AGENT-RULES.md)
+
+### ❌ DON'T (Anti-Patterns)
+- **Never** add arguments to component init/act functions
+- **Never** use `vTaskDelay()` or blocking calls in main loop or act() functions
+- **Never** use Arduino libraries or APIs (this is ESP-IDF native)
+- **Never** hardcode GPIO pins in C code (use JSON configuration)
+- **Never** modify core loop in `app_main()` (immutable by design)
+- **Never** modify files outside your current task scope
+- **Never** use K&R brace style (use Allman style - braces on new line)
+- **Never** omit braces on single-line if/for/while statements
+- **Never** save JSON files with UTF-8 BOM (use ASCII encoding)
 
 ## Development Notes
 - Project uses Windows PowerShell for tooling scripts
