@@ -1,22 +1,64 @@
 # P32 Animatronic Bot - AI Coding Agent Instructions
 
-## � PROJECT LOCATION (MANDATORY SETUP - FIRST)
+## 🚨 CRITICAL SETUP (READ FIRST)
+**Project Root**: `f:\GitHub\p32-animatronic-bot` (fixed location, use absolute paths)
 
-**Project Root Directory**: `f:\GitHub\p32-animatronic-bot`
+**MANDATORY**: Read `.github/AI-AGENT-RULES.md` and `NAMING_RULES.md` before any changes.
 
-**All file paths are relative to this root directory.** Use absolute paths when running commands or referencing files. This location is fixed and should not change.
+## 🏗️ Architecture Overview
+**Pure Component System**: Everything is a component with `init()`/`act()` functions. Main loop iterates components only - no application logic in `app_main()`.
 
-## �🚨 CRITICAL: READ AI-AGENT-RULES.md SECOND 🚨
+**Component Pattern**:
+```cpp
+esp_err_t component_name_init(void);  // Returns ESP_OK
+void component_name_act(void);        // No args, accesses g_loopCount/g_shared_state
+```
 
-**Before doing ANYTHING, read and follow: `.github/AI-AGENT-RULES.md`**
+**Communication**: Components NEVER call each other. Use `SharedMemory::read()`/`SharedMemory::write()` for multi-chip coordination.
 
-These are ironclad rules that must NEVER be broken. They exist because of repeated violations.
+## 🔧 Essential Workflows
+**Generate Components**: `python tools/generate_tables.py goblin_full src` (reads JSON, creates dispatch tables)
 
-## 🚨 CRITICAL: READ NAMING_RULES.md THIRD 🚨
+**Build & Flash**: `pio run -t upload -t monitor`
 
-**Before doing ANYTHING, read and follow: `NAMING_RULES.md`**
+**Validate Config**: `.\generate_file_structure.ps1`
 
-These comprehensive naming rules must be understood before any file creation, modification, or code generation. Naming violations cause build failures and system confusion.
+**Multi-Chip Testing**: Use `test/distance_eye_test/` for SharedMemory mesh validation
+
+## � Key Conventions
+**ASCII-Only**: ESP-IDF toolchain requires ASCII encoding (NO UTF-8/Unicode)
+
+**Component Names**: Globally unique, used in function names `{name}_init`/`{name}_act`
+
+**Bilateral Pattern**: `goblin_left_eye`, `goblin_right_eye`, `cyclops_center_eye`
+
+**Filename Case**: Lowercase except class files (must match class name: `SharedMemory.hpp`)
+
+**JSON Config**: Include `"relative_filename"`, `"version"`, `"author"` fields
+
+## 🗂️ File Organization
+- **Components**: `src/components/{name}.cpp`, `include/components/{name}.hpp`
+- **Configs**: `config/bots/bot_families/{family}/{bot}.json`
+- **Assets**: `assets/{animations,sounds}/{creature}/`, `assets/shapes/scad/`
+- **3D Models**: Tier 1 (universal hardware) + Tier 2 (creature shells)
+
+## ⚡ Critical Constraints
+**ESP32-S3**: 512KB RAM, 8MB Flash - no dynamic allocation in hot paths
+
+**Real-Time**: Components must return quickly (<10ms), no blocking operations
+
+**Multi-Chip**: SharedMemory broadcasts via internal mesh protocol, never direct function calls
+
+**Build System**: PlatformIO + ESP-IDF, multiple environments for subsystems
+
+## 🔗 Integration Points
+**SharedMemory Mesh**: `SharedMemory::write()` broadcasts to all chips
+
+**Hardware Interfaces**: SPI bus + device pattern, I2S shared bus + unique pins
+
+**Coordinate Systems**: 2D planar or 3D skull-based with `"reference_point": "nose_center"`
+
+**PowerShell Tooling**: All scripts lowercase, absolute paths required
 
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.
