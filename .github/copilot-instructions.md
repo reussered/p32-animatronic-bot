@@ -1,16 +1,27 @@
 # P32 Animatronic Bot - AI Coding Agent Instructions
 
-## 🚨 CRITICAL: READ AI-AGENT-RULES.md FIRST 🚨
+## � PROJECT LOCATION (MANDATORY SETUP - FIRST)
+
+**Project Root Directory**: `f:\GitHub\p32-animatronic-bot`
+
+**All file paths are relative to this root directory.** Use absolute paths when running commands or referencing files. This location is fixed and should not change.
+
+## �🚨 CRITICAL: READ AI-AGENT-RULES.md SECOND 🚨
 
 **Before doing ANYTHING, read and follow: `.github/AI-AGENT-RULES.md`**
 
 These are ironclad rules that must NEVER be broken. They exist because of repeated violations.
 
+## 🚨 CRITICAL: READ NAMING_RULES.md THIRD 🚨
+
+**Before doing ANYTHING, read and follow: `NAMING_RULES.md`**
+
+These comprehensive naming rules must be understood before any file creation, modification, or code generation. Naming violations cause build failures and system confusion.
+
 ## Project Overview
 ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF framework. Uses JSON-driven configuration for hardware components, bot definitions, and interface specifications.
 
 ## CRITICAL: Pure Component-Driven Architecture
-
 
 **NOTHING executes unless it's a component with init() and act() functions.**
 
@@ -30,14 +41,22 @@ ESP32-S3 based animatronic system with MOOD-driven behaviors using ESP-IDF frame
 4. Attachment at appropriate level (System/Family/Subsystem/Hardware)
 5. Registration in generated component tables
 
-The core loop in `app_main()` interates once through all of the attached components init functions, then repeatedly through all of the components act functions ONLY- it contains no application logic.
+The core loop in `app_main()` iterates once through all of the attached components init functions, then repeatedly through all of the components act functions ONLY - it contains no application logic.
 
-**CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.  Those values that are common to all subsystems are read and updated though the SharedMemory class.  This class contains an internal version of the ESP NOW bluetooth system and is used to communicvate between all of the various subsystems controled by a separate esp32 chip.  the protocol for using this code is to declate a local copy of the class variable, thern read its current state.  this read is purely local code and doesn't affect the state of any other subsystem.  when the local code has made any changes to the shared state, it then calls the write function of the class, which updates the local copy and also sends out an ESP NOW message to all other subsystems to update their copies of the shared state.
+**CRITICAL**: All component functions use **NO ARGUMENTS** - they access `g_loopCount` and all shared state from `p32_shared_state.h` directly.
+
+**ESP-NOW Shared State Protocol (CRITICAL FOR MULTI-CHIP SYSTEMS)**:
+- **Local Read**: `SharedMemory::read()` gets current local copy of shared state
+- **Local Write**: `SharedMemory::write()` updates local copy + broadcasts via ESP-NOW to all other chips
+- **No Direct Communication**: Components NEVER call functions on other chips - ONLY through shared state broadcasts
+- **State Synchronization**: All chips maintain identical copies of shared state via ESP-NOW mesh
+- **Thread Safety**: Shared state reads/writes are atomic operations
+
+**ASCII-Only Encoding**: ESP-IDF toolchain requires ASCII encoding. NO UTF-8, NO Unicode characters in source files.
 
 **Shapes are defined using scad and stl files. If the shape parameter is missing, this component only affects software. The component must have a shape parameter if both init_function and act_function are set to "STUB" (hardware-only component).**
 
 - for example, The goblin_head component has a shape key that specifies `goblin_skull.scad` which defines the mounting framework for eyes/nose/mouth components. The corresponding stl files are also saved into git to reduce creature generation time.
-	
 
 **System components distributed strategically**:
 - **Torso subsystem** hosts system-level components (WiFi, ESP-NOW mesh, telemetry)
@@ -97,12 +116,33 @@ Two coordinate systems supported:
 ### Build System
 - **Primary**: PlatformIO with ESP-IDF framework (`platformio.ini` → `esp32-s3-devkitc-1`)
 - **Secondary**: CMake via ESP-IDF (`CMakeLists.txt` includes IDF project setup)
-- **Commands**: Use `pio run` for builds, `pio run -t upload` for flashing
+- **Commands**:
+  - Build: `pio run`
+  - Build & Upload: `pio run -t upload`
+  - Build, Upload & Monitor: `pio run -t upload -t monitor`
+  - Clean Build: `pio run --clean-first`
+  - Specific Environment: `pio run -e test_bot_minimal`
 
-### Configuration Analysis
-- Run `.\generate_file_structure.ps1` to scan and validate JSON configs
-- Script auto-displays JSON contents and identifies empty/malformed files
-- Ignores `.pio` build artifacts by default
+### Component Generation Workflow (CRITICAL)
+**NEVER manually create component dispatch tables - ALWAYS use the generator:**
+
+1. **Generate Components**: `python tools/generate_tables.py goblin_full src`
+   - Reads `config/bots/bot_families/goblins/goblin_full.json`
+   - Recursively loads all contained components
+   - Creates `component_tables.cpp` with init/act function pointers
+   - Updates `CMakeLists.txt` with exact component file list
+
+2. **Validate Configuration**: `.\generate_file_structure.ps1`
+   - Scans all JSON configs for completeness
+   - Identifies empty/malformed files
+   - Displays component hierarchies
+
+3. **ESP-IDF Alternative**:
+   ```bash
+   idf.py set-target esp32s3
+   idf.py build
+   idf.py -p COM3 flash monitor
+   ```
 
 ### 3D Shape Generation Workflow
 - **Generate Mounting System**: `.\tools\generate-mounting-system.ps1 -BotType goblin`
@@ -110,6 +150,12 @@ Two coordinate systems supported:
 - **View STLs**: `.\tools\launch-stl-viewer.ps1 assets/shapes/stl/file.stl`
 - **Two-Tier Architecture**: Basic hardware mounts + character-specific decorative shells
 - **Integration**: Uses `use <../basic_mounts/mount.scad>` pattern for shell composition
+
+### Multi-Chip Development
+- **Head Subsystem**: `pio run -e goblin_head`
+- **Torso Subsystem**: `pio run -e goblin_torso`
+- **ESP-NOW Testing**: Use `test/distance_eye_test/` for mesh validation
+- **MAC Address Coordination**: Upload head first to get ESP-NOW peer address
 
 ### Asset Organization
 - **Character-based**: `assets/{animations,sounds}/{bear,cat,cyclops,goblin}/`
@@ -122,63 +168,196 @@ Two coordinate systems supported:
 
 ## Code Conventions
 
+### ASCII-Only Encoding (MANDATORY)
+- **ESP-IDF Toolchain Limitation**: NO UTF-8, NO Unicode characters in ANY source files
+- **JSON Files**: Must be ASCII-encoded (toolchain requirement)
+- **Source Code**: All .cpp/.hpp files must be ASCII-only
+- **Scripts**: No emojis (🚨, 📁, etc.) in PowerShell or Python scripts
+- **Violation**: Build failures with cryptic encoding errors
+
+### Filename Case Conventions
+- **Default**: All filenames must be entirely lowercase
+- **Exception**: Files containing class definitions
+  - Filename MUST exactly match the class name (case-sensitive)
+  - Example: `SharedMemory.hpp` contains `class SharedMemory`
+  - Example: `ComponentRegistry.cpp` contains `class ComponentRegistry`
+- **Scripts**: Always lowercase (`.ps1`, `.py`, `.sh`)
+- **Documentation**: Always lowercase (`.md`, `.txt`)
+
+### Component Function Architecture (IRONCLAD RULES)
+**These rules exist because missing one `return ESP_OK;` stops everything:**
+
+```cpp
+// In component_name.hpp:
+esp_err_t component_name_init(void);  // MUST return esp_err_t
+void component_name_act(void);        // MUST return void
+
+// In component_name.cpp:
+esp_err_t component_name_init(void) {
+    // ... initialization code ...
+    return ESP_OK;  // MANDATORY return statement
+}
+
+void component_name_act(void) {
+    // ... action code ...
+    // No return statement needed
+}
+```
+
+### Component Name Requirements
+- `component_name` serves as both human identifier and technical identifier
+- **Global component name uniqueness** across entire system (MANDATORY)
+- Component names MUST be globally unique - no duplicates allowed
+- Used in function names: `{component_name}_init(void)`, `{component_name}_act(void)`
+
+### Bilateral Components Pattern
+- `{creature}_{side}_{component}` (e.g., `goblin_left_eye`)
+- Examples: `robot_left_eye`, `goblin_right_ear`, `cyclops_center_eye`
+
+### Component File Structure
+- **Source files**: `{component_name}.cpp` in `src/components/`
+- **Header files**: `{component_name}.hpp` in `include/components/`
+- **Examples**: `goblin_left_eye.cpp`, `goblin_right_eye.cpp`
+
+### Component Isolation - NO Function Calls Between Components
+**CRITICAL ARCHITECTURAL PRINCIPLE: Components never ever reference code in other components.**
+
+- Components are **completely isolated** from each other
+- **NO component function ever calls another component's function**
+- Components communicate ONLY through global shared state (`p32_shared_state.h`)
+- Each component reads/writes `g_loopCount`, `g_shared_state`, etc. directly
+- The "contains" relationship in JSON is for **build inclusion**, NOT function calls
+- Component dispatch system calls `init()` and `act()` functions independently
+
 ### JSON Configuration Standards
 - Always include: `"relative_filename"`, `"version"`, `"author"` fields
 - Use UPPERCASE for types/IDs: `"bot_type": "GOBLINFULL"`, `"interface_id": "SPI_BUS_VSPI"`
-- Coordinate objects require `x`, `y`, `z` with unit strings
+- Coordinate objects require `x`, `y`, `z` with unit strings: `"x": "-1.5 INCH"`
 - Reference other configs via relative paths: `"author": "config/author.json"`
+- ASCII-only encoding (NO UTF-8, NO Unicode)
 
-### Component Composition
-- Bot definitions compose multiple positioned components
-- Each component instance maps to hardware definitions via interface assignments
-- SPI displays use sequential device assignments: SPI_DEVICE_1 (left eye), SPI_DEVICE_2 (right eye), SPI_DEVICE_3 (mouth)
-- Mood system uses 8 emotional states: FEAR, ANGER, IRRITATION, HAPPINESS, CONTENTMENT, HUNGER, CURIOSITY, AFFECTION
-- as an example of how component definitions nest take the example provided by the goblinm head.  the head contains 2 eyes (left/right) 2 ears (left/right), a nose, and a mouth.
-goblin_left_eye contains goblin_eye contains gd9a01 while goblin_right_eye also contains goblin_eye contains gc9a01.
-the ultimate act table created is
-	goblin_left_eye_act
-	goblin_right_eye_act
-	goblin_nose_act
-	goblin_mouth_act
-	
-	goblin_eye_act
-	gcda01_act
-	
-	the fact that the goblin_eye and gc9a01 components are included twice in the hiearchy is detected and only one act function for each is included.
-	the goblin_left_eye loads the aniomation for the left eye into a buffer, the goblin_right_eye creates a second buffer.  as these buffers are alocated, they are pushed ionto a stack.
-	the goblin_eye component specifies the goblins eye shape, while its act component acts on every buffer in the stack to modify the frame, by using the Mood class contents.
-	the gc9a01_act function looks at each buffer and displays the contents to the interface deined in the specific eye.  SPI_DEVICE_1 for the left eye and SPI_DEVICE_2 for the right.  all of these things are passed down as partb of the task stack created by the higher level components
-	
-the shape part is defined in goblin_eye.  this is a goblin specific shape.  the gc9a01 shape defines the miounting bracket used for all displays of that type.
+### File Organization Patterns
 
+#### Configuration Structure
+- **Creatures/Bots**: `config/bots/bot_families/{family}/{bot_name}.json`
+- **Hardware specs**: `config/hardware/{component_type}.json`
+- **Interface definitions**: `config/interfaces/{interface_type}.json`
+- **Internal Components**: `config/internal/{component_name}.json`
+- **Instrumentation Components**: `config/instrumentation/{Component_Name}.json`
+- **Test Components**: `config/test/{component_name}.json`
+- **Subsystem Components**: `config/subsystems/{subsystem_name}.json`
 
-this architecture allows creatures with different number of eyes that just 2
+#### Generated Code Structure
+- **Component implementations**: `src/components/{component_name}.cpp`
+- **Component headers**: `include/components/{component_name}.hpp`
+- **Shared classes**: `shared/{ClassName}.hpp`
 
-### Hardware Abstraction
-- Interface definitions separate bus config from device config
-- Devices reference buses by ID, enabling bus sharing
-- Pin assignments centralized in interface configs
+#### Asset Organization
+- **3D Models**: `assets/shapes/scad/{category}/{model}.scad`
+- **STL Files**: `assets/shapes/stl/{category}/{model}.stl`
+- **Animations**: `assets/animations/{creature_family}/{animation_name}.json`
+- **Sounds**: `assets/sounds/{creature_family}/{sound_file}.wav`
+
+### Two-Tier Mounting Architecture
+
+#### Tier 1: Universal Hardware Mounts (Identical Across ALL Creatures)
+- `sensor_basic_mount.scad/.stl` - HC-SR04 bracket
+- `display_basic_mount.scad/.stl` - GC9A01 bracket
+- `speaker_basic_mount.scad/.stl` - 40mm speaker bracket
+
+#### Tier 2: Creature-Specific Decorative Shells
+- `goblin_nose_shell.scad/.stl` - Goblin aesthetics + sensor_basic_mount
+- `cat_nose_shell.scad/.stl` - Cat aesthetics + sensor_basic_mount
+- `bear_nose_shell.scad/.stl` - Bear aesthetics + sensor_basic_mount
+
+**CRITICAL: The "goblin_nose_sensor.stl" file is actually the UNIVERSAL sensor_basic_mount, NOT goblin-specific!**
+
+### Shared State Naming
+- **Case-insensitive**: `g_Mood`, `G_MOOD`, `g_mood` all equivalent
+- **Recommended convention**: lowercase with underscores
+- **Examples**: `"g_Mood"`, `"g_Envir"`, `"g_Personality"`
+- **Defined Classes**: Mood (9 emotions), Environment (sensor data), Personality (future)
+
+### Prohibited Naming Patterns
+
+#### Incorrect Hardware Naming (Causes Confusion)
+- `goblin_nose_sensor.stl` ❌ - Implies goblin-specific sensor hardware
+- `cat_display_mount.stl` ❌ - Implies cat-specific display hardware
+- `bear_speaker_bracket.stl` ❌ - Implies bear-specific speaker hardware
+
+#### Incorrect Subsystem Naming
+- `test_head` ❌ - Use `head` for test configurations
+- `goblin_head` ❌ - Use `head` regardless of creature type
+
+#### Incorrect Filename Patterns
+- `Emergency_Backup_System.ps1` ❌ - Scripts with capitals
+- `WORK_PROTECTION.ps1` ❌ - Scripts all caps
+- `Directory-Monitor.ps1` ❌ - Scripts with hyphens and caps
+- `sharedmemory.hpp` ❌ - Class file not matching case
+- `componentregistry.cpp` ❌ - Class file not matching case
 
 ## Key Files Reference
 
 ### Core Configuration Files
 - `config/author.json` - Project metadata template
-- `config/bots/goblin_full.json` - Complete bot example with 3D skull coordinate system
+- `config/bots/bot_families/goblins/goblin_full.json` - Complete bot example with 3D skull coordinate system
 - `config/components/interfaces/spi_bus_vspi.json` - Standard ESP32 SPI bus setup
 - `config/components/interfaces/spi_device_*.json` - Individual device GPIO assignments
+- `config/components/hardware/gc9a01.json` - Display hardware specifications
+
+### Component Architecture Files
+- `P32-COMPONENT-ARCHITECTURE-RULES.md` - Ironclad component function rules
+- `docs/THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md` - Component attachment specifications
+- `AI-AGENT-RULES.md` - Critical AI agent behavioral rules
+
+### Build System Files
+- `platformio.ini` - PlatformIO configuration with multiple environments
+- `CMakeLists.txt` - ESP-IDF build configuration
+- `component_tables.cpp` - Auto-generated dispatch tables (NEVER EDIT MANUALLY)
+- `p32_shared_state.h` - Global shared state definitions
+
+### Tooling Scripts (PowerShell)
+- `tools/generate_tables.py` - Component table generator (CRITICAL)
+- `generate_file_structure.ps1` - Configuration validation
+- `tools/generate-mounting-system.ps1` - 3D mounting system generator
+- `tools/generate-stl-files.ps1` - OpenSCAD to STL converter
 
 ### Universal Architecture Specifications (READ ALL)
 **Read all architecture documents automatically using these patterns:**
 - `docs/*ARCHITECTURE*.md` - All architecture specification documents
-- `docs/*UNIVERSAL*.md` - Universal design patterns for all subsystems  
+- `docs/*UNIVERSAL*.md` - Universal design patterns for all subsystems
 - `docs/*-spec.md` - Technical specifications for all systems
 - `docs/*-SPEC.md` - Architecture specifications (capitalized)
 - `docs/*diagram*.md` - Wiring and system interconnection diagrams
-- `generate_file_structure.ps1` - Configuration validation tool
-- `tools/generate-mounting-system.ps1` - Creates basic mounts + character shells
-- `tools/generate-stl-files.ps1` - Batch converts .scad files to .stl for 3D printing
-- `tools/launch-stl-viewer.ps1` - Web-based STL viewer for design validation
-- `src/main.c` - Currently minimal ESP-IDF entry point
+
+### Build Instructions
+- `COMPLETE-BUILD-GUIDE.md` - Manufacturing & assembly documentation
+- `QUICK-BUILD-SUMMARY.md` - Print-ready build summary
+- `GOBLIN-HEAD-BUILD-MANUAL.md` - Goblin head assembly manual
+
+## Critical Constraints (Not Obvious From Code)
+
+### ASCII-Only Encoding
+- **ESP-IDF Toolchain Limitation**: NO UTF-8, NO Unicode characters in ANY source files
+- **JSON Files**: Must be ASCII-encoded (toolchain requirement)
+- **Source Code**: All .cpp/.hpp files must be ASCII-only
+- **Violation**: Build failures with cryptic encoding errors
+
+### Memory Constraints
+- **ESP32-S3**: 512KB RAM, 8MB Flash maximum
+- **No Dynamic Allocation**: Avoid `new`/`malloc` in hot paths
+- **Stack Size**: Functions limited to ~4KB stack
+- **Global Variables**: Preferred over heap allocation
+
+### Real-Time Requirements
+- **No Blocking Operations**: Components must return quickly (< 10ms typical)
+- **Interrupt Context**: Some functions called from ISRs
+- **Timing Critical**: Display updates, sensor polling have strict timing requirements
+
+### PowerShell Tooling
+- **Windows Environment**: All tooling scripts are PowerShell (.ps1)
+- **Execution Policy**: May need `Set-ExecutionPolicy Bypass` for local scripts
+- **Path Handling**: Use absolute paths, avoid relative path assumptions
 
 ## Development Notes
 - Project uses Windows PowerShell for tooling scripts
