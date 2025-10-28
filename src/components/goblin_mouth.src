@@ -12,6 +12,16 @@ static const char *TAG = "GOBLIN_MOUTH";
 esp_err_t goblin_mouth_init(void)
 {
     printf("INIT: goblin_mouth_init() called\n");
+    
+    // Register SPI device and configure SPI bus for the mouth (device 3)
+    int device_id = spi_bus_register_device();  // Returns 3 for mouth
+    int device_index = device_id - 1;  // 0-based
+    
+    // Set current device pins and handle for GC9A01 configuration
+    spi_bus_current_cs_pin = spi_device_cs_pins[device_index];
+    spi_bus_current_dc_pin = spi_device_dc_pins[device_index];
+    spi_bus_current_device_handle = spi_device_handles[device_index];
+    
     ESP_LOGI(TAG, "Component goblin_mouth initialized (placeholder)");
     return ESP_OK;
 }

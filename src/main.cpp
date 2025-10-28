@@ -4,20 +4,32 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
+
+#ifdef SIMPLE_DISPLAY_TEST
+// For simple display test, use direct implementation
+extern "C" void simple_display_test_main(void);
+#else
 #include "p32_component_registry.hpp"
+#endif
 
 static const char *TAG = "P32_MAIN";
 
 // Global loop counter for component timing
 uint64_t g_loopCount = 0;
 
+#ifndef SIMPLE_DISPLAY_TEST
 // Extern declarations for component tables (defined in component_tables.cpp)
 extern esp_err_t (*initTable[TABLE_SIZE])(void);
 extern void (*actTable[TABLE_SIZE])(void);
 extern uint32_t hitCountTable[TABLE_SIZE];
+#endif
 
 extern "C" void app_main(void)
 {
+#ifdef SIMPLE_DISPLAY_TEST
+    ESP_LOGI(TAG, "Starting P32 Simple Display Test");
+    simple_display_test_main();
+#else
     ESP_LOGI(TAG, "Starting P32 Animatronic Bot - Component System");
 
     // Initialize all components from the dispatch table
@@ -51,4 +63,5 @@ extern "C" void app_main(void)
         // Small delay to prevent 100% CPU usage
         vTaskDelay(pdMS_TO_TICKS(1)); // ~1ms delay
     }
+#endif
 }

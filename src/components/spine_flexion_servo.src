@@ -1,0 +1,42 @@
+/**
+ * @file spine_flexion_servo.cpp
+ * @brief Spine flexion servo component for torso bending
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/spine_flexion_servo.hpp"
+#include "components/servo_sg90_micro.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "SPINE_FLEXION_SERVO";
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize spine flexion servo component
+ */
+esp_err_t spine_flexion_servo_init(void) {
+    ESP_LOGI(TAG, "Initializing spine flexion servo");
+
+    // Initialize the underlying servo hardware
+    ESP_LOGI(TAG, "Spine flexion servo initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute spine flexion servo component logic
+ */
+void spine_flexion_servo_act(void) {
+    // Control spine flexion (forward/backward bending)
+
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Spine flexion servo act at loop %llu", g_loopCount);
+        }
+    }
+}

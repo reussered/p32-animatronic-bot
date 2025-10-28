@@ -1,0 +1,184 @@
+/**
+ * @file generic_spi_display.cpp
+ * @brief Generic SPI Display Driver Implementation
+ * Reusable for any SPI-based display (GC9A01, ST7796, ILI9488, etc.)
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "generic_spi_display.hpp"
+#include "spi_bus.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "esp_log.h"
+#include "driver/gpio.h"
+#include "driver/spi_master.h"
+#include <ArduinoJson.h>
+#include <fstream>
+#include <string>
+
+static const char *TAG = "GENERIC_SPI_DISPLAY";
+
+// Display configuration - set during init
+static generic_display_config_t display_config = {0};
+
+// Frame buffer - allocated once
+static uint8_t* display_frame_buffer = nullptr;
+
+/**
+ * @brief Initialize generic SPI display with configuration
+ */
+esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
+    if (config == nullptr) {
+        ESP_LOGE(TAG, "Display config is null");
+        return ESP_FAIL;
+    }
+
+    // Copy configuration
+    display_config = *config;
+
+    ESP_LOGI(TAG, "Initializing generic SPI display: %ux%u, %u bpp",
+             display_config.width, display_config.height, display_config.color_depth);
+
+    // Allocate frame buffer if not already allocated
+    if (display_frame_buffer == nullptr) {
+        display_config.frame_size = (display_config.width * display_config.height * display_config.color_depth) / 8;
+        display_frame_buffer = (uint8_t*)malloc(display_config.frame_size);
+        if (display_frame_buffer == nullptr) {
+            ESP_LOGE(TAG, "Failed to allocate frame buffer (%u bytes)", display_config.frame_size);
+            return ESP_FAIL;
+        }
+        ESP_LOGI(TAG, "Allocated frame buffer: %u bytes", display_config.frame_size);
+    }
+
+    // Configure GPIO pins using SPI bus variables
+    uint64_t pin_mask = 0;
+    if (spi_bus_current_dc_pin != GPIO_NUM_NC) pin_mask |= (1ULL << spi_bus_current_dc_pin);
+    if (spi_bus_reset_pin != GPIO_NUM_NC) pin_mask |= (1ULL << spi_bus_reset_pin);
+
+    gpio_config_t io_conf = {
+        .pin_bit_mask = pin_mask,
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+
+    ESP_LOGI(TAG, "Configuring GPIO pins - DC: %d, RST: %d",
+             spi_bus_current_dc_pin, spi_bus_reset_pin);
+
+    esp_err_t config_ret = gpio_config(&io_conf);
+    if (config_ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to configure GPIO pins: %s", esp_err_to_name(config_ret));
+        return config_ret;
+    }
+
+    // Reset display using shared RST pin
+    if (spi_bus_reset_pin != GPIO_NUM_NC) {
+        ESP_LOGI(TAG, "Resetting display using RST pin %d", spi_bus_reset_pin);
+        gpio_set_level((gpio_num_t)spi_bus_reset_pin, 0);
+        vTaskDelay(pdMS_TO_TICKS(10));
+        gpio_set_level((gpio_num_t)spi_bus_reset_pin, 1);
+        vTaskDelay(pdMS_TO_TICKS(120));
+    }
+
+    // Initialize display buffer to black/clear
+    memset(display_frame_buffer, 0, display_config.frame_size);
+
+    ESP_LOGI(TAG, "Generic SPI display initialized successfully");
+    return ESP_OK;
+}
+
+/**
+ * @brief Send current frame buffer to the display
+ */
+void generic_spi_display_act(void) {
+    // Send the frame buffer using configured SPI device
+    generic_spi_display_send_frame((uint16_t*)display_frame_buffer,
+                                   display_config.width * display_config.height);
+}
+
+/**
+ * @brief Send RGB565 frame buffer to display
+ */
+void generic_spi_display_send_frame(uint16_t* frame_buffer, uint32_t pixel_count) {
+    // Use the current device handle configured by positioned component
+    spi_device_handle_t device = spi_bus_current_device_handle;
+
+    if (device == NULL) {
+        ESP_LOGE(TAG, "No SPI device handle configured");
+        return;
+    }
+
+    if (spi_bus_current_dc_pin == GPIO_NUM_NC) {
+        ESP_LOGE(TAG, "Invalid DC pin configured");
+        return;
+    }
+
+    ESP_LOGI(TAG, "Sending frame to SPI device, DC pin %d", spi_bus_current_dc_pin);
+
+    // Set DC pin high for data transmission
+    gpio_set_level((gpio_num_t)spi_bus_current_dc_pin, 1);
+
+    // ESP32 SPI hardware limit is around 64KB per transaction
+    // Send data in chunks to be safe
+    const uint32_t CHUNK_SIZE = 1024; // pixels per chunk
+    uint32_t remaining_pixels = pixel_count;
+    uint16_t* current_buffer = frame_buffer;
+
+    while (remaining_pixels > 0) {
+        uint32_t chunk_pixels = (remaining_pixels > CHUNK_SIZE) ? CHUNK_SIZE : remaining_pixels;
+        uint32_t chunk_bytes = chunk_pixels * 2; // 2 bytes per pixel (RGB565)
+
+        // Prepare SPI transaction for this chunk
+        spi_transaction_t trans = {
+            .flags = 0,
+            .cmd = 0,
+            .addr = 0,
+            .length = chunk_bytes * 8,  // Length in bits
+            .rxlength = 0,
+            .user = NULL,
+            .tx_buffer = current_buffer,
+            .rx_buffer = NULL
+        };
+
+        // Execute SPI transaction
+        esp_err_t ret = spi_device_polling_transmit(device, &trans);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "SPI transmit failed: %s", esp_err_to_name(ret));
+            break;
+        }
+
+        remaining_pixels -= chunk_pixels;
+        current_buffer += chunk_pixels;
+    }
+
+    ESP_LOGD(TAG, "Frame transmission complete");
+}
+
+/**
+ * @brief Display Buffer Interface - allocate buffer for display components
+ */
+uint8_t* generic_display_get_buffer(void) {
+    return display_frame_buffer;
+}
+
+/**
+ * @brief Display Buffer Interface - get total frame size in pixels
+ */
+uint32_t generic_display_get_frame_size(void) {
+    return display_config.width * display_config.height;
+}
+
+/**
+ * @brief Display Buffer Interface - get frame width in pixels
+ */
+uint32_t generic_display_get_frame_width(void) {
+    return display_config.width;
+}
+
+/**
+ * @brief Display Buffer Interface - get frame height in pixels
+ */
+uint32_t generic_display_get_frame_height(void) {
+    return display_config.height;
+}

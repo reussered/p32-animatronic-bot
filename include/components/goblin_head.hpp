@@ -16,7 +16,7 @@
  * @brief Initialize goblin_head component
  * Called once during system startup
  */
-void goblin_head_init(void);
+esp_err_t goblin_head_init(void);
 
 /**
  * @brief Execute goblin_head component logic

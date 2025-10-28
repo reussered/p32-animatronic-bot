@@ -286,7 +286,7 @@ static void fill_screen(uint16_t color)
     }
 }
 
-extern "C" void app_main(void)
+extern "C" void simple_display_test_main(void)
 {
     ESP_LOGI(TAG, "Starting GC9A01 Display Test");
     

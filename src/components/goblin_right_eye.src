@@ -5,6 +5,7 @@
 #include "p32_component_config.h"
 #include "p32_shared_state.h"
 #include "components/gc9a01.hpp"
+#include "components/generic_spi_display.hpp"
 #include "shared/Environment.hpp"
 #include "core/memory/SharedMemory.hpp"
 
@@ -33,11 +34,11 @@ void load_current_frame_to_buffer_right_eye(void);
 // Component: Right eye display animation with integrated pixel processing
 esp_err_t goblin_right_eye_init(void) {
     ESP_LOGI(goblin_right_eye_TAG, "Initializing right eye at position [26.67, 17.78, -8.89] mm");
-    
+
     // Get buffer and dimensions from display component
-    right_eye_animation_buffer = getBuffer();
-    right_eye_total_pixels = getFrameSize();
-    right_eye_frame_width = getFrameRowSize();
+    right_eye_animation_buffer = generic_display_get_buffer();
+    right_eye_total_pixels = generic_display_get_frame_size();
+    right_eye_frame_width = generic_display_get_frame_width();
     right_eye_frame_height = right_eye_total_pixels / right_eye_frame_width;
     
     if (right_eye_animation_buffer == nullptr) {

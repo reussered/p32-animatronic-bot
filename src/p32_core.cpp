@@ -4,6 +4,8 @@
 // P32 CORE SYSTEM
 #include "p32_core.h"
 #include "cJSON.h"
+#include "esp_spiffs.h"
+#include "esp_vfs.h"
 
 static const char* TAG = "P32_CORE";
 
@@ -17,10 +19,22 @@ p32_system_t g_p32_system;
 #define P32_SPI_CS1_PIN     15  // Left eye
 #define P32_SPI_CS2_PIN     2   // Right eye  
 #define P32_SPI_CS3_PIN     4   // Mouth
+#define P32_SPI_CS4_PIN     17  // Future device
+
+#define P32_SPI_RST_PIN     26  // Shared reset
+#define P32_SPI_DC1_PIN     27  // Left eye DC
+#define P32_SPI_DC2_PIN     33  // Right eye DC
+#define P32_SPI_DC3_PIN     16  // Mouth DC
+#define P32_SPI_DC4_PIN     5   // Future device DC
 
 #define P32_I2S_BCK_PIN     26
 #define P32_I2S_WS_PIN      25
 #define P32_I2S_DATA_PIN    22
+
+// Dynamic pin assignments read from SPI bus config
+static gpio_num_t p32_spi_rst_pin = GPIO_NUM_NC;
+static gpio_num_t p32_spi_dc1_pin = GPIO_NUM_NC;
+static gpio_num_t p32_spi_dc2_pin = GPIO_NUM_NC;
 
 esp_err_t p32_core_init(void) {
     ESP_LOGI(TAG, "Initializing P32 core system...");
@@ -36,6 +50,7 @@ esp_err_t p32_core_init(void) {
     }
     
     // Initialize hardware interfaces
+    ESP_ERROR_CHECK(p32_init_spiffs());
     ESP_ERROR_CHECK(p32_init_spi_bus());
     ESP_ERROR_CHECK(p32_init_i2s_bus());
     ESP_ERROR_CHECK(p32_init_gpio_interfaces());
@@ -267,4 +282,39 @@ void p32_log_component_status(const char* component_id) {
     ESP_LOGI(TAG, "Component Status: %s", component_id);
     // Implementation for detailed component logging
 }
+
+esp_err_t p32_init_spiffs(void) {
+    ESP_LOGI(TAG, "Initializing SPIFFS filesystem...");
+    
+    esp_vfs_spiffs_conf_t conf = {
+        .base_path = "/spiffs",
+        .partition_label = NULL,
+        .max_files = 5,
+        .format_if_mount_failed = true
+    };
+    
+    esp_err_t ret = esp_vfs_spiffs_register(&conf);
+    if (ret != ESP_OK) {
+        if (ret == ESP_FAIL) {
+            ESP_LOGE(TAG, "Failed to mount or format filesystem");
+        } else if (ret == ESP_ERR_NOT_FOUND) {
+            ESP_LOGE(TAG, "Failed to find SPIFFS partition");
+        } else {
+            ESP_LOGE(TAG, "Failed to initialize SPIFFS (%s)", esp_err_to_name(ret));
+        }
+        return ret;
+    }
+    
+    size_t total = 0, used = 0;
+    ret = esp_spiffs_info(NULL, &total, &used);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to get SPIFFS partition information (%s)", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "SPIFFS initialized successfully - Total: %d KB, Used: %d KB, Free: %d KB", 
+             total / 1024, used / 1024, (total - used) / 1024);
+    return ESP_OK;
+}
+
 #endif // 0 - TEMPORARILY DISABLED

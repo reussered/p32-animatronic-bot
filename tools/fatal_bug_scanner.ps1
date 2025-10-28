@@ -21,7 +21,13 @@ $warningCount = 0
 Write-Host "? Scanning for unknown component files (JSON definition issues)..." -ForegroundColor Yellow
 $unknownSources = Get-ChildItem -Path "src" -Recurse -Filter "*.cpp" -ErrorAction SilentlyContinue | Where-Object { 
     $_.Name -match "unknown.*\.cpp$"
+} | ForEach-Object { $_ }
+
+$unknownSrcSources = Get-ChildItem -Path "src" -Recurse -Filter "*.src" -ErrorAction SilentlyContinue | Where-Object { 
+    $_.Name -match "unknown.*\.src$"
 }
+
+$unknownSources += $unknownSrcSources
 
 if ($unknownSources) {
     $fatalErrors += "? CRITICAL: Unknown component files detected (indicates incomplete JSON):"

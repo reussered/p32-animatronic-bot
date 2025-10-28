@@ -2,9 +2,9 @@
 # Includes all component source files for build system
 
 set(P32_COMPONENT_SOURCES
-    components/heartbeat.cpp
-    components/network_monitor.cpp
-    component_tables.cpp
+    components/heartbeat.src
+    components/network_monitor.src
+    component_tables.src
 )
 
 # Add component source files to build

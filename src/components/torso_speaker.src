@@ -1,0 +1,40 @@
+// P32 Component: torso_speaker
+// Auto-generated STUB component file
+// Hardware: SG90 Micro Servo Motor for torso speaker control
+
+#include "esp_log.h"
+#include "esp_err.h"
+#include "p32_shared_state.h"
+
+static const char *torso_speaker_TAG = "TORSO_SPEAKER";
+
+// STUB: Torso speaker servo initialization
+esp_err_t torso_speaker_init(void) {
+    ESP_LOGI(torso_speaker_TAG, "STUB: Initializing torso speaker servo");
+    // TODO: Implement torso speaker servo initialization
+    // - Configure PWM output pin for torso speaker servo
+    // - Set initial servo position (1500 microseconds = center)
+    // - Configure servo control parameters for torso speaker movement
+    return ESP_OK;
+}
+
+// STUB: Torso speaker servo action function
+void torso_speaker_act(void) {
+    // Access global loop counter from shared state
+    static uint32_t last_update = 0;
+
+    // Execute only every 10 loops (120Hz / 10 = 12Hz servo update rate)
+    if (g_loopCount % 10 != 0) {
+        return;
+    }
+
+    ESP_LOGD(torso_speaker_TAG, "STUB: Torso speaker servo action at loop %llu", g_loopCount);
+
+    // TODO: Implement torso speaker servo control logic
+    // - Read target position from shared state for speaker movement
+    // - Update PWM duty cycle for smooth speaker articulation
+    // - Handle torso speaker servo specifics
+    // - Implement motion profiles for speaker expressions
+
+    last_update = g_loopCount;
+}

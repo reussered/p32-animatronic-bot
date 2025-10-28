@@ -16,7 +16,7 @@ extern SharedMemory GSM;
  * @brief Initialize goblin_torso component
  * Called once during system startup
  */
-void goblin_torso_init(void) {
+esp_err_t goblin_torso_init(void) {
     // Component initialization logic
     // Access global state via g_loopCount and shared state via GSM
     
@@ -24,6 +24,7 @@ void goblin_torso_init(void) {
     // auto shared_data = GSM.read<SomeSharedDataType>();
     
     // TODO: Implement component-specific initialization
+    return ESP_OK;
 }
 
 /**

@@ -58,6 +58,11 @@ class P32ComponentGenerator:
             for subsystem_ref in bot_config["subsystem_assemblies"]:
                 components.extend(self._load_subsystem_recursive(subsystem_ref))
         
+        # Handle contained_components at bot level (for subsystems and test configs)
+        if "contained_components" in bot_config:
+            for component_ref in bot_config["contained_components"]:
+                components.extend(self._load_component_recursive(component_ref))
+        
         return components
     
     def _load_component_recursive(self, component_ref: str) -> List[Dict[str, Any]]:
@@ -75,6 +80,11 @@ class P32ComponentGenerator:
                     component_data = json.load(f)
                     component_data['config_file'] = component_ref
                     components.append(component_data)
+                    
+                    # Process includes_components (components this component depends on)
+                    if "includes_components" in component_data.get("software", {}):
+                        for included_ref in component_data["software"]["includes_components"]:
+                            components.extend(self._load_component_recursive(included_ref))
                     
                     # Recursively load nested contained_components if present (new wildcard parsing)
                     if "contained_components" in component_data:
@@ -252,7 +262,7 @@ class P32ComponentGenerator:
         # Include individual component headers (RULE 5 compliance)
         includes = set()
         for comp in self.components:
-            include_file = f'"{comp["name"]}.hpp"'
+            include_file = f'"components/{comp["name"]}.hpp"'
             if include_file not in includes:
                 content.append(f"#include {include_file}")
                 includes.add(include_file)

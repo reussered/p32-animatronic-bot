@@ -20,9 +20,15 @@ function Test-FatalBugs {
     $fatalErrors = @()
     
     # Check for unknown components in source code
-    $unknownComponents = Get-ChildItem -Path "src" -Recurse -Filter "*.cpp" | Where-Object { 
+    $unknownCppComponents = Get-ChildItem -Path "src" -Recurse -Filter "*.cpp" | Where-Object { 
         $_.Name -match "unknown.*\.cpp$" -or (Get-Content $_.FullName -ErrorAction SilentlyContinue | Select-String "unknown_component")
     }
+    
+    $unknownSrcComponents = Get-ChildItem -Path "src" -Recurse -Filter "*.src" | Where-Object { 
+        $_.Name -match "unknown.*\.src$" -or (Get-Content $_.FullName -ErrorAction SilentlyContinue | Select-String "unknown_component")
+    }
+    
+    $unknownComponents = $unknownCppComponents + $unknownSrcComponents
     
     if ($unknownComponents) {
         $fatalErrors += "? FATAL: Unknown component files detected:"

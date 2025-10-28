@@ -1,0 +1,41 @@
+/**
+ * @file torso_status_led.cpp
+ * @brief Torso status LED component for system status indication
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/torso_status_led.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "TORSO_STATUS_LED";
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize torso status LED component
+ */
+esp_err_t torso_status_led_init(void) {
+    ESP_LOGI(TAG, "Initializing torso status LED");
+
+    // Initialize LED hardware
+    ESP_LOGI(TAG, "Torso status LED initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute torso status LED component logic
+ */
+void torso_status_led_act(void) {
+    // Control status LED based on system state
+
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Torso status LED act at loop %llu", g_loopCount);
+        }
+    }
+}

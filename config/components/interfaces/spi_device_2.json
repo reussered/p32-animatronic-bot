@@ -5,11 +5,10 @@
     "interface_id":  "SPI_DEVICE_2",
     "interface_type":  "SPI_DEVICE",
     "bus_reference":  "SPI_BUS_VSPI",
-    "pins":  {
-                 "chip_select_2":  16,
-                 "data_command_2":  21,
-                 "reset_2":  22
-             },
+    "unique_pins":  {
+                       "device_select":  32,
+                       "data_control":  33
+                   },
     "device_config":  {
                           "cs_active_low":  true,
                           "manufacturer_variant":  "waveshare"

@@ -5,7 +5,8 @@
  */
 
 #include "p32_shared_state.h"
-#include "components/st7796.hpp"
+#include "components/gc9a01.hpp"
+#include "components/generic_spi_display.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "shared/Environment.hpp"
 #include "esp_log.h"
@@ -26,18 +27,18 @@ static uint32_t goblin_left_eye_total_pixels = 0;
  */
 esp_err_t goblin_left_eye_init(void) {
     ESP_LOGI(goblin_left_eye_TAG, "Initializing left eye animation system");
-    
+
     // Get buffer and dimensions from display component
-    goblin_left_eye_animation_buffer = getBuffer();
-    goblin_left_eye_total_pixels = getFrameSize();
-    goblin_left_eye_frame_width = getFrameRowSize();
+    goblin_left_eye_animation_buffer = generic_display_get_buffer();
+    goblin_left_eye_total_pixels = generic_display_get_frame_size();
+    goblin_left_eye_frame_width = generic_display_get_frame_width();
     goblin_left_eye_frame_height = goblin_left_eye_total_pixels / goblin_left_eye_frame_width;
-    
+
     if (goblin_left_eye_animation_buffer == nullptr) {
         ESP_LOGE(goblin_left_eye_TAG, "Failed to allocate animation buffer");
         return ESP_FAIL;
     }
-    
+
     // Initialize buffer to white
     for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
         goblin_left_eye_animation_buffer[i] = 255;

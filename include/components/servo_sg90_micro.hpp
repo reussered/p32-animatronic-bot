@@ -6,10 +6,6 @@
 // SG90 Micro Servo Component
 // Lightweight servo for fine control (wrist, fingers, small movements)
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // Component lifecycle functions (NO ARGUMENTS pattern)
 esp_err_t servo_sg90_micro_init(void);
 void servo_sg90_micro_act(void);
@@ -22,9 +18,5 @@ void servo_sg90_micro_act(void);
 #define SG90_TORQUE_KG_CM           1.8
 #define SG90_OPERATING_VOLTAGE_V    5.0
 #define SG90_WEIGHT_GRAMS           9
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // P32_SERVO_SG90_MICRO_HPP

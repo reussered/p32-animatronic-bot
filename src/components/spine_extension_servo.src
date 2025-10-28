@@ -1,0 +1,42 @@
+/**
+ * @file spine_extension_servo.cpp
+ * @brief Spine extension servo component for torso straightening
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/spine_extension_servo.hpp"
+#include "components/servo_sg90_micro.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "SPINE_EXTENSION_SERVO";
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize spine extension servo component
+ */
+esp_err_t spine_extension_servo_init(void) {
+    ESP_LOGI(TAG, "Initializing spine extension servo");
+
+    // Initialize the underlying servo hardware
+    ESP_LOGI(TAG, "Spine extension servo initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute spine extension servo component logic
+ */
+void spine_extension_servo_act(void) {
+    // Control spine extension (straightening up)
+
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Spine extension servo act at loop %llu", g_loopCount);
+        }
+    }
+}

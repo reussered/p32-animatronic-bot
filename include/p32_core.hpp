@@ -117,6 +117,7 @@ esp_err_t p32_disable_component(const char* component_id);
 esp_err_t p32_init_spi_bus(void);
 esp_err_t p32_init_i2s_bus(void);
 esp_err_t p32_init_gpio_interfaces(void);
+esp_err_t p32_init_spiffs(void);
 
 // Logging and debug
 void p32_log_system_state(void);

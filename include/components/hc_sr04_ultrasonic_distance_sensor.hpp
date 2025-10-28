@@ -16,7 +16,7 @@
  * @brief Initialize hc_sr04_ultrasonic_distance_sensor component
  * Called once during system startup
  */
-void hc_sr04_ultrasonic_distance_sensor_init(void);
+esp_err_t hc_sr04_ultrasonic_distance_sensor_init(void);
 
 /**
  * @brief Execute hc_sr04_ultrasonic_distance_sensor component logic

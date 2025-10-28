@@ -16,7 +16,7 @@
  * @brief Initialize goblin_torso component
  * Called once during system startup
  */
-void goblin_torso_init(void);
+esp_err_t goblin_torso_init(void);
 
 /**
  * @brief Execute goblin_torso component logic

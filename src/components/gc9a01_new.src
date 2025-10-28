@@ -1,0 +1,91 @@
+/**
+ * @file gc9a01.cpp
+ * @brief GC9A01 240x240 circular display driver using generic SPI display
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/gc9a01.hpp"
+#include "components/generic_spi_display.hpp"
+#include "components/goblin_eye.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+#include <ArduinoJson.h>
+#include <fstream>
+#include <string>
+
+static const char *TAG = "GC9A01";
+
+// GC9A01 specific configuration
+static const generic_display_config_t gc9a01_config = {
+    .width = 240,
+    .height = 240,
+    .color_depth = 16,  // RGB565
+    .frame_size = 0,    // Calculated during init
+    .rotation = 0       // Default rotation
+};
+
+/**
+ * @brief Display Buffer Interface - allocate buffer for eye components
+ * @return Pointer to display buffer (managed by generic component)
+ */
+uint8_t* getBuffer(void) {
+    return generic_display_get_buffer();
+}
+
+/**
+ * @brief Display Buffer Interface - get total frame size in pixels
+ * @return Total number of pixels in frame
+ */
+uint32_t getFrameSize(void) {
+    return generic_display_get_frame_size();
+}
+
+/**
+ * @brief Display Buffer Interface - get pixels per row
+ * @return Number of pixels per row (display width)
+ */
+uint32_t getFrameRowSize(void) {
+    return generic_display_get_frame_width();
+}
+
+/**
+ * @brief Initialize GC9A01 hardware driver using generic SPI display
+ */
+esp_err_t gc9a01_init(void) {
+    ESP_LOGI(TAG, "Initializing GC9A01 using generic SPI display");
+
+    // Initialize the generic SPI display with GC9A01 configuration
+    esp_err_t ret = generic_spi_display_init(&gc9a01_config);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize generic SPI display for GC9A01: %s", esp_err_to_name(ret));
+        return ret;
+    }
+
+    ESP_LOGI(TAG, "GC9A01 driver initialized successfully");
+    return ESP_OK;
+}
+
+/**
+ * @brief Send current frame buffer to GC9A01 display using generic component
+ * Reads currentFrame and current_spi_device set by higher-level components
+ */
+void gc9a01_act(void) {
+    // Only process if we have a valid frame context
+    if (currentFrame == nullptr) {
+        return;
+    }
+
+    // Use the generic SPI display to send the frame
+    generic_spi_display_send_frame((uint16_t*)currentFrame, current_frame_size);
+
+    // Conditional verbose logging based on Environment flags
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging && env->display_diagnostics) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Frame sent via generic SPI display at loop %u, frame_size=%u",
+                    g_loopCount, current_frame_size);
+        }
+    }
+}

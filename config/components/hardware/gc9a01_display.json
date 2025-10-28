@@ -172,7 +172,10 @@
                             },
     "software":  {
                      "init_function":  "gc9a01_init",
-                     "act_function":  "gc9a01_act"
+                     "act_function":  "gc9a01_act",
+                     "includes_components":  [
+                         "config/components/hardware/generic_spi_display.json"
+                     ]
                  },
     "required_interface_functions":  [
                                         "getBuffer",

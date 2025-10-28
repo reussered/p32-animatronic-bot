@@ -1,0 +1,48 @@
+/**
+ * @file goblin_right_ear.cpp
+ * @brief Goblin right ear component - positioned servo for ear movement
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/goblin_right_ear.hpp"
+#include "components/servo_sg90_micro.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "GOBLIN_RIGHT_EAR";
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize goblin right ear component
+ */
+esp_err_t goblin_right_ear_init(void) {
+    ESP_LOGI(TAG, "Initializing goblin right ear");
+
+    // Initialize the underlying servo hardware
+    // Note: PWM channel configuration is handled by positioned component setup
+
+    ESP_LOGI(TAG, "Goblin right ear initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute goblin right ear component logic
+ */
+void goblin_right_ear_act(void) {
+    // Use the servo_sg90_micro functions for actual servo control
+    // The positioned component sets up the PWM channel and pin mappings
+
+    // For now, this is a pass-through to the servo implementation
+    // In the future, this could add goblin-specific ear movement logic
+
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Goblin right ear act at loop %llu", g_loopCount);
+        }
+    }
+}

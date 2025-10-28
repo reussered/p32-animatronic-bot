@@ -16,7 +16,7 @@
  * @brief Initialize speaker component
  * Called once during system startup
  */
-void speaker_init(void);
+esp_err_t speaker_init(void);
 
 /**
  * @brief Execute speaker component logic

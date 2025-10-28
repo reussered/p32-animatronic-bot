@@ -1,0 +1,42 @@
+/**
+ * @file waist_rotation_servo.cpp
+ * @brief Waist rotation servo component for torso twisting
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/waist_rotation_servo.hpp"
+#include "components/servo_sg90_micro.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "WAIST_ROTATION_SERVO";
+
+// External GSM instance
+extern SharedMemory GSM;
+
+/**
+ * @brief Initialize waist rotation servo component
+ */
+esp_err_t waist_rotation_servo_init(void) {
+    ESP_LOGI(TAG, "Initializing waist rotation servo");
+
+    // Initialize the underlying servo hardware
+    ESP_LOGI(TAG, "Waist rotation servo initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute waist rotation servo component logic
+ */
+void waist_rotation_servo_act(void) {
+    // Control waist rotation (left/right twisting)
+
+    Environment* env = GSM.read<Environment>();
+    if (env && env->verbose_logging) {
+        if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
+            ESP_LOGV(TAG, "Waist rotation servo act at loop %llu", g_loopCount);
+        }
+    }
+}
