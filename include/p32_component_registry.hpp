@@ -34,6 +34,6 @@ void goblin_eye_act(void);
 void gc9a01_act(void);
 
 // Table size constant - ALL TABLES MUST HAVE SAME SIZE
-#define TABLE_SIZE 9
+#define TABLE_SIZE 6
 
 #endif // P32_COMPONENT_REGISTRY_HPP

@@ -9,9 +9,9 @@
 // ============================================================================
 
 // Include all individual component headers
-#include "components/goblin_left_eye.hpp"
-#include "components/goblin_nose.hpp"
-#include "components/goblin_right_eye.hpp"
+#include "components/goblin_left_eye.hdr"
+#include "components/goblin_nose.hdr"
+#include "components/goblin_right_eye.hdr"
 
 // Additional component includes will be added here as components are implemented
 

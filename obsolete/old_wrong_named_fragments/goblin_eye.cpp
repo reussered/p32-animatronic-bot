@@ -1,0 +1,195 @@
+/**
+ * @file goblin_eye.cpp
+ * @brief Shared goblin eye processing logic with palette and mood-based rendering
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/goblin_eye.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *TAG = "GOBLIN_EYE";
+
+// Shared variables (definitions - only one copy in memory)
+uint8_t* currentFrame = nullptr;
+uint32_t current_frame_size = 0;
+uint32_t current_spi_device = 0;
+
+// Animation constants
+const uint32_t FRAME_WIDTH = 240;
+const uint32_t FRAME_HEIGHT = 240;
+const uint32_t PIXELS_PER_FRAME = FRAME_WIDTH * FRAME_HEIGHT;
+
+// Goblin eye palette - 256 colors organized by purpose
+RGB565Pixel goblin_eye_palette[256];
+
+// External GSM instance
+extern SharedMemory GSM;
+
+// Mood tracking for optimization
+static Mood lastMood;
+static bool mood_initialized = false;
+
+/**
+ * @brief Initialize shared goblin eye resources
+ */
+void goblin_eye_init(void) {
+    ESP_LOGI(TAG, "Initializing shared goblin eye resources");
+    
+    // Initialize the goblin eye palette
+    init_goblin_eye_palette();
+    
+    // Clear mood tracking
+    lastMood.clear();
+    mood_initialized = false;
+    
+    ESP_LOGI(TAG, "Goblin eye shared resources initialized");
+}
+
+/**
+ * @brief Process current frame with mood-based color adjustments
+ */
+void goblin_eye_act(void) {
+    // Only process if we have a valid frame set by left/right eye components
+    if (currentFrame == nullptr || current_frame_size == 0) {
+        return;
+    }
+    
+    // Process the frame with mood-based color adjustments
+    process_frame_with_mood();
+}
+
+/**
+ * @brief Initialize the goblin eye palette with organized color ranges
+ */
+void init_goblin_eye_palette(void) {
+    ESP_LOGI(TAG, "Initializing 256-color goblin eye palette");
+    
+    // Color range 0-31: Black to dark grays (eyelid/pupil)
+    for (int i = 0; i <= 31; i++) {
+        uint8_t intensity = i * 8; // 0 to 248
+        goblin_eye_palette[i] = RGB565Pixel(intensity, intensity, intensity);
+    }
+    
+    // Color range 32-63: Dark browns to medium browns (iris base)
+    for (int i = 32; i <= 63; i++) {
+        uint8_t brown_factor = (i - 32) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(brown_factor + 64, brown_factor / 2 + 32, 16);
+    }
+    
+    // Color range 64-95: Yellows and golds (iris highlights)
+    for (int i = 64; i <= 95; i++) {
+        uint8_t yellow_factor = (i - 64) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(255, 255 - yellow_factor / 4, yellow_factor / 8);
+    }
+    
+    // Color range 96-127: Reds for anger/irritation effects
+    for (int i = 96; i <= 127; i++) {
+        uint8_t red_factor = (i - 96) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(255, red_factor / 4, red_factor / 8);
+    }
+    
+    // Color range 128-159: Greens for curiosity/contentment
+    for (int i = 128; i <= 159; i++) {
+        uint8_t green_factor = (i - 128) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(green_factor / 4, 255, green_factor / 8);
+    }
+    
+    // Color range 160-191: Blues for fear/sadness
+    for (int i = 160; i <= 191; i++) {
+        uint8_t blue_factor = (i - 160) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(blue_factor / 8, blue_factor / 4, 255);
+    }
+    
+    // Color range 192-223: Purples for affection/mixed emotions
+    for (int i = 192; i <= 223; i++) {
+        uint8_t purple_factor = (i - 192) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(255 - purple_factor / 4, purple_factor / 8, 255 - purple_factor / 8);
+    }
+    
+    // Color range 224-254: Bright whites and highlights
+    for (int i = 224; i <= 254; i++) {
+        uint8_t white_factor = (i - 224) * 8;
+        goblin_eye_palette[i] = RGB565Pixel(255, 255, 255 - white_factor / 4);
+    }
+    
+    // Color 255: Pure white
+    goblin_eye_palette[255] = RGB565Pixel(255, 255, 255);
+    
+    ESP_LOGI(TAG, "Goblin eye palette initialized with 256 organized colors");
+}
+
+/**
+ * @brief Apply mood-based color processing to current frame
+ * Uses the optimized pixel processing algorithm from FrameProcessor
+ */
+void process_frame_with_mood(void) {
+    // Get current global mood from shared memory
+    Mood* mood_ptr = GSM.read<Mood>();
+    Mood currentGlobalMood = (mood_ptr != nullptr) ? *mood_ptr : Mood(); // Default mood (all zeros)
+    
+    // Check if mood changed (optimization!)
+    if (!mood_initialized || lastMood != currentGlobalMood) {
+        // Step 1: Calculate TOTAL color delta (once per frame)
+        MoodColorDelta totalDelta;
+        
+        if (mood_initialized) {
+            // Calculate delta between old and new mood
+            for(int i = 0; i < Mood::componentCount; ++i) {
+                int8_t moodDelta = currentGlobalMood.components[i] - lastMood.components[i];
+                if(moodDelta != 0) {
+                    const MoodColorEffect& effect = moodColorEffects[i];
+                    
+                    // Calculate color contribution from this mood change
+                    MoodColorDelta componentDelta(
+                        static_cast<int8_t>(moodDelta * effect.red_multiplier),
+                        static_cast<int8_t>(moodDelta * effect.green_multiplier),  
+                        static_cast<int8_t>(moodDelta * effect.blue_multiplier)
+                    );
+                    
+                    // Accumulate with overflow protection
+                    totalDelta += componentDelta;
+                }
+            }
+        } else {
+            // First time - calculate delta from neutral to current mood
+            Mood neutralMood;
+            for(int i = 0; i < Mood::componentCount; ++i) {
+                int8_t moodValue = currentGlobalMood.components[i];
+                if(moodValue != 0) {
+                    const MoodColorEffect& effect = moodColorEffects[i];
+                    
+                    MoodColorDelta componentDelta(
+                        static_cast<int8_t>(moodValue * effect.red_multiplier),
+                        static_cast<int8_t>(moodValue * effect.green_multiplier),  
+                        static_cast<int8_t>(moodValue * effect.blue_multiplier)
+                    );
+                    
+                    totalDelta += componentDelta;
+                }
+            }
+            mood_initialized = true;
+        }
+        
+        // Step 2: Apply same delta to ALL pixels (the core loop!)
+        for (uint32_t pixel = 0; pixel < current_frame_size; pixel++) {
+            // Convert pixel from palette index to RGB565
+            RGB565Pixel pixelValue = goblin_eye_palette[currentFrame[pixel]];
+            
+            // Apply mood color delta with clamping
+            pixelValue.applyColorDelta(totalDelta);
+            
+            // Write modified pixel back to frame buffer as RGB565
+            ((uint16_t*)currentFrame)[pixel] = pixelValue.value;
+        }
+        
+        // Step 3: Remember new mood
+        lastMood = currentGlobalMood;
+        
+        ESP_LOGV(TAG, "Frame updated with mood delta R:%+d G:%+d B:%+d at loop %u", 
+                 (int)totalDelta.red_delta, (int)totalDelta.green_delta, 
+                 (int)totalDelta.blue_delta, g_loopCount);
+    }
+    // If mood hasn't changed, do nothing - use cached colors!
+}

@@ -7,6 +7,9 @@
 #include <cstdint>
 #include <cstring>
 
+// Type ID definition - matches SharedMemory.hpp
+typedef int shared_type_id_t;
+
 // Helper function to clamp int16_t values to int8_t range (-128 to +127)
 inline int8_t clampToInt8(int16_t value) {
     if (value > 127) return 127;

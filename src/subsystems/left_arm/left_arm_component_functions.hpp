@@ -9,8 +9,8 @@
 // ============================================================================
 
 // Include all individual component headers
-#include "components/mg996r_servo.hpp"
-#include "components/servo_sg90_micro.hpp"
+#include "components/mg996r_servo.hdr"
+#include "components/servo_sg90_micro.hdr"
 
 // Additional component includes will be added here as components are implemented
 
