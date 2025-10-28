@@ -7,15 +7,7 @@ set(app_sources
     main.cpp
     simple_display_test.cpp
     component_tables.cpp
-    components/heartbeat.cpp
-    components/network_monitor.cpp
-    components/test_head.cpp
-    components/goblin_left_eye.cpp
-    components/spi_bus.cpp
-    components/goblin_eye.cpp
-    components/gc9a01.cpp
-    components/generic_spi_display.cpp
-    components/goblin_right_eye.cpp
+    p32_component_functions.cpp
 )
 
 message(STATUS "P32 sources: ${app_sources}")
