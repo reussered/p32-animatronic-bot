@@ -6,23 +6,14 @@
 #include "esp_log.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "GOBLIN_MOUTH";
+static const char *MOUTH_TAG = "GOBLIN_MOUTH";
 
 // Component initialization function - NO ARGUMENTS
 esp_err_t goblin_mouth_init(void)
 {
     printf("INIT: goblin_mouth_init() called\n");
     
-    // Register SPI device and configure SPI bus for the mouth (device 3)
-    int device_id = spi_bus_register_device();  // Returns 3 for mouth
-    int device_index = device_id - 1;  // 0-based
-    
-    // Set current device pins and handle for GC9A01 configuration
-    spi_bus_current_cs_pin = spi_device_cs_pins[device_index];
-    spi_bus_current_dc_pin = spi_device_dc_pins[device_index];
-    spi_bus_current_device_handle = spi_device_handles[device_index];
-    
-    ESP_LOGI(TAG, "Component goblin_mouth initialized (placeholder)");
+    ESP_LOGI(MOUTH_TAG, "Component goblin_mouth initialized (placeholder)");
     return ESP_OK;
 }
 
@@ -33,6 +24,6 @@ void goblin_mouth_act(void)
     if (g_loopCount % 10000 == 0)
     {
         printf("ACT: goblin_mouth_act() called (loop %llu)\n", g_loopCount);
-        ESP_LOGD(TAG, "Component goblin_mouth action (placeholder)");
+        ESP_LOGD(MOUTH_TAG, "Component goblin_mouth action (placeholder)");
     }
 }

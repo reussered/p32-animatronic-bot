@@ -7,11 +7,6 @@
     "description": "Test head subsystem with dual displays for hardware validation",
     "created": "2025-10-23",
     "controller_hardware": "ESP32_S3_DEVKITC_1",
-    "mesh_role": "STANDALONE_TEST_NODE",
-    "mesh_capabilities": [
-        "HIGH_SPEED_SPI",
-        "DUAL_CORE_PROCESSING"
-    ],
     "coordinate_system": "planar_2d",
     "reference_point": "nose_center",
     "units": "INCHES",
@@ -58,11 +53,11 @@
         "source_file": "components/subsystem/test_head.cpp"
     },
     "interface_assignments": {
-        "spi_bus": "SPI2_HOST",
-        "left_eye_cs": "GPIO_15",
-        "right_eye_cs": "GPIO_32", 
-        "left_eye_dc": "GPIO_27",
-        "right_eye_dc": "GPIO_33",
-        "shared_reset": "GPIO_26"
+        "spi_bus_vspi": "DISPLAY_BUS",
+        "gpio_pin_15": "LEFT_EYE_CS",
+        "gpio_pin_32": "RIGHT_EYE_CS", 
+        "gpio_pin_27": "LEFT_EYE_DC",
+        "gpio_pin_33": "RIGHT_EYE_DC",
+        "gpio_pin_26": "SHARED_RESET"
     }
 }

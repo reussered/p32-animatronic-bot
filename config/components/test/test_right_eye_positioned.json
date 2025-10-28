@@ -9,7 +9,6 @@
         "description": "Test right eye updates every cycle"
     },
     "hardware_reference": "config/components/hardware/gc9a01_display.json",
-    "interface_assignment": "config/interfaces/spi_device_2.json",
     "additional_interfaces": [
         "config/interfaces/gpio_pin_33.json",
         "config/interfaces/gpio_pin_26.json"

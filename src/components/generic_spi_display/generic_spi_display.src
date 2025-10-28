@@ -5,8 +5,8 @@
  * @author P32 Animatronic Bot Project
  */
 
-#include "generic_spi_display.hpp"
-#include "spi_bus.hpp"
+#include "components/generic_spi_display.hpp"
+#include "components/spi_bus.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "shared/Environment.hpp"
 #include "esp_log.h"
@@ -16,7 +16,7 @@
 #include <fstream>
 #include <string>
 
-static const char *TAG = "GENERIC_SPI_DISPLAY";
+static const char *GENERIC_SPI_DISPLAY_TAG = "GENERIC_SPI_DISPLAY";
 
 // Display configuration - set during init
 static generic_display_config_t display_config = {0};
@@ -29,14 +29,14 @@ static uint8_t* display_frame_buffer = nullptr;
  */
 esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
     if (config == nullptr) {
-        ESP_LOGE(TAG, "Display config is null");
+        ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "Display config is null");
         return ESP_FAIL;
     }
 
     // Copy configuration
     display_config = *config;
 
-    ESP_LOGI(TAG, "Initializing generic SPI display: %ux%u, %u bpp",
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Initializing generic SPI display: %ux%u, %u bpp",
              display_config.width, display_config.height, display_config.color_depth);
 
     // Allocate frame buffer if not already allocated
@@ -44,10 +44,10 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
         display_config.frame_size = (display_config.width * display_config.height * display_config.color_depth) / 8;
         display_frame_buffer = (uint8_t*)malloc(display_config.frame_size);
         if (display_frame_buffer == nullptr) {
-            ESP_LOGE(TAG, "Failed to allocate frame buffer (%u bytes)", display_config.frame_size);
+            ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "Failed to allocate frame buffer (%u bytes)", display_config.frame_size);
             return ESP_FAIL;
         }
-        ESP_LOGI(TAG, "Allocated frame buffer: %u bytes", display_config.frame_size);
+        ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Allocated frame buffer: %u bytes", display_config.frame_size);
     }
 
     // Configure GPIO pins using SPI bus variables
@@ -63,18 +63,18 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
         .intr_type = GPIO_INTR_DISABLE,
     };
 
-    ESP_LOGI(TAG, "Configuring GPIO pins - DC: %d, RST: %d",
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Configuring GPIO pins - DC: %d, RST: %d",
              spi_bus_current_dc_pin, spi_bus_reset_pin);
 
     esp_err_t config_ret = gpio_config(&io_conf);
     if (config_ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to configure GPIO pins: %s", esp_err_to_name(config_ret));
+        ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "Failed to configure GPIO pins: %s", esp_err_to_name(config_ret));
         return config_ret;
     }
 
     // Reset display using shared RST pin
     if (spi_bus_reset_pin != GPIO_NUM_NC) {
-        ESP_LOGI(TAG, "Resetting display using RST pin %d", spi_bus_reset_pin);
+        ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Resetting display using RST pin %d", spi_bus_reset_pin);
         gpio_set_level((gpio_num_t)spi_bus_reset_pin, 0);
         vTaskDelay(pdMS_TO_TICKS(10));
         gpio_set_level((gpio_num_t)spi_bus_reset_pin, 1);
@@ -84,7 +84,7 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
     // Initialize display buffer to black/clear
     memset(display_frame_buffer, 0, display_config.frame_size);
 
-    ESP_LOGI(TAG, "Generic SPI display initialized successfully");
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Generic SPI display initialized successfully");
     return ESP_OK;
 }
 
@@ -105,16 +105,16 @@ void generic_spi_display_send_frame(uint16_t* frame_buffer, uint32_t pixel_count
     spi_device_handle_t device = spi_bus_current_device_handle;
 
     if (device == NULL) {
-        ESP_LOGE(TAG, "No SPI device handle configured");
+        ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "No SPI device handle configured");
         return;
     }
 
     if (spi_bus_current_dc_pin == GPIO_NUM_NC) {
-        ESP_LOGE(TAG, "Invalid DC pin configured");
+        ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "Invalid DC pin configured");
         return;
     }
 
-    ESP_LOGI(TAG, "Sending frame to SPI device, DC pin %d", spi_bus_current_dc_pin);
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Sending frame to SPI device, DC pin %d", spi_bus_current_dc_pin);
 
     // Set DC pin high for data transmission
     gpio_set_level((gpio_num_t)spi_bus_current_dc_pin, 1);
@@ -144,7 +144,7 @@ void generic_spi_display_send_frame(uint16_t* frame_buffer, uint32_t pixel_count
         // Execute SPI transaction
         esp_err_t ret = spi_device_polling_transmit(device, &trans);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "SPI transmit failed: %s", esp_err_to_name(ret));
+            ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "SPI transmit failed: %s", esp_err_to_name(ret));
             break;
         }
 
@@ -152,7 +152,7 @@ void generic_spi_display_send_frame(uint16_t* frame_buffer, uint32_t pixel_count
         current_buffer += chunk_pixels;
     }
 
-    ESP_LOGD(TAG, "Frame transmission complete");
+    ESP_LOGD(GENERIC_SPI_DISPLAY_TAG, "Frame transmission complete");
 }
 
 /**

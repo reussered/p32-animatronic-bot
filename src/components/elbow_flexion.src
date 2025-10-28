@@ -10,7 +10,6 @@
 #include "p32_shared_state.h"
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize elbow_flexion component

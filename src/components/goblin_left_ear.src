@@ -11,21 +11,20 @@
 #include "p32_shared_state.h"
 #include "esp_log.h"
 
-static const char *TAG = "GOBLIN_LEFT_EAR";
+static const char *LEFT_EAR_TAG = "GOBLIN_LEFT_EAR";
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize goblin left ear component
  */
 esp_err_t goblin_left_ear_init(void) {
-    ESP_LOGI(TAG, "Initializing goblin left ear");
+    ESP_LOGI(LEFT_EAR_TAG, "Initializing goblin left ear");
 
     // Initialize the underlying servo hardware
     // Note: PWM channel configuration is handled by positioned component setup
 
-    ESP_LOGI(TAG, "Goblin left ear initialized");
+    ESP_LOGI(LEFT_EAR_TAG, "Goblin left ear initialized");
     return ESP_OK;
 }
 
@@ -42,7 +41,7 @@ void goblin_left_ear_act(void) {
     Environment* env = GSM.read<Environment>();
     if (env && env->verbose_logging) {
         if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
-            ESP_LOGV(TAG, "Goblin left ear act at loop %llu", g_loopCount);
+            ESP_LOGV(LEFT_EAR_TAG, "Goblin left ear act at loop %llu", g_loopCount);
         }
     }
 }

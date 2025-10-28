@@ -13,7 +13,6 @@
 static const char *TAG = "TORSO_STATUS_LED";
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize torso status LED component

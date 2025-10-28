@@ -9,7 +9,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/shoulder_flexion_mount.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/servo_standard_mount.scad"
                              },
-    "interface_assignment":  "PWM_CHANNEL_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "shoulder_socket_left",
     "position":  {

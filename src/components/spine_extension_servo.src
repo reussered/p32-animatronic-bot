@@ -14,7 +14,6 @@
 static const char *TAG = "SPINE_EXTENSION_SERVO";
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize spine extension servo component

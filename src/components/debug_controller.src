@@ -12,7 +12,6 @@
 static const char* TAG = "DEBUG_CTRL";
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize debug controller component

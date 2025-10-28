@@ -194,7 +194,7 @@ GSM.write<Environment>(); // Broadcasts current environment state
 
 **Initialization**:
 ```cpp
-GSM.init();  // Initialize ESP-NOW and shared memory system
+GSM.init();  // Initialize shared memory system
 ```
 
 **Prohibited Methods**:
@@ -223,7 +223,7 @@ GSM.init();  // Initialize ESP-NOW and shared memory system
 - **Each subsystem** runs on a dedicated ESP32 chip
 - **Controllers** are defined by hardware type (ESP32-S3-DevKitC-1, etc.)
 - **SharedMemory** handles inter-ESP32 communication transparently
-- **Mesh networking** coordinates between ESP32 controllers
+- **SharedMemory** coordinates between ESP32 controllers
 
 ## RULE: PYTHON TOOLS FOR CODE GENERATION AND AUTOMATION
 
@@ -536,78 +536,99 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Interface assignments via `interface_assignment` field
 - All paths use Windows backslash format
 
-## RULE 13: INTERFACE ASSIGNMENT ARCHITECTURE
+## RULE 13: ENCAPSULATED INTERFACE ARCHITECTURE
 
-**Interface System Overview:**
-The system uses a template + numbered instance pattern for hardware interface assignment, automatically managed by generation scripts.
+**OBSOLETE: All automatic interface assignment systems are obsolete.**
 
-**Interface Template Structure:**
-- **Template Interfaces** define the protocol/connection type (stored in `config\interfaces\`)
-  - `spi_device.json` - Defines SPI device protocol template
-  - `gpio_pair.json` - Defines 2-pin GPIO interface template  
-  - `i2c_device.json` - Defines I2C device protocol template
-  - `1wire_device.json` - Defines 1-wire protocol template
+**New Encapsulated Architecture:**
 
-**Numbered Instance Generation:**
-- **Numbered Instances** provide specific pin assignments (auto-generated)
-  - `spi_device_1.json`, `spi_device_2.json`, etc. - Specific SPI chip select pins
-  - `gpio_pair_1.json`, `gpio_pair_2.json`, etc. - Specific GPIO pin pairs
-  - `i2c_device_1.json`, `i2c_device_2.json`, etc. - Specific I2C device addresses
+- **Positioned Components**: Only declare `hardware_reference` - NO `interface_assignment` fields
+- **Hardware Components**: Encapsulate ALL interface details internally
+- **No Automatic Assignment**: No template interfaces, numbered instances, or generation scripts
+- **Pure Encapsulation**: Components are "private classes" - interface details completely hidden
 
-**Hardware Component Interface Declaration:**
-Components declare generic interface requirements in their hardware specifications:
+**DISPLAY SYSTEM ARCHITECTURE:**
 
-```json
-// In config/hardware/gc9a01_display.json
-{
-  "control_interface": {
-    "protocol": "spi_device",
-    "required_pins": ["MOSI", "SCK", "CS", "DC", "RST"]
-  }
-}
+**Positioned Component Layer (goblin_left_eye):**
 
-// In config/hardware/hw500_vibration_sensor.json  
-{
-  "control_interface": {
-    "protocol": "gpio_pair",
-    "required_pins": ["digital_input", "analog_input"]
-  }
-}
-```
+- References goblin_eye hardware, positioned on left side
+- Does NOT care about driver details or specific pins
+- Only knows positioning coordinates and hardware_reference
 
-**Automatic Interface Assignment Process:**
-1. **Bot Scanning**: Generation script scans all positioned components in a bot configuration
-2. **Interface Counting**: Counts how many components need each interface type
-3. **Sequential Assignment**: Assigns next available numbered interface instance
-   - First SPI component → `spi_device_1.json`
-   - Second SPI component → `spi_device_2.json`  
-   - First GPIO pair component → `gpio_pair_1.json`
-   - Second GPIO pair component → `gpio_pair_2.json`
-4. **Interface Generation**: Creates numbered interface files if they don't exist
-5. **Assignment Injection**: Updates positioned component configs with specific interface references
+**Hardware Component Layer (goblin_eye):**
 
-**Generated Interface Assignment Example:**
-```json
-// In positioned component after generation
-{
-  "component_name": "left_eye_display",
-  "hardware_reference": "config/hardware/gc9a01_display.json",
-  "interface_assignment": {
-    "spi_device": "config/interfaces/spi_device_1.json"
-  }
-}
-```
+- Knows it uses gc9a01 display type
+- Gets all display parameters (frame size, pixel size, etc.) from display component
+- Uses "display:" keyword to specify display type, no other details
+
+**Implementation Functions:**
+
+- getBuffer() - Returns pointer to frame memory
+- getFrameWidth() - Returns frame width in pixels
+- getFrameHeight() - Returns frame height in pixels
+
+**Display Driver Layer (gc9a01):**
+
+- Transfers data from frame_ptr one pixel at a time
+- Contains generic_spi_display for SPI protocol handling
+- Frame buffer points to memory start for transfer
+- frame_row_size and frame_row_count describe pixels per frame
+- bytes_per_pixel set in specific display code
+
+**Generic SPI Display Layer:**
+
+- Used for all displays using SPI bus protocol
+- Contains spi_bus_vspi component for GPIO pin determination
+- GPIO pin assignment is DONE IN CODE by spi_bus_vspi component DYNAMICALLY IN THE COMPONENT LOOP
+- Can be used for any display device
+- Generic_spi_driver doesn't care about specific pins, just how to use them
+- Can be used for any device using SPI protocol
+
+**Interface Assignment:**
+
+- ONLY generic_spi_device has interface_assignment parameter
+- Parser recognizes this means interface device pushed onto components before final generic component
+- Positioned components have NO interface_assignment fields (encapsulated)
 
 **Critical Rules:**
-- Components NEVER reference numbered interfaces directly in their definitions
-- Hardware specs declare generic interface requirements only
-- Generation script handles all specific pin assignments
-- Interface templates define electrical and protocol specifications
-- Numbered instances provide actual GPIO pin mappings
-- Pin conflict detection occurs during interface generation
-- Same interface type shared across multiple ESP32 variants with different pin mappings
+
+- NO automatic interface assignment scripts or systems
+- NO template interfaces or numbered instances
+- NO interface_assignment fields in positioned components
+- ALL interface details encapsulated within hardware_reference chain
+- Components are treated as private classes with hidden implementation details
+
+**Implementation Functions:**
+
+- getBuffer() - Returns pointer to frame memory
+- getFrameWidth() - Returns frame width in pixels  
+- getFrameHeight() - Returns frame height in pixels
+
+**Display Driver Layer (gc9a01):**
+
+- Transfers data from frame_ptr one pixel at a time
+- Contains generic_spi_display for SPI protocol handling
+- Frame buffer points to memory start for transfer
+- frame_row_size and frame_row_count describe pixels per frame
+- bytes_per_pixel set in specific display code
+
+**Generic SPI Display Layer:**
+
+- Used for all displays using SPI bus protocol
+- Contains spi_bus_vspi component for GPIO pin determination
+- GPIO pin assignment is DONE IN CODE by spi_bus_vspi component DYNAMICALLY IN THE COMPONENT LOOP
+- Can be used for any display device
+- Generic_spi_driver doesn't care about specific pins, just how to use them
+- Can be used for any device using SPI protocol
+
+**Interface Assignment:**
+
+- ONLY generic_spi_device has interface_assignment parameter
+- Parser recognizes this means interface device pushed onto components before final generic component
+- Positioned components have NO interface_assignment fields (encapsulated)
 
 **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
+
 - **COMMIT RULE**: After updating AI-AGENT-RULES.md, always commit that file alone to git repository with descriptive message
 
 ## RULE 5B: COMPONENT COORDINATION THROUGH SHARED STATE

@@ -53,7 +53,6 @@ void goblin_speaker_act(void) {
     }
     
     // Access shared state through SharedMemory
-    extern SharedMemory GSM;
     auto local_state = GSM.read<bool>("is_speaking");
     
     // Check if system wants to play audio

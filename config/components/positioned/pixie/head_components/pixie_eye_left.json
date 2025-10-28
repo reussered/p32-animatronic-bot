@@ -13,7 +13,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/pixie/pixie_eye_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/oled_small_mount.scad"
                              },
-    "interface_assignment":  "I2C_DEVICE_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

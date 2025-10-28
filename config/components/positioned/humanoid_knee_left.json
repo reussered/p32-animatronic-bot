@@ -15,12 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/knee_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_flexion_extension":  "config/components/interfaces/servo_knee_left.json",
-                                  "position_feedback":  "config/components/interfaces/encoder_knee_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_knee_left.json",
-                                  "impact_sensor":  "config/components/interfaces/shock_sensor_knee_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  1,
                                "joint_flexion_extension":  {

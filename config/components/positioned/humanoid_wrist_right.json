@@ -7,9 +7,6 @@
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right wrist assembly with 2 DOF for hand orientation and fine manipulation",
     "physical_component":  "config/components/hardware/servo_assembly.json",
-    "interface_assignments":  {
-                                  "primary_interface":  "config/components/interfaces/servo_controller_right_wrist.json"
-                              },
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

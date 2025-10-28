@@ -10,7 +10,6 @@
     "contained_components":  [
                                  "config/components/creature_specific/goblin_ear.json"
                              ],
-    "interface_assignment":  "ADC_LEFT_EAR",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

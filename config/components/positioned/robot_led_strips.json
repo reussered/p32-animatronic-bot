@@ -8,7 +8,6 @@
     "description":  "Accent LED strips for ambient lighting and mood indication",
     "created":  "2025-10-12",
     "hardware_reference":  "config/components/hardware/ws2812_led_strip.json",
-    "interface_assignment":  "config/components/interfaces/gpio_pair_1.json",
     "strip_layout":  {
                          "strip_count":  3,
                          "strips":  [

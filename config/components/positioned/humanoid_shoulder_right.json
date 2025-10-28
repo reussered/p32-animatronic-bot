@@ -7,9 +7,6 @@
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right shoulder assembly with 3 DOF for arm attachment and manipulation workspace",
     "physical_component":  "config/components/hardware/servo_assembly.json",
-    "interface_assignments":  {
-                                  "primary_interface":  "config/components/interfaces/servo_controller_right_shoulder.json"
-                              },
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

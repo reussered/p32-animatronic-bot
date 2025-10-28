@@ -4,7 +4,6 @@
     "author":  "config/author.json",
     "component_name":  "goblin_mouth",
     "subsystem":  "HEAD",
-    "interface_assignment":  "SPI_DEVICE_3",
     "contained_components":  [
                                  "config/components/creature_specific/goblin_mouth.json"
                              ],

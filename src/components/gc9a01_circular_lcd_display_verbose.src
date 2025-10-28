@@ -12,7 +12,6 @@
 static const char* TAG = "GC9A01_VERBOSE";
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize GC9A01 Circular LCD Display component

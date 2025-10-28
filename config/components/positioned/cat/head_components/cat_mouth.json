@@ -4,7 +4,6 @@
     "author":  "config/author.json",
     "component_name":  "cat_mouth",
     "subsystem":  "HEAD",
-    "interface_assignment":  "I2C_DEVICE_1",
     "contained_components":  [
                                  "config/components/creature_specific/cat_mouth.json"
                              ],

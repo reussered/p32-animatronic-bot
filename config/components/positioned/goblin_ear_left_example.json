@@ -4,7 +4,6 @@
     "author":  "config/author.json",
     "component_name":  "goblin_left_ear_example",
     "hardware_reference":  "config/components/hardware/speaker.json",
-    "interface_assignment":  "I2S_DEVICE_1",
     "mounting_architecture":  {
                                   "type":  "integrated",
                                   "integrated_shape":  "goblin_ear_complete",

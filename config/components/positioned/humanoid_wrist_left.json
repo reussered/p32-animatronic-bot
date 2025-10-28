@@ -15,13 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/wrist_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_flexion_extension":  "config/components/interfaces/servo_wrist_flex_left.json",
-                                  "servo_radial_ulnar_deviation":  "config/components/interfaces/servo_wrist_dev_left.json",
-                                  "position_feedback_1":  "config/components/interfaces/encoder_wrist_1_left.json",
-                                  "position_feedback_2":  "config/components/interfaces/encoder_wrist_2_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_wrist_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  2,
                                "joint_1_flexion_extension":  {

@@ -6,13 +6,13 @@
 #include "esp_log.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "GOBLIN_SPEAKER";
+static const char *SPEAKER_TAG = "GOBLIN_SPEAKER";
 
 // Component initialization function - NO ARGUMENTS
 esp_err_t goblin_speaker_init(void)
 {
     printf("INIT: goblin_speaker_init() called\n");
-    ESP_LOGI(TAG, "Component goblin_speaker initialized (placeholder)");
+    ESP_LOGI(SPEAKER_TAG, "Component goblin_speaker initialized (placeholder)");
     return ESP_OK;
 }
 
@@ -23,6 +23,6 @@ void goblin_speaker_act(void)
     if (g_loopCount % 10000 == 0)
     {
         printf("ACT: goblin_speaker_act() called (loop %llu)\n", g_loopCount);
-        ESP_LOGD(TAG, "Component goblin_speaker action (placeholder)");
+        ESP_LOGD(SPEAKER_TAG, "Component goblin_speaker action (placeholder)");
     }
 }

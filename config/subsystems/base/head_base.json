@@ -26,27 +26,7 @@
                                                  ],
                                  "voltage_regulation":  "ONBOARD_LDO"
                              },
-    "mesh_configuration":  {
-                               "role":  "MASTER_COORDINATOR",
-                               "protocol":  "ESP_NOW",
-                               "channel":  "AUTO_SELECT",
-                               "max_peers":  8,
-                               "encryption":  "AES_256",
-                               "broadcast_capability":  true,
-                               "coordination_functions":  [
-                                                              "BEHAVIOR_CONTROL",
-                                                              "SENSOR_FUSION",
-                                                              "EMERGENCY_COORDINATION"
-                                                          ]
-                           },
     "standard_components":  [
-                                {
-                                    "component_type":  "MESH_NETWORK",
-                                    "function_name":  "mesh_network_update",
-                                    "default_hitCount":  5,
-                                    "role":  "master_coordinator",
-                                    "required":  true
-                                },
                                 {
                                     "component_type":  "AI_BEHAVIOR_ENGINE",
                                     "function_name":  "ai_behavior_update",
@@ -71,17 +51,18 @@
                             ],
     "interface_assignments":  {
                                   "spi_bus_vspi":  "SHARED_DISPLAY_BUS",
-                                  "spi_device_1":  "LEFT_EYE_DISPLAY",
-                                  "spi_device_2":  "RIGHT_EYE_DISPLAY",
-                                  "spi_device_3":  "MOUTH_DISPLAY_OR_INTEGRATED",
-                                  "i2c_bus_0":  "SENSOR_BUS",
+                                  "i2c_bus_1":  "SENSOR_BUS",
+                                  "i2s_bus_0":  "AUDIO_BUS",
+                                  "pwm_channel_1":  "SERVO_CONTROL",
+                                  "gpio_pair_1":  "SENSOR_INTERFACE",
+                                  "adc_left_ear":  "LEFT_AUDIO_INPUT",
+                                  "adc_right_ear":  "RIGHT_AUDIO_INPUT",
                                   "uart_0":  "DEBUG_CONSOLE",
                                   "uart_1":  "WIRELESS_INTERACTION"
                               },
     "timing_constraints":  {
                                "loop_frequency":  "MAXIMUM_SPEED",
                                "emergency_response":  "1_LOOP_MAX",
-                               "mesh_communication":  "5_LOOP_INTERVAL",
                                "sensor_update":  "10_LOOP_INTERVAL",
                                "display_refresh":  "30_LOOP_INTERVAL"
                            }

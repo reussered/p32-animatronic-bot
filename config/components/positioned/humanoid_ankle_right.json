@@ -7,9 +7,6 @@
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right ankle joint with 3 DOF for foot orientation and active balance",
     "physical_component":  "config/components/hardware/servo_assembly.json",
-    "interface_assignments":  {
-                                  "primary_interface":  "config/components/interfaces/servo_controller_right_ankle.json"
-                              },
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

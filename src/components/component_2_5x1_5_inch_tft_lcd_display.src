@@ -9,7 +9,6 @@
 #include "p32_shared_state.h"
 
 // External GSM instance
-extern SharedMemory GSM;
 
 /**
  * @brief Initialize component_2_5x1_5_inch_tft_lcd_display component

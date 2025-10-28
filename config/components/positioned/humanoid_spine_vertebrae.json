@@ -38,16 +38,6 @@
                                }
                            ],
     "hardware_reference":  "config/components/hardware/spine_vertebrae_assembly.json",
-    "interface_assignments":  {
-                                  "servo_l5_pitch":  "config/components/interfaces/servo_spine_l5_pitch.json",
-                                  "servo_l5_roll":  "config/components/interfaces/servo_spine_l5_roll.json",
-                                  "servo_t12_pitch":  "config/components/interfaces/servo_spine_t12_pitch.json",
-                                  "servo_t12_roll":  "config/components/interfaces/servo_spine_t12_roll.json",
-                                  "servo_t6_pitch":  "config/components/interfaces/servo_spine_t6_pitch.json",
-                                  "servo_t6_roll":  "config/components/interfaces/servo_spine_t6_roll.json",
-                                  "imu_sensor":  "config/components/interfaces/imu_spine_balance.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_spine.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  6,
                                "l5_joint":  {

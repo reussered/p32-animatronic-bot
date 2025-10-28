@@ -7,13 +7,6 @@
     "description":  "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing",
     "created":  "2025-10-15",
     "controller_hardware":  "ESP32_S3_DEVKITC_1",
-    "mesh_role":  "SLAVE_NODE_HIGH_PRIORITY",
-    "mesh_capabilities":  [
-                              "ESP_NOW_SLAVE",
-                              "DUAL_CORE_PROCESSING",
-                              "HIGH_SPEED_SPI",
-                              "I2S_AUDIO"
-                          ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
@@ -127,14 +120,6 @@
                                "audio_power_w":  "2.0",
                                "servo_power_w":  "6.0"
                            },
-    "mesh_node_config":  {
-                             "node_id":  "HEAD_NODE",
-                             "master_subsystem":  "goblin_torso.json",
-                             "priority":  "HIGH",
-                             "heartbeat_response_time_ms":  100,
-                             "command_buffer_size":  32,
-                             "description":  "High-priority slave focusing on real-time facial expressions and audio"
-                         },
     "processing_responsibilities":  {
                                         "description":  "Head focuses on high-frequency display/audio updates without system-level overhead",
                                         "tasks":  [
@@ -144,11 +129,11 @@
                                                       "Facial expression animation engine",
                                                       "Mood-driven display effects",
                                                       "Neck servo articulation control",
-                                                      "Respond to mesh commands from torso master"
+                                                      "Respond to commands from torso master"
                                                   ],
                                         "excluded_tasks":  [
                                                                "WiFi management (handled by torso)",
-                                                               "Mesh network coordination (handled by torso)",
+                                                               "Network coordination (handled by torso)",
                                                                "Telemetry aggregation (handled by torso)",
                                                                "System-wide behavior planning (handled by torso)"
                                                            ]

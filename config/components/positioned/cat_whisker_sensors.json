@@ -8,7 +8,6 @@
     "description":  "Touch-sensitive whiskers for spatial awareness and tactile interaction",
     "created":  "2025-10-12",
     "hardware_reference":  "config/components/hardware/capacitive_touch_sensor.json",
-    "interface_assignment":  "config/components/interfaces/i2c_touch_controller.json",
     "whisker_layout":  {
                            "whisker_count":  6,
                            "whiskers":  [

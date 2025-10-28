@@ -15,13 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/head_structural_assembly.json",
-    "interface_assignments":  {
-                                  "head_controller":  "config/components/interfaces/esp32_c3_head_controller.json",
-                                  "sensor_array":  "config/components/interfaces/head_sensor_cluster.json",
-                                  "display_system":  "config/components/interfaces/facial_display_array.json",
-                                  "audio_system":  "config/components/interfaces/head_audio_system.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_head.json"
-                              },
     "facial_components":  [
                               "config/components/positioned/goblin_left_eye.json",
                               "config/components/positioned/goblin_right_eye.json",

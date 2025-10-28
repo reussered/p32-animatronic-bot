@@ -8,8 +8,19 @@ set(app_sources
     simple_display_test.cpp
     component_tables.cpp
     p32_component_functions.cpp
+    components/spi_bus.cpp
+    components/gc9a01.cpp
+    components/SharedMemory.cpp
+    components/Mood.cpp
 )
+
+# Conditionally include subsystem-specific source files
+if(SUBSYSTEM_GOBLIN_HEAD)
+    add_subdirectory(goblin_full)
+endif()
 
 message(STATUS "P32 sources: ${app_sources}")
 
-idf_component_register(SRCS ${app_sources})
+idf_component_register(SRCS ${app_sources}
+                       INCLUDE_DIRS ../include
+                                    ../shared)

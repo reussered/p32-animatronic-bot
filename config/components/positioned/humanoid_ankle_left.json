@@ -15,14 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/ankle_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_dorsiflexion_plantarflexion":  "config/components/interfaces/servo_ankle_flex_left.json",
-                                  "servo_inversion_eversion":  "config/components/interfaces/servo_ankle_inv_left.json",
-                                  "position_feedback_1":  "config/components/interfaces/encoder_ankle_1_left.json",
-                                  "position_feedback_2":  "config/components/interfaces/encoder_ankle_2_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_ankle_left.json",
-                                  "pressure_sensors":  "config/components/interfaces/pressure_array_foot_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  2,
                                "joint_1_dorsiflexion_plantarflexion":  {

@@ -15,14 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/neck_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_pan_yaw":  "config/components/interfaces/servo_neck_pan.json",
-                                  "servo_tilt_pitch":  "config/components/interfaces/servo_neck_tilt.json",
-                                  "servo_roll":  "config/components/interfaces/servo_neck_roll.json",
-                                  "position_feedback":  "config/components/interfaces/encoder_neck_array.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_neck.json",
-                                  "head_controller":  "config/components/interfaces/esp32_c3_head_controller.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  3,
                                "joint_1_pan_yaw":  {

@@ -8,7 +8,6 @@
     "description":  "Servo-controlled cat ears for emotional expression and directional hearing simulation",
     "created":  "2025-10-12",
     "hardware_reference":  "config/components/hardware/servo_sg90_micro.json",
-    "interface_assignment":  "config/components/interfaces/servo_controller_ears.json",
     "ear_configuration":  {
                               "ear_count":  2,
                               "ears":  [

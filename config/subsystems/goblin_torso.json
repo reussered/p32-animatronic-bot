@@ -4,16 +4,9 @@
     "author":  "config/author.json",
     "subsystem_type":  "TORSO",
     "subsystem_id":  "goblin_torso_v1",
-    "description":  "Goblin torso subsystem - Master controller with mesh networking, WiFi, and system coordination",
+    "description":  "Goblin torso subsystem - Master controller with WiFi, and system coordination",
     "created":  "2025-10-15",
     "controller_hardware":  "ESP32_S3_DEVKITC_1",
-    "mesh_role":  "MASTER_COORDINATOR",
-    "mesh_capabilities":  [
-                              "ESP_NOW_MASTER",
-                              "WIFI_STATION",
-                              "BLUETOOTH_CENTRAL",
-                              "TELEMETRY_HUB"
-                          ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "spine_base",
     "units":  "MILLIMETERS",
@@ -27,7 +20,6 @@
                                     "config/components/system/system_core.json",
                                     "config/components/system/debug_controller.json",
                                     "config/components/system/network_monitor.json",
-                                    "config/components/system/esp_now_mesh.json",
                                     "config/components/system/wifi_station.json",
                                     "config/components/system/bluetooth_central.json",
                                     "config/components/system/telemetry_hub.json",
@@ -41,51 +33,6 @@
                                  "config/components/positioned/torso_status_led.json",
                                  "config/components/positioned/torso_speaker.json"
                              ],
-    "mesh_network_config":  {
-                                "network_id":  "GOBLIN_MESH_001",
-                                "channel":  6,
-                                "encryption_key":  "GENERATED_AT_RUNTIME",
-                                "max_slave_nodes":  12,
-                                "heartbeat_interval_ms":  1000,
-                                "timeout_ms":  5000,
-                                "slave_nodes":  [
-                                                    {
-                                                        "node_id":  "HEAD_NODE",
-                                                        "subsystem":  "goblin_head.json",
-                                                        "controller":  "ESP32_S3_DEVKITC_1",
-                                                        "priority":  "HIGH",
-                                                        "description":  "Facial expressions and sensors"
-                                                    },
-                                                    {
-                                                        "node_id":  "ARM_LEFT_NODE",
-                                                        "subsystem":  "goblin_arm_left.json",
-                                                        "controller":  "ESP32_C3_MINI",
-                                                        "priority":  "MEDIUM",
-                                                        "description":  "Left arm 7-DOF control"
-                                                    },
-                                                    {
-                                                        "node_id":  "ARM_RIGHT_NODE",
-                                                        "subsystem":  "goblin_arm_right.json",
-                                                        "controller":  "ESP32_C3_MINI",
-                                                        "priority":  "MEDIUM",
-                                                        "description":  "Right arm 7-DOF control"
-                                                    },
-                                                    {
-                                                        "node_id":  "LEG_LEFT_NODE",
-                                                        "subsystem":  "goblin_leg_left.json",
-                                                        "controller":  "ESP32_C3_MINI",
-                                                        "priority":  "MEDIUM",
-                                                        "description":  "Left leg 6-DOF control"
-                                                    },
-                                                    {
-                                                        "node_id":  "LEG_RIGHT_NODE",
-                                                        "subsystem":  "goblin_leg_right.json",
-                                                        "controller":  "ESP32_C3_MINI",
-                                                        "priority":  "MEDIUM",
-                                                        "description":  "Right leg 6-DOF control"
-                                                    }
-                                                ]
-                            },
     "wifi_config":  {
                         "mode":  "STATION",
                         "ssid":  "CONFIGURED_AT_RUNTIME",
@@ -206,7 +153,7 @@
                                                                                               60
                                                                                           ],
                                                                            "units":  "mm",
-                                                                           "description":  "Main electronics bay for ESP32-S3, power distribution, mesh antenna"
+                                                                           "description":  "Main electronics bay for ESP32-S3, power distribution, antenna"
                                                                        }
                                                }
                        },
@@ -242,7 +189,6 @@
     "processing_responsibilities":  {
                                         "description":  "Torso serves as master coordinator with highest processing power",
                                         "tasks":  [
-                                                      "ESP-NOW mesh network master",
                                                       "WiFi connectivity management",
                                                       "Bluetooth central device",
                                                       "MQTT telemetry hub",

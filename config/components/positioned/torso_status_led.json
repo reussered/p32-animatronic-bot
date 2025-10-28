@@ -17,6 +17,5 @@
                      "init_function":  "torso_status_led_init",
                      "hitCount":  10
                  },
-    "interface_assignment":  "PWM_CHANNEL_1",
     "relative_filename":  "config/components/positioned/torso_status_led.json"
 }

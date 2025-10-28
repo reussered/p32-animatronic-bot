@@ -15,14 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/hip_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_1_flexion_extension":  "config/components/interfaces/servo_hip_flex_left.json",
-                                  "servo_2_abduction_adduction":  "config/components/interfaces/servo_hip_abd_left.json",
-                                  "servo_3_rotation":  "config/components/interfaces/servo_hip_rot_left.json",
-                                  "position_feedback":  "config/components/interfaces/encoder_hip_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_hip_left.json",
-                                  "load_sensor":  "config/components/interfaces/load_cell_hip_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  3,
                                "joint_1_flexion_extension":  {

@@ -14,23 +14,7 @@
                                 "spi_interfaces":  1,
                                 "i2c_interfaces":  1
                             },
-    "mesh_configuration":  {
-                               "role":  "MANIPULATION_NODE",
-                               "protocol":  "ESP_NOW",
-                               "coordination_functions":  [
-                                                              "FINE_MOTOR_CONTROL",
-                                                              "GRIP_COORDINATION",
-                                                              "TACTILE_FEEDBACK"
-                                                          ]
-                           },
     "standard_components":  [
-                                {
-                                    "component_type":  "MESH_NETWORK",
-                                    "function_name":  "mesh_network_update",
-                                    "default_hitCount":  5,
-                                    "role":  "manipulation_node",
-                                    "required":  true
-                                },
                                 {
                                     "component_type":  "GRIP_CONTROLLER",
                                     "function_name":  "grip_controller_update",

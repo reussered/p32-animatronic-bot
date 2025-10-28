@@ -17,6 +17,5 @@
                      "init_function":  "spine_extension_servo_init",
                      "hitCount":  10
                  },
-    "interface_assignment":  "PWM_CHANNEL_1",
     "relative_filename":  "config/components/positioned/spine_extension_servo.json"
 }

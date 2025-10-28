@@ -6,12 +6,6 @@
     "positioned_id":  "ROBOT_BACK_MOUNT",
     "description":  "Back-mounted mechanical attachment system for deployable equipment",
     "hardware_reference":  "config/components/hardware/back_mount_system.json",
-    "interface_assignments":  {
-                                  "primary_servo_control":  "config/components/interfaces/servo_pwm_1.json",
-                                  "secondary_servo_control":  "config/components/interfaces/servo_pwm_2.json",
-                                  "position_feedback":  "config/components/interfaces/gpio_pair_1.json",
-                                  "status_indicators":  "config/components/interfaces/gpio_pair_2.json"
-                              },
     "spatial_coordinates":  {
                                 "coordinate_system":  "planar_2d",
                                 "reference_point":  "nose_center",

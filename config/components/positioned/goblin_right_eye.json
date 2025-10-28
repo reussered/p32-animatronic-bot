@@ -4,7 +4,6 @@
     "author":  "config/author.json",
     "component_name":  "goblin_right_eye",
     "subsystem":  "HEAD",
-    "interface_assignment":  "SPI_DEVICE_2",
     "contained_components":  [
                                  "config/components/creature_specific/goblin_eye.json"
                              ],

@@ -7,9 +7,6 @@
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right elbow joint with 1 DOF flexion/extension for forearm articulation",
     "physical_component":  "config/components/hardware/servo_assembly.json",
-    "interface_assignments":  {
-                                  "primary_interface":  "config/components/interfaces/servo_controller_right_elbow.json"
-                              },
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

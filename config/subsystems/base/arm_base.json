@@ -23,26 +23,10 @@
                                                      "SERVO_POWER",
                                                      "3.3V",
                                                      "GND"
-                                                 ]
+                                                 ],
+                                 "voltage_regulation":  "ONBOARD_LDO"
                              },
-    "mesh_configuration":  {
-                               "role":  "SLAVE_NODE",
-                               "protocol":  "ESP_NOW",
-                               "master_controller":  "HEAD_ESP32_S3",
-                               "coordination_functions":  [
-                                                              "MANIPULATION_CONTROL",
-                                                              "BALANCE_COMPENSATION",
-                                                              "COLLISION_AVOIDANCE"
-                                                          ]
-                           },
     "standard_components":  [
-                                {
-                                    "component_type":  "MESH_NETWORK",
-                                    "function_name":  "mesh_network_update",
-                                    "default_hitCount":  5,
-                                    "role":  "slave_node",
-                                    "required":  true
-                                },
                                 {
                                     "component_type":  "COORDINATION_ENGINE",
                                     "function_name":  "coordination_update",
@@ -85,12 +69,10 @@
                                                  }
                              },
     "interface_assignments":  {
-                                  "pwm_0":  "SHOULDER_SERVO",
-                                  "pwm_1":  "ELBOW_SERVO",
-                                  "pwm_2":  "WRIST_SERVO",
-                                  "adc_0":  "SHOULDER_FEEDBACK",
-                                  "adc_1":  "ELBOW_FEEDBACK",
-                                  "i2c_0":  "SENSOR_BUS",
-                                  "uart_0":  "DEBUG_MESH"
+                                  "pwm_channel_1":  "SERVO_CONTROL",
+                                  "adc_left_ear":  "SHOULDER_FEEDBACK",
+                                  "adc_right_ear":  "ELBOW_FEEDBACK",
+                                  "i2c_bus_1":  "SENSOR_BUS",
+                                  "uart_0":  "DEBUG_CONSOLE"
                               }
 }

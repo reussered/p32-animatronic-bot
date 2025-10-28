@@ -14,23 +14,7 @@
                                 "spi_interfaces":  1,
                                 "i2c_interfaces":  1
                             },
-    "mesh_configuration":  {
-                               "role":  "LOCOMOTION_NODE",
-                               "protocol":  "ESP_NOW",
-                               "coordination_functions":  [
-                                                              "GAIT_COORDINATION",
-                                                              "BALANCE_CONTROL",
-                                                              "COLLISION_AVOIDANCE"
-                                                          ]
-                           },
     "standard_components":  [
-                                {
-                                    "component_type":  "MESH_NETWORK",
-                                    "function_name":  "mesh_network_update",
-                                    "default_hitCount":  5,
-                                    "role":  "locomotion_node",
-                                    "required":  true
-                                },
                                 {
                                     "component_type":  "GAIT_COORDINATOR",
                                     "function_name":  "gait_coordinator_update",

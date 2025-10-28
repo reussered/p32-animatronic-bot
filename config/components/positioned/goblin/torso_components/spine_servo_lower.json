@@ -5,7 +5,6 @@
     "component_name":  "goblin_lower_spine",
     "subsystem":  "TORSO",
     "hardware_reference":  "config/components/hardware/mg996r_servo.json",
-    "interface_assignment":  "PWM_CHANNEL_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "position":  {

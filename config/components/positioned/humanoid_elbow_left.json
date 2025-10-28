@@ -15,11 +15,6 @@
                      "scaling_applies":  true
                  },
     "hardware_reference":  "config/components/hardware/elbow_joint_assembly.json",
-    "interface_assignments":  {
-                                  "servo_flexion_extension":  "config/components/interfaces/servo_elbow_left.json",
-                                  "position_feedback":  "config/components/interfaces/encoder_elbow_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_elbow_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  1,
                                "joint_flexion_extension":  {

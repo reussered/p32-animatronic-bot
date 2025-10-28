@@ -7,14 +7,6 @@
     "description":  "Pirate goblin head subsystem - single left eye with enhanced audio processing for missing right eye compensation",
     "created":  "2025-10-21",
     "controller_hardware":  "ESP32_S3_DEVKITC_1",
-    "mesh_role":  "SLAVE_NODE_HIGH_PRIORITY",
-    "mesh_capabilities":  [
-                              "ESP_NOW_SLAVE",
-                              "DUAL_CORE_PROCESSING",
-                              "HIGH_SPEED_SPI",
-                              "I2S_AUDIO",
-                              "SINGLE_EYE_OPTIMIZED"
-                          ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
@@ -56,19 +48,12 @@
                                   "processing_load":  "75_PERCENT_VISUAL_25_PERCENT_AUDIO"
                               },
     "interface_assignments":  {
-                                  "left_eye_spi":  "SPI_DEVICE_1",
-                                  "mouth_spi":  "SPI_DEVICE_3",
-                                  "speaker_i2s":  "I2S_DEVICE_1",
-                                  "nose_sensor":  "GPIO_PAIR_1",
-                                  "left_ear_adc":  "ADC_PIN_35",
-                                  "right_ear_adc":  "ADC_PIN_36"
+                                  "spi_bus_vspi":  "DISPLAY_BUS",
+                                  "i2s_bus_0":  "AUDIO_OUTPUT",
+                                  "gpio_pair_1":  "NOSE_SENSOR",
+                                  "adc_pin_35":  "LEFT_EAR_INPUT",
+                                  "adc_pin_36":  "RIGHT_EAR_INPUT"
                               },
-    "mesh_communication":  {
-                               "reports_to":  "TORSO_MASTER",
-                               "update_frequency":  "100MS_CRITICAL_EVENTS",
-                               "message_priority":  "HIGH_COMBAT_READINESS",
-                               "data_compression":  "PIRATE_OPTIMIZED"
-                           },
     "performance_targets":  {
                                 "left_eye_fps":  30,
                                 "audio_response_time":  "50MS_MAX",
