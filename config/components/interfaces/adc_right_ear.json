@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/adc_right_ear.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "ADC_RIGHT_EAR",
     "interface_type":  "ADC",
@@ -33,3 +35,4 @@
     "prototype_status":  "configured",
     "tested":  false
 }
+

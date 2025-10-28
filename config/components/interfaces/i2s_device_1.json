@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/i2s_device_1.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "I2S_DEVICE_1",
     "interface_type":  "I2S_DEVICE",
@@ -12,3 +14,4 @@
                           "channel":  "left"
                       }
 }
+

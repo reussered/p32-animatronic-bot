@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/ble_mesh_network.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "BLE_MESH_NETWORK",
     "interface_type":  "BLUETOOTH_MESH_COMMUNICATION",
@@ -216,3 +218,4 @@
                                                 }
                       }
 }
+

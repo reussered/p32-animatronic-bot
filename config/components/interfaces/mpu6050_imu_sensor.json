@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/mpu6050_imu_sensor.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "MPU6050_IMU_SENSOR",
     "interface_type":  "INERTIAL_MEASUREMENT_UNIT",
@@ -384,3 +386,4 @@
                                          "vibration_immunity":  "EXCELLENT_MEMS_TECHNOLOGY"
                                      }
 }
+

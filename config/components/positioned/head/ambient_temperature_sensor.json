@@ -1,14 +1,16 @@
-{
+﻿{
   "relative_filename": "config/components/positioned/head/ambient_temperature_sensor.json",
   "version": "1.0.0",
-  "author": "config/author.json", 
+  "author": "config/author.json",
+  "component_type": "POSITIONED_COMPONENT",
+  "hardware_type": "SENSOR",
   "component_name": "ambient_temperature_sensor",
   "display_name": "Skull Ambient Temperature Sensor",
   "description": "Temperature sensor for monitoring ambient environmental conditions inside goblin skull",
   "subsystem": "head",
   "created": "2025-10-23",
   
-  "hardware_reference": "config/hardware/ds18b20_temperature_sensor.json",
+  "contained_components": ["config/hardware/ds18b20_temperature_sensor.json"],
   
   "positioning": {
     "coordinate_system": "skull_3d",

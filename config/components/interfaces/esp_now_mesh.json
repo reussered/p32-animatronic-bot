@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/esp_now_mesh.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "ESP_NOW_MESH",
     "interface_type":  "WIRELESS_MESH_COMMUNICATION",
@@ -106,3 +108,4 @@
                                                     }
                                 }
 }
+

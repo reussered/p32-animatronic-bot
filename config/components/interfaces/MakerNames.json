@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/MakerNames.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "description":  "Maps manufacturer-specific pin names to generic functional names across all interface types",
     "global_manufacturer_preference":  "waveshare",
@@ -98,3 +100,4 @@
                                      },
     "interface_id":  "MAKERNAMES"
 }
+

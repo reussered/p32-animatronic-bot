@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/stepper_motor_28byj48.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "STEPPER_MOTOR_28BYJ48",
     "interface_type":  "STEPPER_MOTOR_CONTROLLER",
@@ -264,3 +266,4 @@
                                                    }
                              }
 }
+

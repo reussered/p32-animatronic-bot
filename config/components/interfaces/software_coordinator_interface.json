@@ -1,5 +1,7 @@
-{
+﻿{
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "interface_type":  "SOFTWARE_COORDINATOR",
     "author":  "config/author.json",
     "pin_assignments":  {
@@ -8,3 +10,4 @@
     "relative_filename":  "config/components/interfaces/software_coordinator_interface.json",
     "interface_id":  "SOFTWARE_COORDINATOR_INTERFACE"
 }
+

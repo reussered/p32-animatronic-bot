@@ -1,6 +1,8 @@
-{
+﻿{
     "author":  "config/author.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "interface_id":  "PWM_CHANNEL_6",
     "pin_assignments":  {
                             "pwm_output":  "GPIO_PIN_6"
@@ -13,3 +15,4 @@
                          },
     "relative_filename":  "config/components/interfaces/pwm_channel_6.json"
 }
+

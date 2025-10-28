@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/robot_solar_parasol.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -7,7 +7,7 @@
     "subsystem":  "UNKNOWN",
     "description":  "Shoulder-mounted deployable solar parasol system for autonomous power generation",
     "created":  "2025-10-13",
-    "hardware_reference":  "config/components/hardware/solar_parasol_system.json",
+    "contained_components": ["config/components/hardware/solar_parasol_system.json"],
     "spatial_coordinates":  {
                                 "coordinate_system":  "planar_2d",
                                 "reference_point":  "nose_center",
@@ -104,3 +104,4 @@
                      "x":  "0.0 INCH"
                  }
 }
+

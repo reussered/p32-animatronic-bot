@@ -1,5 +1,7 @@
-{
+﻿{
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "interface_type":  "I2C_DEVICE",
     "author":  "config/author.json",
     "pin_assignments":  {
@@ -9,3 +11,4 @@
     "relative_filename":  "config/components/interfaces/i2c_device_1.json",
     "interface_id":  "I2C_DEVICE_1"
 }
+

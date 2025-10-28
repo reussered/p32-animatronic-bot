@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/humanoid_head_assembly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                      "z":  "24.0 INCH",
                      "scaling_applies":  true
                  },
-    "hardware_reference":  "config/components/hardware/head_structural_assembly.json",
+    "contained_components": ["config/components/hardware/head_structural_assembly.json"],
     "facial_components":  [
                               "config/components/positioned/goblin_left_eye.json",
                               "config/components/positioned/goblin_right_eye.json",
@@ -115,3 +115,4 @@
                          },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

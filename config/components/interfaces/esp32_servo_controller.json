@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/esp32_servo_controller.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "ESP32_SERVO_CONTROLLER",
     "interface_type":  "PWM_SERVO_BANK",
@@ -77,3 +79,4 @@
                                       "debugging":  "STANDARD_PWM_SCOPE_ANALYSIS"
                                   }
 }
+

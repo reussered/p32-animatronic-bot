@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/max98357a_i2s_amplifier.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "MAX98357A_I2S_AMPLIFIER",
     "interface_type":  "I2S_AUDIO_AMPLIFIER",
@@ -349,3 +351,4 @@
                                                          }
                               }
 }
+

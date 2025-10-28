@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/sg90_micro_servo.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SG90_MICRO_SERVO",
     "interface_type":  "MICRO_SERVO_MOTOR",
@@ -299,3 +301,4 @@
                           "total_system_cost":  "LOW_FOR_MULTI_SERVO_FACIAL_ANIMATION"
                       }
 }
+

@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/spi_device_1.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SPI_DEVICE_1",
     "interface_type":  "SPI_DEVICE",
@@ -14,3 +16,4 @@
                           "manufacturer_variant":  "waveshare_gc9a01"
                       }
 }
+

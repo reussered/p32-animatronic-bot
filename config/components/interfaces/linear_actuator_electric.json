@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/linear_actuator_electric.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "LINEAR_ACTUATOR_ELECTRIC",
     "interface_type":  "LINEAR_ACTUATOR_CONTROLLER",
@@ -326,3 +328,4 @@
                                                         }
                              }
 }
+

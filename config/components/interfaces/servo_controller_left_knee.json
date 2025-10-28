@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/servo_controller_left_knee.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SERVO_CONTROLLER_LEFT_KNEE",
     "interface_type":  "SINGLE_SERVO_CONTROLLER",
@@ -34,3 +36,4 @@
                                  "impact_detection":  "ACCELEROMETER_BASED_SHOCK_MONITORING"
                              }
 }
+

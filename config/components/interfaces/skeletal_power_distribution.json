@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/skeletal_power_distribution.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SKELETAL_POWER_DISTRIBUTION",
     "interface_type":  "STRUCTURAL_POWER_BUS",
@@ -206,3 +208,4 @@
                                               }
                       }
 }
+

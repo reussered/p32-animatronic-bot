@@ -11,7 +11,9 @@
     "component_name":  "goblin_right_ear",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "hardware_reference":  "config/components/hardware/servo_sg90_micro.json",
+    "contained_components":  [
+        "config/components/hardware/servo_sg90_micro.json"
+    ],
     "software":  {
                      "act_function":  "goblin_right_ear_act",
                      "init_function":  "goblin_right_ear_init",

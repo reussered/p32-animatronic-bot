@@ -1,14 +1,16 @@
-{
+﻿{
   "relative_filename": "config/components/positioned/power_supply/temperature_monitor.json",
-  "version": "1.0.0", 
+  "version": "1.0.0",
   "author": "config/author.json",
+  "component_type": "POSITIONED_COMPONENT",
+  "hardware_type": "SENSOR",
   "component_name": "temperature_monitor",
   "display_name": "Power Supply Temperature Monitor",
   "description": "Temperature sensor for monitoring power supply module thermal conditions",
   "subsystem": "power_supply",
   "created": "2025-10-23",
   
-  "hardware_reference": "config/hardware/ds18b20_temperature_sensor.json",
+  "contained_components": ["config/hardware/ds18b20_temperature_sensor.json"],
   
   "positioning": {
     "coordinate_system": "power_module_3d",

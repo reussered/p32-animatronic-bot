@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/servo_controller_right_hip.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SERVO_CONTROLLER_RIGHT_HIP",
     "interface_type":  "MULTI_SERVO_CONTROLLER",
@@ -48,3 +50,4 @@
                                  "load_capacity_monitoring":  "150_KG_DYNAMIC_LIMIT"
                              }
 }
+

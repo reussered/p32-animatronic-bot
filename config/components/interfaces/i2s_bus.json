@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/i2s_bus.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "component_name":  "i2s_bus",
     "hardware_type": "BUS_INTERFACE",
@@ -59,3 +61,4 @@
     },
     "notes": "I2S bus 0 on ESP32. Shared pins (BCLK, WS) can be used by multiple devices. Data pins are unique per device."
 }
+

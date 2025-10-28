@@ -1,4 +1,4 @@
-{
+﻿{
     "component_type":  "POSITIONED_COMPONENT",
     "position":  {
                      "units":  "INCH",
@@ -11,7 +11,7 @@
     "component_name":  "torso_speaker",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "hardware_reference":  "config/components/hardware/servo_sg90_micro.json",
+    "contained_components": ["config/components/hardware/servo_sg90_micro.json"],
     "software":  {
                      "act_function":  "torso_speaker_act",
                      "init_function":  "torso_speaker_init",
@@ -19,3 +19,4 @@
                  },
     "relative_filename":  "config/components/positioned/torso_speaker.json"
 }
+

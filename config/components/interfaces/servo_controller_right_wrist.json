@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/servo_controller_right_wrist.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SERVO_CONTROLLER_RIGHT_WRIST",
     "interface_type":  "DUAL_SERVO_CONTROLLER",
@@ -26,3 +28,4 @@
                                  "position_limits":  "SOFTWARE_LIMITS_ACTIVE"
                              }
 }
+

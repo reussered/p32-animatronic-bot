@@ -4,7 +4,9 @@
     "author":  "config/author.json",
     "component_name":  "goblin_speaker",
     "subsystem":  "HEAD",
-    "hardware_reference":  "config/components/hardware/speaker.json",
+    "contained_components":  [
+        "config/components/hardware/speaker.json"
+    ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

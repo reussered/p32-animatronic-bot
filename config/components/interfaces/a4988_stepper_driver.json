@@ -1,6 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/a4988_stepper_driver.json",
     "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "A4988_STEPPER_DRIVER",
     "interface_type":  "STEPPER_MOTOR_DRIVER",
@@ -337,3 +339,4 @@
                                                          }
                              }
 }
+
