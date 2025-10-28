@@ -17,11 +17,10 @@
                                                   "spacing":  "1.1 INCH"
                                               }
                        },
-    "electrical_specs":  {
-                             "supply_voltage":  "3.3V",
-                             "interface":  "SPI",
-                             "current_consumption":  "50mA"
-                         },
+    "timing": {
+        "hitCount": 1,
+        "description": "Display updates every loop for smooth animation"
+    },
     "pin_mapping":  {
                         "description":  "GC9A01 displays have varying pin labels depending on manufacturer. See MakerNames.json for complete mapping.",
                         "manufacturer_mapping_reference":  "config/components/interfaces/MakerNames.json",

@@ -81,12 +81,20 @@ class P32ComponentGenerator:
                     component_data['config_file'] = component_ref
                     components.append(component_data)
                     
+                    # Load interface components based on interface_assignment (in JSON encounter order)
+                    if "interface_assignment" in component_data:
+                        interface_name = component_data["interface_assignment"]
+                        if interface_name == "SPI_DEVICE_1" or interface_name == "SPI_DEVICE_2":
+                            # Load SPI bus interface when encountered in JSON
+                            spi_bus_ref = "config/components/interfaces/spi_bus_vspi.json"
+                            components.extend(self._load_component_recursive(spi_bus_ref))
+                    
                     # Process includes_components (components this component depends on)
                     if "includes_components" in component_data.get("software", {}):
                         for included_ref in component_data["software"]["includes_components"]:
                             components.extend(self._load_component_recursive(included_ref))
                     
-                    # Recursively load nested contained_components if present (new wildcard parsing)
+                    # Recursively load nested contained_components if present (in JSON order)
                     if "contained_components" in component_data:
                         for nested_ref in component_data["contained_components"]:
                             components.extend(self._load_component_recursive(nested_ref))
@@ -128,7 +136,18 @@ class P32ComponentGenerator:
                 
                 # Recursively load contained_components within the subsystem (new wildcard parsing)
                 if "contained_components" in subsystem_data:
+                    # Separate interfaces from other components for prioritized loading
+                    interfaces = []
+                    other_components = []
+                    
                     for component_ref in subsystem_data["contained_components"]:
+                        if "interfaces/" in component_ref:
+                            interfaces.append(component_ref)
+                        else:
+                            other_components.append(component_ref)
+                    
+                    # Load interfaces first, then other components
+                    for component_ref in interfaces + other_components:
                         components.extend(self._load_component_recursive(component_ref))
                         
                 # Also check for legacy positioned_components (backward compatibility)
@@ -148,7 +167,7 @@ class P32ComponentGenerator:
         return f"{name}_{func_type}"
     
     def extract_component_info(self, components: List[Dict[str, Any]]) -> None:
-        """Extract component information and build function lists"""
+        """Extract component information and build function lists (preserves all traversal encounters)"""
         self.components = []
         self.init_functions = []
         self.act_functions = []
@@ -172,7 +191,7 @@ class P32ComponentGenerator:
                 "type": "system"
             })
         
-        # Process positioned components from JSON
+        # Process ALL positioned components from JSON (no deduplication - preserves traversal order)
         for component in components:
             comp_name = component.get("component_name", "unknown")
             # Default hitCount = 1 if not specified (executes every loop)
@@ -382,7 +401,7 @@ class P32ComponentGenerator:
         return "\n".join(content)
     
     def generate_cmake_files(self) -> None:
-        """Generate CMakeLists.txt with all component source files"""
+        """Generate CMakeLists.txt with all component source files (deduplicated)"""
         # Create CMake content for component sources
         cmake_content = [
             "# P32 Component Dispatch Tables - Auto-generated CMake",
@@ -391,27 +410,22 @@ class P32ComponentGenerator:
             "set(P32_COMPONENT_SOURCES"
         ]
         
-        # Add component source files
+        # Track seen component names to deduplicate source files
+        seen_components = set()
+        
+        # Add component source files (deduplicated)
         for comp in self.components:
-            if comp['type'] == 'system':
-                cmake_content.append(f"    components/{comp['name']}.cpp")
-            else:
-                cmake_content.append(f"    components/{comp['name']}.cpp")
+            comp_name = comp["name"]
+            if comp_name not in seen_components:
+                seen_components.add(comp_name)
+                if comp['type'] == 'system':
+                    cmake_content.append(f"    components/{comp_name}.src")
+                else:
+                    cmake_content.append(f"    components/{comp_name}.src")
         
         # Add dispatch table file
         cmake_content.extend([
-            "    component_tables.cpp",
-            ")",
-            "",
-            "# Add component source files to build",
-            "target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE",
-            "    ${P32_COMPONENT_SOURCES}",
-            ")",
-            "",
-            "# Component include directories",
-            "target_include_directories(${CMAKE_PROJECT_NAME}.elf PRIVATE",
-            "    include/components",
-            "    include",
+            "    component_tables.src",
             ")"
         ])
         
@@ -431,7 +445,7 @@ class P32ComponentGenerator:
 
         # Source files - only generate the dispatch table, not individual components
         source_files = [
-            ("component_tables.cpp", self.generate_unified_implementation())
+            ("component_tables.src", self.generate_unified_implementation())
         ]
 
         # Write unified header to include/
@@ -455,13 +469,13 @@ class P32ComponentGenerator:
         bot_config = self.load_bot_config(bot_name)
         print(f"Loaded bot config: {bot_config.get('bot_name', 'Unknown')}")
         
-        # Load positioned components
+        # Load positioned components (keep all traversal encounters)
         components = self.load_positioned_components(bot_config)
-        print(f"Found {len(components)} positioned components")
+        print(f"Found {len(components)} positioned components (all traversal encounters)")
         
-        # Extract component information
+        # Extract component information (preserves all traversal encounters for dispatch tables)
         self.extract_component_info(components)
-        print(f"Generated {len(self.components)} total components")
+        print(f"Generated {len(self.components)} total dispatch table entries (all traversal encounters)")
         
         # Write generated files
         self.write_files()

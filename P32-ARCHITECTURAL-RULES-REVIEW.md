@@ -76,6 +76,62 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
 
 - `goblin_full.json` → `goblin_head.json` → `left_eye.json`
 
+### Component Containment Hierarchy
+
+**CONTAINMENT TYPES:**
+
+1. **contained_components**: Direct child components loaded when parent initializes
+   - **Loading Order**: Components loaded in JSON array order during traversal
+   - **Use Case**: Physical sub-components, positioned elements, subsystem assemblies
+   - **Example**: `goblin_left_eye.json` contains `goblin_eye.json`
+
+2. **includes_components**: Dependency components loaded as requirements  
+   - **Loading Order**: Loaded immediately after parent during JSON traversal
+   - **Use Case**: Interfaces, drivers, shared libraries that component depends on
+   - **Example**: `gc9a01_display.json` includes `generic_spi_display.json`
+
+**INTERFACE ASSIGNMENT PROCESSING:**
+
+- **JSON Encounter Order**: `interface_assignment` processed when encountered in JSON traversal
+- **Implicit Loading**: Interface assignments cause corresponding interface components to be loaded
+- **SPI Mapping**: `"SPI_DEVICE_1"`/`"SPI_DEVICE_2"` → `spi_bus_vspi.json`
+- **WHY**: Maintains exact JSON-specified component relationships
+
+**LOADING BEHAVIOR:**
+
+- **MANDATORY**: Components loaded EXACTLY as encountered during JSON parsing
+- **MANDATORY**: Depth-first recursive traversal: parent → includes_components → interface_assignments → contained_components
+- **MANDATORY**: Dispatch tables preserve ALL traversal encounters (including duplicates when same component encountered multiple times)
+- **MANDATORY**: Component source files deduplicated (each .src/.hpp file included only once)
+- **MANDATORY**: Initialization order follows dispatch table order
+
+**COMPONENT LOADING SEQUENCE (MANDATORY):**
+
+When parsing a JSON component file:
+
+1. Process `includes_components` array in order → load each dependency
+2. Process `interface_assignment` field → load corresponding interface component
+3. Process `contained_components` array in order → recursively load each child
+
+**DISPATCH TABLE RULES (MANDATORY):**
+
+- **NO DEDUPLICATION**: Every component encounter during traversal gets an entry
+- **PRESERVE ORDER**: Tables reflect exact JSON parsing sequence
+- **ALLOW DUPLICATES**: Same component can appear multiple times if encountered multiple times
+
+**SOURCE FILE RULES (MANDATORY):**
+
+- **DEDUPLICATED**: Each component source file included exactly once
+- **BUILD UNIQUE**: No duplicate .src files in compilation
+- **HEADER UNIQUE**: No duplicate .hpp files in includes
+
+**CONTAINMENT RULES:**
+
+- **NEVER Direct Calls**: Contained components never call each other directly
+- **SharedMemory Only**: All inter-component communication via SharedMemory
+- **Interface Assignment**: Positioned components reference interfaces via `interface_assignment`
+- **Subsystem Boundaries**: Containment respects subsystem boundaries for multi-chip coordination
+
 ### JSON Config System
 
 - Reference other configs: `"author": "config/author.json"`

@@ -15,6 +15,10 @@
                              "interface":  "SPI",
                              "current_consumption":  "Variable"
                          },
+    "timing": {
+        "hitCount": 1,
+        "description": "Generic display driver updates every loop for smooth animation"
+    },
     "pin_mapping":  {
                         "description":  "Generic SPI display pins - configured by positioned components",
                         "generic_pins":  {
