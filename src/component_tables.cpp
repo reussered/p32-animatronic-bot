@@ -10,6 +10,7 @@
 #include "components/goblin_left_eye.hdr"
 #include "components/goblin_eye.hdr"
 #include "components/gc9a01.hdr"
+#include "components/spi_bus_vspi.hdr"
 #include "components/generic_spi_display.hdr"
 #include "components/goblin_right_eye.hdr"
 
@@ -23,12 +24,16 @@ esp_err_t (*initTable[TABLE_SIZE])(void) = {
     goblin_left_eye_init,
     goblin_eye_init,
     gc9a01_init,
+    spi_bus_vspi_init,
     generic_spi_display_init,
+    spi_bus_vspi_init,
     generic_spi_display_init,
     goblin_right_eye_init,
     goblin_eye_init,
     gc9a01_init,
+    spi_bus_vspi_init,
     generic_spi_display_init,
+    spi_bus_vspi_init,
     generic_spi_display_init
 };
 
@@ -42,13 +47,17 @@ void (*actTable[TABLE_SIZE])(void) = {
     goblin_left_eye_act,    // [2] Left eye display animation
     goblin_eye_act,    // [3] Shared goblin eye processing logic with palette and mood-based rendering
     gc9a01_act,    // [4] gc9a01 component
-    generic_spi_display_act,    // [5] generic_spi_display component
+    spi_bus_vspi_act,    // [5] ESP32 VSPI bus interface for SPI communication
     generic_spi_display_act,    // [6] generic_spi_display component
-    goblin_right_eye_act,    // [7] Right eye display with bird animation
-    goblin_eye_act,    // [8] Shared goblin eye processing logic with palette and mood-based rendering
-    gc9a01_act,    // [9] gc9a01 component
-    generic_spi_display_act,    // [10] generic_spi_display component
-    generic_spi_display_act     // [11] generic_spi_display component
+    spi_bus_vspi_act,    // [7] ESP32 VSPI bus interface for SPI communication
+    generic_spi_display_act,    // [8] generic_spi_display component
+    goblin_right_eye_act,    // [9] Right eye display with bird animation
+    goblin_eye_act,    // [10] Shared goblin eye processing logic with palette and mood-based rendering
+    gc9a01_act,    // [11] gc9a01 component
+    spi_bus_vspi_act,    // [12] ESP32 VSPI bus interface for SPI communication
+    generic_spi_display_act,    // [13] generic_spi_display component
+    spi_bus_vspi_act,    // [14] ESP32 VSPI bus interface for SPI communication
+    generic_spi_display_act     // [15] generic_spi_display component
 };
 
 // ============================================================================
@@ -61,11 +70,15 @@ uint32_t hitCountTable[TABLE_SIZE] = {
     1,    // [2] goblin_left_eye - every 1 loops
     1,    // [3] goblin_eye - every 1 loops
     1,    // [4] gc9a01 - every 1 loops
-    1,    // [5] generic_spi_display - every 1 loops
+    1,    // [5] spi_bus_vspi - every 1 loops
     1,    // [6] generic_spi_display - every 1 loops
-    60000,    // [7] goblin_right_eye - every 60000 loops
-    1,    // [8] goblin_eye - every 1 loops
-    1,    // [9] gc9a01 - every 1 loops
-    1,    // [10] generic_spi_display - every 1 loops
-    1     // [11] generic_spi_display - every 1 loops
+    1,    // [7] spi_bus_vspi - every 1 loops
+    1,    // [8] generic_spi_display - every 1 loops
+    60000,    // [9] goblin_right_eye - every 60000 loops
+    1,    // [10] goblin_eye - every 1 loops
+    1,    // [11] gc9a01 - every 1 loops
+    1,    // [12] spi_bus_vspi - every 1 loops
+    1,    // [13] generic_spi_display - every 1 loops
+    1,    // [14] spi_bus_vspi - every 1 loops
+    1     // [15] generic_spi_display - every 1 loops
 };
