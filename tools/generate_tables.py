@@ -401,33 +401,16 @@ class P32ComponentGenerator:
         return "\n".join(content)
     
     def generate_cmake_files(self) -> None:
-        """Generate CMakeLists.txt with all component source files (deduplicated)"""
+        """Generate CMakeLists.txt with component dispatch table only"""
         # Create CMake content for component sources
         cmake_content = [
             "# P32 Component Dispatch Tables - Auto-generated CMake",
-            "# Includes all component source files for build system",
+            "# Includes component dispatch table for build system",
             "",
-            "set(P32_COMPONENT_SOURCES"
-        ]
-        
-        # Track seen component names to deduplicate source files
-        seen_components = set()
-        
-        # Add component source files (deduplicated)
-        for comp in self.components:
-            comp_name = comp["name"]
-            if comp_name not in seen_components:
-                seen_components.add(comp_name)
-                if comp['type'] == 'system':
-                    cmake_content.append(f"    components/{comp_name}.src")
-                else:
-                    cmake_content.append(f"    components/{comp_name}.src")
-        
-        # Add dispatch table file
-        cmake_content.extend([
-            "    component_tables.src",
+            "set(P32_COMPONENT_SOURCES",
+            "    component_tables.cpp",
             ")"
-        ])
+        ]
         
         # Write CMake file
         cmake_file = self.output_dir / "p32_components.cmake"
@@ -445,7 +428,7 @@ class P32ComponentGenerator:
 
         # Source files - only generate the dispatch table, not individual components
         source_files = [
-            ("component_tables.src", self.generate_unified_implementation())
+            ("component_tables.cpp", self.generate_unified_implementation())
         ]
 
         # Write unified header to include/
