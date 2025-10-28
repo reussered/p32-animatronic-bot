@@ -8,6 +8,9 @@
 #ifdef SIMPLE_DISPLAY_TEST
 // For simple display test, use direct implementation
 extern "C" void simple_display_test_main(void);
+#elif defined(DUAL_EYE_DISPLAY_TEST)
+// For dual eye display test harness
+#include "dual_eye_display_test.hpp"
 #else
 #include "p32_component_registry.hpp"
 #endif
@@ -29,6 +32,9 @@ extern "C" void app_main(void)
 #ifdef SIMPLE_DISPLAY_TEST
     ESP_LOGI(TAG, "Starting P32 Simple Display Test");
     simple_display_test_main();
+#elif defined(DUAL_EYE_DISPLAY_TEST)
+    ESP_LOGI(TAG, "Starting P32 Dual Eye Display Test Harness");
+    dual_eye_display_test_start();
 #else
     ESP_LOGI(TAG, "Starting P32 Animatronic Bot - Component System");
 
