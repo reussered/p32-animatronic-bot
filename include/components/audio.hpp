@@ -1,27 +1,7 @@
-#ifndef AUDIO_HPP
-#define AUDIO_HPP
+#ifndef COMPONENTS_audio_HPP
+#define COMPONENTS_audio_HPP
 
-/**
- * @file audio.hpp
- * @brief Audio output processing
- * @author Auto-generated from JSON specification
- */
+#include "components/audio.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_audio_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize audio component
- * Called once during system startup
- */
-void audio_init(void);
-
-/**
- * @brief Execute audio component logic
- * Called every loop iteration based on hitCount
- */
-void audio_act(void);
-
-#endif // AUDIO_HPP

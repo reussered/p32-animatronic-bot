@@ -25,7 +25,25 @@ static generic_display_config_t display_config = {0};
 static uint8_t* display_frame_buffer = nullptr;
 
 /**
- * @brief Initialize generic SPI display with configuration
+ * @brief Initialize generic SPI display with default configuration
+ * Called by dispatch table with no parameters
+ */
+esp_err_t generic_spi_display_init(void) {
+    // Default configuration for GC9A01 circular display
+    generic_display_config_t default_config = {
+        .width = 240,
+        .height = 240,
+        .color_depth = 16,  // RGB565
+        .frame_size = 0     // Will be calculated
+    };
+
+    return generic_spi_display_init(&default_config);
+}
+
+/**
+ * @brief Initialize generic SPI display with custom configuration
+ * @param config Pointer to display configuration
+ * @return ESP_OK on success, ESP_FAIL on error
  */
 esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
     if (config == nullptr) {

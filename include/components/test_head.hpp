@@ -1,16 +1,7 @@
-#ifndef TEST_HEAD_HPP
-#define TEST_HEAD_HPP
+#ifndef COMPONENTS_test_head_HPP
+#define COMPONENTS_test_head_HPP
 
-#include "esp_err.h"
+#include "components/test_head.hdr"
 
-// P32 Component: test_head
-// Test head subsystem with dual displays for hardware validation
-// ESP32-S3 embedded interface
+#endif // COMPONENTS_test_head_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t test_head_init(void);
-
-// Component action function - NO ARGUMENTS
-void test_head_act(void);
-
-#endif // TEST_HEAD_HPP

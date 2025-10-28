@@ -200,7 +200,93 @@ The P32 component generation system automatically detects component composition 
 4. Handle duplicate component detection across composition tree
 5. Create proper include statements for generated source code
 
-**Example**: `goblin_head.json` contains multiple `*_components` fields that automatically compose the complete head subsystem from individual positioned components.
+## Bus Interface Pin Requirements
+
+### Bus Types and Pin Assignment
+
+The P32 system supports multiple bus interface types for hardware communication. Each bus type has specific pin requirements that are validated during code generation to ensure compatibility with the target ESP32 chip.
+
+#### Supported Bus Types
+
+1. **SPI Bus** (`bus_type: "SPI"`)
+   - **Shared Pins**: SCLK (bit clock), MISO (master in, slave out)
+   - **Unique Pins**: CS (chip select), MOSI (master out, slave in) per device
+   - **Example**: `spi_bus.json` - Generic SPI bus interface
+
+2. **I2S Bus** (`bus_type: "I2S"`)
+   - **Shared Pins**: BCLK (bit clock), WS (word select)
+   - **Unique Pins**: DATA (data line) per device/direction
+   - **Example**: `i2s_bus.json` - Generic I2S bus interface for audio
+
+3. **I2C Bus** (`bus_type: "I2C"`)
+   - **Shared Pins**: SCL (serial clock), SDA (serial data)
+   - **Unique Pins**: None (address-based multiplexing)
+   - **Note**: Devices share SDA/SCL lines, addressed via software
+
+4. **ADC Bus** (`bus_type: "ADC"`)
+   - **Shared Pins**: None
+   - **Unique Pins**: ADC input pins per channel
+   - **Note**: Analog-to-digital conversion channels
+
+5. **PWM Bus** (`bus_type: "PWM"`)
+   - **Shared Pins**: None
+   - **Unique Pins**: PWM output pins per channel
+   - **Note**: Pulse-width modulation for servo/LED control
+
+6. **GPIO Pairs** (`bus_type: "GPIO_PAIR"`)
+   - **Shared Pins**: None
+   - **Unique Pins**: 2 GPIO pins per pair (input/output)
+   - **Note**: Simple digital I/O pairs with no shared resources
+
+#### Pin Requirements JSON Structure
+
+Bus interface components must include a `pin_requirements` object:
+
+```json
+{
+  "pin_requirements": {
+    "shared_pins_needed": [
+      {
+        "function": "SPI_SCLK",
+        "count": 1,
+        "description": "SPI serial clock"
+      }
+    ],
+    "unique_pins_needed": [
+      {
+        "function": "SPI_CS",
+        "count": 1,
+        "description": "Chip select (unique per device)"
+      }
+    ]
+  }
+}
+```
+
+#### Pin Validation Algorithm
+
+During code generation, the system validates total pin requirements against the ESP32 chip's available pins:
+
+1. **Count Bus Encounters**: For each component loop iteration, count how many times each bus type is encountered
+2. **Calculate Shared Pins**: Shared pins are assigned once per bus type (e.g., SPI SCLK assigned once for all SPI devices)
+3. **Calculate Unique Pins**: Unique pins are assigned per device (e.g., SPI CS pin per SPI device)
+4. **Total Pins Needed**: `shared_pins + (num_devices × unique_pins_per_device)`
+5. **Validate Against Chip**: Ensure total pins ≤ chip's `exposed_pins` array length
+6. **Runtime Simulation**: Pin assignment simulates `active_pin_index` resetting per component loop
+
+**Example Calculation**:
+- Goblin head: 5 SPI devices
+- SPI bus: 2 shared pins (SCLK, MISO) + 2 unique pins per device (CS, MOSI)
+- Total pins: 2 + (5 × 2) = 12 pins
+- ESP32-S3 has 45 exposed pins → Validation passes
+
+### Hardware Validation Rules
+
+- All pin assignments must be within the chip's `exposed_pins` array
+- Shared pins are allocated once per bus type across all components
+- Unique pins are allocated per device instance
+- Pin conflicts are detected during generation, not runtime
+- GPIO pairs require exactly 2 unique pins with no shared resources
 
 ## Files Updated So Far
 - `goblineye_left.json` - left_eye, hitCount: 5

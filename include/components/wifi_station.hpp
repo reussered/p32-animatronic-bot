@@ -1,27 +1,7 @@
-#ifndef WIFI_STATION_HPP
-#define WIFI_STATION_HPP
+#ifndef COMPONENTS_wifi_station_HPP
+#define COMPONENTS_wifi_station_HPP
 
-/**
- * @file wifi_station.hpp
- * @brief WiFi station connectivity for cloud integration and remote control
- * @author Auto-generated from JSON specification
- */
+#include "components/wifi_station.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_wifi_station_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize wifi_station component
- * Called once during system startup
- */
-void wifi_station_init(void);
-
-/**
- * @brief Execute wifi_station component logic
- * Called every loop iteration based on hitCount
- */
-void wifi_station_act(void);
-
-#endif // WIFI_STATION_HPP

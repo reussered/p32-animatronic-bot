@@ -173,6 +173,7 @@
                      "init_function":  "gc9a01_init",
                      "act_function":  "gc9a01_act",
                      "includes_components":  [
+                         "config/components/interfaces/spi_bus_vspi.json",
                          "config/components/hardware/generic_spi_display.json"
                      ]
                  },

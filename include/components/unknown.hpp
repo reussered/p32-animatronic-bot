@@ -1,15 +1,7 @@
-#ifndef P32_UNKNOWN_HPP
-#define P32_UNKNOWN_HPP
+#ifndef COMPONENTS_unknown_HPP
+#define COMPONENTS_unknown_HPP
 
-#include "esp_err.h"
+#include "components/unknown.hdr"
 
-// Component: unknown
-// Auto-generated header file
+#endif // COMPONENTS_unknown_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t unknown_init(void);
-
-// Component action function - NO ARGUMENTS  
-void unknown_act(void);
-
-#endif // P32_UNKNOWN_HPP

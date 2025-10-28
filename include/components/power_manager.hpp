@@ -1,27 +1,7 @@
-#ifndef POWER_MANAGER_HPP
-#define POWER_MANAGER_HPP
+#ifndef COMPONENTS_power_manager_HPP
+#define COMPONENTS_power_manager_HPP
 
-/**
- * @file power_manager.hpp
- * @brief Battery monitoring and power distribution control
- * @author Auto-generated from JSON specification
- */
+#include "components/power_manager.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_power_manager_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize power_manager component
- * Called once during system startup
- */
-void power_manager_init(void);
-
-/**
- * @brief Execute power_manager component logic
- * Called every loop iteration based on hitCount
- */
-void power_manager_act(void);
-
-#endif // POWER_MANAGER_HPP

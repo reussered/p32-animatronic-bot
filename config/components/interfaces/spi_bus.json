@@ -1,0 +1,76 @@
+{
+    "relative_filename":  "config/components/interfaces/spi_bus.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "spi_bus",
+    "hardware_type": "BUS_INTERFACE",
+    "bus_type": "SPI",
+    "bus_name": "VSPI",
+    "description": "ESP32 VSPI bus interface for SPI communication",
+    "pin_requirements": {
+        "shared_pins_needed": [
+            {
+                "function": "SPI_SCLK",
+                "count": 1,
+                "description": "SPI clock signal"
+            },
+            {
+                "function": "SPI_Q",
+                "count": 1,
+                "description": "SPI MISO (Master In Slave Out)"
+            }
+        ],
+        "unique_pins_needed": [
+            {
+                "function": "SPI_CS",
+                "count": 1,
+                "description": "SPI chip select (unique per device)"
+            },
+            {
+                "function": "SPI_HD",
+                "count": 1,
+                "description": "SPI MOSI (Master Out Slave In) or hold signal"
+            }
+        ]
+    },
+    "component_type":  "INTERFACE_BUS",
+    "interface_id":  "SPI_BUS",
+    "interface_type":  "SPI_BUS",
+    "timing":  {
+                   "hitCount":  1
+               },
+    "software":  {
+                     "init_function":  "spi_bus_init",
+                     "act_function":  "spi_bus_act"
+                 },
+    "pins":  {
+                 "data_output":  12,
+                 "data_input":  13,
+                 "clock":  14
+             },
+    "shared_control_pins":  {
+                               "reset":  26
+                           },
+    "unique_device_pins":  {
+                              "chip_select_1":  15,
+                              "data_command_1":  27,
+                              "chip_select_2":  32,
+                              "data_command_2":  33,
+                              "chip_select_3":  4,
+                              "data_command_3":  16,
+                              "chip_select_4":  17,
+                              "data_command_4":  5
+                          },
+    "bus_config":  {
+                       "frequency":  "10000000",
+                       "mode":  0
+                   },
+    "hardware": {
+        "esp32_specific": {
+            "host_device": "SPI2_HOST",
+            "dma_channel": 1,
+            "max_transfer_size": 4092
+        }
+    },
+    "notes": "VSPI bus on ESP32. Shared pins (SCLK, MISO) can be used by multiple devices. Unique pins (CS, MOSI) are per-device."
+}

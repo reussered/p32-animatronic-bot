@@ -1,10 +1,7 @@
-#ifndef TORSO_SPEAKER_HPP
-#define TORSO_SPEAKER_HPP
+#ifndef COMPONENTS_torso_speaker_HPP
+#define COMPONENTS_torso_speaker_HPP
 
-#include "esp_err.h"
+#include "components/torso_speaker.hdr"
 
-// Torso speaker component functions
-esp_err_t torso_speaker_init(void);
-void torso_speaker_act(void);
+#endif // COMPONENTS_torso_speaker_HPP
 
-#endif // TORSO_SPEAKER_HPP

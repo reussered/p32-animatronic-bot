@@ -1,15 +1,7 @@
-#ifndef P32_GOBLIN_RIGHT_EYE_HPP
-#define P32_GOBLIN_RIGHT_EYE_HPP
+#ifndef COMPONENTS_goblin_right_eye_HPP
+#define COMPONENTS_goblin_right_eye_HPP
 
-#include "esp_err.h"
+#include "components/goblin_right_eye.hdr"
 
-// Component: goblin_right_eye
-// Auto-generated header file
+#endif // COMPONENTS_goblin_right_eye_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t goblin_right_eye_init(void);
-
-// Component action function - NO ARGUMENTS  
-void goblin_right_eye_act(void);
-
-#endif // P32_GOBLIN_RIGHT_EYE_HPP

@@ -1,15 +1,7 @@
-#ifndef P32_HEARTBEAT_HPP
-#define P32_HEARTBEAT_HPP
+#ifndef COMPONENTS_heartbeat_HPP
+#define COMPONENTS_heartbeat_HPP
 
-#include "esp_err.h"
+#include "components/heartbeat.hdr"
 
-// Component: heartbeat
-// Auto-generated header file
+#endif // COMPONENTS_heartbeat_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t heartbeat_init(void);
-
-// Component action function - NO ARGUMENTS  
-void heartbeat_act(void);
-
-#endif // P32_HEARTBEAT_HPP

@@ -1,27 +1,7 @@
-#ifndef GOBLIN_PERSONALITY_HPP
-#define GOBLIN_PERSONALITY_HPP
+#ifndef COMPONENTS_goblin_personality_HPP
+#define COMPONENTS_goblin_personality_HPP
 
-/**
- * @file goblin_personality.hpp
- * @brief Goblin family personality traits - mischievous, aggressive, curious
- * @author Auto-generated from JSON specification
- */
+#include "components/goblin_personality.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_goblin_personality_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize goblin_personality component
- * Called once during system startup
- */
-void goblin_personality_init(void);
-
-/**
- * @brief Execute goblin_personality component logic
- * Called every loop iteration based on hitCount
- */
-void goblin_personality_act(void);
-
-#endif // GOBLIN_PERSONALITY_HPP

@@ -1,27 +1,7 @@
-#ifndef SPEAKER_HPP
-#define SPEAKER_HPP
+#ifndef COMPONENTS_speaker_HPP
+#define COMPONENTS_speaker_HPP
 
-/**
- * @file speaker.hpp
- * @brief Audio output processing - goblin variant with guttural sound profile
- * @author Auto-generated from JSON specification
- */
+#include "components/speaker.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_speaker_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize speaker component
- * Called once during system startup
- */
-esp_err_t speaker_init(void);
-
-/**
- * @brief Execute speaker component logic
- * Called every loop iteration based on hitCount
- */
-void speaker_act(void);
-
-#endif // SPEAKER_HPP

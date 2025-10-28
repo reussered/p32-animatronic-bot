@@ -1,27 +1,7 @@
-#ifndef SPINE_LOWER_HPP
-#define SPINE_LOWER_HPP
+#ifndef COMPONENTS_spine_lower_HPP
+#define COMPONENTS_spine_lower_HPP
 
-/**
- * @file spine_lower.hpp
- * @brief Lower spine flexion/extension control
- * @author Auto-generated from JSON specification
- */
+#include "components/spine_lower.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_spine_lower_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize spine_lower component
- * Called once during system startup
- */
-void spine_lower_init(void);
-
-/**
- * @brief Execute spine_lower component logic
- * Called every loop iteration based on hitCount
- */
-void spine_lower_act(void);
-
-#endif // SPINE_LOWER_HPP

@@ -1,0 +1,473 @@
+{
+    "relative_filename": "config/components/hardware/esp32_s3_devkit_chip.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_name": "esp32_s3_devkit",
+    "hardware_type": "MICROCONTROLLER_CHIP",
+    "chip_family": "ESP32_S3",
+    "board_name": "ESP32-S3-DevKitC-1",
+    "total_sram_kb": 512,
+    "psram_kb": 0,
+    "flash_mb": 16,
+    "exposed_pins": [
+        {
+            "name": "GPIO0",
+            "functions": ["BOOT", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": false,
+            "boot_function": true,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO1",
+            "functions": ["UART_TX", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": false,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO2",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO3",
+            "functions": ["UART_RX", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": false,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO4",
+            "functions": ["ADC1_CH3", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 3,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO5",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO6",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO7",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO8",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO9",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO10",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO11",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO12",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO13",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO14",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO15",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO16",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO17",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO18",
+            "functions": ["SPI_SCLK", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO19",
+            "functions": ["SPI_Q", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO20",
+            "functions": ["SPI_CS", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO21",
+            "functions": ["SPI_HD", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO26",
+            "functions": ["DAC1", "ADC1_CH9", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": false,
+            "boot_function": false,
+            "adc_channel": 9,
+            "dac_channel": 1
+        },
+        {
+            "name": "GPIO27",
+            "functions": ["DAC2", "ADC1_CH10", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": false,
+            "boot_function": false,
+            "adc_channel": 10,
+            "dac_channel": 2
+        },
+        {
+            "name": "GPIO28",
+            "functions": ["ADC1_CH6", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 6,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO29",
+            "functions": ["ADC1_CH7", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 7,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO30",
+            "functions": ["ADC1_CH4", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 4,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO31",
+            "functions": ["ADC1_CH5", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 5,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO32",
+            "functions": ["ADC1_CH8", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 8,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO33",
+            "functions": ["ADC1_CH3", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 3,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO34",
+            "functions": ["ADC1_CH2", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 2,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO35",
+            "functions": ["ADC1_CH1", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 1,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO36",
+            "functions": ["ADC1_CH0", "GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": 0,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO37",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO38",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO39",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO40",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO41",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO42",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO43",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO44",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO45",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO46",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO47",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        },
+        {
+            "name": "GPIO48",
+            "functions": ["GPIO"],
+            "voltage": 3.3,
+            "type": "GPIO",
+            "can_be_shared": true,
+            "boot_function": false,
+            "adc_channel": null,
+            "dac_channel": null
+        }
+    ],
+    "power": {
+        "voltage_v": 3.3,
+        "idle_current_ma": 40,
+        "max_current_ma": 500,
+        "power_w": 1.65
+    },
+    "price_usd": 45.99,
+    "price_last_updated": "2025-10-28T00:00:00Z",
+    "notes": "ESP32-S3-DevKitC-1 development board with 45 GPIO pins, 512KB SRAM, 16MB flash. No PSRAM."
+}

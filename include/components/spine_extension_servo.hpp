@@ -1,23 +1,7 @@
-#ifndef SPINE_EXTENSION_SERVO_HPP
-#define SPINE_EXTENSION_SERVO_HPP
+#ifndef COMPONENTS_spine_extension_servo_HPP
+#define COMPONENTS_spine_extension_servo_HPP
 
-/**
- * @file spine_extension_servo.hpp
- * @brief Spine extension servo component for torso straightening
- * @author P32 Animatronic Bot Project
- */
+#include "components/spine_extension_servo.hdr"
 
-#include "esp_err.h"
+#endif // COMPONENTS_spine_extension_servo_HPP
 
-/**
- * @brief Initialize spine extension servo component
- * @return ESP_OK on success, esp_err_t error code on failure
- */
-esp_err_t spine_extension_servo_init(void);
-
-/**
- * @brief Execute spine extension servo component logic
- */
-void spine_extension_servo_act(void);
-
-#endif // SPINE_EXTENSION_SERVO_HPP

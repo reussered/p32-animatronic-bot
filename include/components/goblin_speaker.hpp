@@ -1,15 +1,7 @@
-#ifndef P32_GOBLIN_SPEAKER_HPP
-#define P32_GOBLIN_SPEAKER_HPP
+#ifndef COMPONENTS_goblin_speaker_HPP
+#define COMPONENTS_goblin_speaker_HPP
 
-#include "esp_err.h"
+#include "components/goblin_speaker.hdr"
 
-// Component: goblin_speaker
-// Auto-generated header file
+#endif // COMPONENTS_goblin_speaker_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t goblin_speaker_init(void);
-
-// Component action function - NO ARGUMENTS  
-void goblin_speaker_act(void);
-
-#endif // P32_GOBLIN_SPEAKER_HPP

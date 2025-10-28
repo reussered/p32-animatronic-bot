@@ -1,23 +1,7 @@
-#ifndef WAIST_ROTATION_SERVO_HPP
-#define WAIST_ROTATION_SERVO_HPP
+#ifndef COMPONENTS_waist_rotation_servo_HPP
+#define COMPONENTS_waist_rotation_servo_HPP
 
-/**
- * @file waist_rotation_servo.hpp
- * @brief Waist rotation servo component for torso twisting
- * @author P32 Animatronic Bot Project
- */
+#include "components/waist_rotation_servo.hdr"
 
-#include "esp_err.h"
+#endif // COMPONENTS_waist_rotation_servo_HPP
 
-/**
- * @brief Initialize waist rotation servo component
- * @return ESP_OK on success, esp_err_t error code on failure
- */
-esp_err_t waist_rotation_servo_init(void);
-
-/**
- * @brief Execute waist rotation servo component logic
- */
-void waist_rotation_servo_act(void);
-
-#endif // WAIST_ROTATION_SERVO_HPP

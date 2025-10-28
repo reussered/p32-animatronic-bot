@@ -1,27 +1,7 @@
-#ifndef MOUTH_HPP
-#define MOUTH_HPP
+#ifndef COMPONENTS_mouth_HPP
+#define COMPONENTS_mouth_HPP
 
-/**
- * @file mouth.hpp
- * @brief Mouth display animation - goblin variant with wide grin expressions
- * @author Auto-generated from JSON specification
- */
+#include "components/mouth.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_mouth_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize mouth component
- * Called once during system startup
- */
-void mouth_init(void);
-
-/**
- * @brief Execute mouth component logic
- * Called every loop iteration based on hitCount
- */
-void mouth_act(void);
-
-#endif // MOUTH_HPP

@@ -18,6 +18,14 @@ class P32ComponentGenerator:
         self.components = []
         self.init_functions = []
         self.act_functions = []
+        self.seen_components = set()  # Track components we've seen for deduplication
+        self.component_configs = {}   # Store component configs for struct generation
+        self.current_subsystem = "unknown"  # Current subsystem context
+        self.current_component = None  # Current component being processed
+        self.is_bot_level = True  # Flag to track if we're processing the root bot file
+        self.controller_chip = None  # ESP32 chip specification
+        self.used_pins = set()  # Track pins that have been assigned
+        self.bus_assignments = {}  # Track pin assignments for buses
         
     def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
         """Load bot configuration from JSON file"""
@@ -166,65 +174,122 @@ class P32ComponentGenerator:
         name = component_name.lower().replace(' ', '_').replace('-', '_')
         return f"{name}_{func_type}"
     
-    def extract_component_info(self, components: List[Dict[str, Any]]) -> None:
-        """Extract component information and build function lists (preserves all traversal encounters)"""
-        self.components = []
-        self.init_functions = []
-        self.act_functions = []
-        
-        # Add system-level components (always present)
-        system_components = [
-            {"name": "heartbeat", "hitCount": 1, "description": "System heartbeat"},
-            {"name": "network_monitor", "hitCount": 1, "description": "Network monitoring and loop timing"}
-        ]
-        
-        for comp in system_components:
-            init_func = self.generate_function_name(comp["name"], "init")
-            act_func = self.generate_function_name(comp["name"], "act")
+    def traverse_json_for_components(self, json_data: Any) -> None:
+        """Streaming JSON parser following component references only (no object hierarchy traversal)"""
+        if isinstance(json_data, dict):
+            for key, value in json_data.items():
+                if key == 'controller':
+                    # Set subsystem context to ESP32 chip type
+                    self.current_subsystem = str(value)
+                    print(f"DEBUG: Set subsystem context to: {self.current_subsystem}")
+                elif key in ['components', 'contained_components', 'includes_components'] or (key == 'subsystem_assemblies' and self._is_bot_level()):
+                    # Process component reference(s) - recurse into component files
+                    # contained_components is treated same as components for subsystems
+                    # includes_components is treated same as components for dependencies
+                    # subsystem_assemblies is treated same as components at bot level
+                    self._process_component_references(value)
+                elif key == 'software' and isinstance(value, dict):
+                    # Special handling for software object - check for includes_components
+                    if 'includes_components' in value:
+                        self._process_component_references(value['includes_components'])
+                    # Continue processing other software keys
+                    self.traverse_json_for_components(value)
+                else:
+                    # Process other key-value pairs (extract configuration data)
+                    self._process_key_value_pair(key, value)
+        elif isinstance(json_data, list):
+            # Handle array values (like components arrays)
+            for item in json_data:
+                if isinstance(item, str):
+                    # String in array might be component reference
+                    self._process_potential_component_reference(item)
+                else:
+                    # For non-string items in arrays, check if they're objects with components
+                    self.traverse_json_for_components(item)
+    
+    def _process_key_value_pair(self, key: str, value: Any) -> None:
+        """Process a key-value pair for configuration data extraction"""
+        # For now, just log - in full implementation this would extract
+        # configuration data for the current component
+        if hasattr(self, 'current_component') and self.current_component:
+            print(f"DEBUG: Processing config key '{key}' for component '{self.current_component}'")
+    
+    def _is_bot_level(self) -> bool:
+        """Check if we're currently processing the root bot level JSON"""
+        return self.is_bot_level
+    
+    def _process_component_references(self, component_refs: Any) -> None:
+        """Process component reference(s) - can be string or array"""
+        if isinstance(component_refs, str):
+            # Single component reference
+            self._process_single_component(component_refs)
+        elif isinstance(component_refs, list):
+            # Array of component references
+            for ref in component_refs:
+                if isinstance(ref, str):
+                    self._process_single_component(ref)
+    
+    def _process_single_component(self, component_ref: str) -> None:
+        """Process a single component reference"""
+        if not component_ref or not isinstance(component_ref, str):
+            return
             
-            self.components.append({
-                "name": comp["name"],
-                "init_func": init_func,
-                "act_func": act_func,
-                "hitCount": comp["hitCount"],
-                "description": comp["description"],
-                "type": "system"
-            })
+        # Remove 'config/' prefix if present
+        clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
+        component_file = self.config_dir / clean_ref
         
-        # Process ALL positioned components from JSON (no deduplication - preserves traversal order)
-        for component in components:
-            comp_name = component.get("component_name", "unknown")
-            # Default hitCount = 1 if not specified (executes every loop)
-            timing = component.get("timing", {})
-            hit_count = timing.get("hitCount")
-            if hit_count is None:
-                print(f"Warning: Component '{comp_name}' has no hitCount defined, defaulting to 1 (every loop)")
-                hit_count = 1
-            description = component.get("description", f"{comp_name} component")
-            
-            # Check for explicit function declarations first
-            function_declarations = component.get("function_declarations", {})
-            if function_declarations:
-                init_func = function_declarations.get("init_function")
-                act_func = function_declarations.get("act_function")
-                if not init_func or not act_func:
-                    print(f"Warning: Incomplete function declarations in {comp_name}")
-                    init_func = self.generate_function_name(comp_name, "init")
-                    act_func = self.generate_function_name(comp_name, "act")
-            else:
-                # Fall back to auto-generated names
+        if component_file.exists():
+            print(f"DEBUG: Processing component: {component_file}")
+            # When processing component files, we're no longer at bot level
+            was_bot_level = self.is_bot_level
+            self.is_bot_level = False
+            try:
+                with open(component_file, 'r', encoding='ascii') as f:
+                    component_data = json.load(f)
+                    
+                comp_name = component_data.get("component_name", "unknown")
+                hit_count = component_data.get("timing", {}).get("hitCount", 1)
+                
+                # Set current component context for configuration processing
+                self.current_component = comp_name
+                
+                # Always add to dispatch tables (no deduplication)
                 init_func = self.generate_function_name(comp_name, "init")
                 act_func = self.generate_function_name(comp_name, "act")
-            
-            self.components.append({
-                "name": comp_name,
-                "init_func": init_func,
-                "act_func": act_func,
-                "hitCount": hit_count,
-                "description": description,
-                "type": "positioned",
-                "config": component
-            })
+                
+                self.components.append({
+                    "name": comp_name,
+                    "init_func": init_func,
+                    "act_func": act_func,
+                    "hitCount": hit_count,
+                    "description": component_data.get("description", f"{comp_name} component"),
+                    "type": "traversed",
+                    "config": component_data,
+                    "subsystem": self.current_subsystem
+                })
+                
+                # Generate configuration struct only for first encounter
+                if comp_name not in self.seen_components:
+                    self.seen_components.add(comp_name)
+                    self._generate_component_config_struct(comp_name, component_data)
+                    print(f"DEBUG: First encounter of component: {comp_name}")
+                
+                # Recursively process this component's "components" key
+                self.traverse_json_for_components(component_data)
+                    
+            except json.JSONDecodeError as e:
+                print(f"ERROR: Invalid JSON in {component_file}: {e}")
+            except Exception as e:
+                print(f"ERROR: Failed to process {component_file}: {e}")
+        else:
+            print(f"Warning: Component file not found: {component_file}")
+    
+    def _generate_component_config_struct(self, comp_name: str, component_data: Dict[str, Any]) -> None:
+        """Generate C++ struct for component configuration mirroring JSON hierarchy"""
+        # This is a placeholder - full implementation would recursively generate
+        # nested structs based on the JSON structure
+        # For now, we'll store the data for later use
+        pass
     
     def generate_unified_header(self) -> str:
         """Generate unified p32_component_registry.hpp header file content"""
@@ -281,7 +346,7 @@ class P32ComponentGenerator:
         # Include individual component headers (RULE 5 compliance)
         includes = set()
         for comp in self.components:
-            include_file = f'"components/{comp["name"]}.hpp"'
+            include_file = f'"components/{comp["name"]}.hdr"'
             if include_file not in includes:
                 content.append(f"#include {include_file}")
                 includes.add(include_file)
@@ -335,6 +400,214 @@ class P32ComponentGenerator:
         ])
 
         return "\n".join(content)
+    
+    def load_controller_chip_spec(self, chip_name: str) -> Dict[str, Any]:
+        """Load ESP32 chip specification for pin assignment"""
+        chip_file = self.config_dir / "components" / "hardware" / f"{chip_name}_chip.json"
+        if not chip_file.exists():
+            print(f"Warning: Chip spec not found: {chip_file}, using default ESP32-S3")
+            chip_file = self.config_dir / "components" / "hardware" / "esp32_s3_devkit_chip.json"
+        
+        if chip_file.exists():
+            with open(chip_file, 'r') as f:
+                chip_data = json.load(f)
+                print(f"DEBUG: Loaded chip spec: {chip_data.get('component_name', 'unknown')}")
+                return chip_data
+        else:
+            print(f"ERROR: No chip specification found for {chip_name}")
+            return None
+    
+    def assign_pins_to_buses(self) -> bool:
+        """Validate pin assignment by simulating the runtime component loop pin assignment process"""
+        if not self.controller_chip:
+            print("Warning: No controller chip loaded, skipping pin validation")
+            return True
+        
+        chip_pins = self.controller_chip.get("exposed_pins", [])
+        print(f"DEBUG: Validating pins for {len(chip_pins)} available pins on {self.controller_chip.get('component_name', 'unknown')}")
+        
+        # Count how many times each bus appears in the component list
+        bus_encounter_counts = {}
+        for comp in self.components:
+            comp_data = comp.get("config", {})
+            bus_type = comp_data.get("bus_type")
+            if bus_type:
+                bus_name = comp.get("name", "unknown")
+                bus_encounter_counts[bus_name] = bus_encounter_counts.get(bus_name, 0) + 1
+        
+        # Simulate runtime pin assignment process
+        active_pin_index = 0  # Resets every time through component loop
+        bus_shared_assigned = {}  # Track which buses have had their shared pins assigned
+        max_pin_index = 0
+        
+        for comp in self.components:
+            comp_data = comp.get("config", {})
+            comp_name = comp.get("name", "unknown")
+            
+            # Check if this is a bus component
+            bus_type = comp_data.get("bus_type")
+            if bus_type:
+                bus_name = comp_name
+                pin_reqs = comp_data.get("pin_requirements", {})
+                
+                # First encounter with this bus: assign shared pins
+                if bus_name not in bus_shared_assigned:
+                    shared_needed = pin_reqs.get("shared_pins_needed", [])
+                    pins_assigned = len(shared_needed)
+                    active_pin_index += pins_assigned
+                    bus_shared_assigned[bus_name] = True
+                    
+                    print(f"DEBUG: Bus {bus_name} assigned {pins_assigned} shared pins, active_pin_index now {active_pin_index}")
+                
+                # Each encounter beyond the first represents a device using unique pins
+                else:
+                    unique_needed = pin_reqs.get("unique_pins_needed", [])
+                    pins_assigned = len(unique_needed)
+                    if pins_assigned == 0:
+                        # If no pin requirements specified, assume 1 pin (CS) for SPI devices
+                        pins_assigned = 1
+                    
+                    active_pin_index += pins_assigned
+                    
+                    print(f"DEBUG: Additional {bus_name} encounter (device) assigned {pins_assigned} unique pins, active_pin_index now {active_pin_index}")
+            
+            # Track the maximum pin index reached
+            max_pin_index = max(max_pin_index, active_pin_index)
+        
+        print(f"DEBUG: Bus encounter counts: {bus_encounter_counts}")
+        print(f"DEBUG: Maximum pin index reached: {max_pin_index}")
+        
+        # Validate against available pins
+        if max_pin_index > len(chip_pins):
+            print(f"ERROR: Insufficient pins! Chip has {len(chip_pins)} pins but pin assignment reached index {max_pin_index}")
+            self._suggest_alternative_chips(max_pin_index)
+            return False
+        
+        print(f"SUCCESS: Pin validation passed - max pin index {max_pin_index}, {len(chip_pins)} pins available")
+        return True
+    
+    def _suggest_alternative_chips(self, pins_needed: int) -> None:
+        """Suggest alternative ESP32 chips that have enough pins"""
+        chip_options = [
+            {"name": "esp32_s3_devkit", "pins": 45, "price": 45.99},
+            {"name": "esp32_c3_devkit", "pins": 15, "price": 12.99},
+            {"name": "esp32_wroom_32", "pins": 38, "price": 8.99},
+            {"name": "esp32_wrover", "pins": 38, "price": 9.99}
+        ]
+        
+        suitable_chips = [chip for chip in chip_options if chip["pins"] >= pins_needed]
+        suitable_chips.sort(key=lambda x: x["price"])  # Sort by price ascending
+        
+        if suitable_chips:
+            print("SUGGESTED ALTERNATIVES:")
+            for chip in suitable_chips[:3]:  # Show top 3 cheapest options
+                print(f"  - {chip['name']}: {chip['pins']} pins (${chip['price']})")
+        else:
+            print("NO SUITABLE ALTERNATIVES FOUND - Consider reducing bus devices or using pin multiplexing")
+    
+    def _assign_pins_to_bus(self, bus_comp: Dict[str, Any], bus_type: str) -> None:
+        """Assign pins to a specific bus component"""
+        comp_data = bus_comp.get("config", {})
+        pin_requirements = comp_data.get("pin_requirements", {})
+        
+        shared_needed = pin_requirements.get("shared_pins_needed", [])
+        unique_needed = pin_requirements.get("unique_pins_needed", [])
+        
+        bus_name = bus_comp.get("name", "unknown")
+        assignment = {"shared": {}, "unique": {}}
+        
+        # Assign shared pins (used by all devices on this bus)
+        for req in shared_needed:
+            func = req.get("function")
+            count = req.get("count", 1)
+            assigned_pins = self._find_available_pins(func, count, allow_shared=False)
+            if assigned_pins:
+                assignment["shared"][func] = assigned_pins
+                print(f"DEBUG: Assigned shared {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
+            else:
+                print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
+        
+        # Assign unique pins (one per device on this bus)
+        for req in unique_needed:
+            func = req.get("function")
+            count = req.get("count", 1)
+            assigned_pins = self._find_available_pins(func, count, allow_shared=True)
+            if assigned_pins:
+                assignment["unique"][func] = assigned_pins
+                print(f"DEBUG: Assigned unique {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
+            else:
+                print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
+        
+        # Store assignment for later use
+        self.bus_assignments[bus_name] = assignment
+        
+        # Update component configuration with pin assignments
+        if "pins" not in comp_data:
+            comp_data["pins"] = {}
+        
+        # Map function names to pin configuration keys
+        func_to_key = {
+            "SPI_SCLK": "clock",
+            "SPI_Q": "data_input", 
+            "SPI_HD": "data_output",
+            "SPI_CS": "chip_select",
+            "I2S_BCLK": "bclk",
+            "I2S_WS": "ws",
+            "I2S_DATA": "data"
+        }
+        
+        for func, pins in assignment["shared"].items():
+            key = func_to_key.get(func, func.lower())
+            comp_data["pins"][key] = pins[0] if len(pins) == 1 else pins
+        
+        # For unique pins, store them in unique_device_pins
+        if assignment["unique"]:
+            if "unique_device_pins" not in comp_data:
+                comp_data["unique_device_pins"] = {}
+            for func, pins in assignment["unique"].items():
+                key = func_to_key.get(func, func.lower())
+                comp_data["unique_device_pins"][f"{key}_available"] = pins
+    
+    def _assign_pin_to_pwm_channel(self, pwm_comp: Dict[str, Any]) -> None:
+        """Assign a pin to a PWM channel"""
+        comp_data = pwm_comp.get("config", {})
+        pwm_name = pwm_comp.get("name", "unknown")
+        
+        # PWM channels typically need one GPIO pin
+        assigned_pins = self._find_available_pins("GPIO", 1, allow_shared=True)
+        if assigned_pins:
+            comp_data["pin"] = assigned_pins[0]
+            print(f"DEBUG: Assigned GPIO pin {assigned_pins[0]} to PWM channel {pwm_name}")
+        else:
+            print(f"Warning: Could not assign GPIO pin for PWM channel {pwm_name}")
+    
+    def _find_available_pins(self, function: str, count: int, allow_shared: bool = True) -> List[int]:
+        """Find available pins that support the requested function"""
+        if not self.controller_chip:
+            return []
+        
+        available_pins = []
+        chip_pins = self.controller_chip.get("exposed_pins", [])
+        
+        for pin in chip_pins:
+            pin_name = pin.get("name", "")
+            pin_num = int(pin_name.replace("GPIO", "")) if pin_name.startswith("GPIO") else None
+            functions = pin.get("functions", [])
+            can_be_shared = pin.get("can_be_shared", True)
+            
+            if pin_num is not None and function in functions:
+                if pin_num not in self.used_pins:
+                    if not allow_shared and not can_be_shared:
+                        continue
+                    available_pins.append(pin_num)
+                    if len(available_pins) >= count:
+                        break
+        
+        # Mark pins as used
+        for pin_num in available_pins[:count]:
+            self.used_pins.add(pin_num)
+        
+        return available_pins[:count]
     
     def generate_component_stub(self, comp_type: str) -> str:
         """Generate component implementation stub file"""
@@ -444,40 +717,108 @@ class P32ComponentGenerator:
                 f.write(content)
             print(f"Generated: {filepath}")
 
-    def generate_from_bot(self, bot_name: str) -> None:
-        """Main generation process for a specific bot"""
+    def generate_from_bot(self, bot_name: str, environment: str = None) -> None:
+        """Main generation process using depth-first JSON traversal algorithm"""
         print(f"Generating P32 component tables for bot: {bot_name}")
-        
+        if environment:
+            print(f"Filtering for environment: {environment}")
+
         # Load bot configuration
         bot_config = self.load_bot_config(bot_name)
         print(f"Loaded bot config: {bot_config.get('bot_name', 'Unknown')}")
+
+        # Initialize component tracking
+        self.components = []
+        self.seen_components = set()
+        self.component_configs = {}
+        self.current_subsystem = "unknown"
+        self.current_component = None
+        self.is_bot_level = True  # Start with bot level processing
         
-        # Load positioned components (keep all traversal encounters)
-        components = self.load_positioned_components(bot_config)
-        print(f"Found {len(components)} positioned components (all traversal encounters)")
+        # Add system-level components (always present)
+        system_components = [
+            {"name": "heartbeat", "hitCount": 1, "description": "System heartbeat"},
+            {"name": "network_monitor", "hitCount": 1, "description": "Network monitoring and loop timing"}
+        ]
         
-        # Extract component information (preserves all traversal encounters for dispatch tables)
-        self.extract_component_info(components)
-        print(f"Generated {len(self.components)} total dispatch table entries (all traversal encounters)")
-        
+        for comp in system_components:
+            init_func = self.generate_function_name(comp["name"], "init")
+            act_func = self.generate_function_name(comp["name"], "act")
+            
+            self.components.append({
+                "name": comp["name"],
+                "init_func": init_func,
+                "act_func": act_func,
+                "hitCount": comp["hitCount"],
+                "description": comp["description"],
+                "type": "system"
+            })
+
+        # Traverse JSON structure using depth-first algorithm
+        self.traverse_json_for_components(bot_config)
+        print(f"Found {len(self.components)} total dispatch table entries after traversal")
+
+        # Filter components based on environment if specified
+        if environment:
+            components = self.filter_components_for_environment(self.components, environment)
+            print(f"Filtered to {len(components)} components for {environment} environment")
+            self.components = components
+
+        # Load controller chip and validate pin requirements
+        controller_name = bot_config.get("controller", "esp32_s3_devkit")
+        self.controller_chip = self.load_controller_chip_spec(controller_name)
+        if self.controller_chip:
+            pin_validation_passed = self.assign_pins_to_buses()
+            if not pin_validation_passed:
+                print("ERROR: Pin validation failed - cannot generate tables")
+                return
+        else:
+            print(f"Warning: Could not load chip spec for {controller_name}, skipping pin validation")
+
         # Write generated files
         self.write_files()
         self.generate_cmake_files()
         print("Generation complete!")
 
+    def filter_components_for_environment(self, components: List[Dict[str, Any]], environment: str) -> List[Dict[str, Any]]:
+        """Filter components based on the build environment"""
+        if environment == "goblin_head":
+            # Define which components are allowed in goblin_head environment
+            allowed_components = {
+                "heartbeat", "network_monitor", "goblin_head", "spi_bus_vspi", 
+                "goblin_left_eye", "goblin_eye", "gc9a01", "generic_spi_display",
+                "goblin_right_eye", "goblin_nose", "hc_sr04_ultrasonic_distance_sensor",
+                "goblin_mouth", "goblin_speaker", "speaker", "goblin_left_ear",
+                "servo_sg90_micro", "goblin_right_ear"
+            }
+            
+            filtered = []
+            for comp in components:
+                comp_name = comp.get("component_name", "") or comp.get("name", "")
+                if comp_name in allowed_components:
+                    filtered.append(comp)
+                else:
+                    print(f"Filtering out component '{comp_name}' (not in {environment} environment)")
+            
+            return filtered
+        else:
+            # For other environments, include all components
+            return components
+
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python generate_tables.py <bot_name> <output_dir>")
-        print("Example: python generate_tables.py goblin_full src/")
+    if len(sys.argv) < 3 or len(sys.argv) > 4:
+        print("Usage: python generate_tables.py <bot_name> <output_dir> [environment]")
+        print("Example: python generate_tables.py goblin_full src goblin_head")
         sys.exit(1)
-    
+
     bot_name = sys.argv[1]
     output_dir = sys.argv[2]
+    environment = sys.argv[3] if len(sys.argv) > 3 else None
     config_dir = "config"  # Relative to current directory
-    
+
     try:
         generator = P32ComponentGenerator(config_dir, output_dir)
-        generator.generate_from_bot(bot_name)
+        generator.generate_from_bot(bot_name, environment)
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

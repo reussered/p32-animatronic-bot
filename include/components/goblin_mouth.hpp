@@ -1,15 +1,7 @@
-#ifndef P32_GOBLIN_MOUTH_HPP
-#define P32_GOBLIN_MOUTH_HPP
+#ifndef COMPONENTS_goblin_mouth_HPP
+#define COMPONENTS_goblin_mouth_HPP
 
-#include "esp_err.h"
+#include "components/goblin_mouth.hdr"
 
-// Component: goblin_mouth
-// Auto-generated header file
+#endif // COMPONENTS_goblin_mouth_HPP
 
-// Component initialization function - NO ARGUMENTS
-esp_err_t goblin_mouth_init(void);
-
-// Component action function - NO ARGUMENTS  
-void goblin_mouth_act(void);
-
-#endif // P32_GOBLIN_MOUTH_HPP

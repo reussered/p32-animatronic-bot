@@ -1,27 +1,7 @@
-#ifndef SHOULDER_FLEXION_HPP
-#define SHOULDER_FLEXION_HPP
+#ifndef COMPONENTS_shoulder_flexion_HPP
+#define COMPONENTS_shoulder_flexion_HPP
 
-/**
- * @file shoulder_flexion.hpp
- * @brief Left shoulder flexion/extension servo - primary arm lift
- * @author Auto-generated from JSON specification
- */
+#include "components/shoulder_flexion.hdr"
 
-#include "core/memory/SharedMemory.hpp"
+#endif // COMPONENTS_shoulder_flexion_HPP
 
-
-// Component-specific includes would go here
-
-/**
- * @brief Initialize shoulder_flexion component
- * Called once during system startup
- */
-void shoulder_flexion_init(void);
-
-/**
- * @brief Execute shoulder_flexion component logic
- * Called every loop iteration based on hitCount
- */
-void shoulder_flexion_act(void);
-
-#endif // SHOULDER_FLEXION_HPP

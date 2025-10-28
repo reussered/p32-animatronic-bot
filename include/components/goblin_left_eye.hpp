@@ -1,9 +1,7 @@
-#ifndef GOBLIN_LEFT_EYE_HPP
-#define GOBLIN_LEFT_EYE_HPP
+#ifndef COMPONENTS_goblin_left_eye_HPP
+#define COMPONENTS_goblin_left_eye_HPP
 
-#include "esp_err.h"
+#include "components/goblin_left_eye.hdr"
 
-esp_err_t goblin_left_eye_init(void);
-void goblin_left_eye_act(void);
+#endif // COMPONENTS_goblin_left_eye_HPP
 
-#endif // GOBLIN_LEFT_EYE_HPP
