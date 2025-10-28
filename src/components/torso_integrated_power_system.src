@@ -6,11 +6,11 @@
 #include "esp_err.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "TORSO_POWER_SYSTEM";
+static const char *torso_integrated_power_system_TAG = "TORSO_POWER_SYSTEM";
 
 // STUB: Power system initialization
 esp_err_t torso_integrated_power_system_init(void) {
-    ESP_LOGI(TAG, "STUB: Initializing torso integrated power system");
+    ESP_LOGI(torso_integrated_power_system_TAG, "STUB: Initializing torso integrated power system");
     // TODO: Implement power system initialization
     // - Initialize Battery Management System (BMS)
     // - Configure voltage/current monitoring 
@@ -30,7 +30,7 @@ void torso_integrated_power_system_act(void) {
         return;
     }
     
-    ESP_LOGD(TAG, "STUB: Power system monitoring at loop %llu", g_loopCount);
+    ESP_LOGD(torso_integrated_power_system_TAG, "STUB: Power system monitoring at loop %llu", g_loopCount);
     
     // TODO: Implement power management logic
     // - Monitor battery voltage and current

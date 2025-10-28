@@ -9,8 +9,9 @@ static const char* TAG = "SharedMemory";
 // ESP-NOW peer address (broadcast to all)
 static uint8_t peer_addr[ESP_NOW_ETH_ALEN] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 
-// Static instance pointer for callback access
+// Static instance pointer for singleton
 SharedMemory* SharedMemory::instance = nullptr;
+bool SharedMemory::esp_now_initialized = false;
 
 // Internal callback for data sent
 void SharedMemory::on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status) 
@@ -33,30 +34,21 @@ void SharedMemory::on_data_recv(const uint8_t* mac_addr, const uint8_t* data, in
     ESP_LOGD(TAG, "Data received from %02x:%02x:%02x:%02x:%02x:%02x, len: %d", 
             mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5], len);
     
-    if (!instance || len < 2) 
+    if (!instance || len < 1) 
     {
         ESP_LOGW(TAG, "Invalid data received or no instance available");
         return;
     }
     
-    // Extract null-terminated string name
-    const char* name_str = reinterpret_cast<const char*>(data);
-    size_t name_len = strnlen(name_str, len);
+    // Extract type_id from first byte
+    shared_type_id_t type_id = data[0];
+    const uint8_t* payload = &data[1];  // Data starts after type_id
+    size_t payload_size = len - 1;
     
-    if (name_len >= len - 1) 
-    {
-        ESP_LOGW(TAG, "Invalid packet format: missing null terminator or no data");
-        return;
-    }
-    
-    std::string name(name_str);
-    const uint8_t* payload = data + name_len + 1;  // Skip past null terminator
-    size_t payload_size = len - name_len - 1;
-    
-    ESP_LOGD(TAG, "Received update for '%s', payload size: %zu", name.c_str(), payload_size);
+    ESP_LOGD(TAG, "Received update for type_id %u, payload size: %zu", type_id, payload_size);
     
     // Update memory from network data
-    instance->update_memory_from_network(name, payload, payload_size);
+    instance->update_memory_from_network(type_id, payload, payload_size);
 }
 
 void SharedMemory::espnow_init() 
@@ -83,13 +75,19 @@ void SharedMemory::espnow_init()
     peerInfo.encrypt = false;
     ESP_ERROR_CHECK(esp_now_add_peer(&peerInfo));
     
+    esp_now_initialized = true;
     ESP_LOGI(TAG, "ESP-NOW initialized successfully");
 }
 
-void SharedMemory::espnow_broadcast(const std::string& name, void* data, size_t size) 
+void SharedMemory::espnow_broadcast(shared_type_id_t type_id, void* data, size_t size) 
 {
-    // Create packet: null-terminated name + data
-    size_t packet_size = name.length() + 1 + size;  // name + null + data
+    if (!esp_now_initialized) 
+    {
+        ESP_LOGD(TAG, "ESP-NOW not initialized, skipping broadcast for type_id %u", type_id);
+        return;
+    }
+    // Create packet: type_id + data
+    size_t packet_size = sizeof(shared_type_id_t) + size;
     uint8_t* packet = new uint8_t[packet_size];
     
     if (!packet) 
@@ -98,34 +96,35 @@ void SharedMemory::espnow_broadcast(const std::string& name, void* data, size_t 
         return;
     }
     
-    // Copy name and null terminator
-    memcpy(packet, name.c_str(), name.length() + 1);
+    // Copy type_id and data
+    packet[0] = type_id;
+    if (size > 0 && data) 
+    {
+        memcpy(&packet[1], data, size);
+    }
     
-    // Copy data immediately after null terminator
-    memcpy(packet + name.length() + 1, data, size);
-    
-    ESP_LOGD(TAG, "Broadcasting '%s', data size: %zu, total packet: %zu", 
-            name.c_str(), size, packet_size);
+    ESP_LOGD(TAG, "Broadcasting type_id %u, data size: %zu, total packet: %zu", 
+            type_id, size, packet_size);
     
     // Send to all peers (broadcast)
     esp_err_t result = esp_now_send(peer_addr, packet, packet_size);
     if (result != ESP_OK) 
     {
-        ESP_LOGE(TAG, "esp_now_send failed for '%s': %d", name.c_str(), result);
+        ESP_LOGE(TAG, "esp_now_send failed for type_id %u: %d", type_id, result);
     }
     
     delete[] packet;
 }
 
-void SharedMemory::update_memory_from_network(const std::string& name, const uint8_t* data, size_t size) 
+void SharedMemory::update_memory_from_network(shared_type_id_t type_id, const uint8_t* data, size_t size) 
 {
-    auto it = memory_map.find(name);
+    auto it = memory_map.find(type_id);
     
     if (it != memory_map.end()) 
     {
         // Entry exists, update in place
         memcpy(it->second, data, size);
-        ESP_LOGD(TAG, "Updated existing entry '%s' with %zu bytes", name.c_str(), size);
+        ESP_LOGD(TAG, "Updated existing entry type_id %u with %zu bytes", type_id, size);
     } 
     else 
     {
@@ -134,12 +133,12 @@ void SharedMemory::update_memory_from_network(const std::string& name, const uin
         if (new_mem) 
         {
             memcpy(new_mem, data, size);
-            memory_map[name] = new_mem;
-            ESP_LOGD(TAG, "Created new entry '%s' with %zu bytes", name.c_str(), size);
+            memory_map[type_id] = new_mem;
+            ESP_LOGD(TAG, "Created new entry type_id %u with %zu bytes", type_id, size);
         } 
         else 
         {
-            ESP_LOGE(TAG, "Failed to allocate memory for '%s'", name.c_str());
+            ESP_LOGE(TAG, "Failed to allocate memory for type_id %u", type_id);
         }
     }
 }

@@ -28,8 +28,9 @@ extern const uint32_t PIXELS_PER_FRAME;
 /**
  * @brief Initialize shared goblin eye resources
  * Called once during system startup
+ * @return ESP_OK on success, esp_err_t error code on failure
  */
-void goblin_eye_init(void);
+esp_err_t goblin_eye_init(void);
 
 /**
  * @brief Process current frame with mood-based color adjustments

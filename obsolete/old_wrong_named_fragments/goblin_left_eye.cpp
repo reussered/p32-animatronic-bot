@@ -5,17 +5,12 @@
  */
 
 #include "p32_shared_state.h"
-#include "components/gc9a01.hpp"
+#include "gc9a01.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "shared/Environment.hpp"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
-// Global variables from goblin_eye system
-extern uint8_t* currentFrame;
-extern uint32_t current_frame_size;
-extern uint32_t current_spi_device;
 
 // Module variables
 static const char *TAG = "GOBLIN_LEFT_EYE";
@@ -222,9 +217,4 @@ void goblin_left_eye_act(void) {
     
     // Load current frame to buffer and set global state
     load_current_frame_to_buffer();
-    
-    // Set context for shared processing (SPI device for left eye)
-    current_spi_device = 1; // SPI_DEVICE_1 for left eye
-    currentFrame = left_eye_animation_buffer;
-    current_frame_size = total_pixels;
 }

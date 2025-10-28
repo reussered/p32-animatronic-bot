@@ -15,8 +15,9 @@
 /**
  * @brief Initialize network_monitor component
  * Called once during system startup
+ * @return ESP_OK on success, esp_err_t error code on failure
  */
-void network_monitor_init(void);
+esp_err_t network_monitor_init(void);
 
 /**
  * @brief Execute network_monitor component logic

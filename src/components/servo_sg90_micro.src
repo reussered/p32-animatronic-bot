@@ -6,11 +6,11 @@
 #include "esp_err.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "SERVO_SG90_MICRO";
+static const char *servo_sg90_micro_TAG = "SERVO_SG90_MICRO";
 
 // STUB: SG90 micro servo initialization
 esp_err_t servo_sg90_micro_init(void) {
-    ESP_LOGI(TAG, "STUB: Initializing SG90 micro servo");
+    ESP_LOGI(servo_sg90_micro_TAG, "STUB: Initializing SG90 micro servo");
     // TODO: Implement micro servo initialization
     // - Configure PWM output pin (smaller current requirements than MG996R)
     // - Set initial servo position (1500 microseconds = center) 
@@ -28,7 +28,7 @@ void servo_sg90_micro_act(void) {
         return;
     }
     
-    ESP_LOGD(TAG, "STUB: Micro servo action at loop %llu", g_loopCount);
+    ESP_LOGD(servo_sg90_micro_TAG, "STUB: Micro servo action at loop %llu", g_loopCount);
     
     // TODO: Implement micro servo control logic
     // - Read target position from shared state

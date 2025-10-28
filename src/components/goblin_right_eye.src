@@ -4,9 +4,9 @@
 
 #include "p32_component_config.h"
 #include "p32_shared_state.h"
-#include "gc9a01.hpp"
+#include "components/gc9a01.hpp"
 #include "shared/Environment.hpp"
-#include "include/core/memory/SharedMemory.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 #ifdef ENABLE_GOBLIN_COMPONENTS
 
@@ -16,35 +16,32 @@
 #include "components/goblin_eye.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG = "GOBLIN_RIGHT_EYE";
+static const char *goblin_right_eye_TAG = "GOBLIN_RIGHT_EYE";
 
 // Private static animation buffer for right eye
 static uint8_t* right_eye_animation_buffer = nullptr;
 static uint32_t right_eye_current_frame = 0;
 static uint32_t right_eye_frame_count = 6; // Curious look animation frames
-static uint32_t frame_width = 0;
-static uint32_t frame_height = 0;
-static uint32_t total_pixels = 0;
-
-// External GSM instance
-extern SharedMemory GSM;
+static uint32_t right_eye_frame_width = 0;
+static uint32_t right_eye_frame_height = 0;
+static uint32_t right_eye_total_pixels = 0;
 
 // Function declarations
 void load_right_eye_animation(void);
-void load_current_frame_to_buffer(void);
+void load_current_frame_to_buffer_right_eye(void);
 
 // Component: Right eye display animation with integrated pixel processing
 esp_err_t goblin_right_eye_init(void) {
-    ESP_LOGI(TAG, "Initializing right eye at position [26.67, 17.78, -8.89] mm");
+    ESP_LOGI(goblin_right_eye_TAG, "Initializing right eye at position [26.67, 17.78, -8.89] mm");
     
     // Get buffer and dimensions from display component
     right_eye_animation_buffer = getBuffer();
-    total_pixels = getFrameSize();
-    frame_width = getFrameRowSize();
-    frame_height = total_pixels / frame_width;
+    right_eye_total_pixels = getFrameSize();
+    right_eye_frame_width = getFrameRowSize();
+    right_eye_frame_height = right_eye_total_pixels / right_eye_frame_width;
     
     if (right_eye_animation_buffer == nullptr) {
-        ESP_LOGE(TAG, "Failed to allocate animation buffer");
+        ESP_LOGE(goblin_right_eye_TAG, "Failed to allocate animation buffer");
         return ESP_FAIL;
     }
     
@@ -52,8 +49,8 @@ esp_err_t goblin_right_eye_init(void) {
     // Load curious look animation frames into buffer
     load_right_eye_animation();
     
-    ESP_LOGI(TAG, "Right eye initialized with %u animation frames on %ux%u display", 
-             right_eye_frame_count, frame_width, frame_height);
+    ESP_LOGI(goblin_right_eye_TAG, "Right eye initialized with %u animation frames on %ux%u display", 
+             right_eye_frame_count, right_eye_frame_width, right_eye_frame_height);
     return ESP_OK;
 }
 
@@ -65,15 +62,15 @@ void goblin_right_eye_act(void) {
     
     if (new_frame != right_eye_current_frame) {
         right_eye_current_frame = new_frame;
-        load_current_frame_to_buffer();
+        load_current_frame_to_buffer_right_eye();
     }
     
     // Set context for shared processing (SPI device for right eye)
     current_spi_device = 2; // SPI_DEVICE_2 for right eye
     currentFrame = right_eye_animation_buffer;
-    current_frame_size = total_pixels;
+    current_frame_size = right_eye_total_pixels;
     
-    ESP_LOGV(TAG, "Right eye frame %u ready for processing at loop %u", 
+    ESP_LOGV(goblin_right_eye_TAG, "Right eye frame %u ready for processing at loop %u", 
              right_eye_current_frame, g_loopCount);
 }
 
@@ -81,30 +78,26 @@ void goblin_right_eye_act(void) {
  * @brief Load curious look animation frames for right eye
  */
 void load_right_eye_animation(void) {
-    ESP_LOGI(TAG, "Loading right eye curious look animation");
+    ESP_LOGI(goblin_right_eye_TAG, "Loading right eye curious look animation");
     
     // Initialize with curious look pattern
     // Frame 0: Normal gaze
-    for (uint32_t i = 0; i < total_pixels; i++) {
+    for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
         right_eye_animation_buffer[i] = 255; // Start with white
     }
     
     right_eye_current_frame = 0;
-    ESP_LOGI(TAG, "Right eye animation loaded");
+    ESP_LOGI(goblin_right_eye_TAG, "Right eye animation loaded");
 }
 
 /**
  * @brief Load current animation frame to processing buffer for right eye
  * Now includes distance-based focusing effect while preserving mood sensitivity
  */
-void load_current_frame_to_buffer(void) {
-    // Declare local SharedMemory instance and read current state
-    // TODO: Re-enable SharedMemory access after fixing compilation issues
-    // SharedMemory local_state;
-    
+void load_current_frame_to_buffer_right_eye(void) {
     // Get viewer distance from Environment in shared state
-    // Environment* env_ptr = local_state.read<Environment>("Environment");
-    uint8_t viewer_distance = 128; // Default distance for now (env_ptr != nullptr) ? env_ptr->distance_cm : 128; // Default if not available
+    Environment* env_ptr = GSM.read<Environment>();
+    uint8_t viewer_distance = (env_ptr != nullptr) ? env_ptr->distance_cm : 128; // Default if not available
     
     // Calculate focus-dependent pupil and iris sizes
     uint32_t pupil_size = 400 + (viewer_distance * 4);        // 400-1420: larger when viewer close
@@ -113,15 +106,15 @@ void load_current_frame_to_buffer(void) {
     uint32_t sclera_size = 10000;                             // Constant sclera boundary
     
     // Calculate centers based on actual display dimensions
-    uint32_t center_x = frame_width / 2;
-    uint32_t center_y = frame_height / 2;
+    uint32_t center_x = right_eye_frame_width / 2;
+    uint32_t center_y = right_eye_frame_height / 2;
     
     // Curious look animation pattern with focus adaptation
     switch (right_eye_current_frame) {
         case 0: // Normal open eye with adaptive focus
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t x = i % frame_width;
-                uint32_t y = i / frame_width;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t x = i % right_eye_frame_width;
+                uint32_t y = i / right_eye_frame_width;
                 uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                 
                 if (distance < pupil_size) { // Adaptive pupil
@@ -139,12 +132,12 @@ void load_current_frame_to_buffer(void) {
             break;
             
         case 1: // Slight squint with focus adaptation
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t y = i / frame_width;
-                uint32_t squint_top = frame_height * 50 / 240;    // Scale squint boundaries
-                uint32_t squint_bottom = frame_height * 190 / 240;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t y = i / right_eye_frame_width;
+                uint32_t squint_top = right_eye_frame_height * 50 / 240;    // Scale squint boundaries
+                uint32_t squint_bottom = right_eye_frame_height * 190 / 240;
                 if (y > squint_top && y < squint_bottom) {
-                    uint32_t x = i % frame_width;
+                    uint32_t x = i % right_eye_frame_width;
                     uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                     
                     if (distance < pupil_size) { // Adaptive pupil
@@ -163,9 +156,9 @@ void load_current_frame_to_buffer(void) {
             break;
             
         case 2: // Wide curious look with focus adaptation
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t x = i % frame_width;
-                uint32_t y = i / frame_width;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t x = i % right_eye_frame_width;
+                uint32_t y = i / right_eye_frame_width;
                 uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                 
                 // Alert pupil size - smaller when surprised/focused
@@ -186,10 +179,10 @@ void load_current_frame_to_buffer(void) {
             break;
             
         case 3: // Narrowed focus with distance adaptation
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t y = i / frame_width;
-                if (y > frame_height * 70 / 240 && y < frame_height * 170 / 240) {
-                    uint32_t x = i % frame_width;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t y = i / right_eye_frame_width;
+                if (y > right_eye_frame_height * 70 / 240 && y < right_eye_frame_height * 170 / 240) {
+                    uint32_t x = i % right_eye_frame_width;
                     uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                     
                     // Concentrated focus - pupil size varies with distance
@@ -209,9 +202,9 @@ void load_current_frame_to_buffer(void) {
             break;
             
         case 4: // Return to normal with focus adaptation
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t x = i % frame_width;
-                uint32_t y = i / frame_width;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t x = i % right_eye_frame_width;
+                uint32_t y = i / right_eye_frame_width;
                 uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                 
                 if (distance < pupil_size) { // Adaptive pupil
@@ -229,10 +222,10 @@ void load_current_frame_to_buffer(void) {
             break;
             
         case 5: // Satisfied look with focus adaptation
-            for (uint32_t i = 0; i < total_pixels; i++) {
-                uint32_t y = i / frame_width;
-                if (y > frame_height * 40 / 240 && y < frame_height * 200 / 240) {
-                    uint32_t x = i % frame_width;
+            for (uint32_t i = 0; i < right_eye_total_pixels; i++) {
+                uint32_t y = i / right_eye_frame_width;
+                if (y > right_eye_frame_height * 40 / 240 && y < right_eye_frame_height * 200 / 240) {
+                    uint32_t x = i % right_eye_frame_width;
                     uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
                     
                     // Relaxed focus - larger pupil for contentment
@@ -252,7 +245,7 @@ void load_current_frame_to_buffer(void) {
             break;
     }
     
-    ESP_LOGV(TAG, "Loaded frame %u to right eye buffer", right_eye_current_frame);
+    ESP_LOGV(goblin_right_eye_TAG, "Loaded frame %u to right eye buffer", right_eye_current_frame);
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

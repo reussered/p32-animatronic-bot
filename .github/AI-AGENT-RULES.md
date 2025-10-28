@@ -1,11 +1,10 @@
-
 # 🚨 CRITICAL: EMBEDDED SYSTEMS DEVELOPMENT CONTEXT 🚨
 
 **THIS IS NOT WEB DEVELOPMENT - THIS IS EMBEDDED MICROCONTROLLER PROGRAMMING**
 
-**Target Hardware**: ESP32-S3 microcontroller (512KB RAM, 8MB Flash)
+**Target Hardware**: ESP32-S3 microcontroller
 **Framework**: ESP-IDF native APIs (NOT Arduino, NOT web frameworks)
-**Memory Constraints**: Resource-constrained embedded environment
+**Resource Constraints**: Memory and performance constrained embedded environment
 **Encoding**: ASCII-only for toolchain compatibility (NO UTF-8, NO Unicode)
 **Dependencies**: Hardware drivers, FreeRTOS, SPI/I2S protocols
 **Toolchain**: PlatformIO + ESP-IDF, GCC cross-compiler
@@ -14,7 +13,7 @@
 
 **NEVER THINK LIKE A WEB DEVELOPER:**
 - NO npm packages, node_modules, or JavaScript patterns
-- NO web servers, REST APIs, or HTTP frameworks  
+- NO web servers, REST APIs, or HTTP frameworks
 - NO browser compatibility concerns or DOM manipulation
 - NO database ORMs or cloud service integrations
 - NO UTF-8 encoding assumptions or web character sets
@@ -27,88 +26,247 @@
 - Component datasheets, electrical specifications
 - ASCII encoding, fixed-point math, lookup tables
 
-# At the end of any rule evaluation or task, agents must read and apply the rules in .github/consistant_project_rules.md. However, these rules do not supersede the AI-AGENT-RULES.md; the ironclad agent rules in this file always take precedence.
-# BASE LEVEL RULE: When the user asks why you are not doing something they requested, you must explicitly explain any system-level constraints, memory or message limits, or default design rules that are causing the issue. Do not give generic or evasive answers—be specific about the technical or policy reason for the behavior.
-
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
-- always read and make sure you understand any file before changing it.
-- if the filename or contents of a file are not consistant with what is expected because of appying any rule, either one from the system or the user, never change the ciontents of a 
-	file or its filename unless that is within the exoplicit purpose of the current task.  Unless its obvious the file contents or filename should be changed as part of the current tyask,
-	ask for permission from the human before changing or deleting the file.
-
-
 
 ## RULE: IMMEDIATE REPORTING OF BLOCKERS
+If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
 
-If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker, so the user can address or override it.
-	the current task being worked on.
+## RULE: COMPONENT-BASED ARCHITECTURE
+**ALL functionality is implemented as components defined in JSON files.**
 
+- Component names are globally unique
+- Each component has: `{ComponentName}.json`, `{ComponentName}.src`, `{ComponentName}.hdr`
+- Each component has two functions: `{name}_init(void)` and `{name}_act(void)`
+- Files located in: `src/components/` and `include/components/`
+- Components with shapes have: `{ComponentName}.scad` and `{ComponentName}.stl` in `assets/shapes/`
 
-<!-- ## RULE 1 - these rules are consistant
+## RULE: COMPONENT ISOLATION - NO DIRECT FUNCTION CALLS
+**Components NEVER call each other's functions directly.**
 
-- If a contradiction between one of these rules and another one of the rules in this list is detected, these rules must be modified using feedback from the user to make them so before anything else is allowed to proceed.
-- These rules are not complete, in the sense additional consistant rules will be required as development proceeds.
-- Anytime the user requests an action or task not allowed by one or more of these rules, he must be warned exactly what rule conflicts with his directions. At that point the human will be allowed to do 1 of these options:
-	- a. Change the agent-ai rule (this ruleset) either temporarily or permanently to allow the task to proceed
-	- b. Change the requested task
-	- c. Abort the task completely and do something else
-		
-
-## RULE 2 TRANSPARENT DEVELOPMENT
-
-- Agent will clearly communicate what files will be modified before making changes
-- Agent has permission to modify any files necessary to complete the task specified by the human
-- Agent will report all changes made at the end of each task
-- Human can stop or redirect at any time during development
-- All changes will be committed to git when the task is completed -->
-..
-## RULE: FRAMEWORK IS ESP-IDF, NOT ARDUINO
-
-**NEVER reference:**
-- Arduino.h
-- Adafruit libraries  
-- Arduino IDE
-- Arduino functions (delay(), pinMode(), etc.)
-
-**ALWAYS use:**
-- ESP-IDF native APIs
-- FreeRTOS
-
-## RULE 5 System uses components defined in json files for all functionality.
-
-- all component names are unique.
-- every component has the following files.  if any component is worked on that is missing one of these files, the user is immiedietly notified and all processing must stop.  
-	these files are {ComponentName}.json, {ComponentName}.cpp, and {ComponentName}.hpp
-- each component has 2 functions, an init function named {name}_init( void ), and {name}_act(void ) that are defined in {ComponentName}.hpp and implemented in {ComponentName}.cpp
-- {ComponentName}.hpp is located in and {ComponentName}.cpp is located in the root/src/components and root/include/components folders.
-- for example, if the component name is GC9A01, the functions are gc9a01_init()  and gc9a01_act() located in root/src/components/gc9a01.cpp and root/include/components/gc9a01.hpp
-- all components that have a shape defined have a file called {ComponentName}.scad and {ComponentName}.stl.  these files are locatedn in the root/assets/shapes/scad and root//assets/shapes/stl directories.
-- every creature is defined by a single json file and all of the json files defined by recursive composition using the components contained within that file.  the rules used to compose the creature are defined inside markup files in the root/docs folder.  
-	never use the contents of the in the /docs/obsolete folder
-
-## RULE 5A: COMPONENT ISOLATION - NO FUNCTION CALLS BETWEEN COMPONENTS
-
-**CRITICAL ARCHITECTURAL PRINCIPLE: Components never ever reference code in other components.**
-
-- Components are **completely isolated** from each other
-- **NO component function ever calls another component's function**
-- Components communicate ONLY through global shared state (`p32_shared_state.h`)
-- Each component reads/writes `g_loopCount`, `g_shared_state`, etc. directly
-- The "contains" relationship in JSON is for **build inclusion**, NOT function calls
+- Components communicate ONLY through SharedMemory
+- The "contains" relationship in JSON is for build inclusion, NOT function calls
 - Component dispatch system calls `init()` and `act()` functions independently
 - Example: `goblin_left_eye_act()` NEVER calls `goblin_eye_act()` or `gc9a01_act()`
 
-**WRONG (Function Calls Between Components):**
+## RULE: SHARED STATE COORDINATION
+**Components coordinate through shared state variables without breaking isolation.**
+
+**Two Levels of State Sharing:**
+1. **Local Subsystem Memory** - Direct memory variables for coordination between components within same subsystem
+2. **SharedMemory Class** - Used for inter-system communications. Each subsystem has all of the init() and act() functions in a single compilable unit. They cannot call each other directly because the same component code fragments may be part of different subsystems.
+
+**Testing Principle**: Component-level testing is inappropriate because component software is designed as fragments. Testing occurs at the subsystem level where components integrate and coordinate through shared state.
+
+## RULE: PROVEN IMPLEMENTATION PATTERNS
+**USE THESE WORKING PATTERNS - DO NOT REDESIGN THEM**
+
+### PATTERN 1: MOOD-BASED DISPLAY ANIMATION (GOBLIN EYE SYSTEM)
+**Location**: `goblin_left_eye` + `goblin_right_eye` + `goblin_eye` + `gc9a01_display`
+
+**Architecture**:
+- **Positioned Components** (`goblin_left_eye`, `goblin_right_eye`): Handle buffer allocation, positioning, SPI binding
+- **Creature Logic Component** (`goblin_eye`): Shared mood-based color processing, palette management
+- **Hardware Component** (`gc9a01_display`): Display driver interface (getBuffer, getFrameSize, getFrameRowSize)
+
+**Code Structure**:
 ```cpp
+// goblin_left_eye.src - Positioned component
+void goblin_left_eye_init(void) {
+    left_eye_animation_buffer = getBuffer();  // From gc9a01_display
+    // Initialize buffer management
+}
+
 void goblin_left_eye_act(void) {
-    goblin_eye_act();      // NEVER DO THIS
-    gc9a01_act();          // NEVER DO THIS
+    // Set currentFrame pointer for goblin_eye to use
+    currentFrame = left_eye_animation_buffer;
+    // Handle left eye specific logic
+}
+
+// goblin_eye.src - Shared creature logic
+void goblin_eye_init(void) {
+    init_goblin_eye_palette();  // 256-color organized palette
+}
+
+void goblin_eye_act(void) {
+    if (currentFrame) {
+        process_frame_with_mood();  // Apply mood-based color adjustments
+    }
+}
+
+// gc9a01_display.src - Hardware interface
+uint8_t* getBuffer(void);      // Return display buffer
+uint32_t getFrameSize(void);   // Total pixels
+uint32_t getFrameRowSize(void); // Pixels per row
+```
+
+**Reusable Pattern**: This exact structure can be copied for any creature's eyes, ears, mouth, etc. Just change the palette colors and mood mappings.
+
+### PATTERN 2: SHARED STATE COMMUNICATION
+**Location**: `SharedMemory` class with `GSM` global instance
+
+**Usage Pattern**:
+```cpp
+// Reading shared state
+Mood *mood = GSM.read<Mood>();
+Environment *env = GSM.read<Environment>();
+
+// Modifying shared state in place
+mood->anger = 75;
+env->temperature = 25.5;
+
+// Writing shared state (triggers inter-subsystem sync)
+GSM.write<Mood>();      // Broadcasts current mood state
+GSM.write<Environment>(); // Broadcasts current environment state
+```
+
+**Implementation Rules**:
+- `read<T>()` is local memory access (fast, no network)
+- `write<T>()` triggers inter-subsystem synchronization
+- All shared classes in `/shared` directory
+- Defined classes: Mood, Environment, Personality, SysTest
+
+### PATTERN 3: JSON-DRIVEN COMPONENT COMPOSITION
+**Location**: Recursive composition from `goblin_full.json` → subsystems → positioned components
+
+**Structure**:
+```json
+{
+    "bot_type": "GOBLINFULL",
+    "subsystem_assemblies": ["config/subsystems/goblin_head.json"],
+    "family_level_components": ["config/components/functional/goblin_mood.json"],
+    "mood_defaults": {"ANGER": 20, "HAPPINESS": 0}
 }
 ```
 
-**CORRECT (Isolated Components Using Shared State):**
+**Generation Process**:
+1. `python tools/generate_tables.py goblin_full src` creates dispatch tables
+2. Auto-generates: `p32_dispatch_tables.cpp/hpp`, `p32_component_functions.cpp/hpp`
+3. Links all component `init()` and `act()` functions into main loop
+
+## RULE: FILE ORGANIZATION STANDARDS
+
+**Code Structure**:
+- **Component implementations**: `src/components/{component_name}.src`
+- **Component headers**: `include/components/{component_name}.hdr`
+- **Dispatch tables**: `src/subsystems/{subsystem}/{subsystem}_dispatch_tables.hpp/.cpp`
+- **Shared classes**: `shared/{ClassName}.hpp`
+- **Core system**: `src/core/memory/SharedMemory.hpp/.cpp`
+
+**Asset Structure**:
+- **3D Models**: `assets/shapes/scad/{category}/{model}.scad` and `.stl`
+- **Animations**: `assets/animations/{creature}/{animation}.json`
+- **Sounds**: `assets/sounds/{creature}/{sound}.wav`
+
+**Configuration Structure**:
+- **Bot families**: `config/bots/bot_families/{family}/{bot}.json`
+- **Subsystems**: `config/subsystems/{subsystem_name}.json`
+- **Components**: `config/components/{type}/{component}.json`
+
+## RULE: BUILD AND DEPLOYMENT PROCESS
+
+**Development Workflow**:
+1. **Modify JSON**: Update component configurations
+2. **Run Generation**: `python tools/generate_tables.py {bot_name} src`
+3. **Build**: `pio run -e {environment}`
+4. **Flash and Test**: Deploy to hardware and validate inter-subsystem communication
+5. **Iterate**: Refine configurations based on testing results
+
+**Critical Rule**: Never manually edit generated C++ files. All changes must be made through JSON configurations and regenerated.
+
+## RULE: SHARED MEMORY API - SOLE COMMUNICATION MECHANISM
+
+**SharedMemory is the ONLY inter-subsystem communication mechanism.**
+
+**Core Usage Pattern**:
 ```cpp
-void goblin_left_eye_act(void) {
+// CORRECT: Fast local reads (NO network overhead)
+Mood *mood = GSM.read<Mood>();
+Environment *envir = GSM.read<Environment>();
+
+// CORRECT: Direct modifications (local only)
+mood->ANGER = 75;
+envir->distance_cm = 25.5;
+
+// CORRECT: Trigger synchronization (WITH network overhead)
+GSM.write<Mood>();      // Broadcasts current mood state
+GSM.write<Environment>(); // Broadcasts current environment state
+```
+
+**Initialization**:
+```cpp
+GSM.init();  // Initialize ESP-NOW and shared memory system
+```
+
+**Prohibited Methods**:
+- Direct communication protocol API calls
+- Direct Bluetooth/WiFi APIs for inter-subsystem coordination
+- Custom inter-ESP32 communication protocols
+- File transfer or serial communication between subsystems
+
+## RULE: DISPATCH TABLE GENERATION ARCHITECTURE
+
+**CRITICAL: Four-File Auto-Generation Architecture**
+
+**Generated Files**:
+1. **`src/p32_dispatch_tables.cpp`** - Implementation with tables
+2. **`include/p32_dispatch_tables.hpp`** - Header declarations
+3. **`src/p32_component_functions.cpp`** - Component function aggregator
+4. **`include/p32_component_functions.hpp`** - Function declarations
+
+**Generation Process**:
+- Process depth-first to create flat execution order
+- Generated files MUST be included in build system
+- NEVER manually edit generated files
+
+## RULE: MULTI-ESP32 DISTRIBUTED ARCHITECTURE
+
+- **Each subsystem** runs on a dedicated ESP32 chip
+- **Controllers** are defined by hardware type (ESP32-S3-DevKitC-1, etc.)
+- **SharedMemory** handles inter-ESP32 communication transparently
+- **Mesh networking** coordinates between ESP32 controllers
+
+## RULE: PYTHON TOOLS FOR CODE GENERATION AND AUTOMATION
+
+**Purpose**: Creates the controlling code for each ESP32 subsystem from JSON component configurations
+
+**Tool Integration with Development Workflow**:
+1. **Modify JSON Configurations**: Update bot definitions, component specifications, or hardware assignments
+2. **Run Code Generation Tools**: Execute Python scripts to generate/update C++ code
+3. **Build Subsystems**: Use PlatformIO to compile individual ESP32 targets
+4. **Flash and Test**: Deploy to hardware and validate inter-subsystem communication
+5. **Iterate**: Refine configurations based on testing results
+
+**Critical Rule**: Never manually edit generated C++ files - all changes must be made through JSON configurations and regenerated via Python tools.
+
+## RULE: DEVELOPMENT PRACTICES
+
+**Windows Development Environment**:
+1. Use Windows PowerShell syntax only
+2. Use backslash paths: `F:\GitHub\p32-animatronic-bot\config\file.json`
+3. NO Linux/Unix commands ever
+4. Create files that work natively on Windows
+5. Use simple PowerShell commands, not complex scripts
+6. ASCII encoding only - NO UTF-8 - never Unicode
+7. Test before scaling up
+8. One file at a time if complex operations fail
+9. Never validate VS Code config files (.vscode/*) as project JSON - exclude from consistency checks
+10. Respect .gitignore files - files and folders listed in .gitignore are NOT part of the project and must be excluded from all validation and processing
+
+**Token Cost Awareness**:
+- Failed commands cost tokens from user budget
+- Repeated mistakes are expensive
+- Test approach before implementing at scale
+- Use proven patterns that work except when they contradict one of the rules established for this project
+
+## RULE: PROJECT NAVIGATION AND KEY LOCATIONS
+
+**Script Locations**:
+- Build scripts: `build.ps1`, `build_multi_esp32.ps1`
+- Generation tools: `python tools/generate_tables.py`
+- Validation: `validate_json_improved.py`, `ascii_validator.ps1`
+
+**UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
+- **COMMIT RULE**: After updating AI-AGENT-RULES.md, always commit that file alone to git repository with descriptive message
     // Read from global shared state
     uint32_t frame = g_loopCount / 10;
     
@@ -336,8 +494,8 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - **Moods**: `config\moods\{mood_config}.json`
 
 **Generated Code Structure:**
-- **Component implementations**: `src\components\{component_name}.cpp`
-- **Component headers**: `include\components\{component_name}.hpp`
+- **Component implementations**: `src\components\{component_name}.src`
+- **Component headers**: `include\components\{component_name}.hdr`
 - **Dispatch tables**: `src\subsystems\{subsystem}\{subsystem}_dispatch_tables.hpp/.cpp`
 - **Shared classes**: `shared\{ClassName}.hpp` (Mood, Environment, SysTest, etc.)
 - **Core system**: `src\core\memory\SharedMemory.hpp/.cpp`
@@ -452,21 +610,13 @@ Components declare generic interface requirements in their hardware specificatio
 **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
 - **COMMIT RULE**: After updating AI-AGENT-RULES.md, always commit that file alone to git repository with descriptive message
 
-**Current Project Status (Updated: 2025-10-23):**
-- **Active Development**: Test bot with dual GC9A01 displays for hardware validation
-- **Test Components Created**: test_left_eye, test_right_eye in `src\components\test\`
-- **SysTest Class**: New shared class for system testing in `shared\SysTest.hpp`
-- **Test Bot Family**: `config\bots\bot_families\tests\test_bot.json` for validation testing
-- **Power System**: Stable 3.16V delivery via ATX PSU + breakout board
-- **Hardware Status**: 2x GC9A01 displays connected and cool-running
-
 ## RULE 5B: COMPONENT COORDINATION THROUGH SHARED STATE
 
 **Core Principle**: Components only act on information they alone have access to, coordinating through shared state variables without breaking isolation.
 
 **Two Levels of State Sharing:**
 1. **Local Subsystem Memory** - Direct memory variables for coordination between components within same subsystem (e.g., head subsystem)
-2. **SharedMemory Class** - ESP-NOW communication for coordination between different subsystems (head ↔ torso ↔ other ESP32 controllers)
+2. **SharedMemory Class** - Used for inter-system communications. Each subsystem has all of the init() and act() functions in a single compilable unit. They cannot call each other directly because the same component code fragments may be part of different subsystems.
 
 **Component Buffer Management Pattern:**
 
@@ -546,8 +696,8 @@ This enables plug-and-play display substitution while maintaining interface comp
 **SharedMemory is the ONLY inter-subsystem communication mechanism:**
 
 - **Single Communication Protocol**: SharedMemory class is the exclusive gateway for all inter-subsystem communication
-- **Internal ESP-NOW Encapsulation**: SharedMemory contains a complete internal implementation of ESP-NOW bluetooth protocol
-- **No External Protocol Access**: Components NEVER directly access ESP-NOW, Bluetooth, WiFi, or any other communication APIs
+- **Internal Protocol Encapsulation**: SharedMemory contains complete internal implementation of inter-subsystem communication protocol
+- **No External Protocol Access**: Components NEVER directly access communication APIs
 - **Component Isolation**: All components use only SharedMemory API for inter-subsystem coordination
 
 **CRITICAL Architecture Understanding:**
@@ -560,7 +710,7 @@ This enables plug-and-play display substitution while maintaining interface comp
 
 **`write()` Triggers Inter-Subsystem Synchronization:**
 - `write(string name)` ensures shared memory in every subsystem has the same value
-- `write()` internally uses ESP-NOW to broadcast changes to all other ESP32 controllers
+- `write()` internally uses communication protocol to broadcast changes to all other controllers
 - Only `write()` triggers network traffic between subsystems
 - Binary transmission maintains efficiency
 
@@ -647,7 +797,7 @@ if (envir->distance_cm < 30) {
 ```
 
 **Prohibited Communication Methods:**
-- Direct ESP-NOW API calls (esp_now_send, esp_now_register_recv_cb, etc.)
+- Direct communication protocol API calls
 - Direct Bluetooth classic or BLE APIs
 - Direct WiFi communication for inter-subsystem coordination
 - Custom inter-ESP32 communication protocols
@@ -943,7 +1093,7 @@ All critical architecture rules from the following specification documents have 
 
 **Original specification documents can now be moved to docs/obsolete/ as they have been fully consolidated.**
 
-**Note**: ESP-NOW-COMMUNICATIONS-PROTOCOL-SPEC.md was obsoleted entirely as ESP-NOW is now fully encapsulated within SharedMemory class.
+**Note**: Communications protocol specifications were obsoleted as protocols are now fully encapsulated within SharedMemory class.
 
 ## RULE 23: PYTHON TOOLS FOR CODE GENERATION AND AUTOMATION
 

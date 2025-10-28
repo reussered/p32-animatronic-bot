@@ -6,7 +6,7 @@
 #include "esp_err.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "NETWORK_MONITOR";
+static const char *NETWORK_MONITOR_TAG = "NETWORK_MONITOR";
 
 // Component: Network status monitoring
 esp_err_t network_monitor_init(void) {
@@ -16,7 +16,7 @@ esp_err_t network_monitor_init(void) {
 #endif
 
     // Network monitoring initialization
-    ESP_LOGI(TAG, "Network monitor initialized");
+    ESP_LOGI(NETWORK_MONITOR_TAG, "Network monitor initialized");
     return ESP_OK;
 }
 
@@ -32,6 +32,6 @@ void network_monitor_act(void) {
 
     // Network status check
     if (g_loopCount % 10000 == 0) {
-        ESP_LOGD(TAG, "Network status check - loop %llu", g_loopCount);
+        ESP_LOGD(NETWORK_MONITOR_TAG, "Network status check - loop %llu", g_loopCount);
     }
 }

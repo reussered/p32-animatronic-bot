@@ -13,7 +13,7 @@
 #include "p32_web_client.h"
 #include <math.h>
 
-static const char *TAG = "GOBLIN_NOSE";
+static const char *goblin_nose_TAG = "GOBLIN_NOSE";
 static float simulated_distance = 25.0f; // Simulated sensor reading in cm
 
 // Component: Proximity sensor monitoring
@@ -24,7 +24,7 @@ esp_err_t goblin_nose_init(void) {
 #endif
 
     // Generic component initialization
-    ESP_LOGI(TAG, "Component initialized");
+    ESP_LOGI(goblin_nose_TAG, "Component initialized");
     return ESP_OK;
 }
 
@@ -49,7 +49,7 @@ void goblin_nose_act(void) {
     // For now, send simulated data to PC display
     web_client_send_sensor_data_for_component("NOSE_SENSOR", simulated_distance, g_loopCount);
     
-    ESP_LOGD(TAG, "Proximity sensor reading: %.1f cm - loop %llu", simulated_distance, g_loopCount);
+    ESP_LOGD(goblin_nose_TAG, "Proximity sensor reading: %.1f cm - loop %llu", simulated_distance, g_loopCount);
 }
 
 #endif // ENABLE_GOBLIN_COMPONENTS

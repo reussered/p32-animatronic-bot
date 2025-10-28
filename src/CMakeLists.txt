@@ -8,7 +8,7 @@ set(P32_CORE_SOURCES
 
 # P32 Individual Components - Auto-generated to include all components
 set(P32_COMPONENT_SOURCES
-    p32_dispatch_tables.cpp         # Generated dispatch tables (initTable, actTable, hitCountTable)
+    component_tables.cpp            # Generated dispatch tables (initTable, actTable, hitCountTable)
     p32_component_functions.cpp     # Aggregates all individual component implementations
     p32_eye_display.cpp             # Eye animation system
     p32_web_client.cpp              # Web client for PC streaming (test mode)
@@ -30,7 +30,6 @@ set(P32_COMPONENT_SOURCES
     components/goblin_behavior_engine.cpp
     components/goblin_eye.cpp
     components/goblin_head.cpp
-    components/goblin_left_eye.cpp
     components/goblin_mood.cpp
     components/goblin_mouth.cpp
     components/goblin_mouth_STUB.cpp

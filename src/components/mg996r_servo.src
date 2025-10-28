@@ -6,11 +6,11 @@
 #include "esp_err.h"
 #include "p32_shared_state.h"
 
-static const char *TAG = "MG996R_SERVO";
+static const char *mg996r_servo_TAG = "MG996R_SERVO";
 
 // STUB: MG996R servo motor initialization
 esp_err_t mg996r_servo_init(void) {
-    ESP_LOGI(TAG, "STUB: Initializing MG996R servo motor");
+    ESP_LOGI(mg996r_servo_TAG, "STUB: Initializing MG996R servo motor");
     // TODO: Implement servo initialization
     // - Configure PWM output pin
     // - Set initial servo position (1500 microseconds = center)
@@ -28,7 +28,7 @@ void mg996r_servo_act(void) {
         return;
     }
     
-    ESP_LOGD(TAG, "STUB: Servo action at loop %llu", g_loopCount);
+    ESP_LOGD(mg996r_servo_TAG, "STUB: Servo action at loop %llu", g_loopCount);
     
     // TODO: Implement servo control logic
     // - Read target position from shared state

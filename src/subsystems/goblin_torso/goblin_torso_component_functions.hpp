@@ -9,8 +9,8 @@
 // ============================================================================
 
 // Include all individual component headers
-#include "components/mg996r_servo.hpp"
-#include "components/torso_integrated_power_system.hpp"
+#include "components/mg996r_servo.hdr"
+#include "components/torso_integrated_power_system.hdr"
 
 // Additional component includes will be added here as components are implemented
 

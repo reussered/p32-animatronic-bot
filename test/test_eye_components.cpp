@@ -34,9 +34,9 @@ void test_eye_processing_pipeline(void) {
     ESP_LOGI(TAG, "Test 2: Testing mood-based frame processing");
     
     // Set up initial neutral mood
-    Mood testMood;
-    testMood.clear();
-    GSM.write<Mood>(testMood);
+    Mood* sharedMood = GSM.read<Mood>();
+    sharedMood->clear();
+    GSM.write<Mood>();
     
     // Simulate several loop iterations with neutral mood
     for (uint32_t loop = 0; loop < 10; loop++) {
@@ -56,8 +56,8 @@ void test_eye_processing_pipeline(void) {
     
     // Test 3: Test with angry mood
     ESP_LOGI(TAG, "Test 3: Testing angry mood effects");
-    testMood.anger() = 80;
-    GSM.write<Mood>(testMood);
+    sharedMood->anger() = 80;
+    GSM.write<Mood>();
     
     for (uint32_t loop = 10; loop < 20; loop++) {
         g_loopCount = loop;
@@ -74,9 +74,9 @@ void test_eye_processing_pipeline(void) {
     
     // Test 4: Test with happy mood
     ESP_LOGI(TAG, "Test 4: Testing happy mood effects");
-    testMood.clear();
-    testMood.happiness() = 90;
-    GSM.write<Mood>(testMood);
+    sharedMood->clear();
+    sharedMood->happiness() = 90;
+    GSM.write<Mood>();
     
     for (uint32_t loop = 20; loop < 30; loop++) {
         g_loopCount = loop;
@@ -93,11 +93,11 @@ void test_eye_processing_pipeline(void) {
     
     // Test 5: Test with complex mixed mood
     ESP_LOGI(TAG, "Test 5: Testing complex mixed mood");
-    testMood.clear();
-    testMood.curiosity() = 60;
-    testMood.affection() = 40;
-    testMood.excitement() = 30;
-    GSM.write<Mood>(testMood);
+    sharedMood->clear();
+    sharedMood->curiosity() = 60;
+    sharedMood->affection() = 40;
+    sharedMood->excitement() = 30;
+    GSM.write<Mood>();
     
     for (uint32_t loop = 30; loop < 40; loop++) {
         g_loopCount = loop;

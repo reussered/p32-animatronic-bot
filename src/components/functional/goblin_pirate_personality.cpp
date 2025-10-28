@@ -8,6 +8,8 @@
 
 #include "esp_log.h"
 #include "p32_shared_state.h"
+#include "core/memory/SharedMemory.hpp"
+#include "Mood.hpp"
 
 static const char* TAG = "PIRATE_PERSONALITY";
 
@@ -48,149 +50,141 @@ void goblin_pirate_personality_act(void) {
     // hitCount: 30 -> executes every 3 seconds
     if ((g_loopCount % 30) != 0) return;
     
-    SharedMemory local_state;
-    local_state.read();
+    // Get shared mood state
+    Mood* mood = GSM.read<Mood>();
+    
+    if (!mood) return;  // Safety check
     
     // Apply pirate-specific personality modifiers
-    apply_pirate_aggression_boost(local_state);
-    handle_treasure_obsession_behavior(local_state);
-    implement_eye_loss_compensation(local_state);
-    manage_pirate_mood_dynamics(local_state);
-    execute_territorial_behaviors(local_state);
+    apply_pirate_aggression_boost(mood);
+    handle_treasure_obsession_behavior(mood);
+    implement_eye_loss_compensation(mood);
+    manage_pirate_mood_dynamics(mood);
+    execute_territorial_behaviors(mood);
     
-    // Update shared state with pirate modifications
-    local_state.write();
+    // Synchronize changes back to other subsystems
+    GSM.write<Mood>();
     
     if ((g_loopCount % 150) == 0) {  // Every 15 seconds
         ESP_LOGD(TAG, "Pirate state: Suspicion=%d%%, Aggression=%d, Treasure_Hunt=%s",
             current_suspicion_level,
-            local_state.mood.ANGER,
-            (local_state.mood.CURIOSITY > 50) ? "ACTIVE" : "DORMANT");
+            mood->anger(),
+            (mood->curiosity() > 50) ? "ACTIVE" : "DORMANT");
     }
 }
 
-static void apply_pirate_aggression_boost(SharedMemory& state) {
+static void apply_pirate_aggression_boost(Mood* mood) {
     // Pirates are naturally more aggressive due to harsh life
-    int base_anger = state.mood.ANGER;
+    int base_anger = mood->anger();
     int boosted_anger = (int)(base_anger * ANGER_AMPLIFICATION);
     
-    // Add escalation for repeated threats
-    if (state.sensor_distance > 0 && state.sensor_distance < 30) {
-        threat_escalation_timer++;
-        if (threat_escalation_timer > 3) {  // Sustained close presence
-            boosted_anger += AGGRESSION_ESCALATION_RATE;
-            ESP_LOGD(TAG, "Threat escalation: %d -> %d anger", base_anger, boosted_anger);
-        }
-    } else {
-        threat_escalation_timer = 0;  // Reset when threat moves away
+    // Add escalation for repeated threats (simplified without distance sensor)
+    threat_escalation_timer++;
+    if (threat_escalation_timer > 3) {  // Sustained presence
+        boosted_anger += AGGRESSION_ESCALATION_RATE;
+        ESP_LOGD(TAG, "Threat escalation: %d -> %d anger", base_anger, boosted_anger);
     }
     
     // Cap anger to prevent overflow
-    state.mood.ANGER = (boosted_anger > 100) ? 100 : boosted_anger;
+    mood->anger() = (boosted_anger > 100) ? 100 : boosted_anger;
     
     // Suppress fear - pirates are battle-hardened
-    state.mood.FEAR = (int)(state.mood.FEAR * FEAR_SUPPRESSION);
+    mood->fear() = (int)(mood->fear() * FEAR_SUPPRESSION);
 }
 
-static void handle_treasure_obsession_behavior(SharedMemory& state) {
-    // Simulate treasure detection based on movement patterns
+static void handle_treasure_obsession_behavior(Mood* mood) {
+    // Simulate treasure detection based on time patterns (simplified without distance sensor)
     bool potential_treasure_detected = false;
     
-    // Rapid movements might indicate hiding/revealing treasure
-    if (state.sensor_distance > 0) {
-        static uint8_t last_distance = 0;
-        uint8_t distance_change = abs(state.sensor_distance - last_distance);
-        
-        if (distance_change > 20) {  // Rapid movement
-            potential_treasure_detected = true;
-            last_treasure_response = g_loopCount;
-        }
-        last_distance = state.sensor_distance;
+    // Periodic treasure hunting behavior
+    if ((g_loopCount % 100) == 0) {  // Every 10 seconds
+        potential_treasure_detected = true;
+        last_treasure_response = g_loopCount;
     }
     
     // Boost curiosity for treasure hunting
     if (potential_treasure_detected || (g_loopCount - last_treasure_response) < 100) {
-        int treasure_curiosity = (int)(state.mood.CURIOSITY * CURIOSITY_TREASURE_BOOST);
-        state.mood.CURIOSITY = (treasure_curiosity > 100) ? 100 : treasure_curiosity;
+        int treasure_curiosity = (int)(mood->curiosity() * CURIOSITY_TREASURE_BOOST);
+        mood->curiosity() = (treasure_curiosity > 100) ? 100 : treasure_curiosity;
         
-        // Increase hunger when treasure hunting (greed)
-        int treasure_hunger = (int)(state.mood.HUNGER * HUNGER_INTENSITY);
-        state.mood.HUNGER = (treasure_hunger > 100) ? 100 : treasure_hunger;
+        // Increase excitement when treasure hunting (greed)
+        int treasure_excitement = (int)(mood->excitement() * HUNGER_INTENSITY);
+        mood->excitement() = (treasure_excitement > 100) ? 100 : treasure_excitement;
         
-        ESP_LOGD(TAG, "TREASURE HUNT MODE: Curiosity boosted to %d", state.mood.CURIOSITY);
+        ESP_LOGD(TAG, "TREASURE HUNT MODE: Curiosity boosted to %d", mood->curiosity());
     }
 }
 
-static void implement_eye_loss_compensation(SharedMemory& state) {
-    // Missing right eye - compensate with enhanced left-side awareness
+static void implement_eye_loss_compensation(Mood* mood) {
+    // Missing right eye - compensate with enhanced suspicion
     if (left_side_defensive_mode) {
-        // Boost suspicion when activity detected
-        if (state.sensor_distance > 0 && state.sensor_distance < 60) {
-            current_suspicion_level += EYE_LOSS_COMPENSATION_FACTOR;
-            if (current_suspicion_level > 100) current_suspicion_level = 100;
-            
-            // Translate suspicion into irritation and caution
-            state.mood.IRRITATION += (current_suspicion_level - SUSPICION_BASE_LEVEL) / 4;
-            if (state.mood.IRRITATION > 100) state.mood.IRRITATION = 100;
-        } else {
-            // Gradually reduce suspicion when no threats
-            if (current_suspicion_level > SUSPICION_BASE_LEVEL) {
-                current_suspicion_level--;
-            }
+        // Boost suspicion periodically
+        current_suspicion_level += EYE_LOSS_COMPENSATION_FACTOR;
+        if (current_suspicion_level > 100) current_suspicion_level = 100;
+        
+        // Translate suspicion into irritation
+        mood->irritation() += (current_suspicion_level - SUSPICION_BASE_LEVEL) / 4;
+        if (mood->irritation() > 100) mood->irritation() = 100;
+    } else {
+        // Gradually reduce suspicion when not in defensive mode
+        if (current_suspicion_level > SUSPICION_BASE_LEVEL) {
+            current_suspicion_level--;
         }
     }
     
     // Eye loss creates hypervigilance
-    if (state.mood.CURIOSITY < 30 && state.sensor_distance == 0) {
-        state.mood.CURIOSITY += 10;  // Always scanning for threats
+    if (mood->curiosity() < 30) {
+        mood->curiosity() += 10;  // Always scanning for threats
     }
 }
 
-static void manage_pirate_mood_dynamics(SharedMemory& state) {
+static void manage_pirate_mood_dynamics(Mood* mood) {
     // Pirates have volatile mood swings
     static uint8_t mood_cycle_counter = 0;
     mood_cycle_counter++;
     
     // Periodic contentment drops (restless pirate nature)
     if ((mood_cycle_counter % 20) == 0) {
-        if (state.mood.CONTENTMENT > 30) {
-            state.mood.CONTENTMENT -= 15;  // Pirates are never truly content
-            state.mood.HUNGER += 10;       // Always wanting more
+        if (mood->contentment() > 30) {
+            mood->contentment() -= 15;  // Pirates are never truly content
+            mood->irritation() += 10;    // Always wanting more (greed as irritation)
         }
     }
     
     // Affection remains very low (trust issues from pirate life)
-    if (state.mood.AFFECTION > 10) {
-        state.mood.AFFECTION = 5;  // Pirates don't trust easily
+    if (mood->affection() > 10) {
+        mood->affection() = 5;  // Pirates don't trust easily
     }
     
     // Happiness is rare and brief for pirates
-    if (state.mood.HAPPINESS > 20) {
-        state.mood.HAPPINESS = (state.mood.HAPPINESS * 3) / 4;  // 25% decay
+    if (mood->happiness() > 20) {
+        mood->happiness() = (mood->happiness() * 3) / 4;  // 25% decay
     }
 }
 
-static void execute_territorial_behaviors(SharedMemory& state) {
-    // Pirates are extremely territorial
-    if (state.sensor_distance > 0 && state.sensor_distance < 40) {
-        // Close proximity triggers territorial response
-        state.mood.ANGER += 5;
-        state.mood.IRRITATION += 10;
+static void execute_territorial_behaviors(Mood* mood) {
+    // Pirates are extremely territorial - simplified without distance sensor
+    static uint8_t territorial_counter = 0;
+    territorial_counter++;
+    
+    // Periodic territorial behavior
+    if ((territorial_counter % 50) == 0) {  // Every 5 seconds
+        mood->anger() += 5;
+        mood->irritation() += 10;
         
-        // Reduce contentment (territory invasion)
-        if (state.mood.CONTENTMENT > 10) {
-            state.mood.CONTENTMENT -= 8;
+        // Reduce contentment (territory defense)
+        if (mood->contentment() > 10) {
+            mood->contentment() -= 8;
         }
         
-        ESP_LOGD(TAG, "TERRITORIAL DEFENSE: Distance=%dcm, Anger=%d", 
-            state.sensor_distance, state.mood.ANGER);
+        ESP_LOGD(TAG, "TERRITORIAL DEFENSE: Anger=%d", mood->anger());
     }
     
-    // Very close proximity triggers combat readiness
-    if (state.sensor_distance > 0 && state.sensor_distance < 20) {
-        state.mood.ANGER += 10;
-        state.mood.FEAR = (state.mood.FEAR * 2) / 3;  // Reduce fear, increase aggression
+    // Occasional combat readiness
+    if ((territorial_counter % 100) == 0) {  // Every 10 seconds
+        mood->anger() += 10;
+        mood->fear() = (mood->fear() * 2) / 3;  // Reduce fear, increase aggression
         
-        ESP_LOGW(TAG, "COMBAT READINESS: Preparing for battle at %dcm", state.sensor_distance);
+        ESP_LOGW(TAG, "COMBAT READINESS: Preparing for battle");
     }
 }

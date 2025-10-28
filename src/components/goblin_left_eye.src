@@ -1,0 +1,221 @@
+/**
+ * @file goblin_left_eye.cpp
+ * @brief Left eye component with animation buffer management and focusing effects
+ * Implements proper component isolation with shared state coordination
+ */
+
+#include "p32_shared_state.h"
+#include "components/st7796.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "shared/Environment.hpp"
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+// Module variables
+static const char *goblin_left_eye_TAG = "GOBLIN_LEFT_EYE";
+static uint8_t* goblin_left_eye_animation_buffer = nullptr;
+static uint32_t goblin_left_eye_current_frame = 0;
+static uint32_t goblin_left_eye_frame_timer = 0;
+static uint32_t goblin_left_eye_frame_width = 0;
+static uint32_t goblin_left_eye_frame_height = 0;
+static uint32_t goblin_left_eye_total_pixels = 0;
+
+/**
+ * @brief Initialize left eye animation system
+ */
+esp_err_t goblin_left_eye_init(void) {
+    ESP_LOGI(goblin_left_eye_TAG, "Initializing left eye animation system");
+    
+    // Get buffer and dimensions from display component
+    goblin_left_eye_animation_buffer = getBuffer();
+    goblin_left_eye_total_pixels = getFrameSize();
+    goblin_left_eye_frame_width = getFrameRowSize();
+    goblin_left_eye_frame_height = goblin_left_eye_total_pixels / goblin_left_eye_frame_width;
+    
+    if (goblin_left_eye_animation_buffer == nullptr) {
+        ESP_LOGE(goblin_left_eye_TAG, "Failed to allocate animation buffer");
+        return ESP_FAIL;
+    }
+    
+    // Initialize buffer to white
+    for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+        goblin_left_eye_animation_buffer[i] = 255;
+    }
+    
+    goblin_left_eye_current_frame = 0;
+    goblin_left_eye_frame_timer = 0;
+    ESP_LOGI(goblin_left_eye_TAG, "Left eye animation initialized with %ux%u display", goblin_left_eye_frame_width, goblin_left_eye_frame_height);
+    return ESP_OK;
+}
+
+/**
+ * @brief Load current animation frame to processing buffer for left eye
+ * Mirrors right eye animation with distance-based focusing effect
+ */
+void load_current_frame_to_buffer(void) {
+    // Get viewer distance from Environment in shared state
+    Environment* env_ptr = GSM.read<Environment>();
+    uint8_t viewer_distance = (env_ptr != nullptr) ? env_ptr->distance_cm : 128; // Default if not available
+    
+    // Calculate centers based on actual display dimensions
+    uint32_t center_x = goblin_left_eye_frame_width / 2;
+    uint32_t center_y = goblin_left_eye_frame_height / 2;
+    
+    // Calculate focus-dependent pupil and iris sizes (scaled to display size)
+    uint32_t base_scale = (goblin_left_eye_frame_width + goblin_left_eye_frame_height) / 2; // Average dimension for scaling
+    uint32_t pupil_size = (base_scale * 400 / 240) + (viewer_distance * base_scale / 60);
+    uint32_t inner_iris_size = (base_scale * 1200 / 240) + (viewer_distance * base_scale / 30);
+    uint32_t outer_iris_size = (base_scale * 3600 / 240) + (viewer_distance * base_scale / 20);
+    uint32_t sclera_size = (base_scale * 10000 / 240);
+    
+    // Mirror the right eye animation pattern with focus adaptation
+    switch (goblin_left_eye_current_frame) {
+        case 0: // Normal open eye with adaptive focus
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t x = i % goblin_left_eye_frame_width;
+                uint32_t y = i / goblin_left_eye_frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < pupil_size) { // Adaptive pupil
+                    goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size) { // Inner iris - detailed when close
+                    goblin_left_eye_animation_buffer[i] = 96; // Red-brown iris (mood-sensitive palette)
+                } else if (distance < outer_iris_size) { // Outer iris - sharp when far
+                    goblin_left_eye_animation_buffer[i] = 64; // Brown iris (mood-sensitive palette)
+                } else if (distance < sclera_size) { // Sclera
+                    goblin_left_eye_animation_buffer[i] = 255; // White (mood-sensitive palette)
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 0; // Black edge
+                }
+            }
+            break;
+            
+        case 1: // Slight squint with focus adaptation  
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t y = i / goblin_left_eye_frame_width;
+                if (y > goblin_left_eye_frame_height * 0.2 && y < goblin_left_eye_frame_height * 0.8) {
+                    uint32_t x = i % goblin_left_eye_frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    if (distance < pupil_size) { // Adaptive pupil
+                        goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < inner_iris_size) { // Focus-adaptive iris
+                        goblin_left_eye_animation_buffer[i] = 128; // Green-curious (mood-sensitive)
+                    } else if (distance < outer_iris_size) { // Outer iris
+                        goblin_left_eye_animation_buffer[i] = 96; // Red-brown (mood-sensitive)
+                    } else {
+                        goblin_left_eye_animation_buffer[i] = 224; // Light gray sclera
+                    }
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 0; // Black eyelid
+                }
+            }
+            break;
+            
+        case 2: // Wide curious look with focus adaptation
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t x = i % goblin_left_eye_frame_width;
+                uint32_t y = i / goblin_left_eye_frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                // Alert pupil size - smaller when surprised/focused
+                uint32_t alert_pupil_size = pupil_size * 0.6; 
+                
+                if (distance < alert_pupil_size) { // Small adaptive pupil
+                    goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size * 0.8) { // Bright inner iris
+                    goblin_left_eye_animation_buffer[i] = 160; // Blue-curious (mood-sensitive)
+                } else if (distance < outer_iris_size) { // Outer iris
+                    goblin_left_eye_animation_buffer[i] = 128; // Green (mood-sensitive)
+                } else if (distance < sclera_size * 1.2) { // Wide sclera for alert look
+                    goblin_left_eye_animation_buffer[i] = 255; // Bright white
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 32; // Dark edge
+                }
+            }
+            break;
+            
+        case 3: // Narrowed focus with distance adaptation
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t y = i / goblin_left_eye_frame_width;
+                if (y > goblin_left_eye_frame_height * 0.3 && y < goblin_left_eye_frame_height * 0.7) {
+                    uint32_t x = i % goblin_left_eye_frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    // Concentrated focus - pupil size varies with distance
+                    uint32_t focus_pupil_size = pupil_size * 0.8;
+                    
+                    if (distance < focus_pupil_size) {
+                        goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < inner_iris_size) {
+                        goblin_left_eye_animation_buffer[i] = 96; // Red focus (mood-sensitive)
+                    } else {
+                        goblin_left_eye_animation_buffer[i] = 192; // Purple intensity (mood-sensitive)
+                    }
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 16; // Dark eyelid
+                }
+            }
+            break;
+            
+        case 4: // Return to normal with focus adaptation
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t x = i % goblin_left_eye_frame_width;
+                uint32_t y = i / goblin_left_eye_frame_width;
+                uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                
+                if (distance < pupil_size) { // Adaptive pupil
+                    goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                } else if (distance < inner_iris_size) { // Inner iris
+                    goblin_left_eye_animation_buffer[i] = 64; // Brown iris (mood-sensitive)
+                } else if (distance < outer_iris_size) { // Outer iris
+                    goblin_left_eye_animation_buffer[i] = 224; // Light (mood-sensitive)
+                } else if (distance < sclera_size) { // Sclera
+                    goblin_left_eye_animation_buffer[i] = 255; // White
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 0; // Black
+                }
+            }
+            break;
+            
+        case 5: // Satisfied look with focus adaptation
+            for (uint32_t i = 0; i < goblin_left_eye_total_pixels; i++) {
+                uint32_t y = i / goblin_left_eye_frame_width;
+                if (y > goblin_left_eye_frame_height * 0.17 && y < goblin_left_eye_frame_height * 0.83) {
+                    uint32_t x = i % goblin_left_eye_frame_width;
+                    uint32_t distance = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
+                    
+                    // Relaxed focus - larger pupil for contentment
+                    uint32_t relaxed_pupil_size = pupil_size * 1.2;
+                    
+                    if (distance < relaxed_pupil_size) {
+                        goblin_left_eye_animation_buffer[i] = 0; // Black pupil
+                    } else if (distance < outer_iris_size) {
+                        goblin_left_eye_animation_buffer[i] = 192; // Purple satisfaction (mood-sensitive)
+                    } else {
+                        goblin_left_eye_animation_buffer[i] = 255; // Bright white
+                    }
+                } else {
+                    goblin_left_eye_animation_buffer[i] = 0; // Black
+                }
+            }
+            break;
+    }
+}
+
+/**
+ * @brief Main animation control function for left eye
+ * Controls frame timing and animation sequence
+ */
+void goblin_left_eye_act(void) {
+    // Frame timing control (advance every 30 loops ≈ 500ms at 60Hz)
+    goblin_left_eye_frame_timer++;
+    if (goblin_left_eye_frame_timer >= 30) {
+        goblin_left_eye_frame_timer = 0;
+        goblin_left_eye_current_frame = (goblin_left_eye_current_frame + 1) % 6; // Cycle through 6 frames
+    }
+    
+    // Load current frame to buffer and set global state
+    load_current_frame_to_buffer();
+}

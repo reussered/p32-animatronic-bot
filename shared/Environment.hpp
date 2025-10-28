@@ -1,4 +1,10 @@
 
+#ifndef ENVIRONMENT_HPP
+#define ENVIRONMENT_HPP
+
+// Type ID definition - matches SharedMemory.hpp
+typedef int shared_type_id_t;
+
 class Environment {
 public:
     uint32_t version;
@@ -20,4 +26,6 @@ public:
     bool display_diagnostics;
     
 };
+
+#endif // ENVIRONMENT_HPP
 

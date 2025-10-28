@@ -90,7 +90,7 @@ void gc9a01_act(void) {
     gc9a01_send_frame(current_spi_device, (uint16_t*)currentFrame, current_frame_size);
     
     // Conditional verbose logging based on Environment flags
-    Environment* env = GSM.read<Environment>("environment");
+    Environment* env = GSM.read<Environment>();
     if (env && env->verbose_logging && env->display_diagnostics) {
         if (g_loopCount % 1000 == 0) { // Log every 1000 loops when verbose
             ESP_LOGV(TAG, "Frame sent to SPI device %u at loop %u, frame_size=%u", 
