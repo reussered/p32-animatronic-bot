@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "subsystem_type": "HEAD",
     "subsystem_id": "test_head_v1",
-    "description": "Test head subsystem with dual displays for hardware validation",
+    "description": "Test head subsystem with single left display for hardware validation",
     "created": "2025-10-23",
     "controller_hardware": "ESP32_S3_DEVKITC_1",
     "coordinate_system": "planar_2d",
@@ -17,26 +17,19 @@
         "description": "Test head coordination every cycle for real-time validation"
     },
     "contained_components": [
-        "config/components/positioned/goblin_left_eye.json",
-        "config/components/positioned/goblin_right_eye.json"
+        "config/components/positioned/goblin_left_eye.json"
     ],
     "shape_assembly": {
         "type": "TEST_FIXTURE",
-        "scad_file": "assets/shapes/scad/test_fixtures/dual_display_mount.scad",
-        "stl_file": "assets/shapes/stl/test_fixtures/dual_display_mount.stl",
-        "description": "Simple mounting fixture for dual GC9A01 displays",
+        "scad_file": "assets/shapes/scad/test_fixtures/single_display_mount.scad",
+        "stl_file": "assets/shapes/stl/test_fixtures/single_display_mount.stl",
+        "description": "Simple mounting fixture for single GC9A01 display",
         "mounting_points": {
             "eye_left": {
                 "type": "26mm_ring",
-                "position": [-1.5, 0.5, 0.0],
+                "position": [0, 0, 0.0],
                 "units": "inches",
                 "description": "Left eye display mount"
-            },
-            "eye_right": {
-                "type": "26mm_ring", 
-                "position": [1.5, 0.5, 0.0],
-                "units": "inches",
-                "description": "Right eye display mount"
             }
         }
     },
@@ -55,11 +48,8 @@
     "interface_assignments": {
         "spi_bus_vspi": "DISPLAY_BUS",
         "gpio_pin_34": "LEFT_EYE_CS",
-        "gpio_pin_33": "RIGHT_EYE_CS",
         "gpio_pin_38": "LEFT_EYE_DC",
-        "gpio_pin_40": "RIGHT_EYE_DC",
         "gpio_pin_42": "SHARED_RESET",
-        "gpio_pin_39": "LEFT_EYE_BL",
-        "gpio_pin_41": "RIGHT_EYE_BL"
+        "gpio_pin_39": "LEFT_EYE_BL"
     }
 }
