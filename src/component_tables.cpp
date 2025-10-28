@@ -44,7 +44,7 @@ void (*actTable[TABLE_SIZE])(void) = {
     gc9a01_act,    // [4] gc9a01 component
     generic_spi_display_act,    // [5] generic_spi_display component
     generic_spi_display_act,    // [6] generic_spi_display component
-    goblin_right_eye_act,    // [7] Right eye display animation
+    goblin_right_eye_act,    // [7] Right eye display with bird animation
     goblin_eye_act,    // [8] Shared goblin eye processing logic with palette and mood-based rendering
     gc9a01_act,    // [9] gc9a01 component
     generic_spi_display_act,    // [10] generic_spi_display component

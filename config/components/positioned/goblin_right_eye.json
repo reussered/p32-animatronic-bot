@@ -19,8 +19,9 @@
                         "rotation":  "0 DEGREES",
                         "roll":  "0 DEGREES"
                     },
-    "function":  "primary_display_right",
-    "description":  "Right eye display animation",
+    "function":  "bird_display_right",
+    "description":  "Right eye display with bird animation",
+    "default_mood":  "BIRD",
     "animatronic_cache":  {
                               "animation_buffers":  "RIGHT_EYE_BUFFER",
                               "buffer_allocation":  "STACK_PUSH",
