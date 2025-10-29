@@ -169,7 +169,7 @@ class P32ComponentGenerator:
     
     def validate_mandatory_fields(self, component_data: Dict[str, Any], file_path: str) -> bool:
         """Validate that all mandatory JSON fields are present"""
-        mandatory_fields = ['component_name', 'description', 'timing']
+        mandatory_fields = ['component_name', 'timing']
         
         for field in mandatory_fields:
             if field not in component_data:
@@ -192,6 +192,11 @@ class P32ComponentGenerator:
         if 'version' not in component_data:
             component_data['version'] = '1.0.0.0'
             print(f"INFO: Setting default version '1.0.0.0' for {file_path}")
+        
+        # Set default description if missing
+        if 'description' not in component_data:
+            component_data['description'] = '<describe the components purpose and functionality here>'
+            print(f"INFO: Setting default description for {file_path}")
         
         return True
     
