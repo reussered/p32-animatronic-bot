@@ -5,8 +5,8 @@
     "component_name":  "spi_bus_vspi",
     "hardware_type": "BUS_INTERFACE",
     "bus_type": "SPI",
-    "bus_name": "VSPI",
-    "description": "ESP32 VSPI bus interface for SPI communication",
+    "bus_name": "HSPI",
+    "description": "ESP32 HSPI bus interface for SPI communication",
     "pin_requirements": {
         "shared_pins_needed": [
             {
@@ -44,17 +44,17 @@
                      "act_function":  "spi_bus_act"
                  },
     "pins":  {
-                 "data_output":  35,
-                 "data_input":  37,
-                 "clock":  36
+                 "data_output":  16,
+                 "data_input":  17,
+                 "clock":  15
              },
     "shared_control_pins":  {
-                               "reset":  42
+                               "reset":  45
                            },
     "unique_device_pins":  {
-                              "chip_select_1":  34,
-                              "data_command_1":  38,
-                              "backlight_1":  39,
+                              "chip_select_1":  48,
+                              "data_command_1":  47,
+                              "backlight_1":  21,
                               "chip_select_2":  33,
                               "data_command_2":  40,
                               "chip_select_3":  17,

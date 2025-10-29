@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "bot_type":  "TEST_GOBLIN_HEAD",
     "bot_id":  "test_goblin_head_v1",
-    "description":  "Test bot for goblin head with dual eye displays - validates display initialization and pin assignments",
+    "description":  "Test bot for goblin head with single left eye display - validates display initialization and pin assignments",
     "created":  "2025-10-23",
     "subsystem_type":  "HEAD_CONTROLLER",
     "controller_hardware":  "ESP32_S3_DEVKIT",
@@ -12,8 +12,7 @@
     "reference_point":  "nose_bridge",
     "units":  "INCHES",
     "contained_components":  [
-                                 "config/components/positioned/goblin_left_eye.json",
-                                 "config/components/positioned/goblin_right_eye.json"
+                                 "config/components/positioned/goblin_left_eye.json"
                              ],
     "degrees_of_freedom":  {
                                "eye_movement_dof":  "4",
@@ -31,7 +30,6 @@
                              },
     "display_config":  {
                            "left_eye_resolution":  "240x240_GC9A01",
-                           "right_eye_resolution":  "240x240_GC9A01",
                            "color_depth":  "16BIT_RGB565",
                            "frame_rate_target_hz":  "30",
                            "backlight_control":  true

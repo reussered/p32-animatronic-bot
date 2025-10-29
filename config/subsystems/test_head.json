@@ -47,9 +47,9 @@
     },
     "interface_assignments": {
         "spi_bus_vspi": "DISPLAY_BUS",
-        "gpio_pin_34": "LEFT_EYE_CS",
-        "gpio_pin_38": "LEFT_EYE_DC",
-        "gpio_pin_42": "SHARED_RESET",
-        "gpio_pin_39": "LEFT_EYE_BL"
+        "gpio_pin_48": "LEFT_EYE_CS",
+        "gpio_pin_47": "LEFT_EYE_DC",
+        "gpio_pin_45": "SHARED_RESET",
+        "gpio_pin_21": "LEFT_EYE_BL"
     }
 }

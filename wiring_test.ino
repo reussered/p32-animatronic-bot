@@ -3,13 +3,10 @@
 
 #include <Arduino.h>
 
-// Pin definitions - match your actual wiring
+// Pin definitions - match your actual wiring (SINGLE LEFT EYE)
 #define LEFT_CS   34
 #define LEFT_DC   38
 #define LEFT_BL   39
-#define RIGHT_CS  33
-#define RIGHT_DC  40
-#define RIGHT_BL  41
 #define SHARED_RST 42
 
 #define SPI_MOSI 35
