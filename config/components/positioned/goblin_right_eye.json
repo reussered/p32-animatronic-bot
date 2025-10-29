@@ -4,9 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "goblin_right_eye",
     "subsystem":  "HEAD",
-    "contained_components":  [
-                                 "config/components/creature_specific/goblin_eye.json"
-                             ],
+    "Component":  "config/components/creature_specific/goblin_eye.json",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {
@@ -29,7 +27,7 @@
                               "interface_binding":  "SPI_DEVICE_2"
                           },
     "timing":  {
-                   "hitCount":  60000
+                   "hitCount":  1
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }

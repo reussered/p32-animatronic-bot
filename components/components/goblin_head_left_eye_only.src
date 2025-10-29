@@ -1,0 +1,50 @@
+/**
+ * @file goblin_head_left_eye_only.cpp
+ * @brief Goblin head subsystem with single left eye only - minimal configuration for testing
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "components/goblin_head_left_eye_only.hpp"
+#include "core/memory/SharedMemory.hpp"
+#include "p32_shared_state.h"
+#include "esp_log.h"
+
+static const char *GOBLIN_HEAD_LEFT_EYE_ONLY_TAG = "GOBLIN_HEAD_LEFT_EYE_ONLY";
+
+/**
+ * @brief Initialize goblin_head_left_eye_only component
+ * Called once during system startup
+ */
+esp_err_t goblin_head_left_eye_only_init(void) {
+    ESP_LOGI(GOBLIN_HEAD_LEFT_EYE_ONLY_TAG, "Initializing goblin head with single left eye only");
+
+    // Subsystem initialization - coordinate contained components
+    // The actual component initialization is handled by the dispatch tables
+    // This function serves as a coordination point for the subsystem
+
+    ESP_LOGI(GOBLIN_HEAD_LEFT_EYE_ONLY_TAG, "Goblin head left eye only subsystem initialized");
+    return ESP_OK;
+}
+
+/**
+ * @brief Act function for goblin_head_left_eye_only component
+ * Called periodically based on hitCount timing (every 25 loops)
+ */
+void goblin_head_left_eye_only_act(void) {
+    // Subsystem coordination logic
+    // This runs less frequently than individual components to coordinate overall head behavior
+
+    // Access shared state if needed for coordination
+    // Mood *mood = GSM.read<Mood>();
+    // Environment *env = GSM.read<Environment>();
+
+    // Coordinate eye behavior, facial expressions, etc.
+    // For now, this is a minimal implementation that just ensures the subsystem is active
+
+    static uint32_t subsystem_loop_count = 0;
+    subsystem_loop_count++;
+
+    if (subsystem_loop_count % 100 == 0) {  // Log every ~2.5 seconds at 25 hitCount
+        ESP_LOGD(GOBLIN_HEAD_LEFT_EYE_ONLY_TAG, "Head subsystem coordination cycle %lu", subsystem_loop_count);
+    }
+}

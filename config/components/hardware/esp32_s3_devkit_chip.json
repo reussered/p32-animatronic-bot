@@ -7,7 +7,7 @@
     "chip_family": "ESP32_S3",
     "board_name": "ESP32-S3-DevKitC-1",
     "total_sram_kb": 512,
-    "psram_kb": 0,
+    "psram_kb": 8192,
     "flash_mb": 16,
     "exposed_pins": [
         {
@@ -469,5 +469,5 @@
     },
     "price_usd": 45.99,
     "price_last_updated": "2025-10-28T00:00:00Z",
-    "notes": "ESP32-S3-DevKitC-1 development board with 45 GPIO pins, 512KB SRAM, 16MB flash. No PSRAM."
+    "notes": "ESP32-S3-DevKitC-1 development board with ESP32-S3 N16R8 chip (16MB flash, 8MB PSRAM), 45 GPIO pins, 512KB SRAM."
 }

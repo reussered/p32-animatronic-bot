@@ -11,29 +11,67 @@
 
 // Forward Declarations - Init Functions (from individual component files)
 
-esp_err_t heartbeat_init(void);
-esp_err_t network_monitor_init(void);
+esp_err_t goblin_personality_init(void);
+esp_err_t goblin_mood_init(void);
+esp_err_t goblin_behavior_engine_init(void);
+esp_err_t goblin_head_init(void);
 esp_err_t goblin_left_eye_init(void);
 esp_err_t goblin_eye_init(void);
 esp_err_t gc9a01_init(void);
-esp_err_t spi_bus_vspi_init(void);
+esp_err_t spi_bus_init(void);
 esp_err_t generic_spi_display_init(void);
-esp_err_t spi_bus_vspi_init(void);
+esp_err_t goblin_right_eye_init(void);
+esp_err_t goblin_eye_init(void);
+esp_err_t gc9a01_init(void);
+esp_err_t spi_bus_init(void);
 esp_err_t generic_spi_display_init(void);
+esp_err_t goblin_nose_init(void);
+esp_err_t hc_sr04_ultrasonic_distance_sensor_init(void);
+esp_err_t goblin_mouth_init(void);
+esp_err_t goblin_mouth_init(void);
+esp_err_t gc9a01_init(void);
+esp_err_t spi_bus_init(void);
+esp_err_t generic_spi_display_init(void);
+esp_err_t goblin_speaker_init(void);
+esp_err_t speaker_init(void);
+esp_err_t goblin_left_ear_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t goblin_right_ear_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t goblin_torso_init(void);
 
 // Forward Declarations - Act Functions (from individual component files)
 
-void heartbeat_act(void);
-void network_monitor_act(void);
+void goblin_personality_act(void);
+void goblin_mood_act(void);
+void goblin_behavior_engine_act(void);
+void goblin_head_act(void);
 void goblin_left_eye_act(void);
 void goblin_eye_act(void);
 void gc9a01_act(void);
-void spi_bus_vspi_act(void);
+void spi_bus_act(void);
 void generic_spi_display_act(void);
-void spi_bus_vspi_act(void);
+void goblin_right_eye_act(void);
+void goblin_eye_act(void);
+void gc9a01_act(void);
+void spi_bus_act(void);
 void generic_spi_display_act(void);
+void goblin_nose_act(void);
+void hc_sr04_ultrasonic_distance_sensor_act(void);
+void goblin_mouth_act(void);
+void goblin_mouth_act(void);
+void gc9a01_act(void);
+void spi_bus_act(void);
+void generic_spi_display_act(void);
+void goblin_speaker_act(void);
+void speaker_act(void);
+void goblin_left_ear_act(void);
+void servo_sg90_micro_act(void);
+void goblin_right_ear_act(void);
+void servo_sg90_micro_act(void);
+void goblin_torso_act(void);
 
 // Table size constant - ALL TABLES MUST HAVE SAME SIZE
-#define TABLE_SIZE 9
+#define TABLE_SIZE 28
 
 #endif // P32_COMPONENT_REGISTRY_HPP

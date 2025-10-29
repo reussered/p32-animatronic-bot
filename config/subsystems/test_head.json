@@ -6,20 +6,20 @@
     "subsystem_id": "test_head_v1",
     "description": "Test head subsystem with single left display for hardware validation",
     "created": "2025-10-23",
-    "controller_hardware": "ESP32_S3_DEVKITC_1",
-    "coordinate_system": "planar_2d",
-    "reference_point": "nose_center",
+    "controller": "ESP32_S3_DEVKITC_1",
+    "coords": "planar_2d",
+    "ref": "nose_center",
     "units": "INCHES",
-    "component_name": "test_head",
-    "component_type": "SUBSYSTEM_ASSEMBLY",
+    "name": "test_head",
+    "type": "SUBSYSTEM_ASSEMBLY",
     "timing": {
         "hitCount": 1,
         "description": "Test head coordination every cycle for real-time validation"
     },
-    "contained_components": [
+    "components": [
         "config/components/positioned/goblin_left_eye.json"
     ],
-    "shape_assembly": {
+    "shape": {
         "type": "TEST_FIXTURE",
         "scad_file": "assets/shapes/scad/test_fixtures/single_display_mount.scad",
         "stl_file": "assets/shapes/stl/test_fixtures/single_display_mount.stl",

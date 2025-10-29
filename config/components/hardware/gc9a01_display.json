@@ -7,6 +7,7 @@
     "display_driver":  true,
     "component_name":  "gc9a01",
     "subsystem":  "HEAD",
+    "Component":  "config/components/interfaces/spi_bus_vspi.json",
     "physical_specs":  {
                            "diameter":  "1.28 INCH",
                            "thickness":  "0.08 INCH",
@@ -172,10 +173,7 @@
     "software":  {
                      "init_function":  "gc9a01_init",
                      "act_function":  "gc9a01_act",
-                     "includes_components":  [
-                         "config/components/interfaces/spi_bus_vspi.json",
-                         "config/components/hardware/generic_spi_display.json"
-                     ]
+                     "includes_components":  []
                  },
     "required_interface_functions":  [
                                         "getBuffer",

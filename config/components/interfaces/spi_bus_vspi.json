@@ -41,7 +41,8 @@
                },
     "software":  {
                      "init_function":  "spi_bus_init",
-                     "act_function":  "spi_bus_act"
+                     "act_function":  "spi_bus_act",
+                     "Component":  "config/components/hardware/generic_spi_display.json"
                  },
     "pins":  {
                  "data_output":  16,
@@ -55,7 +56,7 @@
                               "chip_select_1":  48,
                               "data_command_1":  47,
                               "backlight_1":  21,
-                              "chip_select_2":  33,
+                              "chip_select_2":  18,
                               "data_command_2":  40,
                               "chip_select_3":  17,
                               "data_command_3":  5,

@@ -1,0 +1,25 @@
+# P32 Universal Component System - Individual component files
+# Each component can be commented out for memory analysis
+
+# Always include both main.cpp and simple_display_test.cpp
+# main.cpp will decide which one to call based on SIMPLE_DISPLAY_TEST define
+set(app_sources
+    simple_display_test.cpp
+    component_tables.cpp
+    p32_component_functions.cpp
+    components/spi_bus.src
+    components/gc9a01.src
+    components/SharedMemory.cpp
+    components/Mood.cpp
+)
+
+# Conditionally include subsystem-specific source files
+if(SUBSYSTEM_GOBLIN_HEAD)
+    add_subdirectory(goblin_full)
+endif()
+
+message(STATUS "P32 sources: ${app_sources}")
+
+idf_component_register(SRCS ${app_sources}
+                       INCLUDE_DIRS ../include
+                                    ../shared)

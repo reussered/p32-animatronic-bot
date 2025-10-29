@@ -1,52 +1,21 @@
-# P32 Animatronic Bot - ESP-IDF CMakeLists.txt
-# Main component for goblin_head environment
-
 idf_component_register(
-    SRCS
-        "main.cpp"
-        "../src/component_tables.cpp"
-        "../src/p32_component_functions.cpp"
-        "../src/components/goblin_head.src"
-        "../src/components/goblin_left_eye.src"
-        "../src/components/goblin_right_eye.src"
-        "../src/components/goblin_mouth.src"
-        "../src/components/goblin_speaker.src"
-        "../src/components/goblin_nose.src"
-        "../src/components/goblin_left_ear.src"
-        "../src/components/goblin_right_ear.src"
-        "../src/components/system_core.src"
-        "../src/components/heartbeat.src"
-        "../src/components/network_monitor.src"
-        "../src/components/hc_sr04_ultrasonic_distance_sensor.src"
-        "../src/components/speaker.src"
-        "../src/components/spi_bus.src"
-        "../src/components/gc9a01.src"
-        "../src/components/generic_spi_display/generic_spi_display.src"
-        "../src/components/SharedMemory.cpp"
-        "../src/components/Mood.cpp"
-        "../src/p32_web_client.cpp"
-        "../src/goblin_full/heartbeat.src"
-        "../src/goblin_full/network_monitor.src"
-        "../src/goblin_full/test_head.src"
-        "../src/goblin_full/goblin_eye.src"
-        "../src/goblin_full/goblin_left_eye.src"
-        "../src/goblin_full/goblin_right_eye.src"
-        "../src/goblin_full/goblin_nose.src"
-        "../src/goblin_full/goblin_head.src"
-        "../src/goblin_full/goblin_mouth.src"
-        "../src/goblin_full/goblin_speaker.src"
-        "../src/goblin_full/goblin_left_ear.src"
-        "../src/goblin_full/goblin_right_ear.src"
-        "../src/goblin_full/mg996r_servo.src"
-        "../src/goblin_full/servo_sg90_micro.src"
-        "../src/goblin_full/torso_integrated_power_system.src"
-        "../src/goblin_full/hc_sr04_ultrasonic_distance_sensor.src"
-        "../src/goblin_full/speaker.src"
-
-    INCLUDE_DIRS
-        "../include"
-        "../shared"
-
-    REQUIRES
-        arduinojson
+    SRCS "main.cpp" "component_tables.cpp" "p32_components.cmake"
+    INCLUDE_DIRS "../include" "../shared"
 )
+
+# Conditional source file inclusion based on subsystem
+if(CONFIG_SUBSYSTEM_GOBLIN_HEAD_ONLY)
+    target_sources(${COMPONENT_LIB} PRIVATE
+        "../components/component_tables.cpp"
+        "../components/p32_component_functions.cpp"
+        "../components/components/goblin_head_left_eye_only.src"
+        "../components/goblin_full/goblin_left_eye.src"
+        "../components/goblin_full/goblin_eye.src"
+        "../components/components/gc9a01.src"
+        "../components/components/spi_bus.src"
+        "../components/components/generic_spi_display/generic_spi_display.src"
+        "../components/components/SharedMemory.cpp"
+        "../components/components/Mood.cpp"
+        "../components/p32_web_client.cpp"
+    )
+endif()

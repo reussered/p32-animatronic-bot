@@ -58,7 +58,6 @@ build_flags =
     ${common.build_flags}
     -DESP32_CHIP_TYPE_S3=1
     -DCONFIG_ESP32S3_SPIRAM_SUPPORT=1
-    -DCONFIG_ESP32S3_DEFAULT_CPU_FREQ_240=1
     -DCHIP_GPIO_COUNT=45
     -DCHIP_SRAM_SIZE=512000
     -DCHIP_HAS_PSRAM=1
@@ -79,18 +78,31 @@ build_flags =
     -DENABLE_RIGHT_EYE=1
     -DENABLE_MOUTH=1
     -DENABLE_NOSE_SENSOR=1
-build_src_filter = 
-    +<*>
-    -<components/>
-    +<components/goblin_left_eye.cpp>
-    +<components/goblin_right_eye.cpp>
-    +<components/goblin_nose.cpp>
-    +<components/goblin_eye.cpp>
-    +<components/gc9a01.cpp>
-    +<subsystems/goblin_head/>
 upload_port = COM3
-
-[env:goblin_torso]
+build_src_filter =
+    -<*>
+    +<main.cpp>
+    +<component_tables.cpp>
+    +<p32_component_functions.cpp>
+    +<src/components/goblin_head.src>
+    +<src/components/goblin_left_eye.src>
+    +<src/components/goblin_right_eye.src>
+    +<src/components/goblin_mouth.src>
+    +<src/components/goblin_speaker.src>
+    +<src/components/goblin_nose.src>
+    +<src/components/goblin_left_ear.src>
+    +<src/components/goblin_right_ear.src>
+    +<src/components/system_core.src>
+    +<src/components/heartbeat.src>
+    +<src/components/network_monitor.src>
+    +<src/components/hc_sr04_ultrasonic_distance_sensor.src>
+    +<src/components/speaker.src>
+    +<src/components/spi_bus.src>
+    +<src/components/gc9a01.src>
+    +<src/components/generic_spi_display/generic_spi_display.src>
+    +<src/components/SharedMemory.cpp>
+    +<src/components/Mood.cpp>
+    +<src/p32_web_client.cpp>[env:goblin_torso]
 extends = common_esp32s3
 board = esp32-s3-devkitc-1
 build_flags = 

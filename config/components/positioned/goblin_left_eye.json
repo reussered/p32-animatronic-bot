@@ -4,9 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "goblin_left_eye",
     "subsystem":  "HEAD",
-    "contained_components":  [
-                                 "config/components/creature_specific/goblin_eye.json"
-                             ],
+    "Component":  "config/components/creature_specific/goblin_eye.json",
     "mounting_architecture":  {
                                   "type":  "two_tier",
                                   "hardware_mount":  "display_basic_mount",

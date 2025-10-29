@@ -1,0 +1,92 @@
+{
+    "relative_filename":  "config/bots/bot_families/goblins/goblin_head_only.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "GOBLIN_HEAD_ONLY",
+    "bot_id":  "goblin_head_only_v1",
+    "description":  "Goblin head with single left eye only - no torso",
+    "created":  "2025-10-29",
+    "component_name":  "goblin_head_only",
+    "component_type":  "CREATURE_ASSEMBLY",
+    "timing":  {
+                   "hitCount":  50,
+                   "description":  "Head-only creature coordination every 5 seconds"
+               },
+    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant":  "head_only_goblin",
+    "horizontal_scale":  "0.7",
+    "vertical_scale":  "0.6",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "3.0 INCH",
+    "compression_factor":  0.7,
+    "family_components":  [
+                                    "config/components/functional/goblin_personality.json",
+                                    "config/components/functional/goblin_mood.json"
+                                ],
+    "subsystems":  [
+                                 "config/subsystems/goblin_head_left_eye_only.json"
+                             ],
+    "mood_defaults":  {
+                          "FEAR":  20,
+                          "ANGER":  10,
+                          "IRRITATION":  15,
+                          "HAPPINESS":  0,
+                          "CONTENTMENT":  30,
+                          "HUNGER":  0,
+                          "CURIOSITY":  40,
+                          "AFFECTION":  0
+                      },
+    "behavior_config":  {
+                            "threat_response_enabled":  true,
+                            "auto_sleep_timeout_seconds":  300,
+                            "interaction_range_cm":  200,
+                            "aggressive_threshold":  70,
+                            "calm_threshold":  20
+                        },
+    "shape_assembly":  {
+                           "type":  "HEAD_ONLY",
+                           "description":  "Goblin head assembly without torso",
+                           "scad_file":  "assets/shapes/scad/skull_generators/goblin_skull.scad",
+                           "stl_file":  "assets/shapes/stl/skull_generators/goblin_skull.stl"
+                       },
+    "mass_properties":  {
+                            "total_mass_kg":  0.8,
+                            "center_of_mass":  [
+                                                  0,
+                                                  5,
+                                                  0
+                                              ]
+                        },
+    "power_requirements":  {
+                               "peak_current_ma":  800,
+                               "average_current_ma":  400,
+                               "voltage_range_v":  [
+                                                     6,
+                                                     8.4
+                                                 ]
+                           },
+    "processing_responsibilities":  {
+                                       "display_processing":  true,
+                                       "audio_processing":  false,
+                                       "sensor_fusion":  true,
+                                       "behavior_coordination":  true
+                                   },
+    "hardware_config":  {
+                            "controller_type":  "ESP32_S3_DEVKITC_1",
+                            "display_type":  "GC9A01_SPI",
+                            "sensor_types":  [
+                                                "HC_SR04"
+                                            ],
+                            "actuator_types":  [
+                                                  "SERVO_MG996R"
+                                              ]
+                        },
+    "prototype_status":  "testing",
+    "tested":  false,
+    "notes":  [
+                  "Head-only goblin configuration with single left eye",
+                  "No torso components",
+                  "Simplified for initial testing and development"
+              ]
+}
