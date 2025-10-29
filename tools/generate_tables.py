@@ -169,18 +169,12 @@ class P32ComponentGenerator:
     
     def validate_mandatory_fields(self, component_data: Dict[str, Any], file_path: str) -> bool:
         """Validate that all mandatory JSON fields are present"""
-        mandatory_fields = ['component_name', 'timing']
+        mandatory_fields = ['component_name', 'relative_filename']
         
         for field in mandatory_fields:
             if field not in component_data:
                 print(f"ERROR: Missing mandatory field '{field}' in {file_path}")
                 return False
-        
-        # Validate timing.hitCount
-        timing = component_data.get('timing', {})
-        if 'hitCount' not in timing:
-            print(f"ERROR: Missing timing.hitCount in {file_path}")
-            return False
             
         # Validate component_name is not empty
         comp_name = component_data.get('component_name', '').strip()
@@ -197,6 +191,12 @@ class P32ComponentGenerator:
         if 'description' not in component_data:
             component_data['description'] = '<describe the components purpose and functionality here>'
             print(f"INFO: Setting default description for {file_path}")
+        
+        # Set default timing.hitCount if missing
+        timing = component_data.get('timing', {})
+        if 'hitCount' not in timing:
+            component_data.setdefault('timing', {})['hitCount'] = 1
+            print(f"INFO: Setting default hitCount = 1 for {file_path}")
         
         return True
     
@@ -279,7 +279,7 @@ class P32ComponentGenerator:
                     return
                     
                 comp_name = component_data["component_name"]  # No default - must be present
-                hit_count = component_data["timing"]["hitCount"]  # No default - must be present
+                hit_count = component_data.get("timing", {}).get("hitCount", 1)  # Default set by validation
                 
                 # Set current component context for configuration processing
                 self.current_component = comp_name
