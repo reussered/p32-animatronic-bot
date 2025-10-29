@@ -171,6 +171,65 @@ All of the component source code fragments (in component)name.src go into a sing
 - Required fields: `"relative_filename"`, `"version"`, `"author"`
 - Shape parameter: Present for hardware-only components (`"init_function": "STUB"`)
 
+### JSON Parsing Requirements (CRITICAL)
+
+**ASCII Encoding Mandatory (NO UTF-8 BOM):**
+
+- ALL JSON files MUST be saved as pure ASCII without UTF-8 BOM
+- UTF-8 BOM breaks Python JSON parser with "Expecting value: line 1 column 1 (char 0)"
+- Always use ASCII encoding, never UTF-8 with BOM
+
+**Mandatory JSON Structure:**
+
+```json
+{
+  "relative_filename": "config/components/positioned/component_name.json",
+  "version": "1.0.0",
+  "author": "config/author.json", 
+  "component_name": "unique_component_name",
+  "description": "Human readable description",
+  "timing": {
+    "hitCount": 10
+  },
+  "software": {
+    "init_function": "component_name_init",
+    "act_function": "component_name_act"
+  }
+}
+```
+
+**Function Name Generation:**
+
+- Init: `p32_{component_name}_init()`
+- Act: `p32_{component_name}_act(uint32_t loopCount)`
+- Or "STUB" if not needed
+
+**C++ Parsing Implementation:**
+
+- Uses cJSON library for parsing
+- Error handling required - check for NULL before accessing values
+- Type validation - ensure correct data types
+
+**Component Composition:**
+
+- Wildcard pattern: Any field ending in `*_components` triggers recursive inclusion
+- Example: `"left_eye_components": "config/components/positioned/goblin_left_eye.json"`
+- Processing: Generator parses hierarchy, generates dispatch tables, handles duplicates
+
+**Bus Interface Requirements:**
+
+- SPI: Shared (SCLK, MISO) + Unique per device (CS, MOSI)
+- I2S: Shared (BCLK, WS) + Unique (DATA)
+- I2C: Shared (SCL, SDA) - address-based multiplexing
+- ADC/PWM: Unique pins per channel
+- GPIO_PAIR: 2 unique pins per pair
+
+**Validation:**
+
+- Automated tools: `config/validate.py` for syntax/structure
+- BOM detection: Automated UTF-8 BOM corruption checking
+- Reference validation: Verify all file paths exist
+
 ### Component Containment Types
 
 1. **contained_components**: Direct child components loaded when parent initializes
