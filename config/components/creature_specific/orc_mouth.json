@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Orc mouth with massive tusks and battle expressions - uses large displays",
     "created":  "2025-10-23",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/ili9486_tft_800x480.json"
                              ],
     "component_constraints":  {

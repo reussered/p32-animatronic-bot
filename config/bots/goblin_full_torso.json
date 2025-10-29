@@ -7,11 +7,11 @@
     "description":  "Goblin torso subsystem controller - power, navigation, communication, spine control",
     "created":  "2025-10-13",
     "subsystem_type":  "TORSO_CONTROLLER",
-    "controller_hardware":  "ESP32_S3_DEVKIT",
+    "controller":  "ESP32_S3_DEVKIT",
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "units":  "INCHES",
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin/torso_components/power_management_system.json",
                                  "config/components/positioned/goblin/torso_components/main_battery_monitor.json",
                                  "config/components/positioned/goblin/torso_components/external_wifi_communication.json",

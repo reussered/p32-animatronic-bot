@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/humanoid_pelvis_assembly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                      "z":  "0.0 INCH",
                      "scaling_applies":  true
                  },
-    "contained_components": ["config/components/hardware/pelvis_structural_assembly.json"],
+    "components": ["config/components/hardware/pelvis_structural_assembly.json"],
     "attachment_points":  {
                               "hip_left_connection":  {
                                                           "position":  {

@@ -1,4 +1,4 @@
-﻿{
+{
     "component_type":  "POSITIONED_COMPONENT",
     "position":  {
                      "units":  "INCH",
@@ -11,7 +11,7 @@
     "component_name":  "waist_rotation_servo",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "contained_components": ["config/components/hardware/servo_sg90_micro.json"],
+    "components": ["config/components/hardware/servo_sg90_micro.json"],
     "software":  {
                      "act_function":  "waist_rotation_servo_act",
                      "init_function":  "waist_rotation_servo_init",

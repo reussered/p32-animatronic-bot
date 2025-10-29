@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "goblin_center_eye",
     "subsystem":  "HEAD",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/goblin_eye.json"
                              ],
     "template_inheritance":  {

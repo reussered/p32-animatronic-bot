@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename": "config/components/test/test_left_eye_positioned.json",
     "version": "1.0.0",
     "author": "config/author.json",
@@ -8,7 +8,7 @@
         "hitCount": 1,
         "description": "Test left eye updates every cycle"
     },
-    "contained_components": ["config/components/hardware/gc9a01_display.json"],
+    "components": ["config/components/hardware/gc9a01_display.json"],
     "position": {
         "coordinate_system": "planar_2d",
         "reference_point": "nose_center",

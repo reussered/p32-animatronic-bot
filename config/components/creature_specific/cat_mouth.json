@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared cat mouth processing logic with purr animation and feline expressions",
     "created":  "2025-10-23",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/oled_ssd1306_128x64.json"
                              ],
     "component_constraints":  {

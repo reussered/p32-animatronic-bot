@@ -7,11 +7,11 @@
     "bot_type": "TEST_BOT_MINIMAL",
     "bot_id": "test_bot_minimal_v1",
     "subsystem_type": "HEAD_CONTROLLER",
-    "controller_hardware": "ESP32_S3_DEVKIT",
+    "controller": "ESP32_S3_DEVKIT",
     "coordinate_system": "planar_2d",
     "reference_point": "center",
     "units": "PIXELS",
-    "contained_components": [
+    "components": [
         "config/components/hardware/esp32_s3_devkit_chip.json",
         "config/components/system/system_core.json",
         "config/components/system/power_monitor.json",

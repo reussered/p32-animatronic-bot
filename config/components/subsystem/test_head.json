@@ -12,7 +12,7 @@
     "subsystem": "HEAD",
     "coordinate_system": "planar_2d",
     "reference_point": "nose_center",
-    "contained_components": [
+    "components": [
         "config/components/positioned/goblin_left_eye.json",
         "config/components/positioned/goblin_right_eye.json"
     ],

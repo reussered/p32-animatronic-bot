@@ -39,6 +39,16 @@ esp_err_t servo_sg90_micro_init(void);
 esp_err_t goblin_right_ear_init(void);
 esp_err_t servo_sg90_micro_init(void);
 esp_err_t goblin_torso_init(void);
+esp_err_t spine_flexion_servo_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t spine_extension_servo_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t waist_rotation_servo_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t torso_status_led_init(void);
+esp_err_t servo_sg90_micro_init(void);
+esp_err_t torso_speaker_init(void);
+esp_err_t servo_sg90_micro_init(void);
 
 // Forward Declarations - Act Functions (from individual component files)
 
@@ -70,8 +80,18 @@ void servo_sg90_micro_act(void);
 void goblin_right_ear_act(void);
 void servo_sg90_micro_act(void);
 void goblin_torso_act(void);
+void spine_flexion_servo_act(void);
+void servo_sg90_micro_act(void);
+void spine_extension_servo_act(void);
+void servo_sg90_micro_act(void);
+void waist_rotation_servo_act(void);
+void servo_sg90_micro_act(void);
+void torso_status_led_act(void);
+void servo_sg90_micro_act(void);
+void torso_speaker_act(void);
+void servo_sg90_micro_act(void);
 
 // Table size constant - ALL TABLES MUST HAVE SAME SIZE
-#define TABLE_SIZE 28
+#define TABLE_SIZE 38
 
 #endif // P32_COMPONENT_REGISTRY_HPP

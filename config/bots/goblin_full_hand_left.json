@@ -7,11 +7,11 @@
     "description":  "Goblin left hand subsystem controller - 5 finger articulation",
     "created":  "2025-10-13",
     "subsystem_type":  "HAND_CONTROLLER_LEFT",
-    "controller_hardware":  "ESP32_C3_MINI",
+    "controller":  "ESP32_C3_MINI",
     "coordinate_system":  "skull_3d",
     "reference_point":  "wrist_joint_left",
     "units":  "INCHES",
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin/hand_components/left/thumb_servo.json",
                                  "config/components/positioned/goblin/hand_components/left/index_finger_servo.json",
                                  "config/components/positioned/goblin/hand_components/left/middle_finger_servo.json",

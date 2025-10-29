@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "cat_eye_left",
     "subsystem":  "HEAD",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/cat_eye.json"
                              ],
     "template_inheritance":  {

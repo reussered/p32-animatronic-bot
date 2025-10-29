@@ -15,7 +15,7 @@
     "coordinate_system": "planar_2d",
     "reference_point": "nose_center",
     "eye_spacing": "3.0 INCH",
-    "subsystem_assemblies": [
+    "subsystems": [
         "config/subsystems/test_head.json"
     ],
     "mood_defaults": {

@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "android_eye_left",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/android_eye.json"
                              ],
     "template_inheritance":  {

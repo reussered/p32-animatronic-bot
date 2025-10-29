@@ -1,4 +1,4 @@
-﻿{
+{
   "relative_filename": "config/components/positioned/head/ambient_temperature_sensor.json",
   "version": "1.0.0",
   "author": "config/author.json",
@@ -10,7 +10,7 @@
   "subsystem": "head",
   "created": "2025-10-23",
   
-  "contained_components": ["config/hardware/ds18b20_temperature_sensor.json"],
+  "components": ["config/hardware/ds18b20_temperature_sensor.json"],
   
   "positioning": {
     "coordinate_system": "skull_3d",

@@ -3,7 +3,7 @@
     "version":  "2.0.0",
     "author":  "config/author.json",
     "component_name":  "head_components_goblin_right_eye",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/goblin_eye.json"
                              ],
     "template_inheritance":  {

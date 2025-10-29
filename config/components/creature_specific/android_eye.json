@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared android eye processing logic with LED matrix and digital mood-based rendering",
     "created":  "2025-10-22",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/led_matrix_small.json"
                              ],
     "component_constraints":  {

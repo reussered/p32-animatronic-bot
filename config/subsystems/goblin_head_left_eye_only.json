@@ -6,7 +6,7 @@
     "subsystem_id":  "goblin_head_left_eye_v1",
     "description":  "Goblin head subsystem with single left eye only - minimal configuration for testing",
     "created":  "2025-10-29",
-    "controller_hardware":  "ESP32_S3_DEVKITC_1",
+    "controller":  "ESP32_S3_DEVKITC_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
@@ -16,7 +16,7 @@
                    "hitCount":  25,
                    "description":  "Head coordination every 2.5 seconds"
                },
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin_left_eye.json"
                              ],
     "shape_assembly":  {

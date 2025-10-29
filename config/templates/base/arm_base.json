@@ -6,7 +6,7 @@
     "description":  "Base template for arm subsystems - shoulder, elbow, wrist servos",
     "created":  "2025-10-13",
     "subsystem_type":  "ARM_CONTROLLER",
-    "controller_hardware":  "ESP32_C3_MINI",
+    "controller":  "ESP32_C3_MINI",
     "coordinate_system":  "skull_3d",
     "reference_point":  "shoulder_socket",
     "units":  "INCHES",

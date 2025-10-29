@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "cyclops_eye_center",
     "subsystem":  "HEAD",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/cyclops_eye.json"
                              ],
     "template_inheritance":  {

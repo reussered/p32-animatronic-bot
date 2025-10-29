@@ -6,7 +6,7 @@
     "component_type":  "POSITIONED_DISPLAY",
     "description":  "Left eye positioned display with goblin-specific visual processing",
     "created":  "2025-10-22",
-    "contained_components":  [
+    "components":  [
                                  "config/components/creature_specific/goblin_eye.json"
                              ],
     "interface_assignment":  "SPI_DEVICE_1",

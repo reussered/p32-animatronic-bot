@@ -14,7 +14,7 @@
     "reference_point":  "nose_center",
     "eye_spacing":  "3.0 INCH",
     "compression_factor":  0.7,
-    "contained_components":  [
+    "components":  [
                                  "config/components/functional/goblin_personality.json",
                                  "config/components/functional/goblin_mood.json",
                                  "config/components/functional/goblin_behavior_engine.json",

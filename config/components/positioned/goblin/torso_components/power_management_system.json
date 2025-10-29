@@ -1,10 +1,10 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin/torso_components/power_management_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "power_manager",
     "subsystem":  "TORSO",
-    "contained_components": ["config/components/hardware/power_management_unit.json"],
+    "components": ["config/components/hardware/power_management_unit.json"],
     "interface_assignment":  "I2C_BUS_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",

@@ -7,11 +7,11 @@
     "description":  "Goblin left leg subsystem controller - 6 DOF leg control for bipedal walking",
     "created":  "2025-10-13",
     "subsystem_type":  "LEG_CONTROLLER_LEFT",
-    "controller_hardware":  "ESP32_C3_MINI",
+    "controller":  "ESP32_C3_MINI",
     "coordinate_system":  "skull_3d",
     "reference_point":  "hip_socket_left",
     "units":  "INCHES",
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin/leg_components/left/hip_flexion_servo.json",
                                  "config/components/positioned/goblin/leg_components/left/hip_abduction_servo.json",
                                  "config/components/positioned/goblin/leg_components/left/hip_rotation_servo.json",

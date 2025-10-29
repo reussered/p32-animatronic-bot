@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_AUDIO",
     "description":  "Shared goblin ear processing logic with directional sensitivity and goblin-specific audio characteristics",
     "created":  "2025-10-22",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/hw496_microphone.json"
                              ],
     "creature_audio_profile":  {

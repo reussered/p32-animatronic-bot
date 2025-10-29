@@ -55,7 +55,7 @@
                                                                                                                           "spi_device_1-3.json"
                                                                                                                       ]
                                                                                                          },
-                                                                               "contained_components":  {
+                                                                               "components":  {
                                                                                                             "files":  7,
                                                                                                             "status":  "COMPLETE OK",
                                                                                                             "list":  [

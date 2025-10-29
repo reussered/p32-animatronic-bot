@@ -51,7 +51,7 @@
     "subsystem_compositions":  {
                                    "legs_subsystem":  {
                                                           "functional_component":  "config/components/functional/humanoid_leg_subsystem.json",
-                                                          "controller_hardware":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
                                                           "servo_hardware":  "config/components/hardware/mg996r_servo.json",
                                                           "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                                           "sensor_components":  [
@@ -61,14 +61,14 @@
                                                       },
                                    "arms_subsystem":  {
                                                           "functional_component":  "config/components/functional/humanoid_arm_subsystem.json",
-                                                          "controller_hardware":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
                                                           "servo_hardware":  "config/components/hardware/mg90s_servo.json",
                                                           "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                                           "expansion_hardware":  "config/components/hardware/pca9685_pwm_expander.json"
                                                       },
                                    "head_subsystem":  {
                                                           "functional_component":  "config/components/functional/humanoid_head_subsystem.json",
-                                                          "controller_hardware":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
                                                           "servo_hardware":  "config/components/hardware/mg90s_servo.json",
                                                           "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                                           "sensor_components":  [

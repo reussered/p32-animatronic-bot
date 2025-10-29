@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "subsystem_type":  "HAND_CONTROLLER",
     "description":  "Universal base template for hand subsystem controllers across all creatures",
-    "controller_hardware":  {
+    "controller":  {
                                 "processor":  "ESP32_C3_MINI",
                                 "flash_memory":  "4MB",
                                 "ram":  "400KB",

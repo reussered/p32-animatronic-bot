@@ -6,7 +6,7 @@
     "description":  "Aggressive goblin warrior head subsystem with battle scars and fierce expression",
     "created":  "2025-10-13",
     "subsystem_type":  "HEAD_CONTROLLER",
-    "controller_hardware":  "ESP32_S3_DEVKIT",
+    "controller":  "ESP32_S3_DEVKIT",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "INCHES",

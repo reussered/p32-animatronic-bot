@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/humanoid_hip_left.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                      "z":  "0.0 INCH",
                      "scaling_applies":  true
                  },
-    "contained_components": ["config/components/hardware/hip_joint_assembly.json"],
+    "components": ["config/components/hardware/hip_joint_assembly.json"],
     "degrees_of_freedom":  {
                                "total_dof":  3,
                                "joint_1_flexion_extension":  {

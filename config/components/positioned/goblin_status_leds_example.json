@@ -1,10 +1,10 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin_status_leds_example.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "goblin_status_leds_example",
     "subsystem":  "UNKNOWN",
-    "contained_components": ["config/components/hardware/ws2812b_strip.json"],
+    "components": ["config/components/hardware/ws2812b_strip.json"],
     "mounting_architecture":  {
                                   "type":  "hardware_direct",
                                   "shape_generation":  "none"

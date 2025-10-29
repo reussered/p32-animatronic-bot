@@ -1,11 +1,11 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/robot_back_mount.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_MECHANICAL",
     "positioned_id":  "ROBOT_BACK_MOUNT",
     "description":  "Back-mounted mechanical attachment system for deployable equipment",
-    "contained_components": ["config/components/hardware/back_mount_system.json"],
+    "components": ["config/components/hardware/back_mount_system.json"],
     "spatial_coordinates":  {
                                 "coordinate_system":  "planar_2d",
                                 "reference_point":  "nose_center",

@@ -1,10 +1,10 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin/torso_components/mesh_software_coordinator.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "mesh_software_coordinator",
     "subsystem":  "TORSO",
-    "contained_components": ["config/components/hardware/esp32_s3_devkit.json"],
+    "components": ["config/components/hardware/esp32_s3_devkit.json"],
     "interface_assignment":  "SOFTWARE_COORDINATOR_INTERFACE",
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",

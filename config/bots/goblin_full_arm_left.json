@@ -7,11 +7,11 @@
     "description":  "Goblin left arm subsystem controller - 7 DOF arm control",
     "created":  "2025-10-13",
     "subsystem_type":  "ARM_CONTROLLER_LEFT",
-    "controller_hardware":  "ESP32_C3_MINI",
+    "controller":  "ESP32_C3_MINI",
     "coordinate_system":  "skull_3d",
     "reference_point":  "shoulder_socket_left",
     "units":  "INCHES",
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin/arm_components/left/shoulder_flexion_servo.json",
                                  "config/components/positioned/goblin/arm_components/left/shoulder_abduction_servo.json",
                                  "config/components/positioned/goblin/arm_components/left/shoulder_rotation_servo.json",

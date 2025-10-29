@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "component_name":  "goblin_nose",
     "subsystem":  "HEAD",
-    "contained_components":  [
+    "components":  [
         "config/components/hardware/hc_sr04_sensor.json"
     ],
     "mounting_architecture":  {

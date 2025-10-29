@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared cat eye processing logic with palette and mood-based rendering",
     "created":  "2025-10-22",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/gc9a01_display.json"
                              ],
     "component_constraints":  {

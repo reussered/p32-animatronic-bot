@@ -1,10 +1,10 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin/torso_components/spine_servo_lower.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "goblin_lower_spine",
     "subsystem":  "TORSO",
-    "contained_components": ["config/components/hardware/mg996r_servo.json"],
+    "components": ["config/components/hardware/mg996r_servo.json"],
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "position":  {

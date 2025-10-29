@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/humanoid_shoulder_left.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                      "z":  "18.0 INCH",
                      "scaling_applies":  true
                  },
-    "contained_components": ["config/components/hardware/shoulder_joint_assembly.json"],
+    "components": ["config/components/hardware/shoulder_joint_assembly.json"],
     "interface_assignments":  {
                                   "servo_1_flexion_extension":  "config/components/interfaces/servo_shoulder_flex_left.json",
                                   "servo_2_abduction_adduction":  "config/components/interfaces/servo_shoulder_abd_left.json",

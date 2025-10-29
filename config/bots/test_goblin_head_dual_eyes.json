@@ -7,7 +7,7 @@
     "description":  "Test bot for goblin head with single left eye display - validates display initialization and pin assignments",
     "created":  "2025-10-23",
     "subsystem_type":  "HEAD_CONTROLLER",
-    "controller_hardware":  "ESP32_S3_DEVKIT",
+    "controller":  "ESP32_S3_DEVKIT",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_bridge",
     "units":  "INCHES",

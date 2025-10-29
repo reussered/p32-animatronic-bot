@@ -6,7 +6,7 @@
     "subsystem_id":  "goblin_torso_v1",
     "description":  "Goblin torso subsystem - Master controller with WiFi, and system coordination",
     "created":  "2025-10-15",
-    "controller_hardware":  "ESP32_S3_DEVKITC_1",
+    "controller":  "ESP32_S3_DEVKITC_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "spine_base",
     "units":  "MILLIMETERS",
@@ -26,7 +26,7 @@
                                     "config/components/system/watchdog.json",
                                     "config/components/system/power_monitor.json"
                                 ],
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/spine_flexion_servo.json",
                                  "config/components/positioned/spine_extension_servo.json",
                                  "config/components/positioned/waist_rotation_servo.json",

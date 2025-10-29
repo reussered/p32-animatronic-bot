@@ -4,7 +4,7 @@
     "author":  "config/author.json",
     "subsystem_type":  "HEAD_CONTROLLER",
     "description":  "Universal base template for head subsystem controllers across all creatures",
-    "controller_hardware":  {
+    "controller":  {
                                 "processor":  "ESP32_S3_DEVKITC_1",
                                 "flash_memory":  "8MB",
                                 "psram":  "8MB",

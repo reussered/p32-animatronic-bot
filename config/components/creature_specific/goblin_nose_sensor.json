@@ -7,7 +7,7 @@
     "component_type":  "CREATURE_SPECIFIC_SENSOR",
     "description":  "Goblin-specific proximity sensor with aggressive threat detection and territorial awareness",
     "created":  "2025-10-22",
-    "contained_components":  [
+    "components":  [
                                  "config/components/hardware/hc_sr04_sensor.json"
                              ],
     "creature_sensor_profile":  {

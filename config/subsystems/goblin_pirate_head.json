@@ -6,7 +6,7 @@
     "subsystem_id":  "goblin_pirate_head_v1",
     "description":  "Pirate goblin head subsystem - single left eye with enhanced audio processing for missing right eye compensation",
     "created":  "2025-10-21",
-    "controller_hardware":  "ESP32_S3_DEVKITC_1",
+    "controller":  "ESP32_S3_DEVKITC_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
@@ -16,7 +16,7 @@
                    "hitCount":  25,
                    "description":  "Pirate head coordination every 2.5 seconds"
                },
-    "contained_components":  [
+    "components":  [
                                  "config/components/positioned/goblin/head_components/goblin_left_eye.json",
                                  "config/components/positioned/goblin/head_components/goblin_mouth.json",
                                  "config/components/positioned/goblin/head_components/goblin_speaker.json",
