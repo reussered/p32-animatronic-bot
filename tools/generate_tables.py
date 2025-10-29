@@ -187,7 +187,12 @@ class P32ComponentGenerator:
         if not comp_name:
             print(f"ERROR: component_name cannot be empty in {file_path}")
             return False
-            
+        
+        # Set default version if missing
+        if 'version' not in component_data:
+            component_data['version'] = '1.0.0.0'
+            print(f"INFO: Setting default version '1.0.0.0' for {file_path}")
+        
         return True
     
     def traverse_json_for_components(self, json_data: Any) -> None:
