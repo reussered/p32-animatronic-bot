@@ -167,12 +167,28 @@ class P32ComponentGenerator:
         
         return components
     
-    def generate_function_name(self, component_name: str, func_type: str) -> str:
-        """Generate standardized function names from component names"""
-        # Convert component name to function name format
-        # RULE 5: Functions should be {name}_init() and {name}_act() - NO p32_comp_ prefix
-        name = component_name.lower().replace(' ', '_').replace('-', '_')
-        return f"{name}_{func_type}"
+    def validate_mandatory_fields(self, component_data: Dict[str, Any], file_path: str) -> bool:
+        """Validate that all mandatory JSON fields are present"""
+        mandatory_fields = ['component_name', 'description', 'timing']
+        
+        for field in mandatory_fields:
+            if field not in component_data:
+                print(f"ERROR: Missing mandatory field '{field}' in {file_path}")
+                return False
+        
+        # Validate timing.hitCount
+        timing = component_data.get('timing', {})
+        if 'hitCount' not in timing:
+            print(f"ERROR: Missing timing.hitCount in {file_path}")
+            return False
+            
+        # Validate component_name is not empty
+        comp_name = component_data.get('component_name', '').strip()
+        if not comp_name:
+            print(f"ERROR: component_name cannot be empty in {file_path}")
+            return False
+            
+        return True
     
     def traverse_json_for_components(self, json_data: Any) -> None:
         """Streaming JSON parser following component references only (no object hierarchy traversal)"""
@@ -246,9 +262,14 @@ class P32ComponentGenerator:
             try:
                 with open(component_file, 'r', encoding='ascii') as f:
                     component_data = json.load(f)
+                
+                # Validate mandatory fields - parsing fails if missing
+                if not self.validate_mandatory_fields(component_data, component_file):
+                    print(f"ERROR: Skipping invalid component: {component_file}")
+                    return
                     
-                comp_name = component_data.get("component_name", "unknown")
-                hit_count = component_data.get("timing", {}).get("hitCount", 1)
+                comp_name = component_data["component_name"]  # No default - must be present
+                hit_count = component_data["timing"]["hitCount"]  # No default - must be present
                 
                 # Set current component context for configuration processing
                 self.current_component = comp_name
