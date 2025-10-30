@@ -10,14 +10,11 @@
   "interface_type": "GPIO_ANALOG_SINGLE",
   "hardware_platform": "ESP32_S3",
   
-  "pin_assignments": {
+  "pin_requirements": {
     "analog_pin": {
-      "gpio_number": 1,
-      "pin_name": "GPIO1_ADC1_CH0",
-      "physical_pin": 43,
-      "signal_type": "analog_input",
-      "function": "temperature_measurement",
-      "adc_channel": "ADC1_CHANNEL_0"
+      "gpio_type": "analog_input",
+      "adc_capable": true,
+      "function": "temperature_measurement"
     },
     "power_pins": {
       "vcc_source": "3V3_RAIL",

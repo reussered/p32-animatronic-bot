@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/ghost_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -82,7 +82,7 @@
                                 "skull_scale":  1.05,
                                 "ethereal_extension":  "1.5 INCH"
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/ghost_ectoplasm_generator.json",
                               "config/components/positioned/ghost_floating_mechanism.json",
                               "config/components/positioned/ghost_phase_lights.json"
@@ -164,3 +164,4 @@
                   "Construction types support both translucent hard shells and flowing fabric approaches"
               ]
 }
+

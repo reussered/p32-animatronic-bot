@@ -138,5 +138,8 @@
                                  "animal_animatronics",
                                  "eye_focused_builds"
                              ],
-    "estimated_cost_usd":  "16.99"
+    "estimated_cost_usd":  "16.99",
+    "software":  {
+
+                 }
 }

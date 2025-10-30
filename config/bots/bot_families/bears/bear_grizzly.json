@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_grizzly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -38,7 +38,7 @@
                                              "intimidation_scale":  "maximum"
                                          }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/bear_massive_claws.json",
                                   "config/components/positioned/bear_thick_fur.json"
                               ],
@@ -68,3 +68,4 @@
                   "Audio effects emphasize raw power and dominance"
               ]
 }
+

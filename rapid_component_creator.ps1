@@ -95,7 +95,6 @@ foreach ($componentPath in $missingComponents) {
             component_name = $componentName
             component_type = "POSITIONED_COMPONENT"
             hardware_reference = "config/components/hardware/servo_sg90_micro.json"
-            interface_assignment = "PWM_CHANNEL_1"
             position = @{
                 coordinate_system = "skull_3d"
                 reference_point = "nose_center"

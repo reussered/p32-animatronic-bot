@@ -1,0 +1,28 @@
+{
+    "relative_filename":  "config/components/positioned/goblin_left_cheek.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_name":  "goblin_left_cheek",
+    "subsystem":  "HEAD",
+    "components":  [
+        "config/components/hardware/servo_sg90_micro.json"
+    ],
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "-1.25 INCH",
+                     "y":  "-0.5 INCH",
+                     "z":  "0.75 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "function":  "facial_expression",
+    "description":  "Left cheek muscle for facial expressions and emotions",
+    "timing":  {
+                   "hitCount":  15
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

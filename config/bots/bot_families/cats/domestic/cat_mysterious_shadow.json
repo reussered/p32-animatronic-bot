@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -26,7 +26,7 @@
                                               "shadow_following":  true
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/cat_animated_ears.json",
                                   "config/components/positioned/subtle_led_eyes.json",
                                   "config/components/positioned/ambient_purr_speaker.json",
@@ -79,3 +79,4 @@
                             "disappearance_style":  "gradual_fade"
                         }
 }
+

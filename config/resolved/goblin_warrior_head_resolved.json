@@ -19,9 +19,9 @@
                                         "spi_bus":  "SPI_BUS_VSPI",
                                         "i2s_bus":  "I2S_BUS_0",
                                         "spi_device_assignments":  {
-                                                                       "left_eye":  "SPI_DEVICE_1",
-                                                                       "right_eye":  "SPI_DEVICE_2",
-                                                                       "mouth":  "SPI_DEVICE_3"
+                                                                       "left_eye":  "DIRECT_SPI",
+                                                                       "right_eye":  "DIRECT_SPI",
+                                                                       "mouth":  "DIRECT_SPI"
                                                                    },
                                         "i2s_device_assignments":  {
                                                                        "primary_speaker":  "I2S_DEVICE_1"

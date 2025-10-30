@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/zombie_runner_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,7 +39,7 @@
                             "attention_span_seconds":  90,
                             "pack_behavior":  "lead_charge"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "rapid_movement_system":  {
                                                                  "description":  "High-speed servo actuators for quick head movements and aggressive gestures",
                                                                  "implementation":  "Digital servo cluster with high-torque motors for rapid position changes",
@@ -129,3 +129,4 @@
                   "Designed for high-intensity horror scenarios requiring active threats"
               ]
 }
+

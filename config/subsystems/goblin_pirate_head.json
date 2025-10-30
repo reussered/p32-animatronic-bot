@@ -47,13 +47,6 @@
                                   "power_consumption":  "REDUCED_SINGLE_EYE",
                                   "processing_load":  "75_PERCENT_VISUAL_25_PERCENT_AUDIO"
                               },
-    "interface_assignments":  {
-                                  "spi_bus_vspi":  "DISPLAY_BUS",
-                                  "i2s_bus_0":  "AUDIO_OUTPUT",
-                                  "gpio_pair_1":  "NOSE_SENSOR",
-                                  "adc_pin_35":  "LEFT_EAR_INPUT",
-                                  "adc_pin_36":  "RIGHT_EAR_INPUT"
-                              },
     "performance_targets":  {
                                 "left_eye_fps":  30,
                                 "audio_response_time":  "50MS_MAX",

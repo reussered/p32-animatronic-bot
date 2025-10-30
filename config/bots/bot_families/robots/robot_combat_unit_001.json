@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_combat_unit_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,7 +39,7 @@
                             "attention_span_seconds":  900,
                             "combat_readiness":  "always_alert"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "laser_targeting_system":  {
                                                                   "description":  "Red laser dot projection system with servo-controlled pointing for target acquisition",
                                                                   "implementation":  "Class 1 laser diode with precision servo gimbal mount, eye-safe operation with automatic shutoff",
@@ -157,3 +157,4 @@
                   "Designed for training environments, gaming applications, and military technology demonstration"
               ]
 }
+

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_shaman.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -83,7 +83,7 @@
                                               "expression_intensity":  "otherworldly"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_spirit_runes.json",
                                   "config/components/positioned/goblin_ritual_scars.json",
                                   "config/components/positioned/goblin_bone_ornaments.json",
@@ -194,3 +194,4 @@
                   "Specialized magical ability system integration"
               ]
 }
+

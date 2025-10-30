@@ -5,7 +5,6 @@
     "component_name":  "master_controller",
     "subsystem":  "TORSO",
     "components": ["config/components/hardware/esp32_s3_devkit.json"],
-    "interface_assignment":  "MASTER_CONTROLLER_INTERFACE",
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "position":  {

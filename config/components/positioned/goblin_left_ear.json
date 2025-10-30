@@ -12,7 +12,8 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "components":  [
-        "config/components/hardware/servo_sg90_micro.json"
+        "config/components/hardware/servo_sg90_micro.json",
+        "config/components/hardware/hw496_microphone.json"
     ],
     "software":  {
                      "act_function":  "goblin_left_ear_act",

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/manufacturing/complete_bom_and_stl_master.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -371,7 +371,7 @@
                                                                      "structural_aluminum":  "$165.00",
                                                                      "power_system":  "$930.00",
                                                                      "mechanical_hardware":  "$180.00",
-                                                                     "3d_printed_components":  "$150.00_MATERIAL_COST",
+                                                                     "components":  "$150.00_MATERIAL_COST",
                                                                      "total_material_cost":  "$2880.00",
                                                                      "estimated_shipping":  "$200.00",
                                                                      "grand_total":  "$3080.00_COMPLETE_HUMANOID"
@@ -383,7 +383,7 @@
                                                                       "structural_aluminum":  "$125.00",
                                                                       "power_system":  "$680.00",
                                                                       "mechanical_hardware":  "$140.00",
-                                                                      "3d_printed_components":  "$100.00_MATERIAL_COST",
+                                                                      "components":  "$100.00_MATERIAL_COST",
                                                                       "total_material_cost":  "$1940.00",
                                                                       "estimated_shipping":  "$150.00",
                                                                       "grand_total":  "$2090.00_COMPLETE_QUADRUPED"
@@ -405,3 +405,4 @@
                                                              }
                                  }
 }
+

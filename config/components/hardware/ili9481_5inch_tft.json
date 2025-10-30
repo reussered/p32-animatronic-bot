@@ -162,5 +162,8 @@
                                  "audience_displays",
                                  "professional_builds"
                              ],
-    "estimated_cost_usd":  "59.99"
+    "estimated_cost_usd":  "59.99",
+    "software":  {
+
+                 }
 }

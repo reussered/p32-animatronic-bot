@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/animals/wolf_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.1,
                                 "snout_extension":  "1.8 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/wolf_eye_left.json",
                                "config/components/positioned/wolf_eye_right.json",
                                "config/components/positioned/wolf_snout.json",
@@ -163,3 +163,4 @@
                                              }
                            }
 }
+

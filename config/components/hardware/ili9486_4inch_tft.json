@@ -150,5 +150,8 @@
                                  "theatrical_builds",
                                  "primary_interfaces"
                              ],
-    "estimated_cost_usd":  "45.00"
+    "estimated_cost_usd":  "45.00",
+    "software":  {
+
+                 }
 }

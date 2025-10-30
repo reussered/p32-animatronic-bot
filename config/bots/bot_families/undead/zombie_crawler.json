@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/zombie_crawler.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -33,7 +33,7 @@
                                            "spinal_damage":  "hunched_dragging"
                                        }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/zombie_exposed_bone.json",
                                   "config/components/positioned/zombie_drag_mechanism.json"
                               ],
@@ -71,3 +71,4 @@
                   "Ambush behaviors add stealth horror element"
               ]
 }
+

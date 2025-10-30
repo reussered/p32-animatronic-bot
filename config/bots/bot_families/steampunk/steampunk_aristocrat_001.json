@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/steampunk/steampunk_aristocrat_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,7 +39,7 @@
                             "attention_span_seconds":  300,
                             "social_protocols":  "victorian_etiquette"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "steam_venting_system":  {
                                                                 "description":  "Pressurized steam release system with brass valves creating authentic Victorian-era automation effects",
                                                                 "implementation":  "Electric steam generator with brass valve assemblies and pressure regulation for dramatic venting sequences",
@@ -153,3 +153,4 @@
                   "Designed for historical demonstrations, theatrical productions, and immersive Victorian experiences"
               ]
 }
+

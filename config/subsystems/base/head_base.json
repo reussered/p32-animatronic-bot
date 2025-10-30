@@ -11,7 +11,7 @@
                                 "gpio_pins":  45,
                                 "adc_channels":  20,
                                 "dac_channels":  2,
-                                "pwm_channels":  8,
+                                "pwm_channels":  16,
                                 "spi_interfaces":  4,
                                 "i2c_interfaces":  2
                             },
@@ -49,17 +49,6 @@
                                     "required":  true
                                 }
                             ],
-    "interface_assignments":  {
-                                  "spi_bus_vspi":  "SHARED_DISPLAY_BUS",
-                                  "i2c_bus_1":  "SENSOR_BUS",
-                                  "i2s_bus_0":  "AUDIO_BUS",
-                                  "pwm_channel_1":  "SERVO_CONTROL",
-                                  "gpio_pair_1":  "SENSOR_INTERFACE",
-                                  "adc_left_ear":  "LEFT_AUDIO_INPUT",
-                                  "adc_right_ear":  "RIGHT_AUDIO_INPUT",
-                                  "uart_0":  "DEBUG_CONSOLE",
-                                  "uart_1":  "WIRELESS_INTERACTION"
-                              },
     "timing_constraints":  {
                                "loop_frequency":  "MAXIMUM_SPEED",
                                "emergency_response":  "1_LOOP_MAX",

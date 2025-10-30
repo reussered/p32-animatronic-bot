@@ -85,5 +85,8 @@
                                                       ]
                           },
     "hardware_type":  "TOUCH_SENSOR",
-    "component_name":  "CAPACITIVE_TOUCH_SENSOR"
+    "component_name":  "CAPACITIVE_TOUCH_SENSOR",
+    "software":  {
+
+                 }
 }

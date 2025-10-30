@@ -25,5 +25,12 @@
                           "range_max":  "157 INCH",
                           "accuracy":  "0.12 INCH",
                           "beam_angle":  "15 DEGREES"
-                      }
+                      },
+    "software":  {
+                     "init_function":  "hc_sr04_ultrasonic_distance_sensor_init",
+                     "act_function":  "hc_sr04_ultrasonic_distance_sensor_act",
+                     "components":  [
+                                       "config/components/drivers/gpio_bus.json"
+                                   ]
+                 }
 }

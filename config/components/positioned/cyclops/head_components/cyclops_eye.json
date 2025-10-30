@@ -25,12 +25,6 @@
                         "viewing_angle":  "forward_facing",
                         "tilt_forward":  "15 DEG"
                     },
-    "interface_assignment":  {
-                                 "controller_type":  "INTEGRATED_ESP32_WROOM",
-                                 "primary_interface":  "NATIVE_SPI",
-                                 "power_interface":  "DIRECT_5V_3V3",
-                                 "communication":  "ESP_NOW_MESH"
-                             },
     "cyclops_specific":  {
                              "eye_size":  "MASSIVE",
                              "iris_diameter":  "1.8 INCH",

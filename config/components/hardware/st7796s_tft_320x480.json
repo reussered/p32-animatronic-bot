@@ -131,11 +131,14 @@
                             },
     "software":  {
                      "init_function":  "st7796s_init",
-                     "act_function":  "st7796s_act"
+                     "act_function":  "st7796s_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ]
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ]
 }

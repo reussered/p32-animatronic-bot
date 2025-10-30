@@ -15,13 +15,6 @@
                      "scaling_applies":  true
                  },
     "components": ["config/components/hardware/shoulder_joint_assembly.json"],
-    "interface_assignments":  {
-                                  "servo_1_flexion_extension":  "config/components/interfaces/servo_shoulder_flex_left.json",
-                                  "servo_2_abduction_adduction":  "config/components/interfaces/servo_shoulder_abd_left.json",
-                                  "servo_3_rotation":  "config/components/interfaces/servo_shoulder_rot_left.json",
-                                  "position_feedback":  "config/components/interfaces/encoder_shoulder_left.json",
-                                  "power_connection":  "config/components/interfaces/power_tap_shoulder_left.json"
-                              },
     "degrees_of_freedom":  {
                                "total_dof":  3,
                                "joint_1_flexion_extension":  {

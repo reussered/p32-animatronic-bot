@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/solar_parasol_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -31,7 +31,7 @@
                                                       "subsystem":  "UNKNOWN",
                                                       "material":  "PLA_PLUS",
                                                       "mounting_interface":  "ROBOT_SHOULDER_MOUNT",
-                                                      "internal_components":  [
+                                                      "components":  [
                                                                                   "MPPT_controller",
                                                                                   "servo_drivers",
                                                                                   "weather_sensors"
@@ -59,7 +59,7 @@
                                                           "positioning_accuracy":  "1 DEG"
                                                       }
                               },
-    "3d_printed_components":  [
+    "components":  [
                                   "parasol_central_hub.scad",
                                   "parasol_telescoping_ribs.scad",
                                   "parasol_solar_cell_mounts.scad",
@@ -115,3 +115,4 @@
     "hardware_type":  "SOLAR_PARASOL_ASSEMBLY",
     "component_name":  "SOLAR_PARASOL_SYSTEM"
 }
+

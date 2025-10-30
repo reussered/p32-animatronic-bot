@@ -9,7 +9,6 @@
     "components":  [
                                  "config/components/creature_specific/goblin_eye.json"
                              ],
-    "interface_assignment":  "SPI_DEVICE_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

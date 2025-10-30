@@ -35,13 +35,16 @@
                             },
     "software":  {
                      "init_function":  "ili9486_init",
-                     "act_function":  "ili9486_act"
+                     "act_function":  "ili9486_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ],
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
     "use_cases":  {
                       "recommended_for":  [
                                               "LARGE_CREATURE_FACES",

@@ -10,7 +10,6 @@
                                  "mount_template":  "assets/shapes/scad/basic_mounts/sensor_basic_mount.scad",
                                  "mount_type":  "HARD_NOSE_MOUNT"
                              },
-    "interface_assignment":  "GPIO_PAIR_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

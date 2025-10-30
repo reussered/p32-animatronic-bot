@@ -9,7 +9,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_speaker_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/speaker_basic_mount.scad"
                              },
-    "interface_assignment":  "I2S_DEVICE_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

@@ -10,11 +10,9 @@
   "interface_type": "GPIO_1WIRE",
   "hardware_platform": "ESP32_S3",
   
-  "pin_assignment": {
-    "gpio_number": 32,
-    "pin_name": "GPIO32", 
-    "physical_pin": 8,
-    "signal_type": "digital_bidirectional"
+  "pin_requirements": {
+    "gpio_type": "digital_bidirectional",
+    "interface_type": "GPIO_1WIRE"
   },
   
   "electrical_specs": {

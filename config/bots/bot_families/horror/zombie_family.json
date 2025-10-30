@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/zombie_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -77,7 +77,7 @@
                                 "compression_factor":  0.85,
                                 "skull_scale":  1.1
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/zombie_rotting_flesh.json",
                               "config/components/positioned/zombie_exposed_bone.json",
                               "config/components/positioned/zombie_oozing_wounds.json"
@@ -149,3 +149,4 @@
                   "Hard shell for realistic horror, soft body for safe scary fun"
               ]
 }
+

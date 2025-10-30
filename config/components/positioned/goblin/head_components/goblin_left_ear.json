@@ -9,7 +9,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_ear_left_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/microphone_basic_mount.scad"
                              },
-    "interface_assignment":  "ADC_PIN_35",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

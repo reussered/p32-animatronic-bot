@@ -31,8 +31,7 @@
     "animatronic_cache":  {
                               "animation_buffers":  "LEFT_EYE_BUFFER",
                               "buffer_allocation":  "STACK_PUSH",
-                              "coordinates":  "LEFT_POSITION",
-                              "interface_binding":  "SPI_DEVICE_1"
+                              "coordinates":  "LEFT_POSITION"
                           },
     "timing":  {
                    "hitCount":  1

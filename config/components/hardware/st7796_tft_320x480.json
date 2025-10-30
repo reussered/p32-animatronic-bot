@@ -152,7 +152,7 @@
     "use_cases":  {
                       "recommended_for":  [
                                               "LARGE_MOUTH_DISPLAYS",
-                                              "BODY_PANEL_DISPLAYS", 
+                                              "BODY_PANEL_DISPLAYS",
                                               "DETAILED_EXPRESSIONS",
                                               "MULTI_CHARACTER_TEXT"
                                           ],
@@ -161,11 +161,14 @@
                   },
     "software":  {
                      "init_function":  "st7796_init",
-                     "act_function":  "st7796_act"
+                     "act_function":  "st7796_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ]
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ]
 }

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/esp32c3_hand_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -66,7 +66,7 @@
                                                                             ]
                                                                }
                                  },
-    "leveraging_existing_components":  {
+    "components":  {
                                            "reused_spi_architecture":  {
                                                                            "spi_bus_config":  "EXACT_SAME_AS_DISPLAY_CONTROLLERS",
                                                                            "device_pattern":  "SAME_CS_PIN_CONCEPT_AS_SPI_DEVICES",
@@ -108,3 +108,4 @@
                      "x":  "0.0 INCH"
                  }
 }
+

@@ -10,22 +10,16 @@
   "interface_type": "GPIO_PAIR_DIGITAL_ANALOG",
   "hardware_platform": "ESP32_S3",
   
-  "pin_assignments": {
+  "pin_requirements": {
     "digital_pin": {
-      "gpio_number": 27,
-      "pin_name": "GPIO27",
-      "physical_pin": 12,
-      "signal_type": "digital_input",
+      "gpio_type": "digital_input",
       "function": "vibration_detection_interrupt",
-      "pull_mode": "pullup_internal"
+      "interrupt_capable": true
     },
     "analog_pin": {
-      "gpio_number": 26,
-      "pin_name": "GPIO26_ADC2_CH9", 
-      "physical_pin": 11,
-      "signal_type": "analog_input",
-      "function": "vibration_level_measurement",
-      "adc_channel": "ADC2_CHANNEL_9"
+      "gpio_type": "analog_input",
+      "adc_capable": true,
+      "function": "vibration_level_measurement"
     }
   },
   

@@ -78,5 +78,8 @@
                                   "precision":  "CLOSED_LOOP_CONTROL_WITH_FEEDBACK",
                                   "compliance":  "SOFTWARE_CURRENT_LIMITING"
                               },
-    "hardware_type":  "SERVO_MOTOR"
+    "hardware_type":  "SERVO_MOTOR",
+    "software":  {
+
+                 }
 }

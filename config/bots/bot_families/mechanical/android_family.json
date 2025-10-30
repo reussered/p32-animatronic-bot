@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/mechanical/android_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -80,7 +80,7 @@
                                 "skull_scale":  1.0,
                                 "human_proportions":  "anatomically_accurate"
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/android_synthetic_skin.json",
                               "config/components/positioned/android_emotion_display.json",
                               "config/components/positioned/android_neural_interface.json"
@@ -162,3 +162,4 @@
                   "Construction types support both hard synthetic shells and soft humanoid approaches"
               ]
 }
+

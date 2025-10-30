@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/androids/android_companion_unit_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,7 +39,7 @@
                             "attention_span_seconds":  1800,
                             "companion_mode":  "always_active"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "emotional_simulation_matrix":  {
                                                                        "description":  "Advanced AI system that generates convincing emotional responses and develops relationships over time",
                                                                        "implementation":  "Neural network trained on human emotional patterns with memory systems for relationship development",
@@ -169,3 +169,4 @@
                   "Designed for therapeutic applications, elderly care, and emotional support scenarios"
               ]
 }
+

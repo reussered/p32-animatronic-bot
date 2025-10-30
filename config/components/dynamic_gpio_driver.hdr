@@ -1,0 +1,13 @@
+// Dynamic GPIO Driver Header
+// Demonstrates runtime pin assignment using assigned_pins array
+
+#ifndef DYNAMIC_GPIO_DRIVER_H
+#define DYNAMIC_GPIO_DRIVER_H
+
+#include "esp_err.h"
+
+// Function declarations for dispatch table
+esp_err_t dynamic_gpio_driver_init(void);
+void dynamic_gpio_driver_act(void);
+
+#endif // DYNAMIC_GPIO_DRIVER_H

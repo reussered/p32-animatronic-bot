@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/mechanical/robot_family_enhanced.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                                 "face_height":  "8.0 INCH",
                                 "component_spacing":  "1.5 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/robot_chest_matrix.json",
                                "config/components/positioned/robot_status_oled.json",
                                "config/components/positioned/robot_camera_eyes.json",
@@ -131,7 +131,7 @@
                                                                                           "thermal",
                                                                                           "audio_array"
                                                                                       ],
-                                                               "optional_components":  [
+                                                               "components":  [
                                                                                            "articulated_servos",
                                                                                            "modular_attachments"
                                                                                        ]
@@ -145,7 +145,7 @@
                                                                                   "FEAR":  "-5",
                                                                                   "CURIOSITY":  "-10"
                                                                               },
-                                                    "specialized_components":  [
+                                                    "components":  [
                                                                                    "laser_targeting_system",
                                                                                    "reinforced_chassis",
                                                                                    "armor_plating_actuators"
@@ -158,7 +158,7 @@
                                                                                      "HAPPINESS":  "+10",
                                                                                      "AGGRESSION":  "-15"
                                                                                  },
-                                                       "specialized_components":  [
+                                                       "components":  [
                                                                                       "emotion_recognition_camera",
                                                                                       "soft_touch_sensors",
                                                                                       "companion_ai_module"
@@ -171,7 +171,7 @@
                                                                                    "CONTENTMENT":  "+10",
                                                                                    "EFFICIENCY":  "+20"
                                                                                },
-                                                     "specialized_components":  [
+                                                     "components":  [
                                                                                     "task_specific_tools",
                                                                                     "advanced_pathfinding",
                                                                                     "multi_sensor_array"
@@ -221,3 +221,5 @@
                             "Construction type determines manufacturing method and target market"
                         ]
 }
+
+

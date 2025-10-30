@@ -5,7 +5,6 @@
     "component_type": "POSITIONED_COMPONENT",
     "component_name": "goblin_left_arm_status_led",
     "components": ["config/hardware/led_neopixel_ring.json"],
-    "interface_assignment": "GPIO_PIN_26",
     "position": {
         "coordinate_system": "skull_3d",
         "reference_point": "shoulder_socket_left",

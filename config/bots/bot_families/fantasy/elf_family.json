@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/elf_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  0.9,
                                 "ear_extension":  "1.5 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/elf_eye_left.json",
                                "config/components/positioned/elf_eye_right.json",
                                "config/components/positioned/elf_mouth.json",
@@ -120,3 +120,4 @@
                                             }
                            }
 }
+

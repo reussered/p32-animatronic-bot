@@ -13,7 +13,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/robot/robot_eye_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/neopixel_matrix_mount.scad"
                              },
-    "interface_assignment":  "GPIO_PIN_25",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

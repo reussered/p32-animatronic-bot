@@ -10,7 +10,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_mouth_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/gc9a01_circular_mount.scad"
                              },
-    "interface_assignment":  "SPI_DEVICE_3",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

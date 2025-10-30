@@ -19,7 +19,6 @@ $warnings = @()
 $allJsonFiles = @()
 $fileIndex = @{}
 $componentReferences = @{}
-$interfaceReferences = @{}
 
 # PHASE 1: DISCOVER ALL JSON FILES
 Write-Host "`nPHASE 1: Discovering all JSON files recursively..." -ForegroundColor Cyan
@@ -90,7 +89,7 @@ foreach ($jsonData in $validJsonFiles) {
     $content = $jsonData.Content
     
     # Check relative_filename consistency
-    if ($content.relative_filename -and $content.relative_filename -ne $null) {
+    if ($content.relative_filename -and $null -ne $content.relative_filename) {
         $expectedPath = $content.relative_filename.Replace('/', '\')
         $actualPath = $filePath.Replace('/', '\')
         
@@ -126,53 +125,10 @@ foreach ($jsonData in $validJsonFiles) {
             }
         }
     }
-    
-    # Check interface_assignment references
-    if ($content.interface_assignment) {
-        $interfaceReferences[$content.interface_assignment] = $filePath
-    }
 }
 
-# PHASE 4: VALIDATE INTERFACE CONSISTENCY
-Write-Host "`nPHASE 4: Validating interface assignments and bus sharing..." -ForegroundColor Cyan
-
-$interfaceDefinitions = @{}
-$interfaceAssignments = @{}
-
-foreach ($jsonData in $validJsonFiles) {
-    $content = $jsonData.Content
-    $filePath = $jsonData.RelativePath
-    
-    # Collect interface definitions
-    if ($filePath -like "*interfaces*" -and $content.interface_id) {
-        $interfaceDefinitions[$content.interface_id] = $filePath
-    }
-    
-    # Collect interface assignments
-    if ($content.interface_assignment) {
-        if (-not $interfaceAssignments.ContainsKey($content.interface_assignment)) {
-            $interfaceAssignments[$content.interface_assignment] = @()
-        }
-        $interfaceAssignments[$content.interface_assignment] += $filePath
-    }
-}
-
-# Check for interface assignments without definitions
-foreach ($interfaceId in $interfaceAssignments.Keys) {
-    if (-not $interfaceDefinitions.ContainsKey($interfaceId)) {
-        $inconsistencies += "UNDEFINED_INTERFACE: Interface '$interfaceId' is assigned in $($interfaceAssignments[$interfaceId] -join ', ') but not defined"
-    }
-}
-
-# Check for duplicate interface assignments (should be unique)
-foreach ($interfaceId in $interfaceAssignments.Keys) {
-    if ($interfaceAssignments[$interfaceId].Count -gt 1) {
-        $inconsistencies += "DUPLICATE_INTERFACE: Interface '$interfaceId' is assigned to multiple components: $($interfaceAssignments[$interfaceId] -join ', ')"
-    }
-}
-
-# PHASE 5: VALIDATE COMPONENT HIERARCHY
-Write-Host "`nPHASE 5: Validating component hierarchy and relationships..." -ForegroundColor Cyan
+# PHASE 4: VALIDATE COMPONENT HIERARCHY
+Write-Host "`nPHASE 4: Validating component hierarchy and relationships..." -ForegroundColor Cyan
 
 $componentNames = @{}
 $hardwareTypes = @{}

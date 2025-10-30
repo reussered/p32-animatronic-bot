@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_scout.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -84,7 +84,7 @@
                                               "expression_intensity":  "subtle_alert"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_enhanced_ears.json",
                                   "config/components/positioned/goblin_camouflage_skin.json",
                                   "config/components/positioned/goblin_scent_sensor.json"
@@ -172,3 +172,4 @@
                   "Higher microphone gain for environmental listening"
               ]
 }
+

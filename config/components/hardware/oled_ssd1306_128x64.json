@@ -91,7 +91,10 @@
                               },
     "software":  {
                      "init_function":  "ssd1306_init",
-                     "act_function":  "ssd1306_act"
+                     "act_function":  "ssd1306_act",
+                     "components":  [
+                                       "config/components/drivers/i2c_bus.json"
+                                   ]
                  },
     "required_interface_functions":  [
                                         "getBuffer",

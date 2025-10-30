@@ -68,7 +68,6 @@ typedef struct {
     char component_id[32];
     p32_component_type_t type;
     char hardware_reference[64];
-    char interface_assignment[32];
     float position_x;
     float position_y;
     float position_z;

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_polar.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -38,7 +38,7 @@
                                                         "paw_padding":  "ice_grip"
                                                     }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/bear_arctic_fur.json",
                                   "config/components/positioned/bear_ice_sensors.json"
                               ],
@@ -68,3 +68,4 @@
                   "Audio effects include ice and water sounds"
               ]
 }
+

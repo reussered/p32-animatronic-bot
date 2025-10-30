@@ -8,8 +8,8 @@
     "interface_type":  "SPI_DEVICE",
     "bus_reference":  "SPI_BUS_VSPI",
     "unique_pins":  {
-                       "device_select":  32,
-                       "data_control":  33
+                       "device_select":  10,
+                       "data_control":  11
                    },
     "device_config":  {
                           "cs_active_low":  true,

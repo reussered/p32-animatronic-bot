@@ -131,7 +131,10 @@
                             },
     "software":  {
                      "init_function":  "st7789_240x128_init",
-                     "act_function":  "st7789_240x128_act"
+                     "act_function":  "st7789_240x128_act",
+                     "components":  [
+                                       "config/components/drivers/spi_bus.json"
+                                   ]
                  },
     "required_interface_functions":  [
                                         "getBuffer",

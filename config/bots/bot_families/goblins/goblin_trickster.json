@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_trickster.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -84,7 +84,7 @@
                                               "expression_intensity":  "animated"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_sly_grin.json",
                                   "config/components/positioned/goblin_clever_eyes.json",
                                   "config/components/positioned/goblin_nimble_fingers.json",
@@ -195,3 +195,4 @@
                   "Creative problem-solving for trick development"
               ]
 }
+

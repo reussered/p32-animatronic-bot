@@ -1,0 +1,43 @@
+{
+    "name": "i2s_bus",
+    "type": "bus",
+    "version": "1.0.0",
+    "author": "config/authors/ai_agent.json",
+    "component_name": "i2s_bus",
+    "description": "I2S bus component containing I2S driver for audio input/output and high-speed data transfer",
+    "created": "2025-10-29",
+    "component_type": "bus_interface",
+
+    "capabilities": {
+        "bus_type": "I2S",
+        "sample_rates": ["8kHz-192kHz"],
+        "bit_depth": ["8-bit", "16-bit", "24-bit", "32-bit"],
+        "channels": ["mono", "stereo"],
+        "applications": ["audio playback", "audio recording", "PDM microphones", "DAC output"]
+    },
+
+    "components": [
+        "config/components/drivers/i2s_driver.json"
+    ],
+
+    "software": {
+        "init_function": "i2s_bus_init",
+        "act_function": "i2s_bus_act",
+        "api_functions": [
+            "i2s_bus_init_tx(i2s_port_t port, i2s_config_t* config)",
+            "i2s_bus_init_rx(i2s_port_t port, i2s_config_t* config)",
+            "i2s_bus_write_bytes(i2s_port_t port, const void* src, size_t size)",
+            "i2s_bus_read_bytes(i2s_port_t port, void* dest, size_t size)",
+            "i2s_bus_set_sample_rate(i2s_port_t port, uint32_t rate)",
+            "i2s_bus_start(i2s_port_t port)",
+            "i2s_bus_stop(i2s_port_t port)"
+        ]
+    },
+
+    "compatibility": {
+        "esp32_s3": true,
+        "esp32_s2": true,
+        "esp32": true,
+        "chip_variants": ["ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1", "ESP32-DevKitC"]
+    }
+}

@@ -90,17 +90,10 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
    - **Use Case**: Interfaces, drivers, shared libraries that component depends on
    - **Example**: `gc9a01_display.json` includes `generic_spi_display.json`
 
-**INTERFACE ASSIGNMENT PROCESSING:**
-
-- **JSON Encounter Order**: `interface_assignment` processed when encountered in JSON traversal
-- **Implicit Loading**: Interface assignments cause corresponding interface components to be loaded
-- **SPI Mapping**: `"SPI_DEVICE_1"`/`"SPI_DEVICE_2"` → `spi_bus_vspi.json`
-- **WHY**: Maintains exact JSON-specified component relationships
-
 **LOADING BEHAVIOR:**
 
 - **MANDATORY**: Components loaded EXACTLY as encountered during JSON parsing
-- **MANDATORY**: Depth-first recursive traversal: parent → includes_components → interface_assignments → contained_components
+- **MANDATORY**: Depth-first recursive traversal: parent → includes_components → contained_components
 - **MANDATORY**: Dispatch tables preserve ALL traversal encounters (including duplicates when same component encountered multiple times)
 - **MANDATORY**: Component source files deduplicated (each .src/.hpp file included only once)
 - **MANDATORY**: Initialization order follows dispatch table order
@@ -110,8 +103,7 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
 When parsing a JSON component file:
 
 1. Process `includes_components` array in order → load each dependency
-2. Process `interface_assignment` field → load corresponding interface component
-3. Process `contained_components` array in order → recursively load each child
+2. Process `contained_components` array in order → recursively load each child
 
 **DISPATCH TABLE RULES (MANDATORY):**
 
@@ -129,7 +121,6 @@ When parsing a JSON component file:
 
 - **NEVER Direct Calls**: Contained components never call each other directly
 - **SharedMemory Only**: All inter-component communication via SharedMemory
-- **Interface Assignment**: Positioned components reference interfaces via `interface_assignment`
 - **Subsystem Boundaries**: Containment respects subsystem boundaries for multi-chip coordination
 
 ### JSON Config System

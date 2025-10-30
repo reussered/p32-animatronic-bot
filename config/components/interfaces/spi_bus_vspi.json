@@ -44,25 +44,10 @@
                      "act_function":  "spi_bus_act",
                      "Component":  "config/components/hardware/generic_spi_display.json"
                  },
-    "pins":  {
-                 "data_output":  35,
-                 "data_input":  36,
-                 "clock":  37
-             },
-    "shared_control_pins":  {
-                               "reset":  45
-                           },
-    "unique_device_pins":  {
-                              "chip_select_1":  38,
-                              "data_command_1":  47,
-                              "backlight_1":  21,
-                              "chip_select_2":  18,
-                              "data_command_2":  40,
-                              "chip_select_3":  17,
-                              "data_command_3":  5,
-                              "chip_select_4":  18,
-                              "data_command_4":  19
-                          },
+    "pin_allocation": {
+        "shared_pins": ["clock", "data_output", "data_input", "reset"],
+        "device_pins": ["chip_select", "data_command", "backlight"]
+    },
     "bus_config":  {
                        "frequency":  "10000000",
                        "mode":  0

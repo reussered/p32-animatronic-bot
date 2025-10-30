@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/cyclops_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.5,
                                 "central_eye_diameter":  "4.0 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/cyclops_eye_central.json",
                                "config/components/positioned/cyclops_mouth.json",
                                "config/components/positioned/cyclops_speaker.json"
@@ -117,3 +117,4 @@
                                                }
                            }
 }
+

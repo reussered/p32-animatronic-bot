@@ -255,5 +255,8 @@
                                                           "large_creatures":  "Limited to small accent features",
                                                           "giant_creatures":  "Not recommended - too small"
                                                       }
-                        }
+                        },
+    "software":  {
+
+                 }
 }

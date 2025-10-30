@@ -12,7 +12,6 @@
                                  "creature_shell":  "assets/shapes/scad/creature_shells/bear/bear_eye_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
                              },
-    "interface_assignment":  "SPI_DEVICE_1",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

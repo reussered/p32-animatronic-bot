@@ -499,7 +499,6 @@ Each positioned component can reference generated shapes:
 {
   "component_id": "goblin_eye_left",
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
-  "interface_assignment": "SPI_DEVICE_1", 
   "position": { ... },
   "generated_shapes": [
     "assets/shapes/stl/goblin_eye_left.stl",

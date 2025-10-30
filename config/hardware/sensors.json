@@ -9,28 +9,28 @@
     "devices":  [
                     {
                         "id":  "motion_pir",
-                        "pin":  34,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "PIR",
                         "pollInterval":  100,
                         "sensitivity":  8
                     },
                     {
                         "id":  "distance_ultrasonic",
-                        "pin":  35,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "HC-SR04",
                         "pollInterval":  200,
                         "maxRange":  400
                     },
                     {
                         "id":  "touch",
-                        "pin":  4,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "capacitive",
                         "pollInterval":  50,
                         "threshold":  40
                     },
                     {
                         "id":  "microphone",
-                        "pin":  36,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "analog",
                         "pollInterval":  100,
                         "threshold":  500

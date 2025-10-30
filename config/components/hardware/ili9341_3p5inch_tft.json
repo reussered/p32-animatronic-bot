@@ -149,5 +149,8 @@
                                  "humanoid_robots",
                                  "medium_dragons"
                              ],
-    "estimated_cost_usd":  "34.95"
+    "estimated_cost_usd":  "34.95",
+    "software":  {
+
+                 }
 }

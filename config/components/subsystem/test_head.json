@@ -23,7 +23,7 @@
         "source_file": "components/subsystem/test_head.cpp"
     },
     "hardware_requirements": {
-        "spi_devices": ["SPI_DEVICE_1", "SPI_DEVICE_2"],
+        "spi_devices": ["DIRECT_SPI", "DIRECT_SPI"],
         "gpio_pins": [26, 27, 33],
         "power_consumption": "200mA @ 3.3V"
     },

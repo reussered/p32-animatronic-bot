@@ -134,7 +134,6 @@ Each positioned display component references an SPI device:
 ```json
 {
   "hardware_reference": "config/components/hardware/gc9a01_display.json",
-  "interface_assignment": "SPI_DEVICE_1",
   "position": { ... }
 }
 ```
@@ -145,7 +144,6 @@ Each positioned speaker component references an I2S device:
 ```json
 {
   "hardware_reference": "config/components/hardware/speaker.json", 
-  "interface_assignment": "I2S_DEVICE_1",
   "position": { ... }
 }
 ```

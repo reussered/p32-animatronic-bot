@@ -776,7 +776,6 @@ Create `config/components/hardware/hw496_microphone.json`:
     "mount_template": "assets/shapes/scad/basic_mounts/microphone_basic_mount.scad"
   },
   
-  "interface_assignment": "ADC_PIN_35",
   "coordinate_system": "skull_3d",
   "reference_point": "nose_center",
   "position": {

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_security_unit_mk2.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -26,7 +26,7 @@
                                               "facial_recognition_enabled":  true
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/security_camera_array.json",
                                   "config/components/positioned/thermal_sensor.json",
                                   "config/components/positioned/audio_analysis_unit.json",
@@ -66,3 +66,4 @@
                                    "communication_range":  "500_METERS"
                                }
 }
+

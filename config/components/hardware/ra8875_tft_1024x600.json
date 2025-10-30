@@ -44,13 +44,16 @@
                           },
     "software":  {
                      "init_function":  "ra8875_init",
-                     "act_function":  "ra8875_act"
+                     "act_function":  "ra8875_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ],
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
     "use_cases":  {
                       "recommended_for":  [
                                               "PREMIUM_ORC_DISPLAYS",

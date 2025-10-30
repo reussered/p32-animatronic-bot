@@ -158,13 +158,6 @@
                                                }
                        },
     "articulation":  {
-                         "spine_servos":  [
-                                              "config/components/positioned/spine_flexion_servo.json",
-                                              "config/components/positioned/spine_extension_servo.json"
-                                          ],
-                         "waist_servos":  [
-                                              "config/components/positioned/waist_rotation_servo.json"
-                                          ],
                          "degrees_of_freedom":  3,
                          "spine_flexion_range_degrees":  60,
                          "spine_extension_range_degrees":  45,

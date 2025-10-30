@@ -17,13 +17,20 @@
                    "description":  "Head coordination every 2.5 seconds"
                },
     "components":  [
+                                 "config/components/interfaces/spi_bus_vspi.json",
                                  "config/components/positioned/goblin_left_eye.json",
                                  "config/components/positioned/goblin_right_eye.json",
                                  "config/components/positioned/goblin_nose.json",
                                  "config/components/positioned/goblin_mouth.json",
                                  "config/components/positioned/goblin_speaker.json",
                                  "config/components/positioned/goblin_left_ear.json",
-                                 "config/components/positioned/goblin_right_ear.json"
+                                 "config/components/positioned/goblin_right_ear.json",
+                                 "config/components/positioned/goblin_left_cheek.json",
+                                 "config/components/positioned/goblin_right_cheek.json",
+                                 "config/components/positioned/goblin_left_eyebrow.json",
+                                 "config/components/positioned/goblin_right_eyebrow.json",
+                                 "config/components/positioned/goblin_jaw.json",
+                                 "config/components/positioned/goblin_forehead.json"
                              ],
     "shape_assembly":  {
                            "type":  "SKULL_FRAME",

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/functional/goblin_mood.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -11,7 +11,7 @@
                    "hitCount":  15,
                    "description":  "Mood update every 1.5 seconds"
                },
-    "mood_components":  {
+    "components":  {
                             "ANGER":  {
                                           "decay_rate":  5,
                                           "max_value":  127
@@ -52,3 +52,4 @@
                              "Trigger animations based on mood changes"
                          ]
 }
+

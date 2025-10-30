@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_warrior.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -73,7 +73,7 @@
                                               "expression_intensity":  "maximum"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_battle_scars.json",
                                   "config/components/positioned/goblin_war_paint.json"
                               ],
@@ -129,3 +129,4 @@
                   "Higher audio amplification for intimidation factor"
               ]
 }
+

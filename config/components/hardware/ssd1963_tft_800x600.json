@@ -41,13 +41,16 @@
                         },
     "software":  {
                      "init_function":  "ssd1963_init",
-                     "act_function":  "ssd1963_act"
+                     "act_function":  "ssd1963_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ],
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
     "use_cases":  {
                       "recommended_for":  [
                                               "MASSIVE_ORC_FACES",

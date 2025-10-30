@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/vampire_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.0,
                                 "fang_extension":  "0.8 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/vampire_eye_left.json",
                                "config/components/positioned/vampire_eye_right.json",
                                "config/components/positioned/vampire_mouth.json",
@@ -166,3 +166,4 @@
                                              }
                            }
 }
+

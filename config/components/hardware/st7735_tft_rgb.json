@@ -135,5 +135,8 @@
                                  "testing_builds",
                                  "secondary_features"
                              ],
-    "estimated_cost_usd":  "19.95"
+    "estimated_cost_usd":  "19.95",
+    "software":  {
+
+                 }
 }

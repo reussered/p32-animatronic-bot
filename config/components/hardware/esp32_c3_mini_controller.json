@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/esp32_c3_mini_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -37,7 +37,7 @@
                                          ],
                          "expansion_strategy":  "LEVERAGE_EXISTING_SPI_I2S_DEVICE_ARCHITECTURE"
                      },
-    "gpio_expansion_using_existing_components":  {
+    "components":  {
                                                      "spi_servo_expansion":  {
                                                                                  "component":  "config/components/interfaces/spi_device_1.json",
                                                                                  "expander_chip":  "PCA9685_16_CHANNEL_PWM",
@@ -159,3 +159,4 @@
                                    },
     "hardware_type":  "MICRO_CONTROLLER_MODULE"
 }
+

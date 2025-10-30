@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/humanoids/quadruped_walker_mk1.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -313,7 +313,7 @@
                                                                               }
                                                       },
                               "power_system":  {
-                                                   "skeletal_power_components":  "FROM_SKELETAL_POWER_DISTRIBUTION_CONFIG",
+                                                   "components":  "FROM_SKELETAL_POWER_DISTRIBUTION_CONFIG",
                                                    "batteries_lipo_6s":  {
                                                                              "qty":  2,
                                                                              "part_number":  "TURNIGY_6S_5000MAH",
@@ -349,3 +349,4 @@
                                                  }
                               }
 }
+

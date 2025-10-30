@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/animals/wolves_family.json",
     "version":  "1.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_height":  "8.0 INCH",
                                 "skull_depth":  "6.0 INCH"
                             },
-    "default_components":  [
+    "components":  [
 
                            ],
     "family_mood_profile":  {
@@ -41,3 +41,4 @@
                                                             ]
                                  }
 }
+

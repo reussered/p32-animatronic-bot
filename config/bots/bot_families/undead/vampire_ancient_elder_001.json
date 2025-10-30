@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/vampire_ancient_elder_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -40,7 +40,7 @@
                             "attention_span_seconds":  600,
                             "power_level":  "elder_ancient"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "shadow_tentacle_system":  {
                                                                   "description":  "Flexible tentacle-like appendages that emerge from darkness to simulate shadow manipulation powers",
                                                                   "implementation":  "Pneumatic-actuated flexible tubing with black fabric covering, controlled by pressure systems for lifelike movement",
@@ -178,3 +178,4 @@
                   "Designed for high-end horror attractions and immersive supernatural experiences"
               ]
 }
+

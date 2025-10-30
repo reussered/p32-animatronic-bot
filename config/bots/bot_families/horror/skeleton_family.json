@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/skeleton_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -80,7 +80,7 @@
                                 "skull_scale":  1.15,
                                 "bone_prominence":  "high_definition"
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/skeleton_jaw_actuator.json",
                               "config/components/positioned/skeleton_bone_structure.json",
                               "config/components/positioned/skeleton_joint_mechanism.json"
@@ -162,3 +162,4 @@
                   "Construction types support both hard bone shells and fabric costume approaches"
               ]
 }
+

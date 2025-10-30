@@ -9,7 +9,7 @@
     "devices":  [
                     {
                         "id":  "speaker_main",
-                        "pin":  22,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "I2S",
                         "sampleRate":  44100,
                         "bitDepth":  16,
@@ -19,7 +19,7 @@
                     },
                     {
                         "id":  "speaker_subwoofer",
-                        "pin":  23,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "type":  "I2S",
                         "sampleRate":  22050,
                         "bitDepth":  16,

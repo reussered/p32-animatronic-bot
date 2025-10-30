@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_protective_guardian_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -40,7 +40,7 @@
                             "attention_span_seconds":  180,
                             "protective_instinct":  "high"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "territorial_scent_marking":  {
                                                                      "description":  "Scent dispenser system that simulates bear territory marking with safe, natural forest scents",
                                                                      "implementation":  "Pneumatic scent delivery system with pine, earth, and musk scent cartridges for realistic territory simulation",
@@ -159,3 +159,4 @@
                   "Balance of impressive presence with gentle, protective maternal characteristics"
               ]
 }
+

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_berserker.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -83,7 +83,7 @@
                                               "expression_intensity":  "unhinged"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_rage_foam.json",
                                   "config/components/positioned/goblin_bloodshot_eyes.json",
                                   "config/components/positioned/goblin_self_wounds.json",
@@ -149,3 +149,4 @@
                   "NOT RECOMMENDED for family-friendly environments"
               ]
 }
+

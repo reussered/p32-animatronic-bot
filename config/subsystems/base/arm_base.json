@@ -67,12 +67,5 @@
                                                      "range_degrees":  120,
                                                      "default_hitCount":  15
                                                  }
-                             },
-    "interface_assignments":  {
-                                  "pwm_channel_1":  "SERVO_CONTROL",
-                                  "adc_left_ear":  "SHOULDER_FEEDBACK",
-                                  "adc_right_ear":  "ELBOW_FEEDBACK",
-                                  "i2c_bus_1":  "SENSOR_BUS",
-                                  "uart_0":  "DEBUG_CONSOLE"
-                              }
+                             }
 }

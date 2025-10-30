@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/animals/bear_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.2,
                                 "snout_extension":  "1.2 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/bear_eye_left.json",
                                "config/components/positioned/bear_eye_right.json",
                                "config/components/positioned/bear_snout.json",
@@ -163,3 +163,4 @@
                                              }
                            }
 }
+

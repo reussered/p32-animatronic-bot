@@ -4,9 +4,9 @@
     "hardware_type": "BUS_INTERFACE",
     "interface_type":  "GPIO_DIGITAL",
     "author":  "config/author.json",
-    "pin_assignments":  {
-                            "digital_io":  "GPIO_PIN_25"
-                        },
+    "pin_allocation": {
+        "device_pins": ["digital_io"]
+    },
     "relative_filename":  "config/components/interfaces/gpio_pin_25.json",
     "interface_id":  "GPIO_PIN_25"
 }

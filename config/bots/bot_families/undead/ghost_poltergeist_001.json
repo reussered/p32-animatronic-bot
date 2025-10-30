@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/ghost_poltergeist_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,7 +39,7 @@
                             "attention_span_seconds":  120,
                             "mischief_level":  "high"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "telekinetic_simulation_system":  {
                                                                          "description":  "Hidden servo actuators and magnetic systems that create illusion of object movement",
                                                                          "implementation":  "Network of concealed electromagnets and pneumatic actuators to move lightweight objects",
@@ -141,3 +141,4 @@
                   "Designed for interactive haunted experiences with real environmental impact"
               ]
 }
+

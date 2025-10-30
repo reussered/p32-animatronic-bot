@@ -79,11 +79,6 @@ class P32ComponentGenerator:
             for component_ref in bot_config["Components"]:
                 components.extend(self._load_component_recursive(component_ref))
         
-        # Handle contained_components at bot level (legacy support)
-        if "contained_components" in bot_config:
-            for component_ref in bot_config["contained_components"]:
-                components.extend(self._load_component_recursive(component_ref))
-        
         return components
     
     def _load_subsystem_for_traversal(self, subsystem_ref: str) -> None:
@@ -149,14 +144,6 @@ class P32ComponentGenerator:
                     component_data['config_file'] = component_ref
                     components.append(component_data)
                     
-                    # Load interface components based on interface_assignment (in JSON encounter order)
-                    if "interface_assignment" in component_data:
-                        interface_name = component_data["interface_assignment"]
-                        if interface_name == "SPI_DEVICE_1" or interface_name == "SPI_DEVICE_2":
-                            # Load SPI bus interface when encountered in JSON
-                            spi_bus_ref = "config/components/interfaces/spi_bus_vspi.json"
-                            components.extend(self._load_component_recursive(spi_bus_ref))
-                    
                     # Process Components array (standardized plural form)
                     if "Components" in component_data:
                         for component_ref in component_data["Components"]:
@@ -166,16 +153,6 @@ class P32ComponentGenerator:
                     if "Component" in component_data:
                         components.extend(self._load_component_recursive(component_data["Component"]))
                     
-                    # Legacy support - Process includes_components (components this component depends on)
-                    if "includes_components" in component_data.get("software", {}):
-                        for included_ref in component_data["software"]["includes_components"]:
-                            components.extend(self._load_component_recursive(included_ref))
-                    
-                    # Legacy support - Recursively load nested contained_components if present (in JSON order)
-                    if "contained_components" in component_data:
-                        for nested_ref in component_data["contained_components"]:
-                            components.extend(self._load_component_recursive(nested_ref))
-                            
                     # Also check for legacy positioned_components (backward compatibility)
                     if "positioned_components" in component_data:
                         for nested_ref in component_data["positioned_components"]:
@@ -217,22 +194,6 @@ class P32ComponentGenerator:
                     for family_component_ref in self.family_components:
                         components.extend(self._load_component_recursive(family_component_ref))
                     self.family_components_added = True
-                
-                # Recursively load contained_components within the subsystem (new wildcard parsing)
-                if "contained_components" in subsystem_data:
-                    # Separate interfaces from other components for prioritized loading
-                    interfaces = []
-                    other_components = []
-                    
-                    for component_ref in subsystem_data["contained_components"]:
-                        if "interfaces/" in component_ref:
-                            interfaces.append(component_ref)
-                        else:
-                            other_components.append(component_ref)
-                    
-                    # Load interfaces first, then other components
-                    for component_ref in interfaces + other_components:
-                        components.extend(self._load_component_recursive(component_ref))
                         
                 # Also check for legacy positioned_components (backward compatibility)
                 if "positioned_components" in subsystem_data:
@@ -259,10 +220,8 @@ class P32ComponentGenerator:
                     # Set subsystem context to ESP32 chip type
                     self.current_subsystem = str(value)
                     print(f"DEBUG: Set subsystem context to: {self.current_subsystem}")
-                elif key in ['components', 'contained_components', 'includes_components', 'Components', 'Component', 'family_components']:
+                elif key in ['components', 'family_components']:
                     # Process component reference(s) - recurse into component files
-                    # contained_components is treated same as components for subsystems
-                    # includes_components is treated same as components for dependencies
                     print(f"DEBUG: Processing {key} with {len(value) if isinstance(value, list) else 1} items")
                     self._process_component_references(value)
                 elif key in ['subsystem_assemblies', 'subsystems'] and self._is_bot_level():
@@ -273,9 +232,6 @@ class P32ComponentGenerator:
                             if isinstance(subsystem_ref, str):
                                 self._load_subsystem_for_traversal(subsystem_ref)
                 elif key == 'software' and isinstance(value, dict):
-                    # Special handling for software object - check for includes_components
-                    if 'includes_components' in value:
-                        self._process_component_references(value['includes_components'])
                     # Continue processing other software keys
                     self.traverse_json_for_components(value)
                 else:
@@ -613,7 +569,7 @@ class P32ComponentGenerator:
     def _suggest_alternative_chips(self, pins_needed: int) -> None:
         """Suggest alternative ESP32 chips that have enough pins"""
         chip_options = [
-            {"name": "esp32_s3_devkit", "pins": 45, "price": 45.99},
+            {"name": "esp32_s3_devkit", "pins": 39, "price": 45.99},
             {"name": "esp32_c3_devkit", "pins": 15, "price": 12.99},
             {"name": "esp32_wroom_32", "pins": 38, "price": 8.99},
             {"name": "esp32_wrover", "pins": 38, "price": 9.99}

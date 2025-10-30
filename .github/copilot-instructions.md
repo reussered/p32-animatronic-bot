@@ -21,7 +21,7 @@ void component_name_act(void);        // No args, accesses g_loopCount/g_shared_
 - **Family Level**: Behavior/personality shared across bot family (Goblin, Cat, Bear)
 - **Bot-Specific Level**: Positioned hardware components (eyes, nose, mouth, sensors)
 
-**Recursive JSON Composition**: `goblin_head.json` contains `goblin_left_eye.json` → `goblin_eye.json` → `gc9a01_display.json` (interfaces assigned via `interface_assignment` field)
+**Recursive JSON Composition**: `goblin_head.json` contains `goblin_left_eye.json` → `goblin_eye.json` → `gc9a01_display.json`
 
 ## Essential Workflows
 **Generate Components**: `python tools/generate_tables.py goblin_full src` (reads JSON, creates dispatch tables)
@@ -105,6 +105,8 @@ GSM.write<Environment>();
 **SharedMemory**: `GSM.write<T>()` broadcasts to all chips
 
 **Hardware Interfaces**: SPI bus + device pattern, I2S shared bus + unique pins
+
+**Pin Allocation**: GPIO pins are allocated deterministically at runtime. Once assigned, pin mappings remain consistent across software executions.
 
 **Coordinate Systems**: 2D planar or 3D skull-based with `"reference_point": "nose_center"`
 

@@ -29,5 +29,8 @@
                              "last_updated":  "2025-10-22"
                          },
     "author":  "config/author.json",
-    "hardware_type":  "HARDWARE"
+    "hardware_type":  "HARDWARE",
+    "software":  {
+
+                 }
 }

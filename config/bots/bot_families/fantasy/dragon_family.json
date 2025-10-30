@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/dragon_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.3,
                                 "snout_extension":  "2.5 INCH"
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/dragon_eye_left.json",
                                "config/components/positioned/dragon_eye_right.json",
                                "config/components/positioned/dragon_snout.json",
@@ -124,3 +124,4 @@
                                                 }
                            }
 }
+

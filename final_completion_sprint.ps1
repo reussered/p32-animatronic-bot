@@ -30,11 +30,11 @@ function New-PositionedComponent {
 
     "hardware_reference": "$HardwareRef",    "component_type": "POSITIONED_COMPONENT",
 
-    "interface_assignment": "$Interface",    "component_name": "$ComponentName",
+    "component_name": "$ComponentName",
 
     "position": {    "hardware_reference": "$HardwareRef",
 
-        "coordinate_system": "skull_3d",    "interface_assignment": "$Interface",
+        "coordinate_system": "skull_3d",
 
         "reference_point": "$RefPoint",    "position": {
 

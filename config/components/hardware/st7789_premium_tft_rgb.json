@@ -133,5 +133,8 @@
                                  "detail_creatures",
                                  "high_end_builds"
                              ],
-    "estimated_cost_usd":  "14.95"
+    "estimated_cost_usd":  "14.95",
+    "software":  {
+
+                 }
 }

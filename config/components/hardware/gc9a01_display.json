@@ -173,7 +173,9 @@
     "software":  {
                      "init_function":  "gc9a01_init",
                      "act_function":  "gc9a01_act",
-                     "includes_components":  []
+                     "components":  [
+                                       "config/components/drivers/spi_bus.json"
+                                   ]
                  },
     "required_interface_functions":  [
                                         "getBuffer",

@@ -533,7 +533,6 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Hardware specifications → `config\hardware\`
 - Interface definitions → `config\interfaces\`  
 - Positioned components reference hardware via `hardware_reference` field
-- Interface assignments via `interface_assignment` field
 - All paths use Windows backslash format
 
 ## RULE 13: ENCAPSULATED INTERFACE ARCHITECTURE
@@ -542,7 +541,7 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 
 **New Encapsulated Architecture:**
 
-- **Positioned Components**: Only declare `hardware_reference` - NO `interface_assignment` fields
+- **Positioned Components**: Only declare `hardware_reference`
 - **Hardware Components**: Encapsulate ALL interface details internally
 - **No Automatic Assignment**: No template interfaces, numbered instances, or generation scripts
 - **Pure Encapsulation**: Components are "private classes" - interface details completely hidden
@@ -584,17 +583,10 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Generic_spi_driver doesn't care about specific pins, just how to use them
 - Can be used for any device using SPI protocol
 
-**Interface Assignment:**
-
-- ONLY generic_spi_device has interface_assignment parameter
-- Parser recognizes this means interface device pushed onto components before final generic component
-- Positioned components have NO interface_assignment fields (encapsulated)
-
 **Critical Rules:**
 
 - NO automatic interface assignment scripts or systems
 - NO template interfaces or numbered instances
-- NO interface_assignment fields in positioned components
 - ALL interface details encapsulated within hardware_reference chain
 - Components are treated as private classes with hidden implementation details
 
@@ -620,12 +612,6 @@ read all of the rules files in docs/rules. make sure none of the rules contridic
 - Can be used for any display device
 - Generic_spi_driver doesn't care about specific pins, just how to use them
 - Can be used for any device using SPI protocol
-
-**Interface Assignment:**
-
-- ONLY generic_spi_device has interface_assignment parameter
-- Parser recognizes this means interface device pushed onto components before final generic component
-- Positioned components have NO interface_assignment fields (encapsulated)
 
 **UPDATE RULE**: When creating new directories, families, or major structural changes, update this project navigation section immediately to maintain accurate documentation
 

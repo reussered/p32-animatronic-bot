@@ -25,12 +25,6 @@
                         "viewing_angle":  "forward_facing",
                         "tilt_down":  "15 DEG"
                     },
-    "interface_assignment":  {
-                                 "controller_type":  "INTEGRATED_ESP32_WROOM",
-                                 "primary_interface":  "NATIVE_SPI",
-                                 "power_interface":  "DIRECT_5V_3V3",
-                                 "communication":  "ESP_NOW_MESH"
-                             },
     "orc_specific":  {
                          "creature_size":  "MEDIUM",
                          "mouth_type":  "TUSKED_HUMANOID",

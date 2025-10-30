@@ -30,12 +30,6 @@
     }
   },
   
-  "interface_assignment": {
-    "data_pin": "config/interfaces/gpio_pin_32.json",
-    "power_supply": "config/interfaces/power_3v3.json", 
-    "ground": "config/interfaces/ground.json"
-  },
-  
   "behavior_config": {
     "measurement_range": "-10C_to_50C",
     "comfort_range": "18C_to_28C",

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/skeletal_power_distribution.json",
     "version":  "1.0.0",
     "component_type": "INTERFACE_BUS",
@@ -193,7 +193,7 @@
                                                           "bracing_15x15mm_20ft":  "$40.00",
                                                           "total_structural_aluminum":  "$165.00"
                                                       },
-                          "electrical_components":  {
+                          "components":  {
                                                         "anderson_powerpole_connectors":  "$3.00_EACH_X_20 = $60.00",
                                                         "xt30_connectors":  "$2.00_EACH_X_30 = $60.00",
                                                         "buck_converters":  "$8.00_EACH_X_15 = $120.00",
@@ -208,4 +208,5 @@
                                               }
                       }
 }
+
 

@@ -36,7 +36,7 @@
     },
     "hardware_validation": {
         "required_displays": 2,
-        "required_spi_devices": ["SPI_DEVICE_1", "SPI_DEVICE_2"],
+        "required_spi_devices": ["DIRECT_SPI", "DIRECT_SPI"],
         "required_gpio_pins": [26, 27, 33],
         "power_requirements": "3.3V @ 200mA minimum"
     },

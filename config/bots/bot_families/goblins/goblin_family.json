@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  1.0,
                                 "mechanical_precision":  "moderate_tolerance"
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/goblin_left_eye.json",
                               "config/components/positioned/goblin_right_eye.json",
                               "config/components/positioned/goblin_mouth.json",
@@ -88,3 +88,4 @@
                                  "humans":  "SUSPICIOUS"
                              }
 }
+

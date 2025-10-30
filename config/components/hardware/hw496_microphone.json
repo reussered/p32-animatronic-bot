@@ -72,5 +72,8 @@
                   "Can be used for sound detection or voice input"
               ],
     "hardware_type":  "MEMS_MICROPHONE",
-    "component_name":  "HW496_MICROPHONE"
+    "component_name":  "HW496_MICROPHONE",
+    "software":  {
+
+                 }
 }

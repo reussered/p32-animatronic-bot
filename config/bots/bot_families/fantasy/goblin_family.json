@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/goblin_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,7 +14,7 @@
                                 "compression_factor":  0.7,
                                 "skull_scale":  1.0
                             },
-    "default_components":  [
+    "components":  [
                                "config/components/positioned/goblin_left_eye.json",
                                "config/components/positioned/goblin_right_eye.json",
                                "config/components/positioned/goblin_mouth.json",
@@ -127,7 +127,7 @@
                                                                                           "sound",
                                                                                           "temperature"
                                                                                       ],
-                                                               "optional_components":  [
+                                                               "components":  [
                                                                                            "ear_articulation",
                                                                                            "jaw_movement"
                                                                                        ]
@@ -200,3 +200,5 @@
                             "Construction type determines mounting system and user interaction model"
                         ]
 }
+
+

@@ -74,5 +74,12 @@
                                   "vibration_damping":  "RECOMMENDED",
                                   "wire_management":  "3_WIRE_PIGTAIL"
                               },
+    "software":  {
+                     "init_function":  "servo_sg90_micro_init",
+                     "act_function":  "servo_sg90_micro_act",
+                     "components":  [
+                                       "config/components/drivers/pwm_bus.json"
+                                   ]
+                 },
     "hardware_type":  "SERVO_MOTOR"
 }

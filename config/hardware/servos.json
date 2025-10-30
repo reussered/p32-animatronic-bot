@@ -9,7 +9,7 @@
     "devices":  [
                     {
                         "id":  "head_pan",
-                        "pin":  12,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "minAngle":  -90,
                         "maxAngle":  90,
                         "defaultAngle":  0,
@@ -17,7 +17,7 @@
                     },
                     {
                         "id":  "head_tilt",
-                        "pin":  13,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "minAngle":  -30,
                         "maxAngle":  30,
                         "defaultAngle":  0,
@@ -25,7 +25,7 @@
                     },
                     {
                         "id":  "eyebrows",
-                        "pin":  14,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "minAngle":  -45,
                         "maxAngle":  45,
                         "defaultAngle":  0,
@@ -33,7 +33,7 @@
                     },
                     {
                         "id":  "mouth",
-                        "pin":  27,
+                        "pin":  "DYNAMICALLY_ASSIGNED",
                         "minAngle":  0,
                         "maxAngle":  100,
                         "defaultAngle":  50,

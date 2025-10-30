@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/cats/cat_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,7 +15,7 @@
                                 "skull_scale":  0.9,
                                 "mechanical_precision":  "high_tolerance"
                             },
-    "common_components":  [
+    "components":  [
                               "config/components/positioned/cat_animated_ears.json",
                               "config/components/positioned/cat_whisker_sensors.json",
                               "config/components/positioned/cat_eye_left.json",
@@ -109,3 +109,4 @@
                                  "birds":  "PREDATORY_INSTINCT"
                              }
 }
+

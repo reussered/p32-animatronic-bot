@@ -26,12 +26,6 @@
     }
   },
   
-  "interface_assignment": {
-    "data_pin": "config/interfaces/gpio_pin_33.json",
-    "power_supply": "config/interfaces/power_3v3.json",
-    "ground": "config/interfaces/ground.json"
-  },
-  
   "behavior_config": {
     "critical_temp_c": 75,
     "warning_temp_c": 65,

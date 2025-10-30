@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_companion_buddy.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -28,7 +28,7 @@
                                               "learning_enabled":  true
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/emotion_camera.json",
                                   "config/components/positioned/touch_sensor_array.json",
                                   "config/components/positioned/comfort_speaker.json",
@@ -83,3 +83,4 @@
                             "supervised_learning":  true
                         }
 }
+

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_chief.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -89,7 +89,7 @@
                                               "expression_intensity":  "commanding"
                                           }
                   },
-    "additional_components":  [
+    "components":  [
                                   "config/components/positioned/goblin_horn_crown.json",
                                   "config/components/positioned/goblin_authority_markings.json",
                                   "config/components/positioned/goblin_tribal_tattoos.json",
@@ -199,3 +199,4 @@
                   "Trophy scar system indicating battle experience"
               ]
 }
+

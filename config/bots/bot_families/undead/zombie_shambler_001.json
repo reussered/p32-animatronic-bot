@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/zombie_shambler_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -67,7 +67,7 @@
                             "attention_span_seconds":  45,
                             "pack_behavior":  "follow_horde"
                         },
-    "specialized_components":  {
+    "components":  {
                                    "rotting_flesh_effects":  {
                                                                  "description":  "Servo-actuated skin flaps that simulate decaying flesh with periodic twitching movements",
                                                                  "implementation":  "Multi-layer silicone skin with hidden servo motors for realistic decay animation",
@@ -147,3 +147,4 @@
                   "Behavior patterns emphasize simple, relentless pursuit mechanics"
               ]
 }
+

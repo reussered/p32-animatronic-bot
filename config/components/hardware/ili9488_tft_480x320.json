@@ -131,11 +131,14 @@
                             },
     "software":  {
                      "init_function":  "ili9488_init",
-                     "act_function":  "ili9488_act"
+                     "act_function":  "ili9488_act",
+                     "components":  [
+                                        "config/components/drivers/spi_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ]
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ]
 }
