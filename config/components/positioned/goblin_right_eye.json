@@ -4,7 +4,9 @@
     "author":  "config/author.json",
     "component_name":  "goblin_right_eye",
     "subsystem":  "HEAD",
-    "Component":  "config/components/creature_specific/goblin_eye.json",
+    "components":  [
+        "config/components/creature_specific/goblin_eye.json"
+    ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

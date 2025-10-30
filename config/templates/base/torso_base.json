@@ -10,7 +10,7 @@
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "units":  "INCHES",
-    "base_components":  [
+    "components":  [
                             "config/components/positioned/base_power_management.json",
                             "config/components/positioned/base_battery_monitor.json",
                             "config/components/positioned/base_mesh_coordinator.json",

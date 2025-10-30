@@ -42,7 +42,9 @@
     "software":  {
                      "init_function":  "spi_bus_init",
                      "act_function":  "spi_bus_act",
-                     "Component":  "config/components/hardware/generic_spi_display.json"
+                     "components":  [
+                         "config/components/hardware/generic_spi_display.json"
+                     ]
                  },
     "pin_allocation": {
         "shared_pins": ["clock", "data_output", "data_input", "reset"],

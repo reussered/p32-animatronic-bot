@@ -14,7 +14,7 @@
                                 "spi_interfaces":  1,
                                 "i2c_interfaces":  1
                             },
-    "standard_components":  [
+    "components":  [
                                 {
                                     "component_type":  "GAIT_COORDINATOR",
                                     "function_name":  "gait_coordinator_update",

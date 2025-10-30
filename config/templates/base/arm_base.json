@@ -10,7 +10,7 @@
     "coordinate_system":  "skull_3d",
     "reference_point":  "shoulder_socket",
     "units":  "INCHES",
-    "base_components":  [
+    "components":  [
                             "config/components/positioned/base_shoulder_servo.json",
                             "config/components/positioned/base_elbow_servo.json",
                             "config/components/positioned/base_wrist_servo.json",

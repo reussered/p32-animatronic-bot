@@ -216,7 +216,7 @@
     "full_body_coordination_algorithms":  {
                                               "synchronization_control":  {
                                                                               "master_choreography_controller":  {
-                                                                                                                     "component":  "ESP32_S3_MAIN_CONTROLLER",
+                                                                                                                     "components":  ["ESP32_S3_MAIN_CONTROLLER"],
                                                                                                                      "responsibilities":  [
                                                                                                                                               "OVERALL_MOVEMENT_COORDINATION",
                                                                                                                                               "TIMING_SYNCHRONIZATION",

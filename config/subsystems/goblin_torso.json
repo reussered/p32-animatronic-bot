@@ -16,7 +16,7 @@
                    "hitCount":  50,
                    "description":  "Torso coordination every 5 seconds"
                },
-    "system_level_components":  [
+    "components":  [
                                     "config/components/system/system_core.json",
                                     "config/components/system/debug_controller.json",
                                     "config/components/system/network_monitor.json",
@@ -24,9 +24,14 @@
                                     "config/components/system/bluetooth_central.json",
                                     "config/components/system/telemetry_hub.json",
                                     "config/components/system/watchdog.json",
-                                    "config/components/system/power_monitor.json"
+                                    "config/components/system/power_monitor.json",
+                                    "config/components/positioned/spine_flexion_servo.json",
+                                    "config/components/positioned/spine_extension_servo.json",
+                                    "config/components/positioned/waist_rotation_servo.json",
+                                    "config/components/positioned/torso_status_led.json",
+                                    "config/components/positioned/torso_speaker.json"
                                 ],
-    "components":  [
+    "former_components":  [
                                  "config/components/positioned/spine_flexion_servo.json",
                                  "config/components/positioned/spine_extension_servo.json",
                                  "config/components/positioned/waist_rotation_servo.json",

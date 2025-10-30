@@ -10,7 +10,7 @@
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "INCHES",
-    "base_components":  [
+    "components":  [
                             "config/components/positioned/base_eye_left.json",
                             "config/components/positioned/base_eye_right.json",
                             "config/components/positioned/base_speaker.json"

@@ -26,7 +26,7 @@
                                                  ],
                                  "voltage_regulation":  "ONBOARD_LDO"
                              },
-    "standard_components":  [
+    "components":  [
                                 {
                                     "component_type":  "AI_BEHAVIOR_ENGINE",
                                     "function_name":  "ai_behavior_update",

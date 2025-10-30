@@ -39,14 +39,14 @@
                      },
     "components":  {
                                                      "spi_servo_expansion":  {
-                                                                                 "component":  "config/components/interfaces/spi_device_1.json",
+                                                                                 "components":  ["config/components/interfaces/spi_device_1.json"],
                                                                                  "expander_chip":  "PCA9685_16_CHANNEL_PWM",
                                                                                  "gpio_cost":  "3_PINS_SPI_PLUS_1_CS",
                                                                                  "servo_capacity":  "16_SERVOS_PER_EXPANDER",
                                                                                  "cascading":  "MULTIPLE_PCA9685_ON_SAME_SPI_BUS"
                                                                              },
                                                      "i2c_sensor_expansion":  {
-                                                                                  "component":  "config/components/interfaces/i2c_bus_0.json",
+                                                                                  "components":  ["config/components/interfaces/i2c_bus_0.json"],
                                                                                   "gpio_cost":  "2_PINS_SDA_SCL",
                                                                                   "device_capacity":  "127_I2C_ADDRESSES",
                                                                                   "examples":  [
@@ -56,7 +56,7 @@
                                                                                                ]
                                                                               },
                                                      "i2s_audio_expansion":  {
-                                                                                 "component":  "config/components/interfaces/i2s_device_1.json",
+                                                                                 "components":  ["config/components/interfaces/i2s_device_1.json"],
                                                                                  "gpio_cost":  "3_PINS_BCLK_WS_DATA",
                                                                                  "capability":  "AUDIO_INPUT_OUTPUT_PROCESSING",
                                                                                  "examples":  [

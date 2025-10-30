@@ -14,7 +14,7 @@
                                 "spi_interfaces":  1,
                                 "i2c_interfaces":  1
                             },
-    "standard_components":  [
+    "components":  [
                                 {
                                     "component_type":  "GRIP_CONTROLLER",
                                     "function_name":  "grip_controller_update",

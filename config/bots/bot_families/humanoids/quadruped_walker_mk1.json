@@ -23,7 +23,7 @@
     "coordinate_system":  "skull_3d",
     "distributed_control_architecture":  {
                                              "master_controller":  {
-                                                                       "component":  "config/components/hardware/esp32_s3_devkit.json",
+                                                                       "components":  ["config/components/hardware/esp32_s3_devkit.json"],
                                                                        "position":  "BODY_CENTER_SPINE",
                                                                        "responsibilities":  [
                                                                                                 "GAIT_COORDINATION",
@@ -35,7 +35,7 @@
                                              "subsystem_controllers":  [
                                                                            {
                                                                                "controller_id":  "FRONT_LEFT_LEG",
-                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_fl.json",
+                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_fl.json"],
                                                                                "position":  {
                                                                                                 "x":  "12.0",
                                                                                                 "y":  "9.0",
@@ -45,7 +45,7 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "FRONT_RIGHT_LEG",
-                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_fr.json",
+                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_fr.json"],
                                                                                "position":  {
                                                                                                 "x":  "12.0",
                                                                                                 "y":  "-9.0",
@@ -55,7 +55,7 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "REAR_LEFT_LEG",
-                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_rl.json",
+                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_rl.json"],
                                                                                "position":  {
                                                                                                 "x":  "-12.0",
                                                                                                 "y":  "9.0",
@@ -65,7 +65,7 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "REAR_RIGHT_LEG",
-                                                                               "component":  "config/components/positioned/esp32c3_leg_controller_rr.json",
+                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_rr.json"],
                                                                                "position":  {
                                                                                                 "x":  "-12.0",
                                                                                                 "y":  "-9.0",
@@ -75,7 +75,7 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "HEAD_SENSORS",
-                                                                               "component":  "config/components/positioned/esp32c3_head_controller.json",
+                                                                               "components":  ["config/components/positioned/esp32c3_head_controller.json"],
                                                                                "position":  {
                                                                                                 "x":  "18.0",
                                                                                                 "y":  "0.0",

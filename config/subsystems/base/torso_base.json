@@ -27,7 +27,7 @@
                                                  ],
                                  "power_management":  "SWITCHING_REGULATOR"
                              },
-    "standard_components":  [
+    "components":  [
                                 {
                                     "component_type":  "POWER_MANAGEMENT",
                                     "function_name":  "power_management_update",
