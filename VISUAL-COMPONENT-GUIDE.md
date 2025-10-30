@@ -95,7 +95,7 @@
 ### ESP32-S3-DevKitC-1
 - **Size**: 55mm x 25mm x 12mm
 - **USB**: USB-C connector for programming/power
-- **Pins**: 48 GPIO pins available (12 used for goblin head)
+- **Pins**: 39 GPIO pins exposed on headers (dynamically assigned at runtime)
 - **Power**: 5V input, 3.3V logic
 - **Mounting**: Internal skull cavity with access holes
 
@@ -107,13 +107,13 @@
 ```
 ESP32-S3          Display Mounts
 ┌─────────┐       ┌──────┐ ┌──────┐ ┌──────┐
-│ GPIO 12 │────── │ MISO │ │ MISO │ │ MISO │  Left Eye, Right Eye, Mouth
-│ GPIO 13 │────── │ MOSI │ │ MOSI │ │ MOSI │  (Shared bus saves pins)
-│ GPIO 14 │────── │ CLK  │ │ CLK  │ │ CLK  │
+│ GPIO [D]│────── │ MISO │ │ MISO │ │ MISO │  Left Eye, Right Eye, Mouth
+│ GPIO [D]│────── │ MOSI │ │ MOSI │ │ MOSI │  (Shared bus saves pins)
+│ GPIO [D]│────── │ CLK  │ │ CLK  │ │ CLK  │
 │         │       └──────┘ └──────┘ └──────┘
-│ GPIO 15 │────── CS1 (Left Eye)
-│ GPIO 16 │────── CS2 (Right Eye)  
-│ GPIO 17 │────── CS3 (Mouth)
+│ GPIO [D]│────── CS1 (Left Eye)
+│ GPIO [D]│────── CS2 (Right Eye)
+│ GPIO [D]│────── CS3 (Mouth)
 └─────────┘
 ```
 
@@ -121,18 +121,18 @@ ESP32-S3          Display Mounts
 ```
 ESP32-S3          Speaker Mount
 ┌─────────┐       ┌──────────────┐
-│ GPIO 4  │────── │ BCLK (Clock) │
-│ GPIO 5  │────── │ WS   (Word)  │  
-│ GPIO 6  │────── │ DATA (Audio) │
+│ GPIO [D]│────── │ BCLK (Clock) │
+│ GPIO [D]│────── │ WS   (Word)  │
+│ GPIO [D]│────── │ DATA (Audio) │
 └─────────┘       └──────────────┘
 ```
 
-### Sensor Connection  
+### Sensor Connection
 ```
 ESP32-S3          Nose Sensor Mount
 ┌─────────┐       ┌────────────────┐
-│ GPIO 9  │────── │ TRIG (Trigger) │
-│ GPIO 10 │────── │ ECHO (Response)│
+│ GPIO [D]│────── │ TRIG (Trigger) │
+│ GPIO [D]│────── │ ECHO (Response)│
 └─────────┘       └────────────────┘
 ```
 

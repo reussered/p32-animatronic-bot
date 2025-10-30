@@ -58,10 +58,11 @@ HW-496 microphones (physically available, 2 units on hand) have no JSON config.
 - Current config references wrong hardware type (directional_microphone instead of MEMS)
 - Need new `hw496_microphone.json`
 
-### 4. **GPIO Pin Assignment Conflict**
-`gpio_pair_1.json` uses GPIO 9/10 but wiring guide specifies GPIO 25/34.
-- Quick fix: Update JSON to match physical wiring
-- **Blocks breadboard testing**
+### 4. **GPIO Pin Assignment Conflict - RESOLVED**
+Previously: `gpio_pair_1.json` used GPIO 9/10 but wiring guide specified GPIO 25/34.
+- **SOLUTION**: Implemented dynamic pin allocation system
+- **STATUS**: All GPIO conflicts resolved - pins assigned automatically at runtime
+- **IMPACT**: No more hardcoded pin conflicts, breadboard testing now possible
 
 ### 5. **Path Inconsistencies**
 Positioned components exist in multiple locations with version mismatches:

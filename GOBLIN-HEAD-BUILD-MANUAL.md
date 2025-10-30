@@ -43,22 +43,22 @@ ESP32-S3-DevKitC-1 Controller
 ┌─────────────────────────────────┐
 │                                 │
 │  📱 DISPLAYS (SPI Shared Bus)   │
-│  GPIO 12 ──────┬──────┬──────┬─ │ MISO (Shared)
-│  GPIO 13 ──────┼──────┼──────┼─ │ MOSI (Shared)  
-│  GPIO 14 ──────┼──────┼──────┼─ │ CLK  (Shared)
+│  GPIO [D] ──────┬──────┬──────┬─ │ MISO (Shared)
+│  GPIO [D] ──────┼──────┼──────┼─ │ MOSI (Shared)
+│  GPIO [D] ──────┼──────┼──────┼─ │ CLK  (Shared)
 │                │      │      │  │
-│  GPIO 15 ──────┘      │      │  │ CS1 (Left Eye)
-│  GPIO 16 ─────────────┘      │  │ CS2 (Right Eye)
-│  GPIO 17 ────────────────────┘  │ CS3 (Mouth)
+│  GPIO [D] ──────┘      │      │  │ CS1 (Left Eye)
+│  GPIO [D] ─────────────┘      │  │ CS2 (Right Eye)
+│  GPIO [D] ────────────────────┘  │ CS3 (Mouth)
 │                                 │
 │  🔊 AUDIO (I2S Bus)            │
-│  GPIO 4  ─────────────────────  │ BCLK (Clock)
-│  GPIO 5  ─────────────────────  │ WS   (Word Select)
-│  GPIO 6  ─────────────────────  │ DATA (Audio Stream)
+│  GPIO [D] ─────────────────────  │ BCLK (Clock)
+│  GPIO [D] ─────────────────────  │ WS   (Word Select)
+│  GPIO [D] ─────────────────────  │ DATA (Audio Stream)
 │                                 │
 │  📡 SENSOR (Digital Pins)      │
-│  GPIO 9  ─────────────────────  │ TRIG (Trigger Pulse)
-│  GPIO 10 ─────────────────────  │ ECHO (Response Pulse)
+│  GPIO [D] ─────────────────────  │ TRIG (Trigger Pulse)
+│  GPIO [D] ─────────────────────  │ ECHO (Response Pulse)
 │                                 │
 │  ⚡ POWER                       │
 │  5V   ────────────────────────  │ All Components VCC
@@ -67,7 +67,7 @@ ESP32-S3-DevKitC-1 Controller
 │                                 │
 └─────────────────────────────────┘
 
-TOTAL PINS USED: 12 of 48 available (25% utilization)
+TOTAL PINS USED: 12 pins (dynamically assigned at runtime)
 ```
 
 ---

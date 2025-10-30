@@ -54,11 +54,11 @@ See `config/components/dynamic_gpio_driver.src` for a complete example that:
 2. Uses the assigned pin during `act()` to toggle an LED
 3. Demonstrates proper error handling for pin assignment failures
 ## Controller Compatibility
+
 The system works with all ESP32 controllers:
-- ESP32-S3-DevKitC-1 (24 assignable pins)
+- ESP32-S3-DevKitC-1 (39 assignable GPIO pins exposed on headers)
 - ESP32-S3-R8N16 (24 assignable pins)
 - ESP32-S3-R2N2 (24 assignable pins)
 - ESP32-C3 (16 assignable pins)
-Each controller generates its own pin assignment header with appropriate pin arrays and `assigned_pins` tracking.
 
-Each controller generates its own pin assignment header with appropriate pin arrays and ssigned_pins tracking.
+Each controller generates its own pin assignment header with appropriate pin arrays and `assigned_pins` tracking.
