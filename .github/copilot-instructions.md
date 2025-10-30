@@ -1,11 +1,11 @@
 # P32 Animatronic Bot - AI Coding Agent Instructions
 
-##  CRITICAL SETUP (READ FIRST)
+## CRITICAL SETUP (READ FIRST)
 **Project Root**: `f:\GitHub\p32-animatronic-bot` (fixed location, use absolute paths)
 
 **MANDATORY**: Read `.github/AI-AGENT-RULES.md` and `NAMING_RULES.md` before any changes.
 
-##  Architecture Overview
+## Architecture Overview
 **Pure Component System**: Everything is a component with `init()`/`act()` functions. Main loop iterates components only - no application logic in `app_main()`.
 
 **Component Pattern**:
@@ -14,44 +14,39 @@ esp_err_t component_name_init(void);  // Returns ESP_OK
 void component_name_act(void);        // No args, accesses g_loopCount/g_shared_state
 ```
 
-**Communication**: Components NEVER call each other. Use `SharedMemory::read()`/`SharedMemory::write()` for multi-chip coordination.
+**Communication**: Components NEVER call each other. Use `SharedMemory::read()`/`write()` for multi-chip coordination.
 
 **Three-Level Component Hierarchy**:
 - **System Level**: Core platform (WiFi, Serial, Watchdog) - always present
 - **Family Level**: Behavior/personality shared across bot family (Goblin, Cat, Bear)
 - **Bot-Specific Level**: Positioned hardware components (eyes, nose, mouth, sensors)
 
-**Recursive JSON Composition**: `goblin_head.json` contains `goblin_left_eye.json`  `goblin_eye.json`  `gc9a01_display.json` (interfaces assigned via `interface_assignment` field)
+**Recursive JSON Composition**: `goblin_head.json` contains `goblin_left_eye.json` → `goblin_eye.json` → `gc9a01_display.json` (interfaces assigned via `interface_assignment` field)
 
-##  Essential Workflows
+## Essential Workflows
 **Generate Components**: `python tools/generate_tables.py goblin_full src` (reads JSON, creates dispatch tables)
 
 **Build & Flash**: `pio run -t upload -t monitor`
 
 **Validate Config**: `.\generate_file_structure.ps1`
 
-**Multi-Chip Testing**: Use `test/distance_eye_test/` for SharedMemory validation
-
 **Build Environments**:
-- `simple_display_test`: Basic display validation
-- `test_bot_minimal`: Hardware-only testing
 - `goblin_head`: Complete head assembly
 - `goblin_torso`: Torso components
 - `left_arm`, `right_arm`: Bilateral limb control
 
-##  Workflow Reminders and Checklists
-**Critical Workflow Rules**:
+## Critical Workflow Rules
 - **Never compile .src or .hpp files directly**: These are aggregated using `generate_tables.py`. The original .src and .hpp files live in `config/` locations (these are permanent source files); files in `src/` and `include/` are generated/temporary and should not be edited manually.
 - **Always run generate_tables.py first**: Execute `python tools/generate_tables.py goblin_full src` before any build to generate dispatch tables from JSON configs.
 
-**Pre-Build Checklist** (Run before any compilation):
+**Pre-Build Checklist**:
 - [ ] Execute `python tools/generate_tables.py goblin_full src` to generate dispatch tables from JSON configs
 - [ ] Verify JSON configs are updated and mesh references removed if applicable
 - [ ] Check CMakeLists.txt includes correct file paths and include directories
 - [ ] Confirm .src files are included in p32_component_functions.cpp
 - [ ] Validate component headers exist in include/components/
 
-**Common Oversights to Avoid**:
+**Common Oversights**:
 - Forgetting to run generate_tables.py before builds (generates component_tables.cpp, etc.)
 - Using incorrect PlatformIO config (use platformio_multi_variant.ini for goblin_head)
 - Assuming .src files are compiled separately (they are included in p32_component_functions.cpp)
@@ -62,7 +57,7 @@ void component_name_act(void);        // No args, accesses g_loopCount/g_shared_
 - Use `pio run -c platformio_multi_variant.ini -e <env>` for builds
 - Check build output for undefined references or missing headers
 
-##  Key Conventions
+## Key Conventions
 **ASCII-Only**: ESP-IDF toolchain requires ASCII encoding (NO UTF-8/Unicode)
 
 **Component Names**: Globally unique, used in function names `{name}_init`/`{name}_act`
@@ -71,7 +66,7 @@ void component_name_act(void);        // No args, accesses g_loopCount/g_shared_
 
 **Filename Case**: Lowercase except class files (must match class name: `SharedMemory.hpp`)
 
-**JSON Config**: Include `"relative_filename"`, `"version"`, `"author"` fields
+**JSON Config**: Include `"relative_filename"`, `"version"`, `"author"` fields. Use short keys: `"name"` instead of `"component_name"`, `"type"` instead of `"component_type"`
 
 **SharedMemory API**:
 ```cpp
@@ -88,14 +83,14 @@ GSM.write<Mood>();      // Broadcasts to all chips
 GSM.write<Environment>();
 ```
 
-##  File Organization
+## File Organization
 - **Components**: `src/components/{name}.cpp`, `include/components/{name}.hpp`
 - **Configs**: `config/bots/bot_families/{family}/{bot}.json`
 - **Assets**: `assets/{animations,sounds}/{creature}/`, `assets/shapes/scad/`
 - **3D Models**: Tier 1 (universal hardware) + Tier 2 (creature shells)
 - **Generated Files**: `src/subsystems/{subsystem}/{subsystem}_dispatch_tables.cpp`
 
-##  Critical Constraints
+## Critical Constraints
 **ESP32-S3**: 512KB RAM, 8MB Flash - no dynamic allocation in hot paths
 
 **Real-Time**: Components must return quickly (<10ms), no blocking operations
@@ -106,7 +101,7 @@ GSM.write<Environment>();
 
 **Dispatch Tables**: Auto-generated from JSON, never manually edit C++ files
 
-##  Integration Points
+## Integration Points
 **SharedMemory**: `GSM.write<T>()` broadcasts to all chips
 
 **Hardware Interfaces**: SPI bus + device pattern, I2S shared bus + unique pins
@@ -116,6 +111,7 @@ GSM.write<Environment>();
 **PowerShell Tooling**: All scripts lowercase, absolute paths required
 
 **JSON Interpretation Rules**:
+- Use short keys: `"name"` (not `"component_name"`), `"type"` (not `"component_type"`)
 - Reference other configs: `"author": "config/author.json"`
 - Coordinates: `"x": "-1.5 INCH"` (always include units)
 - Coordinate systems: `"coordinate_system": "planar_2d"` or `"skull_3d"`
@@ -123,7 +119,7 @@ GSM.write<Environment>();
 - Shape parameter: Present for hardware-only components (`"init_function": "STUB"`)
 - Interface assignment: `"interface_assignment": "spi_bus_vspi"` (generic bus component, GPIO pins assigned dynamically at runtime)
 
-##  Component Generation & Build System
+## Component Generation & Build System
 **Generate Tables Command**: `python tools/generate_tables.py {config_name} {output_dir}`
 - Reads JSON bot configs from `config/bots/bot_families/{family}/`
 - Generates dispatch tables (`initTable.h`, `actTable.h`)
@@ -132,7 +128,7 @@ GSM.write<Environment>();
 
 **File Structure Pattern**:
 - **Source Components**: `config/components/{name}.src` (permanent)
-- **Header Components**: `config/components/{name}.hdr` (permanent)  
+- **Header Components**: `config/components/{name}.hdr` (permanent)
 - **Generated Files**: `src/components/{name}.cpp` (temporary)
 - **Generated Headers**: `include/components/{name}.hpp` (temporary)
 
@@ -141,7 +137,9 @@ GSM.write<Environment>();
 - Use `platformio_multi_variant.ini` for full builds
 - Each environment targets specific subsystems or test scenarios
 
-##  Critical "Do Not Touch" Areas
+
+- `goblin_torso`: Torso components
+- `left_arm`, `right_arm`: Bilat## Critical "Do Not Touch" Areas
 **Never Edit Generated Files**:
 - `src/components/*.cpp` (regenerated by tools)
 - `include/components/*.hpp` (regenerated by tools)

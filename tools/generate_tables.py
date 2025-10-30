@@ -363,22 +363,29 @@ class P32ComponentGenerator:
                 # Set current component context for configuration processing
                 self.current_component = comp_name
                 
-                # Add to dispatch tables when component is encountered (no deduplication)
-                # Check for explicitly defined function names in software section
-                software = component_data.get("software", {})
-                init_func = software.get("init_function") or self.generate_function_name(comp_name, "init")
-                act_func = software.get("act_function") or self.generate_function_name(comp_name, "act")
+                # Check if component has already been added to dispatch table (prevent duplicates)
+                component_already_added = any(comp["name"] == comp_name for comp in self.components)
                 
-                self.components.append({
-                    "name": comp_name,
-                    "init_func": init_func,
-                    "act_func": act_func,
-                    "hitCount": hit_count,
-                    "description": component_data.get("description", f"{comp_name} component"),
-                    "type": "traversed",
-                    "config": component_data,
-                    "subsystem": self.current_subsystem
-                })
+                if not component_already_added:
+                    # Add to dispatch tables when component is first encountered
+                    # Check for explicitly defined function names in software section
+                    software = component_data.get("software", {})
+                    init_func = software.get("init_function") or self.generate_function_name(comp_name, "init")
+                    act_func = software.get("act_function") or self.generate_function_name(comp_name, "act")
+                    
+                    self.components.append({
+                        "name": comp_name,
+                        "init_func": init_func,
+                        "act_func": act_func,
+                        "hitCount": hit_count,
+                        "description": component_data.get("description", f"{comp_name} component"),
+                        "type": "traversed",
+                        "config": component_data,
+                        "subsystem": self.current_subsystem
+                    })
+                    print(f"DEBUG: Added component '{comp_name}' to dispatch table")
+                else:
+                    print(f"DEBUG: Skipping duplicate component '{comp_name}' - already in dispatch table")
                 
                 # Generate configuration struct only for first encounter
                 if comp_name not in self.seen_components:

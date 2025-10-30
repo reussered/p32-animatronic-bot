@@ -45,15 +45,15 @@
                      "Component":  "config/components/hardware/generic_spi_display.json"
                  },
     "pins":  {
-                 "data_output":  16,
-                 "data_input":  17,
-                 "clock":  15
+                 "data_output":  35,
+                 "data_input":  36,
+                 "clock":  37
              },
     "shared_control_pins":  {
                                "reset":  45
                            },
     "unique_device_pins":  {
-                              "chip_select_1":  48,
+                              "chip_select_1":  38,
                               "data_command_1":  47,
                               "backlight_1":  21,
                               "chip_select_2":  18,

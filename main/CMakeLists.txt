@@ -6,16 +6,20 @@ idf_component_register(
 # Conditional source file inclusion based on subsystem
 if(CONFIG_SUBSYSTEM_GOBLIN_HEAD_ONLY)
     target_sources(${COMPONENT_LIB} PRIVATE
-        "../components/component_tables.cpp"
         "../components/p32_component_functions.cpp"
-        "../components/components/goblin_head_left_eye_only.src"
-        "../components/goblin_full/goblin_left_eye.src"
-        "../components/goblin_full/goblin_eye.src"
-        "../components/components/gc9a01.src"
-        "../components/components/spi_bus.src"
-        "../components/components/generic_spi_display/generic_spi_display.src"
-        "../components/components/SharedMemory.cpp"
-        "../components/components/Mood.cpp"
+        "../components/SharedMemory.cpp"
+        "../components/Mood.cpp"
         "../components/p32_web_client.cpp"
+    )
+endif()
+
+# Dual eye display test configuration
+if(CONFIG_TEST_DUAL_EYES)
+    target_sources(${COMPONENT_LIB} PRIVATE
+        "../src/component_tables.cpp"
+        "../src/components/SharedMemory.cpp"
+        "../src/components/Mood.cpp"
+        "../src/p32_web_client.cpp"
+        "../test_display_interface.cpp"
     )
 endif()
