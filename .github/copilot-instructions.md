@@ -115,15 +115,13 @@ GSM.write<Environment>();
 - Reference other configs: `"author": "config/author.json"`
 - Coordinates: `"x": "-1.5 INCH"` (always include units)
 - Coordinate systems: `"coordinate_system": "planar_2d"` or `"skull_3d"`
-- Required fields: `"relative_filename"`, `"version"`, `"author"`
-- Shape parameter: Present for hardware-only components (`"init_function": "STUB"`)
-- Interface assignment: `"interface_assignment": "spi_bus_vspi"` (generic bus component, GPIO pins assigned dynamically at runtime)
+- Required fields: `"name"`, `"relative_filename"`, `"author"`
 
 ## Component Generation & Build System
 **Generate Tables Command**: `python tools/generate_tables.py {config_name} {output_dir}`
 - Reads JSON bot configs from `config/bots/bot_families/{family}/`
-- Generates dispatch tables (`initTable.h`, `actTable.h`)
-- Creates component inclusion files
+- Generates dispatch tables (`initTable.h`, `actTable.h`) - includes info from every visited component, duplicates allowed
+- Creates component inclusion files (`p32_component_functions.cpp`, `p32_component_functions.hpp`) - built from component .src/.hdr files, duplicates not allowed
 - Must run before every build
 
 **File Structure Pattern**:
