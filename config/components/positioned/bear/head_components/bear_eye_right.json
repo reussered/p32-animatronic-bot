@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/bear/head_components/bear_eye_right.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "component_name":  "bear_eye_right",
+    "component_name":  "bear_eye_right","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
                                  "config/components/creature_specific/bear_eye.json"
@@ -39,3 +39,4 @@
                           },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

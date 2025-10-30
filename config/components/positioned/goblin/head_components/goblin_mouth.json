@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/head_components/goblin_mouth.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_head_mouth",
+    "component_name":  "goblin_head_mouth","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/gc9a01_display.json",
@@ -35,3 +35,4 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

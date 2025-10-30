@@ -24,7 +24,7 @@
                                     "config/components/functional/goblin_personality.json",
                                     "config/components/functional/goblin_mood.json"
                                 ],
-    "subsystems":  [
+    "components":  [
                                  "config/subsystems/goblin_head_left_eye_only.json"
                              ],
     "mood_defaults":  {

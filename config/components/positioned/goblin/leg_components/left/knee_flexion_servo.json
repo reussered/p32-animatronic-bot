@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/leg_components/left/knee_flexion_servo.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_left_knee_flexion",
+    "component_name":  "goblin_left_knee_flexion","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "LEG",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/mg996r_servo.json",
@@ -35,3 +35,4 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

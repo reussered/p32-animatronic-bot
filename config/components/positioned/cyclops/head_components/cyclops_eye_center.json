@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/cyclops/head_components/cyclops_eye_center.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "component_name":  "cyclops_eye_center",
+    "component_name":  "cyclops_eye_center","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
                                  "config/components/creature_specific/cyclops_eye.json"
@@ -39,3 +39,4 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

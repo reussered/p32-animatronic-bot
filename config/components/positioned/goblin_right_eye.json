@@ -3,6 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_name":  "goblin_right_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
         "config/components/creature_specific/goblin_eye.json"

@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/android/head_components/android_eye_left.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "android_eye_left",
+    "component_name":  "android_eye_left","component_type": "POSITIONED_COMPONENT",
     "components":  [
                                  "config/components/creature_specific/android_eye.json"
                              ],
@@ -41,3 +41,4 @@
                           },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
+

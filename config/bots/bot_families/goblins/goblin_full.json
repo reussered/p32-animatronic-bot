@@ -25,7 +25,7 @@
                                     "config/components/functional/goblin_mood.json",
                                     "config/components/functional/goblin_behavior_engine.json"
                                 ],
-    "subsystems":  [
+    "components":  [
                                  "config/subsystems/goblin_head.json",
                                  "config/subsystems/goblin_torso.json"
                              ],

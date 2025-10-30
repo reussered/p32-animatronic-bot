@@ -231,8 +231,8 @@ class P32ComponentGenerator:
                         for subsystem_ref in value:
                             if isinstance(subsystem_ref, str):
                                 self._load_subsystem_for_traversal(subsystem_ref)
-                elif key == 'software' and isinstance(value, dict):
-                    # Continue processing other software keys
+                elif key in ['software', 'hardware', 'interfaces'] and isinstance(value, dict):
+                    # Continue processing nested sections that may contain components
                     self.traverse_json_for_components(value)
                 else:
                     # Process other key-value pairs (extract configuration data)

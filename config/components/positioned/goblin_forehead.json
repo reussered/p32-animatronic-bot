@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin_forehead.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_forehead",
+    "component_name":  "goblin_forehead","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
         "config/components/hardware/servo_sg90_micro.json"
