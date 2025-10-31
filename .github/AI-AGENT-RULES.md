@@ -864,9 +864,14 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 
 **CRITICAL ARCHITECTURE REQUIREMENT:**
 
+**ALWAYS edit the SOURCE files in `config/components/` (.src/.hdr extensions)**
+
+**NEVER edit the GENERATED files in `src/components/` (.cpp/.hpp extensions)**
+
 ```
 IF creating_component_code THEN
     → Use generate_tables.py or generate_individual_components.py
+    → It is permitted when necessary to edit .src/.hdr files in config/components/ (these are permanent source files)
     → NEVER manually create .cpp/.hpp files in src/components/
     → NEVER manually edit generated dispatch tables
 ELSE
@@ -877,7 +882,7 @@ ELSE
 
 **Component Generation Commands:**
 
-- Generate for specific bot: `python tools\generate_tables.py config\bots\bot_families\goblins\goblin_full.json src`
+- Generate for specific bot: `python tools\generate_tables.py config\bots\bot_families\{family}\{bot}.json src`
 - Individual components: `python tools\generate_individual_components.py`
 
 **Manual component creation ALWAYS fails** - the generation system is required for:
@@ -904,3 +909,5 @@ All critical architecture rules from the following specification documents have 
 **Original specification documents can now be moved to docs/obsolete/ as they have been fully consolidated.**
 
 **Note**: Communications protocol specifications were obsoleted as protocols are now fully encapsulated within SharedMemory class.
+ 
+ 
