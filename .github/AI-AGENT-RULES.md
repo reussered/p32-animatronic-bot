@@ -28,6 +28,18 @@
 
 # AI AGENT IRONCLAD RULES - NEVER BREAK THESE
 
+## 📋 MANDATORY PREREQUISITE: READ ALL RULE DOCUMENTS
+
+**BEFORE implementing ANY changes, the AI agent MUST read and internalize:**
+
+1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
+2. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules
+3. **`NAMING_RULES.md`** - Component naming conventions and file organization
+
+**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
+
+---
+
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
 
@@ -863,8 +875,6 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 **ALL component code MUST be generated via scripts - NEVER manually created**
 
 **CRITICAL ARCHITECTURE REQUIREMENT:**
-
-**ALWAYS edit the SOURCE files in `config/components/` (.src/.hdr extensions)**
 
 **NEVER edit the GENERATED files in `src/components/` (.cpp/.hpp extensions)**
 
