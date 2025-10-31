@@ -184,7 +184,7 @@ The following files remain unchanged and can be reused when mouth display is add
 - ✅ `config/components/hardware/gc9a01_display.json`
 - ✅ `config/components/hardware/hc_sr04_sensor.json`
 - ✅ `config/components/hardware/speaker.json`
-- ✅ `config/components/interfaces/spi_bus_vspi.json`
+- ✅ `config/components/interfaces/spi_bus.json`
 - ✅ `config/components/interfaces/spi_device_1.json` (left eye)
 - ✅ `config/components/interfaces/spi_device_2.json` (right eye)
 - ✅ `config/components/interfaces/spi_device_3.json` (mouth - for future)
@@ -243,3 +243,4 @@ The following files remain unchanged and can be reused when mouth display is add
 
 *Document created: October 15, 2025*
 *Project: P32 Animatronic Bot - Goblin Head Assembly*
+

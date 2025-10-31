@@ -3,7 +3,7 @@
     "type": "bus",
     "version": "1.0.0",
     "author": "config/authors/ai_agent.json",
-    "component_name": "pwm_bus",
+    "name": "pwm_bus",
     "description": "PWM bus component containing PWM driver for servo and LED control",
     "created": "2025-10-29",
     "component_type": "bus_interface",

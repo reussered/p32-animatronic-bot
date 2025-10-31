@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/esp32c3_hand_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "ESP32C3_HAND_CONTROLLER",
+    "name":  "ESP32C3_HAND_CONTROLLER",
     "subsystem":  "TORSO",
     "component_type":  "POSITIONED_SUBSYSTEM_CONTROLLER",
     "description":  "ESP32-C3 hand controller demonstrating GPIO expansion using existing SPI/I2S components",
@@ -28,7 +28,7 @@
                                   },
     "gpio_allocation_strategy":  {
                                      "spi_expansion_for_servos":  {
-                                                                      "interface_component":  "config/components/interfaces/spi_bus_vspi.json",
+                                                                      "interface_component":  "config/components/interfaces/spi_bus.json",
                                                                       "device_component":  "config/components/interfaces/spi_device_1.json",
                                                                       "expander_chip":  "PCA9685_16_CHANNEL_PWM",
                                                                       "gpio_pins_used":  {
@@ -108,4 +108,5 @@
                      "x":  "0.0 INCH"
                  }
 }
+
 

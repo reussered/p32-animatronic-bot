@@ -2,7 +2,7 @@
     "relative_filename": "config/components/functional/test_system_controller.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_name": "test_system_controller",
+    "name": "test_system_controller",
     "component_type": "SYSTEM_CONTROLLER",
     "timing": {
         "hitCount": 10,

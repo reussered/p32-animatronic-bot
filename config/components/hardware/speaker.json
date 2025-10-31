@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "I2S_SPEAKER",
-    "component_name":  "speaker",
+    "name":  "speaker",
     "physical_specs":  {
                            "diameter":  "1.5 INCH",
                            "thickness":  "0.3 INCH",

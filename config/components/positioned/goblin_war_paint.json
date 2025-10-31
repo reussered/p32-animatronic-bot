@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_war_paint.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "GOBLIN_WAR_PAINT",
+    "name":  "GOBLIN_WAR_PAINT",
     "subsystem":  "UNKNOWN",
     "component_type":  "aesthetic_overlay",
     "description":  "War paint markings and tribal decorations for warrior goblins",

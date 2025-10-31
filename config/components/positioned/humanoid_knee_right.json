@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_knee_right.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_KNEE_RIGHT",
+    "name":  "HUMANOID_KNEE_RIGHT",
     "subsystem":  "LEG",
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right knee joint with 1 DOF flexion for walking and shock absorption",

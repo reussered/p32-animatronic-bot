@@ -6,11 +6,11 @@
     "subsystem_id":  "goblin_head_v1",
     "description":  "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing",
     "created":  "2025-10-15",
-    "controller":  "ESP32_S3_DEVKITC_1",
+    "controller":  "ESP32_S3_R8N16",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
-    "component_name":  "goblin_head",
+    "name":  "goblin_head",
     "component_type":  "SUBSYSTEM_ASSEMBLY",
     "timing":  {
                    "hitCount":  25,

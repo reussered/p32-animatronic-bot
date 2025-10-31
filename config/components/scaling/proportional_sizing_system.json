@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/scaling/proportional_sizing_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "PROPORTIONAL_SIZING_SYSTEM",
+    "name":  "PROPORTIONAL_SIZING_SYSTEM",
     "subsystem":  "UNKNOWN",
     "component_type":  "SCALABLE_DESIGN_ARCHITECTURE",
     "description":  "Comprehensive scaling system for different creature types from tiny goblins to massive orcs",

@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_ear_right.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_ear_right",
+    "name":  "goblin_ear_right",
     "subsystem":  "HEAD",
     "component_type":  "POSITIONED_AUDIO_INPUT",
     "description":  "Right ear positioned microphone with goblin-specific directional processing",

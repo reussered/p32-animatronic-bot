@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "ILI9486_4INCH_TFT",
-    "component_name":  "ili9486_4inch_tft",
+    "name":  "ili9486_4inch_tft",
     "description":  "4.0\" TFT RGB display with ILI9486 driver - LARGE creature mouth/primary display",
     "large_display_champion":  "TRUE - Perfect for dragon mouths and large creature features",
     "physical_specifications":  {

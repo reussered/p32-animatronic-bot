@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/creature_specific/zombie_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "zombie_eye",
+    "name":  "zombie_eye",
     "subsystem":  "HEAD",
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared zombie eye processing logic with palette and undead mood-based rendering",

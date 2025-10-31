@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_LED_MATRIX",
-    "component_name":  "ROBOT_CHEST_MATRIX",
+    "name":  "ROBOT_CHEST_MATRIX",
     "subsystem":  "UNKNOWN",
     "description":  "8x8 RGB LED matrix for robot chest display and status indication",
     "created":  "2025-10-12",

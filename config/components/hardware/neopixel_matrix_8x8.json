@@ -73,5 +73,5 @@
                                   "heat_dissipation":  "MODERATE"
                               },
     "hardware_type":  "LED_MATRIX",
-    "component_name":  "NEOPIXEL_MATRIX_8X8"
+    "name":  "NEOPIXEL_MATRIX_8X8"
 }

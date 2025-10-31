@@ -3,7 +3,7 @@
     "type": "bus",
     "version": "1.0.0",
     "author": "config/authors/ai_agent.json",
-    "component_name": "gpio_bus",
+    "name": "gpio_bus",
     "description": "GPIO bus component containing GPIO drivers for digital input/output operations",
     "created": "2025-10-29",
     "component_type": "bus_interface",

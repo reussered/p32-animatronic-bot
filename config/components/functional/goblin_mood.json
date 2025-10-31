@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/functional/goblin_mood.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_mood",
+    "name":  "goblin_mood",
     "component_type":  "FAMILY_LEVEL",
     "family_type":  "GOBLIN",
     "description":  "Goblin 8-mood emotional state machine - integrates sensor inputs and personality",

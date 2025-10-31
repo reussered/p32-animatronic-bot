@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/pixie/head_components/pixie_eye_left.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "component_name":  "pixie_eye_left","component_type": "POSITIONED_COMPONENT",
+    "name":  "pixie_eye_left","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
                                  "config/components/creature_specific/pixie_eye.json"

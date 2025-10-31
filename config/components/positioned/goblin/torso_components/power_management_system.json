@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin/torso_components/power_management_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "power_manager","component_type": "POSITIONED_COMPONENT",
+    "name":  "power_manager","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "TORSO",
     "components": ["config/components/hardware/power_management_unit.json"],
     "coordinate_system":  "skull_3d",

@@ -3,7 +3,7 @@
     "type": "bus",
     "version": "1.0.0",
     "author": "config/authors/ai_agent.json",
-    "component_name": "i2c_bus",
+    "name": "i2c_bus",
     "description": "I2C bus component containing I2C driver for sensor and peripheral communication",
     "created": "2025-10-29",
     "component_type": "bus_interface",

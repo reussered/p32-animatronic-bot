@@ -122,7 +122,7 @@
                                                                          "validation":  "SCHEMA_VALID_INNOVATIVE_SYSTEM"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/interfaces/spi_bus_vspi.json",
+                                                                         "file":  "config/components/interfaces/spi_bus.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "SPI bus configuration",
                                                                          "validation":  "SCHEMA_VALID_BUS_SPEC"
@@ -440,3 +440,4 @@
                        "long_term":  "Expand creature library and community documentation"
                    }
 }
+

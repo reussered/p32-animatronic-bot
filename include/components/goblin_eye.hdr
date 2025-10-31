@@ -18,7 +18,6 @@ extern RGB565Pixel goblin_eye_palette[256];
 // Shared eye processing variables (extern declarations)
 extern uint8_t* currentFrame;
 extern uint32_t current_frame_size;
-extern uint32_t current_spi_device;
 
 // Animation constants
 extern const uint32_t FRAME_WIDTH;

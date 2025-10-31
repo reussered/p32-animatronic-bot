@@ -64,7 +64,7 @@
                                "dragon":  "EXCELLENT"
                            },
     "hardware_type":  "LED_STRIP",
-    "component_name":  "WS2812_LED_STRIP",
+    "name":  "WS2812_LED_STRIP",
     "software":  {
 
                  }

@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/interfaces/max98357a_i2s_amplifier.json",
     "version":  "1.0.0",
     "component_type": "INTERFACE_BUS",

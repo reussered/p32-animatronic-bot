@@ -127,5 +127,5 @@
                                 "estimated_build_time":  "4 HOURS"
                             },
     "hardware_type":  "MECHANICAL_MOUNTING",
-    "component_name":  "BACK_MOUNT_SYSTEM"
+    "name":  "BACK_MOUNT_SYSTEM"
 }

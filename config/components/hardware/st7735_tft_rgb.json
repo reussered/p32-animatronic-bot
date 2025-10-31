@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "ST7735_TFT_RGB",
-    "component_name":  "st7735_tft_rgb",
+    "name":  "st7735_tft_rgb",
     "description":  "1.8\" TFT RGB display with ST7735 driver - FULL COLOR budget option",
     "budget_rgb_champion":  "TRUE - Affordable full color display",
     "physical_specifications":  {

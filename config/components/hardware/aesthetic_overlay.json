@@ -40,5 +40,5 @@
                   "Reusable design for different character configurations"
               ],
     "hardware_type":  "AESTHETIC_OVERLAY",
-    "component_name":  "AESTHETIC_OVERLAY"
+    "name":  "AESTHETIC_OVERLAY"
 }

@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_wrist_right.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_WRIST_RIGHT",
+    "name":  "HUMANOID_WRIST_RIGHT",
     "subsystem":  "ARM",
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right wrist assembly with 2 DOF for hand orientation and fine manipulation",

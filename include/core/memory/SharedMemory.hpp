@@ -32,8 +32,10 @@ inline shared_type_id_t getTypeId<Mood>() {
 }
 
 #ifdef ESP_PLATFORM
+#ifdef CONFIG_ESP_WIFI_ESPNOW
 #include <esp_now.h>
-#include <esp_wifi.h>
+#endif
+//#include <esp_wifi.h>
 #include <esp_log.h>
 #endif
 
@@ -41,9 +43,9 @@ class SharedMemory {
 private:
     std::map<shared_type_id_t, void*> memory_map;
     static SharedMemory* instance;  // Singleton instance
+#if defined(ESP_PLATFORM) && defined(CONFIG_ESP_WIFI_ESPNOW)
     static bool esp_now_initialized;  // Track ESP-NOW initialization
     
-#ifdef ESP_PLATFORM
     static void on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status);
     static void on_data_recv(const uint8_t* mac_addr, const uint8_t* data, int len);
     void espnow_broadcast(shared_type_id_t type_id, void* data, size_t size);
@@ -72,12 +74,12 @@ public:
     }
     
     void init() {
-#ifdef ESP_PLATFORM
+#if defined(ESP_PLATFORM) && defined(CONFIG_ESP_WIFI_ESPNOW)
         espnow_init();
 #endif
     }
     
-#ifdef ESP_PLATFORM
+#if defined(ESP_PLATFORM) && defined(CONFIG_ESP_WIFI_ESPNOW)
     void espnow_init();
 #endif
 
@@ -97,7 +99,7 @@ public:
             if (!new_mem) return nullptr;
             memory_map[key] = new_mem;
             
-#ifdef ESP_PLATFORM
+#if defined(ESP_PLATFORM) && defined(CONFIG_ESP_WIFI_ESPNOW)
             // Broadcast the new default instance to other nodes
             espnow_broadcast(key, new_mem, sizeof(T));
 #endif
@@ -116,7 +118,7 @@ public:
             return -1;
         }
         
-#ifdef ESP_PLATFORM
+#if defined(ESP_PLATFORM) && defined(CONFIG_ESP_WIFI_ESPNOW)
         // Broadcast current data to other ESP32s
         espnow_broadcast(key, it->second, sizeof(T));
 #endif

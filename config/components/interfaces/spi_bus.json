@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/interfaces/spi_bus.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "spi_bus",
+    "name":  "spi_bus",
     "hardware_type": "BUS_INTERFACE",
     "bus_type": "SPI",
     "bus_name": "VSPI",

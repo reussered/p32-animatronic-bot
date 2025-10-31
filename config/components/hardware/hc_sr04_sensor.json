@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "HC_SR04_SENSOR",
-    "component_name":  "hc_sr04_ultrasonic_distance_sensor",
+    "name":  "hc_sr04_ultrasonic_distance_sensor",
     "physical_specs":  {
                            "width":  "1.8 INCH",
                            "height":  "0.7 INCH",

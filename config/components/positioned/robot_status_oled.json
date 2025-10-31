@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_OLED_DISPLAY",
-    "component_name":  "ROBOT_STATUS_OLED",
+    "name":  "ROBOT_STATUS_OLED",
     "subsystem":  "UNKNOWN",
     "description":  "Small OLED display for text-based status information and diagnostics",
     "created":  "2025-10-12",

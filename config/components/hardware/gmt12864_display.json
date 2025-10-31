@@ -93,7 +93,7 @@
                                                      "NEUTRAL":  "standard_colors"
                                                  }
                             },
-    "component_name":  "GMT12864_DISPLAY",
+    "name":  "GMT12864_DISPLAY",
     "software":  {
 
                  }

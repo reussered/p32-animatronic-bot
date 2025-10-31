@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "SSD1351_RGB_OLED",
-    "component_name":  "ssd1351_rgb_oled",
+    "name":  "ssd1351_rgb_oled",
     "description":  "1.5\" RGB OLED with SSD1351 driver - EVERY PIXEL DISPLAYS EVERY COLOR",
     "holy_grail_status":  "TRUE - Full RGB per pixel capability",
     "physical_specifications":  {

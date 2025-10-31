@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/telemetry_hub.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "component_name":  "telemetry_hub",
+    "name":  "telemetry_hub",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "Central telemetry aggregation and publishing hub - collects data from all subsystems",
     "created":  "2025-10-15",

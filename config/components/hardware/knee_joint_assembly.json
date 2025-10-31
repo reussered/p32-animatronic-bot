@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "knee_joint_assembly",
+    "name":  "knee_joint_assembly",
     "relative_filename":  "config/components/hardware/knee_joint_assembly.json",
     "description":  "Generated hardware component for knee_joint_assembly",
     "cost_performance":  {

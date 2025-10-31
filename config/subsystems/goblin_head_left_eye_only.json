@@ -10,7 +10,7 @@
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "units":  "MILLIMETERS",
-    "component_name":  "goblin_head_left_eye_only",
+    "name":  "goblin_head_left_eye_only",
     "component_type":  "SUBSYSTEM_ASSEMBLY",
     "timing":  {
                    "hitCount":  25,

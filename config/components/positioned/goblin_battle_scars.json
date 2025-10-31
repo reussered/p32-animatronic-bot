@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_battle_scars.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "GOBLIN_BATTLE_SCARS",
+    "name":  "GOBLIN_BATTLE_SCARS",
     "subsystem":  "UNKNOWN",
     "component_type":  "aesthetic_overlay",
     "description":  "Battle damage scars and war markings for warrior goblins",

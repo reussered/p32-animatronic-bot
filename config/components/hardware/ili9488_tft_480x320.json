@@ -5,7 +5,7 @@
     "hardware_type":  "ILI9488_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "component_name":  "ili9488",
+    "name":  "ili9488",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "3.5 INCH",

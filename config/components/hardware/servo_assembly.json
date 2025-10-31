@@ -56,5 +56,5 @@
                                       "current_consumption":  "UP_TO_2.5A_PEAK_PER_SERVO",
                                       "control_signal":  "3.3V_LOGIC_COMPATIBLE"
                                   },
-    "component_name":  "SERVO_ASSEMBLY"
+    "name":  "SERVO_ASSEMBLY"
 }

@@ -47,6 +47,7 @@ uint32_t hitCountTable[TABLE_SIZE] = {
     1,    // [1] goblin_left_eye - every 1 loops
     1,    // [2] goblin_eye - every 1 loops
     1,    // [3] gc9a01 - every 1 loops
-    1,    // [4] spi_bus_vspi - every 1 loops
+    1,    // [4] spi_bus - every 1 loops
     1     // [5] generic_spi_display - every 1 loops
 };
+

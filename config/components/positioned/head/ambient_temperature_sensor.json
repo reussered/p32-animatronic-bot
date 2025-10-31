@@ -4,7 +4,7 @@
   "author": "config/author.json",
   "component_type": "POSITIONED_COMPONENT",
   "hardware_type": "SENSOR",
-  "component_name": "ambient_temperature_sensor",
+  "name": "ambient_temperature_sensor",
   "display_name": "Skull Ambient Temperature Sensor",
   "description": "Temperature sensor for monitoring ambient environmental conditions inside goblin skull",
   "subsystem": "head",

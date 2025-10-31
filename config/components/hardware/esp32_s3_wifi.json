@@ -11,7 +11,7 @@
                                                      "power_watts":  "0.792W"
                                                  }
                        },
-    "component_name":  "esp32_s3_wifi",
+    "name":  "esp32_s3_wifi",
     "relative_filename":  "config/components/hardware/esp32_s3_wifi.json",
     "description":  "ESP32-S3 WiFi and Bluetooth controller",
     "cost_performance":  {

@@ -2,7 +2,7 @@
     "relative_filename": "config/components/hardware/esp32_c3_devkit_chip.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_name": "esp32_c3_devkit",
+    "name": "esp32_c3_devkit",
     "hardware_type": "MICROCONTROLLER_CHIP",
     "chip_family": "ESP32_C3",
     "board_name": "ESP32-C3-DevKitC-02",

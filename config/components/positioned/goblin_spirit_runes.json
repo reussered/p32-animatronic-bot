@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_spirit_runes.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "GOBLIN_SPIRIT_RUNES",
+    "name":  "GOBLIN_SPIRIT_RUNES",
     "subsystem":  "UNKNOWN",
     "component_type":  "mystical_display",
     "description":  "Glowing mystical runes for shaman goblin spiritual communication",

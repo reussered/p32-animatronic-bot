@@ -5,7 +5,7 @@
     "hardware_type":  "GC9A01_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "component_name":  "gc9a01",
+    "name":  "gc9a01",
     "subsystem":  "HEAD",
     "components":  [
         "config/components/interfaces/spi_bus_vspi.json"

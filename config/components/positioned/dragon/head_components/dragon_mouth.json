@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/dragon/head_components/dragon_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -42,6 +42,6 @@
                             "sleep_animation":  "assets/animations/dragon/dormant_smoke.json"
                         },
     "hardware_type":  "POSITIONED_COMPONENT",
-    "component_name":  "DRAGON_MOUTH"
+    "name":  "DRAGON_MOUTH"
 }
 

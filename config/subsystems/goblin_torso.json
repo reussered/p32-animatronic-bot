@@ -10,7 +10,7 @@
     "coordinate_system":  "skull_3d",
     "reference_point":  "spine_base",
     "units":  "MILLIMETERS",
-    "component_name":  "goblin_torso",
+    "name":  "goblin_torso",
     "component_type":  "SUBSYSTEM_ASSEMBLY",
     "timing":  {
                    "hitCount":  50,

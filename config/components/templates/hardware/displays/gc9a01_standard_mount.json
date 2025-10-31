@@ -65,5 +65,5 @@
                              ],
     "estimated_cost_usd":  "8.50",
     "hardware_type":  "GENERIC_HARDWARE",
-    "component_name":  "GC9A01_STANDARD_MOUNT"
+    "name":  "GC9A01_STANDARD_MOUNT"
 }

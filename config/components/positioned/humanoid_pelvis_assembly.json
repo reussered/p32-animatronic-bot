@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_pelvis_assembly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_PELVIS_ASSEMBLY",
+    "name":  "HUMANOID_PELVIS_ASSEMBLY",
     "subsystem":  "UNKNOWN",
     "component_type":  "STRUCTURAL_FOUNDATION",
     "description":  "Central pelvis assembly serving as foundation for legs, spine, and power distribution",

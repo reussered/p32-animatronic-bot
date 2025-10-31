@@ -8,7 +8,7 @@
                      "reference_point":  "nose_center",
                      "y":  "0.0 INCH"
                  },
-    "component_name":  "spine_extension_servo",
+    "name":  "spine_extension_servo",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "components": ["config/components/hardware/servo_sg90_micro.json"],

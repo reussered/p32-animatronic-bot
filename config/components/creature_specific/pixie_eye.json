@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/creature_specific/pixie_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "pixie_eye",
+    "name":  "pixie_eye",
     "subsystem":  "HEAD",
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared pixie eye processing logic with small OLED and magical mood-based rendering",

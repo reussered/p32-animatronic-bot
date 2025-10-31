@@ -3,7 +3,7 @@
 // This is the actual "black magic" code that processes pixels with mood
 
 #include "Mood.hpp"
-#include "SharedMemory.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 // The core pixel processing loop - implements your mood-based frame optimization
 void processPixelsWithMood(uint8_t* currentFrame, uint32_t frame_size) {
@@ -212,8 +212,7 @@ void goblin_left_eye_act(void) {
     Mood currentMood = gsm.read<Mood>();
     currentAnimation->renderWithMood(currentMood);
     
-    // Set up for GC9A01 display
-    current_spi_device = SPI_DEVICE_1; // Left eye
+    // Set up for GC9A01 display (dynamic pin assignment via spi_bus)
     currentFrame = (uint8_t*)currentAnimation->getPixels();
 }
 

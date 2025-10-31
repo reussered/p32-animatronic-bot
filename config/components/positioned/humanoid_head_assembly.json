@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_head_assembly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_HEAD_ASSEMBLY",
+    "name":  "HUMANOID_HEAD_ASSEMBLY",
     "subsystem":  "HEAD",
     "component_type":  "FACIAL_EXPRESSION_PLATFORM",
     "description":  "Complete head assembly with facial features, sensors, and expression capabilities",

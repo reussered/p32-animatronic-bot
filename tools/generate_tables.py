@@ -15,7 +15,7 @@ class P32ComponentGenerator:
         self.config_dir = Path(config_dir)
         self.output_dir = Path(output_dir)
         self.include_dir = Path(output_dir).parent / "include"
-        self.components = []
+        self.subsystem_components = {}  # Components grouped by subsystem
         self.init_functions = []
         self.act_functions = []
         self.seen_components = set()  # Track components we've seen for deduplication
@@ -28,6 +28,7 @@ class P32ComponentGenerator:
         self.controller_chip = None  # ESP32 chip specification
         self.used_pins = set()  # Track pins that have been assigned
         self.bus_assignments = {}  # Track pin assignments for buses
+        self.processing_files = set()  # Track files currently being processed to prevent cycles
         
     def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
         """Load bot configuration from JSON file"""
@@ -50,7 +51,7 @@ class P32ComponentGenerator:
         if bot_file is None:
             raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, families, and direct path)")
         
-        print(f"DEBUG: Loading bot config from: {bot_file}")
+        # print(f"DEBUG: Loading bot config from: {bot_file}")
         with open(bot_file, 'r') as f:
             return json.load(f)
     
@@ -61,7 +62,7 @@ class P32ComponentGenerator:
         # Store family_components for addition to first subsystem
         if "family_components" in bot_config:
             self.family_components = bot_config["family_components"]
-            print(f"DEBUG: Stored {len(self.family_components)} family_components for first subsystem")
+            # print(f"DEBUG: Stored {len(self.family_components)} family_components for first subsystem")
         
         # Handle direct positioned_components (backward compatibility)
         if "positioned_components" in bot_config:
@@ -88,14 +89,14 @@ class P32ComponentGenerator:
         subsystem_file = self.config_dir / clean_ref
         
         if subsystem_file.exists():
-            print(f"DEBUG: Loading subsystem for traversal: {subsystem_file}")
+            # print(f"DEBUG: Loading subsystem for traversal: {subsystem_file}")
             with open(subsystem_file, 'r', encoding='ascii') as f:
                 subsystem_data = json.load(f)
                 subsystem_data['config_file'] = subsystem_ref
                 
                 # Add family_components to the first subsystem encountered
                 if not self.family_components_added and self.family_components:
-                    print(f"DEBUG: Adding {len(self.family_components)} family_components to first subsystem: {subsystem_ref}")
+                    # print(f"DEBUG: Adding {len(self.family_components)} family_components to first subsystem: {subsystem_ref}")
                     # Add family components as the first components
                     for family_component_ref in self.family_components:
                         self._process_single_component(family_component_ref)
@@ -123,7 +124,7 @@ class P32ComponentGenerator:
                 if subsystem_name not in self.seen_components:
                     self.seen_components.add(subsystem_name)
                     self._generate_component_config_struct(subsystem_name, subsystem_data)
-                    print(f"DEBUG: First encounter of subsystem: {subsystem_name}")
+                    # print(f"DEBUG: First encounter of subsystem: {subsystem_name}")
                 
                 # Continue traversing the subsystem's JSON structure
                 self.traverse_json_for_components(subsystem_data)
@@ -136,40 +137,83 @@ class P32ComponentGenerator:
         clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
         component_file = self.config_dir / clean_ref
         
-        if component_file.exists():
-            print(f"DEBUG: Loading component: {component_file}")
-            try:
-                with open(component_file, 'r', encoding='ascii') as f:
-                    component_data = json.load(f)
-                    component_data['config_file'] = component_ref
-                    components.append(component_data)
-                    
-                    # Process Components array (standardized plural form)
-                    if "Components" in component_data:
-                        for component_ref in component_data["Components"]:
-                            components.extend(self._load_component_recursive(component_ref))
-                    
-                    # Process single Component reference (standardized singular form)
-                    if "Component" in component_data:
-                        components.extend(self._load_component_recursive(component_data["Component"]))
-                    
-                    # Also check for legacy positioned_components (backward compatibility)
-                    if "positioned_components" in component_data:
-                        for nested_ref in component_data["positioned_components"]:
-                            components.extend(self._load_component_recursive(nested_ref))
-                            
-                    # Load hardware_reference if present (positioned components reference hardware)
-                    if "hardware_reference" in component_data:
-                        hardware_ref = component_data["hardware_reference"]
-                        components.extend(self._load_component_recursive(hardware_ref))
-            except json.JSONDecodeError as e:
-                print(f"ERROR: Invalid JSON in {component_file}: {e}")
-            except Exception as e:
-                print(f"ERROR: Failed to load {component_file}: {e}")
-        else:
-            print(f"Warning: Component file not found: {component_file}")
+        # Check for cycles - if this file is already being processed, skip it
+        file_path_str = str(component_file)
+        if file_path_str in self.processing_files:
+            return components
+        
+        self.processing_files.add(file_path_str)
+        
+        try:
+            if component_file.exists():
+                # print(f"DEBUG: Loading component: {component_file}")
+                try:
+                    with open(component_file, 'r', encoding='ascii') as f:
+                        component_data = json.load(f)
+                        component_data['config_file'] = component_ref
+                        components.append(component_data)
+                        
+                        # Agnostic recursive search: find all component references in the JSON structure
+                        # Look for any string values that appear to be component references
+                        self._find_and_load_component_references(component_data, components)
+                        
+                except json.JSONDecodeError as e:
+                    print(f"ERROR: Invalid JSON in {component_file}: {e}")
+                except Exception as e:
+                    print(f"ERROR: Failed to load {component_file}: {e}")
+            else:
+                print(f"Warning: Component file not found: {component_file}")
+        finally:
+            # Always remove from processing set when done
+            self.processing_files.discard(file_path_str)
         
         return components
+    
+    def _find_and_load_component_references(self, data: Any, components: List[Dict[str, Any]]) -> None:
+        """Recursively search JSON data for component references and load them"""
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if key == 'controller' and isinstance(value, str):
+                    # Special case: controller keyword sets subsystem context
+                    self.current_subsystem = value
+                else:
+                    # Recursively search for component references in all values
+                    self._find_and_load_component_references(value, components)
+        elif isinstance(data, list):
+            for item in data:
+                if isinstance(item, str) and self._is_component_reference(item):
+                    # Found a component reference - load it
+                    components.extend(self._load_component_recursive(item))
+                else:
+                    # Continue searching in nested structures
+                    self._find_and_load_component_references(item, components)
+        elif isinstance(data, str) and self._is_component_reference(data):
+            # Found a component reference - load it
+            components.extend(self._load_component_recursive(data))
+    
+    def _is_component_reference(self, value: str) -> bool:
+        """Check if a string value appears to be a component reference"""
+        if not isinstance(value, str):
+            return False
+        
+        # Component references typically start with config/components/ or config/subsystems/
+        # or are relative paths to component files
+        return (
+            value.startswith("config/components/") or
+            value.startswith("config/subsystems/") or
+            (value.endswith(".json") and ("components/" in value or "subsystems/" in value))
+        )
+    
+    def _is_subsystem_reference(self, value: str) -> bool:
+        """Check if a string value appears to be a subsystem reference"""
+        if not isinstance(value, str):
+            return False
+        
+        # Subsystem references typically start with config/subsystems/
+        return (
+            value.startswith("config/subsystems/") or
+            (value.endswith(".json") and "subsystems/" in value)
+        )
     
     def _load_subsystem_recursive(self, subsystem_ref: str) -> List[Dict[str, Any]]:
         """Recursively load a subsystem and all its components"""
@@ -179,28 +223,31 @@ class P32ComponentGenerator:
         clean_ref = subsystem_ref.replace("config/", "") if subsystem_ref.startswith("config/") else subsystem_ref
         subsystem_file = self.config_dir / clean_ref
         
-        if subsystem_file.exists():
-            print(f"DEBUG: Loading subsystem: {subsystem_file}")
-            with open(subsystem_file, 'r') as f:
-                subsystem_data = json.load(f)
-                subsystem_data['config_file'] = subsystem_ref
-                
-                # Add the subsystem itself as a component
-                components.append(subsystem_data)
-                
-                # Add family_components to the first subsystem encountered
-                if not self.family_components_added and self.family_components:
-                    print(f"DEBUG: Adding {len(self.family_components)} family_components to first subsystem: {subsystem_ref}")
-                    for family_component_ref in self.family_components:
-                        components.extend(self._load_component_recursive(family_component_ref))
-                    self.family_components_added = True
-                        
-                # Also check for legacy positioned_components (backward compatibility)
-                if "positioned_components" in subsystem_data:
-                    for component_ref in subsystem_data["positioned_components"]:
-                        components.extend(self._load_component_recursive(component_ref))
-        else:
-            print(f"Warning: Subsystem file not found: {subsystem_file}")
+        # Check for cycles - if this file is already being processed, skip it
+        file_path_str = str(subsystem_file)
+        if file_path_str in self.processing_files:
+            # print(f"DEBUG: Skipping already processing subsystem file: {subsystem_file}")
+            return components
+        
+        self.processing_files.add(file_path_str)
+        
+        try:
+            if subsystem_file.exists():
+                # print(f"DEBUG: Loading subsystem: {subsystem_file}")
+                with open(subsystem_file, 'r') as f:
+                    subsystem_data = json.load(f)
+                    subsystem_data['config_file'] = subsystem_ref
+                    
+                    # Add the subsystem itself as a component
+                    components.append(subsystem_data)
+                    
+                    # Agnostic recursive search: find all component references in the subsystem JSON
+                    self._find_and_load_component_references(subsystem_data, components)
+            else:
+                print(f"Warning: Subsystem file not found: {subsystem_file}")
+        finally:
+            # Always remove from processing set when done
+            self.processing_files.discard(file_path_str)
         
         return components
 
@@ -212,62 +259,56 @@ class P32ComponentGenerator:
         return f"{name}_{func_type}"
 
     def traverse_json_for_components(self, json_data: Any) -> None:
-        """Streaming JSON parser following component references only (no object hierarchy traversal)"""
+        """Streaming JSON parser that finds component references and subsystems"""
         if isinstance(json_data, dict):
             for key, value in json_data.items():
-                print(f"DEBUG: Traversing key: {key} (bot_level: {self._is_bot_level()})")
-                if key == 'controller':
-                    # Set subsystem context to ESP32 chip type
-                    self.current_subsystem = str(value)
-                    print(f"DEBUG: Set subsystem context to: {self.current_subsystem}")
-                elif key in ['components', 'family_components']:
-                    # Process component reference(s) - recurse into component files
-                    print(f"DEBUG: Processing {key} with {len(value) if isinstance(value, list) else 1} items")
-                    self._process_component_references(value)
-                elif key in ['subsystem_assemblies', 'subsystems'] and self._is_bot_level():
-                    # Process subsystems - load subsystem files and their components
-                    print(f"DEBUG: Processing {key} with {len(value) if isinstance(value, list) else 1} subsystems (bot_level: {self._is_bot_level()})")
-                    if isinstance(value, list):
-                        for subsystem_ref in value:
-                            if isinstance(subsystem_ref, str):
-                                self._load_subsystem_for_traversal(subsystem_ref)
-                elif key in ['software', 'hardware', 'interfaces'] and isinstance(value, dict):
-                    # Continue processing nested sections that may contain components
-                    self.traverse_json_for_components(value)
+                if key in ['controller', 'components', 'Components', 'subsystems']:
+                    # print(f"DEBUG: Traversing key: {key} (bot_level: {self._is_bot_level()})")
+                    if key == 'controller' and isinstance(value, str):
+                        # Special case: controller keyword sets subsystem context
+                        self.current_subsystem = str(value)
+                        # print(f"DEBUG: Set subsystem context to: {self.current_subsystem}")
+                    elif self._is_component_reference(value):
+                        # Found a component reference - load it
+                        self._process_single_component(value)
+                    elif isinstance(value, list):
+                        # Check each item in the list for component references
+                        for item in value:
+                            if self._is_component_reference(item):
+                                self._process_single_component(item)
+                            elif self._is_subsystem_reference(item) and self._is_bot_level():
+                                self._load_subsystem_for_traversal(item)
+                            else:
+                                # Continue traversing nested structures
+                                self.traverse_json_for_components(item)
+                    elif isinstance(value, dict):
+                        # Continue traversing nested objects
+                        self.traverse_json_for_components(value)
                 else:
                     # Process other key-value pairs (extract configuration data)
                     self._process_key_value_pair(key, value)
         elif isinstance(json_data, list):
-            # Handle array values (like components arrays)
+            # Handle array values
             for item in json_data:
                 if isinstance(item, str):
-                    # String in array might be component reference
-                    self._process_potential_component_reference(item)
+                    if self._is_component_reference(item):
+                        self._process_single_component(item)
+                    elif self._is_subsystem_reference(item) and self._is_bot_level():
+                        self._load_subsystem_for_traversal(item)
                 else:
-                    # For non-string items in arrays, check if they're objects with components
+                    # Continue traversing nested structures
                     self.traverse_json_for_components(item)
     
     def _process_key_value_pair(self, key: str, value: Any) -> None:
         """Process a key-value pair for configuration data extraction"""
         # For now, just log - in full implementation this would extract
         # configuration data for the current component
-        if hasattr(self, 'current_component') and self.current_component:
-            print(f"DEBUG: Processing config key '{key}' for component '{self.current_component}'")
+        # Disabled verbose logging to reduce output
+        pass
     
     def _is_bot_level(self) -> bool:
         """Check if we're currently processing the root bot level JSON"""
         return self.is_bot_level
-    
-    def _process_component_references(self, component_refs: Any) -> None:
-        """Process component reference(s) - can be string or array"""
-        if isinstance(component_refs, str):
-            # Single component reference
-            self._process_single_component(component_refs)
-        elif isinstance(component_refs, list):
-            # Array of component references
-            for ref in component_refs:
-                if isinstance(ref, str):
-                    self._process_single_component(ref)
     
     def _process_single_component(self, component_ref: str) -> None:
         """Process a single component reference"""
@@ -279,21 +320,19 @@ class P32ComponentGenerator:
         component_file = self.config_dir / clean_ref
         
         if component_file.exists():
-            print(f"DEBUG: Processing component: {component_file}")
-            # When processing component files, we're no longer at bot level
             was_bot_level = self.is_bot_level
             self.is_bot_level = False
             try:
                 with open(component_file, 'r', encoding='ascii') as f:
                     component_data = json.load(f)
                 
-                # component_name MUST be provided by AI - no default allowed
-                if 'component_name' not in component_data:
-                    print(f"ERROR: Missing mandatory field 'component_name' in {component_file}")
-                    print(f"AI agents must always specify component_name when creating components")
+                # name MUST be provided - no default allowed
+                if 'name' not in component_data:
+                    print(f"ERROR: Missing mandatory field 'name' in {component_file}")
+                    print(f"Components must always specify name field")
                     return
                     
-                comp_name = component_data["component_name"]
+                comp_name = component_data["name"]
                 
                 # Validate component_name doesn't contain "unknown" unless user-specified
                 if "unknown" in comp_name.lower() and comp_name.lower() != "unknown":
@@ -319,35 +358,32 @@ class P32ComponentGenerator:
                 # Set current component context for configuration processing
                 self.current_component = comp_name
                 
-                # Check if component has already been added to dispatch table (prevent duplicates)
-                component_already_added = any(comp["name"] == comp_name for comp in self.components)
+                # Always add to dispatch tables as visited - duplicates are allowed
+                # Check for explicitly defined function names in software section
+                software = component_data.get("software", {})
+                init_func = software.get("init_function") or self.generate_function_name(comp_name, "init")
+                act_func = software.get("act_function") or self.generate_function_name(comp_name, "act")
                 
-                if not component_already_added:
-                    # Add to dispatch tables when component is first encountered
-                    # Check for explicitly defined function names in software section
-                    software = component_data.get("software", {})
-                    init_func = software.get("init_function") or self.generate_function_name(comp_name, "init")
-                    act_func = software.get("act_function") or self.generate_function_name(comp_name, "act")
-                    
-                    self.components.append({
-                        "name": comp_name,
-                        "init_func": init_func,
-                        "act_func": act_func,
-                        "hitCount": hit_count,
-                        "description": component_data.get("description", f"{comp_name} component"),
-                        "type": "traversed",
-                        "config": component_data,
-                        "subsystem": self.current_subsystem
-                    })
-                    print(f"DEBUG: Added component '{comp_name}' to dispatch table")
-                else:
-                    print(f"DEBUG: Skipping duplicate component '{comp_name}' - already in dispatch table")
+                # Add to subsystem-specific component list
+                if self.current_subsystem not in self.subsystem_components:
+                    self.subsystem_components[self.current_subsystem] = []
+                
+                self.subsystem_components[self.current_subsystem].append({
+                    "name": comp_name,
+                    "init_func": init_func,
+                    "act_func": act_func,
+                    "hitCount": hit_count,
+                    "description": component_data.get("description", f"{comp_name} component"),
+                    "type": "traversed",
+                    "config": component_data,
+                    "subsystem": self.current_subsystem
+                })
                 
                 # Generate configuration struct only for first encounter
                 if comp_name not in self.seen_components:
                     self.seen_components.add(comp_name)
                     self._generate_component_config_struct(comp_name, component_data)
-                    print(f"DEBUG: First encounter of component: {comp_name}")
+                    # print(f"DEBUG: First encounter of component: {comp_name}")
                 
                 # Recursively process this component's "components" key
                 self.traverse_json_for_components(component_data)
@@ -491,7 +527,7 @@ class P32ComponentGenerator:
         if chip_file.exists():
             with open(chip_file, 'r') as f:
                 chip_data = json.load(f)
-                print(f"DEBUG: Loaded chip spec: {chip_data.get('component_name', 'unknown')}")
+                # print(f"DEBUG: Loaded chip spec: {chip_data.get('component_name', 'unknown')}")
                 return chip_data
         else:
             print(f"ERROR: No chip specification found for {chip_name}")
@@ -504,7 +540,7 @@ class P32ComponentGenerator:
             return True
         
         chip_pins = self.controller_chip.get("exposed_pins", [])
-        print(f"DEBUG: Validating pins for {len(chip_pins)} available pins on {self.controller_chip.get('component_name', 'unknown')}")
+        # print(f"DEBUG: Validating pins for {len(chip_pins)} available pins on {self.controller_chip.get('component_name', 'unknown')}")
         
         # Count how many times each bus appears in the component list
         bus_encounter_counts = {}
@@ -537,7 +573,7 @@ class P32ComponentGenerator:
                     active_pin_index += pins_assigned
                     bus_shared_assigned[bus_name] = True
                     
-                    print(f"DEBUG: Bus {bus_name} assigned {pins_assigned} shared pins, active_pin_index now {active_pin_index}")
+                    # print(f"DEBUG: Bus {bus_name} assigned {pins_assigned} shared pins, active_pin_index now {active_pin_index}")
                 
                 # Each encounter beyond the first represents a device using unique pins
                 else:
@@ -549,13 +585,13 @@ class P32ComponentGenerator:
                     
                     active_pin_index += pins_assigned
                     
-                    print(f"DEBUG: Additional {bus_name} encounter (device) assigned {pins_assigned} unique pins, active_pin_index now {active_pin_index}")
+                    # print(f"DEBUG: Additional {bus_name} encounter (device) assigned {pins_assigned} unique pins, active_pin_index now {active_pin_index}")
             
             # Track the maximum pin index reached
             max_pin_index = max(max_pin_index, active_pin_index)
         
-        print(f"DEBUG: Bus encounter counts: {bus_encounter_counts}")
-        print(f"DEBUG: Maximum pin index reached: {max_pin_index}")
+        # print(f"DEBUG: Bus encounter counts: {bus_encounter_counts}")
+        # print(f"DEBUG: Maximum pin index reached: {max_pin_index}")
         
         # Validate against available pins
         if max_pin_index > len(chip_pins):
@@ -603,7 +639,7 @@ class P32ComponentGenerator:
             assigned_pins = self._find_available_pins(func, count, allow_shared=False)
             if assigned_pins:
                 assignment["shared"][func] = assigned_pins
-                print(f"DEBUG: Assigned shared {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
+                # print(f"DEBUG: Assigned shared {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
             else:
                 print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
         
@@ -614,7 +650,7 @@ class P32ComponentGenerator:
             assigned_pins = self._find_available_pins(func, count, allow_shared=True)
             if assigned_pins:
                 assignment["unique"][func] = assigned_pins
-                print(f"DEBUG: Assigned unique {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
+                # print(f"DEBUG: Assigned unique {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
             else:
                 print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
         
@@ -657,7 +693,7 @@ class P32ComponentGenerator:
         assigned_pins = self._find_available_pins("GPIO", 1, allow_shared=True)
         if assigned_pins:
             comp_data["pin"] = assigned_pins[0]
-            print(f"DEBUG: Assigned GPIO pin {assigned_pins[0]} to PWM channel {pwm_name}")
+            # print(f"DEBUG: Assigned GPIO pin {assigned_pins[0]} to PWM channel {pwm_name}")
         else:
             print(f"Warning: Could not assign GPIO pin for PWM channel {pwm_name}")
     
@@ -817,6 +853,12 @@ class P32ComponentGenerator:
         
         # Traverse JSON structure using depth-first algorithm
         self.traverse_json_for_components(bot_config)
+        
+        # Combine all subsystem components into a single list for generation
+        self.components = []
+        for subsystem_name, subsystem_comps in self.subsystem_components.items():
+            self.components.extend(subsystem_comps)
+        
         print(f"Found {len(self.components)} total dispatch table entries after traversal")
 
         # Filter components based on environment if specified
@@ -846,7 +888,7 @@ class P32ComponentGenerator:
         if environment == "goblin_head":
             # Define which components are allowed in goblin_head environment
             allowed_components = {
-                "heartbeat", "network_monitor", "goblin_head", "spi_bus_vspi", 
+                "heartbeat", "network_monitor", "goblin_head", "spi_bus", 
                 "goblin_left_eye", "goblin_eye", "gc9a01", "generic_spi_display",
                 "goblin_right_eye", "goblin_nose", "hc_sr04_ultrasonic_distance_sensor",
                 "goblin_mouth", "goblin_speaker", "speaker", "goblin_left_ear",

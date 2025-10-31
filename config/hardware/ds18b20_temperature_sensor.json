@@ -10,7 +10,7 @@
   "hardware_specs": {
     "sensor_type": "digital_1wire",
     "temperature_range": "-55C_to_125C",
-    "accuracy": "±0.5C",
+    "accuracy": "?0.5C",
     "resolution": "9_to_12_bit_configurable",
     "conversion_time": "750ms_max_12bit"
   },

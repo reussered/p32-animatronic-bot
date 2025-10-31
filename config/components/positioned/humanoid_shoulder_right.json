@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_shoulder_right.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_SHOULDER_RIGHT",
+    "name":  "HUMANOID_SHOULDER_RIGHT",
     "subsystem":  "ARM",
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right shoulder assembly with 3 DOF for arm attachment and manipulation workspace",

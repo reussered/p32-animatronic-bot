@@ -5,7 +5,7 @@
     "hardware_type":  "RA8875_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "component_name":  "ra8875",
+    "name":  "ra8875",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "7.0 INCH",

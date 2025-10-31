@@ -8,7 +8,7 @@ The Goblin Full bot uses 12 GPIO pins total for a 3-display, 1-speaker configura
 
 | Component | Interface | GPIO Pins | Pin Function |
 |-----------|-----------|-----------|--------------|
-| SPI Bus | SPI_BUS_VSPI | 12, 13, 14 | MISO, MOSI, CLK |
+| SPI Bus | spi_bus | 12, 13, 14 | MISO, MOSI, CLK |
 | Left Eye Display | SPI_DEVICE_1 | 15 | CS |
 | Right Eye Display | SPI_DEVICE_2 | 16 | CS |
 | Mouth Display | SPI_DEVICE_3 | 17 | CS |
@@ -47,7 +47,7 @@ ESP32-S3-DevKitC-1
 ### Interface Assignments
 
 #### SPI Bus Configuration
-- **File**: `config/components/interfaces/spi_bus_vspi.json`
+- **File**: `config/components/interfaces/spi_bus.json`
 - **Pins**: GPIO 12 (MISO), GPIO 13 (MOSI), GPIO 14 (CLK)
 - **Frequency**: 10 MHz
 

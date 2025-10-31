@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "head_structural_assembly",
+    "name":  "head_structural_assembly",
     "relative_filename":  "config/components/hardware/head_structural_assembly.json",
     "description":  "Generated hardware component for head_structural_assembly",
     "cost_performance":  {

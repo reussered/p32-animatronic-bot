@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_ankle_right.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_ANKLE_RIGHT",
+    "name":  "HUMANOID_ANKLE_RIGHT",
     "subsystem":  "LEG",
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right ankle joint with 3 DOF for foot orientation and active balance",

@@ -2,7 +2,7 @@
     "relative_filename": "config/components/test/test_right_eye_positioned.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_name": "test_right_eye_positioned",
+    "name": "test_right_eye_positioned",
     "component_type": "POSITIONED_COMPONENT",
     "timing": {
         "hitCount": 1,

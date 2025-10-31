@@ -52,7 +52,7 @@
                   "Suitable for creating dynamic color patterns",
                   "Low power consumption for mobile applications"
               ],
-    "component_name":  "COLOR_CHANGING_LEDS",
+    "name":  "COLOR_CHANGING_LEDS",
     "software":  {
 
                  }

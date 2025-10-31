@@ -96,7 +96,7 @@
                                  "medical":  "FAIR"
                              },
     "hardware_type":  "POSITIONED_COMPONENT",
-    "component_name":  "ROBOT_BACK_MOUNT",
+    "name":  "ROBOT_BACK_MOUNT",
     "position":  {
                      "y":  "0.0 INCH",
                      "z":  "0.0 INCH",

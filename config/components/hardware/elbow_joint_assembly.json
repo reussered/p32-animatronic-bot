@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "elbow_joint_assembly",
+    "name":  "elbow_joint_assembly",
     "relative_filename":  "config/components/hardware/elbow_joint_assembly.json",
     "description":  "Generated hardware component for elbow_joint_assembly",
     "cost_performance":  {

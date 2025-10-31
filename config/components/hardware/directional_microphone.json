@@ -55,5 +55,5 @@
                   "Low power consumption for battery operation"
               ],
     "hardware_type":  "DIRECTIONAL_MICROPHONE",
-    "component_name":  "DIRECTIONAL_MICROPHONE"
+    "name":  "DIRECTIONAL_MICROPHONE"
 }

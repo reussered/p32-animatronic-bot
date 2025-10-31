@@ -208,7 +208,7 @@ void load_current_frame_to_buffer(void) {
  * Controls frame timing and animation sequence
  */
 void goblin_left_eye_act(void) {
-    // Frame timing control (advance every 30 loops ≈ 500ms at 60Hz)
+    // Frame timing control (advance every 30 loops ? 500ms at 60Hz)
     left_eye_frame_timer++;
     if (left_eye_frame_timer >= 30) {
         left_eye_frame_timer = 0;

@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/positioned/goblin/torso_components/mesh_software_coordinator.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "mesh_software_coordinator","component_type": "POSITIONED_COMPONENT",
+    "name":  "mesh_software_coordinator","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "TORSO",
     "components": ["config/components/hardware/esp32_s3_devkit.json"],
     "coordinate_system":  "skull_3d",

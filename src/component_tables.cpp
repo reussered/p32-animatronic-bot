@@ -5,19 +5,18 @@
 
 #include "p32_component_registry.hpp"
 
-#include "components/goblin_personality.hdr"
-#include "components/goblin_behavior_engine.hdr"
 #include "components/goblin_head.hdr"
 #include "components/goblin_left_eye.hdr"
 #include "components/goblin_eye.hdr"
 #include "components/gc9a01.hdr"
-#include "components/spi_bus.hdr"
-#include "components/generic_spi_display.hdr"
 #include "components/goblin_right_eye.hdr"
+#include "components/goblin_nose.hdr"
+#include "components/hc_sr04_ultrasonic_distance_sensor.hdr"
+#include "components/goblin_mouth.hdr"
+#include "components/goblin_speaker.hdr"
+#include "components/speaker.hdr"
 #include "components/goblin_left_ear.hdr"
 #include "components/servo_sg90_micro.hdr"
-#include "components/pwm_bus.hdr"
-#include "components/pwm_driver.hdr"
 #include "components/hw496_microphone.hdr"
 #include "components/goblin_right_ear.hdr"
 #include "components/goblin_torso.hdr"
@@ -40,21 +39,26 @@
 // ============================================================================
 
 esp_err_t (*initTable[TABLE_SIZE])(void) = {
-    goblin_personality_init,
-    goblin_behavior_engine_init,
     goblin_head_init,
     goblin_left_eye_init,
     goblin_eye_init,
     gc9a01_init,
-    spi_bus_init,
-    generic_spi_display_init,
     goblin_right_eye_init,
+    goblin_eye_init,
+    gc9a01_init,
+    goblin_nose_init,
+    hc_sr04_ultrasonic_distance_sensor_init,
+    goblin_mouth_init,
+    goblin_mouth_init,
+    gc9a01_init,
+    goblin_speaker_init,
+    speaker_init,
     goblin_left_ear_init,
     servo_sg90_micro_init,
-    pwm_bus_init,
-    pwm_driver_init,
     hw496_microphone_init,
     goblin_right_ear_init,
+    servo_sg90_micro_init,
+    hw496_microphone_init,
     goblin_torso_init,
     system_core_init,
     debug_controller_init,
@@ -65,10 +69,15 @@ esp_err_t (*initTable[TABLE_SIZE])(void) = {
     watchdog_init,
     power_monitor_init,
     spine_flexion_servo_init,
+    servo_sg90_micro_init,
     spine_extension_servo_init,
+    servo_sg90_micro_init,
     waist_rotation_servo_init,
+    servo_sg90_micro_init,
     torso_status_led_init,
-    torso_speaker_init
+    servo_sg90_micro_init,
+    torso_speaker_init,
+    servo_sg90_micro_init
 };
 
 // ============================================================================
@@ -76,35 +85,45 @@ esp_err_t (*initTable[TABLE_SIZE])(void) = {
 // ============================================================================
 
 void (*actTable[TABLE_SIZE])(void) = {
-    goblin_personality_act,    // [0] Goblin family personality traits - mischievous, aggressive, curious
-    goblin_behavior_engine_act,    // [1] Goblin behavior selection engine - chooses actions based on mood and personality
-    goblin_head_act,    // [2] Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing
-    goblin_left_eye_act,    // [3] Left eye display animation
-    goblin_eye_act,    // [4] Shared goblin eye processing logic with palette and mood-based rendering
-    gc9a01_act,    // [5] <describe the components purpose and functionality here>
-    spi_bus_act,    // [6] ESP32 HSPI bus interface for SPI communication
-    generic_spi_display_act,    // [7] <describe the components purpose and functionality here>
-    goblin_right_eye_act,    // [8] Right eye display with bird animation
-    goblin_left_ear_act,    // [9] <describe the components purpose and functionality here>
-    servo_sg90_micro_act,    // [10] Micro servo motor for precise position control in small animatronics
-    pwm_bus_act,    // [11] PWM bus component containing PWM driver for servo and LED control
-    pwm_driver_act,    // [12] Generic PWM driver for ESP32 supporting multiple channels with configurable frequency and duty cycle
-    hw496_microphone_act,    // [13] HW-496 MEMS microphone with MAX4466 pre-amplifier
-    goblin_right_ear_act,    // [14] <describe the components purpose and functionality here>
-    goblin_torso_act,    // [15] Goblin torso subsystem - Master controller with WiFi, and system coordination
-    system_core_act,    // [16] Core system management - initialization, health checks, error handling
-    debug_controller_act,    // [17] System-level debug flag controller that manages debugging state via Environment SharedMemory
-    network_monitor_act,    // [18] Network connectivity monitoring - WiFi signal strength, connection status
-    wifi_station_act,    // [19] WiFi station connectivity for cloud integration and remote control
-    bluetooth_central_act,    // [20] Bluetooth Low Energy (BLE) central controller - mobile app connectivity
-    telemetry_hub_act,    // [21] Central telemetry aggregation and publishing hub - collects data from all subsystems
-    watchdog_act,    // [22] Hardware watchdog timer - system health monitoring and automatic recovery
-    power_monitor_act,    // [23] Power monitoring - battery voltage, current consumption, remaining capacity
-    spine_flexion_servo_act,    // [24] <describe the components purpose and functionality here>
-    spine_extension_servo_act,    // [25] <describe the components purpose and functionality here>
-    waist_rotation_servo_act,    // [26] <describe the components purpose and functionality here>
-    torso_status_led_act,    // [27] <describe the components purpose and functionality here>
-    torso_speaker_act     // [28] <describe the components purpose and functionality here>
+    goblin_head_act,    // [0] Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing
+    goblin_left_eye_act,    // [1] Left eye display animation
+    goblin_eye_act,    // [2] Shared goblin eye processing logic with palette and mood-based rendering
+    gc9a01_act,    // [3] <describe the components purpose and functionality here>
+    goblin_right_eye_act,    // [4] Right eye display with bird animation
+    goblin_eye_act,    // [5] Shared goblin eye processing logic with palette and mood-based rendering
+    gc9a01_act,    // [6] <describe the components purpose and functionality here>
+    goblin_nose_act,    // [7] Proximity sensor monitoring
+    hc_sr04_ultrasonic_distance_sensor_act,    // [8] <describe the components purpose and functionality here>
+    goblin_mouth_act,    // [9] Mouth display animation
+    goblin_mouth_act,    // [10] Shared goblin mouth processing logic with speech animation and mood-based rendering
+    gc9a01_act,    // [11] <describe the components purpose and functionality here>
+    goblin_speaker_act,    // [12] Audio output processing
+    speaker_act,    // [13] <describe the components purpose and functionality here>
+    goblin_left_ear_act,    // [14] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [15] Micro servo motor for precise position control in small animatronics
+    hw496_microphone_act,    // [16] HW-496 MEMS microphone with MAX4466 pre-amplifier
+    goblin_right_ear_act,    // [17] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [18] Micro servo motor for precise position control in small animatronics
+    hw496_microphone_act,    // [19] HW-496 MEMS microphone with MAX4466 pre-amplifier
+    goblin_torso_act,    // [20] Goblin torso subsystem - Master controller with WiFi, and system coordination
+    system_core_act,    // [21] Core system management - initialization, health checks, error handling
+    debug_controller_act,    // [22] System-level debug flag controller that manages debugging state via Environment SharedMemory
+    network_monitor_act,    // [23] Network connectivity monitoring - WiFi signal strength, connection status
+    wifi_station_act,    // [24] WiFi station connectivity for cloud integration and remote control
+    bluetooth_central_act,    // [25] Bluetooth Low Energy (BLE) central controller - mobile app connectivity
+    telemetry_hub_act,    // [26] Central telemetry aggregation and publishing hub - collects data from all subsystems
+    watchdog_act,    // [27] Hardware watchdog timer - system health monitoring and automatic recovery
+    power_monitor_act,    // [28] Power monitoring - battery voltage, current consumption, remaining capacity
+    spine_flexion_servo_act,    // [29] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [30] Micro servo motor for precise position control in small animatronics
+    spine_extension_servo_act,    // [31] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [32] Micro servo motor for precise position control in small animatronics
+    waist_rotation_servo_act,    // [33] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [34] Micro servo motor for precise position control in small animatronics
+    torso_status_led_act,    // [35] <describe the components purpose and functionality here>
+    servo_sg90_micro_act,    // [36] Micro servo motor for precise position control in small animatronics
+    torso_speaker_act,    // [37] <describe the components purpose and functionality here>
+    servo_sg90_micro_act     // [38] Micro servo motor for precise position control in small animatronics
 };
 
 // ============================================================================
@@ -112,33 +131,43 @@ void (*actTable[TABLE_SIZE])(void) = {
 // ============================================================================
 
 uint32_t hitCountTable[TABLE_SIZE] = {
-    25,    // [0] goblin_personality - every 25 loops
-    10,    // [1] goblin_behavior_engine - every 10 loops
-    25,    // [2] goblin_head - every 25 loops
-    1,    // [3] goblin_left_eye - every 1 loops
-    1,    // [4] goblin_eye - every 1 loops
-    1,    // [5] gc9a01 - every 1 loops
-    1,    // [6] spi_bus_vspi - every 1 loops
-    1,    // [7] generic_spi_display - every 1 loops
-    1,    // [8] goblin_right_eye - every 1 loops
-    1,    // [9] goblin_left_ear - every 1 loops
-    1,    // [10] servo_sg90_micro - every 1 loops
-    1,    // [11] pwm_bus - every 1 loops
-    1,    // [12] pwm_driver - every 1 loops
-    1,    // [13] HW496_MICROPHONE - every 1 loops
-    1,    // [14] goblin_right_ear - every 1 loops
-    50,    // [15] goblin_torso - every 50 loops
-    100,    // [16] system_core - every 100 loops
-    1,    // [17] debug_controller - every 1 loops
-    50,    // [18] network_monitor - every 50 loops
-    50,    // [19] wifi_station - every 50 loops
-    75,    // [20] bluetooth_central - every 75 loops
-    75,    // [21] telemetry_hub - every 75 loops
-    500,    // [22] watchdog - every 500 loops
-    200,    // [23] power_monitor - every 200 loops
-    1,    // [24] spine_flexion_servo - every 1 loops
-    1,    // [25] spine_extension_servo - every 1 loops
-    1,    // [26] waist_rotation_servo - every 1 loops
-    1,    // [27] torso_status_led - every 1 loops
-    1     // [28] torso_speaker - every 1 loops
+    25,    // [0] goblin_head - every 25 loops
+    1,    // [1] goblin_left_eye - every 1 loops
+    1,    // [2] goblin_eye - every 1 loops
+    1,    // [3] gc9a01 - every 1 loops
+    1,    // [4] goblin_right_eye - every 1 loops
+    1,    // [5] goblin_eye - every 1 loops
+    1,    // [6] gc9a01 - every 1 loops
+    180000,    // [7] goblin_nose - every 180000 loops
+    1,    // [8] hc_sr04_ultrasonic_distance_sensor - every 1 loops
+    36000,    // [9] goblin_mouth - every 36000 loops
+    1,    // [10] goblin_mouth - every 1 loops
+    1,    // [11] gc9a01 - every 1 loops
+    84000,    // [12] goblin_speaker - every 84000 loops
+    1,    // [13] speaker - every 1 loops
+    1,    // [14] goblin_left_ear - every 1 loops
+    1,    // [15] servo_sg90_micro - every 1 loops
+    1,    // [16] HW496_MICROPHONE - every 1 loops
+    1,    // [17] goblin_right_ear - every 1 loops
+    1,    // [18] servo_sg90_micro - every 1 loops
+    1,    // [19] HW496_MICROPHONE - every 1 loops
+    50,    // [20] goblin_torso - every 50 loops
+    100,    // [21] system_core - every 100 loops
+    1,    // [22] debug_controller - every 1 loops
+    50,    // [23] network_monitor - every 50 loops
+    50,    // [24] wifi_station - every 50 loops
+    75,    // [25] bluetooth_central - every 75 loops
+    75,    // [26] telemetry_hub - every 75 loops
+    500,    // [27] watchdog - every 500 loops
+    200,    // [28] power_monitor - every 200 loops
+    1,    // [29] spine_flexion_servo - every 1 loops
+    1,    // [30] servo_sg90_micro - every 1 loops
+    1,    // [31] spine_extension_servo - every 1 loops
+    1,    // [32] servo_sg90_micro - every 1 loops
+    1,    // [33] waist_rotation_servo - every 1 loops
+    1,    // [34] servo_sg90_micro - every 1 loops
+    1,    // [35] torso_status_led - every 1 loops
+    1,    // [36] servo_sg90_micro - every 1 loops
+    1,    // [37] torso_speaker - every 1 loops
+    1     // [38] servo_sg90_micro - every 1 loops
 };

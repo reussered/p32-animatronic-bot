@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/network_monitor.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "network_monitor",
+    "name":  "network_monitor",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "Network connectivity monitoring - WiFi signal strength, connection status",
     "created":  "2025-10-15",

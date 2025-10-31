@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/hardware/mg996r_servo.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "MG996R_SERVO",
+    "name":  "MG996R_SERVO",
     "subsystem":  "UNKNOWN",
     "component_type":  "SERVO_MOTOR",
     "description":  "Standard servo motor replacing expensive Dynamixel servos in ESP32-S3 adaptation",

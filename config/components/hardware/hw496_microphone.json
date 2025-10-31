@@ -72,8 +72,13 @@
                   "Can be used for sound detection or voice input"
               ],
     "hardware_type":  "MEMS_MICROPHONE",
-    "component_name":  "HW496_MICROPHONE",
+    "name":  "HW496_MICROPHONE",
+    "dependencies":  [
+                        "config/components/drivers/adc_bus.json",
+                        "config/components/drivers/generic_mic_driver.json"
+                    ],
     "software":  {
-
+                     "init_function":  "hw496_microphone_init",
+                     "act_function":  "hw496_microphone_act"
                  }
 }

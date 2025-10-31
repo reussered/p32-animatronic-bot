@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/esp_now_mesh.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "component_name":  "esp_now_mesh",
+    "name":  "esp_now_mesh",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "ESP-NOW mesh network master coordinator - manages all slave node communications",
     "created":  "2025-10-15",

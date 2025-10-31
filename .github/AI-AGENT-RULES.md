@@ -33,8 +33,9 @@
 **BEFORE implementing ANY changes, the AI agent MUST read and internalize:**
 
 1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
-2. **`NAMING_RULES.md`** - Component naming conventions and file organization
-3. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
+2. **`ARCHITECTURE_DECISION_LOG.md`** - Historical decisions, problem-solving approaches, and implementation rationale
+3. **`NAMING_RULES.md`** - Component naming conventions and file organization
+4. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
 ---
 
@@ -278,7 +279,7 @@ GSM.init();  // Initialize shared memory system
 **Configuration Structure**:
 - **Creatures/Bots**: `config\bots\bot_families\{family}\{bot_name}.json` (goblins, cats, bears, robots, etc.)
 - **Hardware specs**: `config\hardware\{component_type}.json` (servo_9g_micro.json, gc9a01_display.json, etc.)
-- **Interface definitions**: `config\interfaces\{interface_type}.json` (spi_device_1.json, pwm_channel_3.json, etc.)
+- **Interface definitions**: `config\interfaces\{interface_type}.json` (spi_bus.json, pwm_channel_3.json, etc.)
 - **Positioned components**: `config\components\positioned\{subsystem}\{component}.json`
 - **Subsystem assemblies**: `config\subsystems\{subsystem_name}.json` (goblin_head.json, goblin_torso.json)
 - **Component templates**: `config\components\templates\{type}\{template}.json`
@@ -368,8 +369,8 @@ GSM.init();  // Initialize shared memory system
 **Generic SPI Display Layer:**
 
 - Used for all displays using SPI bus protocol
-- Contains spi_bus_vspi component for GPIO pin determination
-- GPIO pin assignment is DONE IN CODE by spi_bus_vspi component DYNAMICALLY IN THE COMPONENT LOOP
+- Contains spi_bus component for GPIO pin determination
+- GPIO pin assignment is DONE IN CODE by spi_bus component DYNAMICALLY IN THE COMPONENT LOOP
 - Can be used for any display device
 - Generic_spi_driver doesn't care about specific pins, just how to use them
 - Can be used for any device using SPI protocol

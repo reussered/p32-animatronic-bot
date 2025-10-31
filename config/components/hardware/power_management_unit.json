@@ -14,7 +14,7 @@
                                                  },
                            "max_current":  "5A"
                        },
-    "component_name":  "power_management_unit",
+    "name":  "power_management_unit",
     "relative_filename":  "config/components/hardware/power_management_unit.json",
     "description":  "Battery management and power distribution system",
     "cost_performance":  {

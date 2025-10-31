@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/hardware/servo_sg90_micro.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "servo_sg90_micro",
+    "name":  "servo_sg90_micro",
     "component_type":  "SERVO_MOTOR",
     "hardware_id":  "SERVO_SG90_MICRO",
     "description":  "Micro servo motor for precise position control in small animatronics",

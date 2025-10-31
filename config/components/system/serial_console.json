@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/serial_console.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "serial_console",
+    "name":  "serial_console",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "Serial console interface - debug commands and telemetry output",
     "created":  "2025-10-15",

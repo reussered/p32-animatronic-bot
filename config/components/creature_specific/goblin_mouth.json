@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/creature_specific/goblin_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_mouth",
+    "name":  "goblin_mouth",
     "subsystem":  "HEAD",
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Shared goblin mouth processing logic with speech animation and mood-based rendering",

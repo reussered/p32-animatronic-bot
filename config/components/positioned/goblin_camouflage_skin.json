@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_camouflage_skin.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "GOBLIN_CAMOUFLAGE_SKIN",
+    "name":  "GOBLIN_CAMOUFLAGE_SKIN",
     "subsystem":  "UNKNOWN",
     "component_type":  "adaptive_camouflage",
     "description":  "Forest camouflage skin patterns for scout goblin stealth",

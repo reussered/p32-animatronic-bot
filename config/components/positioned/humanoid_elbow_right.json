@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_elbow_right.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_ELBOW_RIGHT",
+    "name":  "HUMANOID_ELBOW_RIGHT",
     "subsystem":  "ARM",
     "component_type":  "POSITIONED_COMPONENT",
     "description":  "Right elbow joint with 1 DOF flexion/extension for forearm articulation",

@@ -118,15 +118,7 @@ $CoordConfig
   },
   
   "hardware_preferences": {
-    "coordinate_system": "auto_detected",
-    "spi_device_assignments": {
-      "left_eye": "SPI_DEVICE_1",
-      "right_eye": "SPI_DEVICE_2", 
-      "mouth_display": "SPI_DEVICE_3"
-    },
-    "i2s_device_assignments": {
-      "primary_speaker": "I2S_DEVICE_1"
-    }
+    "coordinate_system": "auto_detected"
   },
   
   "aesthetic_profile": {

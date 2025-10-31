@@ -85,7 +85,7 @@
                                                       ]
                           },
     "hardware_type":  "MOTION_SENSOR",
-    "component_name":  "PIR_MOTION_SENSOR",
+    "name":  "PIR_MOTION_SENSOR",
     "software":  {
 
                  }

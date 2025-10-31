@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "hardware_type": "DEBUG_CONTROLLER",
     "component_type": "SYSTEM_SERVICE",
-    "component_name": "debug_controller",
+    "name": "debug_controller",
     "subsystem": "SYSTEM",
     "description": "System-level debug flag controller that manages debugging state via Environment SharedMemory",
     "hitCount": 100,

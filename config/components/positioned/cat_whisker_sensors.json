@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_TOUCH_ARRAY",
-    "component_name":  "CAT_WHISKER_SENSORS",
+    "name":  "CAT_WHISKER_SENSORS",
     "subsystem":  "UNKNOWN",
     "description":  "Touch-sensitive whiskers for spatial awareness and tactile interaction",
     "created":  "2025-10-12",

@@ -8,7 +8,7 @@
                      "reference_point":  "nose_center",
                      "y":  "0.0 INCH"
                  },
-    "component_name":  "torso_status_led",
+    "name":  "torso_status_led",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "components": ["config/components/hardware/servo_sg90_micro.json"],

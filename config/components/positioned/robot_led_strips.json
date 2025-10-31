@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_LED_STRIP",
-    "component_name":  "ROBOT_LED_STRIPS",
+    "name":  "ROBOT_LED_STRIPS",
     "subsystem":  "UNKNOWN",
     "description":  "Accent LED strips for ambient lighting and mood indication",
     "created":  "2025-10-12",

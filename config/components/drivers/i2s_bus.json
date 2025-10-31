@@ -3,7 +3,7 @@
     "type": "bus",
     "version": "1.0.0",
     "author": "config/authors/ai_agent.json",
-    "component_name": "i2s_bus",
+    "name": "i2s_bus",
     "description": "I2S bus component containing I2S driver for audio input/output and high-speed data transfer",
     "created": "2025-10-29",
     "component_type": "bus_interface",

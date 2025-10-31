@@ -6,7 +6,7 @@
     "bot_id":  "goblin_head_only_v1",
     "description":  "Goblin head with single left eye only - no torso",
     "created":  "2025-10-29",
-    "component_name":  "goblin_head_only",
+    "name":  "goblin_head_only",
     "component_type":  "CREATURE_ASSEMBLY",
     "timing":  {
                    "hitCount":  50,

@@ -7,7 +7,7 @@
 #### 1. **Shared Goblin Eye Logic** (`goblin_eye.hpp/cpp`)
 - **256-color organized palette system** with mood-responsive ranges
 - **Mood-based pixel processing** with optimized "only process when mood changes" algorithm
-- **Shared variables** for currentFrame, current_spi_device, frame_size
+- **Shared variables** for currentFrame, frame_size
 - **Memory efficient** 1-byte palette indices → RGB565 conversion
 
 #### 2. **Left Eye Component** (`goblin_left_eye.cpp`)

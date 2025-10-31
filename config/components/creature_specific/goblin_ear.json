@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/creature_specific/goblin_ear.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_ear",
+    "name":  "goblin_ear",
     "subsystem":  "HEAD",
     "component_type":  "CREATURE_SPECIFIC_AUDIO",
     "description":  "Shared goblin ear processing logic with directional sensitivity and goblin-specific audio characteristics",

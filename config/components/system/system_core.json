@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/system_core.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "system_core",
+    "name":  "system_core",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "Core system management - initialization, health checks, error handling",
     "created":  "2025-10-15",

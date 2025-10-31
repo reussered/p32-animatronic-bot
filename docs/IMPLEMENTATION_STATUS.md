@@ -32,7 +32,7 @@ ESP32-S3 based animatronic system with MOOD-driven behaviors, unified proportion
 - **config/components/interfaces/i2s_bus_0.json** ✅ - Audio bus definition
 - **config/components/interfaces/i2s_device_*.json** ✅ - Audio devices (1-3)
 - **config/components/interfaces/skeletal_power_distribution.json** ✅ - Revolutionary power system
-- **config/components/interfaces/spi_bus_vspi.json** ✅ - SPI bus configuration
+- **config/components/interfaces/spi_bus.json** ✅ - SPI bus configuration
 - **config/components/interfaces/spi_device_*.json** ✅ - SPI devices (1-3)
 
 #### Positioned Components (All Fully Implemented)  

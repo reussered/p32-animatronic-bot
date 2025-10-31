@@ -5,7 +5,7 @@
     "hardware_type":  "ST7796_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "component_name":  "st7796",
+    "name":  "st7796",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "3.5 INCH",

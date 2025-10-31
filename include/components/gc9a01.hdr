@@ -24,7 +24,7 @@ esp_err_t gc9a01_init(void);
 
 /**
  * @brief Send current frame buffer to GC9A01 display using generic SPI display
- * Reads currentFrame and current_spi_device set by higher-level components
+ * Reads currentFrame set by higher-level components
  */
 void gc9a01_act(void);
 

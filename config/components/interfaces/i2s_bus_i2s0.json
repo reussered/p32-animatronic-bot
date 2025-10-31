@@ -4,7 +4,7 @@
     "component_type": "INTERFACE_BUS",
     "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
-    "component_name":  "i2s_bus_i2s0",
+    "name":  "i2s_bus_i2s0",
     "bus_type": "I2S",
     "bus_name": "I2S0",
     "description": "ESP32 I2S bus 0 interface for audio communication",

@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/system/wifi_station.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "component_name":  "wifi_station",
+    "name":  "wifi_station",
     "component_type":  "SYSTEM_LEVEL",
     "description":  "WiFi station connectivity for cloud integration and remote control",
     "created":  "2025-10-15",

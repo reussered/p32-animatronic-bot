@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "author": "config/author.json",
     "component_type": "POSITIONED_COMPONENT",
-    "component_name": "goblin_left_shoulder_rotation_servo",
+    "name": "goblin_left_shoulder_rotation_servo",
     "components": ["config/hardware/servo_9g_micro.json"],
     "position": {
         "coordinate_system": "skull_3d",

@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/drivers/i2c_driver.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "i2c_driver",
+    "name":  "i2c_driver",
     "component_type":  "GENERIC_DRIVER",
     "hardware_type":  "BUS_DRIVER",
     "interface_type":  "I2C",

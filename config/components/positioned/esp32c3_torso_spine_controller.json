@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/esp32c3_torso_spine_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "ESP32C3_TORSO_SPINE_CONTROLLER",
+    "name":  "ESP32C3_TORSO_SPINE_CONTROLLER",
     "subsystem":  "TORSO",
     "component_type":  "POSITIONED_ARTICULATED_SPINE_CONTROLLER",
     "description":  "ESP32-C3 controller for multi-vertebrae spine articulation with wireless mesh integration",
@@ -63,7 +63,7 @@
                                  },
     "gpio_allocation_spine_control":  {
                                           "spi_servo_expansion":  {
-                                                                      "interface_component":  "config/components/interfaces/spi_bus_vspi.json",
+                                                                      "interface_component":  "config/components/interfaces/spi_bus.json",
                                                                       "pca9685_expander_1":  {
                                                                                                  "cs_pin":  "GPIO_9",
                                                                                                  "servo_channels":  "16_CHANNELS_SPINE_SERVOS",
@@ -196,3 +196,4 @@
                      "x":  "0.0 INCH"
                  }
 }
+

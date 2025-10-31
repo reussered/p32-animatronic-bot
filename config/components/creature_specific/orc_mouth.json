@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/creature_specific/orc_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "orc_mouth",
+    "name":  "orc_mouth",
     "subsystem":  "HEAD",
     "component_type":  "CREATURE_SPECIFIC_DISPLAY",
     "description":  "Orc mouth with massive tusks and battle expressions - uses large displays",

@@ -4,7 +4,7 @@
     "component_type": "INTERFACE_BUS",
     "hardware_type": "BUS_INTERFACE",
     "author":  "config/author.json",
-    "component_name":  "i2s_bus",
+    "name":  "i2s_bus",
     "hardware_type": "BUS_INTERFACE",
     "bus_type": "I2S",
     "bus_name": "I2S",

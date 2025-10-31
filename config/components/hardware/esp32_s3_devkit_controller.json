@@ -2,7 +2,7 @@
     "relative_filename": "config/components/hardware/esp32_s3_devkit_controller.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_name": "esp32_s3_devkit_controller",
+    "name": "esp32_s3_devkit_controller",
     "hardware_type": "CONTROLLER",
     "chip_model": "ESP32-S3-DevKitC-1",
     "chip_family": "ESP32_S3",

@@ -39,7 +39,8 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
   "relative_filename": "config/components/positioned/component_name.json",
   "version": "1.0.0",
   "author": "config/author.json",
-  "component_name": "unique_component_name",
+  "name": "unique_component_name",
+  "type": "POSITIONED_COMPONENT",
   "description": "Human readable description",
   "timing": {
     "hitCount": 10
@@ -52,11 +53,12 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 ```
 
 ### **Component-Specific Fields**
-1. **Component Name**: `"component_name": "left_eye"` - Used to generate function names
+
+1. **Component Name**: `"name": "left_eye"` - Used to generate function names
 2. **Function Names**: `init_function` and `act_function` (or "STUB" if not needed)
 3. **Loop Count Modulus**: `"timing": {"hitCount": 5}` - How often component executes (every N loops)  
 4. **Description**: Human-readable description for generated comments
-5. **Component Type**: system/positioned/family level categorization
+5. **Component Type**: `"type": "POSITIONED_COMPONENT"` - Categorizes component (DISPLAY_DRIVER, MICRO_CONTROLLER_MODULE, etc.)
 
 ### **Reference Pattern**
 - Use `"author": "config/author.json"` for consistent metadata across all configs
@@ -100,7 +102,7 @@ esp_err_t parse_component_config(const char* json_string) {
     }
     
     // Get string values
-    cJSON *name_item = cJSON_GetObjectItem(config, "component_name");
+    cJSON *name_item = cJSON_GetObjectItem(config, "name");
     const char *component_name = name_item->valuestring;
     
     // Get numeric values
@@ -162,7 +164,7 @@ python config/validate_families.py
 ### **Manual Validation Checklist**
 - [ ] File saved as ASCII without BOM
 - [ ] JSON syntax is valid (no trailing commas, proper quotes)
-- [ ] All mandatory fields present (`component_name`, `hitCount`, etc.)
+- [ ] All mandatory fields present (`name`, `type`, `hitCount`, etc.)
 - [ ] `relative_filename` matches actual file path
 - [ ] Referenced files exist (`author.json`, etc.)
 - [ ] Function names follow naming convention
@@ -171,7 +173,8 @@ python config/validate_families.py
 ```json
 {
   "relative_filename": "config/components/positioned/component_name.json",
-  "component_name": "unique_component_name",
+  "name": "unique_component_name",
+  "type": "POSITIONED_COMPONENT",
   "description": "Human readable description",
   "timing": {
     "hitCount": 10
@@ -185,117 +188,30 @@ python config/validate_families.py
 
 ## Component Composition Rules
 
-### Wildcard Component Parsing
-The P32 component generation system automatically detects component composition using wildcard patterns:
+### Fatal Error: Deprecated *_components Keys
 
-**Pattern**: Any JSON field ending with `*_components` triggers recursive component inclusion
+**FATAL ERROR**: If the parser encounters any key matching the pattern `*_components`, it must immediately stop and report a fatal error.
+
+**Reason**: All keys of this form were supposed to be renamed to `components`. The presence of any `*_components` key indicates a problem higher up in the rules hierarchy that has not been properly resolved.
+
+**Historical Context**: These wildcard patterns were previously used for recursive component inclusion:
+
 - `"left_eye_components": "config/components/positioned/goblin_left_eye.json"`
 - `"right_eye_components": "config/components/positioned/goblin_right_eye.json"`
 - `"subsystem_components": "config/components/assemblies/goblin_head.json"`
 
-**Processing**: Component generator parses these fields to:
-1. Load referenced JSON configuration
-2. Extract component hierarchy and dependencies  
-3. Generate dispatch table entries (init/act functions)
-4. Handle duplicate component detection across composition tree
-5. Create proper include statements for generated source code
-
-## Bus Interface Pin Requirements
-
-### Bus Types and Pin Assignment
-
-The P32 system supports multiple bus interface types for hardware communication. Each bus type has specific pin requirements that are validated during code generation to ensure compatibility with the target ESP32 chip.
-
-#### Supported Bus Types
-
-1. **SPI Bus** (`bus_type: "SPI"`)
-   - **Shared Pins**: SCLK (bit clock), MISO (master in, slave out)
-   - **Unique Pins**: CS (chip select), MOSI (master out, slave in) per device
-   - **Example**: `spi_bus.json` - Generic SPI bus interface
-
-2. **I2S Bus** (`bus_type: "I2S"`)
-   - **Shared Pins**: BCLK (bit clock), WS (word select)
-   - **Unique Pins**: DATA (data line) per device/direction
-   - **Example**: `i2s_bus.json` - Generic I2S bus interface for audio
-
-3. **I2C Bus** (`bus_type: "I2C"`)
-   - **Shared Pins**: SCL (serial clock), SDA (serial data)
-   - **Unique Pins**: None (address-based multiplexing)
-   - **Note**: Devices share SDA/SCL lines, addressed via software
-
-4. **ADC Bus** (`bus_type: "ADC"`)
-   - **Shared Pins**: None
-   - **Unique Pins**: ADC input pins per channel
-   - **Note**: Analog-to-digital conversion channels
-
-5. **PWM Bus** (`bus_type: "PWM"`)
-   - **Shared Pins**: None
-   - **Unique Pins**: PWM output pins per channel
-   - **Note**: Pulse-width modulation for servo/LED control
-
-6. **GPIO Pairs** (`bus_type: "GPIO_PAIR"`)
-   - **Shared Pins**: None
-   - **Unique Pins**: 2 GPIO pins per pair (input/output)
-   - **Note**: Simple digital I/O pairs with no shared resources
-
-#### Pin Requirements JSON Structure
-
-Bus interface components must include a `pin_requirements` object:
-
-```json
-{
-  "pin_requirements": {
-    "shared_pins_needed": [
-      {
-        "function": "SPI_SCLK",
-        "count": 1,
-        "description": "SPI serial clock"
-      }
-    ],
-    "unique_pins_needed": [
-      {
-        "function": "SPI_CS",
-        "count": 1,
-        "description": "Chip select (unique per device)"
-      }
-    ]
-  }
-}
-```
-
-#### Pin Validation Algorithm
-
-During code generation, the system validates total pin requirements against the ESP32 chip's available pins:
-
-1. **Count Bus Encounters**: For each component loop iteration, count how many times each bus type is encountered
-2. **Calculate Shared Pins**: Shared pins are assigned once per bus type (e.g., SPI SCLK assigned once for all SPI devices)
-3. **Calculate Unique Pins**: Unique pins are assigned per device (e.g., SPI CS pin per SPI device)
-4. **Total Pins Needed**: `shared_pins + (num_devices × unique_pins_per_device)`
-5. **Validate Against Chip**: Ensure total pins ≤ chip's `exposed_pins` array length
-6. **Runtime Simulation**: Pin assignment simulates `active_pin_index` resetting per component loop
-
-**Example Calculation**:
-- Goblin head: 5 SPI devices
-- SPI bus: 2 shared pins (SCLK, MISO) + 2 unique pins per device (CS, MOSI)
-- Total pins: 2 + (5 × 2) = 12 pins
-- ESP32-S3 has 45 exposed pins → Validation passes
-
-### Hardware Validation Rules
-
-- All pin assignments must be within the chip's `exposed_pins` array
-- Shared pins are allocated once per bus type across all components
-- Unique pins are allocated per device instance
-- Pin conflicts are detected during generation, not runtime
-- GPIO pairs require exactly 2 unique pins with no shared resources
+**Migration**: All such keys must be renamed to the standard `components` key. Scripts have been executed multiple times to perform this migration - continued presence indicates an unresolved issue in the rules hierarchy.
 
 ## Files Updated So Far
-- `goblineye_left.json` - left_eye, hitCount: 5
-- `goblineye_right.json` - right_eye, hitCount: 5  
+
+- `goblin_left_eye.json` - left_eye, hitCount: 5
+- `goblin_right_eye.json` - right_eye, hitCount: 5
 - `goblin_mouth.json` - mouth, hitCount: 3
 - `goblin_speaker.json` - audio, hitCount: 7
 - `goblin_nose.json` - nose_sensor, hitCount: 15
 
 ## Next Steps
+
 1. Create `goblin_simple.json` bot configuration
 2. Test generator with simple bot
 3. Build and verify P32 universal main loop

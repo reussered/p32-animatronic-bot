@@ -58,5 +58,5 @@
                   "Precise positioning control",
                   "Robust construction for wearable applications"
               ],
-    "component_name":  "MECHANICAL_ACTUATOR"
+    "name":  "MECHANICAL_ACTUATOR"
 }

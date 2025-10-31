@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "wrist_joint_assembly",
+    "name":  "wrist_joint_assembly",
     "relative_filename":  "config/components/hardware/wrist_joint_assembly.json",
     "description":  "Generated hardware component for wrist_joint_assembly",
     "cost_performance":  {

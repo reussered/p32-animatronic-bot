@@ -44,14 +44,14 @@ GPIO 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48
 ## Interface Configuration Files
 
 ### SPI Bus Definition
-File: `config/components/interfaces/spi_bus_vspi.json`
+File: `config/components/interfaces/spi_bus.json`
 
 ```json
 {
-  "relative_filename": "config/components/interfaces/spi_bus_vspi.json", 
+  "relative_filename": "config/components/interfaces/spi_bus.json", 
   "version": "1.0.0",
   "author": "config/author.json",
-  "interface_id": "SPI_BUS_VSPI",
+  "interface_id": "spi_bus",
   "interface_type": "SPI_BUS",
   "pins": {
     "miso": 12,
@@ -75,7 +75,7 @@ File: `config/components/interfaces/spi_device_1.json`
   "author": "config/author.json",
   "interface_id": "SPI_DEVICE_1",
   "interface_type": "SPI_DEVICE",
-  "bus_reference": "SPI_BUS_VSPI",
+  "bus_reference": "spi_bus",
   "pins": {
     "cs": 15
   },

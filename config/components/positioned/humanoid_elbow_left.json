@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_elbow_left.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_ELBOW_LEFT",
+    "name":  "HUMANOID_ELBOW_LEFT",
     "subsystem":  "ARM",
     "component_type":  "ARTICULATED_JOINT_1DOF",
     "description":  "Left elbow joint with single degree of freedom for forearm articulation",

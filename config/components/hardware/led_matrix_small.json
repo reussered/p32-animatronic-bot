@@ -52,5 +52,5 @@
                   "Low power consumption",
                   "Pre-programmed symbol library"
               ],
-    "component_name":  "LED_MATRIX_SMALL"
+    "name":  "LED_MATRIX_SMALL"
 }

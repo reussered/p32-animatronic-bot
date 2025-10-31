@@ -5,7 +5,7 @@
     "hardware_type":  "SSD1963_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "component_name":  "ssd1963",
+    "name":  "ssd1963",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "7.0 INCH",

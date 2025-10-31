@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "component_type":  "POSITIONED_SERVO_PAIR",
-    "component_name":  "CAT_ANIMATED_EARS",
+    "name":  "CAT_ANIMATED_EARS",
     "subsystem":  "HEAD",
     "description":  "Servo-controlled cat ears for emotional expression and directional hearing simulation",
     "created":  "2025-10-12",

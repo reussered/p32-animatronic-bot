@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/scaling/unified_proportional_scaling.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "UNIFIED_PROPORTIONAL_SCALING",
+    "name":  "UNIFIED_PROPORTIONAL_SCALING",
     "subsystem":  "UNKNOWN",
     "component_type":  "COORDINATE_SCALING_SYSTEM",
     "description":  "Unified scaling system using human proportions with horizontal and vertical scale factors like facial coordinate system",

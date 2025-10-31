@@ -3,7 +3,7 @@
     "type": "bus",
     "version": "1.0.0",
     "author": "config/authors/ai_agent.json",
-    "component_name": "spi_bus",
+    "name": "spi_bus",
     "description": "SPI bus component containing SPI display driver for high-speed serial communication",
     "created": "2025-10-29",
     "component_type": "bus_interface",

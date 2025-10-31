@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/hardware/esp32_c3_gpio_constraints.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "ESP32_C3_GPIO_CONSTRAINTS",
+    "name":  "ESP32_C3_GPIO_CONSTRAINTS",
     "subsystem":  "UNKNOWN",
     "component_type":  "GPIO_PIN_ALLOCATION",
     "description":  "GPIO pin limitations and smart allocation strategies for ESP32-C3 mini controllers",

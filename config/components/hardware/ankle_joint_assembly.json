@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "ankle_joint_assembly",
+    "name":  "ankle_joint_assembly",
     "relative_filename":  "config/components/hardware/ankle_joint_assembly.json",
     "description":  "Generated hardware component for ankle_joint_assembly",
     "cost_performance":  {

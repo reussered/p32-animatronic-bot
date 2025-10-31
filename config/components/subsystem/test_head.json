@@ -2,7 +2,7 @@
     "relative_filename": "config/components/subsystem/test_head.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_name": "test_head",
+    "name": "test_head",
     "component_type": "SUBSYSTEM_ASSEMBLY",
     "description": "Test head subsystem with dual displays for hardware validation",
     "timing": {

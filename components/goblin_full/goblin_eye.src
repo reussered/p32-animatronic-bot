@@ -14,7 +14,6 @@ static const char *GOBLIN_EYE_TAG = "GOBLIN_EYE";
 // Shared variables (definitions - only one copy in memory)
 uint8_t* currentFrame = nullptr;
 uint32_t current_frame_size = 0;
-uint32_t current_spi_device = 0;
 
 // Animation constants
 const uint32_t FRAME_WIDTH = 240;

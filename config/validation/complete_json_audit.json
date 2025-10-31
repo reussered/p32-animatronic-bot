@@ -51,7 +51,7 @@
                                                                                                                           "i2s_bus_0.json",
                                                                                                                           "i2s_device_1-3.json",
                                                                                                                           "skeletal_power_distribution.json",
-                                                                                                                          "spi_bus_vspi.json",
+                                                                                                                          "spi_bus.json",
                                                                                                                           "spi_device_1-3.json"
                                                                                                                       ]
                                                                                                          },
@@ -203,3 +203,4 @@
                                    "estimated_firmware_effort":  "8-12_WEEKS_FULL_SYSTEM"
                                }
 }
+

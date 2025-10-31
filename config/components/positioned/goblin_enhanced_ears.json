@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin_enhanced_ears.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "GOBLIN_ENHANCED_EARS",
+    "name":  "GOBLIN_ENHANCED_EARS",
     "subsystem":  "HEAD",
     "component_type":  "sensory_enhancement",
     "description":  "Enlarged and enhanced ears for scout goblin superior hearing",

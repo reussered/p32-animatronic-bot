@@ -25,7 +25,7 @@
 
 ## Configuration Files Updated
 
-1. **SPI_BUS_VSPI**: Now uses generic `data_input`, `data_output`, `clock`
+1. **spi_bus**: Now uses generic `data_input`, `data_output`, `clock`
 2. **SPI_DEVICE_1**: Now uses generic `chip_select`, `data_command`, `reset`
 3. **MakerNames.json**: Maps manufacturer labels to generic names
 

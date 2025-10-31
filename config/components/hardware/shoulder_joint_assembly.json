@@ -33,5 +33,5 @@
                               "attachment_method":  "M8_SHOULDER_BRACKET_TO_TORSO",
                               "arm_connection":  "M6_HUMERUS_COUPLING"
                           },
-    "component_name":  "SHOULDER_JOINT_ASSEMBLY"
+    "name":  "SHOULDER_JOINT_ASSEMBLY"
 }

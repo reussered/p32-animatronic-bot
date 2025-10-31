@@ -1,8 +1,8 @@
 // SPI Bus VSPI Component Header
 // Dynamic pin assignment for SPI bus communication
 
-#ifndef SPI_BUS_VSPI_H
-#define SPI_BUS_VSPI_H
+#ifndef spi_bus_H
+#define spi_bus_H
 
 #include "esp_err.h"
 
@@ -19,4 +19,4 @@ int spi_bus_get_cs_pin(int device_index);
 int spi_bus_get_dc_pin(int device_index);
 int spi_bus_get_backlight_pin(int device_index);
 
-#endif // SPI_BUS_VSPI_H
+#endif // spi_bus_H

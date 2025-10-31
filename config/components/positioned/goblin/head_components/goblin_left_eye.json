@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/goblin/head_components/goblin_left_eye.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "component_name":  "head_components_goblin_left_eye",
+    "name":  "head_components_goblin_left_eye",
     "component_type":  "POSITIONED_DISPLAY",
     "description":  "Left eye positioned display with goblin-specific visual processing",
     "created":  "2025-10-22",

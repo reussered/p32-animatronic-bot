@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 show_component_tree.py - Display complete component tree from a given component JSON file
 

@@ -1,4 +1,4 @@
-﻿# Open markdown preview
+# Open markdown preview
 param([string])
 code 
 Start-Sleep -Seconds 2

@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/humanoid_wrist_left.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HUMANOID_WRIST_LEFT",
+    "name":  "HUMANOID_WRIST_LEFT",
     "subsystem":  "ARM",
     "component_type":  "ARTICULATED_JOINT_2DOF",
     "description":  "Left wrist joint with 2 degrees of freedom for hand orientation",

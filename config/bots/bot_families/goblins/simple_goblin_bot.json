@@ -42,7 +42,7 @@
                     },
     "components":  [
                        {
-                           "component_name":  "left_eye_display",
+                           "name":  "left_eye_display",
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
@@ -59,7 +59,7 @@
                                          }
                        },
                        {
-                           "component_name":  "right_eye_display",
+                           "name":  "right_eye_display",
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
@@ -76,7 +76,7 @@
                                          }
                        },
                        {
-                           "component_name":  "mouth_display",
+                           "name":  "mouth_display",
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
@@ -93,7 +93,7 @@
                                          }
                        },
                        {
-                           "component_name":  "nose_sensor",
+                           "name":  "nose_sensor",
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_SENSOR",
                            "ifdef_variable":  "ENABLE_SIMPLE_SENSOR",
@@ -110,7 +110,7 @@
                                          }
                        },
                        {
-                           "component_name":  "main_speaker",
+                           "name":  "main_speaker",
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_AUDIO",
                            "ifdef_variable":  "ENABLE_SIMPLE_AUDIO",

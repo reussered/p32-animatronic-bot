@@ -6,7 +6,7 @@
     "bot_id": "test_bot_v1",
     "description": "Minimal test creature for hardware validation - direct component test",
     "created": "2025-10-23",
-    "component_name": "test_bot",
+    "name": "test_bot",
     "component_type": "TEST_ASSEMBLY",
     "timing": {
         "hitCount": 1,
@@ -34,15 +34,8 @@
         "auto_cycle_colors": true,
         "display_sync_enabled": false
     },
-    "hardware_validation": {
-        "required_displays": 2,
-        "required_spi_devices": ["DIRECT_SPI", "DIRECT_SPI"],
-        "required_gpio_pins": [26, 27, 33],
-        "power_requirements": "3.3V @ 200mA minimum"
-    },
-    "shape_assembly": {
-        "type": "TEST_FIXTURE",
-        "description": "Minimal test fixture for display validation",
-        "shape": "config/shapes/test_fixture_mount.scad"
+    "hardware_validation": 
+    {
+       "power_requirements": "3.3V @ 200mA minimum"
     }
 }

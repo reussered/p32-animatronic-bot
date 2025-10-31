@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "ST7789_PREMIUM_TFT_RGB",
-    "component_name":  "st7789_premium_tft_rgb",
+    "name":  "st7789_premium_tft_rgb",
     "description":  "1.3\" Premium TFT RGB with ST7789 driver - HIGH RESOLUTION full color",
     "premium_small_champion":  "TRUE - Best small TFT resolution available",
     "physical_specifications":  {

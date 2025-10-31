@@ -66,8 +66,7 @@ void goblin_right_eye_act(void) {
         load_current_frame_to_buffer_right_eye();
     }
     
-    // Set context for shared processing (SPI device for right eye)
-    current_spi_device = 2; // SPI_DEVICE_2 for right eye
+    // Set context for shared processing (dynamic pin assignment via spi_bus)
     currentFrame = right_eye_animation_buffer;
     current_frame_size = right_eye_total_pixels;
     

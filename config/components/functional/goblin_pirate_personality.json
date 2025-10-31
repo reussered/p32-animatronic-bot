@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/functional/goblin_pirate_personality.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_pirate_personality",
+    "name":  "goblin_pirate_personality",
     "component_type":  "PERSONALITY_ENGINE",
     "description":  "Battle-scarred pirate personality with enhanced aggression and treasure obsession",
     "created":  "2025-10-21",

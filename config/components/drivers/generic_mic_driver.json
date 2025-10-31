@@ -1,0 +1,48 @@
+{
+    "relative_filename":  "config/components/drivers/generic_mic_driver.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "generic_mic_driver",
+    "component_type":  "GENERIC_DRIVER",
+    "hardware_type":  "SENSOR_DRIVER",
+    "interface_type":  "ADC",
+    "description":  "Generic microphone driver for analog microphones using ADC bus",
+    "created":  "2025-10-30",
+    "driver_capabilities":  {
+                               "microphone_types":  [
+                                                       "electret",
+                                                       "MEMS",
+                                                       "condenser"
+                                                   ],
+                               "adc_channels":  1,
+                               "sample_rate_hz":  8000,
+                               "bit_depth":  12,
+                               "input_voltage_range":  "0-3.3V"
+                           },
+    "audio_processing":  {
+                            "gain_amplification":  "adjustable",
+                            "high_pass_filter":  "100Hz",
+                            "noise_gate":  "configurable",
+                            "sample_buffering":  "256_samples"
+                        },
+    "dependencies":  [
+                        "config/components/drivers/adc_bus.json"
+                    ],
+    "software":  {
+                     "init_function":  "generic_mic_driver_init",
+                     "act_function":  "generic_mic_driver_act",
+                     "api_functions":  [
+                                          "generic_mic_driver_read_sample(int *sample)",
+                                          "generic_mic_driver_get_voltage(int *voltage_mv)",
+                                          "generic_mic_driver_set_gain(float gain)",
+                                          "generic_mic_driver_enable_noise_gate(bool enable)",
+                                          "generic_mic_driver_set_threshold(int threshold)"
+                                      ]
+                 },
+    "configuration":  {
+                          "adc_channel":  "ADC_CHANNEL_0",
+                          "adc_attenuation":  "ADC_ATTEN_DB_11",
+                          "default_gain":  1.0,
+                          "noise_gate_threshold":  100
+                      }
+}

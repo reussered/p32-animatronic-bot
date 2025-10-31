@@ -6,8 +6,8 @@
     "bot_id":  "goblin_full_v3",
     "description":  "Complete goblin creature assembly via recursive composition",
     "created":  "2025-10-22",
-    "component_name":  "goblin_full",
-    "component_type":  "CREATURE_ASSEMBLY",
+    "name":  "goblin_full",
+    "type":  "CREATURE_ASSEMBLY",
     "timing":  {
                    "hitCount":  100,
                    "description":  "Full creature coordination every 10 seconds"

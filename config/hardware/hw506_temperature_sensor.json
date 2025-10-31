@@ -10,9 +10,9 @@
   "hardware_specs": {
     "sensor_type": "analog_temperature",
     "temperature_range": "-55C_to_150C",
-    "accuracy": "±1C_typical",
+    "accuracy": "?1C_typical",
     "output_scale": "10mV_per_degree_C",
-    "linearity": "±0.4C_max_deviation"
+    "linearity": "?0.4C_max_deviation"
   },
   
   "physical_properties": {

@@ -9,9 +9,9 @@
 
 ### ✅ **Complete Eye Component Architecture**
 - **Shared Logic**: `goblin_eye.hpp/cpp` with 256-color palette system
-- **Left Eye**: Blink animation with SPI_DEVICE_1 context setting
-- **Right Eye**: Curious look animation with SPI_DEVICE_2 context setting  
-- **Hardware Driver**: Complete GC9A01 SPI implementation
+- **Left Eye**: Blink animation with dynamic SPI pin assignment
+- **Right Eye**: Curious look animation with dynamic SPI pin assignment  
+- **Hardware Driver**: Complete GC9A01 SPI implementation with spi_bus dependency
 
 ### ✅ **Mood-Based Pixel Processing**
 - Optimized "only process when mood changes" algorithm

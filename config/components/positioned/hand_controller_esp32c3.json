@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/positioned/hand_controller_esp32c3.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "HAND_CONTROLLER_ESP32C3",
+    "name":  "HAND_CONTROLLER_ESP32C3",
     "subsystem":  "TORSO",
     "component_type":  "POSITIONED_SUBSYSTEM",
     "description":  "5-finger robotic hand controlled by ESP32-C3 with GPIO constraint optimization",

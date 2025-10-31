@@ -4,7 +4,7 @@
   "author": "config/author.json",
   "component_type": "POSITIONED_COMPONENT",
   "hardware_type": "SENSOR",
-  "component_name": "temperature_monitor",
+  "name": "temperature_monitor",
   "display_name": "Power Supply Temperature Monitor",
   "description": "Temperature sensor for monitoring power supply module thermal conditions",
   "subsystem": "power_supply",

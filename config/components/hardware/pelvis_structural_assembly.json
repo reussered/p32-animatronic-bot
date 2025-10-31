@@ -19,7 +19,7 @@
                                                        "height":  "15mm"
                                                    }
                        },
-    "component_name":  "pelvis_structural_assembly",
+    "name":  "pelvis_structural_assembly",
     "relative_filename":  "config/components/hardware/pelvis_structural_assembly.json",
     "description":  "Generated hardware component for pelvis_structural_assembly",
     "cost_performance":  {

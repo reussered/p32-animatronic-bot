@@ -11,7 +11,7 @@ This system solves the problem of different manufacturers using different pin la
 - **Contains**: Mappings for different manufacturer variants
 
 ### 2. Bus/Device Configurations (Use lowercase generic names)
-- **SPI_BUS_VSPI**: Uses `data_input`, `data_output`, `clock`
+- **spi_bus**: Uses `data_input`, `data_output`, `clock`
 - **SPI_DEVICE_X**: Uses `chip_select`, `data_command`, `reset`
 - **Manufacturer Variant**: Specified in `device_config.manufacturer_variant`
 

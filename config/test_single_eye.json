@@ -6,7 +6,7 @@
     "bot_id":  "test_single_eye",
     "description":  "Simple test configuration for single goblin left eye",
     "created":  "2025-10-22",
-    "component_name":  "test_single_eye",
+    "name":  "test_single_eye",
     "component_type":  "TEST_ASSEMBLY",
     "timing":  {
                    "hitCount":  1,

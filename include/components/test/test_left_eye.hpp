@@ -12,8 +12,8 @@
 /**
  * @brief Test Left Eye Component - GC9A01 240x240 Display Test
  * Pin configuration:
- * SPI_CLK: GPIO 14 (from SPI_BUS_VSPI)
- * SPI_MOSI: GPIO 13 (from SPI_BUS_VSPI)  
+ * SPI_CLK: GPIO 14 (from spi_bus)
+ * SPI_MOSI: GPIO 13 (from spi_bus)  
  * SPI_CS: GPIO 15 (from SPI_DEVICE_1)
  * DC: GPIO 27 (Data/Command for left eye)
  * RST: GPIO 26 (Reset - shared)

@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "SSD1331_MICRO_RGB_OLED",
-    "component_name":  "ssd1331_micro_rgb_oled",
+    "name":  "ssd1331_micro_rgb_oled",
     "description":  "0.95\" Micro RGB OLED with SSD1331 driver - TINY with FULL COLOR",
     "micro_size_champion":  "TRUE - Smallest RGB OLED available",
     "physical_specifications":  {

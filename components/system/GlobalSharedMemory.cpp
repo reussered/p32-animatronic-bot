@@ -1,4 +1,4 @@
-#include "core/SharedMemory.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 // Global instance for system-wide shared memory
 SharedMemory g_GlobalSharedMemory;

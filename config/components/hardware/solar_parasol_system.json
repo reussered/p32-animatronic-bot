@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/hardware/solar_parasol_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -27,7 +27,7 @@
                                   },
     "mechanical_subsystems":  {
                                   "central_hub":  {
-                                                      "component_name":  "PARASOL_HUB_ASSEMBLY",
+                                                      "name":  "PARASOL_HUB_ASSEMBLY",
                                                       "subsystem":  "UNKNOWN",
                                                       "material":  "PLA_PLUS",
                                                       "mounting_interface":  "ROBOT_SHOULDER_MOUNT",
@@ -38,21 +38,21 @@
                                                                               ]
                                                   },
                                   "deployment_mechanism":  {
-                                                               "component_name":  "PARASOL_DEPLOYMENT_SYSTEM",
+                                                               "name":  "PARASOL_DEPLOYMENT_SYSTEM",
                                                                "subsystem":  "UNKNOWN",
                                                                "rib_count":  8,
                                                                "extension_ratio":  "3.33:1",
                                                                "actuation_method":  "SERVO_DRIVEN_TELESCOPING"
                                                            },
                                   "solar_panel_mounting":  {
-                                                               "component_name":  "PARASOL_SOLAR_MOUNTS",
+                                                               "name":  "PARASOL_SOLAR_MOUNTS",
                                                                "subsystem":  "UNKNOWN",
                                                                "panel_segments":  16,
                                                                "flexible_interconnects":  true,
                                                                "weather_sealing":  "IP65"
                                                            },
                                   "tracking_system":  {
-                                                          "component_name":  "PARASOL_TRACKING_GIMBAL",
+                                                          "name":  "PARASOL_TRACKING_GIMBAL",
                                                           "subsystem":  "UNKNOWN",
                                                           "tilt_range":  "90 DEG",
                                                           "rotation_range":  "360 DEG",
@@ -113,6 +113,6 @@
                                  "all_humanoid":  "UNIVERSAL"
                              },
     "hardware_type":  "SOLAR_PARASOL_ASSEMBLY",
-    "component_name":  "SOLAR_PARASOL_SYSTEM"
+    "name":  "SOLAR_PARASOL_SYSTEM"
 }
 

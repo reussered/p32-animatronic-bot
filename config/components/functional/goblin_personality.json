@@ -2,7 +2,7 @@
     "relative_filename":  "config/components/functional/goblin_personality.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "goblin_personality",
+    "name":  "goblin_personality",
     "component_type":  "FAMILY_LEVEL",
     "family_type":  "GOBLIN",
     "description":  "Goblin family personality traits - mischievous, aggressive, curious",

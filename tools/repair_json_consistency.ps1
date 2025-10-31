@@ -242,16 +242,17 @@ function Get-InterfaceTemplate {
     
     # Customize based on interface type
     switch -Regex ($InterfaceType) {
-        "SPI_DEVICE" {
-            $deviceNum = [regex]::Match($InterfaceId, '\d+').Value
-            $baseTemplate.bus_reference = "config/components/interfaces/spi_bus_vspi.json"
-            $baseTemplate.device_config = @{
-                chip_select_pin = [int]$deviceNum + 14  # GPIO 15, 16, 17, etc.
-                spi_mode = 0
-                clock_speed_mhz = 20
-                bit_order = "MSB_FIRST"
-            }
-        }
+        # SPI_DEVICE interfaces removed - now using dynamic pin assignment via spi_bus
+        # "SPI_DEVICE" {
+        #     $deviceNum = [regex]::Match($InterfaceId, '\d+').Value
+        #     $baseTemplate.bus_reference = "config/components/interfaces/spi_bus.json"
+        #     $baseTemplate.device_config = @{
+        #         chip_select_pin = [int]$deviceNum + 14  # GPIO 15, 16, 17, etc.
+        #         spi_mode = 0
+        #         clock_speed_mhz = 20
+        #         bit_order = "MSB_FIRST"
+        #     }
+        # }
         "I2C_DEVICE" {
             $deviceNum = [regex]::Match($InterfaceId, '\d+').Value
             $baseTemplate.bus_reference = "config/components/interfaces/i2c_bus_primary.json"

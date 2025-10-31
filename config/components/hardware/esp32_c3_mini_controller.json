@@ -1,8 +1,8 @@
-﻿{
+{
     "relative_filename":  "config/components/hardware/esp32_c3_mini_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_name":  "ESP32_C3_MINI_CONTROLLER",
+    "name":  "ESP32_C3_MINI_CONTROLLER",
     "subsystem":  "TORSO",
     "component_type":  "MICRO_CONTROLLER_MODULE",
     "description":  "Ultra-compact ESP32-C3 for distributed control in joints and extremities",

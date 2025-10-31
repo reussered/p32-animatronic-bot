@@ -16,7 +16,7 @@
                             "config/components/positioned/base_speaker.json"
                         ],
     "hardware_interface_defaults":  {
-                                        "spi_bus":  "SPI_BUS_VSPI",
+                                        "spi_bus":  "spi_bus",
                                         "i2s_bus":  "I2S_BUS_0",
                                         "spi_device_assignments":  {
                                                                        "left_eye":  "DIRECT_SPI",
@@ -168,3 +168,4 @@
                               "  Applied parent: config/templates/base/humanoid_head_base.json"
                           ]
 }
+
