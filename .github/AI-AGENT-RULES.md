@@ -33,10 +33,8 @@
 **BEFORE implementing ANY changes, the AI agent MUST read and internalize:**
 
 1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
-2. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules
-3. **`NAMING_RULES.md`** - Component naming conventions and file organization
-
-**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
+2. **`NAMING_RULES.md`** - Component naming conventions and file organization
+3. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
 ---
 
