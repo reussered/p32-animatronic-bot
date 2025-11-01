@@ -1,930 +1,815 @@
-#!/usr/bin/env python3
-"""
-P32 Component Table Generator
-Reads JSON bot configuration and generates initTable.h, actTable.h and component files
+"""P32 dispatch table generator.
+
+Walks bot JSON configuration trees and emits subsystem-specific component
+aggregation units, dispatch tables, and supporting build metadata.
 """
 
+from __future__ import annotations
+
+import argparse
 import json
-import os
 import sys
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
-class P32ComponentGenerator:
-    def __init__(self, config_dir: str, output_dir: str):
-        self.config_dir = Path(config_dir)
-        self.output_dir = Path(output_dir)
-        self.include_dir = Path(output_dir).parent / "include"
-        self.subsystem_components = {}  # Components grouped by subsystem
-        self.init_functions = []
-        self.act_functions = []
-        self.seen_components = set()  # Track components we've seen for deduplication
-        self.component_configs = {}   # Store component configs for struct generation
-        self.current_subsystem = "unknown"  # Current subsystem context
-        self.current_component = None  # Current component being processed
-        self.is_bot_level = True  # Flag to track if we're processing the root bot file
-        self.family_components_added = False  # Flag to track if family_components have been added to first subsystem
-        self.family_components = []  # Store family_components from bot config
-        self.controller_chip = None  # ESP32 chip specification
-        self.used_pins = set()  # Track pins that have been assigned
-        self.bus_assignments = {}  # Track pin assignments for buses
-        self.processing_files = set()  # Track files currently being processed to prevent cycles
-        
-    def load_bot_config(self, bot_name: str) -> Dict[str, Any]:
-        """Load bot configuration from JSON file"""
-        # Try multiple locations: bots/, subsystems/, families, or direct path
-        possible_paths = [
-            self.config_dir / "bots" / f"{bot_name}.json",
-            self.config_dir / "subsystems" / f"{bot_name}.json",
-            self.config_dir / "bots" / "bot_families" / "goblins" / f"{bot_name}.json",
-            self.config_dir / "bots" / "bot_families" / "cats" / f"{bot_name}.json",
-            self.config_dir / "bots" / "bot_families" / "bears" / f"{bot_name}.json",
-            Path(bot_name)  # Direct path
-        ]
-        
-        bot_file = None
-        for path in possible_paths:
-            if path.exists():
-                bot_file = path
-                break
-        
-        if bot_file is None:
-            raise FileNotFoundError(f"Bot config not found: {bot_name} (tried bots/, subsystems/, families, and direct path)")
-        
-        # print(f"DEBUG: Loading bot config from: {bot_file}")
-        with open(bot_file, 'r') as f:
-            return json.load(f)
-    
-    def load_positioned_components(self, bot_config: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Load all positioned components referenced in bot config - handles recursive composition"""
-        components = []
-        
-        # Store family_components for addition to first subsystem
-        if "family_components" in bot_config:
-            self.family_components = bot_config["family_components"]
-            # print(f"DEBUG: Stored {len(self.family_components)} family_components for first subsystem")
-        
-        # Handle direct positioned_components (backward compatibility)
-        if "positioned_components" in bot_config:
-            for component_ref in bot_config["positioned_components"]:
-                components.extend(self._load_component_recursive(component_ref))
-        
-        # Handle new subsystem_assemblies structure (recursive composition)
-        if "subsystem_assemblies" in bot_config or "subsystems" in bot_config:
-            subsystem_key = "subsystems" if "subsystems" in bot_config else "subsystem_assemblies"
-            for subsystem_ref in bot_config[subsystem_key]:
-                components.extend(self._load_subsystem_recursive(subsystem_ref))
-        
-        # Handle Components array at bot level (standardized plural form)
-        if "Components" in bot_config:
-            for component_ref in bot_config["Components"]:
-                components.extend(self._load_component_recursive(component_ref))
-        
-        return components
-    
-    def _load_subsystem_for_traversal(self, subsystem_ref: str) -> None:
-        """Load a subsystem for traversal - add family_components to first subsystem"""
-        # Remove 'config/' prefix if present since config_dir already points to config/
-        clean_ref = subsystem_ref.replace("config/", "") if subsystem_ref.startswith("config/") else subsystem_ref
-        subsystem_file = self.config_dir / clean_ref
-        
-        if subsystem_file.exists():
-            # print(f"DEBUG: Loading subsystem for traversal: {subsystem_file}")
-            with open(subsystem_file, 'r', encoding='ascii') as f:
-                subsystem_data = json.load(f)
-                subsystem_data['config_file'] = subsystem_ref
-                
-                # Add family_components to the first subsystem encountered
-                if not self.family_components_added and self.family_components:
-                    # print(f"DEBUG: Adding {len(self.family_components)} family_components to first subsystem: {subsystem_ref}")
-                    # Add family components as the first components
-                    for family_component_ref in self.family_components:
-                        self._process_single_component(family_component_ref)
-                    self.family_components_added = True
-                
-                # Process the subsystem itself
-                subsystem_name = subsystem_data.get("component_name", subsystem_data.get("name", subsystem_ref.split('/')[-1].replace('.json', '')))
-                hit_count = subsystem_data.get("timing", {}).get("hitCount", 1)
-                software = subsystem_data.get("software", {})
-                init_func = software.get("init_function") or self.generate_function_name(subsystem_name, "init")
-                act_func = software.get("act_function") or self.generate_function_name(subsystem_name, "act")
-                
-                self.components.append({
-                    "name": subsystem_name,
-                    "init_func": init_func,
-                    "act_func": act_func,
-                    "hitCount": hit_count,
-                    "description": subsystem_data.get("description", f"{subsystem_name} subsystem"),
-                    "type": "traversed",
-                    "config": subsystem_data,
-                    "subsystem": self.current_subsystem
-                })
-                
-                # Generate configuration struct only for first encounter
-                if subsystem_name not in self.seen_components:
-                    self.seen_components.add(subsystem_name)
-                    self._generate_component_config_struct(subsystem_name, subsystem_data)
-                    # print(f"DEBUG: First encounter of subsystem: {subsystem_name}")
-                
-                # Continue traversing the subsystem's JSON structure
-                self.traverse_json_for_components(subsystem_data)
-    
-    def _load_component_recursive(self, component_ref: str) -> List[Dict[str, Any]]:
-        """Recursively load a single component and its nested components"""
-        components = []
-        
-        # Remove 'config/' prefix if present since config_dir already points to config/
-        clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
-        component_file = self.config_dir / clean_ref
-        
-        # Check for cycles - if this file is already being processed, skip it
-        file_path_str = str(component_file)
-        if file_path_str in self.processing_files:
-            return components
-        
-        self.processing_files.add(file_path_str)
-        
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CONFIG_ROOT = PROJECT_ROOT / "config"
+SRC_ROOT = PROJECT_ROOT / "src"
+INCLUDE_ROOT = PROJECT_ROOT / "include"
+
+SUPPORTED_CONTROLLER_BOARDS: Dict[str, str] = {
+    "ESP32_S3_DEVKITC_1": "esp32-s3-devkitc-1",
+    "ESP32_S3_DEVKIT": "esp32-s3-devkitc-1",
+    "ESP32_S3_R8N16": "esp32-s3-devkitc-1",
+    "ESP32-S3": "esp32-s3-devkitc-1",
+    "ESP32_C3_MINI": "esp32-c3-devkitm-1",
+    "ESP32_C3_DEVKITM_1": "esp32-c3-devkitm-1",
+    "ESP32-C3": "esp32-c3-devkitm-1",
+    "ESP32": "esp32dev",
+    "ESP32_DEVKIT": "esp32dev",
+}
+
+
+class JsonLoader:
+    """Caches JSON loads while enforcing ASCII encoding."""
+
+    def __init__(self) -> None:
+        self._cache: Dict[Path, Dict[str, Any]] = {}
+
+    def load(self, path: Path) -> Dict[str, Any]:
+        path = path.resolve()
+        if path in self._cache:
+            return self._cache[path]
         try:
-            if component_file.exists():
-                # print(f"DEBUG: Loading component: {component_file}")
-                try:
-                    with open(component_file, 'r', encoding='ascii') as f:
-                        component_data = json.load(f)
-                        component_data['config_file'] = component_ref
-                        components.append(component_data)
-                        
-                        # Agnostic recursive search: find all component references in the JSON structure
-                        # Look for any string values that appear to be component references
-                        self._find_and_load_component_references(component_data, components)
-                        
-                except json.JSONDecodeError as e:
-                    print(f"ERROR: Invalid JSON in {component_file}: {e}")
-                except Exception as e:
-                    print(f"ERROR: Failed to load {component_file}: {e}")
-            else:
-                print(f"Warning: Component file not found: {component_file}")
-        finally:
-            # Always remove from processing set when done
-            self.processing_files.discard(file_path_str)
-        
-        return components
-    
-    def _find_and_load_component_references(self, data: Any, components: List[Dict[str, Any]]) -> None:
-        """Recursively search JSON data for component references and load them"""
-        if isinstance(data, dict):
-            for key, value in data.items():
-                if key == 'controller' and isinstance(value, str):
-                    # Special case: controller keyword sets subsystem context
-                    self.current_subsystem = value
-                else:
-                    # Recursively search for component references in all values
-                    self._find_and_load_component_references(value, components)
-        elif isinstance(data, list):
-            for item in data:
-                if isinstance(item, str) and self._is_component_reference(item):
-                    # Found a component reference - load it
-                    components.extend(self._load_component_recursive(item))
-                else:
-                    # Continue searching in nested structures
-                    self._find_and_load_component_references(item, components)
-        elif isinstance(data, str) and self._is_component_reference(data):
-            # Found a component reference - load it
-            components.extend(self._load_component_recursive(data))
-    
-    def _is_component_reference(self, value: str) -> bool:
-        """Check if a string value appears to be a component reference"""
-        if not isinstance(value, str):
-            return False
-        
-        # Component references typically start with config/components/ or config/subsystems/
-        # or are relative paths to component files
-        return (
-            value.startswith("config/components/") or
-            value.startswith("config/subsystems/") or
-            (value.endswith(".json") and ("components/" in value or "subsystems/" in value))
-        )
-    
-    def _is_subsystem_reference(self, value: str) -> bool:
-        """Check if a string value appears to be a subsystem reference"""
-        if not isinstance(value, str):
-            return False
-        
-        # Subsystem references typically start with config/subsystems/
-        return (
-            value.startswith("config/subsystems/") or
-            (value.endswith(".json") and "subsystems/" in value)
-        )
-    
-    def _load_subsystem_recursive(self, subsystem_ref: str) -> List[Dict[str, Any]]:
-        """Recursively load a subsystem and all its components"""
-        components = []
-        
-        # Remove 'config/' prefix if present since config_dir already points to config/
-        clean_ref = subsystem_ref.replace("config/", "") if subsystem_ref.startswith("config/") else subsystem_ref
-        subsystem_file = self.config_dir / clean_ref
-        
-        # Check for cycles - if this file is already being processed, skip it
-        file_path_str = str(subsystem_file)
-        if file_path_str in self.processing_files:
-            # print(f"DEBUG: Skipping already processing subsystem file: {subsystem_file}")
-            return components
-        
-        self.processing_files.add(file_path_str)
-        
-        try:
-            if subsystem_file.exists():
-                # print(f"DEBUG: Loading subsystem: {subsystem_file}")
-                with open(subsystem_file, 'r') as f:
-                    subsystem_data = json.load(f)
-                    subsystem_data['config_file'] = subsystem_ref
-                    
-                    # Add the subsystem itself as a component
-                    components.append(subsystem_data)
-                    
-                    # Agnostic recursive search: find all component references in the subsystem JSON
-                    self._find_and_load_component_references(subsystem_data, components)
-            else:
-                print(f"Warning: Subsystem file not found: {subsystem_file}")
-        finally:
-            # Always remove from processing set when done
-            self.processing_files.discard(file_path_str)
-        
-        return components
+            with path.open("r", encoding="ascii") as handle:
+                data = json.load(handle)
+        except UnicodeDecodeError as exc:
+            raise RuntimeError(f"File {path} is not ASCII encoded") from exc
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"Malformed JSON in {path}: {exc}") from exc
+        self._cache[path] = data
+        return data
 
-    def generate_function_name(self, component_name: str, func_type: str) -> str:
-        """Generate standardized function names from component names"""
-        # Convert component name to function name format
-        # RULE 5: Functions should be {name}_init() and {name}_act() - NO p32_comp_ prefix
-        name = component_name.lower().replace(' ', '_').replace('-', '_')
-        return f"{name}_{func_type}"
 
-    def traverse_json_for_components(self, json_data: Any) -> None:
-        """Streaming JSON parser that finds component references and subsystems"""
-        if isinstance(json_data, dict):
-            for key, value in json_data.items():
-                if key in ['controller', 'components', 'Components', 'subsystems']:
-                    # print(f"DEBUG: Traversing key: {key} (bot_level: {self._is_bot_level()})")
-                    if key == 'controller' and isinstance(value, str):
-                        # Special case: controller keyword sets subsystem context
-                        self.current_subsystem = str(value)
-                        # print(f"DEBUG: Set subsystem context to: {self.current_subsystem}")
-                    elif self._is_component_reference(value):
-                        # Found a component reference - load it
-                        self._process_single_component(value)
-                    elif isinstance(value, list):
-                        # Check each item in the list for component references
-                        for item in value:
-                            if self._is_component_reference(item):
-                                self._process_single_component(item)
-                            elif self._is_subsystem_reference(item) and self._is_bot_level():
-                                self._load_subsystem_for_traversal(item)
-                            else:
-                                # Continue traversing nested structures
-                                self.traverse_json_for_components(item)
-                    elif isinstance(value, dict):
-                        # Continue traversing nested objects
-                        self.traverse_json_for_components(value)
-                else:
-                    # Process other key-value pairs (extract configuration data)
-                    self._process_key_value_pair(key, value)
-        elif isinstance(json_data, list):
-            # Handle array values
-            for item in json_data:
-                if isinstance(item, str):
-                    if self._is_component_reference(item):
-                        self._process_single_component(item)
-                    elif self._is_subsystem_reference(item) and self._is_bot_level():
-                        self._load_subsystem_for_traversal(item)
-                else:
-                    # Continue traversing nested structures
-                    self.traverse_json_for_components(item)
-    
-    def _process_key_value_pair(self, key: str, value: Any) -> None:
-        """Process a key-value pair for configuration data extraction"""
-        # For now, just log - in full implementation this would extract
-        # configuration data for the current component
-        # Disabled verbose logging to reduce output
-        pass
-    
-    def _is_bot_level(self) -> bool:
-        """Check if we're currently processing the root bot level JSON"""
-        return self.is_bot_level
-    
-    def _process_single_component(self, component_ref: str) -> None:
-        """Process a single component reference"""
-        if not component_ref or not isinstance(component_ref, str):
+class ComponentSourceIndex:
+    """Maps component identifiers to permanent .src/.hdr files."""
+
+    def __init__(self, components_root: Path) -> None:
+        self._src_index: Dict[str, List[Path]] = {}
+        self._hdr_index: Dict[str, List[Path]] = {}
+        if components_root.exists():
+            for src_path in components_root.rglob("*.src"):
+                self._src_index.setdefault(src_path.stem, []).append(src_path)
+            for hdr_path in components_root.rglob("*.hdr"):
+                self._hdr_index.setdefault(hdr_path.stem, []).append(hdr_path)
+
+    def find_source_file(
+        self,
+        component_name: str,
+        data: Dict[str, Any],
+        json_path: Optional[Path],
+    ) -> Optional[Path]:
+        candidates: List[Path] = []
+        software = data.get("software")
+        if isinstance(software, dict):
+            explicit = software.get("source_file")
+            if isinstance(explicit, str):
+                resolved = resolve_reference_path(explicit)
+                if resolved:
+                    candidates.append(resolved)
+        if json_path is not None:
+            candidates.append(json_path.with_suffix(".src"))
+        candidates.extend(self._src_index.get(component_name, []))
+        for candidate in deduplicate_paths(candidates):
+            if candidate and candidate.exists():
+                return candidate
+        return None
+
+    def find_header_file(
+        self,
+        component_name: str,
+        data: Dict[str, Any],
+        json_path: Optional[Path],
+    ) -> Optional[Path]:
+        candidates: List[Path] = []
+        software = data.get("software")
+        if isinstance(software, dict):
+            explicit = software.get("header_file")
+            if isinstance(explicit, str):
+                resolved = resolve_reference_path(explicit)
+                if resolved:
+                    candidates.append(resolved)
+        if json_path is not None:
+            candidates.append(json_path.with_suffix(".hdr"))
+        candidates.extend(self._hdr_index.get(component_name, []))
+        for candidate in deduplicate_paths(candidates):
+            if candidate and candidate.exists():
+                return candidate
+        return None
+
+
+@dataclass
+class ComponentVisit:
+    name: str
+    init_func: str
+    act_func: str
+    hit_count: int
+    json_path: Optional[Path]
+
+
+@dataclass
+class ComponentDefinition:
+    name: str
+    json_path: Optional[Path]
+    data: Dict[str, Any]
+    init_func: str
+    act_func: str
+    hit_count: int
+    src_path: Optional[Path]
+    hdr_path: Optional[Path]
+    src_content: Optional[str] = None
+    hdr_content: Optional[str] = None
+
+    def load_artifacts(self) -> None:
+        if self.src_path and self.src_path.exists():
+            self.src_content = read_ascii_file(self.src_path)
+        if self.hdr_path and self.hdr_path.exists():
+            self.hdr_content = read_ascii_file(self.hdr_path)
+
+
+@dataclass
+class SubsystemContext:
+    name: str
+    controller: str
+    json_path: Optional[Path]
+    visits: List[ComponentVisit] = field(default_factory=list)
+    unique_components: Dict[str, ComponentDefinition] = field(default_factory=dict)
+
+    def register_component(
+        self,
+        json_path: Optional[Path],
+        data: Dict[str, Any],
+        sources: ComponentSourceIndex,
+    ) -> None:
+        component_name = data.get("name")
+        if not component_name:
             return
-            
-        # Remove 'config/' prefix if present
-        clean_ref = component_ref.replace("config/", "") if component_ref.startswith("config/") else component_ref
-        component_file = self.config_dir / clean_ref
-        
-        if component_file.exists():
-            was_bot_level = self.is_bot_level
-            self.is_bot_level = False
-            try:
-                with open(component_file, 'r', encoding='ascii') as f:
-                    component_data = json.load(f)
-                
-                # name MUST be provided - no default allowed
-                if 'name' not in component_data:
-                    print(f"ERROR: Missing mandatory field 'name' in {component_file}")
-                    print(f"Components must always specify name field")
-                    return
-                    
-                comp_name = component_data["name"]
-                
-                # Validate component_name doesn't contain "unknown" unless user-specified
-                if "unknown" in comp_name.lower() and comp_name.lower() != "unknown":
-                    print(f"ERROR: Component name '{comp_name}' contains 'unknown' - this is illegal unless explicitly specified by user")
-                    return
-                
-                # Set defaults for all other fields so AI agents have complete templates
-                if 'version' not in component_data:
-                    component_data['version'] = '1.0.0.0'
-                    
-                if 'description' not in component_data:
-                    component_data['description'] = '<describe the components purpose and functionality here>'
-                    
-                if 'author' not in component_data:
-                    component_data['author'] = 'config/author.json'
-                    
-                if 'relative_filename' not in component_data:
-                    # Generate relative_filename from component_name if missing
-                    component_data['relative_filename'] = f'config/components/{comp_name}.json'
-                
-                hit_count = component_data.get("timing", {}).get("hitCount", 1)
-                
-                # Set current component context for configuration processing
-                self.current_component = comp_name
-                
-                # Always add to dispatch tables as visited - duplicates are allowed
-                # Check for explicitly defined function names in software section
-                software = component_data.get("software", {})
-                init_func = software.get("init_function") or self.generate_function_name(comp_name, "init")
-                act_func = software.get("act_function") or self.generate_function_name(comp_name, "act")
-                
-                # Add to subsystem-specific component list
-                if self.current_subsystem not in self.subsystem_components:
-                    self.subsystem_components[self.current_subsystem] = []
-                
-                self.subsystem_components[self.current_subsystem].append({
-                    "name": comp_name,
-                    "init_func": init_func,
-                    "act_func": act_func,
-                    "hitCount": hit_count,
-                    "description": component_data.get("description", f"{comp_name} component"),
-                    "type": "traversed",
-                    "config": component_data,
-                    "subsystem": self.current_subsystem
-                })
-                
-                # Generate configuration struct only for first encounter
-                if comp_name not in self.seen_components:
-                    self.seen_components.add(comp_name)
-                    self._generate_component_config_struct(comp_name, component_data)
-                    # print(f"DEBUG: First encounter of component: {comp_name}")
-                
-                # Recursively process this component's "components" key
-                self.traverse_json_for_components(component_data)
-                    
-            except json.JSONDecodeError as e:
-                print(f"ERROR: Invalid JSON in {component_file}: {e}")
-            except Exception as e:
-                print(f"ERROR: Failed to process {component_file}: {e}")
-            finally:
-                # Restore bot level state
-                self.is_bot_level = was_bot_level
+        init_func, act_func = resolve_function_names(component_name, data)
+        hit_count = resolve_hit_count(data)
+        self.visits.append(
+            ComponentVisit(
+                name=component_name,
+                init_func=init_func,
+                act_func=act_func,
+                hit_count=hit_count,
+                json_path=json_path,
+            )
+        )
+        unique_key = str(json_path.resolve()) if json_path is not None else f"inline::{component_name}"
+        if unique_key in self.unique_components:
+            return
+        cloned_data = json.loads(json.dumps(data, ensure_ascii=True))
+        definition = ComponentDefinition(
+            name=component_name,
+            json_path=json_path,
+            data=cloned_data,
+            init_func=init_func,
+            act_func=act_func,
+            hit_count=hit_count,
+            src_path=sources.find_source_file(component_name, data, json_path),
+            hdr_path=sources.find_header_file(component_name, data, json_path),
+        )
+        definition.load_artifacts()
+        self.unique_components[unique_key] = definition
+
+    @property
+    def identifier(self) -> str:
+        return sanitize_identifier(self.name)
+
+
+def sanitize_identifier(value: str) -> str:
+    sanitized = [ch if ch.isalnum() or ch == "_" else "_" for ch in value]
+    result = "".join(sanitized) or "identifier"
+    if result[0].isdigit():
+        result = "_" + result
+    return result
+
+
+def deduplicate_paths(paths: Iterable[Path]) -> List[Path]:
+    seen: Set[Path] = set()
+    deduped: List[Path] = []
+    for path in paths:
+        if path is None:
+            continue
+        resolved = path.resolve()
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        deduped.append(resolved)
+    return deduped
+
+
+def resolve_reference_path(reference: str) -> Optional[Path]:
+    candidate = Path(reference)
+    if not candidate.is_absolute():
+        if reference.startswith("config/"):
+            candidate = PROJECT_ROOT / reference
         else:
-            print(f"Warning: Component file not found: {component_file}")
-    
-    def _generate_component_config_struct(self, comp_name: str, component_data: Dict[str, Any]) -> None:
-        """Generate C++ struct for component configuration mirroring JSON hierarchy"""
-        # This is a placeholder - full implementation would recursively generate
-        # nested structs based on the JSON structure
-        # For now, we'll store the data for later use
-        pass
-    
-    def generate_unified_header(self) -> str:
-        """Generate unified p32_component_registry.hpp header file content"""
-        content = [
-            "#ifndef P32_COMPONENT_REGISTRY_HPP",
-            "#define P32_COMPONENT_REGISTRY_HPP",
-            "",
-            '#include "esp_err.h"',
-            '#include <stdint.h>',
-            "",
-            "// ============================================================================",
-            "// P32 Component Registry - Function Declarations",
-            "// Auto-generated from JSON bot configuration",
-            "// ============================================================================",
-            "",
-            "// Forward Declarations - Init Functions (from individual component files)",
-            ""
-        ]
+            candidate = CONFIG_ROOT / reference
+    return candidate.resolve()
 
-        for comp in self.components:
-            content.append(f"esp_err_t {comp['init_func']}(void);")
 
-        content.extend([
-            "",
-            "// Forward Declarations - Act Functions (from individual component files)",
-            ""
-        ])
-
-        for comp in self.components:
-            content.append(f"void {comp['act_func']}(void);")
-
-        content.extend([
-            "",
-            "// Table size constant - ALL TABLES MUST HAVE SAME SIZE",
-            f"#define TABLE_SIZE {len(self.components)}",
-            "",
-            "#endif // P32_COMPONENT_REGISTRY_HPP"
-        ])
-
-        return "\n".join(content)
-    
-    def generate_unified_implementation(self) -> str:
-        """Generate unified component_tables.cpp implementation file content"""
-        content = [
-            "// ============================================================================",
-            "// P32 Component Dispatch Tables - Implementation",
-            "// Auto-generated from JSON bot configuration",
-            "// ============================================================================",
-            "",
-            '#include "p32_component_registry.hpp"',
-            ""
-        ]
-
-        # Include individual component headers (RULE 5 compliance)
-        includes = set()
-        for comp in self.components:
-            # Use base component type for includes (remove _init/_act suffix from function name)
-            base_name = comp['init_func'].replace('_init', '')
-            include_file = f'"components/{base_name}.hdr"'
-            if include_file not in includes:
-                content.append(f"#include {include_file}")
-                includes.add(include_file)
-
-        content.extend([
-            "",
-            "// ============================================================================",
-            "// Initialization Table",
-            "// ============================================================================",
-            "",
-            f"esp_err_t (*initTable[TABLE_SIZE])(void) = {{"
-        ])
-
-        for i, comp in enumerate(self.components):
-            comma = "," if i < len(self.components) - 1 else ""
-            content.append(f"    {comp['init_func']}{comma}")
-
-        content.extend([
-            "};",
-            "",
-            "// ============================================================================",
-            "// Action Table", 
-            "// ============================================================================",
-            "",
-            f"void (*actTable[TABLE_SIZE])(void) = {{"
-        ])
-
-        for i, comp in enumerate(self.components):
-            comma = "," if i < len(self.components) - 1 else ""
-            comment = f"// [{i}] {comp['description']}"
-            content.append(f"    {comp['act_func']}{comma:1s}    {comment}")
-
-        content.extend([
-            "};",
-            "",
-            "// ============================================================================",
-            "// Timing Table - Execution Frequency Control",
-            "// ============================================================================",
-            "",
-            f"uint32_t hitCountTable[TABLE_SIZE] = {{"
-        ])
-
-        for i, comp in enumerate(self.components):
-            comma = "," if i < len(self.components) - 1 else ""
-            comment = f"// [{i}] {comp['name']} - every {comp['hitCount']} loops"
-            content.append(f"    {comp['hitCount']}{comma:1s}    {comment}")
-
-        content.extend([
-            "};",
-            ""
-        ])
-
-        return "\n".join(content)
-    
-    def load_controller_chip_spec(self, chip_name: str) -> Dict[str, Any]:
-        """Load ESP32 chip specification for pin assignment"""
-        chip_file = self.config_dir / "components" / "hardware" / f"{chip_name}_chip.json"
-        if not chip_file.exists():
-            print(f"Warning: Chip spec not found: {chip_file}, using default ESP32-S3")
-            chip_file = self.config_dir / "components" / "hardware" / "esp32_s3_devkit_chip.json"
-        
-        if chip_file.exists():
-            with open(chip_file, 'r') as f:
-                chip_data = json.load(f)
-                # print(f"DEBUG: Loaded chip spec: {chip_data.get('component_name', 'unknown')}")
-                return chip_data
-        else:
-            print(f"ERROR: No chip specification found for {chip_name}")
-            return None
-    
-    def assign_pins_to_buses(self) -> bool:
-        """Validate pin assignment by simulating the runtime component loop pin assignment process"""
-        if not self.controller_chip:
-            print("Warning: No controller chip loaded, skipping pin validation")
-            return True
-        
-        chip_pins = self.controller_chip.get("exposed_pins", [])
-        # print(f"DEBUG: Validating pins for {len(chip_pins)} available pins on {self.controller_chip.get('component_name', 'unknown')}")
-        
-        # Count how many times each bus appears in the component list
-        bus_encounter_counts = {}
-        for comp in self.components:
-            comp_data = comp.get("config", {})
-            bus_type = comp_data.get("bus_type")
-            if bus_type:
-                bus_name = comp.get("name", "unknown")
-                bus_encounter_counts[bus_name] = bus_encounter_counts.get(bus_name, 0) + 1
-        
-        # Simulate runtime pin assignment process
-        active_pin_index = 0  # Resets every time through component loop
-        bus_shared_assigned = {}  # Track which buses have had their shared pins assigned
-        max_pin_index = 0
-        
-        for comp in self.components:
-            comp_data = comp.get("config", {})
-            comp_name = comp.get("name", "unknown")
-            
-            # Check if this is a bus component
-            bus_type = comp_data.get("bus_type")
-            if bus_type:
-                bus_name = comp_name
-                pin_reqs = comp_data.get("pin_requirements", {})
-                
-                # First encounter with this bus: assign shared pins
-                if bus_name not in bus_shared_assigned:
-                    shared_needed = pin_reqs.get("shared_pins_needed", [])
-                    pins_assigned = len(shared_needed)
-                    active_pin_index += pins_assigned
-                    bus_shared_assigned[bus_name] = True
-                    
-                    # print(f"DEBUG: Bus {bus_name} assigned {pins_assigned} shared pins, active_pin_index now {active_pin_index}")
-                
-                # Each encounter beyond the first represents a device using unique pins
-                else:
-                    unique_needed = pin_reqs.get("unique_pins_needed", [])
-                    pins_assigned = len(unique_needed)
-                    if pins_assigned == 0:
-                        # If no pin requirements specified, assume 1 pin (CS) for SPI devices
-                        pins_assigned = 1
-                    
-                    active_pin_index += pins_assigned
-                    
-                    # print(f"DEBUG: Additional {bus_name} encounter (device) assigned {pins_assigned} unique pins, active_pin_index now {active_pin_index}")
-            
-            # Track the maximum pin index reached
-            max_pin_index = max(max_pin_index, active_pin_index)
-        
-        # print(f"DEBUG: Bus encounter counts: {bus_encounter_counts}")
-        # print(f"DEBUG: Maximum pin index reached: {max_pin_index}")
-        
-        # Validate against available pins
-        if max_pin_index > len(chip_pins):
-            print(f"ERROR: Insufficient pins! Chip has {len(chip_pins)} pins but pin assignment reached index {max_pin_index}")
-            self._suggest_alternative_chips(max_pin_index)
-            return False
-        
-        print(f"SUCCESS: Pin validation passed - max pin index {max_pin_index}, {len(chip_pins)} pins available")
-        return True
-    
-    def _suggest_alternative_chips(self, pins_needed: int) -> None:
-        """Suggest alternative ESP32 chips that have enough pins"""
-        chip_options = [
-            {"name": "esp32_s3_devkit", "pins": 39, "price": 45.99},
-            {"name": "esp32_c3_devkit", "pins": 15, "price": 12.99},
-            {"name": "esp32_wroom_32", "pins": 38, "price": 8.99},
-            {"name": "esp32_wrover", "pins": 38, "price": 9.99}
-        ]
-        
-        suitable_chips = [chip for chip in chip_options if chip["pins"] >= pins_needed]
-        suitable_chips.sort(key=lambda x: x["price"])  # Sort by price ascending
-        
-        if suitable_chips:
-            print("SUGGESTED ALTERNATIVES:")
-            for chip in suitable_chips[:3]:  # Show top 3 cheapest options
-                print(f"  - {chip['name']}: {chip['pins']} pins (${chip['price']})")
-        else:
-            print("NO SUITABLE ALTERNATIVES FOUND - Consider reducing bus devices or using pin multiplexing")
-    
-    def _assign_pins_to_bus(self, bus_comp: Dict[str, Any], bus_type: str) -> None:
-        """Assign pins to a specific bus component"""
-        comp_data = bus_comp.get("config", {})
-        pin_requirements = comp_data.get("pin_requirements", {})
-        
-        shared_needed = pin_requirements.get("shared_pins_needed", [])
-        unique_needed = pin_requirements.get("unique_pins_needed", [])
-        
-        bus_name = bus_comp.get("name", "unknown")
-        assignment = {"shared": {}, "unique": {}}
-        
-        # Assign shared pins (used by all devices on this bus)
-        for req in shared_needed:
-            func = req.get("function")
-            count = req.get("count", 1)
-            assigned_pins = self._find_available_pins(func, count, allow_shared=False)
-            if assigned_pins:
-                assignment["shared"][func] = assigned_pins
-                # print(f"DEBUG: Assigned shared {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
-            else:
-                print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
-        
-        # Assign unique pins (one per device on this bus)
-        for req in unique_needed:
-            func = req.get("function")
-            count = req.get("count", 1)
-            assigned_pins = self._find_available_pins(func, count, allow_shared=True)
-            if assigned_pins:
-                assignment["unique"][func] = assigned_pins
-                # print(f"DEBUG: Assigned unique {func} pins {assigned_pins} to {bus_type} bus {bus_name}")
-            else:
-                print(f"Warning: Could not assign {count} {func} pins for {bus_type} bus {bus_name}")
-        
-        # Store assignment for later use
-        self.bus_assignments[bus_name] = assignment
-        
-        # Update component configuration with pin assignments
-        if "pins" not in comp_data:
-            comp_data["pins"] = {}
-        
-        # Map function names to pin configuration keys
-        func_to_key = {
-            "SPI_SCLK": "clock",
-            "SPI_Q": "data_input", 
-            "SPI_HD": "data_output",
-            "SPI_CS": "chip_select",
-            "I2S_BCLK": "bclk",
-            "I2S_WS": "ws",
-            "I2S_DATA": "data"
-        }
-        
-        for func, pins in assignment["shared"].items():
-            key = func_to_key.get(func, func.lower())
-            comp_data["pins"][key] = pins[0] if len(pins) == 1 else pins
-        
-        # For unique pins, store them in unique_device_pins
-        if assignment["unique"]:
-            if "unique_device_pins" not in comp_data:
-                comp_data["unique_device_pins"] = {}
-            for func, pins in assignment["unique"].items():
-                key = func_to_key.get(func, func.lower())
-                comp_data["unique_device_pins"][f"{key}_available"] = pins
-    
-    def _assign_pin_to_pwm_channel(self, pwm_comp: Dict[str, Any]) -> None:
-        """Assign a pin to a PWM channel"""
-        comp_data = pwm_comp.get("config", {})
-        pwm_name = pwm_comp.get("name", "unknown")
-        
-        # PWM channels typically need one GPIO pin
-        assigned_pins = self._find_available_pins("GPIO", 1, allow_shared=True)
-        if assigned_pins:
-            comp_data["pin"] = assigned_pins[0]
-            # print(f"DEBUG: Assigned GPIO pin {assigned_pins[0]} to PWM channel {pwm_name}")
-        else:
-            print(f"Warning: Could not assign GPIO pin for PWM channel {pwm_name}")
-    
-    def _find_available_pins(self, function: str, count: int, allow_shared: bool = True) -> List[int]:
-        """Find available pins that support the requested function"""
-        if not self.controller_chip:
-            return []
-        
-        available_pins = []
-        chip_pins = self.controller_chip.get("exposed_pins", [])
-        
-        for pin in chip_pins:
-            pin_name = pin.get("name", "")
-            pin_num = int(pin_name.replace("GPIO", "")) if pin_name.startswith("GPIO") else None
-            functions = pin.get("functions", [])
-            can_be_shared = pin.get("can_be_shared", True)
-            
-            if pin_num is not None and function in functions:
-                if pin_num not in self.used_pins:
-                    if not allow_shared and not can_be_shared:
-                        continue
-                    available_pins.append(pin_num)
-                    if len(available_pins) >= count:
-                        break
-        
-        # Mark pins as used
-        for pin_num in available_pins[:count]:
-            self.used_pins.add(pin_num)
-        
-        return available_pins[:count]
-    
-    def generate_component_stub(self, comp_type: str) -> str:
-        """Generate component implementation stub file"""
-        if comp_type == "system":
-            components = [c for c in self.components if c['type'] == 'system']
-            filename = "system_components.cpp"
-        else:
-            components = [c for c in self.components if c['type'] == 'positioned']
-            filename = "bot_components.cpp"
-        
-        content = [
-            '#include "p32_component_tables.h"',
-            '#include "esp_log.h"',
-            "",
-            f"// {comp_type.title()} component implementations",
-            f"// Generated from JSON bot configuration",
-            ""
-        ]
-        
-        # Generate TAG definitions
-        tags = set()
-        for comp in components:
-            tag = comp['name'].upper()
-            if tag not in tags:
-                content.append(f'static const char *TAG_{tag} = "{tag}";')
-                tags.add(tag)
-        
-        content.append("")
-        
-        # Generate function implementations
-        for comp in components:
-            tag = comp['name'].upper()
-            
-            # Init function - Allman style braces
-            content.extend([
-                f"esp_err_t {comp['init_func']}(void)",
-                "{",
-                "#ifdef SIMPLE_TEST",
-                f'    printf("INIT: {comp["name"]} - {comp["description"]}\\n");',
-                "    return ESP_OK;",
-                "#endif",
-                f'    ESP_LOGI(TAG_{tag}, "{comp["description"]} initialized");',
-                "    return ESP_OK;",
-                "}",
-                ""
-            ])
-            
-            # Act function - NO ARGUMENTS - accesses g_loopCount from globals - Allman style
-            content.extend([
-                f"void {comp['act_func']}(void)",
-                "{",
-                f'    // Component: {comp["name"]} - {comp["description"]}',
-                f'    // Timing: Execute every {comp["hitCount"]} loops',
-                "#ifdef SIMPLE_TEST",
-                f'    printf("ACT: {comp["name"]} - hitCount:{comp["hitCount"]}\\n");',
-                "    return;",
-                "#endif",
-                f'    ESP_LOGI(TAG_{tag}, "{comp["description"]}");',
-                "    // TODO: Implement actual component logic",
-                "}",
-                ""
-            ])
-        
-        return "\n".join(content)
-    
-    def generate_cmake_files(self) -> None:
-        """Generate CMakeLists.txt with component dispatch table only"""
-        # Create CMake content for component sources
-        cmake_content = [
-            "# P32 Component Dispatch Tables - Auto-generated CMake",
-            "# Includes component dispatch table for build system",
-            "",
-            "set(P32_COMPONENT_SOURCES",
-            "    component_tables.cpp",
-            ")"
-        ]
-        
-        # Write CMake file
-        cmake_file = self.output_dir / "p32_components.cmake"
-        with open(cmake_file, 'w') as f:
-            f.write('\n'.join(cmake_content))
-        print(f"Generated: {cmake_file}")
-    
-    def write_files(self) -> None:
-        """Write all generated files to appropriate directories"""
-        self.output_dir.mkdir(exist_ok=True)
-        self.include_dir.mkdir(exist_ok=True)
-
-        # Use correct filename per existing architecture
-        header_file = ("p32_component_registry.hpp", self.generate_unified_header())
-
-        # Source files - only generate the dispatch table, not individual components
-        source_files = [
-            ("component_tables.cpp", self.generate_unified_implementation())
-        ]
-
-        # Write unified header to include/
-        filepath = self.include_dir / header_file[0]
-        with open(filepath, 'w') as f:
-            f.write(header_file[1])
-        print(f"Generated: {filepath}")
-
-        # Write source files to src/
-        for filename, content in source_files:
-            filepath = self.output_dir / filename
-            with open(filepath, 'w') as f:
-                f.write(content)
-            print(f"Generated: {filepath}")
-
-    def generate_from_bot(self, bot_name: str, environment: str = None) -> None:
-        """Main generation process using depth-first JSON traversal algorithm"""
-        print(f"Generating P32 component tables for bot: {bot_name}")
-        if environment:
-            print(f"Filtering for environment: {environment}")
-
-        # Load bot configuration
-        bot_config = self.load_bot_config(bot_name)
-        print(f"Loaded bot config: {bot_config.get('bot_name', 'Unknown')}")
-
-        # Initialize component tracking
-        self.components = []
-        self.seen_components = set()
-        self.component_configs = {}
-        self.current_subsystem = "unknown"
-        self.current_component = None
-        self.is_bot_level = True  # Start with bot level processing
-        
-        # Traverse JSON structure using depth-first algorithm
-        self.traverse_json_for_components(bot_config)
-        
-        # Combine all subsystem components into a single list for generation
-        self.components = []
-        for subsystem_name, subsystem_comps in self.subsystem_components.items():
-            self.components.extend(subsystem_comps)
-        
-        print(f"Found {len(self.components)} total dispatch table entries after traversal")
-
-        # Filter components based on environment if specified
-        if environment:
-            components = self.filter_components_for_environment(self.components, environment)
-            print(f"Filtered to {len(components)} components for {environment} environment")
-            self.components = components
-
-        # Load controller chip and validate pin requirements
-        controller_name = bot_config.get("controller", "esp32_s3_devkit")
-        self.controller_chip = self.load_controller_chip_spec(controller_name)
-        if self.controller_chip:
-            pin_validation_passed = self.assign_pins_to_buses()
-            if not pin_validation_passed:
-                print("ERROR: Pin validation failed - cannot generate tables")
-                return
-        else:
-            print(f"Warning: Could not load chip spec for {controller_name}, skipping pin validation")
-
-        # Write generated files
-        self.write_files()
-        self.generate_cmake_files()
-        print("Generation complete!")
-
-    def filter_components_for_environment(self, components: List[Dict[str, Any]], environment: str) -> List[Dict[str, Any]]:
-        """Filter components based on the build environment"""
-        if environment == "goblin_head":
-            # Define which components are allowed in goblin_head environment
-            allowed_components = {
-                "heartbeat", "network_monitor", "goblin_head", "spi_bus", 
-                "goblin_left_eye", "goblin_eye", "gc9a01", "generic_spi_display",
-                "goblin_right_eye", "goblin_nose", "hc_sr04_ultrasonic_distance_sensor",
-                "goblin_mouth", "goblin_speaker", "speaker", "goblin_left_ear",
-                "servo_sg90_micro", "goblin_right_ear"
-            }
-            
-            filtered = []
-            for comp in components:
-                comp_name = comp.get("component_name", "") or comp.get("name", "")
-                if comp_name in allowed_components:
-                    filtered.append(comp)
-                else:
-                    print(f"Filtering out component '{comp_name}' (not in {environment} environment)")
-            
-            return filtered
-        else:
-            # For other environments, include all components
-            return components
-
-def main():
-    if len(sys.argv) < 3 or len(sys.argv) > 4:
-        print("Usage: python generate_tables.py <bot_name> <output_dir> [environment]")
-        print("Example: python generate_tables.py goblin_full src goblin_head")
-        sys.exit(1)
-
-    bot_name = sys.argv[1]
-    output_dir = sys.argv[2]
-    environment = sys.argv[3] if len(sys.argv) > 3 else None
-    config_dir = "config"  # Relative to current directory
-
+def read_ascii_file(path: Path) -> str:
     try:
-        generator = P32ComponentGenerator(config_dir, output_dir)
-        generator.generate_from_bot(bot_name, environment)
-    except Exception as e:
-        print(f"Error: {e}")
+        return path.read_text(encoding="ascii")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError(f"File {path} must be ASCII encoded") from exc
+
+
+def resolve_function_names(component_name: str, data: Dict[str, Any]) -> Tuple[str, str]:
+    software = data.get("software")
+    init_func: Optional[str] = None
+    act_func: Optional[str] = None
+    if isinstance(software, dict):
+        init_candidate = software.get("init_function")
+        act_candidate = software.get("act_function")
+        if isinstance(init_candidate, str):
+            init_func = init_candidate
+        if isinstance(act_candidate, str):
+            act_func = act_candidate
+    if not init_func:
+        init_func = f"{component_name}_init"
+    if not act_func:
+        act_func = f"{component_name}_act"
+    return init_func, act_func
+
+
+def resolve_hit_count(data: Dict[str, Any]) -> int:
+    timing = data.get("timing")
+    if isinstance(timing, dict):
+        hit = timing.get("hitCount")
+        if isinstance(hit, int):
+            return max(1, hit)
+        if isinstance(hit, float):
+            return max(1, int(hit))
+        if isinstance(hit, str):
+            try:
+                value = int(float(hit))
+                return max(1, value)
+            except ValueError:
+                return 1
+    return 1
+
+
+def resolve_json_reference(base_path: Path, reference: str) -> Path:
+    candidate = Path(reference)
+    if not candidate.is_absolute():
+        if reference.startswith("config/"):
+            candidate = PROJECT_ROOT / reference
+        else:
+            candidate = base_path.parent / reference
+    candidate = candidate.resolve()
+    if not candidate.exists():
+        raise FileNotFoundError(f"Referenced JSON file not found: {reference}")
+    return candidate
+
+
+def is_primitive(value: Any) -> bool:
+    return isinstance(value, (str, bool, int, float)) or value is None
+
+
+def json_to_cpp_type(value: Any) -> str:
+    if isinstance(value, str):
+        return "const char*"
+    if isinstance(value, bool):
+        return "bool"
+    if isinstance(value, int):
+        return "int"
+    if isinstance(value, float):
+        return "float"
+    return "const char*"
+
+
+def to_cpp_literal(value: Any) -> str:
+    if isinstance(value, str):
+        escaped = value.replace("\\", "\\\\").replace('"', '\\"')
+        return f'"{escaped}"'
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value, float):
+        return repr(value)
+    if value is None:
+        return "nullptr"
+    json_text = json.dumps(value, ensure_ascii=True)
+    escaped = json_text.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
+
+
+def generate_struct_members(data: Dict[str, Any], indent: int = 4) -> List[str]:
+    lines: List[str] = []
+    for key, value in data.items():
+        if key == "components":
+            continue
+        sanitized_key = sanitize_identifier(key)
+        comment_needed = sanitized_key != key
+        indent_spaces = " " * indent
+        if isinstance(value, dict):
+            struct_type = f"{sanitized_key}_t"
+            if comment_needed:
+                lines.append(f"{indent_spaces}// {key}")
+            lines.append(f"{indent_spaces}struct {struct_type} {{")
+            lines.extend(generate_struct_members(value, indent + 4))
+            lines.append(f"{indent_spaces}}} {sanitized_key};")
+        elif isinstance(value, list):
+            if comment_needed:
+                lines.append(f"{indent_spaces}// {key}")
+            if not value:
+                lines.append(f"{indent_spaces}// Empty array: {sanitized_key}")
+                continue
+            if all(is_primitive(item) for item in value):
+                element_type = json_to_cpp_type(value[0])
+                homogeneous = all(isinstance(item, type(value[0])) for item in value)
+                if not homogeneous:
+                    element_type = "const char*"
+                literals = ", ".join(to_cpp_literal(item) for item in value)
+                lines.append(
+                    f"{indent_spaces}{element_type} {sanitized_key}[{len(value)}] = {{ {literals} }};"
+                )
+            else:
+                json_text = json.dumps(value, ensure_ascii=True)
+                literal = to_cpp_literal(json_text)
+                lines.append(f"{indent_spaces}const char* {sanitized_key} = {literal};")
+        else:
+            if comment_needed:
+                lines.append(f"{indent_spaces}// {key}")
+            cpp_type = json_to_cpp_type(value)
+            literal = to_cpp_literal(value)
+            lines.append(f"{indent_spaces}{cpp_type} {sanitized_key} = {literal};")
+    if not lines:
+        lines.append(" " * indent + "// (empty)")
+    return lines
+
+
+def render_component_struct(component: ComponentDefinition) -> str:
+    lines: List[str] = []
+    lines.append(f"struct {component.name}_config {{")
+    lines.extend(generate_struct_members(component.data))
+    lines.append("};")
+    return "\n".join(lines)
+
+
+def render_component_header(context: SubsystemContext) -> str:
+    guard = f"{context.identifier.upper()}_COMPONENT_FUNCTIONS_HPP"
+    header_lines: List[str] = [
+        f"#ifndef {guard}",
+        f"#define {guard}",
+        "",
+        "#include <cstddef>",
+        "#include <cstdint>",
+        "#include \"esp_err.h\"",
+        "",
+        "// Auto-generated by tools/generate_tables.py",
+        f"// Subsystem: {context.name}",
+        f"// Controller: {context.controller}",
+        "",
+    ]
+    structs: List[str] = []
+    prototypes: List[str] = []
+    additional: List[str] = []
+    for definition in sorted(context.unique_components.values(), key=lambda item: item.name):
+        if definition.json_path:
+            try:
+                source_desc = definition.json_path.relative_to(PROJECT_ROOT)
+            except ValueError:
+                source_desc = definition.json_path
+        else:
+            source_desc = "inline component"
+        structs.append(f"// Component definition sourced from {source_desc}")
+        structs.append(render_component_struct(definition))
+        structs.append("")
+        prototypes.append(f"esp_err_t {definition.init_func}(void);")
+        prototypes.append(f"void {definition.act_func}(void);")
+        if definition.hdr_content:
+            if definition.hdr_path:
+                try:
+                    rel = definition.hdr_path.relative_to(PROJECT_ROOT)
+                except ValueError:
+                    rel = definition.hdr_path
+            else:
+                rel = ""
+            additional.append(f"// Declarations from {rel}")
+            additional.append(definition.hdr_content.strip())
+            additional.append("")
+    header_lines.extend(structs)
+    header_lines.append("// ---------------------------------------------------------------------------")
+    header_lines.append("// Function prototypes")
+    header_lines.append("// ---------------------------------------------------------------------------")
+    header_lines.extend(prototypes)
+    header_lines.append("")
+    header_lines.extend(additional)
+    header_lines.append(f"#endif // {guard}")
+    return "\n".join(header_lines) + "\n"
+
+
+def render_component_source(context: SubsystemContext) -> str:
+    lines: List[str] = [
+        f'#include "{context.name}_component_functions.hpp"',
+        "",
+        "// Auto-generated component aggregation file",
+        "",
+    ]
+    for definition in sorted(context.unique_components.values(), key=lambda item: item.name):
+        if definition.src_content and definition.src_path:
+            try:
+                rel = definition.src_path.relative_to(PROJECT_ROOT)
+            except ValueError:
+                rel = definition.src_path
+            lines.append(f"// --- Begin: {rel} ---")
+            lines.append(definition.src_content.rstrip())
+            lines.append(f"// --- End: {rel} ---")
+        else:
+            lines.append(f"// NOTE: Source for component '{definition.name}' not found.")
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def render_dispatch_header(context: SubsystemContext) -> str:
+    guard = f"{context.identifier.upper()}_DISPATCH_TABLES_HPP"
+    lines = [
+        f"#ifndef {guard}",
+        f"#define {guard}",
+        "",
+        "#include <cstddef>",
+        "#include <cstdint>",
+        "#include \"esp_err.h\"",
+        "",
+        f"// Auto-generated dispatch table header for subsystem {context.name}",
+        "",
+        "using init_function_t = esp_err_t (*)(void);",
+        "using act_function_t = void (*)(void);",
+        "",
+        f"extern const init_function_t {context.identifier}_init_table[];",
+        f"extern const act_function_t {context.identifier}_act_table[];",
+        f"extern const uint32_t {context.identifier}_hitcount_table[];",
+        f"extern const std::size_t {context.identifier}_init_table_size;",
+        f"extern const std::size_t {context.identifier}_act_table_size;",
+        "",
+        f"#endif // {guard}",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_dispatch_source(context: SubsystemContext) -> str:
+    lines: List[str] = [
+        f'#include "{context.name}_dispatch_tables.hpp"',
+        f'#include "{context.name}_component_functions.hpp"',
+        "",
+        f"// Auto-generated dispatch table implementation for subsystem {context.name}",
+        "",
+    ]
+    init_entries = [visit.init_func for visit in context.visits]
+    act_entries = [visit.act_func for visit in context.visits]
+    hit_entries = [visit.hit_count for visit in context.visits]
+    init_body = ",\n    ".join(init_entries)
+    act_body = ",\n    ".join(act_entries)
+    hit_body = ",\n    ".join(str(entry) for entry in hit_entries)
+    lines.append(f"const init_function_t {context.identifier}_init_table[] = {{")
+    if init_body:
+        lines.append(f"    {init_body}")
+    lines.append("};")
+    lines.append("")
+    lines.append(f"const act_function_t {context.identifier}_act_table[] = {{")
+    if act_body:
+        lines.append(f"    {act_body}")
+    lines.append("};")
+    lines.append("")
+    lines.append(f"const uint32_t {context.identifier}_hitcount_table[] = {{")
+    if hit_body:
+        lines.append(f"    {hit_body}")
+    lines.append("};")
+    lines.append("")
+    lines.append(
+        f"const std::size_t {context.identifier}_init_table_size = sizeof({context.identifier}_init_table) / sizeof(init_function_t);"
+    )
+    lines.append(
+        f"const std::size_t {context.identifier}_act_table_size = sizeof({context.identifier}_act_table) / sizeof(act_function_t);"
+    )
+    lines.append("")
+    return "\n".join(lines) + "\n"
+
+
+def render_main_header(context: SubsystemContext) -> str:
+    guard = f"{context.identifier.upper()}_MAIN_HPP"
+    lines = [
+        f"#ifndef {guard}",
+        f"#define {guard}",
+        "",
+        "#ifdef __cplusplus",
+        "extern \"C\" {",
+        "#endif",
+        "",
+        "void app_main(void);",
+        "",
+        "#ifdef __cplusplus",
+        "}",
+        "#endif",
+        "",
+        f"#endif // {guard}",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_main_source(context: SubsystemContext) -> str:
+    lines = [
+        f'#include "{context.name}_main.hpp"',
+        f'#include "{context.name}_dispatch_tables.hpp"',
+        "",
+        "#include <cstddef>",
+        "#include <cstdint>",
+        "",
+        f"// Auto-generated subsystem main loop for {context.name}",
+        "",
+        "uint32_t g_loopCount = 0;",
+        "",
+        "extern \"C\" void app_main(void) {",
+        f"    for (std::size_t i = 0; i < {context.identifier}_init_table_size; ++i) {{",
+        f"        if ({context.identifier}_init_table[i]) {{",
+        f"            {context.identifier}_init_table[i]();",
+        "        }",
+        "    }",
+        "",
+        "    while (true) {",
+        f"        for (std::size_t i = 0; i < {context.identifier}_act_table_size; ++i) {{",
+        f"            const auto func = {context.identifier}_act_table[i];",
+        f"            const auto hit = {context.identifier}_hitcount_table[i];",
+        "            if (func && hit > 0U && (g_loopCount % hit) == 0U) {",
+        "                func();",
+        "            }",
+        "        }",
+        "        ++g_loopCount;",
+        "    }",
+        "}",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def write_text_file(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="ascii")
+
+
+def generate_platformio_file(subsystems: List[SubsystemContext]) -> None:
+    if not subsystems:
+        return
+    default_envs = " ".join(sanitize_identifier(ctx.name).lower() for ctx in subsystems)
+    lines: List[str] = [
+        "; Auto-generated by tools/generate_tables.py",
+        "; Generated PlatformIO environments per subsystem controller",
+        "",
+        "[platformio]",
+        f"default_envs = {default_envs}",
+        "",
+    ]
+    for ctx in subsystems:
+        board = resolve_board_from_controller(ctx.controller)
+        env_name = sanitize_identifier(ctx.name).lower()
+        lines.extend(
+            [
+                f"[env:{env_name}]",
+                "platform = espressif32",
+                "framework = espidf",
+                f"board = {board}",
+                "monitor_speed = 115200",
+                "build_src_filter =",
+                "    -<*>",
+                f"    +<subsystems/{ctx.name}/>",
+                "    +<SharedMemory.cpp>",
+                "",
+            ]
+        )
+    write_text_file(PROJECT_ROOT / "platformio.generated.ini", "\n".join(lines))
+
+
+def resolve_board_from_controller(controller: str) -> str:
+    normalized = controller.strip()
+    key_variants = {
+        normalized,
+        normalized.upper(),
+        normalized.replace("-", "_").upper(),
+    }
+    for key in key_variants:
+        if key in SUPPORTED_CONTROLLER_BOARDS:
+            return SUPPORTED_CONTROLLER_BOARDS[key]
+    raise RuntimeError(f"Unsupported controller '{controller}' - update controller mapping")
+
+
+def generate_cmake_metadata(subsystems: List[SubsystemContext]) -> None:
+    if not subsystems:
+        return
+    cmake_lines: List[str] = [
+        "# Auto-generated by tools/generate_tables.py",
+        "set(P32_GENERATED_SOURCES",
+    ]
+    for ctx in subsystems:
+        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_component_functions.cpp")
+        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.cpp")
+        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_main.cpp")
+    cmake_lines.append(")")
+    cmake_lines.append("")
+    cmake_lines.append("set(P32_GENERATED_HEADERS")
+    for ctx in subsystems:
+        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_component_functions.hpp")
+        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.hpp")
+        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_main.hpp")
+    cmake_lines.append(")")
+    cmake_lines.append("")
+    write_text_file(PROJECT_ROOT / "p32_generated_sources.cmake", "\n".join(cmake_lines))
+    cmakelists_path = PROJECT_ROOT / "CMakeLists.txt"
+    existing = cmakelists_path.read_text(encoding="ascii")
+    include_line = "include(p32_generated_sources.cmake OPTIONAL)"
+    if include_line not in existing:
+        updated = existing.rstrip() + "\n" + include_line + "\n"
+        write_text_file(cmakelists_path, updated)
+
+
+class TableGenerator:
+    def __init__(self, root_config: Path, output_src: Path) -> None:
+        self.root_config = root_config
+        self.output_src = output_src
+        self.loader = JsonLoader()
+        self.sources = ComponentSourceIndex(CONFIG_ROOT / "components")
+        self.subsystems: Dict[str, SubsystemContext] = {}
+        self.subsystem_order: List[SubsystemContext] = []
+
+    def run(self) -> None:
+        self._process_json(self.root_config, stack=[])
+        if not self.subsystem_order:
+            raise RuntimeError("No subsystem controllers discovered in configuration")
+        for ctx in self.subsystem_order:
+            self._emit_subsystem_outputs(ctx)
+        generate_platformio_file(self.subsystem_order)
+        generate_cmake_metadata(self.subsystem_order)
+
+    def _process_json(self, json_path: Path, stack: List[SubsystemContext]) -> None:
+        data = self.loader.load(json_path)
+        component_name = data.get("name")
+        controller_value = data.get("controller")
+        new_context: Optional[SubsystemContext] = None
+        if controller_value and component_name:
+            controller_str = str(controller_value)
+            context = self.subsystems.get(component_name)
+            if context is None:
+                context = SubsystemContext(
+                    name=component_name,
+                    controller=controller_str,
+                    json_path=json_path,
+                )
+                self.subsystems[component_name] = context
+                self.subsystem_order.append(context)
+            else:
+                context.controller = controller_str
+                if context.json_path is None:
+                    context.json_path = json_path
+            stack.append(context)
+            new_context = context
+        active_context = stack[-1] if stack else None
+        if active_context is not None and component_name:
+            active_context.register_component(json_path, data, self.sources)
+        components = data.get("components")
+        if isinstance(components, list):
+            for entry in components:
+                if isinstance(entry, str):
+                    child_path = resolve_json_reference(json_path, entry)
+                    self._process_json(child_path, stack)
+                elif isinstance(entry, dict):
+                    self._process_inline(entry, json_path, stack)
+        if new_context is not None:
+            stack.pop()
+
+    def _process_inline(
+        self,
+        data: Dict[str, Any],
+        base_path: Path,
+        stack: List[SubsystemContext],
+    ) -> None:
+        component_name = data.get("name")
+        controller_value = data.get("controller")
+        new_context: Optional[SubsystemContext] = None
+        if controller_value and component_name:
+            controller_str = str(controller_value)
+            context = self.subsystems.get(component_name)
+            if context is None:
+                context = SubsystemContext(
+                    name=component_name,
+                    controller=controller_str,
+                    json_path=None,
+                )
+                self.subsystems[component_name] = context
+                self.subsystem_order.append(context)
+            else:
+                context.controller = controller_str
+            stack.append(context)
+            new_context = context
+        active_context = stack[-1] if stack else None
+        if active_context is not None and component_name:
+            active_context.register_component(None, data, self.sources)
+        nested = data.get("components")
+        if isinstance(nested, list):
+            for entry in nested:
+                if isinstance(entry, str):
+                    child_path = resolve_json_reference(base_path, entry)
+                    self._process_json(child_path, stack)
+                elif isinstance(entry, dict):
+                    self._process_inline(entry, base_path, stack)
+        if new_context is not None:
+            stack.pop()
+
+    def _emit_subsystem_outputs(self, context: SubsystemContext) -> None:
+        subsystem_src_dir = self.output_src / "subsystems" / context.name
+        subsystem_inc_dir = INCLUDE_ROOT / "subsystems" / context.name
+        write_text_file(
+            subsystem_inc_dir / f"{context.name}_component_functions.hpp",
+            render_component_header(context),
+        )
+        write_text_file(
+            subsystem_src_dir / f"{context.name}_component_functions.cpp",
+            render_component_source(context),
+        )
+        write_text_file(
+            subsystem_inc_dir / f"{context.name}_dispatch_tables.hpp",
+            render_dispatch_header(context),
+        )
+        write_text_file(
+            subsystem_src_dir / f"{context.name}_dispatch_tables.cpp",
+            render_dispatch_source(context),
+        )
+        write_text_file(
+            subsystem_inc_dir / f"{context.name}_main.hpp",
+            render_main_header(context),
+        )
+        write_text_file(
+            subsystem_src_dir / f"{context.name}_main.cpp",
+            render_main_source(context),
+        )
+
+
+def resolve_root_config(argument: str) -> Path:
+    candidate = Path(argument)
+    if not candidate.is_absolute():
+        direct = PROJECT_ROOT / argument
+        if direct.exists():
+            return direct.resolve()
+    if candidate.exists():
+        return candidate.resolve()
+    matches = list(CONFIG_ROOT.rglob("*.json"))
+    filtered = [path for path in matches if path.stem == argument]
+    if len(filtered) == 1:
+        return filtered[0].resolve()
+    if not filtered:
+        raise FileNotFoundError(f"Unable to locate configuration '{argument}'")
+    raise RuntimeError(f"Ambiguous configuration name '{argument}' - provide full path")
+
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Generate subsystem dispatch tables and component aggregation files",
+    )
+    parser.add_argument(
+        "config",
+        help="Root JSON configuration file or name (e.g. goblin_full)",
+    )
+    parser.add_argument(
+        "output",
+        help="Output directory for generated source files (relative to project root)",
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_arguments()
+    try:
+        root_config = resolve_root_config(args.config)
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
+    output_dir = Path(args.output)
+    if not output_dir.is_absolute():
+        output_dir = PROJECT_ROOT / output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    generator = TableGenerator(root_config, output_dir)
+    try:
+        generator.run()
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)
+    print("Generation complete:")
+    for ctx in generator.subsystem_order:
+        print(f"  - Subsystem '{ctx.name}' ({ctx.controller}) -> {len(ctx.visits)} entries")
+
 
 if __name__ == "__main__":
     main()
