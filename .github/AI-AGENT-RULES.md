@@ -35,7 +35,9 @@
 1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
 2. **`ARCHITECTURE_DECISION_LOG.md`** - Historical decisions, problem-solving approaches, and implementation rationale
 3. **`NAMING_RULES.md`** - Component naming conventions and file organization
-4. **`docs/component-json-requirements.md`** - JSON interpretation and parsing rules**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
+4. **`docs/component-json-requirements.md`** - Consolidated JSON, generation, and dynamic pin rules
+
+**FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
 ---
 

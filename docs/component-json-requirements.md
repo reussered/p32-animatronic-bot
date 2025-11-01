@@ -110,109 +110,214 @@ esp_err_t parse_component_config(const char* json_string) {
     cJSON *hitcount_item = cJSON_GetObjectItem(timing, "hitCount");
     int hitCount = hitcount_item->valueint;
     
-    // Cleanup
-    cJSON_Delete(config);
-    return ESP_OK;
-}
-```
+    # P32 Component JSON & Generation Rules
 
-### **Array Iteration Pattern**
-```cpp
-// Process array of objects
-cJSON *array = cJSON_GetObjectItem(config, "components");
-cJSON *element = NULL;
-cJSON_ArrayForEach(element, array) {
-    const char *name = cJSON_GetObjectItem(element, "name")->valuestring;
-    int value = cJSON_GetObjectItem(element, "value")->valueint;
-    // Process each element
-}
-```
+    This document is the single source of truth for how JSON configuration drives code generation, subsystem construction, and dynamic pin assignment in the P32 Animatronic Bot project.
 
-### **Error Handling Requirements**
-```cpp
-// Always check for NULL before accessing cJSON values
-cJSON *item = cJSON_GetObjectItem(config, "field");
-if (!item) {
-    ESP_LOGE(TAG, "Missing required field: %s", "field");
-    return ESP_ERR_NOT_FOUND;
-}
+    ---
 
-// Validate data types
-if (!cJSON_IsString(item)) {
-    ESP_LOGE(TAG, "Field 'field' must be string");
-    return ESP_ERR_INVALID_ARG;
-}
-```
+    ## 1. Encoding & File Hygiene
 
-## ✅ VALIDATION REQUIREMENTS
+    - **ASCII only**: Save every JSON file as ASCII without a UTF-8 BOM. The first byte must be `{` (0x7B).
+    - **Detection snippet**:
 
-### **Automated Validation Tools**
-- **Syntax Check**: Use `config/validate.py` for JSON syntax validation
-- **Structure Check**: Ensure consistent keys within folder groups
-- **BOM Detection**: Automated checking for UTF-8 BOM corruption
-- **Reference Validation**: Verify `"author": "config/author.json"` paths exist
+      ```powershell
+      $bytes = [System.IO.File]::ReadAllBytes($jsonFile)
+      if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
+          Write-Host "UTF-8 BOM detected" -ForegroundColor Red
+      }
+      ```
 
-### **Validation Script Usage**
-```powershell
-# Run validation on all config files
-python config/validate.py
+    - Always validate after edits using `python config/validate.py`.
 
-# Check specific folder for consistency
-python config/validate_families.py
-```
+    ---
 
-### **Manual Validation Checklist**
-- [ ] File saved as ASCII without BOM
-- [ ] JSON syntax is valid (no trailing commas, proper quotes)
-- [ ] All mandatory fields present (`name`, `type`, `hitCount`, etc.)
-- [ ] `relative_filename` matches actual file path
-- [ ] Referenced files exist (`author.json`, etc.)
-- [ ] Function names follow naming convention
+    ## 2. JSON Structure Requirements
 
-## JSON Structure Template
-```json
-{
-  "relative_filename": "config/components/positioned/component_name.json",
-  "name": "unique_component_name",
-  "type": "POSITIONED_COMPONENT",
-  "description": "Human readable description",
-  "timing": {
-    "hitCount": 10
-  },
-  "custom_functions": {
-    "init_func": "p32_custom_init", 
-    "act_func": "p32_custom_act"
-  }
-}
-```
+    ### 2.1 Mandatory Fields
 
-## Component Composition Rules
+    ```json
+    {
+      "relative_filename": "config/components/positioned/component.json",
+      "version": "1.0.0",
+      "author": "config/author.json",
+      "name": "unique_component_name",
+      "type": "POSITIONED_COMPONENT",
+      "description": "Human readable description",
+      "timing": {
+        "hitCount": 10
+      }
+    }
+    ```
 
-### Fatal Error: Deprecated *_components Keys
+    - `name` must be globally unique and forms `{name}_init` / `{name}_act`.
+    - `type` categorises the component (DISPLAY_DRIVER, HARDWARE_DEVICE, etc.).
+    - `timing.hitCount` controls how often the `act()` function executes.
 
-**FATAL ERROR**: If the parser encounters any key matching the pattern `*_components`, it must immediately stop and report a fatal error.
+    ### 2.2 Referencing Other Components
 
-**Reason**: All keys of this form were supposed to be renamed to `components`. The presence of any `*_components` key indicates a problem higher up in the rules hierarchy that has not been properly resolved.
+    - Use a single containment keyword: `"components": [ ... ]`.
+    - All legacy patterns (`*_components`, `contained_components`, etc.) are fatal errors.
+    - Paths are always relative to project root.
 
-**Historical Context**: These wildcard patterns were previously used for recursive component inclusion:
+    ### 2.3 Additional Metadata
 
-- `"left_eye_components": "config/components/positioned/goblin_left_eye.json"`
-- `"right_eye_components": "config/components/positioned/goblin_right_eye.json"`
-- `"subsystem_components": "config/components/assemblies/goblin_head.json"`
+    - Optional sections (`software`, `shape_assembly`, `position`, `hardware_reference`, etc.) appear as needed.
+    - Every JSON keyword **except** `components` becomes part of a generated C-style struct during header generation (see §4).
 
-**Migration**: All such keys must be renamed to the standard `components` key. Scripts have been executed multiple times to perform this migration - continued presence indicates an unresolved issue in the rules hierarchy.
+    ---
 
-## Files Updated So Far
+    ## 3. Component Traversal & Dispatch Semantics
 
-- `goblin_left_eye.json` - left_eye, hitCount: 5
-- `goblin_right_eye.json` - right_eye, hitCount: 5
-- `goblin_mouth.json` - mouth, hitCount: 3
-- `goblin_speaker.json` - audio, hitCount: 7
-- `goblin_nose.json` - nose_sensor, hitCount: 15
+    - The generator performs a depth-first walk of the `components` arrays, preserving JSON order.
+    - Every visit adds an entry to the subsystem dispatch tables:
+      - `initTable[]` stores `{component}_init` pointers.
+      - `actTable[]` stores `{component}_act` pointers.
+      - `hitCount[]` stores `timing.hitCount` values.
+    - **Duplicates are intentional**. If `goblin_eye` appears twice, it is queued twice in all three tables, ensuring both instances execute.
 
-## Next Steps
+    ---
 
-1. Create `goblin_simple.json` bot configuration
-2. Test generator with simple bot
-3. Build and verify P32 universal main loop
-4. Systematically update all component JSON files
+    ## 4. Component Aggregation Outputs
+
+    Each unique component contributes to generated sources exactly once. Subsequent references skip regeneration to avoid duplicate symbols.
+
+    ### 4.1 Aggregated Implementation (`{subsystem}_component_functions.cpp`)
+
+    - Concatenates the permanent `config/components/{component}.src` file on first encounter.
+    - Holds the actual `init()`/`act()` definitions used by the subsystem.
+
+    ### 4.2 Generated Header (`{subsystem}_component_functions.hpp`)
+
+    - For the first encounter of a component:
+      - Declares `esp_err_t {component}_init(void);`
+      - Declares `void {component}_act(void);`
+      - Emits nested structs mirroring the component’s JSON keywords (excluding `components`).
+    - Literal JSON values appear as default initialisers inside those structs, giving compile-time access to configuration.
+
+    ---
+
+    ## 5. Subsystem Boundaries & Controller Keyword
+
+    Encountering a `controller` keyword marks a subsystem boundary and triggers the creation of six files named after the component’s `name` field:
+
+    1. `src/subsystems/{name}/{name}_component_functions.cpp`
+    2. `include/subsystems/{name}/{name}_component_functions.hpp`
+    3. `src/subsystems/{name}/{name}_dispatch_tables.cpp`
+    4. `include/subsystems/{name}/{name}_dispatch_tables.hpp`
+    5. `src/subsystems/{name}/{name}_main.cpp`
+    6. `include/subsystems/{name}/{name}_main.hpp`
+
+    `{name}_main.cpp` includes the dispatch tables and component-functions headers, providing the subsystem’s local main loop. All generated files are appended to `CMakeLists.txt` so PlatformIO/ESP-IDF builds pick them up automatically.
+
+    After the full JSON tree finishes, the generator also produces or updates a dedicated `platformio.ini` (or environment entry) for each subsystem using the board defined by `controller`.
+
+    ---
+
+    ## 6. Dynamic Pin Assignment (Consolidated Rules)
+
+    ### 6.1 Runtime Philosophy
+
+    - Pins are claimed during `init()` only and remain assigned for the life of the program.
+    - Assignments reflect physical wiring; releasing pins is forbidden.
+    - `assigned_pins[]` (shared across bus types) prevents two components from claiming the same GPIO.
+    - Components claim pins in the order their `init()` functions run (same order as dispatch traversal).
+
+    ### 6.2 Controller-Specific Pin Pools
+
+    When a subsystem declares a `controller`, the generator loads that board’s pin capabilities and constructs assignable arrays:
+
+    - `spi_assignable[]`
+    - `i2c_assignable[]`
+    - `i2s_assignable[]`
+    - `adc_assignable[]`
+    - `pwm_assignable[]`
+    - `gpio_assignable[]`
+
+    Arrays are ordered according to the historical `PIN_ASSIGNMENT_RULES.md`:
+
+    1. Pins with the fewest alternate capabilities first.
+    2. Multiply-capable pins (SPI/I2C/PWM/ADC capable) pushed to the end so they are consumed last.
+
+    ### 6.3 Assignment Helpers
+
+    Example helper (simplified):
+
+    ```cpp
+    int assign_pin(int *pool, size_t pool_size) {
+        for (size_t i = 0; i < pool_size; ++i) {
+            if (!is_assigned(pool[i])) {
+                mark_assigned(pool[i]);
+                return pool[i];
+            }
+        }
+        return -1; // No free pins remain
+    }
+    ```
+
+    `spi_bus_init()` (and analogous helpers) pull from these arrays and record the allocation. They are invoked exactly once per hardware interface instance—e.g., two `goblin_eye` displays mean two SPI allocations.
+
+    ### 6.4 Alias Resolution
+
+    Hardware JSON files may define `pin_mapping` blocks listing alternate manufacturer names (e.g., `SDA`, `DIN`, `MOSI`). During generation, the struct for that component exposes canonical names so init code can map aliases to the pins claimed at runtime.
+
+    ### 6.5 Verification Checklist (Test Bots)
+
+    For quick hardware validation (e.g., `tests/test_bot`):
+
+    1. Run `python tools/generate_tables.py tests/test_bot src`.
+    2. Inspect the generated `{subsystem}_component_functions.cpp` to confirm the SPI allocations align with the expected `spi_assignable` ordering.
+    3. Ensure both `goblin_left_eye` and `goblin_right_eye` log/publish their assigned pins before applying full power.
+
+    ---
+
+    ## 7. cJSON Parsing Pattern (For Manual Code)
+
+    ```cpp
+    #include <cJSON.h>
+
+    esp_err_t parse_component(const char *json) {
+        cJSON *root = cJSON_Parse(json);
+        if (!root) {
+            ESP_LOGE(TAG, "Parse error");
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        const cJSON *name = cJSON_GetObjectItem(root, "name");
+        const cJSON *timing = cJSON_GetObjectItem(root, "timing");
+        const cJSON *hit = cJSON_GetObjectItem(timing, "hitCount");
+
+        if (!cJSON_IsString(name) || !cJSON_IsNumber(hit)) {
+            cJSON_Delete(root);
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        // Use values...
+        cJSON_Delete(root);
+        return ESP_OK;
+    }
+    ```
+
+    Always guard against missing keys or wrong types when writing manual parsers.
+
+    ---
+
+    ## 8. Validation Checklist
+
+    - [ ] File saved as ASCII without BOM.
+    - [ ] `components` is the only containment keyword.
+    - [ ] `timing.hitCount` present on every executable component.
+    - [ ] `controller` declared for every subsystem boundary.
+    - [ ] Generated dispatch tables contain expected duplicates.
+    - [ ] Generated PlatformIO environments match controller hardware.
+    - [ ] Pin assignments verified against hardware wiring before applying power.
+
+    ---
+
+    ## 9. Reference Documents (Superseded but Historical)
+
+    - `DYNAMIC_PIN_ASSIGNMENT_SYSTEM.md`
+    - `PIN_ASSIGNMENT_RULES.md`
+    - `COMPONENT-PIN-ALIASING-SPEC.md`
+
+    These documents are maintained for historical context, but all active rules now live here.
