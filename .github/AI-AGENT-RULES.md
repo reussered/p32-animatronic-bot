@@ -61,14 +61,29 @@ If any project rule, technical limitation, or system constraint prevents the age
 - Component dispatch system calls `init()` and `act()` functions independently
 - Example: `goblin_left_eye_act()` NEVER calls `goblin_eye_act()` or `gc9a01_act()`
 
-## RULE 4: SHARED STATE COORDINATION
-**Components coordinate through shared state variables without breaking isolation.**
+## RULE 4: INTRA-SUBSYSTEM vs INTER-SUBSYSTEM COMMUNICATION
 
-**Two Levels of State Sharing:**
-1. **Local Subsystem Memory** - Direct memory variables for coordination between components within same subsystem
-2. **SharedMemory Class** - Used for inter-system communications. Each subsystem has all of the init() and act() functions in a single compilable unit. They cannot call each other directly because the same component code fragments may be part of different subsystems.
+**There are two distinct communication patterns. Mixing them up is a critical architecture violation.**
 
-**Testing Principle**: Component-level testing is inappropriate because component software is designed as fragments. Testing occurs at the subsystem level where components integrate and coordinate through shared state.
+### 1. INTRA-Subsystem Communication (Within a Single ESP32)
+This pattern is for components that are part of the **same subsystem** and compiled into a single file.
+
+- **Mechanism**: File-scoped global variables (e.g., `static` variables or pointers).
+- **How it Works**: The build process concatenates all `.src` files for a subsystem's components into one large `.cpp` file. This shared file scope allows them to communicate "privately" and efficiently.
+- **Example**:
+    1. A display driver component (`gc9a01_display`) can define a function like `get_display_buffer()` that returns a pointer to its frame buffer.
+    2. A hardware-specific component (`goblin_eye`) can call this function to get the pointer and manipulate the buffer directly.
+    3. A bus component (`spi_bus`) can dynamically assign GPIO pins and store them in global variables that a generic driver (`generic_spi_display`) can then use for communication.
+- **Rule**: This is a fast, efficient, and acceptable way for tightly-coupled components *within the same subsystem* to coordinate.
+
+### 2. INTER-Subsystem Communication (Between Different ESP32s)
+This pattern is for communication between components running on **different controllers**.
+
+- **Mechanism**: The `SharedMemory` class (`GSM` global instance) is the **ONLY** permitted mechanism.
+- **How it Works**: `GSM.write<T>()` broadcasts a data structure to all other subsystems over the network. `GSM.read<T>()` provides fast, local access to that data.
+- **Rule**: Direct function calls, direct hardware communication, or any other mechanism besides `SharedMemory` is strictly forbidden between subsystems.
+
+**Key Takeaway**: Components that define a subsystem (those with a `controller` field in JSON) do not have `init()` or `act()` functions themselves; they are containers. The components they contain can use file-scoped globals to talk to each other, but must use `SharedMemory` to talk to the outside world.
 
 ## RULE 5: PROVEN IMPLEMENTATION PATTERNS
 **USE THESE WORKING PATTERNS - DO NOT REDESIGN THEM**
