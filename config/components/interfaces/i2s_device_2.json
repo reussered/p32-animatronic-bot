@@ -8,10 +8,7 @@
     "interface_type":  "i2s_device",
     "description":  "I2S device #2 for secondary audio input/output",
     "created":  "2025-10-12",
-    "bus_reference":  "config/components/interfaces/i2s_bus_0.json",
-    "device_specific_pins":  {
-                                 "data_pin":  "GPIO_26"
-                             },
+    "bus_reference":  "config/components/interfaces/i2s_bus.json",
     "device_configuration":  {
                                  "device_mode":  "slave",
                                  "sample_rate":  16000,

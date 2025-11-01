@@ -170,7 +170,6 @@
                                                                                                  "leg_hip_left":  {
                                                                                                                       "servo_type":  "pwm_standard_servo",
                                                                                                                       "model":  "MG996R",
-                                                                                                                      "gpio_pin":  "GPIO_01",
                                                                                                                       "pwm_channel":  "LEDC_CHANNEL_0",
                                                                                                                       "min_pulse":  "1000_US",
                                                                                                                       "max_pulse":  "2000_US",

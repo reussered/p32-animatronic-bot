@@ -6,7 +6,7 @@
 #include "generic_mic_driver.hdr"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG = "generic_mic_driver";
+static const char *TAG_generic_mic_driver = "generic_mic_driver";
 
 // ADC configuration
 static adc_channel_t mic_channel = ADC_CHANNEL_0;
@@ -23,21 +23,21 @@ static int sample_buffer[SAMPLE_BUFFER_SIZE];
 static size_t sample_index = 0;
 
 esp_err_t generic_mic_driver_init(void) {
-    ESP_LOGI(TAG, "Generic microphone driver init");
+    ESP_LOGI(TAG_generic_mic_driver, "Generic microphone driver init");
 
     esp_err_t ret;
 
     // Initialize ADC channel for microphone
     ret = adc_bus_init_channel(mic_channel, mic_attenuation);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize ADC channel for microphone: %s", esp_err_to_name(ret));
+        ESP_LOGE(TAG_generic_mic_driver, "Failed to initialize ADC channel for microphone: %s", esp_err_to_name(ret));
         return ret;
     }
 
     // Initialize sample buffer
     memset(sample_buffer, 0, sizeof(sample_buffer));
 
-    ESP_LOGI(TAG, "Generic microphone driver initialized successfully");
+    ESP_LOGI(TAG_generic_mic_driver, "Generic microphone driver initialized successfully");
     return ESP_OK;
 }
 
@@ -48,8 +48,32 @@ void generic_mic_driver_act(void) {
 
     if (ret == ESP_OK) {
         // Store in SharedMemory for other components to access
-        // TODO: Define microphone data structure in SharedMemory
-        // GSM.write<MicrophoneData>({raw_sample, processed_sample, etc.});
+        MicrophoneData* mic_data = GSM.read<MicrophoneData>();
+        if (mic_data) {
+            mic_data->raw_sample = raw_sample;
+            mic_data->processed_sample = raw_sample; // For now, same as raw
+            mic_data->sample_count++;
+            mic_data->driver_initialized = true;
+
+            // Update peak and average levels
+            if (abs(raw_sample) > mic_data->peak_level) {
+                mic_data->peak_level = abs(raw_sample);
+            }
+            mic_data->average_level = (mic_data->average_level + abs(raw_sample)) / 2;
+
+            // Simple sound detection
+            mic_data->sound_detected = (abs(raw_sample) > 100);
+
+            // Get voltage reading
+            generic_mic_driver_get_voltage(&mic_data->voltage_mv);
+
+            // Store current settings
+            mic_data->gain_applied = mic_gain;
+            mic_data->noise_gate_active = noise_gate_enabled;
+
+            // Broadcast to other chips
+            GSM.write<MicrophoneData>();
+        }
     }
 }
 
@@ -60,7 +84,7 @@ esp_err_t generic_mic_driver_read_sample(int *sample) {
 
     esp_err_t ret = adc_bus_read_raw(mic_channel, sample);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to read microphone sample: %s", esp_err_to_name(ret));
+        ESP_LOGE(TAG_generic_mic_driver, "Failed to read microphone sample: %s", esp_err_to_name(ret));
         return ret;
     }
 
@@ -89,28 +113,31 @@ esp_err_t generic_mic_driver_get_voltage(int *voltage_mv) {
 
 esp_err_t generic_mic_driver_set_gain(float gain) {
     if (gain < 0.1f || gain > 10.0f) {
-        ESP_LOGE(TAG, "Invalid gain value: %f (must be 0.1-10.0)", gain);
+        ESP_LOGE(TAG_generic_mic_driver, "Invalid gain value: %f (must be 0.1-10.0)", gain);
         return ESP_ERR_INVALID_ARG;
     }
 
     mic_gain = gain;
-    ESP_LOGI(TAG, "Microphone gain set to: %f", mic_gain);
+    ESP_LOGI(TAG_generic_mic_driver, "Microphone gain set to: %f", mic_gain);
     return ESP_OK;
 }
 
 esp_err_t generic_mic_driver_enable_noise_gate(bool enable) {
     noise_gate_enabled = enable;
-    ESP_LOGI(TAG, "Noise gate %s", enable ? "enabled" : "disabled");
+    ESP_LOGI(TAG_generic_mic_driver, "Noise gate %s", enable ? "enabled" : "disabled");
     return ESP_OK;
 }
 
 esp_err_t generic_mic_driver_set_threshold(int threshold) {
     if (threshold < 0 || threshold > 4095) {
-        ESP_LOGE(TAG, "Invalid threshold value: %d (must be 0-4095)", threshold);
+        ESP_LOGE(TAG_generic_mic_driver, "Invalid threshold value: %d (must be 0-4095)", threshold);
         return ESP_ERR_INVALID_ARG;
     }
 
     noise_gate_threshold = threshold;
-    ESP_LOGI(TAG, "Noise gate threshold set to: %d", noise_gate_threshold);
+    ESP_LOGI(TAG_generic_mic_driver, "Noise gate threshold set to: %d", noise_gate_threshold);
     return ESP_OK;
 }
+
+
+

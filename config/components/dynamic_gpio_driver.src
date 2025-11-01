@@ -6,7 +6,7 @@
 #include "driver/gpio.h"
 #include "esp32_s3_devkit_pin_assignments.h"  // Include the pin assignments header
 
-static const char *TAG = "dynamic_gpio_driver";
+static const char *TAG_dynamic_gpio_driver = "dynamic_gpio_driver";
 
 // Static variable to store the assigned pin (assigned during init, used during act)
 static int assigned_pin = -1;
@@ -15,17 +15,17 @@ static int assigned_pin = -1;
 static int current_state = 0;
 
 esp_err_t dynamic_gpio_driver_init(void) {
-    ESP_LOGI(TAG, "Dynamic GPIO driver init - assigning pin at runtime");
+    ESP_LOGI(TAG_dynamic_gpio_driver, "Dynamic GPIO driver init - assigning pin at runtime");
 
     // Assign a GPIO pin dynamically from the assignable array
     assigned_pin = assign_pin(gpio_assignable, gpio_assignable_count);
 
     if (assigned_pin == -1) {
-        ESP_LOGE(TAG, "Failed to assign GPIO pin - no available pins!");
+        ESP_LOGE(TAG_dynamic_gpio_driver, "Failed to assign GPIO pin - no available pins!");
         return ESP_FAIL;
     }
 
-    ESP_LOGI(TAG, "Assigned GPIO pin: %d", assigned_pin);
+    ESP_LOGI(TAG_dynamic_gpio_driver, "Assigned GPIO pin: %d", assigned_pin);
 
     // Configure the assigned pin as output
     gpio_config_t io_conf = {
@@ -38,7 +38,7 @@ esp_err_t dynamic_gpio_driver_init(void) {
 
     esp_err_t ret = gpio_config(&io_conf);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to configure GPIO pin %d", assigned_pin);
+        ESP_LOGE(TAG_dynamic_gpio_driver, "Failed to configure GPIO pin %d", assigned_pin);
         return ret;
     }
 
@@ -46,7 +46,7 @@ esp_err_t dynamic_gpio_driver_init(void) {
     gpio_set_level((gpio_num_t)assigned_pin, 0);
     current_state = 0;
 
-    ESP_LOGI(TAG, "Dynamic GPIO driver initialized successfully on pin %d", assigned_pin);
+    ESP_LOGI(TAG_dynamic_gpio_driver, "Dynamic GPIO driver initialized successfully on pin %d", assigned_pin);
     return ESP_OK;
 }
 
@@ -56,8 +56,11 @@ void dynamic_gpio_driver_act(void) {
         current_state = !current_state;
         gpio_set_level((gpio_num_t)assigned_pin, current_state);
 
-        ESP_LOGD(TAG, "GPIO pin %d set to %s", assigned_pin, current_state ? "HIGH" : "LOW");
+        ESP_LOGD(TAG_dynamic_gpio_driver, "GPIO pin %d set to %s", assigned_pin, current_state ? "HIGH" : "LOW");
     } else {
-        ESP_LOGW(TAG, "No pin assigned - init() was not called or failed");
+        ESP_LOGW(TAG_dynamic_gpio_driver, "No pin assigned - init() was not called or failed");
     }
 }
+
+
+

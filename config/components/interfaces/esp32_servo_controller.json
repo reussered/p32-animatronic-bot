@@ -14,30 +14,6 @@
                                     "pwm_frequency":  "50_HZ",
                                     "servo_voltage":  "6V_REGULATED"
                                 },
-    "gpio_assignments":  {
-                             "servo_bank_1":  {
-                                                  "gpio_01":  "LEG_LEFT_HIP_YAW",
-                                                  "gpio_02":  "LEG_LEFT_HIP_ROLL",
-                                                  "gpio_03":  "LEG_LEFT_HIP_PITCH",
-                                                  "gpio_04":  "LEG_LEFT_KNEE_PITCH",
-                                                  "gpio_05":  "LEG_LEFT_ANKLE_PITCH",
-                                                  "gpio_06":  "LEG_LEFT_ANKLE_ROLL"
-                                              },
-                             "servo_bank_2":  {
-                                                  "gpio_07":  "LEG_RIGHT_HIP_YAW",
-                                                  "gpio_08":  "LEG_RIGHT_HIP_ROLL",
-                                                  "gpio_09":  "LEG_RIGHT_HIP_PITCH",
-                                                  "gpio_10":  "LEG_RIGHT_KNEE_PITCH",
-                                                  "gpio_11":  "LEG_RIGHT_ANKLE_PITCH",
-                                                  "gpio_12":  "LEG_RIGHT_ANKLE_ROLL"
-                                              },
-                             "communication":  {
-                                                   "gpio_13":  "ESP_NOW_ANTENNA",
-                                                   "gpio_14":  "STATUS_LED",
-                                                   "gpio_15":  "IMU_I2C_SDA",
-                                                   "gpio_16":  "IMU_I2C_SCL"
-                                               }
-                         },
     "servo_driver_specs":  {
                                "heavy_duty_servos":  {
                                                          "model":  "MG996R",
@@ -79,4 +55,3 @@
                                       "debugging":  "STANDARD_PWM_SCOPE_ANALYSIS"
                                   }
 }
-

@@ -1,20 +1,28 @@
 {
     "relative_filename": "config/bots/bot_families/tests/test_bot.json",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "TESTBOT",
-    "bot_id": "test_bot_v1",
-    "description": "Minimal test creature for hardware validation - direct component test",
-    "created": "2025-10-23",
+    "bot_id": "test_bot_v2",
+    "description": "Comprehensive test creature assembly for hardware and software validation",
+    "created": "2025-10-30",
     "name": "test_bot",
-    "component_type": "TEST_ASSEMBLY",
+    "type": "TEST_ASSEMBLY",
     "timing": {
-        "hitCount": 1,
-        "description": "Test creature runs every cycle for real-time validation"
+        "hitCount": 10,
+        "description": "Test creature validation every second for real-time feedback"
     },
+    "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant": "test_platform",
+    "horizontal_scale": "1.0",
+    "vertical_scale": "1.0",
     "coordinate_system": "planar_2d",
     "reference_point": "nose_center",
     "eye_spacing": "3.0 INCH",
+    "compression_factor": 1.0,
+    "family_components": [
+        "config/components/functional/test_system_controller.json"
+    ],
     "components": [
         "config/subsystems/test_head.json"
     ],
@@ -28,14 +36,41 @@
         "CURIOSITY": 80,
         "AFFECTION": 0
     },
+    "behavior_config": {
+        "threat_response_enabled": false,
+        "auto_sleep_timeout_seconds": 0,
+        "interaction_range_cm": 100,
+        "aggressive_threshold": 0,
+        "calm_threshold": 100
+    },
+    "shape_assembly": {
+        "type": "TEST_PLATFORM",
+        "assembly_method": "direct_component_test",
+        "validation_mode": "comprehensive"
+    },
     "test_config": {
         "direct_component_testing": true,
         "verbose_logging": true,
         "auto_cycle_colors": true,
-        "display_sync_enabled": false
+        "display_sync_enabled": false,
+        "sensor_validation": true,
+        "motor_test_enabled": false,
+        "audio_test_enabled": false,
+        "network_test_enabled": false
     },
-    "hardware_validation": 
-    {
-       "power_requirements": "3.3V @ 200mA minimum"
+    "hardware_validation": {
+        "power_requirements": "3.3V @ 200mA minimum",
+        "gpio_pin_validation": true,
+        "adc_calibration_required": false,
+        "i2c_bus_test": false,
+        "spi_bus_test": true,
+        "pwm_output_test": false
+    },
+    "software_validation": {
+        "component_initialization_test": true,
+        "shared_memory_test": true,
+        "timing_accuracy_test": true,
+        "error_handling_test": true,
+        "performance_monitoring": true
     }
 }

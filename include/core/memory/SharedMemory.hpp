@@ -11,6 +11,7 @@
 // Include shared state types
 #include "Mood.hpp"
 #include "../shared/Environment.hpp"
+#include "../shared/MicrophoneData.hpp"
 
 // Type ID definition - using int for type IDs
 typedef int shared_type_id_t;
@@ -29,6 +30,11 @@ inline shared_type_id_t getTypeId<Environment>() {
 template<>
 inline shared_type_id_t getTypeId<Mood>() {
     return 2;
+}
+
+template<>
+inline shared_type_id_t getTypeId<MicrophoneData>() {
+    return 3;
 }
 
 #ifdef ESP_PLATFORM

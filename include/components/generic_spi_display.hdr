@@ -24,11 +24,10 @@ typedef struct {
 } generic_display_config_t;
 
 /**
- * @brief Initialize generic SPI display with configuration
- * @param config Display configuration from JSON
+ * @brief Initialize generic SPI display with default configuration
  * @return ESP_OK on success, esp_err_t error code on failure
  */
-esp_err_t generic_spi_display_init(const generic_display_config_t* config);
+esp_err_t generic_spi_display_init(void);
 
 /**
  * @brief Send current frame buffer to the display

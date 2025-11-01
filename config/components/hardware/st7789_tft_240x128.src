@@ -1,0 +1,21 @@
+// st7789_240x128 component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_st7789_tft_240x128 = "st7789_tft_240x128";
+
+esp_err_t st7789_240x128_init(void) {
+    ESP_LOGI(TAG_st7789_tft_240x128, "st7789_240x128 init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void st7789_240x128_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_st7789_tft_240x128, "st7789_240x128 act");
+}
+
+
+
+
+

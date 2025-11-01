@@ -8,6 +8,9 @@
     "bus_type": "I2S",
     "bus_name": "I2S0",
     "description": "ESP32 I2S bus 0 interface for audio communication",
+    "components": [
+        "config/components/drivers/i2s_driver.json"
+    ],
     "pin_requirements": {
         "shared_pins_needed": [
             {

@@ -1,0 +1,21 @@
+// ssd1963 component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_ssd1963_tft_800x600 = "ssd1963_tft_800x600";
+
+esp_err_t ssd1963_init(void) {
+    ESP_LOGI(TAG_ssd1963_tft_800x600, "ssd1963 init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void ssd1963_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_ssd1963_tft_800x600, "ssd1963 act");
+}
+
+
+
+
+

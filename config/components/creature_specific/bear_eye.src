@@ -1,0 +1,21 @@
+// bear_eye component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_bear_eye = "bear_eye";
+
+esp_err_t bear_eye_init(void) {
+    ESP_LOGI(TAG_bear_eye, "bear_eye init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void bear_eye_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_bear_eye, "bear_eye act");
+}
+
+
+
+
+

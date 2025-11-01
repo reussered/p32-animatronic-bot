@@ -1,0 +1,16 @@
+// watchdog component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_watchdog = "watchdog";
+
+esp_err_t watchdog_init(void) {
+    ESP_LOGI(TAG_watchdog, "watchdog init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void watchdog_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_watchdog, "watchdog act");
+}

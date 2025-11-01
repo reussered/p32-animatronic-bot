@@ -1,0 +1,47 @@
+// HW-496 MEMS Microphone Component
+// Uses generic microphone driver with HW496-specific configuration
+
+#include "esp_log.h"
+#include "hw496_microphone.hdr"
+#include "../drivers/generic_mic_driver.hdr"
+#include "core/memory/SharedMemory.hpp"
+
+static const char *TAG_hw496_microphone = "hw496_microphone";
+
+// HW496-specific configuration
+// Based on HW496 datasheet: adjustable gain (25x-125x), 58dB SNR, 20Hz-20kHz response
+static const float HW496_DEFAULT_GAIN = 2.0f;  // 50x gain setting
+static const int HW496_NOISE_GATE_THRESHOLD = 50;  // Adjust based on testing
+static const bool HW496_NOISE_GATE_ENABLED = true;
+
+esp_err_t hw496_microphone_init(void) {
+    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone init");
+
+    // HW496-specific hardware initialization
+    // Note: generic_mic_driver is initialized separately as a dependency
+    // HW496 uses default generic_mic_driver settings
+
+    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone initialized (using generic driver defaults)");
+    return ESP_OK;
+}
+
+void hw496_microphone_act(void) {
+    // Read microphone data from SharedMemory (written by generic_mic_driver)
+    MicrophoneData* mic_data = GSM.read<MicrophoneData>();
+
+    if (mic_data && mic_data->driver_initialized) {
+        // HW496-specific processing or monitoring
+        // For now, log the data for testing
+        ESP_LOGD(TAG_hw496_microphone, "HW496 data: raw=%d, processed=%d, voltage=%dmV, gain=%.1f, sound=%s",
+                 mic_data->raw_sample, mic_data->processed_sample, mic_data->voltage_mv,
+                 mic_data->gain_applied, mic_data->sound_detected ? "detected" : "none");
+
+        // HW496 could add hardware-specific processing here
+        // For example, adjusting gain based on audio levels, or triggering hardware responses
+    } else {
+        ESP_LOGW(TAG_hw496_microphone, "Microphone data not available or driver not initialized");
+    }
+}
+
+
+

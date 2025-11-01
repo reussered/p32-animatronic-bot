@@ -13,22 +13,22 @@
 ╠══════════════════════════════════════════════════════════════╣
 ║  GPIO 14  │  CLK (SCK)   │  Orange  │  Both eyes            ║
 ║  GPIO 13  │  MOSI (SDA)  │  Yellow  │  Both eyes            ║
-║  GPIO 26  │  RESET       │  White   │  Both eyes            ║
+║  GPIO 21  │  RESET       │  White   │  Both eyes            ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                      LEFT EYE (GC9A01 #1)                    ║
 ╠══════════════════════════════════════════════════════════════╣
-║  GPIO 27  │  DC          │  Green   │  Data/Command         ║
-║  GPIO 15  │  CS          │  Blue    │  Chip Select          ║
+║  GPIO 15  │  DC          │  Green   │  Data/Command         ║
+║  GPIO 16  │  CS          │  Blue    │  Chip Select          ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                     RIGHT EYE (GC9A01 #2)                    ║
 ╠══════════════════════════════════════════════════════════════╣
-║  GPIO 33  │  DC          │  Green   │  Data/Command         ║
-║  GPIO 32  │  CS          │  Blue    │  Chip Select          ║
+║  GPIO 17  │  DC          │  Green   │  Data/Command         ║
+║  GPIO 18  │  CS          │  Blue    │  Chip Select          ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                    NOSE SENSOR (HC-SR04)                     ║
 ╠══════════════════════════════════════════════════════════════╣
-║  GPIO 25  │  TRIG        │  Purple  │  Trigger (output)     ║
-║  GPIO 34  │  ECHO        │  Gray    │  Echo (input only)    ║
+║  GPIO 19  │  TRIG        │  Purple  │  Trigger (output)     ║
+║  GPIO 20  │  ECHO        │  Gray    │  Echo (input)         ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                         POWER RAILS                          ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -36,8 +36,8 @@
 ║  GND      │  Ground      │  Black   │  All components       ║
 ╚══════════════════════════════════════════════════════════════╝
 
-Total GPIO Used: 8 pins
-Total Wires: 18 (+ USB power cable)
+Total GPIO Used: 9 pins
+Total Wires: 13 (+ USB power cable)
 ```
 
 ---
@@ -67,9 +67,9 @@ Display Pin → ESP32 GPIO → Wire Color
 ─────────────────────────────────────
 SCK         → GPIO 14     → Orange
 SDA         → GPIO 13     → Yellow
-DC          → GPIO 27     → Green
-CS          → GPIO 15     → Blue
-RST         → GPIO 26     → White
+DC          → GPIO 15     → Green
+CS          → GPIO 16     → Blue
+RST         → GPIO 21     → White
 VCC         → 3.3V rail   → Red
 GND         → GND rail    → Black
 ```
@@ -83,9 +83,9 @@ Display Pin → ESP32 GPIO → Wire Color
 ─────────────────────────────────────
 SCK         → GPIO 14     → Orange   (SHARED)
 SDA         → GPIO 13     → Yellow   (SHARED)
-DC          → GPIO 33     → Green
-CS          → GPIO 32     → Blue
-RST         → GPIO 26     → White    (SHARED)
+DC          → GPIO 17     → Green
+CS          → GPIO 18     → Blue
+RST         → GPIO 21     → White    (SHARED)
 VCC         → 3.3V rail   → Red
 GND         → GND rail    → Black
 ```
@@ -97,8 +97,8 @@ GND         → GND rail    → Black
 ```
 Sensor Pin → ESP32 GPIO → Wire Color
 ─────────────────────────────────────
-TRIG       → GPIO 25    → Purple
-ECHO       → GPIO 34    → Gray
+TRIG       → GPIO 19    → Purple
+ECHO       → GPIO 20    → Gray
 VCC        → 3.3V rail  → Red
 GND        → GND rail   → Black
 ```
@@ -109,7 +109,6 @@ GND        → GND rail   → Black
 
 ```
 ⚠️  DISPLAYS USE 3.3V ONLY - 5V WILL DESTROY THEM!
-⚠️  GPIO 34 IS INPUT-ONLY - PERFECT FOR ECHO PIN
 ⚠️  POWER OFF BEFORE CONNECTING/DISCONNECTING
 ⚠️  CHECK POLARITY - VCC/GND REVERSED = DAMAGE
 ⚠️  MAX CURRENT: 500mA (USB 2.0 limit)
@@ -126,8 +125,8 @@ GND        → GND rail   → Black
 - Check DC, CS unique per eye
 
 **Sensor Not Detecting?**
-- TRIG = GPIO 25 (output)
-- ECHO = GPIO 34 (input only)
+- TRIG = GPIO 19 (output)
+- ECHO = GPIO 20 (input)
 - Try 5V on VCC if available
 - Point sensor forward (no obstructions)
 

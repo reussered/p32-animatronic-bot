@@ -6,13 +6,14 @@
 #include "esp_log.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+#include "esp32_s3_r8n16_pin_assignments.h"
 
-// Display pin definitions (updated to avoid damaged GPIO 13)
-#define PIN_SPI_MISO    GPIO_NUM_12  // Shared MISO
-#define PIN_SPI_MOSI    GPIO_NUM_18  // Shared MOSI (changed from GPIO 13)
-#define PIN_SPI_CLK     GPIO_NUM_14  // Shared SCLK
-#define PIN_CS_LEFT     GPIO_NUM_15  // Left eye CS
-#define PIN_CS_RIGHT    GPIO_NUM_17  // Right eye CS (changed from GPIO 16)
+// Display pin definitions - dynamically assigned at runtime
+static int pin_spi_miso = -1;
+static int pin_spi_mosi = -1;
+static int pin_spi_clk = -1;
+static int pin_cs_left = -1;
+static int pin_cs_right = -1;
 
 // Display commands
 #define GC9A01_SWRESET 0x01
@@ -104,13 +105,127 @@ void fill_display(spi_device_handle_t spi, uint16_t color, const char *name) {
 }
 
 extern "C" void app_main() {
-    ESP_LOGI(TAG, "Starting Dual Display Test");
+    ESP_LOGI(TAG, "Starting Dual Display Test with dynamic pin assignment");
+
+    // Assign SPI pins dynamically from assignable arrays
+    // Find available MISO pin
+    pin_spi_miso = -1;
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        int pin = spi_assignable[i];
+        bool already_assigned = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == pin) {
+                already_assigned = true;
+                break;
+            }
+        }
+        if (!already_assigned && assigned_pins_count < sizeof(assigned_pins)/sizeof(assigned_pins[0])) {
+            assigned_pins[assigned_pins_count++] = pin;
+            pin_spi_miso = pin;
+            break;
+        }
+    }
+    if (pin_spi_miso == -1) {
+        ESP_LOGE(TAG, "Failed to assign SPI MISO pin!");
+        return;
+    }
+
+    // Find available MOSI pin
+    pin_spi_mosi = -1;
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        int pin = spi_assignable[i];
+        bool already_assigned = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == pin) {
+                already_assigned = true;
+                break;
+            }
+        }
+        if (!already_assigned && assigned_pins_count < sizeof(assigned_pins)/sizeof(assigned_pins[0])) {
+            assigned_pins[assigned_pins_count++] = pin;
+            pin_spi_mosi = pin;
+            break;
+        }
+    }
+    if (pin_spi_mosi == -1) {
+        ESP_LOGE(TAG, "Failed to assign SPI MOSI pin!");
+        return;
+    }
+
+    // Find available CLK pin
+    pin_spi_clk = -1;
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        int pin = spi_assignable[i];
+        bool already_assigned = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == pin) {
+                already_assigned = true;
+                break;
+            }
+        }
+        if (!already_assigned && assigned_pins_count < sizeof(assigned_pins)/sizeof(assigned_pins[0])) {
+            assigned_pins[assigned_pins_count++] = pin;
+            pin_spi_clk = pin;
+            break;
+        }
+    }
+    if (pin_spi_clk == -1) {
+        ESP_LOGE(TAG, "Failed to assign SPI CLK pin!");
+        return;
+    }
+
+    // Find available left CS pin
+    pin_cs_left = -1;
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        int pin = spi_assignable[i];
+        bool already_assigned = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == pin) {
+                already_assigned = true;
+                break;
+            }
+        }
+        if (!already_assigned && assigned_pins_count < sizeof(assigned_pins)/sizeof(assigned_pins[0])) {
+            assigned_pins[assigned_pins_count++] = pin;
+            pin_cs_left = pin;
+            break;
+        }
+    }
+    if (pin_cs_left == -1) {
+        ESP_LOGE(TAG, "Failed to assign left CS pin!");
+        return;
+    }
+
+    // Find available right CS pin
+    pin_cs_right = -1;
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        int pin = spi_assignable[i];
+        bool already_assigned = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == pin) {
+                already_assigned = true;
+                break;
+            }
+        }
+        if (!already_assigned && assigned_pins_count < sizeof(assigned_pins)/sizeof(assigned_pins[0])) {
+            assigned_pins[assigned_pins_count++] = pin;
+            pin_cs_right = pin;
+            break;
+        }
+    }
+    if (pin_cs_right == -1) {
+        ESP_LOGE(TAG, "Failed to assign right CS pin!");
+        return;
+    }
+
+    ESP_LOGI(TAG, "Assigned pins - MISO:%d, MOSI:%d, CLK:%d, CS_LEFT:%d, CS_RIGHT:%d",
+             pin_spi_miso, pin_spi_mosi, pin_spi_clk, pin_cs_left, pin_cs_right);
 
     // Configure SPI bus
     spi_bus_config_t buscfg = {
-        .mosi_io_num = PIN_SPI_MOSI,
-        .miso_io_num = PIN_SPI_MISO,
-        .sclk_io_num = PIN_SPI_CLK,
+        .mosi_io_num = pin_spi_mosi,
+        .miso_io_num = pin_spi_miso,
+        .sclk_io_num = pin_spi_clk,
         .quadwp_io_num = -1,
         .quadhd_io_num = -1,
         .max_transfer_sz = 240 * 240 * 2 + 8,  // Max transfer size
@@ -129,7 +244,7 @@ extern "C" void app_main() {
         .cs_ena_posttrans = 0,
         .clock_speed_hz = 40 * 1000 * 1000,  // 40 MHz
         .input_delay_ns = 0,
-        .spics_io_num = PIN_CS_LEFT,
+        .spics_io_num = pin_cs_left,
         .flags = 0,
         .queue_size = 1,
         .pre_cb = NULL,
@@ -149,7 +264,7 @@ extern "C" void app_main() {
         .cs_ena_posttrans = 0,
         .clock_speed_hz = 40 * 1000 * 1000,  // 40 MHz
         .input_delay_ns = 0,
-        .spics_io_num = PIN_CS_RIGHT,
+        .spics_io_num = pin_cs_right,
         .flags = 0,
         .queue_size = 1,
         .pre_cb = NULL,

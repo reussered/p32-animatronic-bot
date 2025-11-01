@@ -6,10 +6,7 @@
     "author":  "config/author.json",
     "interface_id":  "I2S_DEVICE_1",
     "interface_type":  "I2S_DEVICE",
-    "bus_reference":  "I2S_BUS_0",
-    "pins":  {
-                 "data":  6
-             },
+    "bus_reference":  "I2S_BUS",
     "device_config":  {
                           "channel":  "left"
                       }

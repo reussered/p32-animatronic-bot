@@ -7,6 +7,9 @@
     "bus_type": "SPI",
     "bus_name": "VSPI",
     "description": "ESP32 VSPI bus interface for SPI communication",
+    "components": [
+        "config/components/hardware/generic_spi_display.json"
+    ],
     "pin_requirements": {
         "shared_pins_needed": [
             {

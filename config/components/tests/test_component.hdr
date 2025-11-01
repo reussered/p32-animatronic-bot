@@ -1,0 +1,2 @@
+esp_err_t test_component_init(void);
+void test_component_act(void);

@@ -1,0 +1,54 @@
+{
+    "relative_filename":  "config/components/interfaces/i2c_bus.json",
+    "version":  "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
+    "interface_type":  "I2C_BUS",
+    "author":  "config/author.json",
+    "name":  "i2c_bus",
+    "bus_type": "I2C",
+    "bus_name": "I2C",
+    "description": "ESP32 I2C bus interface for sensor and peripheral communication",
+    "components": [
+        "config/components/drivers/i2c_driver.json"
+    ],
+    "pin_requirements": {
+        "shared_pins_needed": [
+            {
+                "function": "I2C_SDA",
+                "count": 1,
+                "description": "I2C serial data line"
+            },
+            {
+                "function": "I2C_SCL",
+                "count": 1,
+                "description": "I2C serial clock line"
+            }
+        ],
+        "unique_pins_needed": []
+    },
+    "timing":  {
+                   "hitCount":  1
+               },
+    "software":  {
+                     "init_function":  "i2c_bus_init",
+                     "act_function":  "i2c_bus_act"
+                 },
+    "pin_allocation": {
+        "shared_pins": ["sda", "scl"],
+        "device_pins": []
+    },
+    "bus_config":  {
+                       "frequency":  "100000",
+                       "mode":  0
+                   },
+    "hardware": {
+        "esp32_specific": {
+            "port": "I2C_NUM_0",
+            "sda_pullup": true,
+            "scl_pullup": true,
+            "timeout": 1000
+        }
+    },
+    "notes": "I2C bus on ESP32. Shared pins (SDA, SCL) can be used by multiple devices."
+}

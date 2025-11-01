@@ -8,7 +8,7 @@
     "name":  "gc9a01",
     "subsystem":  "HEAD",
     "components":  [
-        "config/components/interfaces/spi_bus_vspi.json"
+        "config/components/interfaces/spi_bus.json"
     ],
     "physical_specs":  {
                            "diameter":  "1.28 INCH",
