@@ -37,7 +37,7 @@
                               "coordinates":  "LEFT_POSITION"
                           },
     "timing":  {
-                   "hitCount":  1
+                   "hitCount":  200
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }

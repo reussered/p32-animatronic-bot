@@ -20,6 +20,9 @@ struct SSD1306_Pixel
 {
     unsigned int value : 1;  // 0 = off, 1 = on
     unsigned int : 7;        // Padding to byte boundary
+
+    // Maximum value for monochrome display (for mood calculations)
+    static constexpr unsigned int maxValue = 0x1;  // 1 bit = 1
     
     SSD1306_Pixel() 
     {
@@ -43,9 +46,9 @@ struct SSD1306_Pixel
     {
         SSD1306_Pixel result;
         
-        // Add value (1 bit, max 0x1 = 1)
+        // Add value
         unsigned int sum = value + other.value;
-        result.value = (sum > 0x1) ? 0x1 : sum;
+        result.value = (sum > maxValue) ? maxValue : sum;
         
         return result;
     }
@@ -53,9 +56,9 @@ struct SSD1306_Pixel
     // Add-assign operator with saturation
     SSD1306_Pixel& operator+=(const SSD1306_Pixel& other)
     {
-        // Add value (1 bit, max 0x1 = 1)
+        // Add value
         unsigned int sum = value + other.value;
-        value = (sum > 0x1) ? 0x1 : sum;
+        value = (sum > maxValue) ? maxValue : sum;
         
         return *this;
     }

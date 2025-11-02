@@ -14,22 +14,27 @@ struct Pixel
     unsigned int green : 6;
     unsigned int blue : 5;
 
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
     // Add two pixels with saturation (overflow caps at max value per channel)
     Pixel operator+(const Pixel& other) const
     {
         Pixel result;
         
-        // Add red channel (5 bits, max 0x1F = 31)
+        // Add red channel
         unsigned int sum_r = red + other.red;
-        result.red = (sum_r > 0x1F) ? 0x1F : sum_r;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
         
-        // Add green channel (6 bits, max 0x3F = 63)
+        // Add green channel
         unsigned int sum_g = green + other.green;
-        result.green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
         
-        // Add blue channel (5 bits, max 0x1F = 31)
+        // Add blue channel
         unsigned int sum_b = blue + other.blue;
-        result.blue = (sum_b > 0x1F) ? 0x1F : sum_b;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
         
         return result;
     }
@@ -37,17 +42,17 @@ struct Pixel
     // Add-assign operator with saturation
     Pixel& operator+=(const Pixel& other)
     {
-        // Add red channel (5 bits, max 0x1F = 31)
+        // Add red channel
         unsigned int sum_r = red + other.red;
-        red = (sum_r > 0x1F) ? 0x1F : sum_r;
+        red = (sum_r > maxRed) ? maxRed : sum_r;
         
-        // Add green channel (6 bits, max 0x3F = 63)
+        // Add green channel
         unsigned int sum_g = green + other.green;
-        green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        green = (sum_g > maxGreen) ? maxGreen : sum_g;
         
-        // Add blue channel (5 bits, max 0x1F = 31)
+        // Add blue channel
         unsigned int sum_b = blue + other.blue;
-        blue = (sum_b > 0x1F) ? 0x1F : sum_b;
+        blue = (sum_b > maxBlue) ? maxBlue : sum_b;
         
         return *this;
     }

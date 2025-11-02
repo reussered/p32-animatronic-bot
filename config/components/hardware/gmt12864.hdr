@@ -6,6 +6,9 @@ extern GMT12864_Pixel GMT12864_InitialPixel;
 struct GMT12864_Pixel {
     unsigned int value : 1;  // 1 bit: 0 = off, 1 = on
     unsigned int pad : 7;    // 7 bits padding to byte boundary
+
+    // Maximum value for monochrome display (for mood calculations)
+    static constexpr unsigned int maxValue = 0x1;  // 1 bit = 1
     
     // Default constructor initializes to InitialPixel
     GMT12864_Pixel() { *this = GMT12864_InitialPixel; }
@@ -28,9 +31,9 @@ struct GMT12864_Pixel {
     {
         GMT12864_Pixel result;
         
-        // Add value (1 bit, max 0x1 = 1)
+        // Add value
         unsigned int sum = value + other.value;
-        result.value = (sum > 0x1) ? 0x1 : sum;
+        result.value = (sum > maxValue) ? maxValue : sum;
         result.pad = 0;
         
         return result;
@@ -39,9 +42,9 @@ struct GMT12864_Pixel {
     // Add-assign operator with saturation
     GMT12864_Pixel& operator+=(const GMT12864_Pixel& other)
     {
-        // Add value (1 bit, max 0x1 = 1)
+        // Add value
         unsigned int sum = value + other.value;
-        value = (sum > 0x1) ? 0x1 : sum;
+        value = (sum > maxValue) ? maxValue : sum;
         
         return *this;
     }

@@ -1,18 +1,131 @@
 // zombie_eye component implementation
-// Auto-generated stub - needs actual implementation
+// Zombies show very dulled emotions - shambling undead with minimal response
 
 #include "esp_log.h"
+#include "gc9a01.hpp"
+#include "Mood.hpp"
+#include "SharedMemory.hpp"
+
 static const char *TAG_zombie_eye = "zombie_eye";
 
-esp_err_t zombie_eye_init(void) {
-    ESP_LOGI(TAG_zombie_eye, "zombie_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+// Zombie personality: dulled, slow, minimal emotional response
+static constexpr float ZOMBIE_EMOTION_INTENSITY = 0.3f;
+
+struct MoodColorEffect
+{
+    float redMultiplier;
+    float greenMultiplier;
+    float blueMultiplier;
+
+    MoodColorEffect(float r, float g, float b) 
+        : redMultiplier(r), greenMultiplier(g), blueMultiplier(b) {}
+};
+
+// Mood-to-color mapping for zombies (muted, decay colors)
+static const MoodColorEffect zombie_mood_effects[Mood::componentCount] = {
+    MoodColorEffect(0.4f * ZOMBIE_EMOTION_INTENSITY, -0.2f * ZOMBIE_EMOTION_INTENSITY, -0.2f * ZOMBIE_EMOTION_INTENSITY), // ANGER (faint red)
+    MoodColorEffect(-0.2f * ZOMBIE_EMOTION_INTENSITY, -0.2f * ZOMBIE_EMOTION_INTENSITY, 0.2f * ZOMBIE_EMOTION_INTENSITY), // FEAR (barely visible)
+    MoodColorEffect(0.1f * ZOMBIE_EMOTION_INTENSITY, 0.2f * ZOMBIE_EMOTION_INTENSITY, 0.0f * ZOMBIE_EMOTION_INTENSITY), // HAPPINESS (minimal)
+    MoodColorEffect(-0.3f * ZOMBIE_EMOTION_INTENSITY, -0.3f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY), // SADNESS (decay)
+    MoodColorEffect(0.1f * ZOMBIE_EMOTION_INTENSITY, 0.2f * ZOMBIE_EMOTION_INTENSITY, 0.0f * ZOMBIE_EMOTION_INTENSITY), // CURIOSITY (hunger)
+    MoodColorEffect(0.1f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY), // AFFECTION (minimal)
+    MoodColorEffect(0.3f * ZOMBIE_EMOTION_INTENSITY, -0.1f * ZOMBIE_EMOTION_INTENSITY, -0.1f * ZOMBIE_EMOTION_INTENSITY), // IRRITATION (slight)
+    MoodColorEffect(0.1f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY), // CONTENTMENT (rest)
+    MoodColorEffect(0.2f * ZOMBIE_EMOTION_INTENSITY, 0.1f * ZOMBIE_EMOTION_INTENSITY, 0.0f * ZOMBIE_EMOTION_INTENSITY)  // EXCITEMENT (feeding)
+};
+
+static Pixel* currentFrame = nullptr;
+static size_t frameSize = 0;
+static Mood lastMood;
+
+esp_err_t zombie_eye_init(void)
+{
+    ESP_LOGI(TAG_zombie_eye, "Initializing zombie eye with dulled emotion intensity %.2f", ZOMBIE_EMOTION_INTENSITY);
+    
+    currentFrame = gc9a01_getBuffer();
+    if (!currentFrame)
+    {
+        ESP_LOGE(TAG_zombie_eye, "Failed to get frame buffer");
+        return ESP_FAIL;
+    }
+    
+    frameSize = gc9a01_getFrameSize();
+    
+    // Clear mood state
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        lastMood.components[i] = 0;
+    }
+    
+    ESP_LOGI(TAG_zombie_eye, "Zombie eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 
-void zombie_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_zombie_eye, "zombie_eye act");
+void zombie_eye_act(void)
+{
+    if (!currentFrame)
+    {
+        return;
+    }
+    
+    // Read current mood from shared memory
+    Mood* currentMood = GSM.read<Mood>();
+    if (!currentMood)
+    {
+        return;
+    }
+    
+    // Check if mood changed significantly (zombies need bigger changes)
+    bool moodChanged = false;
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        if (abs(currentMood->components[i] - lastMood.components[i]) > 10)
+        {
+            moodChanged = true;
+            break;
+        }
+    }
+    
+    if (!moodChanged)
+    {
+        return;
+    }
+    
+    // Update last mood
+    lastMood = *currentMood;
+    
+    // Calculate mood-based color tint
+    Pixel moodTint;
+    moodTint.red = 0;
+    moodTint.green = 0;
+    moodTint.blue = 0;
+    
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        float intensity = currentMood->components[i] / 100.0f;
+        
+        int redContrib = (int)(zombie_mood_effects[i].redMultiplier * intensity * Pixel::maxRed);
+        int greenContrib = (int)(zombie_mood_effects[i].greenMultiplier * intensity * Pixel::maxGreen);
+        int blueContrib = (int)(zombie_mood_effects[i].blueMultiplier * intensity * Pixel::maxBlue);
+        
+        moodTint.red += redContrib;
+        moodTint.green += greenContrib;
+        moodTint.blue += blueContrib;
+    }
+    
+    // Clamp to valid range
+    if (moodTint.red < 0) moodTint.red = 0;
+    if (moodTint.green < 0) moodTint.green = 0;
+    if (moodTint.blue < 0) moodTint.blue = 0;
+    if (moodTint.red > (int)Pixel::maxRed) moodTint.red = Pixel::maxRed;
+    if (moodTint.green > (int)Pixel::maxGreen) moodTint.green = Pixel::maxGreen;
+    if (moodTint.blue > (int)Pixel::maxBlue) moodTint.blue = Pixel::maxBlue;
+    
+    // Apply mood tint to entire frame using saturating addition
+    for (size_t pixel = 0; pixel < frameSize; pixel++)
+    {
+        currentFrame[pixel] = currentFrame[pixel] + moodTint;
+    }
 }
 
 

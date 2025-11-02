@@ -1,18 +1,131 @@
 // cat_eye component implementation
-// Auto-generated stub - needs actual implementation
+// Cats show subtle, controlled emotions - aloof but attentive
 
 #include "esp_log.h"
+#include "gc9a01.hpp"
+#include "Mood.hpp"
+#include "SharedMemory.hpp"
+
 static const char *TAG_cat_eye = "cat_eye";
 
-esp_err_t cat_eye_init(void) {
-    ESP_LOGI(TAG_cat_eye, "cat_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+// Cat personality: subtle, aloof, controlled - shows emotions carefully
+static constexpr float CAT_EMOTION_INTENSITY = 0.8f;
+
+struct MoodColorEffect
+{
+    float redMultiplier;
+    float greenMultiplier;
+    float blueMultiplier;
+
+    MoodColorEffect(float r, float g, float b) 
+        : redMultiplier(r), greenMultiplier(g), blueMultiplier(b) {}
+};
+
+// Mood-to-color mapping for cats (subtle, mysterious)
+static const MoodColorEffect cat_mood_effects[Mood::componentCount] = {
+    MoodColorEffect(0.5f * CAT_EMOTION_INTENSITY, -0.2f * CAT_EMOTION_INTENSITY, -0.2f * CAT_EMOTION_INTENSITY), // ANGER (hiss)
+    MoodColorEffect(-0.2f * CAT_EMOTION_INTENSITY, -0.2f * CAT_EMOTION_INTENSITY, 0.4f * CAT_EMOTION_INTENSITY), // FEAR (alert blue)
+    MoodColorEffect(0.3f * CAT_EMOTION_INTENSITY, 0.4f * CAT_EMOTION_INTENSITY, 0.1f * CAT_EMOTION_INTENSITY), // HAPPINESS (purr glow)
+    MoodColorEffect(-0.3f * CAT_EMOTION_INTENSITY, -0.3f * CAT_EMOTION_INTENSITY, 0.2f * CAT_EMOTION_INTENSITY), // SADNESS (mournful)
+    MoodColorEffect(0.2f * CAT_EMOTION_INTENSITY, 0.5f * CAT_EMOTION_INTENSITY, 0.1f * CAT_EMOTION_INTENSITY), // CURIOSITY (hunting focus)
+    MoodColorEffect(0.4f * CAT_EMOTION_INTENSITY, 0.3f * CAT_EMOTION_INTENSITY, 0.3f * CAT_EMOTION_INTENSITY), // AFFECTION (soft warmth)
+    MoodColorEffect(0.4f * CAT_EMOTION_INTENSITY, -0.1f * CAT_EMOTION_INTENSITY, -0.1f * CAT_EMOTION_INTENSITY), // IRRITATION (annoyed)
+    MoodColorEffect(0.3f * CAT_EMOTION_INTENSITY, 0.4f * CAT_EMOTION_INTENSITY, 0.2f * CAT_EMOTION_INTENSITY), // CONTENTMENT (relaxed)
+    MoodColorEffect(0.3f * CAT_EMOTION_INTENSITY, 0.4f * CAT_EMOTION_INTENSITY, 0.0f * CAT_EMOTION_INTENSITY)  // EXCITEMENT (play)
+};
+
+static Pixel* currentFrame = nullptr;
+static size_t frameSize = 0;
+static Mood lastMood;
+
+esp_err_t cat_eye_init(void)
+{
+    ESP_LOGI(TAG_cat_eye, "Initializing cat eye with controlled emotion intensity %.2f", CAT_EMOTION_INTENSITY);
+    
+    currentFrame = gc9a01_getBuffer();
+    if (!currentFrame)
+    {
+        ESP_LOGE(TAG_cat_eye, "Failed to get frame buffer");
+        return ESP_FAIL;
+    }
+    
+    frameSize = gc9a01_getFrameSize();
+    
+    // Clear mood state
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        lastMood.components[i] = 0;
+    }
+    
+    ESP_LOGI(TAG_cat_eye, "Cat eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 
-void cat_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_cat_eye, "cat_eye act");
+void cat_eye_act(void)
+{
+    if (!currentFrame)
+    {
+        return;
+    }
+    
+    // Read current mood from shared memory
+    Mood* currentMood = GSM.read<Mood>();
+    if (!currentMood)
+    {
+        return;
+    }
+    
+    // Check if mood changed significantly
+    bool moodChanged = false;
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        if (abs(currentMood->components[i] - lastMood.components[i]) > 5)
+        {
+            moodChanged = true;
+            break;
+        }
+    }
+    
+    if (!moodChanged)
+    {
+        return;
+    }
+    
+    // Update last mood
+    lastMood = *currentMood;
+    
+    // Calculate mood-based color tint
+    Pixel moodTint;
+    moodTint.red = 0;
+    moodTint.green = 0;
+    moodTint.blue = 0;
+    
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        float intensity = currentMood->components[i] / 100.0f;
+        
+        int redContrib = (int)(cat_mood_effects[i].redMultiplier * intensity * Pixel::maxRed);
+        int greenContrib = (int)(cat_mood_effects[i].greenMultiplier * intensity * Pixel::maxGreen);
+        int blueContrib = (int)(cat_mood_effects[i].blueMultiplier * intensity * Pixel::maxBlue);
+        
+        moodTint.red += redContrib;
+        moodTint.green += greenContrib;
+        moodTint.blue += blueContrib;
+    }
+    
+    // Clamp to valid range
+    if (moodTint.red < 0) moodTint.red = 0;
+    if (moodTint.green < 0) moodTint.green = 0;
+    if (moodTint.blue < 0) moodTint.blue = 0;
+    if (moodTint.red > (int)Pixel::maxRed) moodTint.red = Pixel::maxRed;
+    if (moodTint.green > (int)Pixel::maxGreen) moodTint.green = Pixel::maxGreen;
+    if (moodTint.blue > (int)Pixel::maxBlue) moodTint.blue = Pixel::maxBlue;
+    
+    // Apply mood tint to entire frame using saturating addition
+    for (size_t pixel = 0; pixel < frameSize; pixel++)
+    {
+        currentFrame[pixel] = currentFrame[pixel] + moodTint;
+    }
 }
 
 

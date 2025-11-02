@@ -1,18 +1,131 @@
 // cyclops_eye component implementation
-// Auto-generated stub - needs actual implementation
+// Cyclops show dramatic emotions - one eye amplifies expression
 
 #include "esp_log.h"
+#include "gc9a01.hpp"
+#include "Mood.hpp"
+#include "SharedMemory.hpp"
+
 static const char *TAG_cyclops_eye = "cyclops_eye";
 
-esp_err_t cyclops_eye_init(void) {
-    ESP_LOGI(TAG_cyclops_eye, "cyclops_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+// Cyclops personality: dramatic, powerful, one eye shows it all
+static constexpr float CYCLOPS_EMOTION_INTENSITY = 1.3f;
+
+struct MoodColorEffect
+{
+    float redMultiplier;
+    float greenMultiplier;
+    float blueMultiplier;
+
+    MoodColorEffect(float r, float g, float b) 
+        : redMultiplier(r), greenMultiplier(g), blueMultiplier(b) {}
+};
+
+// Mood-to-color mapping for cyclops (dramatic, powerful)
+static const MoodColorEffect cyclops_mood_effects[Mood::componentCount] = {
+    MoodColorEffect(0.9f * CYCLOPS_EMOTION_INTENSITY, -0.4f * CYCLOPS_EMOTION_INTENSITY, -0.4f * CYCLOPS_EMOTION_INTENSITY), // ANGER (blazing)
+    MoodColorEffect(-0.3f * CYCLOPS_EMOTION_INTENSITY, -0.3f * CYCLOPS_EMOTION_INTENSITY, 0.7f * CYCLOPS_EMOTION_INTENSITY), // FEAR (intense)
+    MoodColorEffect(0.5f * CYCLOPS_EMOTION_INTENSITY, 0.6f * CYCLOPS_EMOTION_INTENSITY, 0.3f * CYCLOPS_EMOTION_INTENSITY), // HAPPINESS (bright)
+    MoodColorEffect(-0.4f * CYCLOPS_EMOTION_INTENSITY, -0.4f * CYCLOPS_EMOTION_INTENSITY, 0.5f * CYCLOPS_EMOTION_INTENSITY), // SADNESS (deep)
+    MoodColorEffect(0.4f * CYCLOPS_EMOTION_INTENSITY, 0.6f * CYCLOPS_EMOTION_INTENSITY, 0.2f * CYCLOPS_EMOTION_INTENSITY), // CURIOSITY (focused)
+    MoodColorEffect(0.6f * CYCLOPS_EMOTION_INTENSITY, 0.4f * CYCLOPS_EMOTION_INTENSITY, 0.6f * CYCLOPS_EMOTION_INTENSITY), // AFFECTION (gentle giant)
+    MoodColorEffect(0.7f * CYCLOPS_EMOTION_INTENSITY, -0.2f * CYCLOPS_EMOTION_INTENSITY, -0.2f * CYCLOPS_EMOTION_INTENSITY), // IRRITATION (warning)
+    MoodColorEffect(0.4f * CYCLOPS_EMOTION_INTENSITY, 0.6f * CYCLOPS_EMOTION_INTENSITY, 0.4f * CYCLOPS_EMOTION_INTENSITY), // CONTENTMENT (peaceful)
+    MoodColorEffect(0.5f * CYCLOPS_EMOTION_INTENSITY, 0.7f * CYCLOPS_EMOTION_INTENSITY, 0.3f * CYCLOPS_EMOTION_INTENSITY)  // EXCITEMENT (powerful)
+};
+
+static Pixel* currentFrame = nullptr;
+static size_t frameSize = 0;
+static Mood lastMood;
+
+esp_err_t cyclops_eye_init(void)
+{
+    ESP_LOGI(TAG_cyclops_eye, "Initializing cyclops eye with dramatic emotion intensity %.2f", CYCLOPS_EMOTION_INTENSITY);
+    
+    currentFrame = gc9a01_getBuffer();
+    if (!currentFrame)
+    {
+        ESP_LOGE(TAG_cyclops_eye, "Failed to get frame buffer");
+        return ESP_FAIL;
+    }
+    
+    frameSize = gc9a01_getFrameSize();
+    
+    // Clear mood state
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        lastMood.components[i] = 0;
+    }
+    
+    ESP_LOGI(TAG_cyclops_eye, "Cyclops eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 
-void cyclops_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_cyclops_eye, "cyclops_eye act");
+void cyclops_eye_act(void)
+{
+    if (!currentFrame)
+    {
+        return;
+    }
+    
+    // Read current mood from shared memory
+    Mood* currentMood = GSM.read<Mood>();
+    if (!currentMood)
+    {
+        return;
+    }
+    
+    // Check if mood changed significantly
+    bool moodChanged = false;
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        if (abs(currentMood->components[i] - lastMood.components[i]) > 5)
+        {
+            moodChanged = true;
+            break;
+        }
+    }
+    
+    if (!moodChanged)
+    {
+        return;
+    }
+    
+    // Update last mood
+    lastMood = *currentMood;
+    
+    // Calculate mood-based color tint
+    Pixel moodTint;
+    moodTint.red = 0;
+    moodTint.green = 0;
+    moodTint.blue = 0;
+    
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        float intensity = currentMood->components[i] / 100.0f;
+        
+        int redContrib = (int)(cyclops_mood_effects[i].redMultiplier * intensity * Pixel::maxRed);
+        int greenContrib = (int)(cyclops_mood_effects[i].greenMultiplier * intensity * Pixel::maxGreen);
+        int blueContrib = (int)(cyclops_mood_effects[i].blueMultiplier * intensity * Pixel::maxBlue);
+        
+        moodTint.red += redContrib;
+        moodTint.green += greenContrib;
+        moodTint.blue += blueContrib;
+    }
+    
+    // Clamp to valid range
+    if (moodTint.red < 0) moodTint.red = 0;
+    if (moodTint.green < 0) moodTint.green = 0;
+    if (moodTint.blue < 0) moodTint.blue = 0;
+    if (moodTint.red > (int)Pixel::maxRed) moodTint.red = Pixel::maxRed;
+    if (moodTint.green > (int)Pixel::maxGreen) moodTint.green = Pixel::maxGreen;
+    if (moodTint.blue > (int)Pixel::maxBlue) moodTint.blue = Pixel::maxBlue;
+    
+    // Apply mood tint to entire frame using saturating addition
+    for (size_t pixel = 0; pixel < frameSize; pixel++)
+    {
+        currentFrame[pixel] = currentFrame[pixel] + moodTint;
+    }
 }
 
 

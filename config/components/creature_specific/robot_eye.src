@@ -1,18 +1,131 @@
 // robot_eye component implementation
-// Auto-generated stub - needs actual implementation
+// Robots show calculated, mechanical emotional responses
 
 #include "esp_log.h"
+#include "gc9a01.hpp"
+#include "Mood.hpp"
+#include "SharedMemory.hpp"
+
 static const char *TAG_robot_eye = "robot_eye";
 
-esp_err_t robot_eye_init(void) {
-    ESP_LOGI(TAG_robot_eye, "robot_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+// Robot personality: mechanical, calculated, systematic responses
+static constexpr float ROBOT_EMOTION_INTENSITY = 0.6f;
+
+struct MoodColorEffect
+{
+    float redMultiplier;
+    float greenMultiplier;
+    float blueMultiplier;
+
+    MoodColorEffect(float r, float g, float b) 
+        : redMultiplier(r), greenMultiplier(g), blueMultiplier(b) {}
+};
+
+// Mood-to-color mapping for robots (systematic, digital colors)
+static const MoodColorEffect robot_mood_effects[Mood::componentCount] = {
+    MoodColorEffect(0.6f * ROBOT_EMOTION_INTENSITY, 0.0f * ROBOT_EMOTION_INTENSITY, 0.0f * ROBOT_EMOTION_INTENSITY), // ANGER (alert red)
+    MoodColorEffect(0.0f * ROBOT_EMOTION_INTENSITY, 0.0f * ROBOT_EMOTION_INTENSITY, 0.6f * ROBOT_EMOTION_INTENSITY), // FEAR (diagnostic blue)
+    MoodColorEffect(0.0f * ROBOT_EMOTION_INTENSITY, 0.6f * ROBOT_EMOTION_INTENSITY, 0.0f * ROBOT_EMOTION_INTENSITY), // HAPPINESS (operational green)
+    MoodColorEffect(-0.2f * ROBOT_EMOTION_INTENSITY, -0.2f * ROBOT_EMOTION_INTENSITY, 0.3f * ROBOT_EMOTION_INTENSITY), // SADNESS (low power)
+    MoodColorEffect(0.2f * ROBOT_EMOTION_INTENSITY, 0.5f * ROBOT_EMOTION_INTENSITY, 0.2f * ROBOT_EMOTION_INTENSITY), // CURIOSITY (scanning)
+    MoodColorEffect(0.3f * ROBOT_EMOTION_INTENSITY, 0.3f * ROBOT_EMOTION_INTENSITY, 0.5f * ROBOT_EMOTION_INTENSITY), // AFFECTION (bonding protocol)
+    MoodColorEffect(0.5f * ROBOT_EMOTION_INTENSITY, 0.2f * ROBOT_EMOTION_INTENSITY, 0.0f * ROBOT_EMOTION_INTENSITY), // IRRITATION (warning)
+    MoodColorEffect(0.2f * ROBOT_EMOTION_INTENSITY, 0.4f * ROBOT_EMOTION_INTENSITY, 0.2f * ROBOT_EMOTION_INTENSITY), // CONTENTMENT (optimal)
+    MoodColorEffect(0.3f * ROBOT_EMOTION_INTENSITY, 0.5f * ROBOT_EMOTION_INTENSITY, 0.3f * ROBOT_EMOTION_INTENSITY)  // EXCITEMENT (processing)
+};
+
+static Pixel* currentFrame = nullptr;
+static size_t frameSize = 0;
+static Mood lastMood;
+
+esp_err_t robot_eye_init(void)
+{
+    ESP_LOGI(TAG_robot_eye, "Initializing robot eye with mechanical emotion intensity %.2f", ROBOT_EMOTION_INTENSITY);
+    
+    currentFrame = gc9a01_getBuffer();
+    if (!currentFrame)
+    {
+        ESP_LOGE(TAG_robot_eye, "Failed to get frame buffer");
+        return ESP_FAIL;
+    }
+    
+    frameSize = gc9a01_getFrameSize();
+    
+    // Clear mood state
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        lastMood.components[i] = 0;
+    }
+    
+    ESP_LOGI(TAG_robot_eye, "Robot eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 
-void robot_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_robot_eye, "robot_eye act");
+void robot_eye_act(void)
+{
+    if (!currentFrame)
+    {
+        return;
+    }
+    
+    // Read current mood from shared memory
+    Mood* currentMood = GSM.read<Mood>();
+    if (!currentMood)
+    {
+        return;
+    }
+    
+    // Check if mood changed significantly
+    bool moodChanged = false;
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        if (abs(currentMood->components[i] - lastMood.components[i]) > 5)
+        {
+            moodChanged = true;
+            break;
+        }
+    }
+    
+    if (!moodChanged)
+    {
+        return;
+    }
+    
+    // Update last mood
+    lastMood = *currentMood;
+    
+    // Calculate mood-based color tint
+    Pixel moodTint;
+    moodTint.red = 0;
+    moodTint.green = 0;
+    moodTint.blue = 0;
+    
+    for (int i = 0; i < Mood::componentCount; i++)
+    {
+        float intensity = currentMood->components[i] / 100.0f;
+        
+        int redContrib = (int)(robot_mood_effects[i].redMultiplier * intensity * Pixel::maxRed);
+        int greenContrib = (int)(robot_mood_effects[i].greenMultiplier * intensity * Pixel::maxGreen);
+        int blueContrib = (int)(robot_mood_effects[i].blueMultiplier * intensity * Pixel::maxBlue);
+        
+        moodTint.red += redContrib;
+        moodTint.green += greenContrib;
+        moodTint.blue += blueContrib;
+    }
+    
+    // Clamp to valid range
+    if (moodTint.red < 0) moodTint.red = 0;
+    if (moodTint.green < 0) moodTint.green = 0;
+    if (moodTint.blue < 0) moodTint.blue = 0;
+    if (moodTint.red > (int)Pixel::maxRed) moodTint.red = Pixel::maxRed;
+    if (moodTint.green > (int)Pixel::maxGreen) moodTint.green = Pixel::maxGreen;
+    if (moodTint.blue > (int)Pixel::maxBlue) moodTint.blue = Pixel::maxBlue;
+    
+    // Apply mood tint to entire frame using saturating addition
+    for (size_t pixel = 0; pixel < frameSize; pixel++)
+    {
+        currentFrame[pixel] = currentFrame[pixel] + moodTint;
+    }
 }
 
 

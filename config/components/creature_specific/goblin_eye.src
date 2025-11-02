@@ -1,18 +1,127 @@
 // goblin_eye component implementation
-// Auto-generated stub - needs actual implementation
+// Shared goblin eye processing logic with Pixel-based mood rendering
+// Uses display-agnostic Pixel types with saturation arithmetic
 
 #include "esp_log.h"
+#include "components/gc9a01.hdr"  // For Pixel type
+#include "Mood.hpp"
+#include "SharedMemory.hpp"
+
 static const char *TAG_goblin_eye = "goblin_eye";
 
-esp_err_t goblin_eye_init(void) {
-    ESP_LOGI(TAG_goblin_eye, "goblin_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+// Shared frame buffer (set by left/right eye positioned components)
+static Pixel* currentFrame = nullptr;
+static uint32_t current_frame_size = 0;
+
+// Goblin personality multiplier - goblins show emotions STRONGLY (1.5x)
+// Compare to bears which might use 0.5x (stoic) or cats which use 0.8x (aloof)
+static constexpr float GOBLIN_EMOTION_INTENSITY = 1.5f;
+
+// Mood tracking for optimization
+static Mood lastMood;
+static bool mood_initialized = false;
+
+// Mood-to-color mapping for goblin eyes (defined later in this file)
+static const MoodColorEffect goblin_mood_effects[Mood::componentCount] = {
+    // ANGER: Red tint, reduces green/blue
+    MoodColorEffect(0.8f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY),
+    // FEAR: Blue tint, pale (reduces all slightly, increases blue)
+    MoodColorEffect(-0.2f * GOBLIN_EMOTION_INTENSITY, -0.2f * GOBLIN_EMOTION_INTENSITY, 0.6f * GOBLIN_EMOTION_INTENSITY),
+    // HAPPINESS: Yellow/warm tint (increase red+green)
+    MoodColorEffect(0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY, 0.1f * GOBLIN_EMOTION_INTENSITY),
+    // SADNESS: Desaturate (reduce all colors)
+    MoodColorEffect(-0.3f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY, -0.1f * GOBLIN_EMOTION_INTENSITY),
+    // CURIOSITY: Green tint (goblins get greenish when curious)
+    MoodColorEffect(0.1f * GOBLIN_EMOTION_INTENSITY, 0.7f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY),
+    // AFFECTION: Purple/warm tint
+    MoodColorEffect(0.4f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY, 0.4f * GOBLIN_EMOTION_INTENSITY),
+    // IRRITATION: Orange-red tint
+    MoodColorEffect(0.6f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY, -0.2f * GOBLIN_EMOTION_INTENSITY),
+    // CONTENTMENT: Warm, slightly yellow
+    MoodColorEffect(0.3f * GOBLIN_EMOTION_INTENSITY, 0.4f * GOBLIN_EMOTION_INTENSITY, 0.1f * GOBLIN_EMOTION_INTENSITY),
+    // EXCITEMENT: Bright, all colors up
+    MoodColorEffect(0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY)
+};
+
+esp_err_t goblin_eye_init(void) 
+{
+    ESP_LOGI(TAG_goblin_eye, "Initializing shared goblin eye resources");
+    
+    // Clear mood tracking
+    lastMood.clear();
+    mood_initialized = false;
+    
+    ESP_LOGI(TAG_goblin_eye, "Goblin eye mood processing initialized (emotion intensity: %.1fx)", 
+             GOBLIN_EMOTION_INTENSITY);
     return ESP_OK;
 }
 
-void goblin_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_eye, "goblin_eye act");
+void goblin_eye_act(void) 
+{
+    // Only process if we have a valid frame set by left/right eye components
+    if (currentFrame == nullptr || current_frame_size == 0) 
+    {
+        return;
+    }
+    
+    // Get current global mood from shared memory
+    Mood* mood_ptr = GSM.read<Mood>();
+    if (mood_ptr == nullptr) 
+    {
+        return;  // No mood data available
+    }
+    Mood currentMood = *mood_ptr;
+    
+    // Check if mood changed (optimization - only recalculate when mood changes)
+    if (!mood_initialized || lastMood != currentMood) 
+    {
+        // Step 1: Calculate mood color deltas (once per mood change)
+        Pixel moodTint;  // Accumulated color adjustment based on mood
+        moodTint.red = 0;
+        moodTint.green = 0;
+        moodTint.blue = 0;
+        
+        for (int i = 0; i < Mood::componentCount; ++i) 
+        {
+            int8_t moodValue = currentMood.components[i];
+            if (moodValue != 0) 
+            {
+                const MoodColorEffect& effect = goblin_mood_effects[i];
+                
+                // Calculate color contribution (scaled by mood intensity)
+                // moodValue ranges from -128 to +127
+                // Normalize to fractional multiplier and apply effect
+                float intensity = static_cast<float>(moodValue) / 127.0f;
+                
+                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * Pixel::maxRed);
+                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * Pixel::maxGreen);
+                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * Pixel::maxBlue);
+                
+                // Accumulate using Pixel's saturating addition
+                Pixel contribution;
+                contribution.red = (red_contrib > 0) ? red_contrib : 0;
+                contribution.green = (green_contrib > 0) ? green_contrib : 0;
+                contribution.blue = (blue_contrib > 0) ? blue_contrib : 0;
+                
+                moodTint += contribution;
+            }
+        }
+        
+        // Step 2: Apply mood tint to ALL pixels in the frame
+        for (uint32_t pixel = 0; pixel < current_frame_size; pixel++) 
+        {
+            // Add mood tint using saturating arithmetic
+            currentFrame[pixel] += moodTint;
+        }
+        
+        // Step 3: Remember new mood
+        lastMood = currentMood;
+        mood_initialized = true;
+        
+        ESP_LOGV(TAG_goblin_eye, "Frame updated with mood tint R:%u G:%u B:%u", 
+                 moodTint.red, moodTint.green, moodTint.blue);
+    }
+    // If mood hasn't changed, frame colors remain cached - no processing needed!
 }
 
 
