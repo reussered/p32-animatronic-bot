@@ -1,4 +1,4 @@
-﻿{
+{
     "version":  "1.0.0",
     "software":  {
                      "act_function":  "skeleton_jaw_actuator_act",

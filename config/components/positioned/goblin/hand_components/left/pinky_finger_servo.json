@@ -1,4 +1,4 @@
-﻿{
+{
     "version":  "1.0.0",
     "software":  {
                      "act_function":  "pinky_finger_servo_act",

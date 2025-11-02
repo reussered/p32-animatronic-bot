@@ -1,4 +1,4 @@
-﻿{
+{
     "relative_filename":  "config/components/interfaces/hc_sr04_ultrasonic_sensor.json",
     "version":  "1.0.0",
     "component_type":  "INTERFACE_BUS",

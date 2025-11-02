@@ -1,4 +1,4 @@
-﻿{
+{
     "version":  "1.0.0",
     "software":  {
                      "act_function":  "base_elbow_servo_act",

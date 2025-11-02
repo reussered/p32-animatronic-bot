@@ -1,4 +1,4 @@
-﻿{
+{
     "name":  "esp32_c3_controller",
     "type":  "controller",
     "chip_family":  "ESP32_C3",

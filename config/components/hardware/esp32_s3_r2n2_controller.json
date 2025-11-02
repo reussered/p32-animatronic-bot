@@ -1,4 +1,4 @@
-﻿{
+{
     "name":  "esp32_s3_r2n2_controller",
     "type":  "controller",
     "chip_family":  "ESP32_S3",
