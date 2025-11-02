@@ -1,0 +1,44 @@
+{
+    "relative_filename":  "config/components/positioned/zombie/head_components/zombie_left_eye.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name": "zombie_left_eye","component_type": "POSITIONED_COMPONENT",
+    "subsystem":  "HEAD",
+    "components":  [
+                                 "config/components/creature_specific/zombie_eye.json"
+                             ],
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/gc9a01.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/zombie/zombie_eye_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
+                             },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "-1.5 INCH",
+                     "y":  "+0.7 INCH",
+                     "z":  "-0.6 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "5 DEGREES",
+                        "rotation":  "15 DEGREES",
+                        "roll":  "-3 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "eye_color":  "ZOMBIE_MILKY_WHITE",
+                                     "pupil_style":  "DILATED_DEAD",
+                                     "expression_range":  "VACANT_TO_HUNGRY",
+                                     "decay_simulation":  "BLOODSHOT_VEINS",
+                                     "tracking_behavior":  "ERRATIC_TWITCHING",
+                                     "horror_factor":  "MAXIMUM"
+                                 },
+    "animation_library":  {
+                              "default":  "zombie_vacant_stare_left.anim",
+                              "hunting":  "zombie_hungry_focus_left.anim",
+                              "twitching":  "zombie_nervous_twitch_left.anim",
+                              "feeding":  "zombie_feeding_frenzy_left.anim",
+                              "decay":  "zombie_deteriorating_left.anim"
+                          },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}
+

@@ -1,0 +1,42 @@
+{
+    "relative_filename":  "config/components/positioned/zombie/head_components/zombie_mouth.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "zombie_mouth","component_type": "POSITIONED_COMPONENT",
+    "subsystem":  "HEAD",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/zombie/zombie_mouth_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
+                             },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0.0 INCH",
+                     "y":  "-2.1 INCH",
+                     "z":  "+0.3 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "-15 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "2 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "mouth_type":  "DECAYING_HUMANOID",
+                                     "teeth_display":  "ROTTING_BROKEN",
+                                     "expression_range":  "MOAN_TO_BITE",
+                                     "decay_simulation":  "FLESH_DETERIORATION",
+                                     "blood_effects":  "DRIPPING_GORE",
+                                     "jaw_behavior":  "UNCONTROLLED_GNASHING",
+                                     "horror_factor":  "EXTREME"
+                                 },
+    "animation_library":  {
+                              "default":  "zombie_slack_jaw.anim",
+                              "moaning":  "zombie_mournful_moan.anim",
+                              "feeding":  "zombie_ravenous_bite.anim",
+                              "decay":  "zombie_flesh_rot.anim",
+                              "threatening":  "zombie_aggressive_snap.anim"
+                          },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}
+

@@ -1,0 +1,38 @@
+{
+    "relative_filename":  "config/components/positioned/goblin/arm_components/left/elbow_flexion_servo.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_left_elbow_flexion","component_type": "POSITIONED_COMPONENT",
+    "subsystem":  "ARM",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/mg996r_servo.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/goblin/elbow_flexion_mount.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/servo_standard_mount.scad"
+                             },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "shoulder_socket_left",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "-10.0 INCH",
+                     "z":  "0 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "servo_specific_config":  {
+                                  "joint_type":  "ELBOW_FLEXION_EXTENSION",
+                                  "range_degrees":  "150",
+                                  "center_position":  "90",
+                                  "movement_direction":  "BEND_STRAIGHTEN",
+                                  "max_torque_required_kg_cm":  "12"
+                              },
+    "function":  "elbow_bend_control",
+    "description":  "Left elbow flexion/extension servo - forearm bend control",
+    "timing":  {
+                   "hitCount":  8
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}
+
