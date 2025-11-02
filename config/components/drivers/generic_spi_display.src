@@ -3,80 +3,138 @@
 
 #include "esp_log.h"
 #include "driver/spi_master.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "components/spi_display_bus.hdr"
+#include "driver/gpio.h"
 
 static const char *TAG_generic_spi_display = "generic_spi_display";
 
-// External references to SPI devices (defined in gc9a01.src)
-extern spi_device_handle_t spi_left;
-extern spi_device_handle_t spi_right;
+// Display commands
+#define GC9A01_SWRESET 0x01
+#define GC9A01_SLPOUT 0x11
+#define GC9A01_DISPON 0x29
+#define GC9A01_CASET  0x2A
+#define GC9A01_RASET  0x2B
+#define GC9A01_RAMWR  0x2C
 
-// SPI transaction functions
-static void spi_write_command(spi_device_handle_t spi, uint8_t cmd) {
+// Internal helper functions to send commands and data
+static void generic_spi_write_data(spi_device_handle_t spi, const uint8_t *data, size_t len) {
+    if (!spi) return;
+    esp_err_t ret;
+    spi_transaction_t t;
+    if (len == 0) return;
+    memset(&t, 0, sizeof(t));
+    t.length = len * 8;
+    t.tx_buffer = data;
+    t.user = (void*)1; // D/C = 1 for data
+    ret = spi_device_polling_transmit(spi, &t);
+    ESP_ERROR_CHECK(ret);
+}
+
+static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
+    if (!spi) return;
     esp_err_t ret;
     spi_transaction_t t;
     memset(&t, 0, sizeof(t));
     t.length = 8;
     t.tx_buffer = &cmd;
-    t.user = (void*)0;  // D/C = 0 for command
+    t.user = (void*)0; // D/C = 0 for command
     ret = spi_device_polling_transmit(spi, &t);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG_generic_spi_display, "SPI command transmit failed: %s", esp_err_to_name(ret));
-    }
-}
-
-static void spi_write_data(spi_device_handle_t spi, uint8_t *data, size_t len) {
-    esp_err_t ret;
-    spi_transaction_t t;
-    memset(&t, 0, sizeof(t));
-    t.length = len * 8;
-    t.tx_buffer = data;
-    t.user = (void*)1;  // D/C = 1 for data
-    ret = spi_device_polling_transmit(spi, &t);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG_generic_spi_display, "SPI data transmit failed: %s", esp_err_to_name(ret));
-    }
+    ESP_ERROR_CHECK(ret);
 }
 
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI(TAG_generic_spi_display, "Generic SPI display interface initialized");
-    // SPI devices are initialized by gc9a01 component
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_pin.cs);
+
+    if (cur_spi_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
+        return ESP_FAIL;
+    }
+
+    // Hardware reset
+    if (cur_spi_pin.rst != -1) {
+        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 0);
+        vTaskDelay(pdMS_TO_TICKS(100));
+        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 1);
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+
+    // Software reset
+    spi_write_command(cur_spi_pin.handle, GC9A01_SWRESET);
+    vTaskDelay(pdMS_TO_TICKS(150));
+
+    // Sleep out
+    spi_write_command(cur_spi_pin.handle, GC9A01_SLPOUT);
+    vTaskDelay(pdMS_TO_TICKS(500));
+
+    // Display on
+    spi_write_command(cur_spi_pin.handle, GC9A01_DISPON);
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_pin.cs);
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    // Generic display interface is passive - drawing handled by specific display components
-    // ESP_LOGD(TAG_generic_spi_display, "generic_spi_display act");
-}
+    if (cur_spi_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_pin.cs);
+        return;
+    }
 
-// Utility functions that can be called by other components
-void generic_display_fill_rect(spi_device_handle_t spi, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
-    if (!spi) return;
+    // Get the appropriate framebuffer based on which display we're driving
+    // CS=3 is left eye, CS=6 is right eye
+    uint16_t* framebuffer = nullptr;
+    if (cur_spi_pin.cs == 3) {
+        framebuffer = goblin_left_eye_get_buffer();
+    } else if (cur_spi_pin.cs == 6) {
+        framebuffer = goblin_right_eye_get_buffer();
+    }
 
-    // Set column address
-    spi_write_command(spi, 0x2A);
-    uint8_t col_data[] = {x >> 8, x & 0xFF, (x + w - 1) >> 8, (x + w - 1) & 0xFF};
-    spi_write_data(spi, col_data, 4);
+    if (!framebuffer) {
+        ESP_LOGE(TAG_generic_spi_display, "No framebuffer available for CS=%d", cur_spi_pin.cs);
+        return;
+    }
 
-    // Set row address
-    spi_write_command(spi, 0x2B);
-    uint8_t row_data[] = {y >> 8, y & 0xFF, (y + h - 1) >> 8, (y + h - 1) & 0xFF};
-    spi_write_data(spi, row_data, 4);
+    // Set column address (0-239)
+    spi_write_command(cur_spi_pin.handle, GC9A01_CASET);
+    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
+    generic_spi_write_data(cur_spi_pin.handle, col_data, 4);
+
+    // Set row address (0-239)
+    spi_write_command(cur_spi_pin.handle, GC9A01_RASET);
+    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
+    generic_spi_write_data(cur_spi_pin.handle, row_data, 4);
 
     // Memory write
-    spi_write_command(spi, 0x2C);
+    spi_write_command(cur_spi_pin.handle, GC9A01_RAMWR);
 
-    // Send pixel data
-    uint8_t pixel_data[2];
-    pixel_data[0] = color >> 8;    // High byte
-    pixel_data[1] = color & 0xFF;  // Low byte
-
-    for (uint32_t i = 0; i < w * h; i++) {
-        spi_write_data(spi, pixel_data, 2);
+    // Send the actual framebuffer data
+    // Convert RGB565 pixels to byte stream (big-endian)
+    const size_t total_pixels = 240 * 240;
+    const size_t row_size = 240 * 2;  // 240 pixels * 2 bytes per pixel
+    uint8_t* row_buffer = (uint8_t*)malloc(row_size);
+    
+    if (!row_buffer) {
+        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate row buffer");
+        return;
     }
-}
 
-void generic_display_draw_pixel(spi_device_handle_t spi, uint16_t x, uint16_t y, uint16_t color) {
-    generic_display_fill_rect(spi, x, y, 1, 1, color);
+    // Send framebuffer row by row
+    for (uint32_t row = 0; row < 240; row++) {
+        uint16_t* row_pixels = framebuffer + (row * 240);
+        
+        // Convert uint16_t pixels to byte stream
+        for (uint32_t col = 0; col < 240; col++) {
+            uint16_t pixel = row_pixels[col];
+            row_buffer[col * 2] = pixel >> 8;       // High byte
+            row_buffer[col * 2 + 1] = pixel & 0xFF; // Low byte
+        }
+        
+        generic_spi_write_data(cur_spi_pin.handle, row_buffer, row_size);
+    }
+    
+    free(row_buffer);
 }
 
 

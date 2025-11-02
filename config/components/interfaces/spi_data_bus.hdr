@@ -1,0 +1,25 @@
+#ifndef SPI_DATA_BUS_H
+#define SPI_DATA_BUS_H
+
+#include "driver/spi_master.h"
+#include <stdio.h>
+
+// Struct to hold the pin configuration for a single SPI data device
+struct spi_data_pinset_t {
+    spi_data_pinset_t()
+        : mosi(-1), miso(-1), sclk(-1), cs(-1), device_handle(nullptr) {
+    }
+    int mosi;
+    int miso;
+    int sclk;
+    int cs;
+    spi_device_handle_t device_handle;
+
+    void print() {
+        printf("SPI_DATA bus: mosi=%d, miso=%d, sclk=%d, cs=%d\n", mosi, miso, sclk, cs);
+    }
+};
+
+extern spi_data_pinset_t cur_spi_data_pin;
+
+#endif // SPI_DATA_BUS_H

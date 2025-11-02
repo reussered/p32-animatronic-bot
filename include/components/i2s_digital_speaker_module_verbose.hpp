@@ -1,7 +1,0 @@
-#ifndef COMPONENTS_i2s_digital_speaker_module_verbose_HPP
-#define COMPONENTS_i2s_digital_speaker_module_verbose_HPP
-
-#include "components/i2s_digital_speaker_module_verbose.hdr"
-
-#endif // COMPONENTS_i2s_digital_speaker_module_verbose_HPP
-

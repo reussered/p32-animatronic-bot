@@ -1,0 +1,32 @@
+// SPI data bus component header
+// Dynamic pin assignment information for full-duplex SPI devices
+
+#ifndef SPI_DATA_BUS_H
+#define SPI_DATA_BUS_H
+
+#include "esp_err.h"
+#include "driver/spi_master.h"
+#include <stdio.h>
+
+struct spi_data_pinset_t {
+    spi_data_pinset_t()
+        : mosi(-1), miso(-1), clk(-1), cs(-1), handle(nullptr) {}
+
+    int mosi;
+    int miso;
+    int clk;
+    int cs;
+    spi_device_handle_t handle;
+
+    void print() {
+        printf("spi_data_pinset: cs=%d, mosi=%d, miso=%d, clk=%d\n", 
+               cs, mosi, miso, clk);
+    }
+};
+
+extern spi_data_pinset_t cur_spi_data_pin;
+
+esp_err_t spi_data_bus_init(void);
+void spi_data_bus_act(void);
+
+#endif // SPI_DATA_BUS_H

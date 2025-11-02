@@ -1,0 +1,132 @@
+// spi_display_bus component implementation
+// Dedicated SPI bus for display devices with dynamic pin assignment
+
+#include "esp_log.h"
+#include "esp_system.h"
+#include "driver/spi_master.h"
+#include "driver/gpio.h"
+#include "esp32_s3_r8n16_pin_assignments.h"
+#include "components/spi_display_bus.hdr"
+
+#include <stddef.h>
+
+static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
+static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
+spi_display_pinset_t cur_spi_pin;
+
+static const char *TAG_spi_display_bus = "spi_display_bus";
+
+static spi_display_pinset_t shared_display_pins;
+
+// Helper to claim the next available GPIO from the provided assignable list
+static int get_next_assignable(const int *assignable, size_t assignable_count) {
+    for (size_t i = 0; i < assignable_count; ++i) {
+        const int candidate = assignable[i];
+        bool already_claimed = false;
+        for (size_t j = 0; j < assigned_pins_count; ++j) {
+            if (assigned_pins[j] == candidate) {
+                already_claimed = true;
+                break;
+            }
+        }
+
+        if (!already_claimed) {
+            if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
+                ESP_LOGE(TAG_spi_display_bus, "Assigned pin buffer exhausted");
+                esp_system_abort("Assigned pin buffer exhausted");
+            }
+
+            assigned_pins[assigned_pins_count++] = candidate;
+            return candidate;
+        }
+    }
+
+    ESP_LOGE(TAG_spi_display_bus, "No assignable pins remain for SPI display bus");
+    esp_system_abort("SPI display bus ran out of assignable pins");
+    return -1; // Unreachable, abort will terminate execution
+}
+
+esp_err_t spi_display_bus_init(void) {
+    // Locate the first available slot for a display device
+    size_t slot = 0;
+    while (slot < SPI_DISPLAY_SLOT_COUNT && spi_display_slots[slot].cs != -1) {
+        ++slot;
+    }
+
+    if (slot >= SPI_DISPLAY_SLOT_COUNT) {
+        ESP_LOGE(TAG_spi_display_bus, "No remaining SPI display device slots available");
+        return ESP_FAIL;
+    }
+
+    // Assign shared pins (MOSI, CLK, RESET) once for the bus
+    const bool shared_unassigned = (shared_display_pins.mosi < 0);
+    if (shared_unassigned) {
+        shared_display_pins.mosi = get_next_assignable(spi_assignable, spi_assignable_count);
+        shared_display_pins.clk = get_next_assignable(spi_assignable, spi_assignable_count);
+        shared_display_pins.rst = get_next_assignable(spi_assignable, spi_assignable_count);
+
+        spi_bus_config_t bus_cfg = {
+            .mosi_io_num = shared_display_pins.mosi,
+            .miso_io_num = -1,
+            .sclk_io_num = shared_display_pins.clk,
+            .quadwp_io_num = -1,
+            .quadhd_io_num = -1,
+            .max_transfer_sz = 240 * 240 * 2 + 8,
+        };
+
+        const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG_spi_display_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            return ret;
+        }
+
+        ESP_LOGI(TAG_spi_display_bus,
+                 "Shared SPI display pins assigned MOSI:%d CLK:%d RST:%d",
+                 shared_display_pins.mosi,
+                 shared_display_pins.clk,
+                 shared_display_pins.rst);
+    }
+
+    spi_display_pinset_t pins = shared_display_pins;
+    pins.cs = get_next_assignable(spi_assignable, spi_assignable_count);
+    pins.dc = get_next_assignable(spi_assignable, spi_assignable_count);
+    pins.bl = get_next_assignable(spi_assignable, spi_assignable_count);
+    pins.handle = nullptr;
+
+    spi_display_slots[slot] = pins;
+
+    ESP_LOGI(TAG_spi_display_bus,
+             "Display slot %u assigned pins MOSI:%d CLK:%d CS:%d DC:%d BL:%d RST:%d",
+             static_cast<unsigned>(slot),
+             pins.mosi,
+             pins.clk,
+             pins.cs,
+             pins.dc,
+             pins.bl,
+             pins.rst);
+
+    return ESP_OK;
+}
+
+void spi_display_bus_act(void) {
+    static int slot = 0;
+
+    if (spi_display_slots[0].cs == -1) {
+        slot = 0;
+        cur_spi_pin = spi_display_pinset_t();
+        return;
+    }
+
+    if (slot < 0 || static_cast<size_t>(slot) >= SPI_DISPLAY_SLOT_COUNT ||
+        spi_display_slots[static_cast<size_t>(slot)].cs == -1) {
+        slot = 0;
+    }
+
+    cur_spi_pin = spi_display_slots[static_cast<size_t>(slot)];
+
+    ++slot;
+    if (static_cast<size_t>(slot) >= SPI_DISPLAY_SLOT_COUNT ||
+        spi_display_slots[static_cast<size_t>(slot)].cs == -1) {
+        slot = 0;
+    }
+}

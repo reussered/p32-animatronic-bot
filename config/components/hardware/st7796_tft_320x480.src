@@ -4,6 +4,30 @@
 #include "esp_log.h"
 static const char *TAG_st7796_tft_320x480 = "st7796_tft_320x480";
 
+// Define ST7796_InitialPixel
+// Note: value should be set before allocating buffers containing ST7796_Pixels
+ST7796_Pixel ST7796_InitialPixel;
+
+size_t st7796_get_width(void) {
+    return 320;
+}
+
+size_t st7796_get_height(void) {
+    return 480;
+}
+
+size_t getFrameSize(void) {
+    return 320 * 480;
+}
+
+size_t getFrameRowSize(void) {
+    return 320;
+}
+
+size_t getDisplaySize(void) {
+    return 320 * 480;
+}
+
 esp_err_t st7796_init(void) {
     ESP_LOGI(TAG_st7796_tft_320x480, "st7796 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code

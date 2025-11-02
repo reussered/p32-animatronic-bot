@@ -189,78 +189,48 @@ struct gc9a01_config {
     const char* required_interface_functions[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
 };
 
-// Component definition sourced from config\components\hardware\generic_spi_display.json
+// Component definition sourced from config\components\drivers\generic_spi_display.json
 struct generic_spi_display_config {
-    const char* relative_filename = "config/components/hardware/generic_spi_display.json";
-    const char* version = "1.0.0";
-    const char* author = "config/author.json";
-    const char* hardware_type = "GENERIC_SPI_DISPLAY";
-    const char* component_type = "DISPLAY_DRIVER";
-    bool display_driver = true;
     const char* name = "generic_spi_display";
-    const char* subsystem = "HEAD";
-    struct physical_specs_t {
-        const char* description = "Generic SPI display specifications - configured per device";
-    } physical_specs;
+    const char* type = "driver";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Generic SPI display driver for ESP32-S3 with configurable pin mapping and display parameters";
+    const char* created = "2025-10-29";
+    const char* hardware_type = "display_driver";
+    struct capabilities_t {
+        const char* bus_type = "SPI";
+        const char* max_resolution = "240x240";
+        const char* color_depth = "16-bit";
+        const char* interface_speed = "up to 80MHz";
+        const char* supported_displays[4] = { "GC9A01", "ILI9341", "ST7789", "custom SPI displays" };
+    } capabilities;
     struct electrical_specs_t {
-        const char* supply_voltage = "3.3V";
-        const char* interface = "SPI";
-        const char* current_consumption = "Variable";
+        const char* voltage_range = "3.3V";
+        const char* current_draw = "50-200mA";
+        const char* spi_mode = "Mode 0 or 3";
+        const char* clock_polarity = "configurable";
     } electrical_specs;
-    struct timing_t {
-        int hitCount = 1;
-        const char* description = "Generic display driver updates every loop for smooth animation";
-    } timing;
-    struct pin_mapping_t {
-        const char* description = "Generic SPI display pins - configured by positioned components";
-        struct generic_pins_t {
-            struct clock_t {
-                const char* function = "SPI Clock";
-                bool required = true;
-                const char* manufacturer_labels[4] = { "CLK", "SCK", "SCLK", "SCL" };
-            } clock;
-            struct data_input_t {
-                const char* function = "SPI Master Out Slave In (Data)";
-                bool required = true;
-                const char* manufacturer_labels[4] = { "MOSI", "SDA", "SDI", "DIN" };
-            } data_input;
-            struct data_command_t {
-                const char* function = "Data/Command Select";
-                bool required = true;
-                const char* manufacturer_labels[4] = { "DC", "D/C", "RS", "A0" };
-            } data_command;
-            struct chip_select_t {
-                const char* function = "Chip Select (Slave Select)";
-                bool required = true;
-                const char* manufacturer_labels[3] = { "CS", "SS", "CE" };
-            } chip_select;
-            struct reset_t {
-                const char* function = "Hardware Reset";
-                bool required = true;
-                const char* manufacturer_labels[3] = { "RST", "RESET", "RES" };
-            } reset;
-        } generic_pins;
-    } pin_mapping;
-    struct driver_config_t {
-        int width = 240;
-        int height = 240;
-        int color_depth = 16;
-        int rotation = 0;
-        bool invert_colors = false;
-        bool backlight_pwm = true;
-    } driver_config;
-    struct color_specifications_t {
-        const char* color_mode = "full_color";
-        int bit_depth = 16;
-        const char* color_space = "RGB565";
-        int colors_supported = 65536;
-        const char* description = "Full color 16-bit RGB display";
-    } color_specifications;
+    struct gpio_requirements_t {
+        const char* required_pins[6] = { "MOSI", "SCLK", "CS", "DC", "RST", "BL" };
+        const char* optional_pins[1] = { "MISO" };
+        int pin_count = 5;
+    } gpio_requirements;
     struct software_t {
         const char* init_function = "generic_spi_display_init";
         const char* act_function = "generic_spi_display_act";
+        const char* api_functions[6] = { "spi_display_init(uint8_t cs_pin, uint8_t dc_pin, uint8_t rst_pin, uint8_t bl_pin)", "spi_display_write_pixel(uint16_t x, uint16_t y, uint16_t color)", "spi_display_fill_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)", "spi_display_draw_bitmap(uint16_t x, uint16_t y, const uint16_t* bitmap, uint16_t w, uint16_t h)", "spi_display_set_brightness(uint8_t brightness)", "spi_display_clear(uint16_t color)" };
     } software;
-    const char* required_interface_functions[4] = { "generic_display_get_buffer", "generic_display_get_frame_size", "generic_display_get_frame_width", "generic_display_get_frame_height" };
+    struct compatibility_t {
+        bool esp32_s3 = true;
+        bool esp32_s2 = true;
+        bool esp32 = false;
+        const char* chip_variants[2] = { "ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1" };
+    } compatibility;
+    struct dependencies_t {
+        const char* esp_idf_components[2] = { "spi", "gpio" };
+        // Empty array: external_libraries
+    } dependencies;
 };
 
 // Component definition sourced from config\components\creature_specific\goblin_eye.json
@@ -343,95 +313,6 @@ struct goblin_eye_config {
     const char* prototype_status = "implemented";
     bool tested = true;
     const char* notes[6] = { "Software-only component - no physical shape", "Code already fully implemented in goblin_eye.cpp/hpp", "Handles mood-based color palette adjustments", "Supports buffer stack processing for left/right eye coordination", "256-color organized palette with distinct mood ranges", "Real-time frame processing with SharedMemory mood integration" };
-};
-
-// Component definition sourced from config\subsystems\goblin_head.json
-struct goblin_head_config {
-    const char* relative_filename = "config/subsystems/goblin_head.json";
-    const char* version = "3.0.0";
-    const char* author = "config/author.json";
-    const char* subsystem_type = "HEAD";
-    const char* subsystem_id = "goblin_head_v1";
-    const char* description = "Goblin head subsystem with facial expressions, sensors, and audio output - Focus on display/audio processing";
-    const char* created = "2025-10-15";
-    const char* controller = "ESP32_S3_R8N16";
-    const char* coordinate_system = "skull_3d";
-    const char* reference_point = "nose_center";
-    const char* units = "MILLIMETERS";
-    const char* name = "goblin_head";
-    const char* component_type = "SUBSYSTEM_ASSEMBLY";
-    struct timing_t {
-        int hitCount = 25;
-        const char* description = "Head coordination every 2.5 seconds";
-    } timing;
-    struct shape_assembly_t {
-        const char* type = "SKULL_FRAME";
-        const char* scad_file = "assets/shapes/scad/skull_generators/goblin_skull.scad";
-        const char* stl_file = "assets/shapes/stl/skull_generators/goblin_skull.stl";
-        const char* description = "Anatomical goblin skull frame with component mounting rings";
-        const char* color_palette = "config/bots/bot_families/fantasy/goblin_family.json";
-        struct mounting_points_t {
-            struct eye_left_t {
-                const char* type = "26mm_ring";
-                float position[3] = { -26.67, 17.78, -8.89 };
-                const char* units = "mm";
-                const char* description = "Left eye socket mounting ring";
-            } eye_left;
-            struct eye_right_t {
-                const char* type = "26mm_ring";
-                float position[3] = { 26.67, 17.78, -8.89 };
-                const char* units = "mm";
-                const char* description = "Right eye socket mounting ring";
-            } eye_right;
-            struct nose_t {
-                const char* type = "22x17mm_bracket";
-                const char* position[3] = { 0, 0, 6.35 };
-                const char* units = "mm";
-                const char* description = "Nose sensor bracket";
-            } nose;
-            struct mouth_t {
-                const char* type = "26mm_ring";
-                const char* position[3] = { 0, -26.67, 0 };
-                const char* units = "mm";
-                const char* description = "Mouth display mounting ring";
-            } mouth;
-            struct ear_left_t {
-                const char* type = "creature_specific";
-                int position[3] = { -50, 25, 0 };
-                const char* units = "mm";
-                const char* description = "Left ear attachment point (goblin-specific)";
-            } ear_left;
-            struct ear_right_t {
-                const char* type = "creature_specific";
-                int position[3] = { 50, 25, 0 };
-                const char* units = "mm";
-                const char* description = "Right ear attachment point (goblin-specific)";
-            } ear_right;
-        } mounting_points;
-    } shape_assembly;
-    struct articulation_t {
-        const char* neck_servos[2] = { "config/components/positioned/neck_pan_servo.json", "config/components/positioned/neck_tilt_servo.json" };
-        int degrees_of_freedom = 2;
-        int neck_pan_range_degrees = 180;
-        int neck_tilt_range_degrees = 90;
-    } articulation;
-    struct mass_properties_t {
-        const char* total_weight_g = "450";
-        int center_of_gravity[3] = { 0, 0, -10 };
-        const char* balance_point = "neck_attachment";
-    } mass_properties;
-    struct power_requirements_t {
-        const char* voltage = "5V";
-        const char* estimated_current_draw_a = "2.5";
-        const char* display_power_w = "3.0";
-        const char* audio_power_w = "2.0";
-        const char* servo_power_w = "6.0";
-    } power_requirements;
-    struct processing_responsibilities_t {
-        const char* description = "Head focuses on high-frequency display/audio updates without system-level overhead";
-        const char* tasks[7] = { "Dual GC9A01 display rendering (60 FPS capable)", "I2S audio playback and mixing", "HC-SR04 sensor polling and filtering", "Facial expression animation engine", "Mood-driven display effects", "Neck servo articulation control", "Respond to commands from torso master" };
-        const char* excluded_tasks[4] = { "WiFi management (handled by torso)", "Network coordination (handled by torso)", "Telemetry aggregation (handled by torso)", "System-wide behavior planning (handled by torso)" };
-    } processing_responsibilities;
 };
 
 // Component definition sourced from config\components\positioned\goblin_left_ear.json
@@ -908,46 +789,20 @@ struct speaker_config {
     } testing_status;
 };
 
-// Component definition sourced from config\components\interfaces\spi_bus.json
-struct spi_bus_config {
-    const char* relative_filename = "config/components/interfaces/spi_bus.json";
+// Component definition sourced from config\components\drivers\spi_display_bus.json
+struct spi_display_bus_config {
+    const char* name = "spi_display_bus";
+    const char* type = "bus";
     const char* version = "1.0.0";
-    const char* author = "config/author.json";
-    const char* name = "spi_bus";
-    const char* hardware_type = "BUS_INTERFACE";
-    const char* bus_type = "SPI";
-    const char* bus_name = "VSPI";
-    const char* description = "ESP32 VSPI bus interface for SPI communication";
-    struct pin_requirements_t {
-        const char* shared_pins_needed = "[{\"function\": \"SPI_SCLK\", \"count\": 1, \"description\": \"SPI clock signal\"}, {\"function\": \"SPI_Q\", \"count\": 1, \"description\": \"SPI MISO (Master In Slave Out)\"}]";
-        const char* unique_pins_needed = "[{\"function\": \"SPI_CS\", \"count\": 1, \"description\": \"SPI chip select (unique per device)\"}, {\"function\": \"SPI_HD\", \"count\": 1, \"description\": \"SPI MOSI (Master Out Slave In) or hold signal\"}]";
-    } pin_requirements;
-    const char* component_type = "INTERFACE_BUS";
-    const char* interface_id = "SPI_BUS";
-    const char* interface_type = "SPI_BUS";
-    struct timing_t {
-        int hitCount = 1;
-    } timing;
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Write-only SPI bus dedicated to display controllers.";
+    const char* created = "2025-11-01";
+    const char* component_type = "bus_interface";
+    const char* relative_filename = "config/components/drivers/spi_display_bus.json";
     struct software_t {
-        const char* init_function = "spi_bus_init";
-        const char* act_function = "spi_bus_act";
+        const char* init_function = "spi_display_bus_init";
+        const char* act_function = "spi_display_bus_act";
     } software;
-    struct pin_allocation_t {
-        const char* shared_pins[4] = { "clock", "data_output", "data_input", "reset" };
-        const char* device_pins[2] = { "chip_select", "data_command" };
-    } pin_allocation;
-    struct bus_config_t {
-        const char* frequency = "10000000";
-        int mode = 0;
-    } bus_config;
-    struct hardware_t {
-        struct esp32_specific_t {
-            const char* host_device = "SPI2_HOST";
-            int dma_channel = 1;
-            int max_transfer_size = 4092;
-        } esp32_specific;
-    } hardware;
-    const char* notes = "VSPI bus on ESP32. Shared pins (SCLK, MISO) can be used by multiple devices. Unique pins (CS, MOSI) are per-device.";
 };
 
 // ---------------------------------------------------------------------------
@@ -961,8 +816,6 @@ esp_err_t generic_spi_display_init(void);
 void generic_spi_display_act(void);
 esp_err_t goblin_eye_init(void);
 void goblin_eye_act(void);
-esp_err_t goblin_head_init(void);
-void goblin_head_act(void);
 esp_err_t goblin_left_ear_init(void);
 void goblin_left_ear_act(void);
 esp_err_t goblin_left_eye_init(void);
@@ -985,8 +838,8 @@ esp_err_t servo_sg90_micro_init(void);
 void servo_sg90_micro_act(void);
 esp_err_t speaker_init(void);
 void speaker_act(void);
-esp_err_t spi_bus_init(void);
-void spi_bus_act(void);
+esp_err_t spi_display_bus_init(void);
+void spi_display_bus_act(void);
 
 // Declarations from config\components\hardware\hw496_microphone.hdr
 // HW-496 MEMS Microphone Component Header
@@ -1005,5 +858,40 @@ esp_err_t hw496_microphone_init(void);
 void hw496_microphone_act(void);
 
 #endif // hw496_microphone_H
+
+// Declarations from config\components\interfaces\spi_display_bus.hdr
+// SPI display bus component header
+// Exposes current SPI pin assignment for display devices
+
+#ifndef SPI_DISPLAY_BUS_H
+#define SPI_DISPLAY_BUS_H
+
+#include "esp_err.h"
+#include "driver/spi_master.h"
+#include <stdio.h>
+
+struct spi_display_pinset_t {
+    spi_display_pinset_t()
+        : mosi(-1), clk(-1), cs(-1), dc(-1), bl(-1), rst(-1), handle(nullptr) {}
+
+    int mosi;
+    int clk;
+    int cs;
+    int dc;
+    int bl;
+    int rst;
+    spi_device_handle_t handle;
+
+    void print() {
+        printf("SPI_DISPLAY bus: mosi=%d, sclk=%d, cs=%d, dc=%d\n", mosi, clk, cs, dc);
+    }
+};
+
+extern spi_display_pinset_t cur_spi_pin;
+
+esp_err_t spi_display_bus_init(void);
+void spi_display_bus_act(void);
+
+#endif // SPI_DISPLAY_BUS_H
 
 #endif // GOBLIN_HEAD_COMPONENT_FUNCTIONS_HPP

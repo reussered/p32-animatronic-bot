@@ -1,19 +1,211 @@
 // spi_bus component implementation
-// Auto-generated stub - needs actual implementation
+// ESP32 VSPI bus interface for SPI communication with dynamic pin assignment
 
 #include "esp_log.h"
+#include "driver/spi_master.h"
+#include "driver/gpio.h"
+#include "esp32_s3_r8n16_pin_assignments.h"
+
+#include <stddef.h>
+
+struct spi_device_pinset_t {
+    spi_device_pinset_t()
+        : mosi(-1), miso(-1), clk(-1), cs(-1), dc(-1), backlight(-1) {}
+
+    int mosi;
+    int miso;
+    int clk;
+    int cs;
+    int dc;
+    int backlight;
+};
+
+static constexpr size_t SPI_DEVICE_SLOT_COUNT = 32U;
+static spi_device_pinset_t spi_device_pins[SPI_DEVICE_SLOT_COUNT];
+spi_device_pinset_t cur_spi_pin;
+static size_t spi_device_count = 0;
+static size_t spi_active_device_index = 0;
+
 static const char *TAG_spi_bus = "spi_bus";
 
+// SPI bus pins assigned at runtime to honour the shared pin allocator
+static int spi_mosi_pin = -1;
+static int spi_miso_pin = -1;
+static int spi_clk_pin = -1;
+static int spi_reset_pin = -1;
+
+static bool spi_initialized = false;
+
+static constexpr size_t REQUIRED_UNIQUE_PINS = 3;  // CS, DC, backlight
+
+static int claim_next_spi_pin(void) {
+    for (size_t i = 0; i < spi_assignable_count; i++) {
+        const int candidate = spi_assignable[i];
+        bool already_claimed = false;
+        for (size_t j = 0; j < assigned_pins_count; j++) {
+            if (assigned_pins[j] == candidate) {
+                already_claimed = true;
+                break;
+            }
+        }
+        if (!already_claimed) {
+            if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
+                ESP_LOGE(TAG_spi_bus, "Assigned pin buffer exhausted");
+                return -1;
+            }
+            assigned_pins[assigned_pins_count++] = candidate;
+            return candidate;
+        }
+    }
+    return -1;
+}
+
 esp_err_t spi_bus_init(void) {
-    ESP_LOGI(TAG_spi_bus, "spi_bus init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    const size_t device_index = spi_device_count;
+    if (device_index >= SPI_DEVICE_SLOT_COUNT) {
+        ESP_LOGE(TAG_spi_bus, "No remaining SPI device slots available for allocation");
+        return ESP_FAIL;
+    }
+
+    if (!spi_initialized) {
+        ESP_LOGI(TAG_spi_bus, "Assigning shared SPI pins for first device");
+
+        spi_mosi_pin = claim_next_spi_pin();
+        spi_miso_pin = claim_next_spi_pin();
+        spi_clk_pin = claim_next_spi_pin();
+
+        if (spi_mosi_pin < 0 || spi_miso_pin < 0 || spi_clk_pin < 0) {
+            ESP_LOGE(TAG_spi_bus, "Unable to assign shared SPI pins (MOSI:%d MISO:%d CLK:%d)",
+                     spi_mosi_pin, spi_miso_pin, spi_clk_pin);
+            return ESP_FAIL;
+        }
+
+        spi_reset_pin = claim_next_spi_pin();
+        if (spi_reset_pin < 0) {
+            ESP_LOGE(TAG_spi_bus, "Unable to assign shared SPI reset pin");
+            return ESP_FAIL;
+        }
+
+        ESP_LOGI(TAG_spi_bus, "Shared SPI pins assigned MOSI:%d MISO:%d CLK:%d RESET:%d",
+                 spi_mosi_pin, spi_miso_pin, spi_clk_pin, spi_reset_pin);
+
+        const spi_bus_config_t bus_cfg = {
+            .mosi_io_num = spi_mosi_pin,
+            .miso_io_num = spi_miso_pin,
+            .sclk_io_num = spi_clk_pin,
+            .quadwp_io_num = -1,
+            .quadhd_io_num = -1,
+            .max_transfer_sz = 240 * 240 * 2 + 8,
+        };
+
+        const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG_spi_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            return ret;
+        }
+
+        spi_initialized = true;
+        ESP_LOGI(TAG_spi_bus, "SPI bus initialized successfully");
+    } else {
+        ESP_LOGI(TAG_spi_bus, "Reusing shared SPI pins MOSI:%d MISO:%d CLK:%d RESET:%d",
+                 spi_mosi_pin, spi_miso_pin, spi_clk_pin, spi_reset_pin);
+    }
+
+    int unique_allocations[REQUIRED_UNIQUE_PINS];
+    for (size_t i = 0; i < REQUIRED_UNIQUE_PINS; ++i) {
+        unique_allocations[i] = claim_next_spi_pin();
+        if (unique_allocations[i] < 0) {
+            ESP_LOGE(TAG_spi_bus, "Unable to assign unique SPI pin index %u for device %u",
+                     (unsigned)i, (unsigned)device_index);
+            return ESP_FAIL;
+        }
+    }
+
+    spi_device_pins[device_index].mosi = spi_mosi_pin;
+    spi_device_pins[device_index].miso = spi_miso_pin;
+    spi_device_pins[device_index].clk = spi_clk_pin;
+    spi_device_pins[device_index].cs = unique_allocations[0];
+    spi_device_pins[device_index].dc = unique_allocations[1];
+    spi_device_pins[device_index].backlight = unique_allocations[2];
+
+    spi_device_count++;
+
+    ESP_LOGI(TAG_spi_bus,
+             "Device %u assigned SPI pins MOSI:%d MISO:%d CLK:%d CS:%d DC:%d BL:%d",
+             (unsigned)device_index,
+             spi_device_pins[device_index].mosi,
+             spi_device_pins[device_index].miso,
+             spi_device_pins[device_index].clk,
+             spi_device_pins[device_index].cs,
+             spi_device_pins[device_index].dc,
+             spi_device_pins[device_index].backlight);
+
     return ESP_OK;
 }
 
 void spi_bus_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_spi_bus, "spi_bus act");
+    static int device = 0;
+
+    if (spi_device_count == 0) {
+        device = 0;
+        cur_spi_pin = spi_device_pinset_t();
+        return;
+    }
+
+    if (device < 0 || static_cast<size_t>(device) >= spi_device_count ||
+        spi_device_pins[static_cast<size_t>(device)].cs == -1) {
+        device = 0;
+    }
+
+    cur_spi_pin = spi_device_pins[static_cast<size_t>(device)];
+
+    ++device;
+    if (static_cast<size_t>(device) >= spi_device_count) {
+        device = 0;
+    }
 }
+
+int spi_bus_get_mosi_pin(void) {
+    return spi_mosi_pin;
+}
+
+int spi_bus_get_miso_pin(void) {
+    return spi_miso_pin;
+}
+
+int spi_bus_get_sclk_pin(void) {
+    return spi_clk_pin;
+}
+
+int spi_bus_get_reset_pin(void) {
+    return spi_reset_pin;
+}
+
+static bool spi_device_index_valid(int device_index) {
+    return device_index >= 0 && static_cast<size_t>(device_index) < spi_device_count;
+}
+
+int spi_bus_get_cs_pin(int device_index) {
+    if (!spi_device_index_valid(device_index)) {
+        return -1;
+    }
+    return spi_device_pins[static_cast<size_t>(device_index)].cs;
+}
+
+int spi_bus_get_dc_pin(int device_index) {
+    if (!spi_device_index_valid(device_index)) {
+        return -1;
+    }
+    return spi_device_pins[static_cast<size_t>(device_index)].dc;
+}
+
+int spi_bus_get_backlight_pin(int device_index) {
+    if (!spi_device_index_valid(device_index)) {
+        return -1;
+    }
+    return spi_device_pins[static_cast<size_t>(device_index)].backlight;
+}
+
 
 
 

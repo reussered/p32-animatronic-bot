@@ -2,5 +2,5 @@
 # Includes component dispatch table for build system
 
 set(P32_COMPONENT_SOURCES
-    component_tables.cpp
+    # No default sources - subsystem files added conditionally
 )

@@ -1,0 +1,27 @@
+// gc9a01 component header
+// Defines data structures for GC9A01 display
+
+#ifndef GC9A01_HDR
+#define GC9A01_HDR
+
+#include <stdint.h>
+
+struct Pixel
+{
+    Pixel() 
+    {}
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+};
+
+// Function declarations
+uint16_t gc9a01_get_width(void);
+uint16_t gc9a01_get_height(void);
+uint32_t getFrameSize(void);
+uint32_t getFrameRowSize(void);
+uint32_t getDisplaySize(void);
+esp_err_t gc9a01_init(void);
+void gc9a01_act(void);
+
+#endif // GC9A01_HDR

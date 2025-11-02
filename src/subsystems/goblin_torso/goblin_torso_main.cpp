@@ -1,5 +1,5 @@
-#include "goblin_torso_main.hpp"
-#include "goblin_torso_dispatch_tables.hpp"
+#include "subsystems/goblin_torso/goblin_torso_main.hpp"
+#include "subsystems/goblin_torso/goblin_torso_dispatch_tables.hpp"
 
 #include <cstddef>
 #include <cstdint>

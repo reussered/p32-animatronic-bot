@@ -1,5 +1,5 @@
-#include "goblin_head_main.hpp"
-#include "goblin_head_dispatch_tables.hpp"
+#include "subsystems/goblin_head/goblin_head_main.hpp"
+#include "subsystems/goblin_head/goblin_head_dispatch_tables.hpp"
 
 #include <cstddef>
 #include <cstdint>

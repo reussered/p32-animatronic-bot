@@ -1,7 +1,0 @@
-#ifndef COMPONENTS_component_2_5x1_5_inch_tft_lcd_display_HPP
-#define COMPONENTS_component_2_5x1_5_inch_tft_lcd_display_HPP
-
-#include "components/component_2_5x1_5_inch_tft_lcd_display.hdr"
-
-#endif // COMPONENTS_component_2_5x1_5_inch_tft_lcd_display_HPP
-

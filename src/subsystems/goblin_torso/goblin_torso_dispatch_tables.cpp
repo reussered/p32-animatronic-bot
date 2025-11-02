@@ -1,10 +1,9 @@
-#include "goblin_torso_dispatch_tables.hpp"
-#include "goblin_torso_component_functions.hpp"
+#include "subsystems/goblin_torso/goblin_torso_dispatch_tables.hpp"
+#include "subsystems/goblin_torso/goblin_torso_component_functions.hpp"
 
 // Auto-generated dispatch table implementation for subsystem goblin_torso
 
 const init_function_t goblin_torso_init_table[] = {
-    goblin_torso_init,
     system_core_init,
     debug_controller_init,
     network_monitor_init,
@@ -26,7 +25,6 @@ const init_function_t goblin_torso_init_table[] = {
 };
 
 const act_function_t goblin_torso_act_table[] = {
-    goblin_torso_act,
     system_core_act,
     debug_controller_act,
     network_monitor_act,
@@ -48,7 +46,6 @@ const act_function_t goblin_torso_act_table[] = {
 };
 
 const uint32_t goblin_torso_hitcount_table[] = {
-    50,
     100,
     1,
     50,

@@ -1,7 +1,0 @@
-#ifndef COMPONENTS_torso_integrated_power_system_HPP
-#define COMPONENTS_torso_integrated_power_system_HPP
-
-#include "components/torso_integrated_power_system.hdr"
-
-#endif // COMPONENTS_torso_integrated_power_system_HPP
-

@@ -1,0 +1,35 @@
+{
+    "name": "spi_data_bus",
+    "type": "bus",
+    "version": "1.0.0",
+    "author": "config/authors/ai_agent.json",
+    "description": "General purpose SPI data bus for full-duplex communication with sensors or other peripherals.",
+    "created": "2025-11-01",
+    "component_type": "bus_interface",
+
+    "capabilities": {
+        "bus_type": "SPI",
+        "speed": "up to 80MHz",
+        "modes": ["Mode 0", "Mode 1", "Mode 2", "Mode 3"],
+        "data_width": ["8-bit", "16-bit"],
+        "full_duplex": true,
+        "applications": ["SD cards", "sensors", "flash memory", "communication modules"]
+    },
+
+    "relative_filename": "config/components/drivers/spi_data_bus.json",
+    "components": [
+        "config/components/drivers/generic_spi_data_driver.json"
+    ],
+
+    "software": {
+        "init_function": "spi_data_bus_init",
+        "act_function": "spi_data_bus_act"
+    },
+
+    "compatibility": {
+        "esp32_s3": true,
+        "esp32_s2": true,
+        "esp32": true,
+        "chip_variants": ["ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1", "ESP32-DevKitC"]
+    }
+}

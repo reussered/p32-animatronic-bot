@@ -1,0 +1,33 @@
+// SPI display bus component header
+// Exposes current SPI pin assignment for display devices
+
+#ifndef SPI_DISPLAY_BUS_H
+#define SPI_DISPLAY_BUS_H
+
+#include "esp_err.h"
+#include "driver/spi_master.h"
+#include <stdio.h>
+
+struct spi_display_pinset_t {
+    spi_display_pinset_t()
+        : mosi(-1), clk(-1), cs(-1), dc(-1), bl(-1), rst(-1), handle(nullptr) {}
+
+    int mosi;
+    int clk;
+    int cs;
+    int dc;
+    int bl;
+    int rst;
+    spi_device_handle_t handle;
+
+    void print() {
+        printf("SPI_DISPLAY bus: mosi=%d, sclk=%d, cs=%d, dc=%d\n", mosi, clk, cs, dc);
+    }
+};
+
+extern spi_display_pinset_t cur_spi_pin;
+
+esp_err_t spi_display_bus_init(void);
+void spi_display_bus_act(void);
+
+#endif // SPI_DISPLAY_BUS_H

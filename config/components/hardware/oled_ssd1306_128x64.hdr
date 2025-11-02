@@ -1,0 +1,53 @@
+// SSD1306 128x64 OLED Display Header
+// Monochrome (1-bit per pixel)
+
+#ifndef OLED_SSD1306_128X64_HDR
+#define OLED_SSD1306_128X64_HDR
+
+#include <cstdint>
+
+// Forward declaration
+struct SSD1306_Pixel;
+
+// Global InitialPixel - must be set before allocating buffers containing Pixels
+extern SSD1306_Pixel SSD1306_InitialPixel;
+
+/**
+ * @brief Pixel struct for SSD1306 OLED display (Monochrome format)
+ * 1-bit color: on/off
+ */
+struct SSD1306_Pixel
+{
+    unsigned int value : 1;  // 0 = off, 1 = on
+    unsigned int : 7;        // Padding to byte boundary
+    
+    SSD1306_Pixel() 
+    {
+        *this = SSD1306_InitialPixel;
+    }
+    
+    // Copy constructor
+    SSD1306_Pixel(const SSD1306_Pixel& other) 
+        : value(other.value)
+    {}
+    
+    // Assignment operator
+    SSD1306_Pixel& operator=(const SSD1306_Pixel& other)
+    {
+        value = other.value;
+        return *this;
+    }
+};
+
+// Display specifications
+size_t ssd1306_get_width(void);
+size_t ssd1306_get_height(void);
+size_t getFrameSize(void);
+size_t getFrameRowSize(void);
+size_t getDisplaySize(void);
+
+// Component functions
+esp_err_t oled_ssd1306_128x64_init(void);
+void oled_ssd1306_128x64_act(void);
+
+#endif // OLED_SSD1306_128X64_HDR

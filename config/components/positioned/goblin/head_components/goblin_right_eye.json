@@ -7,7 +7,7 @@
                                  "config/components/creature_specific/goblin_eye.json"
                              ],
     "template_inheritance":  {
-                                 "hardware_template":  "config/components/hardware/gc9a01_display.json",
+                                 "hardware_template":  "config/components/hardware/gc9a01.json",
                                  "display_type":  "CIRCULAR_LCD_FULL_COLOR",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_eye_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/gc9a01_circular_mount.scad"

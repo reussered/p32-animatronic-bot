@@ -6,17 +6,22 @@
 
 #include "esp_err.h"
 
+struct spi_device_pinset_t {
+	spi_device_pinset_t()
+		: mosi(-1), miso(-1), clk(-1), cs(-1), dc(-1), backlight(-1) {}
+
+	int mosi;
+	int miso;
+	int clk;
+	int cs;
+	int dc;
+	int backlight;
+};
+
+extern spi_device_pinset_t cur_spi_pin;
+
 // Function declarations for dispatch table
 esp_err_t spi_bus_init(void);
 void spi_bus_act(void);
-
-// Pin access functions for other components to get assigned pins
-int spi_bus_get_mosi_pin(void);
-int spi_bus_get_miso_pin(void);
-int spi_bus_get_sclk_pin(void);
-int spi_bus_get_reset_pin(void);
-int spi_bus_get_cs_pin(int device_index);
-int spi_bus_get_dc_pin(int device_index);
-int spi_bus_get_backlight_pin(int device_index);
 
 #endif // SPI_BUS_H

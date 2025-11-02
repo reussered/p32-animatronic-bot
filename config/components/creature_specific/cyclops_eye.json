@@ -8,7 +8,7 @@
     "description":  "Shared cyclops eye processing logic with large TFT display and intimidating mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/tft_2p5x1p5_display.json"
+                                 "config/components/hardware/tft_2p5x1p5.json"
                              ],
     "component_constraints":  {
                                   "required_contained_types":  [

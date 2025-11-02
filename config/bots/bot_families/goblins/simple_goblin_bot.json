@@ -46,7 +46,7 @@
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
-                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "hardware_reference":  "config/components/hardware/gc9a01.json",
                            "interface_reference":  "config/components/interfaces/spi_device_1.json",
                            "position":  {
                                             "x":  "-1.5 INCH",
@@ -63,7 +63,7 @@
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
-                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "hardware_reference":  "config/components/hardware/gc9a01.json",
                            "interface_reference":  "config/components/interfaces/spi_device_2.json",
                            "position":  {
                                             "x":  "1.5 INCH",
@@ -80,7 +80,7 @@
                            "subsystem":  "UNKNOWN",
                            "component_type":  "SIMPLE_DISPLAY",
                            "ifdef_variable":  "ENABLE_SIMPLE_DISPLAY",
-                           "hardware_reference":  "config/components/hardware/gc9a01_display.json",
+                           "hardware_reference":  "config/components/hardware/gc9a01.json",
                            "interface_reference":  "config/components/interfaces/spi_device_3.json",
                            "position":  {
                                             "x":  "0.0 INCH",

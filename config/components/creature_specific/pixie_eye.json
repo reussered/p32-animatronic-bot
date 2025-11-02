@@ -8,7 +8,7 @@
     "description":  "Shared pixie eye processing logic with small OLED and magical mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/gmt12864_display.json"
+                                 "config/components/hardware/gmt12864.json"
                              ],
     "component_constraints":  {
                                   "required_contained_types":  [

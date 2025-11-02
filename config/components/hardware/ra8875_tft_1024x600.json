@@ -46,7 +46,7 @@
                      "init_function":  "ra8875_init",
                      "act_function":  "ra8875_act",
                      "components":  [
-                                        "config/components/drivers/spi_bus.json"
+                                        "config/components/interfaces/spi_display_bus.json"
                                     ]
                  },
     "required_interface_functions":  [

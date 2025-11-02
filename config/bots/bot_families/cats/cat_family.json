@@ -18,8 +18,8 @@
     "components":  [
                               "config/components/positioned/cat_animated_ears.json",
                               "config/components/positioned/cat_whisker_sensors.json",
-                              "config/components/positioned/cat_eye_left.json",
-                              "config/components/positioned/cat_eye_right.json",
+                              "config/components/positioned/cat_left_eye.json",
+                              "config/components/positioned/cat_right_eye.json",
                               "config/components/positioned/cat_mouth.json",
                               "config/components/positioned/cat_nose_sensor.json"
                           ],

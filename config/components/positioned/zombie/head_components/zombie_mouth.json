@@ -5,7 +5,7 @@
     "name":  "zombie_mouth","component_type": "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "template_inheritance":  {
-                                 "hardware_template":  "config/components/hardware/tft_2p5x1p5_display.json",
+                                 "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/zombie/zombie_mouth_shell.scad",
                                  "mount_template":  "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
                              },

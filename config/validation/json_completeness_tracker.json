@@ -68,7 +68,7 @@
                                                                          "validation":  "SCHEMA_VALID_COMPANION_SIZED"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/hardware/gc9a01_display.json",
+                                                                         "file":  "config/components/hardware/gc9a01.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Round LCD display specifications",
                                                                          "validation":  "SCHEMA_VALID_HARDWARE_SPEC"

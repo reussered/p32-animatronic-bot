@@ -6,7 +6,7 @@
  */
 
 #include "components/generic_spi_display.hpp"
-#include "components/spi_bus.hpp"
+#include "components/spi_display_bus.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "shared/Environment.hpp"
 #include "esp_log.h"
@@ -70,8 +70,15 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
 
     // Configure GPIO pins using SPI bus variables
     uint64_t pin_mask = 0;
-    if (spi_bus_current_dc_pin != GPIO_NUM_NC) pin_mask |= (1ULL << spi_bus_current_dc_pin);
-    if (spi_bus_reset_pin != GPIO_NUM_NC) pin_mask |= (1ULL << spi_bus_reset_pin);
+    if (cur_spi_pin.dc >= 0) {
+        pin_mask |= (1ULL << static_cast<uint32_t>(cur_spi_pin.dc));
+    }
+    if (cur_spi_pin.rst >= 0) {
+        pin_mask |= (1ULL << static_cast<uint32_t>(cur_spi_pin.rst));
+    }
+    if (cur_spi_pin.bl >= 0) {
+        pin_mask |= (1ULL << static_cast<uint32_t>(cur_spi_pin.bl));
+    }
 
     gpio_config_t io_conf = {
         .pin_bit_mask = pin_mask,
@@ -81,8 +88,8 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
         .intr_type = GPIO_INTR_DISABLE,
     };
 
-    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Configuring GPIO pins - DC: %d, RST: %d",
-             spi_bus_current_dc_pin, spi_bus_reset_pin);
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Configuring GPIO pins - DC: %d, RST: %d, BL: %d",
+             cur_spi_pin.dc, cur_spi_pin.rst, cur_spi_pin.bl);
 
     esp_err_t config_ret = gpio_config(&io_conf);
     if (config_ret != ESP_OK) {
@@ -91,12 +98,16 @@ esp_err_t generic_spi_display_init(const generic_display_config_t* config) {
     }
 
     // Reset display using shared RST pin
-    if (spi_bus_reset_pin != GPIO_NUM_NC) {
-        ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Resetting display using RST pin %d", spi_bus_reset_pin);
-        gpio_set_level((gpio_num_t)spi_bus_reset_pin, 0);
+    if (cur_spi_pin.rst >= 0) {
+        ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Resetting display using RST pin %d", cur_spi_pin.rst);
+        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 0);
         vTaskDelay(pdMS_TO_TICKS(10));
-        gpio_set_level((gpio_num_t)spi_bus_reset_pin, 1);
+        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 1);
         vTaskDelay(pdMS_TO_TICKS(120));
+    }
+
+    if (cur_spi_pin.bl >= 0) {
+        gpio_set_level((gpio_num_t)cur_spi_pin.bl, 1);
     }
 
     // Initialize display buffer to black/clear
@@ -120,22 +131,22 @@ void generic_spi_display_act(void) {
  */
 void generic_spi_display_send_frame(uint16_t* frame_buffer, uint32_t pixel_count) {
     // Use the current device handle configured by positioned component
-    spi_device_handle_t device = spi_bus_current_device_handle;
+    spi_device_handle_t device = cur_spi_pin.handle;
 
     if (device == NULL) {
         ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "No SPI device handle configured");
         return;
     }
 
-    if (spi_bus_current_dc_pin == GPIO_NUM_NC) {
+    if (cur_spi_pin.dc < 0) {
         ESP_LOGE(GENERIC_SPI_DISPLAY_TAG, "Invalid DC pin configured");
         return;
     }
 
-    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Sending frame to SPI device, DC pin %d", spi_bus_current_dc_pin);
+    ESP_LOGI(GENERIC_SPI_DISPLAY_TAG, "Sending frame to SPI device, DC pin %d", cur_spi_pin.dc);
 
     // Set DC pin high for data transmission
-    gpio_set_level((gpio_num_t)spi_bus_current_dc_pin, 1);
+    gpio_set_level((gpio_num_t)cur_spi_pin.dc, 1);
 
     // ESP32 SPI hardware limit is around 64KB per transaction
     // Send data in chunks to be safe

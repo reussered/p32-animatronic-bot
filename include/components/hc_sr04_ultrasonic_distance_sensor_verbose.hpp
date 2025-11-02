@@ -1,7 +1,0 @@
-#ifndef COMPONENTS_hc_sr04_ultrasonic_distance_sensor_verbose_HPP
-#define COMPONENTS_hc_sr04_ultrasonic_distance_sensor_verbose_HPP
-
-#include "components/hc_sr04_ultrasonic_distance_sensor_verbose.hdr"
-
-#endif // COMPONENTS_hc_sr04_ultrasonic_distance_sensor_verbose_HPP
-

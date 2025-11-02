@@ -2,6 +2,7 @@
 #define P32_GOBLIN_RIGHT_EYE_HPP
 
 #include "esp_err.h"
+#include <stdint.h>
 
 // Component: goblin_right_eye
 // Auto-generated header file
@@ -11,5 +12,11 @@ esp_err_t goblin_right_eye_init(void);
 
 // Component action function - NO ARGUMENTS  
 void goblin_right_eye_act(void);
+
+/**
+ * @brief Get pointer to right eye display buffer
+ * @return Pointer to RGB565 framebuffer, or nullptr if not initialized
+ */
+uint16_t* goblin_right_eye_get_buffer(void);
 
 #endif // P32_GOBLIN_RIGHT_EYE_HPP

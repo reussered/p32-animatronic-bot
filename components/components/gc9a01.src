@@ -5,7 +5,7 @@
  */
 
 #include "components/gc9a01.hpp"
-#include "components/spi_bus.hpp"
+#include "components/spi_display_bus.hpp"
 #include "components/goblin_eye.hpp"
 #include "core/memory/SharedMemory.hpp"
 #include "shared/Environment.hpp"

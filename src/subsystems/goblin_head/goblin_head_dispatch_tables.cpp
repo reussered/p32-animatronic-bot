@@ -1,26 +1,25 @@
-#include "goblin_head_dispatch_tables.hpp"
-#include "goblin_head_component_functions.hpp"
+#include "subsystems/goblin_head/goblin_head_dispatch_tables.hpp"
+#include "subsystems/goblin_head/goblin_head_component_functions.hpp"
 
 // Auto-generated dispatch table implementation for subsystem goblin_head
 
 const init_function_t goblin_head_init_table[] = {
-    goblin_head_init,
     goblin_left_eye_init,
     goblin_eye_init,
     gc9a01_init,
-    spi_bus_init,
+    spi_display_bus_init,
     generic_spi_display_init,
     goblin_right_eye_init,
     goblin_eye_init,
     gc9a01_init,
-    spi_bus_init,
+    spi_display_bus_init,
     generic_spi_display_init,
     goblin_nose_init,
     hc_sr04_ultrasonic_distance_sensor_init,
     goblin_mouth_init,
     goblin_mouth_init,
     gc9a01_init,
-    spi_bus_init,
+    spi_display_bus_init,
     generic_spi_display_init,
     goblin_speaker_init,
     speaker_init,
@@ -33,23 +32,22 @@ const init_function_t goblin_head_init_table[] = {
 };
 
 const act_function_t goblin_head_act_table[] = {
-    goblin_head_act,
     goblin_left_eye_act,
     goblin_eye_act,
     gc9a01_act,
-    spi_bus_act,
+    spi_display_bus_act,
     generic_spi_display_act,
     goblin_right_eye_act,
     goblin_eye_act,
     gc9a01_act,
-    spi_bus_act,
+    spi_display_bus_act,
     generic_spi_display_act,
     goblin_nose_act,
     hc_sr04_ultrasonic_distance_sensor_act,
     goblin_mouth_act,
     goblin_mouth_act,
     gc9a01_act,
-    spi_bus_act,
+    spi_display_bus_act,
     generic_spi_display_act,
     goblin_speaker_act,
     speaker_act,
@@ -62,7 +60,6 @@ const act_function_t goblin_head_act_table[] = {
 };
 
 const uint32_t goblin_head_hitcount_table[] = {
-    25,
     1,
     1,
     1,

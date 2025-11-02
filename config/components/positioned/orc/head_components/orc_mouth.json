@@ -5,7 +5,7 @@
     "positioned_component_type":  "TFT_DISPLAY",
     "display_id":  "ORC_MOUTH_DISPLAY",
     "display_role":  "MOUTH_ANIMATION",
-    "hardware_template":  "config/components/hardware/tft_2p5x1p5_display.json",
+    "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
     "creature_shell":  "config/shapes/scad/bot_shells/orc_mouth_shell.scad",
     "mount_template":  "config/shapes/scad/basic_mounts/display_basic_mount.scad",
     "position":  {

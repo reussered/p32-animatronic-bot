@@ -2,7 +2,7 @@
 // Uses generic microphone driver with HW496-specific configuration
 
 #include "esp_log.h"
-#include "hw496_microphone.hdr"
+#include "components/hardware/hw496_microphone.hdr"
 #include "../drivers/generic_mic_driver.hdr"
 #include "core/memory/SharedMemory.hpp"
 

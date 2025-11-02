@@ -3,20 +3,24 @@
 ## 🚨 CRITICAL ENCODING REQUIREMENTS
 
 ### **ASCII ENCODING MANDATORY (NO UTF-8 BOM)**
+
 **ALL JSON configuration files MUST be saved as pure ASCII without UTF-8 BOM.**
 
 **PROBLEM:**
+
 - UTF-8 BOM (bytes `EF BB BF`) at start of file breaks Python JSON parser
 - Error: "Expecting value: line 1 column 1 (char 0)"
 - We've debugged this multiple times
 
 **CORRECT FILE FORMAT:**
+
 ```powershell
 # Save JSON as ASCII without BOM
 [System.IO.File]::WriteAllText($path, $content, [System.Text.Encoding]::ASCII)
 ```
 
 **DETECTION:**
+
 ```powershell
 # Check for BOM corruption
 $bytes = [System.IO.File]::ReadAllBytes($jsonFile)
@@ -26,6 +30,7 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 ```
 
 **Validation Rules:**
+
 - Always use ASCII encoding
 - Never use UTF-8 with BOM
 - Verify first 3 bytes are NOT `239, 187, 191`
@@ -34,6 +39,7 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 ## 📋 JSON STRUCTURE REQUIREMENTS
 
 ### **Mandatory Fields (All JSON Files)**
+
 ```json
 {
   "relative_filename": "config/components/positioned/component_name.json",
@@ -61,10 +67,12 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 5. **Component Type**: `"type": "POSITIONED_COMPONENT"` - Categorizes component (DISPLAY_DRIVER, MICRO_CONTROLLER_MODULE, etc.)
 
 ### **Reference Pattern**
+
 - Use `"author": "config/author.json"` for consistent metadata across all configs
 - Use relative paths for all file references
 
 ## Standard Function Name Generation Pattern
+
 - Init functions: `p32_{component_name}_init()`
 - Action functions: `p32_{component_name}_act(uint32_t loopCount)`
 
@@ -90,6 +98,7 @@ if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
 ## 💻 C++ JSON PARSING PATTERNS
 
 ### **Standard cJSON Implementation**
+
 ```cpp
 #include <cJSON.h>
 
@@ -174,18 +183,19 @@ esp_err_t parse_component_config(const char* json_string) {
       - `initTable[]` stores `{component}_init` pointers.
       - `actTable[]` stores `{component}_act` pointers.
       - `hitCount[]` stores `timing.hitCount` values.
-    - **Duplicates are intentional**. If `goblin_eye` appears twice, it is queued twice in all three tables, ensuring both instances execute.
+    - **Dispatch tables are visit-driven**: if `goblin_eye` appears twice during the walk, it is queued twice in all three tables so each instance executes on its scheduled cadence.
 
     ---
 
     ## 4. Component Aggregation Outputs
 
-    Each unique component contributes to generated sources exactly once. Subsequent references skip regeneration to avoid duplicate symbols.
+  Each unique component contributes to aggregated sources exactly once. Subsequent references skip regeneration so `.src`/`.hdr` content is not duplicated, even when the component appears multiple times in JSON.
 
     ### 4.1 Aggregated Implementation (`{subsystem}_component_functions.cpp`)
 
-    - Concatenates the permanent `config/components/{component}.src` file on first encounter.
-    - Holds the actual `init()`/`act()` definitions used by the subsystem.
+  - Concatenates the permanent `config/components/{component}.src` file on first encounter.
+  - Ignores later encounters of the same component so the generated file never repeats the same implementation block.
+  - Holds the actual `init()`/`act()` definitions used by the subsystem.
 
     ### 4.2 Generated Header (`{subsystem}_component_functions.hpp`)
 

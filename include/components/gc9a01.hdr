@@ -10,11 +10,46 @@
 #include "core/memory/SharedMemory.hpp"
 #include <cstdint>
 
+// Forward declaration
+struct GC9A01_Pixel;
+
+// Global InitialPixel - must be set before allocating buffers containing Pixels
+extern GC9A01_Pixel GC9A01_InitialPixel;
+
+/**
+ * @brief Pixel struct for GC9A01 display (RGB565 format)
+ * Simple bit-field representation for RGB565 color format
+ */
+struct GC9A01_Pixel
+{
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+    
+    GC9A01_Pixel() 
+    {
+        *this = GC9A01_InitialPixel;
+    }
+    
+    // Copy constructor
+    GC9A01_Pixel(const GC9A01_Pixel& other) 
+        : red(other.red), green(other.green), blue(other.blue)
+    {}
+    
+    // Assignment operator
+    GC9A01_Pixel& operator=(const GC9A01_Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};
+
 // GC9A01 Display Specifications
 #define GC9A01_WIDTH  240
 #define GC9A01_HEIGHT 240
 #define GC9A01_PIXELS (GC9A01_WIDTH * GC9A01_HEIGHT)
-#define GC9A01_FRAME_SIZE (GC9A01_PIXELS * 2)  // 2 bytes per pixel (RGB565)
 
 /**
  * @brief Initialize GC9A01 hardware driver using generic SPI display
@@ -29,21 +64,21 @@ esp_err_t gc9a01_init(void);
 void gc9a01_act(void);
 
 /**
- * @brief Display Buffer Interface - allocate buffer for display components
- * @return Pointer to display buffer (managed by generic component)
- */
-uint8_t* getBuffer(void);
-
-/**
  * @brief Display Buffer Interface - get total frame size in pixels
  * @return Total number of pixels in frame (57,600)
  */
-uint32_t getFrameSize(void);
+size_t getFrameSize(void);
 
 /**
  * @brief Display Buffer Interface - get frame row size in pixels
  * @return Number of pixels per row (240)
  */
-uint32_t getFrameRowSize(void);
+size_t getFrameRowSize(void);
+
+/**
+ * @brief Get display size in pixels
+ * @return Total number of pixels in one frame (width * height)
+ */
+size_t getDisplaySize(void);
 
 #endif // GC9A01_HPP

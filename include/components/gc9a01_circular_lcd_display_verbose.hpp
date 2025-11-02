@@ -1,7 +1,0 @@
-#ifndef COMPONENTS_gc9a01_circular_lcd_display_verbose_HPP
-#define COMPONENTS_gc9a01_circular_lcd_display_verbose_HPP
-
-#include "components/gc9a01_circular_lcd_display_verbose.hdr"
-
-#endif // COMPONENTS_gc9a01_circular_lcd_display_verbose_HPP
-

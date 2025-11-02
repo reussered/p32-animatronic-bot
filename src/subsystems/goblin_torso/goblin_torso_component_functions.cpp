@@ -1,4 +1,4 @@
-#include "goblin_torso_component_functions.hpp"
+#include "subsystems/goblin_torso/goblin_torso_component_functions.hpp"
 
 // Auto-generated component aggregation file
 
@@ -40,8 +40,6 @@ void debug_controller_act(void) {
     // ESP_LOGD(TAG_debug_controller, "debug_controller act");
 }
 // --- End: config\components\system\debug_controller.src ---
-
-// NOTE: Source for component 'goblin_torso' not found.
 
 // --- Begin: config\components\system\network_monitor.src ---
 // network_monitor component implementation

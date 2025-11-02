@@ -1,0 +1,75 @@
+{
+    "relative_filename": "config/components/interfaces/spi_display_bus.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "spi_display_bus",
+    "hardware_type": "BUS_INTERFACE",
+    "bus_type": "SPI",
+    "bus_name": "VSPI",
+    "description": "Dedicated SPI bus interface for display peripherals",
+    "components": [
+        "config/components/hardware/generic_spi_display.json"
+    ],
+    "pin_requirements": {
+        "shared_pins_needed": [
+            {
+                "function": "SPI_SCLK",
+                "count": 1,
+                "description": "SPI clock signal shared across displays"
+            },
+            {
+                "function": "SPI_MOSI",
+                "count": 1,
+                "description": "SPI data output shared across displays"
+            },
+            {
+                "function": "DISPLAY_RESET",
+                "count": 1,
+                "description": "Shared hardware reset line for displays"
+            }
+        ],
+        "unique_pins_needed": [
+            {
+                "function": "SPI_CS",
+                "count": 1,
+                "description": "Chip select per display"
+            },
+            {
+                "function": "DISPLAY_DC",
+                "count": 1,
+                "description": "Data/command select per display"
+            },
+            {
+                "function": "DISPLAY_BACKLIGHT",
+                "count": 1,
+                "description": "Backlight control per display"
+            }
+        ]
+    },
+    "component_type": "INTERFACE_BUS",
+    "interface_id": "SPI_DISPLAY_BUS",
+    "interface_type": "SPI_BUS",
+    "timing": {
+        "hitCount": 1
+    },
+    "software": {
+        "init_function": "spi_display_bus_init",
+        "act_function": "spi_display_bus_act"
+    },
+    "pin_allocation": {
+        "shared_pins": ["clock", "data_output", "reset"],
+        "device_pins": ["chip_select", "data_command", "backlight"]
+    },
+    "bus_config": {
+        "frequency": "10000000",
+        "mode": 0
+    },
+    "hardware": {
+        "esp32_specific": {
+            "host_device": "SPI2_HOST",
+            "dma_channel": 1,
+            "max_transfer_size": 4092
+        }
+    },
+    "notes": "Uses shared MOSI/CLK/RESET pins and allocates unique CS/DC/Backlight pins per display."
+}

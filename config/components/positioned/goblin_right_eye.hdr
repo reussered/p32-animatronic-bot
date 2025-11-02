@@ -1,0 +1,15 @@
+// goblin_right_eye component header
+// Additional declarations beyond init/act
+
+#ifndef GOBLIN_RIGHT_EYE_COMPONENT_H
+#define GOBLIN_RIGHT_EYE_COMPONENT_H
+
+#include <stdint.h>
+
+/**
+ * @brief Get pointer to right eye display buffer
+ * @return Pointer to Pixel array, or nullptr if not initialized
+ */
+Pixel* goblin_right_eye_get_buffer(void);
+
+#endif // GOBLIN_RIGHT_EYE_COMPONENT_H

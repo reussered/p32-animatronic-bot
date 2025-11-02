@@ -8,7 +8,7 @@
     "description":  "Shared zombie eye processing logic with palette and undead mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/gc9a01_display.json"
+                                 "config/components/hardware/gc9a01.json"
                              ],
     "component_constraints":  {
                                   "required_contained_types":  [

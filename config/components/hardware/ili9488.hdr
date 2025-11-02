@@ -1,0 +1,57 @@
+// ILI9488 Display Header
+// RGB666 (18-bit color)
+
+#ifndef ILI9488_HDR
+#define ILI9488_HDR
+
+#include <cstdint>
+
+// Forward declaration
+struct ILI9488_Pixel;
+
+// Global InitialPixel - must be set before allocating buffers containing Pixels
+extern ILI9488_Pixel ILI9488_InitialPixel;
+
+/**
+ * @brief Pixel struct for ILI9488 display (RGB666 format)
+ * 18-bit color: 6 bits per channel
+ */
+struct ILI9488_Pixel
+{
+    unsigned int red : 6;
+    unsigned int green : 6;
+    unsigned int blue : 6;
+    unsigned int : 6;  // Padding to align to 24 bits
+    
+    ILI9488_Pixel() 
+    {
+        *this = ILI9488_InitialPixel;
+    }
+    
+    // Copy constructor
+    ILI9488_Pixel(const ILI9488_Pixel& other) 
+        : red(other.red), green(other.green), blue(other.blue)
+    {}
+    
+    // Assignment operator
+    ILI9488_Pixel& operator=(const ILI9488_Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};
+
+// Display specifications
+size_t ili9488_get_width(void);
+size_t ili9488_get_height(void);
+size_t getFrameSize(void);
+size_t getFrameRowSize(void);
+size_t getDisplaySize(void);
+
+// Component functions
+esp_err_t ili9488_init(void);
+void ili9488_act(void);
+
+#endif // ILI9488_HDR

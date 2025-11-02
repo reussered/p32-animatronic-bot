@@ -8,7 +8,7 @@
         "hitCount": 1,
         "description": "Test right eye updates every cycle"
     },
-    "components": ["config/components/hardware/gc9a01_display.json"],
+    "components": ["config/components/hardware/gc9a01.json"],
     "additional_interfaces": [
         "config/interfaces/gpio_pin_33.json",
         "config/interfaces/gpio_pin_26.json"

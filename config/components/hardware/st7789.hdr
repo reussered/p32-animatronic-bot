@@ -1,0 +1,56 @@
+// ST7789 Display Header
+// RGB565 (16-bit color)
+
+#ifndef ST7789_HDR
+#define ST7789_HDR
+
+#include <cstdint>
+
+// Forward declaration
+struct ST7789_Pixel;
+
+// Global InitialPixel - must be set before allocating buffers containing Pixels
+extern ST7789_Pixel ST7789_InitialPixel;
+
+/**
+ * @brief Pixel struct for ST7789 display (RGB565 format)
+ * 16-bit color: 5-6-5 bits
+ */
+struct ST7789_Pixel
+{
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+    
+    ST7789_Pixel() 
+    {
+        *this = ST7789_InitialPixel;
+    }
+    
+    // Copy constructor
+    ST7789_Pixel(const ST7789_Pixel& other) 
+        : red(other.red), green(other.green), blue(other.blue)
+    {}
+    
+    // Assignment operator
+    ST7789_Pixel& operator=(const ST7789_Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};
+
+// Display specifications
+size_t st7789_get_width(void);
+size_t st7789_get_height(void);
+size_t getFrameSize(void);
+size_t getFrameRowSize(void);
+size_t getDisplaySize(void);
+
+// Component functions
+esp_err_t st7789_240x128_init(void);
+void st7789_240x128_act(void);
+
+#endif // ST7789_HDR

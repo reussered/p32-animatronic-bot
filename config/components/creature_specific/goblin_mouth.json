@@ -8,7 +8,7 @@
     "description":  "Shared goblin mouth processing logic with speech animation and mood-based rendering",
     "created":  "2025-10-23",
     "components":  [
-                                 "config/components/hardware/gc9a01_display.json"
+                                 "config/components/hardware/gc9a01.json"
                              ],
     "component_constraints":  {
                                   "required_contained_types":  [

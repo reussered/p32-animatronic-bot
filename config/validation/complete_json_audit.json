@@ -38,7 +38,7 @@
                                                                                                       "files":  3,
                                                                                                       "status":  "COMPLETE OK",
                                                                                                       "list":  [
-                                                                                                                   "gc9a01_display.json",
+                                                                                                                   "gc9a01.json",
                                                                                                                    "hc_sr04_sensor.json",
                                                                                                                    "speaker.json"
                                                                                                                ]
