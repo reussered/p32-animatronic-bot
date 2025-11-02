@@ -13,6 +13,44 @@ struct Pixel
     unsigned int red : 5;
     unsigned int green : 6;
     unsigned int blue : 5;
+
+    // Add two pixels with saturation (overflow caps at max value per channel)
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        
+        // Add red channel (5 bits, max 0x1F = 31)
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > 0x1F) ? 0x1F : sum_r;
+        
+        // Add green channel (6 bits, max 0x3F = 63)
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        
+        // Add blue channel (5 bits, max 0x1F = 31)
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > 0x1F) ? 0x1F : sum_b;
+        
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        // Add red channel (5 bits, max 0x1F = 31)
+        unsigned int sum_r = red + other.red;
+        red = (sum_r > 0x1F) ? 0x1F : sum_r;
+        
+        // Add green channel (6 bits, max 0x3F = 63)
+        unsigned int sum_g = green + other.green;
+        green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        
+        // Add blue channel (5 bits, max 0x1F = 31)
+        unsigned int sum_b = blue + other.blue;
+        blue = (sum_b > 0x1F) ? 0x1F : sum_b;
+        
+        return *this;
+    }
 };
 
 // Function declarations

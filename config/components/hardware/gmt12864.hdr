@@ -22,4 +22,27 @@ struct GMT12864_Pixel {
         pad = 0;
         return *this;
     }
+
+    // Add two pixels with saturation (overflow caps at max value: 1)
+    GMT12864_Pixel operator+(const GMT12864_Pixel& other) const
+    {
+        GMT12864_Pixel result;
+        
+        // Add value (1 bit, max 0x1 = 1)
+        unsigned int sum = value + other.value;
+        result.value = (sum > 0x1) ? 0x1 : sum;
+        result.pad = 0;
+        
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    GMT12864_Pixel& operator+=(const GMT12864_Pixel& other)
+    {
+        // Add value (1 bit, max 0x1 = 1)
+        unsigned int sum = value + other.value;
+        value = (sum > 0x1) ? 0x1 : sum;
+        
+        return *this;
+    }
 };

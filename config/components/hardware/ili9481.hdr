@@ -28,4 +28,44 @@ struct ILI9481_Pixel {
         pad = 0;
         return *this;
     }
+
+    // Add two pixels with saturation (overflow caps at max value per channel)
+    ILI9481_Pixel operator+(const ILI9481_Pixel& other) const
+    {
+        ILI9481_Pixel result;
+        
+        // Add red channel (6 bits, max 0x3F = 63)
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > 0x3F) ? 0x3F : sum_r;
+        
+        // Add green channel (6 bits, max 0x3F = 63)
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        
+        // Add blue channel (6 bits, max 0x3F = 63)
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > 0x3F) ? 0x3F : sum_b;
+        
+        result.pad = 0;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    ILI9481_Pixel& operator+=(const ILI9481_Pixel& other)
+    {
+        // Add red channel (6 bits, max 0x3F = 63)
+        unsigned int sum_r = red + other.red;
+        red = (sum_r > 0x3F) ? 0x3F : sum_r;
+        
+        // Add green channel (6 bits, max 0x3F = 63)
+        unsigned int sum_g = green + other.green;
+        green = (sum_g > 0x3F) ? 0x3F : sum_g;
+        
+        // Add blue channel (6 bits, max 0x3F = 63)
+        unsigned int sum_b = blue + other.blue;
+        blue = (sum_b > 0x3F) ? 0x3F : sum_b;
+        
+        pad = 0;
+        return *this;
+    }
 };
