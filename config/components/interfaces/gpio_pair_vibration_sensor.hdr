@@ -1,0 +1,9 @@
+#ifndef GPIO_PAIR_VIBRATION_SENSOR_HDR
+#define GPIO_PAIR_VIBRATION_SENSOR_HDR
+
+#include "esp_err.h"
+
+esp_err_t gpio_pair_vibration_sensor_init(void);
+void gpio_pair_vibration_sensor_act(void);
+
+#endif // GPIO_PAIR_VIBRATION_SENSOR_HDR

@@ -1,0 +1,49 @@
+{
+    "relative_filename": "config/components/interfaces/gpio_pair_vibration_sensor.json",
+    "version": "1.0.0",
+    "component_type": "INTERFACE_BUS",
+    "hardware_type": "BUS_INTERFACE",
+    "interface_type": "GPIO_PAIR",
+    "author": "config/author.json",
+    "name": "gpio_pair_vibration_sensor",
+    "bus_type": "GPIO_PAIR",
+    "bus_name": "GPIO_PAIR",
+    "description": "GPIO pair interface for vibration sensors",
+    "components": [
+        "config/components/drivers/gpio_pair_driver.json"
+    ],
+    "pin_requirements": {
+        "shared_pins_needed": [],
+        "unique_pins_needed": [
+            {
+                "function": "GPIO_TRIGGER",
+                "count": 1,
+                "description": "GPIO trigger/output pin"
+            },
+            {
+                "function": "GPIO_ECHO",
+                "count": 1,
+                "description": "GPIO echo/input pin"
+            }
+        ]
+    },
+    "timing": {
+        "hitCount": 1
+    },
+    "software": {
+        "init_function": "gpio_pair_vibration_sensor_init",
+        "act_function": "gpio_pair_vibration_sensor_act"
+    },
+    "pin_allocation": {
+        "shared_pins": [],
+        "unique_pins": []
+    },
+    "connectivity": {
+        "compatible_devices": [
+            "vibration_sensors",
+            "shock_sensors",
+            "motion_detectors"
+        ],
+        "protocol": "GPIO"
+    }
+}

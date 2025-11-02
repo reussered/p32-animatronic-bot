@@ -1,0 +1,6 @@
+SourceFile,MissingComponent,Type
+"config\components\positioned\base_arm_status_led.json","config/components/interfaces/gpio_pair_vibration_sensor.json","components[]"
+"config\components\positioned\base_status_led.json","config/components/interfaces/gpio_pair_vibration_sensor.json","components[]"
+"config\components\positioned\torso_status_led.json","config/components/interfaces/gpio_pair_vibration_sensor.json","components[]"
+"config\components\positioned\goblin\hand_components\left\hand_status_led.json","config/components/interfaces/gpio_pair_vibration_sensor.json","components[]"
+"config\components\positioned\goblin\leg_components\left\leg_status_led.json","config/components/interfaces/gpio_pair_vibration_sensor.json","components[]"

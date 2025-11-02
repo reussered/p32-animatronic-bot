@@ -1,0 +1,18 @@
+#include "esp_log.h"
+
+static const char *TAG = "gpio_pair_vibration_sensor";
+
+esp_err_t gpio_pair_vibration_sensor_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "gpio_pair_vibration_sensor_init() called");
+#endif
+    // TODO: Initialize GPIO pair for vibration sensor
+    return ESP_OK;
+}
+
+void gpio_pair_vibration_sensor_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "gpio_pair_vibration_sensor_act() called");
+#endif
+    // TODO: Read vibration sensor state
+}
