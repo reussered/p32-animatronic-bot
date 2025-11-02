@@ -14,8 +14,8 @@
     "Components":  [
                        "config/components/system/heartbeat.json",
                        "config/components/system/network_monitor.json",
-                       "config/components/positioned/goblin_left_eye.json",
-                       "config/components/positioned/goblin_right_eye.json"
+                       "config/components/creature_specific/goblin_left_eye.json",
+                       "config/components/creature_specific/goblin_right_eye.json"
                    ],
     "degrees_of_freedom":  {
                                "eye_movement_dof":  "4",

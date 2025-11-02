@@ -146,43 +146,43 @@
                                                                          "validation":  "SCHEMA_VALID_DEVICE_SPEC"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_ear_left.json",
+                                                                         "file":  "config/components/creature_specific/goblin_ear_left.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Left ear audio component positioning",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_ear_right.json",
+                                                                         "file":  "config/components/creature_specific/goblin_ear_right.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Right ear audio component positioning",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_mouth.json",
+                                                                         "file":  "config/components/creature_specific/goblin_mouth.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Mouth display positioning with 3D coordinates",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_nose.json",
+                                                                         "file":  "config/components/creature_specific/goblin_nose.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Nose sensor positioning",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_speaker.json",
+                                                                         "file":  "config/components/creature_specific/goblin_speaker.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Speaker positioning with audio specifications",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_left_eye.json",
+                                                                         "file":  "config/components/creature_specific/goblin_left_eye.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Left eye display with 3D skull coordinates",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"
                                                                      },
                                                                      {
-                                                                         "file":  "config/components/positioned/goblin_right_eye.json",
+                                                                         "file":  "config/components/creature_specific/goblin_right_eye.json",
                                                                          "status":  "COMPLETE",
                                                                          "description":  "Right eye display with 3D skull coordinates",
                                                                          "validation":  "SCHEMA_VALID_POSITIONED_COMPONENT"

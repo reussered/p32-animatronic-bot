@@ -14,8 +14,3 @@ void goblin_mouth_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_mouth, "goblin_mouth act");
 }
-
-
-
-
-

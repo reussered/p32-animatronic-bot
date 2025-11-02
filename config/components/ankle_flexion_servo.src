@@ -1,4 +1,4 @@
-﻿// ankle_flexion_servo Implementation
+// ankle_flexion_servo Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

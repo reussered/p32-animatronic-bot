@@ -2,107 +2,42 @@
     "relative_filename":  "config/components/creature_specific/cyclops_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "cyclops_eye",
-    "subsystem":  "HEAD",
-    "component_type":  "CREATURE_SPECIFIC_DISPLAY",
-    "description":  "Shared cyclops eye processing logic with large TFT display and intimidating mood-based rendering",
-    "created":  "2025-10-22",
-    "components":  [
-                       "config/components/hardware/tft_2p5x1p5.json"
-                   ],
-    "component_constraints":  {
-                                  "required_contained_types":  [
-                                                                   "DISPLAY_DRIVER"
-                                                               ],
-                                  "interface_requirements":  [
-                                                                 "getBuffer",
-                                                                 "getFrameSize",
-                                                                 "getFrameRowSize"
-                                                             ]
-                              },
-    "creature_display_profile":  {
-                                     "species":  "CYCLOPS",
-                                     "eye_color_base":  "DEEP_RED",
-                                     "pupil_style":  "MASSIVE_ROUND",
-                                     "expression_range":  "INTIMIDATING_TO_CURIOUS",
-                                     "mood_responsiveness":  "DRAMATIC",
-                                     "size_factor":  "LARGE_SINGLE_EYE"
-                                 },
-    "large_display_config":  {
-                                 "display_type":  "TFT_2.5x1.5_PORTRAIT",
-                                 "resolution":  "320x240",
-                                 "orientation":  "PORTRAIT_VERTICAL",
-                                 "color_depth":  "16BIT_RGB565"
-                             },
-    "palette_system":  {
-                           "palette_size":  512,
-                           "color_ranges":  {
-                                                "eyelid_pupil":  "0-63",
-                                                "iris_base":  "64-127",
-                                                "highlights":  "128-191",
-                                                "anger_reds":  "192-255",
-                                                "curiosity_greens":  "256-319",
-                                                "fear_blues":  "320-383",
-                                                "happiness_yellows":  "384-447",
-                                                "special_effects":  "448-511"
-                                            }
-                       },
-    "mood_color_mapping":  {
-                               "ANGER":  {
-                                             "primary_range":  "192-255",
-                                             "intensity_multiplier":  2.0,
-                                             "glow_effect":  "INTENSE",
-                                             "size_expansion":  "ENABLED"
-                                         },
-                               "CURIOSITY":  {
-                                                 "primary_range":  "256-319",
-                                                 "intensity_multiplier":  1.3,
-                                                 "sparkle_effect":  "ENABLED",
-                                                 "scanning_pattern":  "ENABLED"
-                                             },
-                               "FEAR":  {
-                                            "primary_range":  "320-383",
-                                            "intensity_multiplier":  1.9,
-                                            "dilation_effect":  "EXTREME",
-                                            "darting_motion":  "ENABLED"
-                                        },
-                               "HAPPINESS":  {
-                                                 "primary_range":  "384-447",
-                                                 "intensity_multiplier":  1.4,
-                                                 "warmth_effect":  "ENABLED",
-                                                 "gentle_blinking":  "ENABLED"
-                                             }
-                           },
-    "frame_processing":  {
-                             "buffer_stack_support":  "SINGLE_EYE",
-                             "multi_eye_coordination":  "NOT_APPLICABLE",
-                             "mood_based_adjustments":  "REALTIME",
-                             "color_space":  "RGB565",
-                             "large_frame_optimization":  "ENABLED"
-                         },
-    "animatronic_cache":  {
-                              "animation_buffers":  "SINGLE_LARGE_BUFFER",
-                              "frame_interpolation":  "SMOOTH",
-                              "mood_transition_ms":  400,
-                              "expression_blend_mode":  "DRAMATIC_CROSS_FADE"
-                          },
-    "timing":  {
-                   "hitCount":  1,
-                   "description":  "Process large display frame every loop"
-               },
-    "software":  {
-                     "init_function":  "cyclops_eye_init",
-                     "act_function":  "cyclops_eye_act"
+    "positioned_component_type":  "TFT_DISPLAY",
+    "display_id":  "CYCLOPS_MAIN_EYE",
+    "display_role":  "PRIMARY_EYE",
+    "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
+    "creature_shell":  "config/shapes/scad/bot_shells/cyclops_eye_shell.scad",
+    "mount_template":  "config/shapes/scad/basic_mounts/display_basic_mount.scad",
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "nose_center",
+                     "x":  "0.0 INCH",
+                     "y":  "2.0 INCH",
+                     "z":  "1.8 INCH",
+                     "rotation_x":  "0 DEG",
+                     "rotation_y":  "0 DEG",
+                     "rotation_z":  "0 DEG"
                  },
-    "prototype_status":  "needs_implementation",
-    "tested":  false,
-    "notes":  [
-                  "Software-only component - no physical shape",
-                  "Code pattern based on goblin_eye.cpp/hpp but adapted for large TFT display",
-                  "Handles mood-based color palette adjustments for single large eye",
-                  "Supports large frame buffer processing",
-                  "Extended 512-color palette for dramatic effects",
-                  "Real-time frame processing with SharedMemory mood integration",
-                  "Optimized for single large eye display rather than paired eyes"
-              ]
+    "orientation":  {
+                        "display_mode":  "PORTRAIT",
+                        "vertical_pixels":  320,
+                        "horizontal_pixels":  240,
+                        "viewing_angle":  "forward_facing",
+                        "tilt_forward":  "15 DEG"
+                    },
+    "cyclops_specific":  {
+                             "eye_size":  "MASSIVE",
+                             "iris_diameter":  "1.8 INCH",
+                             "pupil_tracking":  "FULL_RANGE",
+                             "blink_mechanism":  "DIGITAL_OVERLAY",
+                             "intimidation_factor":  "MAXIMUM"
+                         },
+    "display_content":  {
+                            "default_animation":  "assets/animations/cyclops/massive_stare.json",
+                            "blink_animation":  "assets/animations/cyclops/slow_blink.json",
+                            "anger_animation":  "assets/animations/cyclops/burning_gaze.json",
+                            "curiosity_animation":  "assets/animations/cyclops/scanning_look.json"
+                        },
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "name":  "cyclops_eye"
 }

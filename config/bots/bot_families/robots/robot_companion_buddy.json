@@ -29,10 +29,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/emotion_camera.json",
-                       "config/components/positioned/touch_sensor_array.json",
-                       "config/components/positioned/comfort_speaker.json",
-                       "config/components/positioned/pet_simulation_servos.json"
+                       "config/components/creature_specific/emotion_camera.json",
+                       "config/components/creature_specific/touch_sensor_array.json",
+                       "config/components/creature_specific/comfort_speaker.json",
+                       "config/components/creature_specific/pet_simulation_servos.json"
                    ],
     "social_behaviors":  {
                              "greeting_patterns":  [

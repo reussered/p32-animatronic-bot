@@ -8,17 +8,17 @@
                         "chip":  "esp32-s3-n16r8",
                         "goblin_left_eye":  {
                                                 "components":  [
-                                                                   "config/components/positioned/goblin/head_components/goblin_left_eye.json"
+                                                                   "config/components/creature_specific/goblin/head_components/goblin_left_eye.json"
                                                                ]
                                             },
                         "goblin_right_eye":  {
                                                  "components":  [
-                                                                    "config/components/positioned/goblin/head_components/goblin_right_eye.json"
+                                                                    "config/components/creature_specific/goblin/head_components/goblin_right_eye.json"
                                                                 ]
                                              },
                         "goblin_nose":  {
                                             "components":  [
-                                                               "config/components/positioned/goblin/head_components/goblin_nose.json"
+                                                               "config/components/creature_specific/goblin/head_components/goblin_nose.json"
                                                            ]
                                         }
                     },

@@ -74,8 +74,8 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/goblin_battle_scars.json",
-                       "config/components/positioned/goblin_war_paint.json"
+                       "config/components/creature_specific/goblin_battle_scars.json",
+                       "config/components/creature_specific/goblin_war_paint.json"
                    ],
     "custom_behaviors":  {
                              "combat_ready_stance":  {

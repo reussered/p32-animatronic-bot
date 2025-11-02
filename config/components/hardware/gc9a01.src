@@ -2,11 +2,16 @@
 // This component is a data provider. It defines the physical characteristics
 // of the GC9A01 display but contains no active logic.
 
+#include "config/components/hardware/gc9a01.hdr"
 #include "esp_log.h"
 #include "esp_heap_caps.h"
 #include <stdlib.h>
 
 static const char *TAG_gc9a01 = "gc9a01";
+
+// Shared frame pointer for display chain coordination
+// Set by positioned components (left_eye/right_eye), read by display driver
+Pixel* frame_ptr = nullptr;
 
 // Define GC9A01_InitialPixel
 // Note: value should be set before allocating buffers containing GC9A01_Pixels

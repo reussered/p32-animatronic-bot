@@ -1,0 +1,57 @@
+{
+    "relative_filename":  "config/components/creature_specific/temperature_monitor.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_type":  "POSITIONED_COMPONENT",
+    "hardware_type":  "SENSOR",
+    "name":  "temperature_monitor",
+    "display_name":  "Power Supply Temperature Monitor",
+    "description":  "Temperature sensor for monitoring power supply module thermal conditions",
+    "subsystem":  "power_supply",
+    "created":  "2025-10-23",
+    "components":  [
+                       "config/hardware/ds18b20_temperature_sensor.json"
+                   ],
+    "positioning":  {
+                        "coordinate_system":  "power_module_3d",
+                        "reference_point":  "power_module_center",
+                        "position":  {
+                                         "x":  "15.0 MM",
+                                         "y":  "0.0 MM",
+                                         "z":  "8.0 MM"
+                                     },
+                        "orientation":  {
+                                            "probe_direction":  "into_heatsink",
+                                            "cable_routing":  "toward_esp32"
+                                        }
+                    },
+    "behavior_config":  {
+                            "critical_temp_c":  75,
+                            "warning_temp_c":  65,
+                            "normal_operating_range":  "20C_to_55C",
+                            "thermal_protection":  {
+                                                       "enable_shutdown":  true,
+                                                       "shutdown_temp_c":  80,
+                                                       "cooldown_temp_c":  60
+                                                   }
+                        },
+    "component_timing":  {
+                             "hitCount":  100,
+                             "priority":  "high",
+                             "thermal_emergency_override":  true
+                         },
+    "integration":  {
+                        "shared_memory_key":  "power_temperature",
+                        "environment_field":  "temperature_c",
+                        "alerts":  [
+                                       {
+                                           "condition":  "temp \u003e 65",
+                                           "action":  "reduce_system_load"
+                                       },
+                                       {
+                                           "condition":  "temp \u003e 75",
+                                           "action":  "emergency_shutdown"
+                                       }
+                                   ]
+                    }
+}

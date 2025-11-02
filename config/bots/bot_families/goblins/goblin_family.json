@@ -16,13 +16,13 @@
                                 "mechanical_precision":  "moderate_tolerance"
                             },
     "components":  [
-                       "config/components/positioned/goblin_left_eye.json",
-                       "config/components/positioned/goblin_right_eye.json",
-                       "config/components/positioned/goblin_mouth.json",
-                       "config/components/positioned/goblin_nose.json",
-                       "config/components/positioned/goblin_ear_left.json",
-                       "config/components/positioned/goblin_ear_right.json",
-                       "config/components/positioned/goblin_speaker.json"
+                       "config/components/creature_specific/goblin_left_eye.json",
+                       "config/components/creature_specific/goblin_right_eye.json",
+                       "config/components/creature_specific/goblin_mouth.json",
+                       "config/components/creature_specific/goblin_nose.json",
+                       "config/components/creature_specific/goblin_ear_left.json",
+                       "config/components/creature_specific/goblin_ear_right.json",
+                       "config/components/creature_specific/goblin_speaker.json"
                    ],
     "family_characteristics":  {
                                    "physical_features":  {

@@ -1,18 +1,18 @@
-﻿# P32 Animatronic Bot - Complete Architectural Ruleset
+# P32 Animatronic Bot - Complete Architectural Ruleset
 
-## ðŸš¨ CRITICAL SETUP (READ FIRST)
+## ???? CRITICAL SETUP (READ FIRST)
 
 - **Project Root**: `f:\GitHub\p32-animatronic-bot` (fixed location, use absolute paths)
 - **MANDATORY**: Read this document before any code changes. This consolidates all architectural rules without duplicates.
 
-## ðŸ¤– AI Agent Behavior Guidelines
+## ???? AI Agent Behavior Guidelines
 
 - **Defer to user expertise** as domain expert
 - **Never delete, modify, or refactor** existing code without explicit permission
 - **Explain all proposed changes** clearly and get confirmation for significant edits
 - **Preserve existing code context and intent** - no changes "out of context" or based on external assumptions
 
-## ðŸ—ï¸ Architecture Overview
+## ??????? Architecture Overview
 
 ### Pure Component System
 
@@ -36,35 +36,35 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
 - **Across subsystems/chips**: Use SharedMemory for all inter-component coordination and global variable communication
 - **Never call component functions directly** across subsystem boundaries
 
-## ðŸ”§ Essential Workflows
+## ???? Essential Workflows
 
 - **Generate Components**: `python tools/generate_tables.py goblin_full src` (reads JSON, creates dispatch tables and aggregates individual component cpp/hpp files into subsystem component_functions.cpp/hpp)
 - **Build & Flash**: `pio run -t upload -t monitor`
 - **Validate Config**: `.\generate_file_structure.ps1`
 - **Multi-Chip Testing**: Use `test/distance_eye_test/` for SharedMemory mesh validation
 
-## âš¡ Critical Constraints
+## ??? Critical Constraints
 
 - **ESP32 Variants**: Determined per subsystem by final code analysis and testing
 - **Real-Time**: Components must return quickly (<10ms), no blocking operations
 - **Multi-Chip**: SharedMemory broadcasts via internal mesh protocol, never direct function calls
 - **Build System**: PlatformIO + ESP-IDF, multiple environments for subsystems
 
-## ðŸ—‚ï¸ File Organization
+## ??????? File Organization
 
 - **Components**: `src/components/{name}.cpp`, `include/components/{name}.hpp`
 - **Configs**: `config/bots/bot_families/{family}/{bot}.json`
 - **Assets**: `assets/{animations,sounds}/{creature}/` for creature-specific assets, `assets/shapes/scad/` for shared shapes
 - **3D Models**: Tier 1 (universal hardware) + Tier 2 (creature shells)
 
-## ðŸ”— Integration Points
+## ???? Integration Points
 
 - **SharedMemory Mesh**: `SharedMemory::write()` broadcasts to all chips
 - **Hardware Interfaces**: SPI bus + device pattern, I2S shared bus + unique pins
 - **Coordinate Systems**: 2D planar or 3D skull-based with `"reference_point": "nose_center"`
 - **PowerShell Tooling**: All scripts lowercase, absolute paths required
 
-## ðŸ›ï¸ Component Relationships & JSON Interpretation
+## ??????? Component Relationships & JSON Interpretation
 
 ### Three-Level Hierarchy
 
@@ -74,7 +74,7 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
 
 ### Recursive Composition
 
-- `goblin_full.json` â†’ `goblin_head.json` â†’ `left_eye.json`
+- `goblin_full.json` ??? `goblin_head.json` ??? `left_eye.json`
 
 ### JSON Config System
 
@@ -84,7 +84,7 @@ void component_name_act(void);        // No args, reports errors via SharedMemor
 - Required fields: `"relative_filename"`, `"version"`, `"author"`
 - Shape parameter: Present for hardware-only components (`"init_function": "STUB"`)
 
-## ðŸŽ¯ Component Development Rules
+## ???? Component Development Rules
 
 ### Component Function Signatures
 
@@ -102,10 +102,10 @@ void component_name_act(void);        // No parameters, accesses global state
 - **NEVER**: Components call each other directly. Use SharedMemory for communication:
 
 ```cpp
-// âŒ WRONG - Direct component call
+// ??? WRONG - Direct component call
 goblin_right_eye_act();
 
-// âœ… CORRECT - Use SharedMemory
+// ??? CORRECT - Use SharedMemory
 SharedMemory GSM;
 Environment* env = GSM.read<Environment>();
 ```
@@ -123,7 +123,7 @@ Environment* env = GSM.read<Environment>();
 
 ```cpp
 void component_act(void) {
-    if (g_loopCount % 30 == 0) {  // Every 30 loops â‰ˆ 500ms at 60Hz
+    if (g_loopCount % 30 == 0) {  // Every 30 loops ??? 500ms at 60Hz
         // Do periodic work
     }
 }
@@ -134,11 +134,11 @@ void component_act(void) {
 - **FORBIDDEN**: Dynamic allocation in hot paths. Use static buffers:
 
 ```cpp
-static uint8_t* animation_buffer = nullptr;  // âœ… OK
-// std::vector<uint8_t> buffer;  // âŒ FORBIDDEN
+static uint8_t* animation_buffer = nullptr;  // ??? OK
+// std::vector<uint8_t> buffer;  // ??? FORBIDDEN
 ```
 
-## ðŸ”„ SharedMemory API Rules
+## ???? SharedMemory API Rules
 
 ### Reading Shared State
 
@@ -172,7 +172,7 @@ if (curMood != nullptr) {
 - **SUPPORTED**: POD types and simple structs. No complex objects with pointers.
 - **WHY**: ESP-NOW requires serializable data structures.
 
-## ðŸ“Š Dispatch Table Generation Rules
+## ???? Dispatch Table Generation Rules
 
 ### Auto-Generation Process
 
@@ -207,7 +207,7 @@ void (*actTable[TABLE_SIZE])(void) = {
 - **REQUIRED**: Components listed in JSON config are auto-registered in tables.
 - **WHY**: Eliminates manual table maintenance errors.
 
-## ðŸŒ Multi-Chip Communication Rules
+## ???? Multi-Chip Communication Rules
 
 ### ESP-NOW Mesh
 
@@ -230,7 +230,7 @@ void (*actTable[TABLE_SIZE])(void) = {
 - **GUARANTEED**: SharedMemory ensures eventual consistency across chips.
 - **WHY**: Components can assume shared state is current.
 
-## âš™ï¸ JSON Configuration Rules
+## ?????? JSON Configuration Rules
 
 ### File Structure
 
@@ -265,7 +265,7 @@ void (*actTable[TABLE_SIZE])(void) = {
 ]
 ```
 
-## ðŸ”Œ Hardware Interface Rules
+## ???? Hardware Interface Rules
 
 ### SPI Bus Sharing
 
@@ -287,7 +287,7 @@ void (*actTable[TABLE_SIZE])(void) = {
 
 - **WHY**: Enables hardware abstraction and remapping.
 
-## ðŸŽ¨ Animation & Display Rules
+## ???? Animation & Display Rules
 
 ### Buffer Management
 
@@ -319,7 +319,7 @@ if (g_loopCount % 30 == 0) {
 }
 ```
 
-## ðŸ§ª Testing & Validation Rules
+## ???? Testing & Validation Rules
 
 ### Component Testing
 
@@ -336,7 +336,7 @@ if (g_loopCount % 30 == 0) {
 - **MANDATORY**: Run `pio run` before committing.
 - **WHY**: Catches compilation errors early.
 
-## ðŸ“ Code Style Rules
+## ???? Code Style Rules
 
 ### ASCII Encoding
 
@@ -356,7 +356,7 @@ if (g_loopCount % 30 == 0) {
 - **REQUIRED**: Use `#pragma once` or standard guards.
 - **WHY**: Prevents multiple inclusion errors.
 
-## ðŸ”„ Development Workflow Rules
+## ???? Development Workflow Rules
 
 ### Feature Development
 
@@ -374,36 +374,36 @@ if (g_loopCount % 30 == 0) {
 ### Documentation
 
 - **REQUIRED**: Update this rules document for any architectural changes.
-- **WHY**: Maintains system consistency.## ðŸš« Forbidden Patterns
+- **WHY**: Maintains system consistency.## ???? Forbidden Patterns
 
 ### Direct Component Calls
 ```cpp
-// âŒ NEVER DO THIS
+// ??? NEVER DO THIS
 goblin_right_eye_act();
 other_component_init();
 ```
 
 ### Dynamic Allocation in Hot Paths
 ```cpp
-// âŒ NEVER DO THIS
+// ??? NEVER DO THIS
 std::vector<uint8_t> buffer;
 auto* ptr = new uint8_t[size];
 ```
 
 ### Blocking Operations
 ```cpp
-// âŒ NEVER DO THIS
+// ??? NEVER DO THIS
 vTaskDelay(100);
 while (!condition) { }
 ```
 
 ### Direct ESP-NOW Usage
 ```cpp
-// âŒ NEVER DO THIS
+// ??? NEVER DO THIS
 esp_now_send(peer_addr, data, size);
 ```
 
-## âœ… Recommended Patterns
+## ??? Recommended Patterns
 
 ### Shared State Access
 
@@ -436,7 +436,7 @@ if (buffer == nullptr) {
 // Use buffer...
 ```
 
-## ðŸ“‹ Checklist for New Components
+## ???? Checklist for New Components
 
 - [ ] JSON config created with required metadata
 - [ ] Component implements `init()` and `act()` with NO ARGUMENTS
@@ -449,7 +449,7 @@ if (buffer == nullptr) {
 - [ ] Builds successfully
 - [ ] Validated on hardware
 
-## ðŸ” Debugging Rules
+## ???? Debugging Rules
 
 ### Log Levels
 - **REQUIRED**: Use ESP_LOG macros:

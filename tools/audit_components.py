@@ -227,7 +227,7 @@ void {comp_name}_act(void);
         if preview_only:
             print(f"  WOULD CREATE: {header_path}")
         else:
-            with open(header_path, 'w') as f:
+            with open(header_path, 'w', encoding='ascii') as f:
                 f.write(content)
             print(f"  CREATED: {header_path}")
     
@@ -269,7 +269,7 @@ void {comp_name}_act(void)
         if preview_only:
             print(f"  WOULD CREATE: {impl_path}")
         else:
-            with open(impl_path, 'w') as f:
+            with open(impl_path, 'w', encoding='ascii') as f:
                 f.write(content)
             print(f"  CREATED: {impl_path}")
     

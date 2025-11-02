@@ -90,11 +90,11 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/goblin_horn_crown.json",
-                       "config/components/positioned/goblin_authority_markings.json",
-                       "config/components/positioned/goblin_tribal_tattoos.json",
-                       "config/components/positioned/goblin_trophy_scars.json",
-                       "config/components/positioned/goblin_enlarged_fangs.json"
+                       "config/components/creature_specific/goblin_horn_crown.json",
+                       "config/components/creature_specific/goblin_authority_markings.json",
+                       "config/components/creature_specific/goblin_tribal_tattoos.json",
+                       "config/components/creature_specific/goblin_trophy_scars.json",
+                       "config/components/creature_specific/goblin_enlarged_fangs.json"
                    ],
     "custom_behaviors":  {
                              "pack_assembly":  {

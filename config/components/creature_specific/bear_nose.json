@@ -1,0 +1,37 @@
+{
+    "relative_filename":  "config/components/creature_specific/bear_nose.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "name":  "bear_nose",
+    "component_type":  "POSITIONED_COMPONENT",
+    "subsystem":  "HEAD",
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/hc_sr04_sensor.json",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/bear/bear_nose_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/sensor_basic_mount.scad",
+                                 "mount_type":  "SOFT_NOSE_MOUNT"
+                             },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "-0.5 INCH",
+                     "z":  "+0.8 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "15 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "nose_texture":  "SOFT_FUR_COVERED",
+                                     "sensor_visibility":  "FULLY_HIDDEN",
+                                     "breathing_animation":  "PRONOUNCED_SNIFF"
+                                 },
+    "function":  "proximity_sensor",
+    "description":  "Proximity sensor monitoring - bear soft nose variant",
+    "timing":  {
+                   "hitCount":  15
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

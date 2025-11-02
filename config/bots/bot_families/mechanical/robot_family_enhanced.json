@@ -15,11 +15,11 @@
                                 "component_spacing":  "1.5 INCH"
                             },
     "components":  [
-                       "config/components/positioned/robot_chest_matrix.json",
-                       "config/components/positioned/robot_status_oled.json",
-                       "config/components/positioned/robot_camera_eyes.json",
-                       "config/components/positioned/robot_speaker_array.json",
-                       "config/components/positioned/robot_led_strips.json"
+                       "config/components/creature_specific/robot_chest_matrix.json",
+                       "config/components/creature_specific/robot_status_oled.json",
+                       "config/components/creature_specific/robot_camera_eyes.json",
+                       "config/components/creature_specific/robot_speaker_array.json",
+                       "config/components/creature_specific/robot_led_strips.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  5,

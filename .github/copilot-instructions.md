@@ -11,6 +11,13 @@
 
 **RULE 1 - REPORT BLOCKERS IMMEDIATELY**: If any rule or constraint prevents proceeding, report it immediately with exact reason. Never pause or fail silently.
 
+**RULE 2 - BUILD OUTPUT MANAGEMENT** (PREVENTS AGENT FREEZE):
+- **ALWAYS** redirect build output to file: `pio run -e goblin_head > build.log 2>&1`
+- **Check build results**: `Select-String -Path build.log -Pattern "error|failed|success" -CaseSensitive`
+- **Monitor commands**: NEVER use `-t monitor` in agent commands (infinite output)
+- **Serial monitoring**: Use timeout: `Start-Job { pio device monitor } | Wait-Job -Timeout 60 | Receive-Job`
+- **Reason**: ESP32 builds generate 50,000+ lines, serial monitor runs forever - both overwhelm agent context
+
 ## Core Architecture (The "Why")
 **Pure Component System**: Multi-ESP32 distributed animatronic bot. Everything is a component with `{name}_init()` → `{name}_act()` functions. Main loop iterates components ONLY - zero application logic in `app_main()`.
 
@@ -45,16 +52,40 @@ Reads JSON configs → aggregates `.src` files into `p32_component_functions.cpp
 .\generate_file_structure.ps1
 ```
 
-**3. Build & Flash**:
+**3. Build & Flash** (with safe output handling):
 ```powershell
-# Standard build (single env)
-pio run -e goblin_head -t upload -t monitor
+# Standard build (single env) - agent runs this with redirect
+pio run -e goblin_head > build.log 2>&1; Select-String -Path build.log -Pattern "error|success" -Context 2
+
+# Upload firmware (agent runs this)
+pio run -e goblin_head -t upload > upload.log 2>&1; Select-String -Path upload.log -Pattern "error|success|Writing"
+
+# Serial monitor (60-second capture for agent, infinite for user)
+# Agent: Start-Job { pio device monitor } | Wait-Job -Timeout 60 | Receive-Job
+# User:  pio run -e goblin_head -t monitor
 
 # Multi-variant build (multiple ESPs)
-pio run -c platformio_multi_variant.ini -e goblin_head
+pio run -c platformio_multi_variant.ini -e goblin_head > build.log 2>&1; Select-String -Path build.log -Pattern "error|success"
+
+# Test environment (minimal head subsystem)
+pio run -e test_head -t upload > upload.log 2>&1
 ```
 
-**Environments**: `goblin_head`, `goblin_torso`, `left_arm`, `right_arm` (see `platformio.ini`)
+**Agent Build Protocol** (no asking, just do it):
+- Redirect ALL build/upload output to files
+- Check logs with filtered `Select-String` for errors/success only
+- Serial monitor: Use 60-second timeout, capture output, then provide command for user's continuous monitoring
+- Summarize: "Build completed with X errors" or "Upload successful, device ready"
+
+**Available Environments** (see `platformio.ini`):
+- **Production**: `goblin_head`, `goblin_torso`, `left_arm`, `right_arm`
+- **Testing**: `test_head` (minimal subsystem for hardware validation)
+- **Board Types**: ESP32-S3 (head/torso), ESP32-C3 (limbs), ESP32 (complex subsystems)
+
+**Build System Architecture**:
+- **Single codebase**: Same `main.cpp` runs on ALL ESP32 chips
+- **Subsystem filtering**: `build_src_filter` in `platformio.ini` includes subsystem-specific files
+- **Component discovery**: `generate_tables.py` finds `.src`/`.hdr` by stem name, explicit paths in JSON, or sibling to JSON file
 
 ## Golden Rules (NEVER BREAK THESE - THEY CAUSE IMMEDIATE BREAKAGE)
 
@@ -117,7 +148,7 @@ if (condition) { doAction(); }       // ❌
 
 ## Key Conventions
 
-**JSON Structure** (minimal):
+**JSON Structure** (minimal required fields):
 ```json
 {
   "relative_filename": "config/components/positioned/goblin_left_eye.json",
@@ -132,13 +163,30 @@ if (condition) { doAction(); }       // ❌
 }
 ```
 
+**JSON Containment Rules** (CRITICAL - fatal errors if violated):
+- **ONLY** use `"components": []` for child components
+- **NEVER** use legacy keywords: `*_components`, `contained_components`, `child_components`
+- **Controller boundary**: `"controller": "ESP32_S3_DEVKITC_1"` triggers subsystem generation (creates 6 files)
+- **Relative paths**: All file references relative to project root
+
+**Subsystem Generation** (triggered by `controller` keyword):
+```text
+When JSON contains "controller": "ESP32_S3_DEVKITC_1", generates:
+  - src/subsystems/{name}/{name}_component_functions.cpp
+  - include/subsystems/{name}/{name}_component_functions.hpp
+  - src/subsystems/{name}/{name}_dispatch_tables.cpp
+  - include/subsystems/{name}/{name}_dispatch_tables.hpp
+  - src/subsystems/{name}/{name}_main.cpp
+  - include/subsystems/{name}/{name}_main.hpp
+```
+
 **Naming**:
 - Components: `{creature}_{side}_{part}` (e.g., `goblin_left_eye`)
 - Functions: `{component_name}_init()` / `{component_name}_act()`
 - Files: lowercase except classes (`SharedMemory.hpp` matches `class SharedMemory`)
 - Bilateral: `goblin_left_eye`, `goblin_right_eye` (separate configs)
 
-**SharedMemory API** (cross-chip sync):
+**SharedMemory API** (cross-chip sync via ESP-NOW):
 ```cpp
 // Read shared state (any subsystem)
 Mood* mood = GSM.read<Mood>();
@@ -148,7 +196,27 @@ Environment* env = GSM.read<Environment>();
 Mood* mood = GSM.read<Mood>();
 mood->anger = 70;
 mood->fear = 30;
-GSM.write<Mood>();  // Broadcasts to all ESP32s
+GSM.write<Mood>();  // Broadcasts to all ESP32s via ESP-NOW mesh
+```
+
+**Data Ownership Rules** (CRITICAL - prevents conflicts):
+- **Environment state**: Owned by `torso` subsystem (power, temperature)
+- **Mood state**: Owned by `torso` (power modulation) AND `head` (sensory updates)
+- **Position data**: Owned by respective limb subsystems
+- **Local coordination**: Use file-scoped globals in `.src` files, NOT SharedMemory
+
+**Power-Aware Behavior Pattern** (discovered in ARCHITECTURE_DECISION_LOG.md):
+```cpp
+// Torso subsystem - Power affects mood intensity
+Environment *env = GSM.read<Environment>();
+Mood *mood = GSM.read<Mood>();
+
+if (env->power_level < 0.2f) {        // Critical power
+    mood->intensity *= 0.3f;          // Subdued behavior
+    mood->sadness = 1.0f;             // Triggers: shivering, whimpering, collapse
+} else if (env->power_level < 0.5f) { // Low power
+    mood->intensity *= 0.6f;          // Reduced energy
+}
 ```
 
 **Encoding**: ASCII ONLY (no UTF-8 BOM) - JSON parser breaks on `0xEF 0xBB 0xBF`

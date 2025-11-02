@@ -1,0 +1,84 @@
+{
+    "relative_filename":  "config/components/creature_specific/humanoid_pelvis_assembly.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "HUMANOID_PELVIS_ASSEMBLY",
+    "subsystem":  "UNKNOWN",
+    "component_type":  "STRUCTURAL_FOUNDATION",
+    "description":  "Central pelvis assembly serving as foundation for legs, spine, and power distribution",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "position":  {
+                     "x":  "0.0 INCH",
+                     "y":  "0.0 INCH",
+                     "z":  "0.0 INCH",
+                     "scaling_applies":  true
+                 },
+    "components":  [
+                       "config/components/hardware/pelvis_structural_assembly.json"
+                   ],
+    "attachment_points":  {
+                              "hip_left_connection":  {
+                                                          "position":  {
+                                                                           "x":  "-4.5",
+                                                                           "y":  "0.0",
+                                                                           "z":  "0.0"
+                                                                       },
+                                                          "mounting_hardware":  "M10_BOLT_ASSEMBLY_HIGH_STRENGTH",
+                                                          "component_reference":  "config/components/creature_specific/humanoid_hip_left.json"
+                                                      },
+                              "hip_right_connection":  {
+                                                           "position":  {
+                                                                            "x":  "4.5",
+                                                                            "y":  "0.0",
+                                                                            "z":  "0.0"
+                                                                        },
+                                                           "mounting_hardware":  "M10_BOLT_ASSEMBLY_HIGH_STRENGTH",
+                                                           "component_reference":  "config/components/creature_specific/humanoid_hip_right.json"
+                                                       },
+                              "spine_connection":  {
+                                                       "position":  {
+                                                                        "x":  "0.0",
+                                                                        "y":  "0.0",
+                                                                        "z":  "4.0"
+                                                                    },
+                                                       "mounting_hardware":  "M8_BOLT_ASSEMBLY",
+                                                       "component_reference":  "config/components/creature_specific/humanoid_spine_l5.json"
+                                                   }
+                          },
+    "power_system_integration":  {
+                                     "battery_capacity":  "14S4P_LITHIUM_ION_PACK",
+                                     "voltage_rails":  [
+                                                           "51.8V_MAIN",
+                                                           "24V_LOGIC",
+                                                           "12V_SENSORS",
+                                                           "5V_DIGITAL"
+                                                       ],
+                                     "power_taps":  12,
+                                     "current_capacity":  "60A_CONTINUOUS_100A_PEAK",
+                                     "battery_management":  "INTEGRATED_BMS_WITH_BLUETOOTH"
+                                 },
+    "structural_specifications":  {
+                                      "material":  "ALUMINUM_EXTRUSION_WELDED_ASSEMBLY",
+                                      "weight_grams":  3200,
+                                      "load_capacity":  "200_KG_DISTRIBUTED_LOAD",
+                                      "safety_factor":  4.0,
+                                      "center_of_mass":  {
+                                                             "x":  "0.0",
+                                                             "y":  "0.5",
+                                                             "z":  "2.0"
+                                                         }
+                                  },
+    "thermal_management":  {
+                               "cooling_type":  "FORCED_AIR_CONVECTION",
+                               "heat_dissipation_watts":  150,
+                               "operating_temp_range":  "-10C_TO_60C",
+                               "thermal_protection":  "AUTOMATIC_THROTTLING"
+                           },
+    "scaling_behavior":  {
+                             "position_scaling":  "APPLIES_TO_ALL_XYZ_COORDINATES",
+                             "power_scaling":  "SCALES_QUADRATICALLY_WITH_SIZE",
+                             "structural_scaling":  "LOAD_CAPACITY_SCALES_WITH_CREATURE_MASS"
+                         },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

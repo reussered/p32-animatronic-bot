@@ -408,7 +408,7 @@ class P32IndividualComponentGenerator:
             component_source = self.generate_individual_component_file(comp)
             component_file = self.components_dir / comp['filename']
             
-            with open(component_file, 'w') as f:
+            with open(component_file, 'w', encoding='ascii') as f:
                 f.write(component_source)
             print(f"Generated: {component_file}")
         
@@ -416,7 +416,7 @@ class P32IndividualComponentGenerator:
         registry_header = self.generate_component_registry_header()
         registry_file = self.include_dir / "p32_component_registry.h"
         
-        with open(registry_file, 'w') as f:
+        with open(registry_file, 'w', encoding='ascii') as f:
             f.write(registry_header)
         print(f"Generated: {registry_file}")
         
@@ -424,7 +424,7 @@ class P32IndividualComponentGenerator:
         tables_source = self.generate_component_tables()
         tables_file = self.output_dir / "p32_component_tables.cpp"
         
-        with open(tables_file, 'w') as f:
+        with open(tables_file, 'w', encoding='ascii') as f:
             f.write(tables_source)
         print(f"Generated: {tables_file}")
         
@@ -451,7 +451,7 @@ class P32IndividualComponentGenerator:
         ])
         
         cmake_file = self.output_dir / "p32_components.cmake"
-        with open(cmake_file, 'w') as f:
+        with open(cmake_file, 'w', encoding='ascii') as f:
             f.write('\n'.join(cmake_content))
         print(f"Generated: {cmake_file}")
         

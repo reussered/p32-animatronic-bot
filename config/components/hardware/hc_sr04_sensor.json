@@ -27,8 +27,8 @@
                           "beam_angle":  "15 DEGREES"
                       },
     "software":  {
-                     "init_function":  "hc_sr04_ultrasonic_distance_sensor_init",
-                     "act_function":  "hc_sr04_ultrasonic_distance_sensor_act",
+                     "init_function":  "hc_sr04_init",
+                     "act_function":  "hc_sr04_act",
                      "components":  [
                                         "config/components/drivers/gpio_bus.json"
                                     ]

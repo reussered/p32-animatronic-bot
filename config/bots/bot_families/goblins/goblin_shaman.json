@@ -84,10 +84,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/goblin_spirit_runes.json",
-                       "config/components/positioned/goblin_ritual_scars.json",
-                       "config/components/positioned/goblin_bone_ornaments.json",
-                       "config/components/positioned/goblin_mystical_glow.json"
+                       "config/components/creature_specific/goblin_spirit_runes.json",
+                       "config/components/creature_specific/goblin_ritual_scars.json",
+                       "config/components/creature_specific/goblin_bone_ornaments.json",
+                       "config/components/creature_specific/goblin_mystical_glow.json"
                    ],
     "custom_behaviors":  {
                              "ritual_casting":  {

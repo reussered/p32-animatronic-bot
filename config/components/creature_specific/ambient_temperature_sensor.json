@@ -1,0 +1,76 @@
+{
+    "relative_filename":  "config/components/creature_specific/ambient_temperature_sensor.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_type":  "POSITIONED_COMPONENT",
+    "hardware_type":  "SENSOR",
+    "name":  "ambient_temperature_sensor",
+    "display_name":  "Skull Ambient Temperature Sensor",
+    "description":  "Temperature sensor for monitoring ambient environmental conditions inside goblin skull",
+    "subsystem":  "head",
+    "created":  "2025-10-23",
+    "components":  [
+                       "config/hardware/ds18b20_temperature_sensor.json"
+                   ],
+    "positioning":  {
+                        "coordinate_system":  "skull_3d",
+                        "reference_point":  "nose_center",
+                        "position":  {
+                                         "x":  "0.0 MM",
+                                         "y":  "25.0 MM",
+                                         "z":  "15.0 MM"
+                                     },
+                        "orientation":  {
+                                            "probe_direction":  "toward_forehead_interior",
+                                            "cable_routing":  "toward_main_pcb"
+                                        },
+                        "mounting":  {
+                                         "method":  "skull_interior_clip",
+                                         "notes":  "Position away from displays to avoid heat interference"
+                                     }
+                    },
+    "behavior_config":  {
+                            "measurement_range":  "-10C_to_50C",
+                            "comfort_range":  "18C_to_28C",
+                            "mood_influence":  {
+                                                   "cold_threshold":  15,
+                                                   "hot_threshold":  35,
+                                                   "temperature_mood_scaling":  0.3
+                                               }
+                        },
+    "component_timing":  {
+                             "hitCount":  200,
+                             "priority":  "medium",
+                             "environmental_sensing":  true
+                         },
+    "integration":  {
+                        "shared_memory_key":  "ambient_temperature",
+                        "environment_field":  "temperature_c",
+                        "mood_effects":  [
+                                             {
+                                                 "condition":  "temp \u003c 15",
+                                                 "mood_modifier":  "increase_fear_irritation"
+                                             },
+                                             {
+                                                 "condition":  "temp \u003e 35",
+                                                 "mood_modifier":  "increase_anger_discomfort"
+                                             },
+                                             {
+                                                 "condition":  "18 \u003c= temp \u003c= 28",
+                                                 "mood_modifier":  "increase_contentment"
+                                             }
+                                         ]
+                    },
+    "skull_integration":  {
+                              "modification_required":  true,
+                              "mounting_hole":  {
+                                                    "diameter":  "6.5mm",
+                                                    "location":  "forehead_interior_wall",
+                                                    "depth":  "through_wall"
+                                                },
+                              "cable_management":  {
+                                                       "route":  "interior_conduit_to_pcb",
+                                                       "length_required":  "8cm"
+                                                   }
+                          }
+}

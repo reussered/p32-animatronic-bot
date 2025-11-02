@@ -1,0 +1,98 @@
+// HC-SR04 Ultrasonic Distance Sensor Hardware Component
+// config/components/hardware/hc_sr04.src
+
+#include "esp_log.h"
+#include "driver/gpio.h"
+
+static const char *TAG = "hc_sr04";
+
+// HC-SR04 pins (configured via dynamic pin assignment)
+static gpio_num_t trigger_pin = GPIO_NUM_NC;
+static gpio_num_t echo_pin = GPIO_NUM_NC;
+
+// Timing constants for HC-SR04
+#define TRIGGER_PULSE_US 10
+#define TIMEOUT_US 30000  // 30ms timeout for echo
+#define SOUND_SPEED_CM_US 0.0343  // Speed of sound: 343 m/s = 0.0343 cm/µs
+
+// Measurement data
+static float last_distance_cm = 0.0f;
+static bool measurement_valid = false;
+
+esp_err_t hc_sr04_init(void) {
+    ESP_LOGI(TAG, "Initializing HC-SR04 ultrasonic sensor");
+    
+    // Pin assignment happens via dynamic pin system
+    // For now, using stub pins - will be configured by pin manager
+    trigger_pin = GPIO_NUM_12;  // Example - will be assigned dynamically
+    echo_pin = GPIO_NUM_13;     // Example - will be assigned dynamically
+    
+    // Configure trigger pin as output
+    gpio_config_t trigger_config = {
+        .pin_bit_mask = (1ULL << trigger_pin),
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE
+    };
+    esp_err_t ret = gpio_config(&trigger_config);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to configure trigger pin: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Configure echo pin as input
+    gpio_config_t echo_config = {
+        .pin_bit_mask = (1ULL << echo_pin),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE
+    };
+    ret = gpio_config(&echo_config);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to configure echo pin: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Initialize trigger pin to LOW
+    gpio_set_level(trigger_pin, 0);
+    
+    ESP_LOGI(TAG, "HC-SR04 initialized (trigger: GPIO%d, echo: GPIO%d)", trigger_pin, echo_pin);
+    return ESP_OK;
+}
+
+void hc_sr04_act(void) {
+    // Send 10µs trigger pulse
+    gpio_set_level(trigger_pin, 1);
+    esp_rom_delay_us(TRIGGER_PULSE_US);
+    gpio_set_level(trigger_pin, 0);
+    
+    // Wait for echo to go HIGH
+    int64_t start_time = esp_timer_get_time();
+    while (gpio_get_level(echo_pin) == 0) {
+        if ((esp_timer_get_time() - start_time) > TIMEOUT_US) {
+            measurement_valid = false;
+            ESP_LOGW(TAG, "Timeout waiting for echo HIGH");
+            return;
+        }
+    }
+    
+    // Measure how long echo stays HIGH
+    int64_t echo_start = esp_timer_get_time();
+    while (gpio_get_level(echo_pin) == 1) {
+        if ((esp_timer_get_time() - echo_start) > TIMEOUT_US) {
+            measurement_valid = false;
+            ESP_LOGW(TAG, "Timeout waiting for echo LOW");
+            return;
+        }
+    }
+    int64_t echo_end = esp_timer_get_time();
+    
+    // Calculate distance
+    int64_t pulse_duration_us = echo_end - echo_start;
+    last_distance_cm = (pulse_duration_us * SOUND_SPEED_CM_US) / 2.0f;  // Divide by 2 for round trip
+    measurement_valid = true;
+    
+    ESP_LOGD(TAG, "Distance: %.2f cm", last_distance_cm);
+}

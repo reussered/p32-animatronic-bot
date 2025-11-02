@@ -12,14 +12,14 @@
     "reference_point":  "shoulder_socket_left",
     "units":  "INCHES",
     "components":  [
-                       "config/components/positioned/goblin/arm_components/left/shoulder_flexion_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/shoulder_abduction_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/shoulder_rotation_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/elbow_flexion_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/forearm_rotation_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/wrist_flexion_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/wrist_rotation_servo.json",
-                       "config/components/positioned/goblin/arm_components/left/arm_status_led.json"
+                       "config/components/creature_specific/goblin/arm_components/left/shoulder_flexion_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/shoulder_abduction_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/shoulder_rotation_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/elbow_flexion_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/forearm_rotation_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/wrist_flexion_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/wrist_rotation_servo.json",
+                       "config/components/creature_specific/goblin/arm_components/left/arm_status_led.json"
                    ],
     "degrees_of_freedom":  {
                                "shoulder_dof":  "3",

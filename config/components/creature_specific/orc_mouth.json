@@ -2,87 +2,44 @@
     "relative_filename":  "config/components/creature_specific/orc_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "orc_mouth",
-    "subsystem":  "HEAD",
-    "component_type":  "CREATURE_SPECIFIC_DISPLAY",
-    "description":  "Orc mouth with massive tusks and battle expressions - uses large displays",
-    "created":  "2025-10-23",
-    "components":  [
-                       "config/components/hardware/ili9486.json"
-                   ],
-    "component_constraints":  {
-                                  "required_contained_types":  [
-                                                                   "DISPLAY_DRIVER"
-                                                               ],
-                                  "interface_requirements":  [
-                                                                 "getBuffer",
-                                                                 "getFrameSize",
-                                                                 "getFrameRowSize"
-                                                             ]
-                              },
-    "creature_display_profile":  {
-                                     "species":  "ORC",
-                                     "mouth_color_base":  "DARK_GREEN",
-                                     "teeth_style":  "MASSIVE_TUSKS",
-                                     "expression_range":  "SNARL_TO_ROAR",
-                                     "speech_responsiveness":  "LOW",
-                                     "mood_responsiveness":  "AGGRESSIVE",
-                                     "size_category":  "LARGE"
-                                 },
-    "palette_system":  {
-                           "palette_size":  256,
-                           "color_ranges":  {
-                                                "lips_gums":  "0-31",
-                                                "massive_tusks":  "32-63",
-                                                "battle_scars":  "64-95",
-                                                "rage_reds":  "96-127",
-                                                "war_paint":  "128-159",
-                                                "fear_intimidation":  "160-191",
-                                                "bloodlust":  "192-223",
-                                                "special_effects":  "224-255"
-                                            }
-                       },
-    "orc_animation":  {
-                          "battle_expressions":  {
-                                                     "war_cry":  "MASSIVE_OPEN_TUSKS",
-                                                     "intimidation":  "SLOW_TUSK_REVEAL",
-                                                     "rage":  "RAPID_SNARL_FLASH",
-                                                     "victory_roar":  "FULL_MOUTH_DISPLAY"
-                                                 },
-                          "tusk_emphasis":  {
-                                                "tusk_size":  "PROMINENT_LARGE",
-                                                "tusk_detail":  "HIGH_RESOLUTION",
-                                                "battle_damage":  "CHIPPED_REALISTIC"
-                                            },
-                          "transition_speed":  "AGGRESSIVE_FAST",
-                          "hold_duration":  "INTIMIDATING_LONG"
-                      },
-    "display_optimization":  {
-                                 "large_display_benefits":  {
-                                                                "tusk_detail":  "ULTRA_HIGH_RESOLUTION",
-                                                                "battle_scars":  "REALISTIC_TEXTURES",
-                                                                "war_paint":  "COMPLEX_PATTERNS",
-                                                                "intimidation_factor":  "MAXIMUM"
-                                                            },
-                                 "memory_usage":  "768KB buffer - requires PSRAM",
-                                 "performance":  "Optimized for large creature expressions"
-                             },
-    "timing":  {
-                   "hitCount":  2,
-                   "description":  "Process orc mouth animation every 2 loops for intimidating effects"
-               },
-    "software":  {
-                     "init_function":  "orc_mouth_init",
-                     "act_function":  "orc_mouth_act"
+    "positioned_component_type":  "TFT_DISPLAY",
+    "display_id":  "ORC_MOUTH_DISPLAY",
+    "display_role":  "MOUTH_ANIMATION",
+    "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
+    "creature_shell":  "config/shapes/scad/bot_shells/orc_mouth_shell.scad",
+    "mount_template":  "config/shapes/scad/basic_mounts/display_basic_mount.scad",
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "nose_center",
+                     "x":  "0.0 INCH",
+                     "y":  "-2.2 INCH",
+                     "z":  "0.6 INCH",
+                     "rotation_x":  "-15 DEG",
+                     "rotation_y":  "0 DEG",
+                     "rotation_z":  "0 DEG"
                  },
-    "prototype_status":  "designed",
-    "tested":  false,
-    "notes":  [
-                  "Software-only component - no physical shape",
-                  "Designed for large display drivers (800x480+)",
-                  "Emphasizes orc characteristics: tusks, battle scars, intimidation",
-                  "High memory usage - requires ESP32-S3 with PSRAM",
-                  "Optimized for detailed, realistic orc expressions",
-                  "Perfect for large animatronic orc heads"
-              ]
+    "orientation":  {
+                        "display_mode":  "LANDSCAPE",
+                        "vertical_pixels":  240,
+                        "horizontal_pixels":  320,
+                        "viewing_angle":  "forward_facing",
+                        "tilt_down":  "15 DEG"
+                    },
+    "orc_specific":  {
+                         "creature_size":  "MEDIUM",
+                         "mouth_type":  "TUSKED_HUMANOID",
+                         "tusk_display":  "PROMINENT_LOWER_FANGS",
+                         "snarl_animation":  "AGGRESSIVE_LIP_CURL",
+                         "war_cry_capability":  "FULL_ROAR",
+                         "intimidation_level":  "HIGH"
+                     },
+    "display_content":  {
+                            "default_animation":  "assets/animations/orc/menacing_grin.json",
+                            "anger_animation":  "assets/animations/orc/battle_snarl.json",
+                            "roar_animation":  "assets/animations/orc/war_cry.json",
+                            "eating_animation":  "assets/animations/orc/tearing_bite.json",
+                            "threat_animation":  "assets/animations/orc/tusk_display.json"
+                        },
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "name":  "ORC_MOUTH"
 }

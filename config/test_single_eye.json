@@ -17,7 +17,7 @@
                      "act_function":  "test_single_eye_act"
                  },
     "components":  [
-                       "config/components/positioned/goblin_left_eye.json"
+                       "config/components/creature_specific/goblin_left_eye.json"
                    ],
     "subsystem_manifest":  {
                                "HEAD":  {

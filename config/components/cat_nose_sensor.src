@@ -1,4 +1,4 @@
-﻿// cat_nose_sensor Implementation
+// cat_nose_sensor Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

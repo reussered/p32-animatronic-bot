@@ -17,8 +17,8 @@
                    "description":  "Test head coordination every cycle for real-time validation"
                },
     "components":  [
-                       "config/components/positioned/goblin_left_eye.json",
-                       "config/components/positioned/goblin_right_eye.json"
+                       "config/components/creature_specific/goblin_left_eye.json",
+                       "config/components/creature_specific/goblin_right_eye.json"
                    ],
     "test_configuration":  {
                                "hardware_validation":  true,

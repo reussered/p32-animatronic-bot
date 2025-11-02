@@ -37,7 +37,7 @@
                                                                            {
                                                                                "controller_id":  "HEAD_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_head_controller.json"
+                                                                                                  "config/components/creature_specific/esp32c3_head_controller.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "0.0",
@@ -49,7 +49,7 @@
                                                                            {
                                                                                "controller_id":  "LEFT_ARM_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_arm_controller_left.json"
+                                                                                                  "config/components/creature_specific/esp32c3_arm_controller_left.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "-8.0",
@@ -61,7 +61,7 @@
                                                                            {
                                                                                "controller_id":  "RIGHT_ARM_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_arm_controller_right.json"
+                                                                                                  "config/components/creature_specific/esp32c3_arm_controller_right.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "8.0",
@@ -73,7 +73,7 @@
                                                                            {
                                                                                "controller_id":  "LEFT_LEG_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_leg_controller_left.json"
+                                                                                                  "config/components/creature_specific/esp32c3_leg_controller_left.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "-3.0",
@@ -85,7 +85,7 @@
                                                                            {
                                                                                "controller_id":  "RIGHT_LEG_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_leg_controller_right.json"
+                                                                                                  "config/components/creature_specific/esp32c3_leg_controller_right.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "3.0",
@@ -97,7 +97,7 @@
                                                                            {
                                                                                "controller_id":  "TORSO_BALANCE_CONTROLLER",
                                                                                "components":  [
-                                                                                                  "config/components/positioned/esp32c3_torso_controller.json"
+                                                                                                  "config/components/creature_specific/esp32c3_torso_controller.json"
                                                                                               ],
                                                                                "position":  {
                                                                                                 "x":  "0.0",

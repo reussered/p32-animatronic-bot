@@ -1,4 +1,4 @@
-﻿// leg_status_led Implementation
+// leg_status_led Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

@@ -1,0 +1,79 @@
+{
+    "relative_filename":  "config/components/creature_specific/humanoid_knee_left.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "HUMANOID_KNEE_LEFT",
+    "subsystem":  "LEG",
+    "component_type":  "ARTICULATED_JOINT_1DOF",
+    "description":  "Left knee joint with single degree of freedom for walking and balance",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "position":  {
+                     "x":  "-4.5 INCH",
+                     "y":  "0.0 INCH",
+                     "z":  "-18.0 INCH",
+                     "scaling_applies":  true
+                 },
+    "components":  [
+                       "config/components/hardware/knee_joint_assembly.json"
+                   ],
+    "degrees_of_freedom":  {
+                               "total_dof":  1,
+                               "joint_flexion_extension":  {
+                                                               "servo_type":  "NEMA17_WITH_100_1_GEARBOX",
+                                                               "range_degrees":  {
+                                                                                     "min":  0,
+                                                                                     "max":  160
+                                                                                 },
+                                                               "default_position":  5,
+                                                               "max_speed_deg_per_sec":  180,
+                                                               "holding_torque_nm":  11.8,
+                                                               "walking_critical":  true,
+                                                               "emergency_lock":  true
+                                                           }
+                           },
+    "attachment_points":  {
+                              "upper_leg_connection":  {
+                                                           "position":  {
+                                                                            "x":  "0.0",
+                                                                            "y":  "0.0",
+                                                                            "z":  "0.0"
+                                                                        },
+                                                           "mounting_hardware":  "M8_BOLT_ASSEMBLY",
+                                                           "component_reference":  "config/components/creature_specific/humanoid_upper_leg_left.json"
+                                                       },
+                              "lower_leg_connection":  {
+                                                           "position":  {
+                                                                            "x":  "0.0",
+                                                                            "y":  "0.0",
+                                                                            "z":  "-16.0"
+                                                                        },
+                                                           "mounting_hardware":  "M8_BOLT_ASSEMBLY",
+                                                           "component_reference":  "config/components/creature_specific/humanoid_lower_leg_left.json"
+                                                       }
+                          },
+    "walking_specifications":  {
+                                   "stance_phase_angle":  5,
+                                   "swing_phase_max_angle":  120,
+                                   "ground_clearance":  "3.0 INCH",
+                                   "shock_absorption":  "PNEUMATIC_DAMPER_INTEGRATED"
+                               },
+    "structural_specifications":  {
+                                      "material":  "STEEL_4140_HEAT_TREATED",
+                                      "weight_grams":  980,
+                                      "safety_factor":  6.0,
+                                      "expected_cycles":  15000000,
+                                      "maintenance_interval_hours":  200
+                                  },
+    "safety_systems":  {
+                           "mechanical_lock":  "SPRING_LOADED_EMERGENCY_BRAKE",
+                           "overload_protection":  "TORQUE_LIMITING_CLUTCH",
+                           "position_limits":  "HARDWARE_LIMIT_SWITCHES"
+                       },
+    "scaling_behavior":  {
+                             "position_scaling":  "APPLIES_TO_ALL_XYZ_COORDINATES",
+                             "servo_selection":  "SCALES_WITH_CREATURE_WEIGHT_AND_STRIDE",
+                             "structural_scaling":  "LOAD_BEARING_SCALES_QUADRATICALLY"
+                         },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

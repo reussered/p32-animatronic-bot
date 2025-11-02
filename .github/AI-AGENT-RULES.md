@@ -35,11 +35,31 @@
 1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
 2. **`ARCHITECTURE_DECISION_LOG.md`** - Historical decisions, problem-solving approaches, and implementation rationale
 3. **`NAMING_RULES.md`** - Component naming conventions and file organization
-4. **`docs/component-json-requirements.md`** - Consolidated JSON, generation, and dynamic pin rules
+4. **`docs/component-json-requirements.md`** - Consolidated JSON structure requirements, encoding rules, generation patterns, and dynamic pin assignment rules (CRITICAL for all JSON editing and component creation)
 
 **FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
 ---
+
+## RULE 0: READ BEFORE CHANGING - MANDATORY INVESTIGATION PROTOCOL
+
+**BEFORE making ANY code changes, modifications, or "fixes", you MUST:**
+
+1. **READ the existing implementation** - Use `read_file`, `grep_search`, or `semantic_search` to understand what's already there
+2. **UNDERSTAND the current pattern** - See how the code actually works, don't assume you know
+3. **IDENTIFY the actual problem** - Compile errors? Runtime errors? What's the SPECIFIC failure?
+4. **VERIFY the fix is needed** - Is the code actually broken, or just different from your assumptions?
+5. **CHECK for existing solutions** - Has this been solved before? Are there working examples?
+
+**NEVER:**
+- Rewrite working code because you "think" it should be different
+- Move files without understanding their purpose and dependencies
+- Create duplicate files in different locations
+- "Improve" code that already works
+- Change patterns without reading the architecture docs first
+- Assume you know better than existing implementations
+
+**IF UNCLEAR:** Ask the human before making changes. Better to ask than break working code.
 
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.

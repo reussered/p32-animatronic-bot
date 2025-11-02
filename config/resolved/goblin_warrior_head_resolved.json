@@ -11,9 +11,9 @@
     "reference_point":  "nose_center",
     "units":  "INCHES",
     "components":  [
-                       "config/components/positioned/base_eye_left.json",
-                       "config/components/positioned/base_eye_right.json",
-                       "config/components/positioned/base_speaker.json"
+                       "config/components/creature_specific/base_eye_left.json",
+                       "config/components/creature_specific/base_eye_right.json",
+                       "config/components/creature_specific/base_speaker.json"
                    ],
     "hardware_interface_defaults":  {
                                         "spi_bus":  "spi_bus",
@@ -61,13 +61,13 @@
                                 "snout_extension":  "0.5 INCH"
                             },
     "family_components":  [
-                              "config/components/positioned/goblin_left_eye.json",
-                              "config/components/positioned/goblin_right_eye.json",
-                              "config/components/positioned/goblin_nose.json",
-                              "config/components/positioned/goblin_mouth.json",
-                              "config/components/positioned/goblin_ear_left.json",
-                              "config/components/positioned/goblin_ear_right.json",
-                              "config/components/positioned/goblin_speaker.json"
+                              "config/components/creature_specific/goblin_left_eye.json",
+                              "config/components/creature_specific/goblin_right_eye.json",
+                              "config/components/creature_specific/goblin_nose.json",
+                              "config/components/creature_specific/goblin_mouth.json",
+                              "config/components/creature_specific/goblin_ear_left.json",
+                              "config/components/creature_specific/goblin_ear_right.json",
+                              "config/components/creature_specific/goblin_speaker.json"
                           ],
     "family_mood_profile":  {
                                 "FEAR":  8,
@@ -134,8 +134,8 @@
                                       "AFFECTION":  3
                                   },
     "individual_components":  [
-                                  "config/components/positioned/goblin_warrior_battle_scar_left.json",
-                                  "config/components/positioned/goblin_warrior_tooth_fang.json"
+                                  "config/components/creature_specific/goblin_warrior_battle_scar_left.json",
+                                  "config/components/creature_specific/goblin_warrior_tooth_fang.json"
                               ],
     "aesthetic_overrides":  {
                                 "color_scheme":  "dark_green_red",

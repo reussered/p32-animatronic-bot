@@ -16,10 +16,10 @@
                                 "whisker_span":  "3.5 INCH"
                             },
     "components":  [
-                       "config/components/positioned/cat_left_eye.json",
-                       "config/components/positioned/cat_right_eye.json",
-                       "config/components/positioned/cat_nose.json",
-                       "config/components/positioned/cat_speaker.json"
+                       "config/components/creature_specific/cat_left_eye.json",
+                       "config/components/creature_specific/cat_right_eye.json",
+                       "config/components/creature_specific/cat_nose.json",
+                       "config/components/creature_specific/cat_speaker.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  15,

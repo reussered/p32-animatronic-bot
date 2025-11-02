@@ -1,4 +1,4 @@
-﻿// base_status_led Implementation
+// base_status_led Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

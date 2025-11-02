@@ -84,10 +84,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/goblin_rage_foam.json",
-                       "config/components/positioned/goblin_bloodshot_eyes.json",
-                       "config/components/positioned/goblin_self_wounds.json",
-                       "config/components/positioned/goblin_fury_veins.json"
+                       "config/components/creature_specific/goblin_rage_foam.json",
+                       "config/components/creature_specific/goblin_bloodshot_eyes.json",
+                       "config/components/creature_specific/goblin_self_wounds.json",
+                       "config/components/creature_specific/goblin_fury_veins.json"
                    ],
     "custom_behaviors":  {
                              "berserker_frenzy":  {
