@@ -7,7 +7,7 @@
     "subsystem":  "UNKNOWN",
     "description":  "Small OLED display for text-based status information and diagnostics",
     "created":  "2025-10-12",
-    "components": ["config/components/hardware/oled_ssd1306_128x64.json"],
+    "components": ["config/components/hardware/ssd1306.json"],
     "spatial_coordinates":  {
                                 "coordinate_system":  "planar_2d",
                                 "reference_point":  "nose_center",

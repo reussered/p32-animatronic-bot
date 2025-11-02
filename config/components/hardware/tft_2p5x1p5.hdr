@@ -1,0 +1,28 @@
+// TFT 2.5x1.5 Display (ILI9341 driver) - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct TFT_2P5X1P5_Pixel;
+extern TFT_2P5X1P5_Pixel TFT_2P5X1P5_InitialPixel;
+
+struct TFT_2P5X1P5_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    TFT_2P5X1P5_Pixel() { *this = TFT_2P5X1P5_InitialPixel; }
+    
+    // Copy constructor
+    TFT_2P5X1P5_Pixel(const TFT_2P5X1P5_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    TFT_2P5X1P5_Pixel& operator=(const TFT_2P5X1P5_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

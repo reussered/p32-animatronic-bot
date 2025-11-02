@@ -3,6 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "GMT12864_DISPLAY",
+    "name":  "gmt12864",
     "manufacturer":  "GMT",
     "model":  "GMT12864",
     "description":  "GMT12864 OLED display with color variants",
@@ -93,7 +94,6 @@
                                                      "NEUTRAL":  "standard_colors"
                                                  }
                             },
-    "name":  "GMT12864_DISPLAY",
     "software":  {
 
                  }

@@ -1,0 +1,28 @@
+// SSD1331 Micro RGB OLED - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct SSD1331_Pixel;
+extern SSD1331_Pixel SSD1331_InitialPixel;
+
+struct SSD1331_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    SSD1331_Pixel() { *this = SSD1331_InitialPixel; }
+    
+    // Copy constructor
+    SSD1331_Pixel(const SSD1331_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    SSD1331_Pixel& operator=(const SSD1331_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

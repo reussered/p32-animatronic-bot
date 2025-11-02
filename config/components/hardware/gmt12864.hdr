@@ -1,0 +1,25 @@
+// GMT12864 OLED Display - Monochrome (1-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct GMT12864_Pixel;
+extern GMT12864_Pixel GMT12864_InitialPixel;
+
+struct GMT12864_Pixel {
+    unsigned int value : 1;  // 1 bit: 0 = off, 1 = on
+    unsigned int pad : 7;    // 7 bits padding to byte boundary
+    
+    // Default constructor initializes to InitialPixel
+    GMT12864_Pixel() { *this = GMT12864_InitialPixel; }
+    
+    // Copy constructor
+    GMT12864_Pixel(const GMT12864_Pixel& other) {
+        value = other.value;
+        pad = 0;
+    }
+    
+    // Assignment operator
+    GMT12864_Pixel& operator=(const GMT12864_Pixel& other) {
+        value = other.value;
+        pad = 0;
+        return *this;
+    }
+};

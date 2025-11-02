@@ -1,0 +1,33 @@
+// ssd1331 component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+#include "ssd1331.hdr"
+
+static const char *TAG_ssd1331 = "ssd1331";
+
+// Define the initial pixel value (default black)
+SSD1331_Pixel SSD1331_InitialPixel = {0, 0, 0};
+
+esp_err_t ssd1331_init(void) {
+    ESP_LOGI(TAG_ssd1331, "ssd1331 init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void ssd1331_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_ssd1331, "ssd1331 act");
+}
+
+size_t ssd1331_get_width(void) {
+    return 96;
+}
+
+size_t ssd1331_get_height(void) {
+    return 64;
+}
+
+size_t ssd1331_getFrameSize(void) {
+    return ssd1331_get_width() * ssd1331_get_height() * sizeof(SSD1331_Pixel);
+}

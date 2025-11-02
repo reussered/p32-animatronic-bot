@@ -1,0 +1,29 @@
+// RA8875 TFT Display Controller - RGB565 (16-bit) pixel format
+// Note: RA8875 has internal frame buffer, reduces ESP32 RAM requirements
+// Forward declaration to resolve circular dependency
+struct RA8875_Pixel;
+extern RA8875_Pixel RA8875_InitialPixel;
+
+struct RA8875_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    RA8875_Pixel() { *this = RA8875_InitialPixel; }
+    
+    // Copy constructor
+    RA8875_Pixel(const RA8875_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    RA8875_Pixel& operator=(const RA8875_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

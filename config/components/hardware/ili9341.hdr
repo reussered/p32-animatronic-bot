@@ -1,0 +1,28 @@
+// ILI9341 3.5" TFT Display - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct ILI9341_Pixel;
+extern ILI9341_Pixel ILI9341_InitialPixel;
+
+struct ILI9341_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    ILI9341_Pixel() { *this = ILI9341_InitialPixel; }
+    
+    // Copy constructor
+    ILI9341_Pixel(const ILI9341_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    ILI9341_Pixel& operator=(const ILI9341_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

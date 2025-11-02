@@ -1,0 +1,28 @@
+// ST7735 TFT RGB Display - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct ST7735_Pixel;
+extern ST7735_Pixel ST7735_InitialPixel;
+
+struct ST7735_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    ST7735_Pixel() { *this = ST7735_InitialPixel; }
+    
+    // Copy constructor
+    ST7735_Pixel(const ST7735_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    ST7735_Pixel& operator=(const ST7735_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

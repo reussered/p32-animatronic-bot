@@ -1,0 +1,28 @@
+// SSD1351 RGB OLED Display - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct SSD1351_Pixel;
+extern SSD1351_Pixel SSD1351_InitialPixel;
+
+struct SSD1351_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    SSD1351_Pixel() { *this = SSD1351_InitialPixel; }
+    
+    // Copy constructor
+    SSD1351_Pixel(const SSD1351_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    SSD1351_Pixel& operator=(const SSD1351_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

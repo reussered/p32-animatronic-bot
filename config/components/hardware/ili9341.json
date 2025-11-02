@@ -1,9 +1,9 @@
 {
-    "relative_filename":  "config/components/hardware/ili9341_3p5inch_tft.json",
+    "relative_filename":  "config/components/hardware/ili9341.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "ILI9341_3P5INCH_TFT",
-    "name":  "ili9341_3p5inch_tft",
+    "name":  "ili9341",
     "description":  "3.5\" TFT RGB display with ILI9341 driver - MEDIUM-LARGE creature features",
     "medium_large_champion":  "TRUE - Perfect balance of size and power efficiency",
     "physical_specifications":  {

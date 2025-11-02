@@ -1,0 +1,33 @@
+// ssd1351 component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+#include "ssd1351.hdr"
+
+static const char *TAG_ssd1351 = "ssd1351";
+
+// Define the initial pixel value (default black)
+SSD1351_Pixel SSD1351_InitialPixel = {0, 0, 0};
+
+esp_err_t ssd1351_init(void) {
+    ESP_LOGI(TAG_ssd1351, "ssd1351 init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void ssd1351_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_ssd1351, "ssd1351 act");
+}
+
+size_t ssd1351_get_width(void) {
+    return 128;
+}
+
+size_t ssd1351_get_height(void) {
+    return 128;
+}
+
+size_t ssd1351_getFrameSize(void) {
+    return ssd1351_get_width() * ssd1351_get_height() * sizeof(SSD1351_Pixel);
+}

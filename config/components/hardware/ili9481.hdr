@@ -1,0 +1,31 @@
+// ILI9481 5" TFT Display - RGB666 (18-bit) pixel format with 6-bit padding
+// Forward declaration to resolve circular dependency
+struct ILI9481_Pixel;
+extern ILI9481_Pixel ILI9481_InitialPixel;
+
+struct ILI9481_Pixel {
+    unsigned int red : 6;    // 6 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 6;   // 6 bits for blue
+    unsigned int pad : 6;    // 6 bits padding to align to 24 bits (3 bytes)
+    
+    // Default constructor initializes to InitialPixel
+    ILI9481_Pixel() { *this = ILI9481_InitialPixel; }
+    
+    // Copy constructor
+    ILI9481_Pixel(const ILI9481_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        pad = 0;
+    }
+    
+    // Assignment operator
+    ILI9481_Pixel& operator=(const ILI9481_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        pad = 0;
+        return *this;
+    }
+};

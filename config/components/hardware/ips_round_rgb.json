@@ -3,7 +3,7 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "IPS_ROUND_RGB_DISPLAY",
-    "name":  "ips_round_rgb_display",
+    "name":  "ips_round_rgb",
     "description":  "1.28\" Round IPS RGB display - PERFECT EYE SHAPE with full color",
     "perfect_eye_champion":  "TRUE - Ideal round shape for creature eyes",
     "physical_specifications":  {

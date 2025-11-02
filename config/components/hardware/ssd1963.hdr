@@ -1,0 +1,31 @@
+// SSD1963 TFT 800x600 Display - RGB666 (18-bit) pixel format with 6-bit padding
+// Forward declaration to resolve circular dependency
+struct SSD1963_Pixel;
+extern SSD1963_Pixel SSD1963_InitialPixel;
+
+struct SSD1963_Pixel {
+    unsigned int red : 6;    // 6 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 6;   // 6 bits for blue
+    unsigned int pad : 6;    // 6 bits padding to align to 24 bits (3 bytes)
+    
+    // Default constructor initializes to InitialPixel
+    SSD1963_Pixel() { *this = SSD1963_InitialPixel; }
+    
+    // Copy constructor
+    SSD1963_Pixel(const SSD1963_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        pad = 0;
+    }
+    
+    // Assignment operator
+    SSD1963_Pixel& operator=(const SSD1963_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        pad = 0;
+        return *this;
+    }
+};

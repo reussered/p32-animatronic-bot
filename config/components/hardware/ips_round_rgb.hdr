@@ -1,0 +1,28 @@
+// IPS Round RGB Display - RGB565 (16-bit) pixel format
+// Forward declaration to resolve circular dependency
+struct IPS_ROUND_RGB_Pixel;
+extern IPS_ROUND_RGB_Pixel IPS_ROUND_RGB_InitialPixel;
+
+struct IPS_ROUND_RGB_Pixel {
+    unsigned int red : 5;    // 5 bits for red
+    unsigned int green : 6;  // 6 bits for green
+    unsigned int blue : 5;   // 5 bits for blue
+    
+    // Default constructor initializes to InitialPixel
+    IPS_ROUND_RGB_Pixel() { *this = IPS_ROUND_RGB_InitialPixel; }
+    
+    // Copy constructor
+    IPS_ROUND_RGB_Pixel(const IPS_ROUND_RGB_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+    }
+    
+    // Assignment operator
+    IPS_ROUND_RGB_Pixel& operator=(const IPS_ROUND_RGB_Pixel& other) {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+};

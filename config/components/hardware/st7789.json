@@ -5,7 +5,7 @@
     "hardware_type":  "ST7789_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "name":  "st7789_240x128",
+    "name":  "st7789",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "2.0 INCH",
