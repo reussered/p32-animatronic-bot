@@ -1,4 +1,4 @@
-{
+﻿{
     "name":  "greeting",
     "displayName":  "Greeting",
     "description":  "Welcome behavior when detecting new person",
@@ -33,5 +33,6 @@
                      "person_detected",
                      "motion_sensor"
                  ],
-    "version":  "1.0.0"
+    "version":  "1.0.0",
+    "relative_filename":  "config/behaviors/greeting.json"
 }

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_combat_unit_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,12 +14,68 @@
                                 "compression_factor":  0.7,
                                 "skull_scale":  1.3
                             },
-    "components":  [
-                       "config/components/positioned/robot_eye_left_combat.json",
-                       "config/components/positioned/robot_eye_right_combat.json",
-                       "config/components/positioned/robot_mouth_combat.json",
-                       "config/components/positioned/robot_speaker_combat.json"
-                   ],
+    "components":  {
+                       "laser_targeting_system":  {
+                                                      "description":  "Red laser dot projection system with servo-controlled pointing for target acquisition",
+                                                      "implementation":  "Class 1 laser diode with precision servo gimbal mount, eye-safe operation with automatic shutoff",
+                                                      "targeting_modes":  [
+                                                                              "single_target_lock",
+                                                                              "area_sweep",
+                                                                              "threat_assessment",
+                                                                              "friendly_identification"
+                                                                          ]
+                                                  },
+                       "plasma_cannon_simulator":  {
+                                                       "description":  "LED array and sound effects system that simulates futuristic energy weapon discharge",
+                                                       "implementation":  "High-intensity LED strip with capacitor discharge effects and synchronized audio for realistic plasma burst simulation",
+                                                       "firing_modes":  [
+                                                                            "single_shot",
+                                                                            "burst_fire",
+                                                                            "sustained_beam",
+                                                                            "overcharge_blast"
+                                                                        ]
+                                                   },
+                       "armor_plating_actuators":  {
+                                                       "description":  "Servo-driven armor panels that can extend, retract, and angle for defensive positioning",
+                                                       "implementation":  "Multiple servo motors driving sliding and rotating armor segments with position feedback sensors",
+                                                       "defensive_configurations":  [
+                                                                                        "full_protection",
+                                                                                        "combat_stance",
+                                                                                        "mobility_mode",
+                                                                                        "stealth_profile"
+                                                                                    ]
+                                                   },
+                       "tactical_display_array":  {
+                                                      "description":  "LED matrix system displaying tactical information, threat levels, and status indicators",
+                                                      "implementation":  "Addressable RGB LED matrices with real-time data display capability and tactical symbology",
+                                                      "display_modes":  [
+                                                                            "threat_assessment",
+                                                                            "tactical_overlay",
+                                                                            "system_status",
+                                                                            "mission_parameters"
+                                                                        ]
+                                                  },
+                       "electronic_warfare_suite":  {
+                                                        "description":  "RF signal analysis and jamming system for detecting and disrupting electronic threats",
+                                                        "implementation":  "Software-defined radio module with signal analysis algorithms and controlled interference generation",
+                                                        "capabilities":  [
+                                                                             "signal_detection",
+                                                                             "frequency_analysis",
+                                                                             "jamming_simulation",
+                                                                             "communication_intercept"
+                                                                         ]
+                                                    },
+                       "ballistic_protection_simulation":  {
+                                                               "description":  "Impact detection system with reactive armor sound effects and damage assessment",
+                                                               "implementation":  "Accelerometer array with audio feedback system simulating projectile impacts and armor responses",
+                                                               "damage_modeling":  [
+                                                                                       "impact_detection",
+                                                                                       "penetration_assessment",
+                                                                                       "armor_effectiveness",
+                                                                                       "system_degradation"
+                                                                                   ]
+                                                           }
+                   },
     "mood_profile":  {
                          "FEAR":  0,
                          "ANGER":  25,
@@ -39,68 +95,6 @@
                             "attention_span_seconds":  900,
                             "combat_readiness":  "always_alert"
                         },
-    "components":  {
-                                   "laser_targeting_system":  {
-                                                                  "description":  "Red laser dot projection system with servo-controlled pointing for target acquisition",
-                                                                  "implementation":  "Class 1 laser diode with precision servo gimbal mount, eye-safe operation with automatic shutoff",
-                                                                  "targeting_modes":  [
-                                                                                          "single_target_lock",
-                                                                                          "area_sweep",
-                                                                                          "threat_assessment",
-                                                                                          "friendly_identification"
-                                                                                      ]
-                                                              },
-                                   "plasma_cannon_simulator":  {
-                                                                   "description":  "LED array and sound effects system that simulates futuristic energy weapon discharge",
-                                                                   "implementation":  "High-intensity LED strip with capacitor discharge effects and synchronized audio for realistic plasma burst simulation",
-                                                                   "firing_modes":  [
-                                                                                        "single_shot",
-                                                                                        "burst_fire",
-                                                                                        "sustained_beam",
-                                                                                        "overcharge_blast"
-                                                                                    ]
-                                                               },
-                                   "armor_plating_actuators":  {
-                                                                   "description":  "Servo-driven armor panels that can extend, retract, and angle for defensive positioning",
-                                                                   "implementation":  "Multiple servo motors driving sliding and rotating armor segments with position feedback sensors",
-                                                                   "defensive_configurations":  [
-                                                                                                    "full_protection",
-                                                                                                    "combat_stance",
-                                                                                                    "mobility_mode",
-                                                                                                    "stealth_profile"
-                                                                                                ]
-                                                               },
-                                   "tactical_display_array":  {
-                                                                  "description":  "LED matrix system displaying tactical information, threat levels, and status indicators",
-                                                                  "implementation":  "Addressable RGB LED matrices with real-time data display capability and tactical symbology",
-                                                                  "display_modes":  [
-                                                                                        "threat_assessment",
-                                                                                        "tactical_overlay",
-                                                                                        "system_status",
-                                                                                        "mission_parameters"
-                                                                                    ]
-                                                              },
-                                   "electronic_warfare_suite":  {
-                                                                    "description":  "RF signal analysis and jamming system for detecting and disrupting electronic threats",
-                                                                    "implementation":  "Software-defined radio module with signal analysis algorithms and controlled interference generation",
-                                                                    "capabilities":  [
-                                                                                         "signal_detection",
-                                                                                         "frequency_analysis",
-                                                                                         "jamming_simulation",
-                                                                                         "communication_intercept"
-                                                                                     ]
-                                                                },
-                                   "ballistic_protection_simulation":  {
-                                                                           "description":  "Impact detection system with reactive armor sound effects and damage assessment",
-                                                                           "implementation":  "Accelerometer array with audio feedback system simulating projectile impacts and armor responses",
-                                                                           "damage_modeling":  [
-                                                                                                   "impact_detection",
-                                                                                                   "penetration_assessment",
-                                                                                                   "armor_effectiveness",
-                                                                                                   "system_degradation"
-                                                                                               ]
-                                                                       }
-                               },
     "audio_profile":  {
                           "primary_sounds":  [
                                                  "servo_whirring",
@@ -155,6 +149,6 @@
                   "Specialized components emphasize weapon systems, defensive capabilities, and tactical awareness",
                   "All weapon systems are simulation-only with safety interlocks and non-harmful implementations",
                   "Designed for training environments, gaming applications, and military technology demonstration"
-              ]
+              ],
+    "name":  "robot_combat_unit_001"
 }
-

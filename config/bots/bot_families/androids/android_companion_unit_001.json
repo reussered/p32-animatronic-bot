@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/androids/android_companion_unit_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,12 +14,78 @@
                                 "compression_factor":  0.95,
                                 "skull_scale":  1.0
                             },
-    "components":  [
-                       "config/components/positioned/android_eye_left_companion.json",
-                       "config/components/positioned/android_eye_right_companion.json",
-                       "config/components/positioned/android_mouth_companion.json",
-                       "config/components/positioned/android_speaker_companion.json"
-                   ],
+    "components":  {
+                       "emotional_simulation_matrix":  {
+                                                           "description":  "Advanced AI system that generates convincing emotional responses and develops relationships over time",
+                                                           "implementation":  "Neural network trained on human emotional patterns with memory systems for relationship development",
+                                                           "emotional_capabilities":  [
+                                                                                          "empathy_simulation",
+                                                                                          "mood_adaptation",
+                                                                                          "emotional_memory",
+                                                                                          "relationship_bonding"
+                                                                                      ]
+                                                       },
+                       "adaptive_personality_core":  {
+                                                         "description":  "Machine learning system that adjusts personality traits based on user preferences and interaction history",
+                                                         "implementation":  "Reinforcement learning algorithms with personality parameter adjustment based on interaction feedback",
+                                                         "adaptation_areas":  [
+                                                                                  "communication_style",
+                                                                                  "humor_preferences",
+                                                                                  "activity_interests",
+                                                                                  "emotional_support_methods"
+                                                                              ]
+                                                     },
+                       "comfort_heating_system":  {
+                                                      "description":  "Body temperature regulation system that provides realistic human warmth for physical comfort",
+                                                      "implementation":  "Distributed heating elements with temperature sensors maintaining human-like body temperature",
+                                                      "temperature_zones":  [
+                                                                                "hand_warmth",
+                                                                                "facial_warmth",
+                                                                                "embrace_simulation",
+                                                                                "comfort_presence"
+                                                                            ]
+                                                  },
+                       "gentle_touch_sensors":  {
+                                                    "description":  "Pressure-sensitive skin that responds appropriately to physical contact and provides tactile feedback",
+                                                    "implementation":  "Distributed pressure sensor array with force-feedback response for safe, comfortable physical interaction",
+                                                    "touch_responses":  [
+                                                                            "gentle_acknowledgment",
+                                                                            "comfort_provision",
+                                                                            "playful_interaction",
+                                                                            "protective_withdrawal"
+                                                                        ]
+                                                },
+                       "conversation_ai_engine":  {
+                                                      "description":  "Advanced natural language processing system designed for engaging, long-term conversations",
+                                                      "implementation":  "Large language model fine-tuned for companionship with memory systems and contextual awareness",
+                                                      "conversation_modes":  [
+                                                                                 "casual_chatting",
+                                                                                 "deep_discussion",
+                                                                                 "emotional_support",
+                                                                                 "educational_interaction"
+                                                                             ]
+                                                  },
+                       "memory_palace_system":  {
+                                                    "description":  "Sophisticated memory architecture that remembers personal details, preferences, and shared experiences",
+                                                    "implementation":  "Hierarchical memory system with episodic, semantic, and emotional memory components",
+                                                    "memory_types":  [
+                                                                         "personal_preferences",
+                                                                         "shared_experiences",
+                                                                         "emotional_moments",
+                                                                         "learning_progress"
+                                                                     ]
+                                                },
+                       "biometric_recognition_array":  {
+                                                           "description":  "Multi-modal recognition system that identifies users and adapts behavior to individual preferences",
+                                                           "implementation":  "Camera-based facial recognition with voice analysis and behavioral pattern recognition",
+                                                           "recognition_features":  [
+                                                                                        "facial_identification",
+                                                                                        "voice_recognition",
+                                                                                        "behavioral_patterns",
+                                                                                        "mood_detection"
+                                                                                    ]
+                                                       }
+                   },
     "mood_profile":  {
                          "FEAR":  5,
                          "ANGER":  0,
@@ -39,78 +105,6 @@
                             "attention_span_seconds":  1800,
                             "companion_mode":  "always_active"
                         },
-    "components":  {
-                                   "emotional_simulation_matrix":  {
-                                                                       "description":  "Advanced AI system that generates convincing emotional responses and develops relationships over time",
-                                                                       "implementation":  "Neural network trained on human emotional patterns with memory systems for relationship development",
-                                                                       "emotional_capabilities":  [
-                                                                                                      "empathy_simulation",
-                                                                                                      "mood_adaptation",
-                                                                                                      "emotional_memory",
-                                                                                                      "relationship_bonding"
-                                                                                                  ]
-                                                                   },
-                                   "adaptive_personality_core":  {
-                                                                     "description":  "Machine learning system that adjusts personality traits based on user preferences and interaction history",
-                                                                     "implementation":  "Reinforcement learning algorithms with personality parameter adjustment based on interaction feedback",
-                                                                     "adaptation_areas":  [
-                                                                                              "communication_style",
-                                                                                              "humor_preferences",
-                                                                                              "activity_interests",
-                                                                                              "emotional_support_methods"
-                                                                                          ]
-                                                                 },
-                                   "comfort_heating_system":  {
-                                                                  "description":  "Body temperature regulation system that provides realistic human warmth for physical comfort",
-                                                                  "implementation":  "Distributed heating elements with temperature sensors maintaining human-like body temperature",
-                                                                  "temperature_zones":  [
-                                                                                            "hand_warmth",
-                                                                                            "facial_warmth",
-                                                                                            "embrace_simulation",
-                                                                                            "comfort_presence"
-                                                                                        ]
-                                                              },
-                                   "gentle_touch_sensors":  {
-                                                                "description":  "Pressure-sensitive skin that responds appropriately to physical contact and provides tactile feedback",
-                                                                "implementation":  "Distributed pressure sensor array with force-feedback response for safe, comfortable physical interaction",
-                                                                "touch_responses":  [
-                                                                                        "gentle_acknowledgment",
-                                                                                        "comfort_provision",
-                                                                                        "playful_interaction",
-                                                                                        "protective_withdrawal"
-                                                                                    ]
-                                                            },
-                                   "conversation_ai_engine":  {
-                                                                  "description":  "Advanced natural language processing system designed for engaging, long-term conversations",
-                                                                  "implementation":  "Large language model fine-tuned for companionship with memory systems and contextual awareness",
-                                                                  "conversation_modes":  [
-                                                                                             "casual_chatting",
-                                                                                             "deep_discussion",
-                                                                                             "emotional_support",
-                                                                                             "educational_interaction"
-                                                                                         ]
-                                                              },
-                                   "memory_palace_system":  {
-                                                                "description":  "Sophisticated memory architecture that remembers personal details, preferences, and shared experiences",
-                                                                "implementation":  "Hierarchical memory system with episodic, semantic, and emotional memory components",
-                                                                "memory_types":  [
-                                                                                     "personal_preferences",
-                                                                                     "shared_experiences",
-                                                                                     "emotional_moments",
-                                                                                     "learning_progress"
-                                                                                 ]
-                                                            },
-                                   "biometric_recognition_array":  {
-                                                                       "description":  "Multi-modal recognition system that identifies users and adapts behavior to individual preferences",
-                                                                       "implementation":  "Camera-based facial recognition with voice analysis and behavioral pattern recognition",
-                                                                       "recognition_features":  [
-                                                                                                    "facial_identification",
-                                                                                                    "voice_recognition",
-                                                                                                    "behavioral_patterns",
-                                                                                                    "mood_detection"
-                                                                                                ]
-                                                                   }
-                               },
     "audio_profile":  {
                           "primary_sounds":  [
                                                  "natural_breathing",
@@ -167,6 +161,6 @@
                   "Specialized components emphasize human-like interaction, emotional intelligence, and adaptive behavior",
                   "Advanced AI systems enable natural conversation and genuine relationship formation",
                   "Designed for therapeutic applications, elderly care, and emotional support scenarios"
-              ]
+              ],
+    "name":  "android_companion_unit_001"
 }
-

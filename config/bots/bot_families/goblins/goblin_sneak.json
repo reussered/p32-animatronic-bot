@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_sneak.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -84,11 +84,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/goblin_enlarged_eyes.json",
-                                  "config/components/positioned/goblin_pale_skin.json",
-                                  "config/components/positioned/goblin_shadow_sensors.json",
-                                  "config/components/positioned/goblin_malnutrition_features.json"
-                              ],
+                       "config/components/positioned/goblin_enlarged_eyes.json",
+                       "config/components/positioned/goblin_pale_skin.json",
+                       "config/components/positioned/goblin_shadow_sensors.json",
+                       "config/components/positioned/goblin_malnutrition_features.json"
+                   ],
     "custom_behaviors":  {
                              "shadow_meld":  {
                                                  "trigger":  "light_exposure",
@@ -188,6 +188,6 @@
                   "Malnutrition aesthetic reflecting harsh survival",
                   "Power management optimized for extended hiding",
                   "Hypervigilant sensor configuration for paranoid scanning"
-              ]
+              ],
+    "name":  "goblin_sneak"
 }
-

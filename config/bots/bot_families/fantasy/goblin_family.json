@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/fantasy/goblin_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,12 +15,12 @@
                                 "skull_scale":  1.0
                             },
     "components":  [
-                               "config/components/positioned/goblin_left_eye.json",
-                               "config/components/positioned/goblin_right_eye.json",
-                               "config/components/positioned/goblin_mouth.json",
-                               "config/components/positioned/goblin_speaker.json",
-                               "config/components/positioned/goblin_nose.json"
-                           ],
+                       "config/components/positioned/goblin_left_eye.json",
+                       "config/components/positioned/goblin_right_eye.json",
+                       "config/components/positioned/goblin_mouth.json",
+                       "config/components/positioned/goblin_speaker.json",
+                       "config/components/positioned/goblin_nose.json"
+                   ],
     "family_mood_profile":  {
                                 "FEAR":  20,
                                 "ANGER":  10,
@@ -128,9 +128,9 @@
                                                                                           "temperature"
                                                                                       ],
                                                                "components":  [
-                                                                                           "ear_articulation",
-                                                                                           "jaw_movement"
-                                                                                       ]
+                                                                                  "ear_articulation",
+                                                                                  "jaw_movement"
+                                                                              ]
                                                            }
                              },
     "subfamily_variants":  {
@@ -198,7 +198,6 @@
                             "High-contrast mood swings create dramatic character interactions",
                             "Multi-color 3D printing uses 4-color HTML palette system",
                             "Construction type determines mounting system and user interaction model"
-                        ]
+                        ],
+    "name":  "goblin_family"
 }
-
-

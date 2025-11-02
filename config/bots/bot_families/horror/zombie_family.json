@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/zombie_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -78,10 +78,10 @@
                                 "skull_scale":  1.1
                             },
     "components":  [
-                              "config/components/positioned/zombie_rotting_flesh.json",
-                              "config/components/positioned/zombie_exposed_bone.json",
-                              "config/components/positioned/zombie_oozing_wounds.json"
-                          ],
+                       "config/components/positioned/zombie_rotting_flesh.json",
+                       "config/components/positioned/zombie_exposed_bone.json",
+                       "config/components/positioned/zombie_oozing_wounds.json"
+                   ],
     "horror_features":  {
                             "decay_effects":  {
                                                   "flesh_deterioration":  "progressive",
@@ -147,6 +147,6 @@
                   "Subfamily variants cover different stages of decomposition",
                   "Audio effects create atmospheric horror ambiance",
                   "Hard shell for realistic horror, soft body for safe scary fun"
-              ]
+              ],
+    "name":  "zombie_family"
 }
-

@@ -1,40 +1,44 @@
-{
-    "name": "pwm_bus",
-    "type": "bus",
-    "version": "1.0.0",
-    "author": "config/authors/ai_agent.json",
-    "name": "pwm_bus",
-    "description": "PWM bus component containing PWM driver for servo and LED control",
-    "created": "2025-10-29",
-    "component_type": "bus_interface",
-
-    "capabilities": {
-        "bus_type": "PWM",
-        "channels": "up to 16",
-        "frequency_range": "50Hz-1MHz",
-        "resolution": "8-16 bit",
-        "applications": ["servo control", "LED dimming", "motor speed control"]
-    },
-
-    "components": [
-        "config/components/drivers/pwm_driver.json"
-    ],
-
-    "software": {
-        "init_function": "pwm_bus_init",
-        "act_function": "pwm_bus_act",
-        "api_functions": [
-            "pwm_bus_configure_channel(uint8_t channel, uint32_t frequency, uint8_t resolution)",
-            "pwm_bus_set_duty(uint8_t channel, uint32_t duty)",
-            "pwm_bus_start_channel(uint8_t channel)",
-            "pwm_bus_stop_channel(uint8_t channel)"
-        ]
-    },
-
-    "compatibility": {
-        "esp32_s3": true,
-        "esp32_s2": true,
-        "esp32": true,
-        "chip_variants": ["ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1", "ESP32-DevKitC"]
-    }
+﻿{
+    "name":  "pwm_bus",
+    "type":  "bus",
+    "version":  "1.0.0",
+    "author":  "config/authors/ai_agent.json",
+    "description":  "PWM bus component containing PWM driver for servo and LED control",
+    "created":  "2025-10-29",
+    "component_type":  "bus_interface",
+    "capabilities":  {
+                         "bus_type":  "PWM",
+                         "channels":  "up to 16",
+                         "frequency_range":  "50Hz-1MHz",
+                         "resolution":  "8-16 bit",
+                         "applications":  [
+                                              "servo control",
+                                              "LED dimming",
+                                              "motor speed control"
+                                          ]
+                     },
+    "components":  [
+                       "config/components/drivers/pwm_driver.json"
+                   ],
+    "software":  {
+                     "init_function":  "pwm_bus_init",
+                     "act_function":  "pwm_bus_act",
+                     "api_functions":  [
+                                           "pwm_bus_configure_channel(uint8_t channel, uint32_t frequency, uint8_t resolution)",
+                                           "pwm_bus_set_duty(uint8_t channel, uint32_t duty)",
+                                           "pwm_bus_start_channel(uint8_t channel)",
+                                           "pwm_bus_stop_channel(uint8_t channel)"
+                                       ]
+                 },
+    "compatibility":  {
+                          "esp32_s3":  true,
+                          "esp32_s2":  true,
+                          "esp32":  true,
+                          "chip_variants":  [
+                                                "ESP32-S3-DevKitC-1",
+                                                "ESP32-S3-WROOM-1",
+                                                "ESP32-DevKitC"
+                                            ]
+                      },
+    "relative_filename":  "config/components/drivers/pwm_bus.json"
 }

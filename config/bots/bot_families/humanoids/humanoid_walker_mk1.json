@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/humanoids/humanoid_walker_mk1.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -22,7 +22,9 @@
     "coordinate_system":  "skull_3d",
     "distributed_control_architecture":  {
                                              "master_controller":  {
-                                                                       "components":  ["config/components/hardware/esp32_s3_devkit.json"],
+                                                                       "components":  [
+                                                                                          "config/components/hardware/esp32_s3_devkit.json"
+                                                                                      ],
                                                                        "position":  "TORSO_CENTER",
                                                                        "responsibilities":  [
                                                                                                 "GAIT_COORDINATION",
@@ -34,7 +36,9 @@
                                              "subsystem_controllers":  [
                                                                            {
                                                                                "controller_id":  "HEAD_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_head_controller.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_head_controller.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "0.0",
                                                                                                 "y":  "0.0",
@@ -44,7 +48,9 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "LEFT_ARM_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_arm_controller_left.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_arm_controller_left.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "-8.0",
                                                                                                 "y":  "0.0",
@@ -54,7 +60,9 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "RIGHT_ARM_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_arm_controller_right.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_arm_controller_right.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "8.0",
                                                                                                 "y":  "0.0",
@@ -64,7 +72,9 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "LEFT_LEG_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_left.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_leg_controller_left.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "-3.0",
                                                                                                 "y":  "0.0",
@@ -74,7 +84,9 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "RIGHT_LEG_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_leg_controller_right.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_leg_controller_right.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "3.0",
                                                                                                 "y":  "0.0",
@@ -84,7 +96,9 @@
                                                                            },
                                                                            {
                                                                                "controller_id":  "TORSO_BALANCE_CONTROLLER",
-                                                                               "components":  ["config/components/positioned/esp32c3_torso_controller.json"],
+                                                                               "components":  [
+                                                                                                  "config/components/positioned/esp32c3_torso_controller.json"
+                                                                                              ],
                                                                                "position":  {
                                                                                                 "x":  "0.0",
                                                                                                 "y":  "0.0",
@@ -448,5 +462,6 @@
                                                                              ],
                                                             "cost_phase_3":  "$400.00_ADDITIONAL"
                                                         }
-                        }
+                        },
+    "name":  "humanoid_walker_mk1"
 }

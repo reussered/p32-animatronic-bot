@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/solar_parasol_system.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -32,10 +32,10 @@
                                                       "material":  "PLA_PLUS",
                                                       "mounting_interface":  "ROBOT_SHOULDER_MOUNT",
                                                       "components":  [
-                                                                                  "MPPT_controller",
-                                                                                  "servo_drivers",
-                                                                                  "weather_sensors"
-                                                                              ]
+                                                                         "MPPT_controller",
+                                                                         "servo_drivers",
+                                                                         "weather_sensors"
+                                                                     ]
                                                   },
                                   "deployment_mechanism":  {
                                                                "name":  "PARASOL_DEPLOYMENT_SYSTEM",
@@ -60,15 +60,15 @@
                                                       }
                               },
     "components":  [
-                                  "parasol_central_hub.scad",
-                                  "parasol_telescoping_ribs.scad",
-                                  "parasol_solar_cell_mounts.scad",
-                                  "parasol_deployment_servos.scad",
-                                  "parasol_tracking_gimbal.scad",
-                                  "parasol_weather_protection.scad",
-                                  "parasol_cable_management.scad",
-                                  "parasol_shoulder_interface.scad"
-                              ],
+                       "parasol_central_hub.scad",
+                       "parasol_telescoping_ribs.scad",
+                       "parasol_solar_cell_mounts.scad",
+                       "parasol_deployment_servos.scad",
+                       "parasol_tracking_gimbal.scad",
+                       "parasol_weather_protection.scad",
+                       "parasol_cable_management.scad",
+                       "parasol_shoulder_interface.scad"
+                   ],
     "deployment_states":  {
                               "retracted":  {
                                                 "description":  "Fully collapsed for storage/transport",
@@ -115,4 +115,3 @@
     "hardware_type":  "SOLAR_PARASOL_ASSEMBLY",
     "name":  "SOLAR_PARASOL_SYSTEM"
 }
-

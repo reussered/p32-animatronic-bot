@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/drivers/gpio_single_driver.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -9,33 +9,33 @@
     "description":  "Generic single GPIO driver for ESP32 supporting digital input/output with interrupt capabilities",
     "created":  "2025-10-29",
     "driver_capabilities":  {
-                               "max_pins":  34,
-                               "io_modes":  [
-                                                "DIGITAL_INPUT",
-                                                "DIGITAL_OUTPUT",
-                                                "ANALOG_INPUT",
-                                                "PWM_OUTPUT",
-                                                "TOUCH_SENSOR",
-                                                "RTC_GPIO"
-                                            ],
-                               "interrupt_types":  [
-                                                       "RISING_EDGE",
-                                                       "FALLING_EDGE",
-                                                       "ANY_EDGE",
-                                                       "LOW_LEVEL",
-                                                       "HIGH_LEVEL"
-                                                   ],
-                               "pullup_pulldown":  true,
-                               "debouncing":  true,
-                               "adc_capable":  true
-                           },
+                                "max_pins":  34,
+                                "io_modes":  [
+                                                 "DIGITAL_INPUT",
+                                                 "DIGITAL_OUTPUT",
+                                                 "ANALOG_INPUT",
+                                                 "PWM_OUTPUT",
+                                                 "TOUCH_SENSOR",
+                                                 "RTC_GPIO"
+                                             ],
+                                "interrupt_types":  [
+                                                        "RISING_EDGE",
+                                                        "FALLING_EDGE",
+                                                        "ANY_EDGE",
+                                                        "LOW_LEVEL",
+                                                        "HIGH_LEVEL"
+                                                    ],
+                                "pullup_pulldown":  true,
+                                "debouncing":  true,
+                                "adc_capable":  true
+                            },
     "electrical_specs":  {
-                            "operating_voltage":  "3.3V",
-                            "output_current":  "40mA_PER_PIN",
-                            "input_voltage_range":  "0-3.3V",
-                            "pullup_resistance":  "45K_OHM",
-                            "pulldown_resistance":  "45K_OHM"
-                        },
+                             "operating_voltage":  "3.3V",
+                             "output_current":  "40mA_PER_PIN",
+                             "input_voltage_range":  "0-3.3V",
+                             "pullup_resistance":  "45K_OHM",
+                             "pulldown_resistance":  "45K_OHM"
+                         },
     "gpio_requirements":  {
                               "pin_number":  "CONFIGURABLE_AT_RUNTIME",
                               "pin_constraints":  "ESP32_GPIO_PINS",
@@ -46,14 +46,14 @@
                      "init_function":  "gpio_single_driver_init",
                      "act_function":  "gpio_single_driver_act",
                      "api_functions":  [
-                                          "gpio_set_mode(pin, mode)",
-                                          "gpio_write_digital(pin, state)",
-                                          "gpio_read_digital(pin)",
-                                          "gpio_read_analog(pin)",
-                                          "gpio_set_interrupt(pin, type, callback)",
-                                          "gpio_enable_pullup(pin)",
-                                          "gpio_enable_pulldown(pin)"
-                                      ]
+                                           "gpio_set_mode(pin, mode)",
+                                           "gpio_write_digital(pin, state)",
+                                           "gpio_read_digital(pin)",
+                                           "gpio_read_analog(pin)",
+                                           "gpio_set_interrupt(pin, type, callback)",
+                                           "gpio_enable_pullup(pin)",
+                                           "gpio_enable_pulldown(pin)"
+                                       ]
                  },
     "configuration_options":  {
                                   "default_mode":  "DIGITAL_INPUT",

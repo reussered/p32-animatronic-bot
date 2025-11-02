@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/creature_specific/goblin_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -8,15 +8,15 @@
     "description":  "Shared goblin eye processing logic with palette and mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-        "config/components/hardware/gc9a01.json"
-    ],
+                       "config/components/hardware/gc9a01.json"
+                   ],
     "component_constraints":  {
                                   "required_contained_types":  [
                                                                    "DISPLAY_DRIVER"
                                                                ],
                                   "interface_requirements":  [
                                                                  "getBuffer",
-                                                                 "getFrameSize", 
+                                                                 "getFrameSize",
                                                                  "getFrameRowSize"
                                                              ]
                               },
@@ -29,17 +29,17 @@
                                  },
     "palette_system":  {
                            "palette_size":  256,
-                            "color_ranges":  {
-                                                  "eyelid_pupil":  "0-31",
-                                                  "iris_base":  "32-63",
-                                                  "highlights":  "64-95",
-                                                  "bird_colors":  "64-95",
-                                                  "anger_reds":  "96-127",
-                                                  "curiosity_greens":  "128-159",
-                                                  "fear_blues":  "160-191",
-                                                  "happiness_yellows":  "192-223",
-                                                  "special_effects":  "224-255"
-                                              }
+                           "color_ranges":  {
+                                                "eyelid_pupil":  "0-31",
+                                                "iris_base":  "32-63",
+                                                "highlights":  "64-95",
+                                                "bird_colors":  "64-95",
+                                                "anger_reds":  "96-127",
+                                                "curiosity_greens":  "128-159",
+                                                "fear_blues":  "160-191",
+                                                "happiness_yellows":  "192-223",
+                                                "special_effects":  "224-255"
+                                            }
                        },
     "mood_color_mapping":  {
                                "ANGER":  {
@@ -57,17 +57,17 @@
                                             "intensity_multiplier":  1.8,
                                             "dilation_effect":  "ENABLED"
                                         },
-                                 "HAPPINESS":  {
-                                                   "primary_range":  "192-223",
-                                                   "intensity_multiplier":  1.1,
-                                                   "warmth_effect":  "ENABLED"
-                                               },
-                                 "BIRD":  {
-                                              "primary_range":  "32-95",
-                                              "intensity_multiplier":  1.3,
-                                              "special_effect":  "FLYING_PATTERN",
-                                              "wing_animation":  "ENABLED"
-                                          }
+                               "HAPPINESS":  {
+                                                 "primary_range":  "192-223",
+                                                 "intensity_multiplier":  1.1,
+                                                 "warmth_effect":  "ENABLED"
+                                             },
+                               "BIRD":  {
+                                            "primary_range":  "32-95",
+                                            "intensity_multiplier":  1.3,
+                                            "special_effect":  "FLYING_PATTERN",
+                                            "wing_animation":  "ENABLED"
+                                        }
                            },
     "frame_processing":  {
                              "buffer_stack_support":  "ENABLED",

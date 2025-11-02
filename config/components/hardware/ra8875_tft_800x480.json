@@ -1,11 +1,11 @@
-{
-    "relative_filename":  "config/components/hardware/ra8875.json",
+﻿{
+    "relative_filename":  "config/components/hardware/ra8875_tft_800x480.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "RA8875_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "name":  "ra8875",
+    "name":  "ra8875_tft_800x480",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "7.0 INCH",

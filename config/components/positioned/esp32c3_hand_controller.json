@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/esp32c3_hand_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -67,17 +67,17 @@
                                                                }
                                  },
     "components":  {
-                                           "reused_spi_architecture":  {
-                                                                           "spi_bus_config":  "EXACT_SAME_AS_DISPLAY_CONTROLLERS",
-                                                                           "device_pattern":  "SAME_CS_PIN_CONCEPT_AS_SPI_DEVICES",
-                                                                           "driver_reuse":  "IDENTICAL_SPI_COMMUNICATION_CODE"
-                                                                       },
-                                           "reused_i2c_architecture":  {
-                                                                           "i2c_bus_config":  "SAME_AS_SENSOR_CONFIGURATIONS",
-                                                                           "addressing":  "STANDARD_I2C_DEVICE_ADDRESSES",
-                                                                           "driver_reuse":  "EXISTING_I2C_SENSOR_DRIVERS"
-                                                                       }
-                                       },
+                       "reused_spi_architecture":  {
+                                                       "spi_bus_config":  "EXACT_SAME_AS_DISPLAY_CONTROLLERS",
+                                                       "device_pattern":  "SAME_CS_PIN_CONCEPT_AS_SPI_DEVICES",
+                                                       "driver_reuse":  "IDENTICAL_SPI_COMMUNICATION_CODE"
+                                                   },
+                       "reused_i2c_architecture":  {
+                                                       "i2c_bus_config":  "SAME_AS_SENSOR_CONFIGURATIONS",
+                                                       "addressing":  "STANDARD_I2C_DEVICE_ADDRESSES",
+                                                       "driver_reuse":  "EXISTING_I2C_SENSOR_DRIVERS"
+                                                   }
+                   },
     "finger_servo_mapping":  {
                                  "servo_control_method":  "SPI_TO_PCA9685_EXPANSION",
                                  "total_servos":  "10_FINGER_SERVOS_2_DOF_EACH",
@@ -108,5 +108,3 @@
                      "x":  "0.0 INCH"
                  }
 }
-
-

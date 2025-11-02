@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/mechanical/robot_family_corrupted.json",
     "version":  "1.0",
     "author":  "config/author.json",
@@ -17,7 +17,7 @@
                             },
     "components":  [
 
-                           ],
+                   ],
     "family_mood_profile":  {
                                 "FEAR":  30,
                                 "ANGER":  25,
@@ -39,6 +39,6 @@
                                                                 "glitchy",
                                                                 "aggressive"
                                                             ]
-                                 }
+                                 },
+    "name":  "robot_family_corrupted"
 }
-

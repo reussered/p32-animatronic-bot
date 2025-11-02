@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/ssd1306.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -93,14 +93,14 @@
                      "init_function":  "ssd1306_init",
                      "act_function":  "ssd1306_act",
                      "components":  [
-                                       "config/components/drivers/i2c_bus.json"
-                                   ]
+                                        "config/components/drivers/i2c_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ],
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
     "hardware_type":  "OLED_DISPLAY",
     "name":  "ssd1306"
 }

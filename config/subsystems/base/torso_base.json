@@ -1,19 +1,19 @@
-{
+﻿{
     "relative_filename":  "config/subsystems/base/torso_base.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "subsystem_type":  "TORSO_CONTROLLER",
     "description":  "Universal base template for torso subsystem controllers across all creatures",
     "controller":  {
-                                "processor":  "ESP32_C3_MINI",
-                                "flash_memory":  "4MB",
-                                "ram":  "400KB",
-                                "gpio_pins":  22,
-                                "adc_channels":  6,
-                                "pwm_channels":  6,
-                                "spi_interfaces":  1,
-                                "i2c_interfaces":  1
-                            },
+                       "processor":  "ESP32_C3_MINI",
+                       "flash_memory":  "4MB",
+                       "ram":  "400KB",
+                       "gpio_pins":  22,
+                       "adc_channels":  6,
+                       "pwm_channels":  6,
+                       "spi_interfaces":  1,
+                       "i2c_interfaces":  1
+                   },
     "power_specifications":  {
                                  "input_voltage":  "7V_12V_BATTERY",
                                  "logic_voltage":  "3.3V",
@@ -28,19 +28,20 @@
                                  "power_management":  "SWITCHING_REGULATOR"
                              },
     "components":  [
-                                {
-                                    "component_type":  "POWER_MANAGEMENT",
-                                    "function_name":  "power_management_update",
-                                    "default_hitCount":  25,
-                                    "role":  "system_power_control",
-                                    "required":  true
-                                },
-                                {
-                                    "component_type":  "SYSTEM_HEALTH_MONITOR",
-                                    "function_name":  "health_monitor_update",
-                                    "default_hitCount":  50,
-                                    "role":  "subsystem_monitoring",
-                                    "required":  true
-                                }
-                            ]
+                       {
+                           "component_type":  "POWER_MANAGEMENT",
+                           "function_name":  "power_management_update",
+                           "default_hitCount":  25,
+                           "role":  "system_power_control",
+                           "required":  true
+                       },
+                       {
+                           "component_type":  "SYSTEM_HEALTH_MONITOR",
+                           "function_name":  "health_monitor_update",
+                           "default_hitCount":  50,
+                           "role":  "subsystem_monitoring",
+                           "required":  true
+                       }
+                   ],
+    "name":  "torso_base"
 }

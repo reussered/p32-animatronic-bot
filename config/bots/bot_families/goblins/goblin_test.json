@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_test.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
@@ -15,18 +15,18 @@
     "eye_spacing":  "3.0 INCH",
     "compression_factor":  0.7,
     "components":  [
-                                 "config/components/functional/goblin_personality.json",
-                                 "config/components/functional/goblin_mood.json",
-                                 "config/components/functional/goblin_behavior_engine.json",
-                                 "config/components/positioned/goblin/head_components/goblin_left_eye.json",
-                                 "config/components/positioned/goblin/head_components/goblin_right_eye.json",
-                                 "config/components/positioned/goblin/head_components/goblin_center_eye.json",
-                                 "config/components/positioned/goblin/head_components/goblin_mouth.json",
-                                 "config/components/positioned/goblin/head_components/goblin_speaker.json",
-                                 "config/components/positioned/goblin/head_components/goblin_nose.json",
-                                 "config/components/positioned/goblin/head_components/goblin_left_ear.json",
-                                 "config/components/positioned/goblin/head_components/goblin_right_ear.json"
-                             ],
+                       "config/components/functional/goblin_personality.json",
+                       "config/components/functional/goblin_mood.json",
+                       "config/components/functional/goblin_behavior_engine.json",
+                       "config/components/positioned/goblin/head_components/goblin_left_eye.json",
+                       "config/components/positioned/goblin/head_components/goblin_right_eye.json",
+                       "config/components/positioned/goblin/head_components/goblin_center_eye.json",
+                       "config/components/positioned/goblin/head_components/goblin_mouth.json",
+                       "config/components/positioned/goblin/head_components/goblin_speaker.json",
+                       "config/components/positioned/goblin/head_components/goblin_nose.json",
+                       "config/components/positioned/goblin/head_components/goblin_left_ear.json",
+                       "config/components/positioned/goblin/head_components/goblin_right_ear.json"
+                   ],
     "mood_defaults":  {
                           "FEAR":  25,
                           "ANGER":  15,
@@ -58,5 +58,6 @@
                   "Uses bus+device interface architecture",
                   "Center eye positioned at forehead for mystical appearance",
                   "All components should auto-generate dispatch table entries"
-              ]
+              ],
+    "name":  "goblin_test"
 }

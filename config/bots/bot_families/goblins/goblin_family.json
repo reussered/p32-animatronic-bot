@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -16,14 +16,14 @@
                                 "mechanical_precision":  "moderate_tolerance"
                             },
     "components":  [
-                              "config/components/positioned/goblin_left_eye.json",
-                              "config/components/positioned/goblin_right_eye.json",
-                              "config/components/positioned/goblin_mouth.json",
-                              "config/components/positioned/goblin_nose.json",
-                              "config/components/positioned/goblin_ear_left.json",
-                              "config/components/positioned/goblin_ear_right.json",
-                              "config/components/positioned/goblin_speaker.json"
-                          ],
+                       "config/components/positioned/goblin_left_eye.json",
+                       "config/components/positioned/goblin_right_eye.json",
+                       "config/components/positioned/goblin_mouth.json",
+                       "config/components/positioned/goblin_nose.json",
+                       "config/components/positioned/goblin_ear_left.json",
+                       "config/components/positioned/goblin_ear_right.json",
+                       "config/components/positioned/goblin_speaker.json"
+                   ],
     "family_characteristics":  {
                                    "physical_features":  {
                                                              "skin_texture":  "rough_warty",
@@ -86,6 +86,6 @@
                                  "dragons":  "NEUTRAL",
                                  "elves":  "HOSTILE",
                                  "humans":  "SUSPICIOUS"
-                             }
+                             },
+    "name":  "goblin_family"
 }
-

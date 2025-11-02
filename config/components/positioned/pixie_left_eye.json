@@ -1,12 +1,13 @@
-{
-    "relative_filename":  "config/components/positioned/pixie/head_components/pixie_left_eye.json",
+﻿{
+    "relative_filename":  "config/components/positioned/pixie_left_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name": "pixie_left_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "pixie_left_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/pixie_eye.json"
-                             ],
+                       "config/components/creature_specific/pixie_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/gmt12864.json",
                                  "display_type":  "SMALL_OLED_COLOR",
@@ -37,4 +38,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

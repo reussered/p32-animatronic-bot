@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/manufacturing/build_phase_implementation_roadmap.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -285,5 +285,6 @@
                                    "aluminum_battery_upgrade":  "RETROFIT_FUTURE_BATTERY_TECHNOLOGY",
                                    "ai_intelligence_integration":  "ADD_CONVERSATIONAL_AI_CAPABILITIES",
                                    "swarm_coordination":  "MULTIPLE_ROBOTS_COORDINATED_BEHAVIORS"
-                               }
+                               },
+    "name":  "build_phase_implementation_roadmap"
 }

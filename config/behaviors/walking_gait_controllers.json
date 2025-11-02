@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/behaviors/walking_gait_controllers.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -265,5 +265,6 @@
                                                                          "load_carrying":  "15_POUNDS_PAYLOAD_NO_PERFORMANCE_LOSS",
                                                                          "energy_efficiency":  "10_HOURS_RUNTIME_MIXED_TERRAIN"
                                                                      }
-                                       }
+                                       },
+    "name":  "walking_gait_controllers"
 }

@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/micro_servo_array.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "MICRO_SERVO_ARRAY",
     "interface_type":  "MICRO_SERVO_CONTROLLER",
@@ -434,6 +434,6 @@
                                                                  "total_cost":  "APPROXIMATELY_40_USD",
                                                                  "pin_count":  "14_PINS_TOTAL"
                                                              }
-                             }
+                             },
+    "name":  "micro_servo_array"
 }
-

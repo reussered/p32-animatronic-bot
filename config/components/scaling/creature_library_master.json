@@ -1,9 +1,9 @@
-{
+﻿{
     "relative_filename":  "config/components/scaling/creature_library_master.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "component_type": "SCALING_LIBRARY",
-    "hardware_type": "CONFIGURATION",
+    "component_type":  "SCALING_LIBRARY",
+    "hardware_type":  "CONFIGURATION",
     "creature_scaling_library":  {
                                      "description":  "Complete creature library using unified proportional scaling system",
                                      "scaling_reference":  "config/components/scaling/unified_proportional_scaling.json",
@@ -128,5 +128,6 @@
                                                                           "assembly_complexity":  "INCREASES_WITH_SCALE_FACTOR",
                                                                           "cost_estimation":  "AUTOMATED_BASED_ON_SCALE_AND_COMPONENTS"
                                                                       }
-                                 }
+                                 },
+    "name":  "creature_library_master"
 }

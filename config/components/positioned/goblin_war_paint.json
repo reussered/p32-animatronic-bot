@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin_war_paint.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -7,7 +7,9 @@
     "component_type":  "aesthetic_overlay",
     "description":  "War paint markings and tribal decorations for warrior goblins",
     "created":  "2025-10-12",
-    "components": ["config/components/hardware/aesthetic_overlay.json"],
+    "components":  [
+                       "config/components/hardware/aesthetic_overlay.json"
+                   ],
     "interface_reference":  "config/components/interfaces/gpio_pair_1.json",
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
@@ -91,4 +93,3 @@
                      "x":  "0.0 INCH"
                  }
 }
-

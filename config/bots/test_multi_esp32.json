@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/test_multi_esp32.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
@@ -7,31 +7,46 @@
     "goblin_head":  {
                         "chip":  "esp32-s3-n16r8",
                         "goblin_left_eye":  {
-                                                "components":  ["config/components/positioned/goblin/head_components/goblin_left_eye.json"]
+                                                "components":  [
+                                                                   "config/components/positioned/goblin/head_components/goblin_left_eye.json"
+                                                               ]
                                             },
                         "goblin_right_eye":  {
-                                                 "components":  ["config/components/positioned/goblin/head_components/goblin_right_eye.json"]
+                                                 "components":  [
+                                                                    "config/components/positioned/goblin/head_components/goblin_right_eye.json"
+                                                                ]
                                              },
                         "goblin_nose":  {
-                                            "components":  ["config/components/positioned/goblin/head_components/goblin_nose.json"]
+                                            "components":  [
+                                                               "config/components/positioned/goblin/head_components/goblin_nose.json"
+                                                           ]
                                         }
                     },
     "goblin_torso":  {
                          "chip":  "esp32-s3-n16r8",
                          "spine_servo_1":  {
-                                               "components":  ["config/components/hardware/mg996r_servo.json"]
+                                               "components":  [
+                                                                  "config/components/hardware/mg996r_servo.json"
+                                                              ]
                                            },
                          "power_management":  {
-                                                  "components":  ["config/components/hardware/torso_integrated_power_system.json"]
+                                                  "components":  [
+                                                                     "config/components/hardware/torso_integrated_power_system.json"
+                                                                 ]
                                               }
                      },
     "left_arm":  {
                      "chip":  "esp32-c3",
                      "shoulder_servo":  {
-                                            "components":  ["config/components/hardware/mg996r_servo.json"]
+                                            "components":  [
+                                                               "config/components/hardware/mg996r_servo.json"
+                                                           ]
                                         },
                      "elbow_servo":  {
-                                         "components":  ["config/components/hardware/servo_sg90_micro.json"]
+                                         "components":  [
+                                                            "config/components/hardware/servo_sg90_micro.json"
+                                                        ]
                                      }
-                 }
+                 },
+    "name":  "test_multi_esp32"
 }

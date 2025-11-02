@@ -1,4 +1,4 @@
-{
+﻿{
     "component_type":  "POSITIONED_COMPONENT",
     "position":  {
                      "units":  "INCH",
@@ -11,12 +11,13 @@
     "name":  "torso_status_led",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "components": ["config/components/hardware/servo_sg90_micro.json"],
+    "components":  [
+                       "config/components/hardware/servo_sg90_micro.json"
+                   ],
     "software":  {
                      "act_function":  "torso_status_led_act",
                      "init_function":  "torso_status_led_init",
                      "hitCount":  10
                  },
-    "relative_filename":  "config/components/positioned/torso_status_led.json"
+    "relative_filename":  "config/components/positioned/goblin/torso_components/torso_status_led.json"
 }
-

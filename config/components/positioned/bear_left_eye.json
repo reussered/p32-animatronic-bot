@@ -1,12 +1,13 @@
-{
-    "relative_filename":  "config/components/positioned/bear/head_components/bear_left_eye.json",
+﻿{
+    "relative_filename":  "config/components/positioned/bear_left_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "bear_left_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "bear_left_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/bear_eye.json"
-                             ],
+                       "config/components/creature_specific/bear_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/gc9a01.json",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/bear/bear_eye_shell.scad",
@@ -36,4 +37,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

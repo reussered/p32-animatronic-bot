@@ -1,19 +1,20 @@
-{
-    "relative_filename": "config/hardware/led_neopixel_ring.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_type": "LED_STRIP",
-    "model": "WS2812B_NEOPIXEL_RING",
-    "specifications": {
-        "led_count": 8,
-        "operating_voltage": "5V",
-        "data_protocol": "WS2812B",
-        "color_depth": "24_bit_RGB",
-        "refresh_rate": "400Hz"
-    },
-    "pin_requirements": {
-        "data_pin": "GPIO_CAPABLE",
-        "power_pin": "5V",
-        "ground_pin": "GND"
-    }
+﻿{
+    "relative_filename":  "config/hardware/led_neopixel_ring.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "LED_STRIP",
+    "model":  "WS2812B_NEOPIXEL_RING",
+    "specifications":  {
+                           "led_count":  8,
+                           "operating_voltage":  "5V",
+                           "data_protocol":  "WS2812B",
+                           "color_depth":  "24_bit_RGB",
+                           "refresh_rate":  "400Hz"
+                       },
+    "pin_requirements":  {
+                             "data_pin":  "GPIO_CAPABLE",
+                             "power_pin":  "5V",
+                             "ground_pin":  "GND"
+                         },
+    "name":  "led_neopixel_ring"
 }

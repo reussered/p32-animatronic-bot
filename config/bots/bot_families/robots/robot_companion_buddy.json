@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_companion_buddy.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -29,11 +29,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/emotion_camera.json",
-                                  "config/components/positioned/touch_sensor_array.json",
-                                  "config/components/positioned/comfort_speaker.json",
-                                  "config/components/positioned/pet_simulation_servos.json"
-                              ],
+                       "config/components/positioned/emotion_camera.json",
+                       "config/components/positioned/touch_sensor_array.json",
+                       "config/components/positioned/comfort_speaker.json",
+                       "config/components/positioned/pet_simulation_servos.json"
+                   ],
     "social_behaviors":  {
                              "greeting_patterns":  [
                                                        "enthusiastic_wave",
@@ -81,6 +81,6 @@
                             "emergency_stop":  true,
                             "privacy_protection":  true,
                             "supervised_learning":  true
-                        }
+                        },
+    "name":  "robot_companion_buddy"
 }
-

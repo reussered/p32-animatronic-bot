@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/zombie_runner_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -14,12 +14,45 @@
                                 "compression_factor":  0.9,
                                 "skull_scale":  1.0
                             },
-    "components":  [
-                       "config/components/positioned/zombie_eye_left_runner.json",
-                       "config/components/positioned/zombie_eye_right_runner.json",
-                       "config/components/positioned/zombie_mouth_runner.json",
-                       "config/components/positioned/zombie_speaker_runner.json"
-                   ],
+    "components":  {
+                       "rapid_movement_system":  {
+                                                     "description":  "High-speed servo actuators for quick head movements and aggressive gestures",
+                                                     "implementation":  "Digital servo cluster with high-torque motors for rapid position changes",
+                                                     "movement_patterns":  [
+                                                                               "sudden_snaps",
+                                                                               "aggressive_lunging",
+                                                                               "frenzied_searching"
+                                                                           ]
+                                                 },
+                       "infection_stage_indicators":  {
+                                                          "description":  "LED system that shows progression of zombie infection through color changes",
+                                                          "implementation":  "RGB LED strips under translucent skin showing infection spread patterns",
+                                                          "color_progression":  [
+                                                                                    "healthy_pink",
+                                                                                    "sickly_yellow",
+                                                                                    "infected_green",
+                                                                                    "necrotic_black"
+                                                                                ]
+                                                      },
+                       "predator_instinct_ai":  {
+                                                    "description":  "Advanced hunting behavior system that tracks and corners targets",
+                                                    "implementation":  "Multi-sensor array with predictive movement algorithms for tactical pursuit",
+                                                    "hunting_behaviors":  [
+                                                                              "ambush_positioning",
+                                                                              "escape_route_blocking",
+                                                                              "coordinated_pack_attacks"
+                                                                          ]
+                                                },
+                       "adrenaline_simulation":  {
+                                                     "description":  "Dynamic audio and movement system that simulates infected adrenaline rushes",
+                                                     "implementation":  "Variable speed audio playback and servo acceleration during high-intensity moments",
+                                                     "trigger_conditions":  [
+                                                                                "target_proximity",
+                                                                                "loud_sounds",
+                                                                                "bright_lights"
+                                                                            ]
+                                                 }
+                   },
     "mood_profile":  {
                          "FEAR":  15,
                          "ANGER":  60,
@@ -39,45 +72,6 @@
                             "attention_span_seconds":  90,
                             "pack_behavior":  "lead_charge"
                         },
-    "components":  {
-                                   "rapid_movement_system":  {
-                                                                 "description":  "High-speed servo actuators for quick head movements and aggressive gestures",
-                                                                 "implementation":  "Digital servo cluster with high-torque motors for rapid position changes",
-                                                                 "movement_patterns":  [
-                                                                                           "sudden_snaps",
-                                                                                           "aggressive_lunging",
-                                                                                           "frenzied_searching"
-                                                                                       ]
-                                                             },
-                                   "infection_stage_indicators":  {
-                                                                      "description":  "LED system that shows progression of zombie infection through color changes",
-                                                                      "implementation":  "RGB LED strips under translucent skin showing infection spread patterns",
-                                                                      "color_progression":  [
-                                                                                                "healthy_pink",
-                                                                                                "sickly_yellow",
-                                                                                                "infected_green",
-                                                                                                "necrotic_black"
-                                                                                            ]
-                                                                  },
-                                   "predator_instinct_ai":  {
-                                                                "description":  "Advanced hunting behavior system that tracks and corners targets",
-                                                                "implementation":  "Multi-sensor array with predictive movement algorithms for tactical pursuit",
-                                                                "hunting_behaviors":  [
-                                                                                          "ambush_positioning",
-                                                                                          "escape_route_blocking",
-                                                                                          "coordinated_pack_attacks"
-                                                                                      ]
-                                                            },
-                                   "adrenaline_simulation":  {
-                                                                 "description":  "Dynamic audio and movement system that simulates infected adrenaline rushes",
-                                                                 "implementation":  "Variable speed audio playback and servo acceleration during high-intensity moments",
-                                                                 "trigger_conditions":  [
-                                                                                            "target_proximity",
-                                                                                            "loud_sounds",
-                                                                                            "bright_lights"
-                                                                                        ]
-                                                             }
-                               },
     "audio_profile":  {
                           "primary_sounds":  [
                                                  "ragged_breathing",
@@ -127,6 +121,6 @@
                   "Specialized components emphasize speed, aggression, and hunting instincts",
                   "Advanced AI systems create realistic predator-like behavior patterns",
                   "Designed for high-intensity horror scenarios requiring active threats"
-              ]
+              ],
+    "name":  "zombie_runner_001"
 }
-

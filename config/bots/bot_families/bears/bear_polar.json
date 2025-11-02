@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_polar.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,9 +39,9 @@
                                                     }
                   },
     "components":  [
-                                  "config/components/positioned/bear_arctic_fur.json",
-                                  "config/components/positioned/bear_ice_sensors.json"
-                              ],
+                       "config/components/positioned/bear_arctic_fur.json",
+                       "config/components/positioned/bear_ice_sensors.json"
+                   ],
     "custom_behaviors":  {
                              "ice_hunting":  {
                                                  "trigger":  "seal_hole_detection",
@@ -66,6 +66,6 @@
                   "Swimming behaviors require special considerations",
                   "White fur coloring for arctic environment",
                   "Audio effects include ice and water sounds"
-              ]
+              ],
+    "name":  "bear_polar"
 }
-

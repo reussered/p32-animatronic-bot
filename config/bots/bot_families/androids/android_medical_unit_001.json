@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/androids/android_medical_unit_001.json",
     "version":  "2.1.0",
     "author":  "config/author.json",
@@ -74,5 +74,6 @@
     "component_count":  0,
     "components":  [
 
-                   ]
+                   ],
+    "name":  "android_medical_unit_001"
 }

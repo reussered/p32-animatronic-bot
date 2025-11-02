@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/animals/bear_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -16,11 +16,11 @@
                                 "snout_extension":  "1.2 INCH"
                             },
     "components":  [
-                               "config/components/positioned/bear_left_eye.json",
-                               "config/components/positioned/bear_right_eye.json",
-                               "config/components/positioned/bear_snout.json",
-                               "config/components/positioned/bear_speaker.json"
-                           ],
+                       "config/components/positioned/bear_left_eye.json",
+                       "config/components/positioned/bear_right_eye.json",
+                       "config/components/positioned/bear_snout.json",
+                       "config/components/positioned/bear_speaker.json"
+                   ],
     "family_mood_profile":  {
                                 "FEAR":  5,
                                 "ANGER":  5,
@@ -161,6 +161,6 @@
                                                                           "Child-safe construction with secure eye attachments"
                                                                       ]
                                              }
-                           }
+                           },
+    "name":  "bear_family"
 }
-

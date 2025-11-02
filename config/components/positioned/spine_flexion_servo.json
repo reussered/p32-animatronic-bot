@@ -1,4 +1,4 @@
-{
+﻿{
     "component_type":  "POSITIONED_COMPONENT",
     "position":  {
                      "units":  "INCH",
@@ -11,7 +11,9 @@
     "name":  "spine_flexion_servo",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "components": ["config/components/hardware/servo_sg90_micro.json"],
+    "components":  [
+                       "config/components/hardware/servo_sg90_micro.json"
+                   ],
     "software":  {
                      "act_function":  "spine_flexion_servo_act",
                      "init_function":  "spine_flexion_servo_init",
@@ -19,4 +21,3 @@
                  },
     "relative_filename":  "config/components/positioned/spine_flexion_servo.json"
 }
-

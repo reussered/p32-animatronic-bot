@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/electromagnet_controller.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "ELECTROMAGNET_CONTROLLER",
     "interface_type":  "ELECTROMAGNET_DRIVER",
@@ -449,6 +449,6 @@
                                                          "duty_cycle":  "FAILSAFE_NORMALLY_ENGAGED",
                                                          "use_case":  "SAFETY_BRAKE_SYSTEM"
                                                      }
-                             }
+                             },
+    "name":  "electromagnet_controller"
 }
-

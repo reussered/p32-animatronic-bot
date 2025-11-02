@@ -1,19 +1,21 @@
-{
-    "relative_filename": "config/components/positioned/goblin/arm_components/left/forearm_rotation_servo.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "component_type": "POSITIONED_COMPONENT",
-    "name": "goblin_left_forearm_rotation_servo",
-    "components": ["config/hardware/servo_9g_micro.json"],
-    "position": {
-        "coordinate_system": "skull_3d",
-        "reference_point": "shoulder_socket_left",
-        "x": "0.0 INCH",
-        "y": "-3.0 INCH",
-        "z": "0.0 INCH"
-    },
-    "software": {
-        "init_function": "goblin_left_forearm_rotation_servo_init",
-        "act_function": "goblin_left_forearm_rotation_servo_act"
-    }
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/arm_components/left/forearm_rotation_servo.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_type":  "POSITIONED_COMPONENT",
+    "name":  "forearm_rotation_servo",
+    "components":  [
+                       "config/hardware/servo_9g_micro.json"
+                   ],
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "shoulder_socket_left",
+                     "x":  "0.0 INCH",
+                     "y":  "-3.0 INCH",
+                     "z":  "0.0 INCH"
+                 },
+    "software":  {
+                     "init_function":  "goblin_left_forearm_rotation_servo_init",
+                     "act_function":  "goblin_left_forearm_rotation_servo_act"
+                 }
 }

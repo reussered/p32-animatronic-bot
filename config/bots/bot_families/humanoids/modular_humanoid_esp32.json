@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/humanoids/modular_humanoid_esp32.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -55,9 +55,9 @@
                                                           "servo_hardware":  "config/components/hardware/mg996r_servo.json",
                                                           "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                                           "components":  [
-                                                                                    "config/components/hardware/mpu6050_imu.json",
-                                                                                    "config/components/hardware/pressure_sensor.json"
-                                                                                ]
+                                                                             "config/components/hardware/mpu6050_imu.json",
+                                                                             "config/components/hardware/pressure_sensor.json"
+                                                                         ]
                                                       },
                                    "arms_subsystem":  {
                                                           "functional_component":  "config/components/functional/humanoid_arm_subsystem.json",
@@ -72,9 +72,9 @@
                                                           "servo_hardware":  "config/components/hardware/mg90s_servo.json",
                                                           "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                                           "components":  [
-                                                                                    "config/components/hardware/ov2640_camera.json",
-                                                                                    "config/components/hardware/i2s_microphone.json"
-                                                                                ]
+                                                                             "config/components/hardware/ov2640_camera.json",
+                                                                             "config/components/hardware/i2s_microphone.json"
+                                                                         ]
                                                       }
                                },
     "hardware_swap_scenarios":  {
@@ -207,6 +207,6 @@
                                                                                                   "license_compliance":  "CREATIVE_COMMONS_ATTRIBUTION"
                                                                                               }
                                                              }
-                           }
+                           },
+    "name":  "modular_humanoid_esp32"
 }
-

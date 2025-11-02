@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/ghost_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -83,10 +83,10 @@
                                 "ethereal_extension":  "1.5 INCH"
                             },
     "components":  [
-                              "config/components/positioned/ghost_ectoplasm_generator.json",
-                              "config/components/positioned/ghost_floating_mechanism.json",
-                              "config/components/positioned/ghost_phase_lights.json"
-                          ],
+                       "config/components/positioned/ghost_ectoplasm_generator.json",
+                       "config/components/positioned/ghost_floating_mechanism.json",
+                       "config/components/positioned/ghost_phase_lights.json"
+                   ],
     "supernatural_features":  {
                                   "manifestation_effects":  {
                                                                 "visibility_control":  "fade_in_out",
@@ -162,6 +162,6 @@
                   "Subfamily variants cover different types of spiritual manifestation",
                   "Audio effects create otherworldly atmospheric presence",
                   "Construction types support both translucent hard shells and flowing fabric approaches"
-              ]
+              ],
+    "name":  "ghost_family"
 }
-

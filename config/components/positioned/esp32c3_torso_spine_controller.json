@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/esp32c3_torso_spine_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -196,4 +196,3 @@
                      "x":  "0.0 INCH"
                  }
 }
-

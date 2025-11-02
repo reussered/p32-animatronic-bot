@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/validation/complete_full_body_specification.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -216,5 +216,6 @@
                                   "ready_for_manufacturing":  true,
                                   "ready_for_firmware_development":  true,
                                   "specification_quality":  "PRODUCTION_READY_DETAIL_LEVEL"
-                              }
+                              },
+    "name":  "complete_full_body_specification"
 }

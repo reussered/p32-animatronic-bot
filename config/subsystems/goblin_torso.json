@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/subsystems/goblin_torso.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
@@ -17,27 +17,27 @@
                    "description":  "Torso coordination every 5 seconds"
                },
     "components":  [
-                                    "config/components/system/system_core.json",
-                                    "config/components/system/debug_controller.json",
-                                    "config/components/system/network_monitor.json",
-                                    "config/components/system/wifi_station.json",
-                                    "config/components/system/bluetooth_central.json",
-                                    "config/components/system/telemetry_hub.json",
-                                    "config/components/system/watchdog.json",
-                                    "config/components/system/power_monitor.json",
-                                    "config/components/positioned/spine_flexion_servo.json",
-                                    "config/components/positioned/spine_extension_servo.json",
-                                    "config/components/positioned/waist_rotation_servo.json",
-                                    "config/components/positioned/torso_status_led.json",
-                                    "config/components/positioned/torso_speaker.json"
-                                ],
+                       "config/components/system/system_core.json",
+                       "config/components/system/debug_controller.json",
+                       "config/components/system/network_monitor.json",
+                       "config/components/system/wifi_station.json",
+                       "config/components/system/bluetooth_central.json",
+                       "config/components/system/telemetry_hub.json",
+                       "config/components/system/watchdog.json",
+                       "config/components/system/power_monitor.json",
+                       "config/components/positioned/spine_flexion_servo.json",
+                       "config/components/positioned/spine_extension_servo.json",
+                       "config/components/positioned/waist_rotation_servo.json",
+                       "config/components/positioned/torso_status_led.json",
+                       "config/components/positioned/torso_speaker.json"
+                   ],
     "former_components":  [
-                                 "config/components/positioned/spine_flexion_servo.json",
-                                 "config/components/positioned/spine_extension_servo.json",
-                                 "config/components/positioned/waist_rotation_servo.json",
-                                 "config/components/positioned/torso_status_led.json",
-                                 "config/components/positioned/torso_speaker.json"
-                             ],
+                              "config/components/positioned/spine_flexion_servo.json",
+                              "config/components/positioned/spine_extension_servo.json",
+                              "config/components/positioned/waist_rotation_servo.json",
+                              "config/components/positioned/torso_status_led.json",
+                              "config/components/positioned/torso_speaker.json"
+                          ],
     "wifi_config":  {
                         "mode":  "STATION",
                         "ssid":  "CONFIGURED_AT_RUNTIME",

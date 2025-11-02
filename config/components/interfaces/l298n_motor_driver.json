@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/l298n_motor_driver.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "L298N_MOTOR_DRIVER",
     "interface_type":  "DUAL_H_BRIDGE_MOTOR_DRIVER",
@@ -420,6 +420,6 @@
                                                                "filtering":  "CAPACITORS_ON_MOTOR_LEADS_RECOMMENDED",
                                                                "isolation":  "OPTOISOLATION_FOR_SENSITIVE_CIRCUITS"
                                                            }
-                              }
+                              },
+    "name":  "l298n_motor_driver"
 }
-

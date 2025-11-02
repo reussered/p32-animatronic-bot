@@ -1,12 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin_nose.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "goblin_nose","component_type": "POSITIONED_COMPONENT",
+    "name":  "goblin_nose",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-        "config/components/hardware/hc_sr04_sensor.json"
-    ],
+                       "config/components/hardware/hc_sr04_sensor.json"
+                   ],
     "mounting_architecture":  {
                                   "type":  "two_tier",
                                   "hardware_mount":  "sensor_basic_mount",
@@ -31,4 +32,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

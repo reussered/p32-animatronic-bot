@@ -1,12 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/robot/head_components/robot_left_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name": "robot_left_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "robot_left_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/robot_eye.json"
-                             ],
+                       "config/components/creature_specific/robot_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/neopixel_matrix_8x8.json",
                                  "display_type":  "RGB_LED_MATRIX",
@@ -37,4 +38,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

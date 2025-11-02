@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/test_goblin_head_dual_eyes.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
@@ -12,11 +12,11 @@
     "reference_point":  "nose_bridge",
     "units":  "INCHES",
     "Components":  [
-                                 "config/components/system/heartbeat.json",
-                                 "config/components/system/network_monitor.json",
-                                 "config/components/positioned/goblin_left_eye.json",
-                                 "config/components/positioned/goblin_right_eye.json"
-                             ],
+                       "config/components/system/heartbeat.json",
+                       "config/components/system/network_monitor.json",
+                       "config/components/positioned/goblin_left_eye.json",
+                       "config/components/positioned/goblin_right_eye.json"
+                   ],
     "degrees_of_freedom":  {
                                "eye_movement_dof":  "4",
                                "total_controlled_dof":  "4"
@@ -66,5 +66,6 @@
                         },
     "prototype_status":  "test_harness",
     "tested":  false,
-    "estimated_cost_usd":  "45.00"
+    "estimated_cost_usd":  "45.00",
+    "name":  "test_goblin_head_dual_eyes"
 }

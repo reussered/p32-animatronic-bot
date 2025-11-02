@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/cats/domestic/cat_interactive_tabby.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -27,11 +27,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/cat_animated_ears.json",
-                                  "config/components/positioned/cat_whisker_sensors.json",
-                                  "config/components/positioned/cat_purr_generator.json",
-                                  "config/components/positioned/cat_tail_servo.json"
-                              ],
+                       "config/components/positioned/cat_animated_ears.json",
+                       "config/components/positioned/cat_whisker_sensors.json",
+                       "config/components/positioned/cat_purr_generator.json",
+                       "config/components/positioned/cat_tail_servo.json"
+                   ],
     "interactive_behaviors":  {
                                   "greeting_patterns":  [
                                                             "head_bump",
@@ -76,6 +76,6 @@
                             "play_scheduling":  true,
                             "nap_time_patterns":  true,
                             "grooming_requests":  true
-                        }
+                        },
+    "name":  "cat_interactive_tabby"
 }
-

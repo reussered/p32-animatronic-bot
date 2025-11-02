@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_pirate.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,17 +15,17 @@
     "eye_spacing":  "3.0 INCH",
     "compression_factor":  0.7,
     "components":  [
-                                 "config/components/functional/goblin_pirate_personality.json",
-                                 "config/components/functional/goblin_mood.json",
-                                 "config/components/functional/goblin_behavior_engine.json",
-                                 "config/subsystems/goblin_pirate_head.json",
-                                 "config/components/positioned/goblin/head_components/goblin_left_eye.json",
-                                 "config/components/positioned/goblin/head_components/goblin_mouth.json",
-                                 "config/components/positioned/goblin/head_components/goblin_speaker.json",
-                                 "config/components/positioned/goblin/head_components/goblin_nose.json",
-                                 "config/components/positioned/goblin/head_components/goblin_left_ear.json",
-                                 "config/components/positioned/goblin/head_components/goblin_right_ear.json"
-                             ],
+                       "config/components/functional/goblin_pirate_personality.json",
+                       "config/components/functional/goblin_mood.json",
+                       "config/components/functional/goblin_behavior_engine.json",
+                       "config/subsystems/goblin_pirate_head.json",
+                       "config/components/positioned/goblin/head_components/goblin_left_eye.json",
+                       "config/components/positioned/goblin/head_components/goblin_mouth.json",
+                       "config/components/positioned/goblin/head_components/goblin_speaker.json",
+                       "config/components/positioned/goblin/head_components/goblin_nose.json",
+                       "config/components/positioned/goblin/head_components/goblin_left_ear.json",
+                       "config/components/positioned/goblin/head_components/goblin_right_ear.json"
+                   ],
     "mood_defaults":  {
                           "FEAR":  5,
                           "ANGER":  35,
@@ -69,5 +69,6 @@
                   "Pirate-themed personality adjustments",
                   "Reduced GPIO requirements - only 10 pins needed",
                   "More aggressive power management due to battle-hardened nature"
-              ]
+              ],
+    "name":  "goblin_pirate"
 }

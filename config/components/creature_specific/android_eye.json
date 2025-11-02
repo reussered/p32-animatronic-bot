@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/creature_specific/android_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -8,15 +8,15 @@
     "description":  "Shared android eye processing logic with LED matrix and digital mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/led_matrix_small.json"
-                             ],
+                       "config/components/hardware/led_matrix_small.json"
+                   ],
     "component_constraints":  {
                                   "required_contained_types":  [
                                                                    "DISPLAY_DRIVER"
                                                                ],
                                   "interface_requirements":  [
                                                                  "getBuffer",
-                                                                 "getFrameSize", 
+                                                                 "getFrameSize",
                                                                  "getFrameRowSize"
                                                              ]
                               },

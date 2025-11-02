@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/templates/versioned_cost_performance_template.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -105,5 +105,6 @@
                                                                      "Validate CPU utilization benchmarks",
                                                                      "Confirm speed specifications"
                                                                  ]
-                                }
+                                },
+    "name":  "versioned_cost_performance_template"
 }

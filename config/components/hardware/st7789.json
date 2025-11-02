@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/st7789.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -132,13 +132,13 @@
     "software":  {
                      "init_function":  "st7789_240x128_init",
                      "act_function":  "st7789_240x128_act",
-                            "components":  [
-                                                    "config/components/drivers/spi_display_bus.json"
-                                                ]
+                     "components":  [
+                                        "config/components/drivers/spi_display_bus.json"
+                                    ]
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ]
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ]
 }

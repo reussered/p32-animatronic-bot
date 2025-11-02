@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/hc_sr04_ultrasonic_sensor.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "HC_SR04_ULTRASONIC_SENSOR",
     "interface_type":  "ULTRASONIC_DISTANCE_SENSOR",
@@ -259,6 +259,6 @@
                                                                          "air_currents":  "STRONG_WINDS_CAN_AFFECT_MEASUREMENTS",
                                                                          "acoustic_noise":  "40KHZ_NOISE_CAN_INTERFERE"
                                                                      }
-                                       }
+                                       },
+    "name":  "hc_sr04_ultrasonic_sensor"
 }
-

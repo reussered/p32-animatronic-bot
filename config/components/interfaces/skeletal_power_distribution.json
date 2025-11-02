@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/skeletal_power_distribution.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SKELETAL_POWER_DISTRIBUTION",
     "interface_type":  "STRUCTURAL_POWER_BUS",
@@ -194,19 +194,18 @@
                                                           "total_structural_aluminum":  "$165.00"
                                                       },
                           "components":  {
-                                                        "anderson_powerpole_connectors":  "$3.00_EACH_X_20 = $60.00",
-                                                        "xt30_connectors":  "$2.00_EACH_X_30 = $60.00",
-                                                        "buck_converters":  "$8.00_EACH_X_15 = $120.00",
-                                                        "fuses_and_holders":  "$50.00_TOTAL",
-                                                        "total_electrical_hardware":  "$290.00"
-                                                    },
+                                             "anderson_powerpole_connectors":  "$3.00_EACH_X_20 = $60.00",
+                                             "xt30_connectors":  "$2.00_EACH_X_30 = $60.00",
+                                             "buck_converters":  "$8.00_EACH_X_15 = $120.00",
+                                             "fuses_and_holders":  "$50.00_TOTAL",
+                                             "total_electrical_hardware":  "$290.00"
+                                         },
                           "cost_comparison":  {
                                                   "traditional_wiring_harness":  "$800.00_ESTIMATED",
                                                   "skeletal_power_system":  "$455.00_TOTAL",
                                                   "cost_savings":  "$345.00_43_PERCENT_REDUCTION",
                                                   "additional_benefits":  "REDUCED_ASSEMBLY_TIME_IMPROVED_RELIABILITY"
                                               }
-                      }
+                      },
+    "name":  "skeletal_power_distribution"
 }
-
-

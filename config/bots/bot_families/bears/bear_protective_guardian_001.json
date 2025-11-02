@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_protective_guardian_001.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,12 +15,68 @@
                                 "skull_scale":  1.4,
                                 "snout_extension":  "1.4 INCH"
                             },
-    "components":  [
-                       "config/components/positioned/bear_eye_left_grizzly.json",
-                       "config/components/positioned/bear_eye_right_grizzly.json",
-                       "config/components/positioned/bear_snout_grizzly.json",
-                       "config/components/positioned/bear_speaker_grizzly.json"
-                   ],
+    "components":  {
+                       "territorial_scent_marking":  {
+                                                         "description":  "Scent dispenser system that simulates bear territory marking with safe, natural forest scents",
+                                                         "implementation":  "Pneumatic scent delivery system with pine, earth, and musk scent cartridges for realistic territory simulation",
+                                                         "marking_behaviors":  [
+                                                                                   "boundary_establishment",
+                                                                                   "warning_signals",
+                                                                                   "comfort_scenting",
+                                                                                   "familiarization_marking"
+                                                                               ]
+                                                     },
+                       "protective_stance_actuators":  {
+                                                           "description":  "Servo system enabling dramatic defensive posturing including rearing and threat displays",
+                                                           "implementation":  "Heavy-duty servo cluster with reinforced mounting for imposing defensive positions and protective gestures",
+                                                           "defensive_poses":  [
+                                                                                   "rear_up_display",
+                                                                                   "protective_spreading",
+                                                                                   "warning_swipe",
+                                                                                   "calm_assertion"
+                                                                               ]
+                                                       },
+                       "cubs_simulation_system":  {
+                                                      "description":  "Smaller companion units that trigger protective behaviors and maternal responses",
+                                                      "implementation":  "Wireless-connected smaller bear units that coordinate with main unit to simulate family protection dynamics",
+                                                      "interaction_patterns":  [
+                                                                                   "proximity_monitoring",
+                                                                                   "threat_assessment",
+                                                                                   "guidance_behaviors",
+                                                                                   "comfort_providing"
+                                                                               ]
+                                                  },
+                       "hibernation_simulation":  {
+                                                      "description":  "Extended sleep mode with slow breathing patterns and minimal movement simulating bear hibernation",
+                                                      "implementation":  "Ultra-low power mode with periodic breathing simulation and gradual awakening sequences based on seasonal programming",
+                                                      "hibernation_phases":  [
+                                                                                 "deep_sleep",
+                                                                                 "light_dormancy",
+                                                                                 "seasonal_awakening",
+                                                                                 "spring_emergence"
+                                                                             ]
+                                                  },
+                       "fish_catching_simulation":  {
+                                                        "description":  "Interactive fishing behavior system with water detection and catching motion patterns",
+                                                        "implementation":  "Water proximity sensors with programmed fishing motions including patience, striking, and success celebration behaviors",
+                                                        "fishing_behaviors":  [
+                                                                                  "patient_waiting",
+                                                                                  "lightning_strike",
+                                                                                  "fish_handling",
+                                                                                  "consumption_simulation"
+                                                                              ]
+                                                    },
+                       "maternal_care_protocols":  {
+                                                       "description":  "Gentle interaction system designed for safe contact with children and nurturing behaviors",
+                                                       "implementation":  "Force-limited servo system with soft-touch sensors enabling gentle interactions and protective responses",
+                                                       "care_behaviors":  [
+                                                                              "gentle_nuzzling",
+                                                                              "protective_positioning",
+                                                                              "comfort_sounds",
+                                                                              "playful_engagement"
+                                                                          ]
+                                                   }
+                   },
     "mood_profile":  {
                          "FEAR":  5,
                          "ANGER":  15,
@@ -40,68 +96,6 @@
                             "attention_span_seconds":  180,
                             "protective_instinct":  "high"
                         },
-    "components":  {
-                                   "territorial_scent_marking":  {
-                                                                     "description":  "Scent dispenser system that simulates bear territory marking with safe, natural forest scents",
-                                                                     "implementation":  "Pneumatic scent delivery system with pine, earth, and musk scent cartridges for realistic territory simulation",
-                                                                     "marking_behaviors":  [
-                                                                                               "boundary_establishment",
-                                                                                               "warning_signals",
-                                                                                               "comfort_scenting",
-                                                                                               "familiarization_marking"
-                                                                                           ]
-                                                                 },
-                                   "protective_stance_actuators":  {
-                                                                       "description":  "Servo system enabling dramatic defensive posturing including rearing and threat displays",
-                                                                       "implementation":  "Heavy-duty servo cluster with reinforced mounting for imposing defensive positions and protective gestures",
-                                                                       "defensive_poses":  [
-                                                                                               "rear_up_display",
-                                                                                               "protective_spreading",
-                                                                                               "warning_swipe",
-                                                                                               "calm_assertion"
-                                                                                           ]
-                                                                   },
-                                   "cubs_simulation_system":  {
-                                                                  "description":  "Smaller companion units that trigger protective behaviors and maternal responses",
-                                                                  "implementation":  "Wireless-connected smaller bear units that coordinate with main unit to simulate family protection dynamics",
-                                                                  "interaction_patterns":  [
-                                                                                               "proximity_monitoring",
-                                                                                               "threat_assessment",
-                                                                                               "guidance_behaviors",
-                                                                                               "comfort_providing"
-                                                                                           ]
-                                                              },
-                                   "hibernation_simulation":  {
-                                                                  "description":  "Extended sleep mode with slow breathing patterns and minimal movement simulating bear hibernation",
-                                                                  "implementation":  "Ultra-low power mode with periodic breathing simulation and gradual awakening sequences based on seasonal programming",
-                                                                  "hibernation_phases":  [
-                                                                                             "deep_sleep",
-                                                                                             "light_dormancy",
-                                                                                             "seasonal_awakening",
-                                                                                             "spring_emergence"
-                                                                                         ]
-                                                              },
-                                   "fish_catching_simulation":  {
-                                                                    "description":  "Interactive fishing behavior system with water detection and catching motion patterns",
-                                                                    "implementation":  "Water proximity sensors with programmed fishing motions including patience, striking, and success celebration behaviors",
-                                                                    "fishing_behaviors":  [
-                                                                                              "patient_waiting",
-                                                                                              "lightning_strike",
-                                                                                              "fish_handling",
-                                                                                              "consumption_simulation"
-                                                                                          ]
-                                                                },
-                                   "maternal_care_protocols":  {
-                                                                   "description":  "Gentle interaction system designed for safe contact with children and nurturing behaviors",
-                                                                   "implementation":  "Force-limited servo system with soft-touch sensors enabling gentle interactions and protective responses",
-                                                                   "care_behaviors":  [
-                                                                                          "gentle_nuzzling",
-                                                                                          "protective_positioning",
-                                                                                          "comfort_sounds",
-                                                                                          "playful_engagement"
-                                                                                      ]
-                                                               }
-                               },
     "audio_profile":  {
                           "primary_sounds":  [
                                                  "deep_breathing",
@@ -157,6 +151,6 @@
                   "Specialized components create realistic bear behaviors including territory marking and protective instincts",
                   "Designed for educational environments, nature centers, and family-friendly interactive experiences",
                   "Balance of impressive presence with gentle, protective maternal characteristics"
-              ]
+              ],
+    "name":  "bear_protective_guardian_001"
 }
-

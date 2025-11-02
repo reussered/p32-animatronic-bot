@@ -1,18 +1,18 @@
-{
-    "relative_filename": "config/components/test_component.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "test_component",
-    "type": "TEST_HARNESS",
-    "description": "A component to test dynamic pin allocation by requesting a large number of pins.",
-    "timing": {
-        "hitCount": 1,
-        "description": "Runs once at startup."
-    },
-    "pins_requested": {
-        "adc_pins": 5,
-        "pwm_pins": 8,
-        "spi_pins": 3,
-        "i2c_pins": 2
-    }
+﻿{
+    "relative_filename":  "config/components/tests/test_component.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "test_component",
+    "type":  "TEST_HARNESS",
+    "description":  "A component to test dynamic pin allocation by requesting a large number of pins.",
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Runs once at startup."
+               },
+    "pins_requested":  {
+                           "adc_pins":  5,
+                           "pwm_pins":  8,
+                           "spi_pins":  3,
+                           "i2c_pins":  2
+                       }
 }

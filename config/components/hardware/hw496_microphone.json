@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/hw496_microphone.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -74,9 +74,9 @@
     "hardware_type":  "MEMS_MICROPHONE",
     "name":  "HW496_MICROPHONE",
     "dependencies":  [
-                        "config/components/drivers/adc_bus.json",
-                        "config/components/drivers/generic_mic_driver.json"
-                    ],
+                         "config/components/drivers/adc_bus.json",
+                         "config/components/drivers/generic_mic_driver.json"
+                     ],
     "software":  {
                      "init_function":  "hw496_microphone_init",
                      "act_function":  "hw496_microphone_act"

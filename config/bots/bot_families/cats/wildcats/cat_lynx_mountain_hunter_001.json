@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/cats/wildcats/cat_lynx_mountain_hunter_001.json",
     "version":  "2.1.0",
     "author":  "config/author.json",
@@ -75,5 +75,6 @@
     "component_count":  0,
     "components":  [
 
-                   ]
+                   ],
+    "name":  "cat_lynx_mountain_hunter_001"
 }

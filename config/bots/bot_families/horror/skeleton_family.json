@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/horror/skeleton_family.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -81,10 +81,10 @@
                                 "bone_prominence":  "high_definition"
                             },
     "components":  [
-                              "config/components/positioned/skeleton_jaw_actuator.json",
-                              "config/components/positioned/skeleton_bone_structure.json",
-                              "config/components/positioned/skeleton_joint_mechanism.json"
-                          ],
+                       "config/components/positioned/skeleton_jaw_actuator.json",
+                       "config/components/positioned/skeleton_bone_structure.json",
+                       "config/components/positioned/skeleton_joint_mechanism.json"
+                   ],
     "skeletal_features":  {
                               "bone_mechanics":  {
                                                      "jaw_movement":  "chattering_articulation",
@@ -160,6 +160,6 @@
                   "Subfamily variants cover different skeleton roles and abilities",
                   "Audio effects create distinctive bone-based sound signature",
                   "Construction types support both hard bone shells and fabric costume approaches"
-              ]
+              ],
+    "name":  "skeleton_family"
 }
-

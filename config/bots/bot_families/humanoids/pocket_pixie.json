@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/humanoids/pocket_pixie.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -64,5 +64,6 @@
                                      "battery_life":  "EXTENDED_OPERATION_LOW_POWER",
                                      "weight":  "ULTRA_LIGHTWEIGHT_CONSTRUCTION",
                                      "portability":  "COMPACT_TRAVEL_CASE_INCLUDED"
-                                 }
+                                 },
+    "name":  "pocket_pixie"
 }

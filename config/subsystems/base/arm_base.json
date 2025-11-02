@@ -1,19 +1,19 @@
-{
+﻿{
     "relative_filename":  "config/subsystems/base/arm_base.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "subsystem_type":  "ARM_CONTROLLER",
     "description":  "Universal base template for arm subsystem controllers across all creatures",
     "controller":  {
-                                "processor":  "ESP32_C3_MINI",
-                                "flash_memory":  "4MB",
-                                "ram":  "400KB",
-                                "gpio_pins":  22,
-                                "adc_channels":  6,
-                                "pwm_channels":  6,
-                                "spi_interfaces":  1,
-                                "i2c_interfaces":  1
-                            },
+                       "processor":  "ESP32_C3_MINI",
+                       "flash_memory":  "4MB",
+                       "ram":  "400KB",
+                       "gpio_pins":  22,
+                       "adc_channels":  6,
+                       "pwm_channels":  6,
+                       "spi_interfaces":  1,
+                       "i2c_interfaces":  1
+                   },
     "power_specifications":  {
                                  "input_voltage":  "5V_FROM_TORSO",
                                  "logic_voltage":  "3.3V",
@@ -27,21 +27,21 @@
                                  "voltage_regulation":  "ONBOARD_LDO"
                              },
     "components":  [
-                                {
-                                    "component_type":  "COORDINATION_ENGINE",
-                                    "function_name":  "coordination_update",
-                                    "default_hitCount":  10,
-                                    "role":  "balance_compensation",
-                                    "required":  true
-                                },
-                                {
-                                    "component_type":  "SAFETY_MONITOR",
-                                    "function_name":  "safety_monitor_update",
-                                    "default_hitCount":  2,
-                                    "role":  "collision_detection",
-                                    "required":  true
-                                }
-                            ],
+                       {
+                           "component_type":  "COORDINATION_ENGINE",
+                           "function_name":  "coordination_update",
+                           "default_hitCount":  10,
+                           "role":  "balance_compensation",
+                           "required":  true
+                       },
+                       {
+                           "component_type":  "SAFETY_MONITOR",
+                           "function_name":  "safety_monitor_update",
+                           "default_hitCount":  2,
+                           "role":  "collision_detection",
+                           "required":  true
+                       }
+                   ],
     "servo_specifications":  {
                                  "shoulder_joint":  {
                                                         "servo_type":  "MG996R_HIGH_TORQUE",
@@ -67,5 +67,6 @@
                                                      "range_degrees":  120,
                                                      "default_hitCount":  15
                                                  }
-                             }
+                             },
+    "name":  "arm_base"
 }

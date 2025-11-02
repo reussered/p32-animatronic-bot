@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/esp32_c3_mini_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -38,33 +38,39 @@
                          "expansion_strategy":  "LEVERAGE_EXISTING_SPI_I2S_DEVICE_ARCHITECTURE"
                      },
     "components":  {
-                                                     "spi_servo_expansion":  {
-                                                                                 "components":  ["config/components/interfaces/spi_device_1.json"],
-                                                                                 "expander_chip":  "PCA9685_16_CHANNEL_PWM",
-                                                                                 "gpio_cost":  "3_PINS_SPI_PLUS_1_CS",
-                                                                                 "servo_capacity":  "16_SERVOS_PER_EXPANDER",
-                                                                                 "cascading":  "MULTIPLE_PCA9685_ON_SAME_SPI_BUS"
-                                                                             },
-                                                     "i2c_sensor_expansion":  {
-                                                                                  "components":  ["config/components/interfaces/i2c_bus_0.json"],
-                                                                                  "gpio_cost":  "2_PINS_SDA_SCL",
-                                                                                  "device_capacity":  "127_I2C_ADDRESSES",
-                                                                                  "examples":  [
-                                                                                                   "MPU6050_IMU",
-                                                                                                   "AS5600_ENCODER",
-                                                                                                   "ADS1115_ADC"
-                                                                                               ]
-                                                                              },
-                                                     "i2s_audio_expansion":  {
-                                                                                 "components":  ["config/components/interfaces/i2s_device_1.json"],
-                                                                                 "gpio_cost":  "3_PINS_BCLK_WS_DATA",
-                                                                                 "capability":  "AUDIO_INPUT_OUTPUT_PROCESSING",
-                                                                                 "examples":  [
-                                                                                                  "MICROPHONE_ARRAY",
-                                                                                                  "SPEAKER_OUTPUT"
-                                                                                              ]
-                                                                             }
-                                                 },
+                       "spi_servo_expansion":  {
+                                                   "components":  [
+                                                                      "config/components/interfaces/spi_device_1.json"
+                                                                  ],
+                                                   "expander_chip":  "PCA9685_16_CHANNEL_PWM",
+                                                   "gpio_cost":  "3_PINS_SPI_PLUS_1_CS",
+                                                   "servo_capacity":  "16_SERVOS_PER_EXPANDER",
+                                                   "cascading":  "MULTIPLE_PCA9685_ON_SAME_SPI_BUS"
+                                               },
+                       "i2c_sensor_expansion":  {
+                                                    "components":  [
+                                                                       "config/components/interfaces/i2c_bus_0.json"
+                                                                   ],
+                                                    "gpio_cost":  "2_PINS_SDA_SCL",
+                                                    "device_capacity":  "127_I2C_ADDRESSES",
+                                                    "examples":  [
+                                                                     "MPU6050_IMU",
+                                                                     "AS5600_ENCODER",
+                                                                     "ADS1115_ADC"
+                                                                 ]
+                                                },
+                       "i2s_audio_expansion":  {
+                                                   "components":  [
+                                                                      "config/components/interfaces/i2s_device_1.json"
+                                                                  ],
+                                                   "gpio_cost":  "3_PINS_BCLK_WS_DATA",
+                                                   "capability":  "AUDIO_INPUT_OUTPUT_PROCESSING",
+                                                   "examples":  [
+                                                                    "MICROPHONE_ARRAY",
+                                                                    "SPEAKER_OUTPUT"
+                                                                ]
+                                               }
+                   },
     "power_specifications":  {
                                  "operating_voltage":  "3.0V_TO_3.6V",
                                  "active_current":  "80MA_TYPICAL",
@@ -159,4 +165,3 @@
                                    },
     "hardware_type":  "MICRO_CONTROLLER_MODULE"
 }
-

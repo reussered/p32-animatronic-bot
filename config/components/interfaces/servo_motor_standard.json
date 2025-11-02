@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/servo_motor_standard.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SERVO_MOTOR_STANDARD",
     "interface_type":  "SERVO_CONTROLLER",
@@ -353,6 +353,6 @@
                                                           "range":  "45_DEGREES",
                                                           "use_case":  "JAW_OPENING_CLOSING"
                                                       }
-                             }
+                             },
+    "name":  "servo_motor_standard"
 }
-

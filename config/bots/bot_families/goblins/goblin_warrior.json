@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_warrior.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -74,9 +74,9 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/goblin_battle_scars.json",
-                                  "config/components/positioned/goblin_war_paint.json"
-                              ],
+                       "config/components/positioned/goblin_battle_scars.json",
+                       "config/components/positioned/goblin_war_paint.json"
+                   ],
     "custom_behaviors":  {
                              "combat_ready_stance":  {
                                                          "trigger":  "proximity_alert",
@@ -127,6 +127,6 @@
                   "Combat-focused behaviors and high-priority threat responses",
                   "Increased sensor polling for combat awareness",
                   "Higher audio amplification for intimidation factor"
-              ]
+              ],
+    "name":  "goblin_warrior"
 }
-

@@ -1,4 +1,4 @@
-{
+﻿{
     "name":  "sleep",
     "displayName":  "Sleep",
     "description":  "Low-power sleep behavior",
@@ -36,5 +36,6 @@
                      "inactivity_long",
                      "battery_low"
                  ],
-    "version":  "1.0.0"
+    "version":  "1.0.0",
+    "relative_filename":  "config/behaviors/sleep.json"
 }

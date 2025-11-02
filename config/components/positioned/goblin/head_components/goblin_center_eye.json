@@ -1,12 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/head_components/goblin_center_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "goblin_center_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "goblin_center_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/goblin_eye.json"
-                             ],
+                       "config/components/creature_specific/goblin_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/gc9a01.json",
                                  "display_type":  "CIRCULAR_LCD_FULL_COLOR",
@@ -37,4 +38,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

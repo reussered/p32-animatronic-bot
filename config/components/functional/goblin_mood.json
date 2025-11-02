@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/functional/goblin_mood.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -12,39 +12,39 @@
                    "description":  "Mood update every 1.5 seconds"
                },
     "components":  {
-                            "ANGER":  {
-                                          "decay_rate":  5,
-                                          "max_value":  127
-                                      },
-                            "FEAR":  {
+                       "ANGER":  {
+                                     "decay_rate":  5,
+                                     "max_value":  127
+                                 },
+                       "FEAR":  {
+                                    "decay_rate":  3,
+                                    "max_value":  127
+                                },
+                       "HAPPINESS":  {
+                                         "decay_rate":  2,
+                                         "max_value":  127
+                                     },
+                       "SADNESS":  {
+                                       "decay_rate":  2,
+                                       "max_value":  127
+                                   },
+                       "CURIOSITY":  {
+                                         "decay_rate":  4,
+                                         "max_value":  127
+                                     },
+                       "AFFECTION":  {
                                          "decay_rate":  3,
                                          "max_value":  127
                                      },
-                            "HAPPINESS":  {
-                                              "decay_rate":  2,
-                                              "max_value":  127
-                                          },
-                            "SADNESS":  {
-                                            "decay_rate":  2,
-                                            "max_value":  127
-                                        },
-                            "CURIOSITY":  {
-                                              "decay_rate":  4,
-                                              "max_value":  127
-                                          },
-                            "AFFECTION":  {
-                                              "decay_rate":  3,
-                                              "max_value":  127
-                                          },
-                            "IRRITATION":  {
-                                               "decay_rate":  6,
-                                               "max_value":  127
-                                           },
-                            "CONTENTMENT":  {
-                                                "decay_rate":  1,
-                                                "max_value":  127
-                                            }
-                        },
+                       "IRRITATION":  {
+                                          "decay_rate":  6,
+                                          "max_value":  127
+                                      },
+                       "CONTENTMENT":  {
+                                           "decay_rate":  1,
+                                           "max_value":  127
+                                       }
+                   },
     "responsibilities":  [
                              "Update 8-component mood state from sensor inputs",
                              "Apply natural mood decay over time",
@@ -52,4 +52,3 @@
                              "Trigger animations based on mood changes"
                          ]
 }
-

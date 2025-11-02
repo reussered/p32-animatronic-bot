@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/sg90_micro_servo.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "SG90_MICRO_SERVO",
     "interface_type":  "MICRO_SERVO_MOTOR",
@@ -299,6 +299,6 @@
                           "cost_per_torque":  "EXCELLENT_VALUE_FOR_SMALL_LOADS",
                           "cost_per_precision":  "GOOD_VALUE_FOR_1_DEGREE_ACCURACY",
                           "total_system_cost":  "LOW_FOR_MULTI_SERVO_FACIAL_ANIMATION"
-                      }
+                      },
+    "name":  "sg90_micro_servo"
 }
-

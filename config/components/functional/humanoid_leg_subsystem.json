@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/functional/humanoid_leg_subsystem.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -11,9 +11,9 @@
                                    "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
                                    "servo_hardware":  "config/components/hardware/mg996r_servo.json",
                                    "components":  [
-                                                             "config/components/hardware/mpu6050_imu.json",
-                                                             "config/components/hardware/pressure_sensor.json"
-                                                         ],
+                                                      "config/components/hardware/mpu6050_imu.json",
+                                                      "config/components/hardware/pressure_sensor.json"
+                                                  ],
                                    "power_interface":  "config/components/interfaces/power_6v_regulated.json"
                                },
     "abstraction_layers":  {
@@ -148,4 +148,3 @@
                              "scaling":  "ADD_MORE_SERVOS_WITHOUT_ARCHITECTURE_CHANGES"
                          }
 }
-

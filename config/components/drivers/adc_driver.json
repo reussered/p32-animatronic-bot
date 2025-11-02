@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/drivers/adc_driver.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -9,29 +9,29 @@
     "description":  "Generic ADC driver for ESP32 supporting multiple channels with configurable resolution and sampling",
     "created":  "2025-10-29",
     "driver_capabilities":  {
-                               "adc_channels":  20,
-                               "resolution_bits":  [
-                                                      "9_BIT",
-                                                      "10_BIT",
-                                                      "11_BIT",
-                                                      "12_BIT"
-                                                  ],
-                               "reference_voltage":  "3.3V",
-                               "input_voltage_range":  "0-3.3V",
-                               "sampling_frequency":  "UP_TO_2MSPS",
-                               "attenuation_levels":  [
-                                                          "0dB_NO_ATTENUATION",
-                                                          "2.5dB_1.34V_MAX",
-                                                          "6dB_2.0V_MAX",
-                                                          "11dB_3.3V_MAX"
-                                                      ]
-                           },
+                                "adc_channels":  20,
+                                "resolution_bits":  [
+                                                        "9_BIT",
+                                                        "10_BIT",
+                                                        "11_BIT",
+                                                        "12_BIT"
+                                                    ],
+                                "reference_voltage":  "3.3V",
+                                "input_voltage_range":  "0-3.3V",
+                                "sampling_frequency":  "UP_TO_2MSPS",
+                                "attenuation_levels":  [
+                                                           "0dB_NO_ATTENUATION",
+                                                           "2.5dB_1.34V_MAX",
+                                                           "6dB_2.0V_MAX",
+                                                           "11dB_3.3V_MAX"
+                                                       ]
+                            },
     "electrical_specs":  {
-                            "input_impedance":  "HIGH_IMPEDANCE",
-                            "current_consumption":  "LOW_POWER",
-                            "noise_figure":  "GOOD",
-                            "crosstalk":  "MINIMAL"
-                        },
+                             "input_impedance":  "HIGH_IMPEDANCE",
+                             "current_consumption":  "LOW_POWER",
+                             "noise_figure":  "GOOD",
+                             "crosstalk":  "MINIMAL"
+                         },
     "gpio_requirements":  {
                               "adc_pins":  "GPIO_1-10_32-39",
                               "pin_constraints":  "ESP32_ADC_CAPABLE_PINS",
@@ -41,13 +41,13 @@
                      "init_function":  "adc_driver_init",
                      "act_function":  "adc_driver_act",
                      "api_functions":  [
-                                          "adc_read_channel(channel)",
-                                          "adc_read_voltage(channel)",
-                                          "adc_set_resolution(bits)",
-                                          "adc_set_attenuation(channel, level)",
-                                          "adc_calibrate_channel(channel)",
-                                          "adc_get_raw_value(channel)"
-                                      ]
+                                           "adc_read_channel(channel)",
+                                           "adc_read_voltage(channel)",
+                                           "adc_set_resolution(bits)",
+                                           "adc_set_attenuation(channel, level)",
+                                           "adc_calibrate_channel(channel)",
+                                           "adc_get_raw_value(channel)"
+                                       ]
                  },
     "configuration_options":  {
                                   "default_resolution":  "12_BIT",

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/animals/bears_family.json",
     "version":  "1.0",
     "author":  "config/author.json",
@@ -17,7 +17,7 @@
                             },
     "components":  [
 
-                           ],
+                   ],
     "family_mood_profile":  {
                                 "FEAR":  10,
                                 "ANGER":  15,
@@ -39,6 +39,6 @@
                                                                 "friendly",
                                                                 "responsive"
                                                             ]
-                                 }
+                                 },
+    "name":  "bears_family"
 }
-

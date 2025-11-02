@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/max98357a_i2s_amplifier.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "MAX98357A_I2S_AMPLIFIER",
     "interface_type":  "I2S_AUDIO_AMPLIFIER",
@@ -208,18 +208,18 @@
                                                         }
                              },
     "components":  {
-                                     "output_filtering":  {
-                                                              "description":  "LC filter required for speaker connection",
-                                                              "inductor":  "22uH_TO_47uH_LOW_DCR",
-                                                              "capacitor":  "220uF_TO_470uF_LOW_ESR",
-                                                              "purpose":  "REMOVE_SWITCHING_FREQUENCY_CONTENT"
-                                                          },
-                                     "power_supply_filtering":  {
-                                                                    "input_capacitor":  "10uF_TO_100uF_CERAMIC_OR_TANTALUM",
-                                                                    "bypass_capacitor":  "0.1uF_CERAMIC_CLOSE_TO_IC",
-                                                                    "bulk_capacitor":  "220uF_TO_1000uF_ELECTROLYTIC"
-                                                                }
-                                 },
+                       "output_filtering":  {
+                                                "description":  "LC filter required for speaker connection",
+                                                "inductor":  "22uH_TO_47uH_LOW_DCR",
+                                                "capacitor":  "220uF_TO_470uF_LOW_ESR",
+                                                "purpose":  "REMOVE_SWITCHING_FREQUENCY_CONTENT"
+                                            },
+                       "power_supply_filtering":  {
+                                                      "input_capacitor":  "10uF_TO_100uF_CERAMIC_OR_TANTALUM",
+                                                      "bypass_capacitor":  "0.1uF_CERAMIC_CLOSE_TO_IC",
+                                                      "bulk_capacitor":  "220uF_TO_1000uF_ELECTROLYTIC"
+                                                  }
+                   },
     "manufacturer_pin_mappings":  {
                                       "adafruit_max98357a":  {
                                                                  "power":  [
@@ -349,7 +349,6 @@
                                                              "heat_sinking":  "THERMAL_VIAS_TO_GROUND_PLANE",
                                                              "airflow":  "NATURAL_CONVECTION_USUALLY_ADEQUATE"
                                                          }
-                              }
+                              },
+    "name":  "max98357a_i2s_amplifier"
 }
-
-

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/templates/base/torso_base.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -11,11 +11,11 @@
     "reference_point":  "pelvis_center",
     "units":  "INCHES",
     "components":  [
-                            "config/components/positioned/base_power_management.json",
-                            "config/components/positioned/base_battery_monitor.json",
-                            "config/components/positioned/base_mesh_coordinator.json",
-                            "config/components/positioned/base_status_led.json"
-                        ],
+                       "config/components/positioned/base_power_management.json",
+                       "config/components/positioned/base_battery_monitor.json",
+                       "config/components/positioned/base_mesh_coordinator.json",
+                       "config/components/positioned/base_status_led.json"
+                   ],
     "degrees_of_freedom_defaults":  {
                                         "spine_dof":  "3",
                                         "total_controlled_dof":  "3"
@@ -41,5 +41,6 @@
                            "spine_servo_type":  "NEMA17_STEPPER",
                            "spine_servo_current_limit":  "1.5A",
                            "spine_positioning_precision":  "0.1_DEGREES"
-                       }
+                       },
+    "name":  "torso_base"
 }

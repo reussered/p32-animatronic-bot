@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/mechanical/robot_family_enhanced.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -15,12 +15,12 @@
                                 "component_spacing":  "1.5 INCH"
                             },
     "components":  [
-                               "config/components/positioned/robot_chest_matrix.json",
-                               "config/components/positioned/robot_status_oled.json",
-                               "config/components/positioned/robot_camera_eyes.json",
-                               "config/components/positioned/robot_speaker_array.json",
-                               "config/components/positioned/robot_led_strips.json"
-                           ],
+                       "config/components/positioned/robot_chest_matrix.json",
+                       "config/components/positioned/robot_status_oled.json",
+                       "config/components/positioned/robot_camera_eyes.json",
+                       "config/components/positioned/robot_speaker_array.json",
+                       "config/components/positioned/robot_led_strips.json"
+                   ],
     "family_mood_profile":  {
                                 "FEAR":  5,
                                 "ANGER":  10,
@@ -132,9 +132,9 @@
                                                                                           "audio_array"
                                                                                       ],
                                                                "components":  [
-                                                                                           "articulated_servos",
-                                                                                           "modular_attachments"
-                                                                                       ]
+                                                                                  "articulated_servos",
+                                                                                  "modular_attachments"
+                                                                              ]
                                                            }
                              },
     "subfamily_variants":  {
@@ -146,10 +146,10 @@
                                                                                   "CURIOSITY":  "-10"
                                                                               },
                                                     "components":  [
-                                                                                   "laser_targeting_system",
-                                                                                   "reinforced_chassis",
-                                                                                   "armor_plating_actuators"
-                                                                               ]
+                                                                       "laser_targeting_system",
+                                                                       "reinforced_chassis",
+                                                                       "armor_plating_actuators"
+                                                                   ]
                                                 },
                                "companion_robot":  {
                                                        "color_scheme":  "friendly_white",
@@ -159,10 +159,10 @@
                                                                                      "AGGRESSION":  "-15"
                                                                                  },
                                                        "components":  [
-                                                                                      "emotion_recognition_camera",
-                                                                                      "soft_touch_sensors",
-                                                                                      "companion_ai_module"
-                                                                                  ]
+                                                                          "emotion_recognition_camera",
+                                                                          "soft_touch_sensors",
+                                                                          "companion_ai_module"
+                                                                      ]
                                                    },
                                "service_robot":  {
                                                      "color_scheme":  "professional_gray",
@@ -172,10 +172,10 @@
                                                                                    "EFFICIENCY":  "+20"
                                                                                },
                                                      "components":  [
-                                                                                    "task_specific_tools",
-                                                                                    "advanced_pathfinding",
-                                                                                    "multi_sensor_array"
-                                                                                ]
+                                                                        "task_specific_tools",
+                                                                        "advanced_pathfinding",
+                                                                        "multi_sensor_array"
+                                                                    ]
                                                  }
                            },
     "construction_types":  {
@@ -219,7 +219,6 @@
                             "Servo-driven articulation provides precise, repeatable movements",
                             "Multi-sensor fusion enables advanced environmental awareness",
                             "Construction type determines manufacturing method and target market"
-                        ]
+                        ],
+    "name":  "robot_family_enhanced"
 }
-
-

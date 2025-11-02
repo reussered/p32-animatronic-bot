@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/templates/base/arm_base.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -11,11 +11,11 @@
     "reference_point":  "shoulder_socket",
     "units":  "INCHES",
     "components":  [
-                            "config/components/positioned/base_shoulder_servo.json",
-                            "config/components/positioned/base_elbow_servo.json",
-                            "config/components/positioned/base_wrist_servo.json",
-                            "config/components/positioned/base_arm_status_led.json"
-                        ],
+                       "config/components/positioned/base_shoulder_servo.json",
+                       "config/components/positioned/base_elbow_servo.json",
+                       "config/components/positioned/base_wrist_servo.json",
+                       "config/components/positioned/base_arm_status_led.json"
+                   ],
     "degrees_of_freedom_defaults":  {
                                         "shoulder_dof":  "2",
                                         "elbow_dof":  "1",
@@ -45,5 +45,6 @@
     "communication_defaults":  {
                                    "command_response_timeout_ms":  "100",
                                    "position_report_rate_hz":  "20"
-                               }
+                               },
+    "name":  "arm_base"
 }

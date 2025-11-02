@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/validation/complete_json_audit.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -56,16 +56,16 @@
                                                                                                                       ]
                                                                                                          },
                                                                                "components":  {
-                                                                                                            "files":  7,
-                                                                                                            "status":  "COMPLETE OK",
-                                                                                                            "list":  [
-                                                                                                                         "goblin_ear_left/right.json",
-                                                                                                                         "goblin_mouth.json",
-                                                                                                                         "goblin_nose.json",
-                                                                                                                         "goblin_speaker.json",
-                                                                                                                         "goblin_left_eye/right_eye.json"
-                                                                                                                     ]
-                                                                                                        }
+                                                                                                  "files":  7,
+                                                                                                  "status":  "COMPLETE OK",
+                                                                                                  "list":  [
+                                                                                                               "goblin_ear_left/right.json",
+                                                                                                               "goblin_mouth.json",
+                                                                                                               "goblin_nose.json",
+                                                                                                               "goblin_speaker.json",
+                                                                                                               "goblin_left_eye/right_eye.json"
+                                                                                                           ]
+                                                                                              }
                                                                            }
                                                      },
                                "scaling_framework":  {
@@ -201,6 +201,6 @@
                                    "prerequisites":  "ALL_CONFIGURATION_COMPLETE",
                                    "next_major_milestone":  "ESP32_DISTRIBUTED_CONTROL_IMPLEMENTATION",
                                    "estimated_firmware_effort":  "8-12_WEEKS_FULL_SYSTEM"
-                               }
+                               },
+    "name":  "complete_json_audit"
 }
-

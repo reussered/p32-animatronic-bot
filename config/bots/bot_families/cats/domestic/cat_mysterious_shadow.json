@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -27,11 +27,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/cat_animated_ears.json",
-                                  "config/components/positioned/subtle_led_eyes.json",
-                                  "config/components/positioned/ambient_purr_speaker.json",
-                                  "config/components/positioned/motion_stealth_sensor.json"
-                              ],
+                       "config/components/positioned/cat_animated_ears.json",
+                       "config/components/positioned/subtle_led_eyes.json",
+                       "config/components/positioned/ambient_purr_speaker.json",
+                       "config/components/positioned/motion_stealth_sensor.json"
+                   ],
     "mystical_behaviors":  {
                                "appearance_patterns":  [
                                                            "fade_in_slowly",
@@ -77,6 +77,6 @@
                             "appearance_intervals":  "unpredictable",
                             "interaction_duration":  "brief_meaningful",
                             "disappearance_style":  "gradual_fade"
-                        }
+                        },
+    "name":  "cat_mysterious_shadow"
 }
-

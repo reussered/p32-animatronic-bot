@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/bear/head_components/bear_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -42,4 +42,3 @@
     "hardware_type":  "POSITIONED_COMPONENT",
     "name":  "BEAR_MOUTH"
 }
-

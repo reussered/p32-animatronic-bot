@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/templates/base/humanoid_head_base.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -11,10 +11,10 @@
     "reference_point":  "nose_center",
     "units":  "INCHES",
     "components":  [
-                            "config/components/positioned/base_eye_left.json",
-                            "config/components/positioned/base_eye_right.json",
-                            "config/components/positioned/base_speaker.json"
-                        ],
+                       "config/components/positioned/base_eye_left.json",
+                       "config/components/positioned/base_eye_right.json",
+                       "config/components/positioned/base_speaker.json"
+                   ],
     "hardware_interface_defaults":  {
                                         "spi_bus":  "spi_bus",
                                         "i2s_bus":  "I2S_BUS_0",
@@ -51,6 +51,6 @@
     "communication_defaults":  {
                                    "heartbeat_rate_hz":  "1",
                                    "status_broadcast_rate_hz":  "0.1"
-                               }
+                               },
+    "name":  "humanoid_head_base"
 }
-

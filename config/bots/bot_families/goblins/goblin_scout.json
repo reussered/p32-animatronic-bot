@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_scout.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -85,10 +85,10 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/goblin_enhanced_ears.json",
-                                  "config/components/positioned/goblin_camouflage_skin.json",
-                                  "config/components/positioned/goblin_scent_sensor.json"
-                              ],
+                       "config/components/positioned/goblin_enhanced_ears.json",
+                       "config/components/positioned/goblin_camouflage_skin.json",
+                       "config/components/positioned/goblin_scent_sensor.json"
+                   ],
     "custom_behaviors":  {
                              "reconnaissance_mode":  {
                                                          "trigger":  "new_environment",
@@ -170,6 +170,6 @@
                   "Camouflage aesthetic with natural markings",
                   "Evasion-priority behavior over direct confrontation",
                   "Higher microphone gain for environmental listening"
-              ]
+              ],
+    "name":  "goblin_scout"
 }
-

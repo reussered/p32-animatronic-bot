@@ -1,55 +1,72 @@
-{
-    "name": "generic_spi_display",
-    "type": "driver",
-    "version": "1.0.0",
-    "author": "config/authors/ai_agent.json",
-    "description": "Generic SPI display driver for ESP32-S3 with configurable pin mapping and display parameters",
-    "created": "2025-10-29",
-    "hardware_type": "display_driver",
+﻿{
+    "name":  "generic_spi_display",
+    "type":  "driver",
+    "version":  "1.0.0",
+    "author":  "config/authors/ai_agent.json",
+    "description":  "Generic SPI display driver for ESP32-S3 with configurable pin mapping and display parameters",
+    "created":  "2025-10-29",
+    "hardware_type":  "display_driver",
+    "capabilities":  {
+                         "bus_type":  "SPI",
+                         "max_resolution":  "240x240",
+                         "color_depth":  "16-bit",
+                         "interface_speed":  "up to 80MHz",
+                         "supported_displays":  [
+                                                    "GC9A01",
+                                                    "ILI9341",
+                                                    "ST7789",
+                                                    "custom SPI displays"
+                                                ]
+                     },
+    "electrical_specs":  {
+                             "voltage_range":  "3.3V",
+                             "current_draw":  "50-200mA",
+                             "spi_mode":  "Mode 0 or 3",
+                             "clock_polarity":  "configurable"
+                         },
+    "gpio_requirements":  {
+                              "required_pins":  [
+                                                    "MOSI",
+                                                    "SCLK",
+                                                    "CS",
+                                                    "DC",
+                                                    "RST",
+                                                    "BL"
+                                                ],
+                              "optional_pins":  [
+                                                    "MISO"
+                                                ],
+                              "pin_count":  5
+                          },
+    "software":  {
+                     "init_function":  "generic_spi_display_init",
+                     "act_function":  "generic_spi_display_act",
+                     "api_functions":  [
+                                           "spi_display_init(uint8_t cs_pin, uint8_t dc_pin, uint8_t rst_pin, uint8_t bl_pin)",
+                                           "spi_display_write_pixel(uint16_t x, uint16_t y, uint16_t color)",
+                                           "spi_display_fill_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)",
+                                           "spi_display_draw_bitmap(uint16_t x, uint16_t y, const uint16_t* bitmap, uint16_t w, uint16_t h)",
+                                           "spi_display_set_brightness(uint8_t brightness)",
+                                           "spi_display_clear(uint16_t color)"
+                                       ]
+                 },
+    "compatibility":  {
+                          "esp32_s3":  true,
+                          "esp32_s2":  true,
+                          "esp32":  false,
+                          "chip_variants":  [
+                                                "ESP32-S3-DevKitC-1",
+                                                "ESP32-S3-WROOM-1"
+                                            ]
+                      },
+    "dependencies":  {
+                         "esp_idf_components":  [
+                                                    "spi",
+                                                    "gpio"
+                                                ],
+                         "external_libraries":  [
 
-    "capabilities": {
-        "bus_type": "SPI",
-        "max_resolution": "240x240",
-        "color_depth": "16-bit",
-        "interface_speed": "up to 80MHz",
-        "supported_displays": ["GC9A01", "ILI9341", "ST7789", "custom SPI displays"]
-    },
-
-    "electrical_specs": {
-        "voltage_range": "3.3V",
-        "current_draw": "50-200mA",
-        "spi_mode": "Mode 0 or 3",
-        "clock_polarity": "configurable"
-    },
-
-    "gpio_requirements": {
-        "required_pins": ["MOSI", "SCLK", "CS", "DC", "RST", "BL"],
-        "optional_pins": ["MISO"],
-        "pin_count": 5
-    },
-
-    "software": {
-        "init_function": "generic_spi_display_init",
-        "act_function": "generic_spi_display_act",
-        "api_functions": [
-            "spi_display_init(uint8_t cs_pin, uint8_t dc_pin, uint8_t rst_pin, uint8_t bl_pin)",
-            "spi_display_write_pixel(uint16_t x, uint16_t y, uint16_t color)",
-            "spi_display_fill_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)",
-            "spi_display_draw_bitmap(uint16_t x, uint16_t y, const uint16_t* bitmap, uint16_t w, uint16_t h)",
-            "spi_display_set_brightness(uint8_t brightness)",
-            "spi_display_clear(uint16_t color)"
-        ]
-    },
-
-    "compatibility": {
-        "esp32_s3": true,
-        "esp32_s2": true,
-        "esp32": false,
-        "chip_variants": ["ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1"]
-    },
-
-    "dependencies": {
-        "esp_idf_components": ["spi", "gpio"],
-        "external_libraries": []
-    }
+                                                ]
+                     },
+    "relative_filename":  "config/components/drivers/generic_spi_display.json"
 }

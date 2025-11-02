@@ -1,11 +1,11 @@
-{
-    "relative_filename":  "config/components/hardware/ssd1963.json",
+﻿{
+    "relative_filename":  "config/components/hardware/ssd1963_tft_800x600.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "hardware_type":  "SSD1963_DISPLAY",
     "component_type":  "DISPLAY_DRIVER",
     "display_driver":  true,
-    "name":  "ssd1963",
+    "name":  "ssd1963_tft_800x600",
     "subsystem":  "HEAD",
     "physical_specs":  {
                            "screen_size":  "7.0 INCH",

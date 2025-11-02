@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/robots/robot_security_unit_mk2.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -27,11 +27,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/security_camera_array.json",
-                                  "config/components/positioned/thermal_sensor.json",
-                                  "config/components/positioned/audio_analysis_unit.json",
-                                  "config/components/positioned/emergency_beacon.json"
-                              ],
+                       "config/components/positioned/security_camera_array.json",
+                       "config/components/positioned/thermal_sensor.json",
+                       "config/components/positioned/audio_analysis_unit.json",
+                       "config/components/positioned/emergency_beacon.json"
+                   ],
     "specialized_behaviors":  {
                                   "patrol_patterns":  [
                                                           "perimeter_sweep",
@@ -64,6 +64,6 @@
                                    "operating_temperature":  "-10_TO_50_C",
                                    "weather_resistance":  "IP65",
                                    "communication_range":  "500_METERS"
-                               }
+                               },
+    "name":  "robot_security_unit_mk2"
 }
-

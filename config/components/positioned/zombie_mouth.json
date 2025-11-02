@@ -1,8 +1,9 @@
-{
-    "relative_filename":  "config/components/positioned/zombie/head_components/zombie_mouth.json",
+﻿{
+    "relative_filename":  "config/components/positioned/zombie_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "zombie_mouth","component_type": "POSITIONED_COMPONENT",
+    "name":  "zombie_mouth",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
@@ -39,4 +40,3 @@
                           },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

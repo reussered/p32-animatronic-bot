@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_head_only.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -21,12 +21,12 @@
     "eye_spacing":  "3.0 INCH",
     "compression_factor":  0.7,
     "family_components":  [
-                                    "config/components/functional/goblin_personality.json",
-                                    "config/components/functional/goblin_mood.json"
-                                ],
+                              "config/components/functional/goblin_personality.json",
+                              "config/components/functional/goblin_mood.json"
+                          ],
     "components":  [
-                                 "config/subsystems/goblin_head_left_eye_only.json"
-                             ],
+                       "config/subsystems/goblin_head_left_eye_only.json"
+                   ],
     "mood_defaults":  {
                           "FEAR":  20,
                           "ANGER":  10,
@@ -53,34 +53,34 @@
     "mass_properties":  {
                             "total_mass_kg":  0.8,
                             "center_of_mass":  [
-                                                  0,
-                                                  5,
-                                                  0
-                                              ]
+                                                   0,
+                                                   5,
+                                                   0
+                                               ]
                         },
     "power_requirements":  {
                                "peak_current_ma":  800,
                                "average_current_ma":  400,
                                "voltage_range_v":  [
-                                                     6,
-                                                     8.4
-                                                 ]
+                                                       6,
+                                                       8.4
+                                                   ]
                            },
     "processing_responsibilities":  {
-                                       "display_processing":  true,
-                                       "audio_processing":  false,
-                                       "sensor_fusion":  true,
-                                       "behavior_coordination":  true
-                                   },
+                                        "display_processing":  true,
+                                        "audio_processing":  false,
+                                        "sensor_fusion":  true,
+                                        "behavior_coordination":  true
+                                    },
     "hardware_config":  {
                             "controller_type":  "ESP32_S3_DEVKITC_1",
                             "display_type":  "GC9A01_SPI",
                             "sensor_types":  [
-                                                "HC_SR04"
-                                            ],
+                                                 "HC_SR04"
+                                             ],
                             "actuator_types":  [
-                                                  "SERVO_MG996R"
-                                              ]
+                                                   "SERVO_MG996R"
+                                               ]
                         },
     "prototype_status":  "testing",
     "tested":  false,

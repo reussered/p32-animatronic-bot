@@ -1,14 +1,14 @@
-{
-    "relative_filename":  "config/components/positioned/goblin/head_components/goblin_left_eye.json",
+﻿{
+    "relative_filename":  "config/components/goblin_left_eye.json",
     "version":  "3.0.0",
     "author":  "config/author.json",
-    "name":  "head_components_goblin_left_eye",
+    "name":  "goblin_left_eye",
     "component_type":  "POSITIONED_DISPLAY",
     "description":  "Left eye positioned display with goblin-specific visual processing",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/creature_specific/goblin_eye.json"
-                             ],
+                       "config/components/creature_specific/goblin_eye.json"
+                   ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {

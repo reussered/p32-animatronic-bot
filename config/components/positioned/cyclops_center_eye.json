@@ -1,12 +1,13 @@
-{
-    "relative_filename":  "config/components/positioned/cyclops/head_components/cyclops_center_eye.json",
+﻿{
+    "relative_filename":  "config/components/positioned/cyclops_center_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name": "cyclops_center_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "cyclops_center_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/cyclops_eye.json"
-                             ],
+                       "config/components/creature_specific/cyclops_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/tft_2p5x1p5.json",
                                  "display_type":  "LARGE_TFT_PORTRAIT",
@@ -39,4 +40,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

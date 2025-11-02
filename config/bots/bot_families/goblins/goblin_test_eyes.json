@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_test_eyes.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -21,13 +21,13 @@
     "eye_spacing":  "3.0 INCH",
     "compression_factor":  0.7,
     "family_components":  [
-                                    "config/components/functional/goblin_personality.json",
-                                    "config/components/functional/goblin_mood.json",
-                                    "config/components/functional/goblin_behavior_engine.json"
-                                ],
+                              "config/components/functional/goblin_personality.json",
+                              "config/components/functional/goblin_mood.json",
+                              "config/components/functional/goblin_behavior_engine.json"
+                          ],
     "components":  [
-                                 "config/subsystems/test_head.json"
-                             ],
+                       "config/subsystems/test_head.json"
+                   ],
     "mood_defaults":  {
                           "FEAR":  20,
                           "ANGER":  10,
@@ -68,10 +68,10 @@
                                                                                       1.5,
                                                                                       0.0,
                                                                                       0.0
-                                                                                 ],
-                                                                    "units":  "inch",
-                                                                    "description":  "Right eye test mount"
-                                                                }
+                                                                                  ],
+                                                                     "units":  "inch",
+                                                                     "description":  "Right eye test mount"
+                                                                 }
                                                }
                        }
 }

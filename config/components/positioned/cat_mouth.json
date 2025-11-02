@@ -1,12 +1,13 @@
-{
-    "relative_filename":  "config/components/positioned/cat/head_components/cat_mouth.json",
+﻿{
+    "relative_filename":  "config/components/positioned/cat_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "cat_mouth","component_type": "POSITIONED_COMPONENT",
+    "name":  "cat_mouth",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/cat_mouth.json"
-                             ],
+                       "config/components/creature_specific/cat_mouth.json"
+                   ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {
@@ -36,4 +37,3 @@
                           },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

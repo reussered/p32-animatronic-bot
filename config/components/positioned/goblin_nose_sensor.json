@@ -1,5 +1,5 @@
-{
-    "relative_filename":  "config/components/creature_specific/goblin_nose_sensor.json",
+﻿{
+    "relative_filename":  "config/components/positioned/goblin_nose_sensor.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "name":  "goblin_nose_sensor",
@@ -8,8 +8,8 @@
     "description":  "Goblin-specific proximity sensor with aggressive threat detection and territorial awareness",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/hc_sr04_sensor.json"
-                             ],
+                       "config/components/hardware/hc_sr04_sensor.json"
+                   ],
     "creature_sensor_profile":  {
                                     "species":  "GOBLIN",
                                     "detection_style":  "AGGRESSIVE_TERRITORIAL",

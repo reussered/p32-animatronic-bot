@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/pwm_motor_controller.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "PWM_MOTOR_CONTROLLER",
     "interface_type":  "DC_MOTOR_CONTROLLER",
@@ -237,6 +237,6 @@
                                                         "speed_range":  "50_TO_300_RPM",
                                                         "use_case":  "MOBILE_PLATFORM_LOCOMOTION"
                                                     }
-                             }
+                             },
+    "name":  "pwm_motor_controller"
 }
-

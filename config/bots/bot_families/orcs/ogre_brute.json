@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/orcs/ogre_brute.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -64,5 +64,6 @@
                                     "reinforcement":  "DOUBLE_ALUMINUM_EXTRUSION_FRAMEWORK",
                                     "weight_distribution":  "ENHANCED_STABILITY_SYSTEMS",
                                     "power_capacity":  "EXTENDED_OPERATION_HIGH_DRAW"
-                                }
+                                },
+    "name":  "ogre_brute"
 }

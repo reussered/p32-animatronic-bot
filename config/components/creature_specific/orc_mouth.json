@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/creature_specific/orc_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -8,15 +8,15 @@
     "description":  "Orc mouth with massive tusks and battle expressions - uses large displays",
     "created":  "2025-10-23",
     "components":  [
-                                 "config/components/hardware/ili9486.json"
-                             ],
+                       "config/components/hardware/ili9486.json"
+                   ],
     "component_constraints":  {
                                   "required_contained_types":  [
                                                                    "DISPLAY_DRIVER"
                                                                ],
                                   "interface_requirements":  [
                                                                  "getBuffer",
-                                                                 "getFrameSize", 
+                                                                 "getFrameSize",
                                                                  "getFrameRowSize"
                                                              ]
                               },
@@ -60,7 +60,7 @@
     "display_optimization":  {
                                  "large_display_benefits":  {
                                                                 "tusk_detail":  "ULTRA_HIGH_RESOLUTION",
-                                                                "battle_scars":  "REALISTIC_TEXTURES", 
+                                                                "battle_scars":  "REALISTIC_TEXTURES",
                                                                 "war_paint":  "COMPLEX_PATTERNS",
                                                                 "intimidation_factor":  "MAXIMUM"
                                                             },

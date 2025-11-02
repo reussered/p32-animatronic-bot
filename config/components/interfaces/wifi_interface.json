@@ -1,10 +1,10 @@
-{
+﻿{
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "interface_type":  "WIFI_STATION",
     "author":  "config/author.json",
     "relative_filename":  "config/components/interfaces/wifi_interface.json",
-    "interface_id":  "WIFI_INTERFACE"
+    "interface_id":  "WIFI_INTERFACE",
+    "name":  "wifi_interface"
 }
-

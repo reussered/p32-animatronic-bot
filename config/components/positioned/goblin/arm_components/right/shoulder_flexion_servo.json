@@ -1,8 +1,9 @@
-{
-    "relative_filename":  "config/components/positioned/goblin/arm_components/left/shoulder_flexion_servo.json",
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/arm_components/right/shoulder_flexion_servo.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "goblin_left_shoulder_flexion","component_type": "POSITIONED_COMPONENT",
+    "name":  "shoulder_flexion_servo",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "ARM",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/mg996r_servo.json",
@@ -35,4 +36,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

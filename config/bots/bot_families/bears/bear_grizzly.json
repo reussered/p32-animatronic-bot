@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/bears/bear_grizzly.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -39,9 +39,9 @@
                                          }
                   },
     "components":  [
-                                  "config/components/positioned/bear_massive_claws.json",
-                                  "config/components/positioned/bear_thick_fur.json"
-                              ],
+                       "config/components/positioned/bear_massive_claws.json",
+                       "config/components/positioned/bear_thick_fur.json"
+                   ],
     "custom_behaviors":  {
                              "territorial_display":  {
                                                          "trigger":  "proximity_intrusion",
@@ -66,6 +66,6 @@
                   "Designed for territorial and protective scenarios",
                   "Massive scale requires reinforced mounting systems",
                   "Audio effects emphasize raw power and dominance"
-              ]
+              ],
+    "name":  "bear_grizzly"
 }
-

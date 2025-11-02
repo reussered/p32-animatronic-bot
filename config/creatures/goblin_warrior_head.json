@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/creatures/goblin_warrior_head.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -51,5 +51,6 @@
                              "eye_blink_hitCount":  120,
                              "mood_update_hitCount":  25,
                              "threat_assessment_hitCount":  10
-                         }
+                         },
+    "name":  "goblin_warrior_head"
 }

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/drivers/pwm_driver.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -9,23 +9,23 @@
     "description":  "Generic PWM driver for ESP32 supporting multiple channels with configurable frequency and duty cycle",
     "created":  "2025-10-29",
     "driver_capabilities":  {
-                               "max_channels":  16,
-                               "frequency_range":  "1Hz-40MHz",
-                               "resolution_bits":  16,
-                               "duty_cycle_precision":  "0.006%",
-                               "supported_modes":  [
-                                                      "LEDC_FADE",
-                                                      "LEDC_FIXED_DUTY",
-                                                      "SERVO_CONTROL",
-                                                      "MOTOR_CONTROL"
-                                                  ]
-                           },
+                                "max_channels":  16,
+                                "frequency_range":  "1Hz-40MHz",
+                                "resolution_bits":  16,
+                                "duty_cycle_precision":  "0.006%",
+                                "supported_modes":  [
+                                                        "LEDC_FADE",
+                                                        "LEDC_FIXED_DUTY",
+                                                        "SERVO_CONTROL",
+                                                        "MOTOR_CONTROL"
+                                                    ]
+                            },
     "electrical_specs":  {
-                            "output_voltage":  "3.3V",
-                            "max_current_per_channel":  "40mA",
-                            "short_circuit_protection":  false,
-                            "overcurrent_protection":  false
-                        },
+                             "output_voltage":  "3.3V",
+                             "max_current_per_channel":  "40mA",
+                             "short_circuit_protection":  false,
+                             "overcurrent_protection":  false
+                         },
     "gpio_requirements":  {
                               "channels_supported":  16,
                               "pin_assignment":  "CONFIGURABLE_AT_RUNTIME",
@@ -35,12 +35,12 @@
                      "init_function":  "pwm_driver_init",
                      "act_function":  "pwm_driver_act",
                      "api_functions":  [
-                                          "pwm_set_frequency(channel, frequency)",
-                                          "pwm_set_duty(channel, duty_cycle)",
-                                          "pwm_fade(channel, target_duty, fade_time_ms)",
-                                          "pwm_stop(channel)",
-                                          "pwm_get_duty(channel)"
-                                      ]
+                                           "pwm_set_frequency(channel, frequency)",
+                                           "pwm_set_duty(channel, duty_cycle)",
+                                           "pwm_fade(channel, target_duty, fade_time_ms)",
+                                           "pwm_stop(channel)",
+                                           "pwm_get_duty(channel)"
+                                       ]
                  },
     "configuration_options":  {
                                   "default_frequency":  "1000Hz",

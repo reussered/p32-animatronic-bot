@@ -1,21 +1,21 @@
-{
-    "relative_filename": "config/components/system/debug_controller.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_type": "DEBUG_CONTROLLER",
-    "component_type": "SYSTEM_SERVICE",
-    "name": "debug_controller",
-    "subsystem": "SYSTEM",
-    "description": "System-level debug flag controller that manages debugging state via Environment SharedMemory",
-    "hitCount": 100,
-    "software": {
-        "init_function": "debug_controller_init",
-        "act_function": "debug_controller_act"
-    },
-    "debug_config": {
-        "default_debugging_enabled": true,
-        "default_verbose_logging": true,
-        "default_performance_monitoring": false,
-        "default_display_diagnostics": true
-    }
+﻿{
+    "relative_filename":  "config/components/system/debug_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "DEBUG_CONTROLLER",
+    "component_type":  "SYSTEM_SERVICE",
+    "name":  "debug_controller",
+    "subsystem":  "SYSTEM",
+    "description":  "System-level debug flag controller that manages debugging state via Environment SharedMemory",
+    "hitCount":  100,
+    "software":  {
+                     "init_function":  "debug_controller_init",
+                     "act_function":  "debug_controller_act"
+                 },
+    "debug_config":  {
+                         "default_debugging_enabled":  true,
+                         "default_verbose_logging":  true,
+                         "default_performance_monitoring":  false,
+                         "default_display_diagnostics":  true
+                     }
 }

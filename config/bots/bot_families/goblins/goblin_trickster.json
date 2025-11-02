@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/goblins/goblin_trickster.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -85,11 +85,11 @@
                                           }
                   },
     "components":  [
-                                  "config/components/positioned/goblin_sly_grin.json",
-                                  "config/components/positioned/goblin_clever_eyes.json",
-                                  "config/components/positioned/goblin_nimble_fingers.json",
-                                  "config/components/positioned/goblin_prank_accessories.json"
-                              ],
+                       "config/components/positioned/goblin_sly_grin.json",
+                       "config/components/positioned/goblin_clever_eyes.json",
+                       "config/components/positioned/goblin_nimble_fingers.json",
+                       "config/components/positioned/goblin_prank_accessories.json"
+                   ],
     "custom_behaviors":  {
                              "prank_execution":  {
                                                      "trigger":  "opportunity_detected",
@@ -193,6 +193,6 @@
                   "Fast expression changes for animated character",
                   "Balanced aggression levels for family-friendly pranks",
                   "Creative problem-solving for trick development"
-              ]
+              ],
+    "name":  "goblin_trickster"
 }
-

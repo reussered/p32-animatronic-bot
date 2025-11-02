@@ -1,4 +1,4 @@
-{
+﻿{
     "name":  "idle_scan",
     "displayName":  "Idle Scan",
     "description":  "Periodic scanning behavior when idle",
@@ -35,5 +35,6 @@
     "triggers":  [
                      "idle_timeout"
                  ],
-    "version":  "1.0.0"
+    "version":  "1.0.0",
+    "relative_filename":  "config/behaviors/idle_scan.json"
 }

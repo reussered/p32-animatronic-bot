@@ -1,85 +1,79 @@
-{
-  "relative_filename": "config/hardware/ds18b20_temperature_sensor.json",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "component_type": "TEMPERATURE_SENSOR",
-  "hardware_name": "DS18B20 Digital Temperature Sensor",
-  "description": "DS18B20 1-wire digital temperature sensor with waterproof probe",
-  "created": "2025-10-23",
-  
-  "hardware_specs": {
-    "sensor_type": "digital_1wire",
-    "temperature_range": "-55C_to_125C",
-    "accuracy": "?0.5C",
-    "resolution": "9_to_12_bit_configurable",
-    "conversion_time": "750ms_max_12bit"
-  },
-  
-  "physical_properties": {
-    "sensor_dimensions": {
-      "probe_diameter": "6mm",
-      "probe_length": "35mm",
-      "cable_length": "100cm"
-    },
-    "weight": "8g",
-    "mounting": {
-      "type": "probe_insertion",
-      "thread": "M6",
-      "sealing": "waterproof_stainless_steel"
-    }
-  },
-  
-  "control_interface": {
-    "protocol": "1wire",
-    "data_pin_count": 1,
-    "pullup_required": "4.7k_ohm",
-    "supply_mode": "parasitic_or_external"
-  },
-  
-  "power_requirements": {
-    "operating_voltage": "3.0V-5.5V",
-    "typical_voltage": "3.3V",
-    "current_consumption": "1mA_active",
-    "standby_current": "1uA"
-  },
-  
-  "pin_mapping": {
-    "pins": [
-      {
-        "pin_name": "DATA",
-        "direction": "bidirectional",
-        "description": "1-wire data bus",
-        "electrical_type": "digital_open_drain"
-      },
-      {
-        "pin_name": "VDD",
-        "direction": "input",
-        "description": "Power supply positive",
-        "electrical_type": "power"
-      },
-      {
-        "pin_name": "GND",
-        "direction": "input", 
-        "description": "Ground reference",
-        "electrical_type": "ground"
-      }
-    ]
-  },
-  
-  "software": {
-    "init_function": "ds18b20_temperature_sensor_init",
-    "act_function": "ds18b20_temperature_sensor_act",
-    "libraries_required": [
-      "OneWire",
-      "DallasTemperature"
-    ],
-    "sample_code_pattern": "1wire_temperature_polling"
-  },
-  
-  "component_behavior": {
-    "poll_interval_ms": 2000,
-    "temperature_smoothing": "3_sample_average",
-    "error_handling": "retry_3x_then_default",
-    "default_temp_c": 25
-  }
+﻿{
+    "relative_filename":  "config/hardware/ds18b20_temperature_sensor.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_type":  "TEMPERATURE_SENSOR",
+    "hardware_name":  "DS18B20 Digital Temperature Sensor",
+    "description":  "DS18B20 1-wire digital temperature sensor with waterproof probe",
+    "created":  "2025-10-23",
+    "hardware_specs":  {
+                           "sensor_type":  "digital_1wire",
+                           "temperature_range":  "-55C_to_125C",
+                           "accuracy":  "?0.5C",
+                           "resolution":  "9_to_12_bit_configurable",
+                           "conversion_time":  "750ms_max_12bit"
+                       },
+    "physical_properties":  {
+                                "sensor_dimensions":  {
+                                                          "probe_diameter":  "6mm",
+                                                          "probe_length":  "35mm",
+                                                          "cable_length":  "100cm"
+                                                      },
+                                "weight":  "8g",
+                                "mounting":  {
+                                                 "type":  "probe_insertion",
+                                                 "thread":  "M6",
+                                                 "sealing":  "waterproof_stainless_steel"
+                                             }
+                            },
+    "control_interface":  {
+                              "protocol":  "1wire",
+                              "data_pin_count":  1,
+                              "pullup_required":  "4.7k_ohm",
+                              "supply_mode":  "parasitic_or_external"
+                          },
+    "power_requirements":  {
+                               "operating_voltage":  "3.0V-5.5V",
+                               "typical_voltage":  "3.3V",
+                               "current_consumption":  "1mA_active",
+                               "standby_current":  "1uA"
+                           },
+    "pin_mapping":  {
+                        "pins":  [
+                                     {
+                                         "pin_name":  "DATA",
+                                         "direction":  "bidirectional",
+                                         "description":  "1-wire data bus",
+                                         "electrical_type":  "digital_open_drain"
+                                     },
+                                     {
+                                         "pin_name":  "VDD",
+                                         "direction":  "input",
+                                         "description":  "Power supply positive",
+                                         "electrical_type":  "power"
+                                     },
+                                     {
+                                         "pin_name":  "GND",
+                                         "direction":  "input",
+                                         "description":  "Ground reference",
+                                         "electrical_type":  "ground"
+                                     }
+                                 ]
+                    },
+    "software":  {
+                     "init_function":  "ds18b20_temperature_sensor_init",
+                     "act_function":  "ds18b20_temperature_sensor_act",
+                     "libraries_required":  [
+                                                "OneWire",
+                                                "DallasTemperature"
+                                            ],
+                     "sample_code_pattern":  "1wire_temperature_polling"
+                 },
+    "component_behavior":  {
+                               "poll_interval_ms":  2000,
+                               "temperature_smoothing":  "3_sample_average",
+                               "error_handling":  "retry_3x_then_default",
+                               "default_temp_c":  25
+                           },
+    "name":  "ds18b20_temperature_sensor"
 }

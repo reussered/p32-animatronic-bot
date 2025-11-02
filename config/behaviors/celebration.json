@@ -1,4 +1,4 @@
-{
+﻿{
     "name":  "celebration",
     "displayName":  "Celebration",
     "description":  "Excited celebration behavior",
@@ -36,5 +36,6 @@
                      "achievement",
                      "positive_feedback"
                  ],
-    "version":  "1.0.0"
+    "version":  "1.0.0",
+    "relative_filename":  "config/behaviors/celebration.json"
 }

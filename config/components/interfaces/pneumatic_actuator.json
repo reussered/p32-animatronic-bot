@@ -1,8 +1,8 @@
-{
+﻿{
     "relative_filename":  "config/components/interfaces/pneumatic_actuator.json",
     "version":  "1.0.0",
-    "component_type": "INTERFACE_BUS",
-    "hardware_type": "BUS_INTERFACE",
+    "component_type":  "INTERFACE_BUS",
+    "hardware_type":  "BUS_INTERFACE",
     "author":  "config/author.json",
     "interface_id":  "PNEUMATIC_ACTUATOR",
     "interface_type":  "PNEUMATIC_CONTROLLER",
@@ -278,6 +278,6 @@
                                                        "pressure":  "120_PSI",
                                                        "use_case":  "LOCOMOTIVE_LEG_SUPPORT"
                                                    }
-                             }
+                             },
+    "name":  "pneumatic_actuator"
 }
-

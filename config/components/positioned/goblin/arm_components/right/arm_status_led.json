@@ -1,19 +1,21 @@
-{
-    "relative_filename": "config/components/positioned/goblin/arm_components/left/arm_status_led.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "component_type": "POSITIONED_COMPONENT",
-    "name": "goblin_left_arm_status_led",
-    "components": ["config/hardware/led_neopixel_ring.json"],
-    "position": {
-        "coordinate_system": "skull_3d",
-        "reference_point": "shoulder_socket_left",
-        "x": "0.0 INCH",
-        "y": "-2.0 INCH",
-        "z": "0.5 INCH"
-    },
-    "software": {
-        "init_function": "goblin_left_arm_status_led_init",
-        "act_function": "goblin_left_arm_status_led_act"
-    }
+﻿{
+    "relative_filename":  "config/components/positioned/goblin/arm_components/right/arm_status_led.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "component_type":  "POSITIONED_COMPONENT",
+    "name":  "arm_status_led",
+    "components":  [
+                       "config/hardware/led_neopixel_ring.json"
+                   ],
+    "position":  {
+                     "coordinate_system":  "skull_3d",
+                     "reference_point":  "shoulder_socket_left",
+                     "x":  "0.0 INCH",
+                     "y":  "-2.0 INCH",
+                     "z":  "0.5 INCH"
+                 },
+    "software":  {
+                     "init_function":  "goblin_left_arm_status_led_init",
+                     "act_function":  "goblin_left_arm_status_led_act"
+                 }
 }

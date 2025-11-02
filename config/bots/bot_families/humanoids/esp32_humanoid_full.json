@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/humanoids/esp32_humanoid_full.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -154,5 +154,6 @@
                                               "servo_count":  4,
                                               "estimated_cost":  "$55_USD"
                                           }
-                     }
+                     },
+    "name":  "esp32_humanoid_full"
 }

@@ -1,5 +1,5 @@
-{
-    "relative_filename":  "config/components/creature_specific/robot_eye.json",
+﻿{
+    "relative_filename":  "config/components/positioned/robot_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "name":  "robot_eye",
@@ -8,15 +8,15 @@
     "description":  "Shared robot eye processing logic with LED matrix and mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/neopixel_matrix_8x8.json"
-                             ],
+                       "config/components/hardware/neopixel_matrix_8x8.json"
+                   ],
     "component_constraints":  {
                                   "required_contained_types":  [
                                                                    "DISPLAY_DRIVER"
                                                                ],
                                   "interface_requirements":  [
                                                                  "getBuffer",
-                                                                 "getFrameSize", 
+                                                                 "getFrameSize",
                                                                  "getFrameRowSize"
                                                              ]
                               },

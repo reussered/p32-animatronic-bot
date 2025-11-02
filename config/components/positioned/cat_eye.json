@@ -1,5 +1,5 @@
-{
-    "relative_filename":  "config/components/creature_specific/cat_eye.json",
+﻿{
+    "relative_filename":  "config/components/positioned/cat_eye.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "name":  "cat_eye",
@@ -8,15 +8,15 @@
     "description":  "Shared cat eye processing logic with palette and mood-based rendering",
     "created":  "2025-10-22",
     "components":  [
-                                 "config/components/hardware/gc9a01.json"
-                             ],
+                       "config/components/hardware/gc9a01.json"
+                   ],
     "component_constraints":  {
                                   "required_contained_types":  [
                                                                    "DISPLAY_DRIVER"
                                                                ],
                                   "interface_requirements":  [
                                                                  "getBuffer",
-                                                                 "getFrameSize", 
+                                                                 "getFrameSize",
                                                                  "getFrameRowSize"
                                                              ]
                               },

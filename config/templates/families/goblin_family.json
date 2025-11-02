@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/templates/families/goblin_family.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
@@ -71,5 +71,6 @@
                              "mood_update_hitCount":  30,
                              "sound_trigger_hitCount":  150,
                              "sensor_read_hitCount":  15
-                         }
+                         },
+    "name":  "goblin_family"
 }

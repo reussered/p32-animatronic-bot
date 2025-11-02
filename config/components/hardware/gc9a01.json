@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/components/hardware/gc9a01.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -8,8 +8,8 @@
     "name":  "gc9a01",
     "subsystem":  "HEAD",
     "components":  [
-        "config/components/drivers/spi_display_bus.json"
-    ],
+                       "config/components/drivers/spi_display_bus.json"
+                   ],
     "physical_specs":  {
                            "diameter":  "1.28 INCH",
                            "thickness":  "0.08 INCH",
@@ -20,10 +20,10 @@
                                                   "spacing":  "1.1 INCH"
                                               }
                        },
-    "timing": {
-        "hitCount": 1,
-        "description": "Display updates every loop for smooth animation"
-    },
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Display updates every loop for smooth animation"
+               },
     "pin_mapping":  {
                         "description":  "GC9A01 displays have varying pin labels depending on manufacturer. See MakerNames.json for complete mapping.",
                         "manufacturer_mapping_reference":  "config/components/interfaces/MakerNames.json",
@@ -177,8 +177,8 @@
                      "act_function":  "gc9a01_act"
                  },
     "required_interface_functions":  [
-                                        "getBuffer",
-                                        "getFrameSize", 
-                                        "getFrameRowSize"
-                                    ]
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ]
 }

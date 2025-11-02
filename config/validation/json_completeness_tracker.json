@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/validation/json_completeness_tracker.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -438,6 +438,6 @@
                        "short_term":  "Implement basic servo control and safety systems",
                        "medium_term":  "Add advanced movement capabilities and AI decision making",
                        "long_term":  "Expand creature library and community documentation"
-                   }
+                   },
+    "name":  "json_completeness_tracker"
 }
-

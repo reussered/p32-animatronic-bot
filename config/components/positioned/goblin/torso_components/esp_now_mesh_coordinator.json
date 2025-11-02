@@ -1,10 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/torso_components/esp_now_mesh_coordinator.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "mesh_coordinator","component_type": "POSITIONED_COMPONENT",
+    "name":  "esp_now_mesh_coordinator",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "TORSO",
-    "components": ["config/components/hardware/esp32_s3_wifi.json"],
+    "components":  [
+                       "config/components/hardware/esp32_s3_wifi.json"
+                   ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "position":  {
@@ -35,5 +38,3 @@
                     },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-
-

@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/undead/zombie_walker.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -34,9 +34,9 @@
                                             }
                   },
     "components":  [
-                                  "config/components/positioned/zombie_rotting_flesh.json",
-                                  "config/components/positioned/zombie_shamble_actuator.json"
-                              ],
+                       "config/components/positioned/zombie_rotting_flesh.json",
+                       "config/components/positioned/zombie_shamble_actuator.json"
+                   ],
     "custom_behaviors":  {
                              "hunger_response":  {
                                                      "trigger":  "living_presence_detected",
@@ -62,6 +62,6 @@
                   "Moderate decay allows for clear facial recognition",
                   "Shambling gait creates authentic zombie movement",
                   "Hunger-driven behaviors dominate decision making"
-              ]
+              ],
+    "name":  "zombie_walker"
 }
-

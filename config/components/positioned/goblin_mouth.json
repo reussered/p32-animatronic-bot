@@ -1,12 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin_mouth.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "goblin_mouth","component_type": "POSITIONED_COMPONENT",
+    "name":  "goblin_mouth",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
     "components":  [
-                                 "config/components/creature_specific/goblin_mouth.json"
-                             ],
+                       "config/components/creature_specific/goblin_mouth.json"
+                   ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "nose_center",
     "position":  {
@@ -26,4 +27,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

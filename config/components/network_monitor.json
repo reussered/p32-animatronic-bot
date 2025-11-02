@@ -1,5 +1,5 @@
-{
-    "relative_filename":  "config/components/system/network_monitor.json",
+﻿{
+    "relative_filename":  "config/components/network_monitor.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
     "name":  "network_monitor",

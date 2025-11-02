@@ -1,11 +1,12 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/head_components/goblin_right_eye.json",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "head_components_goblin_right_eye","component_type": "POSITIONED_COMPONENT",
+    "name":  "goblin_right_eye",
+    "component_type":  "POSITIONED_COMPONENT",
     "components":  [
-                                 "config/components/creature_specific/goblin_eye.json"
-                             ],
+                       "config/components/creature_specific/goblin_eye.json"
+                   ],
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/gc9a01.json",
                                  "display_type":  "CIRCULAR_LCD_FULL_COLOR",
@@ -36,4 +37,3 @@
                },
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-

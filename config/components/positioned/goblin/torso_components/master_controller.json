@@ -1,10 +1,13 @@
-{
+﻿{
     "relative_filename":  "config/components/positioned/goblin/torso_components/master_controller.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
-    "name":  "master_controller","component_type": "POSITIONED_COMPONENT",
+    "name":  "master_controller",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "TORSO",
-    "components": ["config/components/hardware/esp32_s3_devkit.json"],
+    "components":  [
+                       "config/components/hardware/esp32_s3_devkit.json"
+                   ],
     "coordinate_system":  "skull_3d",
     "reference_point":  "pelvis_center",
     "position":  {
@@ -43,5 +46,3 @@
                         ],
     "hardware_type":  "POSITIONED_COMPONENT"
 }
-
-

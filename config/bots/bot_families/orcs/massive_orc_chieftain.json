@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/bots/bot_families/orcs/massive_orc_chieftain.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -58,5 +58,6 @@
                                   "strength_multiplier":  "3X_HUMAN_STRENGTH",
                                   "intimidation_factor":  "MAXIMUM_PSYCHOLOGICAL_IMPACT",
                                   "industrial_applications":  "CONSTRUCTION_SECURITY_DEMONSTRATION"
-                              }
+                              },
+    "name":  "massive_orc_chieftain"
 }

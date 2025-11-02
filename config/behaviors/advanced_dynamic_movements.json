@@ -1,4 +1,4 @@
-{
+﻿{
     "relative_filename":  "config/behaviors/advanced_dynamic_movements.json",
     "version":  "1.0.0",
     "author":  "config/author.json",
@@ -216,7 +216,9 @@
     "full_body_coordination_algorithms":  {
                                               "synchronization_control":  {
                                                                               "master_choreography_controller":  {
-                                                                                                                     "components":  ["ESP32_S3_MAIN_CONTROLLER"],
+                                                                                                                     "components":  [
+                                                                                                                                        "ESP32_S3_MAIN_CONTROLLER"
+                                                                                                                                    ],
                                                                                                                      "responsibilities":  [
                                                                                                                                               "OVERALL_MOVEMENT_COORDINATION",
                                                                                                                                               "TIMING_SYNCHRONIZATION",
@@ -311,5 +313,6 @@
                                                                        "performance_throttling":  "REDUCE_ACTIVITY_OVERHEATING",
                                                                        "thermal_monitoring":  "CONTINUOUS_TEMPERATURE_TRACKING"
                                                                    }
-                                        }
+                                        },
+    "name":  "advanced_dynamic_movements"
 }
