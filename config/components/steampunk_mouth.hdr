@@ -1,0 +1,21 @@
+﻿// steampunk_mouth Header
+// Auto-generated component header
+
+#ifndef steampunk_mouth_HDR
+#define steampunk_mouth_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize steampunk_mouth component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t steampunk_mouth_init(void);
+
+/**
+ * @brief Act function for steampunk_mouth component
+ * Called periodically by main loop
+ */
+void steampunk_mouth_act(void);
+
+#endif // steampunk_mouth_HDR

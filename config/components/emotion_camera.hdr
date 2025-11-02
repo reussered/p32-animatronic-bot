@@ -1,0 +1,21 @@
+﻿// emotion_camera Header
+// Auto-generated component header
+
+#ifndef emotion_camera_HDR
+#define emotion_camera_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize emotion_camera component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t emotion_camera_init(void);
+
+/**
+ * @brief Act function for emotion_camera component
+ * Called periodically by main loop
+ */
+void emotion_camera_act(void);
+
+#endif // emotion_camera_HDR

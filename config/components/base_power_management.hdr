@@ -1,0 +1,21 @@
+﻿// base_power_management Header
+// Auto-generated component header
+
+#ifndef base_power_management_HDR
+#define base_power_management_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize base_power_management component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t base_power_management_init(void);
+
+/**
+ * @brief Act function for base_power_management component
+ * Called periodically by main loop
+ */
+void base_power_management_act(void);
+
+#endif // base_power_management_HDR

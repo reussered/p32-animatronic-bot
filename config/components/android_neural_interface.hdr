@@ -1,0 +1,21 @@
+﻿// android_neural_interface Header
+// Auto-generated component header
+
+#ifndef android_neural_interface_HDR
+#define android_neural_interface_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize android_neural_interface component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t android_neural_interface_init(void);
+
+/**
+ * @brief Act function for android_neural_interface component
+ * Called periodically by main loop
+ */
+void android_neural_interface_act(void);
+
+#endif // android_neural_interface_HDR

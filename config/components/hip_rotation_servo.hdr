@@ -1,0 +1,21 @@
+﻿// hip_rotation_servo Header
+// Auto-generated component header
+
+#ifndef hip_rotation_servo_HDR
+#define hip_rotation_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize hip_rotation_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t hip_rotation_servo_init(void);
+
+/**
+ * @brief Act function for hip_rotation_servo component
+ * Called periodically by main loop
+ */
+void hip_rotation_servo_act(void);
+
+#endif // hip_rotation_servo_HDR

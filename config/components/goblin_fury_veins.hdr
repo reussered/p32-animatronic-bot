@@ -1,0 +1,21 @@
+﻿// goblin_fury_veins Header
+// Auto-generated component header
+
+#ifndef goblin_fury_veins_HDR
+#define goblin_fury_veins_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_fury_veins component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_fury_veins_init(void);
+
+/**
+ * @brief Act function for goblin_fury_veins component
+ * Called periodically by main loop
+ */
+void goblin_fury_veins_act(void);
+
+#endif // goblin_fury_veins_HDR

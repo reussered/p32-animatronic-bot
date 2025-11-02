@@ -1,0 +1,21 @@
+﻿// parasol_solar_cell_mounts Header
+// Auto-generated component header
+
+#ifndef parasol_solar_cell_mounts_HDR
+#define parasol_solar_cell_mounts_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_solar_cell_mounts component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_solar_cell_mounts_init(void);
+
+/**
+ * @brief Act function for parasol_solar_cell_mounts component
+ * Called periodically by main loop
+ */
+void parasol_solar_cell_mounts_act(void);
+
+#endif // parasol_solar_cell_mounts_HDR

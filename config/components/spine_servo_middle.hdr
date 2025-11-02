@@ -1,0 +1,21 @@
+﻿// spine_servo_middle Header
+// Auto-generated component header
+
+#ifndef spine_servo_middle_HDR
+#define spine_servo_middle_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize spine_servo_middle component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t spine_servo_middle_init(void);
+
+/**
+ * @brief Act function for spine_servo_middle component
+ * Called periodically by main loop
+ */
+void spine_servo_middle_act(void);
+
+#endif // spine_servo_middle_HDR

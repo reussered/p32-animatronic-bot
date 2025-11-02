@@ -1,0 +1,21 @@
+﻿// goblin_sly_grin Header
+// Auto-generated component header
+
+#ifndef goblin_sly_grin_HDR
+#define goblin_sly_grin_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_sly_grin component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_sly_grin_init(void);
+
+/**
+ * @brief Act function for goblin_sly_grin component
+ * Called periodically by main loop
+ */
+void goblin_sly_grin_act(void);
+
+#endif // goblin_sly_grin_HDR

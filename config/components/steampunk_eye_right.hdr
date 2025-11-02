@@ -1,0 +1,21 @@
+﻿// steampunk_eye_right Header
+// Auto-generated component header
+
+#ifndef steampunk_eye_right_HDR
+#define steampunk_eye_right_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize steampunk_eye_right component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t steampunk_eye_right_init(void);
+
+/**
+ * @brief Act function for steampunk_eye_right component
+ * Called periodically by main loop
+ */
+void steampunk_eye_right_act(void);
+
+#endif // steampunk_eye_right_HDR

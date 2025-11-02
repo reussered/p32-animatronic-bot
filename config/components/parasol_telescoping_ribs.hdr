@@ -1,0 +1,21 @@
+﻿// parasol_telescoping_ribs Header
+// Auto-generated component header
+
+#ifndef parasol_telescoping_ribs_HDR
+#define parasol_telescoping_ribs_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_telescoping_ribs component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_telescoping_ribs_init(void);
+
+/**
+ * @brief Act function for parasol_telescoping_ribs component
+ * Called periodically by main loop
+ */
+void parasol_telescoping_ribs_act(void);
+
+#endif // parasol_telescoping_ribs_HDR

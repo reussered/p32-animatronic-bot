@@ -1,0 +1,21 @@
+﻿// zombie_exposed_bone Header
+// Auto-generated component header
+
+#ifndef zombie_exposed_bone_HDR
+#define zombie_exposed_bone_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize zombie_exposed_bone component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_exposed_bone_init(void);
+
+/**
+ * @brief Act function for zombie_exposed_bone component
+ * Called periodically by main loop
+ */
+void zombie_exposed_bone_act(void);
+
+#endif // zombie_exposed_bone_HDR

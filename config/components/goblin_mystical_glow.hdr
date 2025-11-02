@@ -1,0 +1,21 @@
+﻿// goblin_mystical_glow Header
+// Auto-generated component header
+
+#ifndef goblin_mystical_glow_HDR
+#define goblin_mystical_glow_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_mystical_glow component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_mystical_glow_init(void);
+
+/**
+ * @brief Act function for goblin_mystical_glow component
+ * Called periodically by main loop
+ */
+void goblin_mystical_glow_act(void);
+
+#endif // goblin_mystical_glow_HDR

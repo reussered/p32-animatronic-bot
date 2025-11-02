@@ -1,0 +1,21 @@
+﻿// goblin_pale_skin Header
+// Auto-generated component header
+
+#ifndef goblin_pale_skin_HDR
+#define goblin_pale_skin_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_pale_skin component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_pale_skin_init(void);
+
+/**
+ * @brief Act function for goblin_pale_skin component
+ * Called periodically by main loop
+ */
+void goblin_pale_skin_act(void);
+
+#endif // goblin_pale_skin_HDR

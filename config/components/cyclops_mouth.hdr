@@ -1,0 +1,21 @@
+﻿// cyclops_mouth Header
+// Auto-generated component header
+
+#ifndef cyclops_mouth_HDR
+#define cyclops_mouth_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cyclops_mouth component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cyclops_mouth_init(void);
+
+/**
+ * @brief Act function for cyclops_mouth component
+ * Called periodically by main loop
+ */
+void cyclops_mouth_act(void);
+
+#endif // cyclops_mouth_HDR

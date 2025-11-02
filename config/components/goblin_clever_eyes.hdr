@@ -1,0 +1,21 @@
+﻿// goblin_clever_eyes Header
+// Auto-generated component header
+
+#ifndef goblin_clever_eyes_HDR
+#define goblin_clever_eyes_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_clever_eyes component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_clever_eyes_init(void);
+
+/**
+ * @brief Act function for goblin_clever_eyes component
+ * Called periodically by main loop
+ */
+void goblin_clever_eyes_act(void);
+
+#endif // goblin_clever_eyes_HDR

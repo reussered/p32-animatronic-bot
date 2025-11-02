@@ -1,0 +1,21 @@
+﻿// robot_camera_eyes Header
+// Auto-generated component header
+
+#ifndef robot_camera_eyes_HDR
+#define robot_camera_eyes_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize robot_camera_eyes component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t robot_camera_eyes_init(void);
+
+/**
+ * @brief Act function for robot_camera_eyes component
+ * Called periodically by main loop
+ */
+void robot_camera_eyes_act(void);
+
+#endif // robot_camera_eyes_HDR

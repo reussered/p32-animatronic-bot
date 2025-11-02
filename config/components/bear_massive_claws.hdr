@@ -1,0 +1,21 @@
+﻿// bear_massive_claws Header
+// Auto-generated component header
+
+#ifndef bear_massive_claws_HDR
+#define bear_massive_claws_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize bear_massive_claws component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t bear_massive_claws_init(void);
+
+/**
+ * @brief Act function for bear_massive_claws component
+ * Called periodically by main loop
+ */
+void bear_massive_claws_act(void);
+
+#endif // bear_massive_claws_HDR

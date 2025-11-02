@@ -1,0 +1,21 @@
+﻿// bear_snout Header
+// Auto-generated component header
+
+#ifndef bear_snout_HDR
+#define bear_snout_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize bear_snout component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t bear_snout_init(void);
+
+/**
+ * @brief Act function for bear_snout component
+ * Called periodically by main loop
+ */
+void bear_snout_act(void);
+
+#endif // bear_snout_HDR

@@ -1,0 +1,21 @@
+﻿// skeleton_bone_structure Header
+// Auto-generated component header
+
+#ifndef skeleton_bone_structure_HDR
+#define skeleton_bone_structure_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize skeleton_bone_structure component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t skeleton_bone_structure_init(void);
+
+/**
+ * @brief Act function for skeleton_bone_structure component
+ * Called periodically by main loop
+ */
+void skeleton_bone_structure_act(void);
+
+#endif // skeleton_bone_structure_HDR

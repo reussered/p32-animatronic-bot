@@ -1,0 +1,21 @@
+﻿// goblin_bloodshot_eyes Header
+// Auto-generated component header
+
+#ifndef goblin_bloodshot_eyes_HDR
+#define goblin_bloodshot_eyes_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_bloodshot_eyes component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_bloodshot_eyes_init(void);
+
+/**
+ * @brief Act function for goblin_bloodshot_eyes component
+ * Called periodically by main loop
+ */
+void goblin_bloodshot_eyes_act(void);
+
+#endif // goblin_bloodshot_eyes_HDR

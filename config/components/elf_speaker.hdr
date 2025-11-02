@@ -1,0 +1,21 @@
+﻿// elf_speaker Header
+// Auto-generated component header
+
+#ifndef elf_speaker_HDR
+#define elf_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize elf_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t elf_speaker_init(void);
+
+/**
+ * @brief Act function for elf_speaker component
+ * Called periodically by main loop
+ */
+void elf_speaker_act(void);
+
+#endif // elf_speaker_HDR

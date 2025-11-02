@@ -1,0 +1,21 @@
+﻿// cyclops_speaker Header
+// Auto-generated component header
+
+#ifndef cyclops_speaker_HDR
+#define cyclops_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cyclops_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cyclops_speaker_init(void);
+
+/**
+ * @brief Act function for cyclops_speaker component
+ * Called periodically by main loop
+ */
+void cyclops_speaker_act(void);
+
+#endif // cyclops_speaker_HDR

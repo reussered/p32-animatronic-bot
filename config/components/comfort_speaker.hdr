@@ -1,0 +1,21 @@
+﻿// comfort_speaker Header
+// Auto-generated component header
+
+#ifndef comfort_speaker_HDR
+#define comfort_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize comfort_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t comfort_speaker_init(void);
+
+/**
+ * @brief Act function for comfort_speaker component
+ * Called periodically by main loop
+ */
+void comfort_speaker_act(void);
+
+#endif // comfort_speaker_HDR

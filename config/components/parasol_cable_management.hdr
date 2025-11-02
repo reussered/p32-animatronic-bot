@@ -1,0 +1,21 @@
+﻿// parasol_cable_management Header
+// Auto-generated component header
+
+#ifndef parasol_cable_management_HDR
+#define parasol_cable_management_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_cable_management component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_cable_management_init(void);
+
+/**
+ * @brief Act function for parasol_cable_management component
+ * Called periodically by main loop
+ */
+void parasol_cable_management_act(void);
+
+#endif // parasol_cable_management_HDR

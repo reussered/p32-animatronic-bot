@@ -1,0 +1,21 @@
+﻿// zombie_oozing_wounds Header
+// Auto-generated component header
+
+#ifndef zombie_oozing_wounds_HDR
+#define zombie_oozing_wounds_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize zombie_oozing_wounds component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_oozing_wounds_init(void);
+
+/**
+ * @brief Act function for zombie_oozing_wounds component
+ * Called periodically by main loop
+ */
+void zombie_oozing_wounds_act(void);
+
+#endif // zombie_oozing_wounds_HDR

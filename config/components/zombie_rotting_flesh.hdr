@@ -1,0 +1,21 @@
+﻿// zombie_rotting_flesh Header
+// Auto-generated component header
+
+#ifndef zombie_rotting_flesh_HDR
+#define zombie_rotting_flesh_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize zombie_rotting_flesh component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_rotting_flesh_init(void);
+
+/**
+ * @brief Act function for zombie_rotting_flesh component
+ * Called periodically by main loop
+ */
+void zombie_rotting_flesh_act(void);
+
+#endif // zombie_rotting_flesh_HDR

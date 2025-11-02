@@ -1,0 +1,21 @@
+﻿// bear_speaker Header
+// Auto-generated component header
+
+#ifndef bear_speaker_HDR
+#define bear_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize bear_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t bear_speaker_init(void);
+
+/**
+ * @brief Act function for bear_speaker component
+ * Called periodically by main loop
+ */
+void bear_speaker_act(void);
+
+#endif // bear_speaker_HDR

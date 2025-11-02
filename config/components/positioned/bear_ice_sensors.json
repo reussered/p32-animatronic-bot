@@ -1,0 +1,24 @@
+﻿{
+    "version":  "1.0.0",
+    "software":  {
+                     "act_function":  "bear_ice_sensors_act",
+                     "init_function":  "bear_ice_sensors_init",
+                     "hitCount":  10
+                 },
+    "component_type":  "POSITIONED_COMPONENT",
+    "relative_filename":  "config/components/positioned/bear_ice_sensors.json",
+    "name":  "bear_ice_sensors",
+    "subsystem":  "SENSOR",
+    "components":  [
+                       "config/components/interfaces/i2c_bus.json"
+                   ],
+    "author":  "config/author.json",
+    "position":  {
+                     "units":  "INCH",
+                     "x":  "0.0 INCH",
+                     "coordinate_system":  "skull_3d",
+                     "z":  "0.0 INCH",
+                     "reference_point":  "nose_center",
+                     "y":  "0.0 INCH"
+                 }
+}

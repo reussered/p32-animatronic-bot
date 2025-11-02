@@ -1,0 +1,21 @@
+﻿// emergency_beacon Header
+// Auto-generated component header
+
+#ifndef emergency_beacon_HDR
+#define emergency_beacon_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize emergency_beacon component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t emergency_beacon_init(void);
+
+/**
+ * @brief Act function for emergency_beacon component
+ * Called periodically by main loop
+ */
+void emergency_beacon_act(void);
+
+#endif // emergency_beacon_HDR

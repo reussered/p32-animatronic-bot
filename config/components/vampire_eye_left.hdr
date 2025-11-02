@@ -1,0 +1,21 @@
+﻿// vampire_eye_left Header
+// Auto-generated component header
+
+#ifndef vampire_eye_left_HDR
+#define vampire_eye_left_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize vampire_eye_left component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t vampire_eye_left_init(void);
+
+/**
+ * @brief Act function for vampire_eye_left component
+ * Called periodically by main loop
+ */
+void vampire_eye_left_act(void);
+
+#endif // vampire_eye_left_HDR

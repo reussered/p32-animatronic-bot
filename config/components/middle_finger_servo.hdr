@@ -1,0 +1,21 @@
+﻿// middle_finger_servo Header
+// Auto-generated component header
+
+#ifndef middle_finger_servo_HDR
+#define middle_finger_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize middle_finger_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t middle_finger_servo_init(void);
+
+/**
+ * @brief Act function for middle_finger_servo component
+ * Called periodically by main loop
+ */
+void middle_finger_servo_act(void);
+
+#endif // middle_finger_servo_HDR

@@ -1,0 +1,21 @@
+﻿// ankle_rotation_servo Header
+// Auto-generated component header
+
+#ifndef ankle_rotation_servo_HDR
+#define ankle_rotation_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ankle_rotation_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ankle_rotation_servo_init(void);
+
+/**
+ * @brief Act function for ankle_rotation_servo component
+ * Called periodically by main loop
+ */
+void ankle_rotation_servo_act(void);
+
+#endif // ankle_rotation_servo_HDR

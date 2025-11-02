@@ -1,0 +1,21 @@
+﻿// subtle_led_eyes Header
+// Auto-generated component header
+
+#ifndef subtle_led_eyes_HDR
+#define subtle_led_eyes_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize subtle_led_eyes component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t subtle_led_eyes_init(void);
+
+/**
+ * @brief Act function for subtle_led_eyes component
+ * Called periodically by main loop
+ */
+void subtle_led_eyes_act(void);
+
+#endif // subtle_led_eyes_HDR

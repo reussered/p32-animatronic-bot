@@ -1,0 +1,21 @@
+﻿// goblin_self_wounds Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "goblin_self_wounds";
+
+esp_err_t goblin_self_wounds_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "goblin_self_wounds_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void goblin_self_wounds_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "goblin_self_wounds_act() called");
+#endif
+    // TODO: Add action code
+}

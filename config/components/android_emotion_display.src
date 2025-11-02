@@ -1,0 +1,21 @@
+﻿// android_emotion_display Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "android_emotion_display";
+
+esp_err_t android_emotion_display_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "android_emotion_display_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void android_emotion_display_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "android_emotion_display_act() called");
+#endif
+    // TODO: Add action code
+}

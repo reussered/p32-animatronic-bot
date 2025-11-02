@@ -1,8 +1,8 @@
-{
+﻿{
     "author_info":  "AUTHOR",
     "relative_filename":  "config/author.json",
     "version":  "0.1.0",
-    "name":  "Edward Reusser",
+    "name":  "author",
     "organization":  "P32 Robotics",
     "email":  "\u003cnondisclosed\u003e",
     "website":  "\u003cnondisclosed\u003e",

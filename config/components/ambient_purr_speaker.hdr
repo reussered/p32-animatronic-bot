@@ -1,0 +1,21 @@
+﻿// ambient_purr_speaker Header
+// Auto-generated component header
+
+#ifndef ambient_purr_speaker_HDR
+#define ambient_purr_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ambient_purr_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ambient_purr_speaker_init(void);
+
+/**
+ * @brief Act function for ambient_purr_speaker component
+ * Called periodically by main loop
+ */
+void ambient_purr_speaker_act(void);
+
+#endif // ambient_purr_speaker_HDR

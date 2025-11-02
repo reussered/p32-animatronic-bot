@@ -1,0 +1,21 @@
+﻿// motion_stealth_sensor Header
+// Auto-generated component header
+
+#ifndef motion_stealth_sensor_HDR
+#define motion_stealth_sensor_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize motion_stealth_sensor component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t motion_stealth_sensor_init(void);
+
+/**
+ * @brief Act function for motion_stealth_sensor component
+ * Called periodically by main loop
+ */
+void motion_stealth_sensor_act(void);
+
+#endif // motion_stealth_sensor_HDR

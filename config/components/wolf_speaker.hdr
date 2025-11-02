@@ -1,0 +1,21 @@
+﻿// wolf_speaker Header
+// Auto-generated component header
+
+#ifndef wolf_speaker_HDR
+#define wolf_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize wolf_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t wolf_speaker_init(void);
+
+/**
+ * @brief Act function for wolf_speaker component
+ * Called periodically by main loop
+ */
+void wolf_speaker_act(void);
+
+#endif // wolf_speaker_HDR

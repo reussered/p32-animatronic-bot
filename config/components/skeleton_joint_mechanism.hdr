@@ -1,0 +1,21 @@
+﻿// skeleton_joint_mechanism Header
+// Auto-generated component header
+
+#ifndef skeleton_joint_mechanism_HDR
+#define skeleton_joint_mechanism_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize skeleton_joint_mechanism component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t skeleton_joint_mechanism_init(void);
+
+/**
+ * @brief Act function for skeleton_joint_mechanism component
+ * Called periodically by main loop
+ */
+void skeleton_joint_mechanism_act(void);
+
+#endif // skeleton_joint_mechanism_HDR

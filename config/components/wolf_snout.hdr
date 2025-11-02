@@ -1,0 +1,21 @@
+﻿// wolf_snout Header
+// Auto-generated component header
+
+#ifndef wolf_snout_HDR
+#define wolf_snout_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize wolf_snout component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t wolf_snout_init(void);
+
+/**
+ * @brief Act function for wolf_snout component
+ * Called periodically by main loop
+ */
+void wolf_snout_act(void);
+
+#endif // wolf_snout_HDR

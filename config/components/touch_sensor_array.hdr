@@ -1,0 +1,21 @@
+﻿// touch_sensor_array Header
+// Auto-generated component header
+
+#ifndef touch_sensor_array_HDR
+#define touch_sensor_array_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize touch_sensor_array component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t touch_sensor_array_init(void);
+
+/**
+ * @brief Act function for touch_sensor_array component
+ * Called periodically by main loop
+ */
+void touch_sensor_array_act(void);
+
+#endif // touch_sensor_array_HDR

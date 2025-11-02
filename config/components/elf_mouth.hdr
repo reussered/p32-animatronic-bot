@@ -1,0 +1,21 @@
+﻿// elf_mouth Header
+// Auto-generated component header
+
+#ifndef elf_mouth_HDR
+#define elf_mouth_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize elf_mouth component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t elf_mouth_init(void);
+
+/**
+ * @brief Act function for elf_mouth component
+ * Called periodically by main loop
+ */
+void elf_mouth_act(void);
+
+#endif // elf_mouth_HDR

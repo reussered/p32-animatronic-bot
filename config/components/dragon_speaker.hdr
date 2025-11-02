@@ -1,0 +1,21 @@
+﻿// dragon_speaker Header
+// Auto-generated component header
+
+#ifndef dragon_speaker_HDR
+#define dragon_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize dragon_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t dragon_speaker_init(void);
+
+/**
+ * @brief Act function for dragon_speaker component
+ * Called periodically by main loop
+ */
+void dragon_speaker_act(void);
+
+#endif // dragon_speaker_HDR

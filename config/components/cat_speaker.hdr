@@ -1,0 +1,21 @@
+﻿// cat_speaker Header
+// Auto-generated component header
+
+#ifndef cat_speaker_HDR
+#define cat_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cat_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cat_speaker_init(void);
+
+/**
+ * @brief Act function for cat_speaker component
+ * Called periodically by main loop
+ */
+void cat_speaker_act(void);
+
+#endif // cat_speaker_HDR

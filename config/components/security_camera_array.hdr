@@ -1,0 +1,21 @@
+﻿// security_camera_array Header
+// Auto-generated component header
+
+#ifndef security_camera_array_HDR
+#define security_camera_array_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize security_camera_array component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t security_camera_array_init(void);
+
+/**
+ * @brief Act function for security_camera_array component
+ * Called periodically by main loop
+ */
+void security_camera_array_act(void);
+
+#endif // security_camera_array_HDR

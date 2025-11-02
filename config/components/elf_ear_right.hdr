@@ -1,0 +1,21 @@
+﻿// elf_ear_right Header
+// Auto-generated component header
+
+#ifndef elf_ear_right_HDR
+#define elf_ear_right_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize elf_ear_right component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t elf_ear_right_init(void);
+
+/**
+ * @brief Act function for elf_ear_right component
+ * Called periodically by main loop
+ */
+void elf_ear_right_act(void);
+
+#endif // elf_ear_right_HDR

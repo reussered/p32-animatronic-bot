@@ -1,0 +1,21 @@
+﻿// pet_simulation_servos Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "pet_simulation_servos";
+
+esp_err_t pet_simulation_servos_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "pet_simulation_servos_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void pet_simulation_servos_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "pet_simulation_servos_act() called");
+#endif
+    // TODO: Add action code
+}

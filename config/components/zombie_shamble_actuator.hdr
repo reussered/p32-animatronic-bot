@@ -1,0 +1,21 @@
+﻿// zombie_shamble_actuator Header
+// Auto-generated component header
+
+#ifndef zombie_shamble_actuator_HDR
+#define zombie_shamble_actuator_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize zombie_shamble_actuator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_shamble_actuator_init(void);
+
+/**
+ * @brief Act function for zombie_shamble_actuator component
+ * Called periodically by main loop
+ */
+void zombie_shamble_actuator_act(void);
+
+#endif // zombie_shamble_actuator_HDR

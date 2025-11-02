@@ -1,0 +1,21 @@
+﻿// parasol_shoulder_interface Header
+// Auto-generated component header
+
+#ifndef parasol_shoulder_interface_HDR
+#define parasol_shoulder_interface_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_shoulder_interface component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_shoulder_interface_init(void);
+
+/**
+ * @brief Act function for parasol_shoulder_interface component
+ * Called periodically by main loop
+ */
+void parasol_shoulder_interface_act(void);
+
+#endif // parasol_shoulder_interface_HDR

@@ -1,0 +1,21 @@
+﻿// base_speaker Header
+// Auto-generated component header
+
+#ifndef base_speaker_HDR
+#define base_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize base_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t base_speaker_init(void);
+
+/**
+ * @brief Act function for base_speaker component
+ * Called periodically by main loop
+ */
+void base_speaker_act(void);
+
+#endif // base_speaker_HDR

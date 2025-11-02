@@ -1,0 +1,21 @@
+﻿// parasol_tracking_gimbal Header
+// Auto-generated component header
+
+#ifndef parasol_tracking_gimbal_HDR
+#define parasol_tracking_gimbal_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_tracking_gimbal component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_tracking_gimbal_init(void);
+
+/**
+ * @brief Act function for parasol_tracking_gimbal component
+ * Called periodically by main loop
+ */
+void parasol_tracking_gimbal_act(void);
+
+#endif // parasol_tracking_gimbal_HDR

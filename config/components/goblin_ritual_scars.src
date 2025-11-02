@@ -1,0 +1,21 @@
+﻿// goblin_ritual_scars Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "goblin_ritual_scars";
+
+esp_err_t goblin_ritual_scars_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "goblin_ritual_scars_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void goblin_ritual_scars_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "goblin_ritual_scars_act() called");
+#endif
+    // TODO: Add action code
+}

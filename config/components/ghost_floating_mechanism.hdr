@@ -1,0 +1,21 @@
+﻿// ghost_floating_mechanism Header
+// Auto-generated component header
+
+#ifndef ghost_floating_mechanism_HDR
+#define ghost_floating_mechanism_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ghost_floating_mechanism component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ghost_floating_mechanism_init(void);
+
+/**
+ * @brief Act function for ghost_floating_mechanism component
+ * Called periodically by main loop
+ */
+void ghost_floating_mechanism_act(void);
+
+#endif // ghost_floating_mechanism_HDR

@@ -1,0 +1,21 @@
+﻿// audio_analysis_unit Header
+// Auto-generated component header
+
+#ifndef audio_analysis_unit_HDR
+#define audio_analysis_unit_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize audio_analysis_unit component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t audio_analysis_unit_init(void);
+
+/**
+ * @brief Act function for audio_analysis_unit component
+ * Called periodically by main loop
+ */
+void audio_analysis_unit_act(void);
+
+#endif // audio_analysis_unit_HDR

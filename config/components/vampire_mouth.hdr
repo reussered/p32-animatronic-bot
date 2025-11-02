@@ -1,0 +1,21 @@
+﻿// vampire_mouth Header
+// Auto-generated component header
+
+#ifndef vampire_mouth_HDR
+#define vampire_mouth_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize vampire_mouth component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t vampire_mouth_init(void);
+
+/**
+ * @brief Act function for vampire_mouth component
+ * Called periodically by main loop
+ */
+void vampire_mouth_act(void);
+
+#endif // vampire_mouth_HDR

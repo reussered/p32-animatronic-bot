@@ -1,0 +1,556 @@
+﻿=============================================================================
+         COMPONENT REFERENCE VALIDATION REPORT
+=============================================================================
+
+Date: 2025-11-02 01:31:18
+Total References Checked: 415
+Valid References: 241
+MISSING References: 174
+
+=============================================================================
+         MISSING REFERENCES BY CATEGORY
+=============================================================================
+
+[ARM_COMPONENTS] - 8 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/shoulder_flexion_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/shoulder_abduction_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/shoulder_rotation_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/elbow_flexion_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/forearm_rotation_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/wrist_flexion_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/wrist_rotation_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_arm_right.json
+  Missing: config/components/positioned/goblin/arm_components/right/arm_status_led.json
+
+[BASE_TEMPLATES] - 14 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\resolved\goblin_warrior_head_resolved.json
+  Missing: config/components/positioned/base_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\resolved\goblin_warrior_head_resolved.json
+  Missing: config/components/positioned/base_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\resolved\goblin_warrior_head_resolved.json
+  Missing: config/components/positioned/base_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\arm_base.json
+  Missing: config/components/positioned/base_shoulder_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\arm_base.json
+  Missing: config/components/positioned/base_elbow_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\arm_base.json
+  Missing: config/components/positioned/base_wrist_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\arm_base.json
+  Missing: config/components/positioned/base_arm_status_led.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\humanoid_head_base.json
+  Missing: config/components/positioned/base_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\humanoid_head_base.json
+  Missing: config/components/positioned/base_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\humanoid_head_base.json
+  Missing: config/components/positioned/base_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\torso_base.json
+  Missing: config/components/positioned/base_power_management.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\torso_base.json
+  Missing: config/components/positioned/base_battery_monitor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\torso_base.json
+  Missing: config/components/positioned/base_mesh_coordinator.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\templates\base\torso_base.json
+  Missing: config/components/positioned/base_status_led.json
+
+[CREATURE_POSITIONED] - 66 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\bear_family.json
+  Missing: config/components/positioned/bear_left_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\bear_family.json
+  Missing: config/components/positioned/bear_right_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\bear_family.json
+  Missing: config/components/positioned/bear_snout.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\bear_family.json
+  Missing: config/components/positioned/bear_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\cat_family.json
+  Missing: config/components/positioned/cat_left_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\cat_family.json
+  Missing: config/components/positioned/cat_right_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\cat_family.json
+  Missing: config/components/positioned/cat_nose.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\cat_family.json
+  Missing: config/components/positioned/cat_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\wolf_family.json
+  Missing: config/components/positioned/wolf_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\wolf_family.json
+  Missing: config/components/positioned/wolf_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\wolf_family.json
+  Missing: config/components/positioned/wolf_snout.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\animals\wolf_family.json
+  Missing: config/components/positioned/wolf_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\bears\bear_grizzly.json
+  Missing: config/components/positioned/bear_massive_claws.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\bears\bear_grizzly.json
+  Missing: config/components/positioned/bear_thick_fur.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\bears\bear_polar.json
+  Missing: config/components/positioned/bear_arctic_fur.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\bears\bear_polar.json
+  Missing: config/components/positioned/bear_ice_sensors.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\cat_family.json
+  Missing: config/components/positioned/cat_left_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\cat_family.json
+  Missing: config/components/positioned/cat_right_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\cat_family.json
+  Missing: config/components/positioned/cat_mouth.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\cat_family.json
+  Missing: config/components/positioned/cat_nose_sensor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\domestic\cat_interactive_tabby.json
+  Missing: config/components/positioned/cat_purr_generator.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\domestic\cat_interactive_tabby.json
+  Missing: config/components/positioned/cat_tail_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\cyclops_family.json
+  Missing: config/components/positioned/cyclops_eye_central.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\cyclops_family.json
+  Missing: config/components/positioned/cyclops_mouth.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\cyclops_family.json
+  Missing: config/components/positioned/cyclops_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_snout.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_nostril_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\dragon_family.json
+  Missing: config/components/positioned/dragon_nostril_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_mouth.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_ear_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\elf_family.json
+  Missing: config/components/positioned/elf_ear_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\vampire_family.json
+  Missing: config/components/positioned/vampire_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\vampire_family.json
+  Missing: config/components/positioned/vampire_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\vampire_family.json
+  Missing: config/components/positioned/vampire_mouth.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\fantasy\vampire_family.json
+  Missing: config/components/positioned/vampire_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\ghost_family.json
+  Missing: config/components/positioned/ghost_ectoplasm_generator.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\ghost_family.json
+  Missing: config/components/positioned/ghost_floating_mechanism.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\ghost_family.json
+  Missing: config/components/positioned/ghost_phase_lights.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\skeleton_family.json
+  Missing: config/components/positioned/skeleton_jaw_actuator.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\skeleton_family.json
+  Missing: config/components/positioned/skeleton_bone_structure.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\skeleton_family.json
+  Missing: config/components/positioned/skeleton_joint_mechanism.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\zombie_family.json
+  Missing: config/components/positioned/zombie_rotting_flesh.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\zombie_family.json
+  Missing: config/components/positioned/zombie_exposed_bone.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\horror\zombie_family.json
+  Missing: config/components/positioned/zombie_oozing_wounds.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\android_family.json
+  Missing: config/components/positioned/android_synthetic_skin.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\android_family.json
+  Missing: config/components/positioned/android_emotion_display.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\android_family.json
+  Missing: config/components/positioned/android_neural_interface.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\robot_family.json
+  Missing: config/components/positioned/robot_camera_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\robot_family.json
+  Missing: config/components/positioned/robot_speaker_array.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\robot_family_enhanced.json
+  Missing: config/components/positioned/robot_camera_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\robot_family_enhanced.json
+  Missing: config/components/positioned/robot_speaker_array.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\steampunk_family.json
+  Missing: config/components/positioned/steampunk_eye_left.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\steampunk_family.json
+  Missing: config/components/positioned/steampunk_eye_right.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\steampunk_family.json
+  Missing: config/components/positioned/steampunk_nose.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\steampunk_family.json
+  Missing: config/components/positioned/steampunk_mouth.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\mechanical\steampunk_family.json
+  Missing: config/components/positioned/steampunk_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\zombie_crawler.json
+  Missing: config/components/positioned/zombie_exposed_bone.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\zombie_crawler.json
+  Missing: config/components/positioned/zombie_drag_mechanism.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\zombie_walker.json
+  Missing: config/components/positioned/zombie_rotting_flesh.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\zombie_walker.json
+  Missing: config/components/positioned/zombie_shamble_actuator.json
+
+[HAND_COMPONENTS] - 4 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_hand_left.json
+  Missing: config/components/positioned/goblin/hand_components/left/middle_finger_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_hand_left.json
+  Missing: config/components/positioned/goblin/hand_components/left/ring_finger_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_hand_left.json
+  Missing: config/components/positioned/goblin/hand_components/left/pinky_finger_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_hand_left.json
+  Missing: config/components/positioned/goblin/hand_components/left/hand_status_led.json
+
+[INLINE_COMPONENTS] - 24 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\androids\android_companion_unit_001.json
+  Missing: @{emotional_simulation_matrix=; adaptive_personality_core=; comfort_heating_system=; gentle_touch_sensors=; conversation_ai_engine=; memory_palace_system=; biometric_recognition_array=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\bears\bear_protective_guardian_001.json
+  Missing: @{territorial_scent_marking=; protective_stance_actuators=; cubs_simulation_system=; hibernation_simulation=; fish_catching_simulation=; maternal_care_protocols=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\simple_goblin_bot.json
+  Missing: @{name=left_eye_display; subsystem=UNKNOWN; component_type=SIMPLE_DISPLAY; ifdef_variable=ENABLE_SIMPLE_DISPLAY; hardware_reference=config/components/hardware/gc9a01.json; interface_reference=config/components/interfaces/spi_device_1.json; position=; init_function=simple_display_init; functions=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\simple_goblin_bot.json
+  Missing: @{name=right_eye_display; subsystem=UNKNOWN; component_type=SIMPLE_DISPLAY; ifdef_variable=ENABLE_SIMPLE_DISPLAY; hardware_reference=config/components/hardware/gc9a01.json; interface_reference=config/components/interfaces/spi_device_2.json; position=; init_function=simple_display_init; functions=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\simple_goblin_bot.json
+  Missing: @{name=mouth_display; subsystem=UNKNOWN; component_type=SIMPLE_DISPLAY; ifdef_variable=ENABLE_SIMPLE_DISPLAY; hardware_reference=config/components/hardware/gc9a01.json; interface_reference=config/components/interfaces/spi_device_3.json; position=; init_function=simple_display_init; functions=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\simple_goblin_bot.json
+  Missing: @{name=nose_sensor; subsystem=UNKNOWN; component_type=SIMPLE_SENSOR; ifdef_variable=ENABLE_SIMPLE_SENSOR; hardware_reference=config/components/hardware/hc_sr04_sensor.json; interface_reference=config/components/interfaces/gpio_pair_1.json; position=; init_function=simple_sensor_init; functions=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\simple_goblin_bot.json
+  Missing: @{name=main_speaker; subsystem=UNKNOWN; component_type=SIMPLE_AUDIO; ifdef_variable=ENABLE_SIMPLE_AUDIO; hardware_reference=config/components/hardware/speaker.json; interface_reference=config/components/interfaces/i2s_device_1.json; position=; init_function=simple_audio_init; functions=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_combat_unit_001.json
+  Missing: @{laser_targeting_system=; plasma_cannon_simulator=; armor_plating_actuators=; tactical_display_array=; electronic_warfare_suite=; ballistic_protection_simulation=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\steampunk\steampunk_aristocrat_001.json
+  Missing: @{steam_venting_system=; clockwork_precision_actuators=; pressure_gauge_display=; brass_ornamental_system=; social_protocol_processor=; mechanical_tea_service=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\ghost_poltergeist_001.json
+  Missing: @{telekinetic_simulation_system=; electrical_interference_generator=; ectoplasm_projection_system=; temperature_manipulation=; phase_shifting_illusion=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\vampire_ancient_elder_001.json
+  Missing: @{shadow_tentacle_system=; hypnotic_gaze_system=; blood_scent_detection=; centuries_memory_bank=; mist_transformation_effect=; supernatural_strength_simulation=; ancient_language_processor=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\undead\zombie_runner_001.json
+  Missing: @{rapid_movement_system=; infection_stage_indicators=; predator_instinct_ai=; adrenaline_simulation=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\esp32_c3_mini_controller.json
+  Missing: @{spi_servo_expansion=; i2c_sensor_expansion=; i2s_audio_expansion=}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\arm_base.json
+  Missing: @{component_type=COORDINATION_ENGINE; function_name=coordination_update; default_hitCount=10; role=balance_compensation; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\arm_base.json
+  Missing: @{component_type=SAFETY_MONITOR; function_name=safety_monitor_update; default_hitCount=2; role=collision_detection; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\hand_base.json
+  Missing: @{component_type=GRIP_CONTROLLER; function_name=grip_controller_update; default_hitCount=12; role=finger_coordination; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\hand_base.json
+  Missing: @{component_type=TACTILE_PROCESSOR; function_name=tactile_processor_update; default_hitCount=15; role=touch_feedback; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\head_base.json
+  Missing: @{component_type=AI_BEHAVIOR_ENGINE; function_name=ai_behavior_update; default_hitCount=100; role=decision_making; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\head_base.json
+  Missing: @{component_type=SENSOR_FUSION; function_name=sensor_fusion_update; default_hitCount=20; role=environmental_awareness; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\head_base.json
+  Missing: @{component_type=EMERGENCY_HANDLER; function_name=emergency_handler_update; default_hitCount=1; role=safety_monitor; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\leg_base.json
+  Missing: @{component_type=GAIT_COORDINATOR; function_name=gait_coordinator_update; default_hitCount=8; role=walking_coordination; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\leg_base.json
+  Missing: @{component_type=BALANCE_CONTROLLER; function_name=balance_controller_update; default_hitCount=3; role=dynamic_stability; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\torso_base.json
+  Missing: @{component_type=POWER_MANAGEMENT; function_name=power_management_update; default_hitCount=25; role=system_power_control; required=True}
+
+  Source: F:\GitHub\p32-animatronic-bot\config\subsystems\base\torso_base.json
+  Missing: @{component_type=SYSTEM_HEALTH_MONITOR; function_name=health_monitor_update; default_hitCount=50; role=subsystem_monitoring; required=True}
+
+[LEG_COMPONENTS] - 5 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_leg_left.json
+  Missing: config/components/positioned/goblin/leg_components/left/hip_abduction_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_leg_left.json
+  Missing: config/components/positioned/goblin/leg_components/left/hip_rotation_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_leg_left.json
+  Missing: config/components/positioned/goblin/leg_components/left/ankle_flexion_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_leg_left.json
+  Missing: config/components/positioned/goblin/leg_components/left/ankle_rotation_servo.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_leg_left.json
+  Missing: config/components/positioned/goblin/leg_components/left/leg_status_led.json
+
+[SCAD_3D_FILES] - 8 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_central_hub.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_telescoping_ribs.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_solar_cell_mounts.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_deployment_servos.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_tracking_gimbal.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_weather_protection.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_cable_management.scad
+
+  Source: F:\GitHub\p32-animatronic-bot\config\components\hardware\solar_parasol_system.json
+  Missing: parasol_shoulder_interface.scad
+
+[SYSTEM_COMPONENTS] - 39 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/heartbeat.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/network_monitor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/test_head.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/goblin_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/gc9a01.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/goblin_left_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_bot_minimal.json
+  Missing: config/components/goblin_right_eye.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\test_goblin_head_dual_eyes.json
+  Missing: config/components/system/heartbeat.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\domestic\cat_mysterious_shadow.json
+  Missing: config/components/positioned/subtle_led_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\domestic\cat_mysterious_shadow.json
+  Missing: config/components/positioned/ambient_purr_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\cats\domestic\cat_mysterious_shadow.json
+  Missing: config/components/positioned/motion_stealth_sensor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_berserker.json
+  Missing: config/components/positioned/goblin_rage_foam.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_berserker.json
+  Missing: config/components/positioned/goblin_bloodshot_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_berserker.json
+  Missing: config/components/positioned/goblin_self_wounds.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_berserker.json
+  Missing: config/components/positioned/goblin_fury_veins.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_chief.json
+  Missing: config/components/positioned/goblin_authority_markings.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_chief.json
+  Missing: config/components/positioned/goblin_tribal_tattoos.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_chief.json
+  Missing: config/components/positioned/goblin_trophy_scars.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_chief.json
+  Missing: config/components/positioned/goblin_enlarged_fangs.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_scout.json
+  Missing: config/components/positioned/goblin_scent_sensor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_shaman.json
+  Missing: config/components/positioned/goblin_ritual_scars.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_shaman.json
+  Missing: config/components/positioned/goblin_bone_ornaments.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_shaman.json
+  Missing: config/components/positioned/goblin_mystical_glow.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_sneak.json
+  Missing: config/components/positioned/goblin_enlarged_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_sneak.json
+  Missing: config/components/positioned/goblin_pale_skin.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_sneak.json
+  Missing: config/components/positioned/goblin_shadow_sensors.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_sneak.json
+  Missing: config/components/positioned/goblin_malnutrition_features.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_trickster.json
+  Missing: config/components/positioned/goblin_sly_grin.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_trickster.json
+  Missing: config/components/positioned/goblin_clever_eyes.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_trickster.json
+  Missing: config/components/positioned/goblin_nimble_fingers.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\goblin_trickster.json
+  Missing: config/components/positioned/goblin_prank_accessories.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_companion_buddy.json
+  Missing: config/components/positioned/emotion_camera.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_companion_buddy.json
+  Missing: config/components/positioned/touch_sensor_array.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_companion_buddy.json
+  Missing: config/components/positioned/comfort_speaker.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_companion_buddy.json
+  Missing: config/components/positioned/pet_simulation_servos.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_security_unit_mk2.json
+  Missing: config/components/positioned/security_camera_array.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_security_unit_mk2.json
+  Missing: config/components/positioned/thermal_sensor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_security_unit_mk2.json
+  Missing: config/components/positioned/audio_analysis_unit.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\robots\robot_security_unit_mk2.json
+  Missing: config/components/positioned/emergency_beacon.json
+
+[TORSO_COMPONENTS] - 6 missing files
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/main_battery_monitor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/external_wifi_communication.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/imu_balance_sensor.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/spine_servo_middle.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/spine_servo_upper.json
+
+  Source: F:\GitHub\p32-animatronic-bot\config\bots\goblin_full_torso.json
+  Missing: config/components/positioned/goblin/torso_components/torso_status_led.json
+
+=============================================================================
+         END OF REPORT
+=============================================================================

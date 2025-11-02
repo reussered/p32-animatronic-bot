@@ -1,0 +1,21 @@
+﻿// goblin_ritual_scars Header
+// Auto-generated component header
+
+#ifndef goblin_ritual_scars_HDR
+#define goblin_ritual_scars_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_ritual_scars component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_ritual_scars_init(void);
+
+/**
+ * @brief Act function for goblin_ritual_scars component
+ * Called periodically by main loop
+ */
+void goblin_ritual_scars_act(void);
+
+#endif // goblin_ritual_scars_HDR

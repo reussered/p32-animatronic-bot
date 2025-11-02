@@ -1,0 +1,21 @@
+﻿// base_wrist_servo Header
+// Auto-generated component header
+
+#ifndef base_wrist_servo_HDR
+#define base_wrist_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize base_wrist_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t base_wrist_servo_init(void);
+
+/**
+ * @brief Act function for base_wrist_servo component
+ * Called periodically by main loop
+ */
+void base_wrist_servo_act(void);
+
+#endif // base_wrist_servo_HDR

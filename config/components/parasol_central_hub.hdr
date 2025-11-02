@@ -1,0 +1,21 @@
+﻿// parasol_central_hub Header
+// Auto-generated component header
+
+#ifndef parasol_central_hub_HDR
+#define parasol_central_hub_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_central_hub component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_central_hub_init(void);
+
+/**
+ * @brief Act function for parasol_central_hub component
+ * Called periodically by main loop
+ */
+void parasol_central_hub_act(void);
+
+#endif // parasol_central_hub_HDR

@@ -1,0 +1,21 @@
+﻿// elf_eye_left Header
+// Auto-generated component header
+
+#ifndef elf_eye_left_HDR
+#define elf_eye_left_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize elf_eye_left component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t elf_eye_left_init(void);
+
+/**
+ * @brief Act function for elf_eye_left component
+ * Called periodically by main loop
+ */
+void elf_eye_left_act(void);
+
+#endif // elf_eye_left_HDR

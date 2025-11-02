@@ -1,0 +1,21 @@
+﻿// hip_abduction_servo Header
+// Auto-generated component header
+
+#ifndef hip_abduction_servo_HDR
+#define hip_abduction_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize hip_abduction_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t hip_abduction_servo_init(void);
+
+/**
+ * @brief Act function for hip_abduction_servo component
+ * Called periodically by main loop
+ */
+void hip_abduction_servo_act(void);
+
+#endif // hip_abduction_servo_HDR

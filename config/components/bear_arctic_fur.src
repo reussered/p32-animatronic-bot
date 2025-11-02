@@ -1,0 +1,21 @@
+﻿// bear_arctic_fur Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "bear_arctic_fur";
+
+esp_err_t bear_arctic_fur_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "bear_arctic_fur_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void bear_arctic_fur_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "bear_arctic_fur_act() called");
+#endif
+    // TODO: Add action code
+}

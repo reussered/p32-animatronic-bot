@@ -1,0 +1,21 @@
+﻿// steampunk_nose Header
+// Auto-generated component header
+
+#ifndef steampunk_nose_HDR
+#define steampunk_nose_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize steampunk_nose component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t steampunk_nose_init(void);
+
+/**
+ * @brief Act function for steampunk_nose component
+ * Called periodically by main loop
+ */
+void steampunk_nose_act(void);
+
+#endif // steampunk_nose_HDR

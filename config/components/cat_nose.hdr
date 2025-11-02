@@ -1,0 +1,21 @@
+﻿// cat_nose Header
+// Auto-generated component header
+
+#ifndef cat_nose_HDR
+#define cat_nose_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cat_nose component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cat_nose_init(void);
+
+/**
+ * @brief Act function for cat_nose component
+ * Called periodically by main loop
+ */
+void cat_nose_act(void);
+
+#endif // cat_nose_HDR

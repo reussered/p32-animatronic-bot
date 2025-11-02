@@ -1,0 +1,21 @@
+﻿// zombie_drag_mechanism Header
+// Auto-generated component header
+
+#ifndef zombie_drag_mechanism_HDR
+#define zombie_drag_mechanism_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize zombie_drag_mechanism component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_drag_mechanism_init(void);
+
+/**
+ * @brief Act function for zombie_drag_mechanism component
+ * Called periodically by main loop
+ */
+void zombie_drag_mechanism_act(void);
+
+#endif // zombie_drag_mechanism_HDR

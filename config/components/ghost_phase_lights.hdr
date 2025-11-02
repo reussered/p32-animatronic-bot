@@ -1,0 +1,21 @@
+﻿// ghost_phase_lights Header
+// Auto-generated component header
+
+#ifndef ghost_phase_lights_HDR
+#define ghost_phase_lights_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ghost_phase_lights component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ghost_phase_lights_init(void);
+
+/**
+ * @brief Act function for ghost_phase_lights component
+ * Called periodically by main loop
+ */
+void ghost_phase_lights_act(void);
+
+#endif // ghost_phase_lights_HDR

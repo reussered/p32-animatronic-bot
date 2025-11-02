@@ -1,0 +1,21 @@
+﻿// zombie_rotting_flesh Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "zombie_rotting_flesh";
+
+esp_err_t zombie_rotting_flesh_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "zombie_rotting_flesh_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void zombie_rotting_flesh_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "zombie_rotting_flesh_act() called");
+#endif
+    // TODO: Add action code
+}

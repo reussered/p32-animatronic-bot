@@ -1,0 +1,21 @@
+﻿// ghost_ectoplasm_generator Header
+// Auto-generated component header
+
+#ifndef ghost_ectoplasm_generator_HDR
+#define ghost_ectoplasm_generator_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ghost_ectoplasm_generator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ghost_ectoplasm_generator_init(void);
+
+/**
+ * @brief Act function for ghost_ectoplasm_generator component
+ * Called periodically by main loop
+ */
+void ghost_ectoplasm_generator_act(void);
+
+#endif // ghost_ectoplasm_generator_HDR

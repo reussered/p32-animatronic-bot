@@ -1,0 +1,21 @@
+﻿// ankle_flexion_servo Header
+// Auto-generated component header
+
+#ifndef ankle_flexion_servo_HDR
+#define ankle_flexion_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ankle_flexion_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ankle_flexion_servo_init(void);
+
+/**
+ * @brief Act function for ankle_flexion_servo component
+ * Called periodically by main loop
+ */
+void ankle_flexion_servo_act(void);
+
+#endif // ankle_flexion_servo_HDR

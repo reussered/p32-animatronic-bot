@@ -1,0 +1,21 @@
+﻿// cat_tail_servo Header
+// Auto-generated component header
+
+#ifndef cat_tail_servo_HDR
+#define cat_tail_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cat_tail_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cat_tail_servo_init(void);
+
+/**
+ * @brief Act function for cat_tail_servo component
+ * Called periodically by main loop
+ */
+void cat_tail_servo_act(void);
+
+#endif // cat_tail_servo_HDR

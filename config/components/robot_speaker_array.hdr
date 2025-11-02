@@ -1,0 +1,21 @@
+﻿// robot_speaker_array Header
+// Auto-generated component header
+
+#ifndef robot_speaker_array_HDR
+#define robot_speaker_array_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize robot_speaker_array component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t robot_speaker_array_init(void);
+
+/**
+ * @brief Act function for robot_speaker_array component
+ * Called periodically by main loop
+ */
+void robot_speaker_array_act(void);
+
+#endif // robot_speaker_array_HDR

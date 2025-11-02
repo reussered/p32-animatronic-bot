@@ -1,10 +1,13 @@
 ﻿{
-    "relative_filename":  "config/components/positioned/goblin/head_components/goblin_speaker.json",
+    "name":  "goblin_speaker",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "goblin_speaker",
     "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
+    "components":  [
+                       "config/components/interfaces/i2s_bus.json"
+                   ],
+    "relative_filename":  "config/components/positioned/goblin/head_components/goblin_speaker.json",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/speaker.json",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/goblin_speaker_shell.scad",

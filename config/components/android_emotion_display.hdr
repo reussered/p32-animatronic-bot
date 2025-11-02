@@ -1,0 +1,21 @@
+﻿// android_emotion_display Header
+// Auto-generated component header
+
+#ifndef android_emotion_display_HDR
+#define android_emotion_display_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize android_emotion_display component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t android_emotion_display_init(void);
+
+/**
+ * @brief Act function for android_emotion_display component
+ * Called periodically by main loop
+ */
+void android_emotion_display_act(void);
+
+#endif // android_emotion_display_HDR

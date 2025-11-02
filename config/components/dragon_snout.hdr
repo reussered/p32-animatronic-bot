@@ -1,0 +1,21 @@
+﻿// dragon_snout Header
+// Auto-generated component header
+
+#ifndef dragon_snout_HDR
+#define dragon_snout_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize dragon_snout component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t dragon_snout_init(void);
+
+/**
+ * @brief Act function for dragon_snout component
+ * Called periodically by main loop
+ */
+void dragon_snout_act(void);
+
+#endif // dragon_snout_HDR

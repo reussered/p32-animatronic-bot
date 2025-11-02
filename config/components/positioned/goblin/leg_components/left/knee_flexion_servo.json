@@ -1,10 +1,13 @@
 ﻿{
-    "relative_filename":  "config/components/positioned/goblin/leg_components/left/knee_flexion_servo.json",
+    "name":  "knee_flexion_servo",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "knee_flexion_servo",
     "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "LEG",
+    "components":  [
+                       "config/components/interfaces/esp32_servo_controller.json"
+                   ],
+    "relative_filename":  "config/components/positioned/goblin/leg_components/left/knee_flexion_servo.json",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/mg996r_servo.json",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/knee_flexion_mount.scad",

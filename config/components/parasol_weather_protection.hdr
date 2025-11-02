@@ -1,0 +1,21 @@
+﻿// parasol_weather_protection Header
+// Auto-generated component header
+
+#ifndef parasol_weather_protection_HDR
+#define parasol_weather_protection_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_weather_protection component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_weather_protection_init(void);
+
+/**
+ * @brief Act function for parasol_weather_protection component
+ * Called periodically by main loop
+ */
+void parasol_weather_protection_act(void);
+
+#endif // parasol_weather_protection_HDR

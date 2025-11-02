@@ -1,0 +1,21 @@
+﻿// external_wifi_communication Header
+// Auto-generated component header
+
+#ifndef external_wifi_communication_HDR
+#define external_wifi_communication_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize external_wifi_communication component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t external_wifi_communication_init(void);
+
+/**
+ * @brief Act function for external_wifi_communication component
+ * Called periodically by main loop
+ */
+void external_wifi_communication_act(void);
+
+#endif // external_wifi_communication_HDR

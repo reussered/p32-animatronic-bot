@@ -1,0 +1,21 @@
+﻿// steampunk_speaker Header
+// Auto-generated component header
+
+#ifndef steampunk_speaker_HDR
+#define steampunk_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize steampunk_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t steampunk_speaker_init(void);
+
+/**
+ * @brief Act function for steampunk_speaker component
+ * Called periodically by main loop
+ */
+void steampunk_speaker_act(void);
+
+#endif // steampunk_speaker_HDR

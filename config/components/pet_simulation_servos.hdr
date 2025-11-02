@@ -1,0 +1,21 @@
+﻿// pet_simulation_servos Header
+// Auto-generated component header
+
+#ifndef pet_simulation_servos_HDR
+#define pet_simulation_servos_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize pet_simulation_servos component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t pet_simulation_servos_init(void);
+
+/**
+ * @brief Act function for pet_simulation_servos component
+ * Called periodically by main loop
+ */
+void pet_simulation_servos_act(void);
+
+#endif // pet_simulation_servos_HDR

@@ -1,0 +1,21 @@
+﻿// cat_purr_generator Header
+// Auto-generated component header
+
+#ifndef cat_purr_generator_HDR
+#define cat_purr_generator_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cat_purr_generator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cat_purr_generator_init(void);
+
+/**
+ * @brief Act function for cat_purr_generator component
+ * Called periodically by main loop
+ */
+void cat_purr_generator_act(void);
+
+#endif // cat_purr_generator_HDR

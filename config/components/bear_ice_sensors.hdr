@@ -1,0 +1,21 @@
+﻿// bear_ice_sensors Header
+// Auto-generated component header
+
+#ifndef bear_ice_sensors_HDR
+#define bear_ice_sensors_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize bear_ice_sensors component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t bear_ice_sensors_init(void);
+
+/**
+ * @brief Act function for bear_ice_sensors component
+ * Called periodically by main loop
+ */
+void bear_ice_sensors_act(void);
+
+#endif // bear_ice_sensors_HDR

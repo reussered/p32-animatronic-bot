@@ -1,0 +1,21 @@
+﻿// cyclops_speaker Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "cyclops_speaker";
+
+esp_err_t cyclops_speaker_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "cyclops_speaker_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void cyclops_speaker_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "cyclops_speaker_act() called");
+#endif
+    // TODO: Add action code
+}

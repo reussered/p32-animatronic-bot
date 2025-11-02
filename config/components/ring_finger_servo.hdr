@@ -1,0 +1,21 @@
+﻿// ring_finger_servo Header
+// Auto-generated component header
+
+#ifndef ring_finger_servo_HDR
+#define ring_finger_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize ring_finger_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ring_finger_servo_init(void);
+
+/**
+ * @brief Act function for ring_finger_servo component
+ * Called periodically by main loop
+ */
+void ring_finger_servo_act(void);
+
+#endif // ring_finger_servo_HDR

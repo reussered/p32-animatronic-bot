@@ -1,0 +1,21 @@
+﻿// goblin_prank_accessories Header
+// Auto-generated component header
+
+#ifndef goblin_prank_accessories_HDR
+#define goblin_prank_accessories_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_prank_accessories component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_prank_accessories_init(void);
+
+/**
+ * @brief Act function for goblin_prank_accessories component
+ * Called periodically by main loop
+ */
+void goblin_prank_accessories_act(void);
+
+#endif // goblin_prank_accessories_HDR

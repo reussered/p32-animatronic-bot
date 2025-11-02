@@ -1,0 +1,21 @@
+﻿// torso_status_led Header
+// Auto-generated component header
+
+#ifndef torso_status_led_HDR
+#define torso_status_led_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize torso_status_led component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t torso_status_led_init(void);
+
+/**
+ * @brief Act function for torso_status_led component
+ * Called periodically by main loop
+ */
+void torso_status_led_act(void);
+
+#endif // torso_status_led_HDR

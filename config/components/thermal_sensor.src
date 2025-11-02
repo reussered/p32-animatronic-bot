@@ -1,0 +1,21 @@
+﻿// thermal_sensor Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "thermal_sensor";
+
+esp_err_t thermal_sensor_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "thermal_sensor_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void thermal_sensor_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "thermal_sensor_act() called");
+#endif
+    // TODO: Add action code
+}

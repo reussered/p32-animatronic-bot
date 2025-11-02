@@ -1,0 +1,21 @@
+﻿// cyclops_eye_central Header
+// Auto-generated component header
+
+#ifndef cyclops_eye_central_HDR
+#define cyclops_eye_central_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize cyclops_eye_central component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cyclops_eye_central_init(void);
+
+/**
+ * @brief Act function for cyclops_eye_central component
+ * Called periodically by main loop
+ */
+void cyclops_eye_central_act(void);
+
+#endif // cyclops_eye_central_HDR

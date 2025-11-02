@@ -1,0 +1,21 @@
+﻿// dragon_nostril_left Header
+// Auto-generated component header
+
+#ifndef dragon_nostril_left_HDR
+#define dragon_nostril_left_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize dragon_nostril_left component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t dragon_nostril_left_init(void);
+
+/**
+ * @brief Act function for dragon_nostril_left component
+ * Called periodically by main loop
+ */
+void dragon_nostril_left_act(void);
+
+#endif // dragon_nostril_left_HDR

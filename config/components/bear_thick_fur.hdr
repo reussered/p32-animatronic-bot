@@ -1,0 +1,21 @@
+﻿// bear_thick_fur Header
+// Auto-generated component header
+
+#ifndef bear_thick_fur_HDR
+#define bear_thick_fur_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize bear_thick_fur component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t bear_thick_fur_init(void);
+
+/**
+ * @brief Act function for bear_thick_fur component
+ * Called periodically by main loop
+ */
+void bear_thick_fur_act(void);
+
+#endif // bear_thick_fur_HDR

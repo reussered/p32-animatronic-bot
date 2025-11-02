@@ -1,0 +1,21 @@
+﻿// wolf_eye_right Header
+// Auto-generated component header
+
+#ifndef wolf_eye_right_HDR
+#define wolf_eye_right_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize wolf_eye_right component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t wolf_eye_right_init(void);
+
+/**
+ * @brief Act function for wolf_eye_right component
+ * Called periodically by main loop
+ */
+void wolf_eye_right_act(void);
+
+#endif // wolf_eye_right_HDR

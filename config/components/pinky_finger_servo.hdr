@@ -1,0 +1,21 @@
+﻿// pinky_finger_servo Header
+// Auto-generated component header
+
+#ifndef pinky_finger_servo_HDR
+#define pinky_finger_servo_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize pinky_finger_servo component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t pinky_finger_servo_init(void);
+
+/**
+ * @brief Act function for pinky_finger_servo component
+ * Called periodically by main loop
+ */
+void pinky_finger_servo_act(void);
+
+#endif // pinky_finger_servo_HDR

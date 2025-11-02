@@ -1,0 +1,21 @@
+﻿// vampire_speaker Header
+// Auto-generated component header
+
+#ifndef vampire_speaker_HDR
+#define vampire_speaker_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize vampire_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t vampire_speaker_init(void);
+
+/**
+ * @brief Act function for vampire_speaker component
+ * Called periodically by main loop
+ */
+void vampire_speaker_act(void);
+
+#endif // vampire_speaker_HDR

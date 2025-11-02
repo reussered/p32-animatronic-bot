@@ -1,0 +1,21 @@
+﻿// leg_status_led Header
+// Auto-generated component header
+
+#ifndef leg_status_led_HDR
+#define leg_status_led_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize leg_status_led component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t leg_status_led_init(void);
+
+/**
+ * @brief Act function for leg_status_led component
+ * Called periodically by main loop
+ */
+void leg_status_led_act(void);
+
+#endif // leg_status_led_HDR

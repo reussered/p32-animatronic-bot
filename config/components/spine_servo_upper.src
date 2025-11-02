@@ -1,0 +1,21 @@
+﻿// spine_servo_upper Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "spine_servo_upper";
+
+esp_err_t spine_servo_upper_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "spine_servo_upper_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void spine_servo_upper_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "spine_servo_upper_act() called");
+#endif
+    // TODO: Add action code
+}

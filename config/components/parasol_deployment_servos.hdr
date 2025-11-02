@@ -1,0 +1,21 @@
+﻿// parasol_deployment_servos Header
+// Auto-generated component header
+
+#ifndef parasol_deployment_servos_HDR
+#define parasol_deployment_servos_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize parasol_deployment_servos component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t parasol_deployment_servos_init(void);
+
+/**
+ * @brief Act function for parasol_deployment_servos component
+ * Called periodically by main loop
+ */
+void parasol_deployment_servos_act(void);
+
+#endif // parasol_deployment_servos_HDR

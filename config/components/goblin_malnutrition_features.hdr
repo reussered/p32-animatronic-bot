@@ -1,0 +1,21 @@
+﻿// goblin_malnutrition_features Header
+// Auto-generated component header
+
+#ifndef goblin_malnutrition_features_HDR
+#define goblin_malnutrition_features_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_malnutrition_features component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_malnutrition_features_init(void);
+
+/**
+ * @brief Act function for goblin_malnutrition_features component
+ * Called periodically by main loop
+ */
+void goblin_malnutrition_features_act(void);
+
+#endif // goblin_malnutrition_features_HDR

@@ -1,0 +1,21 @@
+﻿// skeleton_jaw_actuator Header
+// Auto-generated component header
+
+#ifndef skeleton_jaw_actuator_HDR
+#define skeleton_jaw_actuator_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize skeleton_jaw_actuator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t skeleton_jaw_actuator_init(void);
+
+/**
+ * @brief Act function for skeleton_jaw_actuator component
+ * Called periodically by main loop
+ */
+void skeleton_jaw_actuator_act(void);
+
+#endif // skeleton_jaw_actuator_HDR

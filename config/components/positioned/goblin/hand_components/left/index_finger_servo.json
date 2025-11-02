@@ -1,10 +1,13 @@
 ﻿{
-    "relative_filename":  "config/components/positioned/goblin/hand_components/left/index_finger_servo.json",
+    "name":  "index_finger_servo",
     "version":  "2.0.0",
     "author":  "config/author.json",
-    "name":  "index_finger_servo",
     "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HAND",
+    "components":  [
+                       "config/components/interfaces/esp32_servo_controller.json"
+                   ],
+    "relative_filename":  "config/components/positioned/goblin/hand_components/left/index_finger_servo.json",
     "template_inheritance":  {
                                  "hardware_template":  "config/components/hardware/servo_sg90_micro.json",
                                  "creature_shell":  "assets/shapes/scad/creature_shells/goblin/index_finger_joint_mount.scad",

@@ -1,0 +1,21 @@
+﻿// main_battery_monitor Header
+// Auto-generated component header
+
+#ifndef main_battery_monitor_HDR
+#define main_battery_monitor_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize main_battery_monitor component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t main_battery_monitor_init(void);
+
+/**
+ * @brief Act function for main_battery_monitor component
+ * Called periodically by main loop
+ */
+void main_battery_monitor_act(void);
+
+#endif // main_battery_monitor_HDR

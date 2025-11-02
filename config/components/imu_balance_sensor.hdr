@@ -1,0 +1,21 @@
+﻿// imu_balance_sensor Header
+// Auto-generated component header
+
+#ifndef imu_balance_sensor_HDR
+#define imu_balance_sensor_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize imu_balance_sensor component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t imu_balance_sensor_init(void);
+
+/**
+ * @brief Act function for imu_balance_sensor component
+ * Called periodically by main loop
+ */
+void imu_balance_sensor_act(void);
+
+#endif // imu_balance_sensor_HDR

@@ -1,0 +1,21 @@
+﻿// base_status_led Header
+// Auto-generated component header
+
+#ifndef base_status_led_HDR
+#define base_status_led_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize base_status_led component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t base_status_led_init(void);
+
+/**
+ * @brief Act function for base_status_led component
+ * Called periodically by main loop
+ */
+void base_status_led_act(void);
+
+#endif // base_status_led_HDR

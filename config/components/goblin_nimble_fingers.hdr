@@ -1,0 +1,21 @@
+﻿// goblin_nimble_fingers Header
+// Auto-generated component header
+
+#ifndef goblin_nimble_fingers_HDR
+#define goblin_nimble_fingers_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_nimble_fingers component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_nimble_fingers_init(void);
+
+/**
+ * @brief Act function for goblin_nimble_fingers component
+ * Called periodically by main loop
+ */
+void goblin_nimble_fingers_act(void);
+
+#endif // goblin_nimble_fingers_HDR

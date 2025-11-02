@@ -1,0 +1,21 @@
+﻿// zombie_oozing_wounds Implementation
+// Auto-generated component source
+
+#include "esp_log.h"
+
+static const char *TAG = "zombie_oozing_wounds";
+
+esp_err_t zombie_oozing_wounds_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "zombie_oozing_wounds_init() called");
+#endif
+    // TODO: Add initialization code
+    return ESP_OK;
+}
+
+void zombie_oozing_wounds_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "zombie_oozing_wounds_act() called");
+#endif
+    // TODO: Add action code
+}

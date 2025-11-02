@@ -1,0 +1,21 @@
+﻿// heartbeat Header
+// Auto-generated component header
+
+#ifndef heartbeat_HDR
+#define heartbeat_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize heartbeat component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t heartbeat_init(void);
+
+/**
+ * @brief Act function for heartbeat component
+ * Called periodically by main loop
+ */
+void heartbeat_act(void);
+
+#endif // heartbeat_HDR

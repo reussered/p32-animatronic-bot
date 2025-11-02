@@ -1,0 +1,21 @@
+﻿// goblin_rage_foam Header
+// Auto-generated component header
+
+#ifndef goblin_rage_foam_HDR
+#define goblin_rage_foam_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_rage_foam component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_rage_foam_init(void);
+
+/**
+ * @brief Act function for goblin_rage_foam component
+ * Called periodically by main loop
+ */
+void goblin_rage_foam_act(void);
+
+#endif // goblin_rage_foam_HDR

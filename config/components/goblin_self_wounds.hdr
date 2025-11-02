@@ -1,0 +1,21 @@
+﻿// goblin_self_wounds Header
+// Auto-generated component header
+
+#ifndef goblin_self_wounds_HDR
+#define goblin_self_wounds_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize goblin_self_wounds component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_self_wounds_init(void);
+
+/**
+ * @brief Act function for goblin_self_wounds component
+ * Called periodically by main loop
+ */
+void goblin_self_wounds_act(void);
+
+#endif // goblin_self_wounds_HDR
