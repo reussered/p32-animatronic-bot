@@ -81,9 +81,9 @@
                                 "human_proportions":  "anatomically_accurate"
                             },
     "components":  [
-                       "config/components/positioned/android_synthetic_skin.json",
-                       "config/components/positioned/android_emotion_display.json",
-                       "config/components/positioned/android_neural_interface.json"
+                       "config/components/creature_specific/android_synthetic_skin.json",
+                       "config/components/creature_specific/android_emotion_display.json",
+                       "config/components/creature_specific/android_neural_interface.json"
                    ],
     "android_features":  {
                              "artificial_intelligence":  {

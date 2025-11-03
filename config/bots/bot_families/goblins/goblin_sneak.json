@@ -84,10 +84,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/goblin_enlarged_eyes.json",
-                       "config/components/positioned/goblin_pale_skin.json",
-                       "config/components/positioned/goblin_shadow_sensors.json",
-                       "config/components/positioned/goblin_malnutrition_features.json"
+                       "config/components/creature_specific/goblin_enlarged_eyes.json",
+                       "config/components/creature_specific/goblin_pale_skin.json",
+                       "config/components/creature_specific/goblin_shadow_sensors.json",
+                       "config/components/creature_specific/goblin_malnutrition_features.json"
                    ],
     "custom_behaviors":  {
                              "shadow_meld":  {

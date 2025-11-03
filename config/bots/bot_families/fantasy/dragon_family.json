@@ -16,12 +16,12 @@
                                 "snout_extension":  "2.5 INCH"
                             },
     "components":  [
-                       "config/components/positioned/dragon_eye_left.json",
-                       "config/components/positioned/dragon_eye_right.json",
-                       "config/components/positioned/dragon_snout.json",
-                       "config/components/positioned/dragon_speaker.json",
-                       "config/components/positioned/dragon_nostril_left.json",
-                       "config/components/positioned/dragon_nostril_right.json"
+                       "config/components/creature_specific/dragon_eye_left.json",
+                       "config/components/creature_specific/dragon_eye_right.json",
+                       "config/components/creature_specific/dragon_snout.json",
+                       "config/components/creature_specific/dragon_speaker.json",
+                       "config/components/creature_specific/dragon_nostril_left.json",
+                       "config/components/creature_specific/dragon_nostril_right.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  2,

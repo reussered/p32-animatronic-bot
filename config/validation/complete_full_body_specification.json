@@ -13,8 +13,8 @@
                                                                      "HEAD_AND_NECK":  {
                                                                                            "components":  2,
                                                                                            "files":  [
-                                                                                                         "config/components/positioned/humanoid_head_assembly.json",
-                                                                                                         "config/components/positioned/humanoid_neck_assembly.json"
+                                                                                                         "config/components/creature_specific/humanoid_head_assembly.json",
+                                                                                                         "config/components/creature_specific/humanoid_neck_assembly.json"
                                                                                                      ],
                                                                                            "capabilities":  [
                                                                                                                 "3_DOF_neck_articulation",
@@ -26,8 +26,8 @@
                                                                      "TORSO_AND_SPINE":  {
                                                                                              "components":  2,
                                                                                              "files":  [
-                                                                                                           "config/components/positioned/humanoid_pelvis_assembly.json",
-                                                                                                           "config/components/positioned/humanoid_spine_vertebrae.json"
+                                                                                                           "config/components/creature_specific/humanoid_pelvis_assembly.json",
+                                                                                                           "config/components/creature_specific/humanoid_spine_vertebrae.json"
                                                                                                        ],
                                                                                              "capabilities":  [
                                                                                                                   "6_DOF_spine_articulation",
@@ -39,12 +39,12 @@
                                                                      "ARM_ASSEMBLIES":  {
                                                                                             "components":  6,
                                                                                             "files":  [
-                                                                                                          "config/components/positioned/humanoid_shoulder_left.json",
-                                                                                                          "config/components/positioned/humanoid_shoulder_right.json",
-                                                                                                          "config/components/positioned/humanoid_elbow_left.json",
-                                                                                                          "config/components/positioned/humanoid_elbow_right.json",
-                                                                                                          "config/components/positioned/humanoid_wrist_left.json",
-                                                                                                          "config/components/positioned/humanoid_wrist_right.json"
+                                                                                                          "config/components/creature_specific/humanoid_shoulder_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_shoulder_right.json",
+                                                                                                          "config/components/creature_specific/humanoid_elbow_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_elbow_right.json",
+                                                                                                          "config/components/creature_specific/humanoid_wrist_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_wrist_right.json"
                                                                                                       ],
                                                                                             "total_dof":  12,
                                                                                             "capabilities":  [
@@ -57,12 +57,12 @@
                                                                      "LEG_ASSEMBLIES":  {
                                                                                             "components":  6,
                                                                                             "files":  [
-                                                                                                          "config/components/positioned/humanoid_hip_left.json",
-                                                                                                          "config/components/positioned/humanoid_hip_right.json",
-                                                                                                          "config/components/positioned/humanoid_knee_left.json",
-                                                                                                          "config/components/positioned/humanoid_knee_right.json",
-                                                                                                          "config/components/positioned/humanoid_ankle_left.json",
-                                                                                                          "config/components/positioned/humanoid_ankle_right.json"
+                                                                                                          "config/components/creature_specific/humanoid_hip_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_hip_right.json",
+                                                                                                          "config/components/creature_specific/humanoid_knee_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_knee_right.json",
+                                                                                                          "config/components/creature_specific/humanoid_ankle_left.json",
+                                                                                                          "config/components/creature_specific/humanoid_ankle_right.json"
                                                                                                       ],
                                                                                             "total_dof":  16,
                                                                                             "capabilities":  [

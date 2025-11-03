@@ -1,4 +1,4 @@
-﻿// torso_status_led Implementation
+// torso_status_led Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

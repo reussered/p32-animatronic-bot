@@ -78,9 +78,9 @@
                                 "skull_scale":  1.1
                             },
     "components":  [
-                       "config/components/positioned/zombie_rotting_flesh.json",
-                       "config/components/positioned/zombie_exposed_bone.json",
-                       "config/components/positioned/zombie_oozing_wounds.json"
+                       "config/components/creature_specific/zombie_rotting_flesh.json",
+                       "config/components/creature_specific/zombie_exposed_bone.json",
+                       "config/components/creature_specific/zombie_oozing_wounds.json"
                    ],
     "horror_features":  {
                             "decay_effects":  {

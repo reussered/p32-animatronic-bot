@@ -10,9 +10,9 @@
     "reference_point":  "nose_center",
     "eye_spacing":  "3.0 INCH",
     "components":  [
-                       "config/components/positioned/goblin_left_eye.json",
-                       "config/components/positioned/goblin_right_eye.json",
-                       "config/components/positioned/goblin_nose.json"
+                       "config/components/creature_specific/goblin_left_eye.json",
+                       "config/components/creature_specific/goblin_right_eye.json",
+                       "config/components/creature_specific/goblin_nose.json"
                    ],
     "mood_defaults":  {
                           "FEAR":  20,

@@ -156,7 +156,7 @@ class P32InheritanceProcessor:
                     component_output_path = self.output_dir / "components" / component_name
                     component_output_path.parent.mkdir(parents=True, exist_ok=True)
                     
-                    with open(component_output_path, 'w') as f:
+                    with open(component_output_path, 'w', encoding='ascii') as f:
                         json.dump(resolved_component, f, indent=2)
                         
                     # Update reference to point to resolved component
@@ -194,7 +194,7 @@ class P32InheritanceProcessor:
         output_path = self.output_dir / output_name
         
         # Write resolved configuration
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='ascii') as f:
             json.dump(resolved_config, f, indent=2)
             
         print(f"Resolved creature: {creature_file}")

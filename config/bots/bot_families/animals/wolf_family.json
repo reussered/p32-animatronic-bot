@@ -16,10 +16,10 @@
                                 "snout_extension":  "1.8 INCH"
                             },
     "components":  [
-                       "config/components/positioned/wolf_eye_left.json",
-                       "config/components/positioned/wolf_eye_right.json",
-                       "config/components/positioned/wolf_snout.json",
-                       "config/components/positioned/wolf_speaker.json"
+                       "config/components/creature_specific/wolf_eye_left.json",
+                       "config/components/creature_specific/wolf_eye_right.json",
+                       "config/components/creature_specific/wolf_snout.json",
+                       "config/components/creature_specific/wolf_speaker.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  10,

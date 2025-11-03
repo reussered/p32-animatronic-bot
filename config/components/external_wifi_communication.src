@@ -1,4 +1,4 @@
-﻿// external_wifi_communication Implementation
+// external_wifi_communication Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

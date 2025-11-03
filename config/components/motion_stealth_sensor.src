@@ -1,4 +1,4 @@
-﻿// motion_stealth_sensor Implementation
+// motion_stealth_sensor Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

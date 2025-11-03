@@ -154,6 +154,27 @@ For subsystem named `{subsystem}`:
 
 ## 📁 FILE ORGANIZATION PATTERNS
 
+### Component Source File Organization (CRITICAL)
+
+**Component `.src` and `.hdr` files MUST be organized by their purpose:**
+
+- **`config/components/drivers/`** - Generic drivers for specific hardware types
+  - Examples: `generic_spi_display.src`, `spi_data_bus.src`, `spi_display_bus.src`
+  - Pattern: Drivers designed to work with multiple pieces of hardware of a specific type
+  - Rule: Drivers abstract hardware categories (e.g., `generic_spi_display` works with ANY SPI display chip - GC9A01, ST7735, etc.)
+
+- **`config/components/hardware/`** - Specific hardware component implementations
+  - Examples: `gc9a01.src`, `st7735.src`, `hc_sr04.src`
+  - Pattern: Hardware-specific code, datasheets, register definitions
+  - Rule: If it talks to a specific chip/sensor/display, it's hardware
+
+- **`config/components/creature_specific/`** - Components with creature name prefix
+  - Examples: `goblin_eye.src`, `goblin_left_eye.src`, `cat_ear.src`
+  - Pattern: Component name starts with creature name (goblin_, cat_, bear_, etc.)
+  - Rule: If component name has creature prefix, it goes in creature_specific/
+
+**PROHIBITED**: Never create `config/components/positioned/` folder - positioned components belong in `creature_specific/`
+
 ### Configuration Structure
 
 - **Creatures/Bots**: `config\bots\bot_families\{family}\{bot_name}.json`
@@ -320,6 +341,6 @@ class P32_Core { ... };
 
 ---
 
-*Last Updated: October 25, 2025*
+*Last Updated: November 2, 2025*
 *Extracted from: ai rules (.github/AI-AGENT-RULES.md), project_coding_standards.md, SUBSYSTEM-GENERATION-RULES.md, component-code-requirements.md (docs/), two-tier-mounting-system.md (docs/), .github/consistant_project_rules.md*
 

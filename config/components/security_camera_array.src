@@ -1,4 +1,4 @@
-﻿// security_camera_array Implementation
+// security_camera_array Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

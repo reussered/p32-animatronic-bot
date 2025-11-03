@@ -1,0 +1,33 @@
+{
+    "relative_filename":  "config/components/creature_specific/goblin_ear_left_example.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_ear_left_example",
+    "component_type":  "POSITIONED_COMPONENT",
+    "components":  [
+                       "config/components/hardware/speaker.json"
+                   ],
+    "mounting_architecture":  {
+                                  "type":  "integrated",
+                                  "integrated_shape":  "goblin_ear_complete",
+                                  "shape_generation":  "manual"
+                              },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "-2.1 INCH",
+                     "y":  "+0.5 INCH",
+                     "z":  "+0.8 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "45 DEGREES",
+                        "rotation":  "-15 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "function":  "audio_output_left",
+    "description":  "Left ear speaker with integrated goblin ear aesthetics",
+    "timing":  {
+                   "hitCount":  3
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

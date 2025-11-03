@@ -19,7 +19,8 @@ const init_function_t goblin_torso_init_table[] = {
     waist_rotation_servo_init,
     servo_sg90_micro_init,
     torso_status_led_init,
-    servo_sg90_micro_init,
+    gpio_pair_vibration_sensor_init,
+    gpio_pair_driver_init,
     torso_speaker_init,
     servo_sg90_micro_init
 };
@@ -40,7 +41,8 @@ const act_function_t goblin_torso_act_table[] = {
     waist_rotation_servo_act,
     servo_sg90_micro_act,
     torso_status_led_act,
-    servo_sg90_micro_act,
+    gpio_pair_vibration_sensor_act,
+    gpio_pair_driver_act,
     torso_speaker_act,
     servo_sg90_micro_act
 };
@@ -54,6 +56,7 @@ const uint32_t goblin_torso_hitcount_table[] = {
     75,
     500,
     200,
+    1,
     1,
     1,
     1,

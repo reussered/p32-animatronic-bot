@@ -59,6 +59,93 @@ struct debug_controller_config {
     } debug_config;
 };
 
+// Component definition sourced from config\components\drivers\gpio_pair_driver.json
+struct gpio_pair_driver_config {
+    const char* relative_filename = "config/components/drivers/gpio_pair_driver.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "gpio_pair_driver";
+    const char* component_type = "GENERIC_DRIVER";
+    const char* hardware_type = "BUS_DRIVER";
+    const char* interface_type = "GPIO_PAIR";
+    const char* description = "Generic GPIO pair driver for ESP32 supporting trigger/echo pairs commonly used for ultrasonic sensors";
+    const char* created = "2025-10-29";
+    struct driver_capabilities_t {
+        const char* pair_types[3] = { "TRIGGER_ECHO_PAIR", "INPUT_OUTPUT_PAIR", "CLOCK_DATA_PAIR" };
+        int max_pairs = 10;
+        bool interrupt_support = true;
+        bool debouncing = true;
+        bool pulse_measurement = true;
+        bool frequency_measurement = false;
+    } driver_capabilities;
+    struct electrical_specs_t {
+        const char* operating_voltage = "3.3V";
+        const char* output_current = "40mA_PER_PIN";
+        const char* input_voltage_range = "0-3.3V";
+        const char* pullup_resistors = "INTERNAL_AVAILABLE";
+        const char* pulldown_resistors = "INTERNAL_AVAILABLE";
+    } electrical_specs;
+    struct gpio_requirements_t {
+        const char* trigger_pin = "CONFIGURABLE_AT_RUNTIME";
+        const char* echo_pin = "CONFIGURABLE_AT_RUNTIME";
+        const char* pin_constraints = "ESP32_GPIO_PINS";
+        bool interrupt_capable = true;
+    } gpio_requirements;
+    struct software_t {
+        const char* init_function = "gpio_pair_driver_init";
+        const char* act_function = "gpio_pair_driver_act";
+        const char* api_functions[6] = { "gpio_pair_trigger_pulse(pair_id, duration_us)", "gpio_pair_measure_pulse(pair_id)", "gpio_pair_wait_for_echo(pair_id, timeout_us)", "gpio_pair_set_interrupt(pair_id, mode)", "gpio_pair_read_state(pair_id)", "gpio_pair_write_state(pair_id, state)" };
+    } software;
+    struct configuration_options_t {
+        const char* default_trigger_duration = "10us";
+        const char* default_timeout = "100000us";
+        bool interrupt_enabled = true;
+        const char* debounce_delay = "50ms";
+        const char* measurement_mode = "PULSE_DURATION";
+    } configuration_options;
+    const char* use_cases[5] = { "ultrasonic_distance_sensing", "proximity_detection", "pulse_width_measurement", "rotary_encoder_reading", "flow_meter_pulse_counting" };
+    struct compatibility_t {
+        const char* esp32_s3 = "FULL";
+        const char* esp32_c3 = "FULL";
+        const char* esp32 = "FULL";
+    } compatibility;
+    const char* prototype_status = "ready_for_implementation";
+    bool tested = false;
+};
+
+// Component definition sourced from config\components\interfaces\gpio_pair_vibration_sensor.json
+struct gpio_pair_vibration_sensor_config {
+    const char* relative_filename = "config/components/interfaces/gpio_pair_vibration_sensor.json";
+    const char* version = "1.0.0";
+    const char* component_type = "INTERFACE_BUS";
+    const char* hardware_type = "BUS_INTERFACE";
+    const char* interface_type = "GPIO_PAIR";
+    const char* author = "config/author.json";
+    const char* name = "gpio_pair_vibration_sensor";
+    const char* bus_type = "GPIO_PAIR";
+    const char* bus_name = "GPIO_PAIR";
+    const char* description = "GPIO pair interface for vibration sensors";
+    struct pin_requirements_t {
+        // Empty array: shared_pins_needed
+        const char* unique_pins_needed = "[{\"function\": \"GPIO_TRIGGER\", \"count\": 1, \"description\": \"GPIO trigger/output pin\"}, {\"function\": \"GPIO_ECHO\", \"count\": 1, \"description\": \"GPIO echo/input pin\"}]";
+    } pin_requirements;
+    struct timing_t {
+        int hitCount = 1;
+    } timing;
+    struct software_t {
+        const char* init_function = "gpio_pair_vibration_sensor_init";
+        const char* act_function = "gpio_pair_vibration_sensor_act";
+    } software;
+    struct pin_allocation_t {
+        // Empty array: shared_pins
+        // Empty array: unique_pins
+    } pin_allocation;
+    struct connectivity_t {
+        const char* compatible_devices[3] = { "vibration_sensors", "shock_sensors", "motion_detectors" };
+        const char* protocol = "GPIO";
+    } connectivity;
+};
+
 // Component definition sourced from config\components\system\network_monitor.json
 struct network_monitor_config {
     const char* relative_filename = "config/components/system/network_monitor.json";
@@ -328,7 +415,17 @@ struct torso_speaker_config {
 
 // Component definition sourced from config\components\positioned\torso_status_led.json
 struct torso_status_led_config {
+    const char* version = "1.0.0";
+    struct software_t {
+        const char* act_function = "torso_status_led_act";
+        const char* init_function = "torso_status_led_init";
+        int hitCount = 10;
+    } software;
     const char* component_type = "POSITIONED_COMPONENT";
+    const char* relative_filename = "config/components/positioned/torso_status_led.json";
+    const char* name = "torso_status_led";
+    const char* subsystem = "INDICATOR";
+    const char* author = "config/author.json";
     struct position_t {
         const char* units = "INCH";
         const char* x = "0.0 INCH";
@@ -337,15 +434,6 @@ struct torso_status_led_config {
         const char* reference_point = "nose_center";
         const char* y = "0.0 INCH";
     } position;
-    const char* name = "torso_status_led";
-    const char* version = "1.0.0";
-    const char* author = "config/author.json";
-    struct software_t {
-        const char* act_function = "torso_status_led_act";
-        const char* init_function = "torso_status_led_init";
-        int hitCount = 10;
-    } software;
-    const char* relative_filename = "config/components/positioned/torso_status_led.json";
 };
 
 // Component definition sourced from config\components\positioned\waist_rotation_servo.json
@@ -440,6 +528,10 @@ esp_err_t bluetooth_central_init(void);
 void bluetooth_central_act(void);
 esp_err_t debug_controller_init(void);
 void debug_controller_act(void);
+esp_err_t gpio_pair_driver_init(void);
+void gpio_pair_driver_act(void);
+esp_err_t gpio_pair_vibration_sensor_init(void);
+void gpio_pair_vibration_sensor_act(void);
 esp_err_t network_monitor_init(void);
 void network_monitor_act(void);
 esp_err_t power_monitor_init(void);
@@ -464,5 +556,39 @@ esp_err_t watchdog_init(void);
 void watchdog_act(void);
 esp_err_t wifi_station_init(void);
 void wifi_station_act(void);
+
+// Declarations from config\components\interfaces\gpio_pair_vibration_sensor.hdr
+#ifndef GPIO_PAIR_VIBRATION_SENSOR_HDR
+#define GPIO_PAIR_VIBRATION_SENSOR_HDR
+
+#include "esp_err.h"
+
+esp_err_t gpio_pair_vibration_sensor_init(void);
+void gpio_pair_vibration_sensor_act(void);
+
+#endif // GPIO_PAIR_VIBRATION_SENSOR_HDR
+
+// Declarations from config\components\torso_status_led.hdr
+// torso_status_led Header
+// Auto-generated component header
+
+#ifndef torso_status_led_HDR
+#define torso_status_led_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize torso_status_led component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t torso_status_led_init(void);
+
+/**
+ * @brief Act function for torso_status_led component
+ * Called periodically by main loop
+ */
+void torso_status_led_act(void);
+
+#endif // torso_status_led_HDR
 
 #endif // GOBLIN_TORSO_COMPONENT_FUNCTIONS_HPP

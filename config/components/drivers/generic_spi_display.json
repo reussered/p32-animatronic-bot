@@ -50,6 +50,9 @@
                                            "spi_display_clear(uint16_t color)"
                                        ]
                  },
+    "components":  [
+                       "config/components/interfaces/spi_bus.json"
+                   ],
     "compatibility":  {
                           "esp32_s3":  true,
                           "esp32_s2":  true,

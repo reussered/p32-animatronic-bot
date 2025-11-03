@@ -16,10 +16,10 @@
                                 "snout_extension":  "1.2 INCH"
                             },
     "components":  [
-                       "config/components/positioned/bear_left_eye.json",
-                       "config/components/positioned/bear_right_eye.json",
-                       "config/components/positioned/bear_snout.json",
-                       "config/components/positioned/bear_speaker.json"
+                       "config/components/creature_specific/bear_left_eye.json",
+                       "config/components/creature_specific/bear_right_eye.json",
+                       "config/components/creature_specific/bear_snout.json",
+                       "config/components/creature_specific/bear_speaker.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  5,

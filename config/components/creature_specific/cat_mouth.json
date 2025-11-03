@@ -3,78 +3,37 @@
     "version":  "1.0.0",
     "author":  "config/author.json",
     "name":  "cat_mouth",
+    "component_type":  "POSITIONED_COMPONENT",
     "subsystem":  "HEAD",
-    "component_type":  "CREATURE_SPECIFIC_DISPLAY",
-    "description":  "Shared cat mouth processing logic with purr animation and feline expressions",
-    "created":  "2025-10-23",
     "components":  [
-                       "config/components/hardware/ssd1306.json"
+                       "config/components/creature_specific/cat_mouth.json"
                    ],
-    "component_constraints":  {
-                                  "required_contained_types":  [
-                                                                   "DISPLAY_DRIVER"
-                                                               ],
-                                  "interface_requirements":  [
-                                                                 "getBuffer",
-                                                                 "getFrameSize",
-                                                                 "getFrameRowSize"
-                                                             ]
-                              },
-    "creature_display_profile":  {
-                                     "species":  "CAT",
-                                     "mouth_color_base":  "PINK",
-                                     "teeth_style":  "SMALL_FANGS",
-                                     "expression_range":  "PURR_TO_HISS",
-                                     "speech_responsiveness":  "MEDIUM",
-                                     "mood_responsiveness":  "HIGH",
-                                     "whisker_animation":  "ENABLED"
-                                 },
-    "palette_system":  {
-                           "palette_size":  16,
-                           "color_ranges":  {
-                                                "lips_nose":  "0-3",
-                                                "teeth_fangs":  "4-7",
-                                                "tongue_pink":  "8-11",
-                                                "whiskers":  "12-15"
-                                            },
-                           "monochrome_mapping":  {
-                                                      "description":  "Maps color ranges to grayscale for OLED display",
-                                                      "lips_nose":  "LIGHT_GRAY",
-                                                      "teeth_fangs":  "WHITE",
-                                                      "tongue_pink":  "MEDIUM_GRAY",
-                                                      "whiskers":  "DARK_GRAY"
-                                                  }
-                       },
-    "feline_animation":  {
-                             "purr_patterns":  {
-                                                   "content_purr":  "GENTLE_VIBRATION",
-                                                   "attention_purr":  "RHYTHMIC_PULSE",
-                                                   "hungry_meow":  "WIDE_OPEN_HOLD"
-                                               },
-                             "whisker_movement":  {
-                                                      "forward_alert":  "LINES_FORWARD",
-                                                      "relaxed":  "LINES_NEUTRAL",
-                                                      "defensive":  "LINES_BACK"
-                                                  },
-                             "transition_speed":  "SMOOTH",
-                             "hold_duration":  "MEDIUM"
-                         },
-    "timing":  {
-                   "hitCount":  3,
-                   "description":  "Process cat mouth animation every 3 loops for smooth transitions"
-               },
-    "software":  {
-                     "init_function":  "cat_mouth_init",
-                     "act_function":  "cat_mouth_act"
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0.0 INCH",
+                     "y":  "-1.0 INCH",
+                     "z":  "+0.2 INCH"
                  },
-    "prototype_status":  "designed",
-    "tested":  false,
-    "notes":  [
-                  "Software-only component - no physical shape",
-                  "Provides display driver interface abstraction for OLED mouth displays",
-                  "Handles feline-specific mouth expressions and whisker animation",
-                  "Supports monochrome display with grayscale mapping",
-                  "Optimized for 128x64 OLED resolution",
-                  "Real-time purr and meow animation with SharedMemory integration"
-              ]
+    "orientation":  {
+                        "tilt":  "-10 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "mouth_type":  "SMALL_FELINE",
+                                     "whisker_display":  "ANIMATED_LINES",
+                                     "expression_range":  "PURR_TO_HISS",
+                                     "teeth_style":  "SMALL_FANGS",
+                                     "tongue_animation":  "PINK_LICKING"
+                                 },
+    "animation_library":  {
+                              "default":  "cat_content_mouth.anim",
+                              "purring":  "cat_happy_purr.anim",
+                              "hissing":  "cat_defensive_hiss.anim",
+                              "meowing":  "cat_vocal_meow.anim",
+                              "eating":  "cat_delicate_nibble.anim",
+                              "grooming":  "cat_tongue_cleaning.anim"
+                          },
+    "hardware_type":  "POSITIONED_COMPONENT"
 }

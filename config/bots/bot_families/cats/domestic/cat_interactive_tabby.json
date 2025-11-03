@@ -27,10 +27,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/cat_animated_ears.json",
-                       "config/components/positioned/cat_whisker_sensors.json",
-                       "config/components/positioned/cat_purr_generator.json",
-                       "config/components/positioned/cat_tail_servo.json"
+                       "config/components/creature_specific/cat_animated_ears.json",
+                       "config/components/creature_specific/cat_whisker_sensors.json",
+                       "config/components/creature_specific/cat_purr_generator.json",
+                       "config/components/creature_specific/cat_tail_servo.json"
                    ],
     "interactive_behaviors":  {
                                   "greeting_patterns":  [

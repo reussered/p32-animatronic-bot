@@ -9,9 +9,9 @@
 // Subsystem: test_head
 // Controller: ESP32_S3_DEVKITC_1
 
-// Component definition sourced from config\components\hardware\gc9a01_display.json
+// Component definition sourced from config\components\hardware\gc9a01.json
 struct gc9a01_config {
-    const char* relative_filename = "config/components/hardware/gc9a01_display.json";
+    const char* relative_filename = "config/components/hardware/gc9a01.json";
     const char* version = "1.0.0";
     const char* author = "config/author.json";
     const char* hardware_type = "GC9A01_DISPLAY";
@@ -126,6 +126,22 @@ struct gc9a01_config {
     const char* required_interface_functions[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
 };
 
+// Component definition sourced from config\components\drivers\generic_spi_data_driver.json
+struct generic_spi_data_driver_config {
+    const char* name = "generic_spi_data_driver";
+    const char* type = "driver";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Generic driver for SPI peripherals using the spi_data_bus for full-duplex communication.";
+    const char* created = "2025-11-01";
+    const char* component_type = "spi_driver";
+    const char* relative_filename = "config/components/drivers/generic_spi_data_driver.json";
+    struct software_t {
+        const char* init_function = "generic_spi_data_driver_init";
+        const char* act_function = "generic_spi_data_driver_act";
+    } software;
+};
+
 // Component definition sourced from config\components\drivers\generic_spi_display.json
 struct generic_spi_display_config {
     const char* name = "generic_spi_display";
@@ -168,6 +184,7 @@ struct generic_spi_display_config {
         const char* esp_idf_components[2] = { "spi", "gpio" };
         // Empty array: external_libraries
     } dependencies;
+    const char* relative_filename = "config/components/drivers/generic_spi_display.json";
 };
 
 // Component definition sourced from config\components\creature_specific\goblin_eye.json
@@ -252,9 +269,9 @@ struct goblin_eye_config {
     const char* notes[6] = { "Software-only component - no physical shape", "Code already fully implemented in goblin_eye.cpp/hpp", "Handles mood-based color palette adjustments", "Supports buffer stack processing for left/right eye coordination", "256-color organized palette with distinct mood ranges", "Real-time frame processing with SharedMemory mood integration" };
 };
 
-// Component definition sourced from config\components\positioned\goblin_left_eye.json
+// Component definition sourced from config\components\creature_specific\goblin_left_eye.json
 struct goblin_left_eye_config {
-    const char* relative_filename = "config/components/positioned/goblin_left_eye.json";
+    const char* relative_filename = "config/components/creature_specific/goblin_left_eye.json";
     const char* version = "1.0.0";
     const char* author = "config/author.json";
     const char* name = "goblin_left_eye";
@@ -289,14 +306,14 @@ struct goblin_left_eye_config {
         const char* coordinates = "LEFT_POSITION";
     } animatronic_cache;
     struct timing_t {
-        int hitCount = 1;
+        int hitCount = 200;
     } timing;
     const char* hardware_type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\positioned\goblin_right_eye.json
+// Component definition sourced from config\components\creature_specific\goblin_right_eye.json
 struct goblin_right_eye_config {
-    const char* relative_filename = "config/components/positioned/goblin_right_eye.json";
+    const char* relative_filename = "config/components/creature_specific/goblin_right_eye.json";
     const char* version = "1.0.0";
     const char* author = "config/author.json";
     const char* name = "goblin_right_eye";
@@ -323,9 +340,51 @@ struct goblin_right_eye_config {
         const char* coordinates = "RIGHT_POSITION";
     } animatronic_cache;
     struct timing_t {
-        int hitCount = 1;
+        int hitCount = 200;
     } timing;
     const char* hardware_type = "POSITIONED_COMPONENT";
+};
+
+// Component definition sourced from config\components\interfaces\spi_bus.json
+struct spi_bus_config {
+    const char* relative_filename = "config/components/interfaces/spi_bus.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "spi_bus";
+    const char* hardware_type = "BUS_INTERFACE";
+    const char* bus_type = "SPI";
+    const char* bus_name = "VSPI";
+    const char* description = "ESP32 VSPI bus interface for SPI communication (bidirectional MOSI/MISO for sensors)";
+    struct pin_requirements_t {
+        const char* shared_pins_needed = "[{\"function\": \"SPI_SCLK\", \"count\": 1, \"description\": \"SPI clock signal\"}, {\"function\": \"SPI_Q\", \"count\": 1, \"description\": \"SPI MISO (Master In Slave Out)\"}]";
+        const char* unique_pins_needed = "[{\"function\": \"SPI_CS\", \"count\": 1, \"description\": \"SPI chip select (unique per device)\"}, {\"function\": \"SPI_HD\", \"count\": 1, \"description\": \"SPI MOSI (Master Out Slave In) or hold signal\"}]";
+    } pin_requirements;
+    const char* component_type = "INTERFACE_BUS";
+    const char* interface_id = "SPI_BUS";
+    const char* interface_type = "SPI_BUS";
+    struct timing_t {
+        int hitCount = 1;
+    } timing;
+    struct software_t {
+        const char* init_function = "spi_bus_init";
+        const char* act_function = "spi_bus_act";
+    } software;
+    struct pin_allocation_t {
+        const char* shared_pins[4] = { "clock", "data_output", "data_input", "reset" };
+        const char* device_pins[2] = { "chip_select", "data_command" };
+    } pin_allocation;
+    struct bus_config_t {
+        const char* frequency = "10000000";
+        int mode = 0;
+    } bus_config;
+    struct hardware_t {
+        struct esp32_specific_t {
+            const char* host_device = "SPI2_HOST";
+            int dma_channel = 1;
+            int max_transfer_size = 4092;
+        } esp32_specific;
+    } hardware;
+    const char* notes = "VSPI bus on ESP32. Shared pins (SCLK, MISO) can be used by multiple devices. Unique pins (CS, MOSI) are per-device.";
 };
 
 // Component definition sourced from config\components\drivers\spi_display_bus.json
@@ -349,6 +408,8 @@ struct spi_display_bus_config {
 // ---------------------------------------------------------------------------
 esp_err_t gc9a01_init(void);
 void gc9a01_act(void);
+esp_err_t generic_spi_data_driver_init(void);
+void generic_spi_data_driver_act(void);
 esp_err_t generic_spi_display_init(void);
 void generic_spi_display_act(void);
 esp_err_t goblin_eye_init(void);
@@ -357,10 +418,114 @@ esp_err_t goblin_left_eye_init(void);
 void goblin_left_eye_act(void);
 esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
+esp_err_t spi_bus_init(void);
+void spi_bus_act(void);
 esp_err_t spi_display_bus_init(void);
 void spi_display_bus_act(void);
 
-// Declarations from config\components\positioned\goblin_left_eye.hdr
+// Declarations from config\components\hardware\gc9a01.hdr
+#ifndef GC9A01_HPP
+#define GC9A01_HPP
+
+/**
+ * @file gc9a01.hpp
+ * @brief GC9A01 240x240 circular display hardware driver
+ * @author P32 Animatronic Bot Project
+ */
+
+#include "core/memory/SharedMemory.hpp"
+#include <cstdint>
+
+// Forward declaration
+struct GC9A01_Pixel;
+
+// Global InitialPixel - must be set before allocating buffers containing Pixels
+extern GC9A01_Pixel GC9A01_InitialPixel;
+
+/**
+ * @brief Pixel struct for GC9A01 display (RGB565 format)
+ * Simple bit-field representation for RGB565 color format
+ */
+struct GC9A01_Pixel
+{
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+    
+    // Default constructor using InitialPixel
+    GC9A01_Pixel() 
+    {
+        *this = GC9A01_InitialPixel;
+    }
+    
+    // Constexpr constructor for static colors
+    constexpr GC9A01_Pixel(unsigned int r, unsigned int g, unsigned int b)
+        : red(r), green(g), blue(b)
+    {}
+    
+    // Copy constructor
+    GC9A01_Pixel(const GC9A01_Pixel& other) 
+        : red(other.red), green(other.green), blue(other.blue)
+    {}
+    
+    // Assignment operator
+    GC9A01_Pixel& operator=(const GC9A01_Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+    
+    // Static color constants
+    static constexpr GC9A01_Pixel Red() { return GC9A01_Pixel(31, 0, 0); }
+    static constexpr GC9A01_Pixel Green() { return GC9A01_Pixel(0, 63, 0); }
+    static constexpr GC9A01_Pixel Blue() { return GC9A01_Pixel(0, 0, 31); }
+    static constexpr GC9A01_Pixel Black() { return GC9A01_Pixel(0, 0, 0); }
+    static constexpr GC9A01_Pixel White() { return GC9A01_Pixel(31, 63, 31); }
+};
+
+// Type alias to use 'Pixel' instead of 'GC9A01_Pixel'
+using Pixel = GC9A01_Pixel;
+
+// GC9A01 Display Specifications
+#define GC9A01_WIDTH  240
+#define GC9A01_HEIGHT 240
+#define GC9A01_PIXELS (GC9A01_WIDTH * GC9A01_HEIGHT)
+
+/**
+ * @brief Initialize GC9A01 hardware driver using generic SPI display
+ * Called once during system startup
+ */
+esp_err_t gc9a01_init(void);
+
+/**
+ * @brief Send current frame buffer to GC9A01 display using generic SPI display
+ * Reads currentFrame set by higher-level components
+ */
+void gc9a01_act(void);
+
+/**
+ * @brief Display Buffer Interface - get total frame size in pixels
+ * @return Total number of pixels in frame (57,600)
+ */
+size_t getFrameSize(void);
+
+/**
+ * @brief Display Buffer Interface - get frame row size in pixels
+ * @return Number of pixels per row (240)
+ */
+size_t getFrameRowSize(void);
+
+/**
+ * @brief Get display size in pixels
+ * @return Total number of pixels in one frame (width * height)
+ */
+size_t getDisplaySize(void);
+
+#endif // GC9A01_HPP
+
+// Declarations from config\components\creature_specific\goblin_left_eye.hdr
 // goblin_left_eye component header
 // Additional declarations beyond init/act
 
@@ -371,13 +536,13 @@ void spi_display_bus_act(void);
 
 /**
  * @brief Get pointer to left eye display buffer
- * @return Pointer to RGB565 framebuffer, or nullptr if not initialized
+ * @return Pointer to Pixel array, or nullptr if not initialized
  */
-uint16_t* goblin_left_eye_get_buffer(void);
+Pixel* goblin_left_eye_get_buffer(void);
 
 #endif // GOBLIN_LEFT_EYE_COMPONENT_H
 
-// Declarations from config\components\positioned\goblin_right_eye.hdr
+// Declarations from config\components\creature_specific\goblin_right_eye.hdr
 // goblin_right_eye component header
 // Additional declarations beyond init/act
 
@@ -388,9 +553,9 @@ uint16_t* goblin_left_eye_get_buffer(void);
 
 /**
  * @brief Get pointer to right eye display buffer
- * @return Pointer to RGB565 framebuffer, or nullptr if not initialized
+ * @return Pointer to Pixel array, or nullptr if not initialized
  */
-uint16_t* goblin_right_eye_get_buffer(void);
+Pixel* goblin_right_eye_get_buffer(void);
 
 #endif // GOBLIN_RIGHT_EYE_COMPONENT_H
 

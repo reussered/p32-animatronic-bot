@@ -1,4 +1,4 @@
-﻿// thermal_sensor Implementation
+// thermal_sensor Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

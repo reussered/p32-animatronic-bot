@@ -1,0 +1,71 @@
+{
+    "relative_filename":  "config/components/creature_specific/humanoid_elbow_left.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "HUMANOID_ELBOW_LEFT",
+    "subsystem":  "ARM",
+    "component_type":  "ARTICULATED_JOINT_1DOF",
+    "description":  "Left elbow joint with single degree of freedom for forearm articulation",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "torso_center",
+    "position":  {
+                     "x":  "-13.0 INCH",
+                     "y":  "0.0 INCH",
+                     "z":  "18.0 INCH",
+                     "scaling_applies":  true
+                 },
+    "components":  [
+                       "config/components/hardware/elbow_joint_assembly.json"
+                   ],
+    "degrees_of_freedom":  {
+                               "total_dof":  1,
+                               "joint_flexion_extension":  {
+                                                               "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
+                                                               "range_degrees":  {
+                                                                                     "min":  0,
+                                                                                     "max":  150
+                                                                                 },
+                                                               "default_position":  30,
+                                                               "max_speed_deg_per_sec":  30,
+                                                               "holding_torque_nm":  5.9
+                                                           }
+                           },
+    "attachment_points":  {
+                              "upper_arm_connection":  {
+                                                           "position":  {
+                                                                            "x":  "0.0",
+                                                                            "y":  "0.0",
+                                                                            "z":  "0.0"
+                                                                        },
+                                                           "mounting_hardware":  "M6_BOLT_ASSEMBLY",
+                                                           "component_reference":  "config/components/creature_specific/humanoid_upper_arm_left.json"
+                                                       },
+                              "forearm_connection":  {
+                                                         "position":  {
+                                                                          "x":  "-10.0",
+                                                                          "y":  "0.0",
+                                                                          "z":  "0.0"
+                                                                      },
+                                                         "mounting_hardware":  "M6_BOLT_ASSEMBLY",
+                                                         "component_reference":  "config/components/creature_specific/humanoid_forearm_left.json"
+                                                     }
+                          },
+    "structural_specifications":  {
+                                      "material":  "ALUMINUM_6061_T6",
+                                      "weight_grams":  650,
+                                      "safety_factor":  4.0,
+                                      "expected_cycles":  2000000,
+                                      "maintenance_interval_hours":  750
+                                  },
+    "load_specifications":  {
+                                "max_payload_kg":  5.0,
+                                "continuous_duty_kg":  2.0,
+                                "moment_arm_length":  "10.0 INCH"
+                            },
+    "scaling_behavior":  {
+                             "position_scaling":  "APPLIES_TO_ALL_XYZ_COORDINATES",
+                             "servo_selection":  "SCALES_WITH_CREATURE_SIZE_AND_LOAD",
+                             "structural_scaling":  "MATERIAL_THICKNESS_SCALES_WITH_SIZE"
+                         },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

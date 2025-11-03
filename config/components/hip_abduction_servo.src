@@ -1,4 +1,4 @@
-﻿// hip_abduction_servo Implementation
+// hip_abduction_servo Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

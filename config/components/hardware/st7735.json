@@ -1,0 +1,42 @@
+{
+    "relative_filename": "config/components/hardware/st7735.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "ST7735_TFT_DISPLAY",
+    "name": "st7735",
+    "physical_specs": {
+        "width": "2.5 INCH",
+        "height": "1.5 INCH",
+        "depth": "0.15 INCH",
+        "display_diagonal": "1.77 INCH",
+        "resolution": {
+            "width": 160,
+            "height": 128
+        },
+        "mounting_holes": {
+            "count": 4,
+            "diameter": "0.1 INCH",
+            "spacing": "2.0 INCH"
+        }
+    },
+    "electrical_specs": {
+        "supply_voltage": "3.3V",
+        "interface": "SPI",
+        "current_consumption": "40mA",
+        "backlight_current": "20mA"
+    },
+    "display_config": {
+        "color_mode": "RGB565",
+        "bits_per_pixel": 16,
+        "refresh_rate": "60 HZ",
+        "brightness_levels": 256
+    },
+    "software": {
+        "init_function": "st7735_init",
+        "act_function": "st7735_act",
+        "components": [
+            "config/components/drivers/spi_display_bus.json",
+            "config/components/drivers/spi_data_bus.json"
+        ]
+    }
+}

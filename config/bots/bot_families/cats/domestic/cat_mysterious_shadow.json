@@ -27,10 +27,10 @@
                                           }
                   },
     "components":  [
-                       "config/components/positioned/cat_animated_ears.json",
-                       "config/components/positioned/subtle_led_eyes.json",
-                       "config/components/positioned/ambient_purr_speaker.json",
-                       "config/components/positioned/motion_stealth_sensor.json"
+                       "config/components/creature_specific/cat_animated_ears.json",
+                       "config/components/creature_specific/subtle_led_eyes.json",
+                       "config/components/creature_specific/ambient_purr_speaker.json",
+                       "config/components/creature_specific/motion_stealth_sensor.json"
                    ],
     "mystical_behaviors":  {
                                "appearance_patterns":  [

@@ -1,0 +1,40 @@
+{
+    "relative_filename":  "config/components/creature_specific/robot_left_eye.json",
+    "version":  "2.0.0",
+    "author":  "config/author.json",
+    "name":  "robot_left_eye",
+    "component_type":  "POSITIONED_COMPONENT",
+    "subsystem":  "HEAD",
+    "components":  [
+                       "config/components/creature_specific/robot_eye.json"
+                   ],
+    "template_inheritance":  {
+                                 "hardware_template":  "config/components/hardware/neopixel_matrix_8x8.json",
+                                 "display_type":  "RGB_LED_MATRIX",
+                                 "creature_shell":  "assets/shapes/scad/creature_shells/robot/robot_eye_shell.scad",
+                                 "mount_template":  "assets/shapes/scad/basic_mounts/neopixel_matrix_mount.scad"
+                             },
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "-1.2 INCH",
+                     "y":  "+0.8 INCH",
+                     "z":  "-0.1 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "creature_specific_config":  {
+                                     "eye_color":  "ROBOT_BLUE",
+                                     "pupil_style":  "PIXELATED_MATRIX",
+                                     "expression_range":  "ROBOTIC_SCANNING_TO_ALERT"
+                                 },
+    "function":  "primary_display_left",
+    "description":  "Left eye display animation - robot variant using RGB LED matrix hardware",
+    "timing":  {
+                   "hitCount":  6
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

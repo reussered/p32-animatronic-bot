@@ -1,4 +1,4 @@
-﻿// cat_tail_servo Implementation
+// cat_tail_servo Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

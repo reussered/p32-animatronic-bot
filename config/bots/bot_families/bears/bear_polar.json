@@ -39,8 +39,8 @@
                                                     }
                   },
     "components":  [
-                       "config/components/positioned/bear_arctic_fur.json",
-                       "config/components/positioned/bear_ice_sensors.json"
+                       "config/components/creature_specific/bear_arctic_fur.json",
+                       "config/components/creature_specific/bear_ice_sensors.json"
                    ],
     "custom_behaviors":  {
                              "ice_hunting":  {

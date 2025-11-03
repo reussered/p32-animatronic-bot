@@ -1,4 +1,4 @@
-﻿// hand_status_led Implementation
+// hand_status_led Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

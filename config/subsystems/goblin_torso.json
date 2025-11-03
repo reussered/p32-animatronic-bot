@@ -25,18 +25,18 @@
                        "config/components/system/telemetry_hub.json",
                        "config/components/system/watchdog.json",
                        "config/components/system/power_monitor.json",
-                       "config/components/positioned/spine_flexion_servo.json",
-                       "config/components/positioned/spine_extension_servo.json",
-                       "config/components/positioned/waist_rotation_servo.json",
-                       "config/components/positioned/torso_status_led.json",
-                       "config/components/positioned/torso_speaker.json"
+                       "config/components/creature_specific/spine_flexion_servo.json",
+                       "config/components/creature_specific/spine_extension_servo.json",
+                       "config/components/creature_specific/waist_rotation_servo.json",
+                       "config/components/creature_specific/torso_status_led.json",
+                       "config/components/creature_specific/torso_speaker.json"
                    ],
     "former_components":  [
-                              "config/components/positioned/spine_flexion_servo.json",
-                              "config/components/positioned/spine_extension_servo.json",
-                              "config/components/positioned/waist_rotation_servo.json",
-                              "config/components/positioned/torso_status_led.json",
-                              "config/components/positioned/torso_speaker.json"
+                              "config/components/creature_specific/spine_flexion_servo.json",
+                              "config/components/creature_specific/spine_extension_servo.json",
+                              "config/components/creature_specific/waist_rotation_servo.json",
+                              "config/components/creature_specific/torso_status_led.json",
+                              "config/components/creature_specific/torso_speaker.json"
                           ],
     "wifi_config":  {
                         "mode":  "STATION",

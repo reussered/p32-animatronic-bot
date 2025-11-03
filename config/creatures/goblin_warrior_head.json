@@ -20,8 +20,8 @@
                                       "AFFECTION":  3
                                   },
     "individual_components":  [
-                                  "config/components/positioned/goblin_warrior_battle_scar_left.json",
-                                  "config/components/positioned/goblin_warrior_tooth_fang.json"
+                                  "config/components/creature_specific/goblin_warrior_battle_scar_left.json",
+                                  "config/components/creature_specific/goblin_warrior_tooth_fang.json"
                               ],
     "aesthetic_overrides":  {
                                 "color_scheme":  "dark_green_red",

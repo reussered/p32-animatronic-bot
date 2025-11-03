@@ -81,9 +81,9 @@
                                 "bone_prominence":  "high_definition"
                             },
     "components":  [
-                       "config/components/positioned/skeleton_jaw_actuator.json",
-                       "config/components/positioned/skeleton_bone_structure.json",
-                       "config/components/positioned/skeleton_joint_mechanism.json"
+                       "config/components/creature_specific/skeleton_jaw_actuator.json",
+                       "config/components/creature_specific/skeleton_bone_structure.json",
+                       "config/components/creature_specific/skeleton_joint_mechanism.json"
                    ],
     "skeletal_features":  {
                               "bone_mechanics":  {

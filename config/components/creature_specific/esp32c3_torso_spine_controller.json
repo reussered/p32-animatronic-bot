@@ -1,0 +1,198 @@
+{
+    "relative_filename":  "config/components/creature_specific/esp32c3_torso_spine_controller.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "ESP32C3_TORSO_SPINE_CONTROLLER",
+    "subsystem":  "TORSO",
+    "component_type":  "POSITIONED_ARTICULATED_SPINE_CONTROLLER",
+    "description":  "ESP32-C3 controller for multi-vertebrae spine articulation with wireless mesh integration",
+    "physical_position":  {
+                              "coordinate_system":  "humanoid_3d",
+                              "reference_point":  "lumbar_vertebrae_L3",
+                              "position":  {
+                                               "x":  "0.0 INCH",
+                                               "y":  "0.0 INCH",
+                                               "z":  "0.0 INCH"
+                                           }
+                          },
+    "spine_articulation_control":  {
+                                       "vertebrae_segments":  {
+                                                                  "cervical_spine_c1_c7":  {
+                                                                                               "dof":  "2_PITCH_YAW",
+                                                                                               "servo_type":  "MG996R_SERVO_DUAL",
+                                                                                               "range_pitch":  "60_DEGREES_NOD",
+                                                                                               "range_yaw":  "90_DEGREES_TURN",
+                                                                                               "structural_mount":  "T_SLOT_CERVICAL_BRACKET"
+                                                                                           },
+                                                                  "thoracic_spine_t1_t12":  {
+                                                                                                "dof":  "3_PITCH_ROLL_YAW",
+                                                                                                "servo_type":  "NEMA17_STEPPER_GEARED_20_1",
+                                                                                                "range_pitch":  "45_DEGREES_FORWARD_BACK",
+                                                                                                "range_roll":  "30_DEGREES_SIDE_BEND",
+                                                                                                "range_yaw":  "60_DEGREES_TWIST",
+                                                                                                "structural_mount":  "ALUMINUM_VERTEBRAE_ASSEMBLY"
+                                                                                            },
+                                                                  "lumbar_spine_l1_l5":  {
+                                                                                             "dof":  "3_PITCH_ROLL_YAW",
+                                                                                             "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
+                                                                                             "range_pitch":  "60_DEGREES_FORWARD_BACK",
+                                                                                             "range_roll":  "45_DEGREES_SIDE_BEND",
+                                                                                             "range_yaw":  "45_DEGREES_TWIST",
+                                                                                             "structural_mount":  "HEAVY_DUTY_LUMBAR_BRACKET"
+                                                                                         }
+                                                              }
+                                   },
+    "shoulder_complex_control":  {
+                                     "shoulder_girdle_articulation":  {
+                                                                          "scapula_elevation":  {
+                                                                                                    "servo_type":  "MG996R_SERVO",
+                                                                                                    "range_degrees":  "45_UP_DOWN_SHRUG",
+                                                                                                    "function":  "SHOULDER_HEIGHT_ADJUSTMENT"
+                                                                                                },
+                                                                          "scapula_protraction":  {
+                                                                                                      "servo_type":  "MG996R_SERVO",
+                                                                                                      "range_degrees":  "30_FORWARD_BACK_REACH",
+                                                                                                      "function":  "SHOULDER_REACH_EXTENSION"
+                                                                                                  },
+                                                                          "clavicle_rotation":  {
+                                                                                                    "servo_type":  "MG90S_MICRO_SERVO",
+                                                                                                    "range_degrees":  "20_COLLAR_BONE_TWIST",
+                                                                                                    "function":  "FINE_SHOULDER_POSITIONING"
+                                                                                                }
+                                                                      }
+                                 },
+    "gpio_allocation_spine_control":  {
+                                          "spi_servo_expansion":  {
+                                                                      "interface_component":  "config/components/interfaces/spi_bus.json",
+                                                                      "pca9685_expander_1":  {
+                                                                                                 "cs_pin":  "GPIO_9",
+                                                                                                 "servo_channels":  "16_CHANNELS_SPINE_SERVOS",
+                                                                                                 "power_tap":  "6V_REGULATED_FROM_SKELETAL_RAIL"
+                                                                                             },
+                                                                      "pca9685_expander_2":  {
+                                                                                                 "cs_pin":  "GPIO_10",
+                                                                                                 "servo_channels":  "16_CHANNELS_SHOULDER_SERVOS",
+                                                                                                 "power_tap":  "6V_REGULATED_FROM_SKELETAL_RAIL"
+                                                                                             },
+                                                                      "total_servo_capacity":  "32_SERVO_CHANNELS_4_GPIO_PINS"
+                                                                  },
+                                          "stepper_motor_control":  {
+                                                                        "stepper_driver_spi":  {
+                                                                                                   "driver_type":  "TMC2209_SPI_DRIVERS",
+                                                                                                   "cs_pins":  [
+                                                                                                                   "GPIO_11",
+                                                                                                                   "GPIO_12",
+                                                                                                                   "GPIO_13"
+                                                                                                               ],
+                                                                                                   "stepper_count":  "3_STEPPERS_SPINE_ARTICULATION",
+                                                                                                   "power_source":  "24V_SKELETAL_POWER_RAIL"
+                                                                                               }
+                                                                    },
+                                          "spine_position_feedback":  {
+                                                                          "encoder_i2c_bus":  {
+                                                                                                  "interface_component":  "config/components/interfaces/i2c_bus_0.json",
+                                                                                                  "absolute_encoders":  "AS5600_MAGNETIC_ENCODERS_8_TOTAL",
+                                                                                                  "gpio_pins_used":  {
+                                                                                                                         "sda":  "GPIO_4",
+                                                                                                                         "scl":  "GPIO_5"
+                                                                                                                     },
+                                                                                                  "addressing":  "I2C_ADDRESSES_0x36_TO_0x3D"
+                                                                                              }
+                                                                      },
+                                          "bluetooth_mesh_integration":  {
+                                                                             "communication_priority":  "HIGH_PRIORITY_SPINE_STABILITY",
+                                                                             "failsafe_behavior":  "LOCK_SPINE_NEUTRAL_ON_DISCONNECT"
+                                                                         }
+                                      },
+    "vertebrae_structural_system":  {
+                                        "biomimetic_spine_design":  {
+                                                                        "vertebrae_bodies":  {
+                                                                                                 "material":  "3D_PRINTED_CARBON_FIBER_PETG",
+                                                                                                 "design":  "ANATOMICALLY_CORRECT_VERTEBRAE_SHAPES",
+                                                                                                 "intervertebral_discs":  "TPU_FLEXIBLE_3D_PRINTED_SPACERS",
+                                                                                                 "stl_files":  [
+                                                                                                                   "assets/shapes/stl/spine/vertebrae_c1_c7.stl",
+                                                                                                                   "assets/shapes/stl/spine/vertebrae_t1_t12.stl",
+                                                                                                                   "assets/shapes/stl/spine/vertebrae_l1_l5.stl"
+                                                                                                               ]
+                                                                                             },
+                                                                        "servo_integration":  {
+                                                                                                  "method":  "HIDDEN_SERVO_MOUNTS_INSIDE_VERTEBRAE",
+                                                                                                  "cable_routing":  "SPINAL_CANAL_POWER_AND_DATA_CHANNELS",
+                                                                                                  "protection":  "ANATOMICAL_RIBCAGE_SERVO_PROTECTION"
+                                                                                              }
+                                                                    },
+                                        "power_routing_through_spine":  {
+                                                                            "vertebral_power_bus":  {
+                                                                                                        "conductor":  "ALUMINUM_SPINE_ROD_15MM_DIAMETER",
+                                                                                                        "electrical_function":  "24V_MAIN_SPINE_POWER_BUS",
+                                                                                                        "mechanical_function":  "PRIMARY_SPINAL_SUPPORT_STRUCTURE",
+                                                                                                        "power_taps":  "VERTEBRAE_LEVEL_ANDERSON_CONNECTORS"
+                                                                                                    },
+                                                                            "neural_pathway_analogy":  {
+                                                                                                           "power_as_blood":  "24V_POWER_LIKE_ARTERIAL_SYSTEM",
+                                                                                                           "data_as_nerves":  "BLUETOOTH_MESH_LIKE_NERVOUS_SYSTEM",
+                                                                                                           "structure_as_bone":  "ALUMINUM_LIKE_SKELETAL_SYSTEM"
+                                                                                                       }
+                                                                        }
+                                    },
+    "balance_and_posture_control":  {
+                                        "postural_control_sensors":  {
+                                                                         "vestibular_system_analog":  {
+                                                                                                          "sensor_type":  "MPU6050_IN_HEAD_POSITION",
+                                                                                                          "function":  "BALANCE_AND_SPATIAL_ORIENTATION",
+                                                                                                          "update_rate":  "1000_HZ_CRITICAL_BALANCE"
+                                                                                                      },
+                                                                         "proprioceptive_feedback":  {
+                                                                                                         "sensor_type":  "ABSOLUTE_ENCODERS_EACH_VERTEBRAE",
+                                                                                                         "function":  "SPINE_POSITION_AWARENESS",
+                                                                                                         "update_rate":  "500_HZ_POSITION_FEEDBACK"
+                                                                                                     }
+                                                                     },
+                                        "dynamic_posture_algorithms":  {
+                                                                           "balance_response":  {
+                                                                                                    "algorithm":  "INVERTED_PENDULUM_MULTI_JOINT",
+                                                                                                    "response_time":  "50_MS_SPINE_CORRECTION",
+                                                                                                    "stability_margin":  "CONFIGURABLE_CONSERVATIVE_TO_DYNAMIC"
+                                                                                                },
+                                                                           "gait_integration":  {
+                                                                                                    "walking_posture":  "SPINE_FOLLOWS_LEG_MOTION_PATTERNS",
+                                                                                                    "turning_lean":  "BANKING_LIKE_MOTORCYCLE_TURNS",
+                                                                                                    "step_shock_absorption":  "SPINE_FLEXION_CUSHIONING"
+                                                                                                }
+                                                                       }
+                                    },
+    "advantages_over_rigid_torso":  {
+                                        "biomechanical_advantages":  {
+                                                                         "shock_absorption":  "SPINE_FLEXIBILITY_REDUCES_IMPACT_FORCES",
+                                                                         "natural_movement":  "HUMAN_LIKE_BODY_LANGUAGE_AND_POSTURE",
+                                                                         "balance_improvement":  "ACTIVE_TORSO_CONTRIBUTES_TO_STABILITY",
+                                                                         "payload_distribution":  "SPINE_HELPS_DISTRIBUTE_CARRIED_LOADS"
+                                                                     },
+                                        "mechanical_advantages":  {
+                                                                      "reduced_leg_stress":  "SPINE_ABSORBS_SOME_BALANCE_CORRECTIONS",
+                                                                      "improved_cog_control":  "ACTIVE_CENTER_OF_GRAVITY_MANAGEMENT",
+                                                                      "enhanced_reach":  "SPINE_EXTENSION_INCREASES_ARM_WORKSPACE",
+                                                                      "energy_efficiency":  "NATURAL_PENDULUM_MOTION_REDUCES_POWER"
+                                                                  }
+                                    },
+    "integration_with_skeletal_power":  {
+                                            "spine_as_power_backbone":  {
+                                                                            "structural_electrical_dual_use":  "SPINE_ROD_IS_24V_POWER_BUS",
+                                                                            "vertebrae_power_taps":  "EACH_VERTEBRAE_HAS_POWER_ACCESS",
+                                                                            "distributed_regulation":  "LOCAL_VOLTAGE_REGULATION_PER_SEGMENT",
+                                                                            "redundant_grounding":  "MULTIPLE_GROUND_PATHS_THROUGH_RIBS"
+                                                                        },
+                                            "wireless_control_benefits":  {
+                                                                              "no_spine_cables":  "ZERO_CONTROL_WIRING_THROUGH_FLEXIBLE_SPINE",
+                                                                              "bluetooth_mesh_redundancy":  "MULTIPLE_COMMUNICATION_PATHS",
+                                                                              "interference_immunity":  "ALUMINUM_STRUCTURE_EMI_SHIELDING"
+                                                                          }
+                                        },
+    "hardware_type":  "POSITIONED_COMPONENT",
+    "position":  {
+                     "y":  "0.0 INCH",
+                     "z":  "0.0 INCH",
+                     "x":  "0.0 INCH"
+                 }
+}

@@ -82,19 +82,16 @@ void generic_spi_display_act(void) {
         return;
     }
 
-    // Get the appropriate framebuffer based on which display we're driving
-    // CS=3 is left eye, CS=6 is right eye
-    uint16_t* framebuffer = nullptr;
-    if (cur_spi_pin.cs == 3) {
-        framebuffer = goblin_left_eye_get_buffer();
-    } else if (cur_spi_pin.cs == 6) {
-        framebuffer = goblin_right_eye_get_buffer();
-    }
-
-    if (!framebuffer) {
-        ESP_LOGE(TAG_generic_spi_display, "No framebuffer available for CS=%d", cur_spi_pin.cs);
+    // Use the global frame_ptr set by the positioned component (left_eye/right_eye)
+    // This allows generic driver to work without knowing about specific eyes
+    extern Pixel* frame_ptr;
+    
+    if (!frame_ptr) {
+        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_pin.cs);
         return;
     }
+    
+    uint16_t* framebuffer = (uint16_t*)frame_ptr;
 
     // Set column address (0-239)
     spi_write_command(cur_spi_pin.handle, GC9A01_CASET);

@@ -1,4 +1,4 @@
-﻿// heartbeat Implementation
+// heartbeat Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

@@ -83,9 +83,9 @@
                                 "ethereal_extension":  "1.5 INCH"
                             },
     "components":  [
-                       "config/components/positioned/ghost_ectoplasm_generator.json",
-                       "config/components/positioned/ghost_floating_mechanism.json",
-                       "config/components/positioned/ghost_phase_lights.json"
+                       "config/components/creature_specific/ghost_ectoplasm_generator.json",
+                       "config/components/creature_specific/ghost_floating_mechanism.json",
+                       "config/components/creature_specific/ghost_phase_lights.json"
                    ],
     "supernatural_features":  {
                                   "manifestation_effects":  {

@@ -3,9 +3,9 @@
 // Uses display-agnostic Pixel types with saturation arithmetic
 
 #include "esp_log.h"
-#include "components/gc9a01.hdr"  // For Pixel type
+#include "config/components/hardware/gc9a01.hdr"  // For Pixel type
 #include "Mood.hpp"
-#include "SharedMemory.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 

@@ -1,0 +1,29 @@
+{
+    "relative_filename":  "config/components/creature_specific/goblin_jaw.json",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_jaw",
+    "component_type":  "POSITIONED_COMPONENT",
+    "subsystem":  "HEAD",
+    "components":  [
+                       "config/components/hardware/servo_sg90_micro.json"
+                   ],
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "position":  {
+                     "x":  "0 INCH",
+                     "y":  "-1.5 INCH",
+                     "z":  "-0.5 INCH"
+                 },
+    "orientation":  {
+                        "tilt":  "0 DEGREES",
+                        "rotation":  "0 DEGREES",
+                        "roll":  "0 DEGREES"
+                    },
+    "function":  "facial_expression",
+    "description":  "Jaw/chin servo for mouth opening/closing and speech animation",
+    "timing":  {
+                   "hitCount":  30
+               },
+    "hardware_type":  "POSITIONED_COMPONENT"
+}

@@ -56,7 +56,8 @@ struct HW496_MICROPHONE_config {
     struct gain_adjustment_t {
         const char* method = "potentiometer";
         const char* range = "25x_to_125x";
-        const char* default = "50x";
+        // default
+        const char* default_ = "50x";
     } gain_adjustment;
     const char* prototype_status = "available_on_hand";
     bool tested = false;
@@ -72,9 +73,9 @@ struct HW496_MICROPHONE_config {
     } software;
 };
 
-// Component definition sourced from config\components\hardware\gc9a01_display.json
+// Component definition sourced from config\components\hardware\gc9a01.json
 struct gc9a01_config {
-    const char* relative_filename = "config/components/hardware/gc9a01_display.json";
+    const char* relative_filename = "config/components/hardware/gc9a01.json";
     const char* version = "1.0.0";
     const char* author = "config/author.json";
     const char* hardware_type = "GC9A01_DISPLAY";
@@ -189,6 +190,22 @@ struct gc9a01_config {
     const char* required_interface_functions[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
 };
 
+// Component definition sourced from config\components\drivers\generic_spi_data_driver.json
+struct generic_spi_data_driver_config {
+    const char* name = "generic_spi_data_driver";
+    const char* type = "driver";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Generic driver for SPI peripherals using the spi_data_bus for full-duplex communication.";
+    const char* created = "2025-11-01";
+    const char* component_type = "spi_driver";
+    const char* relative_filename = "config/components/drivers/generic_spi_data_driver.json";
+    struct software_t {
+        const char* init_function = "generic_spi_data_driver_init";
+        const char* act_function = "generic_spi_data_driver_act";
+    } software;
+};
+
 // Component definition sourced from config\components\drivers\generic_spi_display.json
 struct generic_spi_display_config {
     const char* name = "generic_spi_display";
@@ -231,6 +248,7 @@ struct generic_spi_display_config {
         const char* esp_idf_components[2] = { "spi", "gpio" };
         // Empty array: external_libraries
     } dependencies;
+    const char* relative_filename = "config/components/drivers/generic_spi_display.json";
 };
 
 // Component definition sourced from config\components\creature_specific\goblin_eye.json
@@ -374,7 +392,7 @@ struct goblin_left_eye_config {
         const char* coordinates = "LEFT_POSITION";
     } animatronic_cache;
     struct timing_t {
-        int hitCount = 1;
+        int hitCount = 200;
     } timing;
     const char* hardware_type = "POSITIONED_COMPONENT";
 };
@@ -405,67 +423,6 @@ struct goblin_mouth_config {
         int hitCount = 36000;
     } timing;
     const char* hardware_type = "POSITIONED_COMPONENT";
-};
-
-// Component definition sourced from config\components\creature_specific\goblin_mouth.json
-struct goblin_mouth_config {
-    const char* relative_filename = "config/components/creature_specific/goblin_mouth.json";
-    const char* version = "1.0.0";
-    const char* author = "config/author.json";
-    const char* name = "goblin_mouth";
-    const char* subsystem = "HEAD";
-    const char* component_type = "CREATURE_SPECIFIC_DISPLAY";
-    const char* description = "Shared goblin mouth processing logic with speech animation and mood-based rendering";
-    const char* created = "2025-10-23";
-    struct component_constraints_t {
-        const char* required_contained_types[1] = { "DISPLAY_DRIVER" };
-        const char* interface_requirements[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
-    } component_constraints;
-    struct creature_display_profile_t {
-        const char* species = "GOBLIN";
-        const char* mouth_color_base = "DARK_RED";
-        const char* teeth_style = "JAGGED_SHARP";
-        const char* expression_range = "SNARL_TO_GRIN";
-        const char* speech_responsiveness = "HIGH";
-        const char* mood_responsiveness = "HIGH";
-    } creature_display_profile;
-    struct palette_system_t {
-        int palette_size = 256;
-        struct color_ranges_t {
-            const char* lips_gums = "0-31";
-            const char* teeth_base = "32-63";
-            const char* tongue_base = "64-95";
-            const char* anger_reds = "96-127";
-            const char* speaking_highlights = "128-159";
-            const char* fear_purples = "160-191";
-            const char* happiness_pinks = "192-223";
-            const char* special_effects = "224-255";
-        } color_ranges;
-    } palette_system;
-    struct speech_animation_t {
-        struct phoneme_mapping_t {
-            const char* A_E_I = "WIDE_OPEN";
-            const char* O_U = "ROUND_OPEN";
-            const char* M_B_P = "CLOSED";
-            const char* F_V = "LOWER_LIP_BITE";
-            const char* TH = "TONGUE_OUT";
-            const char* L_R = "TONGUE_UP";
-            const char* S_Z = "SLIGHT_OPEN";
-        } phoneme_mapping;
-        const char* transition_speed = "FAST";
-        const char* hold_duration = "SHORT";
-    } speech_animation;
-    struct timing_t {
-        int hitCount = 1;
-        const char* description = "Process mouth animation every loop for speech responsiveness";
-    } timing;
-    struct software_t {
-        const char* init_function = "goblin_mouth_init";
-        const char* act_function = "goblin_mouth_act";
-    } software;
-    const char* prototype_status = "designed";
-    bool tested = false;
-    const char* notes[6] = { "Software-only component - no physical shape", "Provides display driver interface abstraction for mouth displays", "Handles speech animation and mood-based mouth expressions", "Supports phoneme-based speech animation mapping", "256-color organized palette with speech and mood ranges", "Real-time speech processing with SharedMemory integration" };
 };
 
 // Component definition sourced from config\components\positioned\goblin_nose.json
@@ -552,7 +509,7 @@ struct goblin_right_eye_config {
         const char* coordinates = "RIGHT_POSITION";
     } animatronic_cache;
     struct timing_t {
-        int hitCount = 1;
+        int hitCount = 200;
     } timing;
     const char* hardware_type = "POSITIONED_COMPONENT";
 };
@@ -586,12 +543,12 @@ struct goblin_speaker_config {
 };
 
 // Component definition sourced from config\components\hardware\hc_sr04_sensor.json
-struct hc_sr04_ultrasonic_distance_sensor_config {
+struct hc_sr04_sensor_config {
     const char* relative_filename = "config/components/hardware/hc_sr04_sensor.json";
     const char* version = "1.0.0";
     const char* author = "config/author.json";
     const char* hardware_type = "HC_SR04_SENSOR";
-    const char* name = "hc_sr04_ultrasonic_distance_sensor";
+    const char* name = "hc_sr04_sensor";
     struct physical_specs_t {
         const char* width = "1.8 INCH";
         const char* height = "0.7 INCH";
@@ -789,6 +746,48 @@ struct speaker_config {
     } testing_status;
 };
 
+// Component definition sourced from config\components\interfaces\spi_bus.json
+struct spi_bus_config {
+    const char* relative_filename = "config/components/interfaces/spi_bus.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "spi_bus";
+    const char* hardware_type = "BUS_INTERFACE";
+    const char* bus_type = "SPI";
+    const char* bus_name = "VSPI";
+    const char* description = "ESP32 VSPI bus interface for SPI communication (bidirectional MOSI/MISO for sensors)";
+    struct pin_requirements_t {
+        const char* shared_pins_needed = "[{\"function\": \"SPI_SCLK\", \"count\": 1, \"description\": \"SPI clock signal\"}, {\"function\": \"SPI_Q\", \"count\": 1, \"description\": \"SPI MISO (Master In Slave Out)\"}]";
+        const char* unique_pins_needed = "[{\"function\": \"SPI_CS\", \"count\": 1, \"description\": \"SPI chip select (unique per device)\"}, {\"function\": \"SPI_HD\", \"count\": 1, \"description\": \"SPI MOSI (Master Out Slave In) or hold signal\"}]";
+    } pin_requirements;
+    const char* component_type = "INTERFACE_BUS";
+    const char* interface_id = "SPI_BUS";
+    const char* interface_type = "SPI_BUS";
+    struct timing_t {
+        int hitCount = 1;
+    } timing;
+    struct software_t {
+        const char* init_function = "spi_bus_init";
+        const char* act_function = "spi_bus_act";
+    } software;
+    struct pin_allocation_t {
+        const char* shared_pins[4] = { "clock", "data_output", "data_input", "reset" };
+        const char* device_pins[2] = { "chip_select", "data_command" };
+    } pin_allocation;
+    struct bus_config_t {
+        const char* frequency = "10000000";
+        int mode = 0;
+    } bus_config;
+    struct hardware_t {
+        struct esp32_specific_t {
+            const char* host_device = "SPI2_HOST";
+            int dma_channel = 1;
+            int max_transfer_size = 4092;
+        } esp32_specific;
+    } hardware;
+    const char* notes = "VSPI bus on ESP32. Shared pins (SCLK, MISO) can be used by multiple devices. Unique pins (CS, MOSI) are per-device.";
+};
+
 // Component definition sourced from config\components\drivers\spi_display_bus.json
 struct spi_display_bus_config {
     const char* name = "spi_display_bus";
@@ -812,6 +811,8 @@ esp_err_t hw496_microphone_init(void);
 void hw496_microphone_act(void);
 esp_err_t gc9a01_init(void);
 void gc9a01_act(void);
+esp_err_t generic_spi_data_driver_init(void);
+void generic_spi_data_driver_act(void);
 esp_err_t generic_spi_display_init(void);
 void generic_spi_display_act(void);
 esp_err_t goblin_eye_init(void);
@@ -820,8 +821,6 @@ esp_err_t goblin_left_ear_init(void);
 void goblin_left_ear_act(void);
 esp_err_t goblin_left_eye_init(void);
 void goblin_left_eye_act(void);
-esp_err_t goblin_mouth_init(void);
-void goblin_mouth_act(void);
 esp_err_t goblin_mouth_init(void);
 void goblin_mouth_act(void);
 esp_err_t goblin_nose_init(void);
@@ -838,6 +837,8 @@ esp_err_t servo_sg90_micro_init(void);
 void servo_sg90_micro_act(void);
 esp_err_t speaker_init(void);
 void speaker_act(void);
+esp_err_t spi_bus_init(void);
+void spi_bus_act(void);
 esp_err_t spi_display_bus_init(void);
 void spi_display_bus_act(void);
 
@@ -858,6 +859,40 @@ esp_err_t hw496_microphone_init(void);
 void hw496_microphone_act(void);
 
 #endif // hw496_microphone_H
+
+// Declarations from config\components\positioned\goblin_left_eye.hdr
+// goblin_left_eye component header
+// Additional declarations beyond init/act
+
+#ifndef GOBLIN_LEFT_EYE_COMPONENT_H
+#define GOBLIN_LEFT_EYE_COMPONENT_H
+
+#include <stdint.h>
+
+/**
+ * @brief Get pointer to left eye display buffer
+ * @return Pointer to Pixel array, or nullptr if not initialized
+ */
+Pixel* goblin_left_eye_get_buffer(void);
+
+#endif // GOBLIN_LEFT_EYE_COMPONENT_H
+
+// Declarations from config\components\positioned\goblin_right_eye.hdr
+// goblin_right_eye component header
+// Additional declarations beyond init/act
+
+#ifndef GOBLIN_RIGHT_EYE_COMPONENT_H
+#define GOBLIN_RIGHT_EYE_COMPONENT_H
+
+#include <stdint.h>
+
+/**
+ * @brief Get pointer to right eye display buffer
+ * @return Pointer to Pixel array, or nullptr if not initialized
+ */
+Pixel* goblin_right_eye_get_buffer(void);
+
+#endif // GOBLIN_RIGHT_EYE_COMPONENT_H
 
 // Declarations from config\components\interfaces\spi_display_bus.hdr
 // SPI display bus component header

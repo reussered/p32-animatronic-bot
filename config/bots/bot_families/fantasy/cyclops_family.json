@@ -16,9 +16,9 @@
                                 "central_eye_diameter":  "4.0 INCH"
                             },
     "components":  [
-                       "config/components/positioned/cyclops_eye_central.json",
-                       "config/components/positioned/cyclops_mouth.json",
-                       "config/components/positioned/cyclops_speaker.json"
+                       "config/components/creature_specific/cyclops_eye_central.json",
+                       "config/components/creature_specific/cyclops_mouth.json",
+                       "config/components/creature_specific/cyclops_speaker.json"
                    ],
     "family_mood_profile":  {
                                 "FEAR":  30,

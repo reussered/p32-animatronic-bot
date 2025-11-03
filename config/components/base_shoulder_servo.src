@@ -1,4 +1,4 @@
-﻿// base_shoulder_servo Implementation
+// base_shoulder_servo Implementation
 // Auto-generated component source
 
 #include "esp_log.h"

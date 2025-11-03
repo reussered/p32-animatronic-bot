@@ -41,6 +41,46 @@ void debug_controller_act(void) {
 }
 // --- End: config\components\system\debug_controller.src ---
 
+// --- Begin: config\components\drivers\gpio_pair_driver.src ---
+// gpio_pair_driver component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_gpio_pair_driver = "gpio_pair_driver";
+
+esp_err_t gpio_pair_driver_init(void) {
+    ESP_LOGI(TAG_gpio_pair_driver, "gpio_pair_driver init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void gpio_pair_driver_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_gpio_pair_driver, "gpio_pair_driver act");
+}
+// --- End: config\components\drivers\gpio_pair_driver.src ---
+
+// --- Begin: config\components\interfaces\gpio_pair_vibration_sensor.src ---
+#include "esp_log.h"
+
+static const char *TAG = "gpio_pair_vibration_sensor";
+
+esp_err_t gpio_pair_vibration_sensor_init(void) {
+#ifdef DEBUG
+    ESP_LOGI(TAG, "gpio_pair_vibration_sensor_init() called");
+#endif
+    // TODO: Initialize GPIO pair for vibration sensor
+    return ESP_OK;
+}
+
+void gpio_pair_vibration_sensor_act(void) {
+#ifdef DEBUG
+    ESP_LOGD(TAG, "gpio_pair_vibration_sensor_act() called");
+#endif
+    // TODO: Read vibration sensor state
+}
+// --- End: config\components\interfaces\gpio_pair_vibration_sensor.src ---
+
 // --- Begin: config\components\system\network_monitor.src ---
 // network_monitor component implementation
 // Auto-generated stub - needs actual implementation

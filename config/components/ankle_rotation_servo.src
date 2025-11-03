@@ -1,4 +1,4 @@
-﻿// ankle_rotation_servo Implementation
+// ankle_rotation_servo Implementation
 // Auto-generated component source
 
 #include "esp_log.h"
