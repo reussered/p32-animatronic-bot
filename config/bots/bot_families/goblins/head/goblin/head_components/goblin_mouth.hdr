@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_mouth
+#include <esp_err.h>
+
+esp_err_t goblin_mouth_init(void);
+void goblin_mouth_act(void);

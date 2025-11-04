@@ -1,0 +1,5 @@
+// Auto-generated header for wolf_snout
+#include <esp_err.h>
+
+esp_err_t wolf_snout_init(void);
+void wolf_snout_act(void);

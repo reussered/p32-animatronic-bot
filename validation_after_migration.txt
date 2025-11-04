@@ -1,0 +1,76 @@
+[*] Updating master file list...
+  -> Master file list was updated.
+[*] Starting component validation...
+  -> Generated display driver header for android_eye
+  -> Generated display driver header for bear_eye
+  -> Generated display driver header for cat_eye
+  -> Generated display driver header for pixie_eye
+  -> Generated display driver header for robot_eye
+  -> Generated display driver header for robot_status_oled
+  -> Generated display driver header for android_eye
+  -> Generated display driver header for bear_eye
+  -> Generated display driver header for cat_eye
+  -> Generated display driver header for pixie_eye
+-> Scaffolding component 'goblin_head'...
+-> Scaffolding component 'goblin_torso'...
+
+--- Errors for: config\bots\bot_families\goblins\goblin_full.json ---
+  - Component reference 'config/subsystems/goblin_head.json' not found.
+  - Component reference 'config/subsystems/goblin_torso.json' not found.
+-> Scaffolding component 'goblin_pirate_head'...
+
+--- Errors for: config\bots\bot_families\goblins\goblin_pirate.json ---
+  - Component reference 'config/subsystems/goblin_pirate_head.json' not found.
+  -> Generated display driver header for goblin_eye
+-> Scaffolding component 'goblin_head_left_eye_only'...
+
+--- Errors for: config\bots\bot_families\goblins\head\goblin_head_only.json ---
+  - Component reference 'config/subsystems/goblin_head_left_eye_only.json' not found.
+  -> Generated display driver header for goblin_left_eye
+-> Scaffolding component 'test_head'...
+
+--- Errors for: config\bots\bot_families\goblins\head\goblin_test_eyes.json ---
+  - Component reference 'config/subsystems/test_head.json' not found.
+ ERROR: Could not read or parse config\bots\bot_families\goblins\subsystems\goblin_head.json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+ ERROR: Could not read or parse config\bots\bot_families\goblins\subsystems\goblin_head_left_eye_only.json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+ ERROR: Could not read or parse config\bots\bot_families\goblins\subsystems\goblin_pirate_head.json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+ ERROR: Could not read or parse config\bots\bot_families\goblins\subsystems\goblin_torso.json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+  -> Generated display driver header for robot_eye
+  -> Generated display driver header for robot_status_oled
+ ERROR: Could not read or parse config\bots\bot_families\tests\subsystems\test_head.json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+  -> Generated display driver header for zombie_eye
+  -> Generated display driver header for zombie_eye
+  -> Generated display driver header for goblin_eye
+  -> Generated display driver header for goblin_left_eye
+  -> Generated display driver header for goblin_mouth
+  -> Generated display driver header for gc9a01
+  -> Generated display driver header for generic_spi_display
+  -> Generated display driver header for ili9486
+  -> Generated display driver header for ili9488
+  -> Generated display driver header for oled_ssd1306_128x64
+  -> Generated display driver header for ra8875_tft_1024x600
+  -> Generated display driver header for ra8875_tft_800x480
+  -> Generated display driver header for ssd1306
+  -> Generated display driver header for ssd1963_tft_800x600
+  -> Generated display driver header for st7789
+  -> Generated display driver header for st7796
+  -> Generated display driver header for st7796s
+  -> Generated display driver header for gc9a01
+  -> Generated display driver header for ili9486
+  -> Generated display driver header for ili9488
+  -> Generated display driver header for oled_ssd1306_128x64
+  -> Generated display driver header for ra8875_tft_1024x600
+  -> Generated display driver header for ra8875_tft_800x480
+  -> Generated display driver header for ssd1306
+  -> Generated display driver header for ssd1963_tft_800x600
+  -> Generated display driver header for st7789
+  -> Generated display driver header for st7796
+  -> Generated display driver header for st7796s
+ Automatically fixed fields in config\templates\base\arm_base.json
+ Automatically fixed fields in config\templates\base\hand_base.json
+ Automatically fixed fields in config\templates\base\head_base.json
+ Automatically fixed fields in config\templates\base\leg_base.json
+ Automatically fixed fields in config\templates\base\torso_base.json
+ Saving updated master_rules.json...
+
+ Validation complete. Errors were found and reported above.

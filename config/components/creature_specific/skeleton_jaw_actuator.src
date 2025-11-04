@@ -1,0 +1,15 @@
+// Auto-generated source for skeleton_jaw_actuator
+#include <esp_log.h>
+
+static const char* TAG = "skeleton_jaw_actuator";
+
+esp_err_t skeleton_jaw_actuator_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void skeleton_jaw_actuator_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

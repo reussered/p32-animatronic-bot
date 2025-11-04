@@ -1,0 +1,5 @@
+// Auto-generated header for base_power_management
+#include <esp_err.h>
+
+esp_err_t base_power_management_init(void);
+void base_power_management_act(void);

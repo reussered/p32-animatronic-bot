@@ -1,0 +1,5 @@
+// Auto-generated header for ghost_ectoplasm_generator
+#include <esp_err.h>
+
+esp_err_t ghost_ectoplasm_generator_init(void);
+void ghost_ectoplasm_generator_act(void);

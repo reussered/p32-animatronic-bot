@@ -1,0 +1,15 @@
+// Auto-generated source for pet_simulation_servos
+#include <esp_log.h>
+
+static const char* TAG = "pet_simulation_servos";
+
+esp_err_t pet_simulation_servos_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void pet_simulation_servos_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

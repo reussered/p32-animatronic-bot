@@ -1,0 +1,15 @@
+// Auto-generated source for audio_analysis_unit
+#include <esp_log.h>
+
+static const char* TAG = "audio_analysis_unit";
+
+esp_err_t audio_analysis_unit_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void audio_analysis_unit_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

@@ -1,0 +1,15 @@
+// Auto-generated source for android_neural_interface
+#include <esp_log.h>
+
+static const char* TAG = "android_neural_interface";
+
+esp_err_t android_neural_interface_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void android_neural_interface_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

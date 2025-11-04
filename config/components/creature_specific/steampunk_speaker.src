@@ -1,0 +1,15 @@
+// Auto-generated source for steampunk_speaker
+#include <esp_log.h>
+
+static const char* TAG = "steampunk_speaker";
+
+esp_err_t steampunk_speaker_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void steampunk_speaker_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

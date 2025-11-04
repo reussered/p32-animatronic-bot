@@ -1,20 +1,15 @@
 // Auto-generated source for bear_arctic_fur
-#include "components/bear_arctic_fur.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "bear_arctic_fur";
 
 esp_err_t bear_arctic_fur_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void bear_arctic_fur_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

@@ -1,7 +1,7 @@
 # Goblin Family Variants - Complete Collection
 
 ## Family Template Base
-**Source**: `config/bots/bot_families/fantasy/goblin_family.json`
+**Source**: `config/bots/bot_families/goblins/goblin_family.json`
 - **Coordinate System**: skull_3d with 3.0" eye spacing, 30% compression
 - **Base Personality**: Territorial, suspicious, easily startled, vindictive, cunning
 - **Core Components**: Left/right eyes, mouth, speaker, nose sensor

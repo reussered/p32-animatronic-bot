@@ -1,0 +1,5 @@
+// Auto-generated header for external_wifi_communication
+#include <esp_err.h>
+
+esp_err_t external_wifi_communication_init(void);
+void external_wifi_communication_act(void);

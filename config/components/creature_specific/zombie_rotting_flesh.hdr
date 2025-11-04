@@ -1,0 +1,5 @@
+// Auto-generated header for zombie_rotting_flesh
+#include <esp_err.h>
+
+esp_err_t zombie_rotting_flesh_init(void);
+void zombie_rotting_flesh_act(void);

@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_trophy_scars
+#include "components/goblin_trophy_scars.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_trophy_scars";
+
+esp_err_t goblin_trophy_scars_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_trophy_scars_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for emergency_beacon
+#include <esp_err.h>
+
+esp_err_t emergency_beacon_init(void);
+void emergency_beacon_act(void);

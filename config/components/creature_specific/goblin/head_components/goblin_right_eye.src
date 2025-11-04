@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_right_eye
-#include "components/goblin_right_eye.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_right_eye";
 
 esp_err_t goblin_right_eye_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_right_eye_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

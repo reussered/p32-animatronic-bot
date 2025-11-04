@@ -1,0 +1,15 @@
+// Auto-generated source for ghost_floating_mechanism
+#include <esp_log.h>
+
+static const char* TAG = "ghost_floating_mechanism";
+
+esp_err_t ghost_floating_mechanism_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void ghost_floating_mechanism_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

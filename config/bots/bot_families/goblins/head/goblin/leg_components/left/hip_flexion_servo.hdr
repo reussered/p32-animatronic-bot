@@ -1,0 +1,5 @@
+// Auto-generated header for hip_flexion_servo
+#include <esp_err.h>
+
+esp_err_t hip_flexion_servo_init(void);
+void hip_flexion_servo_act(void);

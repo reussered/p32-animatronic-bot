@@ -77,7 +77,7 @@ config/bots/bot_families/
 ### Family Template Reference
 ```json
 {
-  "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+  "family_template": "config/bots/bot_families/goblins/goblin_family.json",
   "bot_id": "goblin_warrior_v1",
   "overrides": {
     "mood_defaults": {

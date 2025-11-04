@@ -1,0 +1,5 @@
+// Auto-generated header for zombie_exposed_bone
+#include <esp_err.h>
+
+esp_err_t zombie_exposed_bone_init(void);
+void zombie_exposed_bone_act(void);

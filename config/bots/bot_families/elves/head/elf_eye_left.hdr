@@ -1,0 +1,5 @@
+// Auto-generated header for elf_eye_left
+#include <esp_err.h>
+
+esp_err_t elf_eye_left_init(void);
+void elf_eye_left_act(void);

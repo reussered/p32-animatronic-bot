@@ -1,0 +1,5 @@
+// Auto-generated header for zombie_shamble_actuator
+#include <esp_err.h>
+
+esp_err_t zombie_shamble_actuator_init(void);
+void zombie_shamble_actuator_act(void);

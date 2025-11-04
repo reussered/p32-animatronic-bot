@@ -1,0 +1,15 @@
+// Auto-generated source for skeleton_bone_structure
+#include <esp_log.h>
+
+static const char* TAG = "skeleton_bone_structure";
+
+esp_err_t skeleton_bone_structure_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void skeleton_bone_structure_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

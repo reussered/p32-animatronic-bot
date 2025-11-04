@@ -1,0 +1,15 @@
+// Auto-generated source for android_synthetic_skin
+#include <esp_log.h>
+
+static const char* TAG = "android_synthetic_skin";
+
+esp_err_t android_synthetic_skin_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void android_synthetic_skin_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

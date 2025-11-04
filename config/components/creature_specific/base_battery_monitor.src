@@ -1,0 +1,15 @@
+// Auto-generated source for base_battery_monitor
+#include <esp_log.h>
+
+static const char* TAG = "base_battery_monitor";
+
+esp_err_t base_battery_monitor_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void base_battery_monitor_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

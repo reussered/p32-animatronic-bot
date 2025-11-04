@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_pale_skin
+#include <esp_err.h>
+
+esp_err_t goblin_pale_skin_init(void);
+void goblin_pale_skin_act(void);

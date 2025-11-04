@@ -1,0 +1,15 @@
+// Auto-generated source for emergency_beacon
+#include <esp_log.h>
+
+static const char* TAG = "emergency_beacon";
+
+esp_err_t emergency_beacon_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void emergency_beacon_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

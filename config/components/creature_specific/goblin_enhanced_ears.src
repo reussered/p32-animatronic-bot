@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_enhanced_ears
-#include "components/goblin_enhanced_ears.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_enhanced_ears";
 
 esp_err_t goblin_enhanced_ears_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_enhanced_ears_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

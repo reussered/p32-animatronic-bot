@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_spirit_runes
+#include <esp_err.h>
+
+esp_err_t goblin_spirit_runes_init(void);
+void goblin_spirit_runes_act(void);

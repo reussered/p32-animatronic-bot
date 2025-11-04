@@ -1,21 +1,15 @@
-// goblin_ear_right component implementation
-// Auto-generated stub - needs actual implementation
+// Auto-generated source for goblin_ear_right
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_goblin_ear_right = "goblin_ear_right";
+static const char* TAG = "goblin_ear_right";
 
-esp_err_t goblin_ear_right_init(void) {
-    ESP_LOGI(TAG_goblin_ear_right, "goblin_ear_right init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t goblin_ear_right_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void goblin_ear_right_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_ear_right, "goblin_ear_right act");
+void goblin_ear_right_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-
-
-
-
-

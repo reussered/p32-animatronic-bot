@@ -1,20 +1,15 @@
 // Auto-generated source for cyclops_mouth
-#include "components/cyclops_mouth.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "cyclops_mouth";
 
 esp_err_t cyclops_mouth_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void cyclops_mouth_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

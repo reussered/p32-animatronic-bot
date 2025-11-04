@@ -1,0 +1,79 @@
+{
+    "relative_filename": "config/bots/bot_families/goblins/goblin_full_arm_left.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINFULL_ARM_LEFT",
+    "bot_id": "goblin_full_arm_left_v2",
+    "description": "Goblin left arm subsystem controller - 7 DOF arm control",
+    "created": "2025-10-13",
+    "subsystem_type": "ARM_CONTROLLER_LEFT",
+    "controller": "ESP32_C3_MINI",
+    "coordinate_system": "skull_3d",
+    "reference_point": "shoulder_socket_left",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/goblin/arm_components/left/shoulder_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/shoulder_abduction_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/shoulder_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/elbow_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/forearm_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/wrist_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/wrist_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/left/arm_status_led.json"
+    ],
+    "degrees_of_freedom": {
+        "shoulder_dof": "3",
+        "elbow_dof": "1",
+        "forearm_dof": "1",
+        "wrist_dof": "2",
+        "total_controlled_dof": "7"
+    },
+    "arm_specifications": {
+        "upper_arm_length": "10.0 INCHES",
+        "forearm_length": "9.0 INCHES",
+        "total_reach": "19.0 INCHES",
+        "payload_capacity_kg": "2.0",
+        "movement_speed": "MODERATE"
+    },
+    "servo_power_config": {
+        "shoulder_servos": "MG996R_HIGH_TORQUE",
+        "elbow_servo": "MG996R_STANDARD",
+        "wrist_servos": "SG90_MICRO",
+        "power_rail_voltage": "6V",
+        "estimated_current_draw_a": "3.5"
+    },
+    "mesh_communication": {
+        "master_controller": "TORSO_ESP32_S3",
+        "coordination_priority": "MEDIUM",
+        "response_time_target_ms": "50",
+        "heartbeat_rate_hz": "10"
+    },
+    "mood_defaults": {
+        "FEAR": 20,
+        "ANGER": 10,
+        "IRRITATION": 15,
+        "HAPPINESS": 0,
+        "CONTENTMENT": 30,
+        "HUNGER": 0,
+        "CURIOSITY": 40,
+        "AFFECTION": 0
+    },
+    "behavior_config": {
+        "gesture_library_enabled": true,
+        "collision_avoidance": true,
+        "graceful_degradation": true,
+        "position_feedback": "ENCODER_BASED"
+    },
+    "hardware_config": {
+        "servo_update_rate_hz": "50",
+        "position_feedback_rate_hz": "20",
+        "mesh_sync_rate_hz": "5",
+        "safety_check_rate_hz": "10"
+    },
+    "prototype_status": "in_development",
+    "tested": false,
+    "estimated_cost_usd": "185.00",
+    "name": "goblin_full_arm_left",
+    "type": "UNKNOWN",
+    "creature": "goblin"
+}

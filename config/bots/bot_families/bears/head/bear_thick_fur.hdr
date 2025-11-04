@@ -1,0 +1,5 @@
+// Auto-generated header for bear_thick_fur
+#include <esp_err.h>
+
+esp_err_t bear_thick_fur_init(void);
+void bear_thick_fur_act(void);

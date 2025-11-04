@@ -1,0 +1,5 @@
+// Auto-generated header for base_speaker
+#include <esp_err.h>
+
+esp_err_t base_speaker_init(void);
+void base_speaker_act(void);

@@ -1,0 +1,14 @@
+// goblin_mouth.src
+// Goblin mouth display implementation
+
+#include "goblin_mouth.hdr"
+
+esp_err_t goblin_mouth_init(void)
+{
+    return ESP_OK;
+}
+
+void goblin_mouth_act(void)
+{
+    // Mouth animation and expression rendering
+}

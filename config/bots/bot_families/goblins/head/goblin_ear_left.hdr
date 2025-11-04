@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_ear_left
+#include <esp_err.h>
+
+esp_err_t goblin_ear_left_init(void);
+void goblin_ear_left_act(void);

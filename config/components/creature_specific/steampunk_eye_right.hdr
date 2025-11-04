@@ -1,0 +1,5 @@
+// Auto-generated header for steampunk_eye_right
+#include <esp_err.h>
+
+esp_err_t steampunk_eye_right_init(void);
+void steampunk_eye_right_act(void);

@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_horn_crown
+#include <esp_err.h>
+
+esp_err_t goblin_horn_crown_init(void);
+void goblin_horn_crown_act(void);

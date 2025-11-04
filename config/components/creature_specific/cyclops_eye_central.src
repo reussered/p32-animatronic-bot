@@ -1,20 +1,15 @@
 // Auto-generated source for cyclops_eye_central
-#include "components/cyclops_eye_central.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "cyclops_eye_central";
 
 esp_err_t cyclops_eye_central_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void cyclops_eye_central_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

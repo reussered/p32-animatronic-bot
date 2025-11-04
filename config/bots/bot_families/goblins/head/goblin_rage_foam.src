@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_rage_foam
+#include "components/goblin_rage_foam.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_rage_foam";
+
+esp_err_t goblin_rage_foam_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_rage_foam_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,15 @@
+// Auto-generated source for steampunk_eye_left
+#include <esp_log.h>
+
+static const char* TAG = "steampunk_eye_left";
+
+esp_err_t steampunk_eye_left_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void steampunk_eye_left_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

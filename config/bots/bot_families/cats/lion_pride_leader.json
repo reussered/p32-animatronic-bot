@@ -1,0 +1,79 @@
+{
+    "relative_filename": "config/bots/bot_families/cats/lion_pride_leader.json",
+    "version": "2.1.0",
+    "author": "config/author.json",
+    "bot_type": "CAT_LION_PRIDE_LEADER",
+    "inherits_family": "cat_family",
+    "bot_name": "Mufasa the Pride King",
+    "description": "A majestic male lion with a golden mane and commanding presence. Natural leader with protective instincts and royal bearing.",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "eye_spacing": "4.2 INCH",
+    "scale_factor": 1.6,
+    "default_mood": "CONTENTMENT",
+    "mood_defaults": {
+        "FEAR": {
+            "duration_ms": 1500,
+            "intensity": 0.3
+        },
+        "ANGER": {
+            "duration_ms": 18000,
+            "intensity": 0.9
+        },
+        "IRRITATION": {
+            "duration_ms": 10000,
+            "intensity": 0.7
+        },
+        "HAPPINESS": {
+            "duration_ms": 12000,
+            "intensity": 0.8
+        },
+        "CONTENTMENT": {
+            "duration_ms": 30000,
+            "intensity": 0.95
+        },
+        "HUNGER": {
+            "duration_ms": 20000,
+            "intensity": 0.85
+        },
+        "CURIOSITY": {
+            "duration_ms": 8000,
+            "intensity": 0.6
+        },
+        "AFFECTION": {
+            "duration_ms": 15000,
+            "intensity": 0.8
+        }
+    },
+    "personality_traits": {
+        "aggression_level": 0.7,
+        "curiosity_level": 0.6,
+        "sociability_level": 0.8,
+        "energy_level": 0.7,
+        "leadership": 0.95,
+        "protective_instinct": 0.9,
+        "territorial_behavior": 0.85
+    },
+    "behavior_config": {
+        "proximity_alert_distance": "120 CM",
+        "proximity_interact_distance": "60 CM",
+        "interaction_timeout": "12000 MS",
+        "sleep_mode_timeout": "200000 MS"
+    },
+    "audio_profile": {
+        "ambient_sounds": [
+            "lion_deep_breathing.wav",
+            "savanna_wind.wav"
+        ],
+        "reaction_sounds": {
+            "happy": "lion_contented_rumble.wav",
+            "angry": "lion_mighty_roar.wav",
+            "curious": "lion_questioning_grunt.wav",
+            "afraid": "lion_warning_growl.wav"
+        }
+    },
+    "component_count": 0,
+    "components": [],
+    "name": "lion_pride_leader",
+    "type": "UNKNOWN"
+}

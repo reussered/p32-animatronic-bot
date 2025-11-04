@@ -1,0 +1,5 @@
+// Auto-generated header for dragon_nostril_left
+#include <esp_err.h>
+
+esp_err_t dragon_nostril_left_init(void);
+void dragon_nostril_left_act(void);

@@ -1,20 +1,15 @@
 // Auto-generated source for cat_purr_generator
-#include "components/cat_purr_generator.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "cat_purr_generator";
 
 esp_err_t cat_purr_generator_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void cat_purr_generator_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

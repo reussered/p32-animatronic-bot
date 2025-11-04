@@ -1,123 +1,81 @@
 #include "subsystems/goblin_head/goblin_head_component_functions.hpp"
+#include "components/interfaces/spi_display_bus.hdr"
+#include "components/interfaces/spi_data_bus.hdr"
 
 // Auto-generated component aggregation file
 
-// --- Begin: config\components\hardware\hw496_microphone.src ---
-// HW-496 MEMS Microphone Component
-// Uses generic microphone driver with HW496-specific configuration
-
-#include "esp_log.h"
-#include "components/hardware/hw496_microphone.hdr"
-#include "../drivers/generic_mic_driver.hdr"
-#include "core/memory/SharedMemory.hpp"
-
-static const char *TAG_hw496_microphone = "hw496_microphone";
-
-// HW496-specific configuration
-// Based on HW496 datasheet: adjustable gain (25x-125x), 58dB SNR, 20Hz-20kHz response
-static const float HW496_DEFAULT_GAIN = 2.0f;  // 50x gain setting
-static const int HW496_NOISE_GATE_THRESHOLD = 50;  // Adjust based on testing
-static const bool HW496_NOISE_GATE_ENABLED = true;
-
-esp_err_t hw496_microphone_init(void) {
-    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone init");
-
-    // HW496-specific hardware initialization
-    // Note: generic_mic_driver is initialized separately as a dependency
-    // HW496 uses default generic_mic_driver settings
-
-    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone initialized (using generic driver defaults)");
-    return ESP_OK;
-}
-
-void hw496_microphone_act(void) {
-    // Read microphone data from SharedMemory (written by generic_mic_driver)
-    MicrophoneData* mic_data = GSM.read<MicrophoneData>();
-
-    if (mic_data && mic_data->driver_initialized) {
-        // HW496-specific processing or monitoring
-        // For now, log the data for testing
-        ESP_LOGD(TAG_hw496_microphone, "HW496 data: raw=%d, processed=%d, voltage=%dmV, gain=%.1f, sound=%s",
-                 mic_data->raw_sample, mic_data->processed_sample, mic_data->voltage_mv,
-                 mic_data->gain_applied, mic_data->sound_detected ? "detected" : "none");
-
-        // HW496 could add hardware-specific processing here
-        // For example, adjusting gain based on audio levels, or triggering hardware responses
-    } else {
-        ESP_LOGW(TAG_hw496_microphone, "Microphone data not available or driver not initialized");
-    }
-}
-// --- End: config\components\hardware\hw496_microphone.src ---
-
-// --- Begin: config\components\hardware\gc9a01.src ---
+// --- Begin: config/components/hardware/gc9a01.src ---
 // gc9a01 component implementation
-// This component is a data provider. It defines the physical characteristics
-// of the GC9A01 display but contains no active logic.
+// TEMPLATE-BASED HARDWARE DRIVER
+// This component interacts with the physical GC9A01 display.
 
 #include "esp_log.h"
-#include "esp_heap_caps.h"
-#include <stdlib.h>
+#include "driver/spi_master.h" // For SPI communication
+#include <cstdint>
 
-static const char *TAG_gc9a01 = "gc9a01";
+// This is the file-scoped static pointer allocated by the "allocator" component
+// (e.g., goblin_left_eye). Because both components are templates instantiated
+// with the same type 'T' and concatenated into the same compilation unit,
+// this driver component can see and use the buffer allocated by the other.
+template <typename T>
+extern typename T::Pixel* display_buffer;
 
-// Define GC9A01_InitialPixel
-// Note: value should be set before allocating buffers containing GC9A01_Pixels
-GC9A01_Pixel GC9A01_InitialPixel;
+static const char *TAG_gc9a01_driver = "gc9a01_driver";
 
-// Display Buffer Interface - provides buffer allocation and size info
-// to positioned components (eyes, mouth, etc.)
+// Placeholder for the SPI device handle
+static spi_device_handle_t spi_handle;
 
-/**
- * @brief Get display width in pixels
- * @return Display width (240 for GC9A01)
- */
-size_t gc9a01_get_width(void) {
-    return 240;
-}
+template <typename T>
+esp_err_t gc9a01_init()
+{
+    ESP_LOGI(TAG_gc9a01_driver, "Initializing GC9A01 hardware driver (template-based)");
 
-/**
- * @brief Get display height in pixels
- * @return Display height (240 for GC9A01)
- */
-size_t gc9a01_get_height(void) {
-    return 240;
-}
+    // In a real scenario, this is where we would initialize the
+    // SPI bus, configure the pins, and send initialization commands
+    // to the GC9A01 controller.
 
-/**
- * @brief Get total frame size in pixels
- * @return Total pixels in one frame (width * height)
- */
-size_t getFrameSize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
+    // For now, we just log that we are initializing for a specific type.
+    ESP_LOGI(TAG_gc9a01_driver, "Driver configured for display: %dx%d", T::WIDTH, T::HEIGHT);
 
-/**
- * @brief Get pixels per row (display width)
- * @return Number of pixels per row
- */
-size_t getFrameRowSize(void) {
-    return 240;
-}
+    // Check if the display buffer has been allocated by another component.
+    if (display_buffer<T> == nullptr)
+    {
+        ESP_LOGE(TAG_gc9a01_driver, "Display buffer is null! Allocator component must run first.");
+        return ESP_FAIL;
+    }
 
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame
- */
-size_t getDisplaySize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
+    ESP_LOGI(TAG_gc9a01_driver, "Successfully linked with display buffer.");
 
-esp_err_t gc9a01_init(void) {
-    ESP_LOGI(TAG_gc9a01, "gc9a01 component initialized (passive)");
     return ESP_OK;
 }
 
-void gc9a01_act(void) {
-    // This component is passive and does nothing in its act function.
-}
-// --- End: config\components\hardware\gc9a01.src ---
+template <typename T>
+void gc9a01_act()
+{
+    // This is the core logic of the driver. In every 'act' cycle,
+    // it would send the contents of the 'display_buffer' to the
+    // physical screen via SPI.
 
-// --- Begin: config\components\drivers\generic_spi_data_driver.src ---
+    if (display_buffer<T> == nullptr)
+    {
+        return; // Not yet initialized
+    }
+
+    // --- REAL DRIVER LOGIC WOULD GO HERE ---
+    // Example:
+    // spi_transaction_t t;
+    // memset(&t, 0, sizeof(t));
+    // t.length = T::WIDTH * T::HEIGHT * sizeof(typename T::Pixel) * 8; // length in bits
+    // t.tx_buffer = display_buffer<T>;
+    // spi_device_polling_transmit(spi_handle, &t);
+    //
+    // For this simulation, we will just confirm we can access the buffer.
+    // (This log would be too noisy in a real application)
+    // ESP_LOGD(TAG_gc9a01_driver, "gc9a01_act: Acting on display buffer.");
+}
+// --- End: config/components/hardware/gc9a01.src ---
+
+// --- Begin: config/components/drivers/generic_spi_data_driver.src ---
 // generic_spi_data_driver component implementation
 // Driver for generic SPI devices using the spi_data_bus
 
@@ -135,9 +93,9 @@ esp_err_t generic_spi_data_driver_init(void) {
 void generic_spi_data_driver_act(void) {
     // Active logic for the driver, e.g., polling a sensor.
 }
-// --- End: config\components\drivers\generic_spi_data_driver.src ---
+// --- End: config/components/drivers/generic_spi_data_driver.src ---
 
-// --- Begin: config\components\drivers\generic_spi_display.src ---
+// --- Begin: config/components/drivers/generic_spi_display.src ---
 // generic_spi_display component implementation
 // Generic SPI display interface for basic drawing operations
 
@@ -185,69 +143,68 @@ static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
 }
 
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_display_pin.cs);
 
-    if (cur_spi_pin.handle == NULL) {
+    if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
         return ESP_FAIL;
     }
 
     // Hardware reset
-    if (cur_spi_pin.rst != -1) {
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 0);
+    if (cur_spi_display_pin.rst != -1) {
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 0);
         vTaskDelay(pdMS_TO_TICKS(100));
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 1);
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 1);
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     // Software reset
-    spi_write_command(cur_spi_pin.handle, GC9A01_SWRESET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SWRESET);
     vTaskDelay(pdMS_TO_TICKS(150));
 
     // Sleep out
-    spi_write_command(cur_spi_pin.handle, GC9A01_SLPOUT);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SLPOUT);
     vTaskDelay(pdMS_TO_TICKS(500));
 
     // Display on
-    spi_write_command(cur_spi_pin.handle, GC9A01_DISPON);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_DISPON);
     vTaskDelay(pdMS_TO_TICKS(100));
 
-    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_display_pin.cs);
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    if (cur_spi_pin.handle == NULL) {
-        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "generic_spi_display_act called - handle: %p, CS: %d", 
+             (void*)cur_spi_display_pin.handle, cur_spi_display_pin.cs);
+    if (cur_spi_display_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
         return;
     }
 
-    // Get the appropriate framebuffer based on which display we're driving
-    // CS=3 is left eye, CS=6 is right eye
-    uint16_t* framebuffer = nullptr;
-    if (cur_spi_pin.cs == 3) {
-        framebuffer = goblin_left_eye_get_buffer();
-    } else if (cur_spi_pin.cs == 6) {
-        framebuffer = goblin_right_eye_get_buffer();
-    }
-
-    if (!framebuffer) {
-        ESP_LOGE(TAG_generic_spi_display, "No framebuffer available for CS=%d", cur_spi_pin.cs);
+    // Use the global frame_ptr set by the positioned component (left_eye/right_eye)
+    // This allows generic driver to work without knowing about specific eyes
+    extern Pixel* frame_ptr;
+    
+    if (!frame_ptr) {
+        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_display_pin.cs);
         return;
     }
+    
+    uint16_t* framebuffer = (uint16_t*)frame_ptr;
 
     // Set column address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_CASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
     uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, col_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, col_data, 4);
 
     // Set row address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_RASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
     uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, row_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, row_data, 4);
 
     // Memory write
-    spi_write_command(cur_spi_pin.handle, GC9A01_RAMWR);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
 
     // Send the actual framebuffer data
     // Convert RGB565 pixels to byte stream (big-endian)
@@ -271,142 +228,37 @@ void generic_spi_display_act(void) {
             row_buffer[col * 2 + 1] = pixel & 0xFF; // Low byte
         }
         
-        generic_spi_write_data(cur_spi_pin.handle, row_buffer, row_size);
+        generic_spi_write_data(cur_spi_display_pin.handle, row_buffer, row_size);
     }
     
     free(row_buffer);
 }
-// --- End: config\components\drivers\generic_spi_display.src ---
+// --- End: config/components/drivers/generic_spi_display.src ---
 
-// --- Begin: config\components\creature_specific\goblin_eye.src ---
-// goblin_eye component implementation
-// Shared goblin eye processing logic with Pixel-based mood rendering
-// Uses display-agnostic Pixel types with saturation arithmetic
+// --- Begin: config/components/goblin_eye.src ---
+// Auto-generated source for goblin_eye
+#include "components/goblin_eye.hdr"
+#include <esp_log.h>
 
-#include "esp_log.h"
-#include "components/gc9a01.hdr"  // For Pixel type
-#include "Mood.hpp"
-#include "core/memory/SharedMemory.hpp"
+static const char* TAG = "goblin_eye";
 
-static const char *TAG_goblin_eye = "goblin_eye";
-
-// Shared frame buffer (set by left/right eye positioned components)
-static Pixel* currentFrame = nullptr;
-static uint32_t current_frame_size = 0;
-
-// Goblin personality multiplier - goblins show emotions STRONGLY (1.5x)
-// Compare to bears which might use 0.5x (stoic) or cats which use 0.8x (aloof)
-static constexpr float GOBLIN_EMOTION_INTENSITY = 1.5f;
-
-// Mood tracking for optimization
-static Mood lastMood;
-static bool mood_initialized = false;
-
-// Mood-to-color mapping for goblin eyes (defined later in this file)
-static const MoodColorEffect goblin_mood_effects[Mood::componentCount] = {
-    // ANGER: Red tint, reduces green/blue
-    MoodColorEffect(0.8f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY),
-    // FEAR: Blue tint, pale (reduces all slightly, increases blue)
-    MoodColorEffect(-0.2f * GOBLIN_EMOTION_INTENSITY, -0.2f * GOBLIN_EMOTION_INTENSITY, 0.6f * GOBLIN_EMOTION_INTENSITY),
-    // HAPPINESS: Yellow/warm tint (increase red+green)
-    MoodColorEffect(0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY, 0.1f * GOBLIN_EMOTION_INTENSITY),
-    // SADNESS: Desaturate (reduce all colors)
-    MoodColorEffect(-0.3f * GOBLIN_EMOTION_INTENSITY, -0.3f * GOBLIN_EMOTION_INTENSITY, -0.1f * GOBLIN_EMOTION_INTENSITY),
-    // CURIOSITY: Green tint (goblins get greenish when curious)
-    MoodColorEffect(0.1f * GOBLIN_EMOTION_INTENSITY, 0.7f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY),
-    // AFFECTION: Purple/warm tint
-    MoodColorEffect(0.4f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY, 0.4f * GOBLIN_EMOTION_INTENSITY),
-    // IRRITATION: Orange-red tint
-    MoodColorEffect(0.6f * GOBLIN_EMOTION_INTENSITY, 0.2f * GOBLIN_EMOTION_INTENSITY, -0.2f * GOBLIN_EMOTION_INTENSITY),
-    // CONTENTMENT: Warm, slightly yellow
-    MoodColorEffect(0.3f * GOBLIN_EMOTION_INTENSITY, 0.4f * GOBLIN_EMOTION_INTENSITY, 0.1f * GOBLIN_EMOTION_INTENSITY),
-    // EXCITEMENT: Bright, all colors up
-    MoodColorEffect(0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY, 0.5f * GOBLIN_EMOTION_INTENSITY)
-};
-
-esp_err_t goblin_eye_init(void) 
+esp_err_t goblin_eye_init(void)
 {
-    ESP_LOGI(TAG_goblin_eye, "Initializing shared goblin eye resources");
-    
-    // Clear mood tracking
-    lastMood.clear();
-    mood_initialized = false;
-    
-    ESP_LOGI(TAG_goblin_eye, "Goblin eye mood processing initialized (emotion intensity: %.1fx)", 
-             GOBLIN_EMOTION_INTENSITY);
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
     return ESP_OK;
 }
 
-void goblin_eye_act(void) 
+void goblin_eye_act(void)
 {
-    // Only process if we have a valid frame set by left/right eye components
-    if (currentFrame == nullptr || current_frame_size == 0) 
-    {
-        return;
-    }
-    
-    // Get current global mood from shared memory
-    Mood* mood_ptr = GSM.read<Mood>();
-    if (mood_ptr == nullptr) 
-    {
-        return;  // No mood data available
-    }
-    Mood currentMood = *mood_ptr;
-    
-    // Check if mood changed (optimization - only recalculate when mood changes)
-    if (!mood_initialized || lastMood != currentMood) 
-    {
-        // Step 1: Calculate mood color deltas (once per mood change)
-        Pixel moodTint;  // Accumulated color adjustment based on mood
-        moodTint.red = 0;
-        moodTint.green = 0;
-        moodTint.blue = 0;
-        
-        for (int i = 0; i < Mood::componentCount; ++i) 
-        {
-            int8_t moodValue = currentMood.components[i];
-            if (moodValue != 0) 
-            {
-                const MoodColorEffect& effect = goblin_mood_effects[i];
-                
-                // Calculate color contribution (scaled by mood intensity)
-                // moodValue ranges from -128 to +127
-                // Normalize to fractional multiplier and apply effect
-                float intensity = static_cast<float>(moodValue) / 127.0f;
-                
-                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * Pixel::maxRed);
-                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * Pixel::maxGreen);
-                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * Pixel::maxBlue);
-                
-                // Accumulate using Pixel's saturating addition
-                Pixel contribution;
-                contribution.red = (red_contrib > 0) ? red_contrib : 0;
-                contribution.green = (green_contrib > 0) ? green_contrib : 0;
-                contribution.blue = (blue_contrib > 0) ? blue_contrib : 0;
-                
-                moodTint += contribution;
-            }
-        }
-        
-        // Step 2: Apply mood tint to ALL pixels in the frame
-        for (uint32_t pixel = 0; pixel < current_frame_size; pixel++) 
-        {
-            // Add mood tint using saturating arithmetic
-            currentFrame[pixel] += moodTint;
-        }
-        
-        // Step 3: Remember new mood
-        lastMood = currentMood;
-        mood_initialized = true;
-        
-        ESP_LOGV(TAG_goblin_eye, "Frame updated with mood tint R:%u G:%u B:%u", 
-                 moodTint.red, moodTint.green, moodTint.blue);
-    }
-    // If mood hasn't changed, frame colors remain cached - no processing needed!
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
 }
-// --- End: config\components\creature_specific\goblin_eye.src ---
+// --- End: config/components/goblin_eye.src ---
 
-// --- Begin: config\components\positioned\goblin_left_ear.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_left_ear.src ---
 // goblin_left_ear component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -423,83 +275,28 @@ void goblin_left_ear_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_left_ear, "goblin_left_ear act");
 }
-// --- End: config\components\positioned\goblin_left_ear.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_left_ear.src ---
 
-// --- Begin: config\components\positioned\goblin_left_eye.src ---
-// goblin_left_eye component implementation
-// Positioned component that manages the left eye display buffer
+// --- Begin: config/bots/bot_families/goblins/head/goblin_left_eye.src ---
+// head_components_goblin_left_eye component implementation
+// Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-#include <cstdint>
-
 static const char *TAG_goblin_left_eye = "goblin_left_eye";
 
-// Display buffer for left eye - now using Pixel class
-static Pixel* left_display_buffer = nullptr;
-static Pixel* left_current_frame_ptr = nullptr;
-static size_t left_frame_offset = 0;  // Offset in pixels
-
-/**
- * @brief Initialize left eye display buffer
- * Allocates framebuffer using Pixel class and Display Buffer Interface
- */
 esp_err_t goblin_left_eye_init(void) {
-    ESP_LOGI(TAG_goblin_left_eye, "Initializing left eye display buffer");
-    
-    // Allocate display buffer - array of Pixels
-    uint32_t display_size = getDisplaySize();
-    left_display_buffer = new Pixel[display_size];
-    
-    if (!left_display_buffer) {
-        ESP_LOGE(TAG_goblin_left_eye, "Failed to allocate left eye buffer");
-        return ESP_ERR_NO_MEM;
-    }
-    
-    // Initialize frame pointer and offset
-    left_frame_offset = 0;
-    left_current_frame_ptr = left_display_buffer;
-    
-    // Initialize buffer with test pattern - red for left eye
-    Pixel red = Pixel::Red();
-    for (uint32_t i = 0; i < display_size; i++) {
-        left_display_buffer[i] = red;
-    }
-    
-    ESP_LOGI(TAG_goblin_left_eye, "Left eye buffer allocated: %u pixels (%.1f KB)", 
-             display_size, (display_size * sizeof(Pixel)) / 1024.0f);
-    
+    ESP_LOGI(TAG_goblin_left_eye, "head_components_goblin_left_eye init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-/**
- * @brief Get pointer to current frame in left eye display buffer
- * @return Pointer to Pixel array at current offset, or nullptr if not initialized
- */
-Pixel* goblin_left_eye_get_buffer(void) {
-    return left_current_frame_ptr;
-}
-
-/**
- * @brief Update left eye animation and advance frame pointer
- * Implements frame cycling with offset management
- */
 void goblin_left_eye_act(void) {
-    if (!left_display_buffer) return;
-    
-    // Calculate current frame pointer with offset (in pixels)
-    left_current_frame_ptr = left_display_buffer + left_frame_offset;
-    
-    // Advance to next frame
-    left_frame_offset += getFrameSize();
-    
-    // Wrap around if we exceed buffer size
-    if (left_frame_offset >= getDisplaySize()) {
-        left_frame_offset = 0;
-    }
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_goblin_left_eye, "head_components_goblin_left_eye act");
 }
-// --- End: config\components\positioned\goblin_left_eye.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_left_eye.src ---
 
-// --- Begin: config\components\positioned\goblin_mouth.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_mouth.src ---
 // goblin_mouth component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -516,9 +313,9 @@ void goblin_mouth_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_mouth, "goblin_mouth act");
 }
-// --- End: config\components\positioned\goblin_mouth.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_mouth.src ---
 
-// --- Begin: config\components\positioned\goblin_nose.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_nose.src ---
 // goblin_nose component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -535,9 +332,9 @@ void goblin_nose_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_nose, "goblin_nose act");
 }
-// --- End: config\components\positioned\goblin_nose.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_nose.src ---
 
-// --- Begin: config\components\positioned\goblin_right_ear.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_right_ear.src ---
 // goblin_right_ear component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -554,9 +351,9 @@ void goblin_right_ear_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_right_ear, "goblin_right_ear act");
 }
-// --- End: config\components\positioned\goblin_right_ear.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_right_ear.src ---
 
-// --- Begin: config\components\positioned\goblin_right_eye.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_right_eye.src ---
 // goblin_right_eye component implementation
 // Positioned component that manages the right eye display buffer
 
@@ -620,6 +417,10 @@ void goblin_right_eye_act(void) {
     // Calculate current frame pointer with offset (in pixels)
     right_current_frame_ptr = right_display_buffer + right_frame_offset;
     
+    // Set global frame_ptr for display driver to use
+    extern Pixel* frame_ptr;
+    frame_ptr = right_current_frame_ptr;
+    
     // Advance to next frame
     right_frame_offset += getFrameSize();
     
@@ -628,9 +429,9 @@ void goblin_right_eye_act(void) {
         right_frame_offset = 0;
     }
 }
-// --- End: config\components\positioned\goblin_right_eye.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_right_eye.src ---
 
-// --- Begin: config\components\positioned\goblin_speaker.src ---
+// --- Begin: config/bots/bot_families/goblins/head/goblin_speaker.src ---
 // goblin_speaker component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -647,11 +448,58 @@ void goblin_speaker_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_goblin_speaker, "goblin_speaker act");
 }
-// --- End: config\components\positioned\goblin_speaker.src ---
+// --- End: config/bots/bot_families/goblins/head/goblin_speaker.src ---
 
 // NOTE: Source for component 'hc_sr04_sensor' not found.
 
-// --- Begin: config\components\hardware\servo_sg90_micro.src ---
+// --- Begin: config/hardware/hw496_microphone.src ---
+// HW-496 MEMS Microphone Component
+// Uses generic microphone driver with HW496-specific configuration
+
+#include "esp_log.h"
+#include "components/hardware/hw496_microphone.hdr"
+#include "../drivers/generic_mic_driver.hdr"
+#include "core/memory/SharedMemory.hpp"
+
+static const char *TAG_hw496_microphone = "hw496_microphone";
+
+// HW496-specific configuration
+// Based on HW496 datasheet: adjustable gain (25x-125x), 58dB SNR, 20Hz-20kHz response
+static const float HW496_DEFAULT_GAIN = 2.0f;  // 50x gain setting
+static const int HW496_NOISE_GATE_THRESHOLD = 50;  // Adjust based on testing
+static const bool HW496_NOISE_GATE_ENABLED = true;
+
+esp_err_t hw496_microphone_init(void) {
+    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone init");
+
+    // HW496-specific hardware initialization
+    // Note: generic_mic_driver is initialized separately as a dependency
+    // HW496 uses default generic_mic_driver settings
+
+    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone initialized (using generic driver defaults)");
+    return ESP_OK;
+}
+
+void hw496_microphone_act(void) {
+    // Read microphone data from SharedMemory (written by generic_mic_driver)
+    MicrophoneData* mic_data = GSM.read<MicrophoneData>();
+
+    if (mic_data && mic_data->driver_initialized) {
+        // HW496-specific processing or monitoring
+        // For now, log the data for testing
+        ESP_LOGD(TAG_hw496_microphone, "HW496 data: raw=%d, processed=%d, voltage=%dmV, gain=%.1f, sound=%s",
+                 mic_data->raw_sample, mic_data->processed_sample, mic_data->voltage_mv,
+                 mic_data->gain_applied, mic_data->sound_detected ? "detected" : "none");
+
+        // HW496 could add hardware-specific processing here
+        // For example, adjusting gain based on audio levels, or triggering hardware responses
+    } else {
+        ESP_LOGW(TAG_hw496_microphone, "Microphone data not available or driver not initialized");
+    }
+}
+// --- End: config/hardware/hw496_microphone.src ---
+
+// --- Begin: config/hardware/servo_sg90_micro.src ---
 // servo_sg90_micro component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -668,9 +516,9 @@ void servo_sg90_micro_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
 }
-// --- End: config\components\hardware\servo_sg90_micro.src ---
+// --- End: config/hardware/servo_sg90_micro.src ---
 
-// --- Begin: config\components\hardware\speaker.src ---
+// --- Begin: config/hardware/speaker.src ---
 // speaker component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -687,9 +535,9 @@ void speaker_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_speaker, "speaker act");
 }
-// --- End: config\components\hardware\speaker.src ---
+// --- End: config/hardware/speaker.src ---
 
-// --- Begin: config\components\interfaces\spi_bus.src ---
+// --- Begin: config/components/interfaces/spi_bus.src ---
 // spi_bus component implementation
 // ESP32 VSPI bus interface for SPI communication with dynamic pin assignment
 
@@ -714,7 +562,8 @@ struct spi_device_pinset_t {
 
 static constexpr size_t SPI_DEVICE_SLOT_COUNT = 32U;
 static spi_device_pinset_t spi_device_pins[SPI_DEVICE_SLOT_COUNT];
-spi_device_pinset_t cur_spi_pin;
+// cur_spi_display_pin is declared in spi_display_bus component
+extern spi_display_pinset_t cur_spi_display_pin;
 static size_t spi_device_count = 0;
 static size_t spi_active_device_index = 0;
 
@@ -840,7 +689,7 @@ void spi_bus_act(void) {
 
     if (spi_device_count == 0) {
         device = 0;
-        cur_spi_pin = spi_device_pinset_t();
+        cur_spi_display_pin = spi_display_pinset_t();
         return;
     }
 
@@ -849,7 +698,15 @@ void spi_bus_act(void) {
         device = 0;
     }
 
-    cur_spi_pin = spi_device_pins[static_cast<size_t>(device)];
+    // Convert spi_device_pinset_t to spi_display_pinset_t
+    const spi_device_pinset_t& device_pin = spi_device_pins[static_cast<size_t>(device)];
+    cur_spi_display_pin.mosi = device_pin.mosi;
+    cur_spi_display_pin.clk = device_pin.clk;
+    cur_spi_display_pin.cs = device_pin.cs;
+    cur_spi_display_pin.dc = device_pin.dc;
+    cur_spi_display_pin.bl = device_pin.backlight;
+    cur_spi_display_pin.rst = -1;  // Not used in device config
+    cur_spi_display_pin.handle = nullptr;
 
     ++device;
     if (static_cast<size_t>(device) >= spi_device_count) {
@@ -897,9 +754,9 @@ int spi_bus_get_backlight_pin(int device_index) {
     }
     return spi_device_pins[static_cast<size_t>(device_index)].backlight;
 }
-// --- End: config\components\interfaces\spi_bus.src ---
+// --- End: config/components/interfaces/spi_bus.src ---
 
-// --- Begin: config\components\drivers\spi_display_bus.src ---
+// --- Begin: config/components/drivers/spi_display_bus.src ---
 // spi_display_bus driver implementation
 // Provides dedicated SPI bus allocation for display peripherals
 
@@ -915,7 +772,7 @@ int spi_bus_get_backlight_pin(int device_index) {
 
 static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
-spi_display_pinset_t cur_spi_pin;
+spi_display_pinset_t cur_spi_display_pin;
 
 static const char *TAG_spi_display_bus = "spi_display_bus";
 
@@ -1056,8 +913,8 @@ esp_err_t spi_display_bus_init(void) {
              spi_display_slots[device_count].bl,
              (void*)spi_display_slots[device_count].handle);
 
-    // Set cur_spi_pin to the device we just created so the next component can use it immediately
-    cur_spi_pin = spi_display_slots[device_count];
+    // Set cur_spi_display_pin to the device we just created so the next component can use it immediately
+    cur_spi_display_pin = spi_display_slots[device_count];
 
     device_count++;
     return ESP_OK;
@@ -1081,9 +938,9 @@ void spi_display_bus_act(void)
     }
 
     // Set the current global pinset for other components to use
-    cur_spi_pin = spi_display_slots[device];
+    cur_spi_display_pin = spi_display_slots[device];
 
     // Move to the next device for the next call
     device++;
 }
-// --- End: config\components\drivers\spi_display_bus.src ---
+// --- End: config/components/drivers/spi_display_bus.src ---

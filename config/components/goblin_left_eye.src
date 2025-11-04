@@ -1,8 +1,10 @@
 // Auto-generated source for goblin_left_eye
-#include "components/goblin_left_eye.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_left_eye";
+
+template<typename T>
+T::Pixel* displayBuffer;
 
 esp_err_t goblin_left_eye_init(void)
 {
@@ -12,9 +14,15 @@ esp_err_t goblin_left_eye_init(void)
     return ESP_OK;
 }
 
-void goblin_left_eye_act(void)
+template<typename T>
+esp_err_t goblin_left_eye_act()
 {
+    display_buffer = new T( )
+
     #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
     #endif
+    return ESP_OK;
 }
+
+ 

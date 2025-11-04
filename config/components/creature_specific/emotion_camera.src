@@ -1,0 +1,15 @@
+// Auto-generated source for emotion_camera
+#include <esp_log.h>
+
+static const char* TAG = "emotion_camera";
+
+esp_err_t emotion_camera_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void emotion_camera_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

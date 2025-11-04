@@ -1,20 +1,15 @@
 // Auto-generated source for vampire_mouth
-#include "components/vampire_mouth.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "vampire_mouth";
 
 esp_err_t vampire_mouth_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void vampire_mouth_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

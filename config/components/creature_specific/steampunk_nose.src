@@ -1,0 +1,15 @@
+// Auto-generated source for steampunk_nose
+#include <esp_log.h>
+
+static const char* TAG = "steampunk_nose";
+
+esp_err_t steampunk_nose_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void steampunk_nose_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_clever_eyes
+#include <esp_err.h>
+
+esp_err_t goblin_clever_eyes_init(void);
+void goblin_clever_eyes_act(void);

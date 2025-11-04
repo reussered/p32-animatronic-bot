@@ -1,0 +1,5 @@
+// Auto-generated header for wrist_rotation_servo
+#include <esp_err.h>
+
+esp_err_t wrist_rotation_servo_init(void);
+void wrist_rotation_servo_act(void);

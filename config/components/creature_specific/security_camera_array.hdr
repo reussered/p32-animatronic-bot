@@ -1,0 +1,5 @@
+// Auto-generated header for security_camera_array
+#include <esp_err.h>
+
+esp_err_t security_camera_array_init(void);
+void security_camera_array_act(void);

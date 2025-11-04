@@ -1,0 +1,96 @@
+// oled_ssd1306_128x64 component header
+// Defines data structures for oled_ssd1306_128x64 display
+#ifndef OLED_SSD1306_128X64_HDR
+#define OLED_SSD1306_128X64_HDR
+
+#include <stdint.h>
+#include <esp_err.h>
+
+namespace OLED_SSD1306_128X64
+{
+
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
+    Pixel()
+    {
+        *this = InitialPixel;
+    }
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
+    {}
+
+    // Assignment operator
+    Pixel& operator=(const Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
+    }
+};
+
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
+
+// Init and act function prototypes
+esp_err_t oled_ssd1306_128x64_init(void);
+void oled_ssd1306_128x64_act(void);
+
+}  // namespace OLED_SSD1306_128X64
+
+#endif // OLED_SSD1306_128X64_HDR

@@ -1,0 +1,72 @@
+{
+    "relative_filename": "config/bots/bot_families/bears/head/bear_polar.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_template": "config/bots/bot_families/bears/bear_family.json",
+    "bot_type": "BEARPOLAR",
+    "bot_id": "bear_polar_v1",
+    "description": "Arctic polar bear with cold weather adaptations and swimming behaviors",
+    "created": "2025-10-12",
+    "template_inheritance": "extend",
+    "subfamily_selection": "arctic_bear",
+    "overrides": {
+        "baseline_dimensions": {
+            "eye_spacing": "4.0 INCH",
+            "compression_factor": 0.75,
+            "skull_scale": 1.5
+        },
+        "mood_defaults": {
+            "FEAR": 5,
+            "ANGER": 15,
+            "IRRITATION": 10,
+            "HAPPINESS": 10,
+            "CONTENTMENT": 20,
+            "HUNGER": 25,
+            "CURIOSITY": 10,
+            "AFFECTION": 5
+        },
+        "behavior_config": {
+            "threat_response_enabled": true,
+            "auto_sleep_timeout_seconds": 800,
+            "interaction_range_cm": 300,
+            "aggressive_threshold": 75,
+            "swimming_capable": true
+        },
+        "environmental_adaptations": {
+            "cold_resistance": "extreme_arctic",
+            "fur_density": "double_layer",
+            "paw_padding": "ice_grip"
+        }
+    },
+    "components": [
+        "config/components/creature_specific/bear_arctic_fur.json",
+        "config/components/creature_specific/bear_ice_sensors.json"
+    ],
+    "custom_behaviors": {
+        "ice_hunting": {
+            "trigger": "seal_hole_detection",
+            "response": "patient_waiting",
+            "duration_seconds": 300
+        },
+        "swimming_mode": {
+            "trigger": "water_proximity",
+            "response": "aquatic_movement",
+            "stroke_simulation": true
+        }
+    },
+    "audio_profile": {
+        "breath_condensation": "visible_vapor",
+        "ice_breaking": "cracking_sounds",
+        "underwater_calls": "muffled_communication"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Arctic specialized bear with unique cold adaptations",
+        "Swimming behaviors require special considerations",
+        "White fur coloring for arctic environment",
+        "Audio effects include ice and water sounds"
+    ],
+    "name": "bear_polar",
+    "type": "UNKNOWN"
+}

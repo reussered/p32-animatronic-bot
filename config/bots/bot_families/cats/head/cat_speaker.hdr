@@ -1,0 +1,5 @@
+// Auto-generated header for cat_speaker
+#include <esp_err.h>
+
+esp_err_t cat_speaker_init(void);
+void cat_speaker_act(void);

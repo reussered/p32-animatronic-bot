@@ -1,0 +1,5 @@
+// Auto-generated header for android_neural_interface
+#include <esp_err.h>
+
+esp_err_t android_neural_interface_init(void);
+void android_neural_interface_act(void);

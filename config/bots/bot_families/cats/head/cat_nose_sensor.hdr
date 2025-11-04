@@ -1,0 +1,5 @@
+// Auto-generated header for cat_nose_sensor
+#include <esp_err.h>
+
+esp_err_t cat_nose_sensor_init(void);
+void cat_nose_sensor_act(void);

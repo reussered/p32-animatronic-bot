@@ -1,0 +1,5 @@
+// Auto-generated header for thermal_sensor
+#include <esp_err.h>
+
+esp_err_t thermal_sensor_init(void);
+void thermal_sensor_act(void);

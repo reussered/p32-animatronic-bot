@@ -1,0 +1,82 @@
+{
+    "relative_filename": "config/bots/bot_families/cats/interactive_tabby.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_id": "CAT_INTERACTIVE_TABBY",
+    "bot_type": "INTERACTIVE_PET",
+    "description": "Highly interactive orange tabby cat with animated ears and touch-sensitive whiskers",
+    "created": "2025-10-12",
+    "family_template": "config/bots/bot_families/cats/cat_family.json",
+    "overrides": {
+        "mood_defaults": {
+            "CURIOSITY": 45,
+            "AFFECTION": 25,
+            "CONTENTMENT": 30,
+            "PLAYFULNESS": 35,
+            "INDEPENDENCE": 20,
+            "HUNGER": 10,
+            "FEAR": 10,
+            "IRRITATION": 8
+        },
+        "behavior_config": {
+            "purr_enabled": true,
+            "head_nuzzling": true,
+            "play_mode_duration": 300,
+            "attention_seeking": true,
+            "lap_cat_behavior": true
+        }
+    },
+    "components": [
+        "config/components/creature_specific/cat_animated_ears.json",
+        "config/components/creature_specific/cat_whisker_sensors.json",
+        "config/components/creature_specific/cat_purr_generator.json",
+        "config/components/creature_specific/cat_tail_servo.json"
+    ],
+    "interactive_behaviors": {
+        "greeting_patterns": [
+            "head_bump",
+            "figure_eight_weaving",
+            "purr_escalation",
+            "ear_forward_attention"
+        ],
+        "play_responses": [
+            "pounce_simulation",
+            "ear_twitching",
+            "curiosity_head_tilt",
+            "playful_swat_gesture"
+        ],
+        "affection_displays": [
+            "gentle_nuzzling",
+            "content_purring",
+            "slow_blink_love",
+            "whisker_forward_trust"
+        ]
+    },
+    "personality_profile": {
+        "social_level": "high",
+        "independence": "moderate",
+        "playfulness": "high",
+        "vocal_level": "moderate",
+        "lap_preference": "strong"
+    },
+    "sensory_configuration": {
+        "whisker_sensitivity": "high",
+        "ear_mobility": "full_range",
+        "eye_tracking": "smooth_follow",
+        "sound_reactivity": "moderate"
+    },
+    "aesthetic_customization": {
+        "fur_pattern": "orange_tabby_stripes",
+        "eye_color": "green_amber",
+        "nose_color": "pink",
+        "ear_shape": "triangular_tufted"
+    },
+    "care_simulation": {
+        "feeding_reminders": true,
+        "play_scheduling": true,
+        "nap_time_patterns": true,
+        "grooming_requests": true
+    },
+    "name": "interactive_tabby",
+    "type": "UNKNOWN"
+}

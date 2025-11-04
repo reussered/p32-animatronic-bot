@@ -29,7 +29,7 @@
         "scad_file": "assets/shapes/scad/skull_generators/goblin_skull.scad",
         "stl_file": "assets/shapes/stl/skull_generators/goblin_skull.stl",
         "description": "Anatomical goblin skull frame with component mounting rings",
-        "color_palette": "config/bots/bot_families/fantasy/goblin_family.json",
+        "color_palette": "config/bots/bot_families/goblins/goblin_family.json",
         "mounting_points": {
             "eye_left": {
                 "type": "26mm_ring",

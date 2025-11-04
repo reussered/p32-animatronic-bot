@@ -1,0 +1,15 @@
+// Auto-generated source for robot_led_strips
+#include <esp_log.h>
+
+static const char* TAG = "robot_led_strips";
+
+esp_err_t robot_led_strips_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void robot_led_strips_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

@@ -1,0 +1,20 @@
+// Auto-generated source for knee_flexion_servo
+#include "components/knee_flexion_servo.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "knee_flexion_servo";
+
+esp_err_t knee_flexion_servo_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void knee_flexion_servo_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_authority_markings
+#include <esp_err.h>
+
+esp_err_t goblin_authority_markings_init(void);
+void goblin_authority_markings_act(void);

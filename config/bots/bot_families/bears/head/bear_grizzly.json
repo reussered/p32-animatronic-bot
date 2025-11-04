@@ -1,0 +1,72 @@
+{
+    "relative_filename": "config/bots/bot_families/bears/head/bear_grizzly.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_template": "config/bots/bot_families/bears/bear_family.json",
+    "bot_type": "BEARGRIZZLY",
+    "bot_id": "bear_grizzly_v1",
+    "description": "Massive grizzly bear with territorial dominance and protective instincts",
+    "created": "2025-10-12",
+    "template_inheritance": "extend",
+    "subfamily_selection": "forest_bear",
+    "overrides": {
+        "baseline_dimensions": {
+            "eye_spacing": "4.2 INCH",
+            "compression_factor": 0.7,
+            "skull_scale": 1.6
+        },
+        "mood_defaults": {
+            "FEAR": 8,
+            "ANGER": 25,
+            "IRRITATION": 20,
+            "HAPPINESS": 5,
+            "CONTENTMENT": 15,
+            "HUNGER": 20,
+            "CURIOSITY": 5,
+            "AFFECTION": 2
+        },
+        "behavior_config": {
+            "threat_response_enabled": true,
+            "auto_sleep_timeout_seconds": 400,
+            "interaction_range_cm": 250,
+            "aggressive_threshold": 65,
+            "territorial_radius_meters": 10
+        },
+        "size_modifiers": {
+            "body_mass_factor": 1.8,
+            "claw_extension": "2.5 INCH",
+            "intimidation_scale": "maximum"
+        }
+    },
+    "components": [
+        "config/components/creature_specific/bear_massive_claws.json",
+        "config/components/creature_specific/bear_thick_fur.json"
+    ],
+    "custom_behaviors": {
+        "territorial_display": {
+            "trigger": "proximity_intrusion",
+            "response": "rear_up_roar",
+            "duration_seconds": 15
+        },
+        "protective_stance": {
+            "trigger": "young_presence_detected",
+            "response": "defensive_positioning",
+            "aggression_boost": 40
+        }
+    },
+    "audio_profile": {
+        "roar_intensity": "earth_shaking",
+        "growl_depth": "subsonic_rumble",
+        "breathing_volume": "heavy_snorting"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Largest and most intimidating bear variant",
+        "Designed for territorial and protective scenarios",
+        "Massive scale requires reinforced mounting systems",
+        "Audio effects emphasize raw power and dominance"
+    ],
+    "name": "bear_grizzly",
+    "type": "UNKNOWN"
+}

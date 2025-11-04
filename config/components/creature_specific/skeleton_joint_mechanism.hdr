@@ -1,0 +1,5 @@
+// Auto-generated header for skeleton_joint_mechanism
+#include <esp_err.h>
+
+esp_err_t skeleton_joint_mechanism_init(void);
+void skeleton_joint_mechanism_act(void);

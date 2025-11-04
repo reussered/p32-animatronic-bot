@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_scent_sensor
+#include <esp_err.h>
+
+esp_err_t goblin_scent_sensor_init(void);
+void goblin_scent_sensor_act(void);

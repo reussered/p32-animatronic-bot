@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_war_paint
-#include "components/goblin_war_paint.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_war_paint";
 
 esp_err_t goblin_war_paint_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_war_paint_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

@@ -1,0 +1,5 @@
+// Auto-generated header for spine_servo_middle
+#include <esp_err.h>
+
+esp_err_t spine_servo_middle_init(void);
+void spine_servo_middle_act(void);

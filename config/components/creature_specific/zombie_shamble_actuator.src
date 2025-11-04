@@ -1,0 +1,15 @@
+// Auto-generated source for zombie_shamble_actuator
+#include <esp_log.h>
+
+static const char* TAG = "zombie_shamble_actuator";
+
+esp_err_t zombie_shamble_actuator_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void zombie_shamble_actuator_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

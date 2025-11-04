@@ -1,0 +1,5 @@
+// Auto-generated header for cyclops_mouth
+#include <esp_err.h>
+
+esp_err_t cyclops_mouth_init(void);
+void cyclops_mouth_act(void);

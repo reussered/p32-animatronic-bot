@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_bloodshot_eyes
+#include "components/goblin_bloodshot_eyes.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_bloodshot_eyes";
+
+esp_err_t goblin_bloodshot_eyes_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_bloodshot_eyes_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

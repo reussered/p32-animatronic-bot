@@ -1,0 +1,15 @@
+// Auto-generated source for ghost_ectoplasm_generator
+#include <esp_log.h>
+
+static const char* TAG = "ghost_ectoplasm_generator";
+
+esp_err_t ghost_ectoplasm_generator_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void ghost_ectoplasm_generator_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

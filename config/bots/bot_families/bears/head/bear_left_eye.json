@@ -1,0 +1,39 @@
+{
+    "relative_filename": "config/bots/bot_families/bears/head/bear_left_eye.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "name": "bear_left_eye",
+    "subsystem": "HEAD",
+    "components": [
+        "config/components/creature_specific/bear_eye.json"
+    ],
+    "template_inheritance": {
+        "hardware_template": "config/components/hardware/gc9a01.json",
+        "creature_shell": "assets/shapes/scad/creature_shells/bear/bear_eye_shell.scad",
+        "mount_template": "assets/shapes/scad/basic_mounts/display_basic_mount.scad"
+    },
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "-1.8 INCH",
+        "y": "+0.9 INCH",
+        "z": "-0.4 INCH"
+    },
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "creature_specific_config": {
+        "eye_color": "BEAR_BROWN",
+        "pupil_style": "ROUND_MAMMAL",
+        "expression_range": "SLEEPY_TO_ALERT"
+    },
+    "function": "primary_display_left",
+    "description": "Left eye display animation - bear variant using standard GC9A01 hardware",
+    "timing": {
+        "hitCount": 5
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
+}

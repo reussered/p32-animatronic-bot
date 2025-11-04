@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "ROBOT_COMBAT_UNIT_001",
-    "family_reference": "config/bots/bot_families/mechanical/robot_family.json",
+    "family_reference": "config/bots/bot_families/robots/robot_family.json",
     "subfamily": "combat_robot",
     "description": "Military-grade combat robot with weapon simulation systems and tactical behavior patterns",
     "created": "2025-10-12",

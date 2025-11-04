@@ -1,20 +1,15 @@
 // Auto-generated source for cat_nose_sensor
-#include "components/cat_nose_sensor.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "cat_nose_sensor";
 
 esp_err_t cat_nose_sensor_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void cat_nose_sensor_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

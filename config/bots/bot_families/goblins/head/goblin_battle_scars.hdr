@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_battle_scars
+#include <esp_err.h>
+
+esp_err_t goblin_battle_scars_init(void);
+void goblin_battle_scars_act(void);

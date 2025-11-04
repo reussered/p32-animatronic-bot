@@ -1,0 +1,15 @@
+// Auto-generated source for base_eye_right
+#include <esp_log.h>
+
+static const char* TAG = "base_eye_right";
+
+esp_err_t base_eye_right_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void base_eye_right_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

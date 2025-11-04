@@ -1,0 +1,5 @@
+// Auto-generated header for pinky_finger_servo
+#include <esp_err.h>
+
+esp_err_t pinky_finger_servo_init(void);
+void pinky_finger_servo_act(void);

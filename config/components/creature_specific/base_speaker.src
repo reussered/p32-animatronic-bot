@@ -1,0 +1,15 @@
+// Auto-generated source for base_speaker
+#include <esp_log.h>
+
+static const char* TAG = "base_speaker";
+
+esp_err_t base_speaker_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void base_speaker_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

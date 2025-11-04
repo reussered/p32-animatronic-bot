@@ -1,0 +1,65 @@
+{
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_ear.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_ear",
+    "subsystem": "HEAD",
+    "description": "Shared goblin ear processing logic with directional sensitivity and goblin-specific audio characteristics",
+    "created": "2025-10-22",
+    "components": [
+        "config/components/hardware/hw496_microphone.json"
+    ],
+    "creature_audio_profile": {
+        "species": "GOBLIN",
+        "hearing_sensitivity": "ENHANCED",
+        "frequency_preference": "MID_TO_HIGH",
+        "directional_acuity": "SHARP",
+        "threat_detection": "AGGRESSIVE"
+    },
+    "audio_processing": {
+        "base_gain": "20dB",
+        "frequency_response": {
+            "low_cut": "80Hz",
+            "high_boost": "2kHz_+3dB",
+            "presence_boost": "4kHz_+2dB"
+        },
+        "dynamics": {
+            "compression_ratio": "3:1",
+            "attack_time": "5ms",
+            "release_time": "100ms"
+        }
+    },
+    "goblin_behavioral_triggers": {
+        "footstep_detection": {
+            "frequency_range": "50Hz-200Hz",
+            "sensitivity": "HIGH",
+            "reaction": "ALERT_MOOD_INCREASE"
+        },
+        "voice_detection": {
+            "frequency_range": "200Hz-3kHz",
+            "sensitivity": "MEDIUM",
+            "reaction": "CURIOSITY_MOOD_INCREASE"
+        },
+        "sudden_noise": {
+            "threshold": "65dB_SPL",
+            "reaction": "FEAR_MOOD_SPIKE"
+        }
+    },
+    "spatial_audio": {
+        "ear_spacing_reference": "3.0_INCH",
+        "time_delay_range": "0-200_microseconds",
+        "cross_correlation_window": "10ms",
+        "localization_accuracy": "5_degrees"
+    },
+    "timing": {
+        "hitCount": 10,
+        "description": "Audio processing every 10 loops for real-time response"
+    },
+    "software": {
+        "init_function": "goblin_ear_init",
+        "act_function": "goblin_ear_act"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "type": "CREATURE_SPECIFIC_AUDIO"
+}

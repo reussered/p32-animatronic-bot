@@ -1,0 +1,20 @@
+// Auto-generated source for imu_balance_sensor
+#include "components/imu_balance_sensor.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "imu_balance_sensor";
+
+esp_err_t imu_balance_sensor_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void imu_balance_sensor_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}
