@@ -1,0 +1,5 @@
+// Auto-generated header for elf_ear_right
+#include <esp_err.h>
+
+esp_err_t elf_ear_right_init(void);
+void elf_ear_right_act(void);

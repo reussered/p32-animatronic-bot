@@ -5,7 +5,7 @@
         "init_function": "bear_arctic_fur_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/bear_arctic_fur.json",
+    "relative_filename": "config/bots/bot_families/bear_arctic_fur.json",
     "name": "bear_arctic_fur",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

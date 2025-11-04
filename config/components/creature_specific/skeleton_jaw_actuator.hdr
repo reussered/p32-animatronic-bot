@@ -1,0 +1,5 @@
+// Auto-generated header for skeleton_jaw_actuator
+#include <esp_err.h>
+
+esp_err_t skeleton_jaw_actuator_init(void);
+void skeleton_jaw_actuator_act(void);

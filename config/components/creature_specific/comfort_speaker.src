@@ -1,0 +1,15 @@
+// Auto-generated source for comfort_speaker
+#include <esp_log.h>
+
+static const char* TAG = "comfort_speaker";
+
+esp_err_t comfort_speaker_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void comfort_speaker_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

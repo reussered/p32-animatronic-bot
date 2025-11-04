@@ -1,0 +1,5 @@
+// Auto-generated header for ghost_phase_lights
+#include <esp_err.h>
+
+esp_err_t ghost_phase_lights_init(void);
+void ghost_phase_lights_act(void);

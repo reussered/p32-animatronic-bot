@@ -1,0 +1,5 @@
+// Auto-generated header for dragon_snout
+#include <esp_err.h>
+
+esp_err_t dragon_snout_init(void);
+void dragon_snout_act(void);

@@ -1,0 +1,5 @@
+// Auto-generated header for spine_flexion_servo
+#include <esp_err.h>
+
+esp_err_t spine_flexion_servo_init(void);
+void spine_flexion_servo_act(void);

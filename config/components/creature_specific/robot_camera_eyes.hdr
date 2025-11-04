@@ -1,0 +1,5 @@
+// Auto-generated header for robot_camera_eyes
+#include <esp_err.h>
+
+esp_err_t robot_camera_eyes_init(void);
+void robot_camera_eyes_act(void);

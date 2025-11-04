@@ -41,46 +41,6 @@ void debug_controller_act(void) {
 }
 // --- End: config\components\system\debug_controller.src ---
 
-// --- Begin: config\components\drivers\gpio_pair_driver.src ---
-// gpio_pair_driver component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-static const char *TAG_gpio_pair_driver = "gpio_pair_driver";
-
-esp_err_t gpio_pair_driver_init(void) {
-    ESP_LOGI(TAG_gpio_pair_driver, "gpio_pair_driver init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void gpio_pair_driver_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_gpio_pair_driver, "gpio_pair_driver act");
-}
-// --- End: config\components\drivers\gpio_pair_driver.src ---
-
-// --- Begin: config\components\interfaces\gpio_pair_vibration_sensor.src ---
-#include "esp_log.h"
-
-static const char *TAG = "gpio_pair_vibration_sensor";
-
-esp_err_t gpio_pair_vibration_sensor_init(void) {
-#ifdef DEBUG
-    ESP_LOGI(TAG, "gpio_pair_vibration_sensor_init() called");
-#endif
-    // TODO: Initialize GPIO pair for vibration sensor
-    return ESP_OK;
-}
-
-void gpio_pair_vibration_sensor_act(void) {
-#ifdef DEBUG
-    ESP_LOGD(TAG, "gpio_pair_vibration_sensor_act() called");
-#endif
-    // TODO: Read vibration sensor state
-}
-// --- End: config\components\interfaces\gpio_pair_vibration_sensor.src ---
-
 // --- Begin: config\components\system\network_monitor.src ---
 // network_monitor component implementation
 // Auto-generated stub - needs actual implementation
@@ -119,62 +79,41 @@ void power_monitor_act(void) {
 }
 // --- End: config\components\system\power_monitor.src ---
 
-// --- Begin: config\components\hardware\servo_sg90_micro.src ---
-// servo_sg90_micro component implementation
-// Auto-generated stub - needs actual implementation
+// --- Begin: config\components\creature_specific\spine_extension_servo.src ---
+// Auto-generated source for spine_extension_servo
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_servo_sg90_micro = "servo_sg90_micro";
+static const char* TAG = "spine_extension_servo";
 
-esp_err_t servo_sg90_micro_init(void) {
-    ESP_LOGI(TAG_servo_sg90_micro, "servo_sg90_micro init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t spine_extension_servo_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void servo_sg90_micro_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
+void spine_extension_servo_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-// --- End: config\components\hardware\servo_sg90_micro.src ---
+// --- End: config\components\creature_specific\spine_extension_servo.src ---
 
-// --- Begin: config\components\positioned\spine_extension_servo.src ---
-// spine_extension_servo component implementation
-// Auto-generated stub - needs actual implementation
+// --- Begin: config\components\creature_specific\spine_flexion_servo.src ---
+// Auto-generated source for spine_flexion_servo
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_spine_extension_servo = "spine_extension_servo";
+static const char* TAG = "spine_flexion_servo";
 
-esp_err_t spine_extension_servo_init(void) {
-    ESP_LOGI(TAG_spine_extension_servo, "spine_extension_servo init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t spine_flexion_servo_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void spine_extension_servo_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_spine_extension_servo, "spine_extension_servo act");
+void spine_flexion_servo_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-// --- End: config\components\positioned\spine_extension_servo.src ---
-
-// --- Begin: config\components\positioned\spine_flexion_servo.src ---
-// spine_flexion_servo component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-static const char *TAG_spine_flexion_servo = "spine_flexion_servo";
-
-esp_err_t spine_flexion_servo_init(void) {
-    ESP_LOGI(TAG_spine_flexion_servo, "spine_flexion_servo init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void spine_flexion_servo_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_spine_flexion_servo, "spine_flexion_servo act");
-}
-// --- End: config\components\positioned\spine_flexion_servo.src ---
+// --- End: config\components\creature_specific\spine_flexion_servo.src ---
 
 // --- Begin: config\components\system\system_core.src ---
 // system_core component implementation
@@ -214,62 +153,59 @@ void telemetry_hub_act(void) {
 }
 // --- End: config\components\system\telemetry_hub.src ---
 
-// --- Begin: config\components\positioned\torso_speaker.src ---
-// torso_speaker component implementation
-// Auto-generated stub - needs actual implementation
+// --- Begin: config\components\creature_specific\torso_speaker.src ---
+// Auto-generated source for torso_speaker
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_torso_speaker = "torso_speaker";
+static const char* TAG = "torso_speaker";
 
-esp_err_t torso_speaker_init(void) {
-    ESP_LOGI(TAG_torso_speaker, "torso_speaker init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t torso_speaker_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void torso_speaker_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_torso_speaker, "torso_speaker act");
+void torso_speaker_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-// --- End: config\components\positioned\torso_speaker.src ---
+// --- End: config\components\creature_specific\torso_speaker.src ---
 
-// --- Begin: config\components\positioned\torso_status_led.src ---
-// torso_status_led component implementation
-// Auto-generated stub - needs actual implementation
+// --- Begin: config\components\creature_specific\torso_status_led.src ---
+// Auto-generated source for torso_status_led
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_torso_status_led = "torso_status_led";
+static const char* TAG = "torso_status_led";
 
-esp_err_t torso_status_led_init(void) {
-    ESP_LOGI(TAG_torso_status_led, "torso_status_led init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t torso_status_led_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void torso_status_led_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_torso_status_led, "torso_status_led act");
+void torso_status_led_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-// --- End: config\components\positioned\torso_status_led.src ---
+// --- End: config\components\creature_specific\torso_status_led.src ---
 
-// --- Begin: config\components\positioned\waist_rotation_servo.src ---
-// waist_rotation_servo component implementation
-// Auto-generated stub - needs actual implementation
+// --- Begin: config\components\creature_specific\waist_rotation_servo.src ---
+// Auto-generated source for waist_rotation_servo
+#include <esp_log.h>
 
-#include "esp_log.h"
-static const char *TAG_waist_rotation_servo = "waist_rotation_servo";
+static const char* TAG = "waist_rotation_servo";
 
-esp_err_t waist_rotation_servo_init(void) {
-    ESP_LOGI(TAG_waist_rotation_servo, "waist_rotation_servo init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+esp_err_t waist_rotation_servo_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
     return ESP_OK;
 }
 
-void waist_rotation_servo_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_waist_rotation_servo, "waist_rotation_servo act");
+void waist_rotation_servo_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
 }
-// --- End: config\components\positioned\waist_rotation_servo.src ---
+// --- End: config\components\creature_specific\waist_rotation_servo.src ---
 
 // --- Begin: config\components\system\watchdog.src ---
 // watchdog component implementation

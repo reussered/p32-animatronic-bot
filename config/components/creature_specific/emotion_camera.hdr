@@ -1,0 +1,5 @@
+// Auto-generated header for emotion_camera
+#include <esp_err.h>
+
+esp_err_t emotion_camera_init(void);
+void emotion_camera_act(void);

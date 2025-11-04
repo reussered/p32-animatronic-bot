@@ -1,0 +1,5 @@
+// Auto-generated header for base_wrist_servo
+#include <esp_err.h>
+
+esp_err_t base_wrist_servo_init(void);
+void base_wrist_servo_act(void);

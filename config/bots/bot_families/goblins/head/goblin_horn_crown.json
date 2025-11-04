@@ -1,0 +1,141 @@
+{
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_horn_crown.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_horn_crown",
+    "description": "Crown of horns and authority markings for chief goblin leadership",
+    "created": "2025-10-12",
+    "components": [
+        "config/components/hardware/mechanical_actuator.json"
+    ],
+    "interface_reference": "config/components/interfaces/gpio_pair_1.json",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "horn_positions": [
+        {
+            "horn_id": "central_dominance",
+            "position": {
+                "x": "0.0 INCH",
+                "y": "2.2 INCH",
+                "z": "0.8 INCH"
+            },
+            "dimensions": {
+                "length": "2.0 INCH",
+                "base_diameter": "0.8 INCH",
+                "tip_diameter": "0.2 INCH"
+            },
+            "curvature": "slight_forward",
+            "significance": "supreme_authority"
+        },
+        {
+            "horn_id": "left_power",
+            "position": {
+                "x": "-0.8 INCH",
+                "y": "1.8 INCH",
+                "z": "0.6 INCH"
+            },
+            "dimensions": {
+                "length": "1.5 INCH",
+                "base_diameter": "0.6 INCH",
+                "tip_diameter": "0.15 INCH"
+            },
+            "curvature": "outward_curve",
+            "significance": "battle_victories"
+        },
+        {
+            "horn_id": "right_wisdom",
+            "position": {
+                "x": "0.8 INCH",
+                "y": "1.8 INCH",
+                "z": "0.6 INCH"
+            },
+            "dimensions": {
+                "length": "1.5 INCH",
+                "base_diameter": "0.6 INCH",
+                "tip_diameter": "0.15 INCH"
+            },
+            "curvature": "outward_curve",
+            "significance": "tactical_wisdom"
+        },
+        {
+            "horn_id": "left_temple_spike",
+            "position": {
+                "x": "-1.4 INCH",
+                "y": "1.0 INCH",
+                "z": "0.4 INCH"
+            },
+            "dimensions": {
+                "length": "1.0 INCH",
+                "base_diameter": "0.4 INCH",
+                "tip_diameter": "0.1 INCH"
+            },
+            "curvature": "straight_spike",
+            "significance": "territorial_claim"
+        },
+        {
+            "horn_id": "right_temple_spike",
+            "position": {
+                "x": "1.4 INCH",
+                "y": "1.0 INCH",
+                "z": "0.4 INCH"
+            },
+            "dimensions": {
+                "length": "1.0 INCH",
+                "base_diameter": "0.4 INCH",
+                "tip_diameter": "0.1 INCH"
+            },
+            "curvature": "straight_spike",
+            "significance": "pack_discipline"
+        }
+    ],
+    "crown_features": {
+        "base_circlet": {
+            "material": "bone_composite",
+            "diameter": "7.0 INCH",
+            "thickness": "0.3 INCH",
+            "decorative_elements": [
+                "carved_skulls",
+                "victory_notches"
+            ]
+        },
+        "authority_gems": {
+            "central_stone": "blood_ruby",
+            "side_stones": [
+                "amber_eyes",
+                "onyx_shadows"
+            ],
+            "power_glow": "intimidation_red"
+        }
+    },
+    "mechanical_features": {
+        "horn_articulation": {
+            "movement_type": "slight_positioning",
+            "range_degrees": 15,
+            "intimidation_mode": "forward_lean"
+        },
+        "crown_adjustment": {
+            "fit_adaptation": "skull_size_scaling",
+            "comfort_padding": "leather_strips"
+        }
+    },
+    "gpio_mapping": {
+        "horn_position_servo": "GPIO_30",
+        "crown_glow_control": "GPIO_31",
+        "intimidation_mode": "GPIO_32"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Authority symbol for goblin chief leadership",
+        "Mechanical articulation for intimidation display",
+        "Scalable design for different skull sizes",
+        "Cultural significance in goblin hierarchy"
+    ],
+    "hardware_type": "POSITIONED_COMPONENT",
+    "position": {
+        "y": "0.0 INCH",
+        "z": "0.0 INCH",
+        "x": "0.0 INCH"
+    },
+    "type": "AUTHORITY_DISPLAY"
+}

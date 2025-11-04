@@ -1,0 +1,5 @@
+// Auto-generated header for master_controller
+#include <esp_err.h>
+
+esp_err_t master_controller_init(void);
+void master_controller_act(void);

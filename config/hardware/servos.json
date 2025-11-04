@@ -5,7 +5,7 @@
     "name": "servos",
     "displayName": "Servo Motors",
     "description": "Servo motor pin and range configurations for head movement and facial expressions",
-    "type": "ACTUATOR",
+    "type": "HARDWARE_SPEC",
     "devices": [
         {
             "id": "head_pan",

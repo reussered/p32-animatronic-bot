@@ -2,6 +2,7 @@
 .venv/
 .vscode/
 build/
+build-artifacts/
 .vs/
 bin/
 obj/

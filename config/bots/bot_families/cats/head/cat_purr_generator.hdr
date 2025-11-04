@@ -1,0 +1,5 @@
+// Auto-generated header for cat_purr_generator
+#include <esp_err.h>
+
+esp_err_t cat_purr_generator_init(void);
+void cat_purr_generator_act(void);

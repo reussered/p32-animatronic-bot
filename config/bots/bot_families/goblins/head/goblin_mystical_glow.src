@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_mystical_glow
+#include "components/goblin_mystical_glow.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_mystical_glow";
+
+esp_err_t goblin_mystical_glow_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_mystical_glow_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

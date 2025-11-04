@@ -1,44 +1,42 @@
-// ST7796 Display Header
-// RGB565 (16-bit color)
-
+// st7796 component header
+// Defines data structures for st7796 display
 #ifndef ST7796_HDR
 #define ST7796_HDR
 
-#include <cstdint>
+#include <stdint.h>
+#include <esp_err.h>
 
-// Forward declaration
-struct ST7796_Pixel;
-
-// Global InitialPixel - must be set before allocating buffers containing Pixels
-extern ST7796_Pixel ST7796_InitialPixel;
-
-/**
- * @brief Pixel struct for ST7796 display (RGB565 format)
- * 16-bit color: 5-6-5 bits
- */
-struct ST7796_Pixel
+namespace ST7796
 {
-    unsigned int red : 5;
-    unsigned int green : 6;
-    unsigned int blue : 5;
 
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
     // Maximum values for each color channel (for mood calculations)
     static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
     static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
     static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
-    
-    ST7796_Pixel() 
+
+    Pixel()
     {
-        *this = ST7796_InitialPixel;
+        *this = InitialPixel;
     }
-    
-    // Copy constructor
-    ST7796_Pixel(const ST7796_Pixel& other) 
-        : red(other.red), green(other.green), blue(other.blue)
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
     {}
-    
+
     // Assignment operator
-    ST7796_Pixel& operator=(const ST7796_Pixel& other)
+    Pixel& operator=(const Pixel& other)
     {
         red = other.red;
         green = other.green;
@@ -46,54 +44,53 @@ struct ST7796_Pixel
         return *this;
     }
 
-    // Add two pixels with saturation (overflow caps at max value per channel)
-    ST7796_Pixel operator+(const ST7796_Pixel& other) const
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
     {
-        ST7796_Pixel result;
-        
-        // Add red channel
+        Pixel result;
         unsigned int sum_r = red + other.red;
         result.red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
         unsigned int sum_g = green + other.green;
         result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
         unsigned int sum_b = blue + other.blue;
         result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
         return result;
     }
 
     // Add-assign operator with saturation
-    ST7796_Pixel& operator+=(const ST7796_Pixel& other)
+    Pixel& operator+=(const Pixel& other)
     {
-        // Add red channel
-        unsigned int sum_r = red + other.red;
-        red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
-        unsigned int sum_g = green + other.green;
-        green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
-        unsigned int sum_b = blue + other.blue;
-        blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
+        *this = *this + other;
         return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
     }
 };
 
-// Display specifications
-size_t st7796_get_width(void);
-size_t st7796_get_height(void);
-size_t getFrameSize(void);
-size_t getFrameRowSize(void);
-size_t getDisplaySize(void);
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
 
-// Component functions
+// Init and act function prototypes
 esp_err_t st7796_init(void);
 void st7796_act(void);
+
+}  // namespace ST7796
 
 #endif // ST7796_HDR

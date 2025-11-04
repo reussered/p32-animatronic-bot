@@ -1,0 +1,5 @@
+// Auto-generated header for audio_analysis_unit
+#include <esp_err.h>
+
+esp_err_t audio_analysis_unit_init(void);
+void audio_analysis_unit_act(void);

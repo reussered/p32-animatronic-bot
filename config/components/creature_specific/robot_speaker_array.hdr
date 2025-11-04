@@ -1,0 +1,5 @@
+// Auto-generated header for robot_speaker_array
+#include <esp_err.h>
+
+esp_err_t robot_speaker_array_init(void);
+void robot_speaker_array_act(void);

@@ -1,0 +1,15 @@
+// Auto-generated source for ghost_phase_lights
+#include <esp_log.h>
+
+static const char* TAG = "ghost_phase_lights";
+
+esp_err_t ghost_phase_lights_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void ghost_phase_lights_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

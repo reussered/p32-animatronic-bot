@@ -1,0 +1,15 @@
+// Auto-generated source for touch_sensor_array
+#include <esp_log.h>
+
+static const char* TAG = "touch_sensor_array";
+
+esp_err_t touch_sensor_array_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void touch_sensor_array_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

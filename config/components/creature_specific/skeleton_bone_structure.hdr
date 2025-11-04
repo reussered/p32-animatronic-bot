@@ -1,0 +1,5 @@
+// Auto-generated header for skeleton_bone_structure
+#include <esp_err.h>
+
+esp_err_t skeleton_bone_structure_init(void);
+void skeleton_bone_structure_act(void);

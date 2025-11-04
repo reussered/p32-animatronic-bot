@@ -1,0 +1,5 @@
+// Auto-generated header for cyclops_eye_central
+#include <esp_err.h>
+
+esp_err_t cyclops_eye_central_init(void);
+void cyclops_eye_central_act(void);

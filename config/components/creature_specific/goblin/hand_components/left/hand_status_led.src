@@ -1,20 +1,15 @@
 // Auto-generated source for hand_status_led
-#include "components/hand_status_led.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "hand_status_led";
 
 esp_err_t hand_status_led_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void hand_status_led_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

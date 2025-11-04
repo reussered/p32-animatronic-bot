@@ -11,49 +11,25 @@ static const char *TAG_gc9a01 = "gc9a01";
 
 // Define GC9A01_InitialPixel
 // Note: value should be set before allocating buffers containing GC9A01_Pixels
-Pixel GC9A01_InitialPixel;
+GC9A01::Pixel GC9A01::InitialPixel(GC9A01::PixelColors::Red);
 
-// Display Buffer Interface - provides buffer allocation and size info
-// to positioned components (eyes, mouth, etc.)
+// Core display interface - all displays must implement these 3 functions
+// Combined with Pixel::getBytesPerPixel() this provides complete sizing
 
 /**
- * @brief Get display width in pixels
- * @return Display width (240 for GC9A01)
+ * @brief Get number of rows in display (height)
+ * @return Number of rows (240 for GC9A01)
  */
-uint16_t gc9a01_get_width(void) {
+uint16_t getRowCount(void) {
     return 240;
-}
-
-/**
- * @brief Get display height in pixels
- * @return Display height (240 for GC9A01)
- */
-uint16_t gc9a01_get_height(void) {
-    return 240;
-}
-
-/**
- * @brief Get total frame size in pixels
- * @return Total pixels in one frame (width * height)
- */
-uint32_t getFrameSize(void) {
-    return 240 * 240;  // 57,600 pixels
 }
 
 /**
  * @brief Get pixels per row (display width)
- * @return Number of pixels per row
+ * @return Pixels per row (240 for GC9A01)
  */
-uint32_t getFrameRowSize(void) {
+uint16_t getRowSize(void) {
     return 240;
-}
-
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame
- */
-uint32_t getDisplaySize(void) {
-    return 240 * 240;  // 57,600 pixels
 }
 
 esp_err_t gc9a01_init(void) {

@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "name": "base_mesh_coordinator",
-    "relative_filename": "config/components/creature_specific/base_mesh_coordinator.json",
+    "relative_filename": "config/bots/bot_families/base_mesh_coordinator.json",
     "subsystem": "TEMPLATE",
     "software": {
         "act_function": "base_mesh_coordinator_act",

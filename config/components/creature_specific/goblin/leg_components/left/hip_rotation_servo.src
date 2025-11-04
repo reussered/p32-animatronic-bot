@@ -1,20 +1,15 @@
 // Auto-generated source for hip_rotation_servo
-#include "components/hip_rotation_servo.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "hip_rotation_servo";
 
 esp_err_t hip_rotation_servo_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void hip_rotation_servo_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

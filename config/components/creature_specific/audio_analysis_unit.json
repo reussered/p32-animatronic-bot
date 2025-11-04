@@ -5,7 +5,7 @@
         "init_function": "audio_analysis_unit_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/audio_analysis_unit.json",
+    "relative_filename": "config/bots/bot_families/audio_analysis_unit.json",
     "name": "audio_analysis_unit",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

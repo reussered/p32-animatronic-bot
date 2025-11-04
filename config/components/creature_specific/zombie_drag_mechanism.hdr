@@ -1,0 +1,5 @@
+// Auto-generated header for zombie_drag_mechanism
+#include <esp_err.h>
+
+esp_err_t zombie_drag_mechanism_init(void);
+void zombie_drag_mechanism_act(void);

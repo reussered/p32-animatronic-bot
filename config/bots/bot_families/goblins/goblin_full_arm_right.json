@@ -1,0 +1,50 @@
+{
+    "relative_filename": "config/bots/goblin_full_arm_right.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINFULL_ARM_RIGHT",
+    "bot_id": "goblin_full_arm_right_v2",
+    "description": "Goblin right arm subsystem controller - 7 DOF arm control",
+    "created": "2025-10-13",
+    "subsystem_type": "ARM_CONTROLLER_RIGHT",
+    "controller": "ESP32_C3_MINI",
+    "coordinate_system": "skull_3d",
+    "reference_point": "shoulder_socket_right",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/goblin/arm_components/right/shoulder_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/shoulder_abduction_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/shoulder_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/elbow_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/forearm_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/wrist_flexion_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/wrist_rotation_servo.json",
+        "config/components/creature_specific/goblin/arm_components/right/arm_status_led.json"
+    ],
+    "degrees_of_freedom": {
+        "shoulder_dof": "3",
+        "elbow_dof": "1",
+        "forearm_dof": "1",
+        "wrist_dof": "2",
+        "total_controlled_dof": "7"
+    },
+    "arm_specifications": {
+        "upper_arm_length": "10.0 INCHES",
+        "forearm_length": "9.0 INCHES",
+        "total_reach": "19.0 INCHES",
+        "payload_capacity_kg": "2.0",
+        "movement_speed": "MODERATE"
+    },
+    "mesh_communication": {
+        "master_controller": "TORSO_ESP32_S3",
+        "coordination_priority": "MEDIUM",
+        "response_time_target_ms": "50",
+        "heartbeat_rate_hz": "10"
+    },
+    "prototype_status": "in_development",
+    "tested": false,
+    "estimated_cost_usd": "185.00",
+    "name": "goblin_full_arm_right",
+    "type": "UNKNOWN",
+    "creature": "goblin"
+}

@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_ritual_scars
-#include "components/goblin_ritual_scars.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_ritual_scars";
 
 esp_err_t goblin_ritual_scars_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_ritual_scars_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

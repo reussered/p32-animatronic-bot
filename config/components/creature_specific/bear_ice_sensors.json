@@ -5,7 +5,7 @@
         "init_function": "bear_ice_sensors_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/bear_ice_sensors.json",
+    "relative_filename": "config/bots/bot_families/bear_ice_sensors.json",
     "name": "bear_ice_sensors",
     "subsystem": "SENSOR",
     "components": [

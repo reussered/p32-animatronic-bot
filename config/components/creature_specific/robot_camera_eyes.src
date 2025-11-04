@@ -1,0 +1,15 @@
+// Auto-generated source for robot_camera_eyes
+#include <esp_log.h>
+
+static const char* TAG = "robot_camera_eyes";
+
+esp_err_t robot_camera_eyes_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void robot_camera_eyes_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

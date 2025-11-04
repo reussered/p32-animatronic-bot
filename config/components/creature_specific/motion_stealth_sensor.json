@@ -5,7 +5,7 @@
         "init_function": "motion_stealth_sensor_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/motion_stealth_sensor.json",
+    "relative_filename": "config/bots/bot_families/motion_stealth_sensor.json",
     "name": "motion_stealth_sensor",
     "subsystem": "SENSOR",
     "components": [

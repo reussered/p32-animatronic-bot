@@ -1,0 +1,5 @@
+// Auto-generated header for bear_left_eye
+#include <esp_err.h>
+
+esp_err_t bear_left_eye_init(void);
+void bear_left_eye_act(void);

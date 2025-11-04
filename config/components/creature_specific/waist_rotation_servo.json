@@ -18,6 +18,6 @@
         "init_function": "waist_rotation_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/waist_rotation_servo.json",
+    "relative_filename": "config/bots/bot_families/waist_rotation_servo.json",
     "type": "POSITIONED_COMPONENT"
 }

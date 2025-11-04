@@ -1,20 +1,15 @@
 // Auto-generated source for master_controller
-#include "components/master_controller.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "master_controller";
 
 esp_err_t master_controller_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void master_controller_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

@@ -5,7 +5,7 @@
         "init_function": "base_elbow_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/base_elbow_servo.json",
+    "relative_filename": "config/bots/bot_families/base_elbow_servo.json",
     "name": "base_elbow_servo",
     "subsystem": "ACTUATOR",
     "components": [

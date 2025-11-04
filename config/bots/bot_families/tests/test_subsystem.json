@@ -1,0 +1,13 @@
+{
+    "relative_filename": "config/bots/test_subsystem.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "test_subsystem",
+    "type": "SUBSYSTEM_ASSEMBLY",
+    "controller": "esp32-s3-devkitc-1",
+    "description": "A subsystem for testing the dynamic pin allocation.",
+    "components": [
+        "config/components/tests/test_component.json"
+    ],
+    "creature": "test"
+}

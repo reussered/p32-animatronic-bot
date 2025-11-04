@@ -1,0 +1,15 @@
+// Auto-generated source for zombie_rotting_flesh
+#include <esp_log.h>
+
+static const char* TAG = "zombie_rotting_flesh";
+
+esp_err_t zombie_rotting_flesh_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void zombie_rotting_flesh_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

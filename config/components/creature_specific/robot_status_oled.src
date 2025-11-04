@@ -1,0 +1,15 @@
+// Auto-generated source for robot_status_oled
+#include <esp_log.h>
+
+static const char* TAG = "robot_status_oled";
+
+esp_err_t robot_status_oled_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void robot_status_oled_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

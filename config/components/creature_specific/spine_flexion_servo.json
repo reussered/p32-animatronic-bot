@@ -18,6 +18,6 @@
         "init_function": "spine_flexion_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/spine_flexion_servo.json",
+    "relative_filename": "config/bots/bot_families/spine_flexion_servo.json",
     "type": "POSITIONED_COMPONENT"
 }

@@ -2,49 +2,71 @@
     "relative_filename": "config/templates/base/arm_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "template_type": "base_template",
-    "description": "Base template for arm subsystems - shoulder, elbow, wrist servos",
-    "created": "2025-10-13",
     "subsystem_type": "ARM_CONTROLLER",
-    "controller": "ESP32_C3_MINI",
-    "coordinate_system": "skull_3d",
-    "reference_point": "shoulder_socket",
-    "units": "INCHES",
+    "description": "Universal base template for arm subsystem controllers across all creatures",
+    "controller": {
+        "processor": "ESP32_C3_MINI",
+        "flash_memory": "4MB",
+        "ram": "400KB",
+        "gpio_pins": 22,
+        "adc_channels": 6,
+        "pwm_channels": 6,
+        "spi_interfaces": 1,
+        "i2c_interfaces": 1
+    },
+    "power_specifications": {
+        "input_voltage": "5V_FROM_TORSO",
+        "logic_voltage": "3.3V",
+        "servo_voltage": "5V_6V",
+        "max_current_draw": "3000_MA",
+        "power_rails": [
+            "SERVO_POWER",
+            "3.3V",
+            "GND"
+        ],
+        "voltage_regulation": "ONBOARD_LDO"
+    },
     "components": [
-        "config/components/creature_specific/base_shoulder_servo.json",
-        "config/components/creature_specific/base_elbow_servo.json",
-        "config/components/creature_specific/base_wrist_servo.json",
-        "config/components/creature_specific/base_arm_status_led.json"
+        {
+            "component_type": "COORDINATION_ENGINE",
+            "function_name": "coordination_update",
+            "default_hitCount": 10,
+            "role": "balance_compensation",
+            "required": true
+        },
+        {
+            "component_type": "SAFETY_MONITOR",
+            "function_name": "safety_monitor_update",
+            "default_hitCount": 2,
+            "role": "collision_detection",
+            "required": true
+        }
     ],
-    "degrees_of_freedom_defaults": {
-        "shoulder_dof": "2",
-        "elbow_dof": "1",
-        "wrist_dof": "2",
-        "total_controlled_dof": "5"
-    },
     "servo_specifications": {
-        "shoulder_servo_type": "MG996R_SERVO",
-        "elbow_servo_type": "MG996R_SERVO",
-        "wrist_servo_type": "SG90_MICRO_SERVO",
-        "servo_power_voltage": "6V_REGULATED",
-        "max_servo_current": "2.5A_TOTAL"
-    },
-    "timing_defaults": {
-        "servo_update_hitCount": 20,
-        "position_feedback_hitCount": 10,
-        "safety_check_hitCount": 5,
-        "status_led_hitCount": 100
-    },
-    "safety_limits": {
-        "shoulder_range_degrees": "180",
-        "elbow_range_degrees": "150",
-        "wrist_range_degrees": "270",
-        "max_velocity_deg_per_sec": "90",
-        "collision_detection_enabled": true
-    },
-    "communication_defaults": {
-        "command_response_timeout_ms": "100",
-        "position_report_rate_hz": "20"
+        "shoulder_joint": {
+            "servo_type": "MG996R_HIGH_TORQUE",
+            "pwm_channel": 0,
+            "min_pulse": 1000,
+            "max_pulse": 2000,
+            "range_degrees": 180,
+            "default_hitCount": 10
+        },
+        "elbow_joint": {
+            "servo_type": "MG996R_HIGH_TORQUE",
+            "pwm_channel": 1,
+            "min_pulse": 1000,
+            "max_pulse": 2000,
+            "range_degrees": 150,
+            "default_hitCount": 10
+        },
+        "wrist_joint": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 2,
+            "min_pulse": 600,
+            "max_pulse": 2400,
+            "range_degrees": 120,
+            "default_hitCount": 15
+        }
     },
     "name": "arm_base",
     "type": "UNKNOWN"

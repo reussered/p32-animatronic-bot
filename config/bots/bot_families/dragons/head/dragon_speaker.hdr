@@ -1,0 +1,5 @@
+// Auto-generated header for dragon_speaker
+#include <esp_err.h>
+
+esp_err_t dragon_speaker_init(void);
+void dragon_speaker_act(void);

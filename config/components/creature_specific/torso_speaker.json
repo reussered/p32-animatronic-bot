@@ -18,6 +18,6 @@
         "init_function": "torso_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/torso_speaker.json",
+    "relative_filename": "config/bots/bot_families/torso_speaker.json",
     "type": "POSITIONED_COMPONENT"
 }

@@ -1,20 +1,15 @@
 // Auto-generated source for power_management_system
-#include "components/power_management_system.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "power_management_system";
 
 esp_err_t power_management_system_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void power_management_system_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

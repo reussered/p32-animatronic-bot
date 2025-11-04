@@ -1,0 +1,5 @@
+// Auto-generated header for base_shoulder_servo
+#include <esp_err.h>
+
+esp_err_t base_shoulder_servo_init(void);
+void base_shoulder_servo_act(void);

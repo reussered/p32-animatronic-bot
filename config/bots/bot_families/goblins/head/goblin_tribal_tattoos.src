@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_tribal_tattoos
+#include "components/goblin_tribal_tattoos.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_tribal_tattoos";
+
+esp_err_t goblin_tribal_tattoos_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_tribal_tattoos_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for zombie_eye
+#include <esp_err.h>
+
+esp_err_t zombie_eye_init(void);
+void zombie_eye_act(void);

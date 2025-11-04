@@ -1,0 +1,5 @@
+// Auto-generated header for touch_sensor_array
+#include <esp_err.h>
+
+esp_err_t touch_sensor_array_init(void);
+void touch_sensor_array_act(void);

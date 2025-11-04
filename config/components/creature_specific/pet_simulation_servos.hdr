@@ -1,0 +1,5 @@
+// Auto-generated header for pet_simulation_servos
+#include <esp_err.h>
+
+esp_err_t pet_simulation_servos_init(void);
+void pet_simulation_servos_act(void);

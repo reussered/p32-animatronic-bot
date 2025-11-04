@@ -11,7 +11,7 @@
         "init_function": "emotion_camera_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/emotion_camera.json",
+    "relative_filename": "config/bots/bot_families/emotion_camera.json",
     "position": {
         "units": "INCH",
         "x": "0.0 INCH",

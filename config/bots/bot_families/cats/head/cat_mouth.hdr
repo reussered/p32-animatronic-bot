@@ -1,0 +1,5 @@
+// Auto-generated header for cat_mouth
+#include <esp_err.h>
+
+esp_err_t cat_mouth_init(void);
+void cat_mouth_act(void);

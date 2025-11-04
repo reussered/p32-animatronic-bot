@@ -1,0 +1,20 @@
+// Auto-generated source for bear_ice_sensors
+#include "components/bear_ice_sensors.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "bear_ice_sensors";
+
+esp_err_t bear_ice_sensors_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void bear_ice_sensors_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_sly_grin
+#include <esp_err.h>
+
+esp_err_t goblin_sly_grin_init(void);
+void goblin_sly_grin_act(void);

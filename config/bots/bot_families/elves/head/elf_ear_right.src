@@ -1,0 +1,20 @@
+// Auto-generated source for elf_ear_right
+#include "components/elf_ear_right.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "elf_ear_right";
+
+esp_err_t elf_ear_right_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void elf_ear_right_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

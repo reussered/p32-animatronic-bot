@@ -1,0 +1,84 @@
+{
+    "relative_filename": "config/bots/goblin_full_leg_left.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINFULL_LEG_LEFT",
+    "bot_id": "goblin_full_leg_left_v2",
+    "description": "Goblin left leg subsystem controller - 6 DOF leg control for bipedal walking",
+    "created": "2025-10-13",
+    "subsystem_type": "LEG_CONTROLLER_LEFT",
+    "controller": "ESP32_C3_MINI",
+    "coordinate_system": "skull_3d",
+    "reference_point": "hip_socket_left",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/goblin/leg_components/left/hip_flexion_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/hip_abduction_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/hip_rotation_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/knee_flexion_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/ankle_flexion_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/ankle_rotation_servo.json",
+        "config/components/creature_specific/goblin/leg_components/left/leg_status_led.json"
+    ],
+    "degrees_of_freedom": {
+        "hip_dof": "3",
+        "knee_dof": "1",
+        "ankle_dof": "2",
+        "total_controlled_dof": "6"
+    },
+    "leg_specifications": {
+        "thigh_length": "12.0 INCHES",
+        "shin_length": "11.0 INCHES",
+        "foot_length": "4.5 INCHES",
+        "total_leg_length": "27.5 INCHES",
+        "weight_bearing_capacity_kg": "25.0"
+    },
+    "servo_power_config": {
+        "hip_servos": "MG996R_HIGH_TORQUE",
+        "knee_servo": "MG996R_HIGH_TORQUE",
+        "ankle_servos": "MG996R_STANDARD",
+        "power_rail_voltage": "7.2V",
+        "estimated_current_draw_a": "4.5"
+    },
+    "walking_parameters": {
+        "step_length_max": "8.0 INCHES",
+        "step_height_max": "3.0 INCHES",
+        "walking_speed_max": "1.5 MPH",
+        "balance_recovery_time_ms": "200"
+    },
+    "mesh_communication": {
+        "master_controller": "TORSO_ESP32_S3",
+        "coordination_priority": "CRITICAL",
+        "response_time_target_ms": "10",
+        "heartbeat_rate_hz": "50"
+    },
+    "gait_control": {
+        "gait_patterns": [
+            "WALK",
+            "RUN",
+            "CREEP",
+            "BALANCE"
+        ],
+        "stability_monitoring": true,
+        "ground_contact_sensors": true,
+        "adaptive_gait": true
+    },
+    "behavior_config": {
+        "dynamic_balance": true,
+        "collision_avoidance": true,
+        "terrain_adaptation": true,
+        "emergency_stop": true
+    },
+    "hardware_config": {
+        "servo_update_rate_hz": "100",
+        "balance_feedback_rate_hz": "200",
+        "mesh_sync_rate_hz": "50",
+        "safety_check_rate_hz": "100"
+    },
+    "prototype_status": "in_development",
+    "tested": false,
+    "estimated_cost_usd": "220.00",
+    "name": "goblin_full_leg_left",
+    "type": "UNKNOWN",
+    "creature": "goblin"
+}

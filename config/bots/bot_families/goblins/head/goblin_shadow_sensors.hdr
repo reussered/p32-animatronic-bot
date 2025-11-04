@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_shadow_sensors
+#include <esp_err.h>
+
+esp_err_t goblin_shadow_sensors_init(void);
+void goblin_shadow_sensors_act(void);

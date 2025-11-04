@@ -1,0 +1,5 @@
+// Auto-generated header for main_battery_monitor
+#include <esp_err.h>
+
+esp_err_t main_battery_monitor_init(void);
+void main_battery_monitor_act(void);

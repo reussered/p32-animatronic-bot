@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/goblin_nose.json",
+    "relative_filename": "config/bots/bot_families/goblin_nose.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_nose",

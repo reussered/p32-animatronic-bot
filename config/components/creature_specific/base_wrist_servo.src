@@ -1,0 +1,15 @@
+// Auto-generated source for base_wrist_servo
+#include <esp_log.h>
+
+static const char* TAG = "base_wrist_servo";
+
+esp_err_t base_wrist_servo_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void base_wrist_servo_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

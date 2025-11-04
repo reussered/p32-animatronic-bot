@@ -5,7 +5,7 @@
         "init_function": "skeleton_bone_structure_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/skeleton_bone_structure.json",
+    "relative_filename": "config/bots/bot_families/skeleton_bone_structure.json",
     "name": "skeleton_bone_structure",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

@@ -1,0 +1,5 @@
+// Auto-generated header for robot_led_strips
+#include <esp_err.h>
+
+esp_err_t robot_led_strips_init(void);
+void robot_led_strips_act(void);

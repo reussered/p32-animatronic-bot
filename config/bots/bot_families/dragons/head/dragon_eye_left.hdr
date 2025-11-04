@@ -1,0 +1,5 @@
+// Auto-generated header for dragon_eye_left
+#include <esp_err.h>
+
+esp_err_t dragon_eye_left_init(void);
+void dragon_eye_left_act(void);

@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_prank_accessories
-#include "components/goblin_prank_accessories.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_prank_accessories";
 
 esp_err_t goblin_prank_accessories_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_prank_accessories_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

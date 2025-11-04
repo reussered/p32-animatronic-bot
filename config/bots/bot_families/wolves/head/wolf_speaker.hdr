@@ -1,0 +1,5 @@
+// Auto-generated header for wolf_speaker
+#include <esp_err.h>
+
+esp_err_t wolf_speaker_init(void);
+void wolf_speaker_act(void);

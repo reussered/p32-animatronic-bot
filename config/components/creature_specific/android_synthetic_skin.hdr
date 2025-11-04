@@ -1,0 +1,5 @@
+// Auto-generated header for android_synthetic_skin
+#include <esp_err.h>
+
+esp_err_t android_synthetic_skin_init(void);
+void android_synthetic_skin_act(void);

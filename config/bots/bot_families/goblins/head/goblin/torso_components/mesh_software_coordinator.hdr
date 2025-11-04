@@ -1,0 +1,5 @@
+// Auto-generated header for mesh_software_coordinator
+#include <esp_err.h>
+
+esp_err_t mesh_software_coordinator_init(void);
+void mesh_software_coordinator_act(void);

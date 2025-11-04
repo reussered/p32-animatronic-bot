@@ -1,0 +1,5 @@
+// Auto-generated header for robot_chest_matrix
+#include <esp_err.h>
+
+esp_err_t robot_chest_matrix_init(void);
+void robot_chest_matrix_act(void);

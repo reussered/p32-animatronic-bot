@@ -5,7 +5,7 @@
         "init_function": "steampunk_eye_right_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/steampunk_eye_right.json",
+    "relative_filename": "config/bots/bot_families/steampunk_eye_right.json",
     "name": "steampunk_eye_right",
     "subsystem": "VISION",
     "components": [

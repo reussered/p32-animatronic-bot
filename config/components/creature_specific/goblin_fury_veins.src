@@ -1,20 +1,15 @@
 // Auto-generated source for goblin_fury_veins
-#include "components/goblin_fury_veins.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "goblin_fury_veins";
 
 esp_err_t goblin_fury_veins_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void goblin_fury_veins_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

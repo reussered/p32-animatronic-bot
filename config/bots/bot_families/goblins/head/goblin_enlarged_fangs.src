@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_enlarged_fangs
+#include "components/goblin_enlarged_fangs.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_enlarged_fangs";
+
+esp_err_t goblin_enlarged_fangs_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_enlarged_fangs_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

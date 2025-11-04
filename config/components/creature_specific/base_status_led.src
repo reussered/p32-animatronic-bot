@@ -1,0 +1,15 @@
+// Auto-generated source for base_status_led
+#include <esp_log.h>
+
+static const char* TAG = "base_status_led";
+
+esp_err_t base_status_led_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void base_status_led_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

@@ -5,7 +5,7 @@
         "init_function": "elf_mouth_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/elf_mouth.json",
+    "relative_filename": "config/bots/bot_families/elf_mouth.json",
     "name": "elf_mouth",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

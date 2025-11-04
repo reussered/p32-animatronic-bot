@@ -5,7 +5,7 @@
         "init_function": "touch_sensor_array_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/touch_sensor_array.json",
+    "relative_filename": "config/bots/bot_families/touch_sensor_array.json",
     "name": "touch_sensor_array",
     "subsystem": "SENSOR",
     "components": [

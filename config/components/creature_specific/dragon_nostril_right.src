@@ -1,20 +1,15 @@
 // Auto-generated source for dragon_nostril_right
-#include "components/dragon_nostril_right.hdr"
 #include <esp_log.h>
 
 static const char* TAG = "dragon_nostril_right";
 
 esp_err_t dragon_nostril_right_init(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "init executed");
-    #endif
     return ESP_OK;
 }
 
 void dragon_nostril_right_act(void)
 {
-    #ifdef DEBUG
     ESP_LOGI(TAG, "act executed");
-    #endif
 }

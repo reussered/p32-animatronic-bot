@@ -1,0 +1,5 @@
+// Auto-generated header for steampunk_nose
+#include <esp_err.h>
+
+esp_err_t steampunk_nose_init(void);
+void steampunk_nose_act(void);

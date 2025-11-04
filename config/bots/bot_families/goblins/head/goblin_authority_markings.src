@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_authority_markings
+#include "components/goblin_authority_markings.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_authority_markings";
+
+esp_err_t goblin_authority_markings_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_authority_markings_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

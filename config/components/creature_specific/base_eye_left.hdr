@@ -1,0 +1,5 @@
+// Auto-generated header for base_eye_left
+#include <esp_err.h>
+
+esp_err_t base_eye_left_init(void);
+void base_eye_left_act(void);
