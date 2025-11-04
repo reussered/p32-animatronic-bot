@@ -39,7 +39,11 @@
 
 **FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
----
+** ANYTIME contridictory RULES ARE FOUND, THE AGENT MUST STOP AND GET DIRECTION FROM THE HUMAN WHICH RULE TO do.  ONCE THE CORRECT RULE IS DETERMINED REMOVE THE OLD RULE.
+** it IS ABSOLUTELY CRITICAL THAT THE AGENT DOES NOT TRY AND REASON OUT WHAT TO DO IN THIS CASE.  IF WHAT TO DO ISN'T ABSOLUTELY CLEAR, 
+** NO MATTER WHAT IS BEING DONE, THE AGENT MUST STOP AND ASK THE HUMAN.  THIS ALSO APPLIES TO THOSE RULES THAT MAY BE PART OF THE AGENTS TRAINING
+** IT DOES NOT MATTER WHAT THE SOURCE OF THE RULE IS, EVEN EXTERNAL ONES.  aNY CIRCUMSTANCE WHERE THE AGENT IS UNCLEAR ON EXACTLY WHAT SHOULD BE DONE, THE HUMAN MUST BE
+** GIVEN THE OPPURTUNITY TO INTERVENE. 
 
 ## RULE 0: READ BEFORE CHANGING - MANDATORY INVESTIGATION PROTOCOL
 
@@ -64,14 +68,13 @@
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
 
-## RULE 2: COMPONENT-BASED ARCHITECTURE
+## RULE 2: NAMING Rules ARE FOUND IN NAMING_RULES.MD
 **ALL functionality is implemented as components defined in JSON files.**
 
 - Component names are globally unique
 - Each component has: `{ComponentName}.json`, `{ComponentName}.src`, `{ComponentName}.hdr`
 - Each component has two functions: `{name}_init(void)` and `{name}_act(void)`
-- Files located in: `src/components/` and `include/components/`
-- Components with shapes have: `{ComponentName}.scad` and `{ComponentName}.stl` in `assets/shapes/`
+- Components with shapes have: `{ComponentName}.scad` and `{ComponentName}.stl`
 
 ## RULE 3: COMPONENT ISOLATION - NO DIRECT FUNCTION CALLS
 **Components NEVER call each other's functions directly.**
@@ -91,7 +94,7 @@ This pattern is for components that are part of the **same subsystem** and compi
 - **Mechanism**: File-scoped global variables (e.g., `static` variables or pointers).
 - **How it Works**: The build process concatenates all `.src` files for a subsystem's components into one large `.cpp` file. This shared file scope allows them to communicate "privately" and efficiently.
 - **Example**:
-    1. A display driver component (`gc9a01_display`) can define a function like `get_display_buffer()` that returns a pointer to its frame buffer.
+    1. A display driver component (`gc9a01`) can define a function like `get_display_buffer()` that returns a pointer to its frame buffer.
     2. A hardware-specific component (`goblin_eye`) can call this function to get the pointer and manipulate the buffer directly.
     3. A bus component (`spi_bus`) can dynamically assign GPIO pins and store them in global variables that a generic driver (`generic_spi_display`) can then use for communication.
 - **Rule**: This is a fast, efficient, and acceptable way for tightly-coupled components *within the same subsystem* to coordinate.
@@ -109,48 +112,18 @@ This pattern is for communication between components running on **different cont
 **USE THESE WORKING PATTERNS - DO NOT REDESIGN THEM**
 
 ### PATTERN 1: MOOD-BASED DISPLAY ANIMATION (GOBLIN EYE SYSTEM)
-**Location**: `goblin_left_eye` + `goblin_right_eye` + `goblin_eye` + `gc9a01_display`
-
-**Architecture**:
-- **Positioned Components** (`goblin_left_eye`, `goblin_right_eye`): Handle buffer allocation, positioning, SPI binding
-- **Creature Logic Component** (`goblin_eye`): Shared mood-based color processing, palette management
-- **Hardware Component** (`gc9a01_display`): Display driver interface (getBuffer, getFrameSize, getFrameRowSize)
-
-**Code Structure**:
-```cpp
-// goblin_left_eye.src - Positioned component
-void goblin_left_eye_init(void) {
-    left_eye_animation_buffer = getBuffer();  // From gc9a01_display
-    // Initialize buffer management
-}
-
-void goblin_left_eye_act(void) {
-    // Set currentFrame pointer for goblin_eye to use
-    currentFrame = left_eye_animation_buffer;
-    // Handle left eye specific logic
-}
-
-// goblin_eye.src - Shared creature logic
-void goblin_eye_init(void) {
-    init_goblin_eye_palette();  // 256-color organized palette
-}
-
-void goblin_eye_act(void) {
-    if (currentFrame) {
-        process_frame_with_mood();  // Apply mood-based color adjustments
-    }
-}
-
-// gc9a01_display.src - Hardware interface
-uint8_t* getBuffer(void);      // Return display buffer
-uint32_t getFrameSize(void);   // Total pixels
-uint32_t getFrameRowSize(void); // Pixels per row
-```
-
-**Reusable Pattern**: This exact structure can be copied for any creature's eyes, ears, mouth, etc. Just change the palette colors and mood mappings.
+**Location**: `goblin_left_eye` -> `goblin_eye` -> `gc9a01` ->`spi_display_bus` -> `generic_spi_display`
 
 ### PATTERN 2: SHARED STATE COMMUNICATION
-**Location**: `SharedMemory` class with `GSM` global instance
+**Location**: `SharedMemory` class with `GSM` global instance  IS DECLARED IN THE SUBSYTEMS MAIN.CPP FILE LIKE:
+```cpp
+// this goes above the invocation to app_main
+SharedMemory GSM();
+
+// this is first line of app_main
+GSM.init();
+```
+
 
 **Usage Pattern**:
 ```cpp
@@ -173,23 +146,6 @@ GSM.write<Environment>(); // Broadcasts current environment state
 - All shared classes in `/shared` directory
 - Defined classes: Mood, Environment, Personality, SysTest
 
-### PATTERN 3: JSON-DRIVEN COMPONENT COMPOSITION
-**Location**: Recursive composition from `goblin_full.json` → subsystems → positioned components
-
-**Structure**:
-```json
-{
-    "bot_type": "GOBLINFULL",
-    "subsystem_assemblies": ["config/subsystems/goblin_head.json"],
-    "family_level_components": ["config/components/functional/goblin_mood.json"],
-    "mood_defaults": {"ANGER": 20, "HAPPINESS": 0}
-}
-```
-
-**Generation Process**:
-1. `python tools/generate_tables.py goblin_full src` creates dispatch tables
-2. Auto-generates: `p32_dispatch_tables.cpp/hpp`, `p32_component_functions.cpp/hpp`
-3. Links all component `init()` and `act()` functions into main loop
 
 ## RULE 6: FILE ORGANIZATION STANDARDS
 
@@ -208,29 +164,6 @@ Refer to that document for all rules regarding the location of configuration fil
 
 **Critical Rule**: Never manually edit generated C++ files. All changes must be made through JSON configurations and regenerated.
 
-## RULE 8: SHARED MEMORY API - SOLE COMMUNICATION MECHANISM
-
-**SharedMemory is the ONLY inter-subsystem communication mechanism.**
-
-**Core Usage Pattern**:
-```cpp
-// CORRECT: Fast local reads (NO network overhead)
-Mood *mood = GSM.read<Mood>();
-Environment *envir = GSM.read<Environment>();
-
-// CORRECT: Direct modifications (local only)
-mood->ANGER = 75;
-envir->distance_cm = 25.5;
-
-// CORRECT: Trigger synchronization (WITH network overhead)
-GSM.write<Mood>();      // Broadcasts current mood state
-GSM.write<Environment>(); // Broadcasts current environment state
-```
-
-**Initialization**:
-```cpp
-GSM.init();  // Initialize shared memory system
-```
 
 **Prohibited Methods**:
 - Direct communication protocol API calls
@@ -293,304 +226,28 @@ GSM.init();  // Initialize shared memory system
 - Test approach before implementing at scale
 - Use proven patterns that work except when they contradict one of the rules established for this project
 
-## RULE 13: PROJECT NAVIGATION AND KEY LOCATIONS
-
-**Script Locations**:
-- Build scripts: `build.ps1`, `build_multi_esp32.ps1`
-- Generation tools: `python tools/generate_tables.py`
-- Validation: `validate_json_improved.py`, `ascii_validator.ps1`
-
-**Configuration Structure**:
-- **Creatures/Bots**: `config\bots\bot_families\{family}\{bot_name}.json` (goblins, cats, bears, robots, etc.)
-- **Hardware specs**: `config\hardware\{component_type}.json` (servo_9g_micro.json, gc9a01_display.json, etc.)
-- **Interface definitions**: `config\interfaces\{interface_type}.json` (spi_bus.json, pwm_channel_3.json, etc.)
-- **Positioned components**: `config\components\positioned\{subsystem}\{component}.json`
-- **Subsystem assemblies**: `config\bots\bot_families\{family}\{subsystem_folder}\{subsystem_name}.json`
-- **Component templates**: `config\components\templates\{type}\{template}.json`
-- **Behaviors**: `config\behaviors\{behavior_name}.json`
-- **Moods**: `config\moods\{mood_config}.json`
-
-**Generated Code Structure**:
-- **Component implementations**: `src\components\{component_name}.src`
-- **Component headers**: `include\components\{component_name}.hdr`
-- **Dispatch tables**: `src\subsystems\{subsystem}\{subsystem}_dispatch_tables.hpp/.cpp`
-- **Shared classes**: `shared\{ClassName}.hpp` (Mood, Environment, SysTest, etc.)
-- **Core system**: `src\core\memory/SharedMemory.hpp/.cpp`
-
-**Asset Structure**:
-- **3D Models**: `assets\shapes\scad\{category}\{model}.scad` and `assets\shapes\stl\{category}\{model}.stl`
-- **Animations**: `assets\animations\{creature_family}\{animation_name}.json`
-- **Sounds**: `assets\sounds\{creature_family}\{sound_file}.wav`
-- **Manufacturing**: `config\manufacturing\{process}\{specification}.json`
-
-**Documentation Structure**:
-- **Build guides**: `docs\build_guides\{guide_name}.md`
-- **Architecture docs**: `docs\{system}_ARCHITECTURE.md`
-- **Specifications**: `docs\{component}-spec.md`
-- **Wiring diagrams**: `docs\wiring\{system}_wiring.md`
-
-**Family Categories Available**:
-- `config\bots\bot_families\goblins\` - Goblin creatures
-- `config\bots\bot_families\cats\` - Cat creatures
-- `config\bots\bot_families\bears\` - Bear creatures
-- `config\bots\bot_families\robots\` - Test/mechanical bots
-- `config\bots\bot_families\tests\` - Hardware validation and system test bots
-- `config\bots\bot_families\dragons\` - Dragon creatures
-- `config\bots\bot_families\horror\` - Horror creatures
-- `config\bots\bot_families\fantasy\` - Fantasy creatures
-
-**Key Generation Commands**:
-- Generate dispatch tables: `python tools\generate_tables.py config\bots\bot_families\{family}\{bot}.json src`
-- Create missing components: `python tools\generate_individual_components.py`
-- Validate JSON consistency: `.\generate_file_structure.ps1`
-- Example: `python tools\generate_tables.py config\bots\bot_families\tests\test_bot.json src`
-
-**File Organization Rules**:
-- Hardware specifications → `config\hardware\`
-- Interface definitions → `config\interfaces\`
-- Positioned components reference hardware via `hardware_reference` field
-- All paths use Windows backslash format
-
-## RULE 14: ENCAPSULATED INTERFACE ARCHITECTURE
-
-**OBSOLETE: All automatic interface assignment systems are obsolete.**
-
-**New Encapsulated Architecture:**
-
-- **Positioned Components**: Only declare `hardware_reference`
-- **Hardware Components**: Encapsulate ALL interface details internally
-- **No Automatic Assignment**: No template interfaces, numbered instances, or generation scripts
-- **Pure Encapsulation**: Components are "private classes" - interface details completely hidden
-
-**DISPLAY SYSTEM ARCHITECTURE:**
-
-**Positioned Component Layer (goblin_left_eye):**
-
-- References goblin_eye hardware, positioned on left side
-- Does NOT care about driver details or specific pins
-- Only knows positioning coordinates and hardware_reference
-
-**Hardware Component Layer (goblin_eye):**
-
-- Knows it uses gc9a01 display type
-- Gets all display parameters (frame size, pixel size, etc.) from display component
-- Uses "display:" keyword to specify display type, no other details
-
-**Implementation Functions:**
-
-- getBuffer() - Returns pointer to frame memory
-- getFrameWidth() - Returns frame width in pixels
-- getFrameHeight() - Returns frame height in pixels
-
-**Display Driver Layer (gc9a01):**
-
-- Transfers data from frame_ptr one pixel at a time
-- Contains generic_spi_display for SPI protocol handling
-- Frame buffer points to memory start for transfer
-- frame_row_size and frame_row_count describe pixels per frame
-- bytes_per_pixel set in specific display code
-
-**Generic SPI Display Layer:**
-
-- Used for all displays using SPI bus protocol
-- Contains spi_bus component for GPIO pin determination
-- GPIO pin assignment is DONE IN CODE by spi_bus component DYNAMICALLY IN THE COMPONENT LOOP
-- Can be used for any display device
-- Generic_spi_driver doesn't care about specific pins, just how to use them
-- Can be used for any device using SPI protocol
-
-**Critical Rules:**
-
-- NO automatic interface assignment scripts or systems
-- NO template interfaces or numbered instances
-- ALL interface details encapsulated within hardware_reference chain
-- Components are treated as private classes with hidden implementation details
-
-## RULE 15: COMPONENT COORDINATION THROUGH SHARED STATE
-
-**Core Principle**: Components only act on information they alone have access to, coordinating through shared state variables without breaking isolation.
-
-**Two Levels of State Sharing:**
-1. **Local Subsystem Memory** - Direct memory variables for coordination between components within same subsystem (e.g., head subsystem)
-2. **SharedMemory Class** - Used for inter-system communications. Each subsystem has all of the init() and act() functions in a single compilable unit. They cannot call each other directly because the same component code fragments may be part of different subsystems.
-
-**Component Buffer Management Pattern:**
-
-```cpp
-// In display component (generated once even if referenced multiple times)
-uint8_t *frame_ptr;  // used for all eye operations
-const uint32_t FRAME_ROW = 240;
-const uint32_t ROW_COUNT = 240;
-const uint32_t FRAME_SIZE = FRAME_ROW * ROW_COUNT;
-uint32_t current_spi_channel;
-
-// In goblin_left_eye component
-const uint8_t left_eye_buffer[FRAME_SIZE];
-
-// In goblin_right_eye component
-const uint8_t right_eye_buffer[FRAME_SIZE];
-```
-
-**Initialization Order (reverse dependency):**
-
-1. **display_init()** - establishes frame specifications and shared variables
-2. **goblin_eye_init()** - does nothing (shared logic component)
-3. **goblin_left_eye_init()** / **goblin_right_eye_init()** - sets frame_ptr to respective buffer
-
-**Execution Flow Pattern:**
-
-- **Eye components** (left/right): Set frame_ptr to their buffer, set current_spi_channel, bounds check only
-- **Shared processor** (goblin_eye): Modifies frame based on Mood/Environment/Personality
-- **Display component**: Transfers frame via current_spi_channel, advances frame_ptr
-
-**Critical Rules:**
-
-- Each component only accesses data it owns or global shared state
-- No component calls functions on other components
-- Display component doesn't care about frame contents or buffer boundaries
-- Eye components reset frame_ptr when bounds exceeded
-- Code generation must handle duplicate component detection (display referenced by multiple eyes)
-
-## RULE 16: DISPLAY DRIVER INTERFACE CONTRACT
-
-**All components with `component_type: "DISPLAY_DRIVER"` MUST export these three interface functions:**
-
-```cpp
-uint8_t* getBuffer(void);       // Allocate display buffer (malloc)
-uint32_t getFrameSize(void);    // Total pixels in frame
-uint32_t getFrameRowSize(void); // Pixels per row
-```
-
-**These functions provide hardware abstraction allowing creature components to work with any display:**
-
-- **GC9A01 (240x240 circular)**: getFrameSize() returns 57600, getFrameRowSize() returns 240
-- **SSD1306 (128x64 OLED)**: getFrameSize() returns 8192, getFrameRowSize() returns 128
-- **ILI9341 (320x240 TFT)**: getFrameSize() returns 76800, getFrameRowSize() returns 320
-- **ST7796 (320x480 TFT)**: getFrameSize() returns 153600, getFrameRowSize() returns 320
-
-**Component Type Constraints:**
-
-- `creature_specific_display` components (like `goblin_eye`) MUST contain a `display_driver` component
-- `positioned_component` display components MUST reference `display_driver` type in their hierarchy
-- Eye/mouth/display components can call display interface functions when display_driver is in their containment chain
-
-**JSON Configuration Requirements:**
-
-```json
-{
-    "component_type": "DISPLAY_DRIVER",
-    "required_interface_functions": [
-        "getBuffer", "getFrameSize", "getFrameRowSize"
-    ]
-}
-```
-
-This enables plug-and-play display substitution while maintaining interface compatibility.
-
-## RULE 17: GLOBAL SHARED MEMORY API - SOLE COMMUNICATION MECHANISM
-
-**SharedMemory is the ONLY inter-subsystem communication mechanism:**
-
-- **Single Communication Protocol**: SharedMemory class is the exclusive gateway for all inter-subsystem communication
-- **Internal Protocol Encapsulation**: SharedMemory contains complete internal implementation of inter-subsystem communication protocol
-- **No External Protocol Access**: Components NEVER directly access communication APIs
-- **Component Isolation**: All components use only SharedMemory API for inter-subsystem coordination
-
-**CRITICAL Architecture Understanding:**
-
-**`read()` is Local Memory Access (NO Network Traffic):**
-- `read(string name)` returns pointer to class variable in local memory
-- No memcpy or network synchronization unless variable doesn't exist
-- If variable doesn't exist, it's created automatically using default constructor
-- Components can call `read()` **as often as needed** (even every loop!) with ZERO network overhead
-
-**`write()` Triggers Inter-Subsystem Synchronization:**
-- `write(string name)` ensures shared memory in every subsystem has the same value
-- `write()` internally uses communication protocol to broadcast changes to all other controllers
-- Only `write()` triggers network traffic between subsystems
-- Binary transmission maintains efficiency
-
-**Required Usage Pattern:**
-```cpp
-// CORRECT: Fast local reads (NO network overhead)
-Mood *mood = SharedMemory.read("g_Mood");  // Created automatically if doesn't exist
-Environment *envir = SharedMemory.read("g_Envir");
-
-// CORRECT: Direct memory modifications (local only)
-mood->ANGER = 0;
-mood->CONTENTMENT = 100;
-envir->distance_cm = new_measurement;
-
-// CORRECT: Trigger synchronization (WITH network overhead)
-SharedMemory.write("g_Mood");    // Broadcasts to all subsystems
-SharedMemory.write("g_Envir");   // Only write when changes made
-```
-
-**Change Detection Pattern (Recommended):**
-```cpp
-void component_act(void) {
-    Environment *envir = SharedMemory.read("g_Envir");
-    uint8_t new_distance = measure_distance();
-
-    if (new_distance != envir->distance_cm) {
-        envir->distance_cm = new_distance;
-        SharedMemory.write("g_Envir");  // Only write if data changed
-    }
-}
-```
-
-**SharedMemory Implementation Rules:**
-
-**Case-Insensitive Names:**
-- All SharedMemory variable names are case-insensitive
-- `SharedMemory.read("g_Mood")` same as `SharedMemory.read("G_MOOD")` or `SharedMemory.read("g_mood")`
-- Consistent naming convention recommended: use lowercase with underscores
-
-**Fixed-Size Data Blocks:**
-- SharedMemory data blocks NEVER change in size after creation
-- If a data structure needs size changes, create NEW class with DIFFERENT name
-- Prevents memory fragmentation and ensures reliable inter-subsystem synchronization
-- Version control through name changes (e.g., `g_Envir_v2` if Environment class structure changes)
-
 **Defined SharedMemory Classes:**
 
 **All SharedMemory classes are located in `/shared` directory.**
 
-**1. Mood Class** (`"g_Mood"`) - `/shared/Mood.hpp`
+**1. Mood Class** - `/shared/Mood.hpp`
 - Contains 9 different emotions with strength values for each
 - Emotions: ANGER, FEAR, HAPPINESS, SADNESS, CURIOSITY, AFFECTION, IRRITATION, CONTENTMENT, EXCITEMENT
 - Used by personality components to modify creature emotional state
 - Read by display/animation components to adjust visual expressions
 
-**2. Environment Class** (`"g_Envir"`) - `/shared/Environment.hpp`
+**2. Environment Class** - `/shared/Environment.hpp`
 - Contains current surroundings and sensor data
 - Variables include: distance_cm, temperature_c, humidity, sound_level_db, face_detected, target_confidence
 - Updated by sensor components (nose, ears, cameras)
 - Read by behavior and personality components for environmental reactions
 
-**3. Personality Class** (`"g_Personality"`) - `/shared/Personality.hpp` - FUTURE
+**3. Personality Class** - `/shared/Personality.hpp` - FUTURE
 - Will contain creature personality configuration data
 - Expected to grow as personality system develops
 - Loaded from JSON personality files during initialization
 - Contains thresholds, reaction strengths, and behavioral parameters
 
-**Usage Examples:**
-```cpp
-// Case-insensitive access (all equivalent)
-Mood *mood1 = SharedMemory.read("g_Mood");
-Mood *mood2 = SharedMemory.read("G_MOOD");
-Mood *mood3 = SharedMemory.read("g_mood");
-
-// Environment data access
-Environment *envir = SharedMemory.read("g_Envir");
-if (envir->distance_cm < 30) {
-    mood1->CURIOSITY += 10;
-    SharedMemory.write("g_Mood");
-}
-
-// Future personality access
-// Personality *personality = SharedMemory.read("g_Personality");
-```
 
 **Prohibited Communication Methods:**
 - Direct communication protocol API calls
@@ -643,24 +300,7 @@ if (envir->distance_cm < 30) {
 - Use SharedMemory for reading Environment and writing Mood
 - Support mood decay over time
 - Enable different creatures to have distinct personalities using same code
-
-**Required Mood Components:**
-ANGER, FEAR, HAPPINESS, SADNESS, CURIOSITY, AFFECTION, IRRITATION, CONTENTMENT, EXCITEMENT
-
-**SharedMemory Integration:**
-```cpp
-// Read environment and mood (no network overhead)
-Environment *envir = SharedMemory.read("g_Envir");
-Mood *mood = SharedMemory.read("g_Mood");
-
-// Apply personality-driven changes
-if (envir->distance_cm < threshold) {
-    mood->CURIOSITY += personality_delta;
-}
-
-// Trigger synchronization (with network overhead)
-SharedMemory.write("g_Mood");
-```
+ `
 
 ## RULE 19: THREE-LEVEL COMPONENT ATTACHMENT ARCHITECTURE
 
@@ -669,7 +309,6 @@ SharedMemory.write("g_Mood");
 **NOTHING executes unless it's a component with init() and act() functions.**
 
 **Pure Component-Driven Architecture:**
-- ESP32 `app_main()` contains ONLY the component execution loop
 - All functionality is implemented as components with `init()` and `act()` functions
 - Components are attached at three hierarchical levels
 - Core loop iterates through registered components calling their `act()` functions based on `hitCount` timing
@@ -889,7 +528,7 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 
 ## RULE 25: ASCII ENCODING ONLY
 
-**ALL files MUST BE ASCII encoded (NO BOM)**
+**ALL files MUST BE ASCII encoded (NO BOM or UTF8)**
 
 **Reference:** See `docs/component-json-requirements.md` for complete JSON parsing rules and validation requirements.
 
@@ -904,8 +543,8 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 ```
 IF creating_component_code THEN
     → Use generate_tables.py or generate_individual_components.py
-    → It is permitted when necessary to edit .src/.hdr files in config/components/ (these are permanent source files)
-    → NEVER manually create .cpp/.hpp files in src/components/
+
+    → NEVER manually create .cpp/.hpp files in the src/ or include/ folders
     → NEVER manually edit generated dispatch tables
 ELSE
     → Build will fail with missing headers
@@ -927,20 +566,6 @@ ELSE
 
 ---
 
-## CONSOLIDATION COMPLETE
+# AI Agent Rules
 
-All critical architecture rules from the following specification documents have been consolidated into this AI-AGENT-RULES.md file:
-
-- GLOBAL-SHARED-MEMORY-API.md
-- JSON-DRIVEN-PERSONALITY-SPEC.md
-- DISPATCH-TABLE-GENERATION-RULES-SPEC.md
-- THREE-LEVEL-COMPONENT-ATTACHMENT-SPEC.md
-- TWO-TIER-ARCHITECTURE-DEFINITIVE-SPEC.md
-- MULTI-ESP32-COMPONENT-ARCHITECTURE-SPEC.md
-- JSON-MOUNTING-ARCHITECTURE-SPEC.md
-
-**Original specification documents can now be moved to docs/obsolete/ as they have been fully consolidated.**
-
-**Note**: Communications protocol specifications were obsoleted as protocols are now fully encapsulated within SharedMemory class.
- 
- 
+**Note**: This document has been consolidated into `consolidated-rules.md`. Please refer to that file for the latest rules and guidelines.

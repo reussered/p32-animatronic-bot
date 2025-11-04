@@ -1,3 +1,9 @@
+# Naming Rules
+
+**Note**: This document has been consolidated into `consolidated-rules.md`. Please refer to that file for the latest rules and guidelines.
+
+---
+
 # P32 ANIMATRONIC BOT - COMPREHENSIVE NAMING RULES
 
 ## 📋 OVERVIEW
@@ -35,6 +41,8 @@ This document contains the **ACTUAL SPECIFIC NAMING RULES** extracted from sourc
 
 ### Filename Case Conventions
 
+- all components and the src/hdr files associated with them are located in the config folder (or subfolder)
+- all files that are used by the system are in assets - sound files, animation files, etc.
 - **Default**: All filenames must be entirely lowercase
 - **Exception**: .hpp Files containing class definitions
   - Filename MUST exactly match the class name (case-sensitive)
@@ -91,7 +99,7 @@ void component_name_act(void);        // Return void, NO ARGUMENTS
 
 ### Generated Subsystem Files
 
-subsystems with {name} have the following generated files:
+subsystems with {name} have the following GENERATED files:
 
 - `src/subsystem/{name}_component_functions.cpp`
 - `include/subsystem/{name}_component_functions.hpp`
@@ -104,7 +112,7 @@ subsystems with {name} have the following generated files:
 ### Subsystem File Generation Process
 
 1. **Discovery Phase**: JSON tree traversal finds components with the `'controller'` field
-2. **Assignment Phase**: Components are assigned to subsystems through normal JSON containment relationships
+2. **Assignment Phase**: Components are assigned to subsystems through normal component containment relationships
 3. **File Generation**: Separate files generated for each discovered subsystem
  
 
@@ -138,28 +146,33 @@ subsystems with {name} have the following generated files:
  - when picking component names for generating json file, use the shortest poissible name the clearly and uniquely identifies it.
 	for example a gc9a01 display would be `gc9a01`
 	
-- **Creatures/Bots**: each specific creature is identified by a jason file in `config\bots\bot_families\{family}\{name}.json`.  
-	- inside each family folder place folders corresponding to the various subsytems of the {family}  for example in goblin goes folders head/torso/arms/legs/feet/hands.
+- **Creatures/Bots**: each specific creature is identified by a jason file in `config/bots/bot_families/{family}/{name}.json`.  
+	- inside each family folder there are folders corresponding to the various subsytems of the {family}  for example in the goblins folder goes folders head/torso/arms/legs/feet/hands.
 	- inside each of the folders go all of the creature specific components that belong to that subsyetm, so under goblin/head folder would go goblin_head as well as goblin_left_eye, goblin_eye, goblin_nose, etc.
+	- this is a signifigant change from having all creature components in the creature_specific folder.  that placement is obsolete and should never be used
 		  
-- **Hardware specs**: `config\hardware\{name}.json` - here go components that correspond to the sensors, displays, servos, stepper motors, etc.  example `gc9a01`, `sd1306`
-- **Interface definitions**: `config\interfaces\{name}.json`- here go all of the bus components... examples ->`spi_data_bus`, `spi_display_bus`, `adc_bus`, etc.
-- **Driver Components**: `config\driver\{name}.json` examples ->  `generic_spi_display`, `generic_spi_data``
- 
+- **Hardware specs**: `config/hardware/{name}.json` - here go components that correspond to the sensors, displays, servos, stepper motors, etc.  example `gc9a01`, `sd1306`
+- **Interface definitions**: `config/interfaces/{name}.json`- here go all of the bus components... examples ->`spi_data_bus`, `spi_display_bus`, `adc_bus`, etc.
+- **Driver Components**: `config/driver/{name}.json` examples ->  `generic_spi_display`, `generic_spi_data``
+ - scripts are in /Tools
+ - documentation is in /docs
+ - build guides go in /docs/build_guides
+ - ideas go into /docs/ideas -> these are things that are thought of from time to time that will form the core of future work.  
+ - ideas are entirely off line and are not to be acted on until that phase of the project is enacted.
  
 ### Generated Code Structure
 
-- **Component implementations**: `src\components\{component_name}.cpp`
-- **Component headers**: `include\components\{component_name}.hpp`
+- **Component implementations**: `src/components/{component_name}.cpp`
+- **Component headers**: `include/components/{component_name}.hpp`
 - **Generated Software**: Created by python scripts in `/tools` go into regular `src/` and `include/` folders. This includes dispatch tables and component functions `{subsystem}_dispatch_tables.hpp/.cpp` and `{subsystem}_component_functions.hpp/.cpp`. Only the last copy generated is kept. Because the folder and files are not in `.gitignore`, this means that the latest will be stored whenever we commit, which is a good thing
-- **Shared classes**: `shared\{ClassName}.hpp`
+- **Shared classes**: `shared/{ClassName}.hpp`
  
 ### Asset Organization
 
-- **3D Models**: `assets\shapes\scad\{category}\{model}.scad`
-- **STL Files**: `assets\shapes\stl\{category}\{model}.stl`
-- **Animations**: `assets\animations\{creature_family}\{animation_name}.json`
-- **Sounds**: `assets\sounds\{creature_family}\{sound_file}.wav`
+- **3D Models**: `assets/shapes/scad/{category}/{model}.scad`
+- **STL Files**: `assets/shapes/stl/{category}/{model}.stl`
+- **Animations**: `assets/animations/{creature_family}/{animation_name}.json`
+- **Sounds**: `assets/sounds/{creature_family}/{sound_file}.wav`
 
 
 ### Defined Shared Classes
@@ -186,7 +199,8 @@ class ComponentRegistry { ... };
 // File: P32_Core.hpp
 class P32_Core { ... };
 ```
-
+### master_rule.json
+contains information about the system and is located in the root directory.  this file contains the names of every component in the 
 ### C++ Source Files (.cpp)
 
 - Follow same rules as headers
@@ -214,7 +228,7 @@ class P32_Core { ... };
 
 ### Build Guides
 
-- `docs\build_guides\{guide_name}.md`
+- `docs/build_guides/{guide_name}.md`
 - Examples: `goblin_head_build_guide.md`
 
 ### Ideas
@@ -264,5 +278,5 @@ class P32_Core { ... };
 ---
 
 *Last Updated: November 3 2025*
- 
+
 

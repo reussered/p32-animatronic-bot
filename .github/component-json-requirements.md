@@ -1,3 +1,7 @@
+# Component JSON Requirements
+
+**Note**: This document has been consolidated into `consolidated-rules.md`. Please refer to that file for the latest rules and guidelines.
+
 # P32 Component JSON Structure Requirements & Parsing Rules
 
 ## 🚨 CRITICAL ENCODING REQUIREMENTS
