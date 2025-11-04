@@ -1,66 +1,67 @@
 {
-    "relative_filename":  "config/subsystems/base/hand_base.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "subsystem_type":  "HAND_CONTROLLER",
-    "description":  "Universal base template for hand subsystem controllers across all creatures",
-    "controller":  {
-                       "processor":  "ESP32_C3_MINI",
-                       "flash_memory":  "4MB",
-                       "ram":  "400KB",
-                       "gpio_pins":  22,
-                       "adc_channels":  6,
-                       "pwm_channels":  6,
-                       "spi_interfaces":  1,
-                       "i2c_interfaces":  1
-                   },
-    "components":  [
-                       {
-                           "component_type":  "GRIP_CONTROLLER",
-                           "function_name":  "grip_controller_update",
-                           "default_hitCount":  12,
-                           "role":  "finger_coordination",
-                           "required":  true
-                       },
-                       {
-                           "component_type":  "TACTILE_PROCESSOR",
-                           "function_name":  "tactile_processor_update",
-                           "default_hitCount":  15,
-                           "role":  "touch_feedback",
-                           "required":  true
-                       }
-                   ],
-    "servo_specifications":  {
-                                 "thumb_joint":  {
-                                                     "servo_type":  "SG90_MICRO",
-                                                     "pwm_channel":  0,
-                                                     "range_degrees":  90,
-                                                     "default_hitCount":  15
-                                                 },
-                                 "index_finger":  {
-                                                      "servo_type":  "SG90_MICRO",
-                                                      "pwm_channel":  1,
-                                                      "range_degrees":  120,
-                                                      "default_hitCount":  15
-                                                  },
-                                 "middle_finger":  {
-                                                       "servo_type":  "SG90_MICRO",
-                                                       "pwm_channel":  2,
-                                                       "range_degrees":  120,
-                                                       "default_hitCount":  15
-                                                   },
-                                 "ring_finger":  {
-                                                     "servo_type":  "SG90_MICRO",
-                                                     "pwm_channel":  3,
-                                                     "range_degrees":  120,
-                                                     "default_hitCount":  15
-                                                 },
-                                 "pinky_finger":  {
-                                                      "servo_type":  "SG90_MICRO",
-                                                      "pwm_channel":  4,
-                                                      "range_degrees":  120,
-                                                      "default_hitCount":  15
-                                                  }
-                             },
-    "name":  "hand_base"
+    "relative_filename": "config/subsystems/base/hand_base.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "subsystem_type": "HAND_CONTROLLER",
+    "description": "Universal base template for hand subsystem controllers across all creatures",
+    "controller": {
+        "processor": "ESP32_C3_MINI",
+        "flash_memory": "4MB",
+        "ram": "400KB",
+        "gpio_pins": 22,
+        "adc_channels": 6,
+        "pwm_channels": 6,
+        "spi_interfaces": 1,
+        "i2c_interfaces": 1
+    },
+    "components": [
+        {
+            "component_type": "GRIP_CONTROLLER",
+            "function_name": "grip_controller_update",
+            "default_hitCount": 12,
+            "role": "finger_coordination",
+            "required": true
+        },
+        {
+            "component_type": "TACTILE_PROCESSOR",
+            "function_name": "tactile_processor_update",
+            "default_hitCount": 15,
+            "role": "touch_feedback",
+            "required": true
+        }
+    ],
+    "servo_specifications": {
+        "thumb_joint": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 0,
+            "range_degrees": 90,
+            "default_hitCount": 15
+        },
+        "index_finger": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 1,
+            "range_degrees": 120,
+            "default_hitCount": 15
+        },
+        "middle_finger": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 2,
+            "range_degrees": 120,
+            "default_hitCount": 15
+        },
+        "ring_finger": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 3,
+            "range_degrees": 120,
+            "default_hitCount": 15
+        },
+        "pinky_finger": {
+            "servo_type": "SG90_MICRO",
+            "pwm_channel": 4,
+            "range_degrees": 120,
+            "default_hitCount": 15
+        }
+    },
+    "name": "hand_base",
+    "type": "UNKNOWN"
 }

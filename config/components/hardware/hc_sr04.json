@@ -32,5 +32,6 @@
         "components": [
             "config/components/drivers/gpio_bus.json"
         ]
-    }
+    },
+    "type": "UNKNOWN"
 }

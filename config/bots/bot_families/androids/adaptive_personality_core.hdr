@@ -1,0 +1,5 @@
+// Auto-generated header for adaptive_personality_core
+#include <esp_err.h>
+
+esp_err_t adaptive_personality_core_init(void);
+void adaptive_personality_core_act(void);

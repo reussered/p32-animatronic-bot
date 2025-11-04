@@ -1,0 +1,5 @@
+// Auto-generated header for cat_animated_ears
+#include <esp_err.h>
+
+esp_err_t cat_animated_ears_init(void);
+void cat_animated_ears_act(void);

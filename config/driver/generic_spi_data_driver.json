@@ -1,0 +1,13 @@
+{
+    "name": "generic_spi_data_driver",
+    "type": "SPI_DRIVER",
+    "version": "1.0.0",
+    "author": "config/authors/ai_agent.json",
+    "description": "Generic driver for SPI peripherals using the spi_data_bus for full-duplex communication.",
+    "created": "2025-11-01",
+    "relative_filename": "config/driver/generic_spi_data_driver.json",
+    "software": {
+        "init_function": "generic_spi_data_driver_init",
+        "act_function": "generic_spi_data_driver_act"
+    }
+}

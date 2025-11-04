@@ -1,0 +1,103 @@
+{
+    "relative_filename": "config/hardware/speaker.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "I2S_SPEAKER",
+    "name": "speaker",
+    "physical_specs": {
+        "diameter": "1.5 INCH",
+        "thickness": "0.3 INCH",
+        "mounting_holes": {
+            "count": 2,
+            "diameter": "0.08 INCH",
+            "spacing": "1.2 INCH"
+        }
+    },
+    "electrical_specs": {
+        "supply_voltage": "3.3V",
+        "interface": "I2S",
+        "power_output": "3W",
+        "current_consumption": "500mA"
+    },
+    "audio_specs": {
+        "frequency_range": "100-20000 Hz",
+        "sample_rates": [
+            "8000",
+            "16000",
+            "22050",
+            "44100",
+            "48000"
+        ],
+        "bit_depths": [
+            16,
+            24,
+            32
+        ]
+    },
+    "mounting_architecture": {
+        "approach": "two_tier",
+        "shape_generation": {
+            "scad_template": "templates/speaker_enclosure.scad",
+            "manufacturer_variants": {
+                "generic_40mm": {
+                    "stl_file": "basic_mounts/speaker_40mm_generic.stl",
+                    "parameters": {
+                        "speaker_diameter": 40.0,
+                        "mounting_holes": 4,
+                        "hole_diameter": 3.0,
+                        "hole_pcd": 35.0,
+                        "mounting_type": "through_hole",
+                        "depth": 12.0
+                    },
+                    "description": "Generic 40mm speaker with 4x M3 holes at 35mm PCD",
+                    "notes": "Most common design from Chinese manufacturers"
+                },
+                "adafruit_3885": {
+                    "stl_file": "basic_mounts/speaker_40mm_adafruit.stl",
+                    "parameters": {
+                        "speaker_diameter": 40.0,
+                        "mounting_tabs": 2,
+                        "tab_width": 8.0,
+                        "tab_thickness": 2.0,
+                        "tab_spacing": 36.0,
+                        "mounting_type": "tab_slots",
+                        "depth": 10.5
+                    },
+                    "description": "Adafruit #3885 - 40mm 4? 3W speaker with mounting tabs",
+                    "datasheet": "https://www.adafruit.com/product/3885"
+                },
+                "sparkfun_com14023": {
+                    "stl_file": "basic_mounts/speaker_40mm_sparkfun.stl",
+                    "parameters": {
+                        "speaker_diameter": 40.0,
+                        "snap_fit_clips": 4,
+                        "clip_depth": 1.5,
+                        "clip_angle": 15.0,
+                        "mounting_type": "snap_fit",
+                        "depth": 11.0
+                    },
+                    "description": "SparkFun COM-14023 - 40mm speaker with snap-fit enclosure",
+                    "datasheet": "https://www.sparkfun.com/products/14023"
+                },
+                "tbd_awaiting_delivery": {
+                    "stl_file": "basic_mounts/speaker_40mm_tbd.stl",
+                    "parameters": {
+                        "speaker_diameter": 40.0,
+                        "mounting_type": "unknown",
+                        "notes": "Will measure upon arrival"
+                    },
+                    "description": "Generic 40mm speaker mount for standard audio drivers",
+                    "status": "AWAITING_HARDWARE"
+                }
+            },
+            "default_variant": "generic_40mm",
+            "usage_notes": "When speakers arrive: 1) Measure physical dimensions, 2) Photograph mounting holes, 3) Create exact variant parameters, 4) Generate STL, 5) Test print bracket"
+        }
+    },
+    "testing_status": {
+        "hardware_available": false,
+        "expected_arrival": "few days",
+        "testing_strategy": "Use stub component until hardware arrives, then measure and create exact manufacturer variant"
+    },
+    "type": "UNKNOWN"
+}

@@ -1,43 +1,41 @@
 {
-    "relative_filename":  "config/hardware/sensors.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "sensors",
-    "displayName":  "Sensors",
-    "description":  "Sensor input configurations for environmental awareness and interaction detection",
-    "type":  "input",
-    "devices":  [
-                    {
-                        "id":  "motion_pir",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "PIR",
-                        "pollInterval":  100,
-                        "sensitivity":  8
-                    },
-                    {
-                        "id":  "distance_ultrasonic",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "HC-SR04",
-                        "pollInterval":  200,
-                        "maxRange":  400
-                    },
-                    {
-                        "id":  "touch",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "capacitive",
-                        "pollInterval":  50,
-                        "threshold":  40
-                    },
-                    {
-                        "id":  "microphone",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "analog",
-                        "pollInterval":  100,
-                        "threshold":  500
-                    }
-                ],
-    "enabled":  true,
-    "config":  {
-
-               }
+    "relative_filename": "config/hardware/sensors.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "sensors",
+    "displayName": "Sensors",
+    "description": "Sensor input configurations for environmental awareness and interaction detection",
+    "type": "INPUT",
+    "devices": [
+        {
+            "id": "motion_pir",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "PIR",
+            "pollInterval": 100,
+            "sensitivity": 8
+        },
+        {
+            "id": "distance_ultrasonic",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "HC-SR04",
+            "pollInterval": 200,
+            "maxRange": 400
+        },
+        {
+            "id": "touch",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "capacitive",
+            "pollInterval": 50,
+            "threshold": 40
+        },
+        {
+            "id": "microphone",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "analog",
+            "pollInterval": 100,
+            "threshold": 500
+        }
+    ],
+    "enabled": true,
+    "config": {}
 }

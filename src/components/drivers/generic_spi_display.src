@@ -1,0 +1,128 @@
+// generic_spi_display component implementation
+// Generic SPI display interface for basic drawing operations
+
+#include "esp_log.h"
+#include "driver/spi_master.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "components/spi_display_bus.hdr"
+#include "driver/gpio.h"
+#include "components/creature_specific/goblin_eye.hdr"  // For goblin_eye_* globals
+
+static const char *TAG_generic_spi_display = "generic_spi_display";
+
+// Display commands
+#define GC9A01_SWRESET 0x01
+#define GC9A01_SLPOUT 0x11
+#define GC9A01_DISPON 0x29
+#define GC9A01_CASET  0x2A
+#define GC9A01_RASET  0x2B
+#define GC9A01_RAMWR  0x2C
+
+// Internal helper functions to send commands and data
+static void generic_spi_write_data(spi_device_handle_t spi, const uint8_t *data, size_t len) {
+    if (!spi) return;
+    esp_err_t ret;
+    spi_transaction_t t;
+    if (len == 0) return;
+    memset(&t, 0, sizeof(t));
+    t.length = len * 8;
+    t.tx_buffer = data;
+    t.user = (void*)1; // D/C = 1 for data
+    ret = spi_device_polling_transmit(spi, &t);
+    ESP_ERROR_CHECK(ret);
+}
+
+static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
+    if (!spi) return;
+    esp_err_t ret;
+    spi_transaction_t t;
+    memset(&t, 0, sizeof(t));
+    t.length = 8;
+    t.tx_buffer = &cmd;
+    t.user = (void*)0; // D/C = 0 for command
+    ret = spi_device_polling_transmit(spi, &t);
+    ESP_ERROR_CHECK(ret);
+}
+
+esp_err_t generic_spi_display_init(void) {
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_display_pin.cs);
+
+    if (cur_spi_display_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
+        return ESP_FAIL;
+    }
+
+    // Hardware reset
+    if (cur_spi_display_pin.rst != -1) {
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 0);
+        vTaskDelay(pdMS_TO_TICKS(100));
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 1);
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+
+    // Software reset
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SWRESET);
+    vTaskDelay(pdMS_TO_TICKS(150));
+
+    // Sleep out
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SLPOUT);
+    vTaskDelay(pdMS_TO_TICKS(500));
+
+    // Display on
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_DISPON);
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_display_pin.cs);
+    return ESP_OK;
+}
+
+// Simple full-frame transmission for now - optimize later
+// static uint16_t current_display_row = 0;
+// static const uint16_t CHUNK_HEIGHT = 16;
+// static uint8_t* chunk_buffer = nullptr;
+
+void generic_spi_display_act(void) {
+    if (cur_spi_display_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
+        return;
+    }
+
+    // Get the processed frame data from goblin_eye component
+    if (goblin_eye_chunk_buffer == nullptr ||
+        goblin_eye_chunk_width == 0 ||
+        goblin_eye_chunk_height == 0) {
+        ESP_LOGW(TAG_generic_spi_display, "No processed frame data available from goblin_eye");
+        return;
+    }
+
+    // Set column address (full width: 0-239)
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
+    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
+    generic_spi_write_data(cur_spi_display_pin.handle, col_data, 4);
+
+    // Set row address (full height: 0-239)
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
+    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
+    generic_spi_write_data(cur_spi_display_pin.handle, row_data, 4);
+
+    // Memory write command
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
+
+    // Send the processed frame - Pixel struct is already RGB565 format
+    size_t total_pixels = goblin_eye_chunk_width * goblin_eye_chunk_height;
+    size_t buffer_size = total_pixels * 2;  // 2 bytes per pixel (RGB565)
+
+    // Pixel struct is already RGB565 - just cast and send
+    uint16_t* rgb565_data = reinterpret_cast<uint16_t*>(goblin_eye_chunk_buffer);
+    uint8_t* byte_data = reinterpret_cast<uint8_t*>(rgb565_data);
+
+    // Send entire frame in one SPI transfer (RGB565 data is already big-endian)
+    generic_spi_write_data(cur_spi_display_pin.handle, byte_data, buffer_size);
+
+    ESP_LOGI(TAG_generic_spi_display, "Transmitted processed frame: %dx%d (%zu bytes)",
+             goblin_eye_chunk_width, goblin_eye_chunk_height, buffer_size);
+}
+
+
+

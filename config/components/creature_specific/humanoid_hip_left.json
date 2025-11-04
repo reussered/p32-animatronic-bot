@@ -1,94 +1,94 @@
 {
-    "relative_filename":  "config/components/creature_specific/humanoid_hip_left.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "HUMANOID_HIP_LEFT",
-    "subsystem":  "LEG",
-    "component_type":  "ARTICULATED_JOINT_3DOF",
-    "description":  "Left hip joint with 3 degrees of freedom for leg attachment and walking gait",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "pelvis_center",
-    "position":  {
-                     "x":  "-4.5 INCH",
-                     "y":  "0.0 INCH",
-                     "z":  "0.0 INCH",
-                     "scaling_applies":  true
-                 },
-    "components":  [
-                       "config/components/hardware/hip_joint_assembly.json"
-                   ],
-    "degrees_of_freedom":  {
-                               "total_dof":  3,
-                               "joint_1_flexion_extension":  {
-                                                                 "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
-                                                                 "range_degrees":  {
-                                                                                       "min":  -30,
-                                                                                       "max":  120
-                                                                                   },
-                                                                 "default_position":  0,
-                                                                 "max_speed_deg_per_sec":  30,
-                                                                 "holding_torque_nm":  5.9,
-                                                                 "walking_critical":  true
-                                                             },
-                               "joint_2_abduction_adduction":  {
-                                                                   "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
-                                                                   "range_degrees":  {
-                                                                                         "min":  -45,
-                                                                                         "max":  45
-                                                                                     },
-                                                                   "default_position":  0,
-                                                                   "max_speed_deg_per_sec":  30,
-                                                                   "holding_torque_nm":  5.9,
-                                                                   "balance_critical":  true
-                                                               },
-                               "joint_3_internal_external_rotation":  {
-                                                                          "servo_type":  "DS3218_HIGH_TORQUE",
-                                                                          "range_degrees":  {
-                                                                                                "min":  -45,
-                                                                                                "max":  45
-                                                                                            },
-                                                                          "default_position":  0,
-                                                                          "max_speed_deg_per_sec":  45,
-                                                                          "holding_torque_nm":  2.2
-                                                                      }
-                           },
-    "attachment_points":  {
-                              "pelvis_connection":  {
-                                                        "position":  {
-                                                                         "x":  "0.0",
-                                                                         "y":  "0.0",
-                                                                         "z":  "0.0"
-                                                                     },
-                                                        "mounting_hardware":  "M10_BOLT_ASSEMBLY_HIGH_STRENGTH",
-                                                        "load_capacity":  "150_KG_DYNAMIC_LOAD"
-                                                    },
-                              "upper_leg_connection":  {
-                                                           "position":  {
-                                                                            "x":  "0.0",
-                                                                            "y":  "0.0",
-                                                                            "z":  "-18.0"
-                                                                        },
-                                                           "mounting_hardware":  "M8_BOLT_ASSEMBLY",
-                                                           "component_reference":  "config/components/creature_specific/humanoid_upper_leg_left.json"
-                                                       }
-                          },
-    "walking_specifications":  {
-                                   "max_step_length":  "24.0 INCH",
-                                   "max_step_height":  "8.0 INCH",
-                                   "gait_cycle_time_sec":  1.2,
-                                   "weight_bearing_capacity":  "100_KG_FULL_ROBOT_WEIGHT"
-                               },
-    "structural_specifications":  {
-                                      "material":  "STEEL_4140_HEAT_TREATED",
-                                      "weight_grams":  1250,
-                                      "safety_factor":  5.0,
-                                      "expected_cycles":  10000000,
-                                      "maintenance_interval_hours":  250
-                                  },
-    "scaling_behavior":  {
-                             "position_scaling":  "APPLIES_TO_ALL_XYZ_COORDINATES",
-                             "servo_selection":  "SCALES_HEAVILY_WITH_CREATURE_SIZE_WEIGHT",
-                             "structural_scaling":  "LOAD_BEARING_SCALES_QUADRATICALLY"
-                         },
-    "hardware_type":  "POSITIONED_COMPONENT"
+    "relative_filename": "config/components/creature_specific/humanoid_hip_left.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "humanoid_hip_left",
+    "subsystem": "LEG",
+    "description": "Left hip joint with 3 degrees of freedom for leg attachment and walking gait",
+    "coordinate_system": "skull_3d",
+    "reference_point": "pelvis_center",
+    "position": {
+        "x": "-4.5 INCH",
+        "y": "0.0 INCH",
+        "z": "0.0 INCH",
+        "scaling_applies": true
+    },
+    "components": [
+        "config/components/hardware/hip_joint_assembly.json"
+    ],
+    "degrees_of_freedom": {
+        "total_dof": 3,
+        "joint_1_flexion_extension": {
+            "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+            "range_degrees": {
+                "min": -30,
+                "max": 120
+            },
+            "default_position": 0,
+            "max_speed_deg_per_sec": 30,
+            "holding_torque_nm": 5.9,
+            "walking_critical": true
+        },
+        "joint_2_abduction_adduction": {
+            "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+            "range_degrees": {
+                "min": -45,
+                "max": 45
+            },
+            "default_position": 0,
+            "max_speed_deg_per_sec": 30,
+            "holding_torque_nm": 5.9,
+            "balance_critical": true
+        },
+        "joint_3_internal_external_rotation": {
+            "servo_type": "DS3218_HIGH_TORQUE",
+            "range_degrees": {
+                "min": -45,
+                "max": 45
+            },
+            "default_position": 0,
+            "max_speed_deg_per_sec": 45,
+            "holding_torque_nm": 2.2
+        }
+    },
+    "attachment_points": {
+        "pelvis_connection": {
+            "position": {
+                "x": "0.0",
+                "y": "0.0",
+                "z": "0.0"
+            },
+            "mounting_hardware": "M10_BOLT_ASSEMBLY_HIGH_STRENGTH",
+            "load_capacity": "150_KG_DYNAMIC_LOAD"
+        },
+        "upper_leg_connection": {
+            "position": {
+                "x": "0.0",
+                "y": "0.0",
+                "z": "-18.0"
+            },
+            "mounting_hardware": "M8_BOLT_ASSEMBLY",
+            "component_reference": "config/components/creature_specific/humanoid_upper_leg_left.json"
+        }
+    },
+    "walking_specifications": {
+        "max_step_length": "24.0 INCH",
+        "max_step_height": "8.0 INCH",
+        "gait_cycle_time_sec": 1.2,
+        "weight_bearing_capacity": "100_KG_FULL_ROBOT_WEIGHT"
+    },
+    "structural_specifications": {
+        "material": "STEEL_4140_HEAT_TREATED",
+        "weight_grams": 1250,
+        "safety_factor": 5.0,
+        "expected_cycles": 10000000,
+        "maintenance_interval_hours": 250
+    },
+    "scaling_behavior": {
+        "position_scaling": "APPLIES_TO_ALL_XYZ_COORDINATES",
+        "servo_selection": "SCALES_HEAVILY_WITH_CREATURE_SIZE_WEIGHT",
+        "structural_scaling": "LOAD_BEARING_SCALES_QUADRATICALLY"
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "ARTICULATED_JOINT_3DOF"
 }

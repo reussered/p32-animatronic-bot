@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_self_wounds
+#include "components/goblin_self_wounds.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_self_wounds";
+
+esp_err_t goblin_self_wounds_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_self_wounds_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

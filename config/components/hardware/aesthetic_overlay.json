@@ -1,44 +1,44 @@
 {
-    "relative_filename":  "config/components/hardware/aesthetic_overlay.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "component_type":  "AESTHETIC_OVERLAY",
-    "description":  "Generic aesthetic overlay system for scars, paint, and decorative elements",
-    "created":  "2025-10-12",
-    "hardware_specs":  {
-                           "display_type":  "flexible_led_strip",
-                           "resolution":  "32x8_pixels",
-                           "color_depth":  "24_bit_rgb",
-                           "refresh_rate":  "60_fps",
-                           "power_consumption":  "2.5W_max"
-                       },
-    "physical_properties":  {
-                                "substrate":  "flexible_pcb",
-                                "thickness":  "0.5mm",
-                                "flexibility":  "bendable_conformable",
-                                "adhesion":  "medical_grade_adhesive",
-                                "weather_resistance":  "ip65_rated"
-                            },
-    "control_interface":  {
-                              "protocol":  "spi",
-                              "data_pins":  3,
-                              "control_pins":  2,
-                              "update_rate":  "30_hz_typical"
-                          },
-    "mounting_specifications":  {
-                                    "attachment_method":  "adhesive_backing",
-                                    "contour_following":  true,
-                                    "removal_method":  "peel_off_clean",
-                                    "reusability":  "multiple_applications"
-                                },
-    "prototype_status":  "design_complete",
-    "tested":  false,
-    "notes":  [
-                  "Generic template for all aesthetic overlay components",
-                  "Flexible LED system for dynamic visual effects",
-                  "Medical grade materials for skin-safe application",
-                  "Reusable design for different character configurations"
-              ],
-    "hardware_type":  "AESTHETIC_OVERLAY",
-    "name":  "AESTHETIC_OVERLAY"
+    "relative_filename": "config/components/hardware/aesthetic_overlay.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Generic aesthetic overlay system for scars, paint, and decorative elements",
+    "created": "2025-10-12",
+    "hardware_specs": {
+        "display_type": "flexible_led_strip",
+        "resolution": "32x8_pixels",
+        "color_depth": "24_bit_rgb",
+        "refresh_rate": "60_fps",
+        "power_consumption": "2.5W_max"
+    },
+    "physical_properties": {
+        "substrate": "flexible_pcb",
+        "thickness": "0.5mm",
+        "flexibility": "bendable_conformable",
+        "adhesion": "medical_grade_adhesive",
+        "weather_resistance": "ip65_rated"
+    },
+    "control_interface": {
+        "protocol": "spi",
+        "data_pins": 3,
+        "control_pins": 2,
+        "update_rate": "30_hz_typical"
+    },
+    "mounting_specifications": {
+        "attachment_method": "adhesive_backing",
+        "contour_following": true,
+        "removal_method": "peel_off_clean",
+        "reusability": "multiple_applications"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Generic template for all aesthetic overlay components",
+        "Flexible LED system for dynamic visual effects",
+        "Medical grade materials for skin-safe application",
+        "Reusable design for different character configurations"
+    ],
+    "hardware_type": "AESTHETIC_OVERLAY",
+    "name": "aesthetic_overlay",
+    "type": "AESTHETIC_OVERLAY"
 }

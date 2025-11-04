@@ -1,137 +1,139 @@
 {
-  "relative_filename": "assets/animations/goblin/curious_look.json",
-  "animation_name": "goblin_curious_look",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "description": "Curious expression with wide eyes and tilted head simulation",
-  "duration_ms": 3000,
-  "loop": false,
-  "mood_trigger": "CURIOSITY",
-  "components": [
-    {
-      "component_id": "goblin_eye_left",
-      "keyframes": [
+    "relative_filename": "assets/animations/goblin/curious_look.json",
+    "animation_name": "goblin_curious_look",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Curious expression with wide eyes and tilted head simulation",
+    "duration_ms": 3000,
+    "loop": false,
+    "mood_trigger": "CURIOSITY",
+    "components": [
         {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.7,
-            "eye_openness": 0.8,
-            "color": "#44ff44",
-            "expression": "normal"
-          }
+            "component_id": "goblin_eye_left",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.7,
+                        "eye_openness": 0.8,
+                        "color": "#44ff44",
+                        "expression": "normal"
+                    }
+                },
+                {
+                    "time_ms": 500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 1.0,
+                        "color": "#22ff22",
+                        "expression": "wide_curious"
+                    }
+                },
+                {
+                    "time_ms": 1500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 0.9,
+                        "color": "#33ff33",
+                        "expression": "focused"
+                    }
+                },
+                {
+                    "time_ms": 3000,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.7,
+                        "eye_openness": 0.8,
+                        "color": "#44ff44",
+                        "expression": "normal"
+                    }
+                }
+            ]
         },
         {
-          "time_ms": 500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 1.0,
-            "color": "#22ff22",
-            "expression": "wide_curious"
-          }
+            "component_id": "goblin_eye_right",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.7,
+                        "eye_openness": 0.8,
+                        "color": "#44ff44",
+                        "expression": "normal"
+                    }
+                },
+                {
+                    "time_ms": 500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 1.0,
+                        "color": "#22ff22",
+                        "expression": "wide_curious"
+                    }
+                },
+                {
+                    "time_ms": 1500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 0.9,
+                        "color": "#33ff33",
+                        "expression": "focused"
+                    }
+                },
+                {
+                    "time_ms": 3000,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.7,
+                        "eye_openness": 0.8,
+                        "color": "#44ff44",
+                        "expression": "normal"
+                    }
+                }
+            ]
         },
         {
-          "time_ms": 1500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 0.9,
-            "color": "#33ff33",
-            "expression": "focused"
-          }
-        },
-        {
-          "time_ms": 3000,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.7,
-            "eye_openness": 0.8,
-            "color": "#44ff44",
-            "expression": "normal"
-          }
+            "component_id": "goblin_mouth",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "mouth_expression",
+                        "mouth_shape": "neutral",
+                        "teeth_visible": false,
+                        "color": "#228822",
+                        "expression": "neutral"
+                    }
+                },
+                {
+                    "time_ms": 500,
+                    "display_content": {
+                        "type": "mouth_expression",
+                        "mouth_shape": "small_o",
+                        "teeth_visible": false,
+                        "color": "#116611",
+                        "expression": "surprised"
+                    }
+                },
+                {
+                    "time_ms": 3000,
+                    "display_content": {
+                        "type": "mouth_expression",
+                        "mouth_shape": "neutral",
+                        "teeth_visible": false,
+                        "color": "#228822",
+                        "expression": "neutral"
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "component_id": "goblin_eye_right", 
-      "keyframes": [
-        {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.7,
-            "eye_openness": 0.8,
-            "color": "#44ff44",
-            "expression": "normal"
-          }
-        },
-        {
-          "time_ms": 500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 1.0,
-            "color": "#22ff22",
-            "expression": "wide_curious"
-          }
-        },
-        {
-          "time_ms": 1500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 0.9,
-            "color": "#33ff33",
-            "expression": "focused"
-          }
-        },
-        {
-          "time_ms": 3000,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.7,
-            "eye_openness": 0.8,
-            "color": "#44ff44",
-            "expression": "normal"
-          }
-        }
-      ]
-    },
-    {
-      "component_id": "goblin_mouth",
-      "keyframes": [
-        {
-          "time_ms": 0,
-          "display_content": {
-            "type": "mouth_expression",
-            "mouth_shape": "neutral",
-            "teeth_visible": false,
-            "color": "#228822",
-            "expression": "neutral"
-          }
-        },
-        {
-          "time_ms": 500,
-          "display_content": {
-            "type": "mouth_expression",
-            "mouth_shape": "small_o",
-            "teeth_visible": false,
-            "color": "#116611",
-            "expression": "surprised"
-          }
-        },
-        {
-          "time_ms": 3000,
-          "display_content": {
-            "type": "mouth_expression",
-            "mouth_shape": "neutral",
-            "teeth_visible": false,
-            "color": "#228822",
-            "expression": "neutral"
-          }
-        }
-      ]
-    }
-  ]
+    ],
+    "type": "UNKNOWN",
+    "name": "curious_look"
 }

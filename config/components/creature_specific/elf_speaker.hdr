@@ -1,0 +1,5 @@
+// Auto-generated header for elf_speaker
+#include <esp_err.h>
+
+esp_err_t elf_speaker_init(void);
+void elf_speaker_act(void);

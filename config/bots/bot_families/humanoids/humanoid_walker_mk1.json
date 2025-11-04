@@ -1,467 +1,468 @@
 {
-    "relative_filename":  "config/bots/bot_families/humanoids/humanoid_walker_mk1.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_id":  "HUMANOID_WALKER_MK1",
-    "bot_type":  "BIPEDAL_WALKING_HUMANOID",
-    "description":  "Complete walking humanoid robot with distributed ESP32-C3 control",
-    "physical_specifications":  {
-                                    "total_height":  "5.0 FEET",
-                                    "total_weight":  "45.0 POUNDS",
-                                    "walking_speed_max":  "2.5 MPH",
-                                    "step_length_max":  "18.0 INCHES",
-                                    "balance_recovery_time":  "0.3 SECONDS"
-                                },
-    "degrees_of_freedom":  {
-                               "total_dof":  "32",
-                               "head_neck":  "3_DOF",
-                               "arms_total":  "14_DOF",
-                               "torso_spine":  "3_DOF",
-                               "legs_total":  "12_DOF"
-                           },
-    "coordinate_system":  "skull_3d",
-    "distributed_control_architecture":  {
-                                             "master_controller":  {
-                                                                       "components":  [
-                                                                                          "config/components/hardware/esp32_s3_devkit.json"
-                                                                                      ],
-                                                                       "position":  "TORSO_CENTER",
-                                                                       "responsibilities":  [
-                                                                                                "GAIT_COORDINATION",
-                                                                                                "BALANCE_CONTROL",
-                                                                                                "HIGH_LEVEL_BEHAVIOR",
-                                                                                                "MESH_MASTER"
-                                                                                            ]
-                                                                   },
-                                             "subsystem_controllers":  [
-                                                                           {
-                                                                               "controller_id":  "HEAD_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_head_controller.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "0.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "24.0"
-                                                                                            },
-                                                                               "dof_controlled":  "3_HEAD_NECK"
-                                                                           },
-                                                                           {
-                                                                               "controller_id":  "LEFT_ARM_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_arm_controller_left.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "-8.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "18.0"
-                                                                                            },
-                                                                               "dof_controlled":  "7_ARM_DOF"
-                                                                           },
-                                                                           {
-                                                                               "controller_id":  "RIGHT_ARM_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_arm_controller_right.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "8.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "18.0"
-                                                                                            },
-                                                                               "dof_controlled":  "7_ARM_DOF"
-                                                                           },
-                                                                           {
-                                                                               "controller_id":  "LEFT_LEG_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_leg_controller_left.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "-3.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "-12.0"
-                                                                                            },
-                                                                               "dof_controlled":  "6_LEG_DOF"
-                                                                           },
-                                                                           {
-                                                                               "controller_id":  "RIGHT_LEG_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_leg_controller_right.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "3.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "-12.0"
-                                                                                            },
-                                                                               "dof_controlled":  "6_LEG_DOF"
-                                                                           },
-                                                                           {
-                                                                               "controller_id":  "TORSO_BALANCE_CONTROLLER",
-                                                                               "components":  [
-                                                                                                  "config/components/creature_specific/esp32c3_torso_controller.json"
-                                                                                              ],
-                                                                               "position":  {
-                                                                                                "x":  "0.0",
-                                                                                                "y":  "0.0",
-                                                                                                "z":  "6.0"
-                                                                                            },
-                                                                               "dof_controlled":  "3_SPINE_DOF"
-                                                                           }
-                                                                       ]
-                                         },
-    "mechanical_specifications":  {
-                                      "leg_kinematics":  {
-                                                             "hip_flexion_extension":  {
-                                                                                           "servo_type":  "NEMA17_STEPPER_GEARED_50_1",
-                                                                                           "range_degrees":  "120",
-                                                                                           "max_torque_nm":  "15.0",
-                                                                                           "stl_files":  [
-                                                                                                             "assets/shapes/stl/legs/hip_flexion_bracket.stl",
-                                                                                                             "assets/shapes/stl/legs/femur_upper.stl"
-                                                                                                         ]
-                                                                                       },
-                                                             "hip_abduction_adduction":  {
-                                                                                             "servo_type":  "NEMA17_STEPPER_GEARED_50_1",
-                                                                                             "range_degrees":  "45",
-                                                                                             "max_torque_nm":  "12.0",
-                                                                                             "stl_files":  [
-                                                                                                               "assets/shapes/stl/legs/hip_abduction_mount.stl",
-                                                                                                               "assets/shapes/stl/legs/pelvis_side_bracket.stl"
-                                                                                                           ]
-                                                                                         },
-                                                             "hip_rotation":  {
-                                                                                  "servo_type":  "MG996R_SERVO",
-                                                                                  "range_degrees":  "180",
-                                                                                  "max_torque_nm":  "1.5",
-                                                                                  "stl_files":  [
-                                                                                                    "assets/shapes/stl/legs/hip_rotation_housing.stl"
-                                                                                                ]
-                                                                              },
-                                                             "knee_flexion":  {
-                                                                                  "servo_type":  "NEMA17_STEPPER_GEARED_50_1",
-                                                                                  "range_degrees":  "140",
-                                                                                  "max_torque_nm":  "12.0",
-                                                                                  "stl_files":  [
-                                                                                                    "assets/shapes/stl/legs/knee_joint_housing.stl",
-                                                                                                    "assets/shapes/stl/legs/tibia_upper.stl"
-                                                                                                ]
-                                                                              },
-                                                             "ankle_dorsiflexion":  {
-                                                                                        "servo_type":  "MG996R_SERVO",
-                                                                                        "range_degrees":  "60",
-                                                                                        "max_torque_nm":  "1.5",
-                                                                                        "stl_files":  [
-                                                                                                          "assets/shapes/stl/legs/ankle_pitch_bracket.stl",
-                                                                                                          "assets/shapes/stl/legs/foot_upper.stl"
-                                                                                                      ]
-                                                                                    },
-                                                             "ankle_eversion":  {
-                                                                                    "servo_type":  "MG996R_SERVO",
-                                                                                    "range_degrees":  "30",
-                                                                                    "max_torque_nm":  "1.5",
-                                                                                    "stl_files":  [
-                                                                                                      "assets/shapes/stl/legs/ankle_roll_housing.stl",
-                                                                                                      "assets/shapes/stl/legs/foot_base.stl"
-                                                                                                  ]
-                                                                                }
-                                                         },
-                                      "arm_kinematics":  {
-                                                             "shoulder_flexion":  {
-                                                                                      "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
-                                                                                      "range_degrees":  "180",
-                                                                                      "max_torque_nm":  "8.0",
-                                                                                      "stl_files":  [
-                                                                                                        "assets/shapes/stl/arms/shoulder_flexion_mount.stl",
-                                                                                                        "assets/shapes/stl/arms/humerus_upper.stl"
-                                                                                                    ]
-                                                                                  },
-                                                             "shoulder_abduction":  {
-                                                                                        "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
-                                                                                        "range_degrees":  "180",
-                                                                                        "max_torque_nm":  "8.0",
-                                                                                        "stl_files":  [
-                                                                                                          "assets/shapes/stl/arms/shoulder_abduction_housing.stl",
-                                                                                                          "assets/shapes/stl/arms/clavicle_joint.stl"
-                                                                                                      ]
-                                                                                    },
-                                                             "shoulder_rotation":  {
-                                                                                       "servo_type":  "MG996R_SERVO",
-                                                                                       "range_degrees":  "270",
-                                                                                       "max_torque_nm":  "1.5",
-                                                                                       "stl_files":  [
-                                                                                                         "assets/shapes/stl/arms/shoulder_rotation_bearing.stl"
-                                                                                                     ]
-                                                                                   },
-                                                             "elbow_flexion":  {
-                                                                                   "servo_type":  "NEMA17_STEPPER_GEARED_30_1",
-                                                                                   "range_degrees":  "150",
-                                                                                   "max_torque_nm":  "6.0",
-                                                                                   "stl_files":  [
-                                                                                                     "assets/shapes/stl/arms/elbow_joint_housing.stl",
-                                                                                                     "assets/shapes/stl/arms/forearm_upper.stl"
-                                                                                                 ]
-                                                                               },
-                                                             "wrist_flexion":  {
-                                                                                   "servo_type":  "MG90S_MICRO_SERVO",
-                                                                                   "range_degrees":  "180",
-                                                                                   "max_torque_nm":  "0.3",
-                                                                                   "stl_files":  [
-                                                                                                     "assets/shapes/stl/arms/wrist_pitch_bracket.stl",
-                                                                                                     "assets/shapes/stl/hands/palm_base.stl"
-                                                                                                 ]
-                                                                               },
-                                                             "wrist_deviation":  {
-                                                                                     "servo_type":  "MG90S_MICRO_SERVO",
-                                                                                     "range_degrees":  "90",
-                                                                                     "max_torque_nm":  "0.3",
-                                                                                     "stl_files":  [
-                                                                                                       "assets/shapes/stl/arms/wrist_yaw_housing.stl"
-                                                                                                   ]
-                                                                                 },
-                                                             "hand_grip":  {
-                                                                               "servo_type":  "MG90S_MICRO_SERVO",
-                                                                               "range_degrees":  "90",
-                                                                               "max_torque_nm":  "0.3",
-                                                                               "stl_files":  [
-                                                                                                 "assets/shapes/stl/hands/finger_assembly.stl",
-                                                                                                 "assets/shapes/stl/hands/thumb_assembly.stl"
-                                                                                             ]
-                                                                           }
-                                                         },
-                                      "torso_spine":  {
-                                                          "lumbar_flexion":  {
-                                                                                 "servo_type":  "MG996R_SERVO",
-                                                                                 "range_degrees":  "60",
-                                                                                 "max_torque_nm":  "1.5",
-                                                                                 "stl_files":  [
-                                                                                                   "assets/shapes/stl/torso/lumbar_joint.stl",
-                                                                                                   "assets/shapes/stl/torso/pelvis_upper.stl"
-                                                                                               ]
-                                                                             },
-                                                          "thoracic_flexion":  {
-                                                                                   "servo_type":  "MG996R_SERVO",
-                                                                                   "range_degrees":  "45",
-                                                                                   "max_torque_nm":  "1.5",
-                                                                                   "stl_files":  [
-                                                                                                     "assets/shapes/stl/torso/thoracic_joint.stl",
-                                                                                                     "assets/shapes/stl/torso/ribcage_lower.stl"
-                                                                                                 ]
-                                                                               },
-                                                          "cervical_rotation":  {
-                                                                                    "servo_type":  "MG996R_SERVO",
-                                                                                    "range_degrees":  "180",
-                                                                                    "max_torque_nm":  "1.5",
-                                                                                    "stl_files":  [
-                                                                                                      "assets/shapes/stl/torso/neck_rotation_bearing.stl",
-                                                                                                      "assets/shapes/stl/torso/head_mount.stl"
-                                                                                                  ]
-                                                                                }
-                                                      }
-                                  },
-    "movement_capabilities":  {
-                                  "basic_locomotion":  "config/behaviors/walking_gait_controllers.json",
-                                  "advanced_dynamics":  "config/behaviors/advanced_dynamic_movements.json",
-                                  "performance_envelope":  {
-                                                               "walking_speeds":  "0.5_TO_2.5_MPH_VARIABLE",
-                                                               "vertical_leap":  "18_INCHES_MAXIMUM_SAFE_HEIGHT",
-                                                               "horizontal_leap":  "36_INCHES_RUNNING_START",
-                                                               "dance_duration":  "15_MINUTES_CONTINUOUS_CHOREOGRAPHY",
-                                                               "pounce_range":  "8_FEET_MAXIMUM_EFFECTIVE_DISTANCE",
-                                                               "balance_challenges":  "30_SECONDS_ONE_LEG_STAND"
-                                                           },
-                                  "balance_sensors":  {
-                                                          "imu_primary":  {
-                                                                              "sensor_type":  "MPU6050",
-                                                                              "position":  "TORSO_CENTER",
-                                                                              "update_rate_hz":  "1000"
-                                                                          },
-                                                          "imu_backup":  {
-                                                                             "sensor_type":  "MPU6050",
-                                                                             "position":  "HEAD_CENTER",
-                                                                             "update_rate_hz":  "500"
-                                                                         },
-                                                          "foot_pressure":  {
-                                                                                "sensor_type":  "FSR402_ARRAY",
-                                                                                "position":  "BOTH_FEET_4_POINTS_EACH",
-                                                                                "update_rate_hz":  "500"
-                                                                            }
-                                                      },
-                                  "dynamic_movement_modes":  {
-                                                                 "dance_modes":  [
-                                                                                     "ROBOT_DANCE",
-                                                                                     "BREAKDANCE_MOVES",
-                                                                                     "CONTEMPORARY_FLOW"
-                                                                                 ],
-                                                                 "acrobatic_moves":  [
-                                                                                         "FORWARD_ROLLS",
-                                                                                         "HANDSTANDS",
-                                                                                         "BALANCE_CHALLENGES"
-                                                                                     ],
-                                                                 "athletic_moves":  [
-                                                                                        "VERTICAL_LEAPS",
-                                                                                        "HORIZONTAL_LEAPS",
-                                                                                        "POUNCING_ATTACKS"
-                                                                                    ],
-                                                                 "performance_integration":  "MUSIC_SYNCHRONIZED_CHOREOGRAPHY"
-                                                             }
-                              },
-    "power_system":  {
-                         "skeletal_power_distribution":  "config/components/interfaces/skeletal_power_distribution.json",
-                         "battery_primary":  {
-                                                 "type":  "LIPO_6S_5000MAH_X2_PARALLEL",
-                                                 "voltage":  "24V_NOMINAL_REGULATED",
-                                                 "capacity":  "10000MAH_TOTAL",
-                                                 "runtime_walking":  "4.0_HOURS",
-                                                 "position":  "PELVIS_INTEGRATED_BATTERY_BOX"
-                                             },
-                         "structural_power_rails":  {
-                                                        "spine_24v_main":  "40MM_ALUMINUM_EXTRUSION_50_AMP_CAPACITY",
-                                                        "arm_12v_branches":  "20MM_ALUMINUM_EXTRUSION_8_AMP_EACH",
-                                                        "leg_24v_branches":  "30MM_ALUMINUM_EXTRUSION_20_AMP_EACH",
-                                                        "ground_return":  "15MM_ANGLE_ALUMINUM_CONTINUOUS_GROUND_PLANE"
-                                                    },
-                         "power_tapping_points":  {
-                                                      "high_current_anderson":  "45_AMP_POWERPOLE_FOR_STEPPERS",
-                                                      "logic_power_xt30":  "12V_TO_3.3V_LOCAL_REGULATION",
-                                                      "servo_power_6v":  "LM2596_BUCK_CONVERTER_MODULES",
-                                                      "sensor_power_3.3v":  "AMS1117_LINEAR_LOW_NOISE"
-                                                  },
-                         "wireless_only_control":  {
-                                                       "zero_control_wiring":  "BLUETOOTH_MESH_ONLY",
-                                                       "power_data_separation":  "COMPLETE_ELECTRICAL_ISOLATION"
-                                                   }
-                     },
-    "bill_of_materials":  {
-                              "controllers":  {
-                                                  "esp32_s3_master":  {
-                                                                          "qty":  1,
-                                                                          "part_number":  "ESP32-S3-DevKitC-1",
-                                                                          "cost_usd":  "15.00"
-                                                                      },
-                                                  "esp32_c3_slaves":  {
-                                                                          "qty":  6,
-                                                                          "part_number":  "ESP32-C3-MINI-1",
-                                                                          "cost_usd":  "4.00_EACH"
-                                                                      }
-                                              },
-                              "servos":  {
-                                             "nema17_geared_50_1":  {
-                                                                        "qty":  6,
-                                                                        "part_number":  "17HS19-2004S1_GEARED",
-                                                                        "cost_usd":  "35.00_EACH"
-                                                                    },
-                                             "nema17_geared_30_1":  {
-                                                                        "qty":  6,
-                                                                        "part_number":  "17HS19-2004S1_GEARED",
-                                                                        "cost_usd":  "30.00_EACH"
-                                                                    },
-                                             "mg996r_servos":  {
-                                                                   "qty":  8,
-                                                                   "part_number":  "TOWERPRO_MG996R",
-                                                                   "cost_usd":  "12.00_EACH"
-                                                               },
-                                             "mg90s_micro":  {
-                                                                 "qty":  6,
-                                                                 "part_number":  "TOWERPRO_MG90S",
-                                                                 "cost_usd":  "8.00_EACH"
-                                                             }
-                                         },
-                              "sensors":  {
-                                              "mpu6050_imu":  {
-                                                                  "qty":  2,
-                                                                  "part_number":  "GY-521_MPU6050",
-                                                                  "cost_usd":  "5.00_EACH"
-                                                              },
-                                              "fsr402_pressure":  {
-                                                                      "qty":  8,
-                                                                      "part_number":  "INTERLINK_FSR402",
-                                                                      "cost_usd":  "15.00_EACH"
-                                                                  }
-                                          },
-                              "mechanical":  {
-                                                 "bearings_608zz":  {
-                                                                        "qty":  32,
-                                                                        "part_number":  "608ZZ_BEARING",
-                                                                        "cost_usd":  "2.00_EACH"
-                                                                    },
-                                                 "aluminum_angle":  {
-                                                                        "qty":  "20_FEET",
-                                                                        "part_number":  "1_INCH_ANGLE_6061",
-                                                                        "cost_usd":  "3.00_PER_FOOT"
-                                                                    },
-                                                 "threaded_rod_m8":  {
-                                                                         "qty":  "10_FEET",
-                                                                         "part_number":  "M8_THREADED_ROD_316SS",
-                                                                         "cost_usd":  "2.00_PER_FOOT"
-                                                                     }
-                                             },
-                              "estimated_total_cost":  "$1,450.00_USD"
-                          },
-    "stl_file_mapping":  {
-                             "legs":  [
-                                          "assets/shapes/stl/legs/hip_flexion_bracket.stl",
-                                          "assets/shapes/stl/legs/hip_abduction_mount.stl",
-                                          "assets/shapes/stl/legs/knee_joint_housing.stl",
-                                          "assets/shapes/stl/legs/ankle_pitch_bracket.stl",
-                                          "assets/shapes/stl/legs/foot_assembly.stl"
-                                      ],
-                             "arms":  [
-                                          "assets/shapes/stl/arms/shoulder_assembly.stl",
-                                          "assets/shapes/stl/arms/elbow_joint_housing.stl",
-                                          "assets/shapes/stl/arms/wrist_assembly.stl",
-                                          "assets/shapes/stl/hands/finger_assembly.stl"
-                                      ],
-                             "torso":  [
-                                           "assets/shapes/stl/torso/spine_vertebrae.stl",
-                                           "assets/shapes/stl/torso/ribcage_frame.stl",
-                                           "assets/shapes/stl/torso/pelvis_assembly.stl"
-                                       ],
-                             "electronics":  [
-                                                 "assets/shapes/stl/electronics/controller_housings.stl",
-                                                 "assets/shapes/stl/electronics/sensor_mounts.stl"
-                                             ]
-                         },
-    "assembly_phases":  {
-                            "phase_1_stationary":  {
-                                                       "description":  "Upper body only, no legs, stationary base",
-                                                       "components":  [
-                                                                          "HEAD",
-                                                                          "ARMS",
-                                                                          "TORSO",
-                                                                          "FIXED_BASE"
-                                                                      ],
-                                                       "capabilities":  [
-                                                                            "ARM_MOVEMENT",
-                                                                            "HEAD_TRACKING",
-                                                                            "OBJECT_MANIPULATION"
-                                                                        ],
-                                                       "cost_phase_1":  "$650.00"
-                                                   },
-                            "phase_2_basic_walking":  {
-                                                          "description":  "Add legs, basic static walking",
-                                                          "components":  [
-                                                                             "ADD_LEGS",
-                                                                             "ADD_BALANCE_SENSORS"
-                                                                         ],
-                                                          "capabilities":  [
-                                                                               "SLOW_WALKING",
-                                                                               "BASIC_BALANCE",
-                                                                               "STAIR_CLIMBING"
-                                                                           ],
-                                                          "cost_phase_2":  "$400.00_ADDITIONAL"
-                                                      },
-                            "phase_3_dynamic_walking":  {
-                                                            "description":  "Advanced gait control, dynamic balance",
-                                                            "components":  [
-                                                                               "ADVANCED_SENSORS",
-                                                                               "REFINED_ALGORITHMS"
-                                                                           ],
-                                                            "capabilities":  [
-                                                                                 "FAST_WALKING",
-                                                                                 "DYNAMIC_BALANCE",
-                                                                                 "OBSTACLE_AVOIDANCE"
-                                                                             ],
-                                                            "cost_phase_3":  "$400.00_ADDITIONAL"
-                                                        }
-                        },
-    "name":  "humanoid_walker_mk1"
+    "relative_filename": "config/bots/bot_families/humanoids/humanoid_walker_mk1.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_id": "HUMANOID_WALKER_MK1",
+    "bot_type": "BIPEDAL_WALKING_HUMANOID",
+    "description": "Complete walking humanoid robot with distributed ESP32-C3 control",
+    "physical_specifications": {
+        "total_height": "5.0 FEET",
+        "total_weight": "45.0 POUNDS",
+        "walking_speed_max": "2.5 MPH",
+        "step_length_max": "18.0 INCHES",
+        "balance_recovery_time": "0.3 SECONDS"
+    },
+    "degrees_of_freedom": {
+        "total_dof": "32",
+        "head_neck": "3_DOF",
+        "arms_total": "14_DOF",
+        "torso_spine": "3_DOF",
+        "legs_total": "12_DOF"
+    },
+    "coordinate_system": "skull_3d",
+    "distributed_control_architecture": {
+        "master_controller": {
+            "components": [
+                "config/components/hardware/esp32_s3_devkit.json"
+            ],
+            "position": "TORSO_CENTER",
+            "responsibilities": [
+                "GAIT_COORDINATION",
+                "BALANCE_CONTROL",
+                "HIGH_LEVEL_BEHAVIOR",
+                "MESH_MASTER"
+            ]
+        },
+        "subsystem_controllers": [
+            {
+                "controller_id": "HEAD_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_head_controller.json"
+                ],
+                "position": {
+                    "x": "0.0",
+                    "y": "0.0",
+                    "z": "24.0"
+                },
+                "dof_controlled": "3_HEAD_NECK"
+            },
+            {
+                "controller_id": "LEFT_ARM_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_arm_controller_left.json"
+                ],
+                "position": {
+                    "x": "-8.0",
+                    "y": "0.0",
+                    "z": "18.0"
+                },
+                "dof_controlled": "7_ARM_DOF"
+            },
+            {
+                "controller_id": "RIGHT_ARM_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_arm_controller_right.json"
+                ],
+                "position": {
+                    "x": "8.0",
+                    "y": "0.0",
+                    "z": "18.0"
+                },
+                "dof_controlled": "7_ARM_DOF"
+            },
+            {
+                "controller_id": "LEFT_LEG_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_leg_controller_left.json"
+                ],
+                "position": {
+                    "x": "-3.0",
+                    "y": "0.0",
+                    "z": "-12.0"
+                },
+                "dof_controlled": "6_LEG_DOF"
+            },
+            {
+                "controller_id": "RIGHT_LEG_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_leg_controller_right.json"
+                ],
+                "position": {
+                    "x": "3.0",
+                    "y": "0.0",
+                    "z": "-12.0"
+                },
+                "dof_controlled": "6_LEG_DOF"
+            },
+            {
+                "controller_id": "TORSO_BALANCE_CONTROLLER",
+                "components": [
+                    "config/components/creature_specific/esp32c3_torso_controller.json"
+                ],
+                "position": {
+                    "x": "0.0",
+                    "y": "0.0",
+                    "z": "6.0"
+                },
+                "dof_controlled": "3_SPINE_DOF"
+            }
+        ]
+    },
+    "mechanical_specifications": {
+        "leg_kinematics": {
+            "hip_flexion_extension": {
+                "servo_type": "NEMA17_STEPPER_GEARED_50_1",
+                "range_degrees": "120",
+                "max_torque_nm": "15.0",
+                "stl_files": [
+                    "assets/shapes/stl/legs/hip_flexion_bracket.stl",
+                    "assets/shapes/stl/legs/femur_upper.stl"
+                ]
+            },
+            "hip_abduction_adduction": {
+                "servo_type": "NEMA17_STEPPER_GEARED_50_1",
+                "range_degrees": "45",
+                "max_torque_nm": "12.0",
+                "stl_files": [
+                    "assets/shapes/stl/legs/hip_abduction_mount.stl",
+                    "assets/shapes/stl/legs/pelvis_side_bracket.stl"
+                ]
+            },
+            "hip_rotation": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "180",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/legs/hip_rotation_housing.stl"
+                ]
+            },
+            "knee_flexion": {
+                "servo_type": "NEMA17_STEPPER_GEARED_50_1",
+                "range_degrees": "140",
+                "max_torque_nm": "12.0",
+                "stl_files": [
+                    "assets/shapes/stl/legs/knee_joint_housing.stl",
+                    "assets/shapes/stl/legs/tibia_upper.stl"
+                ]
+            },
+            "ankle_dorsiflexion": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "60",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/legs/ankle_pitch_bracket.stl",
+                    "assets/shapes/stl/legs/foot_upper.stl"
+                ]
+            },
+            "ankle_eversion": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "30",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/legs/ankle_roll_housing.stl",
+                    "assets/shapes/stl/legs/foot_base.stl"
+                ]
+            }
+        },
+        "arm_kinematics": {
+            "shoulder_flexion": {
+                "servo_type": "NEMA17_STEPPER_GEARED_30_1",
+                "range_degrees": "180",
+                "max_torque_nm": "8.0",
+                "stl_files": [
+                    "assets/shapes/stl/arms/shoulder_flexion_mount.stl",
+                    "assets/shapes/stl/arms/humerus_upper.stl"
+                ]
+            },
+            "shoulder_abduction": {
+                "servo_type": "NEMA17_STEPPER_GEARED_30_1",
+                "range_degrees": "180",
+                "max_torque_nm": "8.0",
+                "stl_files": [
+                    "assets/shapes/stl/arms/shoulder_abduction_housing.stl",
+                    "assets/shapes/stl/arms/clavicle_joint.stl"
+                ]
+            },
+            "shoulder_rotation": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "270",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/arms/shoulder_rotation_bearing.stl"
+                ]
+            },
+            "elbow_flexion": {
+                "servo_type": "NEMA17_STEPPER_GEARED_30_1",
+                "range_degrees": "150",
+                "max_torque_nm": "6.0",
+                "stl_files": [
+                    "assets/shapes/stl/arms/elbow_joint_housing.stl",
+                    "assets/shapes/stl/arms/forearm_upper.stl"
+                ]
+            },
+            "wrist_flexion": {
+                "servo_type": "MG90S_MICRO_SERVO",
+                "range_degrees": "180",
+                "max_torque_nm": "0.3",
+                "stl_files": [
+                    "assets/shapes/stl/arms/wrist_pitch_bracket.stl",
+                    "assets/shapes/stl/hands/palm_base.stl"
+                ]
+            },
+            "wrist_deviation": {
+                "servo_type": "MG90S_MICRO_SERVO",
+                "range_degrees": "90",
+                "max_torque_nm": "0.3",
+                "stl_files": [
+                    "assets/shapes/stl/arms/wrist_yaw_housing.stl"
+                ]
+            },
+            "hand_grip": {
+                "servo_type": "MG90S_MICRO_SERVO",
+                "range_degrees": "90",
+                "max_torque_nm": "0.3",
+                "stl_files": [
+                    "assets/shapes/stl/hands/finger_assembly.stl",
+                    "assets/shapes/stl/hands/thumb_assembly.stl"
+                ]
+            }
+        },
+        "torso_spine": {
+            "lumbar_flexion": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "60",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/torso/lumbar_joint.stl",
+                    "assets/shapes/stl/torso/pelvis_upper.stl"
+                ]
+            },
+            "thoracic_flexion": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "45",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/torso/thoracic_joint.stl",
+                    "assets/shapes/stl/torso/ribcage_lower.stl"
+                ]
+            },
+            "cervical_rotation": {
+                "servo_type": "MG996R_SERVO",
+                "range_degrees": "180",
+                "max_torque_nm": "1.5",
+                "stl_files": [
+                    "assets/shapes/stl/torso/neck_rotation_bearing.stl",
+                    "assets/shapes/stl/torso/head_mount.stl"
+                ]
+            }
+        }
+    },
+    "movement_capabilities": {
+        "basic_locomotion": "config/behaviors/walking_gait_controllers.json",
+        "advanced_dynamics": "config/behaviors/advanced_dynamic_movements.json",
+        "performance_envelope": {
+            "walking_speeds": "0.5_TO_2.5_MPH_VARIABLE",
+            "vertical_leap": "18_INCHES_MAXIMUM_SAFE_HEIGHT",
+            "horizontal_leap": "36_INCHES_RUNNING_START",
+            "dance_duration": "15_MINUTES_CONTINUOUS_CHOREOGRAPHY",
+            "pounce_range": "8_FEET_MAXIMUM_EFFECTIVE_DISTANCE",
+            "balance_challenges": "30_SECONDS_ONE_LEG_STAND"
+        },
+        "balance_sensors": {
+            "imu_primary": {
+                "sensor_type": "MPU6050",
+                "position": "TORSO_CENTER",
+                "update_rate_hz": "1000"
+            },
+            "imu_backup": {
+                "sensor_type": "MPU6050",
+                "position": "HEAD_CENTER",
+                "update_rate_hz": "500"
+            },
+            "foot_pressure": {
+                "sensor_type": "FSR402_ARRAY",
+                "position": "BOTH_FEET_4_POINTS_EACH",
+                "update_rate_hz": "500"
+            }
+        },
+        "dynamic_movement_modes": {
+            "dance_modes": [
+                "ROBOT_DANCE",
+                "BREAKDANCE_MOVES",
+                "CONTEMPORARY_FLOW"
+            ],
+            "acrobatic_moves": [
+                "FORWARD_ROLLS",
+                "HANDSTANDS",
+                "BALANCE_CHALLENGES"
+            ],
+            "athletic_moves": [
+                "VERTICAL_LEAPS",
+                "HORIZONTAL_LEAPS",
+                "POUNCING_ATTACKS"
+            ],
+            "performance_integration": "MUSIC_SYNCHRONIZED_CHOREOGRAPHY"
+        }
+    },
+    "power_system": {
+        "skeletal_power_distribution": "config/components/interfaces/skeletal_power_distribution.json",
+        "battery_primary": {
+            "type": "LIPO_6S_5000MAH_X2_PARALLEL",
+            "voltage": "24V_NOMINAL_REGULATED",
+            "capacity": "10000MAH_TOTAL",
+            "runtime_walking": "4.0_HOURS",
+            "position": "PELVIS_INTEGRATED_BATTERY_BOX"
+        },
+        "structural_power_rails": {
+            "spine_24v_main": "40MM_ALUMINUM_EXTRUSION_50_AMP_CAPACITY",
+            "arm_12v_branches": "20MM_ALUMINUM_EXTRUSION_8_AMP_EACH",
+            "leg_24v_branches": "30MM_ALUMINUM_EXTRUSION_20_AMP_EACH",
+            "ground_return": "15MM_ANGLE_ALUMINUM_CONTINUOUS_GROUND_PLANE"
+        },
+        "power_tapping_points": {
+            "high_current_anderson": "45_AMP_POWERPOLE_FOR_STEPPERS",
+            "logic_power_xt30": "12V_TO_3.3V_LOCAL_REGULATION",
+            "servo_power_6v": "LM2596_BUCK_CONVERTER_MODULES",
+            "sensor_power_3.3v": "AMS1117_LINEAR_LOW_NOISE"
+        },
+        "wireless_only_control": {
+            "zero_control_wiring": "BLUETOOTH_MESH_ONLY",
+            "power_data_separation": "COMPLETE_ELECTRICAL_ISOLATION"
+        }
+    },
+    "bill_of_materials": {
+        "controllers": {
+            "esp32_s3_master": {
+                "qty": 1,
+                "part_number": "ESP32-S3-DevKitC-1",
+                "cost_usd": "15.00"
+            },
+            "esp32_c3_slaves": {
+                "qty": 6,
+                "part_number": "ESP32-C3-MINI-1",
+                "cost_usd": "4.00_EACH"
+            }
+        },
+        "servos": {
+            "nema17_geared_50_1": {
+                "qty": 6,
+                "part_number": "17HS19-2004S1_GEARED",
+                "cost_usd": "35.00_EACH"
+            },
+            "nema17_geared_30_1": {
+                "qty": 6,
+                "part_number": "17HS19-2004S1_GEARED",
+                "cost_usd": "30.00_EACH"
+            },
+            "mg996r_servos": {
+                "qty": 8,
+                "part_number": "TOWERPRO_MG996R",
+                "cost_usd": "12.00_EACH"
+            },
+            "mg90s_micro": {
+                "qty": 6,
+                "part_number": "TOWERPRO_MG90S",
+                "cost_usd": "8.00_EACH"
+            }
+        },
+        "sensors": {
+            "mpu6050_imu": {
+                "qty": 2,
+                "part_number": "GY-521_MPU6050",
+                "cost_usd": "5.00_EACH"
+            },
+            "fsr402_pressure": {
+                "qty": 8,
+                "part_number": "INTERLINK_FSR402",
+                "cost_usd": "15.00_EACH"
+            }
+        },
+        "mechanical": {
+            "bearings_608zz": {
+                "qty": 32,
+                "part_number": "608ZZ_BEARING",
+                "cost_usd": "2.00_EACH"
+            },
+            "aluminum_angle": {
+                "qty": "20_FEET",
+                "part_number": "1_INCH_ANGLE_6061",
+                "cost_usd": "3.00_PER_FOOT"
+            },
+            "threaded_rod_m8": {
+                "qty": "10_FEET",
+                "part_number": "M8_THREADED_ROD_316SS",
+                "cost_usd": "2.00_PER_FOOT"
+            }
+        },
+        "estimated_total_cost": "$1,450.00_USD"
+    },
+    "stl_file_mapping": {
+        "legs": [
+            "assets/shapes/stl/legs/hip_flexion_bracket.stl",
+            "assets/shapes/stl/legs/hip_abduction_mount.stl",
+            "assets/shapes/stl/legs/knee_joint_housing.stl",
+            "assets/shapes/stl/legs/ankle_pitch_bracket.stl",
+            "assets/shapes/stl/legs/foot_assembly.stl"
+        ],
+        "arms": [
+            "assets/shapes/stl/arms/shoulder_assembly.stl",
+            "assets/shapes/stl/arms/elbow_joint_housing.stl",
+            "assets/shapes/stl/arms/wrist_assembly.stl",
+            "assets/shapes/stl/hands/finger_assembly.stl"
+        ],
+        "torso": [
+            "assets/shapes/stl/torso/spine_vertebrae.stl",
+            "assets/shapes/stl/torso/ribcage_frame.stl",
+            "assets/shapes/stl/torso/pelvis_assembly.stl"
+        ],
+        "electronics": [
+            "assets/shapes/stl/electronics/controller_housings.stl",
+            "assets/shapes/stl/electronics/sensor_mounts.stl"
+        ]
+    },
+    "assembly_phases": {
+        "phase_1_stationary": {
+            "description": "Upper body only, no legs, stationary base",
+            "components": [
+                "HEAD",
+                "ARMS",
+                "TORSO",
+                "FIXED_BASE"
+            ],
+            "capabilities": [
+                "ARM_MOVEMENT",
+                "HEAD_TRACKING",
+                "OBJECT_MANIPULATION"
+            ],
+            "cost_phase_1": "$650.00"
+        },
+        "phase_2_basic_walking": {
+            "description": "Add legs, basic static walking",
+            "components": [
+                "ADD_LEGS",
+                "ADD_BALANCE_SENSORS"
+            ],
+            "capabilities": [
+                "SLOW_WALKING",
+                "BASIC_BALANCE",
+                "STAIR_CLIMBING"
+            ],
+            "cost_phase_2": "$400.00_ADDITIONAL"
+        },
+        "phase_3_dynamic_walking": {
+            "description": "Advanced gait control, dynamic balance",
+            "components": [
+                "ADVANCED_SENSORS",
+                "REFINED_ALGORITHMS"
+            ],
+            "capabilities": [
+                "FAST_WALKING",
+                "DYNAMIC_BALANCE",
+                "OBSTACLE_AVOIDANCE"
+            ],
+            "cost_phase_3": "$400.00_ADDITIONAL"
+        }
+    },
+    "name": "humanoid_walker_mk1",
+    "type": "UNKNOWN"
 }

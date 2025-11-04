@@ -1,112 +1,113 @@
 {
-    "relative_filename":  "config/bots/bot_families/cats/cat_family.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "family_type":  "CAT",
-    "family_category":  "animals",
-    "description":  "Feline creatures ranging from domestic house cats to large predatory wildcats",
-    "created":  "2025-10-13",
-    "template_type":  "family_template",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "2.5 INCH",
-                                "compression_factor":  0.8,
-                                "skull_scale":  0.9,
-                                "mechanical_precision":  "high_tolerance"
-                            },
-    "components":  [
-                       "config/components/creature_specific/cat_animated_ears.json",
-                       "config/components/creature_specific/cat_whisker_sensors.json",
-                       "config/components/creature_specific/cat_left_eye.json",
-                       "config/components/creature_specific/cat_right_eye.json",
-                       "config/components/creature_specific/cat_mouth.json",
-                       "config/components/creature_specific/cat_nose_sensor.json"
-                   ],
-    "family_characteristics":  {
-                                   "physical_features":  {
-                                                             "fur_texture":  "soft_layered",
-                                                             "facial_structure":  "rounded_delicate",
-                                                             "ear_style":  "triangular_mobile",
-                                                             "eye_style":  "large_expressive_slit_pupils",
-                                                             "mouth_style":  "small_precise",
-                                                             "nose_style":  "triangular_sensitive",
-                                                             "whiskers":  "long_sensitive_tactile"
-                                                         },
-                                   "behavioral_traits":  {
-                                                             "default_mood":  "CURIOUS_ALERT",
-                                                             "aggression_level":  "LOW_TO_MODERATE",
-                                                             "intelligence":  "HIGH_INDEPENDENT",
-                                                             "social_behavior":  "SOLITARY_OR_SMALL_GROUP",
-                                                             "activity_pattern":  "CREPUSCULAR_ACTIVE"
-                                                         },
-                                   "size_variants":  {
-                                                         "kitten":  "12_INCH_HEIGHT",
-                                                         "house_cat":  "18_INCH_HEIGHT",
-                                                         "large_domestic":  "24_INCH_HEIGHT",
-                                                         "wildcat":  "30_INCH_HEIGHT",
-                                                         "big_cat":  "48_INCH_HEIGHT"
-                                                     }
-                               },
-    "subfamilies":  {
-                        "domestic":  [
-                                         "house_tabby",
-                                         "siamese",
-                                         "persian",
-                                         "maine_coon"
-                                     ],
-                        "wildcats":  [
-                                         "bobcat",
-                                         "lynx",
-                                         "ocelot",
-                                         "serval"
-                                     ],
-                        "big_cats":  [
-                                         "lion",
-                                         "tiger",
-                                         "panther",
-                                         "cheetah"
-                                     ]
-                    },
-    "mood_preferences":  [
-                             "CURIOSITY",
-                             "CONTENTMENT",
-                             "AFFECTION",
-                             "ALERTNESS",
-                             "PLAYFULNESS"
-                         ],
-    "animation_styles":  {
-                             "idle":  "grooming_tail_flicking",
-                             "alert":  "ears_forward_pupils_dilated",
-                             "hunting":  "low_crouch_focused_stare",
-                             "affectionate":  "slow_blinks_purring",
-                             "playful":  "pouncing_batting_motions"
-                         },
-    "sound_profiles":  {
-                           "vocalizations":  [
-                                                 "purrs",
-                                                 "meows",
-                                                 "chirps",
-                                                 "hisses",
-                                                 "growls"
-                                             ],
-                           "ambient":  [
-                                           "rustling_leaves",
-                                           "bird_sounds",
-                                           "wind_through_grass"
-                                       ],
-                           "hunting":  [
-                                           "footstep_padding",
-                                           "breathing",
-                                           "heartbeat"
-                                       ]
-                       },
-    "family_compatibility":  {
-                                 "other_cats":  "VARIES_BY_TERRITORY",
-                                 "small_animals":  "PREDATORY",
-                                 "humans":  "VARIES_BY_SOCIALIZATION",
-                                 "dogs":  "CAUTIOUS_TO_HOSTILE",
-                                 "birds":  "PREDATORY_INSTINCT"
-                             },
-    "name":  "cat_family"
+    "relative_filename": "config/bots/bot_families/cats/cat_family.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_type": "CAT",
+    "family_category": "animals",
+    "description": "Feline creatures ranging from domestic house cats to large predatory wildcats",
+    "created": "2025-10-13",
+    "template_type": "family_template",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "eye_spacing": "2.5 INCH",
+        "compression_factor": 0.8,
+        "skull_scale": 0.9,
+        "mechanical_precision": "high_tolerance"
+    },
+    "components": [
+        "config/components/creature_specific/cat_animated_ears.json",
+        "config/components/creature_specific/cat_whisker_sensors.json",
+        "config/components/creature_specific/cat_left_eye.json",
+        "config/components/creature_specific/cat_right_eye.json",
+        "config/components/creature_specific/cat_mouth.json",
+        "config/components/creature_specific/cat_nose_sensor.json"
+    ],
+    "family_characteristics": {
+        "physical_features": {
+            "fur_texture": "soft_layered",
+            "facial_structure": "rounded_delicate",
+            "ear_style": "triangular_mobile",
+            "eye_style": "large_expressive_slit_pupils",
+            "mouth_style": "small_precise",
+            "nose_style": "triangular_sensitive",
+            "whiskers": "long_sensitive_tactile"
+        },
+        "behavioral_traits": {
+            "default_mood": "CURIOUS_ALERT",
+            "aggression_level": "LOW_TO_MODERATE",
+            "intelligence": "HIGH_INDEPENDENT",
+            "social_behavior": "SOLITARY_OR_SMALL_GROUP",
+            "activity_pattern": "CREPUSCULAR_ACTIVE"
+        },
+        "size_variants": {
+            "kitten": "12_INCH_HEIGHT",
+            "house_cat": "18_INCH_HEIGHT",
+            "large_domestic": "24_INCH_HEIGHT",
+            "wildcat": "30_INCH_HEIGHT",
+            "big_cat": "48_INCH_HEIGHT"
+        }
+    },
+    "subfamilies": {
+        "domestic": [
+            "house_tabby",
+            "siamese",
+            "persian",
+            "maine_coon"
+        ],
+        "wildcats": [
+            "bobcat",
+            "lynx",
+            "ocelot",
+            "serval"
+        ],
+        "big_cats": [
+            "lion",
+            "tiger",
+            "panther",
+            "cheetah"
+        ]
+    },
+    "mood_preferences": [
+        "CURIOSITY",
+        "CONTENTMENT",
+        "AFFECTION",
+        "ALERTNESS",
+        "PLAYFULNESS"
+    ],
+    "animation_styles": {
+        "idle": "grooming_tail_flicking",
+        "alert": "ears_forward_pupils_dilated",
+        "hunting": "low_crouch_focused_stare",
+        "affectionate": "slow_blinks_purring",
+        "playful": "pouncing_batting_motions"
+    },
+    "sound_profiles": {
+        "vocalizations": [
+            "purrs",
+            "meows",
+            "chirps",
+            "hisses",
+            "growls"
+        ],
+        "ambient": [
+            "rustling_leaves",
+            "bird_sounds",
+            "wind_through_grass"
+        ],
+        "hunting": [
+            "footstep_padding",
+            "breathing",
+            "heartbeat"
+        ]
+    },
+    "family_compatibility": {
+        "other_cats": "VARIES_BY_TERRITORY",
+        "small_animals": "PREDATORY",
+        "humans": "VARIES_BY_SOCIALIZATION",
+        "dogs": "CAUTIOUS_TO_HOSTILE",
+        "birds": "PREDATORY_INSTINCT"
+    },
+    "name": "cat_family",
+    "type": "UNKNOWN"
 }

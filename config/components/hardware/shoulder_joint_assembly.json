@@ -1,37 +1,38 @@
 {
-    "relative_filename":  "config/components/hardware/shoulder_joint_assembly.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "hardware_id":  "SHOULDER_JOINT_ASSEMBLY",
-    "hardware_type":  "MULTI_DOF_JOINT_HARDWARE",
-    "description":  "3 DOF shoulder joint assembly with NEMA17 steppers and precision servo",
-    "joint_configuration":  {
-                                "degrees_of_freedom":  3,
-                                "joint_type":  "BALL_AND_SOCKET_EQUIVALENT",
-                                "load_rating":  "ARM_WEIGHT_PLUS_5KG_PAYLOAD"
-                            },
-    "servo_specifications":  {
-                                 "primary_flexion_extension":  {
-                                                                   "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
-                                                                   "torque_requirement":  "11.8_NM_PEAK",
-                                                                   "position_accuracy":  "0.1_DEGREES"
-                                                               },
-                                 "secondary_abduction_adduction":  {
-                                                                       "servo_type":  "NEMA17_WITH_50_1_GEARBOX",
-                                                                       "torque_requirement":  "8.9_NM_PEAK",
-                                                                       "position_accuracy":  "0.1_DEGREES"
-                                                                   },
-                                 "tertiary_rotation":  {
-                                                           "servo_type":  "DS3218_SERVO",
-                                                           "torque_requirement":  "2.2_NM_PEAK",
-                                                           "position_accuracy":  "0.5_DEGREES"
-                                                       }
-                             },
-    "mechanical_design":  {
-                              "housing_material":  "ALUMINUM_6061_T6",
-                              "bearing_system":  "THRUST_AND_RADIAL_BEARINGS",
-                              "attachment_method":  "M8_SHOULDER_BRACKET_TO_TORSO",
-                              "arm_connection":  "M6_HUMERUS_COUPLING"
-                          },
-    "name":  "SHOULDER_JOINT_ASSEMBLY"
+    "relative_filename": "config/components/hardware/shoulder_joint_assembly.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_id": "SHOULDER_JOINT_ASSEMBLY",
+    "hardware_type": "MULTI_DOF_JOINT_HARDWARE",
+    "description": "3 DOF shoulder joint assembly with NEMA17 steppers and precision servo",
+    "joint_configuration": {
+        "degrees_of_freedom": 3,
+        "joint_type": "BALL_AND_SOCKET_EQUIVALENT",
+        "load_rating": "ARM_WEIGHT_PLUS_5KG_PAYLOAD"
+    },
+    "servo_specifications": {
+        "primary_flexion_extension": {
+            "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+            "torque_requirement": "11.8_NM_PEAK",
+            "position_accuracy": "0.1_DEGREES"
+        },
+        "secondary_abduction_adduction": {
+            "servo_type": "NEMA17_WITH_50_1_GEARBOX",
+            "torque_requirement": "8.9_NM_PEAK",
+            "position_accuracy": "0.1_DEGREES"
+        },
+        "tertiary_rotation": {
+            "servo_type": "DS3218_SERVO",
+            "torque_requirement": "2.2_NM_PEAK",
+            "position_accuracy": "0.5_DEGREES"
+        }
+    },
+    "mechanical_design": {
+        "housing_material": "ALUMINUM_6061_T6",
+        "bearing_system": "THRUST_AND_RADIAL_BEARINGS",
+        "attachment_method": "M8_SHOULDER_BRACKET_TO_TORSO",
+        "arm_connection": "M6_HUMERUS_COUPLING"
+    },
+    "name": "shoulder_joint_assembly",
+    "type": "UNKNOWN"
 }

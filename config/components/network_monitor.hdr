@@ -1,0 +1,5 @@
+// Auto-generated header for network_monitor
+#include <esp_err.h>
+
+esp_err_t network_monitor_init(void);
+void network_monitor_act(void);

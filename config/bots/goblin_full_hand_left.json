@@ -1,84 +1,85 @@
 {
-    "relative_filename":  "config/bots/goblin_full_hand_left.json",
-    "version":  "2.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "GOBLINFULL_HAND_LEFT",
-    "bot_id":  "goblin_full_hand_left_v2",
-    "description":  "Goblin left hand subsystem controller - 5 finger articulation",
-    "created":  "2025-10-13",
-    "subsystem_type":  "HAND_CONTROLLER_LEFT",
-    "controller":  "ESP32_C3_MINI",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "wrist_joint_left",
-    "units":  "INCHES",
-    "components":  [
-                       "config/components/creature_specific/goblin/hand_components/left/thumb_servo.json",
-                       "config/components/creature_specific/goblin/hand_components/left/index_finger_servo.json",
-                       "config/components/creature_specific/goblin/hand_components/left/middle_finger_servo.json",
-                       "config/components/creature_specific/goblin/hand_components/left/ring_finger_servo.json",
-                       "config/components/creature_specific/goblin/hand_components/left/pinky_finger_servo.json",
-                       "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json"
-                   ],
-    "degrees_of_freedom":  {
-                               "thumb_dof":  "1",
-                               "index_finger_dof":  "1",
-                               "middle_finger_dof":  "1",
-                               "ring_finger_dof":  "1",
-                               "pinky_finger_dof":  "1",
-                               "total_controlled_dof":  "5"
-                           },
-    "hand_specifications":  {
-                                "palm_length":  "3.5 INCHES",
-                                "palm_width":  "2.8 INCHES",
-                                "finger_length_avg":  "2.2 INCHES",
-                                "grip_strength_kg":  "1.5",
-                                "precision_level":  "COARSE_MANIPULATION"
-                            },
-    "servo_power_config":  {
-                               "finger_servos":  "SG90_MICRO_SERVO",
-                               "power_rail_voltage":  "5V",
-                               "estimated_current_draw_a":  "1.0"
-                           },
-    "mesh_communication":  {
-                               "parent_controller":  "ARM_LEFT_ESP32_C3",
-                               "coordination_priority":  "HIGH",
-                               "response_time_target_ms":  "25",
-                               "heartbeat_rate_hz":  "20"
-                           },
-    "gesture_library":  {
-                            "basic_gestures":  [
-                                                   "FIST",
-                                                   "OPEN_PALM",
-                                                   "POINT",
-                                                   "PEACE_SIGN"
-                                               ],
-                            "expression_gestures":  [
-                                                        "CLAW",
-                                                        "GRASP",
-                                                        "RELEASE",
-                                                        "THREATENING_POSE"
-                                                    ],
-                            "functional_gestures":  [
-                                                        "PICK_UP",
-                                                        "DROP",
-                                                        "WAVE",
-                                                        "BECKON"
-                                                    ]
-                        },
-    "behavior_config":  {
-                            "gesture_blending":  true,
-                            "finger_coordination":  true,
-                            "safety_limits":  true,
-                            "expressive_movement":  true
-                        },
-    "hardware_config":  {
-                            "servo_update_rate_hz":  "60",
-                            "gesture_transition_rate_hz":  "30",
-                            "mesh_sync_rate_hz":  "10",
-                            "position_hold_enabled":  true
-                        },
-    "prototype_status":  "in_development",
-    "tested":  false,
-    "estimated_cost_usd":  "75.00",
-    "name":  "goblin_full_hand_left"
+    "relative_filename": "config/bots/goblin_full_hand_left.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINFULL_HAND_LEFT",
+    "bot_id": "goblin_full_hand_left_v2",
+    "description": "Goblin left hand subsystem controller - 5 finger articulation",
+    "created": "2025-10-13",
+    "subsystem_type": "HAND_CONTROLLER_LEFT",
+    "controller": "ESP32_C3_MINI",
+    "coordinate_system": "skull_3d",
+    "reference_point": "wrist_joint_left",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/goblin/hand_components/left/thumb_servo.json",
+        "config/components/creature_specific/goblin/hand_components/left/index_finger_servo.json",
+        "config/components/creature_specific/goblin/hand_components/left/middle_finger_servo.json",
+        "config/components/creature_specific/goblin/hand_components/left/ring_finger_servo.json",
+        "config/components/creature_specific/goblin/hand_components/left/pinky_finger_servo.json",
+        "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json"
+    ],
+    "degrees_of_freedom": {
+        "thumb_dof": "1",
+        "index_finger_dof": "1",
+        "middle_finger_dof": "1",
+        "ring_finger_dof": "1",
+        "pinky_finger_dof": "1",
+        "total_controlled_dof": "5"
+    },
+    "hand_specifications": {
+        "palm_length": "3.5 INCHES",
+        "palm_width": "2.8 INCHES",
+        "finger_length_avg": "2.2 INCHES",
+        "grip_strength_kg": "1.5",
+        "precision_level": "COARSE_MANIPULATION"
+    },
+    "servo_power_config": {
+        "finger_servos": "SG90_MICRO_SERVO",
+        "power_rail_voltage": "5V",
+        "estimated_current_draw_a": "1.0"
+    },
+    "mesh_communication": {
+        "parent_controller": "ARM_LEFT_ESP32_C3",
+        "coordination_priority": "HIGH",
+        "response_time_target_ms": "25",
+        "heartbeat_rate_hz": "20"
+    },
+    "gesture_library": {
+        "basic_gestures": [
+            "FIST",
+            "OPEN_PALM",
+            "POINT",
+            "PEACE_SIGN"
+        ],
+        "expression_gestures": [
+            "CLAW",
+            "GRASP",
+            "RELEASE",
+            "THREATENING_POSE"
+        ],
+        "functional_gestures": [
+            "PICK_UP",
+            "DROP",
+            "WAVE",
+            "BECKON"
+        ]
+    },
+    "behavior_config": {
+        "gesture_blending": true,
+        "finger_coordination": true,
+        "safety_limits": true,
+        "expressive_movement": true
+    },
+    "hardware_config": {
+        "servo_update_rate_hz": "60",
+        "gesture_transition_rate_hz": "30",
+        "mesh_sync_rate_hz": "10",
+        "position_hold_enabled": true
+    },
+    "prototype_status": "in_development",
+    "tested": false,
+    "estimated_cost_usd": "75.00",
+    "name": "goblin_full_hand_left",
+    "type": "UNKNOWN"
 }

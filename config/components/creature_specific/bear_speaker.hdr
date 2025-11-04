@@ -1,0 +1,5 @@
+// Auto-generated header for bear_speaker
+#include <esp_err.h>
+
+esp_err_t bear_speaker_init(void);
+void bear_speaker_act(void);

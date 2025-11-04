@@ -1,0 +1,85 @@
+{
+    "relative_filename": "config/hardware/servo_sg90_micro.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "servo_sg90_micro",
+    "hardware_id": "SERVO_SG90_MICRO",
+    "description": "Micro servo motor for precise position control in small animatronics",
+    "created": "2025-10-12",
+    "hitCount": 1,
+    "physical_specifications": {
+        "dimensions": "23x12.2x29 MM",
+        "weight": "9 G",
+        "shaft_diameter": "4 MM",
+        "mounting_holes": 2,
+        "rotation_range": "180 DEG",
+        "operating_voltage": "4.8V-6V",
+        "stall_current": "650 MA",
+        "operating_current": "220 MA"
+    },
+    "electrical_requirements": {
+        "power_supply_voltage": "5V",
+        "control_voltage": "3.3V",
+        "interface_type": "PWM",
+        "pwm_frequency": "50 HZ",
+        "pulse_width_range": "1-2 MS",
+        "logic_compatibility": "3.3V_TOLERANT"
+    },
+    "gpio_requirements": {
+        "control_pin": 1,
+        "power_pins": 1,
+        "ground_pins": 1,
+        "total_connections": 3
+    },
+    "performance_specifications": {
+        "rotation_speed": "0.1 SEC/60_DEG",
+        "torque": "1.8 KG_CM",
+        "precision": "1 DEG",
+        "backlash": "1 DEG",
+        "operating_temperature": "-30_TO_60_C",
+        "duty_cycle": "CONTINUOUS"
+    },
+    "control_capabilities": {
+        "position_feedback": false,
+        "speed_control": false,
+        "torque_limiting": false,
+        "smooth_acceleration": true,
+        "calibration_required": true
+    },
+    "use_cases": [
+        "eye_movement",
+        "ear_articulation",
+        "mouth_opening",
+        "head_turning",
+        "tail_wagging",
+        "wing_flapping",
+        "jaw_movement",
+        "eyebrow_raising"
+    ],
+    "family_suitability": {
+        "robot": "GOOD",
+        "android": "EXCELLENT",
+        "goblin": "EXCELLENT",
+        "vampire": "GOOD",
+        "zombie": "MODERATE",
+        "ghost": "POOR",
+        "dragon": "EXCELLENT",
+        "cat": "EXCELLENT",
+        "bear": "GOOD"
+    },
+    "mounting_requirements": {
+        "servo_horn_required": true,
+        "mounting_bracket": "OPTIONAL",
+        "vibration_damping": "RECOMMENDED",
+        "wire_management": "3_WIRE_PIGTAIL"
+    },
+    "software": {
+        "init_function": "servo_sg90_micro_init",
+        "act_function": "servo_sg90_micro_act",
+        "components": [
+            "config/components/drivers/pwm_bus.json"
+        ]
+    },
+    "hardware_type": "SERVO_MOTOR",
+    "type": "SERVO_MOTOR"
+}

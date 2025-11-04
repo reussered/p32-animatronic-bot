@@ -1,82 +1,83 @@
 {
-    "relative_filename":  "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_id":  "CAT_MYSTERIOUS_SHADOW",
-    "bot_type":  "MYSTICAL_PET",
-    "description":  "Enigmatic black cat with subtle LED accent lighting and mysterious behaviors",
-    "created":  "2025-10-12",
-    "family_template":  "config/bots/bot_families/animals/cat_family.json",
-    "overrides":  {
-                      "mood_defaults":  {
-                                            "CURIOSITY":  55,
-                                            "MYSTERY":  40,
-                                            "INDEPENDENCE":  35,
-                                            "AFFECTION":  15,
-                                            "CONTENTMENT":  20,
-                                            "ALOOFNESS":  30,
-                                            "FEAR":  8,
-                                            "IRRITATION":  12
-                                        },
-                      "behavior_config":  {
-                                              "stealth_mode":  true,
-                                              "mysterious_appearances":  true,
-                                              "selective_interaction":  true,
-                                              "nocturnal_preferences":  true,
-                                              "shadow_following":  true
-                                          }
-                  },
-    "components":  [
-                       "config/components/creature_specific/cat_animated_ears.json",
-                       "config/components/creature_specific/subtle_led_eyes.json",
-                       "config/components/creature_specific/ambient_purr_speaker.json",
-                       "config/components/creature_specific/motion_stealth_sensor.json"
-                   ],
-    "mystical_behaviors":  {
-                               "appearance_patterns":  [
-                                                           "fade_in_slowly",
-                                                           "shadow_emergence",
-                                                           "silent_materialization",
-                                                           "corner_lurking"
-                                                       ],
-                               "interaction_modes":  [
-                                                         "selective_acknowledgment",
-                                                         "mysterious_stare",
-                                                         "brief_contact_vanish",
-                                                         "observer_mode"
-                                                     ],
-                               "atmospheric_effects":  [
-                                                           "subtle_eye_glow",
-                                                           "whispered_purr",
-                                                           "ambient_presence",
-                                                           "shadow_play"
-                                                       ]
-                           },
-    "personality_profile":  {
-                                "social_level":  "selective",
-                                "independence":  "very_high",
-                                "mystique_factor":  "maximum",
-                                "vocal_level":  "minimal",
-                                "presence_intensity":  "subtle_strong"
-                            },
-    "environmental_interaction":  {
-                                      "room_awareness":  "comprehensive",
-                                      "light_sensitivity":  "high",
-                                      "hiding_spots":  "preferred",
-                                      "elevation_seeking":  true,
-                                      "corner_observation":  true
-                                  },
-    "aesthetic_customization":  {
-                                    "fur_pattern":  "solid_black_velvet",
-                                    "eye_color":  "piercing_yellow",
-                                    "accent_lighting":  "subtle_blue",
-                                    "movement_style":  "fluid_graceful"
-                                },
-    "timing_patterns":  {
-                            "active_hours":  "evening_night",
-                            "appearance_intervals":  "unpredictable",
-                            "interaction_duration":  "brief_meaningful",
-                            "disappearance_style":  "gradual_fade"
-                        },
-    "name":  "cat_mysterious_shadow"
+    "relative_filename": "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_id": "CAT_MYSTERIOUS_SHADOW",
+    "bot_type": "MYSTICAL_PET",
+    "description": "Enigmatic black cat with subtle LED accent lighting and mysterious behaviors",
+    "created": "2025-10-12",
+    "family_template": "config/bots/bot_families/animals/cat_family.json",
+    "overrides": {
+        "mood_defaults": {
+            "CURIOSITY": 55,
+            "MYSTERY": 40,
+            "INDEPENDENCE": 35,
+            "AFFECTION": 15,
+            "CONTENTMENT": 20,
+            "ALOOFNESS": 30,
+            "FEAR": 8,
+            "IRRITATION": 12
+        },
+        "behavior_config": {
+            "stealth_mode": true,
+            "mysterious_appearances": true,
+            "selective_interaction": true,
+            "nocturnal_preferences": true,
+            "shadow_following": true
+        }
+    },
+    "components": [
+        "config/components/creature_specific/cat_animated_ears.json",
+        "config/components/creature_specific/subtle_led_eyes.json",
+        "config/components/creature_specific/ambient_purr_speaker.json",
+        "config/components/creature_specific/motion_stealth_sensor.json"
+    ],
+    "mystical_behaviors": {
+        "appearance_patterns": [
+            "fade_in_slowly",
+            "shadow_emergence",
+            "silent_materialization",
+            "corner_lurking"
+        ],
+        "interaction_modes": [
+            "selective_acknowledgment",
+            "mysterious_stare",
+            "brief_contact_vanish",
+            "observer_mode"
+        ],
+        "atmospheric_effects": [
+            "subtle_eye_glow",
+            "whispered_purr",
+            "ambient_presence",
+            "shadow_play"
+        ]
+    },
+    "personality_profile": {
+        "social_level": "selective",
+        "independence": "very_high",
+        "mystique_factor": "maximum",
+        "vocal_level": "minimal",
+        "presence_intensity": "subtle_strong"
+    },
+    "environmental_interaction": {
+        "room_awareness": "comprehensive",
+        "light_sensitivity": "high",
+        "hiding_spots": "preferred",
+        "elevation_seeking": true,
+        "corner_observation": true
+    },
+    "aesthetic_customization": {
+        "fur_pattern": "solid_black_velvet",
+        "eye_color": "piercing_yellow",
+        "accent_lighting": "subtle_blue",
+        "movement_style": "fluid_graceful"
+    },
+    "timing_patterns": {
+        "active_hours": "evening_night",
+        "appearance_intervals": "unpredictable",
+        "interaction_duration": "brief_meaningful",
+        "disappearance_style": "gradual_fade"
+    },
+    "name": "cat_mysterious_shadow",
+    "type": "UNKNOWN"
 }

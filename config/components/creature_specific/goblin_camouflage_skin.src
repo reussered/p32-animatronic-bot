@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_camouflage_skin
+#include "components/goblin_camouflage_skin.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_camouflage_skin";
+
+esp_err_t goblin_camouflage_skin_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_camouflage_skin_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

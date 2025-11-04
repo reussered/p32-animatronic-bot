@@ -1,82 +1,84 @@
 {
-  "relative_filename": "assets/animations/bear/gentle_blink.json",
-  "animation_name": "bear_gentle_blink",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "description": "Slow, gentle blinking animation for friendly bear personality",
-  "duration_ms": 1200,
-  "loop": false,
-  "mood_trigger": "CONTENTMENT",
-  "components": [
-    {
-      "component_id": "bear_eye_left",
-      "keyframes": [
+    "relative_filename": "assets/animations/bear/gentle_blink.json",
+    "animation_name": "bear_gentle_blink",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Slow, gentle blinking animation for friendly bear personality",
+    "duration_ms": 1200,
+    "loop": false,
+    "mood_trigger": "CONTENTMENT",
+    "components": [
         {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 1.0,
-            "color": "#8b4513",
-            "expression": "gentle_open"
-          }
+            "component_id": "bear_eye_left",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 1.0,
+                        "color": "#8b4513",
+                        "expression": "gentle_open"
+                    }
+                },
+                {
+                    "time_ms": 400,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 0.1,
+                        "color": "#8b4513",
+                        "expression": "gentle_closed"
+                    }
+                },
+                {
+                    "time_ms": 800,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 1.0,
+                        "color": "#8b4513",
+                        "expression": "gentle_open"
+                    }
+                }
+            ]
         },
         {
-          "time_ms": 400,
-          "display_content": {
-            "type": "eye_expression", 
-            "pupil_size": 0.8,
-            "eye_openness": 0.1,
-            "color": "#8b4513",
-            "expression": "gentle_closed"
-          }
-        },
-        {
-          "time_ms": 800,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 1.0,
-            "color": "#8b4513",
-            "expression": "gentle_open"
-          }
+            "component_id": "bear_eye_right",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 1.0,
+                        "color": "#8b4513",
+                        "expression": "gentle_open"
+                    }
+                },
+                {
+                    "time_ms": 400,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 0.1,
+                        "color": "#8b4513",
+                        "expression": "gentle_closed"
+                    }
+                },
+                {
+                    "time_ms": 800,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.8,
+                        "eye_openness": 1.0,
+                        "color": "#8b4513",
+                        "expression": "gentle_open"
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "component_id": "bear_eye_right",
-      "keyframes": [
-        {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 1.0,
-            "color": "#8b4513",
-            "expression": "gentle_open"
-          }
-        },
-        {
-          "time_ms": 400,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 0.1,
-            "color": "#8b4513", 
-            "expression": "gentle_closed"
-          }
-        },
-        {
-          "time_ms": 800,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.8,
-            "eye_openness": 1.0,
-            "color": "#8b4513",
-            "expression": "gentle_open"
-          }
-        }
-      ]
-    }
-  ]
+    ],
+    "type": "UNKNOWN",
+    "name": "gentle_blink"
 }

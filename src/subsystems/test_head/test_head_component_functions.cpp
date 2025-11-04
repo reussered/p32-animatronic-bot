@@ -1,77 +1,77 @@
 #include "subsystems/test_head/test_head_component_functions.hpp"
+#include "components/interfaces/spi_display_bus.hdr"
+#include "components/interfaces/spi_data_bus.hdr"
 
 // Auto-generated component aggregation file
 
 // --- Begin: config\components\hardware\gc9a01.src ---
 // gc9a01 component implementation
-// This component is a data provider. It defines the physical characteristics
-// of the GC9A01 display but contains no active logic.
+// TEMPLATE-BASED HARDWARE DRIVER
+// This component interacts with the physical GC9A01 display.
 
-#include "config/components/hardware/gc9a01.hdr"
 #include "esp_log.h"
-#include "esp_heap_caps.h"
-#include <stdlib.h>
+#include "driver/spi_master.h" // For SPI communication
+#include <cstdint>
 
-static const char *TAG_gc9a01 = "gc9a01";
+// This is the file-scoped static pointer allocated by the "allocator" component
+// (e.g., goblin_left_eye). Because both components are templates instantiated
+// with the same type 'T' and concatenated into the same compilation unit,
+// this driver component can see and use the buffer allocated by the other.
+template <typename T>
+extern typename T::Pixel* display_buffer;
 
-// Shared frame pointer for display chain coordination
-// Set by positioned components (left_eye/right_eye), read by display driver
-Pixel* frame_ptr = nullptr;
+static const char *TAG_gc9a01_driver = "gc9a01_driver";
 
-// Define GC9A01_InitialPixel
-// Note: value should be set before allocating buffers containing GC9A01_Pixels
-GC9A01_Pixel GC9A01_InitialPixel;
+// Placeholder for the SPI device handle
+static spi_device_handle_t spi_handle;
 
-// Display Buffer Interface - provides buffer allocation and size info
-// to positioned components (eyes, mouth, etc.)
+template <typename T>
+esp_err_t gc9a01_init()
+{
+    ESP_LOGI(TAG_gc9a01_driver, "Initializing GC9A01 hardware driver (template-based)");
 
-/**
- * @brief Get display width in pixels
- * @return Display width (240 for GC9A01)
- */
-size_t gc9a01_get_width(void) {
-    return 240;
-}
+    // In a real scenario, this is where we would initialize the
+    // SPI bus, configure the pins, and send initialization commands
+    // to the GC9A01 controller.
 
-/**
- * @brief Get display height in pixels
- * @return Display height (240 for GC9A01)
- */
-size_t gc9a01_get_height(void) {
-    return 240;
-}
+    // For now, we just log that we are initializing for a specific type.
+    ESP_LOGI(TAG_gc9a01_driver, "Driver configured for display: %dx%d", T::WIDTH, T::HEIGHT);
 
-/**
- * @brief Get total frame size in pixels
- * @return Total pixels in one frame (width * height)
- */
-size_t getFrameSize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
+    // Check if the display buffer has been allocated by another component.
+    if (display_buffer<T> == nullptr)
+    {
+        ESP_LOGE(TAG_gc9a01_driver, "Display buffer is null! Allocator component must run first.");
+        return ESP_FAIL;
+    }
 
-/**
- * @brief Get pixels per row (display width)
- * @return Number of pixels per row
- */
-size_t getFrameRowSize(void) {
-    return 240;
-}
+    ESP_LOGI(TAG_gc9a01_driver, "Successfully linked with display buffer.");
 
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame
- */
-size_t getDisplaySize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
-
-esp_err_t gc9a01_init(void) {
-    ESP_LOGI(TAG_gc9a01, "gc9a01 component initialized (passive)");
     return ESP_OK;
 }
 
-void gc9a01_act(void) {
-    // This component is passive and does nothing in its act function.
+template <typename T>
+void gc9a01_act()
+{
+    // This is the core logic of the driver. In every 'act' cycle,
+    // it would send the contents of the 'display_buffer' to the
+    // physical screen via SPI.
+
+    if (display_buffer<T> == nullptr)
+    {
+        return; // Not yet initialized
+    }
+
+    // --- REAL DRIVER LOGIC WOULD GO HERE ---
+    // Example:
+    // spi_transaction_t t;
+    // memset(&t, 0, sizeof(t));
+    // t.length = T::WIDTH * T::HEIGHT * sizeof(typename T::Pixel) * 8; // length in bits
+    // t.tx_buffer = display_buffer<T>;
+    // spi_device_polling_transmit(spi_handle, &t);
+    //
+    // For this simulation, we will just confirm we can access the buffer.
+    // (This log would be too noisy in a real application)
+    // ESP_LOGD(TAG_gc9a01_driver, "gc9a01_act: Acting on display buffer.");
 }
 // --- End: config\components\hardware\gc9a01.src ---
 
@@ -143,40 +143,42 @@ static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
 }
 
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_display_pin.cs);
 
-    if (cur_spi_pin.handle == NULL) {
+    if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
         return ESP_FAIL;
     }
 
     // Hardware reset
-    if (cur_spi_pin.rst != -1) {
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 0);
+    if (cur_spi_display_pin.rst != -1) {
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 0);
         vTaskDelay(pdMS_TO_TICKS(100));
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 1);
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 1);
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     // Software reset
-    spi_write_command(cur_spi_pin.handle, GC9A01_SWRESET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SWRESET);
     vTaskDelay(pdMS_TO_TICKS(150));
 
     // Sleep out
-    spi_write_command(cur_spi_pin.handle, GC9A01_SLPOUT);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SLPOUT);
     vTaskDelay(pdMS_TO_TICKS(500));
 
     // Display on
-    spi_write_command(cur_spi_pin.handle, GC9A01_DISPON);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_DISPON);
     vTaskDelay(pdMS_TO_TICKS(100));
 
-    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_display_pin.cs);
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    if (cur_spi_pin.handle == NULL) {
-        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "generic_spi_display_act called - handle: %p, CS: %d", 
+             (void*)cur_spi_display_pin.handle, cur_spi_display_pin.cs);
+    if (cur_spi_display_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
         return;
     }
 
@@ -185,24 +187,24 @@ void generic_spi_display_act(void) {
     extern Pixel* frame_ptr;
     
     if (!frame_ptr) {
-        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_pin.cs);
+        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_display_pin.cs);
         return;
     }
     
     uint16_t* framebuffer = (uint16_t*)frame_ptr;
 
     // Set column address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_CASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
     uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, col_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, col_data, 4);
 
     // Set row address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_RASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
     uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, row_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, row_data, 4);
 
     // Memory write
-    spi_write_command(cur_spi_pin.handle, GC9A01_RAMWR);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
 
     // Send the actual framebuffer data
     // Convert RGB565 pixels to byte stream (big-endian)
@@ -226,7 +228,7 @@ void generic_spi_display_act(void) {
             row_buffer[col * 2 + 1] = pixel & 0xFF; // Low byte
         }
         
-        generic_spi_write_data(cur_spi_pin.handle, row_buffer, row_size);
+        generic_spi_write_data(cur_spi_display_pin.handle, row_buffer, row_size);
     }
     
     free(row_buffer);
@@ -239,14 +241,14 @@ void generic_spi_display_act(void) {
 // Uses display-agnostic Pixel types with saturation arithmetic
 
 #include "esp_log.h"
-#include "config/components/hardware/gc9a01.hdr"  // For Pixel type
+#include "config/components/hardware/gc9a01.hdr"  // For GC9A01_Pixel type
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 
 // Shared frame buffer (set by left/right eye positioned components)
-static Pixel* currentFrame = nullptr;
+static GC9A01_Pixel* currentFrame = nullptr;
 static uint32_t current_frame_size = 0;
 
 // Goblin personality multiplier - goblins show emotions STRONGLY (1.5x)
@@ -329,17 +331,23 @@ void goblin_eye_act(void)
                 // Normalize to fractional multiplier and apply effect
                 float intensity = static_cast<float>(moodValue) / 127.0f;
                 
-                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * Pixel::maxRed);
-                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * Pixel::maxGreen);
-                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * Pixel::maxBlue);
+                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * 31);   // 0x1F = 31
+                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * 63); // 0x3F = 63
+                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * 31);  // 0x1F = 31
                 
                 // Accumulate using Pixel's saturating addition
-                Pixel contribution;
+                GC9A01_Pixel contribution;
                 contribution.red = (red_contrib > 0) ? red_contrib : 0;
                 contribution.green = (green_contrib > 0) ? green_contrib : 0;
                 contribution.blue = (blue_contrib > 0) ? blue_contrib : 0;
                 
-                moodTint += contribution;
+                // Manual saturation addition
+                unsigned int sum_r = moodTint.red + contribution.red;
+                moodTint.red = (sum_r > 31) ? 31 : sum_r;
+                unsigned int sum_g = moodTint.green + contribution.green;
+                moodTint.green = (sum_g > 63) ? 63 : sum_g;
+                unsigned int sum_b = moodTint.blue + contribution.blue;
+                moodTint.blue = (sum_b > 31) ? 31 : sum_b;
             }
         }
         
@@ -347,7 +355,12 @@ void goblin_eye_act(void)
         for (uint32_t pixel = 0; pixel < current_frame_size; pixel++) 
         {
             // Add mood tint using saturating arithmetic
-            currentFrame[pixel] += moodTint;
+            unsigned int sum_r = currentFrame[pixel].red + moodTint.red;
+            currentFrame[pixel].red = (sum_r > 31) ? 31 : sum_r;
+            unsigned int sum_g = currentFrame[pixel].green + moodTint.green;
+            currentFrame[pixel].green = (sum_g > 63) ? 63 : sum_g;
+            unsigned int sum_b = currentFrame[pixel].blue + moodTint.blue;
+            currentFrame[pixel].blue = (sum_b > 31) ? 31 : sum_b;
         }
         
         // Step 3: Remember new mood
@@ -363,79 +376,57 @@ void goblin_eye_act(void)
 
 // --- Begin: config\components\creature_specific\goblin_left_eye.src ---
 // goblin_left_eye component implementation
-// Positioned component that manages the left eye display buffer
+// TEMPLATE-BASED "ALLOCATOR"
+// Allocates a display buffer based on the provided hardware type T.
 
 #include "esp_log.h"
 #include <cstdint>
 
-static const char *TAG_goblin_left_eye = "goblin_left_eye";
+// This file-scoped static pointer is the key to the new architecture.
+// It is templated on the hardware type 'T'. When the build script
+// generates the final C++ file, it will instantiate this variable
+// with a concrete type (e.g., gc9a01), making the buffer available
+// to any other component within the same compilation unit.
+template <typename T>
+static typename T::Pixel* display_buffer = nullptr;
 
-// Display buffer for left eye - now using Pixel class
-static Pixel* left_display_buffer = nullptr;
-static Pixel* left_current_frame_ptr = nullptr;
-static size_t left_frame_offset = 0;  // Offset in pixels
+template <typename T>
+esp_err_t goblin_left_eye_init()
+{
+    const char *TAG = "goblin_left_eye";
+    ESP_LOGI(TAG, "Initializing left eye display buffer (template-based)");
 
-/**
- * @brief Initialize left eye display buffer
- * Allocates framebuffer using Pixel class and Display Buffer Interface
- */
-esp_err_t goblin_left_eye_init(void) {
-    ESP_LOGI(TAG_goblin_left_eye, "Initializing left eye display buffer");
-    
-    // Allocate display buffer - array of Pixels
-    uint32_t display_size = getDisplaySize();
-    left_display_buffer = new Pixel[display_size];
-    
-    if (!left_display_buffer) {
-        ESP_LOGE(TAG_goblin_left_eye, "Failed to allocate left eye buffer");
+    // Calculate size from the hardware type T's static constants.
+    const int display_size = T::WIDTH * T::HEIGHT;
+
+    // Allocate the buffer using the nested Pixel type from T.
+    display_buffer<T> = new typename T::Pixel[display_size];
+
+    if (!display_buffer<T>)
+    {
+        ESP_LOGE(TAG, "Failed to allocate left eye buffer");
         return ESP_ERR_NO_MEM;
     }
-    
-    // Initialize frame pointer and offset
-    left_frame_offset = 0;
-    left_current_frame_ptr = left_display_buffer;
-    
-    // Initialize buffer with test pattern - red for left eye
-    Pixel red = Pixel::Red();
-    for (uint32_t i = 0; i < display_size; i++) {
-        left_display_buffer[i] = red;
+
+    // Initialize buffer to black.
+    for (int i = 0; i < display_size; i++)
+    {
+        display_buffer<T>[i] = typename T::Pixel(); // Default constructor is black.
     }
-    
-    ESP_LOGI(TAG_goblin_left_eye, "Left eye buffer allocated: %u pixels (%.1f KB)", 
-             display_size, (display_size * sizeof(Pixel)) / 1024.0f);
-    
+
+    ESP_LOGI(TAG, "Left eye buffer allocated: %d pixels (%.1f KB)",
+             display_size, (display_size * sizeof(typename T::Pixel)) / 1024.0f);
+
     return ESP_OK;
 }
 
-/**
- * @brief Get pointer to current frame in left eye display buffer
- * @return Pointer to Pixel array at current offset, or nullptr if not initialized
- */
-Pixel* goblin_left_eye_get_buffer(void) {
-    return left_current_frame_ptr;
-}
-
-/**
- * @brief Update left eye animation and advance frame pointer
- * Implements frame cycling with offset management
- */
-void goblin_left_eye_act(void) {
-    if (!left_display_buffer) return;
-    
-    // Calculate current frame pointer with offset (in pixels)
-    left_current_frame_ptr = left_display_buffer + left_frame_offset;
-    
-    // Set global frame_ptr for display driver to use
-    extern Pixel* frame_ptr;
-    frame_ptr = left_current_frame_ptr;
-    
-    // Advance to next frame
-    left_frame_offset += getFrameSize();
-    
-    // Wrap around if we exceed buffer size
-    if (left_frame_offset >= getDisplaySize()) {
-        left_frame_offset = 0;
-    }
+template <typename T>
+void goblin_left_eye_act()
+{
+    // This component is now just an allocator.
+    // The 'act' function doesn't need to do anything in every cycle.
+    // Other components will read from/write to the 'display_buffer'.
+    // This function exists to satisfy the component model.
 }
 // --- End: config\components\creature_specific\goblin_left_eye.src ---
 
@@ -542,7 +533,8 @@ struct spi_device_pinset_t {
 
 static constexpr size_t SPI_DEVICE_SLOT_COUNT = 32U;
 static spi_device_pinset_t spi_device_pins[SPI_DEVICE_SLOT_COUNT];
-spi_device_pinset_t cur_spi_pin;
+// cur_spi_display_pin is declared in spi_display_bus component
+extern spi_display_pinset_t cur_spi_display_pin;
 static size_t spi_device_count = 0;
 static size_t spi_active_device_index = 0;
 
@@ -668,7 +660,7 @@ void spi_bus_act(void) {
 
     if (spi_device_count == 0) {
         device = 0;
-        cur_spi_pin = spi_device_pinset_t();
+        cur_spi_display_pin = spi_display_pinset_t();
         return;
     }
 
@@ -677,7 +669,15 @@ void spi_bus_act(void) {
         device = 0;
     }
 
-    cur_spi_pin = spi_device_pins[static_cast<size_t>(device)];
+    // Convert spi_device_pinset_t to spi_display_pinset_t
+    const spi_device_pinset_t& device_pin = spi_device_pins[static_cast<size_t>(device)];
+    cur_spi_display_pin.mosi = device_pin.mosi;
+    cur_spi_display_pin.clk = device_pin.clk;
+    cur_spi_display_pin.cs = device_pin.cs;
+    cur_spi_display_pin.dc = device_pin.dc;
+    cur_spi_display_pin.bl = device_pin.backlight;
+    cur_spi_display_pin.rst = -1;  // Not used in device config
+    cur_spi_display_pin.handle = nullptr;
 
     ++device;
     if (static_cast<size_t>(device) >= spi_device_count) {
@@ -743,7 +743,7 @@ int spi_bus_get_backlight_pin(int device_index) {
 
 static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
-spi_display_pinset_t cur_spi_pin;
+spi_display_pinset_t cur_spi_display_pin;
 
 static const char *TAG_spi_display_bus = "spi_display_bus";
 
@@ -884,8 +884,8 @@ esp_err_t spi_display_bus_init(void) {
              spi_display_slots[device_count].bl,
              (void*)spi_display_slots[device_count].handle);
 
-    // Set cur_spi_pin to the device we just created so the next component can use it immediately
-    cur_spi_pin = spi_display_slots[device_count];
+    // Set cur_spi_display_pin to the device we just created so the next component can use it immediately
+    cur_spi_display_pin = spi_display_slots[device_count];
 
     device_count++;
     return ESP_OK;
@@ -909,7 +909,7 @@ void spi_display_bus_act(void)
     }
 
     // Set the current global pinset for other components to use
-    cur_spi_pin = spi_display_slots[device];
+    cur_spi_display_pin = spi_display_slots[device];
 
     // Move to the next device for the next call
     device++;

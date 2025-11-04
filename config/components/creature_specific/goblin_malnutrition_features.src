@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_malnutrition_features
+#include "components/goblin_malnutrition_features.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_malnutrition_features";
+
+esp_err_t goblin_malnutrition_features_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_malnutrition_features_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,24 +1,24 @@
 {
-    "component_type":  "POSITIONED_COMPONENT",
-    "position":  {
-                     "units":  "INCH",
-                     "x":  "0.0 INCH",
-                     "coordinate_system":  "skull_3d",
-                     "z":  "0.0 INCH",
-                     "reference_point":  "nose_center",
-                     "y":  "0.0 INCH"
-                 },
-    "name":  "goblin_left_ear",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "components":  [
-                       "config/components/hardware/servo_sg90_micro.json",
-                       "config/components/hardware/hw496_microphone.json"
-                   ],
-    "software":  {
-                     "act_function":  "goblin_left_ear_act",
-                     "init_function":  "goblin_left_ear_init",
-                     "hitCount":  10
-                 },
-    "relative_filename":  "config/components/creature_specific/goblin_left_ear.json"
+    "position": {
+        "units": "INCH",
+        "x": "0.0 INCH",
+        "coordinate_system": "skull_3d",
+        "z": "0.0 INCH",
+        "reference_point": "nose_center",
+        "y": "0.0 INCH"
+    },
+    "name": "goblin_left_ear",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "components": [
+        "config/components/hardware/servo_sg90_micro.json",
+        "config/components/hardware/hw496_microphone.json"
+    ],
+    "software": {
+        "act_function": "goblin_left_ear_act",
+        "init_function": "goblin_left_ear_init",
+        "hitCount": 10
+    },
+    "relative_filename": "config/components/creature_specific/goblin_left_ear.json",
+    "type": "POSITIONED_COMPONENT"
 }

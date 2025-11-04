@@ -1,0 +1,79 @@
+{
+    "relative_filename": "config/bots/bot_families/humanoids/arms/humanoid_wrist_right.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "humanoid_wrist_right",
+    "subsystem": "ARM",
+    "description": "Right wrist assembly with 2 DOF for hand orientation and fine manipulation",
+    "physical_component": "config/components/hardware/servo_assembly.json",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "22.0 INCH",
+        "y": "0.0 INCH",
+        "z": "-8.0 INCH",
+        "description": "Right wrist joint at forearm terminus"
+    },
+    "scaling_behavior": {
+        "scales_with_creature": true,
+        "scaling_reference": "eye_spacing_baseline",
+        "position_scaling": "PROPORTIONAL_XYZ",
+        "component_scaling": "MASS_BASED_SERVO_SELECTION"
+    },
+    "joint_specifications": {
+        "degrees_of_freedom": 2,
+        "joint_names": [
+            "wrist_flex_extend",
+            "wrist_radial_ulnar_deviation"
+        ],
+        "wrist_flex_extend": {
+            "axis": "FRONTAL_PLANE_ROTATION",
+            "range_of_motion": "-80_TO_80_DEGREES",
+            "servo_type": "MG996R_SERVO",
+            "torque_requirement": "1.3_NM_PEAK",
+            "position_feedback": "INTEGRATED_POTENTIOMETER"
+        },
+        "wrist_radial_ulnar_deviation": {
+            "axis": "SAGITTAL_PLANE_ROTATION",
+            "range_of_motion": "-30_TO_30_DEGREES",
+            "servo_type": "DS3218_SERVO",
+            "torque_requirement": "2.2_NM_PEAK",
+            "position_feedback": "INTEGRATED_POTENTIOMETER"
+        }
+    },
+    "attachment_points": {
+        "connects_to_forearm": {
+            "component_reference": "config/bots/bot_families/humanoids/arms/humanoid_elbow_right.json",
+            "attachment_method": "M5_RADIUS_ULNA_COUPLING"
+        },
+        "hand_attachment_ready": {
+            "interface": "M4_HAND_MOUNTING_PLATE",
+            "description": "Ready for future hand/gripper attachment"
+        }
+    },
+    "control_specifications": {
+        "controller_assignment": "ESP32_C3_ARM_CONTROLLER_RIGHT",
+        "control_loop_frequency": "1000_HZ",
+        "coordinate_with": [
+            "humanoid_shoulder_right",
+            "humanoid_elbow_right"
+        ],
+        "safety_limits": {
+            "max_angular_velocity": "400_DEGREES_PER_SECOND",
+            "precision_mode": "HIGH_RESOLUTION_CONTROL_AVAILABLE"
+        }
+    },
+    "behavioral_capabilities": {
+        "manipulation_contribution": "FINE_OBJECT_ORIENTATION_AND_PRECISION_TASKS",
+        "gesture_primitives": [
+            "point_precise",
+            "twist_objects",
+            "stabilize_grip",
+            "express_delicate_movements"
+        ],
+        "precision_level": "SUB_DEGREE_POSITIONING_ACCURACY",
+        "coordination_capability": "BILATERAL_FINE_MOTOR_TASKS"
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
+}

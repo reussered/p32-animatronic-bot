@@ -1,0 +1,5 @@
+// Auto-generated header for esp32_s3_devkit_chip
+#include <esp_err.h>
+
+esp_err_t esp32_s3_devkit_chip_init(void);
+void esp32_s3_devkit_chip_act(void);

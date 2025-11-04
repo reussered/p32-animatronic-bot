@@ -1,0 +1,20 @@
+// Auto-generated source for conversation_ai_engine
+#include "components/conversation_ai_engine.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "conversation_ai_engine";
+
+esp_err_t conversation_ai_engine_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void conversation_ai_engine_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

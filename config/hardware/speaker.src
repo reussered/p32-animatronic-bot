@@ -1,0 +1,16 @@
+// speaker component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_speaker = "speaker";
+
+esp_err_t speaker_init(void) {
+    ESP_LOGI(TAG_speaker, "speaker init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void speaker_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_speaker, "speaker act");
+}

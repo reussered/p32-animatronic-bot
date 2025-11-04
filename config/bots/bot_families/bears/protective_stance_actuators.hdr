@@ -1,0 +1,5 @@
+// Auto-generated header for protective_stance_actuators
+#include <esp_err.h>
+
+esp_err_t protective_stance_actuators_init(void);
+void protective_stance_actuators_act(void);

@@ -1,93 +1,93 @@
 {
-    "relative_filename":  "config/components/creature_specific/cat_animated_ears.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "component_type":  "POSITIONED_SERVO_PAIR",
-    "name":  "CAT_ANIMATED_EARS",
-    "subsystem":  "HEAD",
-    "description":  "Servo-controlled cat ears for emotional expression and directional hearing simulation",
-    "created":  "2025-10-12",
-    "components":  [
-                       "config/components/hardware/servo_sg90_micro.json"
-                   ],
-    "ear_configuration":  {
-                              "ear_count":  2,
-                              "ears":  [
-                                           {
-                                               "ear_id":  "LEFT_EAR",
-                                               "position":  {
-                                                                "x":  "-1.0 INCH",
-                                                                "y":  "1.5 INCH",
-                                                                "z":  "0.5 INCH"
-                                                            },
-                                               "servo_range":  "120 DEG",
-                                               "default_angle":  "45 DEG"
-                                           },
-                                           {
-                                               "ear_id":  "RIGHT_EAR",
-                                               "position":  {
-                                                                "x":  "1.0 INCH",
-                                                                "y":  "1.5 INCH",
-                                                                "z":  "0.5 INCH"
-                                                            },
-                                               "servo_range":  "120 DEG",
-                                               "default_angle":  "45 DEG"
-                                           }
-                                       ]
-                          },
-    "movement_patterns":  {
-                              "alert_stance":  {
-                                                   "left_ear":  "90 DEG",
-                                                   "right_ear":  "90 DEG",
-                                                   "transition_time":  "0.3 SEC"
-                                               },
-                              "relaxed_position":  {
-                                                       "left_ear":  "45 DEG",
-                                                       "right_ear":  "45 DEG",
-                                                       "transition_time":  "1.0 SEC"
-                                                   },
-                              "annoyed_back":  {
-                                                   "left_ear":  "10 DEG",
-                                                   "right_ear":  "10 DEG",
-                                                   "transition_time":  "0.2 SEC"
-                                               },
-                              "curious_swivel":  {
-                                                     "animation":  "alternating_focus",
-                                                     "duration":  "3.0 SEC"
-                                                 }
-                          },
-    "behavioral_integration":  {
-                                   "mood_responsive":  true,
-                                   "mood_mappings":  {
-                                                         "HAPPINESS":  "gentle_sway",
-                                                         "ANGER":  "pinned_back",
-                                                         "CURIOSITY":  "active_swivel",
-                                                         "FEAR":  "flattened_defensive",
-                                                         "CONTENTMENT":  "relaxed_upright"
-                                                     }
-                               },
-    "sound_interaction":  {
-                              "sound_tracking":  true,
-                              "directional_response":  true,
-                              "audio_cue_following":  true
-                          },
-    "use_cases":  [
-                      "emotional_expression",
-                      "attention_direction",
-                      "realistic_cat_behavior",
-                      "interactive_responses",
-                      "ambient_animation"
-                  ],
-    "family_compatibility":  {
-                                 "cat":  "ESSENTIAL",
-                                 "fox":  "EXCELLENT",
-                                 "wolf":  "GOOD",
-                                 "bear":  "POOR"
-                             },
-    "hardware_type":  "POSITIONED_COMPONENT",
-    "position":  {
-                     "y":  "0.0 INCH",
-                     "z":  "0.0 INCH",
-                     "x":  "0.0 INCH"
-                 }
+    "relative_filename": "config/components/creature_specific/cat_animated_ears.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "cat_animated_ears",
+    "subsystem": "HEAD",
+    "description": "Servo-controlled cat ears for emotional expression and directional hearing simulation",
+    "created": "2025-10-12",
+    "components": [
+        "config/components/hardware/servo_sg90_micro.json"
+    ],
+    "ear_configuration": {
+        "ear_count": 2,
+        "ears": [
+            {
+                "ear_id": "LEFT_EAR",
+                "position": {
+                    "x": "-1.0 INCH",
+                    "y": "1.5 INCH",
+                    "z": "0.5 INCH"
+                },
+                "servo_range": "120 DEG",
+                "default_angle": "45 DEG"
+            },
+            {
+                "ear_id": "RIGHT_EAR",
+                "position": {
+                    "x": "1.0 INCH",
+                    "y": "1.5 INCH",
+                    "z": "0.5 INCH"
+                },
+                "servo_range": "120 DEG",
+                "default_angle": "45 DEG"
+            }
+        ]
+    },
+    "movement_patterns": {
+        "alert_stance": {
+            "left_ear": "90 DEG",
+            "right_ear": "90 DEG",
+            "transition_time": "0.3 SEC"
+        },
+        "relaxed_position": {
+            "left_ear": "45 DEG",
+            "right_ear": "45 DEG",
+            "transition_time": "1.0 SEC"
+        },
+        "annoyed_back": {
+            "left_ear": "10 DEG",
+            "right_ear": "10 DEG",
+            "transition_time": "0.2 SEC"
+        },
+        "curious_swivel": {
+            "animation": "alternating_focus",
+            "duration": "3.0 SEC"
+        }
+    },
+    "behavioral_integration": {
+        "mood_responsive": true,
+        "mood_mappings": {
+            "HAPPINESS": "gentle_sway",
+            "ANGER": "pinned_back",
+            "CURIOSITY": "active_swivel",
+            "FEAR": "flattened_defensive",
+            "CONTENTMENT": "relaxed_upright"
+        }
+    },
+    "sound_interaction": {
+        "sound_tracking": true,
+        "directional_response": true,
+        "audio_cue_following": true
+    },
+    "use_cases": [
+        "emotional_expression",
+        "attention_direction",
+        "realistic_cat_behavior",
+        "interactive_responses",
+        "ambient_animation"
+    ],
+    "family_compatibility": {
+        "cat": "ESSENTIAL",
+        "fox": "EXCELLENT",
+        "wolf": "GOOD",
+        "bear": "POOR"
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "position": {
+        "y": "0.0 INCH",
+        "z": "0.0 INCH",
+        "x": "0.0 INCH"
+    },
+    "type": "POSITIONED_SERVO_PAIR"
 }

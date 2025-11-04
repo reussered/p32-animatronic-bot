@@ -1,126 +1,127 @@
 {
-    "relative_filename":  "config/bots/bot_families/undead/zombie_runner_001.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "ZOMBIE_RUNNER_001",
-    "family_reference":  "config/bots/bot_families/horror/zombie_family.json",
-    "subfamily":  "runner",
-    "description":  "Fast-moving infected zombie with frenzied behavior and aggressive pursuit tactics",
-    "created":  "2025-10-12",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "2.2 INCH",
-                                "compression_factor":  0.9,
-                                "skull_scale":  1.0
-                            },
-    "components":  {
-                       "rapid_movement_system":  {
-                                                     "description":  "High-speed servo actuators for quick head movements and aggressive gestures",
-                                                     "implementation":  "Digital servo cluster with high-torque motors for rapid position changes",
-                                                     "movement_patterns":  [
-                                                                               "sudden_snaps",
-                                                                               "aggressive_lunging",
-                                                                               "frenzied_searching"
-                                                                           ]
-                                                 },
-                       "infection_stage_indicators":  {
-                                                          "description":  "LED system that shows progression of zombie infection through color changes",
-                                                          "implementation":  "RGB LED strips under translucent skin showing infection spread patterns",
-                                                          "color_progression":  [
-                                                                                    "healthy_pink",
-                                                                                    "sickly_yellow",
-                                                                                    "infected_green",
-                                                                                    "necrotic_black"
-                                                                                ]
-                                                      },
-                       "predator_instinct_ai":  {
-                                                    "description":  "Advanced hunting behavior system that tracks and corners targets",
-                                                    "implementation":  "Multi-sensor array with predictive movement algorithms for tactical pursuit",
-                                                    "hunting_behaviors":  [
-                                                                              "ambush_positioning",
-                                                                              "escape_route_blocking",
-                                                                              "coordinated_pack_attacks"
-                                                                          ]
-                                                },
-                       "adrenaline_simulation":  {
-                                                     "description":  "Dynamic audio and movement system that simulates infected adrenaline rushes",
-                                                     "implementation":  "Variable speed audio playback and servo acceleration during high-intensity moments",
-                                                     "trigger_conditions":  [
-                                                                                "target_proximity",
-                                                                                "loud_sounds",
-                                                                                "bright_lights"
-                                                                            ]
-                                                 }
-                   },
-    "mood_profile":  {
-                         "FEAR":  15,
-                         "ANGER":  60,
-                         "IRRITATION":  35,
-                         "HAPPINESS":  0,
-                         "CONTENTMENT":  0,
-                         "HUNGER":  75,
-                         "CURIOSITY":  25,
-                         "AFFECTION":  0
-                     },
-    "behavior_config":  {
-                            "threat_response_enabled":  true,
-                            "auto_sleep_timeout_seconds":  120,
-                            "interaction_range_cm":  300,
-                            "aggressive_threshold":  25,
-                            "movement_style":  "frenzied_running",
-                            "attention_span_seconds":  90,
-                            "pack_behavior":  "lead_charge"
-                        },
-    "audio_profile":  {
-                          "primary_sounds":  [
-                                                 "ragged_breathing",
-                                                 "snarling",
-                                                 "clicking_teeth",
-                                                 "throat_gurgling"
-                                             ],
-                          "threat_sounds":  [
-                                                "shrieking",
-                                                "aggressive_roaring",
-                                                "rapid_chattering"
-                                            ],
-                          "ambient_sounds":  [
-                                                 "heartbeat_simulation",
-                                                 "blood_rushing",
-                                                 "nervous_twitching"
-                                             ],
-                          "volume_range":  [
-                                               60,
-                                               95
-                                           ],
-                          "frequency_preference":  "high_aggressive"
-                      },
-    "aesthetic_customizations":  {
-                                     "weathering_level":  "moderate",
-                                     "infection_patterns":  [
-                                                                "fresh_wounds",
-                                                                "viral_veins",
-                                                                "bloodshot_features"
-                                                            ],
-                                     "color_variations":  [
-                                                              "flushed_aggression",
-                                                              "infection_yellowing",
-                                                              "blood_spatter"
-                                                          ],
-                                     "texture_details":  [
-                                                             "sweaty_skin",
-                                                             "tense_muscles",
-                                                             "dilated_pupils"
-                                                         ]
-                                 },
-    "construction_preference":  "hard_shell",
-    "prototype_status":  "design_complete",
-    "tested":  false,
-    "notes":  [
-                  "Fast zombie variant focused on aggressive pursuit and frenzied behavior",
-                  "Specialized components emphasize speed, aggression, and hunting instincts",
-                  "Advanced AI systems create realistic predator-like behavior patterns",
-                  "Designed for high-intensity horror scenarios requiring active threats"
-              ],
-    "name":  "zombie_runner_001"
+    "relative_filename": "config/bots/bot_families/undead/zombie_runner_001.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "ZOMBIE_RUNNER_001",
+    "family_reference": "config/bots/bot_families/horror/zombie_family.json",
+    "subfamily": "runner",
+    "description": "Fast-moving infected zombie with frenzied behavior and aggressive pursuit tactics",
+    "created": "2025-10-12",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "eye_spacing": "2.2 INCH",
+        "compression_factor": 0.9,
+        "skull_scale": 1.0
+    },
+    "components": {
+        "rapid_movement_system": {
+            "description": "High-speed servo actuators for quick head movements and aggressive gestures",
+            "implementation": "Digital servo cluster with high-torque motors for rapid position changes",
+            "movement_patterns": [
+                "sudden_snaps",
+                "aggressive_lunging",
+                "frenzied_searching"
+            ]
+        },
+        "infection_stage_indicators": {
+            "description": "LED system that shows progression of zombie infection through color changes",
+            "implementation": "RGB LED strips under translucent skin showing infection spread patterns",
+            "color_progression": [
+                "healthy_pink",
+                "sickly_yellow",
+                "infected_green",
+                "necrotic_black"
+            ]
+        },
+        "predator_instinct_ai": {
+            "description": "Advanced hunting behavior system that tracks and corners targets",
+            "implementation": "Multi-sensor array with predictive movement algorithms for tactical pursuit",
+            "hunting_behaviors": [
+                "ambush_positioning",
+                "escape_route_blocking",
+                "coordinated_pack_attacks"
+            ]
+        },
+        "adrenaline_simulation": {
+            "description": "Dynamic audio and movement system that simulates infected adrenaline rushes",
+            "implementation": "Variable speed audio playback and servo acceleration during high-intensity moments",
+            "trigger_conditions": [
+                "target_proximity",
+                "loud_sounds",
+                "bright_lights"
+            ]
+        }
+    },
+    "mood_profile": {
+        "FEAR": 15,
+        "ANGER": 60,
+        "IRRITATION": 35,
+        "HAPPINESS": 0,
+        "CONTENTMENT": 0,
+        "HUNGER": 75,
+        "CURIOSITY": 25,
+        "AFFECTION": 0
+    },
+    "behavior_config": {
+        "threat_response_enabled": true,
+        "auto_sleep_timeout_seconds": 120,
+        "interaction_range_cm": 300,
+        "aggressive_threshold": 25,
+        "movement_style": "frenzied_running",
+        "attention_span_seconds": 90,
+        "pack_behavior": "lead_charge"
+    },
+    "audio_profile": {
+        "primary_sounds": [
+            "ragged_breathing",
+            "snarling",
+            "clicking_teeth",
+            "throat_gurgling"
+        ],
+        "threat_sounds": [
+            "shrieking",
+            "aggressive_roaring",
+            "rapid_chattering"
+        ],
+        "ambient_sounds": [
+            "heartbeat_simulation",
+            "blood_rushing",
+            "nervous_twitching"
+        ],
+        "volume_range": [
+            60,
+            95
+        ],
+        "frequency_preference": "high_aggressive"
+    },
+    "aesthetic_customizations": {
+        "weathering_level": "moderate",
+        "infection_patterns": [
+            "fresh_wounds",
+            "viral_veins",
+            "bloodshot_features"
+        ],
+        "color_variations": [
+            "flushed_aggression",
+            "infection_yellowing",
+            "blood_spatter"
+        ],
+        "texture_details": [
+            "sweaty_skin",
+            "tense_muscles",
+            "dilated_pupils"
+        ]
+    },
+    "construction_preference": "hard_shell",
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Fast zombie variant focused on aggressive pursuit and frenzied behavior",
+        "Specialized components emphasize speed, aggression, and hunting instincts",
+        "Advanced AI systems create realistic predator-like behavior patterns",
+        "Designed for high-intensity horror scenarios requiring active threats"
+    ],
+    "name": "zombie_runner_001",
+    "type": "UNKNOWN"
 }

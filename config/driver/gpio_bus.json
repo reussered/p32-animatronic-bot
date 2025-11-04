@@ -1,0 +1,56 @@
+{
+    "name": "gpio_bus",
+    "type": "BUS_INTERFACE",
+    "version": "1.0.0",
+    "author": "config/authors/ai_agent.json",
+    "description": "GPIO bus component containing GPIO drivers for digital input/output operations",
+    "created": "2025-10-29",
+    "capabilities": {
+        "bus_type": "GPIO",
+        "pin_modes": [
+            "input",
+            "output",
+            "input_pullup",
+            "input_pulldown",
+            "open_drain"
+        ],
+        "interrupt_support": true,
+        "pwm_support": true,
+        "adc_support": true,
+        "applications": [
+            "buttons",
+            "LEDs",
+            "relays",
+            "sensors",
+            "communication"
+        ]
+    },
+    "components": [
+        "config/components/drivers/gpio_pair_driver.json",
+        "config/components/drivers/gpio_single_driver.json"
+    ],
+    "software": {
+        "init_function": "gpio_bus_init",
+        "act_function": "gpio_bus_act",
+        "api_functions": [
+            "gpio_bus_set_pin_mode(gpio_num_t pin, gpio_mode_t mode)",
+            "gpio_bus_write_pin(gpio_num_t pin, uint32_t level)",
+            "gpio_bus_read_pin(gpio_num_t pin)",
+            "gpio_bus_toggle_pin(gpio_num_t pin)",
+            "gpio_bus_enable_interrupt(gpio_num_t pin, gpio_int_type_t type)",
+            "gpio_bus_disable_interrupt(gpio_num_t pin)",
+            "gpio_bus_install_isr_handler(void (*fn)(void*), void* arg)"
+        ]
+    },
+    "compatibility": {
+        "esp32_s3": true,
+        "esp32_s2": true,
+        "esp32": true,
+        "chip_variants": [
+            "ESP32-S3-DevKitC-1",
+            "ESP32-S3-WROOM-1",
+            "ESP32-DevKitC"
+        ]
+    },
+    "relative_filename": "config/driver/gpio_bus.json"
+}

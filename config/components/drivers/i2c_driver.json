@@ -1,66 +1,66 @@
 {
-    "relative_filename":  "config/components/drivers/i2c_driver.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "i2c_driver",
-    "component_type":  "GENERIC_DRIVER",
-    "hardware_type":  "BUS_DRIVER",
-    "interface_type":  "I2C",
-    "description":  "Generic I2C driver for ESP32 supporting master mode with configurable speed and multi-device support",
-    "created":  "2025-10-29",
-    "driver_capabilities":  {
-                                "max_devices":  127,
-                                "speed_modes":  [
-                                                    "STANDARD_MODE_100KBPS",
-                                                    "FAST_MODE_400KBPS",
-                                                    "FAST_MODE_PLUS_1MBPS",
-                                                    "HIGH_SPEED_MODE_3.4MBPS"
-                                                ],
-                                "address_range":  "0x08-0x77",
-                                "clock_stretching":  true,
-                                "multi_master_support":  false
-                            },
-    "electrical_specs":  {
-                             "operating_voltage":  "3.3V",
-                             "pullup_resistors":  "EXTERNAL_REQUIRED",
-                             "max_bus_capacitance":  "400pF",
-                             "signal_levels":  "3.3V_TTL"
-                         },
-    "gpio_requirements":  {
-                              "sda_pin":  "CONFIGURABLE_AT_RUNTIME",
-                              "scl_pin":  "CONFIGURABLE_AT_RUNTIME",
-                              "pin_constraints":  "ESP32_I2C_CAPABLE_PINS"
-                          },
-    "software":  {
-                     "init_function":  "i2c_driver_init",
-                     "act_function":  "i2c_driver_act",
-                     "api_functions":  [
-                                           "i2c_write_bytes(device_addr, register, data)",
-                                           "i2c_read_bytes(device_addr, register, length)",
-                                           "i2c_write_register(device_addr, register, value)",
-                                           "i2c_read_register(device_addr, register)",
-                                           "i2c_scan_bus()",
-                                           "i2c_device_present(device_addr)"
-                                       ]
-                 },
-    "configuration_options":  {
-                                  "default_speed":  "FAST_MODE_400KBPS",
-                                  "timeout_ms":  1000,
-                                  "retry_count":  3,
-                                  "ack_check":  true
-                              },
-    "use_cases":  [
-                      "sensor_reading",
-                      "display_control",
-                      "eeprom_access",
-                      "rtc_communication",
-                      "io_expander_control"
-                  ],
-    "compatibility":  {
-                          "esp32_s3":  "FULL_I2C0_I2C1",
-                          "esp32_c3":  "FULL_I2C0",
-                          "esp32":  "FULL_I2C0_I2C1"
-                      },
-    "prototype_status":  "ready_for_implementation",
-    "tested":  false
+    "relative_filename": "config/components/drivers/i2c_driver.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "i2c_driver",
+    "hardware_type": "BUS_DRIVER",
+    "interface_type": "I2C",
+    "description": "Generic I2C driver for ESP32 supporting master mode with configurable speed and multi-device support",
+    "created": "2025-10-29",
+    "driver_capabilities": {
+        "max_devices": 127,
+        "speed_modes": [
+            "STANDARD_MODE_100KBPS",
+            "FAST_MODE_400KBPS",
+            "FAST_MODE_PLUS_1MBPS",
+            "HIGH_SPEED_MODE_3.4MBPS"
+        ],
+        "address_range": "0x08-0x77",
+        "clock_stretching": true,
+        "multi_master_support": false
+    },
+    "electrical_specs": {
+        "operating_voltage": "3.3V",
+        "pullup_resistors": "EXTERNAL_REQUIRED",
+        "max_bus_capacitance": "400pF",
+        "signal_levels": "3.3V_TTL"
+    },
+    "gpio_requirements": {
+        "sda_pin": "CONFIGURABLE_AT_RUNTIME",
+        "scl_pin": "CONFIGURABLE_AT_RUNTIME",
+        "pin_constraints": "ESP32_I2C_CAPABLE_PINS"
+    },
+    "software": {
+        "init_function": "i2c_driver_init",
+        "act_function": "i2c_driver_act",
+        "api_functions": [
+            "i2c_write_bytes(device_addr, register, data)",
+            "i2c_read_bytes(device_addr, register, length)",
+            "i2c_write_register(device_addr, register, value)",
+            "i2c_read_register(device_addr, register)",
+            "i2c_scan_bus()",
+            "i2c_device_present(device_addr)"
+        ]
+    },
+    "configuration_options": {
+        "default_speed": "FAST_MODE_400KBPS",
+        "timeout_ms": 1000,
+        "retry_count": 3,
+        "ack_check": true
+    },
+    "use_cases": [
+        "sensor_reading",
+        "display_control",
+        "eeprom_access",
+        "rtc_communication",
+        "io_expander_control"
+    ],
+    "compatibility": {
+        "esp32_s3": "FULL_I2C0_I2C1",
+        "esp32_c3": "FULL_I2C0",
+        "esp32": "FULL_I2C0_I2C1"
+    },
+    "prototype_status": "ready_for_implementation",
+    "tested": false,
+    "type": "GENERIC_DRIVER"
 }

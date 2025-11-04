@@ -1,0 +1,5 @@
+// Auto-generated header for esp_now_mesh_coordinator
+#include <esp_err.h>
+
+esp_err_t esp_now_mesh_coordinator_init(void);
+void esp_now_mesh_coordinator_act(void);

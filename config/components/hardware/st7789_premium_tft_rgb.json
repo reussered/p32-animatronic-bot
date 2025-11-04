@@ -1,140 +1,139 @@
 {
-    "relative_filename":  "config/components/hardware/st7789_premium_tft_rgb.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "hardware_type":  "ST7789_PREMIUM_TFT_RGB",
-    "name":  "st7789_premium_tft_rgb",
-    "description":  "1.3\" Premium TFT RGB with ST7789 driver - HIGH RESOLUTION full color",
-    "premium_small_champion":  "TRUE - Best small TFT resolution available",
-    "physical_specifications":  {
-                                    "screen_width":  "1.3 INCH",
-                                    "screen_height":  "1.3 INCH",
-                                    "screen_shape":  "square",
-                                    "diagonal":  "1.3 INCH",
-                                    "resolution":  "240x240",
-                                    "pixel_density":  "185 PPI",
-                                    "thickness":  "0.09 INCH",
-                                    "weight":  "6 GRAMS",
-                                    "active_area":  {
-                                                        "width_mm":  23.4,
-                                                        "height_mm":  23.4
-                                                    }
-                                },
-    "color_specifications":  {
-                                 "color_depth":  "262K_COLORS_18BIT",
-                                 "bits_per_pixel":  18,
-                                 "red_bits":  6,
-                                 "green_bits":  6,
-                                 "blue_bits":  6,
-                                 "color_gamut":  "RGB666",
-                                 "brightness":  "350_CD_M2",
-                                 "contrast_ratio":  "800:1_TFT",
-                                 "viewing_angle":  "160_DEGREES"
-                             },
-    "electrical_specifications":  {
-                                      "supply_voltage":  "3.3V",
-                                      "logic_voltage":  "3.3V",
-                                      "interface":  "SPI",
-                                      "current_consumption_ma":  "90",
-                                      "backlight_current_ma":  "60",
-                                      "spi_clock_max_mhz":  "40"
-                                  },
-    "display_controller":  {
-                               "driver_ic":  "ST7789VW",
-                               "manufacturer":  "Sitronix",
-                               "built_in_ram":  "240x240x18_bits",
-                               "refresh_rate_hz":  "60",
-                               "hardware_acceleration":  [
-                                                             "smooth_scrolling",
-                                                             "window_management",
-                                                             "partial_refresh"
-                                                         ]
-                           },
-    "pin_assignments":  {
-                            "vcc":  "3V3_POWER",
-                            "gnd":  "GROUND",
-                            "cs":  "CHIP_SELECT_PIN",
-                            "reset":  "RESET_PIN",
-                            "dc":  "DATA_COMMAND_PIN",
-                            "mosi":  "SPI_MOSI",
-                            "sck":  "SPI_CLOCK",
-                            "led":  "BACKLIGHT_PWM_PIN"
-                        },
-    "usage_categories":  {
-                             "premium_small_eyes":  "high_resolution_color",
-                             "detail_work":  "crisp_graphics",
-                             "quality_features":  "sharp_animations",
-                             "compact_displays":  "maximum_clarity"
-                         },
-    "ordering_information":  {
-                                 "primary_supplier":  "Adafruit",
-                                 "part_number":  "4313",
-                                 "product_name":  "1.3\" Color TFT Bonnet for Raspberry Pi - 240x240 TFT + Joystick",
-                                 "price_usd":  "14.95",
-                                 "availability":  "IN_STOCK",
-                                 "shipping":  "IMMEDIATE",
-                                 "datasheet_url":  "https://cdn-shop.adafruit.com/datasheets/ST7789.pdf",
-                                 "product_url":  "https://www.adafruit.com/product/4313"
-                             },
-    "alternative_suppliers":  [
-                                  {
-                                      "supplier":  "Pimoroni",
-                                      "part_number":  "PIM374",
-                                      "price_usd":  "18.50",
-                                      "stock_status":  "AVAILABLE",
-                                      "note":  "Higher quality build"
-                                  },
-                                  {
-                                      "supplier":  "Waveshare",
-                                      "part_number":  "1.3inch-LCD-HAT",
-                                      "price_usd":  "12.99",
-                                      "stock_status":  "AVAILABLE",
-                                      "note":  "Good value option"
-                                  },
-                                  {
-                                      "supplier":  "AliExpress Premium",
-                                      "part_number":  "ST7789-240x240",
-                                      "price_usd":  "7.99",
-                                      "stock_status":  "AVAILABLE",
-                                      "note":  "Budget but decent quality"
-                                  }
-                              ],
-    "technical_advantages":  [
-                                 "Highest resolution for size class (240x240)",
-                                 "Excellent pixel density (185 PPI)",
-                                 "Full 262K color support",
-                                 "Square format perfect for eyes",
-                                 "Fast refresh rate",
-                                 "Compact form factor",
-                                 "Good brightness for outdoor use",
-                                 "Wide viewing angles"
-                             ],
-    "creature_sizing":  {
-                            "perfect_for":  [
-                                                "premium_small_eyes",
-                                                "detail_creatures",
-                                                "high_quality_builds"
-                                            ],
-                            "excellent_for":  [
-                                                  "goblin_eyes",
-                                                  "cat_eyes",
-                                                  "quality_features"
-                                              ],
-                            "overkill_for":  [
-                                                 "background_elements",
-                                                 "simple_indicators"
-                                             ]
-                        },
-    "stl_reference":  "assets/shapes/stl/basic_mounts/st7789_premium_mount.stl",
-    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/st7789_mount_template.scad",
-    "compatible_creatures":  [
-                                 "premium_goblins",
-                                 "quality_cats",
-                                 "detail_creatures",
-                                 "high_end_builds"
-                             ],
-    "estimated_cost_usd":  "14.95",
-    "software":  {
-
-                 }
+    "relative_filename": "config/components/hardware/st7789_premium_tft_rgb.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "ST7789_PREMIUM_TFT_RGB",
+    "name": "st7789_premium_tft_rgb",
+    "description": "1.3\" Premium TFT RGB with ST7789 driver - HIGH RESOLUTION full color",
+    "premium_small_champion": "TRUE - Best small TFT resolution available",
+    "physical_specifications": {
+        "screen_width": "1.3 INCH",
+        "screen_height": "1.3 INCH",
+        "screen_shape": "square",
+        "diagonal": "1.3 INCH",
+        "resolution": "240x240",
+        "pixel_density": "185 PPI",
+        "thickness": "0.09 INCH",
+        "weight": "6 GRAMS",
+        "active_area": {
+            "width_mm": 23.4,
+            "height_mm": 23.4
+        }
+    },
+    "color_specifications": {
+        "color_depth": "262K_COLORS_18BIT",
+        "bits_per_pixel": 18,
+        "red_bits": 6,
+        "green_bits": 6,
+        "blue_bits": 6,
+        "color_gamut": "RGB666",
+        "brightness": "350_CD_M2",
+        "contrast_ratio": "800:1_TFT",
+        "viewing_angle": "160_DEGREES"
+    },
+    "electrical_specifications": {
+        "supply_voltage": "3.3V",
+        "logic_voltage": "3.3V",
+        "interface": "SPI",
+        "current_consumption_ma": "90",
+        "backlight_current_ma": "60",
+        "spi_clock_max_mhz": "40"
+    },
+    "display_controller": {
+        "driver_ic": "ST7789VW",
+        "manufacturer": "Sitronix",
+        "built_in_ram": "240x240x18_bits",
+        "refresh_rate_hz": "60",
+        "hardware_acceleration": [
+            "smooth_scrolling",
+            "window_management",
+            "partial_refresh"
+        ]
+    },
+    "pin_assignments": {
+        "vcc": "3V3_POWER",
+        "gnd": "GROUND",
+        "cs": "CHIP_SELECT_PIN",
+        "reset": "RESET_PIN",
+        "dc": "DATA_COMMAND_PIN",
+        "mosi": "SPI_MOSI",
+        "sck": "SPI_CLOCK",
+        "led": "BACKLIGHT_PWM_PIN"
+    },
+    "usage_categories": {
+        "premium_small_eyes": "high_resolution_color",
+        "detail_work": "crisp_graphics",
+        "quality_features": "sharp_animations",
+        "compact_displays": "maximum_clarity"
+    },
+    "ordering_information": {
+        "primary_supplier": "Adafruit",
+        "part_number": "4313",
+        "product_name": "1.3\" Color TFT Bonnet for Raspberry Pi - 240x240 TFT + Joystick",
+        "price_usd": "14.95",
+        "availability": "IN_STOCK",
+        "shipping": "IMMEDIATE",
+        "datasheet_url": "https://cdn-shop.adafruit.com/datasheets/ST7789.pdf",
+        "product_url": "https://www.adafruit.com/product/4313"
+    },
+    "alternative_suppliers": [
+        {
+            "supplier": "Pimoroni",
+            "part_number": "PIM374",
+            "price_usd": "18.50",
+            "stock_status": "AVAILABLE",
+            "note": "Higher quality build"
+        },
+        {
+            "supplier": "Waveshare",
+            "part_number": "1.3inch-LCD-HAT",
+            "price_usd": "12.99",
+            "stock_status": "AVAILABLE",
+            "note": "Good value option"
+        },
+        {
+            "supplier": "AliExpress Premium",
+            "part_number": "ST7789-240x240",
+            "price_usd": "7.99",
+            "stock_status": "AVAILABLE",
+            "note": "Budget but decent quality"
+        }
+    ],
+    "technical_advantages": [
+        "Highest resolution for size class (240x240)",
+        "Excellent pixel density (185 PPI)",
+        "Full 262K color support",
+        "Square format perfect for eyes",
+        "Fast refresh rate",
+        "Compact form factor",
+        "Good brightness for outdoor use",
+        "Wide viewing angles"
+    ],
+    "creature_sizing": {
+        "perfect_for": [
+            "premium_small_eyes",
+            "detail_creatures",
+            "high_quality_builds"
+        ],
+        "excellent_for": [
+            "goblin_eyes",
+            "cat_eyes",
+            "quality_features"
+        ],
+        "overkill_for": [
+            "background_elements",
+            "simple_indicators"
+        ]
+    },
+    "stl_reference": "assets/shapes/stl/basic_mounts/st7789_premium_mount.stl",
+    "scad_template": "assets/shapes/scad/templates/hardware_mounts/st7789_mount_template.scad",
+    "compatible_creatures": [
+        "premium_goblins",
+        "quality_cats",
+        "detail_creatures",
+        "high_end_builds"
+    ],
+    "estimated_cost_usd": "14.95",
+    "software": {},
+    "type": "UNKNOWN"
 }

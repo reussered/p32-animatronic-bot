@@ -1,0 +1,144 @@
+{
+    "relative_filename": "config/hardware/ra8875_tft_800x480.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "RA8875_DISPLAY",
+    "display_driver": true,
+    "name": "ra8875_tft_800x480",
+    "subsystem": "HEAD",
+    "physical_specs": {
+        "screen_size": "7.0 INCH",
+        "resolution": "800x480",
+        "thickness": "0.15 INCH",
+        "aspect_ratio": "5:3",
+        "mounting_holes": {
+            "count": 4,
+            "diameter": "0.15 INCH",
+            "spacing": "7.2 INCH x 4.8 INCH"
+        }
+    },
+    "electrical_specs": {
+        "supply_voltage": "3.3V",
+        "logic_voltage": "3.3V",
+        "interface": "SPI",
+        "current_consumption": "200mA",
+        "backlight_current": "150mA",
+        "total_power": "1.15W"
+    },
+    "pin_mapping": {
+        "description": "RA8875 TFT controller with enhanced graphics acceleration",
+        "generic_pins": {
+            "clock": {
+                "function": "SPI Clock",
+                "required": true,
+                "manufacturer_labels": [
+                    "SCK",
+                    "CLK",
+                    "SCLK"
+                ]
+            },
+            "data": {
+                "function": "SPI MOSI Data",
+                "required": true,
+                "manufacturer_labels": [
+                    "SDA",
+                    "MOSI",
+                    "DIN"
+                ]
+            },
+            "chip_select": {
+                "function": "SPI Chip Select",
+                "required": true,
+                "manufacturer_labels": [
+                    "CS",
+                    "CE"
+                ]
+            },
+            "reset": {
+                "function": "Hardware Reset",
+                "required": true,
+                "manufacturer_labels": [
+                    "RST",
+                    "RES",
+                    "RESET"
+                ]
+            },
+            "interrupt": {
+                "function": "Graphics Interrupt",
+                "required": false,
+                "manufacturer_labels": [
+                    "INT",
+                    "IRQ"
+                ]
+            },
+            "backlight": {
+                "function": "Backlight Control",
+                "required": false,
+                "manufacturer_labels": [
+                    "BL",
+                    "LED",
+                    "BLK"
+                ]
+            },
+            "power": {
+                "function": "Power Supply",
+                "required": true,
+                "manufacturer_labels": [
+                    "VCC",
+                    "VDD",
+                    "3V3"
+                ]
+            },
+            "ground": {
+                "function": "Ground Reference",
+                "required": true,
+                "manufacturer_labels": [
+                    "GND",
+                    "VSS"
+                ]
+            }
+        }
+    },
+    "spi_configuration": {
+        "max_clock_speed": "20MHz",
+        "mode": "SPI_MODE_0",
+        "bit_order": "MSB_FIRST",
+        "cs_active_level": "LOW",
+        "data_width": "8_BIT"
+    },
+    "driver_config": {
+        "rotation": 0,
+        "invert_colors": false,
+        "backlight_pwm": true,
+        "hardware_scrolling": true,
+        "partial_update": true,
+        "graphics_acceleration": true,
+        "enhanced_features": "RA8875_GRAPHICS_ENGINE"
+    },
+    "color_specifications": {
+        "color_mode": "full_color",
+        "bit_depth": 16,
+        "color_space": "RGB565",
+        "colors_supported": 65536,
+        "description": "Large format full color 16-bit RGB display with graphics acceleration"
+    },
+    "memory_requirements": {
+        "frame_buffer_size": "768000 BYTES",
+        "color_depth": "2 BYTES_PER_PIXEL",
+        "total_pixels": 384000,
+        "ram_usage": "HIGH"
+    },
+    "software": {
+        "init_function": "ra8875_init",
+        "act_function": "ra8875_act",
+        "components": [
+            "config/components/interfaces/spi_display_bus.json"
+        ]
+    },
+    "required_interface_functions": [
+        "getBuffer",
+        "getFrameSize",
+        "getFrameRowSize"
+    ],
+    "type": "DISPLAY_DRIVER"
+}

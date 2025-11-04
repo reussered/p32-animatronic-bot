@@ -1,0 +1,5 @@
+// Auto-generated header for hand_status_led
+#include <esp_err.h>
+
+esp_err_t hand_status_led_init(void);
+void hand_status_led_act(void);

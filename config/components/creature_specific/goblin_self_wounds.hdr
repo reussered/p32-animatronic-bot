@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_self_wounds
+#include <esp_err.h>
+
+esp_err_t goblin_self_wounds_init(void);
+void goblin_self_wounds_act(void);

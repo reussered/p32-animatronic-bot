@@ -1,0 +1,20 @@
+// Auto-generated source for hibernation_simulation
+#include "components/hibernation_simulation.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "hibernation_simulation";
+
+esp_err_t hibernation_simulation_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void hibernation_simulation_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

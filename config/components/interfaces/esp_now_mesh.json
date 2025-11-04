@@ -1,111 +1,111 @@
 {
-    "relative_filename":  "config/components/interfaces/esp_now_mesh.json",
-    "version":  "1.0.0",
-    "component_type":  "INTERFACE_BUS",
-    "hardware_type":  "BUS_INTERFACE",
-    "author":  "config/author.json",
-    "interface_id":  "ESP_NOW_MESH",
-    "interface_type":  "WIRELESS_MESH_COMMUNICATION",
-    "description":  "ESP-NOW mesh network replacing CAN bus for inter-controller communication",
-    "network_topology":  {
-                             "master_controller":  {
-                                                       "role":  "COORDINATOR",
-                                                       "esp32_id":  "ESP32_MASTER_HEAD",
-                                                       "mac_address":  "AUTO_ASSIGNED",
-                                                       "responsibilities":  [
-                                                                                "MOTION_PLANNING",
-                                                                                "SENSOR_FUSION",
-                                                                                "USER_INTERFACE"
-                                                                            ]
-                                                   },
-                             "slave_controllers":  [
-                                                       {
-                                                           "role":  "LEGS_CONTROLLER",
-                                                           "esp32_id":  "ESP32_LEGS",
-                                                           "responsibilities":  [
-                                                                                    "WALKING",
-                                                                                    "BALANCE",
-                                                                                    "FOOT_SENSORS"
-                                                                                ]
-                                                       },
-                                                       {
-                                                           "role":  "ARMS_CONTROLLER",
-                                                           "esp32_id":  "ESP32_ARMS",
-                                                           "responsibilities":  [
-                                                                                    "MANIPULATION",
-                                                                                    "GESTURE",
-                                                                                    "GRIPPER_CONTROL"
-                                                                                ]
-                                                       },
-                                                       {
-                                                           "role":  "TORSO_CONTROLLER",
-                                                           "esp32_id":  "ESP32_TORSO",
-                                                           "responsibilities":  [
-                                                                                    "POSTURE",
-                                                                                    "BREATHING",
-                                                                                    "CORE_STABILITY"
-                                                                                ]
-                                                       }
-                                                   ]
-                         },
-    "communication_specs":  {
-                                "protocol":  "ESP_NOW_PROTOCOL",
-                                "frequency":  "2.4_GHZ",
-                                "range":  "10_METERS_LINE_OF_SIGHT",
-                                "data_rate":  "1_MBPS",
-                                "latency":  "5_MILLISECONDS_TYPICAL",
-                                "packet_size":  "250_BYTES_MAX"
-                            },
-    "message_formats":  {
-                            "servo_command":  {
-                                                  "header":  "CMD_SERVO",
-                                                  "controller_id":  "UINT8",
-                                                  "servo_count":  "UINT8",
-                                                  "servo_positions":  "ARRAY_UINT16[16]",
-                                                  "timestamp":  "UINT32",
-                                                  "checksum":  "UINT8"
-                                              },
-                            "sensor_data":  {
-                                                "header":  "DATA_SENSOR",
-                                                "controller_id":  "UINT8",
-                                                "sensor_type":  "UINT8",
-                                                "sensor_values":  "ARRAY_FLOAT32[8]",
-                                                "timestamp":  "UINT32",
-                                                "checksum":  "UINT8"
-                                            },
-                            "status_heartbeat":  {
-                                                     "header":  "STATUS_HEARTBEAT",
-                                                     "controller_id":  "UINT8",
-                                                     "system_status":  "UINT8",
-                                                     "battery_level":  "UINT8",
-                                                     "cpu_usage":  "UINT8",
-                                                     "timestamp":  "UINT32"
-                                                 }
-                        },
-    "advantages_over_can_bus":  {
-                                    "cost":  "NO_CAN_TRANSCEIVERS_NEEDED",
-                                    "wiring":  "WIRELESS_NO_BUS_CABLES",
-                                    "flexibility":  "DYNAMIC_MESH_TOPOLOGY",
-                                    "debugging":  "WIFI_SNIFFING_TOOLS",
-                                    "integration":  "NATIVE_ESP32_PROTOCOL"
-                                },
-    "fail_safe_mechanisms":  {
-                                 "connection_loss":  "AUTO_RECONNECT_PROTOCOL",
-                                 "master_failure":  "SLAVE_SAFE_MODE_HOLD_POSITION",
-                                 "packet_corruption":  "CHECKSUM_VALIDATION_RETRY",
-                                 "interference":  "CHANNEL_HOPPING_ADAPTIVE"
-                             },
-    "performance_vs_original":  {
-                                    "poppy_usb2ax":  {
-                                                         "original_latency":  "20_MILLISECONDS",
-                                                         "esp_now_latency":  "5_MILLISECONDS",
-                                                         "improvement":  "4X_FASTER"
-                                                     },
-                                    "openarm_can":  {
-                                                        "original_complexity":  "CAN_TRANSCEIVERS_TERMINATION",
-                                                        "esp_now_complexity":  "WIRELESS_AUTO_CONFIG",
-                                                        "improvement":  "MUCH_SIMPLER"
-                                                    }
-                                },
-    "name":  "esp_now_mesh"
+    "relative_filename": "config/components/interfaces/esp_now_mesh.json",
+    "version": "1.0.0",
+    "hardware_type": "BUS_INTERFACE",
+    "author": "config/author.json",
+    "interface_id": "ESP_NOW_MESH",
+    "interface_type": "WIRELESS_MESH_COMMUNICATION",
+    "description": "ESP-NOW mesh network replacing CAN bus for inter-controller communication",
+    "network_topology": {
+        "master_controller": {
+            "role": "COORDINATOR",
+            "esp32_id": "ESP32_MASTER_HEAD",
+            "mac_address": "AUTO_ASSIGNED",
+            "responsibilities": [
+                "MOTION_PLANNING",
+                "SENSOR_FUSION",
+                "USER_INTERFACE"
+            ]
+        },
+        "slave_controllers": [
+            {
+                "role": "LEGS_CONTROLLER",
+                "esp32_id": "ESP32_LEGS",
+                "responsibilities": [
+                    "WALKING",
+                    "BALANCE",
+                    "FOOT_SENSORS"
+                ]
+            },
+            {
+                "role": "ARMS_CONTROLLER",
+                "esp32_id": "ESP32_ARMS",
+                "responsibilities": [
+                    "MANIPULATION",
+                    "GESTURE",
+                    "GRIPPER_CONTROL"
+                ]
+            },
+            {
+                "role": "TORSO_CONTROLLER",
+                "esp32_id": "ESP32_TORSO",
+                "responsibilities": [
+                    "POSTURE",
+                    "BREATHING",
+                    "CORE_STABILITY"
+                ]
+            }
+        ]
+    },
+    "communication_specs": {
+        "protocol": "ESP_NOW_PROTOCOL",
+        "frequency": "2.4_GHZ",
+        "range": "10_METERS_LINE_OF_SIGHT",
+        "data_rate": "1_MBPS",
+        "latency": "5_MILLISECONDS_TYPICAL",
+        "packet_size": "250_BYTES_MAX"
+    },
+    "message_formats": {
+        "servo_command": {
+            "header": "CMD_SERVO",
+            "controller_id": "UINT8",
+            "servo_count": "UINT8",
+            "servo_positions": "ARRAY_UINT16[16]",
+            "timestamp": "UINT32",
+            "checksum": "UINT8"
+        },
+        "sensor_data": {
+            "header": "DATA_SENSOR",
+            "controller_id": "UINT8",
+            "sensor_type": "UINT8",
+            "sensor_values": "ARRAY_FLOAT32[8]",
+            "timestamp": "UINT32",
+            "checksum": "UINT8"
+        },
+        "status_heartbeat": {
+            "header": "STATUS_HEARTBEAT",
+            "controller_id": "UINT8",
+            "system_status": "UINT8",
+            "battery_level": "UINT8",
+            "cpu_usage": "UINT8",
+            "timestamp": "UINT32"
+        }
+    },
+    "advantages_over_can_bus": {
+        "cost": "NO_CAN_TRANSCEIVERS_NEEDED",
+        "wiring": "WIRELESS_NO_BUS_CABLES",
+        "flexibility": "DYNAMIC_MESH_TOPOLOGY",
+        "debugging": "WIFI_SNIFFING_TOOLS",
+        "integration": "NATIVE_ESP32_PROTOCOL"
+    },
+    "fail_safe_mechanisms": {
+        "connection_loss": "AUTO_RECONNECT_PROTOCOL",
+        "master_failure": "SLAVE_SAFE_MODE_HOLD_POSITION",
+        "packet_corruption": "CHECKSUM_VALIDATION_RETRY",
+        "interference": "CHANNEL_HOPPING_ADAPTIVE"
+    },
+    "performance_vs_original": {
+        "poppy_usb2ax": {
+            "original_latency": "20_MILLISECONDS",
+            "esp_now_latency": "5_MILLISECONDS",
+            "improvement": "4X_FASTER"
+        },
+        "openarm_can": {
+            "original_complexity": "CAN_TRANSCEIVERS_TERMINATION",
+            "esp_now_complexity": "WIRELESS_AUTO_CONFIG",
+            "improvement": "MUCH_SIMPLER"
+        }
+    },
+    "name": "esp_now_mesh",
+    "type": "INTERFACE_BUS"
 }

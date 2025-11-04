@@ -1,0 +1,5 @@
+// Auto-generated header for cyclops_speaker
+#include <esp_err.h>
+
+esp_err_t cyclops_speaker_init(void);
+void cyclops_speaker_act(void);

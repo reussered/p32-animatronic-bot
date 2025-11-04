@@ -1,0 +1,59 @@
+{
+    "relative_filename": "config/hardware/directional_microphone.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "High-sensitivity directional microphone for enhanced hearing capabilities",
+    "created": "2025-10-12",
+    "hardware_specs": {
+        "microphone_type": "electret_condenser",
+        "directivity_pattern": "supercardioid",
+        "frequency_response": "20Hz_to_20kHz",
+        "sensitivity": "-38dBV/Pa",
+        "max_spl": "120dB_SPL",
+        "signal_to_noise": "74dB_A_weighted"
+    },
+    "physical_properties": {
+        "dimensions": {
+            "diameter": "9.7mm",
+            "height": "6.7mm"
+        },
+        "weight": "2.5g",
+        "housing": "aluminum_alloy",
+        "connector": "3.5mm_trs"
+    },
+    "control_interface": {
+        "protocol": "i2s",
+        "sample_rates": [
+            "8kHz",
+            "16kHz",
+            "44.1kHz",
+            "48kHz"
+        ],
+        "bit_depth": "24_bit",
+        "channels": "mono_directional"
+    },
+    "directional_features": {
+        "beam_width": "45_degrees",
+        "rear_rejection": "-20dB",
+        "side_rejection": "-15dB",
+        "positioning_servo": "optional"
+    },
+    "power_requirements": {
+        "operating_voltage": "3.3V",
+        "current_consumption": "0.5mA_typical",
+        "phantom_power": "not_required"
+    },
+    "prototype_status": "verified_component",
+    "tested": true,
+    "supplier": "Knowles_Acoustics",
+    "part_number": "SPH0645LM4H-B",
+    "notes": [
+        "High-performance directional microphone",
+        "Suitable for scout goblin enhanced hearing",
+        "I2S digital output for clean signal",
+        "Low power consumption for battery operation"
+    ],
+    "hardware_type": "DIRECTIONAL_MICROPHONE",
+    "name": "directional_microphone",
+    "type": "DIRECTIONAL_MICROPHONE"
+}

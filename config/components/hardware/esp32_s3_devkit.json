@@ -1,761 +1,660 @@
 {
-    "version":  "1.0.0",
-    "specifications":  {
-                           "processor":  "ESP32-S3",
-                           "power_consumption":  {
-                                                     "voltage":  "5V",
-                                                     "current_draw":  "500mA",
-                                                     "power_watts":  "2.5W"
-                                                 },
-                           "physical_dimensions":  {
-                                                       "weight":  "25g",
-                                                       "width":  "25.5mm",
-                                                       "depth":  "13.2mm",
-                                                       "height":  "69.8mm"
-                                                   },
-                           "wifi_standard":  "802.11 b/g/n",
-                           "memory_ram_kb":  512,
-                           "bluetooth":  "Bluetooth LE 5.0",
-                           "memory_flash_mb":  16,
-                           "gpio_pins":  45
-                       },
-    "name":  "esp32_s3_devkit",
-    "relative_filename":  "config/components/hardware/esp32_s3_devkit.json",
-    "description":  "ESP32-S3-DevKitC-1 development board",
-    "cost_performance":  {
-                             "lead_time_days":  7,
-                             "availability":  "COMMON",
-                             "unit_cost_usd":  45.99,
-                             "last_updated":  "2025-10-22"
-                         },
-    "author":  "config/author.json",
-    "hardware_type":  "MICROCONTROLLER",
-    "pin_definitions":  {
-                            "description":  "ESP32-S3-DevKitC-1 exposed GPIO pins and their capabilities",
-                            "exposed_pins":  {
-                                                 "GPIO0":  {
-                                                               "physical_pin":  27,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH0"
-                                                                                ],
-                                                               "special_functions":  [
-                                                                                         "BOOT"
-                                                                                     ],
-                                                               "constraints":  [
-                                                                                   "BOOT_PIN",
-                                                                                   "PULLUP_BOOT"
-                                                                               ],
-                                                               "available_for_use":  false
-                                                           },
-                                                 "GPIO1":  {
-                                                               "physical_pin":  28,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH1",
-                                                                                    "TOUCH1"
-                                                                                ],
-                                                               "special_functions":  [
-                                                                                         "U0TXD"
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO2":  {
-                                                               "physical_pin":  29,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH2",
-                                                                                    "TOUCH2"
-                                                                                ],
-                                                               "special_functions":  [
-                                                                                         "U0RXD"
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO3":  {
-                                                               "physical_pin":  30,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH3",
-                                                                                    "TOUCH3"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO4":  {
-                                                               "physical_pin":  31,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH4",
-                                                                                    "TOUCH4"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO5":  {
-                                                               "physical_pin":  32,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH5",
-                                                                                    "TOUCH5"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO6":  {
-                                                               "physical_pin":  33,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH6",
-                                                                                    "TOUCH6"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO7":  {
-                                                               "physical_pin":  34,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH7",
-                                                                                    "TOUCH7"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO8":  {
-                                                               "physical_pin":  35,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH8",
-                                                                                    "TOUCH8"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO9":  {
-                                                               "physical_pin":  36,
-                                                               "capabilities":  [
-                                                                                    "GPIO",
-                                                                                    "ADC1_CH9",
-                                                                                    "TOUCH9"
-                                                                                ],
-                                                               "special_functions":  [
-
-                                                                                     ],
-                                                               "constraints":  [
-
-                                                                               ],
-                                                               "available_for_use":  true
-                                                           },
-                                                 "GPIO10":  {
-                                                                "physical_pin":  37,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH0",
-                                                                                     "TOUCH10"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "FSPIHD",
-                                                                                          "FSPICS0"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO11":  {
-                                                                "physical_pin":  38,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH1",
-                                                                                     "TOUCH11"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "FSPID",
-                                                                                          "FSPICS1"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO12":  {
-                                                                "physical_pin":  39,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH2",
-                                                                                     "TOUCH12"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "FSPICLK",
-                                                                                          "FSPICS2"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO13":  {
-                                                                "physical_pin":  40,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH3",
-                                                                                     "TOUCH13"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "FSPIQ",
-                                                                                          "FSPICS3"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO14":  {
-                                                                "physical_pin":  41,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH4",
-                                                                                     "TOUCH14"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "FSPICS4"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO15":  {
-                                                                "physical_pin":  42,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH5",
-                                                                                     "TOUCH15"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "U0RTS",
-                                                                                          "FSPICS5"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO16":  {
-                                                                "physical_pin":  43,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH6",
-                                                                                     "TOUCH16"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "U0CTS"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO17":  {
-                                                                "physical_pin":  44,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH7",
-                                                                                     "TOUCH17"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO18":  {
-                                                                "physical_pin":  45,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH8",
-                                                                                     "TOUCH18"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "U1TXD"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO19":  {
-                                                                "physical_pin":  46,
-                                                                "capabilities":  [
-                                                                                     "GPIO",
-                                                                                     "ADC2_CH9",
-                                                                                     "TOUCH19"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "U1RXD"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO20":  {
-                                                                "physical_pin":  47,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO21":  {
-                                                                "physical_pin":  48,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO26":  {
-                                                                "physical_pin":  49,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPICS1"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO33":  {
-                                                                "physical_pin":  50,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPICS0"
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO34":  {
-                                                                "physical_pin":  51,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPIHD"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO35":  {
-                                                                "physical_pin":  52,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPID"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO36":  {
-                                                                "physical_pin":  53,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPICLK"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO37":  {
-                                                                "physical_pin":  54,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPIQ"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO38":  {
-                                                                "physical_pin":  55,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPICS0"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO39":  {
-                                                                "physical_pin":  56,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPICS1"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INPUT_ONLY"
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO40":  {
-                                                                "physical_pin":  57,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO41":  {
-                                                                "physical_pin":  58,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO42":  {
-                                                                "physical_pin":  59,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO43":  {
-                                                                "physical_pin":  60,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO44":  {
-                                                                "physical_pin":  61,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO45":  {
-                                                                "physical_pin":  62,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO46":  {
-                                                                "physical_pin":  63,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-                                                                                          "SPIDQS"
-                                                                                      ],
-                                                                "constraints":  [
-                                                                                    "INTERNAL_FLASH"
-                                                                                ],
-                                                                "available_for_use":  false
-                                                            },
-                                                 "GPIO47":  {
-                                                                "physical_pin":  64,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            },
-                                                 "GPIO48":  {
-                                                                "physical_pin":  65,
-                                                                "capabilities":  [
-                                                                                     "GPIO"
-                                                                                 ],
-                                                                "special_functions":  [
-
-                                                                                      ],
-                                                                "constraints":  [
-
-                                                                                ],
-                                                                "available_for_use":  true
-                                                            }
-                                             },
-                            "interface_groups":  {
-                                                     "SPI_VSPI":  {
-                                                                      "description":  "VSPI interface for displays and sensors",
-                                                                      "pins":  {
-                                                                                   "MOSI":  "GPIO11",
-                                                                                   "MISO":  "GPIO13",
-                                                                                   "CLK":  "GPIO12",
-                                                                                   "CS0":  "GPIO10",
-                                                                                   "CS1":  "GPIO26",
-                                                                                   "CS2":  "GPIO33"
-                                                                               },
-                                                                      "available":  true
-                                                                  },
-                                                     "SPI_HSPI":  {
-                                                                      "description":  "HSPI interface for additional peripherals",
-                                                                      "pins":  {
-                                                                                   "MOSI":  "GPIO35",
-                                                                                   "MISO":  "GPIO37",
-                                                                                   "CLK":  "GPIO36",
-                                                                                   "CS0":  "GPIO34",
-                                                                                   "CS1":  "GPIO38",
-                                                                                   "CS2":  "GPIO39"
-                                                                               },
-                                                                      "available":  true
-                                                                  },
-                                                     "I2S":  {
-                                                                 "description":  "I2S interface for audio",
-                                                                 "pins":  {
-                                                                              "BCK":  "GPIO17",
-                                                                              "WS":  "GPIO18",
-                                                                              "DATA_OUT":  "GPIO19",
-                                                                              "DATA_IN":  "GPIO16"
-                                                                          },
-                                                                 "available":  true
-                                                             },
-                                                     "PWM":  {
-                                                                 "description":  "PWM-capable GPIO pins",
-                                                                 "pins":  [
-                                                                              "GPIO1",
-                                                                              "GPIO2",
-                                                                              "GPIO3",
-                                                                              "GPIO4",
-                                                                              "GPIO5",
-                                                                              "GPIO6",
-                                                                              "GPIO7",
-                                                                              "GPIO8",
-                                                                              "GPIO9",
-                                                                              "GPIO10",
-                                                                              "GPIO11",
-                                                                              "GPIO12",
-                                                                              "GPIO13",
-                                                                              "GPIO14",
-                                                                              "GPIO15",
-                                                                              "GPIO16",
-                                                                              "GPIO17",
-                                                                              "GPIO18",
-                                                                              "GPIO19",
-                                                                              "GPIO20",
-                                                                              "GPIO21",
-                                                                              "GPIO26",
-                                                                              "GPIO33",
-                                                                              "GPIO34",
-                                                                              "GPIO35",
-                                                                              "GPIO36",
-                                                                              "GPIO37",
-                                                                              "GPIO38",
-                                                                              "GPIO39",
-                                                                              "GPIO40",
-                                                                              "GPIO41",
-                                                                              "GPIO42",
-                                                                              "GPIO43",
-                                                                              "GPIO44",
-                                                                              "GPIO45",
-                                                                              "GPIO47",
-                                                                              "GPIO48"
-                                                                          ],
-                                                                 "available":  true
-                                                             },
-                                                     "ADC1":  {
-                                                                  "description":  "ADC1 channels (12-bit)",
-                                                                  "pins":  [
-                                                                               "GPIO1",
-                                                                               "GPIO2",
-                                                                               "GPIO3",
-                                                                               "GPIO4",
-                                                                               "GPIO5",
-                                                                               "GPIO6",
-                                                                               "GPIO7",
-                                                                               "GPIO8",
-                                                                               "GPIO9"
-                                                                           ],
-                                                                  "available":  true
-                                                              },
-                                                     "ADC2":  {
-                                                                  "description":  "ADC2 channels (12-bit) - shared with WiFi",
-                                                                  "pins":  [
-                                                                               "GPIO10",
-                                                                               "GPIO11",
-                                                                               "GPIO12",
-                                                                               "GPIO13",
-                                                                               "GPIO14",
-                                                                               "GPIO15",
-                                                                               "GPIO16",
-                                                                               "GPIO17",
-                                                                               "GPIO18",
-                                                                               "GPIO19"
-                                                                           ],
-                                                                  "available":  true
-                                                              },
-                                                     "TOUCH":  {
-                                                                   "description":  "Touch sensor capable pins",
-                                                                   "pins":  [
-                                                                                "GPIO1",
-                                                                                "GPIO2",
-                                                                                "GPIO3",
-                                                                                "GPIO4",
-                                                                                "GPIO5",
-                                                                                "GPIO6",
-                                                                                "GPIO7",
-                                                                                "GPIO8",
-                                                                                "GPIO9",
-                                                                                "GPIO10",
-                                                                                "GPIO11",
-                                                                                "GPIO12",
-                                                                                "GPIO13",
-                                                                                "GPIO14",
-                                                                                "GPIO15",
-                                                                                "GPIO16",
-                                                                                "GPIO17",
-                                                                                "GPIO18",
-                                                                                "GPIO19"
-                                                                            ],
-                                                                   "available":  true
-                                                               },
-                                                     "UART0":  {
-                                                                   "description":  "UART0 for serial communication",
-                                                                   "pins":  {
-                                                                                "TX":  "GPIO43",
-                                                                                "RX":  "GPIO44"
-                                                                            },
-                                                                   "available":  true
-                                                               },
-                                                     "UART1":  {
-                                                                   "description":  "UART1 for additional serial",
-                                                                   "pins":  {
-                                                                                "TX":  "GPIO17",
-                                                                                "RX":  "GPIO18"
-                                                                            },
-                                                                   "available":  true
-                                                               }
-                                                 },
-                            "reserved_pins":  {
-                                                  "BOOT":  [
-                                                               "GPIO0"
-                                                           ],
-                                                  "FLASH":  [
-                                                                "GPIO46"
-                                                            ],
-                                                  "PSRAM":  [
-
-                                                            ],
-                                                  "JTAG":  [
-
-                                                           ]
-                                              },
-                            "power_pins":  {
-                                               "VIN":  "5V",
-                                               "3V3":  "3.3V",
-                                               "GND":  "GND",
-                                               "EN":  "CHIP_EN"
-                                           }
-                        }
+    "version": "1.0.0",
+    "specifications": {
+        "processor": "ESP32-S3",
+        "power_consumption": {
+            "voltage": "5V",
+            "current_draw": "500mA",
+            "power_watts": "2.5W"
+        },
+        "physical_dimensions": {
+            "weight": "25g",
+            "width": "25.5mm",
+            "depth": "13.2mm",
+            "height": "69.8mm"
+        },
+        "wifi_standard": "802.11 b/g/n",
+        "memory_ram_kb": 512,
+        "bluetooth": "Bluetooth LE 5.0",
+        "memory_flash_mb": 16,
+        "gpio_pins": 45
+    },
+    "name": "esp32_s3_devkit",
+    "relative_filename": "config/components/hardware/esp32_s3_devkit.json",
+    "description": "ESP32-S3-DevKitC-1 development board",
+    "cost_performance": {
+        "lead_time_days": 7,
+        "availability": "COMMON",
+        "unit_cost_usd": 45.99,
+        "last_updated": "2025-10-22"
+    },
+    "author": "config/author.json",
+    "hardware_type": "MICROCONTROLLER",
+    "pin_definitions": {
+        "description": "ESP32-S3-DevKitC-1 exposed GPIO pins and their capabilities",
+        "exposed_pins": {
+            "GPIO0": {
+                "physical_pin": 27,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH0"
+                ],
+                "special_functions": [
+                    "BOOT"
+                ],
+                "constraints": [
+                    "BOOT_PIN",
+                    "PULLUP_BOOT"
+                ],
+                "available_for_use": false
+            },
+            "GPIO1": {
+                "physical_pin": 28,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH1",
+                    "TOUCH1"
+                ],
+                "special_functions": [
+                    "U0TXD"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO2": {
+                "physical_pin": 29,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH2",
+                    "TOUCH2"
+                ],
+                "special_functions": [
+                    "U0RXD"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO3": {
+                "physical_pin": 30,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH3",
+                    "TOUCH3"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO4": {
+                "physical_pin": 31,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH4",
+                    "TOUCH4"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO5": {
+                "physical_pin": 32,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH5",
+                    "TOUCH5"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO6": {
+                "physical_pin": 33,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH6",
+                    "TOUCH6"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO7": {
+                "physical_pin": 34,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH7",
+                    "TOUCH7"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO8": {
+                "physical_pin": 35,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH8",
+                    "TOUCH8"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO9": {
+                "physical_pin": 36,
+                "capabilities": [
+                    "GPIO",
+                    "ADC1_CH9",
+                    "TOUCH9"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO10": {
+                "physical_pin": 37,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH0",
+                    "TOUCH10"
+                ],
+                "special_functions": [
+                    "FSPIHD",
+                    "FSPICS0"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO11": {
+                "physical_pin": 38,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH1",
+                    "TOUCH11"
+                ],
+                "special_functions": [
+                    "FSPID",
+                    "FSPICS1"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO12": {
+                "physical_pin": 39,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH2",
+                    "TOUCH12"
+                ],
+                "special_functions": [
+                    "FSPICLK",
+                    "FSPICS2"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO13": {
+                "physical_pin": 40,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH3",
+                    "TOUCH13"
+                ],
+                "special_functions": [
+                    "FSPIQ",
+                    "FSPICS3"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO14": {
+                "physical_pin": 41,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH4",
+                    "TOUCH14"
+                ],
+                "special_functions": [
+                    "FSPICS4"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO15": {
+                "physical_pin": 42,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH5",
+                    "TOUCH15"
+                ],
+                "special_functions": [
+                    "U0RTS",
+                    "FSPICS5"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO16": {
+                "physical_pin": 43,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH6",
+                    "TOUCH16"
+                ],
+                "special_functions": [
+                    "U0CTS"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO17": {
+                "physical_pin": 44,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH7",
+                    "TOUCH17"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO18": {
+                "physical_pin": 45,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH8",
+                    "TOUCH18"
+                ],
+                "special_functions": [
+                    "U1TXD"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO19": {
+                "physical_pin": 46,
+                "capabilities": [
+                    "GPIO",
+                    "ADC2_CH9",
+                    "TOUCH19"
+                ],
+                "special_functions": [
+                    "U1RXD"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO20": {
+                "physical_pin": 47,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO21": {
+                "physical_pin": 48,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO26": {
+                "physical_pin": 49,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPICS1"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO33": {
+                "physical_pin": 50,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPICS0"
+                ],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO34": {
+                "physical_pin": 51,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPIHD"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO35": {
+                "physical_pin": 52,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPID"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO36": {
+                "physical_pin": 53,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPICLK"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO37": {
+                "physical_pin": 54,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPIQ"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO38": {
+                "physical_pin": 55,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPICS0"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO39": {
+                "physical_pin": 56,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPICS1"
+                ],
+                "constraints": [
+                    "INPUT_ONLY"
+                ],
+                "available_for_use": true
+            },
+            "GPIO40": {
+                "physical_pin": 57,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO41": {
+                "physical_pin": 58,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO42": {
+                "physical_pin": 59,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO43": {
+                "physical_pin": 60,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO44": {
+                "physical_pin": 61,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO45": {
+                "physical_pin": 62,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO46": {
+                "physical_pin": 63,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [
+                    "SPIDQS"
+                ],
+                "constraints": [
+                    "INTERNAL_FLASH"
+                ],
+                "available_for_use": false
+            },
+            "GPIO47": {
+                "physical_pin": 64,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            },
+            "GPIO48": {
+                "physical_pin": 65,
+                "capabilities": [
+                    "GPIO"
+                ],
+                "special_functions": [],
+                "constraints": [],
+                "available_for_use": true
+            }
+        },
+        "interface_groups": {
+            "SPI_VSPI": {
+                "description": "VSPI interface for displays and sensors",
+                "pins": {
+                    "MOSI": "GPIO11",
+                    "MISO": "GPIO13",
+                    "CLK": "GPIO12",
+                    "CS0": "GPIO10",
+                    "CS1": "GPIO26",
+                    "CS2": "GPIO33"
+                },
+                "available": true
+            },
+            "SPI_HSPI": {
+                "description": "HSPI interface for additional peripherals",
+                "pins": {
+                    "MOSI": "GPIO35",
+                    "MISO": "GPIO37",
+                    "CLK": "GPIO36",
+                    "CS0": "GPIO34",
+                    "CS1": "GPIO38",
+                    "CS2": "GPIO39"
+                },
+                "available": true
+            },
+            "I2S": {
+                "description": "I2S interface for audio",
+                "pins": {
+                    "BCK": "GPIO17",
+                    "WS": "GPIO18",
+                    "DATA_OUT": "GPIO19",
+                    "DATA_IN": "GPIO16"
+                },
+                "available": true
+            },
+            "PWM": {
+                "description": "PWM-capable GPIO pins",
+                "pins": [
+                    "GPIO1",
+                    "GPIO2",
+                    "GPIO3",
+                    "GPIO4",
+                    "GPIO5",
+                    "GPIO6",
+                    "GPIO7",
+                    "GPIO8",
+                    "GPIO9",
+                    "GPIO10",
+                    "GPIO11",
+                    "GPIO12",
+                    "GPIO13",
+                    "GPIO14",
+                    "GPIO15",
+                    "GPIO16",
+                    "GPIO17",
+                    "GPIO18",
+                    "GPIO19",
+                    "GPIO20",
+                    "GPIO21",
+                    "GPIO26",
+                    "GPIO33",
+                    "GPIO34",
+                    "GPIO35",
+                    "GPIO36",
+                    "GPIO37",
+                    "GPIO38",
+                    "GPIO39",
+                    "GPIO40",
+                    "GPIO41",
+                    "GPIO42",
+                    "GPIO43",
+                    "GPIO44",
+                    "GPIO45",
+                    "GPIO47",
+                    "GPIO48"
+                ],
+                "available": true
+            },
+            "ADC1": {
+                "description": "ADC1 channels (12-bit)",
+                "pins": [
+                    "GPIO1",
+                    "GPIO2",
+                    "GPIO3",
+                    "GPIO4",
+                    "GPIO5",
+                    "GPIO6",
+                    "GPIO7",
+                    "GPIO8",
+                    "GPIO9"
+                ],
+                "available": true
+            },
+            "ADC2": {
+                "description": "ADC2 channels (12-bit) - shared with WiFi",
+                "pins": [
+                    "GPIO10",
+                    "GPIO11",
+                    "GPIO12",
+                    "GPIO13",
+                    "GPIO14",
+                    "GPIO15",
+                    "GPIO16",
+                    "GPIO17",
+                    "GPIO18",
+                    "GPIO19"
+                ],
+                "available": true
+            },
+            "TOUCH": {
+                "description": "Touch sensor capable pins",
+                "pins": [
+                    "GPIO1",
+                    "GPIO2",
+                    "GPIO3",
+                    "GPIO4",
+                    "GPIO5",
+                    "GPIO6",
+                    "GPIO7",
+                    "GPIO8",
+                    "GPIO9",
+                    "GPIO10",
+                    "GPIO11",
+                    "GPIO12",
+                    "GPIO13",
+                    "GPIO14",
+                    "GPIO15",
+                    "GPIO16",
+                    "GPIO17",
+                    "GPIO18",
+                    "GPIO19"
+                ],
+                "available": true
+            },
+            "UART0": {
+                "description": "UART0 for serial communication",
+                "pins": {
+                    "TX": "GPIO43",
+                    "RX": "GPIO44"
+                },
+                "available": true
+            },
+            "UART1": {
+                "description": "UART1 for additional serial",
+                "pins": {
+                    "TX": "GPIO17",
+                    "RX": "GPIO18"
+                },
+                "available": true
+            }
+        },
+        "reserved_pins": {
+            "BOOT": [
+                "GPIO0"
+            ],
+            "FLASH": [
+                "GPIO46"
+            ],
+            "PSRAM": [],
+            "JTAG": []
+        },
+        "power_pins": {
+            "VIN": "5V",
+            "3V3": "3.3V",
+            "GND": "GND",
+            "EN": "CHIP_EN"
+        }
+    },
+    "type": "UNKNOWN"
 }

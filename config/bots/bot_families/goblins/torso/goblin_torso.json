@@ -1,0 +1,201 @@
+{
+    "relative_filename": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+    "version": "3.0.0",
+    "author": "config/author.json",
+    "subsystem_type": "TORSO",
+    "subsystem_id": "goblin_torso_v1",
+    "description": "Goblin torso subsystem - Master controller with WiFi, and system coordination",
+    "created": "2025-10-15",
+    "controller": "ESP32_S3_DEVKITC_1",
+    "coordinate_system": "skull_3d",
+    "reference_point": "spine_base",
+    "units": "MILLIMETERS",
+    "name": "goblin_torso",
+    "timing": {
+        "hitCount": 50,
+        "description": "Torso coordination every 5 seconds"
+    },
+    "components": [
+        "config/components/system/system_core.json",
+        "config/components/system/debug_controller.json",
+        "config/components/system/network_monitor.json",
+        "config/components/system/wifi_station.json",
+        "config/components/system/bluetooth_central.json",
+        "config/components/system/telemetry_hub.json",
+        "config/components/system/watchdog.json",
+        "config/components/system/power_monitor.json",
+        "config/components/system/spine_flexion_servo.json",
+        "config/components/system/spine_extension_servo.json",
+        "config/components/system/waist_rotation_servo.json",
+        "config/components/system/torso_status_led.json",
+        "config/components/system/torso_speaker.json"
+    ],
+    "former_components": [
+        "config/components/system/spine_flexion_servo.json",
+        "config/components/system/spine_extension_servo.json",
+        "config/components/system/waist_rotation_servo.json",
+        "config/components/system/torso_status_led.json",
+        "config/components/system/torso_speaker.json"
+    ],
+    "wifi_config": {
+        "mode": "STATION",
+        "ssid": "CONFIGURED_AT_RUNTIME",
+        "password": "CONFIGURED_AT_RUNTIME",
+        "static_ip": "192.168.1.100",
+        "gateway": "192.168.1.1",
+        "subnet": "255.255.255.0",
+        "hostname": "goblin-torso-master"
+    },
+    "telemetry_config": {
+        "mqtt_broker": "CONFIGURED_AT_RUNTIME",
+        "mqtt_port": 1883,
+        "publish_interval_ms": 5000,
+        "topics": {
+            "status": "goblin/torso/status",
+            "sensors": "goblin/sensors/all",
+            "commands": "goblin/commands/input",
+            "diagnostics": "goblin/diagnostics/all"
+        }
+    },
+    "shape_assembly": {
+        "type": "TORSO_FRAME",
+        "scad_file": "assets/shapes/scad/subsystems/goblin_torso_frame.scad",
+        "stl_file": "assets/shapes/stl/subsystems/goblin_torso_frame.stl",
+        "description": "Torso structural frame with servo mounts and electronics bay",
+        "color_palette": "config/bots/bot_families/fantasy/goblin_family.json",
+        "mounting_points": {
+            "spine_base": {
+                "type": "servo_mount",
+                "position": [
+                    0,
+                    0,
+                    0
+                ],
+                "units": "mm",
+                "description": "Spine base servo mount"
+            },
+            "spine_mid": {
+                "type": "servo_mount",
+                "position": [
+                    0,
+                    0,
+                    150
+                ],
+                "units": "mm",
+                "description": "Spine mid-section servo mount"
+            },
+            "waist": {
+                "type": "servo_mount",
+                "position": [
+                    0,
+                    0,
+                    -50
+                ],
+                "units": "mm",
+                "description": "Waist rotation servo mount"
+            },
+            "shoulder_left": {
+                "type": "ball_socket",
+                "position": [
+                    -120,
+                    0,
+                    250
+                ],
+                "units": "mm",
+                "description": "Left shoulder attachment point"
+            },
+            "shoulder_right": {
+                "type": "ball_socket",
+                "position": [
+                    120,
+                    0,
+                    250
+                ],
+                "units": "mm",
+                "description": "Right shoulder attachment point"
+            },
+            "hip_left": {
+                "type": "ball_socket",
+                "position": [
+                    -80,
+                    0,
+                    -100
+                ],
+                "units": "mm",
+                "description": "Left hip attachment point"
+            },
+            "hip_right": {
+                "type": "ball_socket",
+                "position": [
+                    80,
+                    0,
+                    -100
+                ],
+                "units": "mm",
+                "description": "Right hip attachment point"
+            },
+            "neck_socket": {
+                "type": "ball_socket",
+                "position": [
+                    0,
+                    0,
+                    300
+                ],
+                "units": "mm",
+                "description": "Neck/head attachment point"
+            },
+            "electronics_bay": {
+                "type": "enclosure",
+                "position": [
+                    0,
+                    -50,
+                    150
+                ],
+                "dimensions": [
+                    100,
+                    80,
+                    60
+                ],
+                "units": "mm",
+                "description": "Main electronics bay for ESP32-S3, power distribution, antenna"
+            }
+        }
+    },
+    "articulation": {
+        "degrees_of_freedom": 3,
+        "spine_flexion_range_degrees": 60,
+        "spine_extension_range_degrees": 45,
+        "waist_rotation_range_degrees": 180
+    },
+    "mass_properties": {
+        "total_weight_g": "850",
+        "center_of_gravity": [
+            0,
+            0,
+            150
+        ],
+        "balance_point": "spine_base"
+    },
+    "power_requirements": {
+        "voltage": "6V",
+        "estimated_current_draw_a": "4.5",
+        "servo_power_w": "18.0",
+        "electronics_power_w": "5.0",
+        "total_power_w": "23.0"
+    },
+    "processing_responsibilities": {
+        "description": "Torso serves as master coordinator with highest processing power",
+        "tasks": [
+            "WiFi connectivity management",
+            "Bluetooth central device",
+            "MQTT telemetry hub",
+            "System-wide coordination",
+            "High-level behavior planning",
+            "Balance and posture control",
+            "Power monitoring and distribution",
+            "Watchdog and health checks",
+            "Command routing to slave nodes"
+        ]
+    },
+    "type": "SUBSYSTEM_ASSEMBLY"
+}

@@ -1,0 +1,33 @@
+// ili9341 component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+#include "ili9341.hdr"
+
+static const char *TAG_ili9341 = "ili9341";
+
+// Define the initial pixel value (default black)
+ILI9341_Pixel ILI9341_InitialPixel = {0, 0, 0};
+
+esp_err_t ili9341_init(void) {
+    ESP_LOGI(TAG_ili9341, "ili9341 init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void ili9341_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_ili9341, "ili9341 act");
+}
+
+size_t ili9341_get_width(void) {
+    return 320;
+}
+
+size_t ili9341_get_height(void) {
+    return 240;
+}
+
+size_t ili9341_getFrameSize(void) {
+    return ili9341_get_width() * ili9341_get_height() * sizeof(ILI9341_Pixel);
+}

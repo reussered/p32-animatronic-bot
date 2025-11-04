@@ -1,0 +1,72 @@
+// goblin_left_eye component implementation
+// Positioned component that manages the left eye display buffer
+
+#include "esp_log.h"
+#include "esp_heap_caps.h"
+#include "config/components/hardware/gc9a01.hdr"
+#include <cstdint>
+
+static const char *TAG_goblin_left_eye = "goblin_left_eye";
+
+// Global buffer pointer for other components
+Pixel* goblin_left_eye_buffer = nullptr;
+
+/**
+ * @brief Initialize left eye display buffer
+ * Sets up global buffer pointer for display chain
+ */
+esp_err_t goblin_left_eye_init(void) {
+    ESP_LOGI(TAG_goblin_left_eye, "Initializing left eye buffer management");
+    
+    // Global pointer will be set when buffer is allocated in act()
+    goblin_left_eye_buffer = nullptr;
+    
+    ESP_LOGI(TAG_goblin_left_eye, "Left eye buffer management initialized");
+    
+    return ESP_OK;
+}
+
+/**
+ * @brief Get pointer to current display buffer
+ * @return Pointer to current display buffer, or nullptr if not allocated
+ */
+Pixel* goblin_left_eye_get_buffer(void) {
+    return goblin_left_eye_buffer;
+}
+
+/**
+ * @brief Update left eye animation and prepare frame for processing
+ * Allocates heap buffer, copies from PSRAM, sets currentFrame for goblin_eye
+ */
+void goblin_left_eye_act(void) {
+    // Get display size from gc9a01 component
+    size_t display_size = getDisplaySize();
+    
+    // Allocate display buffer for this frame
+    Pixel* display_buffer = new Pixel[display_size];
+    if (!display_buffer) {
+        ESP_LOGE(TAG_goblin_left_eye, "Failed to allocate display buffer");
+        return;
+    }
+    
+    // Initialize with solid red base color for mood effects
+    Pixel red = Pixel::Red();
+    for (size_t i = 0; i < display_size; i++) {
+        display_buffer[i] = red;
+    }
+    
+    // Set global pointers for processing chain
+    extern Pixel* currentFrame;
+    extern uint32_t current_frame_size;
+    currentFrame = display_buffer;
+    current_frame_size = display_size;
+    goblin_left_eye_buffer = display_buffer;
+    
+    ESP_LOGV(TAG_goblin_left_eye, "Allocated display buffer: %.1f KB",
+             display_size * sizeof(Pixel) / 1024.0f);
+}
+
+
+
+
+

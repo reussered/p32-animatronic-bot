@@ -1,41 +1,42 @@
 {
-    "relative_filename":  "config/bots/bot_families/goblins/goblin_simple.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "GOBLINSIMPLE",
-    "bot_id":  "goblin_simple_v1",
-    "description":  "Simple goblin for P32 architecture testing - eyes and basic functionality only",
-    "created":  "2025-10-12",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "eye_spacing":  "3.0 INCH",
-    "components":  [
-                       "config/components/creature_specific/goblin_left_eye.json",
-                       "config/components/creature_specific/goblin_right_eye.json",
-                       "config/components/creature_specific/goblin_nose.json"
-                   ],
-    "mood_defaults":  {
-                          "FEAR":  20,
-                          "ANGER":  10,
-                          "CURIOSITY":  40,
-                          "CONTENTMENT":  30
-                      },
-    "behavior_config":  {
-                            "simple_mode":  true,
-                            "auto_sleep_timeout_seconds":  60,
-                            "interaction_range_cm":  100
-                        },
-    "hardware_config":  {
-                            "display_update_rate_fps":  15,
-                            "sensor_poll_rate_hz":  5,
-                            "power_management":  "simple"
-                        },
-    "prototype_status":  "testing",
-    "tested":  false,
-    "notes":  [
-                  "Simplified bot for P32 universal architecture testing",
-                  "Only eyes and proximity sensor",
-                  "Uses component table generation system"
-              ],
-    "name":  "goblin_simple"
+    "relative_filename": "config/bots/bot_families/goblins/goblin_simple.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINSIMPLE",
+    "bot_id": "goblin_simple_v1",
+    "description": "Simple goblin for P32 architecture testing - eyes and basic functionality only",
+    "created": "2025-10-12",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "eye_spacing": "3.0 INCH",
+    "components": [
+        "config/components/creature_specific/goblin_left_eye.json",
+        "config/components/creature_specific/goblin_right_eye.json",
+        "config/components/creature_specific/goblin_nose.json"
+    ],
+    "mood_defaults": {
+        "FEAR": 20,
+        "ANGER": 10,
+        "CURIOSITY": 40,
+        "CONTENTMENT": 30
+    },
+    "behavior_config": {
+        "simple_mode": true,
+        "auto_sleep_timeout_seconds": 60,
+        "interaction_range_cm": 100
+    },
+    "hardware_config": {
+        "display_update_rate_fps": 15,
+        "sensor_poll_rate_hz": 5,
+        "power_management": "simple"
+    },
+    "prototype_status": "testing",
+    "tested": false,
+    "notes": [
+        "Simplified bot for P32 universal architecture testing",
+        "Only eyes and proximity sensor",
+        "Uses component table generation system"
+    ],
+    "name": "goblin_simple",
+    "type": "UNKNOWN"
 }

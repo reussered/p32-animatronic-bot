@@ -1,0 +1,90 @@
+{
+    "relative_filename": "config/hardware/capacitive_touch_sensor.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_id": "CAPACITIVE_TOUCH_TTP223",
+    "description": "Capacitive touch sensor for detecting proximity and contact",
+    "created": "2025-10-12",
+    "physical_specifications": {
+        "dimensions": "15x10x3 MM",
+        "weight": "1 G",
+        "sensing_area": "8x8 MM",
+        "sensing_distance": "0-5 MM",
+        "operating_voltage": "2.0V-5.5V",
+        "current_consumption": "1.5 UA"
+    },
+    "electrical_requirements": {
+        "power_supply_voltage": "3.3V",
+        "output_voltage": "3.3V",
+        "interface_type": "DIGITAL_OUTPUT",
+        "logic_compatibility": "3.3V_NATIVE",
+        "output_type": "ACTIVE_HIGH",
+        "response_time": "60 MS"
+    },
+    "gpio_requirements": {
+        "output_pin": 1,
+        "power_pins": 1,
+        "ground_pins": 1,
+        "total_connections": 3
+    },
+    "sensing_specifications": {
+        "detection_method": "CAPACITIVE",
+        "sensitivity_adjustable": true,
+        "contact_required": false,
+        "proximity_range": "0-5 MM",
+        "debounce_time": "60 MS",
+        "self_calibration": true
+    },
+    "configuration_options": {
+        "output_modes": [
+            "TOGGLE",
+            "DIRECT"
+        ],
+        "sensitivity_levels": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+        ],
+        "power_modes": [
+            "NORMAL",
+            "LOW_POWER"
+        ],
+        "calibration": "AUTOMATIC"
+    },
+    "use_cases": [
+        "touch_detection",
+        "proximity_sensing",
+        "user_interface",
+        "pet_interaction",
+        "safety_switches",
+        "presence_detection"
+    ],
+    "family_suitability": {
+        "cat": "EXCELLENT",
+        "robot": "GOOD",
+        "android": "EXCELLENT",
+        "goblin": "MODERATE",
+        "vampire": "MODERATE",
+        "all_families": "UNIVERSAL"
+    },
+    "integration_notes": {
+        "requires_calibration": false,
+        "environmental_factors": [
+            "humidity",
+            "temperature",
+            "electromagnetic_interference"
+        ],
+        "installation_tips": [
+            "isolated_ground_plane",
+            "avoid_metal_interference"
+        ],
+        "code_considerations": [
+            "debouncing",
+            "false_trigger_filtering"
+        ]
+    },
+    "hardware_type": "TOUCH_SENSOR",
+    "name": "capacitive_touch_sensor",
+    "software": {},
+    "type": "TOUCH_SENSOR"
+}

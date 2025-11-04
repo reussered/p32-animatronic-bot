@@ -1,0 +1,20 @@
+// Auto-generated source for biometric_recognition_array
+#include "components/biometric_recognition_array.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "biometric_recognition_array";
+
+esp_err_t biometric_recognition_array_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void biometric_recognition_array_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

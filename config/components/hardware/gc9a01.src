@@ -1,72 +1,70 @@
 // gc9a01 component implementation
-// This component is a data provider. It defines the physical characteristics
-// of the GC9A01 display but contains no active logic.
+// TEMPLATE-BASED HARDWARE DRIVER
+// This component interacts with the physical GC9A01 display.
 
-#include "config/components/hardware/gc9a01.hdr"
 #include "esp_log.h"
-#include "esp_heap_caps.h"
-#include <stdlib.h>
+#include "driver/spi_master.h" // For SPI communication
+#include <cstdint>
 
-static const char *TAG_gc9a01 = "gc9a01";
+// This is the file-scoped static pointer allocated by the "allocator" component
+// (e.g., goblin_left_eye). Because both components are templates instantiated
+// with the same type 'T' and concatenated into the same compilation unit,
+// this driver component can see and use the buffer allocated by the other.
+template <typename T>
+extern typename T::Pixel* display_buffer;
 
-// Shared frame pointer for display chain coordination
-// Set by positioned components (left_eye/right_eye), read by display driver
-Pixel* frame_ptr = nullptr;
+static const char *TAG_gc9a01_driver = "gc9a01_driver";
 
-// Define GC9A01_InitialPixel
-// Note: value should be set before allocating buffers containing GC9A01_Pixels
-GC9A01_Pixel GC9A01_InitialPixel;
+// Placeholder for the SPI device handle
+static spi_device_handle_t spi_handle;
 
-// Display Buffer Interface - provides buffer allocation and size info
-// to positioned components (eyes, mouth, etc.)
+template <typename T>
+esp_err_t gc9a01_init()
+{
+    ESP_LOGI(TAG_gc9a01_driver, "Initializing GC9A01 hardware driver (template-based)");
 
-/**
- * @brief Get display width in pixels
- * @return Display width (240 for GC9A01)
- */
-size_t gc9a01_get_width(void) {
-    return 240;
-}
+    // In a real scenario, this is where we would initialize the
+    // SPI bus, configure the pins, and send initialization commands
+    // to the GC9A01 controller.
 
-/**
- * @brief Get display height in pixels
- * @return Display height (240 for GC9A01)
- */
-size_t gc9a01_get_height(void) {
-    return 240;
-}
+    // For now, we just log that we are initializing for a specific type.
+    ESP_LOGI(TAG_gc9a01_driver, "Driver configured for display: %dx%d", T::WIDTH, T::HEIGHT);
 
-/**
- * @brief Get total frame size in pixels
- * @return Total pixels in one frame (width * height)
- */
-size_t getFrameSize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
+    // Check if the display buffer has been allocated by another component.
+    if (display_buffer<T> == nullptr)
+    {
+        ESP_LOGE(TAG_gc9a01_driver, "Display buffer is null! Allocator component must run first.");
+        return ESP_FAIL;
+    }
 
-/**
- * @brief Get pixels per row (display width)
- * @return Number of pixels per row
- */
-size_t getFrameRowSize(void) {
-    return 240;
-}
+    ESP_LOGI(TAG_gc9a01_driver, "Successfully linked with display buffer.");
 
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame
- */
-size_t getDisplaySize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
-
-esp_err_t gc9a01_init(void) {
-    ESP_LOGI(TAG_gc9a01, "gc9a01 component initialized (passive)");
     return ESP_OK;
 }
 
-void gc9a01_act(void) {
-    // This component is passive and does nothing in its act function.
+template <typename T>
+void gc9a01_act()
+{
+    // This is the core logic of the driver. In every 'act' cycle,
+    // it would send the contents of the 'display_buffer' to the
+    // physical screen via SPI.
+
+    if (display_buffer<T> == nullptr)
+    {
+        return; // Not yet initialized
+    }
+
+    // --- REAL DRIVER LOGIC WOULD GO HERE ---
+    // Example:
+    // spi_transaction_t t;
+    // memset(&t, 0, sizeof(t));
+    // t.length = T::WIDTH * T::HEIGHT * sizeof(typename T::Pixel) * 8; // length in bits
+    // t.tx_buffer = display_buffer<T>;
+    // spi_device_polling_transmit(spi_handle, &t);
+    //
+    // For this simulation, we will just confirm we can access the buffer.
+    // (This log would be too noisy in a real application)
+    // ESP_LOGD(TAG_gc9a01_driver, "gc9a01_act: Acting on display buffer.");
 }
 
 

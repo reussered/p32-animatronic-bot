@@ -1,0 +1,5 @@
+// Auto-generated header for bear_snout
+#include <esp_err.h>
+
+esp_err_t bear_snout_init(void);
+void bear_snout_act(void);

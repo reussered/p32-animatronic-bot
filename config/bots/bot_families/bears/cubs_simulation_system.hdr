@@ -1,0 +1,5 @@
+// Auto-generated header for cubs_simulation_system
+#include <esp_err.h>
+
+esp_err_t cubs_simulation_system_init(void);
+void cubs_simulation_system_act(void);

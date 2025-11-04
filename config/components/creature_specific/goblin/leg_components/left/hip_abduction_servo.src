@@ -1,0 +1,20 @@
+// Auto-generated source for hip_abduction_servo
+#include "components/hip_abduction_servo.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "hip_abduction_servo";
+
+esp_err_t hip_abduction_servo_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void hip_abduction_servo_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

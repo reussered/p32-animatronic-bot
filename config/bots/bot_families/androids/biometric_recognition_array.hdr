@@ -1,0 +1,5 @@
+// Auto-generated header for biometric_recognition_array
+#include <esp_err.h>
+
+esp_err_t biometric_recognition_array_init(void);
+void biometric_recognition_array_act(void);

@@ -1,0 +1,20 @@
+// Auto-generated source for adaptive_personality_core
+#include "components/adaptive_personality_core.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "adaptive_personality_core";
+
+esp_err_t adaptive_personality_core_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void adaptive_personality_core_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

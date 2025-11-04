@@ -1,0 +1,103 @@
+{
+    "relative_filename": "config/bots/bot_families/undead/head/zombie_eye.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "zombie_eye",
+    "subsystem": "HEAD",
+    "description": "Shared zombie eye processing logic with palette and undead mood-based rendering",
+    "created": "2025-10-22",
+    "components": [
+        "config/components/hardware/gc9a01.json"
+    ],
+    "component_constraints": {
+        "required_contained_types": [
+            "DISPLAY_DRIVER"
+        ],
+        "interface_requirements": [
+            "getBuffer",
+            "getFrameSize",
+            "getFrameRowSize"
+        ]
+    },
+    "creature_display_profile": {
+        "species": "ZOMBIE",
+        "eye_color_base": "BLOODSHOT_RED",
+        "pupil_style": "DILATED_DEAD",
+        "expression_range": "VACANT_TO_HUNGRY",
+        "mood_responsiveness": "SLUGGISH_DELAYED"
+    },
+    "palette_system": {
+        "palette_size": 256,
+        "color_ranges": {
+            "eyelid_pupil": "0-31",
+            "iris_base": "32-63",
+            "bloodshot": "64-95",
+            "hunger_reds": "96-127",
+            "decay_greens": "128-159",
+            "fear_grays": "160-191",
+            "rage_crimsons": "192-223",
+            "special_effects": "224-255"
+        }
+    },
+    "mood_color_mapping": {
+        "ANGER": {
+            "primary_range": "192-223",
+            "intensity_multiplier": 1.7,
+            "glow_effect": "MENACING",
+            "bloodshot_enhancement": "ENABLED"
+        },
+        "CURIOSITY": {
+            "primary_range": "128-159",
+            "intensity_multiplier": 0.8,
+            "dull_scanning": "ENABLED"
+        },
+        "FEAR": {
+            "primary_range": "160-191",
+            "intensity_multiplier": 1.2,
+            "vacant_stare": "ENABLED"
+        },
+        "HUNGER": {
+            "primary_range": "96-127",
+            "intensity_multiplier": 1.9,
+            "predator_focus": "ENABLED"
+        }
+    },
+    "undead_effects": {
+        "eye_movement": "SLUGGISH_TRACKING",
+        "blink_pattern": "IRREGULAR_DELAYED",
+        "focus_behavior": "PREDATORY_LOCK",
+        "decay_simulation": "SUBTLE_FLICKER"
+    },
+    "frame_processing": {
+        "buffer_stack_support": "ENABLED",
+        "multi_eye_coordination": "ENABLED",
+        "mood_based_adjustments": "DELAYED_RESPONSE",
+        "color_space": "RGB565"
+    },
+    "animatronic_cache": {
+        "animation_buffers": "LEFT_RIGHT_COORDINATED",
+        "frame_interpolation": "JERKY_UNDEAD",
+        "mood_transition_ms": 800,
+        "expression_blend_mode": "DELAYED_FADE"
+    },
+    "timing": {
+        "hitCount": 1,
+        "description": "Process all frames in buffer stack every loop"
+    },
+    "software": {
+        "init_function": "zombie_eye_init",
+        "act_function": "zombie_eye_act"
+    },
+    "prototype_status": "needs_implementation",
+    "tested": false,
+    "notes": [
+        "Software-only component - no physical shape",
+        "Code pattern based on goblin_eye.cpp/hpp with undead modifications",
+        "Handles mood-based color palette adjustments with zombie characteristics",
+        "Supports buffer stack processing for left/right eye coordination",
+        "256-color organized palette with decay and bloodshot effects",
+        "Real-time frame processing with SharedMemory mood integration",
+        "Delayed response patterns simulate undead sluggishness"
+    ],
+    "type": "DISPLAY_DRIVER"
+}

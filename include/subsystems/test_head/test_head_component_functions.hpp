@@ -297,8 +297,8 @@ struct goblin_left_eye_config {
     const char* function = "primary_display_left";
     const char* description = "Left eye display animation";
     struct software_t {
-        const char* init_function = "goblin_left_eye_init";
-        const char* act_function = "goblin_left_eye_act";
+        const char* init_function = "goblin_left_eye_init<T>";
+        const char* act_function = "goblin_left_eye_act<T>";
     } software;
     struct animatronic_cache_t {
         const char* animation_buffers = "LEFT_EYE_BUFFER";
@@ -414,8 +414,8 @@ esp_err_t generic_spi_display_init(void);
 void generic_spi_display_act(void);
 esp_err_t goblin_eye_init(void);
 void goblin_eye_act(void);
-esp_err_t goblin_left_eye_init(void);
-void goblin_left_eye_act(void);
+esp_err_t goblin_left_eye_init<T>(void);
+void goblin_left_eye_act<T>(void);
 esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
 esp_err_t spi_bus_init(void);
@@ -525,6 +525,29 @@ size_t getDisplaySize(void);
 
 #endif // GC9A01_HPP
 
+// Declarations from config\components\creature_specific\goblin_eye.hdr
+// goblin_eye.hdr
+#ifndef GOBLIN_EYE_HDR
+#define GOBLIN_EYE_HDR
+
+#include "esp_err.h"
+#include "config/components/hardware/gc9a01.hdr"  // For Pixel type
+
+// Global variables for spi_display_bus compatibility
+// These are set by goblin_eye_act() to provide chunked data interface
+extern Pixel* goblin_eye_chunk_buffer;
+extern uint16_t goblin_eye_chunk_width;
+extern uint16_t goblin_eye_chunk_height;
+
+// Global flag indicating whether child components should initialize hardware
+// Set by goblin_eye_init() based on call count (true every 8th call)
+extern bool goblin_eye_should_init_hardware;
+
+esp_err_t goblin_eye_init(void);
+void goblin_eye_act(void);
+
+#endif // GOBLIN_EYE_HDR
+
 // Declarations from config\components\creature_specific\goblin_left_eye.hdr
 // goblin_left_eye component header
 // Additional declarations beyond init/act
@@ -587,7 +610,7 @@ struct spi_display_pinset_t {
     }
 };
 
-extern spi_display_pinset_t cur_spi_pin;
+extern spi_display_pinset_t cur_spi_display_pin;
 
 esp_err_t spi_display_bus_init(void);
 void spi_display_bus_act(void);

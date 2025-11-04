@@ -1,0 +1,20 @@
+// Auto-generated source for cat_animated_ears
+#include "components/cat_animated_ears.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "cat_animated_ears";
+
+esp_err_t cat_animated_ears_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void cat_animated_ears_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

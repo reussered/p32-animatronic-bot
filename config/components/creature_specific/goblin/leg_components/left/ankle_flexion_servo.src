@@ -1,0 +1,20 @@
+// Auto-generated source for ankle_flexion_servo
+#include "components/ankle_flexion_servo.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "ankle_flexion_servo";
+
+esp_err_t ankle_flexion_servo_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void ankle_flexion_servo_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,5 @@
+// Auto-generated header for maternal_care_protocols
+#include <esp_err.h>
+
+esp_err_t maternal_care_protocols_init(void);
+void maternal_care_protocols_act(void);

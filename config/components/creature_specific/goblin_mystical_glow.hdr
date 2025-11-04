@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_mystical_glow
+#include <esp_err.h>
+
+esp_err_t goblin_mystical_glow_init(void);
+void goblin_mystical_glow_act(void);

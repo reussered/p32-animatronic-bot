@@ -1,75 +1,76 @@
 {
-    "relative_filename":  "config/bots/goblin_full_torso.json",
-    "version":  "2.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "GOBLINFULL_TORSO",
-    "bot_id":  "goblin_full_torso_v2",
-    "description":  "Goblin torso subsystem controller - power, navigation, communication, spine control",
-    "created":  "2025-10-13",
-    "subsystem_type":  "TORSO_CONTROLLER",
-    "controller":  "ESP32_S3_DEVKIT",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "pelvis_center",
-    "units":  "INCHES",
-    "components":  [
-                       "config/components/creature_specific/goblin/torso_components/power_management_system.json",
-                       "config/components/creature_specific/goblin/torso_components/main_battery_monitor.json",
-                       "config/components/creature_specific/goblin/torso_components/external_wifi_communication.json",
-                       "config/components/creature_specific/goblin/torso_components/esp_now_mesh_coordinator.json",
-                       "config/components/creature_specific/goblin/torso_components/master_controller.json",
-                       "config/components/creature_specific/goblin/torso_components/mesh_software_coordinator.json",
-                       "config/components/creature_specific/goblin/torso_components/imu_balance_sensor.json",
-                       "config/components/creature_specific/goblin/torso_components/spine_servo_lower.json",
-                       "config/components/creature_specific/goblin/torso_components/spine_servo_middle.json",
-                       "config/components/creature_specific/goblin/torso_components/spine_servo_upper.json",
-                       "config/components/creature_specific/goblin/torso_components/torso_status_led.json"
-                   ],
-    "degrees_of_freedom":  {
-                               "spine_dof":  "3",
-                               "total_controlled_dof":  "3"
-                           },
-    "power_specifications":  {
-                                 "battery_voltage":  "12V_3S_LITHIUM",
-                                 "battery_capacity":  "5000_MAH",
-                                 "servo_power_rail":  "6V_REGULATED",
-                                 "logic_power_rail":  "3.3V_ESP32",
-                                 "estimated_runtime_hours":  "4.0"
-                             },
-    "communication_config":  {
-                                 "wifi_ssid":  "GOBLIN_MESH_NETWORK",
-                                 "external_api_enabled":  true,
-                                 "telemetry_broadcast_rate_hz":  "10"
-                             },
-    "balance_control":  {
-                            "imu_sample_rate_hz":  "100",
-                            "balance_correction_enabled":  true,
-                            "tilt_threshold_degrees":  "15",
-                            "emergency_stop_threshold":  "30"
-                        },
-    "mood_defaults":  {
-                          "FEAR":  20,
-                          "ANGER":  10,
-                          "IRRITATION":  15,
-                          "HAPPINESS":  0,
-                          "CONTENTMENT":  30,
-                          "HUNGER":  0,
-                          "CURIOSITY":  40,
-                          "AFFECTION":  0
-                      },
-    "behavior_config":  {
-                            "spine_posture_control":  true,
-                            "auto_balance_enabled":  true,
-                            "power_conservation_mode":  true,
-                            "mesh_coordination_priority":  "HIGH"
-                        },
-    "hardware_config":  {
-                            "servo_update_rate_hz":  "50",
-                            "sensor_poll_rate_hz":  "100",
-                            "mesh_heartbeat_rate_hz":  "5",
-                            "power_monitoring_rate_hz":  "1"
-                        },
-    "prototype_status":  "in_development",
-    "tested":  false,
-    "estimated_cost_usd":  "125.00",
-    "name":  "goblin_full_torso"
+    "relative_filename": "config/bots/goblin_full_torso.json",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "bot_type": "GOBLINFULL_TORSO",
+    "bot_id": "goblin_full_torso_v2",
+    "description": "Goblin torso subsystem controller - power, navigation, communication, spine control",
+    "created": "2025-10-13",
+    "subsystem_type": "TORSO_CONTROLLER",
+    "controller": "ESP32_S3_DEVKIT",
+    "coordinate_system": "skull_3d",
+    "reference_point": "pelvis_center",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/goblin/torso_components/power_management_system.json",
+        "config/components/creature_specific/goblin/torso_components/main_battery_monitor.json",
+        "config/components/creature_specific/goblin/torso_components/external_wifi_communication.json",
+        "config/components/creature_specific/goblin/torso_components/esp_now_mesh_coordinator.json",
+        "config/components/creature_specific/goblin/torso_components/master_controller.json",
+        "config/components/creature_specific/goblin/torso_components/mesh_software_coordinator.json",
+        "config/components/creature_specific/goblin/torso_components/imu_balance_sensor.json",
+        "config/components/creature_specific/goblin/torso_components/spine_servo_lower.json",
+        "config/components/creature_specific/goblin/torso_components/spine_servo_middle.json",
+        "config/components/creature_specific/goblin/torso_components/spine_servo_upper.json",
+        "config/components/creature_specific/goblin/torso_components/torso_status_led.json"
+    ],
+    "degrees_of_freedom": {
+        "spine_dof": "3",
+        "total_controlled_dof": "3"
+    },
+    "power_specifications": {
+        "battery_voltage": "12V_3S_LITHIUM",
+        "battery_capacity": "5000_MAH",
+        "servo_power_rail": "6V_REGULATED",
+        "logic_power_rail": "3.3V_ESP32",
+        "estimated_runtime_hours": "4.0"
+    },
+    "communication_config": {
+        "wifi_ssid": "GOBLIN_MESH_NETWORK",
+        "external_api_enabled": true,
+        "telemetry_broadcast_rate_hz": "10"
+    },
+    "balance_control": {
+        "imu_sample_rate_hz": "100",
+        "balance_correction_enabled": true,
+        "tilt_threshold_degrees": "15",
+        "emergency_stop_threshold": "30"
+    },
+    "mood_defaults": {
+        "FEAR": 20,
+        "ANGER": 10,
+        "IRRITATION": 15,
+        "HAPPINESS": 0,
+        "CONTENTMENT": 30,
+        "HUNGER": 0,
+        "CURIOSITY": 40,
+        "AFFECTION": 0
+    },
+    "behavior_config": {
+        "spine_posture_control": true,
+        "auto_balance_enabled": true,
+        "power_conservation_mode": true,
+        "mesh_coordination_priority": "HIGH"
+    },
+    "hardware_config": {
+        "servo_update_rate_hz": "50",
+        "sensor_poll_rate_hz": "100",
+        "mesh_heartbeat_rate_hz": "5",
+        "power_monitoring_rate_hz": "1"
+    },
+    "prototype_status": "in_development",
+    "tested": false,
+    "estimated_cost_usd": "125.00",
+    "name": "goblin_full_torso",
+    "type": "UNKNOWN"
 }

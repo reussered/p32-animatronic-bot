@@ -1,28 +1,28 @@
 {
-    "relative_filename":  "config/components/system/system_core.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "system_core",
-    "component_type":  "SYSTEM_LEVEL",
-    "description":  "Core system management - initialization, health checks, error handling",
-    "created":  "2025-10-15",
-    "timing":  {
-                   "hitCount":  100,
-                   "description":  "Core system check every 10 seconds"
-               },
-    "system_requirements":  {
-                                "min_controller":  "ESP32",
-                                "required_features":  [
-                                                          "FreeRTOS"
-                                                      ],
-                                "memory_footprint_kb":  "32",
-                                "cpu_usage_percent":  "1-2"
-                            },
-    "responsibilities":  [
-                             "Initialize FreeRTOS tasks",
-                             "Manage system heap memory",
-                             "Handle critical errors",
-                             "Coordinate subsystem initialization",
-                             "Provide system status reporting"
-                         ]
+    "relative_filename": "config/components/system/system_core.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "system_core",
+    "description": "Core system management - initialization, health checks, error handling",
+    "created": "2025-10-15",
+    "timing": {
+        "hitCount": 100,
+        "description": "Core system check every 10 seconds"
+    },
+    "system_requirements": {
+        "min_controller": "ESP32",
+        "required_features": [
+            "FreeRTOS"
+        ],
+        "memory_footprint_kb": "32",
+        "cpu_usage_percent": "1-2"
+    },
+    "responsibilities": [
+        "Initialize FreeRTOS tasks",
+        "Manage system heap memory",
+        "Handle critical errors",
+        "Coordinate subsystem initialization",
+        "Provide system status reporting"
+    ],
+    "type": "SYSTEM_LEVEL"
 }

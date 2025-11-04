@@ -1,123 +1,124 @@
 {
-    "relative_filename":  "config/bots/bot_families/fantasy/elf_family.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "family_type":  "ELF",
-    "family_category":  "fantasy",
-    "description":  "Ethereal elf family with pointed ears and nature-connected behaviors",
-    "created":  "2025-10-12",
-    "template_type":  "family_template",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "2.6 INCH",
-                                "compression_factor":  1.0,
-                                "skull_scale":  0.9,
-                                "ear_extension":  "1.5 INCH"
-                            },
-    "components":  [
-                       "config/components/creature_specific/elf_eye_left.json",
-                       "config/components/creature_specific/elf_eye_right.json",
-                       "config/components/creature_specific/elf_mouth.json",
-                       "config/components/creature_specific/elf_speaker.json",
-                       "config/components/creature_specific/elf_ear_left.json",
-                       "config/components/creature_specific/elf_ear_right.json"
-                   ],
-    "family_mood_profile":  {
-                                "FEAR":  8,
-                                "ANGER":  5,
-                                "IRRITATION":  10,
-                                "HAPPINESS":  30,
-                                "CONTENTMENT":  35,
-                                "HUNGER":  5,
-                                "CURIOSITY":  40,
-                                "AFFECTION":  25
-                            },
-    "family_behavior_patterns":  {
-                                     "threat_response_enabled":  true,
-                                     "auto_sleep_timeout_seconds":  800,
-                                     "interaction_range_cm":  200,
-                                     "aggressive_threshold":  80,
-                                     "calm_threshold":  50,
-                                     "personality_traits":  [
-                                                                "nature_harmony",
-                                                                "ancient_wisdom",
-                                                                "graceful_movement",
-                                                                "keen_perception",
-                                                                "patient_observer"
-                                                            ]
-                                 },
-    "hardware_preferences":  {
-                                 "coordinate_system":  "skull_3d",
-                                 "spi_device_assignments":  {
-                                                                "left_eye":  "SPI_DEVICE_1",
-                                                                "right_eye":  "SPI_DEVICE_2",
-                                                                "mouth":  "SPI_DEVICE_3"
-                                                            },
-                                 "i2s_device_assignments":  {
-                                                                "primary_speaker":  "I2S_DEVICE_1"
-                                                            }
-                             },
-    "aesthetic_profile":  {
-                              "surface_texture":  "smooth_luminous",
-                              "color_scheme":  "silver_green",
-                              "eye_style":  "large_luminous",
-                              "nose_style":  "delicate_narrow",
-                              "mouth_style":  "gentle_pointed",
-                              "feature_asymmetry":  false,
-                              "weathering_effects":  false
-                          },
-    "sound_characteristics":  {
-                                  "voice_pitch":  "melodic_crystalline",
-                                  "breathing_pattern":  "whisper_soft",
-                                  "nature_sounds":  [
-                                                        "wind_chime",
-                                                        "leaf_rustle",
-                                                        "bird_song"
-                                                    ],
-                                  "magic_sounds":  [
-                                                       "bell_tone",
-                                                       "crystal_ring",
-                                                       "ethereal_hum"
-                                                   ],
-                                  "ambient_volume":  0.3,
-                                  "reaction_volume":  0.5
-                              },
-    "animation_style":  {
-                            "movement_speed":  "graceful_flowing",
-                            "eye_tracking":  "wise_observant",
-                            "idle_behaviors":  [
-                                                   "nature_watch",
-                                                   "peaceful_meditation"
-                                               ],
-                            "threat_responses":  [
-                                                     "protective_ward",
-                                                     "evasive_grace"
-                                                 ],
-                            "expression_intensity":  "serene"
-                        },
-    "subfamily_variants":  {
-                               "wood_elf":  {
-                                                "color_scheme":  "forest_green_brown",
-                                                "personality_modifiers":  {
-                                                                              "CURIOSITY":  "+10",
-                                                                              "CONTENTMENT":  "+5"
-                                                                          }
-                                            },
-                               "high_elf":  {
-                                                "color_scheme":  "silver_white_gold",
-                                                "personality_modifiers":  {
-                                                                              "HAPPINESS":  "+10",
-                                                                              "IRRITATION":  "-5"
-                                                                          }
-                                            },
-                               "dark_elf":  {
-                                                "color_scheme":  "dark_purple_silver",
-                                                "personality_modifiers":  {
-                                                                              "ANGER":  "+15",
-                                                                              "FEAR":  "+5"
-                                                                          }
-                                            }
-                           },
-    "name":  "elf_family"
+    "relative_filename": "config/bots/bot_families/fantasy/elf_family.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_type": "ELF",
+    "family_category": "fantasy",
+    "description": "Ethereal elf family with pointed ears and nature-connected behaviors",
+    "created": "2025-10-12",
+    "template_type": "family_template",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "eye_spacing": "2.6 INCH",
+        "compression_factor": 1.0,
+        "skull_scale": 0.9,
+        "ear_extension": "1.5 INCH"
+    },
+    "components": [
+        "config/components/creature_specific/elf_eye_left.json",
+        "config/components/creature_specific/elf_eye_right.json",
+        "config/components/creature_specific/elf_mouth.json",
+        "config/components/creature_specific/elf_speaker.json",
+        "config/components/creature_specific/elf_ear_left.json",
+        "config/components/creature_specific/elf_ear_right.json"
+    ],
+    "family_mood_profile": {
+        "FEAR": 8,
+        "ANGER": 5,
+        "IRRITATION": 10,
+        "HAPPINESS": 30,
+        "CONTENTMENT": 35,
+        "HUNGER": 5,
+        "CURIOSITY": 40,
+        "AFFECTION": 25
+    },
+    "family_behavior_patterns": {
+        "threat_response_enabled": true,
+        "auto_sleep_timeout_seconds": 800,
+        "interaction_range_cm": 200,
+        "aggressive_threshold": 80,
+        "calm_threshold": 50,
+        "personality_traits": [
+            "nature_harmony",
+            "ancient_wisdom",
+            "graceful_movement",
+            "keen_perception",
+            "patient_observer"
+        ]
+    },
+    "hardware_preferences": {
+        "coordinate_system": "skull_3d",
+        "spi_device_assignments": {
+            "left_eye": "SPI_DEVICE_1",
+            "right_eye": "SPI_DEVICE_2",
+            "mouth": "SPI_DEVICE_3"
+        },
+        "i2s_device_assignments": {
+            "primary_speaker": "I2S_DEVICE_1"
+        }
+    },
+    "aesthetic_profile": {
+        "surface_texture": "smooth_luminous",
+        "color_scheme": "silver_green",
+        "eye_style": "large_luminous",
+        "nose_style": "delicate_narrow",
+        "mouth_style": "gentle_pointed",
+        "feature_asymmetry": false,
+        "weathering_effects": false
+    },
+    "sound_characteristics": {
+        "voice_pitch": "melodic_crystalline",
+        "breathing_pattern": "whisper_soft",
+        "nature_sounds": [
+            "wind_chime",
+            "leaf_rustle",
+            "bird_song"
+        ],
+        "magic_sounds": [
+            "bell_tone",
+            "crystal_ring",
+            "ethereal_hum"
+        ],
+        "ambient_volume": 0.3,
+        "reaction_volume": 0.5
+    },
+    "animation_style": {
+        "movement_speed": "graceful_flowing",
+        "eye_tracking": "wise_observant",
+        "idle_behaviors": [
+            "nature_watch",
+            "peaceful_meditation"
+        ],
+        "threat_responses": [
+            "protective_ward",
+            "evasive_grace"
+        ],
+        "expression_intensity": "serene"
+    },
+    "subfamily_variants": {
+        "wood_elf": {
+            "color_scheme": "forest_green_brown",
+            "personality_modifiers": {
+                "CURIOSITY": "+10",
+                "CONTENTMENT": "+5"
+            }
+        },
+        "high_elf": {
+            "color_scheme": "silver_white_gold",
+            "personality_modifiers": {
+                "HAPPINESS": "+10",
+                "IRRITATION": "-5"
+            }
+        },
+        "dark_elf": {
+            "color_scheme": "dark_purple_silver",
+            "personality_modifiers": {
+                "ANGER": "+15",
+                "FEAR": "+5"
+            }
+        }
+    },
+    "name": "elf_family",
+    "type": "UNKNOWN"
 }

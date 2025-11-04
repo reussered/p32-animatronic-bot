@@ -1,0 +1,16 @@
+// HW-496 MEMS Microphone Component Header
+// Uses generic microphone driver with HW496-specific configuration
+
+#ifndef hw496_microphone_H
+#define hw496_microphone_H
+
+#include "esp_err.h"
+
+// Test declaration
+extern int test_hw496_variable;
+
+// Function declarations for dispatch table
+esp_err_t hw496_microphone_init(void);
+void hw496_microphone_act(void);
+
+#endif // hw496_microphone_H

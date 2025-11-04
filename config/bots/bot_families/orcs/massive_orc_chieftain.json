@@ -1,63 +1,64 @@
 {
-    "relative_filename":  "config/bots/bot_families/orcs/massive_orc_chieftain.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "MASSIVE_ORC_CHIEFTAIN",
-    "bot_id":  "massive_orc_chieftain_v1",
-    "description":  "Intimidating massive orc chieftain using unified proportional scaling",
-    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
-    "creature_variant":  "giant_orc",
-    "horizontal_scale":  "1.5",
-    "vertical_scale":  "1.1",
-    "calculated_dimensions":  {
-                                  "total_height":  "77.0 INCHES",
-                                  "shoulder_width":  "27.0 INCHES",
-                                  "head_height":  "9.9 INCHES",
-                                  "leg_length":  "38.5 INCHES",
-                                  "character":  "COMMANDING_INTIMIDATING_PRESENCE"
-                              },
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "eye_spacing":  "4.5 INCH",
-    "components":  [
-                       "config/components/creature_specific/goblin_left_eye.json",
-                       "config/components/creature_specific/goblin_right_eye.json",
-                       "config/components/creature_specific/goblin_mouth.json",
-                       "config/components/creature_specific/goblin_speaker.json",
-                       "config/components/creature_specific/goblin_nose.json"
-                   ],
-    "servo_specifications":  {
-                                 "primary_servos":  "NEMA23_STEPPER_SERVOS",
-                                 "secondary_servos":  "INDUSTRIAL_SERVO_MOTORS",
-                                 "stepper_motors":  "NEMA23_PLANETARY_GEARBOXES",
-                                 "power_system":  "LITHIUM_ION_14S6P_HIGH_CAPACITY"
-                             },
-    "mood_defaults":  {
-                          "FEAR":  0,
-                          "ANGER":  60,
-                          "IRRITATION":  40,
-                          "HAPPINESS":  0,
-                          "CONTENTMENT":  10,
-                          "HUNGER":  20,
-                          "CURIOSITY":  5,
-                          "AFFECTION":  0,
-                          "DOMINANCE":  90,
-                          "AGGRESSION":  80
-                      },
-    "behavior_config":  {
-                            "movement_style":  "SLOW_POWERFUL_DELIBERATE",
-                            "personality":  "COMMANDING_AGGRESSIVE_TERRITORIAL",
-                            "specializations":  [
-                                                    "INTIMIDATION_DISPLAY",
-                                                    "HEAVY_LIFTING",
-                                                    "SECURITY_PRESENCE"
-                                                ],
-                            "voice_characteristics":  "DEEP_BOOMING_AUTHORITATIVE"
-                        },
-    "advanced_capabilities":  {
-                                  "strength_multiplier":  "3X_HUMAN_STRENGTH",
-                                  "intimidation_factor":  "MAXIMUM_PSYCHOLOGICAL_IMPACT",
-                                  "industrial_applications":  "CONSTRUCTION_SECURITY_DEMONSTRATION"
-                              },
-    "name":  "massive_orc_chieftain"
+    "relative_filename": "config/bots/bot_families/orcs/massive_orc_chieftain.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "MASSIVE_ORC_CHIEFTAIN",
+    "bot_id": "massive_orc_chieftain_v1",
+    "description": "Intimidating massive orc chieftain using unified proportional scaling",
+    "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant": "giant_orc",
+    "horizontal_scale": "1.5",
+    "vertical_scale": "1.1",
+    "calculated_dimensions": {
+        "total_height": "77.0 INCHES",
+        "shoulder_width": "27.0 INCHES",
+        "head_height": "9.9 INCHES",
+        "leg_length": "38.5 INCHES",
+        "character": "COMMANDING_INTIMIDATING_PRESENCE"
+    },
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "eye_spacing": "4.5 INCH",
+    "components": [
+        "config/components/creature_specific/goblin_left_eye.json",
+        "config/components/creature_specific/goblin_right_eye.json",
+        "config/components/creature_specific/goblin_mouth.json",
+        "config/components/creature_specific/goblin_speaker.json",
+        "config/components/creature_specific/goblin_nose.json"
+    ],
+    "servo_specifications": {
+        "primary_servos": "NEMA23_STEPPER_SERVOS",
+        "secondary_servos": "INDUSTRIAL_SERVO_MOTORS",
+        "stepper_motors": "NEMA23_PLANETARY_GEARBOXES",
+        "power_system": "LITHIUM_ION_14S6P_HIGH_CAPACITY"
+    },
+    "mood_defaults": {
+        "FEAR": 0,
+        "ANGER": 60,
+        "IRRITATION": 40,
+        "HAPPINESS": 0,
+        "CONTENTMENT": 10,
+        "HUNGER": 20,
+        "CURIOSITY": 5,
+        "AFFECTION": 0,
+        "DOMINANCE": 90,
+        "AGGRESSION": 80
+    },
+    "behavior_config": {
+        "movement_style": "SLOW_POWERFUL_DELIBERATE",
+        "personality": "COMMANDING_AGGRESSIVE_TERRITORIAL",
+        "specializations": [
+            "INTIMIDATION_DISPLAY",
+            "HEAVY_LIFTING",
+            "SECURITY_PRESENCE"
+        ],
+        "voice_characteristics": "DEEP_BOOMING_AUTHORITATIVE"
+    },
+    "advanced_capabilities": {
+        "strength_multiplier": "3X_HUMAN_STRENGTH",
+        "intimidation_factor": "MAXIMUM_PSYCHOLOGICAL_IMPACT",
+        "industrial_applications": "CONSTRUCTION_SECURITY_DEMONSTRATION"
+    },
+    "name": "massive_orc_chieftain",
+    "type": "UNKNOWN"
 }

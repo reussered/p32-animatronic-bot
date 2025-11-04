@@ -116,6 +116,8 @@ class ComponentVisit:
     act_func: str
     hit_count: int
     json_path: Optional[Path]
+    template_type: Optional[str] = None
+
 
 
 @dataclass
@@ -151,6 +153,7 @@ class SubsystemContext:
         json_path: Optional[Path],
         data: Dict[str, Any],
         sources: ComponentSourceIndex,
+        template_type: Optional[str] = None,
     ) -> None:
         component_name = data.get("name")
         if not component_name:
@@ -166,6 +169,7 @@ class SubsystemContext:
                 act_func=act_func,
                 hit_count=hit_count,
                 json_path=json_path,
+                template_type=template_type,
             )
         )
 
@@ -297,17 +301,27 @@ def resolve_hit_count(data: Dict[str, Any]) -> int:
     return 1
 
 
-def resolve_json_reference(base_path: Path, reference: str) -> Path:
-    candidate = Path(reference)
+def resolve_json_reference(base_path: Path, reference: str) -> Tuple[Path, Optional[str]]:
+    """Resolves a JSON reference, parsing out a template type if present."""
+    template_type: Optional[str] = None
+    path_part = reference
+    if "<" in reference and reference.endswith(">"):
+        path_part, template_part = reference.rsplit("<", 1)
+        template_type = template_part[:-1].strip()
+
+    candidate = Path(path_part)
     if not candidate.is_absolute():
-        if reference.startswith("config/"):
-            candidate = PROJECT_ROOT / reference
+        if path_part.startswith("config/"):
+            candidate = PROJECT_ROOT / path_part
         else:
-            candidate = base_path.parent / reference
+            candidate = base_path.parent / path_part
+    
     candidate = candidate.resolve()
     if not candidate.exists():
-        raise FileNotFoundError(f"Referenced JSON file not found: {reference}")
-    return candidate
+        raise FileNotFoundError(f"Referenced JSON file not found: {path_part}")
+    
+    return candidate, template_type
+
 
 
 def is_primitive(value: Any) -> bool:
@@ -451,6 +465,32 @@ def render_component_header(context: SubsystemContext) -> str:
     return "\n".join(header_lines) + "\n"
 
 
+def collect_interface_includes(context: SubsystemContext) -> Set[str]:
+    """Determine which interface headers need to be included based on component usage."""
+    includes: Set[str] = set()
+
+    # Check for SPI display bus usage
+    spi_display_components = {
+        "gc9a01", "generic_spi_display", "spi_display_bus",
+        "goblin_left_eye", "goblin_right_eye", "goblin_eye"
+    }
+
+    for definition in context.unique_components.values():
+        if definition.name in spi_display_components:
+            includes.add("components/interfaces/spi_display_bus.hdr")
+            break
+
+    # Check for SPI data bus usage
+    spi_data_components = {"spi_data_bus", "generic_spi_data_driver"}
+
+    for definition in context.unique_components.values():
+        if definition.name in spi_data_components:
+            includes.add("components/interfaces/spi_data_bus.hdr")
+            break
+
+    return includes
+
+
 def render_component_source(context: SubsystemContext) -> str:
     lines: List[str] = [
         f'#include "subsystems/{context.name}/{context.name}_component_functions.hpp"',
@@ -458,6 +498,12 @@ def render_component_source(context: SubsystemContext) -> str:
         "// Auto-generated component aggregation file",
         "",
     ]
+
+    # Include interface headers for global variables used by components
+    interface_includes = collect_interface_includes(context)
+    for include in sorted(interface_includes):
+        lines.insert(1, f'#include "{include}"')
+
     included_srcs: Set[Path] = set()
     for definition in sorted(context.unique_components.values(), key=lambda item: item.name):
         if definition.src_content and definition.src_path:
@@ -512,8 +558,17 @@ def render_dispatch_source(context: SubsystemContext) -> str:
         f"// Auto-generated dispatch table implementation for subsystem {context.name}",
         "",
     ]
-    init_entries = [visit.init_func for visit in context.visits]
-    act_entries = [visit.act_func for visit in context.visits]
+
+    init_entries = []
+    act_entries = []
+    for visit in context.visits:
+        if visit.template_type:
+            init_entries.append(f"&{visit.init_func.replace('<T>', f'<{visit.template_type}>')}")
+            act_entries.append(f"&{visit.act_func.replace('<T>', f'<{visit.template_type}>')}")
+        else:
+            init_entries.append(f"&{visit.init_func}")
+            act_entries.append(f"&{visit.act_func}")
+
     hit_entries = [visit.hit_count for visit in context.visits]
     init_body = ",\n    ".join(init_entries)
     act_body = ",\n    ".join(act_entries)
@@ -688,7 +743,7 @@ class TableGenerator:
         self.subsystem_order: List[SubsystemContext] = []
 
     def run(self) -> None:
-        self._process_json(self.root_config, stack=[])
+        self._process_json(self.root_config, [], None)
         if not self.subsystem_order:
             raise RuntimeError("No subsystem controllers discovered in configuration")
         for ctx in self.subsystem_order:
@@ -696,7 +751,7 @@ class TableGenerator:
         generate_platformio_file(self.subsystem_order)
         generate_cmake_metadata(self.subsystem_order)
 
-    def _process_json(self, json_path: Path, stack: List[SubsystemContext]) -> None:
+    def _process_json(self, json_path: Path, stack: List[SubsystemContext], template_type: Optional[str]) -> None:
         data = self.loader.load(json_path)
         component_name = data.get("name")
         controller_value = data.get("controller")
@@ -721,13 +776,13 @@ class TableGenerator:
             new_context = context
         active_context = stack[-1] if stack else None
         if active_context is not None and component_name and not is_controller:
-            active_context.register_component(json_path, data, self.sources)
+            active_context.register_component(json_path, data, self.sources, template_type)
         components = data.get("components")
         if isinstance(components, list):
             for entry in components:
                 if isinstance(entry, str):
-                    child_path = resolve_json_reference(json_path, entry)
-                    self._process_json(child_path, stack)
+                    child_path, child_template_type = resolve_json_reference(json_path, entry)
+                    self._process_json(child_path, stack, child_template_type)
                 elif isinstance(entry, dict):
                     self._process_inline(entry, json_path, stack)
         if new_context is not None:
@@ -765,8 +820,8 @@ class TableGenerator:
         if isinstance(nested, list):
             for entry in nested:
                 if isinstance(entry, str):
-                    child_path = resolve_json_reference(base_path, entry)
-                    self._process_json(child_path, stack)
+                    child_path, child_template_type = resolve_json_reference(base_path, entry)
+                    self._process_json(child_path, stack, child_template_type)
                 elif isinstance(entry, dict):
                     self._process_inline(entry, base_path, stack)
         if new_context is not None:

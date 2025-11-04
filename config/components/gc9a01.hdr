@@ -1,0 +1,5 @@
+// Auto-generated header for gc9a01
+#include <esp_err.h>
+
+esp_err_t gc9a01_init(void);
+void gc9a01_act(void);

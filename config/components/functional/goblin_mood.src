@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_mood
+#include "components/goblin_mood.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_mood";
+
+esp_err_t goblin_mood_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_mood_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

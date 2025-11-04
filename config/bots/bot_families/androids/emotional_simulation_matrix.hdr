@@ -1,0 +1,5 @@
+// Auto-generated header for emotional_simulation_matrix
+#include <esp_err.h>
+
+esp_err_t emotional_simulation_matrix_init(void);
+void emotional_simulation_matrix_act(void);

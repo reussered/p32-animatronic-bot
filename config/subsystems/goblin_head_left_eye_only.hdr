@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_head_left_eye_only
+#include <esp_err.h>
+
+esp_err_t goblin_head_left_eye_only_init(void);
+void goblin_head_left_eye_only_act(void);

@@ -1,0 +1,20 @@
+// Auto-generated source for memory_palace_system
+#include "components/memory_palace_system.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "memory_palace_system";
+
+esp_err_t memory_palace_system_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void memory_palace_system_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

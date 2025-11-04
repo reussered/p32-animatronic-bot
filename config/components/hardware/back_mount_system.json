@@ -1,131 +1,131 @@
 {
-    "relative_filename":  "config/components/hardware/back_mount_system.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "component_type":  "MECHANICAL_MOUNTING",
-    "hardware_id":  "BACK_MOUNT_SYSTEM_V1",
-    "description":  "Robotic back-mounted attachment system for parasol and equipment deployment",
-    "physical_specifications":  {
-                                    "mount_plate_dimensions":  {
-                                                                   "width":  "8.0 INCH",
-                                                                   "height":  "12.0 INCH",
-                                                                   "thickness":  "0.5 INCH"
-                                                               },
-                                    "attachment_interface":  "spine_rail_clamp",
-                                    "load_capacity":  {
-                                                          "static":  "20 KG",
-                                                          "dynamic":  "15 KG",
-                                                          "moment_arm":  "24.0 INCH"
-                                                      },
-                                    "pivot_mechanism":  {
-                                                            "type":  "dual_hinge_servo",
-                                                            "range_of_motion":  "90 DEG",
-                                                            "precision":  "1 DEG",
-                                                            "holding_torque":  "15 KG-CM"
-                                                        }
-                                },
-    "servo_requirements":  {
-                               "primary_pivot":  {
-                                                     "type":  "high_torque_servo",
-                                                     "model":  "MG996R",
-                                                     "torque":  "15 KG-CM",
-                                                     "speed":  "0.17 SEC/60DEG",
-                                                     "voltage":  "6V",
-                                                     "current_draw":  {
-                                                                          "idle":  "10 mA",
-                                                                          "moving":  "800 mA",
-                                                                          "stall":  "1.2 A"
-                                                                      }
-                                                 },
-                               "secondary_stabilizer":  {
-                                                            "type":  "micro_servo",
-                                                            "model":  "SG90",
-                                                            "torque":  "2.5 KG-CM",
-                                                            "speed":  "0.12 SEC/60DEG",
-                                                            "voltage":  "5V",
-                                                            "current_draw":  {
-                                                                                 "idle":  "5 mA",
-                                                                                 "moving":  "300 mA",
-                                                                                 "stall":  "650 mA"
-                                                                             }
-                                                        }
-                           },
-    "transport_configuration":  {
-                                    "stowed_position":  "horizontal_back_flush",
-                                    "profile_clearance":  "1.0 INCH",
-                                    "locking_mechanism":  "spring_loaded_pins",
-                                    "quick_release":  "emergency_jettison"
-                                },
-    "deployment_mechanics":  {
-                                 "step_sequence":  [
-                                                       "unlock_transport_clamps",
-                                                       "rotate_90_degrees_vertical",
-                                                       "extend_equipment_platform",
-                                                       "activate_attached_systems"
-                                                   ],
-                                 "total_deployment_time":  "25 SEC",
-                                 "retraction_time":  "18 SEC",
-                                 "emergency_retraction":  "8 SEC"
-                             },
-    "electrical_interface":  {
-                                 "power_requirements":  {
-                                                            "voltage":  "6V",
-                                                            "peak_current":  "2.0 A",
-                                                            "typical_current":  "0.5 A",
-                                                            "standby_current":  "15 mA"
-                                                        },
-                                 "control_signals":  {
-                                                         "servo_pwm_1":  "GPIO_25",
-                                                         "servo_pwm_2":  "GPIO_26",
-                                                         "position_feedback":  "GPIO_27",
-                                                         "emergency_release":  "GPIO_28"
-                                                     },
-                                 "status_indicators":  {
-                                                           "deployment_status_led":  "GPIO_29",
-                                                           "lock_status_sensor":  "GPIO_30"
-                                                       }
-                             },
-    "safety_features":  {
-                            "weight_sensors":  "strain_gauge_monitoring",
-                            "tilt_protection":  "accelerometer_feedback",
-                            "emergency_protocols":  [
-                                                        "automatic_retraction_on_fall",
-                                                        "power_disconnect_on_overload",
-                                                        "manual_quick_release"
-                                                    ],
-                            "operational_limits":  {
-                                                       "max_wind_speed":  "30 MPH",
-                                                       "max_tilt_angle":  "15 DEG",
-                                                       "temperature_range":  "-10 degC to 60 degC"
-                                                   }
-                        },
-    "compatibility":  {
-                          "robot_families":  [
-                                                 "ROBOT",
-                                                 "ANDROID",
-                                                 "STEAMPUNK"
-                                             ],
-                          "attachment_types":  [
-                                                   "SOLAR_PARASOL",
-                                                   "EQUIPMENT_RACK",
-                                                   "SENSOR_ARRAY"
-                                               ],
-                          "spine_rail_standard":  "P32_STANDARD_V1"
-                      },
-    "manufacturing_notes":  {
-                                "materials":  {
-                                                  "mount_plate":  "6061_aluminum_alloy",
-                                                  "pivot_joints":  "stainless_steel_bearings",
-                                                  "housing":  "ABS_3D_printed"
-                                              },
-                                "assembly_complexity":  "MODERATE",
-                                "required_tools":  [
-                                                       "drill",
-                                                       "tap_set",
-                                                       "torque_wrench"
-                                                   ],
-                                "estimated_build_time":  "4 HOURS"
-                            },
-    "hardware_type":  "MECHANICAL_MOUNTING",
-    "name":  "BACK_MOUNT_SYSTEM"
+    "relative_filename": "config/components/hardware/back_mount_system.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_id": "BACK_MOUNT_SYSTEM_V1",
+    "description": "Robotic back-mounted attachment system for parasol and equipment deployment",
+    "physical_specifications": {
+        "mount_plate_dimensions": {
+            "width": "8.0 INCH",
+            "height": "12.0 INCH",
+            "thickness": "0.5 INCH"
+        },
+        "attachment_interface": "spine_rail_clamp",
+        "load_capacity": {
+            "static": "20 KG",
+            "dynamic": "15 KG",
+            "moment_arm": "24.0 INCH"
+        },
+        "pivot_mechanism": {
+            "type": "dual_hinge_servo",
+            "range_of_motion": "90 DEG",
+            "precision": "1 DEG",
+            "holding_torque": "15 KG-CM"
+        }
+    },
+    "servo_requirements": {
+        "primary_pivot": {
+            "type": "high_torque_servo",
+            "model": "MG996R",
+            "torque": "15 KG-CM",
+            "speed": "0.17 SEC/60DEG",
+            "voltage": "6V",
+            "current_draw": {
+                "idle": "10 mA",
+                "moving": "800 mA",
+                "stall": "1.2 A"
+            }
+        },
+        "secondary_stabilizer": {
+            "type": "micro_servo",
+            "model": "SG90",
+            "torque": "2.5 KG-CM",
+            "speed": "0.12 SEC/60DEG",
+            "voltage": "5V",
+            "current_draw": {
+                "idle": "5 mA",
+                "moving": "300 mA",
+                "stall": "650 mA"
+            }
+        }
+    },
+    "transport_configuration": {
+        "stowed_position": "horizontal_back_flush",
+        "profile_clearance": "1.0 INCH",
+        "locking_mechanism": "spring_loaded_pins",
+        "quick_release": "emergency_jettison"
+    },
+    "deployment_mechanics": {
+        "step_sequence": [
+            "unlock_transport_clamps",
+            "rotate_90_degrees_vertical",
+            "extend_equipment_platform",
+            "activate_attached_systems"
+        ],
+        "total_deployment_time": "25 SEC",
+        "retraction_time": "18 SEC",
+        "emergency_retraction": "8 SEC"
+    },
+    "electrical_interface": {
+        "power_requirements": {
+            "voltage": "6V",
+            "peak_current": "2.0 A",
+            "typical_current": "0.5 A",
+            "standby_current": "15 mA"
+        },
+        "control_signals": {
+            "servo_pwm_1": "GPIO_25",
+            "servo_pwm_2": "GPIO_26",
+            "position_feedback": "GPIO_27",
+            "emergency_release": "GPIO_28"
+        },
+        "status_indicators": {
+            "deployment_status_led": "GPIO_29",
+            "lock_status_sensor": "GPIO_30"
+        }
+    },
+    "safety_features": {
+        "weight_sensors": "strain_gauge_monitoring",
+        "tilt_protection": "accelerometer_feedback",
+        "emergency_protocols": [
+            "automatic_retraction_on_fall",
+            "power_disconnect_on_overload",
+            "manual_quick_release"
+        ],
+        "operational_limits": {
+            "max_wind_speed": "30 MPH",
+            "max_tilt_angle": "15 DEG",
+            "temperature_range": "-10 degC to 60 degC"
+        }
+    },
+    "compatibility": {
+        "robot_families": [
+            "ROBOT",
+            "ANDROID",
+            "STEAMPUNK"
+        ],
+        "attachment_types": [
+            "SOLAR_PARASOL",
+            "EQUIPMENT_RACK",
+            "SENSOR_ARRAY"
+        ],
+        "spine_rail_standard": "P32_STANDARD_V1"
+    },
+    "manufacturing_notes": {
+        "materials": {
+            "mount_plate": "6061_aluminum_alloy",
+            "pivot_joints": "stainless_steel_bearings",
+            "housing": "ABS_3D_printed"
+        },
+        "assembly_complexity": "MODERATE",
+        "required_tools": [
+            "drill",
+            "tap_set",
+            "torque_wrench"
+        ],
+        "estimated_build_time": "4 HOURS"
+    },
+    "hardware_type": "MECHANICAL_MOUNTING",
+    "name": "back_mount_system",
+    "type": "MECHANICAL_MOUNTING"
 }

@@ -1,0 +1,5 @@
+// Auto-generated header for fish_catching_simulation
+#include <esp_err.h>
+
+esp_err_t fish_catching_simulation_init(void);
+void fish_catching_simulation_act(void);

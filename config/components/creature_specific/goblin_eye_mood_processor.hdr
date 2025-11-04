@@ -1,0 +1,10 @@
+// goblin_eye_mood_processor.hdr
+#ifndef GOBLIN_EYE_MOOD_PROCESSOR_HDR
+#define GOBLIN_EYE_MOOD_PROCESSOR_HDR
+
+#include "esp_err.h"
+
+esp_err_t goblin_eye_mood_processor_init(void);
+void goblin_eye_mood_processor_act(void);
+
+#endif // GOBLIN_EYE_MOOD_PROCESSOR_HDR

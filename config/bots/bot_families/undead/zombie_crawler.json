@@ -1,74 +1,75 @@
 {
-    "relative_filename":  "config/bots/bot_families/undead/zombie_crawler.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "family_template":  "config/bots/bot_families/horror/zombie_family.json",
-    "bot_type":  "ZOMBIECRAWLER",
-    "bot_id":  "zombie_crawler_v1",
-    "description":  "Severely damaged zombie with advanced decay, crawling locomotion",
-    "created":  "2025-10-12",
-    "template_inheritance":  "extend",
-    "subfamily_selection":  "ancient_zombie",
-    "overrides":  {
-                      "mood_defaults":  {
-                                            "FEAR":  2,
-                                            "ANGER":  30,
-                                            "IRRITATION":  25,
-                                            "HAPPINESS":  0,
-                                            "CONTENTMENT":  1,
-                                            "HUNGER":  40,
-                                            "CURIOSITY":  2,
-                                            "AFFECTION":  0
-                                        },
-                      "behavior_config":  {
-                                              "threat_response_enabled":  false,
-                                              "auto_sleep_timeout_seconds":  100,
-                                              "interaction_range_cm":  60,
-                                              "aggressive_threshold":  20,
-                                              "locomotion_type":  "crawling_dragging"
-                                          },
-                      "severe_decay":  {
-                                           "leg_functionality":  "non_functional",
-                                           "arm_strength":  "limited_grasping",
-                                           "spinal_damage":  "hunched_dragging"
-                                       }
-                  },
-    "components":  [
-                       "config/components/creature_specific/zombie_exposed_bone.json",
-                       "config/components/creature_specific/zombie_drag_mechanism.json"
-                   ],
-    "custom_behaviors":  {
-                             "ambush_crawling":  {
-                                                     "trigger":  "victim_proximity",
-                                                     "response":  "silent_approach",
-                                                     "stealth_factor":  "high"
-                                                 },
-                             "desperate_grasping":  {
-                                                        "trigger":  "food_within_reach",
-                                                        "response":  "frantic_clawing",
-                                                        "tenacity":  "extreme"
-                                                    }
-                         },
-    "decay_effects":  {
-                          "visual_deterioration":  "extensive_flesh_loss",
-                          "oozing_wounds":  "constant_seepage",
-                          "bone_exposure":  "ribs_spine_visible",
-                          "clothing_remnants":  "shredded_tatters",
-                          "trail_marks":  "dragging_blood_smear"
-                      },
-    "horror_amplification":  {
-                                 "surprise_factor":  "hidden_threat",
-                                 "visceral_impact":  "extreme_decay",
-                                 "movement_unnerving":  "unnatural_dragging",
-                                 "persistence_terrifying":  "unstoppable_pursuit"
-                             },
-    "prototype_status":  "design_complete",
-    "tested":  false,
-    "notes":  [
-                  "Advanced decay zombie for maximum horror impact",
-                  "Crawling locomotion creates unique threat profile",
-                  "Extreme visual decay effects require special components",
-                  "Ambush behaviors add stealth horror element"
-              ],
-    "name":  "zombie_crawler"
+    "relative_filename": "config/bots/bot_families/undead/zombie_crawler.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_template": "config/bots/bot_families/horror/zombie_family.json",
+    "bot_type": "ZOMBIECRAWLER",
+    "bot_id": "zombie_crawler_v1",
+    "description": "Severely damaged zombie with advanced decay, crawling locomotion",
+    "created": "2025-10-12",
+    "template_inheritance": "extend",
+    "subfamily_selection": "ancient_zombie",
+    "overrides": {
+        "mood_defaults": {
+            "FEAR": 2,
+            "ANGER": 30,
+            "IRRITATION": 25,
+            "HAPPINESS": 0,
+            "CONTENTMENT": 1,
+            "HUNGER": 40,
+            "CURIOSITY": 2,
+            "AFFECTION": 0
+        },
+        "behavior_config": {
+            "threat_response_enabled": false,
+            "auto_sleep_timeout_seconds": 100,
+            "interaction_range_cm": 60,
+            "aggressive_threshold": 20,
+            "locomotion_type": "crawling_dragging"
+        },
+        "severe_decay": {
+            "leg_functionality": "non_functional",
+            "arm_strength": "limited_grasping",
+            "spinal_damage": "hunched_dragging"
+        }
+    },
+    "components": [
+        "config/components/creature_specific/zombie_exposed_bone.json",
+        "config/components/creature_specific/zombie_drag_mechanism.json"
+    ],
+    "custom_behaviors": {
+        "ambush_crawling": {
+            "trigger": "victim_proximity",
+            "response": "silent_approach",
+            "stealth_factor": "high"
+        },
+        "desperate_grasping": {
+            "trigger": "food_within_reach",
+            "response": "frantic_clawing",
+            "tenacity": "extreme"
+        }
+    },
+    "decay_effects": {
+        "visual_deterioration": "extensive_flesh_loss",
+        "oozing_wounds": "constant_seepage",
+        "bone_exposure": "ribs_spine_visible",
+        "clothing_remnants": "shredded_tatters",
+        "trail_marks": "dragging_blood_smear"
+    },
+    "horror_amplification": {
+        "surprise_factor": "hidden_threat",
+        "visceral_impact": "extreme_decay",
+        "movement_unnerving": "unnatural_dragging",
+        "persistence_terrifying": "unstoppable_pursuit"
+    },
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Advanced decay zombie for maximum horror impact",
+        "Crawling locomotion creates unique threat profile",
+        "Extreme visual decay effects require special components",
+        "Ambush behaviors add stealth horror element"
+    ],
+    "name": "zombie_crawler",
+    "type": "UNKNOWN"
 }

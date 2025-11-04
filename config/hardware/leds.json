@@ -1,36 +1,36 @@
 {
-    "relative_filename":  "config/hardware/leds.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "leds",
-    "displayName":  "LED Lights",
-    "description":  "LED strip and indicator light configurations for mood expression and status indication",
-    "type":  "output",
-    "devices":  [
-                    {
-                        "id":  "eyes",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "WS2812B",
-                        "count":  8,
-                        "brightness":  180
-                    },
-                    {
-                        "id":  "status",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "WS2812B",
-                        "count":  4,
-                        "brightness":  255
-                    },
-                    {
-                        "id":  "ambient",
-                        "pin":  "DYNAMICALLY_ASSIGNED",
-                        "type":  "WS2812B",
-                        "count":  16,
-                        "brightness":  150
-                    }
-                ],
-    "enabled":  true,
-    "config":  {
-                   "defaultColor":  "#FFFFFF"
-               }
+    "relative_filename": "config/hardware/leds.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "leds",
+    "displayName": "LED Lights",
+    "description": "LED strip and indicator light configurations for mood expression and status indication",
+    "type": "OUTPUT",
+    "devices": [
+        {
+            "id": "eyes",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "WS2812B",
+            "count": 8,
+            "brightness": 180
+        },
+        {
+            "id": "status",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "WS2812B",
+            "count": 4,
+            "brightness": 255
+        },
+        {
+            "id": "ambient",
+            "pin": "DYNAMICALLY_ASSIGNED",
+            "type": "WS2812B",
+            "count": 16,
+            "brightness": 150
+        }
+    ],
+    "enabled": true,
+    "config": {
+        "defaultColor": "#FFFFFF"
+    }
 }

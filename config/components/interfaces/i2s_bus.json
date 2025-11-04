@@ -1,61 +1,61 @@
 {
-    "relative_filename":  "config/components/interfaces/i2s_bus.json",
-    "version":  "1.0.0",
-    "component_type":  "INTERFACE_BUS",
-    "hardware_type":  "BUS_INTERFACE",
-    "author":  "config/author.json",
-    "name":  "i2s_bus",
-    "bus_type":  "I2S",
-    "bus_name":  "I2S",
-    "description":  "ESP32 I2S bus 0 interface for audio communication",
-    "components":  [
-                       "config/components/drivers/i2s_driver.json"
-                   ],
-    "pin_requirements":  {
-                             "shared_pins_needed":  [
-                                                        {
-                                                            "function":  "I2S_BCLK",
-                                                            "count":  1,
-                                                            "description":  "I2S bit clock signal"
-                                                        },
-                                                        {
-                                                            "function":  "I2S_WS",
-                                                            "count":  1,
-                                                            "description":  "I2S word select (left/right clock)"
-                                                        }
-                                                    ],
-                             "unique_pins_needed":  [
-                                                        {
-                                                            "function":  "I2S_DATA",
-                                                            "count":  1,
-                                                            "description":  "I2S data line (unique per device/direction)"
-                                                        }
-                                                    ]
-                         },
-    "interface_id":  "I2S_BUS",
-    "interface_type":  "I2S_BUS",
-    "timing":  {
-                   "hitCount":  1
-               },
-    "software":  {
-                     "init_function":  "i2s_bus_0_init",
-                     "act_function":  "i2s_bus_0_act"
-                 },
-    "bus_config":  {
-                       "sample_rate":  "44100",
-                       "bits_per_sample":  16
-                   },
-    "unique_device_pins":  {
-                               "data_1":  6,
-                               "data_2":  26,
-                               "data_3":  25
-                           },
-    "hardware":  {
-                     "esp32_specific":  {
-                                            "i2s_port":  0,
-                                            "dma_buffer_count":  8,
-                                            "dma_buffer_length":  1024
-                                        }
-                 },
-    "notes":  "I2S bus 0 on ESP32. Shared pins (BCLK, WS) can be used by multiple devices. Data pins are unique per device."
+    "relative_filename": "config/components/interfaces/i2s_bus.json",
+    "version": "1.0.0",
+    "hardware_type": "BUS_INTERFACE",
+    "author": "config/author.json",
+    "name": "i2s_bus",
+    "bus_type": "I2S",
+    "bus_name": "I2S",
+    "description": "ESP32 I2S bus 0 interface for audio communication",
+    "components": [
+        "config/components/drivers/i2s_driver.json"
+    ],
+    "pin_requirements": {
+        "shared_pins_needed": [
+            {
+                "function": "I2S_BCLK",
+                "count": 1,
+                "description": "I2S bit clock signal"
+            },
+            {
+                "function": "I2S_WS",
+                "count": 1,
+                "description": "I2S word select (left/right clock)"
+            }
+        ],
+        "unique_pins_needed": [
+            {
+                "function": "I2S_DATA",
+                "count": 1,
+                "description": "I2S data line (unique per device/direction)"
+            }
+        ]
+    },
+    "interface_id": "I2S_BUS",
+    "interface_type": "I2S_BUS",
+    "timing": {
+        "hitCount": 1
+    },
+    "software": {
+        "init_function": "i2s_bus_0_init",
+        "act_function": "i2s_bus_0_act"
+    },
+    "bus_config": {
+        "sample_rate": "44100",
+        "bits_per_sample": 16
+    },
+    "unique_device_pins": {
+        "data_1": 6,
+        "data_2": 26,
+        "data_3": 25
+    },
+    "hardware": {
+        "esp32_specific": {
+            "i2s_port": 0,
+            "dma_buffer_count": 8,
+            "dma_buffer_length": 1024
+        }
+    },
+    "notes": "I2S bus 0 on ESP32. Shared pins (BCLK, WS) can be used by multiple devices. Data pins are unique per device.",
+    "type": "INTERFACE_BUS"
 }

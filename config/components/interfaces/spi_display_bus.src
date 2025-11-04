@@ -12,7 +12,7 @@
 
 static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
-spi_display_pinset_t cur_spi_pin;
+spi_display_pinset_t cur_spi_display_pin;
 
 static const char *TAG_spi_display_bus = "spi_display_bus";
 
@@ -47,6 +47,8 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
 }
 
 esp_err_t spi_display_bus_init(void) {
+    ESP_LOGI(TAG_spi_display_bus, "=== SPI_DISPLAY_BUS_INIT STARTED ===");
+
     // Locate the first available slot for a display device
     size_t slot = 0;
     while (slot < SPI_DISPLAY_SLOT_COUNT && spi_display_slots[slot].cs != -1) {
@@ -75,6 +77,7 @@ esp_err_t spi_display_bus_init(void) {
         };
 
         const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
+        ESP_LOGI(TAG_spi_display_bus, "SPI bus initialize result: %s", esp_err_to_name(ret));
         if (ret != ESP_OK) {
             ESP_LOGE(TAG_spi_display_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
             return ret;
@@ -113,7 +116,7 @@ void spi_display_bus_act(void) {
 
     if (spi_display_slots[0].cs == -1) {
         slot = 0;
-        cur_spi_pin = spi_display_pinset_t();
+        cur_spi_display_pin = spi_display_pinset_t();
         return;
     }
 
@@ -122,7 +125,7 @@ void spi_display_bus_act(void) {
         slot = 0;
     }
 
-    cur_spi_pin = spi_display_slots[static_cast<size_t>(slot)];
+    cur_spi_display_pin = spi_display_slots[static_cast<size_t>(slot)];
 
     ++slot;
     if (static_cast<size_t>(slot) >= SPI_DISPLAY_SLOT_COUNT ||

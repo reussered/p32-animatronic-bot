@@ -1,0 +1,5 @@
+// Auto-generated header for knee_flexion_servo
+#include <esp_err.h>
+
+esp_err_t knee_flexion_servo_init(void);
+void knee_flexion_servo_act(void);

@@ -1,0 +1,110 @@
+{
+    "relative_filename": "config/components/system/esp32c3_hand_controller.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "esp32c3_hand_controller",
+    "subsystem": "TORSO",
+    "description": "ESP32-C3 hand controller demonstrating GPIO expansion using existing SPI/I2S components",
+    "physical_position": {
+        "coordinate_system": "skull_3d",
+        "reference_point": "wrist_center_left",
+        "position": {
+            "x": "0.0 INCH",
+            "y": "0.0 INCH",
+            "z": "0.0 INCH"
+        }
+    },
+    "controller_specifications": {
+        "microcontroller": "ESP32-C3-MINI-1",
+        "total_gpio_pins": "22",
+        "usable_gpio_pins": "18_AFTER_RESERVED",
+        "reserved_pins": [
+            "BOOT",
+            "RESET",
+            "FLASH",
+            "USB_PROGRAMMING"
+        ]
+    },
+    "gpio_allocation_strategy": {
+        "spi_expansion_for_servos": {
+            "interface_component": "config/components/interfaces/spi_bus.json",
+            "device_component": "config/components/interfaces/spi_device_1.json",
+            "expander_chip": "PCA9685_16_CHANNEL_PWM",
+            "gpio_pins_used": {
+                "spi_mosi": "GPIO_6",
+                "spi_miso": "GPIO_7",
+                "spi_sclk": "GPIO_8",
+                "pca9685_cs": "GPIO_9"
+            },
+            "total_gpio_cost": "4_PINS",
+            "servo_capacity": "16_FINGER_SERVOS"
+        },
+        "i2c_expansion_for_sensors": {
+            "interface_component": "config/components/interfaces/i2c_bus_0.json",
+            "gpio_pins_used": {
+                "i2c_sda": "GPIO_4",
+                "i2c_scl": "GPIO_5"
+            },
+            "total_gpio_cost": "2_PINS",
+            "sensor_capacity": "UP_TO_127_I2C_DEVICES"
+        },
+        "bluetooth_mesh_communication": {
+            "interface_component": "config/components/interfaces/ble_mesh_network.json",
+            "gpio_pins_used": "NONE_INTERNAL_RADIO",
+            "total_gpio_cost": "0_PINS",
+            "communication_capacity": "FULL_MESH_NETWORKING"
+        },
+        "remaining_gpio_budget": {
+            "total_available": "18_PINS",
+            "used_by_expansion": "6_PINS_SPI_I2C",
+            "remaining_direct": "12_PINS",
+            "uses": [
+                "STATUS_LEDS",
+                "DIRECT_SENSORS",
+                "EMERGENCY_HARDWIRED"
+            ]
+        }
+    },
+    "components": {
+        "reused_spi_architecture": {
+            "spi_bus_config": "EXACT_SAME_AS_DISPLAY_CONTROLLERS",
+            "device_pattern": "SAME_CS_PIN_CONCEPT_AS_SPI_DEVICES",
+            "driver_reuse": "IDENTICAL_SPI_COMMUNICATION_CODE"
+        },
+        "reused_i2c_architecture": {
+            "i2c_bus_config": "SAME_AS_SENSOR_CONFIGURATIONS",
+            "addressing": "STANDARD_I2C_DEVICE_ADDRESSES",
+            "driver_reuse": "EXISTING_I2C_SENSOR_DRIVERS"
+        }
+    },
+    "finger_servo_mapping": {
+        "servo_control_method": "SPI_TO_PCA9685_EXPANSION",
+        "total_servos": "10_FINGER_SERVOS_2_DOF_EACH",
+        "expansion_efficiency": "10_SERVOS_USING_4_GPIO_PINS",
+        "vs_direct_pwm": "WOULD_NEED_10_GPIO_PINS_IMPOSSIBLE"
+    },
+    "practical_advantages": {
+        "gpio_conservation": {
+            "without_expansion": "MAX_5_SERVOS_DIRECT_PWM",
+            "with_spi_expansion": "16_SERVOS_VIA_PCA9685",
+            "gpio_efficiency": "4X_IMPROVEMENT"
+        },
+        "sensor_expansion": {
+            "without_i2c": "LIMITED_TO_ANALOG_PINS",
+            "with_i2c_bus": "127_ADDRESSABLE_SENSORS",
+            "practically_unlimited": "SENSORS_NOT_GPIO_LIMITED"
+        },
+        "architecture_consistency": {
+            "same_spi_patterns": "REUSE_EXISTING_SPI_DEVICE_CONFIGS",
+            "same_i2c_patterns": "REUSE_EXISTING_I2C_BUS_CONFIGS",
+            "proven_reliability": "BATTLE_TESTED_COMPONENT_ARCHITECTURE"
+        }
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "position": {
+        "y": "0.0 INCH",
+        "z": "0.0 INCH",
+        "x": "0.0 INCH"
+    },
+    "type": "POSITIONED_SUBSYSTEM_CONTROLLER"
+}

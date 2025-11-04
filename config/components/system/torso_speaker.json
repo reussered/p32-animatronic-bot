@@ -1,0 +1,23 @@
+{
+    "position": {
+        "units": "INCH",
+        "x": "0.0 INCH",
+        "coordinate_system": "skull_3d",
+        "z": "0.0 INCH",
+        "reference_point": "nose_center",
+        "y": "0.0 INCH"
+    },
+    "name": "torso_speaker",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "components": [
+        "config/hardware/servo_sg90_micro.json"
+    ],
+    "software": {
+        "act_function": "torso_speaker_act",
+        "init_function": "torso_speaker_init",
+        "hitCount": 10
+    },
+    "relative_filename": "config/components/system/torso_speaker.json",
+    "type": "POSITIONED_COMPONENT"
+}

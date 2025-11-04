@@ -1,7 +1,6 @@
 {
     "relative_filename": "config/components/interfaces/gpio_pair_vibration_sensor.json",
     "version": "1.0.0",
-    "component_type": "INTERFACE_BUS",
     "hardware_type": "BUS_INTERFACE",
     "interface_type": "GPIO_PAIR",
     "author": "config/author.json",
@@ -45,5 +44,6 @@
             "motion_detectors"
         ],
         "protocol": "GPIO"
-    }
+    },
+    "type": "INTERFACE_BUS"
 }

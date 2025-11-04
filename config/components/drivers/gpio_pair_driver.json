@@ -1,69 +1,69 @@
 {
-    "relative_filename":  "config/components/drivers/gpio_pair_driver.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "gpio_pair_driver",
-    "component_type":  "GENERIC_DRIVER",
-    "hardware_type":  "BUS_DRIVER",
-    "interface_type":  "GPIO_PAIR",
-    "description":  "Generic GPIO pair driver for ESP32 supporting trigger/echo pairs commonly used for ultrasonic sensors",
-    "created":  "2025-10-29",
-    "driver_capabilities":  {
-                                "pair_types":  [
-                                                   "TRIGGER_ECHO_PAIR",
-                                                   "INPUT_OUTPUT_PAIR",
-                                                   "CLOCK_DATA_PAIR"
-                                               ],
-                                "max_pairs":  10,
-                                "interrupt_support":  true,
-                                "debouncing":  true,
-                                "pulse_measurement":  true,
-                                "frequency_measurement":  false
-                            },
-    "electrical_specs":  {
-                             "operating_voltage":  "3.3V",
-                             "output_current":  "40mA_PER_PIN",
-                             "input_voltage_range":  "0-3.3V",
-                             "pullup_resistors":  "INTERNAL_AVAILABLE",
-                             "pulldown_resistors":  "INTERNAL_AVAILABLE"
-                         },
-    "gpio_requirements":  {
-                              "trigger_pin":  "CONFIGURABLE_AT_RUNTIME",
-                              "echo_pin":  "CONFIGURABLE_AT_RUNTIME",
-                              "pin_constraints":  "ESP32_GPIO_PINS",
-                              "interrupt_capable":  true
-                          },
-    "software":  {
-                     "init_function":  "gpio_pair_driver_init",
-                     "act_function":  "gpio_pair_driver_act",
-                     "api_functions":  [
-                                           "gpio_pair_trigger_pulse(pair_id, duration_us)",
-                                           "gpio_pair_measure_pulse(pair_id)",
-                                           "gpio_pair_wait_for_echo(pair_id, timeout_us)",
-                                           "gpio_pair_set_interrupt(pair_id, mode)",
-                                           "gpio_pair_read_state(pair_id)",
-                                           "gpio_pair_write_state(pair_id, state)"
-                                       ]
-                 },
-    "configuration_options":  {
-                                  "default_trigger_duration":  "10us",
-                                  "default_timeout":  "100000us",
-                                  "interrupt_enabled":  true,
-                                  "debounce_delay":  "50ms",
-                                  "measurement_mode":  "PULSE_DURATION"
-                              },
-    "use_cases":  [
-                      "ultrasonic_distance_sensing",
-                      "proximity_detection",
-                      "pulse_width_measurement",
-                      "rotary_encoder_reading",
-                      "flow_meter_pulse_counting"
-                  ],
-    "compatibility":  {
-                          "esp32_s3":  "FULL",
-                          "esp32_c3":  "FULL",
-                          "esp32":  "FULL"
-                      },
-    "prototype_status":  "ready_for_implementation",
-    "tested":  false
+    "relative_filename": "config/components/drivers/gpio_pair_driver.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "gpio_pair_driver",
+    "hardware_type": "BUS_DRIVER",
+    "interface_type": "GPIO_PAIR",
+    "description": "Generic GPIO pair driver for ESP32 supporting trigger/echo pairs commonly used for ultrasonic sensors",
+    "created": "2025-10-29",
+    "driver_capabilities": {
+        "pair_types": [
+            "TRIGGER_ECHO_PAIR",
+            "INPUT_OUTPUT_PAIR",
+            "CLOCK_DATA_PAIR"
+        ],
+        "max_pairs": 10,
+        "interrupt_support": true,
+        "debouncing": true,
+        "pulse_measurement": true,
+        "frequency_measurement": false
+    },
+    "electrical_specs": {
+        "operating_voltage": "3.3V",
+        "output_current": "40mA_PER_PIN",
+        "input_voltage_range": "0-3.3V",
+        "pullup_resistors": "INTERNAL_AVAILABLE",
+        "pulldown_resistors": "INTERNAL_AVAILABLE"
+    },
+    "gpio_requirements": {
+        "trigger_pin": "CONFIGURABLE_AT_RUNTIME",
+        "echo_pin": "CONFIGURABLE_AT_RUNTIME",
+        "pin_constraints": "ESP32_GPIO_PINS",
+        "interrupt_capable": true
+    },
+    "software": {
+        "init_function": "gpio_pair_driver_init",
+        "act_function": "gpio_pair_driver_act",
+        "api_functions": [
+            "gpio_pair_trigger_pulse(pair_id, duration_us)",
+            "gpio_pair_measure_pulse(pair_id)",
+            "gpio_pair_wait_for_echo(pair_id, timeout_us)",
+            "gpio_pair_set_interrupt(pair_id, mode)",
+            "gpio_pair_read_state(pair_id)",
+            "gpio_pair_write_state(pair_id, state)"
+        ]
+    },
+    "configuration_options": {
+        "default_trigger_duration": "10us",
+        "default_timeout": "100000us",
+        "interrupt_enabled": true,
+        "debounce_delay": "50ms",
+        "measurement_mode": "PULSE_DURATION"
+    },
+    "use_cases": [
+        "ultrasonic_distance_sensing",
+        "proximity_detection",
+        "pulse_width_measurement",
+        "rotary_encoder_reading",
+        "flow_meter_pulse_counting"
+    ],
+    "compatibility": {
+        "esp32_s3": "FULL",
+        "esp32_c3": "FULL",
+        "esp32": "FULL"
+    },
+    "prototype_status": "ready_for_implementation",
+    "tested": false,
+    "type": "GENERIC_DRIVER"
 }

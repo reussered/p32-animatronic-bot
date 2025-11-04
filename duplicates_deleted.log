@@ -1,0 +1,1054 @@
+Duplicate JSON Files Log - 11/03/2025 11:58:34
+Duplicates for checksum: DCEC795A025DE6C9CC839612DEAA9CC4DF7F087A8B2A5C349514F8BEDBF2F680
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\flasher_args.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\flasher_args.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\flasher_args.json
+Duplicates for checksum: 7934B0EBD3C2643B221B784BF8C5AD209D92CDE7491E640A65FFE2138A34E8F2
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-.-d0094a50bb2071803777.json
+Duplicates for checksum: 1EE2032DB44208DA6E34D313CB5F62471A8A8C96EB06270912266DCBE305FBAA
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf-511c59a69e4f49aded3e.json
+Duplicates for checksum: 838E7BD4010D863C6A5ADC24DC1AAAE5E3EE03514128E82C672324E74A78C2B5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.app_trace-8c9e0f203a65d37af260.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.app_trace-8c9e0f203a65d37af260.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.app_trace-8c9e0f203a65d37af260.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.app_trace-8c9e0f203a65d37af260.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.app_trace-8c9e0f203a65d37af260.json
+Duplicates for checksum: FA60EA3CE0E7938AF4D734EEB0E5A870A9793C8B6B8F0898B1FF45A6A09591EF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.app_update-58d4c0b86fd551f32785.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.app_update-58d4c0b86fd551f32785.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.app_update-58d4c0b86fd551f32785.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.app_update-58d4c0b86fd551f32785.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.app_update-58d4c0b86fd551f32785.json
+Duplicates for checksum: 96FF6D3AB365D63C29644548FB46694AB2B00858C61F0701FC91B60ACE437ACC
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader-6d491af46e97d565234c.json
+Duplicates for checksum: C274EB3582E883ECE162AB59CA311F4205436DCC4B3023FFE00940CA3F5672F4
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.bootloader_support-953fb4f417d20900983c.json
+Duplicates for checksum: 0A99989A49FF240EA81D7B257155809C2864585598B66123ABC611133F4ABB4F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.bt-11bbeec111f19f5cd538.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bt-11bbeec111f19f5cd538.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bt-11bbeec111f19f5cd538.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.bt-11bbeec111f19f5cd538.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.bt-11bbeec111f19f5cd538.json
+Duplicates for checksum: 581C15FE64EFABCAE2DBBB705DE1F03B4B7671DB72D6525DFB06312A17CBF0D1
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.cmock-f342b1aae669048d5dd8.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.cmock-f342b1aae669048d5dd8.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.cmock-f342b1aae669048d5dd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.cmock-f342b1aae669048d5dd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.cmock-f342b1aae669048d5dd8.json
+Duplicates for checksum: BFD938057783FC1AAC1049AF9E0A5F70ED57D028010D6E85264E171D769CE20F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.console-d7dd296ee0d2b4342fb5.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.console-d7dd296ee0d2b4342fb5.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.console-d7dd296ee0d2b4342fb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.console-d7dd296ee0d2b4342fb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.console-d7dd296ee0d2b4342fb5.json
+Duplicates for checksum: CB9BF1950878157D4BBDE7A7AF138B270F4819B9CB0F8D28ED0F60D2A3B4FB50
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.cxx-2f75afead0b4a3edd235.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.cxx-2f75afead0b4a3edd235.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.cxx-2f75afead0b4a3edd235.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.cxx-2f75afead0b4a3edd235.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.cxx-2f75afead0b4a3edd235.json
+Duplicates for checksum: 7FEA627C934BF25A1654516502408396E457C5E7DE6C5CF740485C1726B5F486
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.driver-320229125d0456b8e81a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.driver-320229125d0456b8e81a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.driver-320229125d0456b8e81a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.driver-320229125d0456b8e81a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.driver-320229125d0456b8e81a.json
+Duplicates for checksum: 435EC856F46A42F77DCC9E6D440A5128141007B494A7752A0FD2E9D8E6C3D072
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.efuse-4480daab3e29017c6fcd.json
+Duplicates for checksum: 1907C2B24CC9D4AB92AE9E0932DE134FE97E923E80D578F128C32D2E37CF4E65
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp-tls-d3fa0c41c0a280f0b340.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp-tls-d3fa0c41c0a280f0b340.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp-tls-d3fa0c41c0a280f0b340.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp-tls-d3fa0c41c0a280f0b340.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp-tls-d3fa0c41c0a280f0b340.json
+Duplicates for checksum: 908BD9EB130F073B61B9AB0A8724AF0086933196D93E0F887731F7D60E2BC390
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.espcoredump-f8851934640edf5f0c74.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.espcoredump-f8851934640edf5f0c74.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.espcoredump-f8851934640edf5f0c74.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.espcoredump-f8851934640edf5f0c74.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.espcoredump-f8851934640edf5f0c74.json
+Duplicates for checksum: 5C0F56025B5A2B5D18C77736B754C7734B9F944E403E21EA5C28B92599A4FBBD
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esptool_py-adc4667bb8dbf85e0d87.json
+Duplicates for checksum: 80B4A1D39C7E82534435F4630BDEC201FF77EDF96936FB1E21BAEFE0822B0AC8
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_adc-b6394461d9b5bb96a94a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_adc-b6394461d9b5bb96a94a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_adc-b6394461d9b5bb96a94a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_adc-b6394461d9b5bb96a94a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_adc-b6394461d9b5bb96a94a.json
+Duplicates for checksum: 14B66C6434B2F282C9C565176662A51A2FBE4E79798D89E4A3A249B1DD13F3BC
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_app_format-c27d19eacbf874811d7f.json
+Duplicates for checksum: 586D0733C6E8AFB13A83E3F1E8072865227BCF4632606D367F0A24C1A4CBCB5B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_bootloader_format-1fa63f2f9998bbfdbdbe.json
+Duplicates for checksum: 8D4EADF74C9D048477B53730664F1B01DC39A143169FABC4C2BDC0C82CDAB98C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_coex-211b52eeba2d968016fd.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_coex-211b52eeba2d968016fd.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_coex-211b52eeba2d968016fd.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_coex-211b52eeba2d968016fd.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_coex-211b52eeba2d968016fd.json
+Duplicates for checksum: 8C346DD5C2A02EC3C359EE0EA61574992EFE63834BD38477C0517BE02BDB7C94
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_common-6175a3836508d56cf928.json
+Duplicates for checksum: A94B8CFD1A881DC78799D668DE2ECE8267ACE8F313037DEA77D47C258BFFC996
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ana_cmpr-02d65b0c671ccc71c437.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ana_cmpr-02d65b0c671ccc71c437.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ana_cmpr-02d65b0c671ccc71c437.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ana_cmpr-02d65b0c671ccc71c437.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ana_cmpr-02d65b0c671ccc71c437.json
+Duplicates for checksum: 6526FB9F0D8F1518BA1C905F8820701EC0319123FFB7596423C99790256FE80E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_bitscrambler-54efbd96574c62551845.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_bitscrambler-54efbd96574c62551845.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_bitscrambler-54efbd96574c62551845.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_bitscrambler-54efbd96574c62551845.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_bitscrambler-54efbd96574c62551845.json
+Duplicates for checksum: D35401CA1F8643840A36682556C53D837D971C41D572C107E6019FC45BBF3AF7
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_cam-217828796043093fcde2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_cam-217828796043093fcde2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_cam-217828796043093fcde2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_cam-217828796043093fcde2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_cam-217828796043093fcde2.json
+Duplicates for checksum: 3ABC6ECA9FD15319197F359FC11577F2319ADD11C09079DC763A557A651EA13C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_dac-3d84f2f2d7fe2bfeaf7c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_dac-3d84f2f2d7fe2bfeaf7c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_dac-3d84f2f2d7fe2bfeaf7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_dac-3d84f2f2d7fe2bfeaf7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_dac-3d84f2f2d7fe2bfeaf7c.json
+Duplicates for checksum: 496927E51C5077A0956973CDBB1AE2856DAF440811054C53D4D2DCB420A02084
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gpio-991277e883f4152d2a02.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gpio-991277e883f4152d2a02.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gpio-991277e883f4152d2a02.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gpio-991277e883f4152d2a02.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gpio-991277e883f4152d2a02.json
+Duplicates for checksum: 9311EA48509D609E709459ECA17A68F8B669CA34B83720548737400D605FDF4C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gptimer-66d5104647c844c87289.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gptimer-66d5104647c844c87289.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gptimer-66d5104647c844c87289.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gptimer-66d5104647c844c87289.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_gptimer-66d5104647c844c87289.json
+Duplicates for checksum: B06CECA738ABFBBC23B5BEACA0177A55C35F73FC628BF43DE119C9FFB5EE39A2
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2c-5092259ce6c0c87436a0.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2c-5092259ce6c0c87436a0.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2c-5092259ce6c0c87436a0.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2c-5092259ce6c0c87436a0.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2c-5092259ce6c0c87436a0.json
+Duplicates for checksum: 1F423D10F488A5AF24F4759C545DE5B254CFC1E8670E266C431CE7F25C2CAF25
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2s-95d85b50d7742a03ddd7.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2s-95d85b50d7742a03ddd7.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2s-95d85b50d7742a03ddd7.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2s-95d85b50d7742a03ddd7.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_i2s-95d85b50d7742a03ddd7.json
+Duplicates for checksum: 4ED6EECD5AEA9F9CA011AB724B32974BC7CCB8328394D2810E78EA896B0960CF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_isp-82e08a354ffa81a49300.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_isp-82e08a354ffa81a49300.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_isp-82e08a354ffa81a49300.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_isp-82e08a354ffa81a49300.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_isp-82e08a354ffa81a49300.json
+Duplicates for checksum: B5C14B76E824E74E3006CE19BD2037A4289EFDA93BCC0039ADF3E39FBF519805
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_jpeg-04917a67914059334488.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_jpeg-04917a67914059334488.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_jpeg-04917a67914059334488.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_jpeg-04917a67914059334488.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_jpeg-04917a67914059334488.json
+Duplicates for checksum: DAEAFA7DCB47A0C9A1C8C0F97769982046D1A3B7266A2081B50209B99E37A4B3
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ledc-5da0d6ea075fe890514c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ledc-5da0d6ea075fe890514c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ledc-5da0d6ea075fe890514c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ledc-5da0d6ea075fe890514c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ledc-5da0d6ea075fe890514c.json
+Duplicates for checksum: 3C29943902F28093919FB0CC9C3C47ED035BFAF99D080FD7BFB463E8C850B93A
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_mcpwm-34fccb2e6de65add48c9.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_mcpwm-34fccb2e6de65add48c9.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_mcpwm-34fccb2e6de65add48c9.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_mcpwm-34fccb2e6de65add48c9.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_mcpwm-34fccb2e6de65add48c9.json
+Duplicates for checksum: E8C9EC12682CF735EFC349B7947A69BD65315E43AF1E0E042429895FA49E64B5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_parlio-11b55e097cd661e5f945.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_parlio-11b55e097cd661e5f945.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_parlio-11b55e097cd661e5f945.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_parlio-11b55e097cd661e5f945.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_parlio-11b55e097cd661e5f945.json
+Duplicates for checksum: 42B01FA63924E7713931898A2558CDEBCA4992A7A7B635019263BDCEF4D23E5C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_pcnt-e5de1a4ddcae6130d4f0.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_pcnt-e5de1a4ddcae6130d4f0.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_pcnt-e5de1a4ddcae6130d4f0.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_pcnt-e5de1a4ddcae6130d4f0.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_pcnt-e5de1a4ddcae6130d4f0.json
+Duplicates for checksum: 96F23671213C06635C12D03186B6147E856E532527C1D6F8EF58989EA05A0586
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ppa-2a48b4ebf6639a961042.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ppa-2a48b4ebf6639a961042.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ppa-2a48b4ebf6639a961042.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ppa-2a48b4ebf6639a961042.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_ppa-2a48b4ebf6639a961042.json
+Duplicates for checksum: 0C19BC4EEDB01A5C7191B071B741CABC7B5B7A3F276A9745828F1A69C0D467DB
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_rmt-7c38ce4b393dc885eaea.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_rmt-7c38ce4b393dc885eaea.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_rmt-7c38ce4b393dc885eaea.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_rmt-7c38ce4b393dc885eaea.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_rmt-7c38ce4b393dc885eaea.json
+Duplicates for checksum: 33577A235D68AB630280DA4B85EABCACA39F2BD7E0F8387B1FD3C3FE1BF001FD
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdio-69fcafe87db0497ffc0b.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdio-69fcafe87db0497ffc0b.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdio-69fcafe87db0497ffc0b.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdio-69fcafe87db0497ffc0b.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdio-69fcafe87db0497ffc0b.json
+Duplicates for checksum: B3F038645A5906B3B8BF9CC71CB39E4C800EFF908FCB97867C2EC7CBC9DBCBD0
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdm-d050f044a753f030e911.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdm-d050f044a753f030e911.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdm-d050f044a753f030e911.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdm-d050f044a753f030e911.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdm-d050f044a753f030e911.json
+Duplicates for checksum: C5DB27C0DA1BEDD3B739F8E85E9B844A5E70DE917DA0C9D21691B9AC540D7D9F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdmmc-c60d192b6dd81f7e25d6.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdmmc-c60d192b6dd81f7e25d6.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdmmc-c60d192b6dd81f7e25d6.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdmmc-c60d192b6dd81f7e25d6.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdmmc-c60d192b6dd81f7e25d6.json
+Duplicates for checksum: 36D8CDD7F4E68C1BE8E327E6C2BE530B07A34E6D5D1A41A5DA9936F1C1748360
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdspi-757514f05cc8d5432d2b.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdspi-757514f05cc8d5432d2b.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdspi-757514f05cc8d5432d2b.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdspi-757514f05cc8d5432d2b.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_sdspi-757514f05cc8d5432d2b.json
+Duplicates for checksum: 6E4E2B2354A2AFA1FD3EFDABD8325EF37897A462B3505A0F922CA54B9DBAB921
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_spi-ccb34e09f957b922d5ea.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_spi-ccb34e09f957b922d5ea.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_spi-ccb34e09f957b922d5ea.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_spi-ccb34e09f957b922d5ea.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_spi-ccb34e09f957b922d5ea.json
+Duplicates for checksum: 211266E73C20B517859795E3A29648CDDBC8CC33023E6C881B00B1A9EF4A25CE
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_touch_sens-f4931841aa54bba3c573.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_touch_sens-f4931841aa54bba3c573.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_touch_sens-f4931841aa54bba3c573.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_touch_sens-f4931841aa54bba3c573.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_touch_sens-f4931841aa54bba3c573.json
+Duplicates for checksum: 65CAB24AFD90E73BDF6FA900F791EA6B755B54BD79ECDD30FD8C9D057E26516E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_tsens-4ebd01036290b6c3ba86.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_tsens-4ebd01036290b6c3ba86.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_tsens-4ebd01036290b6c3ba86.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_tsens-4ebd01036290b6c3ba86.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_tsens-4ebd01036290b6c3ba86.json
+Duplicates for checksum: 9EC2A7428C3E1B74E2CC0E70E88D1E585FC9CCC2A5F67352AEBABE9A97FB159C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_twai-68d7d2caf96d7c0aee60.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_twai-68d7d2caf96d7c0aee60.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_twai-68d7d2caf96d7c0aee60.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_twai-68d7d2caf96d7c0aee60.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_twai-68d7d2caf96d7c0aee60.json
+Duplicates for checksum: 05758AA5E12040B78D264750D185CDDB1D9331A930B29ED8E794833E5D4B4E00
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_uart-99e3d15a405374ea1549.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_uart-99e3d15a405374ea1549.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_uart-99e3d15a405374ea1549.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_uart-99e3d15a405374ea1549.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_uart-99e3d15a405374ea1549.json
+Duplicates for checksum: CAEC70B414A4992D4B20E5464AE672606E277A12649EE8877C3D530579367DE1
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_driver_usb_serial_jtag-dfa506b2cbada3a6c0d2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_usb_serial_jtag-dfa506b2cbada3a6c0d2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_usb_serial_jtag-dfa506b2cbada3a6c0d2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_driver_usb_serial_jtag-dfa506b2cbada3a6c0d2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_driver_usb_serial_jtag-dfa506b2cbada3a6c0d2.json
+Duplicates for checksum: 0E850303C3794B362670F3F0A0AD3C46868D3B191817133F94248CD35CF48F0B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_eth-b442074e54e3813a2207.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_eth-b442074e54e3813a2207.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_eth-b442074e54e3813a2207.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_eth-b442074e54e3813a2207.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_eth-b442074e54e3813a2207.json
+Duplicates for checksum: 063100093A4E98B58549F3B6E706AD2CA07874B8DDD0951A4C5FB613E1432D71
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_event-edf1c83c29ac5e7a0ea9.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_event-edf1c83c29ac5e7a0ea9.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_event-edf1c83c29ac5e7a0ea9.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_event-edf1c83c29ac5e7a0ea9.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_event-edf1c83c29ac5e7a0ea9.json
+Duplicates for checksum: 8EF4E510C5884359DA94EF3051B9B31976F5E08843C1444DF71EDC12FABD34C2
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_gdbstub-e2ed00eea7c0f2deec58.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_gdbstub-e2ed00eea7c0f2deec58.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_gdbstub-e2ed00eea7c0f2deec58.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_gdbstub-e2ed00eea7c0f2deec58.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_gdbstub-e2ed00eea7c0f2deec58.json
+Duplicates for checksum: 773116A72E746D7396AB3571ED1A382A9D962DDF0699308C693B35ED8D79B012
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_hid-f3794b0507cc40373fc2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hid-f3794b0507cc40373fc2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hid-f3794b0507cc40373fc2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hid-f3794b0507cc40373fc2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hid-f3794b0507cc40373fc2.json
+Duplicates for checksum: 5CC864B0E808C8331F52A288A0C2FFB0EE8C5769AE789AD709DE1123FAA5DA62
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_https_ota-9ae3755fe950025a5999.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_https_ota-9ae3755fe950025a5999.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_https_ota-9ae3755fe950025a5999.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_https_ota-9ae3755fe950025a5999.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_https_ota-9ae3755fe950025a5999.json
+Duplicates for checksum: EDEB46230A3C5149405D604D61C4E001D072D02B5547936B6C16204A77A3206B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_https_server-10abc9cf7129d3d0f9e1.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_https_server-10abc9cf7129d3d0f9e1.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_https_server-10abc9cf7129d3d0f9e1.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_https_server-10abc9cf7129d3d0f9e1.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_https_server-10abc9cf7129d3d0f9e1.json
+Duplicates for checksum: 9F90CBC23EBEB13F1A8BF4B5BBA08D85373CB0B97F3E9AAC3F923E8DFBB95C7D
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_http_client-fca38416d363ceb199b1.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_http_client-fca38416d363ceb199b1.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_http_client-fca38416d363ceb199b1.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_http_client-fca38416d363ceb199b1.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_http_client-fca38416d363ceb199b1.json
+Duplicates for checksum: FDA84F99A94993F550E340BDEB3D300A23C4B50FFAB1140E8CA17C13657606A1
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_http_server-80039c333cfb244ed8fb.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_http_server-80039c333cfb244ed8fb.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_http_server-80039c333cfb244ed8fb.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_http_server-80039c333cfb244ed8fb.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_http_server-80039c333cfb244ed8fb.json
+Duplicates for checksum: 28D45E4E92920220FAC118EAF517E7D6112AFB400D0A08466D4211AD4D84F677
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support-afb25c754fd04fe0f5db.json
+Duplicates for checksum: 709442476D1CFB2818ECD4B53A818A62003295BD7CED74273D9DE6A14899F40E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.lowpower-f2bfce63cffb7c03091c.json
+Duplicates for checksum: 81538E8708CF9F4CDFC2729F7C4078CD065049622C16F73833ECEAF7450EA04D
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.mspi_timing_tuning.port.esp32s3-e0d9cba6604cdd7b80d7.json
+Duplicates for checksum: 4EBFF39D51C5B9677349ADCEF349EB3E27B6CD9BBA61F1C74D436FFA3BC254A6
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_hw_support.port.esp32s3-e603f06735a6c1ff9a7c.json
+Duplicates for checksum: 46F440BABFF5BAC30F0BD3B53E26C41EDED1691B465F920B552F1DB34E26B3A5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_lcd-4f25f636904c5d56c062.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_lcd-4f25f636904c5d56c062.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_lcd-4f25f636904c5d56c062.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_lcd-4f25f636904c5d56c062.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_lcd-4f25f636904c5d56c062.json
+Duplicates for checksum: 0A0D3858129A9509A825BE24D252993EAD081C123465711FDCD3B5A2FD758299
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_local_ctrl-908ffefe92caf2432cd8.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_local_ctrl-908ffefe92caf2432cd8.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_local_ctrl-908ffefe92caf2432cd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_local_ctrl-908ffefe92caf2432cd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_local_ctrl-908ffefe92caf2432cd8.json
+Duplicates for checksum: 9154822D86B6D9C7E013F3CC2872976074CCC94EBD973E68BA0B2BC06C9D7FBF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_mm-fe02072e6c91347833d2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_mm-fe02072e6c91347833d2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_mm-fe02072e6c91347833d2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_mm-fe02072e6c91347833d2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_mm-fe02072e6c91347833d2.json
+Duplicates for checksum: 7673B57FB70460FECD3825349B4C7D79F9B10F8AC259FCC1595BCD82EA4048A8
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_netif-05f48c2d2b44839d5875.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_netif-05f48c2d2b44839d5875.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_netif-05f48c2d2b44839d5875.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_netif-05f48c2d2b44839d5875.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_netif-05f48c2d2b44839d5875.json
+Duplicates for checksum: 6593C1488E84FFB2E062C5804F39FF51C38917206DEF6F92A4F715B6078B2961
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_netif_stack-92986e38d0dc3fb528cf.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_netif_stack-92986e38d0dc3fb528cf.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_netif_stack-92986e38d0dc3fb528cf.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_netif_stack-92986e38d0dc3fb528cf.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_netif_stack-92986e38d0dc3fb528cf.json
+Duplicates for checksum: 41BB33A4FC318DC19503C8EA95A5B4DA5F5122FC87943DE0776AA3793B70F263
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_partition-8ea9c8e0a4f9f7a94201.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_partition-8ea9c8e0a4f9f7a94201.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_partition-8ea9c8e0a4f9f7a94201.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_partition-8ea9c8e0a4f9f7a94201.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_partition-8ea9c8e0a4f9f7a94201.json
+Duplicates for checksum: C8B75DF9273D328E8F2348F32784FC5E29EDE59C99E74608462E617F653BFD3C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_phy-78c4e143c6f9378a8d7a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_phy-78c4e143c6f9378a8d7a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_phy-78c4e143c6f9378a8d7a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_phy-78c4e143c6f9378a8d7a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_phy-78c4e143c6f9378a8d7a.json
+Duplicates for checksum: 6276EC9EDB36E94667866E46C3E00D50F1DA42A8FE170D41446089BCCCC32941
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_pm-0d251140e3ed1c4ce398.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_pm-0d251140e3ed1c4ce398.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_pm-0d251140e3ed1c4ce398.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_pm-0d251140e3ed1c4ce398.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_pm-0d251140e3ed1c4ce398.json
+Duplicates for checksum: 9BBBCEFCF5D6B0814DF4AFA6C1F6776ED205563F269FDD4784461D6BF632EE2E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_psram-79c00d43b05a3efd5dfd.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_psram-79c00d43b05a3efd5dfd.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_psram-79c00d43b05a3efd5dfd.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_psram-79c00d43b05a3efd5dfd.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_psram-79c00d43b05a3efd5dfd.json
+Duplicates for checksum: C5A86D658255F205B1ED1E513A599420B15D69B0943D96A39493EF2A00943B9B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_ringbuf-577fd29a3f811263fcdb.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_ringbuf-577fd29a3f811263fcdb.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_ringbuf-577fd29a3f811263fcdb.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_ringbuf-577fd29a3f811263fcdb.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_ringbuf-577fd29a3f811263fcdb.json
+Duplicates for checksum: A482A5143C957DF85E46AC91087B663AD9E5F796F71FD68C2CAB71F473E528C4
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_rom-d35dcdef7b1f2e6d8d82.json
+Duplicates for checksum: 35BFC35E7A3095DB3BF85D00B546FD7AC62D0277C11E1634A15288ABB09336FF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_security-cb8d6edde1498c7b99cb.json
+Duplicates for checksum: F6E541F82680ADD0A7390BF0ED1C44E7A1285E369F6FB1A0BE13C431F60E927E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.esp_system-2d8b4ce44ae6cd893e1c.json
+Duplicates for checksum: FD3F5A150B9CFA99066049CE0BB8E7BFE0CD6D3FE0824583A73BA3575C0E508B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_system.port-b808be73a26419d854b7.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system.port-b808be73a26419d854b7.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system.port-b808be73a26419d854b7.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system.port-b808be73a26419d854b7.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system.port-b808be73a26419d854b7.json
+Duplicates for checksum: DF85D12134469AC1E86C26464D8E7DC846F0AEADDBAE3B1A0A3AB89562C5F279
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_system.port.soc.esp32s3-f3f9d7d01bbe20369e7f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system.port.soc.esp32s3-f3f9d7d01bbe20369e7f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system.port.soc.esp32s3-f3f9d7d01bbe20369e7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_system.port.soc.esp32s3-f3f9d7d01bbe20369e7f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_system.port.soc.esp32s3-f3f9d7d01bbe20369e7f.json
+Duplicates for checksum: 190E7E7492111B631D61B382090AD0F79BAF444DF3153536CF7226CF7A414DA1
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_timer-5fc2a91293ae33ae925d.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_timer-5fc2a91293ae33ae925d.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_timer-5fc2a91293ae33ae925d.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_timer-5fc2a91293ae33ae925d.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_timer-5fc2a91293ae33ae925d.json
+Duplicates for checksum: D8175E4BA2103A546159975DAC0CDC2961886322E0C453603C13E3B93859CFCE
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_vfs_console-7b6c1ddac4e4119ff2b8.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_vfs_console-7b6c1ddac4e4119ff2b8.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_vfs_console-7b6c1ddac4e4119ff2b8.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_vfs_console-7b6c1ddac4e4119ff2b8.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_vfs_console-7b6c1ddac4e4119ff2b8.json
+Duplicates for checksum: BBFC73CA7323A34C2824A00ADED8551B38B7C3498F857D25BF68BEC11F964420
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.esp_wifi-5865dcc0d689edb860c8.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_wifi-5865dcc0d689edb860c8.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_wifi-5865dcc0d689edb860c8.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.esp_wifi-5865dcc0d689edb860c8.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.esp_wifi-5865dcc0d689edb860c8.json
+Duplicates for checksum: 2AC803A42449DE14E0DE6551415E022B9E873465E6EE625FCB56A29D2BA8230C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.fatfs-2a3eec51e9bc12a6667a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.fatfs-2a3eec51e9bc12a6667a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.fatfs-2a3eec51e9bc12a6667a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.fatfs-2a3eec51e9bc12a6667a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.fatfs-2a3eec51e9bc12a6667a.json
+Duplicates for checksum: 65FD90673A41EC552A56A9B6F9EFF51BA080296EC1F412DFD61703BAE08E8FCF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.freertos-fa2d16168bed569af28f.json
+Duplicates for checksum: 15DA74BB252F4437A74C2372755A05BD9332A4E3291B19713A093C695481EF6C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.hal-0da292723ecebb2aefb5.json
+Duplicates for checksum: C934B5039D77AAD58D628D590FEC65AA78E641B96F737E74920C56C156063D4F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.heap-c1c7c747deb7e3e73758.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.heap-c1c7c747deb7e3e73758.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.heap-c1c7c747deb7e3e73758.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.heap-c1c7c747deb7e3e73758.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.heap-c1c7c747deb7e3e73758.json
+Duplicates for checksum: C2D5E692D8C0FFC591D38E820EE160C6D5C00060F84C987CC6134AA7ECDFC258
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.http_parser-3e38058bdf3c8c53828b.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.http_parser-3e38058bdf3c8c53828b.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.http_parser-3e38058bdf3c8c53828b.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.http_parser-3e38058bdf3c8c53828b.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.http_parser-3e38058bdf3c8c53828b.json
+Duplicates for checksum: C1A5AEA9CF8CFC6525A486BBF32EEE2D1D2A3F87B22B5171F0FB93155CA834FF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.idf_test-ef00b8833d70bc073605.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.idf_test-ef00b8833d70bc073605.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.idf_test-ef00b8833d70bc073605.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.idf_test-ef00b8833d70bc073605.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.idf_test-ef00b8833d70bc073605.json
+Duplicates for checksum: 14437C6C332219596C0E3084A33998A5A817115739A95BD3BCC6FD3F3518ACD8
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.ieee802154-745792b30c6adad323d5.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.ieee802154-745792b30c6adad323d5.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.ieee802154-745792b30c6adad323d5.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.ieee802154-745792b30c6adad323d5.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.ieee802154-745792b30c6adad323d5.json
+Duplicates for checksum: 28A8CA0B54CF254A82C62ED966671B8F69FD33CCD657FFAB8770AC3C3B7927AE
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.json-6b34b333a364223169ac.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.json-6b34b333a364223169ac.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.json-6b34b333a364223169ac.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.json-6b34b333a364223169ac.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.json-6b34b333a364223169ac.json
+Duplicates for checksum: BAF710F981FEF7715783717738F99B009830FAA09BF5DC4F9CDBCBD8C0C6DE04
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.log-d5f7f732424a46b354a2.json
+Duplicates for checksum: 2BC47A6BFA20E086FA19058D3585AA254B76685A9C475F87D8D88E990A9EE8A9
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.lwip-d2d3f930c5aae664cf6a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.lwip-d2d3f930c5aae664cf6a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.lwip-d2d3f930c5aae664cf6a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.lwip-d2d3f930c5aae664cf6a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.lwip-d2d3f930c5aae664cf6a.json
+Duplicates for checksum: 74EEB27AE47F83DF132E266E0B7421FB5743D9C0FA07567D817A1FDF4BA50BE8
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls-38c1a81a655f7e6d46d3.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls-38c1a81a655f7e6d46d3.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls-38c1a81a655f7e6d46d3.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls-38c1a81a655f7e6d46d3.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls-38c1a81a655f7e6d46d3.json
+Duplicates for checksum: 6A31B9F5ED6920ED6D14A8EA1D1E0361D7C59FFFEB0C525C758ADB17C97F2D0B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls-6260a80878e6b3a2946f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls-6260a80878e6b3a2946f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls-6260a80878e6b3a2946f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls-6260a80878e6b3a2946f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls-6260a80878e6b3a2946f.json
+Duplicates for checksum: F8448157C53635EDCC60D40841F6A8B02F7D153B1D081869551CEE511B13A873
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty-ea8d192d6ef427250867.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty-ea8d192d6ef427250867.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty-ea8d192d6ef427250867.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty-ea8d192d6ef427250867.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty-ea8d192d6ef427250867.json
+Duplicates for checksum: 3BEAD76221E77039422CD848CBBA7308B5237292F7E1C0C77074591DEAD0FF16
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.everest-c56a67c0965e2bb52d33.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.everest-c56a67c0965e2bb52d33.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.everest-c56a67c0965e2bb52d33.json
+Duplicates for checksum: 1BA1F9EAD56D95A0A77C19CF3D34C58DAE61B27E55C5B63A169EF879AF3BD0AF
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.p256-m-bee7076b34ae6b5d24f2.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.p256-m-bee7076b34ae6b5d24f2.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.3rdparty.p256-m-bee7076b34ae6b5d24f2.json
+Duplicates for checksum: 093750300521C620683B8B21033B806C31344CCE799F801AD2641F02FB482F8E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.include-51466d54c30e7eb8e0f7.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.include-51466d54c30e7eb8e0f7.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.include-51466d54c30e7eb8e0f7.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.include-51466d54c30e7eb8e0f7.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.include-51466d54c30e7eb8e0f7.json
+Duplicates for checksum: 7FD2E49353525AC62C25F41ED6F81A151FC4D2240F63460D5EE51DC6B6D6A746
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.library-f09328f9c5db4f819b2a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.library-f09328f9c5db4f819b2a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.library-f09328f9c5db4f819b2a.json
+Duplicates for checksum: 040183735C330EB4DCFB8723FF7AAF739A89DECCEA7C11C544ED9D154EFD8494
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.pkgconfig-1b36895fc02cac2d3092.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.pkgconfig-1b36895fc02cac2d3092.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.pkgconfig-1b36895fc02cac2d3092.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.pkgconfig-1b36895fc02cac2d3092.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mbedtls.mbedtls.pkgconfig-1b36895fc02cac2d3092.json
+Duplicates for checksum: D2A344E8963D22DDDB48CFFCD6AA1F9765A74A71BF969F7FB755E25DDBA016C8
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.mqtt-73a4f4b09487e004300f.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mqtt-73a4f4b09487e004300f.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mqtt-73a4f4b09487e004300f.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.mqtt-73a4f4b09487e004300f.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.mqtt-73a4f4b09487e004300f.json
+Duplicates for checksum: 9C514C51BAF08A8E1198BC0C6B7C9CD96EFD6678A68A6F9BD8CEDCFC5C0CDAFC
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.newlib-1338c96c20ce036e2306.json
+Duplicates for checksum: 5D7ECEC86E884479B989BD99B397284E658C6B22979EC0A4E7FD1A893FE7C0B4
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.newlib.src.port-dfb19610dfd0d61c82d4.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.newlib.src.port-dfb19610dfd0d61c82d4.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.newlib.src.port-dfb19610dfd0d61c82d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.newlib.src.port-dfb19610dfd0d61c82d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.newlib.src.port-dfb19610dfd0d61c82d4.json
+Duplicates for checksum: 5CC3C32D2E2D0B3F5A6BC84DE06D07B3BB17F2970691697AC2C87743F5B79BB1
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.nvs_flash-4087550c072efd921ca0.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.nvs_flash-4087550c072efd921ca0.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.nvs_flash-4087550c072efd921ca0.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.nvs_flash-4087550c072efd921ca0.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.nvs_flash-4087550c072efd921ca0.json
+Duplicates for checksum: 7A7AF3BA2AC58C4A1FD902DE8B27A32B7A6231CD1B07828D3EAFBA275D806801
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.nvs_sec_provider-5edc7f3e4e600f84d0ae.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.nvs_sec_provider-5edc7f3e4e600f84d0ae.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.nvs_sec_provider-5edc7f3e4e600f84d0ae.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.nvs_sec_provider-5edc7f3e4e600f84d0ae.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.nvs_sec_provider-5edc7f3e4e600f84d0ae.json
+Duplicates for checksum: 4D571B073EF3D4BCA30D5E26BD63343ED11AB6E38BDEFF714FF9D08A90CCFBBE
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.openthread-0699bf7f371511a260dc.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.openthread-0699bf7f371511a260dc.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.openthread-0699bf7f371511a260dc.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.openthread-0699bf7f371511a260dc.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.openthread-0699bf7f371511a260dc.json
+Duplicates for checksum: AFE5FB7B0CBB53FB96309C79A47A5791D8155383B7372ECB22F2D4C0C64C0356
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.partition_table-b0ab3908b274e58210d4.json
+Duplicates for checksum: D870F6398BE373927B67D3D4B2AD925BACE5386081C402534DC8F93DB90D1917
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.perfmon-836fc3d3f4126c63b4ca.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.perfmon-836fc3d3f4126c63b4ca.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.perfmon-836fc3d3f4126c63b4ca.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.perfmon-836fc3d3f4126c63b4ca.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.perfmon-836fc3d3f4126c63b4ca.json
+Duplicates for checksum: 11A7BA0907C1A03FE998D862379F7F2801A0624D4441E95BB6934AF77A9BFF98
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.protobuf-c-64f1300585e6350bbca0.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.protobuf-c-64f1300585e6350bbca0.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.protobuf-c-64f1300585e6350bbca0.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.protobuf-c-64f1300585e6350bbca0.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.protobuf-c-64f1300585e6350bbca0.json
+Duplicates for checksum: 48F983A449C831DE4A245B648FBF86015EE80EEEA70963C498D0F22E3467D80E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.protocomm-eb349fcc2b14ce7bc196.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.protocomm-eb349fcc2b14ce7bc196.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.protocomm-eb349fcc2b14ce7bc196.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.protocomm-eb349fcc2b14ce7bc196.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.protocomm-eb349fcc2b14ce7bc196.json
+Duplicates for checksum: D6791B92E30341419C660341FE2461EE9D41BBEF46171BE786D43D0D72D4A0A6
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.pthread-61f302d558734129bbd8.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.pthread-61f302d558734129bbd8.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.pthread-61f302d558734129bbd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.pthread-61f302d558734129bbd8.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.pthread-61f302d558734129bbd8.json
+Duplicates for checksum: 7E875B5BBD65B6A2C43ABC3EE90B9D6DCF1CE6FD81DE76391F5D686BD3A605A9
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.rt-ad20230b5734f3329d0b.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.rt-ad20230b5734f3329d0b.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.rt-ad20230b5734f3329d0b.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.rt-ad20230b5734f3329d0b.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.rt-ad20230b5734f3329d0b.json
+Duplicates for checksum: C2DDB185B3B57D0C3C354A4769B53E6CC618984C901ED1B5CB39968894BF48A5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.sdmmc-c843648161387e2106ea.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.sdmmc-c843648161387e2106ea.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.sdmmc-c843648161387e2106ea.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.sdmmc-c843648161387e2106ea.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.sdmmc-c843648161387e2106ea.json
+Duplicates for checksum: B8E4F7231230428FFCF83772F92A86D1E7E25B308FE4C1B2FB7CEA5B6A3FE540
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.soc-dafc56239b2888f54253.json
+Duplicates for checksum: 84009DE38F291B6383F2635474898C17882B64A733B0BD709026CAEA2F0CF643
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.spiffs-4a56b43be5bc81be493c.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.spiffs-4a56b43be5bc81be493c.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.spiffs-4a56b43be5bc81be493c.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.spiffs-4a56b43be5bc81be493c.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.spiffs-4a56b43be5bc81be493c.json
+Duplicates for checksum: E90B3FC996526747D92894550F4E4EBCE9093E59146B6EA5C8FE309FA4BB1C28
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.spi_flash-d972a250e7bad2c6b1b9.json
+Duplicates for checksum: F17D04E21E94EE95B0292AA5B26A42117E4994599CE7628C601DBE946EABD9F4
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.src-c23e0bc8c53af43ca0ef.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.src-c23e0bc8c53af43ca0ef.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.src-c23e0bc8c53af43ca0ef.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.src-c23e0bc8c53af43ca0ef.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.src-c23e0bc8c53af43ca0ef.json
+Duplicates for checksum: 633DD17DF8E32D4BA16FA51192939B81EF1FD32B664D4DBEAB86674888564C9E
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.tcp_transport-a4d6a7d4875c50ec9e2a.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.tcp_transport-a4d6a7d4875c50ec9e2a.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.tcp_transport-a4d6a7d4875c50ec9e2a.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.tcp_transport-a4d6a7d4875c50ec9e2a.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.tcp_transport-a4d6a7d4875c50ec9e2a.json
+Duplicates for checksum: 075B7E8CABEC382A2FCAE91BDA577DECCA2C3EC0FF053533B8587A19C0409307
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.touch_element-e205bbf65d110eddb6d3.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.touch_element-e205bbf65d110eddb6d3.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.touch_element-e205bbf65d110eddb6d3.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.touch_element-e205bbf65d110eddb6d3.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.touch_element-e205bbf65d110eddb6d3.json
+Duplicates for checksum: 74816E0ABEE091F733095685BBF5127B5B6318ECC68F143609371BB98B25ABF9
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.ulp-f85a2c755b2482b290f4.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.ulp-f85a2c755b2482b290f4.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.ulp-f85a2c755b2482b290f4.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.ulp-f85a2c755b2482b290f4.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.ulp-f85a2c755b2482b290f4.json
+Duplicates for checksum: 40763233FDDD240977FA5442CD209D8A62C5F9F8E6EE17DFDC005110E9F3ECC5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.unity-78c88de01a5b27944de0.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.unity-78c88de01a5b27944de0.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.unity-78c88de01a5b27944de0.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.unity-78c88de01a5b27944de0.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.unity-78c88de01a5b27944de0.json
+Duplicates for checksum: B0200358DE988CA5B8BD2D3FD736A151950430023432A738BE3BCDD25B724157
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.usb-e583f55e3259f47e7372.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.usb-e583f55e3259f47e7372.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.usb-e583f55e3259f47e7372.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.usb-e583f55e3259f47e7372.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.usb-e583f55e3259f47e7372.json
+Duplicates for checksum: F72598A1002D6CFEE902EE61C9C744C0DCA3E4500F592D7AD2DF8A5A05901B04
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.vfs-194869529cdc3d15cb4b.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.vfs-194869529cdc3d15cb4b.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.vfs-194869529cdc3d15cb4b.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.vfs-194869529cdc3d15cb4b.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.vfs-194869529cdc3d15cb4b.json
+Duplicates for checksum: A76BE5068C27F1D5D74A5D0C7AE5A3603EB38B395A77831D6EAB52FB0552E8F0
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.wear_levelling-b08ee837ad2e7cce70db.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wear_levelling-b08ee837ad2e7cce70db.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wear_levelling-b08ee837ad2e7cce70db.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wear_levelling-b08ee837ad2e7cce70db.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wear_levelling-b08ee837ad2e7cce70db.json
+Duplicates for checksum: 2D21CE0AD33248D9D89E56EAC5F7C7E55B8DD501363B85D29EBA432EF4D3D70F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.wifi_provisioning-282467da9136d0951268.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wifi_provisioning-282467da9136d0951268.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wifi_provisioning-282467da9136d0951268.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wifi_provisioning-282467da9136d0951268.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wifi_provisioning-282467da9136d0951268.json
+Duplicates for checksum: 76EBA3EB5100F7EBA7237C1EFDC45054785A21D1B2AF5C98002508FF89F0316C
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.wpa_supplicant-05bdb7b07c7229304137.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wpa_supplicant-05bdb7b07c7229304137.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wpa_supplicant-05bdb7b07c7229304137.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.wpa_supplicant-05bdb7b07c7229304137.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.wpa_supplicant-05bdb7b07c7229304137.json
+Duplicates for checksum: 5D019E72D9021481FF4B06DB9A6702137B99F468F21729908FD41208704EFCB3
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.xtensa-069c78bc69e974b4541d.json
+Duplicates for checksum: EE09A5E09892A976404C42FE0E157899B5F0EBAB244DC8BB05925D7CAAE54A3B
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\directory-esp-idf.__pio_env-2f1fd902cc091262b806.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.__pio_env-2f1fd902cc091262b806.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.__pio_env-2f1fd902cc091262b806.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\directory-esp-idf.__pio_env-2f1fd902cc091262b806.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\directory-esp-idf.__pio_env-2f1fd902cc091262b806.json
+Duplicates for checksum: 84EC774F968E8E784D8B63CBA51A15E5F0774A920A256B15390BCE97E682E24F
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\target-custom_bundle-fdc9910402be364b6950.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\target-custom_bundle-fdc9910402be364b6950.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\target-custom_bundle-fdc9910402be364b6950.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\target-custom_bundle-fdc9910402be364b6950.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\target-custom_bundle-fdc9910402be364b6950.json
+Duplicates for checksum: FA061F842CDAE142F4406BCFBE49F84B957AC6F5456775684AE248C237EE4230
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\target-efuse-custom-table-721b42b9c64ee2c521fe.json
+Duplicates for checksum: 0963610748D847300AC647A110C64E96FB30B6C68624F92A2F5301728B611F6D
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.main-5bff74fee2a922659b4e.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.main-5bff74fee2a922659b4e.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.main-5bff74fee2a922659b4e.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.main-5bff74fee2a922659b4e.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.main-5bff74fee2a922659b4e.json
+Duplicates for checksum: 3967E21ECFE01BE85C0D0C1A58105D17E170EDBE9C04533AA61A155F39B90AF5
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\.cmake\api\v1\reply\directory-esp-idf.micro-ecc-b84f620316c40fe9b692.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.micro-ecc-b84f620316c40fe9b692.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.micro-ecc-b84f620316c40fe9b692.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\.cmake\api\v1\reply\directory-esp-idf.micro-ecc-b84f620316c40fe9b692.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\.cmake\api\v1\reply\directory-esp-idf.micro-ecc-b84f620316c40fe9b692.json
+Duplicates for checksum: 72235A5F1B56E3746381BC6E30C981202499882D9846096332BEE40573EFD97D
+F:\GitHub\p32-animatronic-bot\.pio\build\test_head\bootloader\config\kconfig_menus.json
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\config\kconfig_menus.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\config\kconfig_menus.json
+Deleting: F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\config\kconfig_menus.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\config\kconfig_menus.json
+Duplicates for checksum: 39309B243592657A63225549850C911D48EDEB7659179E8BE69605C923861585
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\dev_all_s3\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_head\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_head_only\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_torso\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_arm\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_arm_advanced\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_leg\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\legacy_single_chip\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_arm\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_arm_advanced\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_leg\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_bot\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_dual_eyes\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32c3\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32s3\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_head\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_subsystem\ArduinoJson\library.json
+F:\GitHub\p32-animatronic-bot\components\components\.pio\libdeps\goblin_head\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_head\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_head_only\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\goblin_torso\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_arm\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_arm_advanced\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\left_leg\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\legacy_single_chip\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_arm\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_arm_advanced\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\right_leg\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_bot\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_dual_eyes\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32c3\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_esp32s3\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_head\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\.pio\libdeps\test_subsystem\ArduinoJson\library.json
+Deleting: F:\GitHub\p32-animatronic-bot\components\components\.pio\libdeps\goblin_head\ArduinoJson\library.json
+Duplicates for checksum: 72E79300B7BD5BF2A80E253675A5BB86B7A75C9458AEFE706FD441E224BCA9F9
+F:\GitHub\p32-animatronic-bot\.vs\ProjectSettings.json
+F:\GitHub\p32-animatronic-bot\components\core\memory\.vs\ProjectSettings.json
+Deleting: F:\GitHub\p32-animatronic-bot\components\core\memory\.vs\ProjectSettings.json
+Duplicates for checksum: F8315C8ACE58425AECA40C1C17B3BE8D50894C55F561CD7E36266DA5D5EA3D72
+F:\GitHub\p32-animatronic-bot\.vs\VSWorkspaceState.json
+F:\GitHub\p32-animatronic-bot\components\core\memory\.vs\VSWorkspaceState.json
+Deleting: F:\GitHub\p32-animatronic-bot\components\core\memory\.vs\VSWorkspaceState.json
+Duplicates for checksum: 274B1C3295BE8DA13F78C43C0B2C0D588B59363B9053B6276D0B1615F92919F9
+F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-32-07-0204.json
+F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-32-10-0267.json
+F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-32-24-0388.json
+F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-33-48-0061.json
+Deleting: F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-32-10-0267.json
+Deleting: F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-32-24-0388.json
+Deleting: F:\GitHub\p32-animatronic-bot\build\.cmake\api\v1\reply\error-2025-10-27T03-33-48-0061.json
+Duplicates for checksum: E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_authority_markings.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_battle_scars.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_bloodshot_eyes.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_bone_ornaments.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_camouflage_skin.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_clever_eyes.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_left.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_left_example.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_right.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enhanced_ears.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enlarged_eyes.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enlarged_fangs.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_forehead.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_fury_veins.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_horn_crown.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_jaw.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_left_cheek.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_left_eyebrow.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_malnutrition_features.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_mystical_glow.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_nimble_fingers.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_nose_sensor.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_pale_skin.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_prank_accessories.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_rage_foam.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_right_cheek.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_right_eyebrow.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ritual_scars.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_scent_sensor.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_self_wounds.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_shadow_sensors.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_sly_grin.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_spirit_runes.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_status_leds_example.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_tribal_tattoos.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_trophy_scars.json
+F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_war_paint.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_battle_scars.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_bloodshot_eyes.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_bone_ornaments.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_camouflage_skin.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_clever_eyes.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_left.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_left_example.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ear_right.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enhanced_ears.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enlarged_eyes.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_enlarged_fangs.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_forehead.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_fury_veins.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_horn_crown.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_jaw.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_left_cheek.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_left_eyebrow.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_malnutrition_features.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_mystical_glow.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_nimble_fingers.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_nose_sensor.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_pale_skin.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_prank_accessories.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_rage_foam.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_right_cheek.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_right_eyebrow.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_ritual_scars.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_scent_sensor.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_self_wounds.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_shadow_sensors.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_sly_grin.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_spirit_runes.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_status_leds_example.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_tribal_tattoos.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_trophy_scars.json
+Deleting: F:\GitHub\p32-animatronic-bot\config\bots\bot_families\goblins\head\goblin_war_paint.json
+Duplicates for checksum: D05061143FAB215E88B5D7601D8974951E4F0CB099B1207EF1EC135B34B06F2D
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\bootloader\config\sdkconfig.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\config\sdkconfig.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\bootloader\config\sdkconfig.json
+Duplicates for checksum: 9CFB08DF5B2CDEECE44AC9F139F3D795BC7E7A887365634AC7326A1AF7C95D5B
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\config\kconfig_menus.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\config\kconfig_menus.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\config\kconfig_menus.json
+Duplicates for checksum: BA0AB2BF83591ED66231470919CBDB6D2E2164F64032C3943704CA92E456AFD7
+F:\GitHub\p32-animatronic-bot\lib\.pio\build\esp32-s3-devkitc-1\config\sdkconfig.json
+F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\config\sdkconfig.json
+Deleting: F:\GitHub\p32-animatronic-bot\test\distance_eye_test\.pio\build\torso\config\sdkconfig.json
+Task completed successfully.

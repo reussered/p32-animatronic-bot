@@ -1,0 +1,5 @@
+// Auto-generated header for cat_right_eye
+#include <esp_err.h>
+
+esp_err_t cat_right_eye_init(void);
+void cat_right_eye_act(void);

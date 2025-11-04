@@ -1,0 +1,5 @@
+// Auto-generated header for bear_arctic_fur
+#include <esp_err.h>
+
+esp_err_t bear_arctic_fur_init(void);
+void bear_arctic_fur_act(void);

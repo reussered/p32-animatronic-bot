@@ -1,53 +1,53 @@
 {
-    "relative_filename":  "config/components/system/esp_now_mesh.json",
-    "version":  "3.0.0",
-    "author":  "config/author.json",
-    "name":  "esp_now_mesh",
-    "component_type":  "SYSTEM_LEVEL",
-    "description":  "ESP-NOW mesh network master coordinator - manages all slave node communications",
-    "created":  "2025-10-15",
-    "timing":  {
-                   "hitCount":  10,
-                   "description":  "Mesh network maintenance every 1 second"
-               },
-    "system_requirements":  {
-                                "min_controller":  "ESP32_S3",
-                                "required_features":  [
-                                                          "ESP_NOW",
-                                                          "WIFI_COEXIST"
-                                                      ],
-                                "memory_footprint_kb":  "64",
-                                "cpu_usage_percent":  "5-15"
-                            },
-    "mesh_configuration":  {
-                               "role":  "MASTER",
-                               "max_slaves":  12,
-                               "channel":  6,
-                               "auto_pairing":  true,
-                               "encryption":  true,
-                               "retry_attempts":  3,
-                               "timeout_ms":  5000
-                           },
-    "slave_node_management":  {
-                                  "heartbeat_interval_ms":  1000,
-                                  "health_check_interval_ms":  5000,
-                                  "auto_reconnect":  true,
-                                  "failover_strategy":  "DEGRADE_GRACEFULLY"
-                              },
-    "communication_protocols":  {
-                                    "command_routing":  "PRIORITY_QUEUE",
-                                    "data_aggregation":  "ROUND_ROBIN",
-                                    "broadcast_mode":  "ALL_NODES",
-                                    "unicast_mode":  "SPECIFIC_NODE"
-                                },
-    "responsibilities":  [
-                             "Initialize ESP-NOW protocol",
-                             "Discover and pair slave nodes",
-                             "Route commands to appropriate subsystems",
-                             "Aggregate telemetry from all nodes",
-                             "Monitor node health and connectivity",
-                             "Handle node failures and reconnections",
-                             "Synchronize timing across mesh network",
-                             "Manage encryption keys"
-                         ]
+    "relative_filename": "config/components/system/esp_now_mesh.json",
+    "version": "3.0.0",
+    "author": "config/author.json",
+    "name": "esp_now_mesh",
+    "description": "ESP-NOW mesh network master coordinator - manages all slave node communications",
+    "created": "2025-10-15",
+    "timing": {
+        "hitCount": 10,
+        "description": "Mesh network maintenance every 1 second"
+    },
+    "system_requirements": {
+        "min_controller": "ESP32_S3",
+        "required_features": [
+            "ESP_NOW",
+            "WIFI_COEXIST"
+        ],
+        "memory_footprint_kb": "64",
+        "cpu_usage_percent": "5-15"
+    },
+    "mesh_configuration": {
+        "role": "MASTER",
+        "max_slaves": 12,
+        "channel": 6,
+        "auto_pairing": true,
+        "encryption": true,
+        "retry_attempts": 3,
+        "timeout_ms": 5000
+    },
+    "slave_node_management": {
+        "heartbeat_interval_ms": 1000,
+        "health_check_interval_ms": 5000,
+        "auto_reconnect": true,
+        "failover_strategy": "DEGRADE_GRACEFULLY"
+    },
+    "communication_protocols": {
+        "command_routing": "PRIORITY_QUEUE",
+        "data_aggregation": "ROUND_ROBIN",
+        "broadcast_mode": "ALL_NODES",
+        "unicast_mode": "SPECIFIC_NODE"
+    },
+    "responsibilities": [
+        "Initialize ESP-NOW protocol",
+        "Discover and pair slave nodes",
+        "Route commands to appropriate subsystems",
+        "Aggregate telemetry from all nodes",
+        "Monitor node health and connectivity",
+        "Handle node failures and reconnections",
+        "Synchronize timing across mesh network",
+        "Manage encryption keys"
+    ],
+    "type": "SYSTEM_LEVEL"
 }

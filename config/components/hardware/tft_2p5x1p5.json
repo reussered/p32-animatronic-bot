@@ -1,112 +1,111 @@
 {
-    "relative_filename":  "config/components/hardware/tft_2p5x1p5.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "hardware_type":  "TFT_2P5X1P5_DISPLAY",
-    "name":  "tft_2p5x1p5",
-    "usage_categories":  {
-                             "large_creature_eyes":  "portrait_320x240",
-                             "medium_creature_mouths":  "landscape_240x320",
-                             "large_creature_mouths":  "landscape_240x320",
-                             "versatility":  "dual_orientation_capable"
-                         },
-    "physical_specifications":  {
-                                    "screen_width":  "2.5 INCH",
-                                    "screen_height":  "1.5 INCH",
-                                    "aspect_ratio":  "5:3",
-                                    "diagonal":  "2.9 INCH",
-                                    "resolution":  "320x240",
-                                    "pixel_density":  "128 PPI",
-                                    "thickness":  "0.15 INCH",
-                                    "weight":  "25 GRAMS"
-                                },
-    "electrical_specifications":  {
-                                      "supply_voltage":  "3.3V",
-                                      "logic_voltage":  "3.3V",
-                                      "interface":  "SPI",
-                                      "current_consumption_ma":  "200",
-                                      "backlight_current_ma":  "150",
-                                      "spi_clock_max_mhz":  "40"
-                                  },
-    "integrated_controller":  {
-                                  "processor":  "ESP32_WROOM_32",
-                                  "flash_memory":  "4MB",
-                                  "ram":  "520KB",
-                                  "wifi_enabled":  true,
-                                  "bluetooth_enabled":  true,
-                                  "gpio_pins":  30,
-                                  "adc_channels":  18,
-                                  "pwm_channels":  16,
-                                  "programming_interface":  "USB_SERIAL",
-                                  "standalone_capable":  true
-                              },
-    "display_specifications":  {
-                                   "driver_ic":  "ILI9341",
-                                   "color_depth":  "18_BIT_RGB666",
-                                   "colors_supported":  "262144",
-                                   "refresh_rate_hz":  "60",
-                                   "viewing_angle":  "140_DEGREES",
-                                   "brightness":  "300_CD_M2"
-                               },
-    "pin_assignments":  {
-                            "vcc":  "3V3_POWER",
-                            "gnd":  "GROUND",
-                            "cs":  "CHIP_SELECT_PIN",
-                            "reset":  "RESET_PIN",
-                            "dc":  "DATA_COMMAND_PIN",
-                            "mosi":  "SPI_MOSI",
-                            "sck":  "SPI_CLOCK",
-                            "led":  "BACKLIGHT_PWM_PIN",
-                            "miso":  "SPI_MISO_OPTIONAL"
-                        },
-    "mechanical_mount_points":  {
-                                    "mount_hole_1":  {
-                                                         "x":  "-1.15 INCH",
-                                                         "y":  "+0.65 INCH"
-                                                     },
-                                    "mount_hole_2":  {
-                                                         "x":  "+1.15 INCH",
-                                                         "y":  "+0.65 INCH"
-                                                     },
-                                    "mount_hole_3":  {
-                                                         "x":  "+1.15 INCH",
-                                                         "y":  "-0.65 INCH"
-                                                     },
-                                    "mount_hole_4":  {
-                                                         "x":  "-1.15 INCH",
-                                                         "y":  "-0.65 INCH"
-                                                     }
-                                },
-    "orientation_modes":  {
-                              "landscape":  {
-                                                "width":  "2.5 INCH",
-                                                "height":  "1.5 INCH",
-                                                "use_cases":  [
-                                                                  "large_creature_mouths",
-                                                                  "wide_expressions"
-                                                              ]
-                                            },
-                              "portrait":  {
-                                               "width":  "1.5 INCH",
-                                               "height":  "2.5 INCH",
-                                               "use_cases":  [
-                                                                 "cyclops_vertical_eye",
-                                                                 "tall_creature_features"
-                                                             ]
-                                           }
-                          },
-    "stl_reference":  "assets/shapes/stl/basic_mounts/tft_2p5x1p5_standard_mount.stl",
-    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/tft_2p5x1p5_mount_template.scad",
-    "usage_notes":  "Large TFT display for major creature features - eyes of largest creatures (cyclops vertical), mouths of most creatures",
-    "compatible_creatures":  [
-                                 "cyclops",
-                                 "dragon",
-                                 "giant",
-                                 "bear",
-                                 "large_goblins"
-                             ],
-    "estimated_cost_usd":  "15.50",
-    "software":  {
-
-                 }
+    "relative_filename": "config/components/hardware/tft_2p5x1p5.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "TFT_2P5X1P5_DISPLAY",
+    "name": "tft_2p5x1p5",
+    "usage_categories": {
+        "large_creature_eyes": "portrait_320x240",
+        "medium_creature_mouths": "landscape_240x320",
+        "large_creature_mouths": "landscape_240x320",
+        "versatility": "dual_orientation_capable"
+    },
+    "physical_specifications": {
+        "screen_width": "2.5 INCH",
+        "screen_height": "1.5 INCH",
+        "aspect_ratio": "5:3",
+        "diagonal": "2.9 INCH",
+        "resolution": "320x240",
+        "pixel_density": "128 PPI",
+        "thickness": "0.15 INCH",
+        "weight": "25 GRAMS"
+    },
+    "electrical_specifications": {
+        "supply_voltage": "3.3V",
+        "logic_voltage": "3.3V",
+        "interface": "SPI",
+        "current_consumption_ma": "200",
+        "backlight_current_ma": "150",
+        "spi_clock_max_mhz": "40"
+    },
+    "integrated_controller": {
+        "processor": "ESP32_WROOM_32",
+        "flash_memory": "4MB",
+        "ram": "520KB",
+        "wifi_enabled": true,
+        "bluetooth_enabled": true,
+        "gpio_pins": 30,
+        "adc_channels": 18,
+        "pwm_channels": 16,
+        "programming_interface": "USB_SERIAL",
+        "standalone_capable": true
+    },
+    "display_specifications": {
+        "driver_ic": "ILI9341",
+        "color_depth": "18_BIT_RGB666",
+        "colors_supported": "262144",
+        "refresh_rate_hz": "60",
+        "viewing_angle": "140_DEGREES",
+        "brightness": "300_CD_M2"
+    },
+    "pin_assignments": {
+        "vcc": "3V3_POWER",
+        "gnd": "GROUND",
+        "cs": "CHIP_SELECT_PIN",
+        "reset": "RESET_PIN",
+        "dc": "DATA_COMMAND_PIN",
+        "mosi": "SPI_MOSI",
+        "sck": "SPI_CLOCK",
+        "led": "BACKLIGHT_PWM_PIN",
+        "miso": "SPI_MISO_OPTIONAL"
+    },
+    "mechanical_mount_points": {
+        "mount_hole_1": {
+            "x": "-1.15 INCH",
+            "y": "+0.65 INCH"
+        },
+        "mount_hole_2": {
+            "x": "+1.15 INCH",
+            "y": "+0.65 INCH"
+        },
+        "mount_hole_3": {
+            "x": "+1.15 INCH",
+            "y": "-0.65 INCH"
+        },
+        "mount_hole_4": {
+            "x": "-1.15 INCH",
+            "y": "-0.65 INCH"
+        }
+    },
+    "orientation_modes": {
+        "landscape": {
+            "width": "2.5 INCH",
+            "height": "1.5 INCH",
+            "use_cases": [
+                "large_creature_mouths",
+                "wide_expressions"
+            ]
+        },
+        "portrait": {
+            "width": "1.5 INCH",
+            "height": "2.5 INCH",
+            "use_cases": [
+                "cyclops_vertical_eye",
+                "tall_creature_features"
+            ]
+        }
+    },
+    "stl_reference": "assets/shapes/stl/basic_mounts/tft_2p5x1p5_standard_mount.stl",
+    "scad_template": "assets/shapes/scad/templates/hardware_mounts/tft_2p5x1p5_mount_template.scad",
+    "usage_notes": "Large TFT display for major creature features - eyes of largest creatures (cyclops vertical), mouths of most creatures",
+    "compatible_creatures": [
+        "cyclops",
+        "dragon",
+        "giant",
+        "bear",
+        "large_goblins"
+    ],
+    "estimated_cost_usd": "15.50",
+    "software": {},
+    "type": "UNKNOWN"
 }

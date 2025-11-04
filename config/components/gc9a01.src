@@ -1,0 +1,20 @@
+// Auto-generated source for gc9a01
+#include "components/gc9a01.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "gc9a01";
+
+esp_err_t gc9a01_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void gc9a01_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

@@ -1,0 +1,16 @@
+// goblin_nose component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_goblin_nose = "goblin_nose";
+
+esp_err_t goblin_nose_init(void) {
+    ESP_LOGI(TAG_goblin_nose, "goblin_nose init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void goblin_nose_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_goblin_nose, "goblin_nose act");
+}

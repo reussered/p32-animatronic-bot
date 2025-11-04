@@ -1,0 +1,5 @@
+// Auto-generated header for territorial_scent_marking
+#include <esp_err.h>
+
+esp_err_t territorial_scent_marking_init(void);
+void territorial_scent_marking_act(void);

@@ -25,7 +25,7 @@ struct spi_display_pinset_t {
     }
 };
 
-extern spi_display_pinset_t cur_spi_pin;
+extern spi_display_pinset_t cur_spi_display_pin;
 
 esp_err_t spi_display_bus_init(void);
 void spi_display_bus_act(void);

@@ -1,33 +1,33 @@
 {
-    "relative_filename":  "config/components/system/power_monitor.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "power_monitor",
-    "component_type":  "SYSTEM_LEVEL",
-    "description":  "Power monitoring - battery voltage, current consumption, remaining capacity",
-    "created":  "2025-10-15",
-    "timing":  {
-                   "hitCount":  200,
-                   "description":  "Power check every 20 seconds"
-               },
-    "system_requirements":  {
-                                "min_controller":  "ESP32",
-                                "required_features":  [
-                                                          "ADC"
-                                                      ],
-                                "memory_footprint_kb":  "20",
-                                "cpu_usage_percent":  "1-2"
-                            },
-    "monitoring_config":  {
-                              "voltage_adc_pin":  36,
-                              "current_adc_pin":  39,
-                              "low_battery_threshold_mv":  3300,
-                              "critical_battery_threshold_mv":  3000
-                          },
-    "responsibilities":  [
-                             "Measure battery voltage via ADC",
-                             "Calculate remaining battery percentage",
-                             "Trigger low-power mode on low battery",
-                             "Report power status to telemetry"
-                         ]
+    "relative_filename": "config/components/system/power_monitor.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "power_monitor",
+    "description": "Power monitoring - battery voltage, current consumption, remaining capacity",
+    "created": "2025-10-15",
+    "timing": {
+        "hitCount": 200,
+        "description": "Power check every 20 seconds"
+    },
+    "system_requirements": {
+        "min_controller": "ESP32",
+        "required_features": [
+            "ADC"
+        ],
+        "memory_footprint_kb": "20",
+        "cpu_usage_percent": "1-2"
+    },
+    "monitoring_config": {
+        "voltage_adc_pin": 36,
+        "current_adc_pin": 39,
+        "low_battery_threshold_mv": 3300,
+        "critical_battery_threshold_mv": 3000
+    },
+    "responsibilities": [
+        "Measure battery voltage via ADC",
+        "Calculate remaining battery percentage",
+        "Trigger low-power mode on low battery",
+        "Report power status to telemetry"
+    ],
+    "type": "SYSTEM_LEVEL"
 }

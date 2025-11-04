@@ -1,0 +1,20 @@
+// Auto-generated source for main_battery_monitor
+#include "components/main_battery_monitor.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "main_battery_monitor";
+
+esp_err_t main_battery_monitor_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void main_battery_monitor_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

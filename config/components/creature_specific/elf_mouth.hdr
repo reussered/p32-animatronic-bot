@@ -1,0 +1,5 @@
+// Auto-generated header for elf_mouth
+#include <esp_err.h>
+
+esp_err_t elf_mouth_init(void);
+void elf_mouth_act(void);

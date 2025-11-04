@@ -1,69 +1,70 @@
 {
-    "relative_filename":  "config/bots/bot_families/orcs/ogre_brute.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "OGRE_BRUTE",
-    "bot_id":  "ogre_brute_v1",
-    "description":  "Massive ogre brute using unified proportional scaling for intimidating presence",
-    "scaling_system":  "config/components/scaling/unified_proportional_scaling.json",
-    "creature_variant":  "extra_large_ogre",
-    "horizontal_scale":  "1.8",
-    "vertical_scale":  "1.4",
-    "calculated_dimensions":  {
-                                  "total_height":  "98.0 INCHES",
-                                  "shoulder_width":  "32.4 INCHES",
-                                  "head_height":  "12.6 INCHES",
-                                  "leg_length":  "49.0 INCHES",
-                                  "character":  "MASSIVE_INTIMIDATING_PRESENCE"
-                              },
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "eye_spacing":  "6.5 INCH",
-    "components":  [
-                       "config/components/creature_specific/goblin_left_eye.json",
-                       "config/components/creature_specific/goblin_right_eye.json",
-                       "config/components/creature_specific/goblin_mouth.json",
-                       "config/components/creature_specific/goblin_speaker.json",
-                       "config/components/creature_specific/goblin_nose.json"
-                   ],
-    "servo_specifications":  {
-                                 "primary_servos":  "NEMA23_HEAVY_DUTY_SERVO_MOTORS",
-                                 "secondary_servos":  "DS3218_HIGH_TORQUE_SERVOS",
-                                 "stepper_motors":  "NEMA23_ULTRA_HIGH_TORQUE",
-                                 "power_system":  "LITHIUM_ION_14S6P_PACK"
-                             },
-    "mood_defaults":  {
-                          "FEAR":  5,
-                          "ANGER":  85,
-                          "IRRITATION":  70,
-                          "HAPPINESS":  5,
-                          "CONTENTMENT":  20,
-                          "HUNGER":  90,
-                          "CURIOSITY":  10,
-                          "AFFECTION":  5,
-                          "AGGRESSION":  95,
-                          "TERRITORIAL":  90,
-                          "DOMINANCE":  95
-                      },
-    "behavior_config":  {
-                            "movement_style":  "HEAVY_LUMBERING_POWERFUL",
-                            "personality":  "BRUTAL_AGGRESSIVE_TERRITORIAL",
-                            "specializations":  [
-                                                    "INTIMIDATION",
-                                                    "PHYSICAL_DOMINANCE",
-                                                    "DEFENSIVE_POSITIONING"
-                                                ],
-                            "voice_characteristics":  "DEEP_BOOMING_THREATENING"
-                        },
-    "ogre_capabilities":  {
-                              "intimidation_presence":  "MASSIVE_SIZE_OVERWHELMING_FORCE",
-                              "territorial_control":  "DOMINATE_PHYSICAL_SPACE",
-                              "crushing_power":  "INCREDIBLE_STRENGTH_DISPLAY"
-                          },
-    "structural_requirements":  {
-                                    "reinforcement":  "DOUBLE_ALUMINUM_EXTRUSION_FRAMEWORK",
-                                    "weight_distribution":  "ENHANCED_STABILITY_SYSTEMS",
-                                    "power_capacity":  "EXTENDED_OPERATION_HIGH_DRAW"
-                                },
-    "name":  "ogre_brute"
+    "relative_filename": "config/bots/bot_families/orcs/ogre_brute.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "OGRE_BRUTE",
+    "bot_id": "ogre_brute_v1",
+    "description": "Massive ogre brute using unified proportional scaling for intimidating presence",
+    "scaling_system": "config/components/scaling/unified_proportional_scaling.json",
+    "creature_variant": "extra_large_ogre",
+    "horizontal_scale": "1.8",
+    "vertical_scale": "1.4",
+    "calculated_dimensions": {
+        "total_height": "98.0 INCHES",
+        "shoulder_width": "32.4 INCHES",
+        "head_height": "12.6 INCHES",
+        "leg_length": "49.0 INCHES",
+        "character": "MASSIVE_INTIMIDATING_PRESENCE"
+    },
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "eye_spacing": "6.5 INCH",
+    "components": [
+        "config/components/creature_specific/goblin_left_eye.json",
+        "config/components/creature_specific/goblin_right_eye.json",
+        "config/components/creature_specific/goblin_mouth.json",
+        "config/components/creature_specific/goblin_speaker.json",
+        "config/components/creature_specific/goblin_nose.json"
+    ],
+    "servo_specifications": {
+        "primary_servos": "NEMA23_HEAVY_DUTY_SERVO_MOTORS",
+        "secondary_servos": "DS3218_HIGH_TORQUE_SERVOS",
+        "stepper_motors": "NEMA23_ULTRA_HIGH_TORQUE",
+        "power_system": "LITHIUM_ION_14S6P_PACK"
+    },
+    "mood_defaults": {
+        "FEAR": 5,
+        "ANGER": 85,
+        "IRRITATION": 70,
+        "HAPPINESS": 5,
+        "CONTENTMENT": 20,
+        "HUNGER": 90,
+        "CURIOSITY": 10,
+        "AFFECTION": 5,
+        "AGGRESSION": 95,
+        "TERRITORIAL": 90,
+        "DOMINANCE": 95
+    },
+    "behavior_config": {
+        "movement_style": "HEAVY_LUMBERING_POWERFUL",
+        "personality": "BRUTAL_AGGRESSIVE_TERRITORIAL",
+        "specializations": [
+            "INTIMIDATION",
+            "PHYSICAL_DOMINANCE",
+            "DEFENSIVE_POSITIONING"
+        ],
+        "voice_characteristics": "DEEP_BOOMING_THREATENING"
+    },
+    "ogre_capabilities": {
+        "intimidation_presence": "MASSIVE_SIZE_OVERWHELMING_FORCE",
+        "territorial_control": "DOMINATE_PHYSICAL_SPACE",
+        "crushing_power": "INCREDIBLE_STRENGTH_DISPLAY"
+    },
+    "structural_requirements": {
+        "reinforcement": "DOUBLE_ALUMINUM_EXTRUSION_FRAMEWORK",
+        "weight_distribution": "ENHANCED_STABILITY_SYSTEMS",
+        "power_capacity": "EXTENDED_OPERATION_HIGH_DRAW"
+    },
+    "name": "ogre_brute",
+    "type": "UNKNOWN"
 }

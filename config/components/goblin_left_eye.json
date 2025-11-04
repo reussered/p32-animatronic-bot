@@ -1,47 +1,47 @@
 {
-    "relative_filename":  "config/components/goblin_left_eye.json",
-    "version":  "3.0.0",
-    "author":  "config/author.json",
-    "name":  "goblin_left_eye",
-    "component_type":  "POSITIONED_DISPLAY",
-    "description":  "Left eye positioned display with goblin-specific visual processing",
-    "created":  "2025-10-22",
-    "components":  [
-                       "config/components/creature_specific/goblin_eye.json"
-                   ],
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "position":  {
-                     "x":  "-1.05 INCH",
-                     "y":  "+0.7 INCH",
-                     "z":  "-0.35 INCH"
-                 },
-    "orientation":  {
-                        "tilt":  "0 DEGREES",
-                        "rotation":  "0 DEGREES",
-                        "roll":  "0 DEGREES"
-                    },
-    "positioning_specific_config":  {
-                                        "eye_side":  "LEFT",
-                                        "spi_device":  "SPI_DEVICE_1",
-                                        "animation_buffer":  "left_eye_animation_buffer",
-                                        "frame_offset":  "0"
-                                    },
-    "function":  "primary_display_left",
-    "timing":  {
-                   "hitCount":  5,
-                   "description":  "Left eye animation frame update every 5 loops"
-               },
-    "software":  {
-                     "init_function":  "goblin_left_eye_init",
-                     "act_function":  "goblin_left_eye_act"
-                 },
-    "shape":  {
-                  "scad_file":  "assets/shapes/scad/positioned/goblin/goblin_left_eye_positioned.scad",
-                  "stl_file":  "assets/shapes/stl/positioned/goblin/goblin_left_eye_positioned.stl",
-                  "description":  "Left eye mount with spatial positioning for goblin skull"
-              },
-    "prototype_status":  "implemented",
-    "tested":  true,
-    "hardware_type":  "POSITIONED_COMPONENT"
+    "relative_filename": "config/components/goblin_left_eye.json",
+    "version": "3.0.0",
+    "author": "config/author.json",
+    "name": "goblin_left_eye",
+    "description": "Left eye positioned display with goblin-specific visual processing",
+    "created": "2025-10-22",
+    "components": [
+        "config/components/creature_specific/goblin_eye.json"
+    ],
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "-1.05 INCH",
+        "y": "+0.7 INCH",
+        "z": "-0.35 INCH"
+    },
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "positioning_specific_config": {
+        "eye_side": "LEFT",
+        "spi_device": "SPI_DEVICE_1",
+        "animation_buffer": "left_eye_animation_buffer",
+        "frame_offset": "0"
+    },
+    "function": "primary_display_left",
+    "timing": {
+        "hitCount": 5,
+        "description": "Left eye animation frame update every 5 loops"
+    },
+    "software": {
+        "init_function": "goblin_left_eye_init",
+        "act_function": "goblin_left_eye_act"
+    },
+    "shape": {
+        "scad_file": "assets/shapes/scad/positioned/goblin/goblin_left_eye_positioned.scad",
+        "stl_file": "assets/shapes/stl/positioned/goblin/goblin_left_eye_positioned.stl",
+        "description": "Left eye mount with spatial positioning for goblin skull"
+    },
+    "prototype_status": "implemented",
+    "tested": true,
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "DISPLAY_DRIVER"
 }

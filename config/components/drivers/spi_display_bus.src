@@ -13,7 +13,7 @@
 
 static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
-spi_display_pinset_t cur_spi_pin;
+spi_display_pinset_t cur_spi_display_pin;
 
 static const char *TAG_spi_display_bus = "spi_display_bus";
 
@@ -154,8 +154,8 @@ esp_err_t spi_display_bus_init(void) {
              spi_display_slots[device_count].bl,
              (void*)spi_display_slots[device_count].handle);
 
-    // Set cur_spi_pin to the device we just created so the next component can use it immediately
-    cur_spi_pin = spi_display_slots[device_count];
+    // Set cur_spi_display_pin to the device we just created so the next component can use it immediately
+    cur_spi_display_pin = spi_display_slots[device_count];
 
     device_count++;
     return ESP_OK;
@@ -179,7 +179,7 @@ void spi_display_bus_act(void)
     }
 
     // Set the current global pinset for other components to use
-    cur_spi_pin = spi_display_slots[device];
+    cur_spi_display_pin = spi_display_slots[device];
 
     // Move to the next device for the next call
     device++;

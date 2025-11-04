@@ -1,0 +1,5 @@
+// Auto-generated header for cat_whisker_sensors
+#include <esp_err.h>
+
+esp_err_t cat_whisker_sensors_init(void);
+void cat_whisker_sensors_act(void);

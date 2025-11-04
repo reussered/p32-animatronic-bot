@@ -1,0 +1,5 @@
+// Auto-generated header for conversation_ai_engine
+#include <esp_err.h>
+
+esp_err_t conversation_ai_engine_init(void);
+void conversation_ai_engine_act(void);

@@ -1,69 +1,70 @@
 {
-    "relative_filename":  "config/components/templates/hardware/displays/gc9a01_standard_mount.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "template_type":  "HARDWARE_TEMPLATE",
-    "hardware_id":  "GC9A01_240X240_SPI_DISPLAY",
-    "display_specifications":  {
-                                   "resolution":  "240x240",
-                                   "driver_ic":  "GC9A01A",
-                                   "interface":  "SPI",
-                                   "color_depth":  "16_BIT_RGB565",
-                                   "refresh_rate_hz":  "60",
-                                   "viewing_angle":  "170_DEGREES"
-                               },
-    "electrical_specifications":  {
-                                      "supply_voltage":  "3.3V",
-                                      "logic_voltage":  "3.3V",
-                                      "current_consumption_ma":  "100",
-                                      "spi_clock_max_mhz":  "80"
-                                  },
-    "physical_specifications":  {
-                                    "pcb_diameter":  "26.0 MM",
-                                    "pcb_thickness":  "1.6 MM",
-                                    "display_diameter":  "23.4 MM",
-                                    "mounting_holes":  "4X_M2_HOLES",
-                                    "connector_type":  "10_PIN_HEADER"
-                                },
-    "pin_assignments":  {
-                            "vcc":  "3V3_POWER",
-                            "gnd":  "GROUND",
-                            "sck":  "SPI_CLOCK",
-                            "sda":  "SPI_MOSI",
-                            "res":  "RESET_PIN",
-                            "dc":  "DATA_COMMAND_PIN",
-                            "cs":  "CHIP_SELECT_PIN",
-                            "bl":  "BACKLIGHT_PWM_PIN"
-                        },
-    "mechanical_mount_points":  {
-                                    "mount_hole_1":  {
-                                                         "x":  "-10.5 MM",
-                                                         "y":  "+10.5 MM"
-                                                     },
-                                    "mount_hole_2":  {
-                                                         "x":  "+10.5 MM",
-                                                         "y":  "+10.5 MM"
-                                                     },
-                                    "mount_hole_3":  {
-                                                         "x":  "+10.5 MM",
-                                                         "y":  "-10.5 MM"
-                                                     },
-                                    "mount_hole_4":  {
-                                                         "x":  "-10.5 MM",
-                                                         "y":  "-10.5 MM"
-                                                     }
-                                },
-    "stl_reference":  "assets/shapes/stl/basic_mounts/gc9a01_standard_mount.stl",
-    "scad_template":  "assets/shapes/scad/templates/hardware_mounts/gc9a01_mount_template.scad",
-    "usage_notes":  "Standard GC9A01 mount used by ALL creature eyes and mouths. Creature-specific shells reference this template.",
-    "compatible_creatures":  [
-                                 "goblin",
-                                 "bear",
-                                 "cat",
-                                 "cyclops",
-                                 "all_creatures"
-                             ],
-    "estimated_cost_usd":  "8.50",
-    "hardware_type":  "GENERIC_HARDWARE",
-    "name":  "GC9A01_STANDARD_MOUNT"
+    "relative_filename": "config/components/templates/hardware/displays/gc9a01_standard_mount.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "template_type": "HARDWARE_TEMPLATE",
+    "hardware_id": "GC9A01_240X240_SPI_DISPLAY",
+    "display_specifications": {
+        "resolution": "240x240",
+        "driver_ic": "GC9A01A",
+        "interface": "SPI",
+        "color_depth": "16_BIT_RGB565",
+        "refresh_rate_hz": "60",
+        "viewing_angle": "170_DEGREES"
+    },
+    "electrical_specifications": {
+        "supply_voltage": "3.3V",
+        "logic_voltage": "3.3V",
+        "current_consumption_ma": "100",
+        "spi_clock_max_mhz": "80"
+    },
+    "physical_specifications": {
+        "pcb_diameter": "26.0 MM",
+        "pcb_thickness": "1.6 MM",
+        "display_diameter": "23.4 MM",
+        "mounting_holes": "4X_M2_HOLES",
+        "connector_type": "10_PIN_HEADER"
+    },
+    "pin_assignments": {
+        "vcc": "3V3_POWER",
+        "gnd": "GROUND",
+        "sck": "SPI_CLOCK",
+        "sda": "SPI_MOSI",
+        "res": "RESET_PIN",
+        "dc": "DATA_COMMAND_PIN",
+        "cs": "CHIP_SELECT_PIN",
+        "bl": "BACKLIGHT_PWM_PIN"
+    },
+    "mechanical_mount_points": {
+        "mount_hole_1": {
+            "x": "-10.5 MM",
+            "y": "+10.5 MM"
+        },
+        "mount_hole_2": {
+            "x": "+10.5 MM",
+            "y": "+10.5 MM"
+        },
+        "mount_hole_3": {
+            "x": "+10.5 MM",
+            "y": "-10.5 MM"
+        },
+        "mount_hole_4": {
+            "x": "-10.5 MM",
+            "y": "-10.5 MM"
+        }
+    },
+    "stl_reference": "assets/shapes/stl/basic_mounts/gc9a01_standard_mount.stl",
+    "scad_template": "assets/shapes/scad/templates/hardware_mounts/gc9a01_mount_template.scad",
+    "usage_notes": "Standard GC9A01 mount used by ALL creature eyes and mouths. Creature-specific shells reference this template.",
+    "compatible_creatures": [
+        "goblin",
+        "bear",
+        "cat",
+        "cyclops",
+        "all_creatures"
+    ],
+    "estimated_cost_usd": "8.50",
+    "hardware_type": "GENERIC_HARDWARE",
+    "name": "gc9a01_standard_mount",
+    "type": "UNKNOWN"
 }

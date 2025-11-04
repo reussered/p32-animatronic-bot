@@ -1,71 +1,69 @@
 {
-    "relative_filename":  "config/components/hardware/ws2812_led_strip.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "component_type":  "LED_STRIP",
-    "hardware_id":  "WS2812_LED_STRIP",
-    "description":  "Programmable RGB LED strip for dynamic lighting effects",
-    "created":  "2025-10-12",
-    "physical_specifications":  {
-                                    "led_count":  30,
-                                    "pixel_pitch":  "16.7 MM",
-                                    "strip_length":  "500 MM",
-                                    "strip_width":  "10 MM",
-                                    "strip_thickness":  "3 MM",
-                                    "voltage":  "5V",
-                                    "current_per_led":  "60 MA",
-                                    "max_current":  "1.8 A",
-                                    "data_protocol":  "WS2812B"
-                                },
-    "electrical_requirements":  {
-                                    "power_supply_voltage":  "5V",
-                                    "data_voltage":  "3.3V",
-                                    "logic_compatibility":  "3.3V_TOLERANT",
-                                    "interface_type":  "SINGLE_WIRE_DATA",
-                                    "timing_critical":  true,
-                                    "requires_level_shifter":  false
-                                },
-    "gpio_requirements":  {
-                              "data_pin":  1,
-                              "power_pins":  2,
-                              "ground_pins":  1,
-                              "total_connections":  4
-                          },
-    "capabilities":  {
-                         "color_depth":  "24_BIT_RGB",
-                         "brightness_levels":  256,
-                         "refresh_rate_hz":  400,
-                         "addressable_pixels":  true,
-                         "effects_supported":  [
-                                                   "breathing",
-                                                   "rainbow_cycle",
-                                                   "color_chase",
-                                                   "fire_simulation",
-                                                   "mood_lighting",
-                                                   "strobe",
-                                                   "fade_transitions"
-                                               ]
-                     },
-    "use_cases":  [
-                      "mood_ambiance",
-                      "status_indicators",
-                      "reactive_lighting",
-                      "aesthetic_enhancement",
-                      "warning_displays",
-                      "synchronization_effects"
-                  ],
-    "family_suitability":  {
-                               "robot":  "EXCELLENT",
-                               "android":  "GOOD",
-                               "goblin":  "MODERATE",
-                               "vampire":  "GOOD",
-                               "zombie":  "POOR",
-                               "ghost":  "EXCELLENT",
-                               "dragon":  "EXCELLENT"
-                           },
-    "hardware_type":  "LED_STRIP",
-    "name":  "WS2812_LED_STRIP",
-    "software":  {
-
-                 }
+    "relative_filename": "config/components/hardware/ws2812_led_strip.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_id": "WS2812_LED_STRIP",
+    "description": "Programmable RGB LED strip for dynamic lighting effects",
+    "created": "2025-10-12",
+    "physical_specifications": {
+        "led_count": 30,
+        "pixel_pitch": "16.7 MM",
+        "strip_length": "500 MM",
+        "strip_width": "10 MM",
+        "strip_thickness": "3 MM",
+        "voltage": "5V",
+        "current_per_led": "60 MA",
+        "max_current": "1.8 A",
+        "data_protocol": "WS2812B"
+    },
+    "electrical_requirements": {
+        "power_supply_voltage": "5V",
+        "data_voltage": "3.3V",
+        "logic_compatibility": "3.3V_TOLERANT",
+        "interface_type": "SINGLE_WIRE_DATA",
+        "timing_critical": true,
+        "requires_level_shifter": false
+    },
+    "gpio_requirements": {
+        "data_pin": 1,
+        "power_pins": 2,
+        "ground_pins": 1,
+        "total_connections": 4
+    },
+    "capabilities": {
+        "color_depth": "24_BIT_RGB",
+        "brightness_levels": 256,
+        "refresh_rate_hz": 400,
+        "addressable_pixels": true,
+        "effects_supported": [
+            "breathing",
+            "rainbow_cycle",
+            "color_chase",
+            "fire_simulation",
+            "mood_lighting",
+            "strobe",
+            "fade_transitions"
+        ]
+    },
+    "use_cases": [
+        "mood_ambiance",
+        "status_indicators",
+        "reactive_lighting",
+        "aesthetic_enhancement",
+        "warning_displays",
+        "synchronization_effects"
+    ],
+    "family_suitability": {
+        "robot": "EXCELLENT",
+        "android": "GOOD",
+        "goblin": "MODERATE",
+        "vampire": "GOOD",
+        "zombie": "POOR",
+        "ghost": "EXCELLENT",
+        "dragon": "EXCELLENT"
+    },
+    "hardware_type": "LED_STRIP",
+    "name": "ws2812_led_strip",
+    "software": {},
+    "type": "LED_STRIP"
 }

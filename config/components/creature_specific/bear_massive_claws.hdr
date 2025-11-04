@@ -1,0 +1,5 @@
+// Auto-generated header for bear_massive_claws
+#include <esp_err.h>
+
+esp_err_t bear_massive_claws_init(void);
+void bear_massive_claws_act(void);

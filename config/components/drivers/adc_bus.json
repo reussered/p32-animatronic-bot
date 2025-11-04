@@ -1,43 +1,43 @@
 {
-    "relative_filename":  "config/components/drivers/adc_bus.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "adc_bus",
-    "hardware_type":  "BUS_INTERFACE",
-    "bus_type":  "ADC",
-    "bus_name":  "ADC1",
-    "description":  "ESP32 ADC bus interface for analog signal conversion",
-    "pin_requirements":  {
-                             "adc_pins_needed":  [
-                                                     {
-                                                         "function":  "ADC_INPUT",
-                                                         "count":  "up to 8",
-                                                         "description":  "ADC input channels (GPIO 1-10, 32-39)"
-                                                     }
-                                                 ]
-                         },
-    "component_type":  "INTERFACE_BUS",
-    "interface_id":  "ADC_BUS",
-    "interface_type":  "ADC_BUS",
-    "timing":  {
-                   "hitCount":  1
-               },
-    "software":  {
-                     "init_function":  "adc_bus_init",
-                     "act_function":  "adc_bus_act"
-                 },
-    "adc_config":  {
-                       "unit":  "ADC_UNIT_1",
-                       "resolution":  "12_BIT",
-                       "attenuation":  "11dB",
-                       "calibration":  "line_fitting"
-                   },
-    "hardware":  {
-                     "esp32_specific":  {
-                                            "adc_unit":  "ADC1",
-                                            "max_channels":  8,
-                                            "supported_pins":  "GPIO_1-10_32-39"
-                                        }
-                 },
-    "notes":  "ADC bus on ESP32-S3. Channels are assigned dynamically from adc_assignable array. Supports calibration for accurate voltage readings."
+    "relative_filename": "config/components/drivers/adc_bus.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "adc_bus",
+    "hardware_type": "BUS_INTERFACE",
+    "bus_type": "ADC",
+    "bus_name": "ADC1",
+    "description": "ESP32 ADC bus interface for analog signal conversion",
+    "pin_requirements": {
+        "adc_pins_needed": [
+            {
+                "function": "ADC_INPUT",
+                "count": "up to 8",
+                "description": "ADC input channels (GPIO 1-10, 32-39)"
+            }
+        ]
+    },
+    "interface_id": "ADC_BUS",
+    "interface_type": "ADC_BUS",
+    "timing": {
+        "hitCount": 1
+    },
+    "software": {
+        "init_function": "adc_bus_init",
+        "act_function": "adc_bus_act"
+    },
+    "adc_config": {
+        "unit": "ADC_UNIT_1",
+        "resolution": "12_BIT",
+        "attenuation": "11dB",
+        "calibration": "line_fitting"
+    },
+    "hardware": {
+        "esp32_specific": {
+            "adc_unit": "ADC1",
+            "max_channels": 8,
+            "supported_pins": "GPIO_1-10_32-39"
+        }
+    },
+    "notes": "ADC bus on ESP32-S3. Channels are assigned dynamically from adc_assignable array. Supports calibration for accurate voltage readings.",
+    "type": "INTERFACE_BUS"
 }

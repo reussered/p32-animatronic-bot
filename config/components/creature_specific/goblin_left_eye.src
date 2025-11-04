@@ -1,77 +1,55 @@
 // goblin_left_eye component implementation
-// Positioned component that manages the left eye display buffer
+// TEMPLATE-BASED "ALLOCATOR"
+// Allocates a display buffer based on the provided hardware type T.
 
 #include "esp_log.h"
 #include <cstdint>
 
-static const char *TAG_goblin_left_eye = "goblin_left_eye";
+// This file-scoped static pointer is the key to the new architecture.
+// It is templated on the hardware type 'T'. When the build script
+// generates the final C++ file, it will instantiate this variable
+// with a concrete type (e.g., gc9a01), making the buffer available
+// to any other component within the same compilation unit.
+template <typename T>
+static typename T::Pixel* display_buffer = nullptr;
 
-// Display buffer for left eye - now using Pixel class
-static Pixel* left_display_buffer = nullptr;
-static Pixel* left_current_frame_ptr = nullptr;
-static size_t left_frame_offset = 0;  // Offset in pixels
+template <typename T>
+esp_err_t goblin_left_eye_init()
+{
+    const char *TAG = "goblin_left_eye";
+    ESP_LOGI(TAG, "Initializing left eye display buffer (template-based)");
 
-/**
- * @brief Initialize left eye display buffer
- * Allocates framebuffer using Pixel class and Display Buffer Interface
- */
-esp_err_t goblin_left_eye_init(void) {
-    ESP_LOGI(TAG_goblin_left_eye, "Initializing left eye display buffer");
-    
-    // Allocate display buffer - array of Pixels
-    uint32_t display_size = getDisplaySize();
-    left_display_buffer = new Pixel[display_size];
-    
-    if (!left_display_buffer) {
-        ESP_LOGE(TAG_goblin_left_eye, "Failed to allocate left eye buffer");
+    // Calculate size from the hardware type T's static constants.
+    const int display_size = T::WIDTH * T::HEIGHT;
+
+    // Allocate the buffer using the nested Pixel type from T.
+    display_buffer<T> = new typename T::Pixel[display_size];
+
+    if (!display_buffer<T>)
+    {
+        ESP_LOGE(TAG, "Failed to allocate left eye buffer");
         return ESP_ERR_NO_MEM;
     }
-    
-    // Initialize frame pointer and offset
-    left_frame_offset = 0;
-    left_current_frame_ptr = left_display_buffer;
-    
-    // Initialize buffer with test pattern - red for left eye
-    Pixel red = Pixel::Red();
-    for (uint32_t i = 0; i < display_size; i++) {
-        left_display_buffer[i] = red;
+
+    // Initialize buffer to black.
+    for (int i = 0; i < display_size; i++)
+    {
+        display_buffer<T>[i] = typename T::Pixel(); // Default constructor is black.
     }
-    
-    ESP_LOGI(TAG_goblin_left_eye, "Left eye buffer allocated: %u pixels (%.1f KB)", 
-             display_size, (display_size * sizeof(Pixel)) / 1024.0f);
-    
+
+    ESP_LOGI(TAG, "Left eye buffer allocated: %d pixels (%.1f KB)",
+             display_size, (display_size * sizeof(typename T::Pixel)) / 1024.0f);
+
     return ESP_OK;
 }
 
-/**
- * @brief Get pointer to current frame in left eye display buffer
- * @return Pointer to Pixel array at current offset, or nullptr if not initialized
- */
-Pixel* goblin_left_eye_get_buffer(void) {
-    return left_current_frame_ptr;
-}
-
-/**
- * @brief Update left eye animation and advance frame pointer
- * Implements frame cycling with offset management
- */
-void goblin_left_eye_act(void) {
-    if (!left_display_buffer) return;
-    
-    // Calculate current frame pointer with offset (in pixels)
-    left_current_frame_ptr = left_display_buffer + left_frame_offset;
-    
-    // Set global frame_ptr for display driver to use
-    extern Pixel* frame_ptr;
-    frame_ptr = left_current_frame_ptr;
-    
-    // Advance to next frame
-    left_frame_offset += getFrameSize();
-    
-    // Wrap around if we exceed buffer size
-    if (left_frame_offset >= getDisplaySize()) {
-        left_frame_offset = 0;
-    }
+template <typename T>
+void goblin_left_eye_act()
+{
+    // This component is now just an allocator.
+    // The 'act' function doesn't need to do anything in every cycle.
+    // Other components will read from/write to the 'display_buffer'.
+    // This function exists to satisfy the component model.
 }
 
 

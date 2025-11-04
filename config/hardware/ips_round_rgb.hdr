@@ -1,0 +1,50 @@
+#ifndef IPS_ROUND_RGB_HDR
+#define IPS_ROUND_RGB_HDR
+
+#include <stdint.h>
+
+// This struct acts as a "type bundle" for the ips_round_rgb hardware.
+// Based on its JSON, it has a 240x240 resolution and 18-bit color.
+// The driver is a GC9A01A, so this is essentially an alias.
+struct ips_round_rgb
+{
+    // Standardized interface members
+    static const int WIDTH = 240;
+    static const int HEIGHT = 240;
+
+    // 18-bit color depth (6 bits per channel)
+    static const int MAX_RED   = 0x3F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x3F;
+
+    // Standardized nested Pixel type for RGB666
+    struct Pixel
+    {
+        unsigned int red : 6;
+        unsigned int green : 6;
+        unsigned int blue : 6;
+
+        Pixel() : red(0), green(0), blue(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
+};
+
+#endif // IPS_ROUND_RGB_HDR

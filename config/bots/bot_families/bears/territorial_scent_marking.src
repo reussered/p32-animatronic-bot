@@ -1,0 +1,20 @@
+// Auto-generated source for territorial_scent_marking
+#include "components/territorial_scent_marking.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "territorial_scent_marking";
+
+esp_err_t territorial_scent_marking_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void territorial_scent_marking_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

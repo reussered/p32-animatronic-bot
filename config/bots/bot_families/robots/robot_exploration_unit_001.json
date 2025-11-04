@@ -1,79 +1,78 @@
 {
-    "relative_filename":  "config/bots/bot_families/robots/robot_exploration_unit_001.json",
-    "version":  "2.1.0",
-    "author":  "config/author.json",
-    "bot_type":  "ROBOT_EXPLORATION",
-    "inherits_family":  "robot_family",
-    "bot_name":  "Explorer-Prime Beta-3",
-    "description":  "Advanced exploration robot with environmental sensors and mapping capabilities. Designed for unknown territory reconnaissance.",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "sensor_array_center",
-    "eye_spacing":  "3.0 INCH",
-    "scale_factor":  1.0,
-    "default_mood":  "CURIOSITY",
-    "mood_defaults":  {
-                          "FEAR":  {
-                                       "duration_ms":  1000,
-                                       "intensity":  0.3
-                                   },
-                          "ANGER":  {
-                                        "duration_ms":  5000,
-                                        "intensity":  0.4
-                                    },
-                          "IRRITATION":  {
-                                             "duration_ms":  3000,
-                                             "intensity":  0.5
-                                         },
-                          "HAPPINESS":  {
-                                            "duration_ms":  8000,
-                                            "intensity":  0.7
-                                        },
-                          "CONTENTMENT":  {
-                                              "duration_ms":  15000,
-                                              "intensity":  0.8
-                                          },
-                          "HUNGER":  {
-                                         "duration_ms":  0,
-                                         "intensity":  0.0
-                                     },
-                          "CURIOSITY":  {
-                                            "duration_ms":  25000,
-                                            "intensity":  0.95
-                                        },
-                          "AFFECTION":  {
-                                            "duration_ms":  3000,
-                                            "intensity":  0.4
-                                        }
-                      },
-    "personality_traits":  {
-                               "aggression_level":  0.2,
-                               "curiosity_level":  0.95,
-                               "sociability_level":  0.7,
-                               "energy_level":  0.8,
-                               "exploration_drive":  0.95,
-                               "data_collection":  0.9
-                           },
-    "behavior_config":  {
-                            "proximity_alert_distance":  "90 CM",
-                            "proximity_interact_distance":  "25 CM",
-                            "interaction_timeout":  "20000 MS",
-                            "sleep_mode_timeout":  "30000 MS"
-                        },
-    "audio_profile":  {
-                          "ambient_sounds":  [
-                                                 "sensor_sweep.wav",
-                                                 "data_recording.wav"
-                                             ],
-                          "reaction_sounds":  {
-                                                  "happy":  "discovery_achievement.wav",
-                                                  "angry":  "obstacle_detected.wav",
-                                                  "curious":  "unknown_entity_scan.wav",
-                                                  "afraid":  "hazard_alert_protocol.wav"
-                                              }
-                      },
-    "component_count":  0,
-    "components":  [
-
-                   ],
-    "name":  "robot_exploration_unit_001"
+    "relative_filename": "config/bots/bot_families/robots/robot_exploration_unit_001.json",
+    "version": "2.1.0",
+    "author": "config/author.json",
+    "bot_type": "ROBOT_EXPLORATION",
+    "inherits_family": "robot_family",
+    "bot_name": "Explorer-Prime Beta-3",
+    "description": "Advanced exploration robot with environmental sensors and mapping capabilities. Designed for unknown territory reconnaissance.",
+    "coordinate_system": "skull_3d",
+    "reference_point": "sensor_array_center",
+    "eye_spacing": "3.0 INCH",
+    "scale_factor": 1.0,
+    "default_mood": "CURIOSITY",
+    "mood_defaults": {
+        "FEAR": {
+            "duration_ms": 1000,
+            "intensity": 0.3
+        },
+        "ANGER": {
+            "duration_ms": 5000,
+            "intensity": 0.4
+        },
+        "IRRITATION": {
+            "duration_ms": 3000,
+            "intensity": 0.5
+        },
+        "HAPPINESS": {
+            "duration_ms": 8000,
+            "intensity": 0.7
+        },
+        "CONTENTMENT": {
+            "duration_ms": 15000,
+            "intensity": 0.8
+        },
+        "HUNGER": {
+            "duration_ms": 0,
+            "intensity": 0.0
+        },
+        "CURIOSITY": {
+            "duration_ms": 25000,
+            "intensity": 0.95
+        },
+        "AFFECTION": {
+            "duration_ms": 3000,
+            "intensity": 0.4
+        }
+    },
+    "personality_traits": {
+        "aggression_level": 0.2,
+        "curiosity_level": 0.95,
+        "sociability_level": 0.7,
+        "energy_level": 0.8,
+        "exploration_drive": 0.95,
+        "data_collection": 0.9
+    },
+    "behavior_config": {
+        "proximity_alert_distance": "90 CM",
+        "proximity_interact_distance": "25 CM",
+        "interaction_timeout": "20000 MS",
+        "sleep_mode_timeout": "30000 MS"
+    },
+    "audio_profile": {
+        "ambient_sounds": [
+            "sensor_sweep.wav",
+            "data_recording.wav"
+        ],
+        "reaction_sounds": {
+            "happy": "discovery_achievement.wav",
+            "angry": "obstacle_detected.wav",
+            "curious": "unknown_entity_scan.wav",
+            "afraid": "hazard_alert_protocol.wav"
+        }
+    },
+    "component_count": 0,
+    "components": [],
+    "name": "robot_exploration_unit_001",
+    "type": "UNKNOWN"
 }

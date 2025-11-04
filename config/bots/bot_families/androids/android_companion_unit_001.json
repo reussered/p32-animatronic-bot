@@ -1,166 +1,167 @@
 {
-    "relative_filename":  "config/bots/bot_families/androids/android_companion_unit_001.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "bot_type":  "ANDROID_COMPANION_UNIT_001",
-    "family_reference":  "config/bots/bot_families/mechanical/android_family.json",
-    "subfamily":  "companion",
-    "description":  "Advanced companion android with emotional simulation and adaptive personality systems",
-    "created":  "2025-10-12",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "2.4 INCH",
-                                "compression_factor":  0.95,
-                                "skull_scale":  1.0
-                            },
-    "components":  {
-                       "emotional_simulation_matrix":  {
-                                                           "description":  "Advanced AI system that generates convincing emotional responses and develops relationships over time",
-                                                           "implementation":  "Neural network trained on human emotional patterns with memory systems for relationship development",
-                                                           "emotional_capabilities":  [
-                                                                                          "empathy_simulation",
-                                                                                          "mood_adaptation",
-                                                                                          "emotional_memory",
-                                                                                          "relationship_bonding"
-                                                                                      ]
-                                                       },
-                       "adaptive_personality_core":  {
-                                                         "description":  "Machine learning system that adjusts personality traits based on user preferences and interaction history",
-                                                         "implementation":  "Reinforcement learning algorithms with personality parameter adjustment based on interaction feedback",
-                                                         "adaptation_areas":  [
-                                                                                  "communication_style",
-                                                                                  "humor_preferences",
-                                                                                  "activity_interests",
-                                                                                  "emotional_support_methods"
-                                                                              ]
-                                                     },
-                       "comfort_heating_system":  {
-                                                      "description":  "Body temperature regulation system that provides realistic human warmth for physical comfort",
-                                                      "implementation":  "Distributed heating elements with temperature sensors maintaining human-like body temperature",
-                                                      "temperature_zones":  [
-                                                                                "hand_warmth",
-                                                                                "facial_warmth",
-                                                                                "embrace_simulation",
-                                                                                "comfort_presence"
-                                                                            ]
-                                                  },
-                       "gentle_touch_sensors":  {
-                                                    "description":  "Pressure-sensitive skin that responds appropriately to physical contact and provides tactile feedback",
-                                                    "implementation":  "Distributed pressure sensor array with force-feedback response for safe, comfortable physical interaction",
-                                                    "touch_responses":  [
-                                                                            "gentle_acknowledgment",
-                                                                            "comfort_provision",
-                                                                            "playful_interaction",
-                                                                            "protective_withdrawal"
-                                                                        ]
-                                                },
-                       "conversation_ai_engine":  {
-                                                      "description":  "Advanced natural language processing system designed for engaging, long-term conversations",
-                                                      "implementation":  "Large language model fine-tuned for companionship with memory systems and contextual awareness",
-                                                      "conversation_modes":  [
-                                                                                 "casual_chatting",
-                                                                                 "deep_discussion",
-                                                                                 "emotional_support",
-                                                                                 "educational_interaction"
-                                                                             ]
-                                                  },
-                       "memory_palace_system":  {
-                                                    "description":  "Sophisticated memory architecture that remembers personal details, preferences, and shared experiences",
-                                                    "implementation":  "Hierarchical memory system with episodic, semantic, and emotional memory components",
-                                                    "memory_types":  [
-                                                                         "personal_preferences",
-                                                                         "shared_experiences",
-                                                                         "emotional_moments",
-                                                                         "learning_progress"
-                                                                     ]
-                                                },
-                       "biometric_recognition_array":  {
-                                                           "description":  "Multi-modal recognition system that identifies users and adapts behavior to individual preferences",
-                                                           "implementation":  "Camera-based facial recognition with voice analysis and behavioral pattern recognition",
-                                                           "recognition_features":  [
-                                                                                        "facial_identification",
-                                                                                        "voice_recognition",
-                                                                                        "behavioral_patterns",
-                                                                                        "mood_detection"
-                                                                                    ]
-                                                       }
-                   },
-    "mood_profile":  {
-                         "FEAR":  5,
-                         "ANGER":  0,
-                         "IRRITATION":  5,
-                         "HAPPINESS":  35,
-                         "CONTENTMENT":  30,
-                         "HUNGER":  0,
-                         "CURIOSITY":  25,
-                         "AFFECTION":  40
-                     },
-    "behavior_config":  {
-                            "threat_response_enabled":  false,
-                            "auto_sleep_timeout_seconds":  7200,
-                            "interaction_range_cm":  150,
-                            "aggressive_threshold":  99,
-                            "movement_style":  "human_natural",
-                            "attention_span_seconds":  1800,
-                            "companion_mode":  "always_active"
-                        },
-    "audio_profile":  {
-                          "primary_sounds":  [
-                                                 "natural_breathing",
-                                                 "gentle_humming",
-                                                 "soft_speaking",
-                                                 "comfort_sounds"
-                                             ],
-                          "emotional_sounds":  [
-                                                   "laughter",
-                                                   "concern_expressions",
-                                                   "excitement",
-                                                   "empathetic_responses"
-                                               ],
-                          "ambient_sounds":  [
-                                                 "peaceful_presence",
-                                                 "subtle_processing",
-                                                 "comfort_breathing",
-                                                 "attentive_listening"
-                                             ],
-                          "conversation_sounds":  [
-                                                      "thoughtful_pauses",
-                                                      "understanding_acknowledgments",
-                                                      "engaging_responses",
-                                                      "supportive_affirmations"
-                                                  ],
-                          "volume_range":  [
-                                               25,
-                                               65
-                                           ],
-                          "frequency_preference":  "warm_human",
-                          "natural_speech":  true
-                      },
-    "aesthetic_customizations":  {
-                                     "appearance_style":  "approachable_human",
-                                     "synthetic_skin":  "realistic_texture_and_color",
-                                     "color_variations":  [
-                                                              "natural_skin_tones",
-                                                              "subtle_synthetic_indicators",
-                                                              "warm_eye_colors",
-                                                              "natural_hair_textures"
-                                                          ],
-                                     "texture_details":  [
-                                                             "human_like_softness",
-                                                             "realistic_features",
-                                                             "comfortable_presence",
-                                                             "trustworthy_appearance"
-                                                         ]
-                                 },
-    "construction_preference":  "soft_body",
-    "prototype_status":  "design_complete",
-    "tested":  false,
-    "notes":  [
-                  "Companion android variant focused on emotional support and long-term relationship development",
-                  "Specialized components emphasize human-like interaction, emotional intelligence, and adaptive behavior",
-                  "Advanced AI systems enable natural conversation and genuine relationship formation",
-                  "Designed for therapeutic applications, elderly care, and emotional support scenarios"
-              ],
-    "name":  "android_companion_unit_001"
+    "relative_filename": "config/bots/bot_families/androids/android_companion_unit_001.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "bot_type": "ANDROID_COMPANION_UNIT_001",
+    "family_reference": "config/bots/bot_families/mechanical/android_family.json",
+    "subfamily": "companion",
+    "description": "Advanced companion android with emotional simulation and adaptive personality systems",
+    "created": "2025-10-12",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "eye_spacing": "2.4 INCH",
+        "compression_factor": 0.95,
+        "skull_scale": 1.0
+    },
+    "components": {
+        "emotional_simulation_matrix": {
+            "description": "Advanced AI system that generates convincing emotional responses and develops relationships over time",
+            "implementation": "Neural network trained on human emotional patterns with memory systems for relationship development",
+            "emotional_capabilities": [
+                "empathy_simulation",
+                "mood_adaptation",
+                "emotional_memory",
+                "relationship_bonding"
+            ]
+        },
+        "adaptive_personality_core": {
+            "description": "Machine learning system that adjusts personality traits based on user preferences and interaction history",
+            "implementation": "Reinforcement learning algorithms with personality parameter adjustment based on interaction feedback",
+            "adaptation_areas": [
+                "communication_style",
+                "humor_preferences",
+                "activity_interests",
+                "emotional_support_methods"
+            ]
+        },
+        "comfort_heating_system": {
+            "description": "Body temperature regulation system that provides realistic human warmth for physical comfort",
+            "implementation": "Distributed heating elements with temperature sensors maintaining human-like body temperature",
+            "temperature_zones": [
+                "hand_warmth",
+                "facial_warmth",
+                "embrace_simulation",
+                "comfort_presence"
+            ]
+        },
+        "gentle_touch_sensors": {
+            "description": "Pressure-sensitive skin that responds appropriately to physical contact and provides tactile feedback",
+            "implementation": "Distributed pressure sensor array with force-feedback response for safe, comfortable physical interaction",
+            "touch_responses": [
+                "gentle_acknowledgment",
+                "comfort_provision",
+                "playful_interaction",
+                "protective_withdrawal"
+            ]
+        },
+        "conversation_ai_engine": {
+            "description": "Advanced natural language processing system designed for engaging, long-term conversations",
+            "implementation": "Large language model fine-tuned for companionship with memory systems and contextual awareness",
+            "conversation_modes": [
+                "casual_chatting",
+                "deep_discussion",
+                "emotional_support",
+                "educational_interaction"
+            ]
+        },
+        "memory_palace_system": {
+            "description": "Sophisticated memory architecture that remembers personal details, preferences, and shared experiences",
+            "implementation": "Hierarchical memory system with episodic, semantic, and emotional memory components",
+            "memory_types": [
+                "personal_preferences",
+                "shared_experiences",
+                "emotional_moments",
+                "learning_progress"
+            ]
+        },
+        "biometric_recognition_array": {
+            "description": "Multi-modal recognition system that identifies users and adapts behavior to individual preferences",
+            "implementation": "Camera-based facial recognition with voice analysis and behavioral pattern recognition",
+            "recognition_features": [
+                "facial_identification",
+                "voice_recognition",
+                "behavioral_patterns",
+                "mood_detection"
+            ]
+        }
+    },
+    "mood_profile": {
+        "FEAR": 5,
+        "ANGER": 0,
+        "IRRITATION": 5,
+        "HAPPINESS": 35,
+        "CONTENTMENT": 30,
+        "HUNGER": 0,
+        "CURIOSITY": 25,
+        "AFFECTION": 40
+    },
+    "behavior_config": {
+        "threat_response_enabled": false,
+        "auto_sleep_timeout_seconds": 7200,
+        "interaction_range_cm": 150,
+        "aggressive_threshold": 99,
+        "movement_style": "human_natural",
+        "attention_span_seconds": 1800,
+        "companion_mode": "always_active"
+    },
+    "audio_profile": {
+        "primary_sounds": [
+            "natural_breathing",
+            "gentle_humming",
+            "soft_speaking",
+            "comfort_sounds"
+        ],
+        "emotional_sounds": [
+            "laughter",
+            "concern_expressions",
+            "excitement",
+            "empathetic_responses"
+        ],
+        "ambient_sounds": [
+            "peaceful_presence",
+            "subtle_processing",
+            "comfort_breathing",
+            "attentive_listening"
+        ],
+        "conversation_sounds": [
+            "thoughtful_pauses",
+            "understanding_acknowledgments",
+            "engaging_responses",
+            "supportive_affirmations"
+        ],
+        "volume_range": [
+            25,
+            65
+        ],
+        "frequency_preference": "warm_human",
+        "natural_speech": true
+    },
+    "aesthetic_customizations": {
+        "appearance_style": "approachable_human",
+        "synthetic_skin": "realistic_texture_and_color",
+        "color_variations": [
+            "natural_skin_tones",
+            "subtle_synthetic_indicators",
+            "warm_eye_colors",
+            "natural_hair_textures"
+        ],
+        "texture_details": [
+            "human_like_softness",
+            "realistic_features",
+            "comfortable_presence",
+            "trustworthy_appearance"
+        ]
+    },
+    "construction_preference": "soft_body",
+    "prototype_status": "design_complete",
+    "tested": false,
+    "notes": [
+        "Companion android variant focused on emotional support and long-term relationship development",
+        "Specialized components emphasize human-like interaction, emotional intelligence, and adaptive behavior",
+        "Advanced AI systems enable natural conversation and genuine relationship formation",
+        "Designed for therapeutic applications, elderly care, and emotional support scenarios"
+    ],
+    "name": "android_companion_unit_001",
+    "type": "UNKNOWN"
 }

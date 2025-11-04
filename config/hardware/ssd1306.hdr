@@ -1,0 +1,56 @@
+// SSD1306 128x64 OLED Display Header
+// Monochrome (1-bit per pixel)
+
+#ifndef OLED_SSD1306_128X64_HDR
+#define OLED_SSD1306_128X64_HDR
+
+#include <cstdint>
+
+// This struct acts as a "type bundle" for the ssd1306 hardware.
+// Based on its JSON, it is a 128x64 monochrome display.
+struct ssd1306
+{
+    // Standardized interface members
+    static const int WIDTH = 128;
+    static const int HEIGHT = 64;
+
+    // Monochrome display, so max value is 1 (on).
+    static const int MAX_VALUE = 1;
+
+    // Standardized nested Pixel type for monochrome displays.
+    struct Pixel
+    {
+        unsigned int value : 1;
+
+        Pixel() : value(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel(bool on) : value(on ? 1 : 0) {}
+
+        Pixel& operator=(const Pixel& other)
+        {
+            value = other.value;
+            return *this;
+        }
+
+        // For monochrome, 'adding' is like a logical OR.
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            result.value = (value || other.value) ? 1 : 0;
+            return result;
+        }
+    };
+};
+
+// Display specifications
+size_t ssd1306_get_width(void);
+size_t ssd1306_get_height(void);
+size_t getFrameSize(void);
+size_t getFrameRowSize(void);
+size_t getDisplaySize(void);
+
+// Component functions
+esp_err_t oled_ssd1306_128x64_init(void);
+void oled_ssd1306_128x64_act(void);
+
+#endif // OLED_SSD1306_128X64_HDR

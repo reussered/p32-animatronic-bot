@@ -1,358 +1,358 @@
 {
-    "relative_filename":  "config/components/interfaces/servo_motor_standard.json",
-    "version":  "1.0.0",
-    "component_type":  "INTERFACE_BUS",
-    "hardware_type":  "BUS_INTERFACE",
-    "author":  "config/author.json",
-    "interface_id":  "SERVO_MOTOR_STANDARD",
-    "interface_type":  "SERVO_CONTROLLER",
-    "description":  "Standard RC servo motor interface for precise angular positioning",
-    "hardware_specifications":  {
-                                    "servo_types":  [
-                                                        "MICRO_SERVO",
-                                                        "STANDARD_SERVO",
-                                                        "GIANT_SERVO",
-                                                        "DIGITAL_SERVO"
-                                                    ],
-                                    "torque_range":  "0.1kg_cm_TO_100kg_cm",
-                                    "rotation_range":  "90_DEGREES_TO_360_DEGREES",
-                                    "speed_range":  "0.05s_60deg_TO_2.0s_60deg",
-                                    "voltage_range":  "3.3V_TO_7.4V",
-                                    "current_range":  "50mA_TO_3A",
-                                    "control_frequency":  "50Hz_TO_333Hz"
-                                },
-    "pin_requirements":  {
-                             "pwm_control_pin":  {
-                                                     "function":  "position_control",
-                                                     "generic_name":  "pwm_signal",
-                                                     "description":  "PWM signal for servo position control",
-                                                     "voltage_level":  "3.3V_5V",
-                                                     "signal_type":  "PWM_50HZ_TO_333HZ",
-                                                     "pulse_width":  "0.5ms_TO_2.5ms",
-                                                     "period":  "20ms_STANDARD"
-                                                 },
-                             "power_pin":  {
-                                               "function":  "servo_power",
-                                               "generic_name":  "vcc_servo",
-                                               "description":  "Servo motor power supply",
-                                               "voltage_level":  "4.8V_TO_7.4V",
-                                               "current_capacity":  "500mA_TO_3A"
-                                           },
-                             "ground_pin":  {
-                                                "function":  "common_ground",
-                                                "generic_name":  "gnd_servo",
-                                                "description":  "Ground reference for servo",
-                                                "voltage_level":  "0V"
-                                            }
-                         },
-    "feedback_pins":  {
-                          "position_feedback_pin":  {
-                                                        "function":  "angular_position_sensing",
-                                                        "generic_name":  "position_feedback",
-                                                        "description":  "Actual servo position feedback (continuous rotation servos)",
-                                                        "direction":  "INPUT",
-                                                        "signal_type":  "ANALOG_POTENTIOMETER_ENCODER",
-                                                        "optional":  true
-                                                    },
-                          "current_sense_pin":  {
-                                                    "function":  "load_monitoring",
-                                                    "generic_name":  "current_sense",
-                                                    "description":  "Servo current consumption monitoring",
-                                                    "direction":  "INPUT",
-                                                    "signal_type":  "ANALOG_0_TO_5V",
-                                                    "optional":  true
-                                                }
-                      },
-    "optional_pins":  {
-                          "enable_pin":  {
-                                             "function":  "servo_enable_disable",
-                                             "generic_name":  "enable",
-                                             "description":  "Enable/disable servo operation (some servos)",
-                                             "voltage_level":  "3.3V_5V",
-                                             "default_state":  "HIGH_ENABLED",
-                                             "optional":  true
-                                         },
-                          "direction_pin":  {
-                                                "function":  "rotation_direction",
-                                                "generic_name":  "direction",
-                                                "description":  "Direction control for continuous rotation servos",
-                                                "voltage_level":  "3.3V_5V",
-                                                "signal_type":  "DIGITAL",
-                                                "optional":  true
-                                            }
-                      },
-    "pwm_specifications":  {
-                               "standard_servo":  {
-                                                      "frequency":  "50Hz",
-                                                      "period":  "20ms",
-                                                      "pulse_width_min":  "1.0ms_MINUS_90_DEGREES",
-                                                      "pulse_width_center":  "1.5ms_CENTER_0_DEGREES",
-                                                      "pulse_width_max":  "2.0ms_PLUS_90_DEGREES",
-                                                      "dead_band":  "0.01ms",
-                                                      "resolution":  "12_TO_16_BIT_PWM"
-                                                  },
-                               "high_frequency_servo":  {
-                                                            "frequency":  "333Hz",
-                                                            "period":  "3ms",
-                                                            "pulse_width_min":  "0.15ms",
-                                                            "pulse_width_center":  "0.225ms",
-                                                            "pulse_width_max":  "0.3ms",
-                                                            "advantages":  [
-                                                                               "FASTER_RESPONSE",
-                                                                               "SMOOTHER_MOTION",
-                                                                               "LESS_JITTER"
-                                                                           ],
-                                                            "disadvantages":  [
-                                                                                  "NOT_ALL_SERVOS_SUPPORT",
-                                                                                  "HIGHER_PROCESSING_LOAD"
-                                                                              ]
-                                                        },
-                               "digital_servo":  {
-                                                     "frequency":  "300Hz_TO_333Hz",
-                                                     "period":  "3ms_TO_3.33ms",
-                                                     "pulse_width_min":  "0.15ms",
-                                                     "pulse_width_center":  "0.225ms",
-                                                     "pulse_width_max":  "0.3ms",
-                                                     "features":  [
-                                                                      "HIGHER_TORQUE",
-                                                                      "FASTER_RESPONSE",
-                                                                      "BETTER_HOLDING_POWER"
-                                                                  ]
-                                                 }
-                           },
-    "servo_categories":  {
-                             "micro_servo":  {
-                                                 "weight":  "5g_TO_15g",
-                                                 "torque":  "0.5kg_cm_TO_3kg_cm",
-                                                 "speed":  "0.08s_60deg_TO_0.15s_60deg",
-                                                 "applications":  [
-                                                                      "SMALL_JOINTS",
-                                                                      "FINGERS",
-                                                                      "EYELIDS",
-                                                                      "EARS"
-                                                                  ],
-                                                 "voltage":  "3.3V_TO_6V"
-                                             },
-                             "standard_servo":  {
-                                                    "weight":  "40g_TO_60g",
-                                                    "torque":  "3kg_cm_TO_15kg_cm",
-                                                    "speed":  "0.1s_60deg_TO_0.2s_60deg",
-                                                    "applications":  [
-                                                                         "ARM_JOINTS",
-                                                                         "HEAD_MOVEMENT",
-                                                                         "LEGS",
-                                                                         "TAIL"
-                                                                     ],
-                                                    "voltage":  "4.8V_TO_6V"
-                                                },
-                             "giant_servo":  {
-                                                 "weight":  "150g_TO_300g",
-                                                 "torque":  "25kg_cm_TO_100kg_cm",
-                                                 "speed":  "0.15s_60deg_TO_0.3s_60deg",
-                                                 "applications":  [
-                                                                      "SHOULDER_JOINTS",
-                                                                      "HIP_JOINTS",
-                                                                      "HEAVY_LIFTING"
-                                                                  ],
-                                                 "voltage":  "6V_TO_7.4V"
-                                             },
-                             "continuous_rotation":  {
-                                                         "rotation":  "360_DEGREES_CONTINUOUS",
-                                                         "torque":  "1kg_cm_TO_20kg_cm",
-                                                         "speed":  "30RPM_TO_200RPM",
-                                                         "applications":  [
-                                                                              "WHEELS",
-                                                                              "ROTATING_PLATFORMS",
-                                                                              "CONVEYOR_SYSTEMS"
-                                                                          ],
-                                                         "control":  "SPEED_DIRECTION_NOT_POSITION"
-                                                     }
-                         },
-    "control_strategies":  {
-                               "position_control":  {
-                                                        "description":  "Standard servo position control with PWM",
-                                                        "pins_required":  [
-                                                                              "pwm_signal",
-                                                                              "vcc_servo",
-                                                                              "gnd_servo"
-                                                                          ],
-                                                        "control_range":  "0_TO_180_DEGREES",
-                                                        "accuracy":  "1_TO_5_DEGREES",
-                                                        "response_time":  "0.1s_TO_1s"
-                                                    },
-                               "speed_control":  {
-                                                     "description":  "Continuous rotation servo speed control",
-                                                     "pins_required":  [
-                                                                           "pwm_signal",
-                                                                           "vcc_servo",
-                                                                           "gnd_servo"
-                                                                       ],
-                                                     "control_range":  "FULL_STOP_TO_MAX_SPEED",
-                                                     "direction_control":  "PWM_PULSE_WIDTH_BASED",
-                                                     "applications":  [
-                                                                          "DRIVE_WHEELS",
-                                                                          "ROTATING_MECHANISMS"
-                                                                      ]
-                                                 },
-                               "torque_limiting":  {
-                                                       "description":  "Current-limited servo operation for safety",
-                                                       "pins_required":  [
-                                                                             "pwm_signal",
-                                                                             "vcc_servo",
-                                                                             "gnd_servo",
-                                                                             "current_sense"
-                                                                         ],
-                                                       "max_current":  "USER_DEFINED_LIMIT",
-                                                       "safety_features":  [
-                                                                               "OVERCURRENT_PROTECTION",
-                                                                               "THERMAL_PROTECTION"
-                                                                           ],
-                                                       "applications":  [
-                                                                            "HUMAN_INTERACTION",
-                                                                            "DELICATE_MECHANISMS"
-                                                                        ]
-                                                   }
-                           },
-    "manufacturer_pin_mappings":  {
-                                      "futaba":  {
-                                                     "pwm_signal":  [
-                                                                        "WHITE",
-                                                                        "SIGNAL"
-                                                                    ],
-                                                     "vcc_servo":  [
-                                                                       "RED",
-                                                                       "POSITIVE",
-                                                                       "+"
-                                                                   ],
-                                                     "gnd_servo":  [
-                                                                       "BLACK",
-                                                                       "NEGATIVE",
-                                                                       "-"
-                                                                   ]
-                                                 },
-                                      "hitec":  {
-                                                    "pwm_signal":  [
-                                                                       "YELLOW",
-                                                                       "SIGNAL"
-                                                                   ],
-                                                    "vcc_servo":  [
-                                                                      "RED",
-                                                                      "POSITIVE",
-                                                                      "+"
-                                                                  ],
-                                                    "gnd_servo":  [
-                                                                      "BLACK",
-                                                                      "BROWN",
-                                                                      "NEGATIVE",
-                                                                      "-"
-                                                                  ]
-                                                },
-                                      "tower_pro":  {
-                                                        "pwm_signal":  [
-                                                                           "ORANGE",
-                                                                           "YELLOW",
-                                                                           "SIGNAL"
-                                                                       ],
-                                                        "vcc_servo":  [
-                                                                          "RED",
-                                                                          "POSITIVE"
-                                                                      ],
-                                                        "gnd_servo":  [
-                                                                          "BROWN",
-                                                                          "BLACK",
-                                                                          "NEGATIVE"
-                                                                      ]
-                                                    },
-                                      "savox":  {
-                                                    "pwm_signal":  [
-                                                                       "WHITE",
-                                                                       "SIGNAL"
-                                                                   ],
-                                                    "vcc_servo":  [
-                                                                      "RED",
-                                                                      "POSITIVE"
-                                                                  ],
-                                                    "gnd_servo":  [
-                                                                      "BLACK",
-                                                                      "NEGATIVE"
-                                                                  ]
-                                                },
-                                      "mg_series":  {
-                                                        "pwm_signal":  [
-                                                                           "ORANGE",
-                                                                           "SIGNAL"
-                                                                       ],
-                                                        "vcc_servo":  [
-                                                                          "RED",
-                                                                          "VCC"
-                                                                      ],
-                                                        "gnd_servo":  [
-                                                                          "BROWN",
-                                                                          "GND"
-                                                                      ]
-                                                    }
-                                  },
-    "timing_specifications":  {
-                                  "update_rate":  {
-                                                      "minimum":  "20ms_50HZ",
-                                                      "typical":  "20ms_50HZ",
-                                                      "maximum":  "3ms_333HZ",
-                                                      "recommendation":  "USE_50HZ_FOR_COMPATIBILITY"
-                                                  },
-                                  "pulse_timing":  {
-                                                       "rise_time":  "LESS_THAN_1us",
-                                                       "fall_time":  "LESS_THAN_1us",
-                                                       "jitter":  "LESS_THAN_10us",
-                                                       "stability":  "PLUS_MINUS_0.1_PERCENT"
-                                                   },
-                                  "response_characteristics":  {
-                                                                   "small_movements":  "50ms_TO_200ms",
-                                                                   "large_movements":  "200ms_TO_1000ms",
-                                                                   "settling_time":  "ADDITIONAL_50ms_TO_200ms",
-                                                                   "factors":  [
-                                                                                   "SERVO_SIZE",
-                                                                                   "LOAD",
-                                                                                   "VOLTAGE",
-                                                                                   "TEMPERATURE"
-                                                                               ]
-                                                               }
-                              },
-    "application_examples":  {
-                                 "head_pan_tilt":  {
-                                                       "servo_type":  "STANDARD_SERVO",
-                                                       "torque_required":  "8kg_cm",
-                                                       "speed":  "0.15s_60deg",
-                                                       "range":  "180_DEGREES",
-                                                       "use_case":  "HEAD_ROTATION_MECHANISMS"
-                                                   },
-                                 "finger_articulation":  {
-                                                             "servo_type":  "MICRO_SERVO",
-                                                             "torque_required":  "1.5kg_cm",
-                                                             "speed":  "0.08s_60deg",
-                                                             "range":  "90_DEGREES",
-                                                             "use_case":  "PRECISE_FINGER_CONTROL"
-                                                         },
-                                 "arm_joints":  {
-                                                    "servo_type":  "GIANT_SERVO",
-                                                    "torque_required":  "40kg_cm",
-                                                    "speed":  "0.2s_60deg",
-                                                    "range":  "180_DEGREES",
-                                                    "use_case":  "HEAVY_DUTY_ARM_MOVEMENT"
-                                                },
-                                 "eye_movement":  {
-                                                      "servo_type":  "MICRO_SERVO",
-                                                      "torque_required":  "0.8kg_cm",
-                                                      "speed":  "0.05s_60deg",
-                                                      "range":  "60_DEGREES",
-                                                      "use_case":  "RAPID_EYE_TRACKING"
-                                                  },
-                                 "jaw_articulation":  {
-                                                          "servo_type":  "STANDARD_SERVO",
-                                                          "torque_required":  "12kg_cm",
-                                                          "speed":  "0.1s_60deg",
-                                                          "range":  "45_DEGREES",
-                                                          "use_case":  "JAW_OPENING_CLOSING"
-                                                      }
-                             },
-    "name":  "servo_motor_standard"
+    "relative_filename": "config/components/interfaces/servo_motor_standard.json",
+    "version": "1.0.0",
+    "hardware_type": "BUS_INTERFACE",
+    "author": "config/author.json",
+    "interface_id": "SERVO_MOTOR_STANDARD",
+    "interface_type": "SERVO_CONTROLLER",
+    "description": "Standard RC servo motor interface for precise angular positioning",
+    "hardware_specifications": {
+        "servo_types": [
+            "MICRO_SERVO",
+            "STANDARD_SERVO",
+            "GIANT_SERVO",
+            "DIGITAL_SERVO"
+        ],
+        "torque_range": "0.1kg_cm_TO_100kg_cm",
+        "rotation_range": "90_DEGREES_TO_360_DEGREES",
+        "speed_range": "0.05s_60deg_TO_2.0s_60deg",
+        "voltage_range": "3.3V_TO_7.4V",
+        "current_range": "50mA_TO_3A",
+        "control_frequency": "50Hz_TO_333Hz"
+    },
+    "pin_requirements": {
+        "pwm_control_pin": {
+            "function": "position_control",
+            "generic_name": "pwm_signal",
+            "description": "PWM signal for servo position control",
+            "voltage_level": "3.3V_5V",
+            "signal_type": "PWM_50HZ_TO_333HZ",
+            "pulse_width": "0.5ms_TO_2.5ms",
+            "period": "20ms_STANDARD"
+        },
+        "power_pin": {
+            "function": "servo_power",
+            "generic_name": "vcc_servo",
+            "description": "Servo motor power supply",
+            "voltage_level": "4.8V_TO_7.4V",
+            "current_capacity": "500mA_TO_3A"
+        },
+        "ground_pin": {
+            "function": "common_ground",
+            "generic_name": "gnd_servo",
+            "description": "Ground reference for servo",
+            "voltage_level": "0V"
+        }
+    },
+    "feedback_pins": {
+        "position_feedback_pin": {
+            "function": "angular_position_sensing",
+            "generic_name": "position_feedback",
+            "description": "Actual servo position feedback (continuous rotation servos)",
+            "direction": "INPUT",
+            "signal_type": "ANALOG_POTENTIOMETER_ENCODER",
+            "optional": true
+        },
+        "current_sense_pin": {
+            "function": "load_monitoring",
+            "generic_name": "current_sense",
+            "description": "Servo current consumption monitoring",
+            "direction": "INPUT",
+            "signal_type": "ANALOG_0_TO_5V",
+            "optional": true
+        }
+    },
+    "optional_pins": {
+        "enable_pin": {
+            "function": "servo_enable_disable",
+            "generic_name": "enable",
+            "description": "Enable/disable servo operation (some servos)",
+            "voltage_level": "3.3V_5V",
+            "default_state": "HIGH_ENABLED",
+            "optional": true
+        },
+        "direction_pin": {
+            "function": "rotation_direction",
+            "generic_name": "direction",
+            "description": "Direction control for continuous rotation servos",
+            "voltage_level": "3.3V_5V",
+            "signal_type": "DIGITAL",
+            "optional": true
+        }
+    },
+    "pwm_specifications": {
+        "standard_servo": {
+            "frequency": "50Hz",
+            "period": "20ms",
+            "pulse_width_min": "1.0ms_MINUS_90_DEGREES",
+            "pulse_width_center": "1.5ms_CENTER_0_DEGREES",
+            "pulse_width_max": "2.0ms_PLUS_90_DEGREES",
+            "dead_band": "0.01ms",
+            "resolution": "12_TO_16_BIT_PWM"
+        },
+        "high_frequency_servo": {
+            "frequency": "333Hz",
+            "period": "3ms",
+            "pulse_width_min": "0.15ms",
+            "pulse_width_center": "0.225ms",
+            "pulse_width_max": "0.3ms",
+            "advantages": [
+                "FASTER_RESPONSE",
+                "SMOOTHER_MOTION",
+                "LESS_JITTER"
+            ],
+            "disadvantages": [
+                "NOT_ALL_SERVOS_SUPPORT",
+                "HIGHER_PROCESSING_LOAD"
+            ]
+        },
+        "digital_servo": {
+            "frequency": "300Hz_TO_333Hz",
+            "period": "3ms_TO_3.33ms",
+            "pulse_width_min": "0.15ms",
+            "pulse_width_center": "0.225ms",
+            "pulse_width_max": "0.3ms",
+            "features": [
+                "HIGHER_TORQUE",
+                "FASTER_RESPONSE",
+                "BETTER_HOLDING_POWER"
+            ]
+        }
+    },
+    "servo_categories": {
+        "micro_servo": {
+            "weight": "5g_TO_15g",
+            "torque": "0.5kg_cm_TO_3kg_cm",
+            "speed": "0.08s_60deg_TO_0.15s_60deg",
+            "applications": [
+                "SMALL_JOINTS",
+                "FINGERS",
+                "EYELIDS",
+                "EARS"
+            ],
+            "voltage": "3.3V_TO_6V"
+        },
+        "standard_servo": {
+            "weight": "40g_TO_60g",
+            "torque": "3kg_cm_TO_15kg_cm",
+            "speed": "0.1s_60deg_TO_0.2s_60deg",
+            "applications": [
+                "ARM_JOINTS",
+                "HEAD_MOVEMENT",
+                "LEGS",
+                "TAIL"
+            ],
+            "voltage": "4.8V_TO_6V"
+        },
+        "giant_servo": {
+            "weight": "150g_TO_300g",
+            "torque": "25kg_cm_TO_100kg_cm",
+            "speed": "0.15s_60deg_TO_0.3s_60deg",
+            "applications": [
+                "SHOULDER_JOINTS",
+                "HIP_JOINTS",
+                "HEAVY_LIFTING"
+            ],
+            "voltage": "6V_TO_7.4V"
+        },
+        "continuous_rotation": {
+            "rotation": "360_DEGREES_CONTINUOUS",
+            "torque": "1kg_cm_TO_20kg_cm",
+            "speed": "30RPM_TO_200RPM",
+            "applications": [
+                "WHEELS",
+                "ROTATING_PLATFORMS",
+                "CONVEYOR_SYSTEMS"
+            ],
+            "control": "SPEED_DIRECTION_NOT_POSITION"
+        }
+    },
+    "control_strategies": {
+        "position_control": {
+            "description": "Standard servo position control with PWM",
+            "pins_required": [
+                "pwm_signal",
+                "vcc_servo",
+                "gnd_servo"
+            ],
+            "control_range": "0_TO_180_DEGREES",
+            "accuracy": "1_TO_5_DEGREES",
+            "response_time": "0.1s_TO_1s"
+        },
+        "speed_control": {
+            "description": "Continuous rotation servo speed control",
+            "pins_required": [
+                "pwm_signal",
+                "vcc_servo",
+                "gnd_servo"
+            ],
+            "control_range": "FULL_STOP_TO_MAX_SPEED",
+            "direction_control": "PWM_PULSE_WIDTH_BASED",
+            "applications": [
+                "DRIVE_WHEELS",
+                "ROTATING_MECHANISMS"
+            ]
+        },
+        "torque_limiting": {
+            "description": "Current-limited servo operation for safety",
+            "pins_required": [
+                "pwm_signal",
+                "vcc_servo",
+                "gnd_servo",
+                "current_sense"
+            ],
+            "max_current": "USER_DEFINED_LIMIT",
+            "safety_features": [
+                "OVERCURRENT_PROTECTION",
+                "THERMAL_PROTECTION"
+            ],
+            "applications": [
+                "HUMAN_INTERACTION",
+                "DELICATE_MECHANISMS"
+            ]
+        }
+    },
+    "manufacturer_pin_mappings": {
+        "futaba": {
+            "pwm_signal": [
+                "WHITE",
+                "SIGNAL"
+            ],
+            "vcc_servo": [
+                "RED",
+                "POSITIVE",
+                "+"
+            ],
+            "gnd_servo": [
+                "BLACK",
+                "NEGATIVE",
+                "-"
+            ]
+        },
+        "hitec": {
+            "pwm_signal": [
+                "YELLOW",
+                "SIGNAL"
+            ],
+            "vcc_servo": [
+                "RED",
+                "POSITIVE",
+                "+"
+            ],
+            "gnd_servo": [
+                "BLACK",
+                "BROWN",
+                "NEGATIVE",
+                "-"
+            ]
+        },
+        "tower_pro": {
+            "pwm_signal": [
+                "ORANGE",
+                "YELLOW",
+                "SIGNAL"
+            ],
+            "vcc_servo": [
+                "RED",
+                "POSITIVE"
+            ],
+            "gnd_servo": [
+                "BROWN",
+                "BLACK",
+                "NEGATIVE"
+            ]
+        },
+        "savox": {
+            "pwm_signal": [
+                "WHITE",
+                "SIGNAL"
+            ],
+            "vcc_servo": [
+                "RED",
+                "POSITIVE"
+            ],
+            "gnd_servo": [
+                "BLACK",
+                "NEGATIVE"
+            ]
+        },
+        "mg_series": {
+            "pwm_signal": [
+                "ORANGE",
+                "SIGNAL"
+            ],
+            "vcc_servo": [
+                "RED",
+                "VCC"
+            ],
+            "gnd_servo": [
+                "BROWN",
+                "GND"
+            ]
+        }
+    },
+    "timing_specifications": {
+        "update_rate": {
+            "minimum": "20ms_50HZ",
+            "typical": "20ms_50HZ",
+            "maximum": "3ms_333HZ",
+            "recommendation": "USE_50HZ_FOR_COMPATIBILITY"
+        },
+        "pulse_timing": {
+            "rise_time": "LESS_THAN_1us",
+            "fall_time": "LESS_THAN_1us",
+            "jitter": "LESS_THAN_10us",
+            "stability": "PLUS_MINUS_0.1_PERCENT"
+        },
+        "response_characteristics": {
+            "small_movements": "50ms_TO_200ms",
+            "large_movements": "200ms_TO_1000ms",
+            "settling_time": "ADDITIONAL_50ms_TO_200ms",
+            "factors": [
+                "SERVO_SIZE",
+                "LOAD",
+                "VOLTAGE",
+                "TEMPERATURE"
+            ]
+        }
+    },
+    "application_examples": {
+        "head_pan_tilt": {
+            "servo_type": "STANDARD_SERVO",
+            "torque_required": "8kg_cm",
+            "speed": "0.15s_60deg",
+            "range": "180_DEGREES",
+            "use_case": "HEAD_ROTATION_MECHANISMS"
+        },
+        "finger_articulation": {
+            "servo_type": "MICRO_SERVO",
+            "torque_required": "1.5kg_cm",
+            "speed": "0.08s_60deg",
+            "range": "90_DEGREES",
+            "use_case": "PRECISE_FINGER_CONTROL"
+        },
+        "arm_joints": {
+            "servo_type": "GIANT_SERVO",
+            "torque_required": "40kg_cm",
+            "speed": "0.2s_60deg",
+            "range": "180_DEGREES",
+            "use_case": "HEAVY_DUTY_ARM_MOVEMENT"
+        },
+        "eye_movement": {
+            "servo_type": "MICRO_SERVO",
+            "torque_required": "0.8kg_cm",
+            "speed": "0.05s_60deg",
+            "range": "60_DEGREES",
+            "use_case": "RAPID_EYE_TRACKING"
+        },
+        "jaw_articulation": {
+            "servo_type": "STANDARD_SERVO",
+            "torque_required": "12kg_cm",
+            "speed": "0.1s_60deg",
+            "range": "45_DEGREES",
+            "use_case": "JAW_OPENING_CLOSING"
+        }
+    },
+    "name": "servo_motor_standard",
+    "type": "INTERFACE_BUS"
 }

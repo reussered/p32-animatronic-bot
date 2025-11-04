@@ -1,0 +1,20 @@
+// Auto-generated source for spine_servo_upper
+#include "components/spine_servo_upper.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "spine_servo_upper";
+
+esp_err_t spine_servo_upper_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void spine_servo_upper_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

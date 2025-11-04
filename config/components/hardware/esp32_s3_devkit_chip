@@ -1,0 +1,6 @@
+{
+    "name": "esp32_s3_devkit_chip",
+    "type": "SCAFFOLDED",
+    "relative_filename": "config/components/hardware/esp32_s3_devkit_chip",
+    "description": "Auto-generated component."
+}

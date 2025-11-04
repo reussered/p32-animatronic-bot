@@ -1,0 +1,5 @@
+// Auto-generated header for system_core
+#include <esp_err.h>
+
+esp_err_t system_core_init(void);
+void system_core_act(void);

@@ -1,0 +1,20 @@
+// Auto-generated source for goblin_pirate_head
+#include "components/goblin_pirate_head.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "goblin_pirate_head";
+
+esp_err_t goblin_pirate_head_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void goblin_pirate_head_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

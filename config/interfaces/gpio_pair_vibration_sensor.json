@@ -1,46 +1,45 @@
 {
-    "relative_filename":  "config/interfaces/gpio_pair_vibration_sensor.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "interface_id":  "GPIO_PAIR_VIBRATION_SENSOR",
-    "display_name":  "GPIO Pair - HW-500 Vibration Sensor",
-    "description":  "GPIO pin pair configured for HW-500 vibration sensor digital and analog outputs",
-    "created":  "2025-10-23",
-    "interface_type":  "GPIO_PAIR_DIGITAL_ANALOG",
-    "hardware_platform":  "ESP32_S3",
-    "pin_requirements":  {
-                             "digital_pin":  {
-                                                 "gpio_type":  "digital_input",
-                                                 "function":  "vibration_detection_interrupt",
-                                                 "interrupt_capable":  true
-                                             },
-                             "analog_pin":  {
-                                                "gpio_type":  "analog_input",
-                                                "adc_capable":  true,
-                                                "function":  "vibration_level_measurement"
-                                            }
-                         },
-    "electrical_specs":  {
-                             "voltage_level":  "3.3V",
-                             "digital_current":  "40mA",
-                             "analog_impedance":  "high_z",
-                             "adc_resolution":  "12_bit"
-                         },
-    "protocol_config":  {
-                            "digital_protocol":  "interrupt_driven",
-                            "analog_protocol":  "adc_polling",
-                            "interrupt_trigger":  "falling_edge",
-                            "debounce_required":  true
-                        },
-    "conflict_detection":  {
-                               "shared_with":  [
-
-                                               ],
-                               "conflicts_with":  [
-                                                      "WIFI_RF_CIRCUITS",
-                                                      "ADC2_DURING_WIFI"
-                                                  ],
-                               "usage_priority":  "vibration_sensing"
-                           },
-    "name":  "gpio_pair_vibration_sensor"
+    "relative_filename": "config/interfaces/gpio_pair_vibration_sensor.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "interface_id": "GPIO_PAIR_VIBRATION_SENSOR",
+    "display_name": "GPIO Pair - HW-500 Vibration Sensor",
+    "description": "GPIO pin pair configured for HW-500 vibration sensor digital and analog outputs",
+    "created": "2025-10-23",
+    "interface_type": "GPIO_PAIR_DIGITAL_ANALOG",
+    "hardware_platform": "ESP32_S3",
+    "pin_requirements": {
+        "digital_pin": {
+            "gpio_type": "digital_input",
+            "function": "vibration_detection_interrupt",
+            "interrupt_capable": true
+        },
+        "analog_pin": {
+            "gpio_type": "analog_input",
+            "adc_capable": true,
+            "function": "vibration_level_measurement"
+        }
+    },
+    "electrical_specs": {
+        "voltage_level": "3.3V",
+        "digital_current": "40mA",
+        "analog_impedance": "high_z",
+        "adc_resolution": "12_bit"
+    },
+    "protocol_config": {
+        "digital_protocol": "interrupt_driven",
+        "analog_protocol": "adc_polling",
+        "interrupt_trigger": "falling_edge",
+        "debounce_required": true
+    },
+    "conflict_detection": {
+        "shared_with": [],
+        "conflicts_with": [
+            "WIFI_RF_CIRCUITS",
+            "ADC2_DURING_WIFI"
+        ],
+        "usage_priority": "vibration_sensing"
+    },
+    "name": "gpio_pair_vibration_sensor",
+    "type": "UNKNOWN"
 }

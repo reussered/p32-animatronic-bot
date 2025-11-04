@@ -1,0 +1,5 @@
+// Auto-generated header for memory_palace_system
+#include <esp_err.h>
+
+esp_err_t memory_palace_system_init(void);
+void memory_palace_system_act(void);

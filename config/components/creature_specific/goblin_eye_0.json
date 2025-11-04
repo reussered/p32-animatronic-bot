@@ -1,0 +1,18 @@
+{
+    "relative_filename": "config/components/creature_specific/goblin_eye_0.json",
+    "version": "3.0.0",
+    "author": "config/author.json",
+    "name": "goblin_eye_0",
+    "description": "Goblin eye chunk processor 0 - processes rows 0-29",
+    "created": "2025-10-23",
+    "chunk_index": 0,
+    "timing": {
+        "hitCount": 1,
+        "description": "Process chunk 0 every cycle"
+    },
+    "software": {
+        "init_function": "goblin_eye_0_init",
+        "act_function": "goblin_eye_0_act"
+    },
+    "type": "CHUNK_PROCESSOR"
+}

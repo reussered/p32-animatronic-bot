@@ -1,0 +1,20 @@
+// Auto-generated source for protective_stance_actuators
+#include "components/protective_stance_actuators.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "protective_stance_actuators";
+
+esp_err_t protective_stance_actuators_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void protective_stance_actuators_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

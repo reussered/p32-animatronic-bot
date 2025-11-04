@@ -1,96 +1,96 @@
 {
-    "relative_filename":  "config/components/creature_specific/humanoid_ankle_right.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "HUMANOID_ANKLE_RIGHT",
-    "subsystem":  "LEG",
-    "component_type":  "POSITIONED_COMPONENT",
-    "description":  "Right ankle joint with 3 DOF for foot orientation and active balance",
-    "physical_component":  "config/components/hardware/servo_assembly.json",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "position":  {
-                     "x":  "3.0 INCH",
-                     "y":  "0.0 INCH",
-                     "z":  "-40.0 INCH",
-                     "description":  "Right ankle joint at lower leg terminus"
-                 },
-    "scaling_behavior":  {
-                             "scales_with_creature":  true,
-                             "scaling_reference":  "eye_spacing_baseline",
-                             "position_scaling":  "PROPORTIONAL_XYZ",
-                             "component_scaling":  "MASS_BASED_SERVO_SELECTION"
-                         },
-    "joint_specifications":  {
-                                 "degrees_of_freedom":  3,
-                                 "joint_names":  [
-                                                     "ankle_dorsi_plantar_flexion",
-                                                     "ankle_inversion_eversion",
-                                                     "ankle_internal_external_rotation"
-                                                 ],
-                                 "ankle_dorsi_plantar_flexion":  {
-                                                                     "axis":  "FRONTAL_PLANE_ROTATION",
-                                                                     "range_of_motion":  "-20_TO_45_DEGREES",
-                                                                     "servo_type":  "DS3218_SERVO",
-                                                                     "torque_requirement":  "2.2_NM_PEAK",
-                                                                     "position_feedback":  "INTEGRATED_POTENTIOMETER",
-                                                                     "walking_primary":  "HEEL_STRIKE_TO_TOE_OFF_CONTROL"
-                                                                 },
-                                 "ankle_inversion_eversion":  {
-                                                                  "axis":  "SAGITTAL_PLANE_ROTATION",
-                                                                  "range_of_motion":  "-30_TO_30_DEGREES",
-                                                                  "servo_type":  "MG996R_SERVO",
-                                                                  "torque_requirement":  "1.3_NM_PEAK",
-                                                                  "position_feedback":  "INTEGRATED_POTENTIOMETER",
-                                                                  "balance_primary":  "LATERAL_BALANCE_CORRECTION"
-                                                              },
-                                 "ankle_internal_external_rotation":  {
-                                                                          "axis":  "LONGITUDINAL_LEG_AXIS",
-                                                                          "range_of_motion":  "-45_TO_45_DEGREES",
-                                                                          "servo_type":  "MG996R_SERVO",
-                                                                          "torque_requirement":  "1.3_NM_PEAK",
-                                                                          "position_feedback":  "INTEGRATED_POTENTIOMETER",
-                                                                          "walking_secondary":  "FOOT_ORIENTATION_AND_TURNING"
-                                                                      }
-                             },
-    "balance_system":  {
-                           "active_balance_correction":  "CONTINUOUS_MICRO_ADJUSTMENTS",
-                           "imu_integration":  "MPU6050_FOR_TILT_FEEDBACK",
-                           "balance_strategy":  "ANKLE_STRATEGY_PRIMARY_BALANCE_METHOD",
-                           "response_time":  "UNDER_50MS_CORRECTION_LATENCY"
-                       },
-    "attachment_points":  {
-                              "connects_to_lower_leg":  {
-                                                            "component_reference":  "config/components/creature_specific/humanoid_knee_right.json",
-                                                            "attachment_method":  "M6_TIBIA_FIBULA_COUPLING"
-                                                        },
-                              "foot_attachment_ready":  {
-                                                            "interface":  "M5_FOOT_MOUNTING_PLATE",
-                                                            "description":  "Ready for future foot/balance platform attachment"
-                                                        }
-                          },
-    "control_specifications":  {
-                                   "controller_assignment":  "ESP32_C3_LEG_CONTROLLER_RIGHT",
-                                   "control_loop_frequency":  "2000_HZ",
-                                   "coordinate_with":  [
-                                                           "humanoid_hip_right",
-                                                           "humanoid_knee_right",
-                                                           "humanoid_ankle_left"
-                                                       ],
-                                   "balance_integration":  {
-                                                               "balance_algorithm":  "PID_WITH_FEEDFORWARD_COMPENSATION",
-                                                               "terrain_sensing":  "PRESSURE_SENSITIVE_FOOT_CONTACT"
-                                                           }
-                               },
-    "behavioral_capabilities":  {
-                                    "balance_contribution":  "PRIMARY_ACTIVE_BALANCE_CORRECTION",
-                                    "walking_contribution":  "FOOT_PLACEMENT_AND_PUSH_OFF_CONTROL",
-                                    "terrain_adaptation":  "UNEVEN_SURFACE_FOOT_CONFORMANCE",
-                                    "athletic_movements":  [
-                                                               "balance_beam_walking",
-                                                               "single_leg_stance",
-                                                               "dynamic_recovery"
-                                                           ]
-                                },
-    "hardware_type":  "POSITIONED_COMPONENT"
+    "relative_filename": "config/components/creature_specific/humanoid_ankle_right.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "humanoid_ankle_right",
+    "subsystem": "LEG",
+    "description": "Right ankle joint with 3 DOF for foot orientation and active balance",
+    "physical_component": "config/components/hardware/servo_assembly.json",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "3.0 INCH",
+        "y": "0.0 INCH",
+        "z": "-40.0 INCH",
+        "description": "Right ankle joint at lower leg terminus"
+    },
+    "scaling_behavior": {
+        "scales_with_creature": true,
+        "scaling_reference": "eye_spacing_baseline",
+        "position_scaling": "PROPORTIONAL_XYZ",
+        "component_scaling": "MASS_BASED_SERVO_SELECTION"
+    },
+    "joint_specifications": {
+        "degrees_of_freedom": 3,
+        "joint_names": [
+            "ankle_dorsi_plantar_flexion",
+            "ankle_inversion_eversion",
+            "ankle_internal_external_rotation"
+        ],
+        "ankle_dorsi_plantar_flexion": {
+            "axis": "FRONTAL_PLANE_ROTATION",
+            "range_of_motion": "-20_TO_45_DEGREES",
+            "servo_type": "DS3218_SERVO",
+            "torque_requirement": "2.2_NM_PEAK",
+            "position_feedback": "INTEGRATED_POTENTIOMETER",
+            "walking_primary": "HEEL_STRIKE_TO_TOE_OFF_CONTROL"
+        },
+        "ankle_inversion_eversion": {
+            "axis": "SAGITTAL_PLANE_ROTATION",
+            "range_of_motion": "-30_TO_30_DEGREES",
+            "servo_type": "MG996R_SERVO",
+            "torque_requirement": "1.3_NM_PEAK",
+            "position_feedback": "INTEGRATED_POTENTIOMETER",
+            "balance_primary": "LATERAL_BALANCE_CORRECTION"
+        },
+        "ankle_internal_external_rotation": {
+            "axis": "LONGITUDINAL_LEG_AXIS",
+            "range_of_motion": "-45_TO_45_DEGREES",
+            "servo_type": "MG996R_SERVO",
+            "torque_requirement": "1.3_NM_PEAK",
+            "position_feedback": "INTEGRATED_POTENTIOMETER",
+            "walking_secondary": "FOOT_ORIENTATION_AND_TURNING"
+        }
+    },
+    "balance_system": {
+        "active_balance_correction": "CONTINUOUS_MICRO_ADJUSTMENTS",
+        "imu_integration": "MPU6050_FOR_TILT_FEEDBACK",
+        "balance_strategy": "ANKLE_STRATEGY_PRIMARY_BALANCE_METHOD",
+        "response_time": "UNDER_50MS_CORRECTION_LATENCY"
+    },
+    "attachment_points": {
+        "connects_to_lower_leg": {
+            "component_reference": "config/components/creature_specific/humanoid_knee_right.json",
+            "attachment_method": "M6_TIBIA_FIBULA_COUPLING"
+        },
+        "foot_attachment_ready": {
+            "interface": "M5_FOOT_MOUNTING_PLATE",
+            "description": "Ready for future foot/balance platform attachment"
+        }
+    },
+    "control_specifications": {
+        "controller_assignment": "ESP32_C3_LEG_CONTROLLER_RIGHT",
+        "control_loop_frequency": "2000_HZ",
+        "coordinate_with": [
+            "humanoid_hip_right",
+            "humanoid_knee_right",
+            "humanoid_ankle_left"
+        ],
+        "balance_integration": {
+            "balance_algorithm": "PID_WITH_FEEDFORWARD_COMPENSATION",
+            "terrain_sensing": "PRESSURE_SENSITIVE_FOOT_CONTACT"
+        }
+    },
+    "behavioral_capabilities": {
+        "balance_contribution": "PRIMARY_ACTIVE_BALANCE_CORRECTION",
+        "walking_contribution": "FOOT_PLACEMENT_AND_PUSH_OFF_CONTROL",
+        "terrain_adaptation": "UNEVEN_SURFACE_FOOT_CONFORMANCE",
+        "athletic_movements": [
+            "balance_beam_walking",
+            "single_leg_stance",
+            "dynamic_recovery"
+        ]
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
 }

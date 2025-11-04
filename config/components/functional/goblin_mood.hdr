@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_mood
+#include <esp_err.h>
+
+esp_err_t goblin_mood_init(void);
+void goblin_mood_act(void);

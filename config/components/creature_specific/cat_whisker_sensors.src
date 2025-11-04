@@ -1,0 +1,20 @@
+// Auto-generated source for cat_whisker_sensors
+#include "components/cat_whisker_sensors.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "cat_whisker_sensors";
+
+esp_err_t cat_whisker_sensors_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void cat_whisker_sensors_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

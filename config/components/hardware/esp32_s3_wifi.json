@@ -1,25 +1,26 @@
 {
-    "version":  "1.0.0",
-    "specifications":  {
-                           "wifi_standard":  "802.11 b/g/n",
-                           "bluetooth":  "Bluetooth LE 5.0",
-                           "mesh_networking":  "Supported",
-                           "esp_now":  "Supported",
-                           "power_consumption":  {
-                                                     "voltage":  "3.3V",
-                                                     "current_draw":  "240mA",
-                                                     "power_watts":  "0.792W"
-                                                 }
-                       },
-    "name":  "esp32_s3_wifi",
-    "relative_filename":  "config/components/hardware/esp32_s3_wifi.json",
-    "description":  "ESP32-S3 WiFi and Bluetooth controller",
-    "cost_performance":  {
-                             "lead_time_days":  3,
-                             "availability":  "COMMON",
-                             "unit_cost_usd":  8.99,
-                             "last_updated":  "2025-10-22"
-                         },
-    "author":  "config/author.json",
-    "hardware_type":  "WIRELESS_CONTROLLER"
+    "version": "1.0.0",
+    "specifications": {
+        "wifi_standard": "802.11 b/g/n",
+        "bluetooth": "Bluetooth LE 5.0",
+        "mesh_networking": "Supported",
+        "esp_now": "Supported",
+        "power_consumption": {
+            "voltage": "3.3V",
+            "current_draw": "240mA",
+            "power_watts": "0.792W"
+        }
+    },
+    "name": "esp32_s3_wifi",
+    "relative_filename": "config/components/hardware/esp32_s3_wifi.json",
+    "description": "ESP32-S3 WiFi and Bluetooth controller",
+    "cost_performance": {
+        "lead_time_days": 3,
+        "availability": "COMMON",
+        "unit_cost_usd": 8.99,
+        "last_updated": "2025-10-22"
+    },
+    "author": "config/author.json",
+    "hardware_type": "WIRELESS_CONTROLLER",
+    "type": "UNKNOWN"
 }

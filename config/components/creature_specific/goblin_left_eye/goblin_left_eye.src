@@ -1,0 +1,35 @@
+#include "esp_log.h"
+#include "esp_heap_caps.h"
+
+// This component is the "root" of the display pipeline. It defines the
+// shared buffer and brings the display driver's namespace into scope.
+using namespace GC9A01;
+
+// This is the shared buffer pointer for the entire display pipeline.
+// It is visible to all component .src files in this subsystem.
+static Pixel* currentDisplay = NULL;
+
+esp_err_t goblin_left_eye_init(void)
+{
+    // Initialization logic for the left eye.
+    // The buffer is managed in the act() cycle.
+    ESP_LOGI("goblin_left_eye", "Component initialized.");
+    return ESP_OK;
+}
+
+void goblin_left_eye_act(void)
+{
+    // This component's job is to allocate the buffer for the start of a new frame.
+    // It only allocates if the buffer is NULL (meaning the display driver has freed it).
+    if (currentDisplay == NULL)
+    {
+        // The size is known at compile time from the gc9a01.hdr file.
+        currentDisplay = new Pixel[WIDTH * HEIGHT];
+
+        if (currentDisplay == NULL) {
+            ESP_LOGE("goblin_left_eye", "Failed to allocate display buffer!");
+        } else {
+            ESP_LOGI("goblin_left_eye", "Display buffer allocated.");
+        }
+    }
+}

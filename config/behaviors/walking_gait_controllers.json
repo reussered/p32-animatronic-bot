@@ -1,270 +1,271 @@
 {
-    "relative_filename":  "config/behaviors/walking_gait_controllers.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "behavior_id":  "WALKING_GAIT_CONTROLLERS",
-    "behavior_type":  "DYNAMIC_LOCOMOTION_ALGORITHMS",
-    "description":  "Complete walking gait algorithms for bipedal and quadruped robots with distributed ESP32 control",
-    "bipedal_gait_algorithms":  {
-                                    "static_walking_gait":  {
-                                                                "description":  "Statically stable walking with 3-point support",
-                                                                "algorithm_type":  "ZERO_MOMENT_POINT_ZMP_CONTROL",
-                                                                "step_sequence":  {
-                                                                                      "phase_1_double_support":  {
-                                                                                                                     "duration":  "0.4_SECONDS",
-                                                                                                                     "both_feet_ground":  "WEIGHT_TRANSFER_TO_SUPPORT_LEG",
-                                                                                                                     "zmp_position":  "CENTER_BETWEEN_FEET_STABLE"
-                                                                                                                 },
-                                                                                      "phase_2_swing_preparation":  {
-                                                                                                                        "duration":  "0.2_SECONDS",
-                                                                                                                        "weight_shift":  "FULL_WEIGHT_ON_SUPPORT_LEG",
-                                                                                                                        "swing_leg_preparation":  "LIFT_PREPARATION_ANKLE_FLEX"
-                                                                                                                    },
-                                                                                      "phase_3_swing_phase":  {
-                                                                                                                  "duration":  "0.8_SECONDS",
-                                                                                                                  "swing_leg_trajectory":  "MINIMUM_ENERGY_SPLINE_PATH",
-                                                                                                                  "support_leg":  "MICRO_ADJUSTMENTS_FOR_BALANCE"
-                                                                                                              },
-                                                                                      "phase_4_touchdown":  {
-                                                                                                                "duration":  "0.2_SECONDS",
-                                                                                                                "foot_placement":  "CONTROLLED_HEEL_STRIKE_IMPACT_ABSORPTION",
-                                                                                                                "transition":  "PREPARE_NEXT_STEP_CYCLE"
-                                                                                                            }
-                                                                                  },
-                                                                "esp32_distributed_control":  {
-                                                                                                  "master_controller_esp32s3":  {
-                                                                                                                                    "responsibilities":  [
-                                                                                                                                                             "OVERALL_GAIT_COORDINATION",
-                                                                                                                                                             "BALANCE_MONITORING",
-                                                                                                                                                             "STEP_TIMING"
-                                                                                                                                                         ],
-                                                                                                                                    "update_rate":  "1000_HZ_CRITICAL_BALANCE_LOOP"
-                                                                                                                                },
-                                                                                                  "leg_controllers_esp32c3":  {
-                                                                                                                                  "responsibilities":  [
-                                                                                                                                                           "LOCAL_LEG_CONTROL",
-                                                                                                                                                           "JOINT_INTERPOLATION",
-                                                                                                                                                           "FORCE_FEEDBACK"
-                                                                                                                                                       ],
-                                                                                                                                  "update_rate":  "500_HZ_SERVO_CONTROL_LOOP"
-                                                                                                                              },
-                                                                                                  "spine_controller_esp32c3":  {
-                                                                                                                                   "responsibilities":  [
-                                                                                                                                                            "TORSO_BALANCE_CONTRIBUTION",
-                                                                                                                                                            "DYNAMIC_POSTURE"
-                                                                                                                                                        ],
-                                                                                                                                   "update_rate":  "200_HZ_POSTURAL_ADJUSTMENTS"
-                                                                                                                               }
-                                                                                              }
-                                                            },
-                                    "dynamic_walking_gait":  {
-                                                                 "description":  "Dynamic walking with controlled falling and recovery",
-                                                                 "algorithm_type":  "INVERTED_PENDULUM_WITH_ANKLE_STRATEGY",
-                                                                 "step_sequence":  {
-                                                                                       "controlled_fall_phase":  {
-                                                                                                                     "duration":  "0.3_SECONDS",
-                                                                                                                     "mechanism":  "LEAN_FORWARD_GRAVITY_ASSIST",
-                                                                                                                     "recovery_preparation":  "SWING_LEG_TRAJECTORY_CALCULATION"
-                                                                                                                 },
-                                                                                       "ballistic_swing":  {
-                                                                                                               "duration":  "0.4_SECONDS",
-                                                                                                               "trajectory":  "NATURAL_PENDULUM_SWING_MINIMUM_ENERGY",
-                                                                                                               "balance_strategy":  "ANKLE_TORQUE_FINE_ADJUSTMENTS"
-                                                                                                           },
-                                                                                       "impact_absorption":  {
-                                                                                                                 "duration":  "0.1_SECONDS",
-                                                                                                                 "heel_strike":  "CONTROLLED_IMPACT_ENERGY_DISSIPATION",
-                                                                                                                 "transition":  "MOMENTUM_TRANSFER_TO_FORWARD_MOTION"
-                                                                                                             }
-                                                                                   },
-                                                                 "advanced_features":  {
-                                                                                           "adaptive_step_length":  "TERRAIN_AND_SPEED_RESPONSIVE",
-                                                                                           "obstacle_avoidance":  "REAL_TIME_TRAJECTORY_MODIFICATION",
-                                                                                           "energy_optimization":  "NATURAL_PENDULUM_EXPLOITATION"
-                                                                                       }
-                                                             },
-                                    "stair_climbing_gait":  {
-                                                                "description":  "Specialized gait for stairs and obstacles",
-                                                                "step_height_capability":  "UP_TO_8_INCHES_STANDARD_STAIRS",
-                                                                "algorithm_features":  {
-                                                                                           "high_lift_trajectory":  "MODIFIED_SWING_PHASE_VERTICAL_CLEARANCE",
-                                                                                           "precision_foot_placement":  "VISUAL_SERVO_CONTROL_FOOT_POSITIONING",
-                                                                                           "increased_stability_margin":  "CONSERVATIVE_BALANCE_PARAMETERS",
-                                                                                           "step_edge_detection":  "PRESSURE_SENSORS_CONFIRM_SOLID_FOOTING"
-                                                                                       }
-                                                            }
-                                },
-    "quadruped_gait_algorithms":  {
-                                      "walk_gait_four_beat":  {
-                                                                  "description":  "Classic quadruped walk - always 3 legs supporting",
-                                                                  "leg_sequence":  [
-                                                                                       "FRONT_LEFT",
-                                                                                       "REAR_RIGHT",
-                                                                                       "FRONT_RIGHT",
-                                                                                       "REAR_LEFT"
-                                                                                   ],
-                                                                  "timing_parameters":  {
-                                                                                            "duty_cycle":  "75_PERCENT_STANCE_PHASE",
-                                                                                            "step_frequency":  "0.5_HZ_SLOW_STABLE_WALK",
-                                                                                            "phase_offset":  "25_PERCENT_BETWEEN_LEGS"
-                                                                                        },
-                                                                  "stability_advantages":  {
-                                                                                               "static_stability":  "ALWAYS_STABLE_TRIANGLE_SUPPORT",
-                                                                                               "no_balance_required":  "INHERENTLY_STABLE_NO_SENSORS_NEEDED",
-                                                                                               "simple_control":  "OPEN_LOOP_GAIT_POSSIBLE"
-                                                                                           }
-                                                              },
-                                      "trot_gait_diagonal":  {
-                                                                 "description":  "Dynamic trot - diagonal leg pairs synchronized",
-                                                                 "leg_sequence":  [
-                                                                                      "FRONT_LEFT + REAR_RIGHT",
-                                                                                      "FRONT_RIGHT + REAR_LEFT"
-                                                                                  ],
-                                                                 "timing_parameters":  {
-                                                                                           "duty_cycle":  "50_PERCENT_STANCE_PHASE",
-                                                                                           "step_frequency":  "1.5_HZ_MODERATE_SPEED",
-                                                                                           "suspension_phase":  "BRIEF_AIRBORNE_PERIODS"
-                                                                                       },
-                                                                 "dynamic_features":  {
-                                                                                          "natural_suspension":  "ELASTIC_ENERGY_STORAGE_RECOVERY",
-                                                                                          "increased_speed":  "UP_TO_3.5_MPH_SUSTAINABLE",
-                                                                                          "smooth_gait":  "MINIMAL_VERTICAL_OSCILLATION"
-                                                                                      }
-                                                             },
-                                      "bound_gait_front_rear":  {
-                                                                    "description":  "High-speed bound - front pair then rear pair",
-                                                                    "leg_sequence":  [
-                                                                                         "FRONT_LEFT + FRONT_RIGHT",
-                                                                                         "REAR_LEFT + REAR_RIGHT"
-                                                                                     ],
-                                                                    "timing_parameters":  {
-                                                                                              "duty_cycle":  "40_PERCENT_STANCE_PHASE",
-                                                                                              "step_frequency":  "2.5_HZ_HIGH_SPEED",
-                                                                                              "ballistic_phases":  "SIGNIFICANT_AIRBORNE_TIME"
-                                                                                          },
-                                                                    "performance_characteristics":  {
-                                                                                                        "maximum_speed":  "UP_TO_5_MPH_BURST_CAPABILITY",
-                                                                                                        "energy_storage":  "SPINE_FLEXION_EXTENSION_SPRING",
-                                                                                                        "terrain_capability":  "OBSTACLE_JUMPING_ABILITY"
-                                                                                                    }
-                                                                }
-                                  },
-    "balance_and_stability_algorithms":  {
-                                             "sensor_fusion_balance":  {
-                                                                           "primary_sensors":  {
-                                                                                                   "imu_vestibular":  {
-                                                                                                                          "sensor":  "MPU6050_HEAD_MOUNTED",
-                                                                                                                          "function":  "ANGULAR_VELOCITY_ACCELERATION",
-                                                                                                                          "update_rate":  "1000_HZ"
-                                                                                                                      },
-                                                                                                   "foot_pressure_proprioceptive":  {
-                                                                                                                                        "sensor":  "FSR402_ARRAYS_EACH_FOOT",
-                                                                                                                                        "function":  "GROUND_CONTACT_FORCE_DISTRIBUTION",
-                                                                                                                                        "update_rate":  "500_HZ"
-                                                                                                                                    },
-                                                                                                   "joint_encoders_kinesthetic":  {
-                                                                                                                                      "sensor":  "AS5600_MAGNETIC_ENCODERS",
-                                                                                                                                      "function":  "JOINT_POSITION_FEEDBACK",
-                                                                                                                                      "update_rate":  "500_HZ"
-                                                                                                                                  }
-                                                                                               },
-                                                                           "kalman_filter_fusion":  {
-                                                                                                        "state_estimation":  "POSITION_VELOCITY_ACCELERATION_FUSION",
-                                                                                                        "prediction_model":  "INVERTED_PENDULUM_DYNAMICS",
-                                                                                                        "measurement_updates":  "MULTI_SENSOR_WEIGHTED_AVERAGE",
-                                                                                                        "noise_filtering":  "ADAPTIVE_FILTER_PARAMETERS"
-                                                                                                    }
-                                                                       },
-                                             "balance_recovery_strategies":  {
-                                                                                 "ankle_strategy":  {
-                                                                                                        "description":  "Small disturbances corrected by ankle torque",
-                                                                                                        "activation_threshold":  "LEAN_ANGLE_LESS_THAN_5_DEGREES",
-                                                                                                        "response_time":  "50_MILLISECONDS",
-                                                                                                        "control_method":  "PID_ANKLE_TORQUE_CONTROL"
-                                                                                                    },
-                                                                                 "hip_strategy":  {
-                                                                                                      "description":  "Medium disturbances corrected by hip motion",
-                                                                                                      "activation_threshold":  "LEAN_ANGLE_5_TO_15_DEGREES",
-                                                                                                      "response_time":  "100_MILLISECONDS",
-                                                                                                      "control_method":  "COORDINATED_HIP_TORSO_MOVEMENT"
-                                                                                                  },
-                                                                                 "step_strategy":  {
-                                                                                                       "description":  "Large disturbances require protective step",
-                                                                                                       "activation_threshold":  "LEAN_ANGLE_GREATER_THAN_15_DEGREES",
-                                                                                                       "response_time":  "200_MILLISECONDS",
-                                                                                                       "control_method":  "EMERGENCY_STEP_PLACEMENT"
-                                                                                                   }
-                                                                             }
-                                         },
-    "distributed_control_coordination":  {
-                                             "bluetooth_mesh_coordination":  {
-                                                                                 "master_to_slave_communication":  {
-                                                                                                                       "gait_commands":  "HIGH_LEVEL_STEP_TARGETS_AND_TIMING",
-                                                                                                                       "balance_corrections":  "REAL_TIME_BALANCE_ADJUSTMENT_COMMANDS",
-                                                                                                                       "emergency_stops":  "IMMEDIATE_HALT_ALL_MOTION_CAPABILITY",
-                                                                                                                       "latency_requirement":  "UNDER_5_MILLISECONDS_CRITICAL_COMMANDS"
-                                                                                                                   },
-                                                                                 "slave_to_master_feedback":  {
-                                                                                                                  "joint_positions":  "CURRENT_SERVO_ANGLES_AND_LOADS",
-                                                                                                                  "sensor_data":  "PRESSURE_FORCE_ENCODER_READINGS",
-                                                                                                                  "status_health":  "CONTROLLER_OPERATIONAL_STATUS",
-                                                                                                                  "update_rate":  "200_HZ_SUFFICIENT_FEEDBACK"
-                                                                                                              }
-                                                                             },
-                                             "failsafe_behaviors":  {
-                                                                        "communication_loss":  {
-                                                                                                   "local_autonomy":  "CONTINUE_LAST_GAIT_PATTERN_5_SECONDS",
-                                                                                                   "safe_shutdown":  "GRADUAL_STOP_AND_STABLE_POSE",
-                                                                                                   "recovery_protocol":  "RECONNECTION_VERIFICATION_RESUME"
-                                                                                               },
-                                                                        "sensor_failure":  {
-                                                                                               "sensor_redundancy":  "MULTIPLE_SENSORS_SAME_MEASUREMENT",
-                                                                                               "degraded_operation":  "REDUCE_SPEED_INCREASE_MARGINS",
-                                                                                               "emergency_protocols":  "IMMEDIATE_SAFE_STOP_PROCEDURES"
-                                                                                           }
-                                                                    }
-                                         },
-    "terrain_adaptation_algorithms":  {
-                                          "surface_detection":  {
-                                                                    "ground_compliance":  "FOOT_PRESSURE_PATTERN_ANALYSIS",
-                                                                    "surface_angle":  "IMU_GRAVITY_VECTOR_CALCULATION",
-                                                                    "obstacle_detection":  "LIDAR_ULTRASONIC_SENSOR_FUSION",
-                                                                    "adaptation_response":  "MODIFY_GAIT_PARAMETERS_REAL_TIME"
-                                                                },
-                                          "adaptive_parameters":  {
-                                                                      "step_height_adjustment":  "INCREASE_CLEARANCE_ROUGH_TERRAIN",
-                                                                      "step_length_modification":  "SHORTER_STEPS_UNSTABLE_SURFACES",
-                                                                      "stability_margin_increase":  "CONSERVATIVE_BALANCE_PARAMETERS",
-                                                                      "speed_reduction":  "SLOWER_SPEEDS_CHALLENGING_TERRAIN"
-                                                                  }
-                                      },
-    "power_optimization_algorithms":  {
-                                          "energy_efficient_gaits":  {
-                                                                         "natural_pendulum_exploitation":  "MINIMIZE_ACTUATOR_WORK",
-                                                                         "gravity_assist_utilization":  "CONTROLLED_FALLING_FORWARD",
-                                                                         "elastic_energy_recovery":  "SPRING_LIKE_LEG_COMPLIANCE",
-                                                                         "regenerative_braking":  "ENERGY_RECOVERY_DURING_DECELERATION"
-                                                                     },
-                                          "dynamic_power_management":  {
-                                                                           "predictive_power_allocation":  "ANTICIPATE_POWER_NEEDS_TERRAIN",
-                                                                           "load_balancing":  "DISTRIBUTE_EFFORT_ACROSS_JOINTS",
-                                                                           "thermal_management":  "PREVENT_SERVO_OVERHEATING",
-                                                                           "battery_optimization":  "MAXIMIZE_RUNTIME_MISSION_PROFILE"
-                                                                       }
-                                      },
-    "real_world_performance_targets":  {
-                                           "bipedal_performance":  {
-                                                                       "walking_speed":  "2.5_MPH_SUSTAINED_4_HOURS",
-                                                                       "stair_climbing":  "STANDARD_8_INCH_STAIRS_NO_HANDRAIL",
-                                                                       "obstacle_navigation":  "6_INCH_OBSTACLES_DYNAMIC_AVOIDANCE",
-                                                                       "energy_efficiency":  "8_HOURS_RUNTIME_MODERATE_WALKING"
-                                                                   },
-                                           "quadruped_performance":  {
-                                                                         "walking_speed":  "3.5_MPH_SUSTAINED_5_HOURS",
-                                                                         "terrain_capability":  "15_DEGREE_SLOPES_ROUGH_SURFACES",
-                                                                         "load_carrying":  "15_POUNDS_PAYLOAD_NO_PERFORMANCE_LOSS",
-                                                                         "energy_efficiency":  "10_HOURS_RUNTIME_MIXED_TERRAIN"
-                                                                     }
-                                       },
-    "name":  "walking_gait_controllers"
+    "relative_filename": "config/behaviors/walking_gait_controllers.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "behavior_id": "WALKING_GAIT_CONTROLLERS",
+    "behavior_type": "DYNAMIC_LOCOMOTION_ALGORITHMS",
+    "description": "Complete walking gait algorithms for bipedal and quadruped robots with distributed ESP32 control",
+    "bipedal_gait_algorithms": {
+        "static_walking_gait": {
+            "description": "Statically stable walking with 3-point support",
+            "algorithm_type": "ZERO_MOMENT_POINT_ZMP_CONTROL",
+            "step_sequence": {
+                "phase_1_double_support": {
+                    "duration": "0.4_SECONDS",
+                    "both_feet_ground": "WEIGHT_TRANSFER_TO_SUPPORT_LEG",
+                    "zmp_position": "CENTER_BETWEEN_FEET_STABLE"
+                },
+                "phase_2_swing_preparation": {
+                    "duration": "0.2_SECONDS",
+                    "weight_shift": "FULL_WEIGHT_ON_SUPPORT_LEG",
+                    "swing_leg_preparation": "LIFT_PREPARATION_ANKLE_FLEX"
+                },
+                "phase_3_swing_phase": {
+                    "duration": "0.8_SECONDS",
+                    "swing_leg_trajectory": "MINIMUM_ENERGY_SPLINE_PATH",
+                    "support_leg": "MICRO_ADJUSTMENTS_FOR_BALANCE"
+                },
+                "phase_4_touchdown": {
+                    "duration": "0.2_SECONDS",
+                    "foot_placement": "CONTROLLED_HEEL_STRIKE_IMPACT_ABSORPTION",
+                    "transition": "PREPARE_NEXT_STEP_CYCLE"
+                }
+            },
+            "esp32_distributed_control": {
+                "master_controller_esp32s3": {
+                    "responsibilities": [
+                        "OVERALL_GAIT_COORDINATION",
+                        "BALANCE_MONITORING",
+                        "STEP_TIMING"
+                    ],
+                    "update_rate": "1000_HZ_CRITICAL_BALANCE_LOOP"
+                },
+                "leg_controllers_esp32c3": {
+                    "responsibilities": [
+                        "LOCAL_LEG_CONTROL",
+                        "JOINT_INTERPOLATION",
+                        "FORCE_FEEDBACK"
+                    ],
+                    "update_rate": "500_HZ_SERVO_CONTROL_LOOP"
+                },
+                "spine_controller_esp32c3": {
+                    "responsibilities": [
+                        "TORSO_BALANCE_CONTRIBUTION",
+                        "DYNAMIC_POSTURE"
+                    ],
+                    "update_rate": "200_HZ_POSTURAL_ADJUSTMENTS"
+                }
+            }
+        },
+        "dynamic_walking_gait": {
+            "description": "Dynamic walking with controlled falling and recovery",
+            "algorithm_type": "INVERTED_PENDULUM_WITH_ANKLE_STRATEGY",
+            "step_sequence": {
+                "controlled_fall_phase": {
+                    "duration": "0.3_SECONDS",
+                    "mechanism": "LEAN_FORWARD_GRAVITY_ASSIST",
+                    "recovery_preparation": "SWING_LEG_TRAJECTORY_CALCULATION"
+                },
+                "ballistic_swing": {
+                    "duration": "0.4_SECONDS",
+                    "trajectory": "NATURAL_PENDULUM_SWING_MINIMUM_ENERGY",
+                    "balance_strategy": "ANKLE_TORQUE_FINE_ADJUSTMENTS"
+                },
+                "impact_absorption": {
+                    "duration": "0.1_SECONDS",
+                    "heel_strike": "CONTROLLED_IMPACT_ENERGY_DISSIPATION",
+                    "transition": "MOMENTUM_TRANSFER_TO_FORWARD_MOTION"
+                }
+            },
+            "advanced_features": {
+                "adaptive_step_length": "TERRAIN_AND_SPEED_RESPONSIVE",
+                "obstacle_avoidance": "REAL_TIME_TRAJECTORY_MODIFICATION",
+                "energy_optimization": "NATURAL_PENDULUM_EXPLOITATION"
+            }
+        },
+        "stair_climbing_gait": {
+            "description": "Specialized gait for stairs and obstacles",
+            "step_height_capability": "UP_TO_8_INCHES_STANDARD_STAIRS",
+            "algorithm_features": {
+                "high_lift_trajectory": "MODIFIED_SWING_PHASE_VERTICAL_CLEARANCE",
+                "precision_foot_placement": "VISUAL_SERVO_CONTROL_FOOT_POSITIONING",
+                "increased_stability_margin": "CONSERVATIVE_BALANCE_PARAMETERS",
+                "step_edge_detection": "PRESSURE_SENSORS_CONFIRM_SOLID_FOOTING"
+            }
+        }
+    },
+    "quadruped_gait_algorithms": {
+        "walk_gait_four_beat": {
+            "description": "Classic quadruped walk - always 3 legs supporting",
+            "leg_sequence": [
+                "FRONT_LEFT",
+                "REAR_RIGHT",
+                "FRONT_RIGHT",
+                "REAR_LEFT"
+            ],
+            "timing_parameters": {
+                "duty_cycle": "75_PERCENT_STANCE_PHASE",
+                "step_frequency": "0.5_HZ_SLOW_STABLE_WALK",
+                "phase_offset": "25_PERCENT_BETWEEN_LEGS"
+            },
+            "stability_advantages": {
+                "static_stability": "ALWAYS_STABLE_TRIANGLE_SUPPORT",
+                "no_balance_required": "INHERENTLY_STABLE_NO_SENSORS_NEEDED",
+                "simple_control": "OPEN_LOOP_GAIT_POSSIBLE"
+            }
+        },
+        "trot_gait_diagonal": {
+            "description": "Dynamic trot - diagonal leg pairs synchronized",
+            "leg_sequence": [
+                "FRONT_LEFT + REAR_RIGHT",
+                "FRONT_RIGHT + REAR_LEFT"
+            ],
+            "timing_parameters": {
+                "duty_cycle": "50_PERCENT_STANCE_PHASE",
+                "step_frequency": "1.5_HZ_MODERATE_SPEED",
+                "suspension_phase": "BRIEF_AIRBORNE_PERIODS"
+            },
+            "dynamic_features": {
+                "natural_suspension": "ELASTIC_ENERGY_STORAGE_RECOVERY",
+                "increased_speed": "UP_TO_3.5_MPH_SUSTAINABLE",
+                "smooth_gait": "MINIMAL_VERTICAL_OSCILLATION"
+            }
+        },
+        "bound_gait_front_rear": {
+            "description": "High-speed bound - front pair then rear pair",
+            "leg_sequence": [
+                "FRONT_LEFT + FRONT_RIGHT",
+                "REAR_LEFT + REAR_RIGHT"
+            ],
+            "timing_parameters": {
+                "duty_cycle": "40_PERCENT_STANCE_PHASE",
+                "step_frequency": "2.5_HZ_HIGH_SPEED",
+                "ballistic_phases": "SIGNIFICANT_AIRBORNE_TIME"
+            },
+            "performance_characteristics": {
+                "maximum_speed": "UP_TO_5_MPH_BURST_CAPABILITY",
+                "energy_storage": "SPINE_FLEXION_EXTENSION_SPRING",
+                "terrain_capability": "OBSTACLE_JUMPING_ABILITY"
+            }
+        }
+    },
+    "balance_and_stability_algorithms": {
+        "sensor_fusion_balance": {
+            "primary_sensors": {
+                "imu_vestibular": {
+                    "sensor": "MPU6050_HEAD_MOUNTED",
+                    "function": "ANGULAR_VELOCITY_ACCELERATION",
+                    "update_rate": "1000_HZ"
+                },
+                "foot_pressure_proprioceptive": {
+                    "sensor": "FSR402_ARRAYS_EACH_FOOT",
+                    "function": "GROUND_CONTACT_FORCE_DISTRIBUTION",
+                    "update_rate": "500_HZ"
+                },
+                "joint_encoders_kinesthetic": {
+                    "sensor": "AS5600_MAGNETIC_ENCODERS",
+                    "function": "JOINT_POSITION_FEEDBACK",
+                    "update_rate": "500_HZ"
+                }
+            },
+            "kalman_filter_fusion": {
+                "state_estimation": "POSITION_VELOCITY_ACCELERATION_FUSION",
+                "prediction_model": "INVERTED_PENDULUM_DYNAMICS",
+                "measurement_updates": "MULTI_SENSOR_WEIGHTED_AVERAGE",
+                "noise_filtering": "ADAPTIVE_FILTER_PARAMETERS"
+            }
+        },
+        "balance_recovery_strategies": {
+            "ankle_strategy": {
+                "description": "Small disturbances corrected by ankle torque",
+                "activation_threshold": "LEAN_ANGLE_LESS_THAN_5_DEGREES",
+                "response_time": "50_MILLISECONDS",
+                "control_method": "PID_ANKLE_TORQUE_CONTROL"
+            },
+            "hip_strategy": {
+                "description": "Medium disturbances corrected by hip motion",
+                "activation_threshold": "LEAN_ANGLE_5_TO_15_DEGREES",
+                "response_time": "100_MILLISECONDS",
+                "control_method": "COORDINATED_HIP_TORSO_MOVEMENT"
+            },
+            "step_strategy": {
+                "description": "Large disturbances require protective step",
+                "activation_threshold": "LEAN_ANGLE_GREATER_THAN_15_DEGREES",
+                "response_time": "200_MILLISECONDS",
+                "control_method": "EMERGENCY_STEP_PLACEMENT"
+            }
+        }
+    },
+    "distributed_control_coordination": {
+        "bluetooth_mesh_coordination": {
+            "master_to_slave_communication": {
+                "gait_commands": "HIGH_LEVEL_STEP_TARGETS_AND_TIMING",
+                "balance_corrections": "REAL_TIME_BALANCE_ADJUSTMENT_COMMANDS",
+                "emergency_stops": "IMMEDIATE_HALT_ALL_MOTION_CAPABILITY",
+                "latency_requirement": "UNDER_5_MILLISECONDS_CRITICAL_COMMANDS"
+            },
+            "slave_to_master_feedback": {
+                "joint_positions": "CURRENT_SERVO_ANGLES_AND_LOADS",
+                "sensor_data": "PRESSURE_FORCE_ENCODER_READINGS",
+                "status_health": "CONTROLLER_OPERATIONAL_STATUS",
+                "update_rate": "200_HZ_SUFFICIENT_FEEDBACK"
+            }
+        },
+        "failsafe_behaviors": {
+            "communication_loss": {
+                "local_autonomy": "CONTINUE_LAST_GAIT_PATTERN_5_SECONDS",
+                "safe_shutdown": "GRADUAL_STOP_AND_STABLE_POSE",
+                "recovery_protocol": "RECONNECTION_VERIFICATION_RESUME"
+            },
+            "sensor_failure": {
+                "sensor_redundancy": "MULTIPLE_SENSORS_SAME_MEASUREMENT",
+                "degraded_operation": "REDUCE_SPEED_INCREASE_MARGINS",
+                "emergency_protocols": "IMMEDIATE_SAFE_STOP_PROCEDURES"
+            }
+        }
+    },
+    "terrain_adaptation_algorithms": {
+        "surface_detection": {
+            "ground_compliance": "FOOT_PRESSURE_PATTERN_ANALYSIS",
+            "surface_angle": "IMU_GRAVITY_VECTOR_CALCULATION",
+            "obstacle_detection": "LIDAR_ULTRASONIC_SENSOR_FUSION",
+            "adaptation_response": "MODIFY_GAIT_PARAMETERS_REAL_TIME"
+        },
+        "adaptive_parameters": {
+            "step_height_adjustment": "INCREASE_CLEARANCE_ROUGH_TERRAIN",
+            "step_length_modification": "SHORTER_STEPS_UNSTABLE_SURFACES",
+            "stability_margin_increase": "CONSERVATIVE_BALANCE_PARAMETERS",
+            "speed_reduction": "SLOWER_SPEEDS_CHALLENGING_TERRAIN"
+        }
+    },
+    "power_optimization_algorithms": {
+        "energy_efficient_gaits": {
+            "natural_pendulum_exploitation": "MINIMIZE_ACTUATOR_WORK",
+            "gravity_assist_utilization": "CONTROLLED_FALLING_FORWARD",
+            "elastic_energy_recovery": "SPRING_LIKE_LEG_COMPLIANCE",
+            "regenerative_braking": "ENERGY_RECOVERY_DURING_DECELERATION"
+        },
+        "dynamic_power_management": {
+            "predictive_power_allocation": "ANTICIPATE_POWER_NEEDS_TERRAIN",
+            "load_balancing": "DISTRIBUTE_EFFORT_ACROSS_JOINTS",
+            "thermal_management": "PREVENT_SERVO_OVERHEATING",
+            "battery_optimization": "MAXIMIZE_RUNTIME_MISSION_PROFILE"
+        }
+    },
+    "real_world_performance_targets": {
+        "bipedal_performance": {
+            "walking_speed": "2.5_MPH_SUSTAINED_4_HOURS",
+            "stair_climbing": "STANDARD_8_INCH_STAIRS_NO_HANDRAIL",
+            "obstacle_navigation": "6_INCH_OBSTACLES_DYNAMIC_AVOIDANCE",
+            "energy_efficiency": "8_HOURS_RUNTIME_MODERATE_WALKING"
+        },
+        "quadruped_performance": {
+            "walking_speed": "3.5_MPH_SUSTAINED_5_HOURS",
+            "terrain_capability": "15_DEGREE_SLOPES_ROUGH_SURFACES",
+            "load_carrying": "15_POUNDS_PAYLOAD_NO_PERFORMANCE_LOSS",
+            "energy_efficiency": "10_HOURS_RUNTIME_MIXED_TERRAIN"
+        }
+    },
+    "name": "walking_gait_controllers",
+    "type": "UNKNOWN"
 }

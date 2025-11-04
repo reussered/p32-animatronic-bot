@@ -3,14 +3,14 @@
 // Uses display-agnostic Pixel types with saturation arithmetic
 
 #include "esp_log.h"
-#include "config/components/hardware/gc9a01.hdr"  // For Pixel type
+#include "config/components/hardware/gc9a01.hdr"  // For GC9A01_Pixel type
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 
 // Shared frame buffer (set by left/right eye positioned components)
-static Pixel* currentFrame = nullptr;
+static GC9A01_Pixel* currentFrame = nullptr;
 static uint32_t current_frame_size = 0;
 
 // Goblin personality multiplier - goblins show emotions STRONGLY (1.5x)
@@ -93,17 +93,23 @@ void goblin_eye_act(void)
                 // Normalize to fractional multiplier and apply effect
                 float intensity = static_cast<float>(moodValue) / 127.0f;
                 
-                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * Pixel::maxRed);
-                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * Pixel::maxGreen);
-                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * Pixel::maxBlue);
+                int16_t red_contrib = static_cast<int16_t>(intensity * effect.red_multiplier * 31);   // 0x1F = 31
+                int16_t green_contrib = static_cast<int16_t>(intensity * effect.green_multiplier * 63); // 0x3F = 63
+                int16_t blue_contrib = static_cast<int16_t>(intensity * effect.blue_multiplier * 31);  // 0x1F = 31
                 
                 // Accumulate using Pixel's saturating addition
-                Pixel contribution;
+                GC9A01_Pixel contribution;
                 contribution.red = (red_contrib > 0) ? red_contrib : 0;
                 contribution.green = (green_contrib > 0) ? green_contrib : 0;
                 contribution.blue = (blue_contrib > 0) ? blue_contrib : 0;
                 
-                moodTint += contribution;
+                // Manual saturation addition
+                unsigned int sum_r = moodTint.red + contribution.red;
+                moodTint.red = (sum_r > 31) ? 31 : sum_r;
+                unsigned int sum_g = moodTint.green + contribution.green;
+                moodTint.green = (sum_g > 63) ? 63 : sum_g;
+                unsigned int sum_b = moodTint.blue + contribution.blue;
+                moodTint.blue = (sum_b > 31) ? 31 : sum_b;
             }
         }
         
@@ -111,7 +117,12 @@ void goblin_eye_act(void)
         for (uint32_t pixel = 0; pixel < current_frame_size; pixel++) 
         {
             // Add mood tint using saturating arithmetic
-            currentFrame[pixel] += moodTint;
+            unsigned int sum_r = currentFrame[pixel].red + moodTint.red;
+            currentFrame[pixel].red = (sum_r > 31) ? 31 : sum_r;
+            unsigned int sum_g = currentFrame[pixel].green + moodTint.green;
+            currentFrame[pixel].green = (sum_g > 63) ? 63 : sum_g;
+            unsigned int sum_b = currentFrame[pixel].blue + moodTint.blue;
+            currentFrame[pixel].blue = (sum_b > 31) ? 31 : sum_b;
         }
         
         // Step 3: Remember new mood

@@ -1,0 +1,5 @@
+// Auto-generated header for goblin_pirate_head
+#include <esp_err.h>
+
+esp_err_t goblin_pirate_head_init(void);
+void goblin_pirate_head_act(void);

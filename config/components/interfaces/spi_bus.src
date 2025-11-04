@@ -22,7 +22,8 @@ struct spi_device_pinset_t {
 
 static constexpr size_t SPI_DEVICE_SLOT_COUNT = 32U;
 static spi_device_pinset_t spi_device_pins[SPI_DEVICE_SLOT_COUNT];
-spi_device_pinset_t cur_spi_pin;
+// cur_spi_display_pin is declared in spi_display_bus component
+extern spi_display_pinset_t cur_spi_display_pin;
 static size_t spi_device_count = 0;
 static size_t spi_active_device_index = 0;
 
@@ -148,7 +149,7 @@ void spi_bus_act(void) {
 
     if (spi_device_count == 0) {
         device = 0;
-        cur_spi_pin = spi_device_pinset_t();
+        cur_spi_display_pin = spi_display_pinset_t();
         return;
     }
 
@@ -157,7 +158,15 @@ void spi_bus_act(void) {
         device = 0;
     }
 
-    cur_spi_pin = spi_device_pins[static_cast<size_t>(device)];
+    // Convert spi_device_pinset_t to spi_display_pinset_t
+    const spi_device_pinset_t& device_pin = spi_device_pins[static_cast<size_t>(device)];
+    cur_spi_display_pin.mosi = device_pin.mosi;
+    cur_spi_display_pin.clk = device_pin.clk;
+    cur_spi_display_pin.cs = device_pin.cs;
+    cur_spi_display_pin.dc = device_pin.dc;
+    cur_spi_display_pin.bl = device_pin.backlight;
+    cur_spi_display_pin.rst = -1;  // Not used in device config
+    cur_spi_display_pin.handle = nullptr;
 
     ++device;
     if (static_cast<size_t>(device) >= spi_device_count) {

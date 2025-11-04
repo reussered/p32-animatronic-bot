@@ -1,110 +1,112 @@
 {
-  "relative_filename": "assets/animations/cat/playful_eye_dart.json", 
-  "animation_name": "cat_playful_eye_dart",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "description": "Quick darting eye movements for feline hunting instincts",
-  "duration_ms": 1500,
-  "loop": true,
-  "mood_trigger": "CURIOSITY",
-  "components": [
-    {
-      "component_id": "cat_eye_left",
-      "keyframes": [
+    "relative_filename": "assets/animations/cat/playful_eye_dart.json",
+    "animation_name": "cat_playful_eye_dart",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Quick darting eye movements for feline hunting instincts",
+    "duration_ms": 1500,
+    "loop": true,
+    "mood_trigger": "CURIOSITY",
+    "components": [
         {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_center",
-            "iris_dilation": "HUNTING_MODE"
-          }
+            "component_id": "cat_eye_left",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_center",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 200,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_left_track",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_right_track",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 800,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_center",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                }
+            ]
         },
         {
-          "time_ms": 200,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8, 
-            "color": "#32cd32",
-            "expression": "alert_left_track",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        },
-        {
-          "time_ms": 500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_right_track",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        },
-        {
-          "time_ms": 800,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32", 
-            "expression": "alert_center",
-            "iris_dilation": "HUNTING_MODE"
-          }
+            "component_id": "cat_eye_right",
+            "keyframes": [
+                {
+                    "time_ms": 0,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_center",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 200,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_left_track",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 500,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_right_track",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                },
+                {
+                    "time_ms": 800,
+                    "display_content": {
+                        "type": "eye_expression",
+                        "pupil_size": 0.9,
+                        "eye_openness": 0.8,
+                        "color": "#32cd32",
+                        "expression": "alert_center",
+                        "iris_dilation": "HUNTING_MODE"
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "component_id": "cat_eye_right",
-      "keyframes": [
-        {
-          "time_ms": 0,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_center",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        },
-        {
-          "time_ms": 200,
-          "display_content": {
-            "type": "eye_expression", 
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_left_track",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        },
-        {
-          "time_ms": 500,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_right_track",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        },
-        {
-          "time_ms": 800,
-          "display_content": {
-            "type": "eye_expression",
-            "pupil_size": 0.9,
-            "eye_openness": 0.8,
-            "color": "#32cd32",
-            "expression": "alert_center",
-            "iris_dilation": "HUNTING_MODE"
-          }
-        }
-      ]
-    }
-  ]
+    ],
+    "type": "UNKNOWN",
+    "name": "playful_eye_dart"
 }

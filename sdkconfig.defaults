@@ -1,6 +1,10 @@
 # P32 Animatronic Bot - ESP32-S3 Configuration  
 # Optimized for animatronic control with WiFi support
 
+# Flash size configuration for 16MB boards
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+
 # Basic ESP32-S3 settings
 CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240=y
 

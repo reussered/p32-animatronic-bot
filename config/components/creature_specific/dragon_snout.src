@@ -1,0 +1,20 @@
+// Auto-generated source for dragon_snout
+#include "components/dragon_snout.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "dragon_snout";
+
+esp_err_t dragon_snout_init(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "init executed");
+    #endif
+    return ESP_OK;
+}
+
+void dragon_snout_act(void)
+{
+    #ifdef DEBUG
+    ESP_LOGI(TAG, "act executed");
+    #endif
+}

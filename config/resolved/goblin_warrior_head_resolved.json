@@ -1,171 +1,172 @@
 {
-    "relative_filename":  "config/resolved/goblin_warrior_head_resolved.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "template_type":  "family_template",
-    "description":  "Aggressive goblin warrior head subsystem with battle scars and fierce expression",
-    "created":  "2025-10-13",
-    "subsystem_type":  "HEAD_CONTROLLER",
-    "controller":  "ESP32_S3_DEVKIT",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "units":  "INCHES",
-    "components":  [
-                       "config/components/creature_specific/base_eye_left.json",
-                       "config/components/creature_specific/base_eye_right.json",
-                       "config/components/creature_specific/base_speaker.json"
-                   ],
-    "hardware_interface_defaults":  {
-                                        "spi_bus":  "spi_bus",
-                                        "i2s_bus":  "I2S_BUS_0",
-                                        "spi_device_assignments":  {
-                                                                       "left_eye":  "DIRECT_SPI",
-                                                                       "right_eye":  "DIRECT_SPI",
-                                                                       "mouth":  "DIRECT_SPI"
-                                                                   },
-                                        "i2s_device_assignments":  {
-                                                                       "primary_speaker":  "I2S_DEVICE_1"
-                                                                   }
-                                    },
-    "base_mood_profile":  {
-                              "FEAR":  10,
-                              "ANGER":  10,
-                              "IRRITATION":  10,
-                              "HAPPINESS":  10,
-                              "CONTENTMENT":  10,
-                              "HUNGER":  10,
-                              "CURIOSITY":  10,
-                              "AFFECTION":  10
-                          },
-    "timing_defaults":  {
-                            "eye_blink_hitCount":  100,
-                            "mood_update_hitCount":  50,
-                            "sound_trigger_hitCount":  200,
-                            "sensor_read_hitCount":  20
-                        },
-    "power_specifications":  {
-                                 "voltage_requirement":  "3.3V_ESP32",
-                                 "estimated_current_ma":  "150",
-                                 "sleep_mode_supported":  true
-                             },
-    "communication_defaults":  {
-                                   "heartbeat_rate_hz":  "1",
-                                   "status_broadcast_rate_hz":  "0.1"
-                               },
-    "family_type":  "GOBLIN",
-    "family_category":  "humanoids",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "3.0 INCH",
-                                "compression_factor":  0.7,
-                                "skull_scale":  0.8,
-                                "snout_extension":  "0.5 INCH"
-                            },
-    "family_components":  [
-                              "config/components/creature_specific/goblin_left_eye.json",
-                              "config/components/creature_specific/goblin_right_eye.json",
-                              "config/components/creature_specific/goblin_nose.json",
-                              "config/components/creature_specific/goblin_mouth.json",
-                              "config/components/creature_specific/goblin_ear_left.json",
-                              "config/components/creature_specific/goblin_ear_right.json",
-                              "config/components/creature_specific/goblin_speaker.json"
-                          ],
-    "family_mood_profile":  {
-                                "FEAR":  8,
-                                "ANGER":  15,
-                                "IRRITATION":  18,
-                                "HAPPINESS":  12,
-                                "CONTENTMENT":  6,
-                                "HUNGER":  14,
-                                "CURIOSITY":  16,
-                                "AFFECTION":  8
-                            },
-    "aesthetic_profile":  {
-                              "surface_texture":  "rough_skin",
-                              "color_scheme":  "green_brown",
-                              "eye_style":  "large_expressive",
-                              "nose_style":  "pointed_snout",
-                              "mouth_style":  "wide_grin",
-                              "ear_style":  "pointed_tall",
-                              "feature_asymmetry":  true,
-                              "weathering_effects":  true
-                          },
-    "behavioral_characteristics":  {
-                                       "movement_speed":  "quick_jerky",
-                                       "attention_span_seconds":  "15",
-                                       "curiosity_level":  "high",
-                                       "aggression_threshold":  "medium_low",
-                                       "social_interaction":  "mischievous_playful"
-                                   },
-    "sound_characteristics":  {
-                                  "voice_pitch":  "high_scratchy",
-                                  "breathing_pattern":  "quick_irregular",
-                                  "comfort_sounds":  [
-                                                         "chittering",
-                                                         "soft_giggle",
-                                                         "content_purr"
-                                                     ],
-                                  "alert_sounds":  [
-                                                       "sharp_hiss",
-                                                       "warning_growl",
-                                                       "excited_chatter"
-                                                   ],
-                                  "ambient_volume":  0.6,
-                                  "voice_distortion":  "slight_rasp"
-                              },
-    "timing_overrides":  {
-                             "eye_blink_hitCount":  120,
-                             "mood_update_hitCount":  25,
-                             "sound_trigger_hitCount":  150,
-                             "sensor_read_hitCount":  15,
-                             "threat_assessment_hitCount":  10
-                         },
-    "bot_id":  "goblin_warrior_head_001",
-    "bot_type":  "GOBLIN_WARRIOR_HEAD",
-    "individual_characteristics":  {
-                                       "name":  "Skarfang",
-                                       "personality":  "aggressive_territorial",
-                                       "battle_experience":  "veteran",
-                                       "scar_pattern":  "left_eye_diagonal"
-                                   },
-    "individual_mood_overrides":  {
-                                      "ANGER":  20,
-                                      "IRRITATION":  22,
-                                      "FEAR":  5,
-                                      "AFFECTION":  3
-                                  },
-    "individual_components":  [
-                                  "config/components/creature_specific/goblin_warrior_battle_scar_left.json",
-                                  "config/components/creature_specific/goblin_warrior_tooth_fang.json"
-                              ],
-    "aesthetic_overrides":  {
-                                "color_scheme":  "dark_green_red",
-                                "weathering_effects":  true,
-                                "battle_damage":  "moderate",
-                                "eye_glow_intensity":  0.8
-                            },
-    "behavioral_overrides":  {
-                                 "aggression_threshold":  "low",
-                                 "attention_span_seconds":  "8",
-                                 "territorial_radius_inches":  "24"
-                             },
-    "sound_overrides":  {
-                            "voice_pitch":  "low_menacing",
-                            "comfort_sounds":  [
-                                                   "low_growl",
-                                                   "territorial_grunt"
-                                               ],
-                            "alert_sounds":  [
-                                                 "battle_roar",
-                                                 "threat_snarl",
-                                                 "challenge_howl"
-                                             ],
-                            "ambient_volume":  0.8
-                        },
-    "resolved_from_inheritance":  true,
-    "inheritance_chain":  [
-                              "Resolving: goblin_warrior_head_001",
-                              "  Applied family: config/templates/families/goblin_family.json",
-                              "  Applied parent: config/templates/base/humanoid_head_base.json"
-                          ],
-    "name":  "goblin_warrior_head_resolved"
+    "relative_filename": "config/resolved/goblin_warrior_head_resolved.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "template_type": "family_template",
+    "description": "Aggressive goblin warrior head subsystem with battle scars and fierce expression",
+    "created": "2025-10-13",
+    "subsystem_type": "HEAD_CONTROLLER",
+    "controller": "ESP32_S3_DEVKIT",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "units": "INCHES",
+    "components": [
+        "config/components/creature_specific/base_eye_left.json",
+        "config/components/creature_specific/base_eye_right.json",
+        "config/components/creature_specific/base_speaker.json"
+    ],
+    "hardware_interface_defaults": {
+        "spi_bus": "spi_bus",
+        "i2s_bus": "I2S_BUS_0",
+        "spi_device_assignments": {
+            "left_eye": "DIRECT_SPI",
+            "right_eye": "DIRECT_SPI",
+            "mouth": "DIRECT_SPI"
+        },
+        "i2s_device_assignments": {
+            "primary_speaker": "I2S_DEVICE_1"
+        }
+    },
+    "base_mood_profile": {
+        "FEAR": 10,
+        "ANGER": 10,
+        "IRRITATION": 10,
+        "HAPPINESS": 10,
+        "CONTENTMENT": 10,
+        "HUNGER": 10,
+        "CURIOSITY": 10,
+        "AFFECTION": 10
+    },
+    "timing_defaults": {
+        "eye_blink_hitCount": 100,
+        "mood_update_hitCount": 50,
+        "sound_trigger_hitCount": 200,
+        "sensor_read_hitCount": 20
+    },
+    "power_specifications": {
+        "voltage_requirement": "3.3V_ESP32",
+        "estimated_current_ma": "150",
+        "sleep_mode_supported": true
+    },
+    "communication_defaults": {
+        "heartbeat_rate_hz": "1",
+        "status_broadcast_rate_hz": "0.1"
+    },
+    "family_type": "GOBLIN",
+    "family_category": "humanoids",
+    "baseline_dimensions": {
+        "eye_spacing": "3.0 INCH",
+        "compression_factor": 0.7,
+        "skull_scale": 0.8,
+        "snout_extension": "0.5 INCH"
+    },
+    "family_components": [
+        "config/components/creature_specific/goblin_left_eye.json",
+        "config/components/creature_specific/goblin_right_eye.json",
+        "config/components/creature_specific/goblin_nose.json",
+        "config/components/creature_specific/goblin_mouth.json",
+        "config/components/creature_specific/goblin_ear_left.json",
+        "config/components/creature_specific/goblin_ear_right.json",
+        "config/components/creature_specific/goblin_speaker.json"
+    ],
+    "family_mood_profile": {
+        "FEAR": 8,
+        "ANGER": 15,
+        "IRRITATION": 18,
+        "HAPPINESS": 12,
+        "CONTENTMENT": 6,
+        "HUNGER": 14,
+        "CURIOSITY": 16,
+        "AFFECTION": 8
+    },
+    "aesthetic_profile": {
+        "surface_texture": "rough_skin",
+        "color_scheme": "green_brown",
+        "eye_style": "large_expressive",
+        "nose_style": "pointed_snout",
+        "mouth_style": "wide_grin",
+        "ear_style": "pointed_tall",
+        "feature_asymmetry": true,
+        "weathering_effects": true
+    },
+    "behavioral_characteristics": {
+        "movement_speed": "quick_jerky",
+        "attention_span_seconds": "15",
+        "curiosity_level": "high",
+        "aggression_threshold": "medium_low",
+        "social_interaction": "mischievous_playful"
+    },
+    "sound_characteristics": {
+        "voice_pitch": "high_scratchy",
+        "breathing_pattern": "quick_irregular",
+        "comfort_sounds": [
+            "chittering",
+            "soft_giggle",
+            "content_purr"
+        ],
+        "alert_sounds": [
+            "sharp_hiss",
+            "warning_growl",
+            "excited_chatter"
+        ],
+        "ambient_volume": 0.6,
+        "voice_distortion": "slight_rasp"
+    },
+    "timing_overrides": {
+        "eye_blink_hitCount": 120,
+        "mood_update_hitCount": 25,
+        "sound_trigger_hitCount": 150,
+        "sensor_read_hitCount": 15,
+        "threat_assessment_hitCount": 10
+    },
+    "bot_id": "goblin_warrior_head_001",
+    "bot_type": "GOBLIN_WARRIOR_HEAD",
+    "individual_characteristics": {
+        "name": "Skarfang",
+        "personality": "aggressive_territorial",
+        "battle_experience": "veteran",
+        "scar_pattern": "left_eye_diagonal"
+    },
+    "individual_mood_overrides": {
+        "ANGER": 20,
+        "IRRITATION": 22,
+        "FEAR": 5,
+        "AFFECTION": 3
+    },
+    "individual_components": [
+        "config/components/creature_specific/goblin_warrior_battle_scar_left.json",
+        "config/components/creature_specific/goblin_warrior_tooth_fang.json"
+    ],
+    "aesthetic_overrides": {
+        "color_scheme": "dark_green_red",
+        "weathering_effects": true,
+        "battle_damage": "moderate",
+        "eye_glow_intensity": 0.8
+    },
+    "behavioral_overrides": {
+        "aggression_threshold": "low",
+        "attention_span_seconds": "8",
+        "territorial_radius_inches": "24"
+    },
+    "sound_overrides": {
+        "voice_pitch": "low_menacing",
+        "comfort_sounds": [
+            "low_growl",
+            "territorial_grunt"
+        ],
+        "alert_sounds": [
+            "battle_roar",
+            "threat_snarl",
+            "challenge_howl"
+        ],
+        "ambient_volume": 0.8
+    },
+    "resolved_from_inheritance": true,
+    "inheritance_chain": [
+        "Resolving: goblin_warrior_head_001",
+        "  Applied family: config/templates/families/goblin_family.json",
+        "  Applied parent: config/templates/base/humanoid_head_base.json"
+    ],
+    "name": "goblin_warrior_head_resolved",
+    "type": "UNKNOWN"
 }

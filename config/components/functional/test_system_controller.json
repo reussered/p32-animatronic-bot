@@ -1,30 +1,30 @@
 {
-    "relative_filename":  "config/components/functional/test_system_controller.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "test_system_controller",
-    "component_type":  "SYSTEM_CONTROLLER",
-    "timing":  {
-                   "hitCount":  10,
-                   "description":  "Test system coordination every 10 cycles"
-               },
-    "software":  {
-                     "init_function":  "test_system_controller_init",
-                     "act_function":  "test_system_controller_act",
-                     "header_file":  "components/test/test_system_controller.hpp",
-                     "source_file":  "components/test/test_system_controller.cpp"
-                 },
-    "test_management":  {
-                            "manages_systest_class":  true,
-                            "auto_start_tests":  true,
-                            "test_validation_enabled":  true,
-                            "error_reporting_enabled":  true,
-                            "performance_monitoring":  true
-                        },
-    "logging":  {
-                    "verbose_mode":  true,
-                    "log_level":  "INFO",
-                    "test_results_logging":  true,
-                    "performance_metrics":  true
-                }
+    "relative_filename": "config/components/functional/test_system_controller.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "test_system_controller",
+    "timing": {
+        "hitCount": 10,
+        "description": "Test system coordination every 10 cycles"
+    },
+    "software": {
+        "init_function": "test_system_controller_init",
+        "act_function": "test_system_controller_act",
+        "header_file": "components/test/test_system_controller.hpp",
+        "source_file": "components/test/test_system_controller.cpp"
+    },
+    "test_management": {
+        "manages_systest_class": true,
+        "auto_start_tests": true,
+        "test_validation_enabled": true,
+        "error_reporting_enabled": true,
+        "performance_monitoring": true
+    },
+    "logging": {
+        "verbose_mode": true,
+        "log_level": "INFO",
+        "test_results_logging": true,
+        "performance_metrics": true
+    },
+    "type": "SYSTEM_CONTROLLER"
 }

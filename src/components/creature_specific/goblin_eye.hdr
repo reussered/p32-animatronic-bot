@@ -1,0 +1,21 @@
+// goblin_eye.hdr
+#ifndef GOBLIN_EYE_HDR
+#define GOBLIN_EYE_HDR
+
+#include "esp_err.h"
+#include "config/components/hardware/gc9a01.hdr"  // For Pixel type
+
+// Global variables for spi_display_bus compatibility
+// These are set by goblin_eye_act() to provide chunked data interface
+extern Pixel* goblin_eye_chunk_buffer;
+extern uint16_t goblin_eye_chunk_width;
+extern uint16_t goblin_eye_chunk_height;
+
+// Global flag indicating whether child components should initialize hardware
+// Set by goblin_eye_init() based on call count (true every 8th call)
+extern bool goblin_eye_should_init_hardware;
+
+esp_err_t goblin_eye_init(void);
+void goblin_eye_act(void);
+
+#endif // GOBLIN_EYE_HDR

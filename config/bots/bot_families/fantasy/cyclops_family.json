@@ -1,120 +1,121 @@
 {
-    "relative_filename":  "config/bots/bot_families/fantasy/cyclops_family.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "family_type":  "CYCLOPS",
-    "family_category":  "fantasy",
-    "description":  "Single massive eye cyclops family with brutish features and simple emotional range",
-    "created":  "2025-10-12",
-    "template_type":  "family_template",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "eye_spacing":  "0.0 INCH",
-                                "compression_factor":  0.5,
-                                "skull_scale":  1.5,
-                                "central_eye_diameter":  "4.0 INCH"
-                            },
-    "components":  [
-                       "config/components/creature_specific/cyclops_eye_central.json",
-                       "config/components/creature_specific/cyclops_mouth.json",
-                       "config/components/creature_specific/cyclops_speaker.json"
-                   ],
-    "family_mood_profile":  {
-                                "FEAR":  30,
-                                "ANGER":  40,
-                                "IRRITATION":  35,
-                                "HAPPINESS":  10,
-                                "CONTENTMENT":  20,
-                                "HUNGER":  45,
-                                "CURIOSITY":  15,
-                                "AFFECTION":  5
-                            },
-    "family_behavior_patterns":  {
-                                     "threat_response_enabled":  true,
-                                     "auto_sleep_timeout_seconds":  200,
-                                     "interaction_range_cm":  100,
-                                     "aggressive_threshold":  30,
-                                     "calm_threshold":  70,
-                                     "personality_traits":  [
-                                                                "simple_minded",
-                                                                "brutish_strength",
-                                                                "easily_confused",
-                                                                "loyal_if_fed",
-                                                                "fear_of_strangers"
-                                                            ]
-                                 },
-    "hardware_preferences":  {
-                                 "coordinate_system":  "skull_3d",
-                                 "spi_device_assignments":  {
-                                                                "central_eye":  "SPI_DEVICE_1",
-                                                                "mouth":  "SPI_DEVICE_2"
-                                                            },
-                                 "i2s_device_assignments":  {
-                                                                "primary_speaker":  "I2S_DEVICE_1"
-                                                            }
-                             },
-    "aesthetic_profile":  {
-                              "surface_texture":  "scarred_flesh",
-                              "color_scheme":  "pale_gray",
-                              "eye_style":  "massive_central",
-                              "nose_style":  "minimal_ridge",
-                              "mouth_style":  "wide_grimace",
-                              "feature_asymmetry":  true,
-                              "weathering_effects":  true
-                          },
-    "sound_characteristics":  {
-                                  "voice_pitch":  "deep_simple",
-                                  "breathing_pattern":  "heavy_labored",
-                                  "simple_sounds":  [
-                                                        "grunt",
-                                                        "moan",
-                                                        "confused_hmm"
-                                                    ],
-                                  "angry_sounds":  [
-                                                       "roar",
-                                                       "stomp",
-                                                       "frustrated_bellow"
-                                                   ],
-                                  "ambient_volume":  0.7,
-                                  "reaction_volume":  1.0
-                              },
-    "animation_style":  {
-                            "movement_speed":  "slow_ponderous",
-                            "eye_tracking":  "single_focus",
-                            "idle_behaviors":  [
-                                                   "confused_look",
-                                                   "hungry_stare"
-                                               ],
-                            "threat_responses":  [
-                                                     "angry_glare",
-                                                     "intimidating_lean"
-                                                 ],
-                            "expression_intensity":  "basic"
-                        },
-    "subfamily_variants":  {
-                               "mountain_cyclops":  {
-                                                        "size_scale":  1.8,
-                                                        "color_scheme":  "stone_gray",
-                                                        "personality_modifiers":  {
-                                                                                      "ANGER":  "-10",
-                                                                                      "CONTENTMENT":  "+10"
-                                                                                  }
-                                                    },
-                               "forge_cyclops":  {
-                                                     "color_scheme":  "soot_blackened",
-                                                     "personality_modifiers":  {
-                                                                                   "CURIOSITY":  "+10",
-                                                                                   "ANGER":  "+5"
-                                                                               }
-                                                 },
-                               "sea_cyclops":  {
-                                                   "color_scheme":  "algae_green",
-                                                   "personality_modifiers":  {
-                                                                                 "FEAR":  "+10",
-                                                                                 "HUNGER":  "+10"
-                                                                             }
-                                               }
-                           },
-    "name":  "cyclops_family"
+    "relative_filename": "config/bots/bot_families/fantasy/cyclops_family.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_type": "CYCLOPS",
+    "family_category": "fantasy",
+    "description": "Single massive eye cyclops family with brutish features and simple emotional range",
+    "created": "2025-10-12",
+    "template_type": "family_template",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "eye_spacing": "0.0 INCH",
+        "compression_factor": 0.5,
+        "skull_scale": 1.5,
+        "central_eye_diameter": "4.0 INCH"
+    },
+    "components": [
+        "config/components/creature_specific/cyclops_eye_central.json",
+        "config/components/creature_specific/cyclops_mouth.json",
+        "config/components/creature_specific/cyclops_speaker.json"
+    ],
+    "family_mood_profile": {
+        "FEAR": 30,
+        "ANGER": 40,
+        "IRRITATION": 35,
+        "HAPPINESS": 10,
+        "CONTENTMENT": 20,
+        "HUNGER": 45,
+        "CURIOSITY": 15,
+        "AFFECTION": 5
+    },
+    "family_behavior_patterns": {
+        "threat_response_enabled": true,
+        "auto_sleep_timeout_seconds": 200,
+        "interaction_range_cm": 100,
+        "aggressive_threshold": 30,
+        "calm_threshold": 70,
+        "personality_traits": [
+            "simple_minded",
+            "brutish_strength",
+            "easily_confused",
+            "loyal_if_fed",
+            "fear_of_strangers"
+        ]
+    },
+    "hardware_preferences": {
+        "coordinate_system": "skull_3d",
+        "spi_device_assignments": {
+            "central_eye": "SPI_DEVICE_1",
+            "mouth": "SPI_DEVICE_2"
+        },
+        "i2s_device_assignments": {
+            "primary_speaker": "I2S_DEVICE_1"
+        }
+    },
+    "aesthetic_profile": {
+        "surface_texture": "scarred_flesh",
+        "color_scheme": "pale_gray",
+        "eye_style": "massive_central",
+        "nose_style": "minimal_ridge",
+        "mouth_style": "wide_grimace",
+        "feature_asymmetry": true,
+        "weathering_effects": true
+    },
+    "sound_characteristics": {
+        "voice_pitch": "deep_simple",
+        "breathing_pattern": "heavy_labored",
+        "simple_sounds": [
+            "grunt",
+            "moan",
+            "confused_hmm"
+        ],
+        "angry_sounds": [
+            "roar",
+            "stomp",
+            "frustrated_bellow"
+        ],
+        "ambient_volume": 0.7,
+        "reaction_volume": 1.0
+    },
+    "animation_style": {
+        "movement_speed": "slow_ponderous",
+        "eye_tracking": "single_focus",
+        "idle_behaviors": [
+            "confused_look",
+            "hungry_stare"
+        ],
+        "threat_responses": [
+            "angry_glare",
+            "intimidating_lean"
+        ],
+        "expression_intensity": "basic"
+    },
+    "subfamily_variants": {
+        "mountain_cyclops": {
+            "size_scale": 1.8,
+            "color_scheme": "stone_gray",
+            "personality_modifiers": {
+                "ANGER": "-10",
+                "CONTENTMENT": "+10"
+            }
+        },
+        "forge_cyclops": {
+            "color_scheme": "soot_blackened",
+            "personality_modifiers": {
+                "CURIOSITY": "+10",
+                "ANGER": "+5"
+            }
+        },
+        "sea_cyclops": {
+            "color_scheme": "algae_green",
+            "personality_modifiers": {
+                "FEAR": "+10",
+                "HUNGER": "+10"
+            }
+        }
+    },
+    "name": "cyclops_family",
+    "type": "UNKNOWN"
 }

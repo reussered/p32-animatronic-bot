@@ -1,38 +1,40 @@
 {
-  "relative_filename": "assets/sounds/cat/curious_meow.json",
-  "sound_name": "cat_curious_meow",
-  "version": "1.0.0", 
-  "author": "config/author.json",
-  "description": "Inquisitive meowing sound for feline curiosity and attention-seeking",
-  "audio_file": "cat_curious_meow.wav",
-  "duration_ms": 1200,
-  "mood_trigger": "CURIOSITY",
-  "volume": 0.6,
-  "audio_specs": {
-    "sample_rate": "44100 Hz",
-    "bit_depth": "16-bit",
-    "channels": "mono",
-    "format": "WAV"
-  },
-  "frequency_profile": {
-    "fundamental": "200-800 Hz",
-    "harmonics": "MID_TO_HIGH_FREQUENCY",
-    "character": "QUESTIONING_TONAL_RISE"
-  },
-  "playback_settings": {
-    "loop": false,
-    "fade_in": "50ms",
-    "fade_out": "200ms", 
-    "priority": 7
-  },
-  "trigger_conditions": {
-    "proximity": "MEDIUM_TO_CLOSE_RANGE",
-    "mood_state": "CURIOUS_OR_ALERT",
-    "context": "INVESTIGATION_MODE"
-  },
-  "audio_processing": {
-    "high_pass_filter": "ENABLED_AT_150HZ",
-    "reverb": "MINIMAL_ROOM_TONE",
-    "pitch_variation": "NATURAL_FELINE_INFLECTION"
-  }
+    "relative_filename": "assets/sounds/cat/curious_meow.json",
+    "sound_name": "cat_curious_meow",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Inquisitive meowing sound for feline curiosity and attention-seeking",
+    "audio_file": "cat_curious_meow.wav",
+    "duration_ms": 1200,
+    "mood_trigger": "CURIOSITY",
+    "volume": 0.6,
+    "audio_specs": {
+        "sample_rate": "44100 Hz",
+        "bit_depth": "16-bit",
+        "channels": "mono",
+        "format": "WAV"
+    },
+    "frequency_profile": {
+        "fundamental": "200-800 Hz",
+        "harmonics": "MID_TO_HIGH_FREQUENCY",
+        "character": "QUESTIONING_TONAL_RISE"
+    },
+    "playback_settings": {
+        "loop": false,
+        "fade_in": "50ms",
+        "fade_out": "200ms",
+        "priority": 7
+    },
+    "trigger_conditions": {
+        "proximity": "MEDIUM_TO_CLOSE_RANGE",
+        "mood_state": "CURIOUS_OR_ALERT",
+        "context": "INVESTIGATION_MODE"
+    },
+    "audio_processing": {
+        "high_pass_filter": "ENABLED_AT_150HZ",
+        "reverb": "MINIMAL_ROOM_TONE",
+        "pitch_variation": "NATURAL_FELINE_INFLECTION"
+    },
+    "type": "UNKNOWN",
+    "name": "curious_meow"
 }

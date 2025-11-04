@@ -1,0 +1,5 @@
+// Auto-generated header for middle_finger_servo
+#include <esp_err.h>
+
+esp_err_t middle_finger_servo_init(void);
+void middle_finger_servo_act(void);

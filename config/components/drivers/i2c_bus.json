@@ -1,51 +1,50 @@
 {
-    "name":  "i2c_bus",
-    "type":  "bus",
-    "version":  "1.0.0",
-    "author":  "config/authors/ai_agent.json",
-    "description":  "I2C bus component containing I2C driver for sensor and peripheral communication",
-    "created":  "2025-10-29",
-    "component_type":  "bus_interface",
-    "capabilities":  {
-                         "bus_type":  "I2C",
-                         "speed_modes":  [
-                                             "Standard (100kHz)",
-                                             "Fast (400kHz)",
-                                             "Fast Plus (1MHz)"
-                                         ],
-                         "address_range":  "7-bit and 10-bit",
-                         "multi_master":  true,
-                         "applications":  [
-                                              "sensors",
-                                              "EEPROM",
-                                              "RTC",
-                                              "display controllers",
-                                              "GPIO expanders"
-                                          ]
-                     },
-    "components":  [
-                       "config/components/drivers/i2c_driver.json"
-                   ],
-    "software":  {
-                     "init_function":  "i2c_bus_init",
-                     "act_function":  "i2c_bus_act",
-                     "api_functions":  [
-                                           "i2c_bus_master_init(i2c_port_t port, uint32_t frequency)",
-                                           "i2c_bus_write_bytes(uint8_t device_addr, const uint8_t* data, size_t len)",
-                                           "i2c_bus_read_bytes(uint8_t device_addr, uint8_t* data, size_t len)",
-                                           "i2c_bus_write_read(uint8_t device_addr, const uint8_t* write_data, size_t write_len, uint8_t* read_data, size_t read_len)",
-                                           "i2c_bus_scan_devices(void)"
-                                       ]
-                 },
-    "compatibility":  {
-                          "esp32_s3":  true,
-                          "esp32_s2":  true,
-                          "esp32":  true,
-                          "chip_variants":  [
-                                                "ESP32-S3-DevKitC-1",
-                                                "ESP32-S3-WROOM-1",
-                                                "ESP32-DevKitC"
-                                            ]
-                      },
-    "relative_filename":  "config/components/drivers/i2c_bus.json"
+    "name": "i2c_bus",
+    "type": "BUS_INTERFACE",
+    "version": "1.0.0",
+    "author": "config/authors/ai_agent.json",
+    "description": "I2C bus component containing I2C driver for sensor and peripheral communication",
+    "created": "2025-10-29",
+    "capabilities": {
+        "bus_type": "I2C",
+        "speed_modes": [
+            "Standard (100kHz)",
+            "Fast (400kHz)",
+            "Fast Plus (1MHz)"
+        ],
+        "address_range": "7-bit and 10-bit",
+        "multi_master": true,
+        "applications": [
+            "sensors",
+            "EEPROM",
+            "RTC",
+            "display controllers",
+            "GPIO expanders"
+        ]
+    },
+    "components": [
+        "config/components/drivers/i2c_driver.json"
+    ],
+    "software": {
+        "init_function": "i2c_bus_init",
+        "act_function": "i2c_bus_act",
+        "api_functions": [
+            "i2c_bus_master_init(i2c_port_t port, uint32_t frequency)",
+            "i2c_bus_write_bytes(uint8_t device_addr, const uint8_t* data, size_t len)",
+            "i2c_bus_read_bytes(uint8_t device_addr, uint8_t* data, size_t len)",
+            "i2c_bus_write_read(uint8_t device_addr, const uint8_t* write_data, size_t write_len, uint8_t* read_data, size_t read_len)",
+            "i2c_bus_scan_devices(void)"
+        ]
+    },
+    "compatibility": {
+        "esp32_s3": true,
+        "esp32_s2": true,
+        "esp32": true,
+        "chip_variants": [
+            "ESP32-S3-DevKitC-1",
+            "ESP32-S3-WROOM-1",
+            "ESP32-DevKitC"
+        ]
+    },
+    "relative_filename": "config/components/drivers/i2c_bus.json"
 }

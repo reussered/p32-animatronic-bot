@@ -1,64 +1,65 @@
 {
-    "relative_filename":  "config/bots/test_bot_minimal.json",
-    "version":  "1.0.0.0",
-    "author":  "config/author.json",
-    "name":  "test_bot_minimal",
-    "description":  "Minimal test bot for hardware validation - includes system components and basic eye display",
-    "bot_type":  "TEST_BOT_MINIMAL",
-    "bot_id":  "test_bot_minimal_v1",
-    "subsystem_type":  "HEAD_CONTROLLER",
-    "controller":  "ESP32_S3_DEVKIT",
-    "coordinate_system":  "planar_2d",
-    "reference_point":  "center",
-    "units":  "PIXELS",
-    "components":  [
-                       "config/components/hardware/esp32_s3_devkit_chip.json",
-                       "config/components/system/system_core.json",
-                       "config/components/system/power_monitor.json",
-                       "config/components/heartbeat.json",
-                       "config/components/network_monitor.json",
-                       "config/components/test_head.json",
-                       "config/components/goblin_eye.json",
-                       "config/components/gc9a01.json",
-                       "config/components/goblin_left_eye.json",
-                       "config/components/goblin_right_eye.json"
-                   ],
-    "degrees_of_freedom":  {
-                               "eye_movement_dof":  "4",
-                               "total_controlled_dof":  "4"
-                           },
-    "power_specifications":  {
-                                 "battery_voltage":  "5V_USB",
-                                 "display_power_rail":  "3.3V_REGULATED",
-                                 "logic_power_rail":  "3.3V_ESP32",
-                                 "estimated_runtime_hours":  "8.0"
-                             },
-    "communication_config":  {
-                                 "serial_debug_enabled":  true,
-                                 "telemetry_broadcast_rate_hz":  "5"
-                             },
-    "display_config":  {
-                           "left_eye_resolution":  "240x240_GC9A01",
-                           "right_eye_resolution":  "240x240_GC9A01",
-                           "color_depth":  "16BIT_RGB565",
-                           "frame_rate_target_hz":  "30",
-                           "backlight_control":  true
-                       },
-    "test_config":  {
-                        "test_mode":  "HARDWARE_VALIDATION",
-                        "pin_validation_enabled":  true,
-                        "component_init_order_test":  true,
-                        "bus_interface_test":  true
-                    },
-    "mood_defaults":  {
-                          "FEAR":  0,
-                          "ANGER":  0,
-                          "IRRITATION":  0,
-                          "HAPPINESS":  50,
-                          "CONTENTMENT":  50,
-                          "HUNGER":  0,
-                          "CURIOSITY":  100,
-                          "SLEEPINESS":  0,
-                          "EXCITEMENT":  0
-                      }
+    "relative_filename": "config/bots/test_bot_minimal.json",
+    "version": "1.0.0.0",
+    "author": "config/author.json",
+    "name": "test_bot_minimal",
+    "description": "Minimal test bot for hardware validation - includes system components and basic eye display",
+    "bot_type": "TEST_BOT_MINIMAL",
+    "bot_id": "test_bot_minimal_v1",
+    "subsystem_type": "HEAD_CONTROLLER",
+    "controller": "ESP32_S3_DEVKIT",
+    "coordinate_system": "planar_2d",
+    "reference_point": "center",
+    "units": "PIXELS",
+    "components": [
+        "config/components/hardware/esp32_s3_devkit_chip.json",
+        "config/components/system/system_core.json",
+        "config/components/system/power_monitor.json",
+        "config/components/heartbeat.json",
+        "config/components/network_monitor.json",
+        "config/components/test_head.json",
+        "config/components/goblin_eye.json",
+        "config/components/gc9a01.json",
+        "config/components/goblin_left_eye.json",
+        "config/components/goblin_right_eye.json"
+    ],
+    "degrees_of_freedom": {
+        "eye_movement_dof": "4",
+        "total_controlled_dof": "4"
+    },
+    "power_specifications": {
+        "battery_voltage": "5V_USB",
+        "display_power_rail": "3.3V_REGULATED",
+        "logic_power_rail": "3.3V_ESP32",
+        "estimated_runtime_hours": "8.0"
+    },
+    "communication_config": {
+        "serial_debug_enabled": true,
+        "telemetry_broadcast_rate_hz": "5"
+    },
+    "display_config": {
+        "left_eye_resolution": "240x240_GC9A01",
+        "right_eye_resolution": "240x240_GC9A01",
+        "color_depth": "16BIT_RGB565",
+        "frame_rate_target_hz": "30",
+        "backlight_control": true
+    },
+    "test_config": {
+        "test_mode": "HARDWARE_VALIDATION",
+        "pin_validation_enabled": true,
+        "component_init_order_test": true,
+        "bus_interface_test": true
+    },
+    "mood_defaults": {
+        "FEAR": 0,
+        "ANGER": 0,
+        "IRRITATION": 0,
+        "HAPPINESS": 50,
+        "CONTENTMENT": 50,
+        "HUNGER": 0,
+        "CURIOSITY": 100,
+        "SLEEPINESS": 0,
+        "EXCITEMENT": 0
+    },
+    "type": "UNKNOWN"
 }

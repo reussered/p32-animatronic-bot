@@ -45,40 +45,42 @@ static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
 }
 
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_display_pin.cs);
 
-    if (cur_spi_pin.handle == NULL) {
+    if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
         return ESP_FAIL;
     }
 
     // Hardware reset
-    if (cur_spi_pin.rst != -1) {
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 0);
+    if (cur_spi_display_pin.rst != -1) {
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 0);
         vTaskDelay(pdMS_TO_TICKS(100));
-        gpio_set_level((gpio_num_t)cur_spi_pin.rst, 1);
+        gpio_set_level((gpio_num_t)cur_spi_display_pin.rst, 1);
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     // Software reset
-    spi_write_command(cur_spi_pin.handle, GC9A01_SWRESET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SWRESET);
     vTaskDelay(pdMS_TO_TICKS(150));
 
     // Sleep out
-    spi_write_command(cur_spi_pin.handle, GC9A01_SLPOUT);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_SLPOUT);
     vTaskDelay(pdMS_TO_TICKS(500));
 
     // Display on
-    spi_write_command(cur_spi_pin.handle, GC9A01_DISPON);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_DISPON);
     vTaskDelay(pdMS_TO_TICKS(100));
 
-    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Display with CS=%d initialized successfully", cur_spi_display_pin.cs);
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    if (cur_spi_pin.handle == NULL) {
-        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "generic_spi_display_act called - handle: %p, CS: %d", 
+             (void*)cur_spi_display_pin.handle, cur_spi_display_pin.cs);
+    if (cur_spi_display_pin.handle == NULL) {
+        ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
         return;
     }
 
@@ -87,24 +89,24 @@ void generic_spi_display_act(void) {
     extern Pixel* frame_ptr;
     
     if (!frame_ptr) {
-        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_pin.cs);
+        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_display_pin.cs);
         return;
     }
     
     uint16_t* framebuffer = (uint16_t*)frame_ptr;
 
     // Set column address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_CASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
     uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, col_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, col_data, 4);
 
     // Set row address (0-239)
-    spi_write_command(cur_spi_pin.handle, GC9A01_RASET);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
     uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_pin.handle, row_data, 4);
+    generic_spi_write_data(cur_spi_display_pin.handle, row_data, 4);
 
     // Memory write
-    spi_write_command(cur_spi_pin.handle, GC9A01_RAMWR);
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
 
     // Send the actual framebuffer data
     // Convert RGB565 pixels to byte stream (big-endian)
@@ -128,7 +130,7 @@ void generic_spi_display_act(void) {
             row_buffer[col * 2 + 1] = pixel & 0xFF; // Low byte
         }
         
-        generic_spi_write_data(cur_spi_pin.handle, row_buffer, row_size);
+        generic_spi_write_data(cur_spi_display_pin.handle, row_buffer, row_size);
     }
     
     free(row_buffer);

@@ -193,22 +193,9 @@ GSM.write<Environment>(); // Broadcasts current environment state
 
 ## RULE 6: FILE ORGANIZATION STANDARDS
 
-**Code Structure**:
-- **Component implementations**: `src/components/{component_name}.src`
-- **Component headers**: `include/components/{component_name}.hdr`
-- **Dispatch tables**: `src/subsystems/{subsystem}/{subsystem}_dispatch_tables.hpp/.cpp`
-- **Shared classes**: `shared/{ClassName}.hpp`
-- **Core system**: `src/core/memory/SharedMemory.hpp/.cpp`
+**The single source of truth for file organization is `.github/naming_rules.md`.**
 
-**Asset Structure**:
-- **3D Models**: `assets/shapes/scad/{category}/{model}.scad` and `.stl`
-- **Animations**: `assets/animations/{creature}/{animation}.json`
-- **Sounds**: `assets/sounds/{creature}/{sound}.wav`
-
-**Configuration Structure**:
-- **Bot families**: `config/bots/bot_families/{family}/{bot}.json`
-- **Subsystems**: `config/subsystems/{subsystem_name}.json`
-- **Components**: `config/components/{type}/{component}.json`
+Refer to that document for all rules regarding the location of configuration files, source code, assets, and documentation. The validation script `tools/validate_file_structure.py` can be used to check for compliance.
 
 ## RULE 7: BUILD AND DEPLOYMENT PROCESS
 
@@ -318,7 +305,7 @@ GSM.init();  // Initialize shared memory system
 - **Hardware specs**: `config\hardware\{component_type}.json` (servo_9g_micro.json, gc9a01_display.json, etc.)
 - **Interface definitions**: `config\interfaces\{interface_type}.json` (spi_bus.json, pwm_channel_3.json, etc.)
 - **Positioned components**: `config\components\positioned\{subsystem}\{component}.json`
-- **Subsystem assemblies**: `config\subsystems\{subsystem_name}.json` (goblin_head.json, goblin_torso.json)
+- **Subsystem assemblies**: `config\bots\bot_families\{family}\{subsystem_folder}\{subsystem_name}.json`
 - **Component templates**: `config\components\templates\{type}\{template}.json`
 - **Behaviors**: `config\behaviors\{behavior_name}.json`
 - **Moods**: `config\moods\{mood_config}.json`

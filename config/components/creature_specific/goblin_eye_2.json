@@ -1,0 +1,18 @@
+{
+    "relative_filename": "config/components/creature_specific/goblin_eye_2.json",
+    "version": "3.0.0",
+    "author": "config/author.json",
+    "name": "goblin_eye_2",
+    "description": "Goblin eye chunk processor 2 - processes rows 60-89",
+    "created": "2025-10-23",
+    "chunk_index": 2,
+    "timing": {
+        "hitCount": 1,
+        "description": "Process chunk 2 every cycle"
+    },
+    "software": {
+        "init_function": "goblin_eye_2_init",
+        "act_function": "goblin_eye_2_act"
+    },
+    "type": "CHUNK_PROCESSOR"
+}

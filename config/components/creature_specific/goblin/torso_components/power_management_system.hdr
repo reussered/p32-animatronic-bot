@@ -1,0 +1,5 @@
+// Auto-generated header for power_management_system
+#include <esp_err.h>
+
+esp_err_t power_management_system_init(void);
+void power_management_system_act(void);

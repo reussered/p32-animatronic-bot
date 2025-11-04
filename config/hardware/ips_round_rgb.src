@@ -1,0 +1,33 @@
+// ips_round_rgb component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+#include "ips_round_rgb.hdr"
+
+static const char *TAG_ips_round_rgb = "ips_round_rgb";
+
+// Define the initial pixel value (default black)
+IPS_ROUND_RGB_Pixel IPS_ROUND_RGB_InitialPixel = {0, 0, 0};
+
+esp_err_t ips_round_rgb_init(void) {
+    ESP_LOGI(TAG_ips_round_rgb, "ips_round_rgb init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void ips_round_rgb_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_ips_round_rgb, "ips_round_rgb act");
+}
+
+size_t ips_round_rgb_get_width(void) {
+    return 240;
+}
+
+size_t ips_round_rgb_get_height(void) {
+    return 240;
+}
+
+size_t ips_round_rgb_getFrameSize(void) {
+    return ips_round_rgb_get_width() * ips_round_rgb_get_height() * sizeof(IPS_ROUND_RGB_Pixel);
+}

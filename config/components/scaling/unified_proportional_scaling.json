@@ -1,259 +1,259 @@
 {
-    "relative_filename":  "config/components/scaling/unified_proportional_scaling.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "UNIFIED_PROPORTIONAL_SCALING",
-    "subsystem":  "UNKNOWN",
-    "component_type":  "COORDINATE_SCALING_SYSTEM",
-    "description":  "Unified scaling system using human proportions with horizontal and vertical scale factors like facial coordinate system",
-    "scaling_methodology":  {
-                                "base_reference":  "NORMAL_HUMAN_ADULT_PROPORTIONS",
-                                "scaling_approach":  "HORIZONTAL_AND_VERTICAL_SCALE_FACTORS",
-                                "consistency":  "SAME_METHOD_AS_FACIAL_COORDINATE_SYSTEM",
-                                "simplicity":  "TWO_PARAMETERS_DEFINE_ENTIRE_CREATURE"
-                            },
-    "human_baseline_proportions":  {
-                                       "reference_measurements":  {
-                                                                      "total_height":  "70.0 INCHES",
-                                                                      "head_height":  "9.0 INCHES",
-                                                                      "head_width":  "6.0 INCHES",
-                                                                      "shoulder_width":  "18.0 INCHES",
-                                                                      "torso_length":  "24.0 INCHES",
-                                                                      "arm_span":  "70.0 INCHES",
-                                                                      "leg_length":  "35.0 INCHES",
-                                                                      "foot_length":  "10.0 INCHES"
-                                                                  },
-                                       "proportional_ratios":  {
-                                                                   "head_to_height":  "0.129_RATIO_9_INCHES_OF_70",
-                                                                   "shoulder_to_height":  "0.257_RATIO_18_INCHES_OF_70",
-                                                                   "torso_to_height":  "0.343_RATIO_24_INCHES_OF_70",
-                                                                   "leg_to_height":  "0.500_RATIO_35_INCHES_OF_70",
-                                                                   "arm_span_to_height":  "1.000_RATIO_EQUAL_DIMENSIONS"
-                                                               }
-                                   },
-    "creature_scaling_definitions":  {
-                                         "tiny_goblin":  {
-                                                             "horizontal_scale":  "0.6",
-                                                             "vertical_scale":  "0.4",
-                                                             "description":  "COMPRESSED_SQUAT_WIDE_PROPORTIONS",
-                                                             "resulting_height":  "28.0_INCHES_70_X_0.4",
-                                                             "resulting_width":  "10.8_INCHES_18_X_0.6",
-                                                             "character":  "WIDE_SQUAT_MISCHIEVOUS"
-                                                         },
-                                         "standard_goblin":  {
-                                                                 "horizontal_scale":  "0.7",
-                                                                 "vertical_scale":  "0.6",
-                                                                 "description":  "MODERATELY_COMPRESSED_GOBLIN_PROPORTIONS",
-                                                                 "resulting_height":  "42.0_INCHES_70_X_0.6",
-                                                                 "resulting_width":  "12.6_INCHES_18_X_0.7",
-                                                                 "character":  "CLASSIC_GOBLIN_PROPORTIONS"
-                                                             },
-                                         "large_hobgoblin":  {
-                                                                 "horizontal_scale":  "0.9",
-                                                                 "vertical_scale":  "0.8",
-                                                                 "description":  "NEARLY_HUMAN_PROPORTIONS_SLIGHTLY_BROAD",
-                                                                 "resulting_height":  "56.0_INCHES_70_X_0.8",
-                                                                 "resulting_width":  "16.2_INCHES_18_X_0.9",
-                                                                 "character":  "MILITARY_DISCIPLINED_UPRIGHT"
-                                                             },
-                                         "giant_orc":  {
-                                                           "horizontal_scale":  "1.3",
-                                                           "vertical_scale":  "1.0",
-                                                           "description":  "HUMAN_HEIGHT_MUCH_BROADER_INTIMIDATING",
-                                                           "resulting_height":  "70.0_INCHES_70_X_1.0",
-                                                           "resulting_width":  "23.4_INCHES_18_X_1.3",
-                                                           "character":  "BROAD_POWERFUL_THREATENING"
-                                                       },
-                                         "massive_ogre":  {
-                                                              "horizontal_scale":  "1.8",
-                                                              "vertical_scale":  "1.4",
-                                                              "description":  "OVERSIZED_EVERYTHING_HULKING_GIANT",
-                                                              "resulting_height":  "98.0_INCHES_70_X_1.4",
-                                                              "resulting_width":  "32.4_INCHES_18_X_1.8",
-                                                              "character":  "MASSIVE_OVERWHELMING_PRESENCE"
-                                                          }
-                                     },
-    "coordinate_system_integration":  {
-                                          "reference_point":  "PELVIS_CENTER_SAME_AS_SKULL_SYSTEM",
-                                          "coordinate_calculation":  {
-                                                                         "x_coordinate":  "BASE_X_TIMES_HORIZONTAL_SCALE",
-                                                                         "y_coordinate":  "BASE_Y_TIMES_HORIZONTAL_SCALE",
-                                                                         "z_coordinate":  "BASE_Z_TIMES_VERTICAL_SCALE"
-                                                                     },
-                                          "units":  "INCHES_WITH_EXPLICIT_UNIT_STRINGS",
-                                          "consistency":  "EXACT_SAME_APPROACH_AS_FACIAL_COORDINATES"
-                                      },
-    "anatomical_scaling_application":  {
-                                           "head_scaling":  {
-                                                                "base_head_height":  "9.0 INCHES",
-                                                                "base_head_width":  "6.0 INCHES",
-                                                                "scaled_head_height":  "BASE_HEIGHT_TIMES_VERTICAL_SCALE",
-                                                                "scaled_head_width":  "BASE_WIDTH_TIMES_HORIZONTAL_SCALE",
-                                                                "facial_features":  "USE_EXISTING_FACIAL_COORDINATE_SCALING"
-                                                            },
-                                           "torso_scaling":  {
-                                                                 "base_shoulder_width":  "18.0 INCHES",
-                                                                 "base_torso_length":  "24.0 INCHES",
-                                                                 "base_waist_width":  "14.0 INCHES",
-                                                                 "scaled_shoulder_width":  "BASE_SHOULDER_TIMES_HORIZONTAL_SCALE",
-                                                                 "scaled_torso_length":  "BASE_TORSO_TIMES_VERTICAL_SCALE",
-                                                                 "scaled_waist_width":  "BASE_WAIST_TIMES_HORIZONTAL_SCALE"
-                                                             },
-                                           "limb_scaling":  {
-                                                                "base_arm_length":  "24.0 INCHES",
-                                                                "base_leg_length":  "35.0 INCHES",
-                                                                "base_hand_length":  "7.0 INCHES",
-                                                                "base_foot_length":  "10.0 INCHES",
-                                                                "scaled_arm_length":  "BASE_ARM_TIMES_VERTICAL_SCALE",
-                                                                "scaled_leg_length":  "BASE_LEG_TIMES_VERTICAL_SCALE",
-                                                                "scaled_hand_length":  "BASE_HAND_TIMES_HORIZONTAL_SCALE",
-                                                                "scaled_foot_length":  "BASE_FOOT_TIMES_HORIZONTAL_SCALE"
-                                                            }
-                                       },
-    "mechanical_component_scaling":  {
-                                         "servo_selection_by_scale":  {
-                                                                          "scale_0.4_to_0.6":  {
-                                                                                                   "primary_servos":  "MG90S_MICRO_SERVOS",
-                                                                                                   "secondary_servos":  "SG92R_MICRO_DIGITAL",
-                                                                                                   "steppers":  "NEMA14_SMALL_STEPPERS"
-                                                                                               },
-                                                                          "scale_0.6_to_0.8":  {
-                                                                                                   "primary_servos":  "MG996R_STANDARD_SERVOS",
-                                                                                                   "secondary_servos":  "DS3218_HIGH_TORQUE",
-                                                                                                   "steppers":  "NEMA17_MODERATE_GEARING"
-                                                                                               },
-                                                                          "scale_0.8_to_1.2":  {
-                                                                                                   "primary_servos":  "DS3218_HIGH_TORQUE_SERVOS",
-                                                                                                   "secondary_servos":  "NEMA17_SERVO_MOTORS",
-                                                                                                   "steppers":  "NEMA17_HIGH_GEAR_RATIOS"
-                                                                                               },
-                                                                          "scale_1.2_to_1.8":  {
-                                                                                                   "primary_servos":  "NEMA23_STEPPER_SERVOS",
-                                                                                                   "secondary_servos":  "INDUSTRIAL_SERVO_MOTORS",
-                                                                                                   "steppers":  "NEMA23_PLANETARY_GEARBOXES"
-                                                                                               }
-                                                                      },
-                                         "structural_scaling":  {
-                                                                    "aluminum_extrusion_selection":  {
-                                                                                                         "horizontal_scale_0.4_to_0.7":  "15MM_T_SLOT_LIGHTWEIGHT",
-                                                                                                         "horizontal_scale_0.7_to_1.0":  "20MM_T_SLOT_STANDARD",
-                                                                                                         "horizontal_scale_1.0_to_1.3":  "30MM_T_SLOT_HEAVY_DUTY",
-                                                                                                         "horizontal_scale_1.3_to_1.8":  "40MM_T_SLOT_INDUSTRIAL"
-                                                                                                     },
-                                                                    "bearing_size_selection":  {
-                                                                                                   "vertical_scale_0.4_to_0.6":  "604ZZ_4MM_MINIATURE",
-                                                                                                   "vertical_scale_0.6_to_0.8":  "608ZZ_8MM_STANDARD",
-                                                                                                   "vertical_scale_0.8_to_1.2":  "6001ZZ_12MM_MEDIUM",
-                                                                                                   "vertical_scale_1.2_to_1.8":  "6003ZZ_17MM_HEAVY_DUTY"
-                                                                                               }
-                                                                }
-                                     },
-    "stl_generation_parameters":  {
-                                      "openscad_scaling_variables":  {
-                                                                         "horizontal_scale_factor":  "OPENSCAD_VARIABLE_HSCALE",
-                                                                         "vertical_scale_factor":  "OPENSCAD_VARIABLE_VSCALE",
-                                                                         "automatic_part_sizing":  "ALL_DIMENSIONS_CALCULATED_FROM_SCALES",
-                                                                         "tolerance_scaling":  "BEARING_FITS_SCALE_PROPORTIONALLY"
-                                                                     },
-                                      "parametric_generation":  {
-                                                                    "base_stl_template":  "HUMAN_PROPORTIONED_MASTER_MODEL",
-                                                                    "scaling_script":  "GENERATES_ALL_CREATURE_VARIANTS",
-                                                                    "batch_generation":  "SINGLE_COMMAND_ALL_SIZES",
-                                                                    "validation":  "AUTOMATIC_COLLISION_DETECTION"
-                                                                }
-                                  },
-    "power_system_scaling":  {
-                                 "battery_capacity_by_total_scale":  {
-                                                                         "total_scale_0.24_tiny":  {
-                                                                                                       "calculation":  "0.6_HORIZ_X_0.4_VERT = 0.24",
-                                                                                                       "battery_system":  "SINGLE_LIPO_3S_2200MAH",
-                                                                                                       "runtime_target":  "4_HOURS_EFFICIENT_OPERATION"
-                                                                                                   },
-                                                                         "total_scale_0.42_standard":  {
-                                                                                                           "calculation":  "0.7_HORIZ_X_0.6_VERT = 0.42",
-                                                                                                           "battery_system":  "DUAL_LIPO_6S_5000MAH",
-                                                                                                           "runtime_target":  "6_HOURS_BALANCED_OPERATION"
-                                                                                                       },
-                                                                         "total_scale_0.72_large":  {
-                                                                                                        "calculation":  "0.9_HORIZ_X_0.8_VERT = 0.72",
-                                                                                                        "battery_system":  "LITHIUM_ION_10S4P_PACK",
-                                                                                                        "runtime_target":  "8_HOURS_EXTENDED_OPERATION"
-                                                                                                    },
-                                                                         "total_scale_1.30_giant":  {
-                                                                                                        "calculation":  "1.3_HORIZ_X_1.0_VERT = 1.30",
-                                                                                                        "battery_system":  "LITHIUM_ION_14S6P_HIGH_CAPACITY",
-                                                                                                        "runtime_target":  "10_HOURS_CONTINUOUS_OPERATION"
-                                                                                                    },
-                                                                         "total_scale_2.52_massive":  {
-                                                                                                          "calculation":  "1.8_HORIZ_X_1.4_VERT = 2.52",
-                                                                                                          "battery_system":  "INDUSTRIAL_LITHIUM_18S8P_PACK",
-                                                                                                          "runtime_target":  "12_HOURS_HEAVY_DUTY_OPERATION"
-                                                                                                      }
-                                                                     }
-                             },
-    "example_creature_definitions":  {
-                                         "goblin_variants":  {
-                                                                 "house_goblin_small":  {
-                                                                                            "horizontal_scale":  "0.5",
-                                                                                            "vertical_scale":  "0.3"
-                                                                                        },
-                                                                 "workshop_goblin_standard":  {
-                                                                                                  "horizontal_scale":  "0.7",
-                                                                                                  "vertical_scale":  "0.6"
-                                                                                              },
-                                                                 "warrior_goblin_fierce":  {
-                                                                                               "horizontal_scale":  "0.8",
-                                                                                               "vertical_scale":  "0.7"
-                                                                                           }
-                                                             },
-                                         "orc_variants":  {
-                                                              "orc_grunt_basic":  {
-                                                                                      "horizontal_scale":  "1.2",
-                                                                                      "vertical_scale":  "0.9"
-                                                                                  },
-                                                              "orc_warrior_strong":  {
-                                                                                         "horizontal_scale":  "1.3",
-                                                                                         "vertical_scale":  "1.0"
-                                                                                     },
-                                                              "orc_chieftain_massive":  {
-                                                                                            "horizontal_scale":  "1.5",
-                                                                                            "vertical_scale":  "1.1"
-                                                                                        }
-                                                          },
-                                         "hobgoblin_variants":  {
-                                                                    "hobgoblin_soldier":  {
-                                                                                              "horizontal_scale":  "0.9",
-                                                                                              "vertical_scale":  "0.8"
-                                                                                          },
-                                                                    "hobgoblin_captain":  {
-                                                                                              "horizontal_scale":  "1.0",
-                                                                                              "vertical_scale":  "0.9"
-                                                                                          },
-                                                                    "hobgoblin_general":  {
-                                                                                              "horizontal_scale":  "1.1",
-                                                                                              "vertical_scale":  "1.0"
-                                                                                          }
-                                                                },
-                                         "ogre_variants":  {
-                                                               "cave_ogre_hunched":  {
-                                                                                         "horizontal_scale":  "1.6",
-                                                                                         "vertical_scale":  "1.2"
-                                                                                     },
-                                                               "mountain_ogre_tall":  {
-                                                                                          "horizontal_scale":  "1.7",
-                                                                                          "vertical_scale":  "1.4"
-                                                                                      },
-                                                               "siege_ogre_massive":  {
-                                                                                          "horizontal_scale":  "1.9",
-                                                                                          "vertical_scale":  "1.5"
-                                                                                      }
-                                                           }
-                                     },
-    "implementation_benefits":  {
-                                    "consistency_with_faces":  "SAME_SCALING_METHOD_AS_FACIAL_COORDINATES",
-                                    "design_simplicity":  "TWO_NUMBERS_DEFINE_ENTIRE_CREATURE",
-                                    "manufacturing_efficiency":  "SINGLE_STL_SET_GENERATES_ALL_VARIANTS",
-                                    "customization_flexibility":  "INFINITE_CREATURE_VARIATIONS_POSSIBLE",
-                                    "maintenance_ease":  "FAMILIAR_SCALING_SYSTEM_EASY_MODIFICATIONS"
-                                }
+    "relative_filename": "config/components/scaling/unified_proportional_scaling.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "unified_proportional_scaling",
+    "subsystem": "UNKNOWN",
+    "description": "Unified scaling system using human proportions with horizontal and vertical scale factors like facial coordinate system",
+    "scaling_methodology": {
+        "base_reference": "NORMAL_HUMAN_ADULT_PROPORTIONS",
+        "scaling_approach": "HORIZONTAL_AND_VERTICAL_SCALE_FACTORS",
+        "consistency": "SAME_METHOD_AS_FACIAL_COORDINATE_SYSTEM",
+        "simplicity": "TWO_PARAMETERS_DEFINE_ENTIRE_CREATURE"
+    },
+    "human_baseline_proportions": {
+        "reference_measurements": {
+            "total_height": "70.0 INCHES",
+            "head_height": "9.0 INCHES",
+            "head_width": "6.0 INCHES",
+            "shoulder_width": "18.0 INCHES",
+            "torso_length": "24.0 INCHES",
+            "arm_span": "70.0 INCHES",
+            "leg_length": "35.0 INCHES",
+            "foot_length": "10.0 INCHES"
+        },
+        "proportional_ratios": {
+            "head_to_height": "0.129_RATIO_9_INCHES_OF_70",
+            "shoulder_to_height": "0.257_RATIO_18_INCHES_OF_70",
+            "torso_to_height": "0.343_RATIO_24_INCHES_OF_70",
+            "leg_to_height": "0.500_RATIO_35_INCHES_OF_70",
+            "arm_span_to_height": "1.000_RATIO_EQUAL_DIMENSIONS"
+        }
+    },
+    "creature_scaling_definitions": {
+        "tiny_goblin": {
+            "horizontal_scale": "0.6",
+            "vertical_scale": "0.4",
+            "description": "COMPRESSED_SQUAT_WIDE_PROPORTIONS",
+            "resulting_height": "28.0_INCHES_70_X_0.4",
+            "resulting_width": "10.8_INCHES_18_X_0.6",
+            "character": "WIDE_SQUAT_MISCHIEVOUS"
+        },
+        "standard_goblin": {
+            "horizontal_scale": "0.7",
+            "vertical_scale": "0.6",
+            "description": "MODERATELY_COMPRESSED_GOBLIN_PROPORTIONS",
+            "resulting_height": "42.0_INCHES_70_X_0.6",
+            "resulting_width": "12.6_INCHES_18_X_0.7",
+            "character": "CLASSIC_GOBLIN_PROPORTIONS"
+        },
+        "large_hobgoblin": {
+            "horizontal_scale": "0.9",
+            "vertical_scale": "0.8",
+            "description": "NEARLY_HUMAN_PROPORTIONS_SLIGHTLY_BROAD",
+            "resulting_height": "56.0_INCHES_70_X_0.8",
+            "resulting_width": "16.2_INCHES_18_X_0.9",
+            "character": "MILITARY_DISCIPLINED_UPRIGHT"
+        },
+        "giant_orc": {
+            "horizontal_scale": "1.3",
+            "vertical_scale": "1.0",
+            "description": "HUMAN_HEIGHT_MUCH_BROADER_INTIMIDATING",
+            "resulting_height": "70.0_INCHES_70_X_1.0",
+            "resulting_width": "23.4_INCHES_18_X_1.3",
+            "character": "BROAD_POWERFUL_THREATENING"
+        },
+        "massive_ogre": {
+            "horizontal_scale": "1.8",
+            "vertical_scale": "1.4",
+            "description": "OVERSIZED_EVERYTHING_HULKING_GIANT",
+            "resulting_height": "98.0_INCHES_70_X_1.4",
+            "resulting_width": "32.4_INCHES_18_X_1.8",
+            "character": "MASSIVE_OVERWHELMING_PRESENCE"
+        }
+    },
+    "coordinate_system_integration": {
+        "reference_point": "PELVIS_CENTER_SAME_AS_SKULL_SYSTEM",
+        "coordinate_calculation": {
+            "x_coordinate": "BASE_X_TIMES_HORIZONTAL_SCALE",
+            "y_coordinate": "BASE_Y_TIMES_HORIZONTAL_SCALE",
+            "z_coordinate": "BASE_Z_TIMES_VERTICAL_SCALE"
+        },
+        "units": "INCHES_WITH_EXPLICIT_UNIT_STRINGS",
+        "consistency": "EXACT_SAME_APPROACH_AS_FACIAL_COORDINATES"
+    },
+    "anatomical_scaling_application": {
+        "head_scaling": {
+            "base_head_height": "9.0 INCHES",
+            "base_head_width": "6.0 INCHES",
+            "scaled_head_height": "BASE_HEIGHT_TIMES_VERTICAL_SCALE",
+            "scaled_head_width": "BASE_WIDTH_TIMES_HORIZONTAL_SCALE",
+            "facial_features": "USE_EXISTING_FACIAL_COORDINATE_SCALING"
+        },
+        "torso_scaling": {
+            "base_shoulder_width": "18.0 INCHES",
+            "base_torso_length": "24.0 INCHES",
+            "base_waist_width": "14.0 INCHES",
+            "scaled_shoulder_width": "BASE_SHOULDER_TIMES_HORIZONTAL_SCALE",
+            "scaled_torso_length": "BASE_TORSO_TIMES_VERTICAL_SCALE",
+            "scaled_waist_width": "BASE_WAIST_TIMES_HORIZONTAL_SCALE"
+        },
+        "limb_scaling": {
+            "base_arm_length": "24.0 INCHES",
+            "base_leg_length": "35.0 INCHES",
+            "base_hand_length": "7.0 INCHES",
+            "base_foot_length": "10.0 INCHES",
+            "scaled_arm_length": "BASE_ARM_TIMES_VERTICAL_SCALE",
+            "scaled_leg_length": "BASE_LEG_TIMES_VERTICAL_SCALE",
+            "scaled_hand_length": "BASE_HAND_TIMES_HORIZONTAL_SCALE",
+            "scaled_foot_length": "BASE_FOOT_TIMES_HORIZONTAL_SCALE"
+        }
+    },
+    "mechanical_component_scaling": {
+        "servo_selection_by_scale": {
+            "scale_0.4_to_0.6": {
+                "primary_servos": "MG90S_MICRO_SERVOS",
+                "secondary_servos": "SG92R_MICRO_DIGITAL",
+                "steppers": "NEMA14_SMALL_STEPPERS"
+            },
+            "scale_0.6_to_0.8": {
+                "primary_servos": "MG996R_STANDARD_SERVOS",
+                "secondary_servos": "DS3218_HIGH_TORQUE",
+                "steppers": "NEMA17_MODERATE_GEARING"
+            },
+            "scale_0.8_to_1.2": {
+                "primary_servos": "DS3218_HIGH_TORQUE_SERVOS",
+                "secondary_servos": "NEMA17_SERVO_MOTORS",
+                "steppers": "NEMA17_HIGH_GEAR_RATIOS"
+            },
+            "scale_1.2_to_1.8": {
+                "primary_servos": "NEMA23_STEPPER_SERVOS",
+                "secondary_servos": "INDUSTRIAL_SERVO_MOTORS",
+                "steppers": "NEMA23_PLANETARY_GEARBOXES"
+            }
+        },
+        "structural_scaling": {
+            "aluminum_extrusion_selection": {
+                "horizontal_scale_0.4_to_0.7": "15MM_T_SLOT_LIGHTWEIGHT",
+                "horizontal_scale_0.7_to_1.0": "20MM_T_SLOT_STANDARD",
+                "horizontal_scale_1.0_to_1.3": "30MM_T_SLOT_HEAVY_DUTY",
+                "horizontal_scale_1.3_to_1.8": "40MM_T_SLOT_INDUSTRIAL"
+            },
+            "bearing_size_selection": {
+                "vertical_scale_0.4_to_0.6": "604ZZ_4MM_MINIATURE",
+                "vertical_scale_0.6_to_0.8": "608ZZ_8MM_STANDARD",
+                "vertical_scale_0.8_to_1.2": "6001ZZ_12MM_MEDIUM",
+                "vertical_scale_1.2_to_1.8": "6003ZZ_17MM_HEAVY_DUTY"
+            }
+        }
+    },
+    "stl_generation_parameters": {
+        "openscad_scaling_variables": {
+            "horizontal_scale_factor": "OPENSCAD_VARIABLE_HSCALE",
+            "vertical_scale_factor": "OPENSCAD_VARIABLE_VSCALE",
+            "automatic_part_sizing": "ALL_DIMENSIONS_CALCULATED_FROM_SCALES",
+            "tolerance_scaling": "BEARING_FITS_SCALE_PROPORTIONALLY"
+        },
+        "parametric_generation": {
+            "base_stl_template": "HUMAN_PROPORTIONED_MASTER_MODEL",
+            "scaling_script": "GENERATES_ALL_CREATURE_VARIANTS",
+            "batch_generation": "SINGLE_COMMAND_ALL_SIZES",
+            "validation": "AUTOMATIC_COLLISION_DETECTION"
+        }
+    },
+    "power_system_scaling": {
+        "battery_capacity_by_total_scale": {
+            "total_scale_0.24_tiny": {
+                "calculation": "0.6_HORIZ_X_0.4_VERT = 0.24",
+                "battery_system": "SINGLE_LIPO_3S_2200MAH",
+                "runtime_target": "4_HOURS_EFFICIENT_OPERATION"
+            },
+            "total_scale_0.42_standard": {
+                "calculation": "0.7_HORIZ_X_0.6_VERT = 0.42",
+                "battery_system": "DUAL_LIPO_6S_5000MAH",
+                "runtime_target": "6_HOURS_BALANCED_OPERATION"
+            },
+            "total_scale_0.72_large": {
+                "calculation": "0.9_HORIZ_X_0.8_VERT = 0.72",
+                "battery_system": "LITHIUM_ION_10S4P_PACK",
+                "runtime_target": "8_HOURS_EXTENDED_OPERATION"
+            },
+            "total_scale_1.30_giant": {
+                "calculation": "1.3_HORIZ_X_1.0_VERT = 1.30",
+                "battery_system": "LITHIUM_ION_14S6P_HIGH_CAPACITY",
+                "runtime_target": "10_HOURS_CONTINUOUS_OPERATION"
+            },
+            "total_scale_2.52_massive": {
+                "calculation": "1.8_HORIZ_X_1.4_VERT = 2.52",
+                "battery_system": "INDUSTRIAL_LITHIUM_18S8P_PACK",
+                "runtime_target": "12_HOURS_HEAVY_DUTY_OPERATION"
+            }
+        }
+    },
+    "example_creature_definitions": {
+        "goblin_variants": {
+            "house_goblin_small": {
+                "horizontal_scale": "0.5",
+                "vertical_scale": "0.3"
+            },
+            "workshop_goblin_standard": {
+                "horizontal_scale": "0.7",
+                "vertical_scale": "0.6"
+            },
+            "warrior_goblin_fierce": {
+                "horizontal_scale": "0.8",
+                "vertical_scale": "0.7"
+            }
+        },
+        "orc_variants": {
+            "orc_grunt_basic": {
+                "horizontal_scale": "1.2",
+                "vertical_scale": "0.9"
+            },
+            "orc_warrior_strong": {
+                "horizontal_scale": "1.3",
+                "vertical_scale": "1.0"
+            },
+            "orc_chieftain_massive": {
+                "horizontal_scale": "1.5",
+                "vertical_scale": "1.1"
+            }
+        },
+        "hobgoblin_variants": {
+            "hobgoblin_soldier": {
+                "horizontal_scale": "0.9",
+                "vertical_scale": "0.8"
+            },
+            "hobgoblin_captain": {
+                "horizontal_scale": "1.0",
+                "vertical_scale": "0.9"
+            },
+            "hobgoblin_general": {
+                "horizontal_scale": "1.1",
+                "vertical_scale": "1.0"
+            }
+        },
+        "ogre_variants": {
+            "cave_ogre_hunched": {
+                "horizontal_scale": "1.6",
+                "vertical_scale": "1.2"
+            },
+            "mountain_ogre_tall": {
+                "horizontal_scale": "1.7",
+                "vertical_scale": "1.4"
+            },
+            "siege_ogre_massive": {
+                "horizontal_scale": "1.9",
+                "vertical_scale": "1.5"
+            }
+        }
+    },
+    "implementation_benefits": {
+        "consistency_with_faces": "SAME_SCALING_METHOD_AS_FACIAL_COORDINATES",
+        "design_simplicity": "TWO_NUMBERS_DEFINE_ENTIRE_CREATURE",
+        "manufacturing_efficiency": "SINGLE_STL_SET_GENERATES_ALL_VARIANTS",
+        "customization_flexibility": "INFINITE_CREATURE_VARIATIONS_POSSIBLE",
+        "maintenance_ease": "FAMILIAR_SCALING_SYSTEM_EASY_MODIFICATIONS"
+    },
+    "type": "COORDINATE_SCALING_SYSTEM"
 }

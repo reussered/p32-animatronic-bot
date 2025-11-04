@@ -1,0 +1,5 @@
+// Auto-generated header for torso_status_led
+#include <esp_err.h>
+
+esp_err_t torso_status_led_init(void);
+void torso_status_led_act(void);

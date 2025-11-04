@@ -1,38 +1,40 @@
 {
-  "relative_filename": "assets/sounds/cyclops/deep_rumble_warning.json",
-  "sound_name": "cyclops_deep_rumble_warning",
-  "version": "1.0.0",
-  "author": "config/author.json",
-  "description": "Extremely deep rumbling warning sound for massive cyclops presence",
-  "audio_file": "cyclops_deep_rumble_warning.wav",
-  "duration_ms": 5000,
-  "mood_trigger": "ANGER",
-  "volume": 0.9,
-  "audio_specs": {
-    "sample_rate": "44100 Hz",
-    "bit_depth": "16-bit",
-    "channels": "mono",
-    "format": "WAV"
-  },
-  "frequency_profile": {
-    "fundamental": "30-80 Hz",
-    "harmonics": "ULTRA_LOW_FREQUENCY_EMPHASIS",
-    "character": "EARTH_SHAKING_SUBSONIC"
-  },
-  "playback_settings": {
-    "loop": false,
-    "fade_in": "500ms",
-    "fade_out": "1000ms",
-    "priority": 10
-  },
-  "trigger_conditions": {
-    "proximity": "ANY_RANGE_AREA_EFFECT",
-    "mood_state": "ANGRY_OR_TERRITORIAL",
-    "context": "INTIMIDATION_WARNING"
-  },
-  "audio_processing": {
-    "low_pass_filter": "ENABLED_AT_500HZ",
-    "reverb": "HEAVY_CAVERN_ECHO",
-    "subwoofer_boost": "MAXIMUM_BASS_PRESENCE"
-  }
+    "relative_filename": "assets/sounds/cyclops/deep_rumble_warning.json",
+    "sound_name": "cyclops_deep_rumble_warning",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "description": "Extremely deep rumbling warning sound for massive cyclops presence",
+    "audio_file": "cyclops_deep_rumble_warning.wav",
+    "duration_ms": 5000,
+    "mood_trigger": "ANGER",
+    "volume": 0.9,
+    "audio_specs": {
+        "sample_rate": "44100 Hz",
+        "bit_depth": "16-bit",
+        "channels": "mono",
+        "format": "WAV"
+    },
+    "frequency_profile": {
+        "fundamental": "30-80 Hz",
+        "harmonics": "ULTRA_LOW_FREQUENCY_EMPHASIS",
+        "character": "EARTH_SHAKING_SUBSONIC"
+    },
+    "playback_settings": {
+        "loop": false,
+        "fade_in": "500ms",
+        "fade_out": "1000ms",
+        "priority": 10
+    },
+    "trigger_conditions": {
+        "proximity": "ANY_RANGE_AREA_EFFECT",
+        "mood_state": "ANGRY_OR_TERRITORIAL",
+        "context": "INTIMIDATION_WARNING"
+    },
+    "audio_processing": {
+        "low_pass_filter": "ENABLED_AT_500HZ",
+        "reverb": "HEAVY_CAVERN_ECHO",
+        "subwoofer_boost": "MAXIMUM_BASS_PRESENCE"
+    },
+    "type": "UNKNOWN",
+    "name": "deep_rumble_warning"
 }

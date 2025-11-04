@@ -1,0 +1,5 @@
+// Auto-generated header for comfort_heating_system
+#include <esp_err.h>
+
+esp_err_t comfort_heating_system_init(void);
+void comfort_heating_system_act(void);

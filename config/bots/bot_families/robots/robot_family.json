@@ -1,65 +1,66 @@
 {
-    "relative_filename":  "config/bots/bot_families/robots/robot_family.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "family_type":  "ROBOT",
-    "family_category":  "mechanical",
-    "description":  "Advanced artificial constructs with LED displays, servo mechanisms, and AI behaviors",
-    "created":  "2025-10-13",
-    "template_type":  "family_template",
-    "coordinate_system":  "planar_2d",
-    "reference_point":  "nose_center",
-    "baseline_dimensions":  {
-                                "face_width":  "6.0 INCH",
-                                "face_height":  "8.0 INCH",
-                                "component_spacing":  "1.5 INCH"
-                            },
-    "family_characteristics":  {
-                                   "physical_features":  {
-                                                             "surface_material":  "metallic_brushed_aluminum",
-                                                             "facial_structure":  "geometric_angular",
-                                                             "eye_style":  "led_matrix_displays",
-                                                             "mouth_style":  "speaker_grille_pattern",
-                                                             "sensor_integration":  "visible_technical_elements"
-                                                         },
-                                   "behavioral_traits":  {
-                                                             "default_mood":  "ANALYTICAL_EFFICIENT",
-                                                             "aggression_level":  "TASK_DEPENDENT",
-                                                             "intelligence":  "ARTIFICIAL_LOGICAL",
-                                                             "social_behavior":  "PROTOCOL_BASED",
-                                                             "activity_pattern":  "ALWAYS_ACTIVE"
-                                                         },
-                                   "specializations":  {
-                                                           "security":  "threat_detection_and_response",
-                                                           "companion":  "social_interaction_and_assistance",
-                                                           "medical":  "health_monitoring_and_care",
-                                                           "exploration":  "environment_mapping_and_analysis",
-                                                           "combat":  "tactical_assessment_and_engagement"
-                                                       }
-                               },
-    "mood_preferences":  [
-                             "ANALYTICAL",
-                             "EFFICIENT",
-                             "PROTECTIVE",
-                             "HELPFUL",
-                             "VIGILANT"
-                         ],
-    "sound_profiles":  {
-                           "vocalizations":  [
-                                                 "synthesized_speech",
-                                                 "data_processing_beeps",
-                                                 "status_tones"
-                                             ],
-                           "ambient":  [
-                                           "servo_humming",
-                                           "cooling_fans",
-                                           "electronic_buzzing"
-                                       ],
-                           "operational":  [
-                                               "sensor_scanning",
-                                               "data_transmission",
-                                               "system_diagnostics"
-                                           ]
-                       },
-    "name":  "robot_family"
+    "relative_filename": "config/bots/bot_families/robots/robot_family.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "family_type": "ROBOT",
+    "family_category": "mechanical",
+    "description": "Advanced artificial constructs with LED displays, servo mechanisms, and AI behaviors",
+    "created": "2025-10-13",
+    "template_type": "family_template",
+    "coordinate_system": "planar_2d",
+    "reference_point": "nose_center",
+    "baseline_dimensions": {
+        "face_width": "6.0 INCH",
+        "face_height": "8.0 INCH",
+        "component_spacing": "1.5 INCH"
+    },
+    "family_characteristics": {
+        "physical_features": {
+            "surface_material": "metallic_brushed_aluminum",
+            "facial_structure": "geometric_angular",
+            "eye_style": "led_matrix_displays",
+            "mouth_style": "speaker_grille_pattern",
+            "sensor_integration": "visible_technical_elements"
+        },
+        "behavioral_traits": {
+            "default_mood": "ANALYTICAL_EFFICIENT",
+            "aggression_level": "TASK_DEPENDENT",
+            "intelligence": "ARTIFICIAL_LOGICAL",
+            "social_behavior": "PROTOCOL_BASED",
+            "activity_pattern": "ALWAYS_ACTIVE"
+        },
+        "specializations": {
+            "security": "threat_detection_and_response",
+            "companion": "social_interaction_and_assistance",
+            "medical": "health_monitoring_and_care",
+            "exploration": "environment_mapping_and_analysis",
+            "combat": "tactical_assessment_and_engagement"
+        }
+    },
+    "mood_preferences": [
+        "ANALYTICAL",
+        "EFFICIENT",
+        "PROTECTIVE",
+        "HELPFUL",
+        "VIGILANT"
+    ],
+    "sound_profiles": {
+        "vocalizations": [
+            "synthesized_speech",
+            "data_processing_beeps",
+            "status_tones"
+        ],
+        "ambient": [
+            "servo_humming",
+            "cooling_fans",
+            "electronic_buzzing"
+        ],
+        "operational": [
+            "sensor_scanning",
+            "data_transmission",
+            "system_diagnostics"
+        ]
+    },
+    "name": "robot_family",
+    "type": "UNKNOWN"
 }

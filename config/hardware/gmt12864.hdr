@@ -1,0 +1,42 @@
+#ifndef GMT12864_HDR
+#define GMT12864_HDR
+
+#include <stdint.h>
+
+// This struct acts as a "type bundle" for the gmt12864 hardware.
+// Based on its JSON, it is a 128x64 monochrome display.
+struct gmt12864
+{
+    // Standardized interface members
+    static const int WIDTH = 128;
+    static const int HEIGHT = 64;
+
+    // Monochrome display, so max value is 1 (on).
+    static const int MAX_VALUE = 1;
+
+    // Standardized nested Pixel type for monochrome displays.
+    struct Pixel
+    {
+        unsigned int value : 1;
+
+        Pixel() : value(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel(bool on) : value(on ? 1 : 0) {}
+
+        Pixel& operator=(const Pixel& other)
+        {
+            value = other.value;
+            return *this;
+        }
+
+        // For monochrome, 'adding' is like a logical OR.
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            result.value = (value || other.value) ? 1 : 0;
+            return result;
+        }
+    };
+};
+
+#endif // GMT12864_HDR

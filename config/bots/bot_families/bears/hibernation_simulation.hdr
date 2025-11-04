@@ -1,0 +1,5 @@
+// Auto-generated header for hibernation_simulation
+#include <esp_err.h>
+
+esp_err_t hibernation_simulation_init(void);
+void hibernation_simulation_act(void);

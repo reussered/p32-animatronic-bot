@@ -1,75 +1,75 @@
 {
-    "relative_filename":  "config/components/creature_specific/humanoid_elbow_right.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "name":  "HUMANOID_ELBOW_RIGHT",
-    "subsystem":  "ARM",
-    "component_type":  "POSITIONED_COMPONENT",
-    "description":  "Right elbow joint with 1 DOF flexion/extension for forearm articulation",
-    "physical_component":  "config/components/hardware/servo_assembly.json",
-    "coordinate_system":  "skull_3d",
-    "reference_point":  "nose_center",
-    "position":  {
-                     "x":  "14.0 INCH",
-                     "y":  "0.0 INCH",
-                     "z":  "-8.0 INCH",
-                     "description":  "Right elbow joint midpoint on upper arm"
-                 },
-    "scaling_behavior":  {
-                             "scales_with_creature":  true,
-                             "scaling_reference":  "eye_spacing_baseline",
-                             "position_scaling":  "PROPORTIONAL_XYZ",
-                             "component_scaling":  "MASS_BASED_SERVO_SELECTION"
-                         },
-    "joint_specifications":  {
-                                 "degrees_of_freedom":  1,
-                                 "joint_names":  [
-                                                     "elbow_flex_extend"
-                                                 ],
-                                 "elbow_flex_extend":  {
-                                                           "axis":  "FRONTAL_PLANE_ROTATION",
-                                                           "range_of_motion":  "0_TO_150_DEGREES",
-                                                           "servo_type":  "NEMA17_WITH_27_1_GEARBOX",
-                                                           "torque_requirement":  "6.7_NM_PEAK",
-                                                           "position_feedback":  "AS5600_ABSOLUTE_ENCODER",
-                                                           "soft_limits":  {
-                                                                               "comfortable_range":  "10_TO_140_DEGREES",
-                                                                               "hyperextension_protection":  "ACTIVE_TORQUE_LIMITING"
-                                                                           }
-                                                       }
-                             },
-    "attachment_points":  {
-                              "connects_to_upper_arm":  {
-                                                            "component_reference":  "config/components/creature_specific/humanoid_shoulder_right.json",
-                                                            "attachment_method":  "M6_HUMERUS_COUPLING"
-                                                        },
-                              "connects_to_forearm":  {
-                                                          "component_reference":  "config/components/creature_specific/humanoid_wrist_right.json",
-                                                          "attachment_method":  "M5_RADIUS_ULNA_COUPLING"
-                                                      }
-                          },
-    "control_specifications":  {
-                                   "controller_assignment":  "ESP32_C3_ARM_CONTROLLER_RIGHT",
-                                   "control_loop_frequency":  "1000_HZ",
-                                   "coordinate_with":  [
-                                                           "humanoid_shoulder_right",
-                                                           "humanoid_wrist_right"
-                                                       ],
-                                   "safety_limits":  {
-                                                         "max_angular_velocity":  "300_DEGREES_PER_SECOND",
-                                                         "collision_detection":  "TORQUE_SPIKE_MONITORING"
-                                                     }
-                               },
-    "behavioral_capabilities":  {
-                                    "manipulation_contribution":  "FOREARM_POSITIONING_AND_REACH_EXTENSION",
-                                    "gesture_primitives":  [
-                                                               "bend",
-                                                               "extend",
-                                                               "carry_load",
-                                                               "brace_impact"
-                                                           ],
-                                    "load_handling":  "UP_TO_5KG_SUSTAINED_FLEXION",
-                                    "speed_capability":  "RAPID_GESTURE_MOVEMENTS"
-                                },
-    "hardware_type":  "POSITIONED_COMPONENT"
+    "relative_filename": "config/components/creature_specific/humanoid_elbow_right.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "humanoid_elbow_right",
+    "subsystem": "ARM",
+    "description": "Right elbow joint with 1 DOF flexion/extension for forearm articulation",
+    "physical_component": "config/components/hardware/servo_assembly.json",
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "14.0 INCH",
+        "y": "0.0 INCH",
+        "z": "-8.0 INCH",
+        "description": "Right elbow joint midpoint on upper arm"
+    },
+    "scaling_behavior": {
+        "scales_with_creature": true,
+        "scaling_reference": "eye_spacing_baseline",
+        "position_scaling": "PROPORTIONAL_XYZ",
+        "component_scaling": "MASS_BASED_SERVO_SELECTION"
+    },
+    "joint_specifications": {
+        "degrees_of_freedom": 1,
+        "joint_names": [
+            "elbow_flex_extend"
+        ],
+        "elbow_flex_extend": {
+            "axis": "FRONTAL_PLANE_ROTATION",
+            "range_of_motion": "0_TO_150_DEGREES",
+            "servo_type": "NEMA17_WITH_27_1_GEARBOX",
+            "torque_requirement": "6.7_NM_PEAK",
+            "position_feedback": "AS5600_ABSOLUTE_ENCODER",
+            "soft_limits": {
+                "comfortable_range": "10_TO_140_DEGREES",
+                "hyperextension_protection": "ACTIVE_TORQUE_LIMITING"
+            }
+        }
+    },
+    "attachment_points": {
+        "connects_to_upper_arm": {
+            "component_reference": "config/components/creature_specific/humanoid_shoulder_right.json",
+            "attachment_method": "M6_HUMERUS_COUPLING"
+        },
+        "connects_to_forearm": {
+            "component_reference": "config/components/creature_specific/humanoid_wrist_right.json",
+            "attachment_method": "M5_RADIUS_ULNA_COUPLING"
+        }
+    },
+    "control_specifications": {
+        "controller_assignment": "ESP32_C3_ARM_CONTROLLER_RIGHT",
+        "control_loop_frequency": "1000_HZ",
+        "coordinate_with": [
+            "humanoid_shoulder_right",
+            "humanoid_wrist_right"
+        ],
+        "safety_limits": {
+            "max_angular_velocity": "300_DEGREES_PER_SECOND",
+            "collision_detection": "TORQUE_SPIKE_MONITORING"
+        }
+    },
+    "behavioral_capabilities": {
+        "manipulation_contribution": "FOREARM_POSITIONING_AND_REACH_EXTENSION",
+        "gesture_primitives": [
+            "bend",
+            "extend",
+            "carry_load",
+            "brace_impact"
+        ],
+        "load_handling": "UP_TO_5KG_SUSTAINED_FLEXION",
+        "speed_capability": "RAPID_GESTURE_MOVEMENTS"
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
 }

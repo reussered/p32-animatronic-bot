@@ -1,69 +1,69 @@
 {
-    "relative_filename":  "config/components/creature_specific/robot_chest_matrix.json",
-    "version":  "1.0.0",
-    "author":  "config/author.json",
-    "component_type":  "POSITIONED_LED_MATRIX",
-    "name":  "ROBOT_CHEST_MATRIX",
-    "subsystem":  "UNKNOWN",
-    "description":  "8x8 RGB LED matrix for robot chest display and status indication",
-    "created":  "2025-10-12",
-    "components":  [
-                       "config/components/hardware/neopixel_matrix_8x8.json"
-                   ],
-    "spatial_coordinates":  {
-                                "coordinate_system":  "planar_2d",
-                                "reference_point":  "nose_center",
-                                "position":  {
-                                                 "x":  "0.0 INCH",
-                                                 "y":  "-4.0 INCH",
-                                                 "z":  "0.5 INCH"
-                                             },
-                                "orientation":  {
-                                                    "rotation_x":  "0 DEG",
-                                                    "rotation_y":  "0 DEG",
-                                                    "rotation_z":  "0 DEG"
-                                                }
-                            },
-    "mounting_specifications":  {
-                                    "mount_type":  "flush_panel",
-                                    "bezel_required":  true,
-                                    "diffusion_layer":  "optional",
-                                    "viewing_angle":  "90 DEG",
-                                    "protection_rating":  "indoor_use"
-                                },
-    "display_configuration":  {
-                                  "default_brightness":  128,
-                                  "animation_fps":  30,
-                                  "color_profile":  "robot_blue",
-                                  "startup_animation":  "boot_sequence",
-                                  "idle_pattern":  "breathing_pulse"
-                              },
-    "behavioral_integration":  {
-                                   "mood_responsive":  true,
-                                   "mood_mappings":  {
-                                                         "HAPPINESS":  "cheerful_patterns",
-                                                         "ANGER":  "warning_strobes",
-                                                         "CURIOSITY":  "scanning_animation",
-                                                         "CONTENTMENT":  "steady_glow",
-                                                         "EXCITEMENT":  "rapid_cycling"
-                                                     }
-                               },
-    "use_cases":  [
-                      "status_display",
-                      "emotion_expression",
-                      "system_diagnostics",
-                      "user_communication",
-                      "ambient_lighting"
-                  ],
-    "family_compatibility":  {
-                                 "robot":  "PRIMARY",
-                                 "android":  "GOOD",
-                                 "steampunk":  "MODERATE"
-                             },
-    "hardware_type":  "POSITIONED_COMPONENT",
-    "position":  {
-                     "y":  "0.0 INCH",
-                     "z":  "0.0 INCH",
-                     "x":  "0.0 INCH"
-                 }
+    "relative_filename": "config/components/creature_specific/robot_chest_matrix.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "robot_chest_matrix",
+    "subsystem": "UNKNOWN",
+    "description": "8x8 RGB LED matrix for robot chest display and status indication",
+    "created": "2025-10-12",
+    "components": [
+        "config/components/hardware/neopixel_matrix_8x8.json"
+    ],
+    "spatial_coordinates": {
+        "coordinate_system": "planar_2d",
+        "reference_point": "nose_center",
+        "position": {
+            "x": "0.0 INCH",
+            "y": "-4.0 INCH",
+            "z": "0.5 INCH"
+        },
+        "orientation": {
+            "rotation_x": "0 DEG",
+            "rotation_y": "0 DEG",
+            "rotation_z": "0 DEG"
+        }
+    },
+    "mounting_specifications": {
+        "mount_type": "flush_panel",
+        "bezel_required": true,
+        "diffusion_layer": "optional",
+        "viewing_angle": "90 DEG",
+        "protection_rating": "indoor_use"
+    },
+    "display_configuration": {
+        "default_brightness": 128,
+        "animation_fps": 30,
+        "color_profile": "robot_blue",
+        "startup_animation": "boot_sequence",
+        "idle_pattern": "breathing_pulse"
+    },
+    "behavioral_integration": {
+        "mood_responsive": true,
+        "mood_mappings": {
+            "HAPPINESS": "cheerful_patterns",
+            "ANGER": "warning_strobes",
+            "CURIOSITY": "scanning_animation",
+            "CONTENTMENT": "steady_glow",
+            "EXCITEMENT": "rapid_cycling"
+        }
+    },
+    "use_cases": [
+        "status_display",
+        "emotion_expression",
+        "system_diagnostics",
+        "user_communication",
+        "ambient_lighting"
+    ],
+    "family_compatibility": {
+        "robot": "PRIMARY",
+        "android": "GOOD",
+        "steampunk": "MODERATE"
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "position": {
+        "y": "0.0 INCH",
+        "z": "0.0 INCH",
+        "x": "0.0 INCH"
+    },
+    "type": "POSITIONED_LED_MATRIX"
 }

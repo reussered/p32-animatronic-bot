@@ -38,5 +38,6 @@
             "config/components/drivers/spi_display_bus.json",
             "config/components/drivers/spi_data_bus.json"
         ]
-    }
+    },
+    "type": "UNKNOWN"
 }
