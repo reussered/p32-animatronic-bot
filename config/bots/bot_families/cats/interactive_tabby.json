@@ -6,7 +6,7 @@
     "bot_type": "INTERACTIVE_PET",
     "description": "Highly interactive orange tabby cat with animated ears and touch-sensitive whiskers",
     "created": "2025-10-12",
-    "family_template": "config/bots/bot_families/animals/cat_family.json",
+    "family_template": "config/bots/bot_families/cats/cat_family.json",
     "overrides": {
         "mood_defaults": {
             "CURIOSITY": 45,

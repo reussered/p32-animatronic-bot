@@ -2,7 +2,7 @@
     "relative_filename": "config/bots/bot_families/goblins/goblin_sneak.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+    "family_template": "config/bots/bot_families/goblins/goblin_family.json",
     "bot_type": "GOBLINSNEAK",
     "bot_id": "goblin_sneak_v1",
     "description": "Cave-dwelling goblin sneak with minimal sounds and extreme cautious behaviors",

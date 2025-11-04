@@ -2,7 +2,7 @@
     "relative_filename": "config/bots/bot_families/goblins/goblin_chief.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+    "family_template": "config/bots/bot_families/goblins/goblin_family.json",
     "bot_type": "GOBLINCHIEF",
     "bot_id": "goblin_chief_v1",
     "description": "Commanding goblin chief with leadership presence and territorial dominance",

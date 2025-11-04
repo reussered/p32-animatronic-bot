@@ -2,7 +2,7 @@
     "relative_filename": "config/bots/bot_families/bears/head/bear_polar.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "family_template": "config/bots/bot_families/animals/bear_family.json",
+    "family_template": "config/bots/bot_families/bears/bear_family.json",
     "bot_type": "BEARPOLAR",
     "bot_id": "bear_polar_v1",
     "description": "Arctic polar bear with cold weather adaptations and swimming behaviors",

@@ -6,7 +6,7 @@
     "bot_type": "MYSTICAL_PET",
     "description": "Enigmatic black cat with subtle LED accent lighting and mysterious behaviors",
     "created": "2025-10-12",
-    "family_template": "config/bots/bot_families/animals/cat_family.json",
+    "family_template": "config/bots/bot_families/cats/cat_family.json",
     "overrides": {
         "mood_defaults": {
             "CURIOSITY": 55,

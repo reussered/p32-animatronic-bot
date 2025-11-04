@@ -2,7 +2,7 @@
     "relative_filename": "config/bots/bot_families/goblins/goblin_berserker.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
+    "family_template": "config/bots/bot_families/goblins/goblin_family.json",
     "bot_type": "GOBLINBERSERKER",
     "bot_id": "goblin_berserker_v1",
     "description": "Rage-driven goblin berserker with uncontrollable fury and battle madness",

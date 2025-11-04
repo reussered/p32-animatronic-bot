@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "BEAR_PROTECTIVE_GUARDIAN_001",
-    "family_reference": "config/bots/bot_families/animals/bear_family.json",
+    "family_reference": "config/bots/bot_families/bears/bear_family.json",
     "subfamily": "grizzly_bear",
     "description": "Protective grizzly bear with maternal instincts and territory defense behaviors",
     "created": "2025-10-12",

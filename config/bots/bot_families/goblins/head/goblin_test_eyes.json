@@ -25,7 +25,7 @@
         "config/components/functional/goblin_behavior_engine.json"
     ],
     "components": [
-        "config/bots/bot_families/tests/subsystems/test_head.json"
+        "config/bots/bot_families/tests/head/test_head.json"
     ],
     "mood_defaults": {
         "FEAR": 20,
@@ -49,7 +49,7 @@
         "scad_file": "assets/shapes/scad/test_fixtures/dual_display_test.scad",
         "stl_file": "assets/shapes/stl/test_fixtures/dual_display_test.stl",
         "description": "Test fixture for dual GC9A01 displays",
-        "color_palette": "config/bots/bot_families/fantasy/goblin_family.json",
+        "color_palette": "config/bots/bot_families/goblins/goblin_family.json",
         "mounting_points": {
             "eye_left": {
                 "type": "26mm_ring",
