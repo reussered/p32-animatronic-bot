@@ -5,7 +5,7 @@
         "init_function": "skeleton_jaw_actuator_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/skeleton_jaw_actuator.json",
+    "relative_filename": "config/components/creature_specific/skeleton_jaw_actuator.json",
     "name": "skeleton_jaw_actuator",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

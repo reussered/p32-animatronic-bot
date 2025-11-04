@@ -25,3 +25,6 @@ src/p32_dispatch_tables.cpp
 include/p32_dispatch_tables.hpp
 src/p32_component_functions.cpp
 include/p32_component_functions.hpp
+
+# Auto-generated JSON files from .src/.hdr in subsystems folders
+config/bots/bot_families/*/subsystems/*.json

@@ -20,65 +20,820 @@
 // Subsystem: goblin_head
 // Controller: ESP32_S3_R8N16
 
-// Component definition sourced from config\components\creature_specific\goblin_left_ear.json
+// Component definition sourced from config/components/hardware/gc9a01.json
+struct gc9a01_config {
+    const char* relative_filename = "config/components/hardware/gc9a01.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* hardware_type = "GC9A01_DISPLAY";
+    bool display_driver = true;
+    const char* name = "gc9a01";
+    const char* subsystem = "HEAD";
+    struct physical_specs_t {
+        const char* diameter = "1.28 INCH";
+        const char* thickness = "0.08 INCH";
+        const char* resolution = "240x240";
+        struct mounting_holes_t {
+            int count = 4;
+            const char* diameter = "0.1 INCH";
+            const char* spacing = "1.1 INCH";
+        } mounting_holes;
+    } physical_specs;
+    struct timing_t {
+        int hitCount = 1;
+        const char* description = "Display updates every loop for smooth animation";
+    } timing;
+    struct pin_mapping_t {
+        const char* description = "GC9A01 displays have varying pin labels depending on manufacturer. See MakerNames.json for complete mapping.";
+        const char* manufacturer_mapping_reference = "config/components/interfaces/MakerNames.json";
+        struct generic_pins_t {
+            struct clock_t {
+                const char* function = "SPI Clock";
+                bool required = true;
+                const char* manufacturer_labels[4] = { "CLK", "SCK", "SCLK", "SCL" };
+            } clock;
+            struct data_input_t {
+                const char* function = "SPI Master Out Slave In (Data)";
+                bool required = true;
+                const char* manufacturer_labels[4] = { "MOSI", "SDA", "SDI", "DIN" };
+            } data_input;
+            struct data_command_t {
+                const char* function = "Data/Command Select";
+                bool required = true;
+                const char* manufacturer_labels[4] = { "DC", "D/C", "RS", "A0" };
+            } data_command;
+            struct chip_select_t {
+                const char* function = "Chip Select (Slave Select)";
+                bool required = true;
+                const char* manufacturer_labels[3] = { "CS", "SS", "CE" };
+            } chip_select;
+            struct reset_t {
+                const char* function = "Hardware Reset";
+                bool required = true;
+                const char* manufacturer_labels[3] = { "RST", "RESET", "RES" };
+            } reset;
+            struct backlight_t {
+                const char* function = "Backlight Control (PWM)";
+                bool required = false;
+                const char* manufacturer_labels[3] = { "BL", "BLK", "LED" };
+            } backlight;
+            struct power_positive_t {
+                const char* function = "Power Supply (3.3V)";
+                bool required = true;
+                const char* manufacturer_labels[4] = { "VCC", "VDD", "3V3", "+3.3V" };
+            } power_positive;
+            struct power_ground_t {
+                const char* function = "Ground Reference";
+                bool required = true;
+                const char* manufacturer_labels[3] = { "GND", "VSS", "0V" };
+            } power_ground;
+        } generic_pins;
+        struct common_manufacturer_variations_t {
+            struct variation_1_t {
+                const char* description = "Most common pinout (your displays)";
+                const char* pins_exposed[7] = { "SCK", "SDA", "DC", "CS", "RST", "VCC", "GND" };
+            } variation_1;
+            struct variation_2_t {
+                const char* description = "Waveshare/Adafruit style";
+                const char* pins_exposed[8] = { "CLK", "MOSI", "DC", "CS", "RST", "BL", "VCC", "GND" };
+            } variation_2;
+            struct variation_3_t {
+                const char* description = "Generic Chinese modules";
+                const char* pins_exposed[8] = { "SCLK", "SDI", "RS", "CS", "RESET", "LED", "VDD", "GND" };
+            } variation_3;
+        } common_manufacturer_variations;
+    } pin_mapping;
+    struct driver_config_t {
+        int rotation = 0;
+        bool invert_colors = false;
+        bool backlight_pwm = true;
+    } driver_config;
+    struct color_specifications_t {
+        const char* color_mode = "full_color";
+        int bit_depth = 16;
+        const char* color_space = "RGB565";
+        int colors_supported = 65536;
+        const char* description = "Full color 16-bit RGB display";
+    } color_specifications;
+    struct mood_color_response_t {
+        bool supports_dynamic_colors = true;
+        bool full_spectrum_available = true;
+        struct mood_mapping_t {
+            const char* ANGER = "#FF0000";
+            const char* FEAR = "#800080";
+            const char* HAPPINESS = "#FFFF00";
+            const char* CONTENTMENT = "#00FF00";
+            const char* CURIOSITY = "#0080FF";
+            const char* IRRITATION = "#FF8000";
+            const char* HUNGER = "#FF0080";
+            const char* AFFECTION = "#FF69B4";
+        } mood_mapping;
+    } mood_color_response;
+    struct software_t {
+        const char* init_function = "gc9a01_init";
+        const char* act_function = "gc9a01_act";
+    } software;
+    const char* required_interface_functions[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
+    const char* type = "DISPLAY_DRIVER";
+};
+
+// Component definition sourced from config/components/drivers/generic_spi_data_driver.json
+struct generic_spi_data_driver_config {
+    const char* name = "generic_spi_data_driver";
+    const char* type = "SPI_DRIVER";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Generic driver for SPI peripherals using the spi_data_bus for full-duplex communication.";
+    const char* created = "2025-11-01";
+    const char* relative_filename = "config/components/drivers/generic_spi_data_driver.json";
+    struct software_t {
+        const char* init_function = "generic_spi_data_driver_init";
+        const char* act_function = "generic_spi_data_driver_act";
+    } software;
+};
+
+// Component definition sourced from config/components/drivers/generic_spi_display.json
+struct generic_spi_display_config {
+    const char* name = "generic_spi_display";
+    const char* type = "DRIVER";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Generic SPI display driver for ESP32-S3 with configurable pin mapping and display parameters";
+    const char* created = "2025-10-29";
+    const char* hardware_type = "display_driver";
+    struct capabilities_t {
+        const char* bus_type = "SPI";
+        const char* max_resolution = "240x240";
+        const char* color_depth = "16-bit";
+        const char* interface_speed = "up to 80MHz";
+        const char* supported_displays[4] = { "GC9A01", "ILI9341", "ST7789", "custom SPI displays" };
+    } capabilities;
+    struct electrical_specs_t {
+        const char* voltage_range = "3.3V";
+        const char* current_draw = "50-200mA";
+        const char* spi_mode = "Mode 0 or 3";
+        const char* clock_polarity = "configurable";
+    } electrical_specs;
+    struct gpio_requirements_t {
+        const char* required_pins[6] = { "MOSI", "SCLK", "CS", "DC", "RST", "BL" };
+        const char* optional_pins[1] = { "MISO" };
+        int pin_count = 5;
+    } gpio_requirements;
+    struct software_t {
+        const char* init_function = "generic_spi_display_init";
+        const char* act_function = "generic_spi_display_act";
+        const char* api_functions[6] = { "spi_display_init(uint8_t cs_pin, uint8_t dc_pin, uint8_t rst_pin, uint8_t bl_pin)", "spi_display_write_pixel(uint16_t x, uint16_t y, uint16_t color)", "spi_display_fill_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)", "spi_display_draw_bitmap(uint16_t x, uint16_t y, const uint16_t* bitmap, uint16_t w, uint16_t h)", "spi_display_set_brightness(uint8_t brightness)", "spi_display_clear(uint16_t color)" };
+    } software;
+    struct compatibility_t {
+        bool esp32_s3 = true;
+        bool esp32_s2 = true;
+        bool esp32 = false;
+        const char* chip_variants[2] = { "ESP32-S3-DevKitC-1", "ESP32-S3-WROOM-1" };
+    } compatibility;
+    struct dependencies_t {
+        const char* esp_idf_components[2] = { "spi", "gpio" };
+        // Empty array: external_libraries
+    } dependencies;
+    const char* relative_filename = "config/components/drivers/generic_spi_display.json";
+};
+
+// Component definition sourced from config/components/goblin_eye.json
+struct goblin_eye_config {
+    const char* relative_filename = "config/components/goblin_eye.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "goblin_eye";
+    const char* subsystem = "HEAD";
+    const char* type = "DISPLAY_DRIVER";
+    const char* description = "Shared goblin eye processing logic with palette and mood-based rendering";
+    const char* created = "2025-10-22";
+    struct component_constraints_t {
+        const char* required_contained_types[1] = { "DISPLAY_DRIVER" };
+        const char* interface_requirements[3] = { "getBuffer", "getFrameSize", "getFrameRowSize" };
+    } component_constraints;
+    struct creature_display_profile_t {
+        const char* species = "GOBLIN";
+        const char* eye_color_base = "AMBER_GOLD";
+        const char* pupil_style = "VERTICAL_SLIT";
+        const char* expression_range = "MENACING_TO_CURIOUS";
+        const char* mood_responsiveness = "HIGH";
+    } creature_display_profile;
+    struct palette_system_t {
+        int palette_size = 256;
+        struct color_ranges_t {
+            const char* eyelid_pupil = "0-31";
+            const char* iris_base = "32-63";
+            const char* highlights = "64-95";
+            const char* bird_colors = "64-95";
+            const char* anger_reds = "96-127";
+            const char* curiosity_greens = "128-159";
+            const char* fear_blues = "160-191";
+            const char* happiness_yellows = "192-223";
+            const char* special_effects = "224-255";
+        } color_ranges;
+    } palette_system;
+    struct mood_color_mapping_t {
+        struct ANGER_t {
+            const char* primary_range = "96-127";
+            float intensity_multiplier = 1.5;
+            const char* glow_effect = "ENABLED";
+        } ANGER;
+        struct CURIOSITY_t {
+            const char* primary_range = "128-159";
+            float intensity_multiplier = 1.2;
+            const char* sparkle_effect = "ENABLED";
+        } CURIOSITY;
+        struct FEAR_t {
+            const char* primary_range = "160-191";
+            float intensity_multiplier = 1.8;
+            const char* dilation_effect = "ENABLED";
+        } FEAR;
+        struct HAPPINESS_t {
+            const char* primary_range = "192-223";
+            float intensity_multiplier = 1.1;
+            const char* warmth_effect = "ENABLED";
+        } HAPPINESS;
+        struct BIRD_t {
+            const char* primary_range = "32-95";
+            float intensity_multiplier = 1.3;
+            const char* special_effect = "FLYING_PATTERN";
+            const char* wing_animation = "ENABLED";
+        } BIRD;
+    } mood_color_mapping;
+    struct frame_processing_t {
+        const char* buffer_stack_support = "ENABLED";
+        const char* multi_eye_coordination = "ENABLED";
+        const char* mood_based_adjustments = "REALTIME";
+        const char* color_space = "RGB565";
+    } frame_processing;
+    struct timing_t {
+        int hitCount = 1;
+        const char* description = "Process all frames in buffer stack every loop";
+    } timing;
+    struct software_t {
+        const char* init_function = "goblin_eye_init";
+        const char* act_function = "goblin_eye_act";
+    } software;
+    const char* prototype_status = "implemented";
+    bool tested = true;
+    const char* notes[6] = { "Software-only component - no physical shape", "Code already fully implemented in goblin_eye.cpp/hpp", "Handles mood-based color palette adjustments", "Supports buffer stack processing for left/right eye coordination", "256-color organized palette with distinct mood ranges", "Real-time frame processing with SharedMemory mood integration" };
+};
+
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_left_ear.json
 struct goblin_left_ear_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "goblin_left_ear";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_left_ear.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "goblin_left_ear_act";
+        const char* init_function = "goblin_left_ear_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_left_ear.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_left_eye.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_left_eye.json
 struct goblin_left_eye_config {
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_left_eye.json";
+    const char* version = "3.0.0";
+    const char* author = "config/author.json";
     const char* name = "goblin_left_eye";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_left_eye.json";
-    const char* description = "Auto-generated component.";
+    const char* description = "Left eye positioned display with goblin-specific visual processing";
+    const char* created = "2025-10-22";
+    const char* coordinate_system = "skull_3d";
+    const char* reference_point = "nose_center";
+    struct position_t {
+        const char* x = "-1.05 INCH";
+        const char* y = "+0.7 INCH";
+        const char* z = "-0.35 INCH";
+    } position;
+    struct orientation_t {
+        const char* tilt = "0 DEGREES";
+        const char* rotation = "0 DEGREES";
+        const char* roll = "0 DEGREES";
+    } orientation;
+    struct positioning_specific_config_t {
+        const char* eye_side = "LEFT";
+        const char* spi_device = "SPI_DEVICE_1";
+        const char* animation_buffer = "left_eye_animation_buffer";
+        const char* frame_offset = "0";
+    } positioning_specific_config;
+    const char* function = "primary_display_left";
+    struct timing_t {
+        int hitCount = 5;
+        const char* description = "Left eye animation frame update every 5 loops";
+    } timing;
+    struct software_t {
+        const char* init_function = "goblin_left_eye_init";
+        const char* act_function = "goblin_left_eye_act";
+    } software;
+    struct shape_t {
+        const char* scad_file = "assets/shapes/scad/positioned/goblin/goblin_left_eye_positioned.scad";
+        const char* stl_file = "assets/shapes/stl/positioned/goblin/goblin_left_eye_positioned.stl";
+        const char* description = "Left eye mount with spatial positioning for goblin skull";
+    } shape;
+    const char* prototype_status = "implemented";
+    bool tested = true;
+    const char* hardware_type = "POSITIONED_COMPONENT";
+    const char* type = "DISPLAY_DRIVER";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_mouth.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_mouth.json
 struct goblin_mouth_config {
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_mouth.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
     const char* name = "goblin_mouth";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_mouth.json";
-    const char* description = "Auto-generated component.";
+    const char* subsystem = "HEAD";
+    const char* coordinate_system = "skull_3d";
+    const char* reference_point = "nose_center";
+    struct position_t {
+        const char* x = "0 INCH";
+        const char* y = "-1.05 INCH";
+        const char* z = "0 INCH";
+    } position;
+    struct orientation_t {
+        const char* tilt = "0 DEGREES";
+        const char* rotation = "0 DEGREES";
+        const char* roll = "0 DEGREES";
+    } orientation;
+    const char* function = "mouth_display";
+    const char* description = "Mouth display animation";
+    struct timing_t {
+        int hitCount = 36000;
+    } timing;
+    const char* hardware_type = "POSITIONED_COMPONENT";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_nose.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_nose.json
 struct goblin_nose_config {
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_nose.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
     const char* name = "goblin_nose";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_nose.json";
-    const char* description = "Auto-generated component.";
+    const char* subsystem = "HEAD";
+    struct mounting_architecture_t {
+        const char* type = "two_tier";
+        const char* hardware_mount = "sensor_basic_mount";
+        const char* decorative_shell = "goblin_nose_shell";
+    } mounting_architecture;
+    const char* coordinate_system = "skull_3d";
+    const char* reference_point = "nose_center";
+    struct position_t {
+        const char* x = "0 INCH";
+        const char* y = "0 INCH";
+        const char* z = "+0.25 INCH";
+    } position;
+    struct orientation_t {
+        const char* tilt = "0 DEGREES";
+        const char* rotation = "0 DEGREES";
+        const char* roll = "0 DEGREES";
+    } orientation;
+    const char* function = "proximity_sensor";
+    const char* description = "Proximity sensor monitoring";
+    struct timing_t {
+        int hitCount = 180000;
+    } timing;
+    const char* hardware_type = "POSITIONED_COMPONENT";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_right_ear.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_right_ear.json
 struct goblin_right_ear_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "goblin_right_ear";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_right_ear.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "goblin_right_ear_act";
+        const char* init_function = "goblin_right_ear_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_right_ear.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_right_eye.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_right_eye.json
 struct goblin_right_eye_config {
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_right_eye.json";
+    const char* version = "2.0.0";
+    const char* author = "config/author.json";
     const char* name = "goblin_right_eye";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_right_eye.json";
-    const char* description = "Auto-generated component.";
+    struct template_inheritance_t {
+        const char* hardware_template = "config/hardware/gc9a01.json";
+        const char* display_type = "CIRCULAR_LCD_FULL_COLOR";
+        const char* creature_shell = "assets/shapes/scad/creature_shells/goblin/goblin_eye_shell.scad";
+        const char* mount_template = "assets/shapes/scad/basic_mounts/gc9a01_circular_mount.scad";
+    } template_inheritance;
+    const char* coordinate_system = "skull_3d";
+    const char* reference_point = "nose_center";
+    struct position_t {
+        const char* x = "+1.05 INCH";
+        const char* y = "+0.7 INCH";
+        const char* z = "-0.35 INCH";
+    } position;
+    struct orientation_t {
+        const char* tilt = "0 DEGREES";
+        const char* rotation = "0 DEGREES";
+        const char* roll = "0 DEGREES";
+    } orientation;
+    struct creature_specific_config_t {
+        const char* eye_color = "GOBLIN_GREEN";
+        const char* pupil_style = "VERTICAL_SLIT";
+        const char* expression_range = "MENACING_TO_CURIOUS";
+    } creature_specific_config;
+    const char* function = "primary_display_right";
+    const char* description = "Right eye display animation - goblin variant using standard GC9A01 hardware";
+    struct timing_t {
+        int hitCount = 5;
+    } timing;
+    const char* hardware_type = "POSITIONED_COMPONENT";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\goblin_speaker.json
+// Component definition sourced from config/bots/bot_families/goblins/head/goblin_speaker.json
 struct goblin_speaker_config {
+    const char* relative_filename = "config/bots/bot_families/goblins/head/goblin_speaker.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
     const char* name = "goblin_speaker";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/goblin_speaker.json";
-    const char* description = "Auto-generated component.";
+    const char* subsystem = "HEAD";
+    const char* coordinate_system = "skull_3d";
+    const char* reference_point = "nose_center";
+    struct position_t {
+        const char* x = "-0.5 INCH";
+        const char* y = "+0.5 INCH";
+        const char* z = "-1.0 INCH";
+    } position;
+    struct orientation_t {
+        const char* tilt = "0 DEGREES";
+        const char* rotation = "0 DEGREES";
+        const char* roll = "0 DEGREES";
+    } orientation;
+    const char* function = "primary_audio_output";
+    const char* description = "Audio output processing";
+    struct timing_t {
+        int hitCount = 84000;
+    } timing;
+    const char* hardware_type = "POSITIONED_COMPONENT";
+    const char* type = "POSITIONED_COMPONENT";
+};
+
+// Component definition sourced from config/hardware/hc_sr04_sensor.json
+struct hc_sr04_sensor_config {
+    const char* relative_filename = "config/hardware/hc_sr04_sensor.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* hardware_type = "HC_SR04_SENSOR";
+    const char* name = "hc_sr04_sensor";
+    struct physical_specs_t {
+        const char* width = "1.8 INCH";
+        const char* height = "0.7 INCH";
+        const char* depth = "0.6 INCH";
+        const char* sensor_spacing = "1.0 INCH";
+        struct mounting_holes_t {
+            int count = 2;
+            const char* diameter = "0.08 INCH";
+            const char* spacing = "1.5 INCH";
+        } mounting_holes;
+    } physical_specs;
+    struct electrical_specs_t {
+        const char* supply_voltage = "5V";
+        const char* interface = "GPIO_PAIR";
+        const char* current_consumption = "15mA";
+    } electrical_specs;
+    struct sensor_config_t {
+        const char* range_min = "0.08 INCH";
+        const char* range_max = "157 INCH";
+        const char* accuracy = "0.12 INCH";
+        const char* beam_angle = "15 DEGREES";
+    } sensor_config;
+    struct software_t {
+        const char* init_function = "hc_sr04_ultrasonic_distance_sensor_init";
+        const char* act_function = "hc_sr04_ultrasonic_distance_sensor_act";
+    } software;
+    const char* type = "UNKNOWN";
+};
+
+// Component definition sourced from config/hardware/hw496_microphone.json
+struct hw496_microphone_config {
+    const char* relative_filename = "config/hardware/hw496_microphone.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* hardware_name = "HW-496 MEMS Microphone Module";
+    const char* description = "HW-496 MEMS microphone with MAX4466 pre-amplifier";
+    const char* created = "2025-10-15";
+    struct hardware_specs_t {
+        const char* microphone_type = "electret_mems";
+        const char* frequency_response = "20Hz_to_20kHz";
+        const char* sensitivity = "adjustable_gain";
+        const char* max_spl = "110dB_SPL";
+        const char* signal_to_noise = "58dB";
+    } hardware_specs;
+    struct physical_properties_t {
+        struct board_dimensions_t {
+            const char* width = "20mm";
+            const char* length = "15mm";
+            const char* height = "7mm";
+        } board_dimensions;
+        const char* weight = "1.5g";
+        struct mounting_holes_t {
+            int count = 2;
+            const char* diameter = "2mm";
+            const char* spacing = "15mm";
+        } mounting_holes;
+    } physical_properties;
+    struct control_interface_t {
+        const char* protocol = "analog";
+        const char* output_type = "analog_voltage";
+        const char* output_range = "0-3.3V";
+        const char* adc_connection = "single_ended";
+    } control_interface;
+    struct power_requirements_t {
+        const char* operating_voltage = "2.4V-5V";
+        const char* typical_voltage = "3.3V";
+        const char* current_consumption = "4mA_typical";
+        const char* max_current = "10mA";
+    } power_requirements;
+    struct pin_mapping_t {
+        const char* pins = "[{\"name\": \"VCC\", \"type\": \"power\", \"voltage\": \"3.3V\"}, {\"name\": \"GND\", \"type\": \"ground\"}, {\"name\": \"OUT\", \"type\": \"analog_output\", \"description\": \"Audio signal output\"}]";
+    } pin_mapping;
+    struct gain_adjustment_t {
+        const char* method = "potentiometer";
+        const char* range = "25x_to_125x";
+        // default
+        const char* default_ = "50x";
+    } gain_adjustment;
+    const char* prototype_status = "available_on_hand";
+    bool tested = false;
+    int quantity_available = 2;
+    const char* supplier = "Generic/AliExpress";
+    const char* notes[4] = { "Physical hardware available for testing", "Requires ADC pin assignment for each ear", "Adjustable gain via onboard trimpot", "Can be used for sound detection or voice input" };
+    const char* hardware_type = "MEMS_MICROPHONE";
+    const char* name = "hw496_microphone";
+    const char* dependencies[2] = { "config/components/drivers/adc_bus.json", "config/components/drivers/generic_mic_driver.json" };
+    struct software_t {
+        const char* init_function = "hw496_microphone_init";
+        const char* act_function = "hw496_microphone_act";
+    } software;
+    const char* type = "MEMS_MICROPHONE";
+};
+
+// Component definition sourced from config/hardware/servo_sg90_micro.json
+struct servo_sg90_micro_config {
+    const char* relative_filename = "config/hardware/servo_sg90_micro.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "servo_sg90_micro";
+    const char* hardware_id = "SERVO_SG90_MICRO";
+    const char* description = "Micro servo motor for precise position control in small animatronics";
+    const char* created = "2025-10-12";
+    int hitCount = 1;
+    struct physical_specifications_t {
+        const char* dimensions = "23x12.2x29 MM";
+        const char* weight = "9 G";
+        const char* shaft_diameter = "4 MM";
+        int mounting_holes = 2;
+        const char* rotation_range = "180 DEG";
+        const char* operating_voltage = "4.8V-6V";
+        const char* stall_current = "650 MA";
+        const char* operating_current = "220 MA";
+    } physical_specifications;
+    struct electrical_requirements_t {
+        const char* power_supply_voltage = "5V";
+        const char* control_voltage = "3.3V";
+        const char* interface_type = "PWM";
+        const char* pwm_frequency = "50 HZ";
+        const char* pulse_width_range = "1-2 MS";
+        const char* logic_compatibility = "3.3V_TOLERANT";
+    } electrical_requirements;
+    struct gpio_requirements_t {
+        int control_pin = 1;
+        int power_pins = 1;
+        int ground_pins = 1;
+        int total_connections = 3;
+    } gpio_requirements;
+    struct performance_specifications_t {
+        const char* rotation_speed = "0.1 SEC/60_DEG";
+        const char* torque = "1.8 KG_CM";
+        const char* precision = "1 DEG";
+        const char* backlash = "1 DEG";
+        const char* operating_temperature = "-30_TO_60_C";
+        const char* duty_cycle = "CONTINUOUS";
+    } performance_specifications;
+    struct control_capabilities_t {
+        bool position_feedback = false;
+        bool speed_control = false;
+        bool torque_limiting = false;
+        bool smooth_acceleration = true;
+        bool calibration_required = true;
+    } control_capabilities;
+    const char* use_cases[8] = { "eye_movement", "ear_articulation", "mouth_opening", "head_turning", "tail_wagging", "wing_flapping", "jaw_movement", "eyebrow_raising" };
+    struct family_suitability_t {
+        const char* robot = "GOOD";
+        const char* android = "EXCELLENT";
+        const char* goblin = "EXCELLENT";
+        const char* vampire = "GOOD";
+        const char* zombie = "MODERATE";
+        const char* ghost = "POOR";
+        const char* dragon = "EXCELLENT";
+        const char* cat = "EXCELLENT";
+        const char* bear = "GOOD";
+    } family_suitability;
+    struct mounting_requirements_t {
+        bool servo_horn_required = true;
+        const char* mounting_bracket = "OPTIONAL";
+        const char* vibration_damping = "RECOMMENDED";
+        const char* wire_management = "3_WIRE_PIGTAIL";
+    } mounting_requirements;
+    struct software_t {
+        const char* init_function = "servo_sg90_micro_init";
+        const char* act_function = "servo_sg90_micro_act";
+    } software;
+    const char* hardware_type = "SERVO_MOTOR";
+    const char* type = "SERVO_MOTOR";
+};
+
+// Component definition sourced from config/hardware/speaker.json
+struct speaker_config {
+    const char* relative_filename = "config/hardware/speaker.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* hardware_type = "I2S_SPEAKER";
+    const char* name = "speaker";
+    struct physical_specs_t {
+        const char* diameter = "1.5 INCH";
+        const char* thickness = "0.3 INCH";
+        struct mounting_holes_t {
+            int count = 2;
+            const char* diameter = "0.08 INCH";
+            const char* spacing = "1.2 INCH";
+        } mounting_holes;
+    } physical_specs;
+    struct electrical_specs_t {
+        const char* supply_voltage = "3.3V";
+        const char* interface = "I2S";
+        const char* power_output = "3W";
+        const char* current_consumption = "500mA";
+    } electrical_specs;
+    struct audio_specs_t {
+        const char* frequency_range = "100-20000 Hz";
+        const char* sample_rates[5] = { "8000", "16000", "22050", "44100", "48000" };
+        int bit_depths[3] = { 16, 24, 32 };
+    } audio_specs;
+    struct mounting_architecture_t {
+        const char* approach = "two_tier";
+        struct shape_generation_t {
+            const char* scad_template = "templates/speaker_enclosure.scad";
+            struct manufacturer_variants_t {
+                struct generic_40mm_t {
+                    const char* stl_file = "basic_mounts/speaker_40mm_generic.stl";
+                    struct parameters_t {
+                        float speaker_diameter = 40.0;
+                        int mounting_holes = 4;
+                        float hole_diameter = 3.0;
+                        float hole_pcd = 35.0;
+                        const char* mounting_type = "through_hole";
+                        float depth = 12.0;
+                    } parameters;
+                    const char* description = "Generic 40mm speaker with 4x M3 holes at 35mm PCD";
+                    const char* notes = "Most common design from Chinese manufacturers";
+                } generic_40mm;
+                struct adafruit_3885_t {
+                    const char* stl_file = "basic_mounts/speaker_40mm_adafruit.stl";
+                    struct parameters_t {
+                        float speaker_diameter = 40.0;
+                        int mounting_tabs = 2;
+                        float tab_width = 8.0;
+                        float tab_thickness = 2.0;
+                        float tab_spacing = 36.0;
+                        const char* mounting_type = "tab_slots";
+                        float depth = 10.5;
+                    } parameters;
+                    const char* description = "Adafruit #3885 - 40mm 4? 3W speaker with mounting tabs";
+                    const char* datasheet = "https://www.adafruit.com/product/3885";
+                } adafruit_3885;
+                struct sparkfun_com14023_t {
+                    const char* stl_file = "basic_mounts/speaker_40mm_sparkfun.stl";
+                    struct parameters_t {
+                        float speaker_diameter = 40.0;
+                        int snap_fit_clips = 4;
+                        float clip_depth = 1.5;
+                        float clip_angle = 15.0;
+                        const char* mounting_type = "snap_fit";
+                        float depth = 11.0;
+                    } parameters;
+                    const char* description = "SparkFun COM-14023 - 40mm speaker with snap-fit enclosure";
+                    const char* datasheet = "https://www.sparkfun.com/products/14023";
+                } sparkfun_com14023;
+                struct tbd_awaiting_delivery_t {
+                    const char* stl_file = "basic_mounts/speaker_40mm_tbd.stl";
+                    struct parameters_t {
+                        float speaker_diameter = 40.0;
+                        const char* mounting_type = "unknown";
+                        const char* notes = "Will measure upon arrival";
+                    } parameters;
+                    const char* description = "Generic 40mm speaker mount for standard audio drivers";
+                    const char* status = "AWAITING_HARDWARE";
+                } tbd_awaiting_delivery;
+            } manufacturer_variants;
+            const char* default_variant = "generic_40mm";
+            const char* usage_notes = "When speakers arrive: 1) Measure physical dimensions, 2) Photograph mounting holes, 3) Create exact variant parameters, 4) Generate STL, 5) Test print bracket";
+        } shape_generation;
+    } mounting_architecture;
+    struct testing_status_t {
+        bool hardware_available = false;
+        const char* expected_arrival = "few days";
+        const char* testing_strategy = "Use stub component until hardware arrives, then measure and create exact manufacturer variant";
+    } testing_status;
+    const char* type = "UNKNOWN";
+};
+
+// Component definition sourced from config/components/interfaces/spi_bus.json
+struct spi_bus_config {
+    const char* relative_filename = "config/components/interfaces/spi_bus.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "spi_bus";
+    const char* hardware_type = "BUS_INTERFACE";
+    const char* bus_type = "SPI";
+    const char* bus_name = "VSPI";
+    const char* description = "ESP32 VSPI bus interface for SPI communication (bidirectional MOSI/MISO for sensors)";
+    struct pin_requirements_t {
+        const char* shared_pins_needed = "[{\"function\": \"SPI_SCLK\", \"count\": 1, \"description\": \"SPI clock signal\"}, {\"function\": \"SPI_Q\", \"count\": 1, \"description\": \"SPI MISO (Master In Slave Out)\"}]";
+        const char* unique_pins_needed = "[{\"function\": \"SPI_CS\", \"count\": 1, \"description\": \"SPI chip select (unique per device)\"}, {\"function\": \"SPI_HD\", \"count\": 1, \"description\": \"SPI MOSI (Master Out Slave In) or hold signal\"}]";
+    } pin_requirements;
+    const char* interface_id = "SPI_BUS";
+    const char* interface_type = "SPI_BUS";
+    struct timing_t {
+        int hitCount = 1;
+    } timing;
+    struct software_t {
+        const char* init_function = "spi_bus_init";
+        const char* act_function = "spi_bus_act";
+    } software;
+    struct pin_allocation_t {
+        const char* shared_pins[4] = { "clock", "data_output", "data_input", "reset" };
+        const char* device_pins[2] = { "chip_select", "data_command" };
+    } pin_allocation;
+    struct bus_config_t {
+        const char* frequency = "10000000";
+        int mode = 0;
+    } bus_config;
+    struct hardware_t {
+        struct esp32_specific_t {
+            const char* host_device = "SPI2_HOST";
+            int dma_channel = 1;
+            int max_transfer_size = 4092;
+        } esp32_specific;
+    } hardware;
+    const char* notes = "VSPI bus on ESP32. Shared pins (SCLK, MISO) can be used by multiple devices. Unique pins (CS, MOSI) are per-device.";
+    const char* type = "INTERFACE_BUS";
+};
+
+// Component definition sourced from config/components/drivers/spi_display_bus.json
+struct spi_display_bus_config {
+    const char* name = "spi_display_bus";
+    const char* type = "BUS_INTERFACE";
+    const char* version = "1.0.0";
+    const char* author = "config/authors/ai_agent.json";
+    const char* description = "Write-only SPI bus dedicated to display controllers.";
+    const char* created = "2025-11-01";
+    const char* relative_filename = "config/components/drivers/spi_display_bus.json";
+    struct software_t {
+        const char* init_function = "spi_display_bus_init";
+        const char* act_function = "spi_display_bus_act";
+    } software;
 };
 
 // ---------------------------------------------------------------------------
 // Function prototypes
 // ---------------------------------------------------------------------------
+esp_err_t gc9a01_init(void);
+void gc9a01_act(void);
+esp_err_t generic_spi_data_driver_init(void);
+void generic_spi_data_driver_act(void);
+esp_err_t generic_spi_display_init(void);
+void generic_spi_display_act(void);
+esp_err_t goblin_eye_init(void);
+void goblin_eye_act(void);
 esp_err_t goblin_left_ear_init(void);
 void goblin_left_ear_act(void);
 esp_err_t goblin_left_eye_init(void);
@@ -93,54 +848,521 @@ esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
 esp_err_t goblin_speaker_init(void);
 void goblin_speaker_act(void);
+esp_err_t hc_sr04_ultrasonic_distance_sensor_init(void);
+void hc_sr04_ultrasonic_distance_sensor_act(void);
+esp_err_t hw496_microphone_init(void);
+void hw496_microphone_act(void);
+esp_err_t servo_sg90_micro_init(void);
+void servo_sg90_micro_act(void);
+esp_err_t speaker_init(void);
+void speaker_act(void);
+esp_err_t spi_bus_init(void);
+void spi_bus_act(void);
+esp_err_t spi_display_bus_init(void);
+void spi_display_bus_act(void);
 
-// Declarations from config\components\creature_specific\goblin_left_ear.hdr
+// Declarations from config/components/hardware/gc9a01.hdr
+// gc9a01 component header
+// Defines data structures for gc9a01 display
+#ifndef GC9A01_HDR
+#define GC9A01_HDR
+
+#include <stdint.h>
+#include <esp_err.h>
+
+namespace GC9A01
+{
+
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
+    Pixel()
+    {
+        *this = InitialPixel;
+    }
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
+    {}
+
+    // Assignment operator
+    Pixel& operator=(const Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
+    }
+};
+
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
+
+// Init and act function prototypes
+esp_err_t gc9a01_init(void);
+void gc9a01_act(void);
+
+}  // namespace GC9A01
+
+#endif // GC9A01_HDR
+
+// Declarations from config/components/hardware/generic_spi_display.hdr
+// generic_spi_display component header
+// Defines data structures for generic_spi_display display
+#ifndef GENERIC_SPI_DISPLAY_HDR
+#define GENERIC_SPI_DISPLAY_HDR
+
+#include <stdint.h>
+#include <esp_err.h>
+
+namespace GENERIC_SPI_DISPLAY
+{
+
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
+    Pixel()
+    {
+        *this = InitialPixel;
+    }
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
+    {}
+
+    // Assignment operator
+    Pixel& operator=(const Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
+    }
+};
+
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
+
+// Init and act function prototypes
+esp_err_t generic_spi_display_init(void);
+void generic_spi_display_act(void);
+
+}  // namespace GENERIC_SPI_DISPLAY
+
+#endif // GENERIC_SPI_DISPLAY_HDR
+
+// Declarations from config/components/goblin_eye.hdr
+// goblin_eye component header
+// Defines data structures for goblin_eye display
+#ifndef GOBLIN_EYE_HDR
+#define GOBLIN_EYE_HDR
+
+#include <stdint.h>
+#include <esp_err.h>
+
+namespace GOBLIN_EYE
+{
+
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
+    Pixel()
+    {
+        *this = InitialPixel;
+    }
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
+    {}
+
+    // Assignment operator
+    Pixel& operator=(const Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
+    }
+};
+
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
+
+// Init and act function prototypes
+esp_err_t goblin_eye_init(void);
+void goblin_eye_act(void);
+
+}  // namespace GOBLIN_EYE
+
+#endif // GOBLIN_EYE_HDR
+
+// Declarations from config/components/creature_specific/goblin_left_ear.hdr
 // Auto-generated header for goblin_left_ear
 #include <esp_err.h>
 
 esp_err_t goblin_left_ear_init(void);
 void goblin_left_ear_act(void);
 
-// Declarations from config\components\creature_specific\goblin_left_eye.hdr
-// Auto-generated header for goblin_left_eye
+// Declarations from config/bots/bot_families/goblins/head/goblin_left_eye.hdr
+// goblin_left_eye component header
+// Defines data structures for goblin_left_eye display
+#ifndef GOBLIN_LEFT_EYE_HDR
+#define GOBLIN_LEFT_EYE_HDR
+
+#include <stdint.h>
 #include <esp_err.h>
 
+namespace GOBLIN_LEFT_EYE
+{
+
+// Forward declaration and global InitialPixel
+struct Pixel;
+extern Pixel InitialPixel;
+
+struct Pixel
+{
+    // Maximum values for each color channel (for mood calculations)
+    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
+    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
+    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
+
+    Pixel()
+    {
+        *this = InitialPixel;
+    }
+    unsigned int red : 5;
+    unsigned int green : 6;
+    unsigned int blue : 5;
+
+    // Constructor from 8-bit RGB byte values (0-255 each)
+    constexpr Pixel(uint8_t r8, uint8_t g8, uint8_t b8)
+        : red(static_cast<unsigned int>((static_cast<float>(r8) / 255.0f) * maxRed)),
+          green(static_cast<unsigned int>((static_cast<float>(g8) / 255.0f) * maxGreen)),
+          blue(static_cast<unsigned int>((static_cast<float>(b8) / 255.0f) * maxBlue))
+    {}
+
+    // Assignment operator
+    Pixel& operator=(const Pixel& other)
+    {
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        return *this;
+    }
+
+    // Add two pixels with saturation
+    Pixel operator+(const Pixel& other) const
+    {
+        Pixel result;
+        unsigned int sum_r = red + other.red;
+        result.red = (sum_r > maxRed) ? maxRed : sum_r;
+        unsigned int sum_g = green + other.green;
+        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
+        unsigned int sum_b = blue + other.blue;
+        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
+        return result;
+    }
+
+    // Add-assign operator with saturation
+    Pixel& operator+=(const Pixel& other)
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+    // Convert Pixel* buffer to uint8_t*
+    static uint8_t* to_bytes(Pixel* pixel_buffer)
+    {
+        return reinterpret_cast<uint8_t*>(pixel_buffer);
+    }
+
+    // Convert uint8_t* buffer back to Pixel*
+    static Pixel* from_bytes(uint8_t* byte_buffer)
+    {
+        return reinterpret_cast<Pixel*>(byte_buffer);
+    }
+
+    // Get size of a single Pixel in bytes
+    static constexpr size_t getBytesPerPixel()
+    {
+        return 2;  // RGB565 = 16 bits = 2 bytes
+    }
+};
+
+// Display interface - compile-time sizing
+static constexpr uint16_t getRowCount() { return 240; }
+static constexpr uint16_t getRowSize() { return 240; }
+
+// Init and act function prototypes
 esp_err_t goblin_left_eye_init(void);
 void goblin_left_eye_act(void);
 
-// Declarations from config\components\creature_specific\goblin_mouth.hdr
+}  // namespace GOBLIN_LEFT_EYE
+
+#endif // GOBLIN_LEFT_EYE_HDR
+
+// Declarations from config/bots/bot_families/goblins/head/goblin_mouth.hdr
 // Auto-generated header for goblin_mouth
 #include <esp_err.h>
 
 esp_err_t goblin_mouth_init(void);
 void goblin_mouth_act(void);
 
-// Declarations from config\components\creature_specific\goblin_nose.hdr
+// Declarations from config/bots/bot_families/goblins/head/goblin_nose.hdr
 // Auto-generated header for goblin_nose
 #include <esp_err.h>
 
 esp_err_t goblin_nose_init(void);
 void goblin_nose_act(void);
 
-// Declarations from config\components\creature_specific\goblin_right_ear.hdr
+// Declarations from config/components/creature_specific/goblin_right_ear.hdr
 // Auto-generated header for goblin_right_ear
 #include <esp_err.h>
 
 esp_err_t goblin_right_ear_init(void);
 void goblin_right_ear_act(void);
 
-// Declarations from config\components\creature_specific\goblin_right_eye.hdr
-// Auto-generated header for goblin_right_eye
-#include <esp_err.h>
+// Declarations from config/bots/bot_families/goblins/head/goblin_right_eye.hdr
+// goblin_right_eye component header
+// Additional declarations beyond init/act
 
-esp_err_t goblin_right_eye_init(void);
-void goblin_right_eye_act(void);
+#ifndef GOBLIN_RIGHT_EYE_COMPONENT_H
+#define GOBLIN_RIGHT_EYE_COMPONENT_H
 
-// Declarations from config\components\creature_specific\goblin_speaker.hdr
+#include <stdint.h>
+
+/**
+ * @brief Get pointer to right eye display buffer
+ * @return Pointer to Pixel array, or nullptr if not initialized
+ */
+Pixel* goblin_right_eye_get_buffer(void);
+
+#endif // GOBLIN_RIGHT_EYE_COMPONENT_H
+
+// Declarations from config/bots/bot_families/goblins/head/goblin_speaker.hdr
 // Auto-generated header for goblin_speaker
 #include <esp_err.h>
 
 esp_err_t goblin_speaker_init(void);
 void goblin_speaker_act(void);
+
+// Declarations from config/hardware/hw496_microphone.hdr
+// HW-496 MEMS Microphone Component Header
+// Uses generic microphone driver with HW496-specific configuration
+
+#ifndef hw496_microphone_H
+#define hw496_microphone_H
+
+#include "esp_err.h"
+
+// Test declaration
+extern int test_hw496_variable;
+
+// Function declarations for dispatch table
+esp_err_t hw496_microphone_init(void);
+void hw496_microphone_act(void);
+
+#endif // hw496_microphone_H
+
+// Declarations from config/hardware/servo_sg90_micro.hdr
+// Auto-generated header for servo_sg90_micro
+#include <esp_err.h>
+
+esp_err_t servo_sg90_micro_init(void);
+void servo_sg90_micro_act(void);
+
+// Declarations from config/components/interfaces/spi_display_bus.hdr
+// SPI display bus component header
+// Exposes current SPI pin assignment for display devices
+
+#ifndef SPI_DISPLAY_BUS_H
+#define SPI_DISPLAY_BUS_H
+
+#include "esp_err.h"
+#include "driver/spi_master.h"
+#include <stdio.h>
+
+struct spi_display_pinset_t {
+    spi_display_pinset_t()
+        : mosi(-1), clk(-1), cs(-1), dc(-1), bl(-1), rst(-1), handle(nullptr) {}
+
+    int mosi;
+    int clk;
+    int cs;
+    int dc;
+    int bl;
+    int rst;
+    spi_device_handle_t handle;
+
+    void print() {
+        printf("SPI_DISPLAY bus: mosi=%d, sclk=%d, cs=%d, dc=%d\n", mosi, clk, cs, dc);
+    }
+};
+
+extern spi_display_pinset_t cur_spi_display_pin;
+
+esp_err_t spi_display_bus_init(void);
+void spi_display_bus_act(void);
+
+#endif // SPI_DISPLAY_BUS_H
 
 #endif // GOBLIN_HEAD_COMPONENT_FUNCTIONS_HPP

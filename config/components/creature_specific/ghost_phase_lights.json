@@ -5,7 +5,7 @@
         "init_function": "ghost_phase_lights_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/ghost_phase_lights.json",
+    "relative_filename": "config/components/creature_specific/ghost_phase_lights.json",
     "name": "ghost_phase_lights",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

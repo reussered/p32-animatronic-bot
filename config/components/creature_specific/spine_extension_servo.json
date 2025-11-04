@@ -18,6 +18,6 @@
         "init_function": "spine_extension_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/spine_extension_servo.json",
+    "relative_filename": "config/components/creature_specific/spine_extension_servo.json",
     "type": "POSITIONED_COMPONENT"
 }

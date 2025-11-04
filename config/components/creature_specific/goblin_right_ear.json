@@ -19,6 +19,6 @@
         "init_function": "goblin_right_ear_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblin_right_ear.json",
+    "relative_filename": "config/components/creature_specific/goblin_right_ear.json",
     "type": "POSITIONED_COMPONENT"
 }

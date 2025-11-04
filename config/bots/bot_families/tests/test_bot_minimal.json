@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/test_bot_minimal.json",
+    "relative_filename": "config/bots/bot_families/tests/test_bot_minimal.json",
     "version": "1.0.0.0",
     "author": "config/author.json",
     "name": "test_bot_minimal",

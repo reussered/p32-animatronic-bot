@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/android_left_eye.json",
+    "relative_filename": "config/components/creature_specific/android_left_eye.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "android_left_eye",

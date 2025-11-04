@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/esp32c3_hand_controller.json",
+    "relative_filename": "config/components/creature_specific/esp32c3_hand_controller.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "esp32c3_hand_controller",

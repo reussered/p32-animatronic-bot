@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "name": "base_battery_monitor",
-    "relative_filename": "config/bots/bot_families/base_battery_monitor.json",
+    "relative_filename": "config/components/creature_specific/base_battery_monitor.json",
     "subsystem": "TEMPLATE",
     "software": {
         "act_function": "base_battery_monitor_act",

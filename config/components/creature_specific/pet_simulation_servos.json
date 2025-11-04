@@ -5,7 +5,7 @@
         "init_function": "pet_simulation_servos_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/pet_simulation_servos.json",
+    "relative_filename": "config/components/creature_specific/pet_simulation_servos.json",
     "name": "pet_simulation_servos",
     "subsystem": "ACTUATOR",
     "components": [

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/test_goblin_head_dual_eyes.json",
+    "relative_filename": "config/bots/bot_families/tests/test_goblin_head_dual_eyes.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "TEST_GOBLIN_HEAD",

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/cat_animated_ears.json",
+    "relative_filename": "config/components/creature_specific/cat_animated_ears.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_animated_ears",

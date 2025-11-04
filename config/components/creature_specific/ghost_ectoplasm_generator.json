@@ -5,7 +5,7 @@
         "init_function": "ghost_ectoplasm_generator_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/ghost_ectoplasm_generator.json",
+    "relative_filename": "config/components/creature_specific/ghost_ectoplasm_generator.json",
     "name": "ghost_ectoplasm_generator",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

@@ -5,7 +5,7 @@
         "init_function": "bear_thick_fur_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/bear_thick_fur.json",
+    "relative_filename": "config/components/creature_specific/bear_thick_fur.json",
     "name": "bear_thick_fur",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

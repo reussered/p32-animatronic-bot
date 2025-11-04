@@ -5,7 +5,7 @@
         "init_function": "base_wrist_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/base_wrist_servo.json",
+    "relative_filename": "config/components/creature_specific/base_wrist_servo.json",
     "name": "base_wrist_servo",
     "subsystem": "ACTUATOR",
     "components": [

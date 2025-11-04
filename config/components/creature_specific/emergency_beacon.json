@@ -11,7 +11,7 @@
         "init_function": "emergency_beacon_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/emergency_beacon.json",
+    "relative_filename": "config/components/creature_specific/emergency_beacon.json",
     "position": {
         "units": "INCH",
         "x": "0.0 INCH",

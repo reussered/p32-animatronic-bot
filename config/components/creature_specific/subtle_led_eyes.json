@@ -5,7 +5,7 @@
         "init_function": "subtle_led_eyes_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/subtle_led_eyes.json",
+    "relative_filename": "config/components/creature_specific/subtle_led_eyes.json",
     "name": "subtle_led_eyes",
     "subsystem": "VISION",
     "components": [

@@ -5,7 +5,7 @@
         "init_function": "ghost_floating_mechanism_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/ghost_floating_mechanism.json",
+    "relative_filename": "config/components/creature_specific/ghost_floating_mechanism.json",
     "name": "ghost_floating_mechanism",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

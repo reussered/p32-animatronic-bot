@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/goblin_full_arm_right.json",
+    "relative_filename": "config/bots/bot_families/goblins/goblin_full_arm_right.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINFULL_ARM_RIGHT",
