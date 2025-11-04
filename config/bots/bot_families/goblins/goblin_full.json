@@ -27,7 +27,7 @@
     ],
     "components": [
         "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,
