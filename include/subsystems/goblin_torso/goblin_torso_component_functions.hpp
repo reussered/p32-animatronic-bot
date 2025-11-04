@@ -20,7 +20,7 @@
 // Subsystem: goblin_torso
 // Controller: ESP32_S3_DEVKITC_1
 
-// Component definition sourced from config\components\system\bluetooth_central.json
+// Component definition sourced from config/components/system/bluetooth_central.json
 struct bluetooth_central_config {
     const char* relative_filename = "config/components/system/bluetooth_central.json";
     const char* version = "1.0.0";
@@ -47,7 +47,7 @@ struct bluetooth_central_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\system\debug_controller.json
+// Component definition sourced from config/components/system/debug_controller.json
 struct debug_controller_config {
     const char* relative_filename = "config/components/system/debug_controller.json";
     const char* version = "1.0.0";
@@ -70,7 +70,7 @@ struct debug_controller_config {
     const char* type = "SYSTEM_SERVICE";
 };
 
-// Component definition sourced from config\components\system\network_monitor.json
+// Component definition sourced from config/components/system/network_monitor.json
 struct network_monitor_config {
     const char* relative_filename = "config/components/system/network_monitor.json";
     const char* version = "1.0.0";
@@ -98,7 +98,7 @@ struct network_monitor_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\system\power_monitor.json
+// Component definition sourced from config/components/system/power_monitor.json
 struct power_monitor_config {
     const char* relative_filename = "config/components/system/power_monitor.json";
     const char* version = "1.0.0";
@@ -126,23 +126,126 @@ struct power_monitor_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\creature_specific\spine_extension_servo.json
+// Component definition sourced from config/hardware/servo_sg90_micro.json
+struct servo_sg90_micro_config {
+    const char* relative_filename = "config/hardware/servo_sg90_micro.json";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    const char* name = "servo_sg90_micro";
+    const char* hardware_id = "SERVO_SG90_MICRO";
+    const char* description = "Micro servo motor for precise position control in small animatronics";
+    const char* created = "2025-10-12";
+    int hitCount = 1;
+    struct physical_specifications_t {
+        const char* dimensions = "23x12.2x29 MM";
+        const char* weight = "9 G";
+        const char* shaft_diameter = "4 MM";
+        int mounting_holes = 2;
+        const char* rotation_range = "180 DEG";
+        const char* operating_voltage = "4.8V-6V";
+        const char* stall_current = "650 MA";
+        const char* operating_current = "220 MA";
+    } physical_specifications;
+    struct electrical_requirements_t {
+        const char* power_supply_voltage = "5V";
+        const char* control_voltage = "3.3V";
+        const char* interface_type = "PWM";
+        const char* pwm_frequency = "50 HZ";
+        const char* pulse_width_range = "1-2 MS";
+        const char* logic_compatibility = "3.3V_TOLERANT";
+    } electrical_requirements;
+    struct gpio_requirements_t {
+        int control_pin = 1;
+        int power_pins = 1;
+        int ground_pins = 1;
+        int total_connections = 3;
+    } gpio_requirements;
+    struct performance_specifications_t {
+        const char* rotation_speed = "0.1 SEC/60_DEG";
+        const char* torque = "1.8 KG_CM";
+        const char* precision = "1 DEG";
+        const char* backlash = "1 DEG";
+        const char* operating_temperature = "-30_TO_60_C";
+        const char* duty_cycle = "CONTINUOUS";
+    } performance_specifications;
+    struct control_capabilities_t {
+        bool position_feedback = false;
+        bool speed_control = false;
+        bool torque_limiting = false;
+        bool smooth_acceleration = true;
+        bool calibration_required = true;
+    } control_capabilities;
+    const char* use_cases[8] = { "eye_movement", "ear_articulation", "mouth_opening", "head_turning", "tail_wagging", "wing_flapping", "jaw_movement", "eyebrow_raising" };
+    struct family_suitability_t {
+        const char* robot = "GOOD";
+        const char* android = "EXCELLENT";
+        const char* goblin = "EXCELLENT";
+        const char* vampire = "GOOD";
+        const char* zombie = "MODERATE";
+        const char* ghost = "POOR";
+        const char* dragon = "EXCELLENT";
+        const char* cat = "EXCELLENT";
+        const char* bear = "GOOD";
+    } family_suitability;
+    struct mounting_requirements_t {
+        bool servo_horn_required = true;
+        const char* mounting_bracket = "OPTIONAL";
+        const char* vibration_damping = "RECOMMENDED";
+        const char* wire_management = "3_WIRE_PIGTAIL";
+    } mounting_requirements;
+    struct software_t {
+        const char* init_function = "servo_sg90_micro_init";
+        const char* act_function = "servo_sg90_micro_act";
+    } software;
+    const char* hardware_type = "SERVO_MOTOR";
+    const char* type = "SERVO_MOTOR";
+};
+
+// Component definition sourced from config/components/system/spine_extension_servo.json
 struct spine_extension_servo_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "spine_extension_servo";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/spine_extension_servo.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "spine_extension_servo_act";
+        const char* init_function = "spine_extension_servo_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/components/system/spine_extension_servo.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\spine_flexion_servo.json
+// Component definition sourced from config/components/system/spine_flexion_servo.json
 struct spine_flexion_servo_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "spine_flexion_servo";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/spine_flexion_servo.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "spine_flexion_servo_act";
+        const char* init_function = "spine_flexion_servo_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/components/system/spine_flexion_servo.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\system\system_core.json
+// Component definition sourced from config/components/system/system_core.json
 struct system_core_config {
     const char* relative_filename = "config/components/system/system_core.json";
     const char* version = "1.0.0";
@@ -164,7 +267,7 @@ struct system_core_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\system\telemetry_hub.json
+// Component definition sourced from config/components/system/telemetry_hub.json
 struct telemetry_hub_config {
     const char* relative_filename = "config/components/system/telemetry_hub.json";
     const char* version = "3.0.0";
@@ -212,31 +315,73 @@ struct telemetry_hub_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\creature_specific\torso_speaker.json
+// Component definition sourced from config/components/system/torso_speaker.json
 struct torso_speaker_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "torso_speaker";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/torso_speaker.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "torso_speaker_act";
+        const char* init_function = "torso_speaker_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/components/system/torso_speaker.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\torso_status_led.json
+// Component definition sourced from config/components/system/torso_status_led.json
 struct torso_status_led_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "torso_status_led";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/torso_status_led.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "torso_status_led_act";
+        const char* init_function = "torso_status_led_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/components/system/torso_status_led.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\creature_specific\waist_rotation_servo.json
+// Component definition sourced from config/components/system/waist_rotation_servo.json
 struct waist_rotation_servo_config {
+    struct position_t {
+        const char* units = "INCH";
+        const char* x = "0.0 INCH";
+        const char* coordinate_system = "skull_3d";
+        const char* z = "0.0 INCH";
+        const char* reference_point = "nose_center";
+        const char* y = "0.0 INCH";
+    } position;
     const char* name = "waist_rotation_servo";
-    const char* type = "SCAFFOLDED";
-    const char* relative_filename = "config/components/creature_specific/waist_rotation_servo.json";
-    const char* description = "Auto-generated component.";
+    const char* version = "1.0.0";
+    const char* author = "config/author.json";
+    struct software_t {
+        const char* act_function = "waist_rotation_servo_act";
+        const char* init_function = "waist_rotation_servo_init";
+        int hitCount = 10;
+    } software;
+    const char* relative_filename = "config/components/system/waist_rotation_servo.json";
+    const char* type = "POSITIONED_COMPONENT";
 };
 
-// Component definition sourced from config\components\system\watchdog.json
+// Component definition sourced from config/components/system/watchdog.json
 struct watchdog_config {
     const char* relative_filename = "config/components/system/watchdog.json";
     const char* version = "1.0.0";
@@ -263,7 +408,7 @@ struct watchdog_config {
     const char* type = "SYSTEM_LEVEL";
 };
 
-// Component definition sourced from config\components\system\wifi_station.json
+// Component definition sourced from config/components/system/wifi_station.json
 struct wifi_station_config {
     const char* relative_filename = "config/components/system/wifi_station.json";
     const char* version = "3.0.0";
@@ -310,6 +455,8 @@ esp_err_t network_monitor_init(void);
 void network_monitor_act(void);
 esp_err_t power_monitor_init(void);
 void power_monitor_act(void);
+esp_err_t servo_sg90_micro_init(void);
+void servo_sg90_micro_act(void);
 esp_err_t spine_extension_servo_init(void);
 void spine_extension_servo_act(void);
 esp_err_t spine_flexion_servo_init(void);
@@ -329,56 +476,79 @@ void watchdog_act(void);
 esp_err_t wifi_station_init(void);
 void wifi_station_act(void);
 
-// Declarations from config\components\network_monitor.hdr
+// Declarations from config/components/network_monitor.hdr
 // Auto-generated header for network_monitor
 #include <esp_err.h>
 
 esp_err_t network_monitor_init(void);
 void network_monitor_act(void);
 
-// Declarations from config\components\system\power_monitor.hdr
+// Declarations from config/components/system/power_monitor.hdr
 // Auto-generated header for power_monitor
 #include <esp_err.h>
 
 esp_err_t power_monitor_init(void);
 void power_monitor_act(void);
 
-// Declarations from config\components\creature_specific\spine_extension_servo.hdr
+// Declarations from config/hardware/servo_sg90_micro.hdr
+// Auto-generated header for servo_sg90_micro
+#include <esp_err.h>
+
+esp_err_t servo_sg90_micro_init(void);
+void servo_sg90_micro_act(void);
+
+// Declarations from config/components/creature_specific/spine_extension_servo.hdr
 // Auto-generated header for spine_extension_servo
 #include <esp_err.h>
 
 esp_err_t spine_extension_servo_init(void);
 void spine_extension_servo_act(void);
 
-// Declarations from config\components\creature_specific\spine_flexion_servo.hdr
+// Declarations from config/components/creature_specific/spine_flexion_servo.hdr
 // Auto-generated header for spine_flexion_servo
 #include <esp_err.h>
 
 esp_err_t spine_flexion_servo_init(void);
 void spine_flexion_servo_act(void);
 
-// Declarations from config\components\system\system_core.hdr
+// Declarations from config/components/system/system_core.hdr
 // Auto-generated header for system_core
 #include <esp_err.h>
 
 esp_err_t system_core_init(void);
 void system_core_act(void);
 
-// Declarations from config\components\creature_specific\torso_speaker.hdr
+// Declarations from config/components/creature_specific/torso_speaker.hdr
 // Auto-generated header for torso_speaker
 #include <esp_err.h>
 
 esp_err_t torso_speaker_init(void);
 void torso_speaker_act(void);
 
-// Declarations from config\components\creature_specific\torso_status_led.hdr
-// Auto-generated header for torso_status_led
-#include <esp_err.h>
+// Declarations from config/components/torso_status_led.hdr
+// torso_status_led Header
+// Auto-generated component header
 
+#ifndef torso_status_led_HDR
+#define torso_status_led_HDR
+
+#include "esp_err.h"
+
+/**
+ * @brief Initialize torso_status_led component
+ * @return ESP_OK on success, error code otherwise
+ */
 esp_err_t torso_status_led_init(void);
+
+/**
+ * @brief Act function for torso_status_led component
+ * Called periodically by main loop
+ */
 void torso_status_led_act(void);
 
-// Declarations from config\components\creature_specific\waist_rotation_servo.hdr
+#endif // torso_status_led_HDR
+
+// Declarations from config/components/creature_specific/waist_rotation_servo.hdr
 // Auto-generated header for waist_rotation_servo
 #include <esp_err.h>
 

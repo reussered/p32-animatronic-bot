@@ -2,7 +2,7 @@
 
 // Auto-generated component aggregation file
 
-// --- Begin: config\components\system\bluetooth_central.src ---
+// --- Begin: config/components/system/bluetooth_central.src ---
 // bluetooth_central component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -19,9 +19,9 @@ void bluetooth_central_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_bluetooth_central, "bluetooth_central act");
 }
-// --- End: config\components\system\bluetooth_central.src ---
+// --- End: config/components/system/bluetooth_central.src ---
 
-// --- Begin: config\components\system\debug_controller.src ---
+// --- Begin: config/components/system/debug_controller.src ---
 // debug_controller component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -39,9 +39,9 @@ void debug_controller_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_debug_controller, "debug_controller act");
 }
-// --- End: config\components\system\debug_controller.src ---
+// --- End: config/components/system/debug_controller.src ---
 
-// --- Begin: config\components\system\network_monitor.src ---
+// --- Begin: config/components/system/network_monitor.src ---
 // network_monitor component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -58,9 +58,9 @@ void network_monitor_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_network_monitor, "network_monitor act");
 }
-// --- End: config\components\system\network_monitor.src ---
+// --- End: config/components/system/network_monitor.src ---
 
-// --- Begin: config\components\system\power_monitor.src ---
+// --- Begin: config/components/system/power_monitor.src ---
 // power_monitor component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -77,45 +77,66 @@ void power_monitor_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_power_monitor, "power_monitor act");
 }
-// --- End: config\components\system\power_monitor.src ---
+// --- End: config/components/system/power_monitor.src ---
 
-// --- Begin: config\components\creature_specific\spine_extension_servo.src ---
-// Auto-generated source for spine_extension_servo
-#include <esp_log.h>
+// --- Begin: config/hardware/servo_sg90_micro.src ---
+// servo_sg90_micro component implementation
+// Auto-generated stub - needs actual implementation
 
-static const char* TAG = "spine_extension_servo";
+#include "esp_log.h"
+static const char *TAG_servo_sg90_micro = "servo_sg90_micro";
 
-esp_err_t spine_extension_servo_init(void)
-{
-    ESP_LOGI(TAG, "init executed");
+esp_err_t servo_sg90_micro_init(void) {
+    ESP_LOGI(TAG_servo_sg90_micro, "servo_sg90_micro init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-void spine_extension_servo_act(void)
-{
-    ESP_LOGI(TAG, "act executed");
+void servo_sg90_micro_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
 }
-// --- End: config\components\creature_specific\spine_extension_servo.src ---
+// --- End: config/hardware/servo_sg90_micro.src ---
 
-// --- Begin: config\components\creature_specific\spine_flexion_servo.src ---
-// Auto-generated source for spine_flexion_servo
-#include <esp_log.h>
+// --- Begin: config/components/creature_specific/spine_extension_servo.src ---
+// spine_extension_servo component implementation
+// Auto-generated stub - needs actual implementation
 
-static const char* TAG = "spine_flexion_servo";
+#include "esp_log.h"
+static const char *TAG_spine_extension_servo = "spine_extension_servo";
 
-esp_err_t spine_flexion_servo_init(void)
-{
-    ESP_LOGI(TAG, "init executed");
+esp_err_t spine_extension_servo_init(void) {
+    ESP_LOGI(TAG_spine_extension_servo, "spine_extension_servo init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-void spine_flexion_servo_act(void)
-{
-    ESP_LOGI(TAG, "act executed");
+void spine_extension_servo_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_spine_extension_servo, "spine_extension_servo act");
 }
-// --- End: config\components\creature_specific\spine_flexion_servo.src ---
+// --- End: config/components/creature_specific/spine_extension_servo.src ---
 
-// --- Begin: config\components\system\system_core.src ---
+// --- Begin: config/components/creature_specific/spine_flexion_servo.src ---
+// spine_flexion_servo component implementation
+// Auto-generated stub - needs actual implementation
+
+#include "esp_log.h"
+static const char *TAG_spine_flexion_servo = "spine_flexion_servo";
+
+esp_err_t spine_flexion_servo_init(void) {
+    ESP_LOGI(TAG_spine_flexion_servo, "spine_flexion_servo init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
+    return ESP_OK;
+}
+
+void spine_flexion_servo_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_spine_flexion_servo, "spine_flexion_servo act");
+}
+// --- End: config/components/creature_specific/spine_flexion_servo.src ---
+
+// --- Begin: config/components/system/system_core.src ---
 // system_core component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -132,9 +153,9 @@ void system_core_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_system_core, "system_core act");
 }
-// --- End: config\components\system\system_core.src ---
+// --- End: config/components/system/system_core.src ---
 
-// --- Begin: config\components\system\telemetry_hub.src ---
+// --- Begin: config/components/system/telemetry_hub.src ---
 // telemetry_hub component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -151,63 +172,66 @@ void telemetry_hub_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_telemetry_hub, "telemetry_hub act");
 }
-// --- End: config\components\system\telemetry_hub.src ---
+// --- End: config/components/system/telemetry_hub.src ---
 
-// --- Begin: config\components\creature_specific\torso_speaker.src ---
-// Auto-generated source for torso_speaker
-#include <esp_log.h>
+// --- Begin: config/components/creature_specific/torso_speaker.src ---
+// torso_speaker component implementation
+// Auto-generated stub - needs actual implementation
 
-static const char* TAG = "torso_speaker";
+#include "esp_log.h"
+static const char *TAG_torso_speaker = "torso_speaker";
 
-esp_err_t torso_speaker_init(void)
-{
-    ESP_LOGI(TAG, "init executed");
+esp_err_t torso_speaker_init(void) {
+    ESP_LOGI(TAG_torso_speaker, "torso_speaker init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-void torso_speaker_act(void)
-{
-    ESP_LOGI(TAG, "act executed");
+void torso_speaker_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_torso_speaker, "torso_speaker act");
 }
-// --- End: config\components\creature_specific\torso_speaker.src ---
+// --- End: config/components/creature_specific/torso_speaker.src ---
 
-// --- Begin: config\components\creature_specific\torso_status_led.src ---
-// Auto-generated source for torso_status_led
-#include <esp_log.h>
+// --- Begin: config/components/system/torso_status_led.src ---
+// torso_status_led component implementation
+// Auto-generated stub - needs actual implementation
 
-static const char* TAG = "torso_status_led";
+#include "esp_log.h"
+static const char *TAG_torso_status_led = "torso_status_led";
 
-esp_err_t torso_status_led_init(void)
-{
-    ESP_LOGI(TAG, "init executed");
+esp_err_t torso_status_led_init(void) {
+    ESP_LOGI(TAG_torso_status_led, "torso_status_led init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-void torso_status_led_act(void)
-{
-    ESP_LOGI(TAG, "act executed");
+void torso_status_led_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_torso_status_led, "torso_status_led act");
 }
-// --- End: config\components\creature_specific\torso_status_led.src ---
+// --- End: config/components/system/torso_status_led.src ---
 
-// --- Begin: config\components\creature_specific\waist_rotation_servo.src ---
-// Auto-generated source for waist_rotation_servo
-#include <esp_log.h>
+// --- Begin: config/components/creature_specific/waist_rotation_servo.src ---
+// waist_rotation_servo component implementation
+// Auto-generated stub - needs actual implementation
 
-static const char* TAG = "waist_rotation_servo";
+#include "esp_log.h"
+static const char *TAG_waist_rotation_servo = "waist_rotation_servo";
 
-esp_err_t waist_rotation_servo_init(void)
-{
-    ESP_LOGI(TAG, "init executed");
+esp_err_t waist_rotation_servo_init(void) {
+    ESP_LOGI(TAG_waist_rotation_servo, "waist_rotation_servo init - STUB IMPLEMENTATION");
+    // TODO: Add actual initialization code
     return ESP_OK;
 }
 
-void waist_rotation_servo_act(void)
-{
-    ESP_LOGI(TAG, "act executed");
+void waist_rotation_servo_act(void) {
+    // TODO: Add actual action code
+    // ESP_LOGD(TAG_waist_rotation_servo, "waist_rotation_servo act");
 }
-// --- End: config\components\creature_specific\waist_rotation_servo.src ---
+// --- End: config/components/creature_specific/waist_rotation_servo.src ---
 
-// --- Begin: config\components\system\watchdog.src ---
+// --- Begin: config/components/system/watchdog.src ---
 // watchdog component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -224,9 +248,9 @@ void watchdog_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_watchdog, "watchdog act");
 }
-// --- End: config\components\system\watchdog.src ---
+// --- End: config/components/system/watchdog.src ---
 
-// --- Begin: config\components\system\wifi_station.src ---
+// --- Begin: config/components/system/wifi_station.src ---
 // wifi_station component implementation
 // Auto-generated stub - needs actual implementation
 
@@ -243,4 +267,4 @@ void wifi_station_act(void) {
     // TODO: Add actual action code
     // ESP_LOGD(TAG_wifi_station, "wifi_station act");
 }
-// --- End: config\components\system\wifi_station.src ---
+// --- End: config/components/system/wifi_station.src ---

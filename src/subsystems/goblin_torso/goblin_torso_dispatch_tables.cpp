@@ -13,10 +13,15 @@ const init_function_t goblin_torso_init_table[] = {
     &watchdog_init,
     &power_monitor_init,
     &spine_flexion_servo_init,
+    &servo_sg90_micro_init,
     &spine_extension_servo_init,
+    &servo_sg90_micro_init,
     &waist_rotation_servo_init,
+    &servo_sg90_micro_init,
     &torso_status_led_init,
-    &torso_speaker_init
+    &servo_sg90_micro_init,
+    &torso_speaker_init,
+    &servo_sg90_micro_init
 };
 
 const act_function_t goblin_torso_act_table[] = {
@@ -29,10 +34,15 @@ const act_function_t goblin_torso_act_table[] = {
     &watchdog_act,
     &power_monitor_act,
     &spine_flexion_servo_act,
+    &servo_sg90_micro_act,
     &spine_extension_servo_act,
+    &servo_sg90_micro_act,
     &waist_rotation_servo_act,
+    &servo_sg90_micro_act,
     &torso_status_led_act,
-    &torso_speaker_act
+    &servo_sg90_micro_act,
+    &torso_speaker_act,
+    &servo_sg90_micro_act
 };
 
 const uint32_t goblin_torso_hitcount_table[] = {
@@ -44,6 +54,11 @@ const uint32_t goblin_torso_hitcount_table[] = {
     75,
     500,
     200,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,

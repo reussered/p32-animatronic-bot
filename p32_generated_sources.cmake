@@ -3,10 +3,16 @@ set(P32_GENERATED_SOURCES
     src/subsystems/goblin_head/goblin_head_component_functions.cpp
     src/subsystems/goblin_head/goblin_head_dispatch_tables.cpp
     src/subsystems/goblin_head/goblin_head_main.cpp
+    src/subsystems/goblin_torso/goblin_torso_component_functions.cpp
+    src/subsystems/goblin_torso/goblin_torso_dispatch_tables.cpp
+    src/subsystems/goblin_torso/goblin_torso_main.cpp
 )
 
 set(P32_GENERATED_HEADERS
     include/subsystems/goblin_head/goblin_head_component_functions.hpp
     include/subsystems/goblin_head/goblin_head_dispatch_tables.hpp
     include/subsystems/goblin_head/goblin_head_main.hpp
+    include/subsystems/goblin_torso/goblin_torso_component_functions.hpp
+    include/subsystems/goblin_torso/goblin_torso_dispatch_tables.hpp
+    include/subsystems/goblin_torso/goblin_torso_main.hpp
 )
