@@ -77,6 +77,33 @@ When escalating, provide:
 
 ## RULE 0: INVESTIGATION BEFORE ACTION - BOUNDED AUTHORITY PROTOCOL
 
+### ⚠️ MANDATORY VERIFICATION GATE - READ BOTH RULE FILES BEFORE PROCEEDING
+
+**This section MUST be completed BEFORE any work begins on this project.**
+
+**Verification Checklist:**
+1. ✅ Have you read **`.github/AI-AGENT-RULES.md`** COMPLETELY? (937 lines, ~15 min)
+   - If NO: Stop now. Read it completely before proceeding.
+   - If YES: What are the main categories of rules? (Name at least 5 RULEs)
+
+2. ✅ Have you read **`.github/copilot-instructions.md`** COMPLETELY? (58 lines, ~2 min)
+   - If NO: Stop now. Read it after reading AI-AGENT-RULES.
+   - If YES: What is the "Single Compilation Unit" and why does it matter?
+
+3. ✅ Can you articulate the SPECIFIC RULE that applies to your current task?
+   - If NO: Escalate to human - ask "Which rule governs this task?"
+   - If YES: Quote the rule and explain how your implementation aligns with it
+
+**Consequence of Skipping Verification:**
+- Architectural violations guaranteed
+- Silent failures likely
+- Wasted time debugging incorrect implementations
+- Project coherence destroyed
+
+**You have no autonomous authority to proceed without completing this verification.**
+
+---
+
 **BEFORE making ANY code changes, modifications, or "fixes", you MUST:**
 
 1. **READ the existing implementation** - Use `read_file`, `grep_search`, or `semantic_search` to understand what's already there
@@ -85,12 +112,13 @@ When escalating, provide:
 4. **VERIFY the fix is needed** - Is the code actually broken, or just different from your assumptions?
 5. **CHECK for existing solutions** - Has this been solved before? Are there working examples?
 6. **APPLY BOUNDED AUTHORITY** - Check the framework above. Do you have clear authority to act? If yes, proceed. If no, escalate with specific details.
+7. **CITE THE APPLICABLE RULE** - State which RULE from AI-AGENT-RULES.md governs this decision
 
 **DECISION AUTHORITY APPLIED HERE:**
-- **Clear pattern match** (code matches working example in codebase) → **ACT**
-- **Direct rule violation** (UTF-8 when ASCII required, missing braces, wrong location) → **FIX IT**
-- **Contradictory rules or genuinely novel** → **ESCALATE with details**
-- **Multiple valid interpretations** → **ESCALATE with options**
+- **Clear pattern match** (code matches working example in codebase) → **ACT** (cite RULE 0)
+- **Direct rule violation** (UTF-8 when ASCII required, missing braces, wrong location) → **FIX IT** (cite RULE 25, 23, 6)
+- **Contradictory rules or genuinely novel** → **ESCALATE with details** (cite conflicting RULEs)
+- **Multiple valid interpretations** → **ESCALATE with options** (cite applicable RULEs)
 
 **NEVER:**
 - Rewrite working code because you "think" it should be different
@@ -100,6 +128,7 @@ When escalating, provide:
 - Change patterns without reading the architecture docs first
 - Assume you know better than existing implementations
 - Ask permission for decisions that fall under your autonomous authority
+- **WORK ON THIS PROJECT WITHOUT READING BOTH RULE FILES COMPLETELY**
 
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
