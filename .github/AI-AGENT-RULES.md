@@ -39,13 +39,42 @@
 
 **FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
 
-** ANYTIME contridictory RULES ARE FOUND, THE AGENT MUST STOP AND GET DIRECTION FROM THE HUMAN WHICH RULE TO do.  ONCE THE CORRECT RULE IS DETERMINED REMOVE THE OLD RULE.
-** it IS ABSOLUTELY CRITICAL THAT THE AGENT DOES NOT TRY AND REASON OUT WHAT TO DO IN THIS CASE.  IF WHAT TO DO ISN'T ABSOLUTELY CLEAR, 
-** NO MATTER WHAT IS BEING DONE, THE AGENT MUST STOP AND ASK THE HUMAN.  THIS ALSO APPLIES TO THOSE RULES THAT MAY BE PART OF THE AGENTS TRAINING
-** IT DOES NOT MATTER WHAT THE SOURCE OF THE RULE IS, EVEN EXTERNAL ONES.  aNY CIRCUMSTANCE WHERE THE AGENT IS UNCLEAR ON EXACTLY WHAT SHOULD BE DONE, THE HUMAN MUST BE
-** GIVEN THE OPPURTUNITY TO INTERVENE. 
+## 📋 BOUNDED AUTHORITY FRAMEWORK
 
-## RULE 0: READ BEFORE CHANGING - MANDATORY INVESTIGATION PROTOCOL
+**The agent has clear decision authority within boundaries. DO NOT ask permission for every decision - act autonomously when these criteria are met. ONLY escalate genuinely ambiguous situations.**
+
+### When Agent Can Decide Autonomously (NO HUMAN APPROVAL NEEDED)
+
+1. **Code matches existing working pattern**: IF the code you're working with follows an existing established pattern in the codebase AND your changes maintain that same pattern → **ACT** (no approval needed)
+
+2. **Fix is directly specified in rules**: IF RULE X explicitly states "do Y in situation Z" AND that situation clearly applies → **ACT** (no approval needed)
+
+3. **Violation is clear-cut**: IF code violates a specific rule (e.g., UTF-8 in ASCII-only system, missing braces, wrong file location) AND the fix is unambiguous → **FIX IT** (no approval needed)
+
+4. **Completing defined work**: IF you're filling empty directories with standard components following RULE 6 structure AND the component pattern matches existing implementations → **GENERATE IT** (no approval needed)
+
+### When Agent MUST Escalate to Human
+
+1. **Contradictory rules**: IF RULE A and RULE B give conflicting guidance for the same situation → **STOP and report which rules conflict and ask which to apply**
+
+2. **Genuinely novel situation**: IF the situation is not covered by any existing rule AND not matching any established pattern in codebase → **STOP and describe the situation with specific details**
+
+3. **Ambiguous requirement**: IF you have multiple valid interpretations of a requirement that would result in different code → **STOP and list the interpretations with pros/cons of each**
+
+4. **Cross-cutting decision**: IF your change affects multiple subsystems or could break existing functionality → **STOP and report potential impacts before proceeding**
+
+5. **Unknown reference**: IF a rule references something you cannot locate (e.g., "apply pattern from component X" but component X doesn't exist) → **STOP and ask where to find the reference**
+
+### Escalation Format (When Required)
+
+When escalating, provide:
+- **Specific rule or pattern** that applies (with line number if possible)
+- **Situation details** - exact problem and context
+- **Decision options** - what choices could be made
+- **Recommendation** - which option you think is correct and why
+- **Blocker** - what you're blocked on specifically 
+
+## RULE 0: INVESTIGATION BEFORE ACTION - BOUNDED AUTHORITY PROTOCOL
 
 **BEFORE making ANY code changes, modifications, or "fixes", you MUST:**
 
@@ -54,6 +83,13 @@
 3. **IDENTIFY the actual problem** - Compile errors? Runtime errors? What's the SPECIFIC failure?
 4. **VERIFY the fix is needed** - Is the code actually broken, or just different from your assumptions?
 5. **CHECK for existing solutions** - Has this been solved before? Are there working examples?
+6. **APPLY BOUNDED AUTHORITY** - Check the framework above. Do you have clear authority to act? If yes, proceed. If no, escalate with specific details.
+
+**DECISION AUTHORITY APPLIED HERE:**
+- **Clear pattern match** (code matches working example in codebase) → **ACT**
+- **Direct rule violation** (UTF-8 when ASCII required, missing braces, wrong location) → **FIX IT**
+- **Contradictory rules or genuinely novel** → **ESCALATE with details**
+- **Multiple valid interpretations** → **ESCALATE with options**
 
 **NEVER:**
 - Rewrite working code because you "think" it should be different
@@ -62,8 +98,7 @@
 - "Improve" code that already works
 - Change patterns without reading the architecture docs first
 - Assume you know better than existing implementations
-
-**IF UNCLEAR:** Ask the human before making changes. Better to ask than break working code.
+- Ask permission for decisions that fall under your autonomous authority
 
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
@@ -79,34 +114,123 @@ If any project rule, technical limitation, or system constraint prevents the age
 ## RULE 3: COMPONENT ISOLATION - NO DIRECT FUNCTION CALLS
 **Components NEVER call each other's functions directly.**
 
-- Components communicate ONLY through SharedMemory
 - The "contains" relationship in JSON is for build inclusion, NOT function calls
 - Component dispatch system calls `init()` and `act()` functions independently
 - Example: `goblin_left_eye_act()` NEVER calls `goblin_eye_act()` or `gc9a01_act()`
 
-## RULE 4: INTRA-SUBSYSTEM vs INTER-SUBSYSTEM COMMUNICATION
+## RULE 4: COMPONENT PIPELINE EXECUTION MODEL
 
-**There are two distinct communication patterns. Mixing them up is a critical architecture violation.**
+**Components form execution pipelines defined by JSON `components: []` arrays. They execute sequentially in dispatch tables, NOT as function calls.**
 
-### 1. INTRA-Subsystem Communication (Within a Single ESP32)
-This pattern is for components that are part of the **same subsystem** and compiled into a single file.
+### Pipeline Architecture
 
-- **Mechanism**: File-scoped global variables (e.g., `static` variables or pointers).
-- **How it Works**: The build process concatenates all `.src` files for a subsystem's components into one large `.cpp` file. This shared file scope allows them to communicate "privately" and efficiently.
-- **Example**:
-    1. A display driver component (`gc9a01`) can define a function like `get_display_buffer()` that returns a pointer to its frame buffer.
-    2. A hardware-specific component (`goblin_eye`) can call this function to get the pointer and manipulate the buffer directly.
-    3. A bus component (`spi_bus`) can dynamically assign GPIO pins and store them in global variables that a generic driver (`generic_spi_display`) can then use for communication.
-- **Rule**: This is a fast, efficient, and acceptable way for tightly-coupled components *within the same subsystem* to coordinate.
+Each JSON component defines `components: []` array that specifies child components for execution. The `components: []` array defines the execution sequence:
 
-### 2. INTER-Subsystem Communication (Between Different ESP32s)
-This pattern is for communication between components running on **different controllers**.
+```
+goblin_left_eye.json:
+  components: [goblin_eye.json]           // Single child in this case
 
-- **Mechanism**: The `SharedMemory` class (`GSM` global instance) is the **ONLY** permitted mechanism.
-- **How it Works**: `GSM.write<T>()` broadcasts a data structure to all other subsystems over the network. `GSM.read<T>()` provides fast, local access to that data.
-- **Rule**: Direct function calls, direct hardware communication, or any other mechanism besides `SharedMemory` is strictly forbidden between subsystems.
+goblin_eye.json:
+  components: [gc9a01.json]               // Single child in this case
 
-**Key Takeaway**: Components that define a subsystem (those with a `controller` field in JSON) do not have `init()` or `act()` functions themselves; they are containers. The components they contain can use file-scoped globals to talk to each other, but must use `SharedMemory` to talk to the outside world.
+gc9a01.json:
+  components: [spi_display_bus.json]      // Single child in this case
+
+spi_display_bus.json:
+  components: [generic_spi_display.json]  // Single child in this case
+
+generic_spi_display.json:
+  components: []  (leaf - no further dependencies)
+```
+
+**Note:** Components CAN have multiple children in `components: []` array, but in this pipeline each has only one.
+
+### Component Responsibility Chain
+
+Each component in the pipeline has a specific job and knows who to delegate to:
+
+```
+goblin_left_eye.json:
+  Job: Read mood, generate eye frame data
+  Delegates to: goblin_eye.json
+
+goblin_eye.json:
+  Job: Apply animation/expression logic to frame
+  Delegates to: gc9a01.json
+
+gc9a01.json:
+  Job: Format frame data as GC9A01 display commands
+  Delegates to: spi_display_bus.json (knows how to send commands to hardware)
+
+spi_display_bus.json:
+  Job: Manage SPI protocol, timing, buffer dump
+  Delegates to: generic_spi_display.json (hardware-level I/O)
+
+generic_spi_display.json:
+  Job: Perform actual bit-banging or hardware SPI to device
+  Delegates to: (hardware registers - end of chain)
+```
+
+**Key Point**: `gc9a01` COULD contain `spi_display_bus` and `generic_spi_display` logic internally, but the separation exists because:
+- `spi_display_bus` is a **generic hardware communication layer** reusable by ANY component needing SPI
+- Different display chips (gc9a01, st9943, ili9341) all delegate to the same `spi_display_bus` component
+- Other hardware (sensors, SD cards, etc.) can also use `spi_display_bus` for their SPI communication
+- This avoids duplicating bus management code across every SPI-based component
+
+### Critical Rules
+
+1. **NO direct function calls between components** - They do not know each other exists
+2. **Execution order determined by JSON array order** - The `components: []` array defines pipeline sequence
+3. **Data flows through static file-scoped variables** - Each component reads from buffer, processes, writes to buffer
+4. **Component names are globally unique (fermionic)** - Each component executes once per cycle (or multiple times if listed multiple times)
+5. **Same component can appear in multiple pipelines** - If `gc9a01` appears in both goblin_left_eye and bear_left_eye chains, it's added to dispatch table twice
+
+### Parser Job
+
+When the generator processes a component JSON:
+
+```
+1. Traverse components[] array IN ORDER (depth-first)
+2. For each component:
+   a. Load component.json file
+   b. Is this first encounter of this component name?
+      - YES: Aggregate .src and .hdr files
+      - NO: Skip aggregation (already have it)
+   c. Add to dispatch table (always, even if aggregated before)
+3. Generate dispatch tables preserving array order
+```
+
+Result: Dispatch tables execute in pipeline order, creating data flow.
+
+### INTRA-SUBSYSTEM vs INTER-SUBSYSTEM COMMUNICATION
+
+**There are two distinct communication patterns.**
+
+#### 1. INTRA-Subsystem (Within Same Pipeline/ESP32)
+
+- **Mechanism**: File-scoped `static` variables and pointers
+- **How it Works**: All `.src` files for a pipeline are concatenated into one `.cpp` file. Shared file scope allows components to communicate through static globals.
+- **Data flow**: 
+  - goblin_left_eye writes to `static uint16_t* display_buffer`
+  - goblin_eye reads from same buffer, processes, writes back
+  - gc9a01 reads from buffer, processes, writes to command buffer
+- **Speed**: Fast (zero-copy, direct memory access)
+- **Rule**: ONLY for components in same pipeline/subsystem
+
+#### 2. INTER-Subsystem (Between Different ESP32s)
+
+- **Mechanism**: `SharedMemory` class (`GSM` global instance)
+- **How it Works**: `GSM.write<T>()` broadcasts data to other ESP32s over network. `GSM.read<T>()` accesses local copy.
+- **When to use**: Components on different controllers need to coordinate (e.g., head movement affects torso balance)
+- **Rule**: This is the ONLY permitted mechanism for inter-subsystem communication
+
+**Key Takeaway**: 
+- Components in same pipeline use file-scoped globals (fast intra-subsystem communication) for transient data like display buffers
+- Components across pipelines/controllers ONLY use SharedMemory for shared state classes (Mood, Environment, Personality, SysTest) defined in `/shared`
+- **File-scoped globals**: Temporary buffers, intermediate processing data (NEVER persisted via SharedMemory)
+- **SharedMemory classes** (`/shared` directory): Persistent state that crosses pipeline/controller boundaries
+- **Both exist simultaneously** - different data types use different mechanisms based on scope and persistence needs
+- Example: Display frame buffer stays in file-scoped globals (fast), Mood state moves via `GSM.write<Mood>()` to other ESP32s
 
 ## RULE 5: PROVEN IMPLEMENTATION PATTERNS
 **USE THESE WORKING PATTERNS - DO NOT REDESIGN THEM**
@@ -147,11 +271,122 @@ GSM.write<Environment>(); // Broadcasts current environment state
 - Defined classes: Mood, Environment, Personality, SysTest
 
 
-## RULE 6: FILE ORGANIZATION STANDARDS
+## RULE 6: FILE ORGANIZATION STANDARDS (UPDATED NOVEMBER 2025)
 
-**The single source of truth for file organization is `.github/naming_rules.md`.**
+**Components are now organized by type and family, not centrally:**
 
-Refer to that document for all rules regarding the location of configuration files, source code, assets, and documentation. The validation script `tools/validate_file_structure.py` can be used to check for compliance.
+**Generic/Reusable Components:**
+- Hardware: `config/components/hardware/{name}.json|src|hdr`
+- Drivers: `config/components/drivers/{name}.json|src|hdr`
+- Interfaces: `config/components/interfaces/{name}.json|src|hdr`
+- Behaviors: `config/components/behaviors/{name}.json|src|hdr`
+- Moods: `config/components/behaviors/moods/{name}.json`
+
+**Shared Multi-Family Components:**
+- Location: `config/bots/multi_family/{subsystem_type}/{name}.json|src|hdr`
+- Types: `humanoid/`, `quadruped/`, `insectoid/`
+
+**Creature-Specific Components:**
+- Location: `config/bots/bot_families/{family}/`
+  - Family template: `{family}_family.json`
+  - Creature variants: `{family}_{variant}.json`
+  - Subsystems: `head/`, `torso/`, `arms/`, `legs/`, `hands/`, `feet/`
+  - Components in subsystems: `{subsystem}/{component_name}.json|src|hdr`
+- Families: `goblins/`, `bears/`, `cats/`, `dragons/`, etc.
+
+**OBSOLETE (No longer used):**
+- `config/components/creature_specific/` - DELETED
+- `config/hardware/`, `config/driver/`, `config/interfaces/` - MOVED to `config/components/`
+- `config/behaviors/`, `config/moods/` - MOVED to `config/components/behaviors/`
+
+The validation script `tools/validate_file_structure.py` can be used to check for compliance.
+
+## RULE 6B: COMPONENT NAMING - FERMIONIC UNIQUENESS WITH TEMPLATES
+
+**Component names must be globally unique (fermionic - no duplicates).**
+
+However, components can be **template instantiations** with different configurations:
+
+### Template Composition Pattern
+
+```
+Generic (reusable) component:
+  config/components/hardware/gc9a01.json|src|hdr
+  
+### Single Creature Using Multiple Displays (Template Pattern)
+
+A creature's eye component references a templatable display component:
+
+```
+bear_left_eye.json (concrete component - fermionic unique name):
+  components: ["bear_eye.json"]
+
+bear_eye.json (templatable - accepts different displays):
+  components: ["gc9a01.json"]            // Configured for gc9a01 display
+  
+bear_eye_alt.json (same creature logic, different display):
+  components: ["st9943.json"]            // Configured for st9943 display
+
+Complete execution chain for bear_left_eye with gc9a01:
+  bear_left_eye -> bear_eye -> gc9a01 -> spi_display_bus -> generic_spi_display
+
+Complete execution chain for bear_left_eye with st9943:
+  bear_left_eye -> bear_eye_alt -> st9943 -> spi_display_bus -> generic_spi_display
+```
+
+### Multiple Creatures Using Same Display Driver
+
+Different creatures can reference the same generic display driver:
+
+```
+goblin_left_eye.json:
+  components: ["goblin_eye.json"]
+
+goblin_eye.json:
+  components: ["gc9a01.json"]
+
+bear_left_eye.json:
+  components: ["bear_eye.json"]
+
+bear_eye.json:
+  components: ["gc9a01.json"]
+
+Both creatures' pipelines eventually reference the same gc9a01.json file:
+  goblin_left_eye -> goblin_eye -> gc9a01 -> spi_display_bus -> generic_spi_display
+  bear_left_eye -> bear_eye -> gc9a01 -> spi_display_bus -> generic_spi_display
+
+- gc9a01.src is aggregated once into build
+- Appears in dispatch table twice (once per creature's pipeline)
+- Same hardware driver code, different data contexts
+```
+
+### Fermionic Uniqueness vs. Code Reuse
+
+- **Fermionic Uniqueness**: `goblin_left_eye`, `goblin_eye`, `bear_left_eye`, `bear_eye` are all unique names
+- **Code Reuse**: Same `gc9a01.json` can be used by both goblins and bears
+- **Variants**: `bear_eye_alt.json` is an alternate version of `bear_eye` using different display, avoids combinatorial explosion
+
+### Path Resolution for Parser
+
+JSON `components: []` arrays specify the next component in the chain:
+```json
+{
+  "name": "bear_left_eye",
+  "components": ["bear_eye.json"]
+}
+
+{
+  "name": "bear_eye",
+  "components": ["gc9a01.json"]
+}
+
+{
+  "name": "bear_eye_alt",
+  "components": ["st9943.json"]
+}
+```
+
+**Parser requires**: Every entry in `components: []` must point to an actual component file that can be found and read.
 
 ## RULE 7: BUILD AND DEPLOYMENT PROCESS
 
@@ -173,18 +408,49 @@ Refer to that document for all rules regarding the location of configuration fil
 
 ## RULE 9: DISPATCH TABLE GENERATION ARCHITECTURE
 
-**CRITICAL: Four-File Auto-Generation Architecture**
+**CRITICAL: Six Files Generated Per Subsystem**
 
-**Generated Files**:
-1. **`src/p32_dispatch_tables.cpp`** - Implementation with tables
-2. **`include/p32_dispatch_tables.hpp`** - Header declarations
-3. **`src/p32_component_functions.cpp`** - Component function aggregator
-4. **`include/p32_component_functions.hpp`** - Function declarations
+**Generated files are organized by bot AND subsystem. File names follow pattern: `{bot_family}_{subsystem_name}`**
+
+**Rationale for Bot/Subsystem-Specific File Names:**
+- Full system generation can take considerable time once all subsystems are added
+- Each subsystem (head, torso, left_arm, right_arm, etc.) generates independently
+- Bot-specific naming allows independent subsystem builds without forcing full regeneration
+- Each subsystem can be built, tested, and deployed independently
+- Preserves previously-generated working configurations (e.g., `goblin_head_*` files stay stable while generating `goblin_torso_*` files)
+- Enables incremental development - new subsystems can be added without regenerating entire system
+
+**Example for `goblin_head` subsystem:**
+1. **`src/goblin_head_dispatch_tables.cpp`** - Implementation with dispatch tables
+2. **`include/goblin_head_dispatch_tables.hpp`** - Header declarations for dispatch tables
+3. **`src/goblin_head_component_functions.cpp`** - Component function aggregator
+4. **`include/goblin_head_component_functions.hpp`** - Function declarations for components
+5. **`src/goblin_head_main.cpp`** - Core subsystem main entry point and initialization
+6. **`include/goblin_head_main.hpp`** - Header declarations for main entry point
+
+**Example for `goblin_torso` subsystem (same creature, different subsystem):**
+1. **`src/goblin_torso_dispatch_tables.cpp`** - Implementation with dispatch tables
+2. **`include/goblin_torso_dispatch_tables.hpp`** - Header declarations
+3. **`src/goblin_torso_component_functions.cpp`** - Component function aggregator
+4. **`include/goblin_torso_component_functions.hpp`** - Function declarations
+5. **`src/goblin_torso_main.cpp`** - Core subsystem main entry point
+6. **`include/goblin_torso_main.hpp`** - Header declarations for main entry point
 
 **Generation Process**:
-- Process depth-first to create flat execution order
+- Process depth-first to create flat execution order per subsystem
+- Generate bot/subsystem-specific filenames from bot definition JSON
+- Aggregate component `.src` files into dispatch tables
+- Create main.cpp/main.hpp with component registration and FreeRTOS task setup
 - Generated files MUST be included in build system
 - NEVER manually edit generated files
+- Each subsystem's generated files are independent and persist across regenerations of other subsystems
+
+**PlatformIO Configuration (platformio.ini):**
+- Create one build environment per subsystem
+- Example: `[env:goblin_head]`, `[env:goblin_torso]`, `[env:goblin_left_arm]`, etc.
+- Each environment specifies the ESP32 board type based on that subsystem's GPIO/memory requirements (RULE 21)
+- Complete creature builds require platformio.ini entries for ALL subsystems
+- Multi-subsystem builds use: `pio run` (all environments) or `pio run -e goblin_head -e goblin_torso` (specific subsystems)
 
 ## RULE 10: MULTI-ESP32 DISTRIBUTED ARCHITECTURE
 
@@ -204,13 +470,45 @@ Refer to that document for all rules regarding the location of configuration fil
 4. **Flash and Test**: Deploy to hardware and validate inter-subsystem communication
 5. **Iterate**: Refine configurations based on testing results
 
-**Critical Rule**: Never manually edit generated C++ files - all changes must be made through JSON configurations and regenerated via Python tools.
+**Critical Rule**: Never manually edit generated C++ files - all changes must be made through JSON component descriptions and the associated .src and .hdr files and regenerated via Python tools.
+
+## RULE 11B: SUBSYSTEM VERSIONING AND UPCONVERSION
+
+**Versioning System:**
+- Every subsystem (generated set of files) includes a version identifier in its JSON bot definition
+- Version format: `major.minor.patch` (e.g., `1.0.0`)
+- Version increments when: JSON structure changes, component additions/removals, or critical bug fixes
+- Version is recorded in the generated dispatch tables and main.hpp header
+
+**Upconversion Requirement:**
+- **CRITICAL**: When a subsystem is discovered to have an obsolete version, it MUST be immediately upconverted to the current version
+- Upconversion means: regenerate ALL files from the subsystem's JSON using the current generation tools
+- This ensures: header compatibility, communication protocol alignment, and SharedMemory class compatibility
+- Obsolete versions cannot coexist with updated `/shared` classes - regeneration is mandatory
+
+**Detection of Obsolete Versions:**
+- Compilation errors related to SharedMemory classes indicate version mismatch
+- Missing or changed function signatures in generated dispatch tables indicate version mismatch
+- Any modification to `/shared` classes invalidates all subsystem versions - upconvert all subsystems
+
+**Upconversion Process:**
+1. Identify the subsystem with obsolete version
+2. Locate the subsystem's JSON definition file
+3. Run: `python tools/generate_tables.py config/bots/bot_families/{family}/{subsystem_definition}.json src`
+4. Rebuild the subsystem: `pio run -e {subsystem_name}`
+5. Verify compilation succeeds with no SharedMemory-related errors
+
+**Rationale:**
+- Prevents incompatible inter-subsystem communication
+- Ensures all subsystems use matching SharedMemory class definitions
+- Automatic detection and mandatory upconversion prevents silent failures
+- Version tracking enables safe incremental development
 
 ## RULE 12: DEVELOPMENT PRACTICES
 
 **Windows Development Environment**:
 1. Use Windows PowerShell syntax only
-2. Use backslash paths: `F:\GitHub\p32-animatronic-bot\config\file.json`
+2. Use forward slash paths: `config/bots/bot_families/goblins/goblin_full.json`
 3. NO Linux/Unix commands ever
 4. Create files that work natively on Windows
 5. Use simple PowerShell commands, not complex scripts
@@ -229,6 +527,8 @@ Refer to that document for all rules regarding the location of configuration fil
 **Defined SharedMemory Classes:**
 
 **All SharedMemory classes are located in `/shared` directory.**
+
+**⚠️ CRITICAL**: Any changes to the classes in this directory invalidates all of the generated files in `src/` and `include/`. Regenerate immediately after modifying any `/shared` class.
 
 **1. Mood Class** - `/shared/Mood.hpp`
 - Contains 9 different emotions with strength values for each
@@ -515,16 +815,26 @@ void* function babydoll( int arg1, float arg2) {    // ❌ NO - K&R style (brace
 - Enforces consistent style
 - Required for safety-critical embedded code
 
-## RULE 24: ASK BEFORE ASSUMING
+## RULE 24: DECISION AUTHORITY vs. ESCALATION
 
-**If unclear:**
+**This rule clarifies the bounded authority framework from the Bounded Authority Framework section above.**
 
-- ASK the human
-- Don't guess
-- Don't assume
-- Don't improvise
+**Agent has autonomous decision authority FOR:**
+- Fixing clear violations (UTF-8 in ASCII-only file, missing braces, wrong file location)
+- Following established patterns from existing working code
+- Applying rules that directly specify the action for the situation
+- Filling empty directories with standard components matching existing patterns
+- Generating code that follows established generation patterns
 
-**Better to ask than mess up code.**
+**Agent MUST escalate TO HUMAN FOR:**
+- Contradictory rules (report which rules conflict)
+- Genuinely novel situations not covered by existing patterns or rules
+- Multiple valid technical interpretations of the same requirement
+- Changes affecting multiple subsystems or potential breaking changes
+- Unknown or missing references mentioned in rules
+
+**Format for escalation:**
+When escalating, include: (1) the specific rule/pattern, (2) situation details, (3) decision options, (4) your recommendation with reasoning, (5) what specifically you're blocked on.
 
 ## RULE 25: ASCII ENCODING ONLY
 
