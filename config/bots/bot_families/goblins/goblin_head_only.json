@@ -24,7 +24,9 @@
         "config/components/functional/goblin_mood.json"
     ],
     "components": [
-        "config/subsystems/goblin_head_left_eye_only.json"
+        "config/subsystems/goblin_head_left_eye_only.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

@@ -1,0 +1,27 @@
+#ifndef STEPPER_MOTOR_NEMA17_HDR
+#define STEPPER_MOTOR_NEMA17_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize stepper_motor_nema17 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t stepper_motor_nema17_init(void);
+
+/**
+ * @brief Execute stepper_motor_nema17 component action
+ * Called periodically by subsystem dispatcher
+ */
+void stepper_motor_nema17_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // STEPPER_MOTOR_NEMA17_HDR

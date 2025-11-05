@@ -1,0 +1,27 @@
+#ifndef RA8875_TFT_800X480_HDR
+#define RA8875_TFT_800X480_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize ra8875_tft_800x480 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ra8875_tft_800x480_init(void);
+
+/**
+ * @brief Execute ra8875_tft_800x480 component action
+ * Called periodically by subsystem dispatcher
+ */
+void ra8875_tft_800x480_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // RA8875_TFT_800X480_HDR

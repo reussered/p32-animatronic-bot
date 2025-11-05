@@ -1,0 +1,27 @@
+#ifndef SKELETAL_POWER_DISTRIBUTION_HDR
+#define SKELETAL_POWER_DISTRIBUTION_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize skeletal_power_distribution component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t skeletal_power_distribution_init(void);
+
+/**
+ * @brief Execute skeletal_power_distribution component action
+ * Called periodically by subsystem dispatcher
+ */
+void skeletal_power_distribution_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SKELETAL_POWER_DISTRIBUTION_HDR

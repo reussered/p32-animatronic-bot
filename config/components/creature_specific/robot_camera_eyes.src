@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file robot_camera_eyes.src
+ * @brief Implementation for robot_camera_eyes component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize robot_camera_eyes
+ * Performs any setup needed for this component
+ */
+esp_err_t robot_camera_eyes_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute robot_camera_eyes action
+ * Called periodically during subsystem dispatch
+ */
+void robot_camera_eyes_act(void)
+{
+    // TODO: Implement component behavior
+}

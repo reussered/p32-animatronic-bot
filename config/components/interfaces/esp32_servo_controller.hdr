@@ -1,0 +1,27 @@
+#ifndef ESP32_SERVO_CONTROLLER_HDR
+#define ESP32_SERVO_CONTROLLER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize esp32_servo_controller component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t esp32_servo_controller_init(void);
+
+/**
+ * @brief Execute esp32_servo_controller component action
+ * Called periodically by subsystem dispatcher
+ */
+void esp32_servo_controller_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ESP32_SERVO_CONTROLLER_HDR

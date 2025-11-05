@@ -1,0 +1,97 @@
+{
+    "relative_filename": "config/bots/bot_families/cats/head/cat_eye.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "cat_eye",
+    "subsystem": "HEAD",
+    "description": "Shared cat eye processing logic with palette and mood-based rendering",
+    "created": "2025-10-22",
+    "components": [
+        "config/components/hardware/gc9a01.json",
+        "config/subsystems/cat_head.json",
+        "config/subsystems/cat_torso.json"
+    ],
+    "component_constraints": {
+        "required_contained_types": [
+            "DISPLAY_DRIVER"
+        ],
+        "interface_requirements": [
+            "getBuffer",
+            "getFrameSize",
+            "getFrameRowSize"
+        ]
+    },
+    "creature_display_profile": {
+        "species": "CAT",
+        "eye_color_base": "EMERALD_GREEN",
+        "pupil_style": "VERTICAL_SLIT",
+        "expression_range": "PLAYFUL_TO_ALOOF",
+        "mood_responsiveness": "HIGH"
+    },
+    "palette_system": {
+        "palette_size": 256,
+        "color_ranges": {
+            "eyelid_pupil": "0-31",
+            "iris_base": "32-63",
+            "highlights": "64-95",
+            "anger_reds": "96-127",
+            "curiosity_greens": "128-159",
+            "fear_blues": "160-191",
+            "happiness_yellows": "192-223",
+            "special_effects": "224-255"
+        }
+    },
+    "mood_color_mapping": {
+        "ANGER": {
+            "primary_range": "96-127",
+            "intensity_multiplier": 1.6,
+            "glow_effect": "ENABLED"
+        },
+        "CURIOSITY": {
+            "primary_range": "128-159",
+            "intensity_multiplier": 1.4,
+            "sparkle_effect": "ENABLED"
+        },
+        "FEAR": {
+            "primary_range": "160-191",
+            "intensity_multiplier": 1.7,
+            "dilation_effect": "ENABLED"
+        },
+        "HAPPINESS": {
+            "primary_range": "192-223",
+            "intensity_multiplier": 1.3,
+            "warmth_effect": "ENABLED"
+        }
+    },
+    "frame_processing": {
+        "buffer_stack_support": "ENABLED",
+        "multi_eye_coordination": "ENABLED",
+        "mood_based_adjustments": "REALTIME",
+        "color_space": "RGB565"
+    },
+    "animatronic_cache": {
+        "animation_buffers": "LEFT_RIGHT_COORDINATED",
+        "frame_interpolation": "SMOOTH",
+        "mood_transition_ms": 300,
+        "expression_blend_mode": "CROSS_FADE"
+    },
+    "timing": {
+        "hitCount": 1,
+        "description": "Process all frames in buffer stack every loop"
+    },
+    "software": {
+        "init_function": "cat_eye_init",
+        "act_function": "cat_eye_act"
+    },
+    "prototype_status": "needs_implementation",
+    "tested": false,
+    "notes": [
+        "Software-only component - no physical shape",
+        "Code pattern based on goblin_eye.cpp/hpp",
+        "Handles mood-based color palette adjustments",
+        "Supports buffer stack processing for left/right eye coordination",
+        "256-color organized palette with distinct mood ranges",
+        "Real-time frame processing with SharedMemory mood integration"
+    ],
+    "type": "DISPLAY_DRIVER"
+}

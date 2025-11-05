@@ -1,0 +1,27 @@
+#ifndef WRIST_JOINT_ASSEMBLY_HDR
+#define WRIST_JOINT_ASSEMBLY_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize wrist_joint_assembly component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t wrist_joint_assembly_init(void);
+
+/**
+ * @brief Execute wrist_joint_assembly component action
+ * Called periodically by subsystem dispatcher
+ */
+void wrist_joint_assembly_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // WRIST_JOINT_ASSEMBLY_HDR

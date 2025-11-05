@@ -1,0 +1,27 @@
+#ifndef UNIFIED_PROPORTIONAL_SCALING_HDR
+#define UNIFIED_PROPORTIONAL_SCALING_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize unified_proportional_scaling component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t unified_proportional_scaling_init(void);
+
+/**
+ * @brief Execute unified_proportional_scaling component action
+ * Called periodically by subsystem dispatcher
+ */
+void unified_proportional_scaling_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // UNIFIED_PROPORTIONAL_SCALING_HDR

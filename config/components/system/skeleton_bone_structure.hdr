@@ -1,0 +1,27 @@
+#ifndef SKELETON_BONE_STRUCTURE_HDR
+#define SKELETON_BONE_STRUCTURE_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize skeleton_bone_structure component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t skeleton_bone_structure_init(void);
+
+/**
+ * @brief Execute skeleton_bone_structure component action
+ * Called periodically by subsystem dispatcher
+ */
+void skeleton_bone_structure_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SKELETON_BONE_STRUCTURE_HDR

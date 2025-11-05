@@ -1,0 +1,27 @@
+#ifndef ZOMBIE_OOZING_WOUNDS_HDR
+#define ZOMBIE_OOZING_WOUNDS_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize zombie_oozing_wounds component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_oozing_wounds_init(void);
+
+/**
+ * @brief Execute zombie_oozing_wounds component action
+ * Called periodically by subsystem dispatcher
+ */
+void zombie_oozing_wounds_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ZOMBIE_OOZING_WOUNDS_HDR

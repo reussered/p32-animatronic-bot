@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file robot_back_mount.src
+ * @brief Implementation for robot_back_mount component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize robot_back_mount
+ * Performs any setup needed for this component
+ */
+esp_err_t robot_back_mount_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute robot_back_mount action
+ * Called periodically during subsystem dispatch
+ */
+void robot_back_mount_act(void)
+{
+    // TODO: Implement component behavior
+}

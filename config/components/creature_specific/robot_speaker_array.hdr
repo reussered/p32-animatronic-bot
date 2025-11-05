@@ -1,0 +1,27 @@
+#ifndef ROBOT_SPEAKER_ARRAY_HDR
+#define ROBOT_SPEAKER_ARRAY_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize robot_speaker_array component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t robot_speaker_array_init(void);
+
+/**
+ * @brief Execute robot_speaker_array component action
+ * Called periodically by subsystem dispatcher
+ */
+void robot_speaker_array_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ROBOT_SPEAKER_ARRAY_HDR

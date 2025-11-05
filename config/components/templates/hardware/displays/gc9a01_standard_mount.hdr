@@ -1,0 +1,27 @@
+#ifndef GC9A01_STANDARD_MOUNT_HDR
+#define GC9A01_STANDARD_MOUNT_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize gc9a01_standard_mount component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t gc9a01_standard_mount_init(void);
+
+/**
+ * @brief Execute gc9a01_standard_mount component action
+ * Called periodically by subsystem dispatcher
+ */
+void gc9a01_standard_mount_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GC9A01_STANDARD_MOUNT_HDR

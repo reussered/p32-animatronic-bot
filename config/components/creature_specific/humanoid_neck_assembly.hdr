@@ -1,0 +1,27 @@
+#ifndef HUMANOID_NECK_ASSEMBLY_HDR
+#define HUMANOID_NECK_ASSEMBLY_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize humanoid_neck_assembly component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t humanoid_neck_assembly_init(void);
+
+/**
+ * @brief Execute humanoid_neck_assembly component action
+ * Called periodically by subsystem dispatcher
+ */
+void humanoid_neck_assembly_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // HUMANOID_NECK_ASSEMBLY_HDR

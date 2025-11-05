@@ -1,0 +1,27 @@
+#ifndef ROBOT_BACK_MOUNT_HDR
+#define ROBOT_BACK_MOUNT_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize robot_back_mount component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t robot_back_mount_init(void);
+
+/**
+ * @brief Execute robot_back_mount component action
+ * Called periodically by subsystem dispatcher
+ */
+void robot_back_mount_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ROBOT_BACK_MOUNT_HDR

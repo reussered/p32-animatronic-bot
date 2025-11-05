@@ -125,7 +125,9 @@
             "functions": {
                 "play_sound": "simple_audio_play"
             }
-        }
+        },
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "behaviors": [
         {

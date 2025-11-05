@@ -1,0 +1,90 @@
+{
+  "name": "example_multi_hardware_eye",
+  "description": "Example component demonstrating multi-hardware template system. Can use different display + camera combinations without recompilation.",
+  "hardware_roles": [
+    {
+      "role": "display",
+      "description": "Primary display for eye animation",
+      "required": true
+    },
+    {
+      "role": "camera",
+      "description": "Camera for emotion detection",
+      "required": true
+    }
+  ],
+  "templates": {
+    "display": {
+      "GC9A01": {
+        "role": "display",
+        "device": "GC9A01",
+        "description": "GC9A01 round SPI display (240x240)",
+        "args": {
+          "width": { "value": 240, "type": "int" },
+          "height": { "value": 240, "type": "int" },
+          "spi_clock_mhz": { "value": 80, "type": "int" },
+          "cs_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "dc_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "rst_pin": { "value": "GPIO_DYNAMIC", "type": "str" }
+        }
+      },
+      "ST7789": {
+        "role": "display",
+        "device": "ST7789",
+        "description": "ST7789 rectangular SPI display (240x320)",
+        "args": {
+          "width": { "value": 240, "type": "int" },
+          "height": { "value": 320, "type": "int" },
+          "spi_clock_mhz": { "value": 80, "type": "int" },
+          "cs_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "dc_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "rst_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "backlight_pin": { "value": "GPIO_DYNAMIC", "type": "str" }
+        }
+      },
+      "ILI9341": {
+        "role": "display",
+        "device": "ILI9341",
+        "description": "ILI9341 larger SPI display (320x240)",
+        "args": {
+          "width": { "value": 320, "type": "int" },
+          "height": { "value": 240, "type": "int" },
+          "spi_clock_mhz": { "value": 60, "type": "int" },
+          "cs_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "dc_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "rst_pin": { "value": "GPIO_DYNAMIC", "type": "str" }
+        }
+      }
+    },
+    "camera": {
+      "OV2640": {
+        "role": "camera",
+        "device": "OV2640",
+        "description": "OV2640 2MP camera over OV I2C interface",
+        "args": {
+          "resolution": { "value": "FRAMESIZE_QVGA", "type": "str" },
+          "jpeg_quality": { "value": 12, "type": "int" },
+          "i2c_sda_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "i2c_scl_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "pwdn_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "reset_pin": { "value": "GPIO_DYNAMIC", "type": "str" }
+        }
+      },
+      "OV7670": {
+        "role": "camera",
+        "device": "OV7670",
+        "description": "OV7670 0.3MP camera - lower power alternative",
+        "args": {
+          "resolution": { "value": "FRAMESIZE_QVGA", "type": "str" },
+          "i2c_sda_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "i2c_scl_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "pwdn_pin": { "value": "GPIO_DYNAMIC", "type": "str" },
+          "reset_pin": { "value": "GPIO_DYNAMIC", "type": "str" }
+        }
+      }
+    }
+  },
+  "init_signature": "esp_err_t example_multi_hardware_eye_init(void)",
+  "act_signature": "void example_multi_hardware_eye_act(void)",
+  "notes": "Component will receive config struct populated with chosen template args at init() time. Use hardware-agnostic functions like display_draw_pixel(x, y, color) instead of device-specific calls."
+}

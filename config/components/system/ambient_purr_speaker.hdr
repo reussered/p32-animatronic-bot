@@ -1,0 +1,27 @@
+#ifndef AMBIENT_PURR_SPEAKER_HDR
+#define AMBIENT_PURR_SPEAKER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize ambient_purr_speaker component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ambient_purr_speaker_init(void);
+
+/**
+ * @brief Execute ambient_purr_speaker component action
+ * Called periodically by subsystem dispatcher
+ */
+void ambient_purr_speaker_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // AMBIENT_PURR_SPEAKER_HDR

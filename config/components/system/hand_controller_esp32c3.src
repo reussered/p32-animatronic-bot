@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file hand_controller_esp32c3.src
+ * @brief Implementation for hand_controller_esp32c3 component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize hand_controller_esp32c3
+ * Performs any setup needed for this component
+ */
+esp_err_t hand_controller_esp32c3_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute hand_controller_esp32c3 action
+ * Called periodically during subsystem dispatch
+ */
+void hand_controller_esp32c3_act(void)
+{
+    // TODO: Implement component behavior
+}

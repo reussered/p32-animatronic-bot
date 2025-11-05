@@ -1,0 +1,27 @@
+#ifndef BACK_MOUNT_SYSTEM_HDR
+#define BACK_MOUNT_SYSTEM_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize back_mount_system component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t back_mount_system_init(void);
+
+/**
+ * @brief Execute back_mount_system component action
+ * Called periodically by subsystem dispatcher
+ */
+void back_mount_system_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // BACK_MOUNT_SYSTEM_HDR

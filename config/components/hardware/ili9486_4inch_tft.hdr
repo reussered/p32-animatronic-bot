@@ -1,0 +1,27 @@
+#ifndef ILI9486_4INCH_TFT_HDR
+#define ILI9486_4INCH_TFT_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize ili9486_4inch_tft component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ili9486_4inch_tft_init(void);
+
+/**
+ * @brief Execute ili9486_4inch_tft component action
+ * Called periodically by subsystem dispatcher
+ */
+void ili9486_4inch_tft_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ILI9486_4INCH_TFT_HDR

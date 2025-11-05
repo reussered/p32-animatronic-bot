@@ -1,0 +1,27 @@
+#ifndef COLOR_CHANGING_LEDS_HDR
+#define COLOR_CHANGING_LEDS_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize color_changing_leds component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t color_changing_leds_init(void);
+
+/**
+ * @brief Execute color_changing_leds component action
+ * Called periodically by subsystem dispatcher
+ */
+void color_changing_leds_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // COLOR_CHANGING_LEDS_HDR

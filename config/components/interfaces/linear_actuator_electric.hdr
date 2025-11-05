@@ -1,0 +1,27 @@
+#ifndef LINEAR_ACTUATOR_ELECTRIC_HDR
+#define LINEAR_ACTUATOR_ELECTRIC_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize linear_actuator_electric component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t linear_actuator_electric_init(void);
+
+/**
+ * @brief Execute linear_actuator_electric component action
+ * Called periodically by subsystem dispatcher
+ */
+void linear_actuator_electric_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // LINEAR_ACTUATOR_ELECTRIC_HDR

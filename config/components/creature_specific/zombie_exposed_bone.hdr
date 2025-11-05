@@ -1,0 +1,27 @@
+#ifndef ZOMBIE_EXPOSED_BONE_HDR
+#define ZOMBIE_EXPOSED_BONE_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize zombie_exposed_bone component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_exposed_bone_init(void);
+
+/**
+ * @brief Execute zombie_exposed_bone component action
+ * Called periodically by subsystem dispatcher
+ */
+void zombie_exposed_bone_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ZOMBIE_EXPOSED_BONE_HDR

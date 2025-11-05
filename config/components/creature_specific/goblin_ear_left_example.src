@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file goblin_ear_left_example.src
+ * @brief Implementation for goblin_ear_left_example component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize goblin_ear_left_example
+ * Performs any setup needed for this component
+ */
+esp_err_t goblin_ear_left_example_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute goblin_ear_left_example action
+ * Called periodically during subsystem dispatch
+ */
+void goblin_ear_left_example_act(void)
+{
+    // TODO: Implement component behavior
+}

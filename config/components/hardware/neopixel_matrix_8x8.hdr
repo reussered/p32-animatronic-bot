@@ -1,0 +1,27 @@
+#ifndef NEOPIXEL_MATRIX_8X8_HDR
+#define NEOPIXEL_MATRIX_8X8_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize neopixel_matrix_8x8 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t neopixel_matrix_8x8_init(void);
+
+/**
+ * @brief Execute neopixel_matrix_8x8 component action
+ * Called periodically by subsystem dispatcher
+ */
+void neopixel_matrix_8x8_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NEOPIXEL_MATRIX_8X8_HDR

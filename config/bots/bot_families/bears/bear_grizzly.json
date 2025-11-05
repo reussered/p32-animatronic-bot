@@ -40,7 +40,9 @@
     },
     "components": [
         "config/components/creature_specific/bear_massive_claws.json",
-        "config/components/creature_specific/bear_thick_fur.json"
+        "config/components/creature_specific/bear_thick_fur.json",
+        "config/subsystems/bear_head.json",
+        "config/subsystems/bear_torso.json"
     ],
     "custom_behaviors": {
         "territorial_display": {

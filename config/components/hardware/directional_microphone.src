@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file directional_microphone.src
+ * @brief Implementation for directional_microphone component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize directional_microphone
+ * Performs any setup needed for this component
+ */
+esp_err_t directional_microphone_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute directional_microphone action
+ * Called periodically during subsystem dispatch
+ */
+void directional_microphone_act(void)
+{
+    // TODO: Implement component behavior
+}

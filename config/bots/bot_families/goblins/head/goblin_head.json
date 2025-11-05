@@ -22,7 +22,9 @@
         "config/bots/bot_families/goblins/head/goblin_mouth.json",
         "config/bots/bot_families/goblins/head/goblin_speaker.json",
         "config/bots/bot_families/goblins/head/goblin_left_ear.json",
-        "config/bots/bot_families/goblins/head/goblin_right_ear.json"
+        "config/bots/bot_families/goblins/head/goblin_right_ear.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",

@@ -1,0 +1,27 @@
+#ifndef CAT_EYE_HDR
+#define CAT_EYE_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize cat_eye component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t cat_eye_init(void);
+
+/**
+ * @brief Execute cat_eye component action
+ * Called periodically by subsystem dispatcher
+ */
+void cat_eye_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // CAT_EYE_HDR

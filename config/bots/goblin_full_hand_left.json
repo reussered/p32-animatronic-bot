@@ -17,7 +17,9 @@
         "config/components/creature_specific/goblin/hand_components/left/middle_finger_servo.json",
         "config/components/creature_specific/goblin/hand_components/left/ring_finger_servo.json",
         "config/components/creature_specific/goblin/hand_components/left/pinky_finger_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json"
+        "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "thumb_dof": "1",

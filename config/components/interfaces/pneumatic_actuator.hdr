@@ -1,0 +1,27 @@
+#ifndef PNEUMATIC_ACTUATOR_HDR
+#define PNEUMATIC_ACTUATOR_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize pneumatic_actuator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t pneumatic_actuator_init(void);
+
+/**
+ * @brief Execute pneumatic_actuator component action
+ * Called periodically by subsystem dispatcher
+ */
+void pneumatic_actuator_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // PNEUMATIC_ACTUATOR_HDR

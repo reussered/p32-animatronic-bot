@@ -1,0 +1,27 @@
+#ifndef TEMPERATURE_MONITOR_HDR
+#define TEMPERATURE_MONITOR_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize temperature_monitor component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t temperature_monitor_init(void);
+
+/**
+ * @brief Execute temperature_monitor component action
+ * Called periodically by subsystem dispatcher
+ */
+void temperature_monitor_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // TEMPERATURE_MONITOR_HDR

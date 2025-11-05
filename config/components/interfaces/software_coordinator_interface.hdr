@@ -1,0 +1,27 @@
+#ifndef SOFTWARE_COORDINATOR_INTERFACE_HDR
+#define SOFTWARE_COORDINATOR_INTERFACE_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize software_coordinator_interface component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t software_coordinator_interface_init(void);
+
+/**
+ * @brief Execute software_coordinator_interface component action
+ * Called periodically by subsystem dispatcher
+ */
+void software_coordinator_interface_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SOFTWARE_COORDINATOR_INTERFACE_HDR

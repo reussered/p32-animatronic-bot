@@ -1,0 +1,27 @@
+#ifndef ZOMBIE_SHAMBLE_ACTUATOR_HDR
+#define ZOMBIE_SHAMBLE_ACTUATOR_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize zombie_shamble_actuator component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t zombie_shamble_actuator_init(void);
+
+/**
+ * @brief Execute zombie_shamble_actuator component action
+ * Called periodically by subsystem dispatcher
+ */
+void zombie_shamble_actuator_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ZOMBIE_SHAMBLE_ACTUATOR_HDR

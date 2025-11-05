@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file stepper_motor_nema17.src
+ * @brief Implementation for stepper_motor_nema17 component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize stepper_motor_nema17
+ * Performs any setup needed for this component
+ */
+esp_err_t stepper_motor_nema17_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute stepper_motor_nema17 action
+ * Called periodically during subsystem dispatch
+ */
+void stepper_motor_nema17_act(void)
+{
+    // TODO: Implement component behavior
+}

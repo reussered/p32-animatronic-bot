@@ -1,0 +1,27 @@
+#ifndef SSD1963_TFT_800X600_HDR
+#define SSD1963_TFT_800X600_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize ssd1963_tft_800x600 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ssd1963_tft_800x600_init(void);
+
+/**
+ * @brief Execute ssd1963_tft_800x600 component action
+ * Called periodically by subsystem dispatcher
+ */
+void ssd1963_tft_800x600_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SSD1963_TFT_800X600_HDR

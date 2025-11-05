@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file ambient_temperature_sensor.src
+ * @brief Implementation for ambient_temperature_sensor component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize ambient_temperature_sensor
+ * Performs any setup needed for this component
+ */
+esp_err_t ambient_temperature_sensor_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute ambient_temperature_sensor action
+ * Called periodically during subsystem dispatch
+ */
+void ambient_temperature_sensor_act(void)
+{
+    // TODO: Implement component behavior
+}

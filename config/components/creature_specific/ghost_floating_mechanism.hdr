@@ -1,0 +1,27 @@
+#ifndef GHOST_FLOATING_MECHANISM_HDR
+#define GHOST_FLOATING_MECHANISM_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize ghost_floating_mechanism component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t ghost_floating_mechanism_init(void);
+
+/**
+ * @brief Execute ghost_floating_mechanism component action
+ * Called periodically by subsystem dispatcher
+ */
+void ghost_floating_mechanism_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GHOST_FLOATING_MECHANISM_HDR

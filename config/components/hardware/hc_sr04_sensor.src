@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file hc_sr04_sensor.src
+ * @brief Implementation for hc_sr04_sensor component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize hc_sr04_sensor
+ * Performs any setup needed for this component
+ */
+esp_err_t hc_sr04_sensor_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute hc_sr04_sensor action
+ * Called periodically during subsystem dispatch
+ */
+void hc_sr04_sensor_act(void)
+{
+    // TODO: Implement component behavior
+}

@@ -1,0 +1,27 @@
+#ifndef WIFI_STATION_HDR
+#define WIFI_STATION_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize wifi_station component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t wifi_station_init(void);
+
+/**
+ * @brief Execute wifi_station component action
+ * Called periodically by subsystem dispatcher
+ */
+void wifi_station_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // WIFI_STATION_HDR

@@ -1,0 +1,27 @@
+#ifndef TEST_SYSTEM_CONTROLLER_HDR
+#define TEST_SYSTEM_CONTROLLER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize test_system_controller component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t test_system_controller_init(void);
+
+/**
+ * @brief Execute test_system_controller component action
+ * Called periodically by subsystem dispatcher
+ */
+void test_system_controller_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // TEST_SYSTEM_CONTROLLER_HDR

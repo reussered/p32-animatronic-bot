@@ -24,7 +24,9 @@
         "config/components/creature_specific/goblin_right_eye.json",
         "config/components/creature_specific/goblin_mouth.json",
         "config/components/creature_specific/goblin_speaker.json",
-        "config/components/creature_specific/goblin_nose.json"
+        "config/components/creature_specific/goblin_nose.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "servo_specifications": {
         "primary_servos": "MG90S_MICRO_SERVOS_ONLY",

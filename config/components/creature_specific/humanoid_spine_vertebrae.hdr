@@ -1,0 +1,27 @@
+#ifndef HUMANOID_SPINE_VERTEBRAE_HDR
+#define HUMANOID_SPINE_VERTEBRAE_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize humanoid_spine_vertebrae component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t humanoid_spine_vertebrae_init(void);
+
+/**
+ * @brief Execute humanoid_spine_vertebrae component action
+ * Called periodically by subsystem dispatcher
+ */
+void humanoid_spine_vertebrae_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // HUMANOID_SPINE_VERTEBRAE_HDR

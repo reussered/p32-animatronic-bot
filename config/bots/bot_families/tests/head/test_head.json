@@ -18,7 +18,9 @@
     "components": [
         "config/components/creature_specific/goblin_left_eye.json<gc9a01>",
         "config/components/creature_specific/goblin_right_eye.json<gc9a01>",
-        "config/components/hardware/gc9a01.json"
+        "config/components/hardware/gc9a01.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "test_configuration": {
         "hardware_validation": true,

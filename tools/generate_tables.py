@@ -302,7 +302,16 @@ def resolve_hit_count(data: Dict[str, Any]) -> int:
 
 
 def resolve_json_reference(base_path: Path, reference: str) -> Tuple[Path, Optional[str]]:
-    """Resolves a JSON reference, parsing out a template type if present."""
+    """Resolves a JSON reference, parsing out a template type if present.
+    
+    Supports both old style:
+      - "config/components/goblin_left_eye.json"
+      - "config/components/goblin_left_eye.json<GC9A01>"
+    
+    And new style (by component name):
+      - "goblin_left_eye"
+      - "goblin_left_eye<GC9A01,OV2640>"
+    """
     template_type: Optional[str] = None
     path_part = reference
     if "<" in reference and reference.endswith(">"):
@@ -314,7 +323,14 @@ def resolve_json_reference(base_path: Path, reference: str) -> Tuple[Path, Optio
         if path_part.startswith("config/"):
             candidate = PROJECT_ROOT / path_part
         else:
+            # Try as a file path first
             candidate = base_path.parent / path_part
+            if not candidate.exists():
+                # Try as a component name by searching in config/components
+                from pathlib import Path as PathlibPath
+                matches = list((PROJECT_ROOT / "config" / "components").rglob(f"{path_part}.json"))
+                if matches:
+                    candidate = matches[0]  # Use first match
     
     candidate = candidate.resolve()
     if not candidate.exists():

@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file led_matrix_small.src
+ * @brief Implementation for led_matrix_small component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize led_matrix_small
+ * Performs any setup needed for this component
+ */
+esp_err_t led_matrix_small_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute led_matrix_small action
+ * Called periodically during subsystem dispatch
+ */
+void led_matrix_small_act(void)
+{
+    // TODO: Implement component behavior
+}

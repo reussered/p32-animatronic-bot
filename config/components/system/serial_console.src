@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file serial_console.src
+ * @brief Implementation for serial_console component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize serial_console
+ * Performs any setup needed for this component
+ */
+esp_err_t serial_console_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute serial_console action
+ * Called periodically during subsystem dispatch
+ */
+void serial_console_act(void)
+{
+    // TODO: Implement component behavior
+}

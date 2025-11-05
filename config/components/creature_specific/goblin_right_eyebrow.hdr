@@ -1,0 +1,27 @@
+#ifndef GOBLIN_RIGHT_EYEBROW_HDR
+#define GOBLIN_RIGHT_EYEBROW_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize goblin_right_eyebrow component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t goblin_right_eyebrow_init(void);
+
+/**
+ * @brief Execute goblin_right_eyebrow component action
+ * Called periodically by subsystem dispatcher
+ */
+void goblin_right_eyebrow_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GOBLIN_RIGHT_EYEBROW_HDR

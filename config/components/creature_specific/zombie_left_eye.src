@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file zombie_left_eye.src
+ * @brief Implementation for zombie_left_eye component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize zombie_left_eye
+ * Performs any setup needed for this component
+ */
+esp_err_t zombie_left_eye_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute zombie_left_eye action
+ * Called periodically during subsystem dispatch
+ */
+void zombie_left_eye_act(void)
+{
+    // TODO: Implement component behavior
+}

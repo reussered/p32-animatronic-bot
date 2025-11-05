@@ -87,7 +87,9 @@
         "config/components/creature_specific/goblin_spirit_runes.json",
         "config/components/creature_specific/goblin_ritual_scars.json",
         "config/components/creature_specific/goblin_bone_ornaments.json",
-        "config/components/creature_specific/goblin_mystical_glow.json"
+        "config/components/creature_specific/goblin_mystical_glow.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "custom_behaviors": {
         "ritual_casting": {

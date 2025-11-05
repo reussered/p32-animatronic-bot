@@ -1,0 +1,27 @@
+#ifndef STEPPER_MOTOR_28BYJ48_HDR
+#define STEPPER_MOTOR_28BYJ48_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize stepper_motor_28byj48 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t stepper_motor_28byj48_init(void);
+
+/**
+ * @brief Execute stepper_motor_28byj48 component action
+ * Called periodically by subsystem dispatcher
+ */
+void stepper_motor_28byj48_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // STEPPER_MOTOR_28BYJ48_HDR

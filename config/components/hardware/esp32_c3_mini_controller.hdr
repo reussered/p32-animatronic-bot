@@ -1,0 +1,27 @@
+#ifndef ESP32_C3_MINI_CONTROLLER_HDR
+#define ESP32_C3_MINI_CONTROLLER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize esp32_c3_mini_controller component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t esp32_c3_mini_controller_init(void);
+
+/**
+ * @brief Execute esp32_c3_mini_controller component action
+ * Called periodically by subsystem dispatcher
+ */
+void esp32_c3_mini_controller_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ESP32_C3_MINI_CONTROLLER_HDR

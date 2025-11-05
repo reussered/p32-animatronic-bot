@@ -21,7 +21,9 @@
         "config/components/creature_specific/dragon_snout.json",
         "config/components/creature_specific/dragon_speaker.json",
         "config/components/creature_specific/dragon_nostril_left.json",
-        "config/components/creature_specific/dragon_nostril_right.json"
+        "config/components/creature_specific/dragon_nostril_right.json",
+        "config/subsystems/dragon_head.json",
+        "config/subsystems/dragon_torso.json"
     ],
     "family_mood_profile": {
         "FEAR": 2,

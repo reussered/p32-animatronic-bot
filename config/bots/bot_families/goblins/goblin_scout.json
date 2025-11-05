@@ -87,7 +87,9 @@
     "components": [
         "config/components/creature_specific/goblin_enhanced_ears.json",
         "config/components/creature_specific/goblin_camouflage_skin.json",
-        "config/components/creature_specific/goblin_scent_sensor.json"
+        "config/components/creature_specific/goblin_scent_sensor.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "custom_behaviors": {
         "reconnaissance_mode": {

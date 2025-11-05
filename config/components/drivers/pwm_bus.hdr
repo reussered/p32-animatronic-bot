@@ -1,0 +1,27 @@
+#ifndef PWM_BUS_HDR
+#define PWM_BUS_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize pwm_bus component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t pwm_bus_init(void);
+
+/**
+ * @brief Execute pwm_bus component action
+ * Called periodically by subsystem dispatcher
+ */
+void pwm_bus_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // PWM_BUS_HDR

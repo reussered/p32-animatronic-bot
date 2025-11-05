@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file example_multi_hardware_eye.src
+ * @brief Implementation for example_multi_hardware_eye component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize example_multi_hardware_eye
+ * Performs any setup needed for this component
+ */
+esp_err_t example_multi_hardware_eye_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute example_multi_hardware_eye action
+ * Called periodically during subsystem dispatch
+ */
+void example_multi_hardware_eye_act(void)
+{
+    // TODO: Implement component behavior
+}

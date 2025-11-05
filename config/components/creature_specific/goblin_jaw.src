@@ -1,0 +1,29 @@
+#include <esp_err.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+/**
+ * @file goblin_jaw.src
+ * @brief Implementation for goblin_jaw component
+ * 
+ * TODO: Implement component initialization and action logic
+ */
+
+/**
+ * @brief Initialize goblin_jaw
+ * Performs any setup needed for this component
+ */
+esp_err_t goblin_jaw_init(void)
+{
+    // TODO: Implement initialization
+    return ESP_OK;
+}
+
+/**
+ * @brief Execute goblin_jaw action
+ * Called periodically during subsystem dispatch
+ */
+void goblin_jaw_act(void)
+{
+    // TODO: Implement component behavior
+}

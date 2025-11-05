@@ -1,0 +1,27 @@
+#ifndef SPINE_VERTEBRAE_ASSEMBLY_HDR
+#define SPINE_VERTEBRAE_ASSEMBLY_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize spine_vertebrae_assembly component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t spine_vertebrae_assembly_init(void);
+
+/**
+ * @brief Execute spine_vertebrae_assembly component action
+ * Called periodically by subsystem dispatcher
+ */
+void spine_vertebrae_assembly_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SPINE_VERTEBRAE_ASSEMBLY_HDR

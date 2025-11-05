@@ -22,7 +22,9 @@
         "config/components/creature_specific/goblin_nose.json",
         "config/components/creature_specific/goblin_ear_left.json",
         "config/components/creature_specific/goblin_ear_right.json",
-        "config/components/creature_specific/goblin_speaker.json"
+        "config/components/creature_specific/goblin_speaker.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "family_characteristics": {
         "physical_features": {

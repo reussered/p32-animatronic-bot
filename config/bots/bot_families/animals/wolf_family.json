@@ -19,7 +19,9 @@
         "config/components/creature_specific/wolf_eye_left.json",
         "config/components/creature_specific/wolf_eye_right.json",
         "config/components/creature_specific/wolf_snout.json",
-        "config/components/creature_specific/wolf_speaker.json"
+        "config/components/creature_specific/wolf_speaker.json",
+        "config/subsystems/wolf_head.json",
+        "config/subsystems/wolf_torso.json"
     ],
     "family_mood_profile": {
         "FEAR": 10,

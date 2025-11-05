@@ -1,0 +1,27 @@
+#ifndef ST7789_PREMIUM_TFT_RGB_HDR
+#define ST7789_PREMIUM_TFT_RGB_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize st7789_premium_tft_rgb component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t st7789_premium_tft_rgb_init(void);
+
+/**
+ * @brief Execute st7789_premium_tft_rgb component action
+ * Called periodically by subsystem dispatcher
+ */
+void st7789_premium_tft_rgb_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // ST7789_PREMIUM_TFT_RGB_HDR

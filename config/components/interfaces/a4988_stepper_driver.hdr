@@ -1,0 +1,27 @@
+#ifndef A4988_STEPPER_DRIVER_HDR
+#define A4988_STEPPER_DRIVER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize a4988_stepper_driver component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t a4988_stepper_driver_init(void);
+
+/**
+ * @brief Execute a4988_stepper_driver component action
+ * Called periodically by subsystem dispatcher
+ */
+void a4988_stepper_driver_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // A4988_STEPPER_DRIVER_HDR

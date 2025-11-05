@@ -20,14 +20,14 @@ class ValidationRunner:
 
     def _save_rules(self):
         if self.master_files_dirty:
-            print("💾 Saving updated master_rules.json...")
+            print("[SAVE] Saving updated master_rules.json...")
             with self.rules_file.open("w", encoding="utf-8") as f:
                 json.dump(self.rules, f, indent=4)
             self.master_files_dirty = False
 
     def run(self):
         """Walks through the project and runs all validations."""
-        print("📝 Updating master file list...")
+        print("[UPDATE] Updating master file list...")
         all_json_files = self._get_all_json_files()
 
         # New step: Check for and rename files with uppercase letters
@@ -40,7 +40,7 @@ class ValidationRunner:
         self._consolidate_master_rules_types()
         self._migrate_required_fields()
 
-        print("🔍 Starting component validation...")
+        print("[VALIDATE] Starting component validation...")
         
         overall_errors_found = False
         for file_path in all_json_files:
@@ -50,9 +50,9 @@ class ValidationRunner:
         self._save_rules()
 
         if not overall_errors_found:
-            print("\n✅ Validation complete. No new errors found.")
+            print("\n[OK] Validation complete. No new errors found.")
         else:
-            print("\n❌ Validation complete. Errors were found and reported above.")
+            print("\n[ERROR] Validation complete. Errors were found and reported above.")
 
     def _get_all_json_files(self):
         """Returns a list of all .json files in the 'config' and 'assets' directories."""
@@ -263,23 +263,23 @@ class ValidationRunner:
                 data = json.load(f)
         except json.JSONDecodeError as e:
             if 'Invalid escape' in str(e):
-                print(f"🐍 Attempting to fix invalid escape sequences in {os.path.relpath(file_path, self.root_dir)}...")
+                print(f"[FIX] Attempting to fix invalid escape sequences in {os.path.relpath(file_path, self.root_dir)}...")
                 if self._fix_invalid_json_escapes(file_path):
                     try:
                         with open(file_path, 'r', encoding='utf-8') as f:
                             data = json.load(f)
-                        print(f"✅ Successfully fixed and reloaded {os.path.relpath(file_path, self.root_dir)}.")
+                        print(f"[OK] Successfully fixed and reloaded {os.path.relpath(file_path, self.root_dir)}.")
                     except json.JSONDecodeError as e2:
-                        print(f"❌ ERROR: Still could not parse {os.path.relpath(file_path, self.root_dir)} after fix: {e2}")
+                        print(f"[ERROR] Still could not parse {os.path.relpath(file_path, self.root_dir)} after fix: {e2}")
                         return True
                 else:
-                    print(f"❌ ERROR: Could not read or parse {os.path.relpath(file_path, self.root_dir)}: {e}")
+                    print(f"[ERROR] Could not read or parse {os.path.relpath(file_path, self.root_dir)}: {e}")
                     return True
             else:
-                print(f"❌ ERROR: Could not read or parse {os.path.relpath(file_path, self.root_dir)}: {e}")
+                print(f"[ERROR] Could not read or parse {os.path.relpath(file_path, self.root_dir)}: {e}")
                 return True
         except Exception as e:
-            print(f"❌ ERROR: Could not read file {os.path.relpath(file_path, self.root_dir)}: {e}")
+            print(f"[ERROR] Could not read file {os.path.relpath(file_path, self.root_dir)}: {e}")
             return True
 
         # --- Auto-fix common issues ---
@@ -334,7 +334,7 @@ class ValidationRunner:
             try:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f, indent=4)
-                print(f"🔧 Automatically fixed fields in {os.path.relpath(file_path, self.root_dir)}")
+                print(f"[FIX] Automatically fixed fields in {os.path.relpath(file_path, self.root_dir)}")
             except Exception as e:
                 errors.append(f"Could not write automatic fixes to file: {e}")
 
@@ -362,12 +362,12 @@ class ValidationRunner:
             if not file_path.stem.islower():
                 new_name = file_path.stem.lower() + file_path.suffix
                 new_path = file_path.with_name(new_name)
-                print(f"-> Renaming file: {file_path.name} -> {new_path.name}")
+                print(f"[RENAME] Renaming file: {file_path.name} -> {new_path.name}")
                 try:
                     file_path.rename(new_path)
                     renamed_any = True
                 except OSError as e:
-                    print(f"❌ ERROR: Could not rename {file_path.name}: {e}")
+                    print(f"[ERROR] Could not rename {file_path.name}: {e}")
         return renamed_any
 
     def _consolidate_master_rules_types(self):

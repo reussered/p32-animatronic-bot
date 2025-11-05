@@ -25,7 +25,9 @@
         "config/components/functional/goblin_behavior_engine.json"
     ],
     "components": [
-        "config/subsystems/test_head.json"
+        "config/subsystems/test_head.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

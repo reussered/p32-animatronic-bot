@@ -12,7 +12,9 @@
     "components": [
         "config/components/creature_specific/goblin_left_eye.json",
         "config/components/creature_specific/goblin_right_eye.json",
-        "config/components/creature_specific/goblin_nose.json"
+        "config/components/creature_specific/goblin_nose.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

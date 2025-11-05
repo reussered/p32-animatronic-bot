@@ -1,0 +1,27 @@
+#ifndef MICRO_SERVO_ARRAY_HDR
+#define MICRO_SERVO_ARRAY_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize micro_servo_array component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t micro_servo_array_init(void);
+
+/**
+ * @brief Execute micro_servo_array component action
+ * Called periodically by subsystem dispatcher
+ */
+void micro_servo_array_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MICRO_SERVO_ARRAY_HDR

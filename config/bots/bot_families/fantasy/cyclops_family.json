@@ -18,7 +18,9 @@
     "components": [
         "config/components/creature_specific/cyclops_eye_central.json",
         "config/components/creature_specific/cyclops_mouth.json",
-        "config/components/creature_specific/cyclops_speaker.json"
+        "config/components/creature_specific/cyclops_speaker.json",
+        "config/subsystems/cyclops_head.json",
+        "config/subsystems/cyclops_torso.json"
     ],
     "family_mood_profile": {
         "FEAR": 30,
