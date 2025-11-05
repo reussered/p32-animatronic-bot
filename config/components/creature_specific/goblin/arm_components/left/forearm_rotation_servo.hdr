@@ -1,5 +1,0 @@
-// Auto-generated header for forearm_rotation_servo
-#include <esp_err.h>
-
-esp_err_t forearm_rotation_servo_init(void);
-void forearm_rotation_servo_act(void);

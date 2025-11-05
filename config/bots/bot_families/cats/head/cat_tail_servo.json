@@ -5,13 +5,11 @@
         "init_function": "cat_tail_servo_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/cats/head/cat_tail_servo.json",
+    "relative_filename": "config/components/creature_specific/cat_tail_servo.json",
     "name": "cat_tail_servo",
     "subsystem": "ACTUATOR",
     "components": [
-        "config/components/interfaces/esp32_servo_controller.json",
-        "config/subsystems/cat_head.json",
-        "config/subsystems/cat_torso.json"
+        "config/components/interfaces/esp32_servo_controller.json"
     ],
     "author": "config/author.json",
     "position": {

@@ -1,5 +1,0 @@
-// Auto-generated header for shoulder_flexion_servo
-#include <esp_err.h>
-
-esp_err_t shoulder_flexion_servo_init(void);
-void shoulder_flexion_servo_act(void);

@@ -1,5 +1,0 @@
-// Auto-generated header for index_finger_servo
-#include <esp_err.h>
-
-esp_err_t index_finger_servo_init(void);
-void index_finger_servo_act(void);

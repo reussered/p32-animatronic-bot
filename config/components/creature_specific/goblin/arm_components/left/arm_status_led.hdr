@@ -1,5 +1,0 @@
-// Auto-generated header for arm_status_led
-#include <esp_err.h>
-
-esp_err_t arm_status_led_init(void);
-void arm_status_led_act(void);

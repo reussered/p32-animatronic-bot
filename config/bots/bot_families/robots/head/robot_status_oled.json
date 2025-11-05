@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_status_oled.json",
+    "relative_filename": "config/components/creature_specific/robot_status_oled.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "robot_status_oled",

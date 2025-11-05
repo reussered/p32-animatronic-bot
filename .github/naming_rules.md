@@ -141,38 +141,56 @@ subsystems with {name} have the following GENERATED files:
 
 ## 📁 FILE ORGANIZATION PATTERNS
 
-### Configuration Structure
+## 📁 FILE ORGANIZATION PATTERNS
 
- - when picking component names for generating json file, use the shortest poissible name the clearly and uniquely identifies it.
-	for example a gc9a01 display would be `gc9a01`
-	
-- **Creatures/Bots**: each specific creature is identified by a jason file in `config/bots/bot_families/{family}/{name}.json`.  
-	- inside each family folder there are folders corresponding to the various subsytems of the {family}  for example in the goblins folder goes folders head/torso/arms/legs/feet/hands.
-	- inside each of the folders go all of the creature specific components that belong to that subsyetm, so under goblin/head folder would go goblin_head as well as goblin_left_eye, goblin_eye, goblin_nose, etc.
-	- this is a signifigant change from having all creature components in the creature_specific folder.  that placement is obsolete and should never be used
-		  
-- **Hardware specs**: `config/hardware/{name}.json` - here go components that correspond to the sensors, displays, servos, stepper motors, etc.  example `gc9a01`, `sd1306`
-- **Interface definitions**: `config/interfaces/{name}.json`- here go all of the bus components... examples ->`spi_data_bus`, `spi_display_bus`, `adc_bus`, etc.
-- **Driver Components**: `config/driver/{name}.json` examples ->  `generic_spi_display`, `generic_spi_data``
- - scripts are in /Tools
- - documentation is in /docs
- - build guides go in /docs/build_guides
- - ideas go into /docs/ideas -> these are things that are thought of from time to time that will form the core of future work.  
- - ideas are entirely off line and are not to be acted on until that phase of the project is enacted.
- 
+### Component Organization (Reorganized November 2025)
+
+**All components now organized by type and family:**
+
+- **Generic Hardware**: `config/components/hardware/{name}.json|src|hdr`
+  - Examples: `gc9a01`, `ssd1306`, `ili9341`, `hc_sr04_sensor`, `mg996r_servo`
+
+- **Driver Components**: `config/components/drivers/{name}.json|src|hdr`
+  - Examples: `generic_spi_display`, `spi_display_bus`, `i2c_driver`, `pwm_driver`
+
+- **Interface Definitions**: `config/components/interfaces/{name}.json|src|hdr`
+  - Examples: `spi_data_bus`, `gpio_pair_hw506_temperature`
+
+- **Behaviors**: `config/components/behaviors/{name}.json|src|hdr`
+  - Examples: `walking_gait_controllers`, `celebration`, `idle_scan`
+
+- **Moods**: `config/components/behaviors/moods/{name}.json`
+  - Examples: `angry`, `happy`, `neutral`, `sad`
+
+- **Multi-Family Components** (shared across multiple creature families):
+  - Location: `config/bots/multi_family/{subsystem_type}/{name}.json|src|hdr`
+  - Types: `humanoid/`, `quadruped/`, `insectoid/`
+  - Examples: `humanoid_left_knee`, `humanoid_spine_vertebrae`
+
+- **Creature Family Components** (specific to each creature family):
+  - Location: `config/bots/bot_families/{family}/`
+  - Family template: `{family}_family.json` (e.g., `goblin_family.json`)
+  - Creature variants: `{family}_{variant}.json` (e.g., `goblin_warrior.json`, `bear_arctic.json`)
+  - Subsystems: `head/`, `torso/`, `arms/`, `legs/`, `hands/`, `feet/`
+  - Components: `{subsystem}/{name}.json|src|hdr`
+  - Families: `goblins/`, `bears/`, `cats/`, `dragons/`, `elves/`, `wolves/`, `vampires/`, `zombies/`, `orcs/`, `horror/`, `steampunk/`, `androids/`, `fantasy/`, `undead/`, `humanoids/`, `robots/`, `tests/`
+  - Examples: `goblins/head/goblin_left_eye.json`, `bears/torso/bear_speaker.src`
+
 ### Generated Code Structure
 
 - **Component implementations**: `src/components/{component_name}.cpp`
 - **Component headers**: `include/components/{component_name}.hpp`
-- **Generated Software**: Created by python scripts in `/tools` go into regular `src/` and `include/` folders. This includes dispatch tables and component functions `{subsystem}_dispatch_tables.hpp/.cpp` and `{subsystem}_component_functions.hpp/.cpp`. Only the last copy generated is kept. Because the folder and files are not in `.gitignore`, this means that the latest will be stored whenever we commit, which is a good thing
-- **Shared classes**: `shared/{ClassName}.hpp`
- 
+- **Subsystem dispatch**: `src/subsystems/{subsystem_name}/{subsystem_name}_dispatch_tables.cpp`
+- **Subsystem functions**: `src/subsystems/{subsystem_name}/{subsystem_name}_component_functions.cpp`
+- Only the latest generated files are kept (not in `.gitignore`, so latest appears in commits)
+
 ### Asset Organization
 
 - **3D Models**: `assets/shapes/scad/{category}/{model}.scad`
 - **STL Files**: `assets/shapes/stl/{category}/{model}.stl`
 - **Animations**: `assets/animations/{creature_family}/{animation_name}.json`
 - **Sounds**: `assets/sounds/{creature_family}/{sound_file}.wav`
+- **Manufacturing**: `docs/manufacturing/{document}.json`
 
 
 ### Defined Shared Classes

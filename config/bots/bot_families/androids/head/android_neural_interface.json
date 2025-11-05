@@ -5,7 +5,7 @@
         "init_function": "android_neural_interface_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/androids/head/android_neural_interface.json",
+    "relative_filename": "config/components/creature_specific/android_neural_interface.json",
     "name": "android_neural_interface",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

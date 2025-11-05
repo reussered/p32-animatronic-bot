@@ -1,5 +1,0 @@
-// Auto-generated header for ring_finger_servo
-#include <esp_err.h>
-
-esp_err_t ring_finger_servo_init(void);
-void ring_finger_servo_act(void);

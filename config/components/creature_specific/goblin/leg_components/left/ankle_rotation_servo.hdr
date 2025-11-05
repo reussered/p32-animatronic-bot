@@ -1,5 +1,0 @@
-// Auto-generated header for ankle_rotation_servo
-#include <esp_err.h>
-
-esp_err_t ankle_rotation_servo_init(void);
-void ankle_rotation_servo_act(void);

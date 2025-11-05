@@ -1,5 +1,0 @@
-// Auto-generated header for leg_status_led
-#include <esp_err.h>
-
-esp_err_t leg_status_led_init(void);
-void leg_status_led_act(void);

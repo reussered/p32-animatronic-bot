@@ -1,5 +1,0 @@
-// Auto-generated header for power_monitor
-#include <esp_err.h>
-
-esp_err_t power_monitor_init(void);
-void power_monitor_act(void);

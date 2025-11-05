@@ -1,5 +1,0 @@
-// Auto-generated header for thumb_servo
-#include <esp_err.h>
-
-esp_err_t thumb_servo_init(void);
-void thumb_servo_act(void);

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_back_mount.json",
+    "relative_filename": "config/components/creature_specific/robot_back_mount.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "positioned_id": "ROBOT_BACK_MOUNT",

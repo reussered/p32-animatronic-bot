@@ -5,7 +5,7 @@
         "init_function": "android_synthetic_skin_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/androids/head/android_synthetic_skin.json",
+    "relative_filename": "config/components/creature_specific/android_synthetic_skin.json",
     "name": "android_synthetic_skin",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
