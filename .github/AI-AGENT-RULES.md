@@ -128,7 +128,7 @@ When escalating, provide:
 - Change patterns without reading the architecture docs first
 - Assume you know better than existing implementations
 - Ask permission for decisions that fall under your autonomous authority
-- **WORK ON THIS PROJECT WITHOUT READING BOTH RULE FILES COMPLETELY**
+- Work on this project without reading BOTH rule files completely
 
 ## RULE 1: IMMEDIATE REPORTING OF BLOCKERS
 If any project rule, technical limitation, or system constraint prevents the agent from proceeding with the current task, the agent must immediately report the exact reason to the user. The agent must not pause, stop, or silently fail without providing a clear explanation of the blocker.
