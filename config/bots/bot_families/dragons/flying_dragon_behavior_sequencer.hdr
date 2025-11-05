@@ -1,0 +1,28 @@
+/**
+ * P32 FLYING DRAGON - BEHAVIOR SEQUENCER HEADER
+ */
+
+#ifndef FLYING_DRAGON_BEHAVIOR_SEQUENCER_H
+#define FLYING_DRAGON_BEHAVIOR_SEQUENCER_H
+
+#include <esp_err.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize behavior sequencer
+ */
+esp_err_t flying_dragon_behavior_sequencer_init(void);
+
+/**
+ * Main control loop - execute creature-wide behavior state machine
+ */
+void flying_dragon_behavior_sequencer_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_BEHAVIOR_SEQUENCER_H

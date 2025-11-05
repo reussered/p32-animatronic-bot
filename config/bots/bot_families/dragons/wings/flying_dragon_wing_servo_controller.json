@@ -1,0 +1,59 @@
+{
+    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.json",
+    "name": "flying_dragon_wing_servo_controller",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "type": "CREATURE_SPECIFIC",
+    "category": "articulation_system",
+    "description": "6-servo wing articulation control (3 per wing) for dynamic flight adjustments",
+    "created": "2025-11-05",
+    "hardware_type": "SERVO_CONTROLLER",
+    "interface_type": "PWM_SERVO_CONTROL",
+    "physical_specifications": {
+        "servo_type": "digital_servo",
+        "servo_model": "MG996R",
+        "servo_count": 6,
+        "torque_kg_cm": 11,
+        "speed_sec_60deg": 0.16,
+        "weight_per_servo_g": 55,
+        "total_servo_mass_g": 330
+    },
+    "wing_articulation": {
+        "left_wing": {
+            "shoulder_servo": 0,
+            "twist_servo": 1,
+            "flap_servo": 2
+        },
+        "right_wing": {
+            "shoulder_servo": 3,
+            "twist_servo": 4,
+            "flap_servo": 5
+        }
+    },
+    "control_parameters": {
+        "pwm_pins": [16, 17, 18, 19, 20, 21],
+        "pwm_frequency_hz": 50,
+        "control_range_degrees": [0, 180],
+        "flap_frequency_hz": 3.0
+    },
+    "power_requirements": {
+        "nominal_voltage_v": 5.0,
+        "nominal_current_per_servo_a": 0.8,
+        "peak_current_a": 5.0
+    },
+    "software": {
+        "init_function": "flying_dragon_wing_servo_controller_init",
+        "act_function": "flying_dragon_wing_servo_controller_act",
+        "source_file": "config/bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.src",
+        "header_file": "config/bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.hdr"
+    },
+    "timing": {
+        "hitCount": 2,
+        "description": "Update wing servo positions at ~25 Hz for smooth flight control"
+    },
+    "components": [],
+    "dependencies": [
+        "PWM driver",
+        "servo infrastructure"
+    ]
+}

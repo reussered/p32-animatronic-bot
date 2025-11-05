@@ -1,0 +1,32 @@
+{
+  "name": "flying_dragon_power_system",
+  "category": "power_system",
+  "description": "Central power management - battery monitoring, voltage regulation, power distribution to all subsystems",
+  "version": "1.0.0",
+  "hardware_templates": [
+    {
+      "name": "LIPO_4S_5000MAH_BATTERY",
+      "battery_type": "LiPo",
+      "cell_count": 4,
+      "nominal_voltage_v": 14.8,
+      "capacity_mah": 5000,
+      "capacity_wh": 74,
+      "max_discharge_current_a": 100,
+      "weight_g": 500,
+      "chemistry": "Li-ion polymer",
+      "discharge_rating": "20C continuous",
+      "adc_pin": 36,
+      "low_battery_threshold_v": 11.0,
+      "critical_battery_threshold_v": 10.5,
+      "cell_voltage_nominal": 3.7,
+      "cell_voltage_min": 3.0,
+      "cell_voltage_max": 4.2
+    }
+  ],
+  "power_requirements": {
+    "nominal_voltage_v": 14.8,
+    "nominal_current_a": 0.05
+  },
+  "dependencies": [],
+  "function_signature": "flying_dragon_power_system_init(void); void flying_dragon_power_system_act(void);"
+}

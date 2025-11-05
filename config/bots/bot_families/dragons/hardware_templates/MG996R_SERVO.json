@@ -1,0 +1,23 @@
+{
+  "template_name": "MG996R_SERVO",
+  "manufacturer": "MG",
+  "model": "MG996R",
+  "specifications": {
+    "type": "digital_servo",
+    "torque_kg_cm": 11,
+    "speed_unloaded_sec_60deg": 0.16,
+    "voltage_nominal_v": 5.0,
+    "voltage_range_v": [4.5, 6.0],
+    "no_load_current_a": 0.1,
+    "loaded_current_a": 0.8,
+    "peak_current_a": 1.2,
+    "weight_g": 55,
+    "dimensions_mm": [40.7, 20, 37.5],
+    "control_range_degrees": [0, 180],
+    "connector": "3pin_male",
+    "pwm_frequency_hz": 50,
+    "pwm_pulse_range_us": [500, 2500],
+    "dead_band_us": 5,
+    "gear_type": "plastic"
+  }
+}

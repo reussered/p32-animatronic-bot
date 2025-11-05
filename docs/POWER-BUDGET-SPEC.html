@@ -1,0 +1,606 @@
+<h1 id="power-budget-specification---p32-animatronic-bot">Power Budget
+Specification - P32 Animatronic Bot</h1>
+<h2 id="critical-design-constraint">Critical Design Constraint</h2>
+<p><strong>Every component MUST have documented power
+requirements</strong> - without accurate power budgeting, the system
+will experience brownouts, resets, or component damage.</p>
+<h2 id="power-budget-philosophy">Power Budget Philosophy</h2>
+<ol type="1">
+<li><strong>Measure twice, budget once</strong> - Always use worst-case
+maximums, not typical values</li>
+<li><strong>Voltage rail isolation</strong> - Different subsystems may
+need different voltages</li>
+<li><strong>Peak vs. continuous</strong> - Servos draw massive peak
+current during motion</li>
+<li><strong>Battery capacity planning</strong> - Runtime = (Battery mAh)
+/ (Average current draw in mA)</li>
+<li><strong>Thermal management</strong> - Power dissipated as heat must
+be managed</li>
+</ol>
+<h2 id="current-power-inventory-goblin-full-bot">Current Power Inventory
+(Goblin Full Bot)</h2>
+<h3 id="esp32-s3-subsystems">ESP32-S3 Subsystems</h3>
+<h4 id="head-subsystem-esp32-s3-devkitc-1">Head Subsystem (ESP32-S3
+DevKitC-1)</h4>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Voltage</th>
+<th>Current (mA)</th>
+<th>Power (W)</th>
+<th>Duty Cycle</th>
+<th>Avg Current (mA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ESP32-S3 Module</strong></td>
+<td>3.3V</td>
+<td>500</td>
+<td>1.65</td>
+<td>100%</td>
+<td>500</td>
+</tr>
+<tr>
+<td><strong>Left Eye (GC9A01)</strong></td>
+<td>3.3V</td>
+<td>50</td>
+<td>0.165</td>
+<td>100%</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Right Eye (GC9A01)</strong></td>
+<td>3.3V</td>
+<td>50</td>
+<td>0.165</td>
+<td>100%</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Mouth Display (GC9A01)</strong></td>
+<td>3.3V</td>
+<td>50</td>
+<td>0.165</td>
+<td>100%</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Nose Sensor (HC-SR04)</strong></td>
+<td>5V</td>
+<td>15</td>
+<td>0.075</td>
+<td>10%</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td><strong>Speaker (I2S 3W)</strong></td>
+<td>3.3V</td>
+<td>500</td>
+<td>1.65</td>
+<td>20%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Neck Pan Servo (SG90)</strong></td>
+<td>5V</td>
+<td>500</td>
+<td>2.5</td>
+<td>10%</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Neck Tilt Servo (SG90)</strong></td>
+<td>5V</td>
+<td>500</td>
+<td>2.5</td>
+<td>10%</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Ear LEDs (WS2812 x2)</strong></td>
+<td>5V</td>
+<td>60</td>
+<td>0.3</td>
+<td>50%</td>
+<td>30</td>
+</tr>
+<tr>
+<td><strong>TOTAL HEAD</strong></td>
+<td>-</td>
+<td>-</td>
+<td><strong>9.22W</strong></td>
+<td>-</td>
+<td><strong>881.5 mA</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Head Power Rails</strong>: - <strong>3.3V Rail</strong>:
+1,200 mA (ESP32 + 3x displays + speaker) - <strong>5V Rail</strong>:
+131.5 mA (sensor + servos + LEDs)</p>
+<h4 id="torso-subsystem-esp32-s3-devkitc-1">Torso Subsystem (ESP32-S3
+DevKitC-1)</h4>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Voltage</th>
+<th>Current (mA)</th>
+<th>Power (W)</th>
+<th>Duty Cycle</th>
+<th>Avg Current (mA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ESP32-S3 Module</strong></td>
+<td>3.3V</td>
+<td>500</td>
+<td>1.65</td>
+<td>100%</td>
+<td>500</td>
+</tr>
+<tr>
+<td><strong>WiFi Active</strong></td>
+<td>3.3V</td>
+<td>250</td>
+<td>0.825</td>
+<td>30%</td>
+<td>75</td>
+</tr>
+<tr>
+<td><strong>ESP-NOW Mesh</strong></td>
+<td>3.3V</td>
+<td>100</td>
+<td>0.33</td>
+<td>100%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Bluetooth LE</strong></td>
+<td>3.3V</td>
+<td>50</td>
+<td>0.165</td>
+<td>50%</td>
+<td>25</td>
+</tr>
+<tr>
+<td><strong>Spine Flexion Servo</strong></td>
+<td>5V</td>
+<td>500</td>
+<td>2.5</td>
+<td>20%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Spine Extension Servo</strong></td>
+<td>5V</td>
+<td>500</td>
+<td>2.5</td>
+<td>20%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Waist Rotation Servo</strong></td>
+<td>5V</td>
+<td>500</td>
+<td>2.5</td>
+<td>20%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Torso Status LED</strong></td>
+<td>3.3V</td>
+<td>20</td>
+<td>0.066</td>
+<td>50%</td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Torso Speaker</strong></td>
+<td>3.3V</td>
+<td>500</td>
+<td>1.65</td>
+<td>20%</td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>TOTAL TORSO</strong></td>
+<td>-</td>
+<td>-</td>
+<td><strong>12.18W</strong></td>
+<td>-</td>
+<td><strong>1,110 mA</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Torso Power Rails</strong>: - <strong>3.3V Rail</strong>: 810
+mA (ESP32 + WiFi + Mesh + BLE + LED + speaker) - <strong>5V
+Rail</strong>: 300 mA (3x servos)</p>
+<h3 id="system-wide-power-summary">System-Wide Power Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>3.3V (mA)</th>
+<th>5V (mA)</th>
+<th>Peak Power (W)</th>
+<th>Avg Power (W)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Head</strong></td>
+<td>1,200</td>
+<td>131.5</td>
+<td>9.22</td>
+<td>6.08</td>
+</tr>
+<tr>
+<td><strong>Torso</strong></td>
+<td>810</td>
+<td>300</td>
+<td>12.18</td>
+<td>7.33</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>2,010</strong></td>
+<td><strong>431.5</strong></td>
+<td><strong>21.4W</strong></td>
+<td><strong>13.41W</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="power-supply-architecture">Power Supply Architecture</h2>
+<h3 id="option-1-single-5v-buck-converter-3.3v-ldos">Option 1: Single 5V
+Buck Converter + 3.3V LDOs</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│  7.4V 2S LiPo Battery (3000 mAh)                           │
+│  Voltage Range: 8.4V (full) → 6.0V (empty)                 │
+└─────────────────────────────────────────────────────────────┘
+                        │
+                        ▼
+        ┌───────────────────────────────┐
+        │  5V Buck Converter (5A rated) │
+        │  Efficiency: ~85%              │
+        └───────────────────────────────┘
+                        │
+            ┌───────────┴───────────┐
+            ▼                       ▼
+    ┌──────────────┐        ┌──────────────┐
+    │  5V Devices  │        │  3.3V LDO    │
+    │  (Servos,    │        │  (3A rated)  │
+    │   Sensors,   │        │  Efficiency: │
+    │   LEDs)      │        │  ~75%        │
+    │  432 mA      │        └──────────────┘
+    └──────────────┘                │
+                                    ▼
+                            ┌──────────────┐
+                            │ 3.3V Devices │
+                            │ (ESP32s,     │
+                            │  Displays,   │
+                            │  Speakers)   │
+                            │ 2,010 mA     │
+                            └──────────────┘</code></pre>
+<p><strong>Runtime Calculation</strong>: - Battery: 7.4V × 3000 mAh =
+22.2 Wh - Average Power: 13.41W - <strong>Runtime: 22.2 Wh / 13.41W =
+1.66 hours (100 minutes)</strong></p>
+<h3 id="option-2-dual-buck-converters-more-efficient">Option 2: Dual
+Buck Converters (More Efficient)</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│  7.4V 2S LiPo Battery (3000 mAh)                           │
+└─────────────────────────────────────────────────────────────┘
+                        │
+            ┌───────────┴───────────┐
+            ▼                       ▼
+    ┌──────────────┐        ┌──────────────┐
+    │  5V Buck     │        │  3.3V Buck   │
+    │  (1A rated)  │        │  (3A rated)  │
+    │  Eff: 90%    │        │  Eff: 90%    │
+    └──────────────┘        └──────────────┘
+            │                       │
+            ▼                       ▼
+    ┌──────────────┐        ┌──────────────┐
+    │  5V Devices  │        │ 3.3V Devices │
+    │  432 mA      │        │ 2,010 mA     │
+    └──────────────┘        └──────────────┘</code></pre>
+<p><strong>Improved Runtime</strong>: - 5V rail: (5V × 0.432A) / 0.90 =
+2.4W from battery - 3.3V rail: (3.3V × 2.01A) / 0.90 = 7.37W from
+battery - Total: 9.77W from battery (vs 13.41W with LDO losses) -
+<strong>Runtime: 22.2 Wh / 9.77W = 2.27 hours (136 minutes)</strong></p>
+<h2 id="critical-power-gotchas">Critical Power Gotchas</h2>
+<h3 id="servo-peak-current-surges">1. Servo Peak Current Surges</h3>
+<p><strong>DANGER</strong>: SG90 servos can draw <strong>800mA
+peak</strong> during stall or rapid motion.</p>
+<ul>
+<li><strong>6 servos moving simultaneously</strong> = 4.8A peak
+current!</li>
+<li><strong>Solution</strong>: Stagger servo movements in code (never
+move all at once)</li>
+<li><strong>Hardware</strong>: Large bulk capacitors (1000-2200µF) on 5V
+rail</li>
+</ul>
+<h3 id="display-backlight-current">2. Display Backlight Current</h3>
+<p><strong>GC9A01 displays</strong>: - Specified: 50mA typical -
+<strong>Reality</strong>: Up to 80mA at full brightness -
+<strong>Solution</strong>: PWM dim backlights to 70% (saves power,
+extends battery)</p>
+<h3 id="wifi-peak-current">3. WiFi Peak Current</h3>
+<p><strong>ESP32-S3 WiFi transmit</strong>: - Specified: 250mA average -
+<strong>Peak</strong>: Can spike to 500mA during TX burst -
+<strong>Solution</strong>: Ensure 3.3V rail can supply 1A peaks (ESP32 +
+WiFi spike)</p>
+<h3 id="speaker-distortion-under-load">4. Speaker Distortion Under
+Load</h3>
+<p><strong>I2S 3W speakers</strong>: - Specified: 500mA at 3.3V -
+<strong>Reality</strong>: Peaks to 900mA on bass transients -
+<strong>Solution</strong>: Dedicated 3.3V rail for audio (isolate from
+ESP32)</p>
+<h2 id="power-monitoring-strategy">Power Monitoring Strategy</h2>
+<h3 id="hardware-power-monitor-already-implemented">Hardware Power
+Monitor (Already Implemented!)</h3>
+<p>Your <code>power_monitor.c</code> component reads ADC for battery
+voltage:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// src/components/system/power_monitor.c</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Monitors battery voltage and calculates percentage</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// hitCount: 200 (every 20 seconds)</span></span></code></pre></div>
+<h3 id="recommended-additions">Recommended Additions</h3>
+<ol type="1">
+<li><strong>INA219 Current Sensor</strong> (I2C):
+<ul>
+<li>Measures actual current on each power rail</li>
+<li>Detects brownout conditions before they crash system</li>
+<li>Cost: $2-3 per sensor</li>
+</ul></li>
+<li><strong>Battery Voltage Divider</strong> (Already mentioned in
+code):
+<ul>
+<li>ADC Channel 0 (GPIO 36)</li>
+<li>Divider ratio: 2:1 or 3:1 depending on battery voltage</li>
+<li>Update battery percentage in
+<code>g_shared_state.battery_percent</code></li>
+</ul></li>
+<li><strong>Per-Rail Monitoring</strong>:
+<ul>
+<li>3.3V rail: Measure with ADC (no divider needed)</li>
+<li>5V rail: Measure with ADC + small divider (5V → 3.3V max)</li>
+</ul></li>
+</ol>
+<h2 id="battery-selection-guide">Battery Selection Guide</h2>
+<h3 id="current-goblin-full-bot-head-torso-only">Current Goblin Full Bot
+(Head + Torso Only)</h3>
+<table>
+<thead>
+<tr>
+<th>Battery</th>
+<th>Voltage</th>
+<th>Capacity</th>
+<th>Runtime</th>
+<th>Weight</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2S 3000mAh LiPo</strong></td>
+<td>7.4V</td>
+<td>3000mAh</td>
+<td>1.5 hrs</td>
+<td>150g</td>
+<td>$25</td>
+</tr>
+<tr>
+<td><strong>2S 5000mAh LiPo</strong></td>
+<td>7.4V</td>
+<td>5000mAh</td>
+<td>2.5 hrs</td>
+<td>250g</td>
+<td>$35</td>
+</tr>
+<tr>
+<td><strong>3S 2200mAh LiPo</strong></td>
+<td>11.1V</td>
+<td>2200mAh</td>
+<td>1.8 hrs</td>
+<td>180g</td>
+<td>$22</td>
+</tr>
+</tbody>
+</table>
+<h3 id="future-full-robot-4x-arms-2x-legs-added">Future Full Robot (4x
+Arms + 2x Legs Added)</h3>
+<table>
+<thead>
+<tr>
+<th>Battery</th>
+<th>Voltage</th>
+<th>Capacity</th>
+<th>Runtime</th>
+<th>Weight</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3S 5000mAh LiPo</strong></td>
+<td>11.1V</td>
+<td>5000mAh</td>
+<td>1.5 hrs</td>
+<td>400g</td>
+<td>$45</td>
+</tr>
+<tr>
+<td><strong>4S 5000mAh LiPo</strong></td>
+<td>14.8V</td>
+<td>5000mAh</td>
+<td>1.8 hrs</td>
+<td>500g</td>
+<td>$55</td>
+</tr>
+<tr>
+<td><strong>3S 10000mAh LiPo</strong></td>
+<td>11.1V</td>
+<td>10000mAh</td>
+<td>3.0 hrs</td>
+<td>800g</td>
+<td>$80</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation</strong>: Start with <strong>2S
+5000mAh</strong> for testing (2.5 hour runtime, affordable).</p>
+<h2 id="power-failure-modes-protection">Power Failure Modes &amp;
+Protection</h2>
+<h3 id="brown-out-detection-bod">Brown-Out Detection (BOD)</h3>
+<p>ESP32-S3 has built-in BOD:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In system_core_init()</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>esp_brownout_init<span class="op">();</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>esp_brownout_set_threshold<span class="op">(</span>ESP_BROWNOUT_DET_LVL_SEL_2<span class="op">);</span>  <span class="co">// 2.43V threshold</span></span></code></pre></div>
+<h3 id="low-battery-warning">Low Battery Warning</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In power_monitor_act()</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>battery_percent <span class="op">&lt;</span> <span class="dv">20</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ESP_LOGW<span class="op">(</span>TAG<span class="op">,</span> <span class="st">&quot;Low battery: </span><span class="sc">%d%%</span><span class="st">&quot;</span><span class="op">,</span> battery_percent<span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Reduce display brightness</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Disable non-critical servos</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Flash warning LED</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>battery_percent <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ESP_LOGE<span class="op">(</span>TAG<span class="op">,</span> <span class="st">&quot;Critical battery: </span><span class="sc">%d%%</span><span class="st">&quot;</span><span class="op">,</span> battery_percent<span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Trigger graceful shutdown</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Save state to NVS</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Turn off all peripherals except WiFi (send alert)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="servo-current-limiting">Servo Current Limiting</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In servo control components</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_SIMULTANEOUS_SERVOS </span><span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">uint8_t</span> servos_moving <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> servo_act<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>servos_moving <span class="op">&gt;=</span> MAX_SIMULTANEOUS_SERVOS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span>  <span class="co">// Defer movement until others finish</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    servos_moving<span class="op">++;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    move_servo<span class="op">();</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    servos_moving<span class="op">--;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="power-budget-validation-checklist">Power Budget Validation
+Checklist</h2>
+<p>Before adding any new component:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><strong>Voltage rail
+identified</strong> - Which rail (3.3V, 5V, 12V)?</label></li>
+<li><label><input type="checkbox" /><strong>Current measured</strong> -
+Actual measurement with multimeter, not just datasheet</label></li>
+<li><label><input type="checkbox" /><strong>Peak current
+documented</strong> - Worst-case scenario (startup, stall, full
+load)</label></li>
+<li><label><input type="checkbox" /><strong>Duty cycle
+estimated</strong> - What % of time is it active?</label></li>
+<li><label><input type="checkbox" /><strong>Average current
+calculated</strong> - Peak × Duty Cycle</label></li>
+<li><label><input type="checkbox" /><strong>Power supply headroom
+verified</strong> - Rail can supply peak + 20% margin</label></li>
+<li><label><input type="checkbox" /><strong>Thermal dissipation
+considered</strong> - Does it need heatsink?</label></li>
+<li><label><input type="checkbox" /><strong>Battery runtime
+recalculated</strong> - Update total system power budget</label></li>
+<li><label><input type="checkbox" /><strong>Hardware JSON
+updated</strong> - Add electrical_specs to component file</label></li>
+<li><label><input type="checkbox" /><strong>Power monitor code
+updated</strong> - Add to monitoring if critical</label></li>
+</ul>
+<h2 id="hardware-json-power-spec-template">Hardware JSON Power Spec
+Template</h2>
+<p>Every hardware component MUST include this section:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;electrical_specs&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;supply_voltage&quot;</span><span class="fu">:</span> <span class="st">&quot;5V&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;logic_voltage&quot;</span><span class="fu">:</span> <span class="st">&quot;3.3V&quot;</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;current_consumption_typical&quot;</span><span class="fu">:</span> <span class="st">&quot;50mA&quot;</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;current_consumption_max&quot;</span><span class="fu">:</span> <span class="st">&quot;100mA&quot;</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;peak_inrush_current&quot;</span><span class="fu">:</span> <span class="st">&quot;200mA&quot;</span><span class="fu">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;power_consumption_typical&quot;</span><span class="fu">:</span> <span class="st">&quot;0.25W&quot;</span><span class="fu">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;power_consumption_max&quot;</span><span class="fu">:</span> <span class="st">&quot;0.5W&quot;</span><span class="fu">,</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;startup_delay&quot;</span><span class="fu">:</span> <span class="st">&quot;100ms&quot;</span><span class="fu">,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;power_sequencing&quot;</span><span class="fu">:</span> <span class="st">&quot;MUST_POWER_BEFORE_LOGIC&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;thermal_specs&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;operating_temp_range&quot;</span><span class="fu">:</span> <span class="st">&quot;-20C to +85C&quot;</span><span class="fu">,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;max_case_temp&quot;</span><span class="fu">:</span> <span class="st">&quot;85C&quot;</span><span class="fu">,</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;thermal_resistance&quot;</span><span class="fu">:</span> <span class="st">&quot;50C/W&quot;</span><span class="fu">,</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;requires_heatsink&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h2 id="power-supply-component-files-needed">Power Supply Component
+Files Needed</h2>
+<p>Create these hardware definitions:</p>
+<ol type="1">
+<li><strong>config/components/hardware/buck_5v_5a.json</strong> - 5V
+buck converter spec</li>
+<li><strong>config/components/hardware/buck_3v3_3a.json</strong> - 3.3V
+buck converter spec</li>
+<li><strong>config/components/hardware/lipo_2s_5000mah.json</strong> -
+Battery spec</li>
+<li><strong>config/components/hardware/ina219_current_sensor.json</strong>
+- Current monitor</li>
+<li><strong>config/components/hardware/bulk_capacitor_2200uf.json</strong>
+- Power smoothing</li>
+</ol>
+<h2 id="future-multi-subsystem-power-distribution">Future:
+Multi-Subsystem Power Distribution</h2>
+<p>When adding arms/legs (each with ESP32-C3):</p>
+<pre><code>Main Battery (3S 11.1V 5000mAh)
+    │
+    ├─► Head Subsystem Buck (3.3V 2A) → Head ESP32-S3 + Displays
+    │
+    ├─► Torso Subsystem Buck (3.3V 2A) → Torso ESP32-S3 + System
+    │
+    ├─► Arm Left Buck (3.3V 1A) → Arm ESP32-C3 + 7 Servos
+    │
+    ├─► Arm Right Buck (3.3V 1A) → Arm ESP32-C3 + 7 Servos
+    │
+    ├─► Leg Left Buck (5V 3A) → Leg ESP32-C3 + NEMA 17 Motors
+    │
+    └─► Leg Right Buck (5V 3A) → Leg ESP32-C3 + NEMA 17 Motors</code></pre>
+<p><strong>Total Power</strong>: ~40-50W (need 10,000+ mAh battery for 2
+hour runtime)</p>
+<h2 id="summary">Summary</h2>
+<p>✅ <strong>Current inventory complete</strong> - Head + Torso power
+documented<br />
+✅ <strong>Power rails defined</strong> - 3.3V (2A) and 5V (0.5A)<br />
+✅ <strong>Battery sizing calculated</strong> - 2S 5000mAh LiPo = 2.5
+hours<br />
+✅ <strong>Critical gotchas identified</strong> - Servo surges, WiFi
+peaks, speaker transients<br />
+✅ <strong>Monitoring strategy</strong> - ADC voltage sensing + future
+INA219 current<br />
+⏳ <strong>Hardware JSON audit needed</strong> - Verify all components
+have complete electrical_specs<br />
+⏳ <strong>Power supply components</strong> - Create JSON definitions
+for buck converters, batteries<br />
+⏳ <strong>Protection code</strong> - Implement low battery warnings and
+graceful shutdown</p>
+<p>📘 <strong>Next Steps</strong>: Audit all hardware JSON files and add
+missing power specs</p>

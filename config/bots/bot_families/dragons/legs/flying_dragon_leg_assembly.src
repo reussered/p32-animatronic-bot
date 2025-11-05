@@ -1,0 +1,121 @@
+/**
+ * P32 FLYING DRAGON - LEG ASSEMBLY COMPONENT (Retractable Bipod)
+ * 
+ * Biomechanics: Poppy Project-inspired jumping/leaping locomotion
+ * Purpose: Retractable leg mechanism for walking and running when grounded
+ * 
+ * Design Philosophy:
+ * - Symmetric bipedal structure (L/R legs)
+ * - 4 Degrees of Freedom per leg (Hip X, Hip Y, Knee Y, Ankle Y)
+ * - Cascading servo control for smooth gaits
+ * - Compliant endpoints for shock absorption during jumps
+ * - Stowed completely into body (no flight interference)
+ * - Weight optimized: ~150g per leg (~300g total)
+ * 
+ * Actuation: MG996R servos (same as wings, reuses power distribution)
+ * Control: Timing-based gait primitives + compliant mode for safety
+ * Integration: Works with quadcopter lift assist during initial motion
+ */
+
+#include <stdint.h>
+#include <stdbool.h>
+#include <math.h>
+#include <algorithm>
+
+// Servo pin definitions (assigned from global table, TBD in PIN_ASSIGNMENT_RULES.md)
+static uint16_t leg_servo_pins[8] = { 0 }; // L_hip_x, L_hip_y, L_knee, L_ankle, R_hip_x, R_hip_y, R_knee, R_ankle
+static bool leg_servos_initialized = false;
+
+// Gait timing and state
+static int32_t leg_state_counter = 0;        // Monotonic tick for gait phase
+static uint8_t current_gait_mode = 0;        // 0: idle, 1: walking, 2: running, 3: jumping
+static float gait_speed_factor = 0.5f;       // 0.5-1.5 for speed modulation
+
+// Per-leg servo angle targets (degrees)
+struct LegServoAngles
+{
+  float hip_x;      // Abduction/adduction (-45 to +45 deg)
+  float hip_y;      // Flexion/extension (-60 to +60 deg)
+  float knee_y;     // Extension/flexion (0 to +120 deg)
+  float ankle_y;    // Dorsi/plantarflexion (-45 to +45 deg)
+};
+
+static struct LegServoAngles l_leg_target = { 0 }, r_leg_target = { 0 };
+static struct LegServoAngles l_leg_current = { 0 }, r_leg_current = { 0 };
+
+// Leg retraction state
+static bool legs_deployed = false;
+static float retraction_progress = 0.0f;    // 0.0 = fully stowed, 1.0 = fully deployed
+
+// Energy mode flag (set by behavior system at 75% battery depletion)
+static bool energy_seek_mode = false;
+
+
+/**
+ * flying_dragon_leg_assembly_init()
+ * 
+ * Initialize servo pins and reset gait state to idle.
+ * Must be called during system boot before leg_assembly_act().
+ */
+esp_err_t flying_dragon_leg_assembly_init(void)
+{
+  if (leg_servos_initialized)
+    return ESP_OK;
+
+  // Fetch pin assignments from global table (defined in platform-specific header)
+  // Pattern: [L_hip_x, L_hip_y, L_knee_y, L_ankle_y, R_hip_x, R_hip_y, R_knee_y, R_ankle_y]
+  // Example (ESP32-S3):
+  //   leg_servo_pins[0] = GPIO_NUM_39; // L_hip_x
+  //   leg_servo_pins[1] = GPIO_NUM_40; // L_hip_y
+  //   leg_servo_pins[2] = GPIO_NUM_41; // L_knee_y
+  //   leg_servo_pins[3] = GPIO_NUM_42; // L_ankle_y
+  //   leg_servo_pins[4] = GPIO_NUM_43; // R_hip_x
+  //   leg_servo_pins[5] = GPIO_NUM_44; // R_hip_y
+  //   leg_servo_pins[6] = GPIO_NUM_45; // R_knee_y
+  //   leg_servo_pins[7] = GPIO_NUM_46; // R_ankle_y
+  // NOTE: Actual pin assignment deferred to hardware_config during {name}_init()
+
+  // Initialize all leg servos to idle positions (stowed)
+  l_leg_target = { 0, 0, 0, 0 };
+  r_leg_target = { 0, 0, 0, 0 };
+  l_leg_current = { 0, 0, 0, 0 };
+  r_leg_current = { 0, 0, 0, 0 };
+
+  legs_deployed = false;
+  retraction_progress = 0.0f;
+  current_gait_mode = 0;
+  leg_state_counter = 0;
+
+  leg_servos_initialized = true;
+  return ESP_OK;
+}
+
+void flying_dragon_leg_assembly_act(void)
+{
+  // TODO: Main control loop stub
+}
+
+void flying_dragon_leg_set_gait_mode(uint8_t mode)
+{
+  current_gait_mode = mode;
+}
+
+void flying_dragon_leg_set_energy_seek(bool enabled)
+{
+  energy_seek_mode = enabled;
+}
+
+void flying_dragon_leg_set_speed_factor(float factor)
+{
+  gait_speed_factor = factor;
+}
+
+uint8_t flying_dragon_leg_get_gait_mode(void)
+{
+  return current_gait_mode;
+}
+
+bool flying_dragon_leg_is_deployed(void)
+{
+  return legs_deployed;
+}

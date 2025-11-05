@@ -1,0 +1,28 @@
+/**
+ * P32 FLYING DRAGON - WING SERVO CONTROLLER HEADER
+ */
+
+#ifndef FLYING_DRAGON_WING_SERVO_CONTROLLER_H
+#define FLYING_DRAGON_WING_SERVO_CONTROLLER_H
+
+#include <esp_err.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize wing servo controller
+ */
+esp_err_t flying_dragon_wing_servo_controller_init(void);
+
+/**
+ * Main control loop - update wing servo positions
+ */
+void flying_dragon_wing_servo_controller_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_WING_SERVO_CONTROLLER_H

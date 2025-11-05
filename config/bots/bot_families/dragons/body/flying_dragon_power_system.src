@@ -1,0 +1,49 @@
+/**
+ * P32 FLYING DRAGON - POWER SYSTEM
+ * 
+ * Central power management for the creature
+ * Monitors battery voltage, manages power distribution, triggers failsafes
+ */
+
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#define BATTERY_ADC_PIN 36
+#define LOW_BATTERY_THRESHOLD_MV 11000
+#define CRITICAL_BATTERY_THRESHOLD_MV 10500
+#define BATTERY_CELL_COUNT 4
+
+static bool power_system_initialized = false;
+static uint16_t battery_voltage_mv = 14800;
+
+/**
+ * Initialize power system
+ */
+esp_err_t flying_dragon_power_system_init(void)
+{
+    if (power_system_initialized)
+        return ESP_OK;
+    
+    // TODO: Initialize battery ADC on GPIO 36
+    // TODO: Configure voltage monitoring thresholds
+    // TODO: Initialize power distribution rails
+    
+    power_system_initialized = true;
+    return ESP_OK;
+}
+
+/**
+ * Main control loop - monitor battery and manage power
+ */
+void flying_dragon_power_system_act(void)
+{
+    if (!power_system_initialized)
+        return;
+    
+    // TODO: Read battery voltage from ADC
+    // TODO: Calculate battery percentage (0-100%)
+    // TODO: Check for low/critical voltage conditions
+    // TODO: Write battery status to GSM for other subsystems
+    // TODO: Trigger power saving or emergency descent if needed
+}

@@ -1,0 +1,60 @@
+/**
+ * P32 FLYING DRAGON - LEG ASSEMBLY HEADER
+ * 
+ * Public API for bipedal leg control subsystem
+ * Implements Poppy-inspired walking, running, and jumping gaits
+ */
+
+#ifndef FLYING_DRAGON_LEG_ASSEMBLY_H
+#define FLYING_DRAGON_LEG_ASSEMBLY_H
+
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize leg assembly subsystem
+ * Must be called once during system startup
+ */
+esp_err_t flying_dragon_leg_assembly_init(void);
+
+/**
+ * Main control loop (call at ~50 Hz from scheduler)
+ * Computes and applies gait commands to servo outputs
+ */
+void flying_dragon_leg_assembly_act(void);
+
+/**
+ * Set gait mode: 0=idle, 1=walking, 2=running, 3=jumping
+ */
+void flying_dragon_leg_set_gait_mode(uint8_t mode);
+
+/**
+ * Enable/disable energy-seeking behavior (set by behavior system at 75% battery)
+ */
+void flying_dragon_leg_set_energy_seek(bool enabled);
+
+/**
+ * Adjust gait speed: 0.3-1.5 multiplier on cycle time
+ */
+void flying_dragon_leg_set_speed_factor(float factor);
+
+/**
+ * Query current gait mode
+ */
+uint8_t flying_dragon_leg_get_gait_mode(void);
+
+/**
+ * Query deployment state (true = extended, false = stowed)
+ */
+bool flying_dragon_leg_is_deployed(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_LEG_ASSEMBLY_H

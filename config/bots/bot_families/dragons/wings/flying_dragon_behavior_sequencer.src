@@ -1,0 +1,51 @@
+/**
+ * P32 FLYING DRAGON - BEHAVIOR SEQUENCER
+ * 
+ * Flight state machine, mood-based behavior, autonomous sequences
+ */
+
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+typedef enum {
+    IDLE,
+    ARMING,
+    HOVER,
+    CLIMB,
+    CRUISE_FORWARD,
+    AGGRESSIVE_MANEUVER,
+    LANDING,
+    EMERGENCY_DESCENT
+} flight_state_t;
+
+static bool behavior_sequencer_initialized = false;
+static flight_state_t current_state = IDLE;
+
+/**
+ * Initialize behavior sequencer
+ */
+esp_err_t flying_dragon_behavior_sequencer_init(void)
+{
+    if (behavior_sequencer_initialized)
+        return ESP_OK;
+    
+    // TODO: Initialize state machine
+    // TODO: Configure mood influence parameters
+    
+    behavior_sequencer_initialized = true;
+    return ESP_OK;
+}
+
+/**
+ * Main control loop - execute flight state machine
+ */
+void flying_dragon_behavior_sequencer_act(void)
+{
+    if (!behavior_sequencer_initialized)
+        return;
+    
+    // TODO: Read current mood from GSM
+    // TODO: Update state machine based on sensor fusion
+    // TODO: Apply mood-based parameter modulation
+}

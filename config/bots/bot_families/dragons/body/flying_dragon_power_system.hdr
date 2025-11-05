@@ -1,0 +1,29 @@
+/**
+ * P32 FLYING DRAGON - POWER SYSTEM HEADER
+ */
+
+#ifndef FLYING_DRAGON_POWER_SYSTEM_H
+#define FLYING_DRAGON_POWER_SYSTEM_H
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize power system
+ */
+esp_err_t flying_dragon_power_system_init(void);
+
+/**
+ * Main control loop - monitor battery and manage power
+ */
+void flying_dragon_power_system_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_POWER_SYSTEM_H

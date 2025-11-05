@@ -1,0 +1,51 @@
+/**
+ * P32 FLYING DRAGON - FOOT ASSEMBLY HEADER
+ * 
+ * Public API for passive foot mechanics and contact state estimation
+ * Provides telemetry for landing shock, ground reaction forces (future)
+ */
+
+#ifndef FLYING_DRAGON_FOOT_ASSEMBLY_H
+#define FLYING_DRAGON_FOOT_ASSEMBLY_H
+
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize foot assembly subsystem
+ * Must be called once during system startup
+ */
+esp_err_t flying_dragon_foot_assembly_init(void);
+
+/**
+ * Main loop (call at ~50 Hz from scheduler)
+ * Updates contact state and estimates shock absorption
+ */
+void flying_dragon_foot_assembly_act(void);
+
+/**
+ * Query contact state for left/right feet
+ */
+bool flying_dragon_foot_is_in_contact_left(void);
+bool flying_dragon_foot_is_in_contact_right(void);
+
+/**
+ * Estimate total vertical load on both feet (for motion planning)
+ */
+float flying_dragon_foot_get_total_vertical_load(void);
+
+/**
+ * Total mass of foot assembly (for ballistics)
+ */
+float flying_dragon_foot_get_total_mass_kg(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_FOOT_ASSEMBLY_H

@@ -1,0 +1,28 @@
+/**
+ * P32 FLYING DRAGON - MOTOR CONTROLLER HEADER
+ */
+
+#ifndef FLYING_DRAGON_MOTOR_CONTROLLER_H
+#define FLYING_DRAGON_MOTOR_CONTROLLER_H
+
+#include <esp_err.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Initialize motor controller
+ */
+esp_err_t flying_dragon_motor_controller_init(void);
+
+/**
+ * Main control loop - update motor thrust
+ */
+void flying_dragon_motor_controller_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FLYING_DRAGON_MOTOR_CONTROLLER_H

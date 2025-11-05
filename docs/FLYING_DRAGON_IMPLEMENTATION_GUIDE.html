@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Dragon - Implementation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #2980b9;
+            margin: 40px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h2 {
+            font-size: 2em;
+            color: #2980b9;
+            margin: 35px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 25px 0 10px 0;
+        }
+        
+        h4, h5, h6 {
+            color: #34495e;
+            margin: 15px 0 8px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #c7254e;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.4;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            padding-left: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #2980b9;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border: 1px solid #bdc3c7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #ecf0f1;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        em {
+            color: #34495e;
+        }
+        
+        hr {
+            border: none;
+            height: 2px;
+            background: #bdc3c7;
+            margin: 30px 0;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            pre, code, table {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="flying-dragon-implementation-guide">FLYING DRAGON IMPLEMENTATION GUIDE</h1>
+<h2 id="quick-start-checklists-decision-trees">Quick-Start Checklists &amp; Decision Trees</h2>
+<p><strong>Date</strong>: November 4, 2025<br />
+<strong>Audience</strong>: Development team ready to begin Phase 1</p>
+<hr />
+<h2 id="part-1-pre-prototyping-decisions">PART 1: PRE-PROTOTYPING DECISIONS</h2>
+<h3 id="decision-tree-1-motor-configuration">Decision Tree 1: Motor Configuration</h3>
+<pre class="codehilite"><code>Should we use quad motors or hub motor?
+│
+├─ [CHOSEN] Distributed Quad Motors (T-Motor U3 580KV × 4)
+│  Pros:
+│  • Better control authority (differential motor mixing for roll/pitch)
+│  • Scalable (can add more motors for heavier models)
+│  • Industry standard for MAVs (proven software ecosystem)
+│  • Easier component testing (each motor independent)
+│  Cons:
+│  • More complex ESC synchronization (4 channels)
+│  • Higher wiring complexity
+│  
+└─ Centralized Hub Motor (single large motor)
+   Pros:
+   • Simpler electrical integration (1 ESC)
+   • Less weight (fewer motor+ESC pairs)
+   Cons:
+   • No differential control (must rely 100% on wings for pitch/roll)
+   • Higher gimbal lock risk
+   • Slower response to disturbances
+</code></pre>
+
+<p><strong>Recommendation</strong>: <strong>Quad Motors</strong> (Option A) for Phase 1 and beyond.</p>
+<hr />
+<h3 id="decision-tree-2-wing-flapping-mechanism">Decision Tree 2: Wing Flapping Mechanism</h3>
+<pre class="codehilite"><code>How should wings articulate?
+│
+├─ [CHOSEN] Servo-Driven Linkage (6 servos, 3 per wing)
+│  Mechanism:
+│  • Shoulder servo (pitch/rotation)
+│  • Twist servo (wing twist/yaw)
+│  • Flap servo (primary beat cycle)
+│  Pros:
+│  • Proven servo technology (low cost, readily available)
+│  • Easy to prototype with 3D-printed linkage
+│  • Can adjust flap frequency by PWM adjustment
+│  Cons:
+│  • Limited compliance (stiff linkage → injury risk)
+│  • Servo wear on high-frequency cycling
+│  
+├─ Pushrod Linkage (cam-driven)
+│  • Single motor drives eccentric cam
+│  • Linkages convert rotational to flapping motion
+│  Pros:
+│  • Efficient power transfer
+│  • Natural frequency matching possible
+│  Cons:
+│  • Complex CAD and fabrication
+│  • Harder to prototype
+│  
+└─ Direct Motor-Driven Wings
+   • Motors directly on wing hinge
+   Pros:
+   • Maximum compliance and efficiency
+   Cons:
+   • Requires tiny brushless motors (hard to find, expensive)
+   • Increased mass per wing
+</code></pre>
+
+<p><strong>Recommendation</strong>: <strong>Servo-Driven Linkage</strong> (Option 1) for prototyping simplicity.</p>
+<hr />
+<h3 id="decision-tree-3-flight-controller-hardware">Decision Tree 3: Flight Controller Hardware</h3>
+<pre class="codehilite"><code>Which ESP32 variant for flight controller?
+│
+├─ [CHOSEN] ESP32-S3-R8N16 (Suggested Default)
+│  • 240 MHz dual core, 512 KB SRAM
+│  • 4× PWM channels (motor control)
+│  • 6× PWM for servos (or I2C PWM expander)
+│  • I2C + SPI for sensors
+│  
+├─ ESP32-C3 (Single core, lighter footprint)
+│  • 160 MHz single core (smaller, 250 KB SRAM)
+│  • Sufficient for flight loop, but limited headroom
+│  
+└─ Dedicated Flight Controller (Pixhawk, Betaflight, etc.)
+   • Overkill for this project; contradicts P32 ESP32-native design
+</code></pre>
+
+<p><strong>Recommendation</strong>: <strong>ESP32-S3-R8N16</strong> (maintain P32 ecosystem consistency).</p>
+<hr />
+<h3 id="decision-tree-4-sensor-suite">Decision Tree 4: Sensor Suite</h3>
+<pre class="codehilite"><code>Which sensors for attitude + altitude estimation?
+│
+├─ [CHOSEN] ICM20689 (6-axis IMU) + BMP390 (Barometer)
+│  • IMU: 1000 Hz sampling, low noise, sensored
+│  • Barometer: 50 Hz altitude + climb rate estimation
+│  • Both on single I2C breakout board
+│  • Cost: ~$15–20 total
+│  
+├─ Simpler: MPU6050 (older, cheaper IMU) + BMP180
+│  • MPU6050: 1000 Hz, higher noise floor
+│  • BMP180: Lower altitude accuracy (±5 m)
+│  • Cost: ~$8–12
+│  • Trade-off: Slightly noisier estimates
+│  
+└─ Premium: ICM20689 + MS5607 (barometer) + LIS3MDL (magnetometer)
+   • Adds heading estimation for yaw drift correction
+   • Not necessary for Phase 1 (can add later)
+</code></pre>
+
+<p><strong>Recommendation</strong>: <strong>ICM20689 + BMP390</strong> (balance of cost, performance, availability).</p>
+<hr />
+<h2 id="part-2-phase-1-prototype-build-plan">PART 2: PHASE 1 PROTOTYPE BUILD PLAN</h2>
+<h3 id="bill-of-materials-bom">Bill of Materials (BOM)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Qty</th>
+<th>Part Number</th>
+<th>Cost ea.</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Motors</strong></td>
+<td>4</td>
+<td>T-Motor U3 PRO 580KV</td>
+<td>$20</td>
+<td>Brushless, sensored</td>
+</tr>
+<tr>
+<td><strong>Props</strong></td>
+<td>8</td>
+<td>APC 10×5 Carbon Fiber</td>
+<td>$10</td>
+<td>2 spare sets</td>
+</tr>
+<tr>
+<td><strong>ESCs</strong></td>
+<td>4</td>
+<td>Hobbywing 40A XRotor</td>
+<td>$25</td>
+<td>BLHeli-32</td>
+</tr>
+<tr>
+<td><strong>Servos</strong></td>
+<td>6</td>
+<td>MG996R Digital Servo</td>
+<td>$8</td>
+<td>Wing articulation</td>
+</tr>
+<tr>
+<td><strong>IMU</strong></td>
+<td>1</td>
+<td>ICM20689 Breakout</td>
+<td>$12</td>
+<td>I2C module</td>
+</tr>
+<tr>
+<td><strong>Barometer</strong></td>
+<td>1</td>
+<td>BMP390 Breakout</td>
+<td>$8</td>
+<td>I2C module (often bundled)</td>
+</tr>
+<tr>
+<td><strong>Battery</strong></td>
+<td>1</td>
+<td>4S 5000 mAh 50C LiPo</td>
+<td>$30</td>
+<td>XT60 connector</td>
+</tr>
+<tr>
+<td><strong>PDB</strong></td>
+<td>1</td>
+<td>Generic Power Dist. Board</td>
+<td>$5</td>
+<td>4× XT30 inputs</td>
+</tr>
+<tr>
+<td><strong>ESP32-S3</strong></td>
+<td>1</td>
+<td>DevKit or Feather</td>
+<td>$15</td>
+<td>Flight logic + pinout flexibility</td>
+</tr>
+<tr>
+<td><strong>Wiring</strong></td>
+<td>1</td>
+<td>Hook-up wire, JST connectors</td>
+<td>$10</td>
+<td>Assorted</td>
+</tr>
+<tr>
+<td><strong>Structural</strong></td>
+<td>1</td>
+<td>Carbon fiber tubes, foam, glue</td>
+<td>$20</td>
+<td>Build materials</td>
+</tr>
+<tr>
+<td><strong>**TOTAL</strong></td>
+<td></td>
+<td></td>
+<td><strong>~$275</strong></td>
+<td>Pilot unit, reusable components</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assembly-steps-week-13">Assembly Steps (Week 1–3)</h3>
+<h4 id="week-1-structural-prototype">Week 1: Structural Prototype</h4>
+<ul>
+<li>[ ] Design fuselage in OpenSCAD (simple tube frame, ~200 mm length)</li>
+<li>[ ] 3D-print or laser-cut wing mounts (hard points for servo attach)</li>
+<li>[ ] 3D-print or machine motor plates (4× identical, symmetrical mount)</li>
+<li>[ ] Assemble frame (glue/bolt carbon fiber tubes, secure motor plates)</li>
+<li>[ ] Install landing gear (aluminum angle or foam skids, non-damage)</li>
+<li>[ ] Total mass target: ~500 g (excluding electronics)</li>
+</ul>
+<h4 id="week-2-motor-esc-integration">Week 2: Motor &amp; ESC Integration</h4>
+<ul>
+<li>[ ] Solder ESC motor leads to motor connectors (proper polarity!)</li>
+<li>[ ] Mount motors on plates (use vibration isolators if available)</li>
+<li>[ ] Solder battery connector (XT60) to PDB main bus</li>
+<li>[ ] Mount PDB on frame (centered for weight distribution)</li>
+<li>[ ] Connect ESCs to PDB, route signal wires to ESP32 GPIO pins (12, 13, 14, 15)</li>
+<li>[ ] Connect battery, verify no shorts (multimeter check before powering)</li>
+<li>[ ] <strong>TEST</strong>: Single ESC + motor spin test (manual PWM command from function generator)</li>
+</ul>
+<h4 id="week-3-flight-controller-sensors">Week 3: Flight Controller &amp; Sensors</h4>
+<ul>
+<li>[ ] Solder ESP32-S3 headers (if breakout board)</li>
+<li>[ ] Mount ESP32-S3 on frame (vibration-isolated board or 3D-printed bracket)</li>
+<li>[ ] Connect IMU via I2C (GPIO 21 SDA, 22 SCL)</li>
+<li>[ ] Connect Barometer via I2C (same bus as IMU)</li>
+<li>[ ] Connect battery voltage monitoring to ADC (GPIO 36)</li>
+<li>[ ] Load test firmware (basic sensor read loop)</li>
+<li>[ ] <strong>TEST</strong>: IMU gyro + accel readings (should be near zero at rest)</li>
+<li>[ ] <strong>TEST</strong>: Barometer altitude reading (compare to known altitude)</li>
+</ul>
+<h4 id="exit-criteria-for-phase-1">Exit Criteria for Phase 1</h4>
+<ul>
+<li>[ ] All 4 motors spin independently in response to PWM commands</li>
+<li>[ ] Motor thrust measured on scale: 950 ± 50 gf per motor (at 100% throttle)</li>
+<li>[ ] IMU orientation output stable (no random drifts)</li>
+<li>[ ] Barometer altitude within ±2 m of known reference point</li>
+<li>[ ] Total system mass &lt;2.7 kg (on target for weight budget)</li>
+<li>[ ] No shorts or loose connections visible</li>
+<li>[ ] ESP32 boots and connects to serial console</li>
+</ul>
+<hr />
+<h2 id="part-3-phase-1-motor-thrust-validation">PART 3: PHASE 1 MOTOR THRUST VALIDATION</h2>
+<h3 id="thrust-measurement-stand-design">Thrust Measurement Stand Design</h3>
+<p><strong>Simple scale-based setup</strong>:</p>
+<pre class="codehilite"><code>        ┌─────────────────┐
+        │  Digital Scale  │  (±1 g accuracy)
+        └────────┬────────┘
+                 │
+           ┌─────▼──────┐
+           │  Plywood   │  (30×30 cm platform)
+           │   Base     │
+           └─────┬──────┘
+                 │
+        ┌────────▼────────┐
+        │  Motor Mount    │  (vertical orientation)
+        │  (3D-printed)   │
+        └────────┬────────┘
+                 │
+            ┌────▼─────┐
+            │ Motor +  │
+            │ Prop     │
+            └──────────┘
+           (thrust points down)
+</code></pre>
+
+<h3 id="procedure">Procedure</h3>
+<pre class="codehilite"><code class="language-powershell"># Step 1: Record baseline mass (motor + prop only)
+$baseline_g = 120  # Replace with actual measurement
+
+# Step 2: Increase throttle from 1000 µs to 2000 µs in steps
+# Record scale reading at each step after 2-second stabilization
+
+$throttle_tests = @(
+    @{pwm_us=1000; label=&quot;Idle&quot;; expected_scale_g=0},
+    @{pwm_us=1100; label=&quot;10%&quot;; expected_scale_g=15},
+    @{pwm_us=1250; label=&quot;25%&quot;; expected_scale_g=100},
+    @{pwm_us=1500; label=&quot;50%&quot;; expected_scale_g=250},
+    @{pwm_us=1750; label=&quot;75%&quot;; expected_scale_g=700},
+    @{pwm_us=2000; label=&quot;100%&quot;; expected_scale_g=950}
+)
+
+foreach ($test in $throttle_tests) {
+    Write-Host &quot;Testing PWM $($test.pwm_us) µs ($($test.label) throttle)...&quot;
+    # Send PWM command to ESP32
+    # Read scale output (manual or via serial)
+    # Compare to expected thrust
+    # Record deviation
+}
+</code></pre>
+
+<h3 id="acceptance-criteria">Acceptance Criteria</h3>
+<p>For each motor:
+- <strong>100% throttle</strong>: 950 ± 50 gf (within 5%)
+- <strong>50% throttle</strong>: 250 ± 50 gf (linear response expected)
+- <strong>No cogging</strong>: Smooth acceleration, no buzzing or stuttering</p>
+<p><strong>Flag motor if</strong>:
+- Static thrust &lt;850 gf @ 100% throttle
+- Non-linear response (e.g., 50% throttle produces 30% thrust)
+- Audible grinding or cogging noise</p>
+<hr />
+<h2 id="part-4-imu-calibration-checklist">PART 4: IMU CALIBRATION CHECKLIST</h2>
+<pre class="codehilite"><code>ACCELEROMETER CALIBRATION
+┌─ Set accelerometer to ±16g range
+├─ Place on level surface
+├─ Read X, Y, Z raw values (should be 0, 0, 16384 LSBs)
+├─ If deviation &gt; ±100 LSBs, apply soft-iron calibration
+│  (Use calibration matrix from ICM20689 datasheet)
+└─ Verify with known G forces (place at 45° angle)
+
+GYROSCOPE CALIBRATION
+┌─ Set gyroscope to ±2000°/s range
+├─ Place stationary on level surface
+├─ Read X, Y, Z raw values (should be 0, 0, 0)
+├─ Record offset drift over 60 seconds
+├─ If drift &gt;±5°/s, apply zero-rate bias correction
+└─ Verify with manual rotation (30°/s expected at known rate)
+
+ACCELEROMETER BIAS
+┌─ Estimated from 3-point calibration
+├─ Test 1: [0, 0, +1g] (level)
+├─ Test 2: [0, +1g, 0] (rotated 90°)
+├─ Test 3: [+1g, 0, 0] (rotated 90°)
+└─ Solve for bias/scale matrix
+</code></pre>
+
+<hr />
+<h2 id="part-5-firmware-skeleton-stage-1">PART 5: FIRMWARE SKELETON (Stage 1)</h2>
+<p><strong>File</strong>: <code>src/flying_dragon_flight_system.cpp</code> (early version)</p>
+<pre class="codehilite"><code class="language-cpp">#include &quot;driver/ledc.h&quot;
+#include &quot;driver/i2c_master.h&quot;
+#include &quot;esp_log.h&quot;
+#include &lt;math.h&gt;
+
+#define TAG &quot;FLYING_DRAGON&quot;
+
+// Motor PWM configuration
+#define MOTOR1_GPIO 12
+#define MOTOR2_GPIO 13
+#define MOTOR3_GPIO 14
+#define MOTOR4_GPIO 15
+
+// Sensor configuration
+#define IMU_I2C_ADDR 0x68
+#define BARO_I2C_ADDR 0x77
+
+// Global state
+static uint16_t motor_pwm[4] = {1000, 1000, 1000, 1000};  // µs
+static bool system_armed = false;
+
+// IMU data structure
+typedef struct {
+    float ax, ay, az;  // Acceleration (g)
+    float gx, gy, gz;  // Angular velocity (°/s)
+} imu_data_t;
+
+typedef struct {
+    float alt_m;       // Altitude (m)
+    float pressure_pa; // Pressure (Pa)
+} baro_data_t;
+
+// ============================================================================
+// INITIALIZATION ROUTINES
+// ============================================================================
+
+esp_err_t motor_controller_init(void)
+{
+    ESP_LOGI(TAG, &quot;Initializing motor PWM controller...&quot;);
+
+    ledc_timer_config_t timer_conf = {
+        .speed_mode = LEDC_HIGH_SPEED_MODE,
+        .timer_num = LEDC_TIMER_0,
+        .freq_hz = 490,  // ESC standard
+        .duty_resolution = LEDC_TIMER_13_BIT,
+        .clk_cfg = LEDC_AUTO_CLK
+    };
+    ESP_ERROR_CHECK(ledc_timer_config(&amp;timer_conf));
+
+    int gpio_pins[4] = {MOTOR1_GPIO, MOTOR2_GPIO, MOTOR3_GPIO, MOTOR4_GPIO};
+
+    for (int i = 0; i &lt; 4; i++) {
+        ledc_channel_config_t ch_conf = {
+            .channel = (ledc_channel_t)i,
+            .duty = 0,
+            .gpio_num = gpio_pins[i],
+            .speed_mode = LEDC_HIGH_SPEED_MODE,
+            .timer_sel = LEDC_TIMER_0,
+            .intr_type = LEDC_INTR_DISABLE
+        };
+        ESP_ERROR_CHECK(ledc_channel_config(&amp;ch_conf));
+    }
+
+    ESP_LOGI(TAG, &quot;Motor PWM initialized: 490 Hz, 13-bit resolution&quot;);
+    return ESP_OK;
+}
+
+esp_err_t sensor_i2c_init(void)
+{
+    ESP_LOGI(TAG, &quot;Initializing I2C bus for sensors...&quot;);
+
+    i2c_master_bus_config_t i2c_mst_config = {
+        .clk_source = I2C_CLK_SRC_DEFAULT,
+        .i2c_port = I2C_NUM_0,
+        .scl_io_num = 22,
+        .sda_io_num = 21,
+        .glitch_ignore_cnt = 7,
+        .flags.enable_internal_pullup = true,
+        .trans_queue_depth = 0
+    };
+    i2c_master_bus_handle_t bus_handle;
+    ESP_ERROR_CHECK(i2c_new_master_bus(&amp;i2c_mst_config, &amp;bus_handle));
+
+    ESP_LOGI(TAG, &quot;I2C bus initialized at 400 kHz&quot;);
+    return ESP_OK;
+}
+
+// ============================================================================
+// MOTOR CONTROL FUNCTIONS
+// ============================================================================
+
+void motor_set_pwm(int motor_idx, uint16_t pwm_us)
+{
+    // Convert µs to duty cycle (0–4095 for 13-bit resolution)
+    // PWM period = 1/490 Hz ≈ 2041 µs
+    // Duty = (pwm_us / 2041) * 4095
+
+    if (motor_idx &lt; 0 || motor_idx &gt; 3) return;
+    if (pwm_us &lt; 1000) pwm_us = 1000;  // Clamp to idle
+    if (pwm_us &gt; 2000) pwm_us = 2000;  // Clamp to max
+
+    motor_pwm[motor_idx] = pwm_us;
+
+    uint32_t duty = (pwm_us * 4095) / 2041;
+    ledc_set_duty_and_update(LEDC_HIGH_SPEED_MODE, (ledc_channel_t)motor_idx, duty);
+}
+
+void motors_arm(void)
+{
+    system_armed = true;
+    ESP_LOGI(TAG, &quot;Motors armed&quot;);
+}
+
+void motors_disarm(void)
+{
+    system_armed = false;
+    for (int i = 0; i &lt; 4; i++) {
+        motor_set_pwm(i, 1000);  // Idle all motors
+    }
+    ESP_LOGI(TAG, &quot;Motors disarmed and idle&quot;);
+}
+
+// ============================================================================
+// SENSOR READ FUNCTIONS
+// ============================================================================
+
+esp_err_t read_imu(imu_data_t *imu_out)
+{
+    // TODO: Implement I2C read from ICM20689
+    // Read ACCEL_XOUT_H/L, ACCEL_YOUT_H/L, ACCEL_ZOUT_H/L
+    // Read GYRO_XOUT_H/L, GYRO_YOUT_H/L, GYRO_ZOUT_H/L
+
+    imu_out-&gt;ax = 0.0f;  // Placeholder
+    imu_out-&gt;ay = 0.0f;
+    imu_out-&gt;az = 1.0f;
+    imu_out-&gt;gx = 0.0f;
+    imu_out-&gt;gy = 0.0f;
+    imu_out-&gt;gz = 0.0f;
+
+    return ESP_OK;
+}
+
+esp_err_t read_barometer(baro_data_t *baro_out)
+{
+    // TODO: Implement I2C read from BMP390
+    // Read pressure register, convert to altitude
+
+    baro_out-&gt;pressure_pa = 101325;  // Sea level
+    baro_out-&gt;alt_m = 0.0f;
+
+    return ESP_OK;
+}
+
+// ============================================================================
+// ATTITUDE ESTIMATION (Complementary Filter)
+// ============================================================================
+
+typedef struct {
+    float roll;   // Degrees
+    float pitch;  // Degrees
+    float yaw;    // Degrees
+} attitude_t;
+
+static attitude_t estimated_attitude = {0, 0, 0};
+static const float GYRO_WEIGHT = 0.98f;  // Gyro dominance in filter
+static const float ACCEL_WEIGHT = 1.0f - GYRO_WEIGHT;
+
+void estimate_attitude(const imu_data_t *imu, float dt_s, attitude_t *att_out)
+{
+    // Compute roll/pitch from accelerometer (gravity vector)
+    float accel_roll = atan2f(imu-&gt;ay, imu-&gt;az) * 180.0f / M_PI;
+    float accel_pitch = atan2f(-imu-&gt;ax, sqrtf(imu-&gt;ay*imu-&gt;ay + imu-&gt;az*imu-&gt;az)) * 180.0f / M_PI;
+
+    // Complementary filter (gyro integration with accel correction)
+    estimated_attitude.roll = GYRO_WEIGHT * (estimated_attitude.roll + imu-&gt;gx * dt_s)
+                             + ACCEL_WEIGHT * accel_roll;
+    estimated_attitude.pitch = GYRO_WEIGHT * (estimated_attitude.pitch + imu-&gt;gy * dt_s)
+                              + ACCEL_WEIGHT * accel_pitch;
+    estimated_attitude.yaw = estimated_attitude.yaw + imu-&gt;gz * dt_s;  // Gyro integration only
+
+    *att_out = estimated_attitude;
+}
+
+// ============================================================================
+// MAIN FLIGHT CONTROL LOOP
+// ============================================================================
+
+void flight_control_task(void *arg)
+{
+    ESP_LOGI(TAG, &quot;Flight control task started&quot;);
+
+    imu_data_t imu;
+    baro_data_t baro;
+    attitude_t attitude;
+
+    uint32_t last_time_us = esp_timer_get_time();
+
+    // Arm sequence (manual trigger via serial or button)
+    vTaskDelay(pdMS_TO_TICKS(5000));  // Wait 5 sec for settling
+    motors_arm();
+
+    while (1) {
+        uint32_t now_us = esp_timer_get_time();
+        float dt_s = (now_us - last_time_us) / 1e6f;
+        last_time_us = now_us;
+
+        // Cap dt to prevent overflow (max 100 ms = 0.1 s)
+        if (dt_s &gt; 0.1f) dt_s = 0.1f;
+
+        // 1. Read sensors
+        read_imu(&amp;imu);
+        read_barometer(&amp;baro);
+
+        // 2. Estimate attitude
+        estimate_attitude(&amp;imu, dt_s, &amp;attitude);
+
+        // 3. Apply simple control law
+        if (system_armed) {
+            // Test: Ramp throttle from 1000 to 1500 µs over 5 seconds
+            static uint32_t ramp_time_ms = 0;
+            uint16_t pwm_target = 1000 + (500 * ramp_time_ms) / 5000;
+            ramp_time_ms += (uint32_t)(dt_s * 1000);
+
+            for (int i = 0; i &lt; 4; i++) {
+                motor_set_pwm(i, pwm_target);
+            }
+
+            // Log telemetry
+            if (ramp_time_ms % 500 == 0) {
+                ESP_LOGI(TAG, &quot;PWM=%u Att=(%.1f°,%.1f°,%.1f°) Alt=%.1f m&quot;,
+                        pwm_target, attitude.roll, attitude.pitch, attitude.yaw, baro.alt_m);
+            }
+        }
+
+        // Control loop frequency: 100 Hz (10 ms per iteration)
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+}
+
+// ============================================================================
+// APP MAIN
+// ============================================================================
+
+void app_main(void)
+{
+    ESP_LOGI(TAG, &quot;=== FLYING DRAGON FLIGHT CONTROLLER ===&quot;);
+    ESP_LOGI(TAG, &quot;Initializing subsystems...&quot;);
+
+    ESP_ERROR_CHECK(motor_controller_init());
+    ESP_ERROR_CHECK(sensor_i2c_init());
+
+    // Disable all motors initially
+    for (int i = 0; i &lt; 4; i++) {
+        motor_set_pwm(i, 1000);
+    }
+
+    // Create flight control task (runs at 100 Hz)
+    xTaskCreate(flight_control_task, &quot;flight_ctrl&quot;, 4096, NULL, 10, NULL);
+
+    ESP_LOGI(TAG, &quot;System ready. Awaiting command...&quot;);
+}
+</code></pre>
+
+<hr />
+<h2 id="part-6-testing-sequence-week-13">PART 6: TESTING SEQUENCE (Week 1–3)</h2>
+<h3 id="day-12-structural-assembly">Day 1–2: Structural Assembly</h3>
+<pre class="codehilite"><code class="language-bash"># Objective: Build frame, verify weight
+pio run -t build   # Compile test firmware
+scale_reading=$(weigh_dragon_structure)
+if scale_reading &lt;= 500; then
+    echo &quot;✓ Structure within weight budget&quot;
+else
+    echo &quot;✗ Structure too heavy; remove unnecessary material&quot;
+fi
+</code></pre>
+
+<h3 id="day-35-motor-testing">Day 3–5: Motor Testing</h3>
+<pre class="codehilite"><code class="language-bash"># Objective: Validate all 4 motors spin independently
+# Manually send PWM commands via serial terminal:
+# &quot;motor1 1100&quot; → Motor 1 at 1100 µs (gentle spin)
+# &quot;motor1 1500&quot; → Motor 1 at 1500 µs (50% throttle)
+# &quot;motor1 2000&quot; → Motor 1 at 2000 µs (100% throttle)
+
+# Record thrust measurements on scale:
+Motor 1 @ 100% = 945 gf ✓
+Motor 2 @ 100% = 952 gf ✓
+Motor 3 @ 100% = 948 gf ✓
+Motor 4 @ 100% = 950 gf ✓
+</code></pre>
+
+<h3 id="day-67-sensor-validation">Day 6–7: Sensor Validation</h3>
+<pre class="codehilite"><code class="language-bash"># Objective: Verify IMU + barometer output
+# Serial terminal shows:
+# &quot;IMU: ax=0.00g ay=0.00g az=1.00g  gx=0°/s gy=0°/s gz=0°/s&quot;
+# &quot;BARO: pressure=101325 Pa, altitude=0.0 m&quot;
+
+# Tilt drone 45°, verify IMU changes:
+# &quot;IMU: ax=-0.70g ay=0.00g az=0.70g  gx=0°/s gy=0°/s gz=0°/s&quot;
+#
+# Lift drone 1 meter, verify barometer:
+# &quot;BARO: pressure=101242 Pa, altitude=0.8 m&quot; (±0.2 m acceptable)
+</code></pre>
+
+<h3 id="day-810-integration-test">Day 8–10: Integration Test</h3>
+<pre class="codehilite"><code class="language-bash"># Objective: Full system + arming sequence
+# Actions:
+# 1. Power on (LED indicator should pulse)
+# 2. Wait 5 seconds (arming timer)
+# 3. Issue &quot;arm&quot; command (LED solid, motors spin to idle)
+# 4. Issue &quot;throttle 1200&quot; (all 4 motors increase smoothly)
+# 5. Verify attitude estimation changes as drone tilts
+# 6. Issue &quot;disarm&quot; (motors return to idle)
+</code></pre>
+
+<hr />
+<h2 id="summary-critical-success-factors">SUMMARY: CRITICAL SUCCESS FACTORS</h2>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Threshold</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Motor thrust uniformity</strong></td>
+<td>±5% across all 4 motors</td>
+<td>Scale weight comparison</td>
+</tr>
+<tr>
+<td><strong>IMU stability</strong></td>
+<td>±0.1 g bias, ±5°/s gyro offset</td>
+<td>Serial telemetry over 60 s</td>
+</tr>
+<tr>
+<td><strong>Barometer accuracy</strong></td>
+<td>±2 m altitude</td>
+<td>Compare to known elevation</td>
+</tr>
+<tr>
+<td><strong>Total mass</strong></td>
+<td>&lt;2.7 kg</td>
+<td>Scale weight</td>
+</tr>
+<tr>
+<td><strong>Flight loop frequency</strong></td>
+<td>≥100 Hz</td>
+<td>Timing instrumentation</td>
+</tr>
+<tr>
+<td><strong>Battery voltage stability</strong></td>
+<td>&lt;0.5 V sag under load</td>
+<td>Multimeter under full throttle</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Next Step</strong>: Begin Phase 1 assembly per this guide. Report blockers immediately to enable Phase 2 (tethered flight) by end of Week 3.</p>
+<p>Document Status: <strong>Ready for Deployment</strong></p>
+    </div>
+</body>
+</html>

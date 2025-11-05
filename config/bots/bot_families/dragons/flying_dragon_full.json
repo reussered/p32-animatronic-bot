@@ -1,0 +1,59 @@
+{
+  "name": "flying_dragon_full",
+  "description": "Complete flying dragon with head (eyes/mouth/speaker) and flight systems",
+  "version": "1.0.0",
+  "creature_family": "dragon",
+  "family_components": [
+    "flying_dragon_behavior_sequencer<ESP32_S3_BEHAVIOR_LOGIC>"
+  ],
+  "subsystems": [
+    {
+      "name": "flying_dragon_head",
+      "type": "creature_head",
+      "components": [
+        "flying_dragon_left_eye<GC9A01>",
+        "flying_dragon_right_eye<GC9A01>",
+        "flying_dragon_mouth<GC9A01>",
+        "flying_dragon_speaker<MINISPKR>",
+        "flying_dragon_nostril_left<RGB_LED>",
+        "flying_dragon_nostril_right<RGB_LED>"
+      ]
+    },
+    {
+      "name": "flying_dragon_flight_controller",
+      "type": "flight_system",
+      "enabled": true,
+      "components": [
+        "flying_dragon_sensor_fusion<ICM20689_BMP390>",
+        "flying_dragon_flight_safety<WATCHDOG_BATTERY_MONITOR>",
+        "flying_dragon_motor_controller<T_MOTOR_U3_580KV>",
+        "flying_dragon_wing_servo_controller<MG996R_SERVO>"
+      ],
+      "configuration": {
+        "flight_loop_frequency_hz": 100,
+        "wing_flap_frequency_hz": 3.0,
+        "thrust_to_weight_ratio": 1.5,
+        "battery_capacity_mah": 5000
+      }
+    }
+  ],
+  "assembly_notes": "Flying dragon with articulated wings (3 DoF per side) and quadcopter propulsion. Sensor fusion provides stability; failsafes ensure safe descent.",
+  "mass_budget_g": {
+    "airframe": 500,
+    "motors": 220,
+    "escs": 140,
+    "servos": 330,
+    "flight_controller": 100,
+    "battery": 550,
+    "wiring": 120,
+    "payload": 100,
+    "total": 2560
+  },
+  "performance": {
+    "max_flight_time_min": 15,
+    "cruise_speed_ms": 5,
+    "max_speed_ms": 15,
+    "service_ceiling_m": 50,
+    "thrust_to_weight": 1.5
+  }
+}
