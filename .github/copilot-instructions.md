@@ -11,7 +11,7 @@
 - **Intra-Subsystem Communication**: Because of the single compilation unit, components within the same subsystem **must** communicate using file-scoped `static` variables (e.g., `static uint16_t* display_buffer = NULL;`). This is the standard way to pass data along a processing chain. You do **not** need to `#include` other component headers for this to work; the build system aggregates them.
 - **Component System**: Every behavior lives in organized component folders:
   - `config/components/{hardware|drivers|interfaces|behaviors}/` (generic/reusable)
-  - `config/bots/multi_family/{humanoid|quadruped|insectoid}/` (shared multi-family)
+  - `config/bots/multi_family/{humanoid|quadruped|tentacles|wings}/` (shared multi-family)
   - `config/bots/bot_families/{family}/{subsystem}/` (creature-specific)
   - All expose `{name}_init()` / `{name}_act()` functions via `.json`, `.src`, `.hdr` files
 - **JSON-Driven Composition**: A hierarchy of JSON files starting from `config/bots/bot_families/...` defines the animatronic, composes components, and assigns them to controllers.

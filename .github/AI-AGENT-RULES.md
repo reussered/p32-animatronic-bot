@@ -32,12 +32,13 @@
 
 **BEFORE implementing ANY changes, the AI agent MUST read and internalize:**
 
-1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules)
+1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules - SINGLE SOURCE OF TRUTH)
 2. **`ARCHITECTURE_DECISION_LOG.md`** - Historical decisions, problem-solving approaches, and implementation rationale
-3. **`NAMING_RULES.md`** - Component naming conventions and file organization
-4. **`docs/component-json-requirements.md`** - Consolidated JSON structure requirements, encoding rules, generation patterns, and dynamic pin assignment rules (CRITICAL for all JSON editing and component creation)
+3. **`.github/copilot-instructions.md`** - Copilot-specific implementation guidance and best practices
 
 **FAILURE TO READ THESE DOCUMENTS WILL RESULT IN ARCHITECTURE VIOLATIONS**
+
+**Note**: All naming rules, component JSON requirements, encoding rules, generation patterns, and pin assignment rules are consolidated in this file (AI-AGENT-RULES.md). This is now the single source of truth.
 
 ## 📋 BOUNDED AUTHORITY FRAMEWORK
 
@@ -284,7 +285,7 @@ GSM.write<Environment>(); // Broadcasts current environment state
 
 **Shared Multi-Family Components:**
 - Location: `config/bots/multi_family/{subsystem_type}/{name}.json|src|hdr`
-- Types: `humanoid/`, `quadruped/`, `insectoid/`
+- Types: `humanoid/`, `quadruped/`, `tentacles/`, `wings/`
 
 **Creature-Specific Components:**
 - Location: `config/bots/bot_families/{family}/`
@@ -421,20 +422,20 @@ JSON `components: []` arrays specify the next component in the chain:
 - Enables incremental development - new subsystems can be added without regenerating entire system
 
 **Example for `goblin_head` subsystem:**
-1. **`src/goblin_head_dispatch_tables.cpp`** - Implementation with dispatch tables
-2. **`include/goblin_head_dispatch_tables.hpp`** - Header declarations for dispatch tables
-3. **`src/goblin_head_component_functions.cpp`** - Component function aggregator
-4. **`include/goblin_head_component_functions.hpp`** - Function declarations for components
-5. **`src/goblin_head_main.cpp`** - Core subsystem main entry point and initialization
-6. **`include/goblin_head_main.hpp`** - Header declarations for main entry point
+1. **`src/subsystems/goblin_head/goblin_head_component_functions.cpp`** - Component function aggregator
+2. **`include/subsystems/goblin_head/goblin_head_component_functions.hpp`** - Function declarations for components
+3. **`src/subsystems/goblin_head/goblin_head_dispatch_tables.cpp`** - Implementation with dispatch tables
+4. **`include/subsystems/goblin_head/goblin_head_dispatch_tables.hpp`** - Header declarations for dispatch tables
+5. **`src/subsystems/goblin_head/goblin_head_main.cpp`** - Core subsystem main entry point and initialization
+6. **`include/subsystems/goblin_head/goblin_head_main.hpp`** - Header declarations for main entry point
 
 **Example for `goblin_torso` subsystem (same creature, different subsystem):**
-1. **`src/goblin_torso_dispatch_tables.cpp`** - Implementation with dispatch tables
-2. **`include/goblin_torso_dispatch_tables.hpp`** - Header declarations
-3. **`src/goblin_torso_component_functions.cpp`** - Component function aggregator
-4. **`include/goblin_torso_component_functions.hpp`** - Function declarations
-5. **`src/goblin_torso_main.cpp`** - Core subsystem main entry point
-6. **`include/goblin_torso_main.hpp`** - Header declarations for main entry point
+1. **`src/subsystems/goblin_torso/goblin_torso_component_functions.cpp`** - Component function aggregator
+2. **`include/subsystems/goblin_torso/goblin_torso_component_functions.hpp`** - Function declarations
+3. **`src/subsystems/goblin_torso/goblin_torso_dispatch_tables.cpp`** - Implementation with dispatch tables
+4. **`include/subsystems/goblin_torso/goblin_torso_dispatch_tables.hpp`** - Header declarations
+5. **`src/subsystems/goblin_torso/goblin_torso_main.cpp`** - Core subsystem main entry point
+6. **`include/subsystems/goblin_torso/goblin_torso_main.hpp`** - Header declarations for main entry point
 
 **Generation Process**:
 - Process depth-first to create flat execution order per subsystem
@@ -504,6 +505,65 @@ JSON `components: []` arrays specify the next component in the chain:
 - Automatic detection and mandatory upconversion prevents silent failures
 - Version tracking enables safe incremental development
 
+## RULE 11C: TIMING GUIDELINES FOR COMPONENT EXECUTION
+
+**Component `hitCount` values control execution frequency. Use these guidelines:**
+
+| Component Type | hitCount Range | Purpose | Notes |
+|---|---|---|---|
+| **System heartbeat** | 1 | Every loop | Core system timing reference |
+| **Animations** | 3-7 | Fast updates | Eyes, mouth, movements |
+| **Sensors** | 10-20 | Responsive | Nose, ears, cameras |
+| **Mood** | 10-15 | Frequent | Emotional state updates |
+| **Personality** | 25 | Moderate | Behavior modulation |
+| **Family behaviors** | 10-50 | Mid-range | Shared creature behavior |
+| **Network/WiFi** | 50+ | Slow | Infrequent communication |
+
+**Timing Philosophy:**
+- Lower hitCount = higher frequency (executes more often)
+- Higher hitCount = lower frequency (executes less often)
+- System level: hitCount 1-50 (always responsive)
+- Family level: hitCount 10-50 (moderate frequency)
+- Bot-specific: hitCount 3-30 (high frequency for hardware)
+
+**Critical Rule**: NOTHING executes unless it's a component with `init()` and `act()` functions with a defined `hitCount`.
+
+## RULE 11D: JSON FILE ENCODING AND VALIDATION
+
+**ASCII Encoding is MANDATORY - No UTF-8 BOM:**
+
+All JSON configuration files MUST be saved as pure ASCII without UTF-8 BOM.
+
+**Why This Matters:**
+- UTF-8 BOM (bytes `EF BB BF` at file start) breaks Python JSON parser
+- Error: "Expecting value: line 1 column 1 (char 0)"
+- This is a known recurring issue in the project
+
+**Correct File Format (PowerShell):**
+```powershell
+# Save JSON as ASCII without BOM
+[System.IO.File]::WriteAllText($path, $content, [System.Text.Encoding]::ASCII)
+```
+
+**Detection of BOM Corruption (PowerShell):**
+```powershell
+# Check for BOM corruption
+$bytes = [System.IO.File]::ReadAllBytes($jsonFile)
+if ($bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) {
+    Write-Host "UTF-8 BOM DETECTED - File is corrupted!" -ForegroundColor Red
+    # Fix it:
+    $content = Get-Content $jsonFile -Raw
+    [System.IO.File]::WriteAllText($jsonFile, $content, [System.Text.Encoding]::ASCII)
+}
+```
+
+**Validation Rules:**
+- Always use ASCII encoding
+- Never use UTF-8 with BOM
+- Verify first 3 bytes are NOT `239, 187, 191`
+- First byte should be `123` (the `{` character)
+- Run validation: `python config/validate.py` after creating JSON files
+
 ## RULE 12: DEVELOPMENT PRACTICES
 
 **Windows Development Environment**:
@@ -526,7 +586,7 @@ JSON `components: []` arrays specify the next component in the chain:
 
 **Defined SharedMemory Classes:**
 
-**All SharedMemory classes are located in `/shared` directory.**
+21
 
 **⚠️ CRITICAL**: Any changes to the classes in this directory invalidates all of the generated files in `src/` and `include/`. Regenerate immediately after modifying any `/shared` class.
 
@@ -875,7 +935,3 @@ ELSE
 - Multi-ESP32 variant support
 
 ---
-
-# AI Agent Rules
-
-**Note**: This document has been consolidated into `consolidated-rules.md`. Please refer to that file for the latest rules and guidelines.
