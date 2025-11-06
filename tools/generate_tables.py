@@ -377,20 +377,21 @@ def to_cpp_literal(value: Any) -> str:
 def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -> List[str]:
     """Generate global declarations/assignments for inherited keyword fields from use_fields.
     
-    On FIRST encounter of a field name: Generate declaration + assignment
-    On SUBSEQUENT encounters: Generate assignment only (no redeclaration)
+    Two types of entries:
     
-    Type mismatches will cause compile errors (intentional validation).
+    1. NORMAL FIELDS: generates variable declaration/assignment
+       "color_schema": "RGB565"
+       First: static char* color_schema = "RGB565";
+       Later: color_schema = "RGB565";
     
-    use_fields: { "color_schema": "RGB565", "eat_my_cupcakes": true }
+    2. ADD_ONCE DIRECTIVES: outputs the value as literal code, deduplicated by value
+       Keys with ### markers (e.g., ###1###, ###2###) indicate unique add-once lines
+       "###1###": "#include display_classes.hdr"
+       "###2###": "#include mood_system.hdr"
+       First: #include display_classes.hdr
+       Later: (skipped if same value seen before)
     
-    First component:
-      static char* color_schema = "RGB565";
-      static bool eat_my_cupcakes = true;
-    
-    Second component (same fields):
-      color_schema = "RGB565";
-      eat_my_cupcakes = true;
+    Type mismatches on normal fields will cause compile errors (intentional validation).
     """
     lines: List[str] = []
     use_fields = data.get("use_fields")
@@ -398,18 +399,26 @@ def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -
         return lines
     
     for key, value in use_fields.items():
-        sanitized_key = sanitize_identifier(key)
-        cpp_type = json_to_cpp_type(value)
-        literal = to_cpp_literal(value)
-        
-        # Check if this field was already declared
-        if sanitized_key in context.declared_fields:
-            # Already declared - just generate assignment
-            lines.append(f"{sanitized_key} = {literal};")
+        # Check if this is a directive (contains ### markers)
+        if "###" in key:
+            # Output the value as literal code if not already output
+            if value not in context.declared_fields:
+                lines.append(str(value))  # Output directive as-is
+                context.declared_fields[value] = "add_once"  # Mark as declared
         else:
-            # First declaration - generate declaration + assignment
-            lines.append(f"static {cpp_type} {sanitized_key} = {literal};")
-            context.declared_fields[sanitized_key] = cpp_type
+            # Normal field: generate C++ variable declaration/assignment
+            sanitized_key = sanitize_identifier(key)
+            cpp_type = json_to_cpp_type(value)
+            literal = to_cpp_literal(value)
+            
+            # Check if this field was already declared
+            if sanitized_key in context.declared_fields:
+                # Already declared - just generate assignment
+                lines.append(f"{sanitized_key} = {literal};")
+            else:
+                # First declaration - generate declaration + assignment
+                lines.append(f"static {cpp_type} {sanitized_key} = {literal};")
+                context.declared_fields[sanitized_key] = cpp_type
     
     return lines
 
