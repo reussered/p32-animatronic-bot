@@ -1,0 +1,6 @@
+// Auto-generated header for POWER_MANAGEMENT
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t POWER_MANAGEMENT_init(void);
+void POWER_MANAGEMENT_act(void);

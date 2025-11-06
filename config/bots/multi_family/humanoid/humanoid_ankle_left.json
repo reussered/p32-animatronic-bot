@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/humanoid_ankle_left.json",
+    "relative_filename": "config/bots/multi_family/humanoid/humanoid_ankle_left.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "humanoid_ankle_left",

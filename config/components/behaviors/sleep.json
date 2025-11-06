@@ -37,5 +37,5 @@
         "battery_low"
     ],
     "version": "1.0.0",
-    "relative_filename": "config/behaviors/sleep.json"
+    "relative_filename": "config/components/behaviors/sleep.json"
 }

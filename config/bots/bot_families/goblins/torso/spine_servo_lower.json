@@ -1,6 +1,7 @@
 {
     "name": "spine_servo_lower",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/components/creature_specific/goblin/torso_components/spine_servo_lower.json",
-    "description": "Auto-generated component."
+    "relative_filename": "config/bots/bot_families/goblins/torso/spine_servo_lower.json",
+    "description": "Auto-generated component.",
+    "components": []
 }

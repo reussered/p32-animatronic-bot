@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/base/hand_base.json",
+    "relative_filename": "config/subsystems/hand_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HAND_CONTROLLER",
@@ -15,20 +15,8 @@
         "i2c_interfaces": 1
     },
     "components": [
-        {
-            "component_type": "GRIP_CONTROLLER",
-            "function_name": "grip_controller_update",
-            "default_hitCount": 12,
-            "role": "finger_coordination",
-            "required": true
-        },
-        {
-            "component_type": "TACTILE_PROCESSOR",
-            "function_name": "tactile_processor_update",
-            "default_hitCount": 15,
-            "role": "touch_feedback",
-            "required": true
-        }
+        "config/subsystems/components/grip_controller.json",
+        "config/subsystems/components/tactile_processor.json"
     ],
     "servo_specifications": {
         "thumb_joint": {

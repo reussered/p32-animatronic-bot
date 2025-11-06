@@ -1,0 +1,19 @@
+{
+    "name": "mouth_display",
+    "type": "SIMPLE_DISPLAY",
+    "relative_filename": "config/bots/multi_family/behaviors/mouth_display.json",
+    "description": "Auto-migrated from inline component",
+    "subsystem": "UNKNOWN",
+    "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
+    "hardware_reference": "config/components/hardware/gc9a01.json",
+    "interface_reference": "config/components/interfaces/spi_device_3.json",
+    "position": {
+        "x": "0.0 INCH",
+        "y": "-1.8 INCH",
+        "z": "0.0 INCH"
+    },
+    "init_function": "simple_display_init",
+    "functions": {
+        "show_expression": "simple_display_show_mouth"
+    }
+}

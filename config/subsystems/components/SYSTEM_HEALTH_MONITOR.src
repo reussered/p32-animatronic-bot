@@ -1,0 +1,17 @@
+// Auto-generated source for SYSTEM_HEALTH_MONITOR
+// Migrated from inline component definition
+#include "SYSTEM_HEALTH_MONITOR.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "SYSTEM_HEALTH_MONITOR";
+
+esp_err_t SYSTEM_HEALTH_MONITOR_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void SYSTEM_HEALTH_MONITOR_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

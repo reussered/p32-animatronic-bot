@@ -5,7 +5,7 @@
         "init_function": "goblin_bloodshot_eyes_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/goblin_bloodshot_eyes.json",
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_bloodshot_eyes.json",
     "name": "goblin_bloodshot_eyes",
     "subsystem": "VISION",
     "components": [

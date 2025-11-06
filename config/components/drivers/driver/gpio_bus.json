@@ -52,5 +52,5 @@
             "ESP32-DevKitC"
         ]
     },
-    "relative_filename": "config/driver/gpio_bus.json"
+    "relative_filename": "config/components/drivers/driver/gpio_bus.json"
 }

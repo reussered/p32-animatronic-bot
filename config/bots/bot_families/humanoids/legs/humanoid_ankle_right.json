@@ -92,5 +92,6 @@
         ]
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

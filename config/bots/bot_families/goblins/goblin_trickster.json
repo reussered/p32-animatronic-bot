@@ -85,12 +85,12 @@
         }
     },
     "components": [
-        "config/components/creature_specific/goblin_sly_grin.json",
-        "config/components/creature_specific/goblin_clever_eyes.json",
-        "config/components/creature_specific/goblin_nimble_fingers.json",
-        "config/components/creature_specific/goblin_prank_accessories.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_sly_grin.json",
+        "config/bots/bot_families/goblins/head/goblin_clever_eyes.json",
+        "config/bots/bot_families/goblins/head/goblin_nimble_fingers.json",
+        "config/bots/bot_families/goblins/head/goblin_prank_accessories.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "prank_execution": {

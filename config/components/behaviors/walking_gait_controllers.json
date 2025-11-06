@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/behaviors/walking_gait_controllers.json",
+    "relative_filename": "config/components/behaviors/walking_gait_controllers.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "behavior_id": "WALKING_GAIT_CONTROLLERS",

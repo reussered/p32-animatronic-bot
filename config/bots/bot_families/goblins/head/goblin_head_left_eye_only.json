@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/goblin_head_left_eye_only.json",
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_head_left_eye_only.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HEAD",
@@ -16,7 +16,7 @@
         "description": "Head coordination every 2.5 seconds"
     },
     "components": [
-        "config/components/creature_specific/goblin_left_eye.json"
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",

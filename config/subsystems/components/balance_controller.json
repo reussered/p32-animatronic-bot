@@ -1,0 +1,10 @@
+{
+    "name": "balance_controller",
+    "type": "BALANCE_CONTROLLER",
+    "relative_filename": "config/subsystems/components/balance_controller.json",
+    "description": "Auto-migrated from inline component",
+    "function_name": "balance_controller_update",
+    "default_hitCount": 3,
+    "role": "dynamic_stability",
+    "required": true
+}

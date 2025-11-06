@@ -16,12 +16,12 @@
         "mechanical_precision": "high_tolerance"
     },
     "components": [
-        "config/components/creature_specific/cat_animated_ears.json",
-        "config/components/creature_specific/cat_whisker_sensors.json",
-        "config/components/creature_specific/cat_left_eye.json",
-        "config/components/creature_specific/cat_right_eye.json",
-        "config/components/creature_specific/cat_mouth.json",
-        "config/components/creature_specific/cat_nose_sensor.json",
+        "config/bots/.archived_components/bot_families/cats/head/cat_animated_ears.json",
+        "config/bots/.archived_components/bot_families/cats/head/cat_whisker_sensors.json",
+        "config/bots/bot_families/cats/head/cat_left_eye.json",
+        "config/bots/bot_families/cats/head/cat_right_eye.json",
+        "config/bots/bot_families/cats/head/cat_mouth.json",
+        "config/bots/.archived_components/bot_families/cats/head/cat_nose_sensor.json",
         "config/subsystems/cat_head.json",
         "config/subsystems/cat_torso.json"
     ],

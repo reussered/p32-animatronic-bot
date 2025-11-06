@@ -1,0 +1,6 @@
+// Auto-generated header for right_eye_display
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t right_eye_display_init(void);
+void right_eye_display_act(void);

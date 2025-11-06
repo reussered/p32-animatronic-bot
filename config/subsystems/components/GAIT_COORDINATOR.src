@@ -1,0 +1,17 @@
+// Auto-generated source for GAIT_COORDINATOR
+// Migrated from inline component definition
+#include "GAIT_COORDINATOR.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "GAIT_COORDINATOR";
+
+esp_err_t GAIT_COORDINATOR_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void GAIT_COORDINATOR_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

@@ -5,7 +5,7 @@
         "init_function": "robot_speaker_array_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/robot_speaker_array.json",
+    "relative_filename": "config/bots/bot_families/robots/head/robot_speaker_array.json",
     "name": "robot_speaker_array",
     "subsystem": "AUDIO",
     "components": [

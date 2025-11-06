@@ -1,6 +1,7 @@
 {
     "name": "mesh_software_coordinator",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/components/creature_specific/goblin/torso_components/mesh_software_coordinator.json",
-    "description": "Auto-generated component."
+    "relative_filename": "config/bots/bot_families/goblins/torso/mesh_software_coordinator.json",
+    "description": "Auto-generated component.",
+    "components": []
 }

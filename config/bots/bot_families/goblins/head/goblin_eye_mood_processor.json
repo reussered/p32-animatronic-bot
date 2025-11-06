@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/goblin_eye_mood_processor.json",
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_eye_mood_processor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_eye_mood_processor",
@@ -43,9 +43,6 @@
             "intensity_multiplier": 1.4,
             "brightness_boost": 0.2
         }
-    }
+    },
+    "components": []
 }
-
-
-
-

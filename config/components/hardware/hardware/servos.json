@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/servos.json",
+    "relative_filename": "config/components/hardware/hardware/servos.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "servos",

@@ -1,11 +1,11 @@
 {
-    "relative_filename": "config/components/creature_specific/cat_right_eye.json",
+    "relative_filename": "config/bots/bot_families/cats/head/cat_right_eye.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_right_eye",
     "subsystem": "HEAD",
     "components": [
-        "config/components/creature_specific/cat_eye.json"
+        "config/bots/.archived_components/bot_families/cats/head/cat_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",

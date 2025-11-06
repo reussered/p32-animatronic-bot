@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/hw506_temperature_sensor.json",
+    "relative_filename": "config/components/hardware/hardware/hw506_temperature_sensor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_name": "HW-506 Temperature Sensor Module",

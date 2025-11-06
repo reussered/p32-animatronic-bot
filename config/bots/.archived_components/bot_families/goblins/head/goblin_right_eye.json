@@ -1,12 +1,12 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "goblin_right_eye",
     "components": [
         "config/components/goblin_eye.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/hardware/gc9a01.json",

@@ -1,10 +1,10 @@
 {
-    "relative_filename": "config/bots/bot_families/androids/head/android_left_eye.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/androids/head/android_left_eye.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "android_left_eye",
     "components": [
-        "config/components/creature_specific/android_eye.json",
+        "config/bots/.archived_components/bot_families/androids/head/android_eye.json",
         "config/subsystems/android_head.json",
         "config/subsystems/android_torso.json"
     ],

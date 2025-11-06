@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/gmt12864.json",
+    "relative_filename": "config/components/hardware/hardware/gmt12864.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "GMT12864_DISPLAY",

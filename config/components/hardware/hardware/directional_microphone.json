@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/directional_microphone.json",
+    "relative_filename": "config/components/hardware/hardware/directional_microphone.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "description": "High-sensitivity directional microphone for enhanced hearing capabilities",

@@ -20,8 +20,8 @@
         "config/components/creature_specific/goblin/arm_components/right/wrist_flexion_servo.json",
         "config/components/creature_specific/goblin/arm_components/right/wrist_rotation_servo.json",
         "config/components/creature_specific/goblin/arm_components/right/arm_status_led.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "shoulder_dof": "3",

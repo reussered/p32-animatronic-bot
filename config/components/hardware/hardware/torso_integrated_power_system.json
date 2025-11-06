@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/torso_integrated_power_system.json",
+    "relative_filename": "config/components/hardware/hardware/torso_integrated_power_system.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "torso_integrated_power_system",

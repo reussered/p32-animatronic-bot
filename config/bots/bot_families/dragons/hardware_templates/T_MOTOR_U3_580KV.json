@@ -1,35 +1,42 @@
 {
-  "template_name": "T_MOTOR_U3_580KV",
-  "manufacturer": "T-Motor",
-  "model": "U3 PRO 580KV",
-  "part_number": "U3 PRO 580",
-  "specifications": {
-    "type": "brushless_outrunner",
-    "kv": 580,
-    "pole_pairs": 14,
-    "stator_diameter_mm": 20,
-    "stator_length_mm": 15,
-    "no_load_current_a": 0.2,
-    "max_continuous_current_a": 40,
-    "max_burst_current_a": 60,
-    "internal_resistance_ohms": 0.12,
-    "weight_g": 55,
-    "voltage_nominal_v": 14.8,
-    "voltage_range_v": [11.0, 16.8],
-    "thrust_at_nominal_voltage": {
-      "rpm": 10640,
-      "static_thrust_gf": 950,
-      "static_thrust_kg": 0.95,
-      "power_w": 150
+    "template_name": "T_MOTOR_U3_580KV",
+    "manufacturer": "T-Motor",
+    "model": "U3 PRO 580KV",
+    "part_number": "U3 PRO 580",
+    "specifications": {
+        "type": "brushless_outrunner",
+        "kv": 580,
+        "pole_pairs": 14,
+        "stator_diameter_mm": 20,
+        "stator_length_mm": 15,
+        "no_load_current_a": 0.2,
+        "max_continuous_current_a": 40,
+        "max_burst_current_a": 60,
+        "internal_resistance_ohms": 0.12,
+        "weight_g": 55,
+        "voltage_nominal_v": 14.8,
+        "voltage_range_v": [
+            11.0,
+            16.8
+        ],
+        "thrust_at_nominal_voltage": {
+            "rpm": 10640,
+            "static_thrust_gf": 950,
+            "static_thrust_kg": 0.95,
+            "power_w": 150
+        },
+        "sensored": true,
+        "sensor_type": "hall_effect",
+        "connector": "XT30"
     },
-    "sensored": true,
-    "sensor_type": "hall_effect",
-    "connector": "XT30"
-  },
-  "mechanical_interface": {
-    "shaft_diameter_mm": 3,
-    "shaft_length_mm": 5,
-    "mount_pattern": "M2_holes",
-    "mount_diameter_mm": 19
-  }
+    "mechanical_interface": {
+        "shaft_diameter_mm": 3,
+        "shaft_length_mm": 5,
+        "mount_pattern": "M2_holes",
+        "mount_diameter_mm": 19
+    },
+    "name": "t_motor_u3_580kv",
+    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/t_motor_u3_580kv.json",
+    "type": "BOT",
+    "components": []
 }

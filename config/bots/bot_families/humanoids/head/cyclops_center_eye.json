@@ -1,11 +1,11 @@
 {
-    "relative_filename": "config/components/creature_specific/cyclops_center_eye.json",
+    "relative_filename": "config/bots/bot_families/humanoids/head/cyclops_center_eye.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "cyclops_center_eye",
     "subsystem": "HEAD",
     "components": [
-        "config/components/creature_specific/cyclops_eye.json"
+        "config/bots/bot_families/humanoids/head/cyclops_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/tft_2p5x1p5.json",

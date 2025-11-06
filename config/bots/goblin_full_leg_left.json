@@ -19,8 +19,8 @@
         "config/components/creature_specific/goblin/leg_components/left/ankle_flexion_servo.json",
         "config/components/creature_specific/goblin/leg_components/left/ankle_rotation_servo.json",
         "config/components/creature_specific/goblin/leg_components/left/leg_status_led.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "hip_dof": "3",

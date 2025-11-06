@@ -62,5 +62,6 @@
         ]
     },
     "name": "robot_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

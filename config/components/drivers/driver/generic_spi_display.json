@@ -66,5 +66,5 @@
         ],
         "external_libraries": []
     },
-    "relative_filename": "config/driver/generic_spi_display.json"
+    "relative_filename": "config/components/drivers/driver/generic_spi_display.json"
 }

@@ -1,0 +1,6 @@
+// Auto-generated header for mouth_display
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t mouth_display_init(void);
+void mouth_display_act(void);

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/base/torso_base.json",
+    "relative_filename": "config/subsystems/torso_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "TORSO_CONTROLLER",
@@ -28,20 +28,8 @@
         "power_management": "SWITCHING_REGULATOR"
     },
     "components": [
-        {
-            "component_type": "POWER_MANAGEMENT",
-            "function_name": "power_management_update",
-            "default_hitCount": 25,
-            "role": "system_power_control",
-            "required": true
-        },
-        {
-            "component_type": "SYSTEM_HEALTH_MONITOR",
-            "function_name": "health_monitor_update",
-            "default_hitCount": 50,
-            "role": "subsystem_monitoring",
-            "required": true
-        }
+        "config/subsystems/components/power_management.json",
+        "config/subsystems/components/system_health_monitor.json"
     ],
     "name": "torso_base",
     "type": "UNKNOWN"

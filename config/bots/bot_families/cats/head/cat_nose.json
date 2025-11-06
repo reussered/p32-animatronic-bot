@@ -5,7 +5,7 @@
         "init_function": "cat_nose_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/cat_nose.json",
+    "relative_filename": "config/bots/bot_families/cats/head/cat_nose.json",
     "name": "cat_nose",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
@@ -17,5 +17,6 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

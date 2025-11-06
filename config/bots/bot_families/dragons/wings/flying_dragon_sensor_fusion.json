@@ -1,31 +1,36 @@
 {
-  "name": "flying_dragon_sensor_fusion",
-  "category": "sensor_system",
-  "description": "IMU + barometer for attitude & altitude estimation",
-  "version": "1.0.0",
-  "hardware_templates": [
-    {
-      "name": "ICM20689_BMP390",
-      "imu_type": "ICM20689",
-      "imu_i2c_address": "0x68",
-      "imu_sample_rate_hz": 1000,
-      "imu_accel_range_g": 16,
-      "imu_gyro_range_dps": 2000,
-      "barometer_type": "BMP390",
-      "barometer_i2c_address": "0x77",
-      "barometer_sample_rate_hz": 50,
-      "barometer_accuracy_m": 2.0,
-      "i2c_bus": {
-        "sda_pin": 21,
-        "scl_pin": 22,
-        "frequency_hz": 400000
-      }
-    }
-  ],
-  "power_requirements": {
-    "nominal_voltage_v": 3.3,
-    "nominal_current_a": 0.05
-  },
-  "dependencies": ["flying_dragon_flight_safety"],
-  "function_signature": "flying_dragon_sensor_fusion_init(void); void flying_dragon_sensor_fusion_act(void);"
+    "name": "flying_dragon_sensor_fusion",
+    "category": "sensor_system",
+    "description": "IMU + barometer for attitude & altitude estimation",
+    "version": "1.0.0",
+    "hardware_templates": [
+        {
+            "name": "ICM20689_BMP390",
+            "imu_type": "ICM20689",
+            "imu_i2c_address": "0x68",
+            "imu_sample_rate_hz": 1000,
+            "imu_accel_range_g": 16,
+            "imu_gyro_range_dps": 2000,
+            "barometer_type": "BMP390",
+            "barometer_i2c_address": "0x77",
+            "barometer_sample_rate_hz": 50,
+            "barometer_accuracy_m": 2.0,
+            "i2c_bus": {
+                "sda_pin": 21,
+                "scl_pin": 22,
+                "frequency_hz": 400000
+            }
+        }
+    ],
+    "power_requirements": {
+        "nominal_voltage_v": 3.3,
+        "nominal_current_a": 0.05
+    },
+    "dependencies": [
+        "flying_dragon_flight_safety"
+    ],
+    "function_signature": "flying_dragon_sensor_fusion_init(void); void flying_dragon_sensor_fusion_act(void);",
+    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_sensor_fusion.json",
+    "type": "BOT",
+    "components": []
 }

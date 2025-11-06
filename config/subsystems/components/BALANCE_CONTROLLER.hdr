@@ -1,0 +1,6 @@
+// Auto-generated header for BALANCE_CONTROLLER
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t BALANCE_CONTROLLER_init(void);
+void BALANCE_CONTROLLER_act(void);

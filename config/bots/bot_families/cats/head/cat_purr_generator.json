@@ -5,7 +5,7 @@
         "init_function": "cat_purr_generator_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/cat_purr_generator.json",
+    "relative_filename": "config/bots/bot_families/cats/head/cat_purr_generator.json",
     "name": "cat_purr_generator",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
@@ -17,5 +17,6 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

@@ -262,6 +262,47 @@ Result: Dispatch tables execute in pipeline order, creating data flow.
 - **Both exist simultaneously** - different data types use different mechanisms based on scope and persistence needs
 - Example: Display frame buffer stays in file-scoped globals (fast), Mood state moves via `GSM.write<Mood>()` to other ESP32s
 
+---
+
+### ANIMATION KEYFRAME PATTERN (Special Case - NOT Component Pipeline)
+
+**Animations are DATA, not executable components. They use a different pattern: `component_id` with `keyframes`.**
+
+Animation files (`assets/animations/{creature}/*.json`) define keyframe sequences with `component_id` references:
+
+```json
+{
+  "animation_name": "goblin_blink",
+  "components": [
+    {
+      "component_id": "goblin_eye_left",
+      "keyframes": [
+        {
+          "time_ms": 0,
+          "display_content": { "eye_openness": 0.8 }
+        },
+        {
+          "time_ms": 100,
+          "display_content": { "eye_openness": 0.0 }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Key Differences from Component Pipeline:**
+
+- Uses `component_id` (not file paths) to reference components by name
+- Contains `keyframes` array (animation data, not executables)
+- These are **metadata/data files**, not executable components
+- Animation system reads these and applies keyframe data to named components at runtime
+- **NOT subject to RULE 4 component pipeline requirements** - separate execution model
+
+**CRITICAL**: Inline components in `config/` ARE violations of RULE 4/6. Only animations use `component_id` + `keyframes` pattern.
+
+---
+
 ## RULE 5: PROVEN IMPLEMENTATION PATTERNS
 **USE THESE WORKING PATTERNS - DO NOT REDESIGN THEM**
 

@@ -1,41 +1,49 @@
 {
-  "name": "flying_dragon_behavior_sequencer",
-  "category": "control_system",
-  "description": "Creature-wide behavior sequencer - mood-based behavior, autonomous sequences, coordinated subsystem control",
-  "version": "1.0.0",
-  "hardware_templates": [
-    {
-      "name": "ESP32_S3_BEHAVIOR_LOGIC",
-      "behavior_controller": "ESP32_S3",
-      "clock_speed_mhz": 240,
-      "behavior_loop_frequency_hz": 50,
-      "states": [
-        "IDLE",
-        "ALERT",
-        "EXPLORATION",
-        "PLAY",
-        "AGGRESSION",
-        "SLEEP",
-        "FLIGHT_MODE"
-      ],
-      "mood_system": {
-        "mood_types": ["calm", "playful", "aggressive", "fearful"],
-        "mood_decay_hz": 0.5,
-        "mood_influence_all_subsystems": true
-      }
-    }
-  ],
-  "power_requirements": {
-    "nominal_voltage_v": 3.3,
-    "nominal_current_a": 0.2
-  },
-  "dependencies": [
-    "flying_dragon_sensor_fusion",
-    "flying_dragon_motor_controller",
-    "flying_dragon_wing_servo_controller",
-    "flying_dragon_flight_safety",
-    "flying_dragon_leg_assembly",
-    "flying_dragon_foot_assembly"
-  ],
-  "function_signature": "flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);"
+    "name": "flying_dragon_behavior_sequencer",
+    "category": "control_system",
+    "description": "Creature-wide behavior sequencer - mood-based behavior, autonomous sequences, coordinated subsystem control",
+    "version": "1.0.0",
+    "hardware_templates": [
+        {
+            "name": "ESP32_S3_BEHAVIOR_LOGIC",
+            "behavior_controller": "ESP32_S3",
+            "clock_speed_mhz": 240,
+            "behavior_loop_frequency_hz": 50,
+            "states": [
+                "IDLE",
+                "ALERT",
+                "EXPLORATION",
+                "PLAY",
+                "AGGRESSION",
+                "SLEEP",
+                "FLIGHT_MODE"
+            ],
+            "mood_system": {
+                "mood_types": [
+                    "calm",
+                    "playful",
+                    "aggressive",
+                    "fearful"
+                ],
+                "mood_decay_hz": 0.5,
+                "mood_influence_all_subsystems": true
+            }
+        }
+    ],
+    "power_requirements": {
+        "nominal_voltage_v": 3.3,
+        "nominal_current_a": 0.2
+    },
+    "dependencies": [
+        "flying_dragon_sensor_fusion",
+        "flying_dragon_motor_controller",
+        "flying_dragon_wing_servo_controller",
+        "flying_dragon_flight_safety",
+        "flying_dragon_leg_assembly",
+        "flying_dragon_foot_assembly"
+    ],
+    "function_signature": "flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);",
+    "relative_filename": "config/bots/bot_families/dragons/flying_dragon_behavior_sequencer.json",
+    "type": "BOT",
+    "components": []
 }

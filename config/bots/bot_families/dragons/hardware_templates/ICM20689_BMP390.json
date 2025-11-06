@@ -1,37 +1,19 @@
 {
-  "template_name": "ICM20689_BMP390",
-  "components": [
-    {
-      "sensor": "ICM20689",
-      "type": "6_axis_imu",
-      "i2c_address": "0x68",
-      "i2c_frequency_hz": 400000,
-      "accel_range_g": [2, 4, 8, 16],
-      "accel_sensitivity_lsb_g": 2048,
-      "accel_noise_density_ug_rtHz": 75,
-      "gyro_range_dps": [250, 500, 1000, 2000],
-      "gyro_sensitivity_lsb_dps": 131,
-      "gyro_noise_density": 12.5,
-      "sample_rate_hz": 1000,
-      "temperature_range_c": [-40, 85],
-      "power_consumption_ma": 3.5
+    "template_name": "ICM20689_BMP390",
+    "components": [
+        "config/bots/bot_families/dragons/hardware_templates/components/inline_component_0.json",
+        "config/bots/bot_families/dragons/hardware_templates/components/inline_component_1.json"
+    ],
+    "breakout_board": {
+        "dimensions_mm": [
+            25,
+            25
+        ],
+        "mounting_holes": "M2",
+        "connector": "4pin_i2c",
+        "address_selectable": false
     },
-    {
-      "sensor": "BMP390",
-      "type": "barometer",
-      "i2c_address": "0x77",
-      "pressure_range_pa": [30000, 110000],
-      "temperature_range_c": [-40, 85],
-      "altitude_accuracy_m": 2.0,
-      "altitude_resolution_m": 0.1,
-      "sample_rate_hz": 50,
-      "power_consumption_ma": 0.2
-    }
-  ],
-  "breakout_board": {
-    "dimensions_mm": [25, 25],
-    "mounting_holes": "M2",
-    "connector": "4pin_i2c",
-    "address_selectable": false
-  }
+    "name": "icm20689_bmp390",
+    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/icm20689_bmp390.json",
+    "type": "BOT"
 }

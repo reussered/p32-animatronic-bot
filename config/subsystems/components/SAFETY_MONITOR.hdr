@@ -1,0 +1,6 @@
+// Auto-generated header for SAFETY_MONITOR
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t SAFETY_MONITOR_init(void);
+void SAFETY_MONITOR_act(void);

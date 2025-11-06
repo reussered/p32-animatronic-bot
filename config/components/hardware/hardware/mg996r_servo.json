@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/mg996r_servo.json",
+    "relative_filename": "config/components/hardware/hardware/mg996r_servo.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "mg996r_servo",

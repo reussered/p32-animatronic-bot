@@ -16,10 +16,10 @@
         "whisker_span": "3.5 INCH"
     },
     "components": [
-        "config/components/creature_specific/cat_left_eye.json",
-        "config/components/creature_specific/cat_right_eye.json",
-        "config/components/creature_specific/cat_nose.json",
-        "config/components/creature_specific/cat_speaker.json",
+        "config/bots/bot_families/cats/head/cat_left_eye.json",
+        "config/bots/bot_families/cats/head/cat_right_eye.json",
+        "config/bots/.archived_components/bot_families/cats/head/cat_nose.json",
+        "config/bots/.archived_components/bot_families/cats/head/cat_speaker.json",
         "config/subsystems/cat_head.json",
         "config/subsystems/cat_torso.json"
     ],

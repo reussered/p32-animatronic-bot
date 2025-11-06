@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/audio.json",
+    "relative_filename": "config/components/hardware/hardware/audio.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "audio",

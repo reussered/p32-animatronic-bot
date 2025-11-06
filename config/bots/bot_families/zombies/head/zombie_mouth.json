@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/zombie_mouth.json",
+    "relative_filename": "config/bots/bot_families/zombies/head/zombie_mouth.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "zombie_mouth",
@@ -38,5 +38,6 @@
         "threatening": "zombie_aggressive_snap.anim"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

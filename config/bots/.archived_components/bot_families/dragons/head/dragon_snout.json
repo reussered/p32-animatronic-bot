@@ -5,7 +5,7 @@
         "init_function": "dragon_snout_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/dragons/head/dragon_snout.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/dragons/head/dragon_snout.json",
     "name": "dragon_snout",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

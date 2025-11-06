@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/driver/gpio_single_driver.json",
+    "relative_filename": "config/components/drivers/driver/gpio_single_driver.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "gpio_single_driver",

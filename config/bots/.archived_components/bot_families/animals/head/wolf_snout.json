@@ -5,7 +5,7 @@
         "init_function": "wolf_snout_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/animals/head/wolf_snout.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/animals/head/wolf_snout.json",
     "name": "wolf_snout",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

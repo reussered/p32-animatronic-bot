@@ -209,5 +209,6 @@
         }
     },
     "name": "modular_humanoid_esp32",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

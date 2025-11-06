@@ -1,0 +1,17 @@
+// Auto-generated source for SAFETY_MONITOR
+// Migrated from inline component definition
+#include "SAFETY_MONITOR.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "SAFETY_MONITOR";
+
+esp_err_t SAFETY_MONITOR_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void SAFETY_MONITOR_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

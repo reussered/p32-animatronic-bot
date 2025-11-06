@@ -5,7 +5,7 @@
         "init_function": "wolf_snout_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/wolf_snout.json",
+    "relative_filename": "config/bots/bot_families/wolves/head/wolf_snout.json",
     "name": "wolf_snout",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
@@ -17,5 +17,6 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

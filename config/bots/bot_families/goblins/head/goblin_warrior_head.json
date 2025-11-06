@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/creatures/goblin_warrior_head.json",
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_warrior_head.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_id": "goblin_warrior_head_001",
@@ -53,5 +53,6 @@
         "threat_assessment_hitCount": 10
     },
     "name": "goblin_warrior_head",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

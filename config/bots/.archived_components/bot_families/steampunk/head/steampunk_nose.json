@@ -5,7 +5,7 @@
         "init_function": "steampunk_nose_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/steampunk/head/steampunk_nose.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/steampunk/head/steampunk_nose.json",
     "name": "steampunk_nose",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

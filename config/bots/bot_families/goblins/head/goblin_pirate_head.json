@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/goblin_pirate_head.json",
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_pirate_head.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HEAD",
@@ -16,12 +16,12 @@
         "description": "Pirate head coordination every 2.5 seconds"
     },
     "components": [
-        "config/components/creature_specific/goblin/head_components/goblin_left_eye.json",
-        "config/components/creature_specific/goblin/head_components/goblin_mouth.json",
-        "config/components/creature_specific/goblin/head_components/goblin_speaker.json",
-        "config/components/creature_specific/goblin/head_components/goblin_nose.json",
-        "config/components/creature_specific/goblin/head_components/goblin_left_ear.json",
-        "config/components/creature_specific/goblin/head_components/goblin_right_ear.json"
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
+        "config/bots/bot_families/goblins/head/goblin_left_ear.json",
+        "config/bots/bot_families/goblins/head/goblin_right_ear.json"
     ],
     "pirate_specific_features": {
         "missing_eye_compensation": {

@@ -74,5 +74,6 @@
         "terrain_adaptation": "VARIABLE_STEP_HEIGHT_CAPABILITY"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

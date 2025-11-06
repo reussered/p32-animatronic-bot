@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/tft_2p5x1p5.json",
+    "relative_filename": "config/components/hardware/hardware/tft_2p5x1p5.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "TFT_2P5X1P5_DISPLAY",

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/dragon_mouth.json",
+    "relative_filename": "config/bots/bot_families/dragons/head/dragon_mouth.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "positioned_component_type": "TFT_DISPLAY",
@@ -43,5 +43,6 @@
     },
     "hardware_type": "POSITIONED_COMPONENT",
     "name": "dragon_mouth",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

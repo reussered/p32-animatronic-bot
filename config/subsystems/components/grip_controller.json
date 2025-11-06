@@ -1,0 +1,10 @@
+{
+    "name": "grip_controller",
+    "type": "GRIP_CONTROLLER",
+    "relative_filename": "config/subsystems/components/grip_controller.json",
+    "description": "Auto-migrated from inline component",
+    "function_name": "grip_controller_update",
+    "default_hitCount": 12,
+    "role": "finger_coordination",
+    "required": true
+}

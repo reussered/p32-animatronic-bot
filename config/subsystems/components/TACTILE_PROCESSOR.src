@@ -1,0 +1,17 @@
+// Auto-generated source for TACTILE_PROCESSOR
+// Migrated from inline component definition
+#include "TACTILE_PROCESSOR.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "TACTILE_PROCESSOR";
+
+esp_err_t TACTILE_PROCESSOR_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void TACTILE_PROCESSOR_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

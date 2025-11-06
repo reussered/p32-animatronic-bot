@@ -1,0 +1,19 @@
+{
+    "name": "nose_sensor",
+    "type": "SIMPLE_SENSOR",
+    "relative_filename": "config/bots/multi_family/behaviors/nose_sensor.json",
+    "description": "Auto-migrated from inline component",
+    "subsystem": "UNKNOWN",
+    "ifdef_variable": "ENABLE_SIMPLE_SENSOR",
+    "hardware_reference": "config/components/hardware/hc_sr04_sensor.json",
+    "interface_reference": "config/components/interfaces/gpio_pair_1.json",
+    "position": {
+        "x": "0.0 INCH",
+        "y": "0.0 INCH",
+        "z": "0.0 INCH"
+    },
+    "init_function": "simple_sensor_init",
+    "functions": {
+        "read_distance": "simple_sensor_read_distance"
+    }
+}

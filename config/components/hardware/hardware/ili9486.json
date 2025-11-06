@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/ili9486.json",
+    "relative_filename": "config/components/hardware/hardware/ili9486.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ILI9486_DISPLAY",

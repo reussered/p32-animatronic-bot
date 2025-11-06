@@ -1,0 +1,21 @@
+{
+    "name": "inline_component_1",
+    "type": "BAROMETER",
+    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/components/inline_component_1.json",
+    "description": "Auto-migrated from inline component",
+    "sensor": "BMP390",
+    "i2c_address": "0x77",
+    "pressure_range_pa": [
+        30000,
+        110000
+    ],
+    "temperature_range_c": [
+        -40,
+        85
+    ],
+    "altitude_accuracy_m": 2.0,
+    "altitude_resolution_m": 0.1,
+    "sample_rate_hz": 50,
+    "power_consumption_ma": 0.2,
+    "components": []
+}

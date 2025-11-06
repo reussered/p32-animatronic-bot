@@ -34,8 +34,8 @@
         }
     },
     "components": [
-        "config/components/creature_specific/zombie_rotting_flesh.json",
-        "config/components/creature_specific/zombie_shamble_actuator.json"
+        "config/bots/bot_families/undead/head/zombie_rotting_flesh.json",
+        "config/bots/.archived_components/bot_families/undead/head/zombie_shamble_actuator.json"
     ],
     "custom_behaviors": {
         "hunger_response": {

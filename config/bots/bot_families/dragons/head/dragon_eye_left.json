@@ -5,7 +5,7 @@
         "init_function": "dragon_eye_left_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/dragon_eye_left.json",
+    "relative_filename": "config/bots/bot_families/dragons/head/dragon_eye_left.json",
     "name": "dragon_eye_left",
     "subsystem": "VISION",
     "components": [

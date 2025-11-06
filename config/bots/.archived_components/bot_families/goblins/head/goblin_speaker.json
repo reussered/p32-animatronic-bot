@@ -1,13 +1,13 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_speaker.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_speaker",
     "subsystem": "HEAD",
     "components": [
-        "config/hardware/speaker.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/components/hardware/speaker.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

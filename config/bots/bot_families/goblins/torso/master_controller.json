@@ -1,6 +1,7 @@
 {
     "name": "master_controller",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/components/creature_specific/goblin/torso_components/master_controller.json",
-    "description": "Auto-generated component."
+    "relative_filename": "config/bots/bot_families/goblins/torso/master_controller.json",
+    "description": "Auto-generated component.",
+    "components": []
 }

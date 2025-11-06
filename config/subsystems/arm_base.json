@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/base/arm_base.json",
+    "relative_filename": "config/subsystems/arm_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "ARM_CONTROLLER",
@@ -27,20 +27,8 @@
         "voltage_regulation": "ONBOARD_LDO"
     },
     "components": [
-        {
-            "component_type": "COORDINATION_ENGINE",
-            "function_name": "coordination_update",
-            "default_hitCount": 10,
-            "role": "balance_compensation",
-            "required": true
-        },
-        {
-            "component_type": "SAFETY_MONITOR",
-            "function_name": "safety_monitor_update",
-            "default_hitCount": 2,
-            "role": "collision_detection",
-            "required": true
-        }
+        "config/subsystems/components/coordination_engine.json",
+        "config/subsystems/components/safety_monitor.json"
     ],
     "servo_specifications": {
         "shoulder_joint": {

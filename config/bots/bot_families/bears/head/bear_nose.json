@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/bear_nose.json",
+    "relative_filename": "config/bots/bot_families/bears/head/bear_nose.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "bear_nose",
@@ -33,5 +33,6 @@
         "hitCount": 15
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

@@ -5,7 +5,7 @@
         "init_function": "cyclops_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/cyclops_speaker.json",
+    "relative_filename": "config/bots/bot_families/humanoids/head/cyclops_speaker.json",
     "name": "cyclops_speaker",
     "subsystem": "AUDIO",
     "components": [

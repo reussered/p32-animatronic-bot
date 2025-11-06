@@ -39,5 +39,5 @@
             "ESP32-DevKitC"
         ]
     },
-    "relative_filename": "config/driver/pwm_bus.json"
+    "relative_filename": "config/components/drivers/driver/pwm_bus.json"
 }

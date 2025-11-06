@@ -156,5 +156,6 @@
         }
     },
     "name": "esp32_humanoid_full",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

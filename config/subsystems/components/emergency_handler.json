@@ -1,0 +1,10 @@
+{
+    "name": "emergency_handler",
+    "type": "EMERGENCY_HANDLER",
+    "relative_filename": "config/subsystems/components/emergency_handler.json",
+    "description": "Auto-migrated from inline component",
+    "function_name": "emergency_handler_update",
+    "default_hitCount": 1,
+    "role": "safety_monitor",
+    "required": true
+}

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/aesthetic_overlay.json",
+    "relative_filename": "config/components/hardware/hardware/aesthetic_overlay.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "description": "Generic aesthetic overlay system for scars, paint, and decorative elements",

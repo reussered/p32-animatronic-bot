@@ -1,0 +1,19 @@
+{
+    "name": "main_speaker",
+    "type": "SIMPLE_AUDIO",
+    "relative_filename": "config/bots/multi_family/behaviors/main_speaker.json",
+    "description": "Auto-migrated from inline component",
+    "subsystem": "UNKNOWN",
+    "ifdef_variable": "ENABLE_SIMPLE_AUDIO",
+    "hardware_reference": "config/components/hardware/speaker.json",
+    "interface_reference": "config/components/interfaces/i2s_device_1.json",
+    "position": {
+        "x": "0.0 INCH",
+        "y": "-2.5 INCH",
+        "z": "-1.0 INCH"
+    },
+    "init_function": "simple_audio_init",
+    "functions": {
+        "play_sound": "simple_audio_play"
+    }
+}

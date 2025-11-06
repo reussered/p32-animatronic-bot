@@ -1,33 +1,41 @@
 {
-  "name": "flying_dragon_motor_controller",
-  "category": "flight_system",
-  "description": "Brushless motor control for quadcopter lift system",
-  "version": "1.0.0",
-  "hardware_templates": [
-    {
-      "name": "T_MOTOR_U3_580KV",
-      "motor_type": "brushless_sensored",
-      "kv_rating": 580,
-      "max_continuous_thrust_gf": 950,
-      "max_continuous_current_a": 40,
-      "weight_g": 55,
-      "motor_count": 4,
-      "esc_type": "HOBBYWING_40A_ESC",
-      "esc_current_rating_a": 40,
-      "esc_weight_g": 28,
-      "esc_count": 4,
-      "pwm_frequency_hz": 490,
-      "pwm_pins": [12, 13, 14, 15],
-      "prop_diameter_inches": 10,
-      "prop_pitch_inches": 5
-    }
-  ],
-  "power_requirements": {
-    "nominal_voltage_v": 14.8,
-    "min_voltage_v": 11.0,
-    "max_current_a": 160,
-    "average_current_hover_a": 40
-  },
-  "dependencies": [],
-  "function_signature": "flying_dragon_motor_controller_init(void); void flying_dragon_motor_controller_act(void);"
+    "name": "flying_dragon_motor_controller",
+    "category": "flight_system",
+    "description": "Brushless motor control for quadcopter lift system",
+    "version": "1.0.0",
+    "hardware_templates": [
+        {
+            "name": "T_MOTOR_U3_580KV",
+            "motor_type": "brushless_sensored",
+            "kv_rating": 580,
+            "max_continuous_thrust_gf": 950,
+            "max_continuous_current_a": 40,
+            "weight_g": 55,
+            "motor_count": 4,
+            "esc_type": "HOBBYWING_40A_ESC",
+            "esc_current_rating_a": 40,
+            "esc_weight_g": 28,
+            "esc_count": 4,
+            "pwm_frequency_hz": 490,
+            "pwm_pins": [
+                12,
+                13,
+                14,
+                15
+            ],
+            "prop_diameter_inches": 10,
+            "prop_pitch_inches": 5
+        }
+    ],
+    "power_requirements": {
+        "nominal_voltage_v": 14.8,
+        "min_voltage_v": 11.0,
+        "max_current_a": 160,
+        "average_current_hover_a": 40
+    },
+    "dependencies": [],
+    "function_signature": "flying_dragon_motor_controller_init(void); void flying_dragon_motor_controller_act(void);",
+    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_motor_controller.json",
+    "type": "BOT",
+    "components": []
 }

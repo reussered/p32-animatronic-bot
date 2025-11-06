@@ -16,11 +16,11 @@
         "description": "Test head coordination every cycle for real-time validation"
     },
     "components": [
-        "config/components/creature_specific/goblin_left_eye.json<gc9a01>",
-        "config/components/creature_specific/goblin_right_eye.json<gc9a01>",
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
         "config/components/hardware/gc9a01.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "test_configuration": {
         "hardware_validation": true,

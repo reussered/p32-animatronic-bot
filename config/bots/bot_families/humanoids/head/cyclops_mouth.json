@@ -5,7 +5,7 @@
         "init_function": "cyclops_mouth_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/cyclops_mouth.json",
+    "relative_filename": "config/bots/bot_families/humanoids/head/cyclops_mouth.json",
     "name": "cyclops_mouth",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
@@ -17,5 +17,6 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

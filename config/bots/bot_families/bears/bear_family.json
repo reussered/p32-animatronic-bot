@@ -66,5 +66,6 @@
         ]
     },
     "name": "bear_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "components": []
 }

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
     "version": "3.0.0",
     "author": "config/author.json",
     "name": "goblin_left_eye",
@@ -7,8 +7,8 @@
     "created": "2025-10-22",
     "components": [
         "config/components/goblin_eye.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

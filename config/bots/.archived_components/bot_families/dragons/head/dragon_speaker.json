@@ -5,7 +5,7 @@
         "init_function": "dragon_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/dragons/head/dragon_speaker.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
     "name": "dragon_speaker",
     "subsystem": "AUDIO",
     "components": [

@@ -1,25 +1,31 @@
 {
-  "name": "flying_dragon_flight_safety",
-  "category": "safety_system",
-  "description": "Failsafe monitoring, battery management, emergency procedures",
-  "version": "1.0.0",
-  "hardware_templates": [
-    {
-      "name": "WATCHDOG_BATTERY_MONITOR",
-      "watchdog_timeout_ms": 500,
-      "battery_adc_pin": 36,
-      "battery_min_voltage_v": 11.0,
-      "battery_cells": 4,
-      "low_battery_alert_v": 11.5,
-      "altitude_floor_m": 0.5,
-      "gyro_limit_dps": 500,
-      "emergency_descent_rate_ms": 0.5
-    }
-  ],
-  "power_requirements": {
-    "nominal_voltage_v": 3.3,
-    "nominal_current_a": 0.01
-  },
-  "dependencies": ["flying_dragon_sensor_fusion", "flying_dragon_motor_controller"],
-  "function_signature": "flying_dragon_flight_safety_init(void); void flying_dragon_flight_safety_act(void);"
+    "name": "flying_dragon_flight_safety",
+    "category": "safety_system",
+    "description": "Failsafe monitoring, battery management, emergency procedures",
+    "version": "1.0.0",
+    "hardware_templates": [
+        {
+            "name": "WATCHDOG_BATTERY_MONITOR",
+            "watchdog_timeout_ms": 500,
+            "battery_adc_pin": 36,
+            "battery_min_voltage_v": 11.0,
+            "battery_cells": 4,
+            "low_battery_alert_v": 11.5,
+            "altitude_floor_m": 0.5,
+            "gyro_limit_dps": 500,
+            "emergency_descent_rate_ms": 0.5
+        }
+    ],
+    "power_requirements": {
+        "nominal_voltage_v": 3.3,
+        "nominal_current_a": 0.01
+    },
+    "dependencies": [
+        "flying_dragon_sensor_fusion",
+        "flying_dragon_motor_controller"
+    ],
+    "function_signature": "flying_dragon_flight_safety_init(void); void flying_dragon_flight_safety_act(void);",
+    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_flight_safety.json",
+    "type": "BOT",
+    "components": []
 }

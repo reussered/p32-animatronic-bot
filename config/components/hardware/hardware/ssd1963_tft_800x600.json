@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/ssd1963_tft_800x600.json",
+    "relative_filename": "config/components/hardware/hardware/ssd1963_tft_800x600.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "SSD1963_DISPLAY",

@@ -34,8 +34,8 @@
         }
     },
     "components": [
-        "config/components/creature_specific/zombie_exposed_bone.json",
-        "config/components/creature_specific/zombie_drag_mechanism.json"
+        "config/bots/bot_families/undead/head/zombie_exposed_bone.json",
+        "config/bots/bot_families/undead/head/zombie_drag_mechanism.json"
     ],
     "custom_behaviors": {
         "ambush_crawling": {

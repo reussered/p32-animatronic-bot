@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "name": "goblin_right_eye",
     "components": [
-        "config/components/creature_specific/goblin_eye.json"
+        "config/bots/bot_families/goblins/head/goblin_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",

@@ -206,19 +206,6 @@
             "tweeter": "HIGH_FREQUENCY_2kHz_TO_20kHz_WITH_CROSSOVER"
         }
     },
-    "components": {
-        "output_filtering": {
-            "description": "LC filter required for speaker connection",
-            "inductor": "22uH_TO_47uH_LOW_DCR",
-            "capacitor": "220uF_TO_470uF_LOW_ESR",
-            "purpose": "REMOVE_SWITCHING_FREQUENCY_CONTENT"
-        },
-        "power_supply_filtering": {
-            "input_capacitor": "10uF_TO_100uF_CERAMIC_OR_TANTALUM",
-            "bypass_capacitor": "0.1uF_CERAMIC_CLOSE_TO_IC",
-            "bulk_capacitor": "220uF_TO_1000uF_ELECTROLYTIC"
-        }
-    },
     "manufacturer_pin_mappings": {
         "adafruit_max98357a": {
             "power": [

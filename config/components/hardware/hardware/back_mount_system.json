@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/back_mount_system.json",
+    "relative_filename": "config/components/hardware/hardware/back_mount_system.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "BACK_MOUNT_SYSTEM_V1",

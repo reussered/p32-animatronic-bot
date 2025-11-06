@@ -1,12 +1,12 @@
 {
-    "relative_filename": "config/hardware/gc9a01.json",
+    "relative_filename": "config/components/hardware/hardware/gc9a01.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "display_driver": true,
     "name": "gc9a01",
     "type": "DISPLAY_DRIVER",
     "components": [
-        "config/interfaces/spi_display_bus.json"
+        "config/components/drivers/spi_display_bus.json"
     ],
     "physical_specs": {
         "diameter": "1.28 INCH",
@@ -56,5 +56,4 @@
         "getFrameSize",
         "getFrameRowSize"
     ]
-
 }

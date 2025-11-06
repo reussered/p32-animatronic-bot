@@ -5,7 +5,7 @@
         "init_function": "cat_nose_sensor_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/cats/head/cat_nose_sensor.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/cats/head/cat_nose_sensor.json",
     "name": "cat_nose_sensor",
     "subsystem": "SENSOR",
     "components": [

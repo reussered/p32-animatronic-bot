@@ -10,7 +10,14 @@
         "hitCount": 15,
         "description": "Mood update every 1.5 seconds"
     },
-    "components": {
+    "responsibilities": [
+        "Update 8-component mood state from sensor inputs",
+        "Apply natural mood decay over time",
+        "Synchronize mood state via ESP-NOW mesh",
+        "Trigger animations based on mood changes"
+    ],
+    "type": "FAMILY_LEVEL",
+    "moods": {
         "ANGER": {
             "decay_rate": 5,
             "max_value": 127
@@ -43,12 +50,5 @@
             "decay_rate": 1,
             "max_value": 127
         }
-    },
-    "responsibilities": [
-        "Update 8-component mood state from sensor inputs",
-        "Apply natural mood decay over time",
-        "Synchronize mood state via ESP-NOW mesh",
-        "Trigger animations based on mood changes"
-    ],
-    "type": "FAMILY_LEVEL"
+    }
 }

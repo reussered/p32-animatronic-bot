@@ -1,26 +1,40 @@
 {
-  "template_name": "HOBBYWING_40A_ESC",
-  "manufacturer": "Hobbywing",
-  "model": "XRotor 40A",
-  "specifications": {
-    "continuous_current_a": 40,
-    "burst_current_a": 50,
-    "voltage_nominal_v": 14.8,
-    "voltage_range_v": [2.0, 6.0],
-    "lipo_cell_range": "2S–6S",
-    "weight_g": 28,
-    "firmware": "BLHeli-32",
-    "pwm_frequency_hz": 490,
-    "pwm_resolution_bit": 13,
-    "input_protocol": ["PWM", "DShot600"],
-    "telemetry": ["voltage", "current", "temperature"],
-    "connector_input": "JST_XH",
-    "connector_motor": "HXT_3.5mm_bullet",
-    "programming": "via_USB_adapter"
-  },
-  "thermal": {
-    "temperature_sensor": true,
-    "low_voltage_throttle": true,
-    "overtemp_cutoff_c": 120
-  }
+    "template_name": "HOBBYWING_40A_ESC",
+    "manufacturer": "Hobbywing",
+    "model": "XRotor 40A",
+    "specifications": {
+        "continuous_current_a": 40,
+        "burst_current_a": 50,
+        "voltage_nominal_v": 14.8,
+        "voltage_range_v": [
+            2.0,
+            6.0
+        ],
+        "lipo_cell_range": "2S\u20136S",
+        "weight_g": 28,
+        "firmware": "BLHeli-32",
+        "pwm_frequency_hz": 490,
+        "pwm_resolution_bit": 13,
+        "input_protocol": [
+            "PWM",
+            "DShot600"
+        ],
+        "telemetry": [
+            "voltage",
+            "current",
+            "temperature"
+        ],
+        "connector_input": "JST_XH",
+        "connector_motor": "HXT_3.5mm_bullet",
+        "programming": "via_USB_adapter"
+    },
+    "thermal": {
+        "temperature_sensor": true,
+        "low_voltage_throttle": true,
+        "overtemp_cutoff_c": 120
+    },
+    "name": "hobbywing_40a_esc",
+    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/hobbywing_40a_esc.json",
+    "type": "BOT",
+    "components": []
 }

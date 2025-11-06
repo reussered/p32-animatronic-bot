@@ -1,6 +1,7 @@
 {
     "name": "goblin_left_ear",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/components/creature_specific/goblin/head_components/goblin_left_ear.json",
-    "description": "Auto-generated component."
+    "relative_filename": "config/bots/bot_families/goblins/head/goblin_left_ear.json",
+    "description": "Auto-generated component.",
+    "components": []
 }

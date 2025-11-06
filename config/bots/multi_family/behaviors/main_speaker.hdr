@@ -1,0 +1,6 @@
+// Auto-generated header for main_speaker
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t main_speaker_init(void);
+void main_speaker_act(void);

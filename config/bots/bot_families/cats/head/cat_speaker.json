@@ -5,7 +5,7 @@
         "init_function": "cat_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/cat_speaker.json",
+    "relative_filename": "config/bots/bot_families/cats/head/cat_speaker.json",
     "name": "cat_speaker",
     "subsystem": "AUDIO",
     "components": [

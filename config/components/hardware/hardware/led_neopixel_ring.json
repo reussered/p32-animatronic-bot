@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/led_neopixel_ring.json",
+    "relative_filename": "config/components/hardware/hardware/led_neopixel_ring.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "LED_STRIP",

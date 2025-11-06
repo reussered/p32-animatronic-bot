@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/base/leg_base.json",
+    "relative_filename": "config/subsystems/leg_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "LEG_CONTROLLER",
@@ -15,20 +15,8 @@
         "i2c_interfaces": 1
     },
     "components": [
-        {
-            "component_type": "GAIT_COORDINATOR",
-            "function_name": "gait_coordinator_update",
-            "default_hitCount": 8,
-            "role": "walking_coordination",
-            "required": true
-        },
-        {
-            "component_type": "BALANCE_CONTROLLER",
-            "function_name": "balance_controller_update",
-            "default_hitCount": 3,
-            "role": "dynamic_stability",
-            "required": true
-        }
+        "config/subsystems/components/gait_coordinator.json",
+        "config/subsystems/components/balance_controller.json"
     ],
     "servo_specifications": {
         "hip_joint": {

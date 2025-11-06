@@ -1,21 +1,22 @@
 {
-  "name": "flying_dragon_flight_system",
-  "category": "subsystem",
-  "description": "Integrated flight control subsystem (motors + wings + sensors + safety)",
-  "type": "container",
-  "components": [
-    "flying_dragon_sensor_fusion<ICM20689_BMP390>",
-    "flying_dragon_flight_safety<WATCHDOG_BATTERY_MONITOR>",
-    "flying_dragon_motor_controller<T_MOTOR_U3_580KV>",
-    "flying_dragon_wing_servo_controller<MG996R_SERVO>",
-    "flying_dragon_behavior_sequencer<ESP32_S3_FLIGHT_LOGIC>"
-  ],
-  "execution_priority": [
-    1,
-    2,
-    3,
-    4,
-    5
-  ],
-  "notes": "Execute in order: sensors -> safety -> motors -> servos -> behavior logic"
+    "name": "flying_dragon_flight_system",
+    "category": "subsystem",
+    "description": "Integrated flight control subsystem (motors + wings + sensors + safety)",
+    "type": "CONTAINER",
+    "components": [
+        "config/bots/bot_families/dragons/wings/flying_dragon_sensor_fusion.json",
+        "config/bots/bot_families/dragons/wings/flying_dragon_flight_safety.json",
+        "config/bots/bot_families/dragons/wings/flying_dragon_motor_controller.json",
+        "config/bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.json",
+        "config/bots/bot_families/dragons/flying_dragon_behavior_sequencer.json"
+    ],
+    "execution_priority": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "notes": "Execute in order: sensors -> safety -> motors -> servos -> behavior logic",
+    "relative_filename": "config/components/subsystem/flying_dragon_flight_system.json"
 }

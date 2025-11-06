@@ -1,0 +1,6 @@
+// Auto-generated header for EMERGENCY_HANDLER
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t EMERGENCY_HANDLER_init(void);
+void EMERGENCY_HANDLER_act(void);

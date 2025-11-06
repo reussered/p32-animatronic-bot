@@ -9,7 +9,7 @@
     "subsystem": "power_supply",
     "created": "2025-10-23",
     "components": [
-        "config/hardware/ds18b20_temperature_sensor.json"
+        "config/components/hardware/hardware/ds18b20_temperature_sensor.json"
     ],
     "positioning": {
         "coordinate_system": "power_module_3d",

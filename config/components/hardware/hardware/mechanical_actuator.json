@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/mechanical_actuator.json",
+    "relative_filename": "config/components/hardware/hardware/mechanical_actuator.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "MECHANICAL_ACTUATOR",

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/creature_specific/cat_whisker_sensors.json",
+    "relative_filename": "config/bots/bot_families/cats/head/cat_whisker_sensors.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_whisker_sensors",

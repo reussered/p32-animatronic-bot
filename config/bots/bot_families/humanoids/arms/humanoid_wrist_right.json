@@ -75,5 +75,6 @@
         "coordination_capability": "BILATERAL_FINE_MOTOR_TASKS"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

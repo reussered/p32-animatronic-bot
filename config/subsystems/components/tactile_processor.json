@@ -1,0 +1,10 @@
+{
+    "name": "tactile_processor",
+    "type": "TACTILE_PROCESSOR",
+    "relative_filename": "config/subsystems/components/tactile_processor.json",
+    "description": "Auto-migrated from inline component",
+    "function_name": "tactile_processor_update",
+    "default_hitCount": 15,
+    "role": "touch_feedback",
+    "required": true
+}

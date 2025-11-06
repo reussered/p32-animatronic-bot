@@ -1,0 +1,6 @@
+// Auto-generated header for COORDINATION_ENGINE
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t COORDINATION_ENGINE_init(void);
+void COORDINATION_ENGINE_act(void);

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/ws2812_led_strip.json",
+    "relative_filename": "config/components/hardware/hardware/ws2812_led_strip.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "WS2812_LED_STRIP",

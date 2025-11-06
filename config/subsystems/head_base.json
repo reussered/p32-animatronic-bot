@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/subsystems/base/head_base.json",
+    "relative_filename": "config/subsystems/head_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HEAD_CONTROLLER",
@@ -27,27 +27,9 @@
         "voltage_regulation": "ONBOARD_LDO"
     },
     "components": [
-        {
-            "component_type": "AI_BEHAVIOR_ENGINE",
-            "function_name": "ai_behavior_update",
-            "default_hitCount": 100,
-            "role": "decision_making",
-            "required": true
-        },
-        {
-            "component_type": "SENSOR_FUSION",
-            "function_name": "sensor_fusion_update",
-            "default_hitCount": 20,
-            "role": "environmental_awareness",
-            "required": true
-        },
-        {
-            "component_type": "EMERGENCY_HANDLER",
-            "function_name": "emergency_handler_update",
-            "default_hitCount": 1,
-            "role": "safety_monitor",
-            "required": true
-        }
+        "config/subsystems/components/ai_behavior_engine.json",
+        "config/subsystems/components/sensor_fusion.json",
+        "config/subsystems/components/emergency_handler.json"
     ],
     "timing_constraints": {
         "loop_frequency": "MAXIMUM_SPEED",

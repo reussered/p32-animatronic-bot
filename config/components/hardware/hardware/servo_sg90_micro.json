@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/servo_sg90_micro.json",
+    "relative_filename": "config/components/hardware/hardware/servo_sg90_micro.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "servo_sg90_micro",

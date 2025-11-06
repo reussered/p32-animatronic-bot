@@ -14,35 +14,6 @@
         "compression_factor": 0.85,
         "skull_scale": 1.1
     },
-    "components": {
-        "rotting_flesh_effects": {
-            "description": "Servo-actuated skin flaps that simulate decaying flesh with periodic twitching movements",
-            "implementation": "Multi-layer silicone skin with hidden servo motors for realistic decay animation",
-            "activation_triggers": [
-                "proximity_detection",
-                "random_intervals",
-                "audio_cues"
-            ]
-        },
-        "mindless_pursuit_system": {
-            "description": "Simple tracking behavior that follows movement with single-minded determination",
-            "implementation": "Ultrasonic sensor array with basic pathfinding algorithms, no complex decision making",
-            "behavioral_patterns": [
-                "straight_line_pursuit",
-                "obstacle_bumping",
-                "relentless_following"
-            ]
-        },
-        "decay_scent_simulator": {
-            "description": "Chemical scent dispenser that releases decay-like odors for immersive horror experience",
-            "implementation": "Small pump system with scent cartridges, activated during peak interaction moments",
-            "safety_features": [
-                "non-toxic_compounds",
-                "limited_dispersion",
-                "manual_override"
-            ]
-        }
-    },
     "mood_profile": {
         "FEAR": 5,
         "ANGER": 45,
@@ -113,5 +84,35 @@
         "Behavior patterns emphasize simple, relentless pursuit mechanics"
     ],
     "name": "zombie_shambler_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "subsystems": {
+        "rotting_flesh_effects": {
+            "description": "Servo-actuated skin flaps that simulate decaying flesh with periodic twitching movements",
+            "implementation": "Multi-layer silicone skin with hidden servo motors for realistic decay animation",
+            "activation_triggers": [
+                "proximity_detection",
+                "random_intervals",
+                "audio_cues"
+            ]
+        },
+        "mindless_pursuit_system": {
+            "description": "Simple tracking behavior that follows movement with single-minded determination",
+            "implementation": "Ultrasonic sensor array with basic pathfinding algorithms, no complex decision making",
+            "behavioral_patterns": [
+                "straight_line_pursuit",
+                "obstacle_bumping",
+                "relentless_following"
+            ]
+        },
+        "decay_scent_simulator": {
+            "description": "Chemical scent dispenser that releases decay-like odors for immersive horror experience",
+            "implementation": "Small pump system with scent cartridges, activated during peak interaction moments",
+            "safety_features": [
+                "non-toxic_compounds",
+                "limited_dispersion",
+                "manual_override"
+            ]
+        }
+    },
+    "components": []
 }

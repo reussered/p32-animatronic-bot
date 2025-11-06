@@ -1,0 +1,17 @@
+// Auto-generated source for BALANCE_CONTROLLER
+// Migrated from inline component definition
+#include "BALANCE_CONTROLLER.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "BALANCE_CONTROLLER";
+
+esp_err_t BALANCE_CONTROLLER_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void BALANCE_CONTROLLER_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

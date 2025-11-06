@@ -1,55 +1,58 @@
 {
-  "name": "flying_dragon_behavior_sequencer",
-  "category": "control_system",
-  "description": "Flight state machine, mood-based behavior, autonomous sequences",
-  "version": "1.0.0",
-  "hardware_templates": [
-    {
-      "name": "ESP32_S3_FLIGHT_LOGIC",
-      "flight_controller": "ESP32_S3",
-      "clock_speed_mhz": 240,
-      "flight_loop_frequency_hz": 100,
-      "states": [
-        "IDLE",
-        "ARMING",
-        "HOVER",
-        "CLIMB",
-        "CRUISE_FORWARD",
-        "AGGRESSIVE_MANEUVER",
-        "LANDING",
-        "EMERGENCY_DESCENT"
-      ],
-      "mood_influence": {
-        "calm": {
-          "max_roll_deg": 20,
-          "max_pitch_deg": 20,
-          "max_climb_rate_ms": 0.5,
-          "wing_beat_freq_hz": 2.5
-        },
-        "playful": {
-          "max_roll_deg": 45,
-          "max_pitch_deg": 35,
-          "max_climb_rate_ms": 1.0,
-          "wing_beat_freq_hz": 3.5
-        },
-        "aggressive": {
-          "max_roll_deg": 60,
-          "max_pitch_deg": 50,
-          "max_climb_rate_ms": 1.5,
-          "wing_beat_freq_hz": 4.0
+    "name": "flying_dragon_behavior_sequencer",
+    "category": "control_system",
+    "description": "Flight state machine, mood-based behavior, autonomous sequences",
+    "version": "1.0.0",
+    "hardware_templates": [
+        {
+            "name": "ESP32_S3_FLIGHT_LOGIC",
+            "flight_controller": "ESP32_S3",
+            "clock_speed_mhz": 240,
+            "flight_loop_frequency_hz": 100,
+            "states": [
+                "IDLE",
+                "ARMING",
+                "HOVER",
+                "CLIMB",
+                "CRUISE_FORWARD",
+                "AGGRESSIVE_MANEUVER",
+                "LANDING",
+                "EMERGENCY_DESCENT"
+            ],
+            "mood_influence": {
+                "calm": {
+                    "max_roll_deg": 20,
+                    "max_pitch_deg": 20,
+                    "max_climb_rate_ms": 0.5,
+                    "wing_beat_freq_hz": 2.5
+                },
+                "playful": {
+                    "max_roll_deg": 45,
+                    "max_pitch_deg": 35,
+                    "max_climb_rate_ms": 1.0,
+                    "wing_beat_freq_hz": 3.5
+                },
+                "aggressive": {
+                    "max_roll_deg": 60,
+                    "max_pitch_deg": 50,
+                    "max_climb_rate_ms": 1.5,
+                    "wing_beat_freq_hz": 4.0
+                }
+            }
         }
-      }
-    }
-  ],
-  "power_requirements": {
-    "nominal_voltage_v": 3.3,
-    "nominal_current_a": 0.2
-  },
-  "dependencies": [
-    "flying_dragon_sensor_fusion",
-    "flying_dragon_motor_controller",
-    "flying_dragon_wing_servo_controller",
-    "flying_dragon_flight_safety"
-  ],
-  "function_signature": "flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);"
+    ],
+    "power_requirements": {
+        "nominal_voltage_v": 3.3,
+        "nominal_current_a": 0.2
+    },
+    "dependencies": [
+        "flying_dragon_sensor_fusion",
+        "flying_dragon_motor_controller",
+        "flying_dragon_wing_servo_controller",
+        "flying_dragon_flight_safety"
+    ],
+    "function_signature": "flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);",
+    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_behavior_sequencer.json",
+    "type": "BOT",
+    "components": []
 }

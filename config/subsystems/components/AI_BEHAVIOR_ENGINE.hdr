@@ -1,0 +1,6 @@
+// Auto-generated header for AI_BEHAVIOR_ENGINE
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t AI_BEHAVIOR_ENGINE_init(void);
+void AI_BEHAVIOR_ENGINE_act(void);

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/ips_round_rgb.json",
+    "relative_filename": "config/components/hardware/hardware/ips_round_rgb.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "IPS_ROUND_RGB_DISPLAY",

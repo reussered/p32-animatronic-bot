@@ -5,7 +5,7 @@
         "init_function": "wolf_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/wolf_speaker.json",
+    "relative_filename": "config/bots/bot_families/wolves/head/wolf_speaker.json",
     "name": "wolf_speaker",
     "subsystem": "AUDIO",
     "components": [

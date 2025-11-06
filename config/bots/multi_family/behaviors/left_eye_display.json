@@ -1,0 +1,19 @@
+{
+    "name": "left_eye_display",
+    "type": "SIMPLE_DISPLAY",
+    "relative_filename": "config/bots/multi_family/behaviors/left_eye_display.json",
+    "description": "Auto-migrated from inline component",
+    "subsystem": "UNKNOWN",
+    "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",
+    "hardware_reference": "config/components/hardware/gc9a01.json",
+    "interface_reference": "config/components/interfaces/spi_device_1.json",
+    "position": {
+        "x": "-1.5 INCH",
+        "y": "0.5 INCH",
+        "z": "0.0 INCH"
+    },
+    "init_function": "simple_display_init",
+    "functions": {
+        "show_expression": "simple_display_show_eyes"
+    }
+}

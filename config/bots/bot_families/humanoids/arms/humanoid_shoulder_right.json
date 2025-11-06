@@ -88,5 +88,6 @@
         "coordination_with_left": "BILATERAL_SYMMETRIC_MOVEMENTS"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

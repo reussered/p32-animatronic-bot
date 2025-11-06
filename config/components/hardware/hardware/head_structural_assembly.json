@@ -20,7 +20,7 @@
         }
     },
     "name": "head_structural_assembly",
-    "relative_filename": "config/hardware/head_structural_assembly.json",
+    "relative_filename": "config/components/hardware/hardware/head_structural_assembly.json",
     "description": "Generated hardware component for head_structural_assembly",
     "cost_performance": {
         "lead_time_days": 7,

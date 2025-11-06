@@ -1,0 +1,6 @@
+// Auto-generated header for SENSOR_FUSION
+// Migrated from inline component definition
+#include <esp_err.h>
+
+esp_err_t SENSOR_FUSION_init(void);
+void SENSOR_FUSION_act(void);

@@ -14,58 +14,6 @@
         "compression_factor": 0.8,
         "skull_scale": 1.0
     },
-    "components": {
-        "telekinetic_simulation_system": {
-            "description": "Hidden servo actuators and magnetic systems that create illusion of object movement",
-            "implementation": "Network of concealed electromagnets and pneumatic actuators to move lightweight objects",
-            "object_types": [
-                "small_decorations",
-                "lightweight_furniture",
-                "hanging_items",
-                "loose_papers"
-            ]
-        },
-        "electrical_interference_generator": {
-            "description": "RF interference system that causes lights to flicker and electronics to malfunction",
-            "implementation": "Controlled electromagnetic pulse generator with safety limiters for nearby electronics",
-            "effects": [
-                "light_flickering",
-                "radio_static",
-                "phone_interference",
-                "speaker_disruption"
-            ]
-        },
-        "ectoplasm_projection_system": {
-            "description": "Fog machine with UV-reactive particles creating glowing mist manifestations",
-            "implementation": "Micro fog generator with UV LED array and fluorescent particles for ethereal glow effects",
-            "manifestation_patterns": [
-                "swirling_mists",
-                "cold_spots",
-                "glowing_trails",
-                "floating_orbs"
-            ]
-        },
-        "temperature_manipulation": {
-            "description": "Localized cooling system that creates supernatural cold spots and breath condensation",
-            "implementation": "Thermoelectric cooling elements with targeted air circulation for dramatic temperature drops",
-            "cold_effects": [
-                "visible_breath",
-                "frost_formation",
-                "temperature_gradients",
-                "chill_sensations"
-            ]
-        },
-        "phase_shifting_illusion": {
-            "description": "Dynamic transparency control using smart glass and backlighting for appearing/disappearing effects",
-            "implementation": "Electrochromic glass panels with programmable opacity and integrated LED backlighting",
-            "phase_states": [
-                "fully_visible",
-                "translucent",
-                "barely_visible",
-                "completely_invisible"
-            ]
-        }
-    },
     "mood_profile": {
         "FEAR": 10,
         "ANGER": 35,
@@ -135,5 +83,57 @@
         "Designed for interactive haunted experiences with real environmental impact"
     ],
     "name": "ghost_poltergeist_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "subsystems": {
+        "telekinetic_simulation_system": {
+            "description": "Hidden servo actuators and magnetic systems that create illusion of object movement",
+            "implementation": "Network of concealed electromagnets and pneumatic actuators to move lightweight objects",
+            "object_types": [
+                "small_decorations",
+                "lightweight_furniture",
+                "hanging_items",
+                "loose_papers"
+            ]
+        },
+        "electrical_interference_generator": {
+            "description": "RF interference system that causes lights to flicker and electronics to malfunction",
+            "implementation": "Controlled electromagnetic pulse generator with safety limiters for nearby electronics",
+            "effects": [
+                "light_flickering",
+                "radio_static",
+                "phone_interference",
+                "speaker_disruption"
+            ]
+        },
+        "ectoplasm_projection_system": {
+            "description": "Fog machine with UV-reactive particles creating glowing mist manifestations",
+            "implementation": "Micro fog generator with UV LED array and fluorescent particles for ethereal glow effects",
+            "manifestation_patterns": [
+                "swirling_mists",
+                "cold_spots",
+                "glowing_trails",
+                "floating_orbs"
+            ]
+        },
+        "temperature_manipulation": {
+            "description": "Localized cooling system that creates supernatural cold spots and breath condensation",
+            "implementation": "Thermoelectric cooling elements with targeted air circulation for dramatic temperature drops",
+            "cold_effects": [
+                "visible_breath",
+                "frost_formation",
+                "temperature_gradients",
+                "chill_sensations"
+            ]
+        },
+        "phase_shifting_illusion": {
+            "description": "Dynamic transparency control using smart glass and backlighting for appearing/disappearing effects",
+            "implementation": "Electrochromic glass panels with programmable opacity and integrated LED backlighting",
+            "phase_states": [
+                "fully_visible",
+                "translucent",
+                "barely_visible",
+                "completely_invisible"
+            ]
+        }
+    }
 }

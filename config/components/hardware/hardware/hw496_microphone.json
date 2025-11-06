@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/hw496_microphone.json",
+    "relative_filename": "config/components/hardware/hardware/hw496_microphone.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_name": "HW-496 MEMS Microphone Module",

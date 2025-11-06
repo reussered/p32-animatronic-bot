@@ -5,7 +5,7 @@
         "init_function": "steampunk_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/steampunk/head/steampunk_speaker.json",
+    "relative_filename": "config/bots/.archived_components/bot_families/steampunk/head/steampunk_speaker.json",
     "name": "steampunk_speaker",
     "subsystem": "AUDIO",
     "components": [

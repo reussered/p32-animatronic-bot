@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/led_matrix_small.json",
+    "relative_filename": "config/components/hardware/hardware/led_matrix_small.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "LED_MATRIX_SMALL",

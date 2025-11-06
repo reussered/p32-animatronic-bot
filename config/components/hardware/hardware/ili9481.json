@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/ili9481.json",
+    "relative_filename": "config/components/hardware/hardware/ili9481.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ILI9481_5INCH_TFT",

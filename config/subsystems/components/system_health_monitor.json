@@ -1,0 +1,10 @@
+{
+    "name": "system_health_monitor",
+    "type": "SYSTEM_HEALTH_MONITOR",
+    "relative_filename": "config/subsystems/components/system_health_monitor.json",
+    "description": "Auto-migrated from inline component",
+    "function_name": "health_monitor_update",
+    "default_hitCount": 50,
+    "role": "subsystem_monitoring",
+    "required": true
+}

@@ -1,0 +1,17 @@
+// Auto-generated source for POWER_MANAGEMENT
+// Migrated from inline component definition
+#include "POWER_MANAGEMENT.hdr"
+#include <esp_log.h>
+
+static const char* TAG = "POWER_MANAGEMENT";
+
+esp_err_t POWER_MANAGEMENT_init(void)
+{
+    ESP_LOGI(TAG, "init executed");
+    return ESP_OK;
+}
+
+void POWER_MANAGEMENT_act(void)
+{
+    ESP_LOGI(TAG, "act executed");
+}

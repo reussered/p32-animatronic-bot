@@ -5,7 +5,7 @@
         "init_function": "dragon_nostril_left_init",
         "hitCount": 10
     },
-    "relative_filename": "config/components/creature_specific/dragon_nostril_left.json",
+    "relative_filename": "config/bots/bot_families/dragons/head/dragon_nostril_left.json",
     "name": "dragon_nostril_left",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",
@@ -17,5 +17,6 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "components": []
 }

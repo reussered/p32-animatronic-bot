@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/hardware/st7789.json",
+    "relative_filename": "config/components/hardware/hardware/st7789.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ST7789_DISPLAY",

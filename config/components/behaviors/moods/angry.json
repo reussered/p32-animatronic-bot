@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/moods/angry.json",
+    "relative_filename": "config/components/behaviors/moods/angry.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "angry",
