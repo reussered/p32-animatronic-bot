@@ -10,6 +10,10 @@ class ValidationRunner:
         self.rules_file = self.root_dir / "master_rules.json"
         self.rules = self._load_rules()
         self.master_files_dirty = False
+        self.master_file_registry = {}  # Maps lowercase paths to actual file paths
+        self.components_fixed = 0
+        self.components_errors = 0
+        self.inline_components_found = 0  # Track inline component violations
 
     def _load_rules(self):
         if not self.rules_file.exists():
@@ -27,7 +31,11 @@ class ValidationRunner:
 
     def run(self):
         """Walks through the project and runs all validations."""
-        print("[UPDATE] Updating master file list...")
+        print("[STEP 1] Building master file registry from config/ tree...")
+        self._build_master_file_registry()
+        
+        print(f"[STEP 2] Found {len(self.master_file_registry)} component files in registry")
+        print("[STEP 3] Updating master file list in master_rules.json...")
         all_json_files = self._get_all_json_files()
 
         # New step: Check for and rename files with uppercase letters
@@ -40,7 +48,7 @@ class ValidationRunner:
         self._consolidate_master_rules_types()
         self._migrate_required_fields()
 
-        print("[VALIDATE] Starting component validation...")
+        print("[STEP 4] Starting component validation...")
         
         overall_errors_found = False
         for file_path in all_json_files:
@@ -48,6 +56,17 @@ class ValidationRunner:
                 overall_errors_found = True
 
         self._save_rules()
+
+        print(f"\n[COMPONENTS VALIDATION SUMMARY]")
+        print(f"  - References corrected: {self.components_fixed}")
+        print(f"  - Unresolvable errors: {self.components_errors}")
+        print(f"  - INLINE COMPONENTS (RULE 4/6 VIOLATIONS): {self.inline_components_found}")
+
+        if self.inline_components_found > 0:
+            print(f"\n[CRITICAL] {self.inline_components_found} inline components found!")
+            print(f"Inline components violate RULE 4 (Component Pipeline Model)")
+            print(f"and RULE 6 (File Organization Standards).")
+            print(f"All components must be separate .json files with .src/.hdr pairs.")
 
         if not overall_errors_found:
             print("\n[OK] Validation complete. No new errors found.")
@@ -63,6 +82,135 @@ class ValidationRunner:
         assets_files = list(assets_dir.glob("**/*.json"))
 
         return config_files + assets_files
+
+    def _build_master_file_registry(self):
+        """
+        Walks the entire config/ tree and builds a registry of all component files.
+        Registry maps relative paths (normalized) to actual Path objects.
+        RULE 6: File organization standards - covers all component types and locations.
+        """
+        config_dir = self.root_dir / "config"
+        
+        if not config_dir.exists():
+            print("WARNING: config/ directory not found")
+            return
+        
+        # Find all .json files
+        for json_file in config_dir.glob("**/*.json"):
+            relative_path = json_file.relative_to(self.root_dir).as_posix()
+            
+            # Store both normalized (with and without .json) and full path
+            normalized_key = relative_path.lower()
+            self.master_file_registry[normalized_key] = json_file
+            
+            # Also store without .json extension for flexible matching
+            if normalized_key.endswith('.json'):
+                no_ext_key = normalized_key[:-5]
+                self.master_file_registry[no_ext_key] = json_file
+
+    def _find_component_file(self, component_ref: str) -> Path | None:
+        """
+        Attempts to locate a component file referenced in a components: [] array.
+        Handles various path formats and tries case-insensitive matching.
+        Returns the actual Path or None if not found.
+        """
+        # Clean up the reference (remove template markers like <...>)
+        ref_clean = re.sub(r"<.*>", "", component_ref).strip()
+        
+        # Try direct match first (exact path as given)
+        ref_lower = ref_clean.lower()
+        if ref_lower in self.master_file_registry:
+            return self.master_file_registry[ref_lower]
+        
+        # Try with .json extension added
+        if not ref_lower.endswith('.json'):
+            ref_with_json = ref_lower + '.json'
+            if ref_with_json in self.master_file_registry:
+                return self.master_file_registry[ref_with_json]
+        
+        # Try to find by component name (last part of path)
+        component_name = Path(ref_clean).stem.lower()
+        for reg_key, reg_path in self.master_file_registry.items():
+            if reg_path.stem.lower() == component_name:
+                return reg_path
+        
+        return None
+
+    def _validate_and_fix_components_array(self, file_path, data):
+        """
+        RULE 4 ENFORCEMENT: components: [] MUST contain ONLY string file references.
+        No inline objects, no metadata, no keyframes - just component file paths.
+        
+        RULE 4: Component pipeline model - all entries in components: [] are file references
+        RULE 6: File organization standards - all components must be separate .json files
+        """
+        errors = []
+        made_changes = False
+        
+        if "components" not in data:
+            return errors, made_changes
+        
+        if not isinstance(data["components"], list):
+            errors.append("Field 'components' must be an array/list")
+            return errors, made_changes
+        
+        corrected_components = []
+        
+        for idx, ref in enumerate(data["components"]):
+            if isinstance(ref, str):
+                # CORRECT: String file reference
+                ref_clean = re.sub(r"<.*>", "", ref).strip()
+                
+                # Try to find the component
+                actual_path = self._find_component_file(ref_clean)
+                
+                if actual_path:
+                    # Component found - use correct relative path
+                    correct_ref = actual_path.relative_to(self.root_dir).as_posix()
+                    
+                    if correct_ref != ref_clean:
+                        # Path was corrected
+                        print(f"  -> [FIXED] Component reference in {os.path.relpath(file_path, self.root_dir)}")
+                        print(f"     OLD: {ref_clean}")
+                        print(f"     NEW: {correct_ref}")
+                        corrected_components.append(correct_ref)
+                        made_changes = True
+                        self.components_fixed += 1
+                    else:
+                        # Path is already correct
+                        corrected_components.append(ref_clean)
+                else:
+                    # Component not found - report error
+                    errors.append(f"Component reference '{ref_clean}' not found (index {idx})")
+                    corrected_components.append(ref_clean)  # Keep original to preserve structure
+                    self.components_errors += 1
+                    
+            elif isinstance(ref, dict):
+                # VIOLATION: Dict in components: array
+                # RULE 4 requires ONLY string file references
+                self.inline_components_found += 1
+                
+                # Extract identifying information
+                component_name = ref.get("name", ref.get("component_id", ref.get("component_type", f"unnamed_dict_{idx}")))
+                ref_keys = ", ".join(ref.keys())
+                
+                errors.append(
+                    f"[RULE 4 VIOLATION] components[{idx}] is dict, not string reference. "
+                    f"components: [] must contain ONLY file references (strings). "
+                    f"Found: {{{ref_keys}}}"
+                )
+                
+                # DO NOT auto-migrate or fix - report and skip
+                # User must fix this manually to understand the violation
+                
+            else:
+                errors.append(f"[RULE 4 VIOLATION] components[{idx}] is invalid type: {type(ref).__name__}")
+        
+        # Update components array if corrections were made
+        if made_changes:
+            data["components"] = corrected_components
+        
+        return errors, made_changes
 
     def _update_master_file_list(self, file_paths):
         """Updates the project_files.files list in the master rules."""
@@ -137,21 +285,8 @@ class ValidationRunner:
         return errors
 
     def _validate_components_array(self, file_path, data):
-        """Validates that all referenced component files exist."""
-        errors = []
-        if "components" in data and isinstance(data["components"], list):
-            for ref in data["components"]:
-                if isinstance(ref, str):
-                    ref_path_str = re.sub(r"<.*>", "", ref)
-                    ref_path = self.root_dir / ref_path_str
-                    
-                    if not ref_path.exists():
-                        errors.append(f"Component reference '{ref_path_str}' not found.")
-                        self._scaffold_component(ref_path)
-                elif isinstance(ref, dict):
-                    # This is an inline component definition, not a file reference.
-                    pass
-        return errors
+        """Deprecated - replaced by _validate_and_fix_components_array"""
+        return []
 
     def _scaffold_component(self, json_path: Path):
         """Creates placeholder .json, .hdr, and .src files if they don't exist."""
@@ -330,24 +465,31 @@ class ValidationRunner:
             data["type"] = "DISPLAY_DRIVER"
             made_changes = True
 
+        # --- NEW: Validate and fix components array ---
+        component_errors, component_fixes = self._validate_and_fix_components_array(file_path, data)
+        if component_fixes:
+            made_changes = True
+        
         if made_changes:
             try:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f, indent=4)
                 print(f"[FIX] Automatically fixed fields in {os.path.relpath(file_path, self.root_dir)}")
             except Exception as e:
-                errors.append(f"Could not write automatic fixes to file: {e}")
+                print(f"[ERROR] Could not write automatic fixes to file {os.path.relpath(file_path, self.root_dir)}: {e}")
 
         # --- Run validations on (now fixed) data ---
         errors = []
         errors.extend(self._validate_filename_and_name_field(Path(file_path), data))
         errors.extend(self._validate_type_and_rules(Path(file_path), data))
-        errors.extend(self._validate_components_array(file_path, data))
+        errors.extend(component_errors)  # Add component validation errors
 
         if errors:
             print(f"\n--- Errors for: {os.path.relpath(file_path, self.root_dir)} ---")
             for error in errors:
-                print(f"  - {error}")
+                # Escape Unicode characters for Windows console compatibility
+                safe_error = error.encode('utf-8', errors='replace').decode('utf-8')
+                print(f"  - {safe_error}")
             errors_found = True
 
         return errors_found
