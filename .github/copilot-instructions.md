@@ -18,6 +18,12 @@
 - **Inter-Subsystem Communication**: Data flow between different ESP32 chips (e.g., head to torso) happens **exclusively** through the Global Shared Memory system: `GSM.read<T>()` and `GSM.write<T>()`.
 
 ## Critical workflows
+- **VALIDATE BEFORE EVERY CODE GENERATION** - Auto-corrects component references and detects violations:
+```powershell
+python tools/validate_file_structure.py
+```
+This MUST run successfully before `generate_tables.py`.
+
 - Regenerate tables after any JSON or `.src` change or builds will fail:
 ```powershell
 python tools/generate_tables.py goblin_full src
@@ -48,10 +54,13 @@ void goblin_eye_act(void);
 
 ## Reference map
 - **Generic Components**: `config/components/{hardware|drivers|interfaces|behaviors}/`
-- **Multi-Family Components**: `config/bots/multi_family/{humanoid|quadruped|insectoid}/`
+- **Multi-Family Components**: `config/bots/multi_family/{humanoid|quadruped|tentacles|wings}/`
 - **Creature-Specific Components**: `config/bots/bot_families/{family}/{subsystem}/` (e.g., goblins/head/, bears/torso/)
 - **Bot Assemblies**: `config/bots/bot_families/{family}/*.json` (root definitions for each creature)
 - **Shared Structs** (`Mood`, `Environment`, `Personality`): `shared/`
-- **Tooling helpers**: `tools/generate_tables.py`, `tools/generate_file_structure.ps1`
+- **Validation Tools** (RUN BEFORE CODE GENERATION):
+  - `tools/validate_file_structure.py` - Auto-correct component references, enforce RULE 4/6
+  - `tools/generate_tables.py` - Generate subsystem code from JSON (AFTER validation passes)
+  - `tools/generate_file_structure.ps1` - Generate folder structure
 - **Build configs**: `platformio.ini` (env filters), `.pio/**` (build outputs - never edit)
 
