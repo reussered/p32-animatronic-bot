@@ -9,21 +9,11 @@
 ## Architecture
 - **CRITICAL: Single Compilation Unit**: The build script (`tools/generate_tables.py`) concatenates all component `.src` files for a subsystem (e.g., `goblin_head`) into a single, large `.cpp` file. This means all `.src` files within that subsystem share the **same file scope**.
 - **Intra-Subsystem Communication**: Because of the single compilation unit, components within the same subsystem **must** communicate using file-scoped `static` variables (e.g., `static uint16_t* display_buffer = NULL;`). This is the standard way to pass data along a processing chain. You do **not** need to `#include` other component headers for this to work; the build system aggregates them.
-- **Component System**: Every behavior lives in organized component folders:
-  - `config/components/{hardware|drivers|interfaces|behaviors}/` (generic/reusable)
-  - `config/bots/multi_family/{humanoid|quadruped|tentacles|wings}/` (shared multi-family)
-  - `config/bots/bot_families/{family}/{subsystem}/` (creature-specific)
-  - All expose `{name}_init()` / `{name}_act()` functions via `.json`, `.src`, `.hdr` files
-- **JSON-Driven Composition**: A hierarchy of JSON files starting from `config/bots/bot_families/...` defines the animatronic, composes components, and assigns them to controllers.
+- **Component System**: Every behavior lives in `config/components/**/*.src` (logic) and `.hdr` (definitions), exposing `{name}_init()` / `{name}_act()` functions.
+- **JSON-Driven Composition**: A hierarchy of JSON files starting from `config/bots/...` defines the animatronic, composes components, and assigns them to controllers.
 - **Inter-Subsystem Communication**: Data flow between different ESP32 chips (e.g., head to torso) happens **exclusively** through the Global Shared Memory system: `GSM.read<T>()` and `GSM.write<T>()`.
 
 ## Critical workflows
-- **VALIDATE BEFORE EVERY CODE GENERATION** - Auto-corrects component references and detects violations:
-```powershell
-python tools/validate_file_structure.py
-```
-This MUST run successfully before `generate_tables.py`.
-
 - Regenerate tables after any JSON or `.src` change or builds will fail:
 ```powershell
 python tools/generate_tables.py goblin_full src
@@ -53,14 +43,9 @@ void goblin_eye_act(void);
 - Dynamic pin assignment lives in `include/esp32_s3_r8n16_pin_assignments.h`; SPI/I2C/ADC buses assign pins during their `init()` and rotate within `act()`.
 
 ## Reference map
-- **Generic Components**: `config/components/{hardware|drivers|interfaces|behaviors}/`
-- **Multi-Family Components**: `config/bots/multi_family/{humanoid|quadruped|tentacles|wings}/`
-- **Creature-Specific Components**: `config/bots/bot_families/{family}/{subsystem}/` (e.g., goblins/head/, bears/torso/)
-- **Bot Assemblies**: `config/bots/bot_families/{family}/*.json` (root definitions for each creature)
-- **Shared Structs** (`Mood`, `Environment`, `Personality`): `shared/`
-- **Validation Tools** (RUN BEFORE CODE GENERATION):
-  - `tools/validate_file_structure.py` - Auto-correct component references, enforce RULE 4/6
-  - `tools/generate_tables.py` - Generate subsystem code from JSON (AFTER validation passes)
-  - `tools/generate_file_structure.ps1` - Generate folder structure
-- **Build configs**: `platformio.ini` (env filters), `.pio/**` (build outputs - never edit)
+- Component logic: `config/components/creature_specific/`, `config/components/drivers/`, `config/components/hardware/`.
+- Bot assemblies: `config/bots/bot_families/goblins/goblin_full.json` (root for head/torso/etc.).
+- Shared structs (`Mood`, `Environment`, future `Personality`): `shared/`.
+- Tooling helpers: `tools/generate_tables.py`, `generate_file_structure.ps1`, pin guidance `PIN_ASSIGNMENT_RULES.md`.
+- Build configs: `platformio.ini` (env filters), `.pio/**` for build outputs (never edit).
 

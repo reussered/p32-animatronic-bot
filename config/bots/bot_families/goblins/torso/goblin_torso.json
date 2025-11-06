@@ -18,24 +18,24 @@
     "components": [
         "config/components/system/system_core.json",
         "config/components/system/debug_controller.json",
-        "config/components/network_monitor.json",
+        "config/components/system/network_monitor.json",
         "config/components/system/wifi_station.json",
         "config/components/system/bluetooth_central.json",
         "config/components/system/telemetry_hub.json",
         "config/components/system/watchdog.json",
         "config/components/system/power_monitor.json",
-        "config/components/creature_specific/spine_flexion_servo.json",
-        "config/components/creature_specific/spine_extension_servo.json",
-        "config/components/creature_specific/waist_rotation_servo.json",
-        "config/components/creature_specific/torso_status_led.json",
-        "config/components/creature_specific/torso_speaker.json"
+        "config/components/system/spine_flexion_servo.json",
+        "config/components/system/spine_extension_servo.json",
+        "config/components/system/waist_rotation_servo.json",
+        "config/components/system/torso_status_led.json",
+        "config/components/system/torso_speaker.json"
     ],
     "former_components": [
-        "config/components/creature_specific/spine_flexion_servo.json",
-        "config/components/creature_specific/spine_extension_servo.json",
-        "config/components/creature_specific/waist_rotation_servo.json",
-        "config/components/creature_specific/torso_status_led.json",
-        "config/components/creature_specific/torso_speaker.json"
+        "config/components/system/spine_flexion_servo.json",
+        "config/components/system/spine_extension_servo.json",
+        "config/components/system/waist_rotation_servo.json",
+        "config/components/system/torso_status_led.json",
+        "config/components/system/torso_speaker.json"
     ],
     "wifi_config": {
         "mode": "STATION",

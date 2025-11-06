@@ -1,7 +1,26 @@
 {
+    "position": {
+        "units": "INCH",
+        "x": "0.0 INCH",
+        "coordinate_system": "skull_3d",
+        "z": "0.0 INCH",
+        "reference_point": "nose_center",
+        "y": "0.0 INCH"
+    },
     "name": "goblin_right_ear",
-    "type": "SCAFFOLDED",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "components": [
+        "config/hardware/servo_sg90_micro.json",
+        "config/hardware/hw496_microphone.json",
+        "config/subsystems/goblin_head.json",
+        "config/subsystems/goblin_torso.json"
+    ],
+    "software": {
+        "act_function": "goblin_right_ear_act",
+        "init_function": "goblin_right_ear_init",
+        "hitCount": 10
+    },
     "relative_filename": "config/bots/bot_families/goblins/head/goblin_right_ear.json",
-    "description": "Auto-generated component.",
-    "components": []
+    "type": "POSITIONED_COMPONENT"
 }

@@ -25,32 +25,17 @@
 
 ### Directory Structure
 
-**Configuration Files:**
-- **Generic Hardware/Drivers**: `config/components/hardware/{component_name}.json|src|hdr`
-- **Driver Components**: `config/components/drivers/{component_name}.json|src|hdr`
-- **Interface Definitions**: `config/components/interfaces/{component_name}.json|src|hdr`
-- **Behaviors**: `config/components/behaviors/{component_name}.json|src|hdr`
-- **Moods**: `config/components/behaviors/moods/{mood_name}.json`
-- **Multi-Family Components**: `config/bots/multi_family/{type}/{component_name}.json|src|hdr`
-  - Types: `humanoid/`, `quadruped/`, `tentacles/`, `wings/`
-- **Creature Family Structure**: `config/bots/bot_families/{family}/`
-  - Family template: `{family}_family.json`
-  - Creature variants: `{family}_{variant}.json` (e.g., `goblin_warrior.json`, `goblin_berserker.json`)
-  - Subsystem folders: `head/`, `torso/`, `arms/`, `legs/`, `hands/`, `feet/`
-  - Components: `{subsystem}/{component_name}.json|src|hdr`
-  - Families: `goblins/`, `bears/`, `cats/`, `dragons/`, `elves/`, `wolves/`, `vampires/`, `zombies/`, `orcs/`, `horror/`, `steampunk/`, `androids/`, `fantasy/`, `undead/`, `humanoids/`, `robots/`, `tests/`
+- **Components**: `config/components/{category}/{component_name}.json`.
+- **Subsystems**: `config/bots/bot_families/{family}/{subsystem}/{component_name}.json`.
+- **Generated Code**:
 
-**Generated Code**:
-- `src/components/{component_name}.cpp`
-- `include/components/{component_name}.hpp`
-- `src/subsystems/{subsystem_name}/{subsystem_name}_component_functions.cpp`
-- `include/subsystems/{subsystem_name}/{subsystem_name}_component_functions.hpp`
+  - `src/components/{component_name}.cpp`
+  - `include/components/{component_name}.hpp`
 
-**Assets**:
-- 3D Models: `assets/shapes/scad/{category}/{model}.scad`
-- STL Files: `assets/shapes/stl/{category}/{model}.stl`
-- Animations: `assets/animations/{creature_family}/{animation_name}.json`
-- Manufacturing: `docs/manufacturing/{document}.json`
+- **Assets**:
+
+  - 3D Models: `assets/shapes/scad/{category}/{model}.scad`.
+  - Animations: `assets/animations/{creature_family}/{animation_name}.json`.
 
 ## Component Rules
 
