@@ -7,7 +7,7 @@
     "description": "Shoulder-mounted deployable solar parasol system for autonomous power generation",
     "created": "2025-10-13",
     "components": [
-        "config/components/hardware/solar_parasol_system.json"
+        "components/hardware/solar_parasol_system.json"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",

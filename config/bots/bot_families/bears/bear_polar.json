@@ -39,8 +39,8 @@
         }
     },
     "components": [
-        "config/bots/bot_families/bears/head/bear_arctic_fur.json",
-        "config/bots/.archived_components/bot_families/bears/head/bear_ice_sensors.json",
+        "bots/bot_families/bears/head/bear_arctic_fur.json",
+        "bots/.archived_components/bot_families/bears/head/bear_ice_sensors.json",
         "config/subsystems/bear_head.json",
         "config/subsystems/bear_torso.json"
     ],

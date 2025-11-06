@@ -11,10 +11,10 @@
     "reference_point": "pelvis_center",
     "units": "INCHES",
     "components": [
-        "config/components/creature_specific/base_power_management.json",
-        "config/components/creature_specific/base_battery_monitor.json",
-        "config/components/creature_specific/base_mesh_coordinator.json",
-        "config/components/creature_specific/base_status_led.json"
+        "components/creature_specific/base_power_management.json",
+        "components/creature_specific/base_battery_monitor.json",
+        "components/creature_specific/base_mesh_coordinator.json",
+        "components/creature_specific/base_status_led.json"
     ],
     "degrees_of_freedom_defaults": {
         "spine_dof": "3",

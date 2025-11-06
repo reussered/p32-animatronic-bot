@@ -41,13 +41,13 @@
         }
     },
     "components": [
-        "config/bots/multi_family/behaviors/left_eye_display.json",
-        "config/bots/multi_family/behaviors/right_eye_display.json",
-        "config/bots/multi_family/behaviors/mouth_display.json",
-        "config/bots/multi_family/behaviors/nose_sensor.json",
-        "config/bots/multi_family/behaviors/main_speaker.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/multi_family/behaviors/left_eye_display.json",
+        "bots/multi_family/behaviors/right_eye_display.json",
+        "bots/multi_family/behaviors/mouth_display.json",
+        "bots/multi_family/behaviors/nose_sensor.json",
+        "bots/multi_family/behaviors/main_speaker.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "behaviors": [
         {

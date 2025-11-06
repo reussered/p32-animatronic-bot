@@ -12,18 +12,18 @@
     "reference_point": "center",
     "units": "PIXELS",
     "components": [
-        "config/components/hardware/esp32_s3_devkit_chip.json",
+        "components/hardware/esp32_s3_devkit_chip.json",
         "config/components/system/system_core.json",
         "config/components/system/power_monitor.json",
-        "config/components/heartbeat.json",
-        "config/components/network_monitor.json",
-        "config/components/test_head.json",
-        "config/components/goblin_eye.json",
-        "config/components/gc9a01.json",
-        "config/components/goblin_left_eye.json",
-        "config/components/goblin_right_eye.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "components/heartbeat.json",
+        "components/network_monitor.json",
+        "bots/bot_families/tests/head/test_head.json",
+        "bots/bot_families/goblins/head/goblin_eye.json",
+        "components/gc9a01.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "eye_movement_dof": "4",

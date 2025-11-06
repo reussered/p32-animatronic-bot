@@ -6,7 +6,7 @@
     "description": "Crown of horns and authority markings for chief goblin leadership",
     "created": "2025-10-12",
     "components": [
-        "config/components/hardware/mechanical_actuator.json"
+        "components/hardware/mechanical_actuator.json"
     ],
     "interface_reference": "config/components/interfaces/gpio_pair_1.json",
     "coordinate_system": "skull_3d",

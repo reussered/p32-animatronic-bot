@@ -7,7 +7,7 @@
     "description": "Battle damage scars and war markings for warrior goblins",
     "created": "2025-10-12",
     "components": [
-        "config/components/hardware/aesthetic_overlay.json"
+        "components/hardware/aesthetic_overlay.json"
     ],
     "interface_reference": "config/components/interfaces/gpio_pair_1.json",
     "coordinate_system": "skull_3d",

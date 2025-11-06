@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_spirit_runes.json",
-        "config/bots/bot_families/goblins/head/goblin_ritual_scars.json",
-        "config/bots/bot_families/goblins/head/goblin_bone_ornaments.json",
-        "config/bots/bot_families/goblins/head/goblin_mystical_glow.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/bot_families/goblins/head/goblin_spirit_runes.json",
+        "bots/bot_families/goblins/head/goblin_ritual_scars.json",
+        "bots/bot_families/goblins/head/goblin_bone_ornaments.json",
+        "bots/bot_families/goblins/head/goblin_mystical_glow.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "ritual_casting": {

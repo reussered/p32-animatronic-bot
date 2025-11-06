@@ -7,7 +7,7 @@
     "description": "Shared android eye processing logic with LED matrix and digital mood-based rendering",
     "created": "2025-10-22",
     "components": [
-        "config/components/hardware/led_matrix_small.json"
+        "components/hardware/led_matrix_small.json"
     ],
     "component_constraints": {
         "required_contained_types": [

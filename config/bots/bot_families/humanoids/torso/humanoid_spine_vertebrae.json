@@ -37,7 +37,7 @@
         }
     ],
     "components": [
-        "config/components/hardware/spine_vertebrae_assembly.json"
+        "components/hardware/spine_vertebrae_assembly.json"
     ],
     "degrees_of_freedom": {
         "total_dof": 6,

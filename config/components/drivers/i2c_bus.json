@@ -23,7 +23,7 @@
         ]
     },
     "components": [
-        "config/components/drivers/i2c_driver.json"
+        "components/drivers/i2c_driver.json"
     ],
     "software": {
         "init_function": "i2c_bus_init",

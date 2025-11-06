@@ -9,7 +9,7 @@
     "name": "bear_speaker",
     "subsystem": "AUDIO",
     "components": [
-        "config/components/interfaces/i2s_bus.json",
+        "components/drivers/i2s_bus.json",
         "config/subsystems/bear_head.json",
         "config/subsystems/bear_torso.json"
     ],

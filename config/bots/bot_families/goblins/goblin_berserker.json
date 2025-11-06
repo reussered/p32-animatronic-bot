@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_rage_foam.json",
-        "config/bots/bot_families/goblins/head/goblin_bloodshot_eyes.json",
-        "config/bots/bot_families/goblins/head/goblin_self_wounds.json",
-        "config/bots/bot_families/goblins/head/goblin_fury_veins.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/bot_families/goblins/head/goblin_rage_foam.json",
+        "bots/bot_families/goblins/head/goblin_bloodshot_eyes.json",
+        "bots/bot_families/goblins/head/goblin_self_wounds.json",
+        "bots/bot_families/goblins/head/goblin_fury_veins.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "berserker_frenzy": {

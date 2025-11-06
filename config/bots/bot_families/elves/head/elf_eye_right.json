@@ -9,7 +9,7 @@
     "name": "elf_eye_right",
     "subsystem": "VISION",
     "components": [
-        "config/components/interfaces/spi_bus.json"
+        "components/interfaces/spi_bus.json"
     ],
     "author": "config/author.json",
     "position": {

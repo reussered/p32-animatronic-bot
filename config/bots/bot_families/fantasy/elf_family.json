@@ -16,12 +16,12 @@
         "ear_extension": "1.5 INCH"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/elves/head/elf_eye_left.json",
-        "config/bots/.archived_components/bot_families/elves/head/elf_eye_right.json",
-        "config/bots/.archived_components/bot_families/elves/head/elf_mouth.json",
-        "config/bots/.archived_components/bot_families/elves/head/elf_speaker.json",
-        "config/bots/bot_families/elves/head/elf_ear_left.json",
-        "config/bots/bot_families/elves/head/elf_ear_right.json",
+        "bots/.archived_components/bot_families/elves/head/elf_eye_left.json",
+        "bots/.archived_components/bot_families/elves/head/elf_eye_right.json",
+        "bots/.archived_components/bot_families/elves/head/elf_mouth.json",
+        "bots/.archived_components/bot_families/elves/head/elf_speaker.json",
+        "bots/bot_families/elves/head/elf_ear_left.json",
+        "bots/bot_families/elves/head/elf_ear_right.json",
         "config/subsystems/elf_head.json",
         "config/subsystems/elf_torso.json"
     ],

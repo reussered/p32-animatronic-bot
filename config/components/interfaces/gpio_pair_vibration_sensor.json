@@ -9,7 +9,7 @@
     "bus_name": "GPIO_PAIR",
     "description": "GPIO pair interface for vibration sensors",
     "components": [
-        "config/components/drivers/gpio_pair_driver.json"
+        "components/drivers/gpio_pair_driver.json"
     ],
     "pin_requirements": {
         "shared_pins_needed": [],

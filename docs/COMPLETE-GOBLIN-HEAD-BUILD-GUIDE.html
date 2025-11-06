@@ -1,748 +1,748 @@
-﻿<!DOCTYPE html>
-<html>
-<head><title>P32 Goblin Head Build Guide</title>
-<style>body{font-family:Arial;margin:40px;line-height:1.6}h1{color:#333}h2{color:#666}pre{background:#f4f4f4;padding:10px;overflow-x:auto}code{background:#f4f4f4;padding:2px}</style>
-</head>
-<body><pre># P32 Goblin Head Assembly - Complete Build Guide
-**Professional Manufacturing Documentation**
-
----
-
-**Project:** P32 Animatronic Bot - Goblin Head Subsystem  
-**Version:** 1.0  
-**Date:** October 14, 2025  
-**Status:** Ready for Manufacturing  
-
----
-
-## Table of Contents
-
-1. [Overview & Specifications](#overview--specifications)
-2. [3D Printed Components](#3d-printed-components)  
-3. [Electronic Components](#electronic-components)
-4. [Wiring Diagram](#wiring-diagram)
-5. [Assembly Instructions](#assembly-instructions)
-6. [Motor Requirements](#motor-requirements)
-7. [Testing & Calibration](#testing--calibration)
-
----
-
-## Overview & Specifications
-
-### System Architecture
-The P32 Goblin Head is a complete animatronic subsystem featuring:
-- **Realistic goblin skull design** based on folklore research
-- **3 GC9A01 circular displays** (2 eyes + 1 mouth) 
-- **HC-SR04 ultrasonic sensor** for proximity detection
-- **ESP32-S3-DevKitC-1** main controller
-- **I2S audio output** capability
-- **NEMA 17 motor mounts** for head articulation
-
-### Key Specifications
-```yaml
-Total Weight: 249.75 grams (8.81 oz)
-Power: 5V @ 2A maximum
-GPIO Usage: 12 pins total (26+ available for expansion)
-Print Time: 13-21 hours total
-Material: ~108g PLA filament
-Assembly Time: 4-6 hours with documentation
-```
-
----
-
-## 3D Printed Components
-
-### Generated STL Files (Ready for Production)
-
-#### 1. Main Skull Structure
-```
-File: assets/shapes/stl/goblin_skull_complete.stl
-Size: 371 KB
-Print Time: 8-12 hours
-Weight: 57.5 grams
-Material: ~60g PLA filament
-
-Description:
-Complete goblin skull with integrated mounting points for all
-electronic components. Features anatomically accurate proportions
-based on D&D folklore research with 3.0" eye spacing baseline.
-
-Print Settings:
-- Layer Height: 0.2mm
-- Infill: 20%
-- Supports: Yes (eye sockets, jaw overhangs)
-- Orientation: Base flat on bed
-- Wall Lines: 3 (2mm thickness)
-```
-
-#### 2. Display Mounts (Print 3 Copies)
-```
-File: assets/shapes/stl/example_display_mount.stl  
-Size: 78.4 KB each
-Print Time: 1-2 hours each (3-6 hours total)
-Weight: 8 grams each (24g total)
-Material: ~30g PLA filament total
-
-Description:
-Precision mounting rings for GC9A01 240x240 circular displays.
-Tight tolerances ensure proper fit and electrical contact.
-
-Usage:
-- Copy 1: Left Eye Display (Coordinates: [-38.1, 0, 0]mm)
-- Copy 2: Right Eye Display (Coordinates: [38.1, 0, 0]mm)  
-- Copy 3: Mouth Display (Coordinates: [0, -25.4, -38.1]mm)
-
-Print Settings:
-- Layer Height: 0.2mm
-- Infill: 100% (structural component)
-- Supports: None required
-- Orientation: Flat for best surface finish
-```
-
-#### 3. Sensor Mount
-```
-File: assets/shapes/stl/goblin_nose_sensor.stl
-Size: 63.4 KB
-Print Time: 2-3 hours  
-Weight: 15 grams
-Material: ~18g PLA filament
-
-Description:
-Custom mount for HC-SR04 ultrasonic sensor integrated into
-goblin nose design. Provides proper sensor positioning and
-wire management.
-
-Position: Nose tip (Coordinates: [0, 15, -5]mm from nose center)
-
-Print Settings:
-- Layer Height: 0.2mm
-- Infill: 100% (structural integrity)
-- Supports: Minimal 
-- Orientation: Mounting face down
-```
-
-#### 4. Calibration Test
-```
-File: assets/shapes/stl/test_cube.stl
-Size: 0.7 KB
-Print Time: 15 minutes
-Weight: <1 gram
-
-Description:
-20x20x20mm calibration cube for verifying printer accuracy
-before starting main prints. Critical for ensuring proper
-component fit tolerances.
-
-Print Settings:
-- Layer Height: 0.2mm
-- Infill: 20%
-- No supports needed
-- Print first to verify dimensional accuracy
-```
-
-### Material Specifications
-```yaml
-Primary Material: PLA Plastic
-Density: 1.25 g/cmÂ³
-Recommended Color: Goblin Green (#4A5D23)
-Alternative Colors: Dark Gray, Brown, Natural
-Nozzle Temperature: 210Â°C
-Bed Temperature: 60Â°C
-Print Speed: 50mm/s standard, 25mm/s details
-```
-
-### Quality Control Checklist
-- [ ] Test cube measures exactly 20.0mm Â±0.1mm on all sides
-- [ ] GC9A01 displays fit snugly in mounting rings
-- [ ] HC-SR04 sensor fits properly in nose mount  
-- [ ] All M3 threaded insert holes are clean and properly sized
-- [ ] Surface finish is smooth with no layer separation
-
----
-
-## Electronic Components
-
-### Required Components List
-
-#### Main Controller
-```yaml
-ESP32-S3-DevKitC-1:
-  Quantity: 1
-  Power: 5V @ 500mA
-  GPIO Available: 38 pins (12 used, 26+ free)
-  Features: WiFi, Bluetooth, USB-C
-  Weight: 25 grams
-  Cost: ~$15-20
-```
-
-#### Displays  
-```yaml
-GC9A01 Circular Display:
-  Quantity: 3 (2 eyes + 1 mouth)
-  Resolution: 240x240 pixels
-  Size: 24mm diameter
-  Interface: SPI
-  Power: 3.3V @ 30mA each
-  Weight: 8 grams each
-  Cost: ~$8-12 each
-```
-
-#### Sensor
-```yaml
-HC-SR04 Ultrasonic Sensor:
-  Quantity: 1  
-  Range: 2cm - 4m
-  Interface: GPIO (Trigger + Echo)
-  Power: 5V @ 15mA
-  Weight: 9 grams
-  Cost: ~$3-5
-```
-
-#### Hardware
-```yaml
-Threaded Inserts (M3 x 5mm): 12 pieces
-M3 Screws (Various lengths): 15 pieces  
-M3 Nuts: 8 pieces
-Washers: 6 pieces
-Wire (22AWG): 2 meters various colors
-Connectors: Dupont style recommended
-```
-
-### Component Weight Analysis (Calculated from OpenSCAD)
-```
-=== GOBLIN HEAD ASSEMBLY WEIGHT ANALYSIS ===
-3D Printed Components: 123.75 grams
-Electronics: 88.0 grams  
-Hardware: 38.0 grams
-Total Assembly Weight: 249.75 grams (8.81 oz)
-Center of Mass: [0, -8.2, -2.1] mm from nose center
-Moment Arm Length: 59.1 mm
-Required Motor Torque: 0.795 Nâ‹…m (112.5 ozâ‹…in)
-Recommended Motor: NEMA 17 with â‰¥120 ozâ‹…in holding torque
-============================================
-```
-
----
-
-## Wiring Diagram
-
-### GPIO Pin Assignment Summary
-```
-ESP32-S3-DevKitC-1 Pin Assignments:
-
-SPI Bus (Shared by all displays):
-â”œâ”€â”€ GPIO 12: MISO (Master In, Slave Out)
-â”œâ”€â”€ GPIO 13: MOSI (Master Out, Slave In)  
-â””â”€â”€ GPIO 14: CLK (Clock)
-
-Display Chip Select (Individual):
-â”œâ”€â”€ GPIO 15: Left Eye Display CS
-â”œâ”€â”€ GPIO 16: Right Eye Display CS
-â””â”€â”€ GPIO 17: Mouth Display CS
-
-I2S Audio Bus:
-â”œâ”€â”€ GPIO 4: BCLK (Bit Clock)
-â”œâ”€â”€ GPIO 5: WS (Word Select)
-â””â”€â”€ GPIO 6: DATA (Audio Data)
-
-Sensor Interface:
-â”œâ”€â”€ GPIO 9: HC-SR04 Trigger
-â””â”€â”€ GPIO 10: HC-SR04 Echo
-
-Total GPIO Usage: 12 pins
-Remaining Available: 26+ pins for expansion
-```
-
-### Professional Wiring Diagram (Zero Wire Crossovers)
-
-```
-                    ESP32-S3-DevKitC-1
-         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-         â”‚                                         â”‚
-         â”‚  â”Œâ”€ GPIO 4  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-         â”‚  â”œâ”€ GPIO 5  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚  â”‚  
-         â”‚  â”œâ”€ GPIO 6  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚   â”‚  â”‚
-         â”‚  â”‚                           â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 9  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 10 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”‚                     â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 12 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 13 â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 14 â”€â”€â”€â”€â”€â”€â” â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”‚               â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 15 â”€â”€â”   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 16 â” â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”œâ”€ GPIO 17 â”‚ â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â”‚  â”‚          â”‚ â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â””â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”˜
-            â”‚          â”‚ â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚
-            â”‚          â”‚ â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚
-    â”Œâ”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-    â”‚ SPI   â”‚          â”‚ â”‚   â”‚ â”‚ â”‚ â”‚ â”‚  â”‚   â”‚   â”‚            â”‚
-    â”‚ BUS   â”‚          â”‚ â”‚   â””â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€ CLK       â”‚
-    â”‚       â”‚          â”‚ â”‚     â””â”€â”¼â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€ MOSI      â”‚
-    â”‚       â”‚          â”‚ â”‚       â””â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€ MISO      â”‚
-    â””â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-            â”‚          â”‚ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚
-         â”Œâ”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”
-         â”‚  â”‚    CS3   â”‚ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚  â”‚ Mouth
-         â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”¤ Display
-         â”‚       CS2   â”‚ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚  â”‚ GC9A01
-         â”‚       â”Œâ”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”¤ 240x240
-         â”‚       â”‚ CS1 â”‚ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚  â”‚
-         â””â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”¼â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”˜
-                 â”‚     â”‚ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚
-      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”˜ â”‚         â”‚ â”‚  â”‚   â”‚   â”‚
-      â”‚    â”Œâ”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚ â”‚  â”‚   â”‚   â”‚
-      â”‚    â”‚  â”Œâ”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚  â”‚   â”‚   â”‚
-      â”‚    â”‚  â”‚  â”‚                   â”‚  â”‚   â”‚   â”‚
-   â”Œâ”€â”€â–¼â”€â”€â”¬â”€â–¼â”€â”€â–¼â”€â”€â–¼â”€â”              â”Œâ”€â”€â–¼â”€â”€â–¼â”€â”€â”€â–¼â”€â”€â”€â–¼â”€â”€â”
-   â”‚ CS  â”‚ SPI BUS â”‚              â”‚ TRIG â”‚ I2S BUS â”‚
-   â”œâ”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤              â”œâ”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-   â”‚ Leftâ”‚ CLK     â”‚              â”‚ ECHO â”‚ BCLK    â”‚
-   â”‚ Eye â”‚ MOSI    â”‚              â”‚      â”‚ WS      â”‚
-   â”‚     â”‚ MISO    â”‚              â”‚ HC-  â”‚ DATA    â”‚
-   â”‚GC9A01         â”‚              â”‚ SR04 â”‚         â”‚
-   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜              â””â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-        â”‚                              â”‚       â”‚
-   â”Œâ”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”                   â”Œâ”€â”€â”€â”€â–¼â”€â”€â”€â”   â”‚
-   â”‚ Right    â”‚                   â”‚ Nose   â”‚   â”‚
-   â”‚ Eye      â”‚                   â”‚ Sensor â”‚   â”‚
-   â”‚ GC9A01   â”‚                   â”‚        â”‚   â”‚
-   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
-                                               â”‚
-                                        â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”
-                                        â”‚ I2S      â”‚
-                                        â”‚ Speaker  â”‚
-                                        â”‚          â”‚
-                                        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-
-Power Distribution (All Components):
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ 5V Power    â”‚ â”€â”€â”€â”€ ESP32-S3 VIN
-â”‚ Supply      â”‚ â”€â”€â”€â”€ HC-SR04 VCC  
-â”‚ 2A Minimum â”‚ â”€â”€â”€â”€ All GND connections
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-   â”‚
-   â””â”€â”€ 3.3V Regulator â”€â”€â”€â”€ GC9A01 displays (3x)
-```
-
-### Wire Color Code (Recommended)
-```yaml
-Power:
-  5V: Red wire
-  3.3V: Orange wire  
-  GND: Black wire
-
-SPI Bus:
-  CLK: Yellow wire
-  MOSI: Green wire
-  MISO: Blue wire
-  
-Chip Select:
-  CS1 (Left Eye): Purple wire
-  CS2 (Right Eye): Gray wire
-  CS3 (Mouth): White wire
-  
-I2S Audio:
-  BCLK: Brown wire
-  WS: Pink wire
-  DATA: Cyan wire
-  
-Sensor:
-  TRIG: Lime wire
-  ECHO: Magenta wire
-```
-
-### Connection Verification Checklist
-- [ ] All 5V connections secure and tested
-- [ ] All ground connections verified with multimeter
-- [ ] SPI bus connections tested for continuity  
-- [ ] Each display CS pin connected to correct GPIO
-- [ ] Sensor trigger/echo pins properly connected
-- [ ] No short circuits between power and ground
-- [ ] Wire routing avoids sharp edges and moving parts
-
----
-
-## Assembly Instructions
-
-### Phase 1: 3D Print Preparation
-1. **Print calibration cube first** - Verify 20mm Â±0.1mm accuracy
-2. **Print main skull** - 8-12 hours, use supports for overhangs
-3. **Print 3 display mounts** - High precision, 100% infill
-4. **Print sensor mount** - Verify HC-SR04 fits properly
-5. **Clean all prints** - Remove supports, sand surfaces smooth
-
-### Phase 2: Hardware Installation  
-1. **Install threaded inserts** - Heat to 200Â°C, press flush
-2. **Test component fits** - Displays, sensor, ESP32 mounting
-3. **Prepare wire harnesses** - Cut to length, add connectors
-4. **Label all wires** - Use color code for easy identification
-
-### Phase 3: Electronics Assembly
-1. **Mount ESP32-S3** in rear compartment of skull
-2. **Install display mounts** in eye sockets and mouth
-3. **Mount sensor** in nose position with proper orientation  
-4. **Route all wiring** through internal channels
-5. **Make all connections** following wiring diagram exactly
-
-### Phase 4: Testing & Validation
-1. **Power-on test** - Verify 5V power distribution
-2. **Display test** - Check all three GC9A01 screens
-3. **Sensor test** - Verify HC-SR04 distance readings
-4. **Communication test** - SPI and GPIO functionality
-5. **Weight verification** - Should measure 249.75g Â±10%
-
-### Phase 5: Motor Integration (Optional)
-1. **Install motor mounts** - NEMA 17 brackets
-2. **Connect motor drivers** - TMC2209 recommended
-3. **Calibrate movement** - Test yaw and pitch axes
-4. **Program motion profiles** - Smooth S-curve acceleration
-
----
-
-## Motor Requirements
-
-### Head Movement Motors (2 Required)
-
-#### Yaw Motor (Left/Right Head Turn)
-```yaml
-Application: Horizontal head rotation
-Load: 249.75g at 59.1mm moment arm
-Static Torque Required: 0.159 Nâ‹…m
-Dynamic Torque Required: 0.175 Nâ‹…m  
-Safety Factor: 2.5x
-Final Requirement: 0.795 Nâ‹…m (112.5 ozâ‹…in)
-
-Recommended Motor:
-  Type: NEMA 17 High Torque
-  Holding Torque: â‰¥1.26 Nâ‹…m (178 ozâ‹…in)
-  Step Angle: 1.8Â° (200 steps/revolution)
-  Rated Current: 2.0A
-  Resistance: 1.4Î© per phase
-  Weight: 280 grams
-  Cost: ~$25-35
-```
-
-#### Pitch Motor (Up/Down Head Tilt)  
-```yaml
-Application: Vertical head tilting
-Load: Similar to yaw motor
-Static Torque Required: 0.20 Nâ‹…m
-Safety Factor: 2.5x
-Final Requirement: 0.50 Nâ‹…m (71 ozâ‹…in)
-
-Recommended Motor:
-  Type: NEMA 17 Standard  
-  Holding Torque: â‰¥0.65 Nâ‹…m (92 ozâ‹…in)
-  Step Angle: 1.8Â°
-  Rated Current: 1.2A
-  Weight: 230 grams
-  Cost: ~$15-25
-```
-
-### Motor Driver Requirements
-```yaml
-Recommended Driver: TMC2209
-Microstepping: 16x (0.1125Â° per step)
-Current Rating: 2.5A peak
-Voltage Supply: 12V recommended
-Features: StealthChop, StallGuard, UART control
-Cost: ~$7-10 each
-```
-
-### Performance Specifications
-```yaml
-Movement Speed: 90Â° head turn in 0.5 seconds
-Positioning Accuracy: Â±0.2Â° (with 16x microstepping)
-Power Consumption: 24W per motor maximum
-Power Supply: 12V @ 5A minimum for dual motors
-Control Interface: Step/Direction from ESP32-S3
-```
-
----
-
-## Testing & Calibration
-
-### Initial System Tests
-
-#### Power System Validation
-```bash
-Test 1: Voltage Verification
-- Measure 5V Â±0.1V at ESP32 VIN pin
-- Verify 3.3V Â±0.1V at display power pins
-- Check all ground connections for continuity
-
-Test 2: Current Draw Measurement  
-- ESP32-S3: ~150mA idle, ~300mA active
-- GC9A01 displays: ~90mA total (3 Ã— 30mA)
-- HC-SR04 sensor: ~15mA during ping
-- Total system: <500mA without motors
-```
-
-#### Display System Tests
-```bash
-Test 3: SPI Communication
-- Load test pattern to each display individually
-- Verify CS pin selection working properly
-- Test SPI clock speeds up to 20MHz
-- Confirm 240x240 pixel resolution
-
-Test 4: Visual Calibration
-- Display solid colors on all screens
-- Test eye tracking patterns
-- Verify mouth animation sequences  
-- Check brightness and contrast levels
-```
-
-#### Sensor System Tests
-```bash
-Test 5: Distance Measurement
-- Test HC-SR04 at 10cm, 50cm, 1m, 2m distances
-- Verify trigger pulse timing (10Î¼s minimum)
-- Measure echo pulse timing accuracy
-- Test detection cone angle (~15Â° beam width)
-```
-
-### Motor System Calibration
-
-#### Static Load Testing
-```bash
-Test 6: Holding Torque Verification
-- Mount head assembly to motor shaft
-- Apply increasing lateral force until motor slips
-- Verify holding torque meets 0.795 Nâ‹…m minimum
-- Test both yaw and pitch motors
-```
-
-#### Dynamic Performance Testing  
-```bash
-Test 7: Movement Profiles
-- Program 90Â° rotation in 0.5 seconds
-- Verify smooth S-curve acceleration
-- Test positioning repeatability (Â±0.2Â°)
-- Measure settling time after movement
-```
-
-#### Thermal Testing
-```bash
-Test 8: Continuous Operation
-- Run motors at 50% duty cycle for 30 minutes
-- Monitor motor temperature (<60Â°C maximum)
-- Check for thermal shutdown protection
-- Verify cooling airflow if needed
-```
-
-### Software Integration Tests
-
-#### ESP32-S3 Programming
-```cpp
-// Basic test code structure
-void setup() {
-  // Initialize SPI displays
-  // Initialize HC-SR04 sensor  
-  // Initialize motor drivers
-  // Run self-test sequence
-}
-
-void loop() {
-  // Read sensor data
-  // Update display animations
-  // Execute motor movements
-  // Handle mood state changes
-}
-```
-
-#### P32 Configuration Validation
-```bash
-Test 9: JSON Configuration Loading
-- Verify goblin_full.json loads correctly
-- Test component positioning data
-- Validate interface assignments
-- Check mood behavior mappings
-```
-
-### Quality Assurance Checklist
-
-#### Mechanical Assembly
-- [ ] All threaded inserts properly seated
-- [ ] No loose screws or hardware
-- [ ] Smooth motor shaft rotation
-- [ ] No mechanical binding in any axis
-- [ ] Weight within 249.75g Â±5% tolerance
-
-#### Electrical Systems  
-- [ ] All connections secure and strain-relieved
-- [ ] No short circuits between power rails
-- [ ] SPI communication error-free
-- [ ] Sensor readings stable and accurate
-- [ ] Motor drivers responding correctly
-
-#### Software Systems
-- [ ] ESP32-S3 boots and connects reliably  
-- [ ] Display animations smooth at 30+ FPS
-- [ ] Sensor data updates at 10+ Hz
-- [ ] Motor movements precise and repeatable
-- [ ] Mood system responds to inputs correctly
-
----
-
-## Troubleshooting Guide
-
-### Common Issues and Solutions
-
-#### Display Problems
-```yaml
-Issue: Displays not lighting up
-Check: 3.3V power supply, SPI connections
-Solution: Verify voltage levels, check wire continuity
-
-Issue: Garbled display output  
-Check: SPI clock speed, CS pin assignments
-Solution: Reduce SPI frequency, verify GPIO mapping
-
-Issue: One display not working
-Check: Individual CS pin connection
-Solution: Swap CS wires to isolate problem
-```
-
-#### Sensor Problems
-```yaml
-Issue: No distance readings
-Check: 5V power, trigger/echo connections
-Solution: Verify GPIO pins, check sensor orientation  
-
-Issue: Erratic readings
-Check: Electrical noise, timing issues
-Solution: Add decoupling capacitors, adjust code timing
-
-Issue: Limited range
-Check: Sensor mounting, obstacles  
-Solution: Ensure clear line of sight, proper positioning
-```
-
-#### Motor Problems
-```yaml
-Issue: Motors not moving
-Check: Power supply, driver connections
-Solution: Verify 12V supply, check step/direction signals
-
-Issue: Jerky movement
-Check: Microstepping settings, acceleration  
-Solution: Enable 16x microstepping, smooth profiles
-
-Issue: Position drift
-Check: Motor load, driver current
-Solution: Increase driver current, verify mechanical load
-```
-
----
-
-## Parts List & Procurement
-
-### 3D Printing Materials
-```yaml
-PLA Filament (Goblin Green #4A5D23):
-  Quantity: 1kg spool
-  Usage: ~108g for complete head
-  Supplier: SUNLU, eSUN, Hatchbox
-  Cost: $20-25
-
-Alternative Colors:
-  Dark Gray: Professional appearance
-  Brown: Natural goblin coloring  
-  Natural: Easy to paint/finish
-```
-
-### Electronic Components
-```yaml
-ESP32-S3-DevKitC-1:
-  Quantity: 1
-  Supplier: Espressif, Adafruit, SparkFun
-  Cost: $15-20
-
-GC9A01 240x240 Circular Display:
-  Quantity: 3
-  Supplier: Adafruit, Waveshare, Generic
-  Cost: $8-12 each
-
-HC-SR04 Ultrasonic Sensor:
-  Quantity: 1  
-  Supplier: SparkFun, Adafruit, Generic
-  Cost: $3-5
-
-TMC2209 Stepper Drivers:
-  Quantity: 2
-  Supplier: BigTreeTech, Trinamic
-  Cost: $7-10 each
-
-NEMA 17 Stepper Motors:
-  High Torque (1x): $25-35
-  Standard (1x): $15-25
-```
-
-### Hardware & Fasteners
-```yaml
-M3 Threaded Inserts (5mm):
-  Quantity: 12 pieces
-  Supplier: McMaster-Carr, Amazon
-  Cost: $5-10
-
-M3 Screws (Various lengths):
-  Quantity: 20 pieces assorted
-  Supplier: Local hardware, McMaster-Carr  
-  Cost: $5-10
-
-Wire & Connectors:
-  22AWG Stranded Wire: 2 meters various colors
-  Dupont Connectors: Male/Female sets
-  Cost: $10-15 total
-```
-
-### Tools Required
-```yaml
-3D Printer: FDM printer with 200x200mm+ bed
-Soldering Iron: For threaded insert installation
-Multimeter: For electrical testing
-Hex Keys: M3 size for assembly
-Wire Strippers: For harness preparation
-Heat Gun: Optional for wire management
-```
-
-### Total Project Cost Estimate
-```yaml
-3D Printing: $20-25 (filament)
-Electronics: $60-85 (displays, controller, sensor)  
-Motors & Drivers: $50-80 (2 motors + drivers)
-Hardware: $20-30 (fasteners, wire, connectors)
-
-Total Cost: $150-220
-Labor Time: 20-30 hours (including print time)
-```
-
----
-
-## Conclusion
-
-This complete build guide provides everything needed to manufacture a professional-quality P32 Goblin Head animatronic subsystem. The design integrates:
-
-âœ… **Research-based anatomical accuracy** from folklore sources  
-âœ… **Integrated weight and motor load calculations** for reliable operation  
-âœ… **Professional-grade 3D printing specifications** with quality control  
-âœ… **Zero-crossover wiring diagrams** for clean assembly  
-âœ… **Comprehensive testing and calibration procedures** for validation  
-âœ… **Complete parts list and procurement guide** for easy sourcing  
-
-The system provides a robust foundation for future expansion into full-body animatronics while maintaining focus on the critical head subsystem functionality.
-
-**Ready for manufacturing and assembly!**
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** October 14, 2025  
-**Review Status:** Complete and Ready for Production  
-**Print Status:** All STL files generated and verified  
-**Quality Level:** Professional manufacturing documentation</pre></body>
-</html>
+<!DOCTYPE html>
+<html>
+<head><title>P32 Goblin Head Build Guide</title>
+<style>body{font-family:Arial;margin:40px;line-height:1.6}h1{color:#333}h2{color:#666}pre{background:#f4f4f4;padding:10px;overflow-x:auto}code{background:#f4f4f4;padding:2px}</style>
+</head>
+<body><pre># P32 Goblin Head Assembly - Complete Build Guide
+**Professional Manufacturing Documentation**
+
+---
+
+**Project:** P32 Animatronic Bot - Goblin Head Subsystem  
+**Version:** 1.0  
+**Date:** October 14, 2025  
+**Status:** Ready for Manufacturing  
+
+---
+
+## Table of Contents
+
+1. [Overview & Specifications](#overview--specifications)
+2. [3D Printed Components](#3d-printed-components)  
+3. [Electronic Components](#electronic-components)
+4. [Wiring Diagram](#wiring-diagram)
+5. [Assembly Instructions](#assembly-instructions)
+6. [Motor Requirements](#motor-requirements)
+7. [Testing & Calibration](#testing--calibration)
+
+---
+
+## Overview & Specifications
+
+### System Architecture
+The P32 Goblin Head is a complete animatronic subsystem featuring:
+- **Realistic goblin skull design** based on folklore research
+- **3 GC9A01 circular displays** (2 eyes + 1 mouth) 
+- **HC-SR04 ultrasonic sensor** for proximity detection
+- **ESP32-S3-DevKitC-1** main controller
+- **I2S audio output** capability
+- **NEMA 17 motor mounts** for head articulation
+
+### Key Specifications
+```yaml
+Total Weight: 249.75 grams (8.81 oz)
+Power: 5V @ 2A maximum
+GPIO Usage: 12 pins total (26+ available for expansion)
+Print Time: 13-21 hours total
+Material: ~108g PLA filament
+Assembly Time: 4-6 hours with documentation
+```
+
+---
+
+## 3D Printed Components
+
+### Generated STL Files (Ready for Production)
+
+#### 1. Main Skull Structure
+```
+File: assets/shapes/stl/goblin_skull_complete.stl
+Size: 371 KB
+Print Time: 8-12 hours
+Weight: 57.5 grams
+Material: ~60g PLA filament
+
+Description:
+Complete goblin skull with integrated mounting points for all
+electronic components. Features anatomically accurate proportions
+based on D&D folklore research with 3.0" eye spacing baseline.
+
+Print Settings:
+- Layer Height: 0.2mm
+- Infill: 20%
+- Supports: Yes (eye sockets, jaw overhangs)
+- Orientation: Base flat on bed
+- Wall Lines: 3 (2mm thickness)
+```
+
+#### 2. Display Mounts (Print 3 Copies)
+```
+File: assets/shapes/stl/example_display_mount.stl  
+Size: 78.4 KB each
+Print Time: 1-2 hours each (3-6 hours total)
+Weight: 8 grams each (24g total)
+Material: ~30g PLA filament total
+
+Description:
+Precision mounting rings for GC9A01 240x240 circular displays.
+Tight tolerances ensure proper fit and electrical contact.
+
+Usage:
+- Copy 1: Left Eye Display (Coordinates: [-38.1, 0, 0]mm)
+- Copy 2: Right Eye Display (Coordinates: [38.1, 0, 0]mm)  
+- Copy 3: Mouth Display (Coordinates: [0, -25.4, -38.1]mm)
+
+Print Settings:
+- Layer Height: 0.2mm
+- Infill: 100% (structural component)
+- Supports: None required
+- Orientation: Flat for best surface finish
+```
+
+#### 3. Sensor Mount
+```
+File: assets/shapes/stl/goblin_nose_sensor.stl
+Size: 63.4 KB
+Print Time: 2-3 hours  
+Weight: 15 grams
+Material: ~18g PLA filament
+
+Description:
+Custom mount for HC-SR04 ultrasonic sensor integrated into
+goblin nose design. Provides proper sensor positioning and
+wire management.
+
+Position: Nose tip (Coordinates: [0, 15, -5]mm from nose center)
+
+Print Settings:
+- Layer Height: 0.2mm
+- Infill: 100% (structural integrity)
+- Supports: Minimal 
+- Orientation: Mounting face down
+```
+
+#### 4. Calibration Test
+```
+File: assets/shapes/stl/test_cube.stl
+Size: 0.7 KB
+Print Time: 15 minutes
+Weight: <1 gram
+
+Description:
+20x20x20mm calibration cube for verifying printer accuracy
+before starting main prints. Critical for ensuring proper
+component fit tolerances.
+
+Print Settings:
+- Layer Height: 0.2mm
+- Infill: 20%
+- No supports needed
+- Print first to verify dimensional accuracy
+```
+
+### Material Specifications
+```yaml
+Primary Material: PLA Plastic
+Density: 1.25 g/cm
+Recommended Color: Goblin Green (#4A5D23)
+Alternative Colors: Dark Gray, Brown, Natural
+Nozzle Temperature: 210C
+Bed Temperature: 60C
+Print Speed: 50mm/s standard, 25mm/s details
+```
+
+### Quality Control Checklist
+- [ ] Test cube measures exactly 20.0mm 0.1mm on all sides
+- [ ] GC9A01 displays fit snugly in mounting rings
+- [ ] HC-SR04 sensor fits properly in nose mount  
+- [ ] All M3 threaded insert holes are clean and properly sized
+- [ ] Surface finish is smooth with no layer separation
+
+---
+
+## Electronic Components
+
+### Required Components List
+
+#### Main Controller
+```yaml
+ESP32-S3-DevKitC-1:
+  Quantity: 1
+  Power: 5V @ 500mA
+  GPIO Available: 38 pins (12 used, 26+ free)
+  Features: WiFi, Bluetooth, USB-C
+  Weight: 25 grams
+  Cost: ~$15-20
+```
+
+#### Displays  
+```yaml
+GC9A01 Circular Display:
+  Quantity: 3 (2 eyes + 1 mouth)
+  Resolution: 240x240 pixels
+  Size: 24mm diameter
+  Interface: SPI
+  Power: 3.3V @ 30mA each
+  Weight: 8 grams each
+  Cost: ~$8-12 each
+```
+
+#### Sensor
+```yaml
+HC-SR04 Ultrasonic Sensor:
+  Quantity: 1  
+  Range: 2cm - 4m
+  Interface: GPIO (Trigger + Echo)
+  Power: 5V @ 15mA
+  Weight: 9 grams
+  Cost: ~$3-5
+```
+
+#### Hardware
+```yaml
+Threaded Inserts (M3 x 5mm): 12 pieces
+M3 Screws (Various lengths): 15 pieces  
+M3 Nuts: 8 pieces
+Washers: 6 pieces
+Wire (22AWG): 2 meters various colors
+Connectors: Dupont style recommended
+```
+
+### Component Weight Analysis (Calculated from OpenSCAD)
+```
+=== GOBLIN HEAD ASSEMBLY WEIGHT ANALYSIS ===
+3D Printed Components: 123.75 grams
+Electronics: 88.0 grams  
+Hardware: 38.0 grams
+Total Assembly Weight: 249.75 grams (8.81 oz)
+Center of Mass: [0, -8.2, -2.1] mm from nose center
+Moment Arm Length: 59.1 mm
+Required Motor Torque: 0.795 Nm (112.5 ozin)
+Recommended Motor: NEMA 17 with 120 ozin holding torque
+============================================
+```
+
+---
+
+## Wiring Diagram
+
+### GPIO Pin Assignment Summary
+```
+ESP32-S3-DevKitC-1 Pin Assignments:
+
+SPI Bus (Shared by all displays):
+ GPIO 12: MISO (Master In, Slave Out)
+ GPIO 13: MOSI (Master Out, Slave In)  
+ GPIO 14: CLK (Clock)
+
+Display Chip Select (Individual):
+ GPIO 15: Left Eye Display CS
+ GPIO 16: Right Eye Display CS
+ GPIO 17: Mouth Display CS
+
+I2S Audio Bus:
+ GPIO 4: BCLK (Bit Clock)
+ GPIO 5: WS (Word Select)
+ GPIO 6: DATA (Audio Data)
+
+Sensor Interface:
+ GPIO 9: HC-SR04 Trigger
+ GPIO 10: HC-SR04 Echo
+
+Total GPIO Usage: 12 pins
+Remaining Available: 26+ pins for expansion
+```
+
+### Professional Wiring Diagram (Zero Wire Crossovers)
+
+```
+                    ESP32-S3-DevKitC-1
+         
+                                                  
+            GPIO 4    
+            GPIO 5         
+            GPIO 6          
+                                              
+            GPIO 9            
+            GPIO 10            
+                                           
+            GPIO 12             
+            GPIO 13              
+            GPIO 14               
+                                        
+            GPIO 15                  
+            GPIO 16                   
+            GPIO 17                   
+                                       
+         
+                                      
+                                      
+    
+     SPI                                         
+     BUS                  CLK       
+                            MOSI      
+                              MISO      
+    
+                                         
+         
+               CS3                         Mouth
+            Display
+                CS2                         GC9A01
+                 240x240
+                 CS1                      
+         
+                                         
+                         
+                            
+                     
+                                         
+                 
+    CS   SPI BUS                TRIG  I2S BUS 
+                 
+    Left CLK                    ECHO  BCLK    
+    Eye  MOSI                         WS      
+         MISO                   HC-   DATA    
+   GC9A01                        SR04          
+                 
+                                             
+                         
+    Right                        Nose      
+    Eye                          Sensor    
+    GC9A01                                 
+                         
+                                               
+                                        
+                                         I2S      
+                                         Speaker  
+                                                  
+                                        
+
+Power Distribution (All Components):
+
+ 5V Power      ESP32-S3 VIN
+ Supply        HC-SR04 VCC  
+ 2A Minimum   All GND connections
+
+   
+    3.3V Regulator  GC9A01 displays (3x)
+```
+
+### Wire Color Code (Recommended)
+```yaml
+Power:
+  5V: Red wire
+  3.3V: Orange wire  
+  GND: Black wire
+
+SPI Bus:
+  CLK: Yellow wire
+  MOSI: Green wire
+  MISO: Blue wire
+  
+Chip Select:
+  CS1 (Left Eye): Purple wire
+  CS2 (Right Eye): Gray wire
+  CS3 (Mouth): White wire
+  
+I2S Audio:
+  BCLK: Brown wire
+  WS: Pink wire
+  DATA: Cyan wire
+  
+Sensor:
+  TRIG: Lime wire
+  ECHO: Magenta wire
+```
+
+### Connection Verification Checklist
+- [ ] All 5V connections secure and tested
+- [ ] All ground connections verified with multimeter
+- [ ] SPI bus connections tested for continuity  
+- [ ] Each display CS pin connected to correct GPIO
+- [ ] Sensor trigger/echo pins properly connected
+- [ ] No short circuits between power and ground
+- [ ] Wire routing avoids sharp edges and moving parts
+
+---
+
+## Assembly Instructions
+
+### Phase 1: 3D Print Preparation
+1. **Print calibration cube first** - Verify 20mm 0.1mm accuracy
+2. **Print main skull** - 8-12 hours, use supports for overhangs
+3. **Print 3 display mounts** - High precision, 100% infill
+4. **Print sensor mount** - Verify HC-SR04 fits properly
+5. **Clean all prints** - Remove supports, sand surfaces smooth
+
+### Phase 2: Hardware Installation  
+1. **Install threaded inserts** - Heat to 200C, press flush
+2. **Test component fits** - Displays, sensor, ESP32 mounting
+3. **Prepare wire harnesses** - Cut to length, add connectors
+4. **Label all wires** - Use color code for easy identification
+
+### Phase 3: Electronics Assembly
+1. **Mount ESP32-S3** in rear compartment of skull
+2. **Install display mounts** in eye sockets and mouth
+3. **Mount sensor** in nose position with proper orientation  
+4. **Route all wiring** through internal channels
+5. **Make all connections** following wiring diagram exactly
+
+### Phase 4: Testing & Validation
+1. **Power-on test** - Verify 5V power distribution
+2. **Display test** - Check all three GC9A01 screens
+3. **Sensor test** - Verify HC-SR04 distance readings
+4. **Communication test** - SPI and GPIO functionality
+5. **Weight verification** - Should measure 249.75g 10%
+
+### Phase 5: Motor Integration (Optional)
+1. **Install motor mounts** - NEMA 17 brackets
+2. **Connect motor drivers** - TMC2209 recommended
+3. **Calibrate movement** - Test yaw and pitch axes
+4. **Program motion profiles** - Smooth S-curve acceleration
+
+---
+
+## Motor Requirements
+
+### Head Movement Motors (2 Required)
+
+#### Yaw Motor (Left/Right Head Turn)
+```yaml
+Application: Horizontal head rotation
+Load: 249.75g at 59.1mm moment arm
+Static Torque Required: 0.159 Nm
+Dynamic Torque Required: 0.175 Nm  
+Safety Factor: 2.5x
+Final Requirement: 0.795 Nm (112.5 ozin)
+
+Recommended Motor:
+  Type: NEMA 17 High Torque
+  Holding Torque: 1.26 Nm (178 ozin)
+  Step Angle: 1.8 (200 steps/revolution)
+  Rated Current: 2.0A
+  Resistance: 1.4 per phase
+  Weight: 280 grams
+  Cost: ~$25-35
+```
+
+#### Pitch Motor (Up/Down Head Tilt)  
+```yaml
+Application: Vertical head tilting
+Load: Similar to yaw motor
+Static Torque Required: 0.20 Nm
+Safety Factor: 2.5x
+Final Requirement: 0.50 Nm (71 ozin)
+
+Recommended Motor:
+  Type: NEMA 17 Standard  
+  Holding Torque: 0.65 Nm (92 ozin)
+  Step Angle: 1.8
+  Rated Current: 1.2A
+  Weight: 230 grams
+  Cost: ~$15-25
+```
+
+### Motor Driver Requirements
+```yaml
+Recommended Driver: TMC2209
+Microstepping: 16x (0.1125 per step)
+Current Rating: 2.5A peak
+Voltage Supply: 12V recommended
+Features: StealthChop, StallGuard, UART control
+Cost: ~$7-10 each
+```
+
+### Performance Specifications
+```yaml
+Movement Speed: 90 head turn in 0.5 seconds
+Positioning Accuracy: 0.2 (with 16x microstepping)
+Power Consumption: 24W per motor maximum
+Power Supply: 12V @ 5A minimum for dual motors
+Control Interface: Step/Direction from ESP32-S3
+```
+
+---
+
+## Testing & Calibration
+
+### Initial System Tests
+
+#### Power System Validation
+```bash
+Test 1: Voltage Verification
+- Measure 5V 0.1V at ESP32 VIN pin
+- Verify 3.3V 0.1V at display power pins
+- Check all ground connections for continuity
+
+Test 2: Current Draw Measurement  
+- ESP32-S3: ~150mA idle, ~300mA active
+- GC9A01 displays: ~90mA total (3  30mA)
+- HC-SR04 sensor: ~15mA during ping
+- Total system: <500mA without motors
+```
+
+#### Display System Tests
+```bash
+Test 3: SPI Communication
+- Load test pattern to each display individually
+- Verify CS pin selection working properly
+- Test SPI clock speeds up to 20MHz
+- Confirm 240x240 pixel resolution
+
+Test 4: Visual Calibration
+- Display solid colors on all screens
+- Test eye tracking patterns
+- Verify mouth animation sequences  
+- Check brightness and contrast levels
+```
+
+#### Sensor System Tests
+```bash
+Test 5: Distance Measurement
+- Test HC-SR04 at 10cm, 50cm, 1m, 2m distances
+- Verify trigger pulse timing (10s minimum)
+- Measure echo pulse timing accuracy
+- Test detection cone angle (~15 beam width)
+```
+
+### Motor System Calibration
+
+#### Static Load Testing
+```bash
+Test 6: Holding Torque Verification
+- Mount head assembly to motor shaft
+- Apply increasing lateral force until motor slips
+- Verify holding torque meets 0.795 Nm minimum
+- Test both yaw and pitch motors
+```
+
+#### Dynamic Performance Testing  
+```bash
+Test 7: Movement Profiles
+- Program 90 rotation in 0.5 seconds
+- Verify smooth S-curve acceleration
+- Test positioning repeatability (0.2)
+- Measure settling time after movement
+```
+
+#### Thermal Testing
+```bash
+Test 8: Continuous Operation
+- Run motors at 50% duty cycle for 30 minutes
+- Monitor motor temperature (<60C maximum)
+- Check for thermal shutdown protection
+- Verify cooling airflow if needed
+```
+
+### Software Integration Tests
+
+#### ESP32-S3 Programming
+```cpp
+// Basic test code structure
+void setup() {
+  // Initialize SPI displays
+  // Initialize HC-SR04 sensor  
+  // Initialize motor drivers
+  // Run self-test sequence
+}
+
+void loop() {
+  // Read sensor data
+  // Update display animations
+  // Execute motor movements
+  // Handle mood state changes
+}
+```
+
+#### P32 Configuration Validation
+```bash
+Test 9: JSON Configuration Loading
+- Verify goblin_full.json loads correctly
+- Test component positioning data
+- Validate interface assignments
+- Check mood behavior mappings
+```
+
+### Quality Assurance Checklist
+
+#### Mechanical Assembly
+- [ ] All threaded inserts properly seated
+- [ ] No loose screws or hardware
+- [ ] Smooth motor shaft rotation
+- [ ] No mechanical binding in any axis
+- [ ] Weight within 249.75g 5% tolerance
+
+#### Electrical Systems  
+- [ ] All connections secure and strain-relieved
+- [ ] No short circuits between power rails
+- [ ] SPI communication error-free
+- [ ] Sensor readings stable and accurate
+- [ ] Motor drivers responding correctly
+
+#### Software Systems
+- [ ] ESP32-S3 boots and connects reliably  
+- [ ] Display animations smooth at 30+ FPS
+- [ ] Sensor data updates at 10+ Hz
+- [ ] Motor movements precise and repeatable
+- [ ] Mood system responds to inputs correctly
+
+---
+
+## Troubleshooting Guide
+
+### Common Issues and Solutions
+
+#### Display Problems
+```yaml
+Issue: Displays not lighting up
+Check: 3.3V power supply, SPI connections
+Solution: Verify voltage levels, check wire continuity
+
+Issue: Garbled display output  
+Check: SPI clock speed, CS pin assignments
+Solution: Reduce SPI frequency, verify GPIO mapping
+
+Issue: One display not working
+Check: Individual CS pin connection
+Solution: Swap CS wires to isolate problem
+```
+
+#### Sensor Problems
+```yaml
+Issue: No distance readings
+Check: 5V power, trigger/echo connections
+Solution: Verify GPIO pins, check sensor orientation  
+
+Issue: Erratic readings
+Check: Electrical noise, timing issues
+Solution: Add decoupling capacitors, adjust code timing
+
+Issue: Limited range
+Check: Sensor mounting, obstacles  
+Solution: Ensure clear line of sight, proper positioning
+```
+
+#### Motor Problems
+```yaml
+Issue: Motors not moving
+Check: Power supply, driver connections
+Solution: Verify 12V supply, check step/direction signals
+
+Issue: Jerky movement
+Check: Microstepping settings, acceleration  
+Solution: Enable 16x microstepping, smooth profiles
+
+Issue: Position drift
+Check: Motor load, driver current
+Solution: Increase driver current, verify mechanical load
+```
+
+---
+
+## Parts List & Procurement
+
+### 3D Printing Materials
+```yaml
+PLA Filament (Goblin Green #4A5D23):
+  Quantity: 1kg spool
+  Usage: ~108g for complete head
+  Supplier: SUNLU, eSUN, Hatchbox
+  Cost: $20-25
+
+Alternative Colors:
+  Dark Gray: Professional appearance
+  Brown: Natural goblin coloring  
+  Natural: Easy to paint/finish
+```
+
+### Electronic Components
+```yaml
+ESP32-S3-DevKitC-1:
+  Quantity: 1
+  Supplier: Espressif, Adafruit, SparkFun
+  Cost: $15-20
+
+GC9A01 240x240 Circular Display:
+  Quantity: 3
+  Supplier: Adafruit, Waveshare, Generic
+  Cost: $8-12 each
+
+HC-SR04 Ultrasonic Sensor:
+  Quantity: 1  
+  Supplier: SparkFun, Adafruit, Generic
+  Cost: $3-5
+
+TMC2209 Stepper Drivers:
+  Quantity: 2
+  Supplier: BigTreeTech, Trinamic
+  Cost: $7-10 each
+
+NEMA 17 Stepper Motors:
+  High Torque (1x): $25-35
+  Standard (1x): $15-25
+```
+
+### Hardware & Fasteners
+```yaml
+M3 Threaded Inserts (5mm):
+  Quantity: 12 pieces
+  Supplier: McMaster-Carr, Amazon
+  Cost: $5-10
+
+M3 Screws (Various lengths):
+  Quantity: 20 pieces assorted
+  Supplier: Local hardware, McMaster-Carr  
+  Cost: $5-10
+
+Wire & Connectors:
+  22AWG Stranded Wire: 2 meters various colors
+  Dupont Connectors: Male/Female sets
+  Cost: $10-15 total
+```
+
+### Tools Required
+```yaml
+3D Printer: FDM printer with 200x200mm+ bed
+Soldering Iron: For threaded insert installation
+Multimeter: For electrical testing
+Hex Keys: M3 size for assembly
+Wire Strippers: For harness preparation
+Heat Gun: Optional for wire management
+```
+
+### Total Project Cost Estimate
+```yaml
+3D Printing: $20-25 (filament)
+Electronics: $60-85 (displays, controller, sensor)  
+Motors & Drivers: $50-80 (2 motors + drivers)
+Hardware: $20-30 (fasteners, wire, connectors)
+
+Total Cost: $150-220
+Labor Time: 20-30 hours (including print time)
+```
+
+---
+
+## Conclusion
+
+This complete build guide provides everything needed to manufacture a professional-quality P32 Goblin Head animatronic subsystem. The design integrates:
+
+ **Research-based anatomical accuracy** from folklore sources  
+ **Integrated weight and motor load calculations** for reliable operation  
+ **Professional-grade 3D printing specifications** with quality control  
+ **Zero-crossover wiring diagrams** for clean assembly  
+ **Comprehensive testing and calibration procedures** for validation  
+ **Complete parts list and procurement guide** for easy sourcing  
+
+The system provides a robust foundation for future expansion into full-body animatronics while maintaining focus on the critical head subsystem functionality.
+
+**Ready for manufacturing and assembly!**
+
+---
+
+**Document Version:** 1.0  
+**Last Updated:** October 14, 2025  
+**Review Status:** Complete and Ready for Production  
+**Print Status:** All STL files generated and verified  
+**Quality Level:** Professional manufacturing documentation</pre></body>
+</html>

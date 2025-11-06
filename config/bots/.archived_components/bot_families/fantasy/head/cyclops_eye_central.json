@@ -9,7 +9,7 @@
     "name": "cyclops_eye_central",
     "subsystem": "VISION",
     "components": [
-        "config/components/interfaces/spi_bus.json",
+        "components/interfaces/spi_bus.json",
         "config/subsystems/cyclops_head.json",
         "config/subsystems/cyclops_torso.json"
     ],

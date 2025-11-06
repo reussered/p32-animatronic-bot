@@ -15,8 +15,8 @@
         "i2c_interfaces": 1
     },
     "components": [
-        "config/subsystems/components/gait_coordinator.json",
-        "config/subsystems/components/balance_controller.json"
+        "subsystems/components/gait_coordinator.json",
+        "subsystems/components/balance_controller.json"
     ],
     "servo_specifications": {
         "hip_joint": {

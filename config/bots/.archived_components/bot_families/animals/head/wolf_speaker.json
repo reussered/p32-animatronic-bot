@@ -9,7 +9,7 @@
     "name": "wolf_speaker",
     "subsystem": "AUDIO",
     "components": [
-        "config/components/interfaces/i2s_bus.json",
+        "components/drivers/i2s_bus.json",
         "config/subsystems/wolf_head.json",
         "config/subsystems/wolf_torso.json"
     ],

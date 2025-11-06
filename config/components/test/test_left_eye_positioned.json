@@ -8,7 +8,7 @@
         "description": "Test left eye updates every cycle"
     },
     "components": [
-        "config/components/hardware/gc9a01.json"
+        "components/gc9a01.json"
     ],
     "position": {
         "coordinate_system": "planar_2d",

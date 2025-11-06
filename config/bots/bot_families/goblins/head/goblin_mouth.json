@@ -3,5 +3,9 @@
     "type": "SCAFFOLDED",
     "relative_filename": "config/bots/bot_families/goblins/head/goblin_mouth.json",
     "description": "Auto-generated component.",
+    "use_fields": {
+        "color_schema": "RGB666",
+        "###1###": "#include config/shared_headers/color_schema.hpp"
+    },
     "components": []
 }

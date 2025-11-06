@@ -85,11 +85,11 @@
         }
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_enhanced_ears.json",
-        "config/bots/bot_families/goblins/head/goblin_camouflage_skin.json",
-        "config/bots/bot_families/goblins/head/goblin_scent_sensor.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/bot_families/goblins/head/goblin_enhanced_ears.json",
+        "bots/bot_families/goblins/head/goblin_camouflage_skin.json",
+        "bots/bot_families/goblins/head/goblin_scent_sensor.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "reconnaissance_mode": {

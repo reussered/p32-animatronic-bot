@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_enlarged_eyes.json",
-        "config/bots/bot_families/goblins/head/goblin_pale_skin.json",
-        "config/bots/bot_families/goblins/head/goblin_shadow_sensors.json",
-        "config/bots/bot_families/goblins/head/goblin_malnutrition_features.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/bot_families/goblins/head/goblin_enlarged_eyes.json",
+        "bots/bot_families/goblins/head/goblin_pale_skin.json",
+        "bots/bot_families/goblins/head/goblin_shadow_sensors.json",
+        "bots/bot_families/goblins/head/goblin_malnutrition_features.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "shadow_meld": {

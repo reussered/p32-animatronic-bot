@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>P32 Goblin Head - Visual Build Guide</title>
@@ -18,281 +18,281 @@ th{background:#34495e;color:white}
 </style>
 </head>
 <body><div><h1>P32 Goblin Head Assembly - Visual Build Guide</h1>
-<strong>Complete Manufacturing Documentation with Images</strong>
-
----
-
-## Overview & Quick Reference
-
-### What You're Building
-A complete animatronic goblin head with:
-- <strong>249.75 grams total weight</strong>
-- <strong>3 circular displays</strong> (eyes + mouth)
-- <strong>Ultrasonic sensor</strong> (nose)
-- <strong>ESP32-S3 controller</strong>
-- <strong>NEMA 17 motor compatibility</strong>
-
-### Print Summary
-- <strong>Total print time:</strong> 13-21 hours
-- <strong>Material needed:</strong> ~108g PLA filament
-- <strong>Files ready:</strong> 6 STL files generated
-
----
-
-## 3D Printed Parts Gallery
-
-### Main Goblin Skull
-<strong>File:</strong> <code>assets/shapes/stl/goblin_skull_complete.stl</code>
-
-![Goblin Skull](../assets/shapes/images/skull_render.png)
-
-<strong>Specifications:</strong>
-- <strong>Print time:</strong> 8-12 hours
-- <strong>Weight:</strong> 57.5 grams
-- <strong>Infill:</strong> 20%
-- <strong>Supports:</strong> Yes (eye sockets, jaw)
-
-<strong>What you see:</strong>
-- Anatomically accurate goblin proportions
-- Integrated mounting points for displays
-- Internal channels for wire routing
-- Motor attachment points on rear
-
-### Display Mounts (Print 3 Copies)
-<strong>File:</strong> <code>assets/shapes/stl/example_display_mount.stl</code>
-
-<em>[Display mount render - circular ring with precise GC9A01 fit]</em>
-
-<strong>Specifications:</strong>
-- <strong>Print time:</strong> 1-2 hours each
-- <strong>Weight:</strong> 8 grams each
-- <strong>Infill:</strong> 100% (structural)
-- <strong>Quantity needed:</strong> 3 copies
-
-<strong>Usage:</strong>
-- Left eye display mount
-- Right eye display mount  
-- Mouth display mount
-
-### Sensor Mount
-<strong>File:</strong> <code>assets/shapes/stl/goblin_nose_sensor.stl</code>
-
-<em>[Sensor mount render - HC-SR04 bracket integrated into nose design]</em>
-
-<strong>Specifications:</strong>
-- <strong>Print time:</strong> 2-3 hours
-- <strong>Weight:</strong> 15 grams
-- <strong>Infill:</strong> 100%
-- <strong>Location:</strong> Nose tip position
-
----
-
-## Professional Wiring Diagram
-
-### Zero-Crossover Layout
-<em>Click to view full-size SVG diagram</em>
-
-<strong>Key Features:</strong>
-- <strong>No wire crossovers</strong> over components
-- <strong>Professional PCB routing</strong> standards
-- <strong>Color-coded connections</strong>
-- <strong>Clear pin assignments</strong>
-
-### Pin Assignment Summary
-<pre>
-ESP32-S3-DevKitC-1 GPIO Usage:
-
-SPI Bus (Shared):
-â”œâ”€â”€ GPIO 12: MISO
-â”œâ”€â”€ GPIO 13: MOSI  
-â””â”€â”€ GPIO 14: CLK
-
-Display CS Pins:
-â”œâ”€â”€ GPIO 15: Left Eye
-â”œâ”€â”€ GPIO 16: Right Eye
-â””â”€â”€ GPIO 17: Mouth
-
-I2S Audio:
-â”œâ”€â”€ GPIO 4: BCLK
-â”œâ”€â”€ GPIO 5: WS
-â””â”€â”€ GPIO 6: DATA
-
-Sensor:
-â”œâ”€â”€ GPIO 9: Trigger
-â””â”€â”€ GPIO 10: Echo
-</pre>
-
----
-
-## Assembly Sequence with Images
-
-### Step 1: Print All Components
-<strong>Required prints:</strong>
-- [ ] 1x Goblin skull (8-12 hours)
-- [ ] 3x Display mounts (3-6 hours total)  
-- [ ] 1x Sensor mount (2-3 hours)
-- [ ] 1x Test cube (15 minutes - for calibration)
-
-<strong>Print settings:</strong>
-- Layer height: 0.2mm
-- PLA temperature: 210Â°C
-- Bed temperature: 60Â°C
-- Supports: Auto-generate for skull
-
-### Step 2: Hardware Installation
-<strong>Install threaded inserts:</strong>
-- Heat soldering iron to 200Â°C
-- Press 12x M3 threaded inserts into skull
-- Ensure flush mounting
-
-<strong>Mount displays:</strong>
-- Insert GC9A01 displays into mounting rings
-- Verify snug fit without forcing
-- Test electrical connections
-
-### Step 3: Electronics Assembly
-<strong>Following wiring diagram:</strong>
-- Mount ESP32-S3 in rear skull compartment
-- Route SPI bus wires to all displays
-- Connect individual CS pins (GPIO 15,16,17)
-- Install HC-SR04 in nose mount
-
-### Step 4: Testing & Validation
-<strong>Power-up sequence:</strong>
-- Apply 5V power to ESP32
-- Verify all displays illuminate
-- Test sensor distance readings
-- Check for proper SPI communication
-
----
-
-## Motor Integration
-
-### Required Motors
-<strong>For responsive head movement:</strong>
-
-<strong>Yaw Motor (Left/Right):</strong>
-- NEMA 17 High Torque
-- â‰¥178 ozâ‹…in holding torque
-- 1.8Â° step angle
-- ~$25-35 cost
-
-<strong>Pitch Motor (Up/Down):</strong>
-- NEMA 17 Standard  
-- â‰¥92 ozâ‹…in holding torque
-- 1.8Â° step angle
-- ~$15-25 cost
-
-### Performance Specifications
-- <strong>90Â° head turn:</strong> 0.5 seconds
-- <strong>Positioning accuracy:</strong> Â±0.2Â°
-- <strong>Power consumption:</strong> 24W per motor
-- <strong>Control:</strong> Step/direction from ESP32
-
----
-
-## Parts Shopping List
-
-### Electronics ($60-85)
-- <strong>ESP32-S3-DevKitC-1:</strong> $15-20
-- <strong>GC9A01 displays (3x):</strong> $24-36 total
-- <strong>HC-SR04 sensor:</strong> $3-5
-- <strong>Wire & connectors:</strong> $10-15
-- <strong>TMC2209 drivers (2x):</strong> $14-20
-
-### Motors ($50-80)
-- <strong>NEMA 17 High Torque:</strong> $25-35
-- <strong>NEMA 17 Standard:</strong> $15-25
-- <strong>Motor mounts:</strong> $10-20
-
-### Hardware ($20-30)  
-- <strong>M3 threaded inserts (12x):</strong> $5-10
-- <strong>M3 screws (assorted):</strong> $5-10
-- <strong>Washers, nuts, misc:</strong> $10-10
-
-### 3D Printing ($20-25)
-- <strong>PLA filament (1kg):</strong> $20-25
-- <strong>Usage:</strong> ~108g for complete head
-
-<strong>Total Project Cost: $150-220</strong>
-
----
-
-## Quality Control Checklist
-
-### Print Quality
-- [ ] Test cube measures 20.0mm Â±0.1mm
-- [ ] Skull surfaces smooth, no layer separation
-- [ ] Display mounts fit GC9A01 perfectly
-- [ ] Sensor mount accommodates HC-SR04
-- [ ] All threaded insert holes clean
-
-### Assembly Quality  
-- [ ] Total weight: 249.75g Â±5%
-- [ ] All connections secure
-- [ ] No short circuits
-- [ ] Displays show test patterns
-- [ ] Sensor readings stable
-- [ ] Motor movement smooth
-
-### Performance Validation
-- [ ] 90Â° head turn in 0.5 seconds
-- [ ] Positioning repeatable to Â±0.2Â°
-- [ ] No mechanical binding
-- [ ] Power consumption within spec
-- [ ] All GPIO functions working
-
----
-
-## Troubleshooting Quick Reference
-
-### Display Issues
-<strong>Problem:</strong> No display output
-<strong>Check:</strong> 3.3V power, SPI connections
-<strong>Fix:</strong> Verify voltage levels, check continuity
-
-<strong>Problem:</strong> Garbled images  
-<strong>Check:</strong> SPI clock speed, CS assignments
-<strong>Fix:</strong> Reduce frequency, verify GPIO mapping
-
-### Sensor Issues  
-<strong>Problem:</strong> No distance readings
-<strong>Check:</strong> 5V power, trigger/echo pins
-<strong>Fix:</strong> Verify connections, check orientation
-
-<strong>Problem:</strong> Erratic readings
-<strong>Check:</strong> Electrical noise, timing
-<strong>Fix:</strong> Add decoupling caps, adjust code
-
-### Motor Issues
-<strong>Problem:</strong> No movement
-<strong>Check:</strong> 12V supply, step/direction signals  
-<strong>Fix:</strong> Verify power, check driver settings
-
-<strong>Problem:</strong> Position drift
-<strong>Check:</strong> Motor load, driver current
-<strong>Fix:</strong> Increase current, verify mechanical load
-
----
-
-## Next Steps
-
-### Immediate Actions
-1. <strong>Start printing</strong> the calibration cube
-2. <strong>Verify printer accuracy</strong> with measurements  
-3. <strong>Begin skull print</strong> (longest component)
-4. <strong>Order electronics</strong> while printing
-5. <strong>Prepare assembly workspace</strong>
-
-### Future Expansion
-- <strong>Motor integration</strong> for head articulation
-- <strong>Full body architecture</strong> (documented separately)
-- <strong>Advanced behaviors</strong> and mood system
-- <strong>Multi-bot coordination</strong> with ESP-NOW
-
----
-
-<strong>Document Status:</strong> Complete with Visual Documentation  
-<strong>Last Updated:</strong> October 14, 2025  
-<strong>Ready for:</strong> Manufacturing and Assembly  
-<strong>Quality Level:</strong> Professional Production Guide</div></body></html>
+<strong>Complete Manufacturing Documentation with Images</strong>
+
+---
+
+## Overview & Quick Reference
+
+### What You're Building
+A complete animatronic goblin head with:
+- <strong>249.75 grams total weight</strong>
+- <strong>3 circular displays</strong> (eyes + mouth)
+- <strong>Ultrasonic sensor</strong> (nose)
+- <strong>ESP32-S3 controller</strong>
+- <strong>NEMA 17 motor compatibility</strong>
+
+### Print Summary
+- <strong>Total print time:</strong> 13-21 hours
+- <strong>Material needed:</strong> ~108g PLA filament
+- <strong>Files ready:</strong> 6 STL files generated
+
+---
+
+## 3D Printed Parts Gallery
+
+### Main Goblin Skull
+<strong>File:</strong> <code>assets/shapes/stl/goblin_skull_complete.stl</code>
+
+![Goblin Skull](../assets/shapes/images/skull_render.png)
+
+<strong>Specifications:</strong>
+- <strong>Print time:</strong> 8-12 hours
+- <strong>Weight:</strong> 57.5 grams
+- <strong>Infill:</strong> 20%
+- <strong>Supports:</strong> Yes (eye sockets, jaw)
+
+<strong>What you see:</strong>
+- Anatomically accurate goblin proportions
+- Integrated mounting points for displays
+- Internal channels for wire routing
+- Motor attachment points on rear
+
+### Display Mounts (Print 3 Copies)
+<strong>File:</strong> <code>assets/shapes/stl/example_display_mount.stl</code>
+
+<em>[Display mount render - circular ring with precise GC9A01 fit]</em>
+
+<strong>Specifications:</strong>
+- <strong>Print time:</strong> 1-2 hours each
+- <strong>Weight:</strong> 8 grams each
+- <strong>Infill:</strong> 100% (structural)
+- <strong>Quantity needed:</strong> 3 copies
+
+<strong>Usage:</strong>
+- Left eye display mount
+- Right eye display mount  
+- Mouth display mount
+
+### Sensor Mount
+<strong>File:</strong> <code>assets/shapes/stl/goblin_nose_sensor.stl</code>
+
+<em>[Sensor mount render - HC-SR04 bracket integrated into nose design]</em>
+
+<strong>Specifications:</strong>
+- <strong>Print time:</strong> 2-3 hours
+- <strong>Weight:</strong> 15 grams
+- <strong>Infill:</strong> 100%
+- <strong>Location:</strong> Nose tip position
+
+---
+
+## Professional Wiring Diagram
+
+### Zero-Crossover Layout
+<em>Click to view full-size SVG diagram</em>
+
+<strong>Key Features:</strong>
+- <strong>No wire crossovers</strong> over components
+- <strong>Professional PCB routing</strong> standards
+- <strong>Color-coded connections</strong>
+- <strong>Clear pin assignments</strong>
+
+### Pin Assignment Summary
+<pre>
+ESP32-S3-DevKitC-1 GPIO Usage:
+
+SPI Bus (Shared):
+ GPIO 12: MISO
+ GPIO 13: MOSI  
+ GPIO 14: CLK
+
+Display CS Pins:
+ GPIO 15: Left Eye
+ GPIO 16: Right Eye
+ GPIO 17: Mouth
+
+I2S Audio:
+ GPIO 4: BCLK
+ GPIO 5: WS
+ GPIO 6: DATA
+
+Sensor:
+ GPIO 9: Trigger
+ GPIO 10: Echo
+</pre>
+
+---
+
+## Assembly Sequence with Images
+
+### Step 1: Print All Components
+<strong>Required prints:</strong>
+- [ ] 1x Goblin skull (8-12 hours)
+- [ ] 3x Display mounts (3-6 hours total)  
+- [ ] 1x Sensor mount (2-3 hours)
+- [ ] 1x Test cube (15 minutes - for calibration)
+
+<strong>Print settings:</strong>
+- Layer height: 0.2mm
+- PLA temperature: 210C
+- Bed temperature: 60C
+- Supports: Auto-generate for skull
+
+### Step 2: Hardware Installation
+<strong>Install threaded inserts:</strong>
+- Heat soldering iron to 200C
+- Press 12x M3 threaded inserts into skull
+- Ensure flush mounting
+
+<strong>Mount displays:</strong>
+- Insert GC9A01 displays into mounting rings
+- Verify snug fit without forcing
+- Test electrical connections
+
+### Step 3: Electronics Assembly
+<strong>Following wiring diagram:</strong>
+- Mount ESP32-S3 in rear skull compartment
+- Route SPI bus wires to all displays
+- Connect individual CS pins (GPIO 15,16,17)
+- Install HC-SR04 in nose mount
+
+### Step 4: Testing & Validation
+<strong>Power-up sequence:</strong>
+- Apply 5V power to ESP32
+- Verify all displays illuminate
+- Test sensor distance readings
+- Check for proper SPI communication
+
+---
+
+## Motor Integration
+
+### Required Motors
+<strong>For responsive head movement:</strong>
+
+<strong>Yaw Motor (Left/Right):</strong>
+- NEMA 17 High Torque
+- 178 ozin holding torque
+- 1.8 step angle
+- ~$25-35 cost
+
+<strong>Pitch Motor (Up/Down):</strong>
+- NEMA 17 Standard  
+- 92 ozin holding torque
+- 1.8 step angle
+- ~$15-25 cost
+
+### Performance Specifications
+- <strong>90 head turn:</strong> 0.5 seconds
+- <strong>Positioning accuracy:</strong> 0.2
+- <strong>Power consumption:</strong> 24W per motor
+- <strong>Control:</strong> Step/direction from ESP32
+
+---
+
+## Parts Shopping List
+
+### Electronics ($60-85)
+- <strong>ESP32-S3-DevKitC-1:</strong> $15-20
+- <strong>GC9A01 displays (3x):</strong> $24-36 total
+- <strong>HC-SR04 sensor:</strong> $3-5
+- <strong>Wire & connectors:</strong> $10-15
+- <strong>TMC2209 drivers (2x):</strong> $14-20
+
+### Motors ($50-80)
+- <strong>NEMA 17 High Torque:</strong> $25-35
+- <strong>NEMA 17 Standard:</strong> $15-25
+- <strong>Motor mounts:</strong> $10-20
+
+### Hardware ($20-30)  
+- <strong>M3 threaded inserts (12x):</strong> $5-10
+- <strong>M3 screws (assorted):</strong> $5-10
+- <strong>Washers, nuts, misc:</strong> $10-10
+
+### 3D Printing ($20-25)
+- <strong>PLA filament (1kg):</strong> $20-25
+- <strong>Usage:</strong> ~108g for complete head
+
+<strong>Total Project Cost: $150-220</strong>
+
+---
+
+## Quality Control Checklist
+
+### Print Quality
+- [ ] Test cube measures 20.0mm 0.1mm
+- [ ] Skull surfaces smooth, no layer separation
+- [ ] Display mounts fit GC9A01 perfectly
+- [ ] Sensor mount accommodates HC-SR04
+- [ ] All threaded insert holes clean
+
+### Assembly Quality  
+- [ ] Total weight: 249.75g 5%
+- [ ] All connections secure
+- [ ] No short circuits
+- [ ] Displays show test patterns
+- [ ] Sensor readings stable
+- [ ] Motor movement smooth
+
+### Performance Validation
+- [ ] 90 head turn in 0.5 seconds
+- [ ] Positioning repeatable to 0.2
+- [ ] No mechanical binding
+- [ ] Power consumption within spec
+- [ ] All GPIO functions working
+
+---
+
+## Troubleshooting Quick Reference
+
+### Display Issues
+<strong>Problem:</strong> No display output
+<strong>Check:</strong> 3.3V power, SPI connections
+<strong>Fix:</strong> Verify voltage levels, check continuity
+
+<strong>Problem:</strong> Garbled images  
+<strong>Check:</strong> SPI clock speed, CS assignments
+<strong>Fix:</strong> Reduce frequency, verify GPIO mapping
+
+### Sensor Issues  
+<strong>Problem:</strong> No distance readings
+<strong>Check:</strong> 5V power, trigger/echo pins
+<strong>Fix:</strong> Verify connections, check orientation
+
+<strong>Problem:</strong> Erratic readings
+<strong>Check:</strong> Electrical noise, timing
+<strong>Fix:</strong> Add decoupling caps, adjust code
+
+### Motor Issues
+<strong>Problem:</strong> No movement
+<strong>Check:</strong> 12V supply, step/direction signals  
+<strong>Fix:</strong> Verify power, check driver settings
+
+<strong>Problem:</strong> Position drift
+<strong>Check:</strong> Motor load, driver current
+<strong>Fix:</strong> Increase current, verify mechanical load
+
+---
+
+## Next Steps
+
+### Immediate Actions
+1. <strong>Start printing</strong> the calibration cube
+2. <strong>Verify printer accuracy</strong> with measurements  
+3. <strong>Begin skull print</strong> (longest component)
+4. <strong>Order electronics</strong> while printing
+5. <strong>Prepare assembly workspace</strong>
+
+### Future Expansion
+- <strong>Motor integration</strong> for head articulation
+- <strong>Full body architecture</strong> (documented separately)
+- <strong>Advanced behaviors</strong> and mood system
+- <strong>Multi-bot coordination</strong> with ESP-NOW
+
+---
+
+<strong>Document Status:</strong> Complete with Visual Documentation  
+<strong>Last Updated:</strong> October 14, 2025  
+<strong>Ready for:</strong> Manufacturing and Assembly  
+<strong>Quality Level:</strong> Professional Production Guide</div></body></html>

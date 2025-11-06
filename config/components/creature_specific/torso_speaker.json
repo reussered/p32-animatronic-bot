@@ -11,7 +11,7 @@
     "version": "1.0.0",
     "author": "config/author.json",
     "components": [
-        "config/components/hardware/servo_sg90_micro.json"
+        "components/hardware/servo_sg90_micro.json"
     ],
     "software": {
         "act_function": "torso_speaker_act",

@@ -27,9 +27,9 @@
         "voltage_regulation": "ONBOARD_LDO"
     },
     "components": [
-        "config/subsystems/components/ai_behavior_engine.json",
-        "config/subsystems/components/sensor_fusion.json",
-        "config/subsystems/components/emergency_handler.json"
+        "subsystems/components/ai_behavior_engine.json",
+        "subsystems/components/sensor_fusion.json",
+        "subsystems/components/emergency_handler.json"
     ],
     "timing_constraints": {
         "loop_frequency": "MAXIMUM_SPEED",

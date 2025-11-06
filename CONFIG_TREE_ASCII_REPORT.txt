@@ -1,565 +1,565 @@
-================================================================================
-CONFIG TREE - COMPLETE FOLDER AND FILE STRUCTURE
-================================================================================
-Generated: 2025-11-04
-Format: ASCII Text Report
-Purpose: Complete inventory of all files in config/ directory with locations
-
-================================================================================
-DIRECTORY HIERARCHY
-================================================================================
-
-config/
-├── author.json
-├── behaviors/
-├── bots/
-│   ├── .archived_components/
-│   │   ├── android_eye.json
-│   │   ├── android_left_eye.json
-│   │   ├── bear_eye.json
-│   │   ├── bear_ice_sensors.json
-│   │   ├── bear_snout.json
-│   │   ├── bear_speaker.json
-│   │   ├── bears_family.json
-│   │   ├── cat_animated_ears.json
-│   │   ├── cat_eye.json
-│   │   ├── cat_nose.json
-│   │   ├── cat_nose_sensor.json
-│   │   ├── cat_speaker.json
-│   │   ├── cat_whisker_sensors.json
-│   │   ├── cyclops_eye_central.json
-│   │   ├── cyclops_mouth.json
-│   │   ├── cyclops_speaker.json
-│   │   ├── dragon_eye_left.json
-│   │   ├── dragon_eye_right.json
-│   │   ├── dragon_snout.json
-│   │   ├── dragon_speaker.json
-│   │   ├── elf_eye_left.json
-│   │   ├── elf_eye_right.json
-│   │   ├── elf_mouth.json
-│   │   ├── elf_speaker.json
-│   │   ├── goblin_head_left_eye_only.json
-│   │   ├── goblin_left_eye.json
-│   │   ├── goblin_mouth.json
-│   │   ├── goblin_nose.json
-│   │   ├── goblin_right_eye.json
-│   │   ├── goblin_speaker.json
-│   │   ├── pixie_eye.json
-│   │   ├── robot_camera_eyes.json
-│   │   ├── robot_eye.json
-│   │   ├── robot_speaker_array.json
-│   │   ├── steampunk_eye_left.json
-│   │   ├── steampunk_eye_right.json
-│   │   ├── steampunk_mouth.json
-│   │   ├── steampunk_nose.json
-│   │   ├── steampunk_speaker.json
-│   │   ├── vampire_eye_left.json
-│   │   ├── vampire_eye_right.json
-│   │   ├── vampire_mouth.json
-│   │   ├── vampire_speaker.json
-│   │   ├── wolf_eye_left.json
-│   │   ├── wolf_eye_right.json
-│   │   ├── wolf_snout.json
-│   │   ├── wolf_speaker.json
-│   │   ├── zombie_eye.json
-│   │   └── zombie_shamble_actuator.json
-│   └── bot_families/
-│       ├── androids/
-│       ├── bears/
-│       ├── cats/
-│       ├── cyclops/
-│       ├── dragons/
-│       ├── elves/
-│       ├── goblins/
-│       ├── pixies/
-│       ├── robots/
-│       ├── steampunk/
-│       ├── vampires/
-│       ├── wolves/
-│       ├── zombies/
-│       └── [contains head/torso subsystem definitions]
-├── components/
-│   ├── creature_specific/
-│   │   ├── ambient_purr_speaker.hdr
-│   │   ├── ambient_purr_speaker.json
-│   │   ├── ambient_purr_speaker.src
-│   │   ├── ambient_temperature_sensor.hdr
-│   │   ├── ambient_temperature_sensor.src
-│   │   ├── android_emotion_display.hdr
-│   │   ├── android_emotion_display.src
-│   │   ├── android_neural_interface.hdr
-│   │   ├── android_neural_interface.src
-│   │   ├── android_synthetic_skin.hdr
-│   │   ├── android_synthetic_skin.src
-│   │   ├── android_eye.hdr
-│   │   ├── android_eye.json
-│   │   ├── android_eye.src
-│   │   ├── android_left_eye.hdr
-│   │   ├── android_left_eye.src
-│   │   ├── audio_analysis_unit.hdr
-│   │   ├── audio_analysis_unit.src
-│   │   ├── base_arm_status_led.hdr
-│   │   ├── base_arm_status_led.src
-│   │   ├── base_battery_monitor.hdr
-│   │   ├── base_battery_monitor.src
-│   │   ├── base_elbow_servo.hdr
-│   │   ├── base_elbow_servo.src
-│   │   ├── base_eye_left.hdr
-│   │   ├── base_eye_left.src
-│   │   ├── base_eye_right.hdr
-│   │   ├── base_eye_right.src
-│   │   ├── base_mesh_coordinator.hdr
-│   │   ├── base_mesh_coordinator.src
-│   │   ├── base_power_management.hdr
-│   │   ├── base_power_management.src
-│   │   ├── base_shoulder_servo.hdr
-│   │   ├── base_shoulder_servo.src
-│   │   ├── base_speaker.hdr
-│   │   ├── base_speaker.json
-│   │   ├── base_speaker.src
-│   │   ├── base_status_led.hdr
-│   │   ├── base_status_led.src
-│   │   ├── base_wrist_servo.hdr
-│   │   ├── base_wrist_servo.src
-│   │   ├── bear_arctic_fur.hdr
-│   │   ├── bear_arctic_fur.src
-│   │   ├── bear_eye.hdr
-│   │   ├── bear_eye.json
-│   │   ├── bear_eye.src
-│   │   ├── bear_ice_sensors.hdr
-│   │   ├── bear_ice_sensors.json
-│   │   ├── bear_ice_sensors.src
-│   │   ├── bear_massive_claws.hdr
-│   │   ├── bear_massive_claws.src
-│   │   ├── bear_snout.hdr
-│   │   ├── bear_snout.json
-│   │   ├── bear_snout.src
-│   │   ├── bear_speaker.hdr
-│   │   ├── bear_speaker.json
-│   │   ├── bear_speaker.src
-│   │   ├── bear_thick_fur.hdr
-│   │   ├── bear_thick_fur.src
-│   │   ├── cat_animated_ears.hdr
-│   │   ├── cat_animated_ears.src
-│   │   ├── cat_eye.hdr
-│   │   ├── cat_eye.json
-│   │   ├── cat_eye.src
-│   │   ├── cat_nose.hdr
-│   │   ├── cat_nose.json
-│   │   ├── cat_nose.src
-│   │   ├── cat_nose_sensor.hdr
-│   │   ├── cat_nose_sensor.json
-│   │   ├── cat_nose_sensor.src
-│   │   ├── cat_purr_generator.hdr
-│   │   ├── cat_purr_generator.src
-│   │   ├── cat_speaker.hdr
-│   │   ├── cat_speaker.json
-│   │   ├── cat_speaker.src
-│   │   ├── cat_tail_servo.hdr
-│   │   ├── cat_tail_servo.src
-│   │   ├── cat_whisker_sensors.hdr
-│   │   ├── cat_whisker_sensors.src
-│   │   ├── comfort_speaker.hdr
-│   │   ├── comfort_speaker.src
-│   │   ├── cyclops_eye_central.hdr
-│   │   ├── cyclops_eye_central.json
-│   │   ├── cyclops_eye_central.src
-│   │   ├── cyclops_mouth.hdr
-│   │   ├── cyclops_mouth.json
-│   │   ├── cyclops_mouth.src
-│   │   ├── cyclops_speaker.hdr
-│   │   ├── cyclops_speaker.json
-│   │   ├── cyclops_speaker.src
-│   │   ├── dragon_eye_left.hdr
-│   │   ├── dragon_eye_left.json
-│   │   ├── dragon_eye_left.src
-│   │   ├── dragon_eye_right.hdr
-│   │   ├── dragon_eye_right.json
-│   │   ├── dragon_eye_right.src
-│   │   ├── dragon_nostril_left.hdr
-│   │   ├── dragon_nostril_left.src
-│   │   ├── dragon_nostril_right.hdr
-│   │   ├── dragon_nostril_right.src
-│   │   ├── dragon_snout.hdr
-│   │   ├── dragon_snout.json
-│   │   ├── dragon_snout.src
-│   │   ├── dragon_speaker.hdr
-│   │   ├── dragon_speaker.json
-│   │   ├── dragon_speaker.src
-│   │   ├── dynamic_gpio_driver.hdr
-│   │   ├── dynamic_gpio_driver.src
-│   │   ├── elf_ear_left.hdr
-│   │   ├── elf_ear_left.src
-│   │   ├── elf_ear_right.hdr
-│   │   ├── elf_ear_right.src
-│   │   ├── elf_eye_left.hdr
-│   │   ├── elf_eye_left.json
-│   │   ├── elf_eye_left.src
-│   │   ├── elf_eye_right.hdr
-│   │   ├── elf_eye_right.json
-│   │   ├── elf_eye_right.src
-│   │   ├── elf_mouth.hdr
-│   │   ├── elf_mouth.json
-│   │   ├── elf_mouth.src
-│   │   ├── elf_speaker.hdr
-│   │   ├── elf_speaker.json
-│   │   ├── elf_speaker.src
-│   │   ├── emergency_beacon.hdr
-│   │   ├── emergency_beacon.src
-│   │   ├── emotion_camera.hdr
-│   │   ├── emotion_camera.src
-│   │   ├── external_wifi_communication.hdr
-│   │   ├── external_wifi_communication.src
-│   │   ├── gc9a01.hdr
-│   │   ├── gc9a01.json
-│   │   ├── gc9a01.src
-│   │   ├── ghost_ectoplasm_generator.hdr
-│   │   ├── ghost_ectoplasm_generator.src
-│   │   ├── ghost_floating_mechanism.hdr
-│   │   ├── ghost_floating_mechanism.src
-│   │   ├── ghost_phase_lights.hdr
-│   │   ├── ghost_phase_lights.src
-│   │   ├── goblin_authority_markings.hdr
-│   │   ├── goblin_authority_markings.src
-│   │   ├── goblin_bloodshot_eyes.hdr
-│   │   ├── goblin_bloodshot_eyes.src
-│   │   ├── goblin_bone_ornaments.hdr
-│   │   ├── goblin_bone_ornaments.src
-│   │   ├── goblin_clever_eyes.hdr
-│   │   ├── goblin_clever_eyes.src
-│   │   ├── goblin_enlarged_eyes.hdr
-│   │   ├── goblin_enlarged_eyes.src
-│   │   ├── goblin_enlarged_fangs.hdr
-│   │   ├── goblin_enlarged_fangs.src
-│   │   ├── goblin_eye.hdr
-│   │   ├── goblin_eye.json
-│   │   ├── goblin_eye.src
-│   │   ├── goblin_fury_veins.hdr
-│   │   ├── goblin_fury_veins.src
-│   │   ├── goblin_left_eye.hdr
-│   │   ├── goblin_left_eye.json
-│   │   ├── goblin_left_eye.src
-│   │   ├── goblin_malnutrition_features.hdr
-│   │   ├── goblin_malnutrition_features.src
-│   │   ├── goblin_mystical_glow.hdr
-│   │   ├── goblin_mystical_glow.src
-│   │   ├── goblin_nimble_fingers.hdr
-│   │   ├── goblin_nimble_fingers.src
-│   │   ├── goblin_pale_skin.hdr
-│   │   ├── goblin_pale_skin.src
-│   │   ├── goblin_prank_accessories.hdr
-│   │   ├── goblin_prank_accessories.src
-│   │   ├── goblin_rage_foam.hdr
-│   │   ├── goblin_rage_foam.src
-│   │   ├── goblin_right_eye.hdr
-│   │   ├── goblin_right_eye.json
-│   │   ├── goblin_right_eye.src
-│   │   ├── goblin_ritual_scars.hdr
-│   │   ├── goblin_ritual_scars.src
-│   │   ├── goblin_scent_sensor.hdr
-│   │   ├── goblin_scent_sensor.src
-│   │   ├── goblin_self_wounds.hdr
-│   │   ├── goblin_self_wounds.src
-│   │   ├── goblin_shadow_sensors.hdr
-│   │   ├── goblin_shadow_sensors.src
-│   │   ├── goblin_sly_grin.hdr
-│   │   ├── goblin_sly_grin.src
-│   │   ├── goblin_tribal_tattoos.hdr
-│   │   ├── goblin_tribal_tattoos.src
-│   │   ├── goblin_trophy_scars.hdr
-│   │   ├── goblin_trophy_scars.src
-│   │   ├── hand_status_led.hdr
-│   │   ├── hand_status_led.src
-│   │   ├── heartbeat.hdr
-│   │   ├── heartbeat.json
-│   │   ├── heartbeat.src
-│   │   ├── hip_abduction_servo.hdr
-│   │   ├── hip_abduction_servo.src
-│   │   ├── hip_rotation_servo.hdr
-│   │   ├── hip_rotation_servo.src
-│   │   ├── imu_balance_sensor.hdr
-│   │   ├── imu_balance_sensor.src
-│   │   ├── leg_status_led.hdr
-│   │   ├── leg_status_led.src
-│   │   ├── main_battery_monitor.hdr
-│   │   ├── main_battery_monitor.src
-│   │   ├── middle_finger_servo.hdr
-│   │   ├── middle_finger_servo.src
-│   │   ├── motion_stealth_sensor.hdr
-│   │   ├── motion_stealth_sensor.src
-│   │   ├── network_monitor.hdr
-│   │   ├── network_monitor.json
-│   │   ├── network_monitor.src
-│   │   ├── parasol_cable_management.hdr
-│   │   ├── parasol_cable_management.src
-│   │   ├── parasol_central_hub.hdr
-│   │   ├── parasol_central_hub.src
-│   │   ├── parasol_deployment_servos.hdr
-│   │   ├── parasol_deployment_servos.src
-│   │   ├── parasol_shoulder_interface.hdr
-│   │   ├── parasol_shoulder_interface.src
-│   │   ├── parasol_solar_cell_mounts.hdr
-│   │   ├── parasol_solar_cell_mounts.src
-│   │   ├── parasol_telescoping_ribs.hdr
-│   │   ├── parasol_telescoping_ribs.src
-│   │   ├── parasol_tracking_gimbal.hdr
-│   │   ├── parasol_tracking_gimbal.src
-│   │   ├── parasol_weather_protection.hdr
-│   │   ├── parasol_weather_protection.src
-│   │   ├── pet_simulation_servos.hdr
-│   │   ├── pet_simulation_servos.src
-│   │   ├── pinky_finger_servo.hdr
-│   │   ├── pinky_finger_servo.src
-│   │   ├── pixie_eye.hdr
-│   │   ├── pixie_eye.json
-│   │   ├── pixie_eye.src
-│   │   ├── ring_finger_servo.hdr
-│   │   ├── ring_finger_servo.src
-│   │   ├── robot_camera_eyes.hdr
-│   │   ├── robot_camera_eyes.src
-│   │   ├── robot_eye.hdr
-│   │   ├── robot_eye.json
-│   │   ├── robot_eye.src
-│   │   ├── robot_speaker_array.hdr
-│   │   ├── robot_speaker_array.src
-│   │   ├── security_camera_array.hdr
-│   │   ├── security_camera_array.src
-│   │   ├── skeleton_bone_structure.hdr
-│   │   ├── skeleton_bone_structure.src
-│   │   ├── skeleton_jaw_actuator.hdr
-│   │   ├── skeleton_jaw_actuator.src
-│   │   ├── skeleton_joint_mechanism.hdr
-│   │   ├── skeleton_joint_mechanism.src
-│   │   ├── spine_servo_middle.hdr
-│   │   ├── spine_servo_middle.src
-│   │   ├── spine_servo_upper.hdr
-│   │   ├── spine_servo_upper.src
-│   │   ├── steampunk_eye_left.hdr
-│   │   ├── steampunk_eye_left.json
-│   │   ├── steampunk_eye_left.src
-│   │   ├── steampunk_eye_right.hdr
-│   │   ├── steampunk_eye_right.json
-│   │   ├── steampunk_eye_right.src
-│   │   ├── steampunk_mouth.hdr
-│   │   ├── steampunk_mouth.json
-│   │   ├── steampunk_mouth.src
-│   │   ├── steampunk_nose.hdr
-│   │   ├── steampunk_nose.json
-│   │   ├── steampunk_nose.src
-│   │   ├── steampunk_speaker.hdr
-│   │   ├── steampunk_speaker.json
-│   │   ├── steampunk_speaker.src
-│   │   ├── subtle_led_eyes.hdr
-│   │   ├── subtle_led_eyes.src
-│   │   ├── system_status_display.hdr
-│   │   ├── system_status_display.src
-│   │   ├── test_head.hdr
-│   │   ├── test_head.json
-│   │   ├── test_head.src
-│   │   ├── thermal_sensor.hdr
-│   │   ├── thermal_sensor.src
-│   │   ├── touch_sensor_array.hdr
-│   │   ├── touch_sensor_array.src
-│   │   ├── torso_status_led.hdr
-│   │   ├── torso_status_led.src
-│   │   ├── vampire_eye_left.hdr
-│   │   ├── vampire_eye_left.json
-│   │   ├── vampire_eye_left.src
-│   │   ├── vampire_eye_right.hdr
-│   │   ├── vampire_eye_right.json
-│   │   ├── vampire_eye_right.src
-│   │   ├── vampire_mouth.hdr
-│   │   ├── vampire_mouth.json
-│   │   ├── vampire_mouth.src
-│   │   ├── vampire_speaker.hdr
-│   │   ├── vampire_speaker.json
-│   │   ├── vampire_speaker.src
-│   │   ├── wolf_eye_left.hdr
-│   │   ├── wolf_eye_left.json
-│   │   ├── wolf_eye_left.src
-│   │   ├── wolf_eye_right.hdr
-│   │   ├── wolf_eye_right.json
-│   │   ├── wolf_eye_right.src
-│   │   ├── wolf_snout.hdr
-│   │   ├── wolf_snout.json
-│   │   ├── wolf_snout.src
-│   │   ├── wolf_speaker.hdr
-│   │   ├── wolf_speaker.json
-│   │   ├── wolf_speaker.src
-│   │   ├── zombie_drag_mechanism.hdr
-│   │   ├── zombie_drag_mechanism.src
-│   │   ├── zombie_exposed_bone.hdr
-│   │   ├── zombie_exposed_bone.src
-│   │   ├── zombie_eye.hdr
-│   │   ├── zombie_eye.json
-│   │   ├── zombie_eye.src
-│   │   ├── zombie_oozing_wounds.hdr
-│   │   ├── zombie_oozing_wounds.src
-│   │   ├── zombie_rotting_flesh.hdr
-│   │   ├── zombie_rotting_flesh.src
-│   │   └── zombie_shamble_actuator.hdr
-│   │   └── zombie_shamble_actuator.src
-│   ├── drivers/
-│   ├── functional/
-│   ├── hardware/
-│   ├── interfaces/
-│   ├── scaling/
-│   ├── subsystem/
-│   ├── system/
-│   ├── templates/
-│   ├── test/
-│   └── tests/
-├── creatures/
-├── driver/
-├── hardware/
-├── interfaces/
-├── manufacturing/
-├── moods/
-├── README.md
-├── resolved/
-├── subsystems/
-├── templates/
-├── test_single_eye.json
-└── validate.py
-
-================================================================================
-FILE STATISTICS
-================================================================================
-
-TOTAL CONFIG TREE FILES:   2,385
-
-By Type:
-  .json files:             1,484
-  .src files:                518
-  .hdr files:                383
-
-By Directory:
-  config/bots/                   145 active bots + 49 archived components
-  config/components/            187+ components with .hdr/.src/.json
-  config/creatures/             [directory]
-  config/driver/                [directory]
-  config/hardware/              [directory]
-  config/interfaces/            [directory]
-  config/manufacturing/         [directory]
-  config/moods/                 [directory]
-  config/resolved/              [directory]
-  config/subsystems/            [directory]
-  config/templates/             [directory]
-  config/behaviors/             [directory]
-
-================================================================================
-KEY LOCATIONS FOR COMPONENTS
-================================================================================
-
-AUTHORITATIVE COMPONENT DEFINITIONS:
-  Location: config/components/creature_specific/
-  Format:   .hdr (header), .src (source), .json (config)
-  Example:  config/components/creature_specific/goblin_left_eye.hdr
-            config/components/creature_specific/goblin_left_eye.src
-            config/components/creature_specific/goblin_left_eye.json
-
-COMPONENT CATEGORIES FOUND:
-  - creature_specific/    (Primary components for all creatures)
-  - drivers/              (Hardware drivers)
-  - functional/           (Functional components)
-  - hardware/             (Hardware definitions)
-  - interfaces/           (Interface definitions)
-  - scaling/              (Scaling components)
-  - subsystem/            (Subsystem components)
-  - system/               (System components)
-  - templates/            (Template components)
-  - test/                 (Test components)
-  - tests/                (Test suite)
-
-================================================================================
-BOT LOCATIONS
-================================================================================
-
-ACTIVE BOT DEFINITIONS:
-  Location: config/bots/bot_families/
-  Structure: {creature_type}/{variant_name}/{subsystem}/
-  
-  Example Paths:
-    config/bots/bot_families/goblins/goblin_berserker/head/
-    config/bots/bot_families/goblins/goblin_berserker/torso/
-    config/bots/bot_families/bears/bear_massive/head/
-    config/bots/bot_families/cats/cat_sneaky/head/
-
-ARCHIVED COMPONENTS (Duplicates):
-  Location: config/bots/.archived_components/
-  Count:    49 files (47 duplicates + 2 unique)
-  Status:   Safe backup, not used by build system
-
-================================================================================
-COMPONENT NAMING CONVENTIONS
-================================================================================
-
-Creature Eye Components:
-  Format: {creature}_eye_{position}.json
-  Examples:
-    goblin_eye_left.json      (not goblin_left_eye.json)
-    vampire_eye_right.json    (not vampire_right_eye.json)
-    dragon_eye_left.json
-    wolf_eye_left.json
-    
-Speaker Components:
-  Format: {creature}_speaker.json
-  Examples:
-    bear_speaker.json
-    cat_speaker.json
-    dragon_speaker.json
-    
-Sensor Components:
-  Format: {creature}_{sensor_type}_sensor{s}.json
-  Examples:
-    cat_nose_sensor.json
-    bear_ice_sensors.json
-    goblin_scent_sensor.json
-
-Behavioral/Aesthetic Components:
-  Format: {creature}_{feature_name}.json
-  Examples:
-    goblin_authority_markings.json
-    bear_massive_claws.json
-    cat_animated_ears.json
-    zombie_shamble_actuator.json
-
-================================================================================
-CONFIGURATION TREE STATUS
-================================================================================
-
-ASCII Compliance:      100% (all files ASCII-only, no BOM)
-File Type Compliance:  99.75% (only .json, .src, .hdr + README, validate scripts)
-Organization:         CLEAN (post-archival)
-Duplication:          RESOLVED (49 duplicates archived)
-Active Bots:          145 complete bot definitions
-Components:           187+ creature-specific components
-
-================================================================================
-RECENT CLEANUP SUMMARY
-================================================================================
-
-Date:                 2025-11-04
-Action:               Archived 49 misclassified component files
-
-Files Archived:
-  - 47 duplicate JSON configs (already in config/components/creature_specific/)
-  - 2 unique files (bears_family.json, goblin_head_left_eye_only.json)
-
-Destination:          config/bots/.archived_components/
-Status:               All files preserved, none deleted
-Impact:               Zero functionality loss
-
-Before Cleanup:
-  - 194 files in config/bots/
-  - Mixed components and bot definitions
-  - Directory unclear
-
-After Cleanup:
-  - 145 active bot files in config/bots/
-  - 49 archived components (backup)
-  - Clear separation of concerns
-
-================================================================================
-END OF REPORT
-================================================================================
+================================================================================
+CONFIG TREE - COMPLETE FOLDER AND FILE STRUCTURE
+================================================================================
+Generated: 2025-11-04
+Format: ASCII Text Report
+Purpose: Complete inventory of all files in config/ directory with locations
+
+================================================================================
+DIRECTORY HIERARCHY
+================================================================================
+
+config/
+ author.json
+ behaviors/
+ bots/
+    .archived_components/
+       android_eye.json
+       android_left_eye.json
+       bear_eye.json
+       bear_ice_sensors.json
+       bear_snout.json
+       bear_speaker.json
+       bears_family.json
+       cat_animated_ears.json
+       cat_eye.json
+       cat_nose.json
+       cat_nose_sensor.json
+       cat_speaker.json
+       cat_whisker_sensors.json
+       cyclops_eye_central.json
+       cyclops_mouth.json
+       cyclops_speaker.json
+       dragon_eye_left.json
+       dragon_eye_right.json
+       dragon_snout.json
+       dragon_speaker.json
+       elf_eye_left.json
+       elf_eye_right.json
+       elf_mouth.json
+       elf_speaker.json
+       goblin_head_left_eye_only.json
+       goblin_left_eye.json
+       goblin_mouth.json
+       goblin_nose.json
+       goblin_right_eye.json
+       goblin_speaker.json
+       pixie_eye.json
+       robot_camera_eyes.json
+       robot_eye.json
+       robot_speaker_array.json
+       steampunk_eye_left.json
+       steampunk_eye_right.json
+       steampunk_mouth.json
+       steampunk_nose.json
+       steampunk_speaker.json
+       vampire_eye_left.json
+       vampire_eye_right.json
+       vampire_mouth.json
+       vampire_speaker.json
+       wolf_eye_left.json
+       wolf_eye_right.json
+       wolf_snout.json
+       wolf_speaker.json
+       zombie_eye.json
+       zombie_shamble_actuator.json
+    bot_families/
+        androids/
+        bears/
+        cats/
+        cyclops/
+        dragons/
+        elves/
+        goblins/
+        pixies/
+        robots/
+        steampunk/
+        vampires/
+        wolves/
+        zombies/
+        [contains head/torso subsystem definitions]
+ components/
+    creature_specific/
+       ambient_purr_speaker.hdr
+       ambient_purr_speaker.json
+       ambient_purr_speaker.src
+       ambient_temperature_sensor.hdr
+       ambient_temperature_sensor.src
+       android_emotion_display.hdr
+       android_emotion_display.src
+       android_neural_interface.hdr
+       android_neural_interface.src
+       android_synthetic_skin.hdr
+       android_synthetic_skin.src
+       android_eye.hdr
+       android_eye.json
+       android_eye.src
+       android_left_eye.hdr
+       android_left_eye.src
+       audio_analysis_unit.hdr
+       audio_analysis_unit.src
+       base_arm_status_led.hdr
+       base_arm_status_led.src
+       base_battery_monitor.hdr
+       base_battery_monitor.src
+       base_elbow_servo.hdr
+       base_elbow_servo.src
+       base_eye_left.hdr
+       base_eye_left.src
+       base_eye_right.hdr
+       base_eye_right.src
+       base_mesh_coordinator.hdr
+       base_mesh_coordinator.src
+       base_power_management.hdr
+       base_power_management.src
+       base_shoulder_servo.hdr
+       base_shoulder_servo.src
+       base_speaker.hdr
+       base_speaker.json
+       base_speaker.src
+       base_status_led.hdr
+       base_status_led.src
+       base_wrist_servo.hdr
+       base_wrist_servo.src
+       bear_arctic_fur.hdr
+       bear_arctic_fur.src
+       bear_eye.hdr
+       bear_eye.json
+       bear_eye.src
+       bear_ice_sensors.hdr
+       bear_ice_sensors.json
+       bear_ice_sensors.src
+       bear_massive_claws.hdr
+       bear_massive_claws.src
+       bear_snout.hdr
+       bear_snout.json
+       bear_snout.src
+       bear_speaker.hdr
+       bear_speaker.json
+       bear_speaker.src
+       bear_thick_fur.hdr
+       bear_thick_fur.src
+       cat_animated_ears.hdr
+       cat_animated_ears.src
+       cat_eye.hdr
+       cat_eye.json
+       cat_eye.src
+       cat_nose.hdr
+       cat_nose.json
+       cat_nose.src
+       cat_nose_sensor.hdr
+       cat_nose_sensor.json
+       cat_nose_sensor.src
+       cat_purr_generator.hdr
+       cat_purr_generator.src
+       cat_speaker.hdr
+       cat_speaker.json
+       cat_speaker.src
+       cat_tail_servo.hdr
+       cat_tail_servo.src
+       cat_whisker_sensors.hdr
+       cat_whisker_sensors.src
+       comfort_speaker.hdr
+       comfort_speaker.src
+       cyclops_eye_central.hdr
+       cyclops_eye_central.json
+       cyclops_eye_central.src
+       cyclops_mouth.hdr
+       cyclops_mouth.json
+       cyclops_mouth.src
+       cyclops_speaker.hdr
+       cyclops_speaker.json
+       cyclops_speaker.src
+       dragon_eye_left.hdr
+       dragon_eye_left.json
+       dragon_eye_left.src
+       dragon_eye_right.hdr
+       dragon_eye_right.json
+       dragon_eye_right.src
+       dragon_nostril_left.hdr
+       dragon_nostril_left.src
+       dragon_nostril_right.hdr
+       dragon_nostril_right.src
+       dragon_snout.hdr
+       dragon_snout.json
+       dragon_snout.src
+       dragon_speaker.hdr
+       dragon_speaker.json
+       dragon_speaker.src
+       dynamic_gpio_driver.hdr
+       dynamic_gpio_driver.src
+       elf_ear_left.hdr
+       elf_ear_left.src
+       elf_ear_right.hdr
+       elf_ear_right.src
+       elf_eye_left.hdr
+       elf_eye_left.json
+       elf_eye_left.src
+       elf_eye_right.hdr
+       elf_eye_right.json
+       elf_eye_right.src
+       elf_mouth.hdr
+       elf_mouth.json
+       elf_mouth.src
+       elf_speaker.hdr
+       elf_speaker.json
+       elf_speaker.src
+       emergency_beacon.hdr
+       emergency_beacon.src
+       emotion_camera.hdr
+       emotion_camera.src
+       external_wifi_communication.hdr
+       external_wifi_communication.src
+       gc9a01.hdr
+       gc9a01.json
+       gc9a01.src
+       ghost_ectoplasm_generator.hdr
+       ghost_ectoplasm_generator.src
+       ghost_floating_mechanism.hdr
+       ghost_floating_mechanism.src
+       ghost_phase_lights.hdr
+       ghost_phase_lights.src
+       goblin_authority_markings.hdr
+       goblin_authority_markings.src
+       goblin_bloodshot_eyes.hdr
+       goblin_bloodshot_eyes.src
+       goblin_bone_ornaments.hdr
+       goblin_bone_ornaments.src
+       goblin_clever_eyes.hdr
+       goblin_clever_eyes.src
+       goblin_enlarged_eyes.hdr
+       goblin_enlarged_eyes.src
+       goblin_enlarged_fangs.hdr
+       goblin_enlarged_fangs.src
+       goblin_eye.hdr
+       goblin_eye.json
+       goblin_eye.src
+       goblin_fury_veins.hdr
+       goblin_fury_veins.src
+       goblin_left_eye.hdr
+       goblin_left_eye.json
+       goblin_left_eye.src
+       goblin_malnutrition_features.hdr
+       goblin_malnutrition_features.src
+       goblin_mystical_glow.hdr
+       goblin_mystical_glow.src
+       goblin_nimble_fingers.hdr
+       goblin_nimble_fingers.src
+       goblin_pale_skin.hdr
+       goblin_pale_skin.src
+       goblin_prank_accessories.hdr
+       goblin_prank_accessories.src
+       goblin_rage_foam.hdr
+       goblin_rage_foam.src
+       goblin_right_eye.hdr
+       goblin_right_eye.json
+       goblin_right_eye.src
+       goblin_ritual_scars.hdr
+       goblin_ritual_scars.src
+       goblin_scent_sensor.hdr
+       goblin_scent_sensor.src
+       goblin_self_wounds.hdr
+       goblin_self_wounds.src
+       goblin_shadow_sensors.hdr
+       goblin_shadow_sensors.src
+       goblin_sly_grin.hdr
+       goblin_sly_grin.src
+       goblin_tribal_tattoos.hdr
+       goblin_tribal_tattoos.src
+       goblin_trophy_scars.hdr
+       goblin_trophy_scars.src
+       hand_status_led.hdr
+       hand_status_led.src
+       heartbeat.hdr
+       heartbeat.json
+       heartbeat.src
+       hip_abduction_servo.hdr
+       hip_abduction_servo.src
+       hip_rotation_servo.hdr
+       hip_rotation_servo.src
+       imu_balance_sensor.hdr
+       imu_balance_sensor.src
+       leg_status_led.hdr
+       leg_status_led.src
+       main_battery_monitor.hdr
+       main_battery_monitor.src
+       middle_finger_servo.hdr
+       middle_finger_servo.src
+       motion_stealth_sensor.hdr
+       motion_stealth_sensor.src
+       network_monitor.hdr
+       network_monitor.json
+       network_monitor.src
+       parasol_cable_management.hdr
+       parasol_cable_management.src
+       parasol_central_hub.hdr
+       parasol_central_hub.src
+       parasol_deployment_servos.hdr
+       parasol_deployment_servos.src
+       parasol_shoulder_interface.hdr
+       parasol_shoulder_interface.src
+       parasol_solar_cell_mounts.hdr
+       parasol_solar_cell_mounts.src
+       parasol_telescoping_ribs.hdr
+       parasol_telescoping_ribs.src
+       parasol_tracking_gimbal.hdr
+       parasol_tracking_gimbal.src
+       parasol_weather_protection.hdr
+       parasol_weather_protection.src
+       pet_simulation_servos.hdr
+       pet_simulation_servos.src
+       pinky_finger_servo.hdr
+       pinky_finger_servo.src
+       pixie_eye.hdr
+       pixie_eye.json
+       pixie_eye.src
+       ring_finger_servo.hdr
+       ring_finger_servo.src
+       robot_camera_eyes.hdr
+       robot_camera_eyes.src
+       robot_eye.hdr
+       robot_eye.json
+       robot_eye.src
+       robot_speaker_array.hdr
+       robot_speaker_array.src
+       security_camera_array.hdr
+       security_camera_array.src
+       skeleton_bone_structure.hdr
+       skeleton_bone_structure.src
+       skeleton_jaw_actuator.hdr
+       skeleton_jaw_actuator.src
+       skeleton_joint_mechanism.hdr
+       skeleton_joint_mechanism.src
+       spine_servo_middle.hdr
+       spine_servo_middle.src
+       spine_servo_upper.hdr
+       spine_servo_upper.src
+       steampunk_eye_left.hdr
+       steampunk_eye_left.json
+       steampunk_eye_left.src
+       steampunk_eye_right.hdr
+       steampunk_eye_right.json
+       steampunk_eye_right.src
+       steampunk_mouth.hdr
+       steampunk_mouth.json
+       steampunk_mouth.src
+       steampunk_nose.hdr
+       steampunk_nose.json
+       steampunk_nose.src
+       steampunk_speaker.hdr
+       steampunk_speaker.json
+       steampunk_speaker.src
+       subtle_led_eyes.hdr
+       subtle_led_eyes.src
+       system_status_display.hdr
+       system_status_display.src
+       test_head.hdr
+       test_head.json
+       test_head.src
+       thermal_sensor.hdr
+       thermal_sensor.src
+       touch_sensor_array.hdr
+       touch_sensor_array.src
+       torso_status_led.hdr
+       torso_status_led.src
+       vampire_eye_left.hdr
+       vampire_eye_left.json
+       vampire_eye_left.src
+       vampire_eye_right.hdr
+       vampire_eye_right.json
+       vampire_eye_right.src
+       vampire_mouth.hdr
+       vampire_mouth.json
+       vampire_mouth.src
+       vampire_speaker.hdr
+       vampire_speaker.json
+       vampire_speaker.src
+       wolf_eye_left.hdr
+       wolf_eye_left.json
+       wolf_eye_left.src
+       wolf_eye_right.hdr
+       wolf_eye_right.json
+       wolf_eye_right.src
+       wolf_snout.hdr
+       wolf_snout.json
+       wolf_snout.src
+       wolf_speaker.hdr
+       wolf_speaker.json
+       wolf_speaker.src
+       zombie_drag_mechanism.hdr
+       zombie_drag_mechanism.src
+       zombie_exposed_bone.hdr
+       zombie_exposed_bone.src
+       zombie_eye.hdr
+       zombie_eye.json
+       zombie_eye.src
+       zombie_oozing_wounds.hdr
+       zombie_oozing_wounds.src
+       zombie_rotting_flesh.hdr
+       zombie_rotting_flesh.src
+       zombie_shamble_actuator.hdr
+       zombie_shamble_actuator.src
+    drivers/
+    functional/
+    hardware/
+    interfaces/
+    scaling/
+    subsystem/
+    system/
+    templates/
+    test/
+    tests/
+ creatures/
+ driver/
+ hardware/
+ interfaces/
+ manufacturing/
+ moods/
+ README.md
+ resolved/
+ subsystems/
+ templates/
+ test_single_eye.json
+ validate.py
+
+================================================================================
+FILE STATISTICS
+================================================================================
+
+TOTAL CONFIG TREE FILES:   2,385
+
+By Type:
+  .json files:             1,484
+  .src files:                518
+  .hdr files:                383
+
+By Directory:
+  config/bots/                   145 active bots + 49 archived components
+  config/components/            187+ components with .hdr/.src/.json
+  config/creatures/             [directory]
+  config/driver/                [directory]
+  config/hardware/              [directory]
+  config/interfaces/            [directory]
+  config/manufacturing/         [directory]
+  config/moods/                 [directory]
+  config/resolved/              [directory]
+  config/subsystems/            [directory]
+  config/templates/             [directory]
+  config/behaviors/             [directory]
+
+================================================================================
+KEY LOCATIONS FOR COMPONENTS
+================================================================================
+
+AUTHORITATIVE COMPONENT DEFINITIONS:
+  Location: config/components/creature_specific/
+  Format:   .hdr (header), .src (source), .json (config)
+  Example:  config/components/creature_specific/goblin_left_eye.hdr
+            config/components/creature_specific/goblin_left_eye.src
+            config/components/creature_specific/goblin_left_eye.json
+
+COMPONENT CATEGORIES FOUND:
+  - creature_specific/    (Primary components for all creatures)
+  - drivers/              (Hardware drivers)
+  - functional/           (Functional components)
+  - hardware/             (Hardware definitions)
+  - interfaces/           (Interface definitions)
+  - scaling/              (Scaling components)
+  - subsystem/            (Subsystem components)
+  - system/               (System components)
+  - templates/            (Template components)
+  - test/                 (Test components)
+  - tests/                (Test suite)
+
+================================================================================
+BOT LOCATIONS
+================================================================================
+
+ACTIVE BOT DEFINITIONS:
+  Location: config/bots/bot_families/
+  Structure: {creature_type}/{variant_name}/{subsystem}/
+  
+  Example Paths:
+    config/bots/bot_families/goblins/goblin_berserker/head/
+    config/bots/bot_families/goblins/goblin_berserker/torso/
+    config/bots/bot_families/bears/bear_massive/head/
+    config/bots/bot_families/cats/cat_sneaky/head/
+
+ARCHIVED COMPONENTS (Duplicates):
+  Location: config/bots/.archived_components/
+  Count:    49 files (47 duplicates + 2 unique)
+  Status:   Safe backup, not used by build system
+
+================================================================================
+COMPONENT NAMING CONVENTIONS
+================================================================================
+
+Creature Eye Components:
+  Format: {creature}_eye_{position}.json
+  Examples:
+    goblin_eye_left.json      (not goblin_left_eye.json)
+    vampire_eye_right.json    (not vampire_right_eye.json)
+    dragon_eye_left.json
+    wolf_eye_left.json
+    
+Speaker Components:
+  Format: {creature}_speaker.json
+  Examples:
+    bear_speaker.json
+    cat_speaker.json
+    dragon_speaker.json
+    
+Sensor Components:
+  Format: {creature}_{sensor_type}_sensor{s}.json
+  Examples:
+    cat_nose_sensor.json
+    bear_ice_sensors.json
+    goblin_scent_sensor.json
+
+Behavioral/Aesthetic Components:
+  Format: {creature}_{feature_name}.json
+  Examples:
+    goblin_authority_markings.json
+    bear_massive_claws.json
+    cat_animated_ears.json
+    zombie_shamble_actuator.json
+
+================================================================================
+CONFIGURATION TREE STATUS
+================================================================================
+
+ASCII Compliance:      100% (all files ASCII-only, no BOM)
+File Type Compliance:  99.75% (only .json, .src, .hdr + README, validate scripts)
+Organization:         CLEAN (post-archival)
+Duplication:          RESOLVED (49 duplicates archived)
+Active Bots:          145 complete bot definitions
+Components:           187+ creature-specific components
+
+================================================================================
+RECENT CLEANUP SUMMARY
+================================================================================
+
+Date:                 2025-11-04
+Action:               Archived 49 misclassified component files
+
+Files Archived:
+  - 47 duplicate JSON configs (already in config/components/creature_specific/)
+  - 2 unique files (bears_family.json, goblin_head_left_eye_only.json)
+
+Destination:          config/bots/.archived_components/
+Status:               All files preserved, none deleted
+Impact:               Zero functionality loss
+
+Before Cleanup:
+  - 194 files in config/bots/
+  - Mixed components and bot definitions
+  - Directory unclear
+
+After Cleanup:
+  - 145 active bot files in config/bots/
+  - 49 archived components (backup)
+  - Clear separation of concerns
+
+================================================================================
+END OF REPORT
+================================================================================

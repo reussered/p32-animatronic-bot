@@ -9,7 +9,7 @@
     "name": "dragon_eye_left",
     "subsystem": "VISION",
     "components": [
-        "config/components/interfaces/spi_bus.json",
+        "components/interfaces/spi_bus.json",
         "config/subsystems/dragon_head.json",
         "config/subsystems/dragon_torso.json"
     ],

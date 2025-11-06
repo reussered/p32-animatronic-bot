@@ -8,7 +8,7 @@
     "bus_name": "VSPI",
     "description": "Dedicated SPI bus interface for display peripherals",
     "components": [
-        "config/components/hardware/generic_spi_display.json"
+        "components/drivers/generic_spi_display.json"
     ],
     "pin_requirements": {
         "shared_pins_needed": [

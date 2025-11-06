@@ -20,13 +20,13 @@
     "reference_point": "nose_center",
     "eye_spacing": "6.5 INCH",
     "components": [
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "servo_specifications": {
         "primary_servos": "NEMA23_HEAVY_DUTY_SERVO_MOTORS",

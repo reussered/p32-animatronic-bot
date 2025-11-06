@@ -1,860 +1,860 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flying Dragon - Component Specifications</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #2c3e50;
-            background: #ecf0f1;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            color: #2980b9;
-            margin: 40px 0 20px 0;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
-        }
-        
-        h2 {
-            font-size: 2em;
-            color: #2980b9;
-            margin: 35px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        h3 {
-            font-size: 1.5em;
-            color: #34495e;
-            margin: 25px 0 10px 0;
-        }
-        
-        h4, h5, h6 {
-            color: #34495e;
-            margin: 15px 0 8px 0;
-        }
-        
-        p {
-            margin: 12px 0;
-            text-align: justify;
-        }
-        
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        code {
-            background: #f4f4f4;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-            color: #c7254e;
-        }
-        
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-            line-height: 1.4;
-            font-size: 0.9em;
-        }
-        
-        pre code {
-            background: none;
-            color: inherit;
-            padding: 0;
-            border-radius: 0;
-        }
-        
-        ul, ol {
-            margin: 15px 0 15px 30px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        blockquote {
-            border-left: 4px solid #3498db;
-            margin: 20px 0;
-            padding-left: 20px;
-            color: #7f8c8d;
-            font-style: italic;
-        }
-        
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        th {
-            background: #3498db;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: bold;
-            border: 1px solid #2980b9;
-        }
-        
-        td {
-            padding: 10px 12px;
-            border: 1px solid #bdc3c7;
-        }
-        
-        tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-        
-        tr:hover {
-            background: #ecf0f1;
-        }
-        
-        .toc {
-            background: #ecf0f1;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        
-        .toc ul {
-            margin: 10px 0 10px 20px;
-        }
-        
-        .toc a {
-            text-decoration: none;
-        }
-        
-        strong {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-        
-        em {
-            color: #34495e;
-        }
-        
-        hr {
-            border: none;
-            height: 2px;
-            background: #bdc3c7;
-            margin: 30px 0;
-        }
-        
-        .page-break {
-            page-break-after: always;
-        }
-        
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .container {
-                max-width: 100%;
-                margin: 0;
-                padding: 0;
-                box-shadow: none;
-                page-break-inside: avoid;
-            }
-            h1, h2, h3 {
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-            pre, code, table {
-                page-break-inside: avoid;
-            }
-        }
-        
-        @page {
-            size: A4;
-            margin: 2cm;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 id="flying-dragon-component-specification-json-templates">FLYING DRAGON - COMPONENT SPECIFICATION &amp; JSON TEMPLATES</h1>
-<p><strong>Date</strong>: November 4, 2025<br />
-<strong>Purpose</strong>: Define JSON structure for flying dragon bot composition in P32 system</p>
-<hr />
-<h2 id="1-component-json-definitions">1. COMPONENT JSON DEFINITIONS</h2>
-<h3 id="11-motor-controller-component-definition">1.1 Motor Controller Component Definition</h3>
-<p><strong>File</strong>: <code>config/components/functional/flying_dragon_motor_controller.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_motor_controller&quot;,
-  &quot;category&quot;: &quot;flight_system&quot;,
-  &quot;description&quot;: &quot;Brushless motor control for quadcopter lift system&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;hardware_templates&quot;: [
-    {
-      &quot;name&quot;: &quot;T_MOTOR_U3_580KV&quot;,
-      &quot;motor_type&quot;: &quot;brushless_sensored&quot;,
-      &quot;kv_rating&quot;: 580,
-      &quot;max_continuous_thrust_gf&quot;: 950,
-      &quot;max_continuous_current_a&quot;: 40,
-      &quot;weight_g&quot;: 55,
-      &quot;motor_count&quot;: 4,
-      &quot;esc_type&quot;: &quot;HOBBYWING_40A_ESC&quot;,
-      &quot;esc_current_rating_a&quot;: 40,
-      &quot;esc_weight_g&quot;: 28,
-      &quot;esc_count&quot;: 4,
-      &quot;pwm_frequency_hz&quot;: 490,
-      &quot;pwm_pins&quot;: [12, 13, 14, 15],
-      &quot;prop_diameter_inches&quot;: 10,
-      &quot;prop_pitch_inches&quot;: 5
-    }
-  ],
-  &quot;power_requirements&quot;: {
-    &quot;nominal_voltage_v&quot;: 14.8,
-    &quot;min_voltage_v&quot;: 11.0,
-    &quot;max_current_a&quot;: 160,
-    &quot;average_current_hover_a&quot;: 40
-  },
-  &quot;dependencies&quot;: [],
-  &quot;function_signature&quot;: &quot;flying_dragon_motor_controller_init(void); void flying_dragon_motor_controller_act(void);&quot;
-}
-</code></pre>
-
-<h3 id="12-wing-servo-controller-component">1.2 Wing Servo Controller Component</h3>
-<p><strong>File</strong>: <code>config/components/functional/flying_dragon_wing_servo_controller.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_wing_servo_controller&quot;,
-  &quot;category&quot;: &quot;articulation_system&quot;,
-  &quot;description&quot;: &quot;6-servo wing articulation control (3 per wing)&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;hardware_templates&quot;: [
-    {
-      &quot;name&quot;: &quot;MG996R_SERVO&quot;,
-      &quot;servo_type&quot;: &quot;digital_servo&quot;,
-      &quot;torque_kg_cm&quot;: 11,
-      &quot;speed_sec_60deg&quot;: 0.16,
-      &quot;weight_g&quot;: 55,
-      &quot;servo_count&quot;: 6,
-      &quot;pwm_pins&quot;: [16, 17, 18, 19, 20, 21],
-      &quot;pwm_frequency_hz&quot;: 50,
-      &quot;control_range_degrees&quot;: [0, 180],
-      &quot;flap_frequency_hz&quot;: 3.0,
-      &quot;wing_articulation&quot;: {
-        &quot;left_wing&quot;: {
-          &quot;shoulder_servo&quot;: 0,
-          &quot;twist_servo&quot;: 1,
-          &quot;flap_servo&quot;: 2
-        },
-        &quot;right_wing&quot;: {
-          &quot;shoulder_servo&quot;: 3,
-          &quot;twist_servo&quot;: 4,
-          &quot;flap_servo&quot;: 5
-        }
-      }
-    }
-  ],
-  &quot;power_requirements&quot;: {
-    &quot;nominal_voltage_v&quot;: 5.0,
-    &quot;nominal_current_per_servo_a&quot;: 0.8,
-    &quot;peak_current_a&quot;: 5.0
-  },
-  &quot;dependencies&quot;: [],
-  &quot;function_signature&quot;: &quot;flying_dragon_wing_servo_controller_init(void); void flying_dragon_wing_servo_controller_act(void);&quot;
-}
-</code></pre>
-
-<h3 id="13-sensor-fusion-component">1.3 Sensor Fusion Component</h3>
-<p><strong>File</strong>: <code>config/components/functional/flying_dragon_sensor_fusion.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_sensor_fusion&quot;,
-  &quot;category&quot;: &quot;sensor_system&quot;,
-  &quot;description&quot;: &quot;IMU + barometer for attitude &amp; altitude estimation&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;hardware_templates&quot;: [
-    {
-      &quot;name&quot;: &quot;ICM20689_BMP390&quot;,
-      &quot;imu_type&quot;: &quot;ICM20689&quot;,
-      &quot;imu_i2c_address&quot;: &quot;0x68&quot;,
-      &quot;imu_sample_rate_hz&quot;: 1000,
-      &quot;imu_accel_range_g&quot;: 16,
-      &quot;imu_gyro_range_dps&quot;: 2000,
-      &quot;barometer_type&quot;: &quot;BMP390&quot;,
-      &quot;barometer_i2c_address&quot;: &quot;0x77&quot;,
-      &quot;barometer_sample_rate_hz&quot;: 50,
-      &quot;barometer_accuracy_m&quot;: 2.0,
-      &quot;i2c_bus&quot;: {
-        &quot;sda_pin&quot;: 21,
-        &quot;scl_pin&quot;: 22,
-        &quot;frequency_hz&quot;: 400000
-      }
-    }
-  ],
-  &quot;power_requirements&quot;: {
-    &quot;nominal_voltage_v&quot;: 3.3,
-    &quot;nominal_current_a&quot;: 0.05
-  },
-  &quot;dependencies&quot;: [&quot;flying_dragon_flight_safety&quot;],
-  &quot;function_signature&quot;: &quot;flying_dragon_sensor_fusion_init(void); void flying_dragon_sensor_fusion_act(void);&quot;
-}
-</code></pre>
-
-<h3 id="14-flight-safety-component">1.4 Flight Safety Component</h3>
-<p><strong>File</strong>: <code>config/components/functional/flying_dragon_flight_safety.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_flight_safety&quot;,
-  &quot;category&quot;: &quot;safety_system&quot;,
-  &quot;description&quot;: &quot;Failsafe monitoring, battery management, emergency procedures&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;hardware_templates&quot;: [
-    {
-      &quot;name&quot;: &quot;WATCHDOG_BATTERY_MONITOR&quot;,
-      &quot;watchdog_timeout_ms&quot;: 500,
-      &quot;battery_adc_pin&quot;: 36,
-      &quot;battery_min_voltage_v&quot;: 11.0,
-      &quot;battery_cells&quot;: 4,
-      &quot;low_battery_alert_v&quot;: 11.5,
-      &quot;altitude_floor_m&quot;: 0.5,
-      &quot;gyro_limit_dps&quot;: 500,
-      &quot;emergency_descent_rate_ms&quot;: 0.5
-    }
-  ],
-  &quot;power_requirements&quot;: {
-    &quot;nominal_voltage_v&quot;: 3.3,
-    &quot;nominal_current_a&quot;: 0.01
-  },
-  &quot;dependencies&quot;: [&quot;flying_dragon_sensor_fusion&quot;, &quot;flying_dragon_motor_controller&quot;],
-  &quot;function_signature&quot;: &quot;flying_dragon_flight_safety_init(void); void flying_dragon_flight_safety_act(void);&quot;
-}
-</code></pre>
-
-<h3 id="15-behavior-sequencer-component">1.5 Behavior Sequencer Component</h3>
-<p><strong>File</strong>: <code>config/components/functional/flying_dragon_behavior_sequencer.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_behavior_sequencer&quot;,
-  &quot;category&quot;: &quot;control_system&quot;,
-  &quot;description&quot;: &quot;Flight state machine, mood-based behavior, autonomous sequences&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;hardware_templates&quot;: [
-    {
-      &quot;name&quot;: &quot;ESP32_S3_FLIGHT_LOGIC&quot;,
-      &quot;flight_controller&quot;: &quot;ESP32_S3&quot;,
-      &quot;clock_speed_mhz&quot;: 240,
-      &quot;flight_loop_frequency_hz&quot;: 100,
-      &quot;states&quot;: [
-        &quot;IDLE&quot;,
-        &quot;ARMING&quot;,
-        &quot;HOVER&quot;,
-        &quot;CLIMB&quot;,
-        &quot;CRUISE_FORWARD&quot;,
-        &quot;AGGRESSIVE_MANEUVER&quot;,
-        &quot;LANDING&quot;,
-        &quot;EMERGENCY_DESCENT&quot;
-      ],
-      &quot;mood_influence&quot;: {
-        &quot;calm&quot;: {
-          &quot;max_roll_deg&quot;: 20,
-          &quot;max_pitch_deg&quot;: 20,
-          &quot;max_climb_rate_ms&quot;: 0.5,
-          &quot;wing_beat_freq_hz&quot;: 2.5
-        },
-        &quot;playful&quot;: {
-          &quot;max_roll_deg&quot;: 45,
-          &quot;max_pitch_deg&quot;: 35,
-          &quot;max_climb_rate_ms&quot;: 1.0,
-          &quot;wing_beat_freq_hz&quot;: 3.5
-        },
-        &quot;aggressive&quot;: {
-          &quot;max_roll_deg&quot;: 60,
-          &quot;max_pitch_deg&quot;: 50,
-          &quot;max_climb_rate_ms&quot;: 1.5,
-          &quot;wing_beat_freq_hz&quot;: 4.0
-        }
-      }
-    }
-  ],
-  &quot;power_requirements&quot;: {
-    &quot;nominal_voltage_v&quot;: 3.3,
-    &quot;nominal_current_a&quot;: 0.2
-  },
-  &quot;dependencies&quot;: [
-    &quot;flying_dragon_sensor_fusion&quot;,
-    &quot;flying_dragon_motor_controller&quot;,
-    &quot;flying_dragon_wing_servo_controller&quot;,
-    &quot;flying_dragon_flight_safety&quot;
-  ],
-  &quot;function_signature&quot;: &quot;flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);&quot;
-}
-</code></pre>
-
-<hr />
-<h2 id="2-bot-family-definitions">2. BOT FAMILY DEFINITIONS</h2>
-<h3 id="21-flying-dragon-full-bot">2.1 Flying Dragon Full Bot</h3>
-<p><strong>File</strong>: <code>config/bots/bot_families/flying_dragons/flying_dragon_full.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_full&quot;,
-  &quot;description&quot;: &quot;Complete flying dragon with head (eyes/mouth/speaker) and flight systems&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;creature_family&quot;: &quot;dragon&quot;,
-  &quot;subsystems&quot;: [
-    {
-      &quot;name&quot;: &quot;flying_dragon_head&quot;,
-      &quot;type&quot;: &quot;creature_head&quot;,
-      &quot;components&quot;: [
-        &quot;flying_dragon_left_eye&lt;GC9A01&gt;&quot;,
-        &quot;flying_dragon_right_eye&lt;GC9A01&gt;&quot;,
-        &quot;flying_dragon_mouth&lt;GC9A01&gt;&quot;,
-        &quot;flying_dragon_speaker&lt;MINISPKR&gt;&quot;,
-        &quot;flying_dragon_nostril_left&lt;RGB_LED&gt;&quot;,
-        &quot;flying_dragon_nostril_right&lt;RGB_LED&gt;&quot;
-      ]
-    },
-    {
-      &quot;name&quot;: &quot;flying_dragon_flight_controller&quot;,
-      &quot;type&quot;: &quot;flight_system&quot;,
-      &quot;enabled&quot;: true,
-      &quot;components&quot;: [
-        &quot;flying_dragon_sensor_fusion&lt;ICM20689_BMP390&gt;&quot;,
-        &quot;flying_dragon_flight_safety&lt;WATCHDOG_BATTERY_MONITOR&gt;&quot;,
-        &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV&gt;&quot;,
-        &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
-        &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3_FLIGHT_LOGIC&gt;&quot;
-      ],
-      &quot;configuration&quot;: {
-        &quot;flight_loop_frequency_hz&quot;: 100,
-        &quot;wing_flap_frequency_hz&quot;: 3.0,
-        &quot;thrust_to_weight_ratio&quot;: 1.5,
-        &quot;battery_capacity_mah&quot;: 5000
-      }
-    }
-  ],
-  &quot;assembly_notes&quot;: &quot;Flying dragon with articulated wings (3 DoF per side) and quadcopter propulsion. Sensor fusion provides stability; failsafes ensure safe descent.&quot;,
-  &quot;mass_budget_g&quot;: {
-    &quot;airframe&quot;: 500,
-    &quot;motors&quot;: 220,
-    &quot;escs&quot;: 140,
-    &quot;servos&quot;: 330,
-    &quot;flight_controller&quot;: 100,
-    &quot;battery&quot;: 550,
-    &quot;wiring&quot;: 120,
-    &quot;payload&quot;: 100,
-    &quot;total&quot;: 2560
-  },
-  &quot;performance&quot;: {
-    &quot;max_flight_time_min&quot;: 15,
-    &quot;cruise_speed_ms&quot;: 5,
-    &quot;max_speed_ms&quot;: 15,
-    &quot;service_ceiling_m&quot;: 50,
-    &quot;thrust_to_weight&quot;: 1.5
-  }
-}
-</code></pre>
-
-<h3 id="22-flight-controller-subsystem">2.2 Flight Controller Subsystem</h3>
-<p><strong>File</strong>: <code>config/components/subsystem/flying_dragon_flight_system.json</code></p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_flight_system&quot;,
-  &quot;category&quot;: &quot;subsystem&quot;,
-  &quot;description&quot;: &quot;Integrated flight control subsystem (motors + wings + sensors + safety)&quot;,
-  &quot;type&quot;: &quot;container&quot;,
-  &quot;components&quot;: [
-    &quot;flying_dragon_sensor_fusion&lt;ICM20689_BMP390&gt;&quot;,
-    &quot;flying_dragon_flight_safety&lt;WATCHDOG_BATTERY_MONITOR&gt;&quot;,
-    &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV&gt;&quot;,
-    &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
-    &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3_FLIGHT_LOGIC&gt;&quot;
-  ],
-  &quot;execution_priority&quot;: [
-    1,
-    2,
-    3,
-    4,
-    5
-  ],
-  &quot;notes&quot;: &quot;Execute in order: sensors → safety → motors → servos → behavior logic&quot;
-}
-</code></pre>
-
-<hr />
-<h2 id="3-hardware-template-specifications">3. HARDWARE TEMPLATE SPECIFICATIONS</h2>
-<h3 id="31-motor-template-t_motor_u3_580kv">3.1 Motor Template: T_MOTOR_U3_580KV</h3>
-<pre class="codehilite"><code class="language-json">{
-  &quot;template_name&quot;: &quot;T_MOTOR_U3_580KV&quot;,
-  &quot;manufacturer&quot;: &quot;T-Motor&quot;,
-  &quot;model&quot;: &quot;U3 PRO 580KV&quot;,
-  &quot;part_number&quot;: &quot;U3 PRO 580&quot;,
-  &quot;specifications&quot;: {
-    &quot;type&quot;: &quot;brushless_outrunner&quot;,
-    &quot;kv&quot;: 580,
-    &quot;pole_pairs&quot;: 14,
-    &quot;stator_diameter_mm&quot;: 20,
-    &quot;stator_length_mm&quot;: 15,
-    &quot;no_load_current_a&quot;: 0.2,
-    &quot;max_continuous_current_a&quot;: 40,
-    &quot;max_burst_current_a&quot;: 60,
-    &quot;internal_resistance_ohms&quot;: 0.12,
-    &quot;weight_g&quot;: 55,
-    &quot;voltage_nominal_v&quot;: 14.8,
-    &quot;voltage_range_v&quot;: [11.0, 16.8],
-    &quot;thrust_at_nominal_voltage&quot;: {
-      &quot;rpm&quot;: 10640,
-      &quot;static_thrust_gf&quot;: 950,
-      &quot;static_thrust_kg&quot;: 0.95,
-      &quot;power_w&quot;: 150
-    },
-    &quot;sensored&quot;: true,
-    &quot;sensor_type&quot;: &quot;hall_effect&quot;,
-    &quot;connector&quot;: &quot;XT30&quot;
-  },
-  &quot;mechanical_interface&quot;: {
-    &quot;shaft_diameter_mm&quot;: 3,
-    &quot;shaft_length_mm&quot;: 5,
-    &quot;mount_pattern&quot;: &quot;M2_holes&quot;,
-    &quot;mount_diameter_mm&quot;: 19
-  }
-}
-</code></pre>
-
-<h3 id="32-esc-template-hobbywing_40a_esc">3.2 ESC Template: HOBBYWING_40A_ESC</h3>
-<pre class="codehilite"><code class="language-json">{
-  &quot;template_name&quot;: &quot;HOBBYWING_40A_ESC&quot;,
-  &quot;manufacturer&quot;: &quot;Hobbywing&quot;,
-  &quot;model&quot;: &quot;XRotor 40A&quot;,
-  &quot;specifications&quot;: {
-    &quot;continuous_current_a&quot;: 40,
-    &quot;burst_current_a&quot;: 50,
-    &quot;voltage_nominal_v&quot;: 14.8,
-    &quot;voltage_range_v&quot;: [2.0, 6.0],
-    &quot;lipo_cell_range&quot;: &quot;2S–6S&quot;,
-    &quot;weight_g&quot;: 28,
-    &quot;firmware&quot;: &quot;BLHeli-32&quot;,
-    &quot;pwm_frequency_hz&quot;: 490,
-    &quot;pwm_resolution_bit&quot;: 13,
-    &quot;input_protocol&quot;: [&quot;PWM&quot;, &quot;DShot600&quot;],
-    &quot;telemetry&quot;: [&quot;voltage&quot;, &quot;current&quot;, &quot;temperature&quot;],
-    &quot;connector_input&quot;: &quot;JST_XH&quot;,
-    &quot;connector_motor&quot;: &quot;HXT_3.5mm_bullet&quot;,
-    &quot;programming&quot;: &quot;via_USB_adapter&quot;
-  },
-  &quot;thermal&quot;: {
-    &quot;temperature_sensor&quot;: true,
-    &quot;low_voltage_throttle&quot;: true,
-    &quot;overtemp_cutoff_c&quot;: 120
-  }
-}
-</code></pre>
-
-<h3 id="33-servo-template-mg996r_servo">3.3 Servo Template: MG996R_SERVO</h3>
-<pre class="codehilite"><code class="language-json">{
-  &quot;template_name&quot;: &quot;MG996R_SERVO&quot;,
-  &quot;manufacturer&quot;: &quot;MG&quot;,
-  &quot;model&quot;: &quot;MG996R&quot;,
-  &quot;specifications&quot;: {
-    &quot;type&quot;: &quot;digital_servo&quot;,
-    &quot;torque_kg_cm&quot;: 11,
-    &quot;speed_unloaded_sec_60deg&quot;: 0.16,
-    &quot;voltage_nominal_v&quot;: 5.0,
-    &quot;voltage_range_v&quot;: [4.5, 6.0],
-    &quot;no_load_current_a&quot;: 0.1,
-    &quot;loaded_current_a&quot;: 0.8,
-    &quot;peak_current_a&quot;: 1.2,
-    &quot;weight_g&quot;: 55,
-    &quot;dimensions_mm&quot;: [40.7, 20, 37.5],
-    &quot;control_range_degrees&quot;: [0, 180],
-    &quot;connector&quot;: &quot;3pin_male&quot;,
-    &quot;pwm_frequency_hz&quot;: 50,
-    &quot;pwm_pulse_range_us&quot;: [500, 2500],
-    &quot;dead_band_us&quot;: 5,
-    &quot;gear_type&quot;: &quot;plastic&quot;
-  }
-}
-</code></pre>
-
-<h3 id="34-sensor-template-icm20689_bmp390">3.4 Sensor Template: ICM20689_BMP390</h3>
-<pre class="codehilite"><code class="language-json">{
-  &quot;template_name&quot;: &quot;ICM20689_BMP390&quot;,
-  &quot;components&quot;: [
-    {
-      &quot;sensor&quot;: &quot;ICM20689&quot;,
-      &quot;type&quot;: &quot;6_axis_imu&quot;,
-      &quot;i2c_address&quot;: &quot;0x68&quot;,
-      &quot;i2c_frequency_hz&quot;: 400000,
-      &quot;accel_range_g&quot;: [2, 4, 8, 16],
-      &quot;accel_sensitivity_lsb_g&quot;: 2048,
-      &quot;accel_noise_density_ug_rtHz&quot;: 75,
-      &quot;gyro_range_dps&quot;: [250, 500, 1000, 2000],
-      &quot;gyro_sensitivity_lsb_dps&quot;: 131,
-      &quot;gyro_noise_density&quot;: 12.5,
-      &quot;sample_rate_hz&quot;: 1000,
-      &quot;temperature_range_c&quot;: [-40, 85],
-      &quot;power_consumption_ma&quot;: 3.5
-    },
-    {
-      &quot;sensor&quot;: &quot;BMP390&quot;,
-      &quot;type&quot;: &quot;barometer&quot;,
-      &quot;i2c_address&quot;: &quot;0x77&quot;,
-      &quot;pressure_range_pa&quot;: [30000, 110000],
-      &quot;temperature_range_c&quot;: [-40, 85],
-      &quot;altitude_accuracy_m&quot;: 2.0,
-      &quot;altitude_resolution_m&quot;: 0.1,
-      &quot;sample_rate_hz&quot;: 50,
-      &quot;power_consumption_ma&quot;: 0.2
-    }
-  ],
-  &quot;breakout_board&quot;: {
-    &quot;dimensions_mm&quot;: [25, 25],
-    &quot;mounting_holes&quot;: &quot;M2&quot;,
-    &quot;connector&quot;: &quot;4pin_i2c&quot;,
-    &quot;address_selectable&quot;: false
-  }
-}
-</code></pre>
-
-<hr />
-<h2 id="4-example-motor-mixing-equations-c">4. EXAMPLE MOTOR MIXING EQUATIONS (C++)</h2>
-<pre class="codehilite"><code class="language-cpp">// Motor mixing for quad X-configuration
-// Motors arranged: 1=Front-Left, 2=Front-Right, 3=Rear-Left, 4=Rear-Right
-
-void compute_motor_commands(
-    float throttle_cmd,       // [0.0–1.0]
-    float roll_cmd,           // [−1.0–1.0] (δ left, + right)
-    float pitch_cmd,          // [−1.0–1.0] (− forward, + backward)
-    float yaw_rate_cmd,       // [−1.0–1.0] (− CCW, + CW)
-    float motor_out[4])       // Output PWM [0.0–1.0]
-{
-    // Compute motor mixing (simplified, no cross-coupling)
-    float m1 = throttle_cmd + pitch_cmd - roll_cmd + yaw_rate_cmd;
-    float m2 = throttle_cmd + pitch_cmd + roll_cmd - yaw_rate_cmd;
-    float m3 = throttle_cmd - pitch_cmd - roll_cmd - yaw_rate_cmd;
-    float m4 = throttle_cmd - pitch_cmd + roll_cmd + yaw_rate_cmd;
-
-    // Clamp to [0.0–1.0] to prevent saturation
-    motor_out[0] = constrain(m1, 0.0f, 1.0f);
-    motor_out[1] = constrain(m2, 0.0f, 1.0f);
-    motor_out[2] = constrain(m3, 0.0f, 1.0f);
-    motor_out[3] = constrain(m4, 0.0f, 1.0f);
-}
-</code></pre>
-
-<hr />
-<h2 id="5-calibration-procedures">5. CALIBRATION PROCEDURES</h2>
-<h3 id="51-motor-calibration-checklist">5.1 Motor Calibration Checklist</h3>
-<pre class="codehilite"><code class="language-markdown">1. **ESC Initialization** (per ESC)
-   - Connect single motor to ESC
-   - Power on without throttle (silence = ready)
-   - Gradually increase throttle from 0–100%
-   - Verify smooth acceleration (no cogging, no buzzing)
-   - Record RPM at 50%, 75%, 100% throttle
-
-2. **Static Thrust Measurement**
-   - Place motor+prop on scale (isolated setup)
-   - Set throttle to 0% (idle ~1000 µs PWM)
-   - Record baseline weight (should be motor weight only)
-   - Increase to 50% throttle (1500 µs PWM), wait 5 sec, record scale reading
-   - Subtract baseline to get static thrust at 50%
-   - Repeat at 75% and 100% throttle
-   - Compare to spec data (should be ±5%)
-
-3. **Cross-Motor Validation**
-   - Repeat static thrust test for all 4 motors
-   - Verify all motors produce ≥95% of rated thrust
-   - Flag any motor &lt;90% for replacement
-
-4. **ESC PWM Response**
-   - Connect PWM signal generator to ESC
-   - Send 1000 µs pulse (idle), verify no spin
-   - Increase to 1100 µs, verify gentle spin
-   - Increase to 1500 µs, record response time (&lt;100 ms expected)
-   - Record RPM vs. PWM curve for control loop tuning
-</code></pre>
-
-<h3 id="52-sensor-calibration">5.2 Sensor Calibration</h3>
-<pre class="codehilite"><code class="language-markdown">**IMU (ICM20689)**
-   - Place on level surface
-   - Read accelerometer: X=0, Y=0, Z=~1g (±0.05g tolerance)
-   - Read gyroscope: X=0, Y=0, Z=0 (±5°/s tolerance)
-   - If out of tolerance, perform hard-iron/soft-iron calibration via datasheetgyro calibration
-
-**Barometer (BMP390)**
-   - Place at known altitude (e.g., sea level = 0 m)
-   - Record raw pressure reading
-   - Compare to atmospheric table for that date/location
-   - Apply altitude offset calibration if &gt;2 m error
-</code></pre>
-
-<hr />
-<h2 id="6-power-budget-example">6. POWER BUDGET EXAMPLE</h2>
-<pre class="codehilite"><code class="language-markdown">**Hover Condition** (4 motors at 50% throttle)
-   - Motor current per motor: 10 A
-   - Total motor current: 40 A
-   - ESC overhead: ~2 A (voltage conversion losses)
-   - Servo current (at rest): 0.5 A
-   - Flight logic + sensors: 0.3 A
-   - **Total system current: ~43 A**
-
-**Battery capacity**: 5000 mAh = 5 Ah
-**Flight time**: 5 Ah ÷ 43 A ≈ 7 min hover
-
-**Cruise Condition** (mixed forward flight, motors at 40% throttle)
-   - Motor current per motor: 8 A
-   - Total motor current: 32 A
-   - Servo current (active wing flap @ 3 Hz): 1.0 A
-   - Overhead: ~2.5 A
-   - **Total system current: ~35.5 A**
-
-**Flight time**: 5 Ah ÷ 35.5 A ≈ 8.5 min mixed flight
-
-**Peak Condition** (aggressive maneuver, 75% throttle)
-   - Motor current: 30 A (total)
-   - Servo current: 1.5 A
-   - Overhead: 3 A
-   - **Total: ~34.5 A (short burst only)**
-   - Duration: Limited to ~5 sec before battery voltage drops below LVC threshold
-</code></pre>
-
-<hr />
-<h2 id="7-integration-validation-script-python">7. INTEGRATION VALIDATION SCRIPT (Python)</h2>
-<p><strong>File</strong>: <code>tools/validate_flying_dragon_config.py</code></p>
-<pre class="codehilite"><code class="language-python">#!/usr/bin/env python3
-&quot;&quot;&quot;
-Validate flying dragon bot configuration for consistency and feasibility.
-&quot;&quot;&quot;
-
-import json
-import os
-from pathlib import Path
-
-def validate_motor_thrust_budget():
-    &quot;&quot;&quot;Verify that total motor thrust exceeds 1.5× dragon weight.&quot;&quot;&quot;
-    dragon_mass_kg = 2.5
-    thrust_per_motor_gf = 950
-    total_thrust_gf = 4 * thrust_per_motor_gf
-    required_thrust_gf = dragon_mass_kg * 1000 * 1.5  # 1.5× T/W ratio
-
-    print(f&quot;Motor Thrust Budget:&quot;)
-    print(f&quot;  Dragon mass: {dragon_mass_kg} kg&quot;)
-    print(f&quot;  Total available thrust: {total_thrust_gf} gf ({total_thrust_gf/1000:.2f} kgf)&quot;)
-    print(f&quot;  Required (1.5× T/W): {required_thrust_gf} gf ({required_thrust_gf/1000:.2f} kgf)&quot;)
-    print(f&quot;  ✓ PASS&quot; if total_thrust_gf &gt; required_thrust_gf else &quot;  ✗ FAIL&quot;)
-
-def validate_power_budget():
-    &quot;&quot;&quot;Verify battery capacity is sufficient for target flight time.&quot;&quot;&quot;
-    battery_capacity_mah = 5000
-    avg_current_hover_a = 43
-    avg_current_cruise_a = 35.5
-
-    hover_time_min = battery_capacity_mah / (avg_current_hover_a * 1000 * 60)
-    cruise_time_min = battery_capacity_mah / (avg_current_cruise_a * 1000 * 60)
-
-    print(f&quot;\nPower Budget:&quot;)
-    print(f&quot;  Battery: {battery_capacity_mah} mAh&quot;)
-    print(f&quot;  Hover time: {hover_time_min:.1f} min @ {avg_current_hover_a} A avg&quot;)
-    print(f&quot;  Cruise time: {cruise_time_min:.1f} min @ {avg_current_cruise_a} A avg&quot;)
-    print(f&quot;  Target: 10–12 min mixed flight&quot;)
-    print(f&quot;  ✓ PASS&quot; if cruise_time_min &gt; 10 else &quot;  ✗ MARGINAL (consider larger battery)&quot;)
-
-def validate_servo_torque():
-    &quot;&quot;&quot;Check wing servo torque is sufficient for articulation.&quot;&quot;&quot;
-    servo_torque_kg_cm = 11
-    wing_moment_arm_cm = 5  # Approximate moment arm for wing flap
-    wing_mass_g = 200
-    wing_weight_kg = wing_mass_g / 1000
-
-    required_torque_kg_cm = wing_weight_kg * wing_moment_arm_cm
-
-    print(f&quot;\nServo Torque Budget:&quot;)
-    print(f&quot;  Servo torque: {servo_torque_kg_cm} kg-cm&quot;)
-    print(f&quot;  Wing mass: {wing_mass_g} g&quot;)
-    print(f&quot;  Required torque (estimated): {required_torque_kg_cm:.1f} kg-cm&quot;)
-    print(f&quot;  ✓ PASS&quot; if servo_torque_kg_cm &gt; required_torque_kg_cm * 2 else &quot;  ✗ MARGINAL&quot;)
-
-def validate_component_files():
-    &quot;&quot;&quot;Verify all required component files exist.&quot;&quot;&quot;
-    components = [
-        &quot;flying_dragon_motor_controller&quot;,
-        &quot;flying_dragon_wing_servo_controller&quot;,
-        &quot;flying_dragon_sensor_fusion&quot;,
-        &quot;flying_dragon_flight_safety&quot;,
-        &quot;flying_dragon_behavior_sequencer&quot;
-    ]
-
-    print(f&quot;\nComponent Files Validation:&quot;)
-    comp_dir = Path(&quot;config/components/functional&quot;)
-    all_exist = True
-
-    for comp in components:
-        json_exists = (comp_dir / f&quot;{comp}.json&quot;).exists()
-        src_exists = (comp_dir / f&quot;{comp}.src&quot;).exists()
-        hdr_exists = (comp_dir / f&quot;{comp}.hdr&quot;).exists()
-
-        status = &quot;✓&quot; if (json_exists and src_exists and hdr_exists) else &quot;✗&quot;
-        print(f&quot;  {status} {comp}: .json={json_exists}, .src={src_exists}, .hdr={hdr_exists}&quot;)
-        all_exist = all_exist and json_exists and src_exists and hdr_exists
-
-    return all_exist
-
-if __name__ == &quot;__main__&quot;:
-    print(&quot;=&quot; * 60)
-    print(&quot;FLYING DRAGON BOT CONFIGURATION VALIDATION&quot;)
-    print(&quot;=&quot; * 60)
-
-    validate_motor_thrust_budget()
-    validate_power_budget()
-    validate_servo_torque()
-    validate_component_files()
-
-    print(&quot;\n&quot; + &quot;=&quot; * 60)
-    print(&quot;Validation complete. Address any ✗ FAIL items before deployment.&quot;)
-    print(&quot;=&quot; * 60)
-</code></pre>
-
-<hr />
-<h2 id="8-deployment-checklist">8. DEPLOYMENT CHECKLIST</h2>
-<p>Before proceeding to Phase 1 prototyping:</p>
-<ul>
-<li>[ ] All JSON definitions reviewed for correctness</li>
-<li>[ ] Component templates match physical hardware specifications</li>
-<li>[ ] Motor thrust calculations verified (1.5× T/W ratio confirmed)</li>
-<li>[ ] Power budget validated for 10+ min flight time</li>
-<li>[ ] Sensor accuracies acceptable (altitude ±2 m, IMU ±0.1 g)</li>
-<li>[ ] Safety limits defined (altitude floor, gyro limit, battery LVC)</li>
-<li>[ ] P32 component architecture aligned with motor/servo/sensor separation</li>
-<li>[ ] SharedMemory integration planned for multi-chip coordination</li>
-<li>[ ] Failsafe procedures documented and testable</li>
-<li>[ ] Tether safety harness design approved</li>
-<li>[ ] All component source files (<code>*.src</code>) use Allman braces and ASCII encoding</li>
-<li>[ ] Build system configured to aggregate component files into subsystem <code>.cpp</code></li>
-<li>[ ] Telemetry logging prepared for post-flight analysis</li>
-</ul>
-<hr />
-<p><strong>Document Status</strong>: Ready for Implementation<br />
-<strong>Next Action</strong>: Begin Phase 1 prototyping per FLYING_DRAGON_DEEP_DIVE.md</p>
-    </div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Dragon - Component Specifications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #2980b9;
+            margin: 40px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h2 {
+            font-size: 2em;
+            color: #2980b9;
+            margin: 35px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 25px 0 10px 0;
+        }
+        
+        h4, h5, h6 {
+            color: #34495e;
+            margin: 15px 0 8px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #c7254e;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.4;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            padding-left: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #2980b9;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border: 1px solid #bdc3c7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #ecf0f1;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        em {
+            color: #34495e;
+        }
+        
+        hr {
+            border: none;
+            height: 2px;
+            background: #bdc3c7;
+            margin: 30px 0;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            pre, code, table {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="flying-dragon-component-specification-json-templates">FLYING DRAGON - COMPONENT SPECIFICATION &amp; JSON TEMPLATES</h1>
+<p><strong>Date</strong>: November 4, 2025<br />
+<strong>Purpose</strong>: Define JSON structure for flying dragon bot composition in P32 system</p>
+<hr />
+<h2 id="1-component-json-definitions">1. COMPONENT JSON DEFINITIONS</h2>
+<h3 id="11-motor-controller-component-definition">1.1 Motor Controller Component Definition</h3>
+<p><strong>File</strong>: <code>config/components/functional/flying_dragon_motor_controller.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_motor_controller&quot;,
+  &quot;category&quot;: &quot;flight_system&quot;,
+  &quot;description&quot;: &quot;Brushless motor control for quadcopter lift system&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;hardware_templates&quot;: [
+    {
+      &quot;name&quot;: &quot;T_MOTOR_U3_580KV&quot;,
+      &quot;motor_type&quot;: &quot;brushless_sensored&quot;,
+      &quot;kv_rating&quot;: 580,
+      &quot;max_continuous_thrust_gf&quot;: 950,
+      &quot;max_continuous_current_a&quot;: 40,
+      &quot;weight_g&quot;: 55,
+      &quot;motor_count&quot;: 4,
+      &quot;esc_type&quot;: &quot;HOBBYWING_40A_ESC&quot;,
+      &quot;esc_current_rating_a&quot;: 40,
+      &quot;esc_weight_g&quot;: 28,
+      &quot;esc_count&quot;: 4,
+      &quot;pwm_frequency_hz&quot;: 490,
+      &quot;pwm_pins&quot;: [12, 13, 14, 15],
+      &quot;prop_diameter_inches&quot;: 10,
+      &quot;prop_pitch_inches&quot;: 5
+    }
+  ],
+  &quot;power_requirements&quot;: {
+    &quot;nominal_voltage_v&quot;: 14.8,
+    &quot;min_voltage_v&quot;: 11.0,
+    &quot;max_current_a&quot;: 160,
+    &quot;average_current_hover_a&quot;: 40
+  },
+  &quot;dependencies&quot;: [],
+  &quot;function_signature&quot;: &quot;flying_dragon_motor_controller_init(void); void flying_dragon_motor_controller_act(void);&quot;
+}
+</code></pre>
+
+<h3 id="12-wing-servo-controller-component">1.2 Wing Servo Controller Component</h3>
+<p><strong>File</strong>: <code>config/components/functional/flying_dragon_wing_servo_controller.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_wing_servo_controller&quot;,
+  &quot;category&quot;: &quot;articulation_system&quot;,
+  &quot;description&quot;: &quot;6-servo wing articulation control (3 per wing)&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;hardware_templates&quot;: [
+    {
+      &quot;name&quot;: &quot;MG996R_SERVO&quot;,
+      &quot;servo_type&quot;: &quot;digital_servo&quot;,
+      &quot;torque_kg_cm&quot;: 11,
+      &quot;speed_sec_60deg&quot;: 0.16,
+      &quot;weight_g&quot;: 55,
+      &quot;servo_count&quot;: 6,
+      &quot;pwm_pins&quot;: [16, 17, 18, 19, 20, 21],
+      &quot;pwm_frequency_hz&quot;: 50,
+      &quot;control_range_degrees&quot;: [0, 180],
+      &quot;flap_frequency_hz&quot;: 3.0,
+      &quot;wing_articulation&quot;: {
+        &quot;left_wing&quot;: {
+          &quot;shoulder_servo&quot;: 0,
+          &quot;twist_servo&quot;: 1,
+          &quot;flap_servo&quot;: 2
+        },
+        &quot;right_wing&quot;: {
+          &quot;shoulder_servo&quot;: 3,
+          &quot;twist_servo&quot;: 4,
+          &quot;flap_servo&quot;: 5
+        }
+      }
+    }
+  ],
+  &quot;power_requirements&quot;: {
+    &quot;nominal_voltage_v&quot;: 5.0,
+    &quot;nominal_current_per_servo_a&quot;: 0.8,
+    &quot;peak_current_a&quot;: 5.0
+  },
+  &quot;dependencies&quot;: [],
+  &quot;function_signature&quot;: &quot;flying_dragon_wing_servo_controller_init(void); void flying_dragon_wing_servo_controller_act(void);&quot;
+}
+</code></pre>
+
+<h3 id="13-sensor-fusion-component">1.3 Sensor Fusion Component</h3>
+<p><strong>File</strong>: <code>config/components/functional/flying_dragon_sensor_fusion.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_sensor_fusion&quot;,
+  &quot;category&quot;: &quot;sensor_system&quot;,
+  &quot;description&quot;: &quot;IMU + barometer for attitude &amp; altitude estimation&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;hardware_templates&quot;: [
+    {
+      &quot;name&quot;: &quot;ICM20689_BMP390&quot;,
+      &quot;imu_type&quot;: &quot;ICM20689&quot;,
+      &quot;imu_i2c_address&quot;: &quot;0x68&quot;,
+      &quot;imu_sample_rate_hz&quot;: 1000,
+      &quot;imu_accel_range_g&quot;: 16,
+      &quot;imu_gyro_range_dps&quot;: 2000,
+      &quot;barometer_type&quot;: &quot;BMP390&quot;,
+      &quot;barometer_i2c_address&quot;: &quot;0x77&quot;,
+      &quot;barometer_sample_rate_hz&quot;: 50,
+      &quot;barometer_accuracy_m&quot;: 2.0,
+      &quot;i2c_bus&quot;: {
+        &quot;sda_pin&quot;: 21,
+        &quot;scl_pin&quot;: 22,
+        &quot;frequency_hz&quot;: 400000
+      }
+    }
+  ],
+  &quot;power_requirements&quot;: {
+    &quot;nominal_voltage_v&quot;: 3.3,
+    &quot;nominal_current_a&quot;: 0.05
+  },
+  &quot;dependencies&quot;: [&quot;flying_dragon_flight_safety&quot;],
+  &quot;function_signature&quot;: &quot;flying_dragon_sensor_fusion_init(void); void flying_dragon_sensor_fusion_act(void);&quot;
+}
+</code></pre>
+
+<h3 id="14-flight-safety-component">1.4 Flight Safety Component</h3>
+<p><strong>File</strong>: <code>config/components/functional/flying_dragon_flight_safety.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_flight_safety&quot;,
+  &quot;category&quot;: &quot;safety_system&quot;,
+  &quot;description&quot;: &quot;Failsafe monitoring, battery management, emergency procedures&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;hardware_templates&quot;: [
+    {
+      &quot;name&quot;: &quot;WATCHDOG_BATTERY_MONITOR&quot;,
+      &quot;watchdog_timeout_ms&quot;: 500,
+      &quot;battery_adc_pin&quot;: 36,
+      &quot;battery_min_voltage_v&quot;: 11.0,
+      &quot;battery_cells&quot;: 4,
+      &quot;low_battery_alert_v&quot;: 11.5,
+      &quot;altitude_floor_m&quot;: 0.5,
+      &quot;gyro_limit_dps&quot;: 500,
+      &quot;emergency_descent_rate_ms&quot;: 0.5
+    }
+  ],
+  &quot;power_requirements&quot;: {
+    &quot;nominal_voltage_v&quot;: 3.3,
+    &quot;nominal_current_a&quot;: 0.01
+  },
+  &quot;dependencies&quot;: [&quot;flying_dragon_sensor_fusion&quot;, &quot;flying_dragon_motor_controller&quot;],
+  &quot;function_signature&quot;: &quot;flying_dragon_flight_safety_init(void); void flying_dragon_flight_safety_act(void);&quot;
+}
+</code></pre>
+
+<h3 id="15-behavior-sequencer-component">1.5 Behavior Sequencer Component</h3>
+<p><strong>File</strong>: <code>config/components/functional/flying_dragon_behavior_sequencer.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_behavior_sequencer&quot;,
+  &quot;category&quot;: &quot;control_system&quot;,
+  &quot;description&quot;: &quot;Flight state machine, mood-based behavior, autonomous sequences&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;hardware_templates&quot;: [
+    {
+      &quot;name&quot;: &quot;ESP32_S3_FLIGHT_LOGIC&quot;,
+      &quot;flight_controller&quot;: &quot;ESP32_S3&quot;,
+      &quot;clock_speed_mhz&quot;: 240,
+      &quot;flight_loop_frequency_hz&quot;: 100,
+      &quot;states&quot;: [
+        &quot;IDLE&quot;,
+        &quot;ARMING&quot;,
+        &quot;HOVER&quot;,
+        &quot;CLIMB&quot;,
+        &quot;CRUISE_FORWARD&quot;,
+        &quot;AGGRESSIVE_MANEUVER&quot;,
+        &quot;LANDING&quot;,
+        &quot;EMERGENCY_DESCENT&quot;
+      ],
+      &quot;mood_influence&quot;: {
+        &quot;calm&quot;: {
+          &quot;max_roll_deg&quot;: 20,
+          &quot;max_pitch_deg&quot;: 20,
+          &quot;max_climb_rate_ms&quot;: 0.5,
+          &quot;wing_beat_freq_hz&quot;: 2.5
+        },
+        &quot;playful&quot;: {
+          &quot;max_roll_deg&quot;: 45,
+          &quot;max_pitch_deg&quot;: 35,
+          &quot;max_climb_rate_ms&quot;: 1.0,
+          &quot;wing_beat_freq_hz&quot;: 3.5
+        },
+        &quot;aggressive&quot;: {
+          &quot;max_roll_deg&quot;: 60,
+          &quot;max_pitch_deg&quot;: 50,
+          &quot;max_climb_rate_ms&quot;: 1.5,
+          &quot;wing_beat_freq_hz&quot;: 4.0
+        }
+      }
+    }
+  ],
+  &quot;power_requirements&quot;: {
+    &quot;nominal_voltage_v&quot;: 3.3,
+    &quot;nominal_current_a&quot;: 0.2
+  },
+  &quot;dependencies&quot;: [
+    &quot;flying_dragon_sensor_fusion&quot;,
+    &quot;flying_dragon_motor_controller&quot;,
+    &quot;flying_dragon_wing_servo_controller&quot;,
+    &quot;flying_dragon_flight_safety&quot;
+  ],
+  &quot;function_signature&quot;: &quot;flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);&quot;
+}
+</code></pre>
+
+<hr />
+<h2 id="2-bot-family-definitions">2. BOT FAMILY DEFINITIONS</h2>
+<h3 id="21-flying-dragon-full-bot">2.1 Flying Dragon Full Bot</h3>
+<p><strong>File</strong>: <code>config/bots/bot_families/flying_dragons/flying_dragon_full.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_full&quot;,
+  &quot;description&quot;: &quot;Complete flying dragon with head (eyes/mouth/speaker) and flight systems&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;creature_family&quot;: &quot;dragon&quot;,
+  &quot;subsystems&quot;: [
+    {
+      &quot;name&quot;: &quot;flying_dragon_head&quot;,
+      &quot;type&quot;: &quot;creature_head&quot;,
+      &quot;components&quot;: [
+        &quot;flying_dragon_left_eye&lt;GC9A01&gt;&quot;,
+        &quot;flying_dragon_right_eye&lt;GC9A01&gt;&quot;,
+        &quot;flying_dragon_mouth&lt;GC9A01&gt;&quot;,
+        &quot;flying_dragon_speaker&lt;MINISPKR&gt;&quot;,
+        &quot;flying_dragon_nostril_left&lt;RGB_LED&gt;&quot;,
+        &quot;flying_dragon_nostril_right&lt;RGB_LED&gt;&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;flying_dragon_flight_controller&quot;,
+      &quot;type&quot;: &quot;flight_system&quot;,
+      &quot;enabled&quot;: true,
+      &quot;components&quot;: [
+        &quot;flying_dragon_sensor_fusion&lt;ICM20689_BMP390&gt;&quot;,
+        &quot;flying_dragon_flight_safety&lt;WATCHDOG_BATTERY_MONITOR&gt;&quot;,
+        &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV&gt;&quot;,
+        &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
+        &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3_FLIGHT_LOGIC&gt;&quot;
+      ],
+      &quot;configuration&quot;: {
+        &quot;flight_loop_frequency_hz&quot;: 100,
+        &quot;wing_flap_frequency_hz&quot;: 3.0,
+        &quot;thrust_to_weight_ratio&quot;: 1.5,
+        &quot;battery_capacity_mah&quot;: 5000
+      }
+    }
+  ],
+  &quot;assembly_notes&quot;: &quot;Flying dragon with articulated wings (3 DoF per side) and quadcopter propulsion. Sensor fusion provides stability; failsafes ensure safe descent.&quot;,
+  &quot;mass_budget_g&quot;: {
+    &quot;airframe&quot;: 500,
+    &quot;motors&quot;: 220,
+    &quot;escs&quot;: 140,
+    &quot;servos&quot;: 330,
+    &quot;flight_controller&quot;: 100,
+    &quot;battery&quot;: 550,
+    &quot;wiring&quot;: 120,
+    &quot;payload&quot;: 100,
+    &quot;total&quot;: 2560
+  },
+  &quot;performance&quot;: {
+    &quot;max_flight_time_min&quot;: 15,
+    &quot;cruise_speed_ms&quot;: 5,
+    &quot;max_speed_ms&quot;: 15,
+    &quot;service_ceiling_m&quot;: 50,
+    &quot;thrust_to_weight&quot;: 1.5
+  }
+}
+</code></pre>
+
+<h3 id="22-flight-controller-subsystem">2.2 Flight Controller Subsystem</h3>
+<p><strong>File</strong>: <code>config/components/subsystem/flying_dragon_flight_system.json</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_flight_system&quot;,
+  &quot;category&quot;: &quot;subsystem&quot;,
+  &quot;description&quot;: &quot;Integrated flight control subsystem (motors + wings + sensors + safety)&quot;,
+  &quot;type&quot;: &quot;container&quot;,
+  &quot;components&quot;: [
+    &quot;flying_dragon_sensor_fusion&lt;ICM20689_BMP390&gt;&quot;,
+    &quot;flying_dragon_flight_safety&lt;WATCHDOG_BATTERY_MONITOR&gt;&quot;,
+    &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV&gt;&quot;,
+    &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
+    &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3_FLIGHT_LOGIC&gt;&quot;
+  ],
+  &quot;execution_priority&quot;: [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  &quot;notes&quot;: &quot;Execute in order: sensors  safety  motors  servos  behavior logic&quot;
+}
+</code></pre>
+
+<hr />
+<h2 id="3-hardware-template-specifications">3. HARDWARE TEMPLATE SPECIFICATIONS</h2>
+<h3 id="31-motor-template-t_motor_u3_580kv">3.1 Motor Template: T_MOTOR_U3_580KV</h3>
+<pre class="codehilite"><code class="language-json">{
+  &quot;template_name&quot;: &quot;T_MOTOR_U3_580KV&quot;,
+  &quot;manufacturer&quot;: &quot;T-Motor&quot;,
+  &quot;model&quot;: &quot;U3 PRO 580KV&quot;,
+  &quot;part_number&quot;: &quot;U3 PRO 580&quot;,
+  &quot;specifications&quot;: {
+    &quot;type&quot;: &quot;brushless_outrunner&quot;,
+    &quot;kv&quot;: 580,
+    &quot;pole_pairs&quot;: 14,
+    &quot;stator_diameter_mm&quot;: 20,
+    &quot;stator_length_mm&quot;: 15,
+    &quot;no_load_current_a&quot;: 0.2,
+    &quot;max_continuous_current_a&quot;: 40,
+    &quot;max_burst_current_a&quot;: 60,
+    &quot;internal_resistance_ohms&quot;: 0.12,
+    &quot;weight_g&quot;: 55,
+    &quot;voltage_nominal_v&quot;: 14.8,
+    &quot;voltage_range_v&quot;: [11.0, 16.8],
+    &quot;thrust_at_nominal_voltage&quot;: {
+      &quot;rpm&quot;: 10640,
+      &quot;static_thrust_gf&quot;: 950,
+      &quot;static_thrust_kg&quot;: 0.95,
+      &quot;power_w&quot;: 150
+    },
+    &quot;sensored&quot;: true,
+    &quot;sensor_type&quot;: &quot;hall_effect&quot;,
+    &quot;connector&quot;: &quot;XT30&quot;
+  },
+  &quot;mechanical_interface&quot;: {
+    &quot;shaft_diameter_mm&quot;: 3,
+    &quot;shaft_length_mm&quot;: 5,
+    &quot;mount_pattern&quot;: &quot;M2_holes&quot;,
+    &quot;mount_diameter_mm&quot;: 19
+  }
+}
+</code></pre>
+
+<h3 id="32-esc-template-hobbywing_40a_esc">3.2 ESC Template: HOBBYWING_40A_ESC</h3>
+<pre class="codehilite"><code class="language-json">{
+  &quot;template_name&quot;: &quot;HOBBYWING_40A_ESC&quot;,
+  &quot;manufacturer&quot;: &quot;Hobbywing&quot;,
+  &quot;model&quot;: &quot;XRotor 40A&quot;,
+  &quot;specifications&quot;: {
+    &quot;continuous_current_a&quot;: 40,
+    &quot;burst_current_a&quot;: 50,
+    &quot;voltage_nominal_v&quot;: 14.8,
+    &quot;voltage_range_v&quot;: [2.0, 6.0],
+    &quot;lipo_cell_range&quot;: &quot;2S6S&quot;,
+    &quot;weight_g&quot;: 28,
+    &quot;firmware&quot;: &quot;BLHeli-32&quot;,
+    &quot;pwm_frequency_hz&quot;: 490,
+    &quot;pwm_resolution_bit&quot;: 13,
+    &quot;input_protocol&quot;: [&quot;PWM&quot;, &quot;DShot600&quot;],
+    &quot;telemetry&quot;: [&quot;voltage&quot;, &quot;current&quot;, &quot;temperature&quot;],
+    &quot;connector_input&quot;: &quot;JST_XH&quot;,
+    &quot;connector_motor&quot;: &quot;HXT_3.5mm_bullet&quot;,
+    &quot;programming&quot;: &quot;via_USB_adapter&quot;
+  },
+  &quot;thermal&quot;: {
+    &quot;temperature_sensor&quot;: true,
+    &quot;low_voltage_throttle&quot;: true,
+    &quot;overtemp_cutoff_c&quot;: 120
+  }
+}
+</code></pre>
+
+<h3 id="33-servo-template-mg996r_servo">3.3 Servo Template: MG996R_SERVO</h3>
+<pre class="codehilite"><code class="language-json">{
+  &quot;template_name&quot;: &quot;MG996R_SERVO&quot;,
+  &quot;manufacturer&quot;: &quot;MG&quot;,
+  &quot;model&quot;: &quot;MG996R&quot;,
+  &quot;specifications&quot;: {
+    &quot;type&quot;: &quot;digital_servo&quot;,
+    &quot;torque_kg_cm&quot;: 11,
+    &quot;speed_unloaded_sec_60deg&quot;: 0.16,
+    &quot;voltage_nominal_v&quot;: 5.0,
+    &quot;voltage_range_v&quot;: [4.5, 6.0],
+    &quot;no_load_current_a&quot;: 0.1,
+    &quot;loaded_current_a&quot;: 0.8,
+    &quot;peak_current_a&quot;: 1.2,
+    &quot;weight_g&quot;: 55,
+    &quot;dimensions_mm&quot;: [40.7, 20, 37.5],
+    &quot;control_range_degrees&quot;: [0, 180],
+    &quot;connector&quot;: &quot;3pin_male&quot;,
+    &quot;pwm_frequency_hz&quot;: 50,
+    &quot;pwm_pulse_range_us&quot;: [500, 2500],
+    &quot;dead_band_us&quot;: 5,
+    &quot;gear_type&quot;: &quot;plastic&quot;
+  }
+}
+</code></pre>
+
+<h3 id="34-sensor-template-icm20689_bmp390">3.4 Sensor Template: ICM20689_BMP390</h3>
+<pre class="codehilite"><code class="language-json">{
+  &quot;template_name&quot;: &quot;ICM20689_BMP390&quot;,
+  &quot;components&quot;: [
+    {
+      &quot;sensor&quot;: &quot;ICM20689&quot;,
+      &quot;type&quot;: &quot;6_axis_imu&quot;,
+      &quot;i2c_address&quot;: &quot;0x68&quot;,
+      &quot;i2c_frequency_hz&quot;: 400000,
+      &quot;accel_range_g&quot;: [2, 4, 8, 16],
+      &quot;accel_sensitivity_lsb_g&quot;: 2048,
+      &quot;accel_noise_density_ug_rtHz&quot;: 75,
+      &quot;gyro_range_dps&quot;: [250, 500, 1000, 2000],
+      &quot;gyro_sensitivity_lsb_dps&quot;: 131,
+      &quot;gyro_noise_density&quot;: 12.5,
+      &quot;sample_rate_hz&quot;: 1000,
+      &quot;temperature_range_c&quot;: [-40, 85],
+      &quot;power_consumption_ma&quot;: 3.5
+    },
+    {
+      &quot;sensor&quot;: &quot;BMP390&quot;,
+      &quot;type&quot;: &quot;barometer&quot;,
+      &quot;i2c_address&quot;: &quot;0x77&quot;,
+      &quot;pressure_range_pa&quot;: [30000, 110000],
+      &quot;temperature_range_c&quot;: [-40, 85],
+      &quot;altitude_accuracy_m&quot;: 2.0,
+      &quot;altitude_resolution_m&quot;: 0.1,
+      &quot;sample_rate_hz&quot;: 50,
+      &quot;power_consumption_ma&quot;: 0.2
+    }
+  ],
+  &quot;breakout_board&quot;: {
+    &quot;dimensions_mm&quot;: [25, 25],
+    &quot;mounting_holes&quot;: &quot;M2&quot;,
+    &quot;connector&quot;: &quot;4pin_i2c&quot;,
+    &quot;address_selectable&quot;: false
+  }
+}
+</code></pre>
+
+<hr />
+<h2 id="4-example-motor-mixing-equations-c">4. EXAMPLE MOTOR MIXING EQUATIONS (C++)</h2>
+<pre class="codehilite"><code class="language-cpp">// Motor mixing for quad X-configuration
+// Motors arranged: 1=Front-Left, 2=Front-Right, 3=Rear-Left, 4=Rear-Right
+
+void compute_motor_commands(
+    float throttle_cmd,       // [0.01.0]
+    float roll_cmd,           // [1.01.0] ( left, + right)
+    float pitch_cmd,          // [1.01.0] ( forward, + backward)
+    float yaw_rate_cmd,       // [1.01.0] ( CCW, + CW)
+    float motor_out[4])       // Output PWM [0.01.0]
+{
+    // Compute motor mixing (simplified, no cross-coupling)
+    float m1 = throttle_cmd + pitch_cmd - roll_cmd + yaw_rate_cmd;
+    float m2 = throttle_cmd + pitch_cmd + roll_cmd - yaw_rate_cmd;
+    float m3 = throttle_cmd - pitch_cmd - roll_cmd - yaw_rate_cmd;
+    float m4 = throttle_cmd - pitch_cmd + roll_cmd + yaw_rate_cmd;
+
+    // Clamp to [0.01.0] to prevent saturation
+    motor_out[0] = constrain(m1, 0.0f, 1.0f);
+    motor_out[1] = constrain(m2, 0.0f, 1.0f);
+    motor_out[2] = constrain(m3, 0.0f, 1.0f);
+    motor_out[3] = constrain(m4, 0.0f, 1.0f);
+}
+</code></pre>
+
+<hr />
+<h2 id="5-calibration-procedures">5. CALIBRATION PROCEDURES</h2>
+<h3 id="51-motor-calibration-checklist">5.1 Motor Calibration Checklist</h3>
+<pre class="codehilite"><code class="language-markdown">1. **ESC Initialization** (per ESC)
+   - Connect single motor to ESC
+   - Power on without throttle (silence = ready)
+   - Gradually increase throttle from 0100%
+   - Verify smooth acceleration (no cogging, no buzzing)
+   - Record RPM at 50%, 75%, 100% throttle
+
+2. **Static Thrust Measurement**
+   - Place motor+prop on scale (isolated setup)
+   - Set throttle to 0% (idle ~1000 s PWM)
+   - Record baseline weight (should be motor weight only)
+   - Increase to 50% throttle (1500 s PWM), wait 5 sec, record scale reading
+   - Subtract baseline to get static thrust at 50%
+   - Repeat at 75% and 100% throttle
+   - Compare to spec data (should be 5%)
+
+3. **Cross-Motor Validation**
+   - Repeat static thrust test for all 4 motors
+   - Verify all motors produce 95% of rated thrust
+   - Flag any motor &lt;90% for replacement
+
+4. **ESC PWM Response**
+   - Connect PWM signal generator to ESC
+   - Send 1000 s pulse (idle), verify no spin
+   - Increase to 1100 s, verify gentle spin
+   - Increase to 1500 s, record response time (&lt;100 ms expected)
+   - Record RPM vs. PWM curve for control loop tuning
+</code></pre>
+
+<h3 id="52-sensor-calibration">5.2 Sensor Calibration</h3>
+<pre class="codehilite"><code class="language-markdown">**IMU (ICM20689)**
+   - Place on level surface
+   - Read accelerometer: X=0, Y=0, Z=~1g (0.05g tolerance)
+   - Read gyroscope: X=0, Y=0, Z=0 (5/s tolerance)
+   - If out of tolerance, perform hard-iron/soft-iron calibration via datasheetgyro calibration
+
+**Barometer (BMP390)**
+   - Place at known altitude (e.g., sea level = 0 m)
+   - Record raw pressure reading
+   - Compare to atmospheric table for that date/location
+   - Apply altitude offset calibration if &gt;2 m error
+</code></pre>
+
+<hr />
+<h2 id="6-power-budget-example">6. POWER BUDGET EXAMPLE</h2>
+<pre class="codehilite"><code class="language-markdown">**Hover Condition** (4 motors at 50% throttle)
+   - Motor current per motor: 10 A
+   - Total motor current: 40 A
+   - ESC overhead: ~2 A (voltage conversion losses)
+   - Servo current (at rest): 0.5 A
+   - Flight logic + sensors: 0.3 A
+   - **Total system current: ~43 A**
+
+**Battery capacity**: 5000 mAh = 5 Ah
+**Flight time**: 5 Ah  43 A  7 min hover
+
+**Cruise Condition** (mixed forward flight, motors at 40% throttle)
+   - Motor current per motor: 8 A
+   - Total motor current: 32 A
+   - Servo current (active wing flap @ 3 Hz): 1.0 A
+   - Overhead: ~2.5 A
+   - **Total system current: ~35.5 A**
+
+**Flight time**: 5 Ah  35.5 A  8.5 min mixed flight
+
+**Peak Condition** (aggressive maneuver, 75% throttle)
+   - Motor current: 30 A (total)
+   - Servo current: 1.5 A
+   - Overhead: 3 A
+   - **Total: ~34.5 A (short burst only)**
+   - Duration: Limited to ~5 sec before battery voltage drops below LVC threshold
+</code></pre>
+
+<hr />
+<h2 id="7-integration-validation-script-python">7. INTEGRATION VALIDATION SCRIPT (Python)</h2>
+<p><strong>File</strong>: <code>tools/validate_flying_dragon_config.py</code></p>
+<pre class="codehilite"><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Validate flying dragon bot configuration for consistency and feasibility.
+&quot;&quot;&quot;
+
+import json
+import os
+from pathlib import Path
+
+def validate_motor_thrust_budget():
+    &quot;&quot;&quot;Verify that total motor thrust exceeds 1.5 dragon weight.&quot;&quot;&quot;
+    dragon_mass_kg = 2.5
+    thrust_per_motor_gf = 950
+    total_thrust_gf = 4 * thrust_per_motor_gf
+    required_thrust_gf = dragon_mass_kg * 1000 * 1.5  # 1.5 T/W ratio
+
+    print(f&quot;Motor Thrust Budget:&quot;)
+    print(f&quot;  Dragon mass: {dragon_mass_kg} kg&quot;)
+    print(f&quot;  Total available thrust: {total_thrust_gf} gf ({total_thrust_gf/1000:.2f} kgf)&quot;)
+    print(f&quot;  Required (1.5 T/W): {required_thrust_gf} gf ({required_thrust_gf/1000:.2f} kgf)&quot;)
+    print(f&quot;   PASS&quot; if total_thrust_gf &gt; required_thrust_gf else &quot;   FAIL&quot;)
+
+def validate_power_budget():
+    &quot;&quot;&quot;Verify battery capacity is sufficient for target flight time.&quot;&quot;&quot;
+    battery_capacity_mah = 5000
+    avg_current_hover_a = 43
+    avg_current_cruise_a = 35.5
+
+    hover_time_min = battery_capacity_mah / (avg_current_hover_a * 1000 * 60)
+    cruise_time_min = battery_capacity_mah / (avg_current_cruise_a * 1000 * 60)
+
+    print(f&quot;\nPower Budget:&quot;)
+    print(f&quot;  Battery: {battery_capacity_mah} mAh&quot;)
+    print(f&quot;  Hover time: {hover_time_min:.1f} min @ {avg_current_hover_a} A avg&quot;)
+    print(f&quot;  Cruise time: {cruise_time_min:.1f} min @ {avg_current_cruise_a} A avg&quot;)
+    print(f&quot;  Target: 1012 min mixed flight&quot;)
+    print(f&quot;   PASS&quot; if cruise_time_min &gt; 10 else &quot;   MARGINAL (consider larger battery)&quot;)
+
+def validate_servo_torque():
+    &quot;&quot;&quot;Check wing servo torque is sufficient for articulation.&quot;&quot;&quot;
+    servo_torque_kg_cm = 11
+    wing_moment_arm_cm = 5  # Approximate moment arm for wing flap
+    wing_mass_g = 200
+    wing_weight_kg = wing_mass_g / 1000
+
+    required_torque_kg_cm = wing_weight_kg * wing_moment_arm_cm
+
+    print(f&quot;\nServo Torque Budget:&quot;)
+    print(f&quot;  Servo torque: {servo_torque_kg_cm} kg-cm&quot;)
+    print(f&quot;  Wing mass: {wing_mass_g} g&quot;)
+    print(f&quot;  Required torque (estimated): {required_torque_kg_cm:.1f} kg-cm&quot;)
+    print(f&quot;   PASS&quot; if servo_torque_kg_cm &gt; required_torque_kg_cm * 2 else &quot;   MARGINAL&quot;)
+
+def validate_component_files():
+    &quot;&quot;&quot;Verify all required component files exist.&quot;&quot;&quot;
+    components = [
+        &quot;flying_dragon_motor_controller&quot;,
+        &quot;flying_dragon_wing_servo_controller&quot;,
+        &quot;flying_dragon_sensor_fusion&quot;,
+        &quot;flying_dragon_flight_safety&quot;,
+        &quot;flying_dragon_behavior_sequencer&quot;
+    ]
+
+    print(f&quot;\nComponent Files Validation:&quot;)
+    comp_dir = Path(&quot;config/components/functional&quot;)
+    all_exist = True
+
+    for comp in components:
+        json_exists = (comp_dir / f&quot;{comp}.json&quot;).exists()
+        src_exists = (comp_dir / f&quot;{comp}.src&quot;).exists()
+        hdr_exists = (comp_dir / f&quot;{comp}.hdr&quot;).exists()
+
+        status = &quot;&quot; if (json_exists and src_exists and hdr_exists) else &quot;&quot;
+        print(f&quot;  {status} {comp}: .json={json_exists}, .src={src_exists}, .hdr={hdr_exists}&quot;)
+        all_exist = all_exist and json_exists and src_exists and hdr_exists
+
+    return all_exist
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;=&quot; * 60)
+    print(&quot;FLYING DRAGON BOT CONFIGURATION VALIDATION&quot;)
+    print(&quot;=&quot; * 60)
+
+    validate_motor_thrust_budget()
+    validate_power_budget()
+    validate_servo_torque()
+    validate_component_files()
+
+    print(&quot;\n&quot; + &quot;=&quot; * 60)
+    print(&quot;Validation complete. Address any  FAIL items before deployment.&quot;)
+    print(&quot;=&quot; * 60)
+</code></pre>
+
+<hr />
+<h2 id="8-deployment-checklist">8. DEPLOYMENT CHECKLIST</h2>
+<p>Before proceeding to Phase 1 prototyping:</p>
+<ul>
+<li>[ ] All JSON definitions reviewed for correctness</li>
+<li>[ ] Component templates match physical hardware specifications</li>
+<li>[ ] Motor thrust calculations verified (1.5 T/W ratio confirmed)</li>
+<li>[ ] Power budget validated for 10+ min flight time</li>
+<li>[ ] Sensor accuracies acceptable (altitude 2 m, IMU 0.1 g)</li>
+<li>[ ] Safety limits defined (altitude floor, gyro limit, battery LVC)</li>
+<li>[ ] P32 component architecture aligned with motor/servo/sensor separation</li>
+<li>[ ] SharedMemory integration planned for multi-chip coordination</li>
+<li>[ ] Failsafe procedures documented and testable</li>
+<li>[ ] Tether safety harness design approved</li>
+<li>[ ] All component source files (<code>*.src</code>) use Allman braces and ASCII encoding</li>
+<li>[ ] Build system configured to aggregate component files into subsystem <code>.cpp</code></li>
+<li>[ ] Telemetry logging prepared for post-flight analysis</li>
+</ul>
+<hr />
+<p><strong>Document Status</strong>: Ready for Implementation<br />
+<strong>Next Action</strong>: Begin Phase 1 prototyping per FLYING_DRAGON_DEEP_DIVE.md</p>
+    </div>
+</body>
 </html>

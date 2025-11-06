@@ -90,13 +90,13 @@
         }
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_horn_crown.json",
-        "config/bots/bot_families/goblins/head/goblin_authority_markings.json",
-        "config/bots/bot_families/goblins/head/goblin_tribal_tattoos.json",
-        "config/bots/bot_families/goblins/head/goblin_trophy_scars.json",
-        "config/bots/bot_families/goblins/head/goblin_enlarged_fangs.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/bot_families/goblins/head/goblin_horn_crown.json",
+        "bots/bot_families/goblins/head/goblin_authority_markings.json",
+        "bots/bot_families/goblins/head/goblin_tribal_tattoos.json",
+        "bots/bot_families/goblins/head/goblin_trophy_scars.json",
+        "bots/bot_families/goblins/head/goblin_enlarged_fangs.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "pack_assembly": {

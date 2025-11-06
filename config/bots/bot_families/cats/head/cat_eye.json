@@ -7,7 +7,7 @@
     "description": "Shared cat eye processing logic with palette and mood-based rendering",
     "created": "2025-10-22",
     "components": [
-        "config/components/hardware/gc9a01.json"
+        "components/gc9a01.json"
     ],
     "component_constraints": {
         "required_contained_types": [

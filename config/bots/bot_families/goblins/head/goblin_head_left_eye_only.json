@@ -16,7 +16,7 @@
         "description": "Head coordination every 2.5 seconds"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json"
+        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",

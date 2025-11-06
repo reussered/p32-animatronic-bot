@@ -9,7 +9,7 @@
     "name": "base_wrist_servo",
     "subsystem": "ACTUATOR",
     "components": [
-        "config/components/interfaces/esp32_servo_controller.json"
+        "components/interfaces/esp32_servo_controller.json"
     ],
     "author": "config/author.json",
     "position": {

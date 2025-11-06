@@ -7,7 +7,7 @@
     "description": "Shared robot eye processing logic with LED matrix and mood-based rendering",
     "created": "2025-10-22",
     "components": [
-        "config/components/hardware/neopixel_matrix_8x8.json"
+        "components/hardware/neopixel_matrix_8x8.json"
     ],
     "component_constraints": {
         "required_contained_types": [

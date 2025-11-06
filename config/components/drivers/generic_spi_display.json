@@ -51,7 +51,7 @@
         ]
     },
     "components": [
-        "config/components/interfaces/spi_bus.json"
+        "components/interfaces/spi_bus.json"
     ],
     "compatibility": {
         "esp32_s3": true,

@@ -1,444 +1,444 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P32 Animatronic Bot - STL Shape Viewer</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #1a1a1a;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            overflow: hidden;
-        }
-        
-        .header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            z-index: 100;
-            border-bottom: 2px solid #00ff41;
-        }
-        
-        .header h1 {
-            margin: 0;
-            color: #00ff41;
-            font-size: 24px;
-            display: inline-block;
-        }
-        
-        .controls {
-            float: right;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        .file-input {
-            background: #333;
-            border: 1px solid #555;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .file-input:hover {
-            background: #444;
-        }
-        
-        .info-panel {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            z-index: 100;
-            border-top: 2px solid #00ff41;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .info-panel h3 {
-            margin: 0 0 10px 0;
-            color: #00ff41;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .info-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 4px;
-        }
-        
-        .info-item strong {
-            color: #00ff41;
-        }
-        
-        #viewer-container {
-            position: absolute;
-            top: 80px;
-            bottom: 220px;
-            left: 0;
-            right: 0;
-        }
-        
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #00ff41;
-            font-size: 18px;
-            z-index: 50;
-        }
-        
-        .error {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ff4141;
-            font-size: 16px;
-            text-align: center;
-            z-index: 50;
-        }
-        
-        .instructions {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #888;
-            z-index: 50;
-        }
-        
-        .instructions h2 {
-            color: #00ff41;
-            margin-bottom: 20px;
-        }
-        
-        .button {
-            background: #00ff41;
-            color: #000;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .button:hover {
-            background: #00cc33;
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🤖 P32 STL Shape Viewer</h1>
-        <div class="controls">
-            <input type="file" id="fileInput" accept=".stl" class="file-input">
-            <button id="resetView" class="button">Reset View</button>
-            <button id="toggleWireframe" class="button">Wireframe</button>
-        </div>
-    </div>
-    
-    <div id="viewer-container">
-        <div id="instructions" class="instructions">
-            <h2>STL Shape Viewer</h2>
-            <p>Select an STL file to view the 3D shape</p>
-            <p><strong>Controls:</strong></p>
-            <p>• Left Click + Drag: Rotate</p>
-            <p>• Right Click + Drag: Pan</p>
-            <p>• Mouse Wheel: Zoom</p>
-        </div>
-        <div id="loading" class="loading hidden">Loading STL file...</div>
-        <div id="error" class="error hidden"></div>
-    </div>
-    
-    <div class="info-panel">
-        <h3>Shape Information</h3>
-        <div class="info-grid">
-            <div class="info-item">
-                <strong>File:</strong> <span id="fileName">No file loaded</span>
-            </div>
-            <div class="info-item">
-                <strong>Triangles:</strong> <span id="triangleCount">0</span>
-            </div>
-            <div class="info-item">
-                <strong>Vertices:</strong> <span id="vertexCount">0</span>
-            </div>
-            <div class="info-item">
-                <strong>File Size:</strong> <span id="fileSize">0 bytes</span>
-            </div>
-            <div class="info-item">
-                <strong>Dimensions:</strong> <span id="dimensions">0 × 0 × 0 mm</span>
-            </div>
-            <div class="info-item">
-                <strong>Center:</strong> <span id="center">0, 0, 0</span>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-    
-    <script>
-        class STLViewer {
-            constructor() {
-                this.scene = null;
-                this.camera = null;
-                this.renderer = null;
-                this.controls = null;
-                this.currentMesh = null;
-                this.wireframeMode = false;
-                
-                this.init();
-                this.setupEventListeners();
-            }
-            
-            init() {
-                const container = document.getElementById('viewer-container');
-                
-                // Scene
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x1a1a1a);
-                
-                // Camera
-                this.camera = new THREE.PerspectiveCamera(
-                    75, 
-                    container.clientWidth / container.clientHeight, 
-                    0.1, 
-                    1000
-                );
-                this.camera.position.set(50, 50, 50);
-                
-                // Renderer
-                this.renderer = new THREE.WebGLRenderer({ antialias: true });
-                this.renderer.setSize(container.clientWidth, container.clientHeight);
-                this.renderer.shadowMap.enabled = true;
-                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-                container.appendChild(this.renderer.domElement);
-                
-                // Controls
-                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-                this.controls.enableDamping = true;
-                this.controls.dampingFactor = 0.1;
-                
-                // Lighting
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
-                this.scene.add(ambientLight);
-                
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight.position.set(50, 50, 50);
-                directionalLight.castShadow = true;
-                directionalLight.shadow.mapSize.width = 2048;
-                directionalLight.shadow.mapSize.height = 2048;
-                this.scene.add(directionalLight);
-                
-                const directionalLight2 = new THREE.DirectionalLight(0x00ff41, 0.3);
-                directionalLight2.position.set(-50, -50, -50);
-                this.scene.add(directionalLight2);
-                
-                // Grid
-                const gridHelper = new THREE.GridHelper(100, 50, 0x00ff41, 0x333333);
-                this.scene.add(gridHelper);
-                
-                // Axes helper
-                const axesHelper = new THREE.AxesHelper(25);
-                this.scene.add(axesHelper);
-                
-                // Animation loop
-                this.animate();
-                
-                // Handle window resize
-                window.addEventListener('resize', () => this.onWindowResize());
-            }
-            
-            setupEventListeners() {
-                document.getElementById('fileInput').addEventListener('change', (e) => {
-                    if (e.target.files.length > 0) {
-                        this.loadSTL(e.target.files[0]);
-                    }
-                });
-                
-                document.getElementById('resetView').addEventListener('click', () => {
-                    this.resetCamera();
-                });
-                
-                document.getElementById('toggleWireframe').addEventListener('click', () => {
-                    this.toggleWireframe();
-                });
-            }
-            
-            loadSTL(file) {
-                this.showLoading(true);
-                this.hideInstructions();
-                this.hideError();
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const loader = new THREE.STLLoader();
-                        const geometry = loader.parse(e.target.result);
-                        
-                        this.displayMesh(geometry, file);
-                        this.updateInfo(geometry, file);
-                        this.showLoading(false);
-                    } catch (error) {
-                        this.showError('Error loading STL file: ' + error.message);
-                        this.showLoading(false);
-                    }
-                };
-                
-                reader.onerror = () => {
-                    this.showError('Error reading file');
-                    this.showLoading(false);
-                };
-                
-                reader.readAsArrayBuffer(file);
-            }
-            
-            displayMesh(geometry, file) {
-                // Remove existing mesh
-                if (this.currentMesh) {
-                    this.scene.remove(this.currentMesh);
-                }
-                
-                // Center and scale geometry
-                geometry.computeBoundingBox();
-                const center = geometry.boundingBox.getCenter(new THREE.Vector3());
-                geometry.translate(-center.x, -center.y, -center.z);
-                
-                // Create material
-                const material = new THREE.MeshPhongMaterial({
-                    color: 0x00ff41,
-                    shininess: 100,
-                    transparent: true,
-                    opacity: 0.9
-                });
-                
-                // Create mesh
-                this.currentMesh = new THREE.Mesh(geometry, material);
-                this.currentMesh.castShadow = true;
-                this.currentMesh.receiveShadow = true;
-                this.scene.add(this.currentMesh);
-                
-                // Auto-fit camera
-                this.fitCameraToObject();
-            }
-            
-            updateInfo(geometry, file) {
-                const bbox = geometry.boundingBox;
-                const size = bbox.getSize(new THREE.Vector3());
-                const center = bbox.getCenter(new THREE.Vector3());
-                
-                document.getElementById('fileName').textContent = file.name;
-                document.getElementById('triangleCount').textContent = geometry.attributes.position.count / 3;
-                document.getElementById('vertexCount').textContent = geometry.attributes.position.count;
-                document.getElementById('fileSize').textContent = this.formatFileSize(file.size);
-                document.getElementById('dimensions').textContent = 
-                    `${size.x.toFixed(2)} × ${size.y.toFixed(2)} × ${size.z.toFixed(2)} mm`;
-                document.getElementById('center').textContent = 
-                    `${center.x.toFixed(2)}, ${center.y.toFixed(2)}, ${center.z.toFixed(2)}`;
-            }
-            
-            fitCameraToObject() {
-                if (!this.currentMesh) return;
-                
-                const bbox = new THREE.Box3().setFromObject(this.currentMesh);
-                const size = bbox.getSize(new THREE.Vector3());
-                const maxDim = Math.max(size.x, size.y, size.z);
-                
-                const distance = maxDim * 2;
-                this.camera.position.set(distance, distance, distance);
-                this.camera.lookAt(0, 0, 0);
-                this.controls.target.set(0, 0, 0);
-                this.controls.update();
-            }
-            
-            resetCamera() {
-                if (this.currentMesh) {
-                    this.fitCameraToObject();
-                } else {
-                    this.camera.position.set(50, 50, 50);
-                    this.camera.lookAt(0, 0, 0);
-                    this.controls.target.set(0, 0, 0);
-                    this.controls.update();
-                }
-            }
-            
-            toggleWireframe() {
-                if (!this.currentMesh) return;
-                
-                this.wireframeMode = !this.wireframeMode;
-                this.currentMesh.material.wireframe = this.wireframeMode;
-                
-                document.getElementById('toggleWireframe').textContent = 
-                    this.wireframeMode ? 'Solid' : 'Wireframe';
-            }
-            
-            formatFileSize(bytes) {
-                if (bytes === 0) return '0 bytes';
-                const k = 1024;
-                const sizes = ['bytes', 'KB', 'MB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-            
-            showLoading(show) {
-                document.getElementById('loading').classList.toggle('hidden', !show);
-            }
-            
-            hideInstructions() {
-                document.getElementById('instructions').classList.add('hidden');
-            }
-            
-            showError(message) {
-                const errorDiv = document.getElementById('error');
-                errorDiv.textContent = message;
-                errorDiv.classList.remove('hidden');
-            }
-            
-            hideError() {
-                document.getElementById('error').classList.add('hidden');
-            }
-            
-            animate() {
-                requestAnimationFrame(() => this.animate());
-                this.controls.update();
-                this.renderer.render(this.scene, this.camera);
-            }
-            
-            onWindowResize() {
-                const container = document.getElementById('viewer-container');
-                this.camera.aspect = container.clientWidth / container.clientHeight;
-                this.camera.updateProjectionMatrix();
-                this.renderer.setSize(container.clientWidth, container.clientHeight);
-            }
-        }
-        
-        // Initialize viewer when page loads
-        window.addEventListener('load', () => {
-            new STLViewer();
-        });
-    </script>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P32 Animatronic Bot - STL Shape Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            z-index: 100;
+            border-bottom: 2px solid #00ff41;
+        }
+        
+        .header h1 {
+            margin: 0;
+            color: #00ff41;
+            font-size: 24px;
+            display: inline-block;
+        }
+        
+        .controls {
+            float: right;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .file-input {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .file-input:hover {
+            background: #444;
+        }
+        
+        .info-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            z-index: 100;
+            border-top: 2px solid #00ff41;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .info-panel h3 {
+            margin: 0 0 10px 0;
+            color: #00ff41;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .info-item strong {
+            color: #00ff41;
+        }
+        
+        #viewer-container {
+            position: absolute;
+            top: 80px;
+            bottom: 220px;
+            left: 0;
+            right: 0;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ff41;
+            font-size: 18px;
+            z-index: 50;
+        }
+        
+        .error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff4141;
+            font-size: 16px;
+            text-align: center;
+            z-index: 50;
+        }
+        
+        .instructions {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #888;
+            z-index: 50;
+        }
+        
+        .instructions h2 {
+            color: #00ff41;
+            margin-bottom: 20px;
+        }
+        
+        .button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .button:hover {
+            background: #00cc33;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> P32 STL Shape Viewer</h1>
+        <div class="controls">
+            <input type="file" id="fileInput" accept=".stl" class="file-input">
+            <button id="resetView" class="button">Reset View</button>
+            <button id="toggleWireframe" class="button">Wireframe</button>
+        </div>
+    </div>
+    
+    <div id="viewer-container">
+        <div id="instructions" class="instructions">
+            <h2>STL Shape Viewer</h2>
+            <p>Select an STL file to view the 3D shape</p>
+            <p><strong>Controls:</strong></p>
+            <p> Left Click + Drag: Rotate</p>
+            <p> Right Click + Drag: Pan</p>
+            <p> Mouse Wheel: Zoom</p>
+        </div>
+        <div id="loading" class="loading hidden">Loading STL file...</div>
+        <div id="error" class="error hidden"></div>
+    </div>
+    
+    <div class="info-panel">
+        <h3>Shape Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>File:</strong> <span id="fileName">No file loaded</span>
+            </div>
+            <div class="info-item">
+                <strong>Triangles:</strong> <span id="triangleCount">0</span>
+            </div>
+            <div class="info-item">
+                <strong>Vertices:</strong> <span id="vertexCount">0</span>
+            </div>
+            <div class="info-item">
+                <strong>File Size:</strong> <span id="fileSize">0 bytes</span>
+            </div>
+            <div class="info-item">
+                <strong>Dimensions:</strong> <span id="dimensions">0  0  0 mm</span>
+            </div>
+            <div class="info-item">
+                <strong>Center:</strong> <span id="center">0, 0, 0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    
+    <script>
+        class STLViewer {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.controls = null;
+                this.currentMesh = null;
+                this.wireframeMode = false;
+                
+                this.init();
+                this.setupEventListeners();
+            }
+            
+            init() {
+                const container = document.getElementById('viewer-container');
+                
+                // Scene
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x1a1a1a);
+                
+                // Camera
+                this.camera = new THREE.PerspectiveCamera(
+                    75, 
+                    container.clientWidth / container.clientHeight, 
+                    0.1, 
+                    1000
+                );
+                this.camera.position.set(50, 50, 50);
+                
+                // Renderer
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                container.appendChild(this.renderer.domElement);
+                
+                // Controls
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.1;
+                
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(50, 50, 50);
+                directionalLight.castShadow = true;
+                directionalLight.shadow.mapSize.width = 2048;
+                directionalLight.shadow.mapSize.height = 2048;
+                this.scene.add(directionalLight);
+                
+                const directionalLight2 = new THREE.DirectionalLight(0x00ff41, 0.3);
+                directionalLight2.position.set(-50, -50, -50);
+                this.scene.add(directionalLight2);
+                
+                // Grid
+                const gridHelper = new THREE.GridHelper(100, 50, 0x00ff41, 0x333333);
+                this.scene.add(gridHelper);
+                
+                // Axes helper
+                const axesHelper = new THREE.AxesHelper(25);
+                this.scene.add(axesHelper);
+                
+                // Animation loop
+                this.animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+            
+            setupEventListeners() {
+                document.getElementById('fileInput').addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        this.loadSTL(e.target.files[0]);
+                    }
+                });
+                
+                document.getElementById('resetView').addEventListener('click', () => {
+                    this.resetCamera();
+                });
+                
+                document.getElementById('toggleWireframe').addEventListener('click', () => {
+                    this.toggleWireframe();
+                });
+            }
+            
+            loadSTL(file) {
+                this.showLoading(true);
+                this.hideInstructions();
+                this.hideError();
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const loader = new THREE.STLLoader();
+                        const geometry = loader.parse(e.target.result);
+                        
+                        this.displayMesh(geometry, file);
+                        this.updateInfo(geometry, file);
+                        this.showLoading(false);
+                    } catch (error) {
+                        this.showError('Error loading STL file: ' + error.message);
+                        this.showLoading(false);
+                    }
+                };
+                
+                reader.onerror = () => {
+                    this.showError('Error reading file');
+                    this.showLoading(false);
+                };
+                
+                reader.readAsArrayBuffer(file);
+            }
+            
+            displayMesh(geometry, file) {
+                // Remove existing mesh
+                if (this.currentMesh) {
+                    this.scene.remove(this.currentMesh);
+                }
+                
+                // Center and scale geometry
+                geometry.computeBoundingBox();
+                const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+                geometry.translate(-center.x, -center.y, -center.z);
+                
+                // Create material
+                const material = new THREE.MeshPhongMaterial({
+                    color: 0x00ff41,
+                    shininess: 100,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                
+                // Create mesh
+                this.currentMesh = new THREE.Mesh(geometry, material);
+                this.currentMesh.castShadow = true;
+                this.currentMesh.receiveShadow = true;
+                this.scene.add(this.currentMesh);
+                
+                // Auto-fit camera
+                this.fitCameraToObject();
+            }
+            
+            updateInfo(geometry, file) {
+                const bbox = geometry.boundingBox;
+                const size = bbox.getSize(new THREE.Vector3());
+                const center = bbox.getCenter(new THREE.Vector3());
+                
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('triangleCount').textContent = geometry.attributes.position.count / 3;
+                document.getElementById('vertexCount').textContent = geometry.attributes.position.count;
+                document.getElementById('fileSize').textContent = this.formatFileSize(file.size);
+                document.getElementById('dimensions').textContent = 
+                    `${size.x.toFixed(2)}  ${size.y.toFixed(2)}  ${size.z.toFixed(2)} mm`;
+                document.getElementById('center').textContent = 
+                    `${center.x.toFixed(2)}, ${center.y.toFixed(2)}, ${center.z.toFixed(2)}`;
+            }
+            
+            fitCameraToObject() {
+                if (!this.currentMesh) return;
+                
+                const bbox = new THREE.Box3().setFromObject(this.currentMesh);
+                const size = bbox.getSize(new THREE.Vector3());
+                const maxDim = Math.max(size.x, size.y, size.z);
+                
+                const distance = maxDim * 2;
+                this.camera.position.set(distance, distance, distance);
+                this.camera.lookAt(0, 0, 0);
+                this.controls.target.set(0, 0, 0);
+                this.controls.update();
+            }
+            
+            resetCamera() {
+                if (this.currentMesh) {
+                    this.fitCameraToObject();
+                } else {
+                    this.camera.position.set(50, 50, 50);
+                    this.camera.lookAt(0, 0, 0);
+                    this.controls.target.set(0, 0, 0);
+                    this.controls.update();
+                }
+            }
+            
+            toggleWireframe() {
+                if (!this.currentMesh) return;
+                
+                this.wireframeMode = !this.wireframeMode;
+                this.currentMesh.material.wireframe = this.wireframeMode;
+                
+                document.getElementById('toggleWireframe').textContent = 
+                    this.wireframeMode ? 'Solid' : 'Wireframe';
+            }
+            
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 bytes';
+                const k = 1024;
+                const sizes = ['bytes', 'KB', 'MB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            showLoading(show) {
+                document.getElementById('loading').classList.toggle('hidden', !show);
+            }
+            
+            hideInstructions() {
+                document.getElementById('instructions').classList.add('hidden');
+            }
+            
+            showError(message) {
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = message;
+                errorDiv.classList.remove('hidden');
+            }
+            
+            hideError() {
+                document.getElementById('error').classList.add('hidden');
+            }
+            
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+            
+            onWindowResize() {
+                const container = document.getElementById('viewer-container');
+                this.camera.aspect = container.clientWidth / container.clientHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        }
+        
+        // Initialize viewer when page loads
+        window.addEventListener('load', () => {
+            new STLViewer();
+        });
+    </script>
+</body>
 </html>

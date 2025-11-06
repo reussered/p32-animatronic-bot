@@ -15,8 +15,8 @@
         "i2c_interfaces": 1
     },
     "components": [
-        "config/subsystems/components/grip_controller.json",
-        "config/subsystems/components/tactile_processor.json"
+        "subsystems/components/grip_controller.json",
+        "subsystems/components/tactile_processor.json"
     ],
     "servo_specifications": {
         "thumb_joint": {

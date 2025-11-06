@@ -9,7 +9,7 @@
     "name": "cat_nose_sensor",
     "subsystem": "SENSOR",
     "components": [
-        "config/components/interfaces/i2c_bus.json"
+        "components/drivers/i2c_bus.json"
     ],
     "author": "config/author.json",
     "position": {

@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "config/components/hardware/ankle_joint_assembly.json"
+        "components/hardware/ankle_joint_assembly.json"
     ],
     "degrees_of_freedom": {
         "total_dof": 2,

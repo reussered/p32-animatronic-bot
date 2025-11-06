@@ -5,7 +5,7 @@
     "positioned_id": "ROBOT_BACK_MOUNT",
     "description": "Back-mounted mechanical attachment system for deployable equipment",
     "components": [
-        "config/components/hardware/back_mount_system.json"
+        "components/hardware/back_mount_system.json"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",

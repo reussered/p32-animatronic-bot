@@ -16,12 +16,12 @@
         "snout_extension": "2.5 INCH"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_left.json",
-        "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_right.json",
-        "config/bots/.archived_components/bot_families/dragons/head/dragon_snout.json",
-        "config/bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
-        "config/bots/bot_families/dragons/head/dragon_nostril_left.json",
-        "config/bots/bot_families/dragons/head/dragon_nostril_right.json",
+        "bots/.archived_components/bot_families/dragons/head/dragon_eye_left.json",
+        "bots/.archived_components/bot_families/dragons/head/dragon_eye_right.json",
+        "bots/.archived_components/bot_families/dragons/head/dragon_snout.json",
+        "bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
+        "bots/bot_families/dragons/head/dragon_nostril_left.json",
+        "bots/bot_families/dragons/head/dragon_nostril_right.json",
         "config/subsystems/dragon_head.json",
         "config/subsystems/dragon_torso.json"
     ],

@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "name": "android_left_eye",
     "components": [
-        "config/bots/.archived_components/bot_families/androids/head/android_eye.json",
+        "bots/.archived_components/bot_families/androids/head/android_eye.json",
         "config/subsystems/android_head.json",
         "config/subsystems/android_torso.json"
     ],

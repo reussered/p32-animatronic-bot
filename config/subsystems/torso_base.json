@@ -28,8 +28,8 @@
         "power_management": "SWITCHING_REGULATOR"
     },
     "components": [
-        "config/subsystems/components/power_management.json",
-        "config/subsystems/components/system_health_monitor.json"
+        "subsystems/components/power_management.json",
+        "subsystems/components/system_health_monitor.json"
     ],
     "name": "torso_base",
     "type": "UNKNOWN"

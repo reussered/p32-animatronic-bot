@@ -7,7 +7,7 @@
     "name": "gc9a01",
     "subsystem": "HEAD",
     "components": [
-        "config/components/drivers/spi_display_bus.json"
+        "components/drivers/spi_display_bus.json"
     ],
     "physical_specs": {
         "diameter": "1.28 INCH",

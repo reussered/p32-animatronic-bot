@@ -5,9 +5,9 @@
     "name": "goblin_speaker",
     "subsystem": "HEAD",
     "components": [
-        "config/components/hardware/speaker.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "components/hardware/speaker.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

@@ -1,1302 +1,1302 @@
-<h1 id="p32-animatronic-bot---power-consumption-analysis">P32
-Animatronic Bot - Power Consumption Analysis</h1>
-<h2 id="power-requirements-overview">🔋 Power Requirements Overview</h2>
-<h3 id="goblin-head-configuration-phase-1">Goblin Head Configuration
-(Phase 1)</h3>
-<p><em>Current minimal working system</em></p>
-<table>
-<colgroup>
-<col style="width: 19%" />
-<col style="width: 16%" />
-<col style="width: 25%" />
-<col style="width: 12%" />
-<col style="width: 26%" />
-</colgroup>
-<thead>
-<tr>
-<th>Component</th>
-<th>Voltage</th>
-<th>Current Draw</th>
-<th>Power</th>
-<th>Usage Pattern</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ESP32-S3-DevKitC-1</strong></td>
-<td>3.3V</td>
-<td>240mA active / 10mA sleep</td>
-<td>0.79W / 0.033W</td>
-<td>Continuous</td>
-</tr>
-<tr>
-<td><strong>GC9A01 Displays (2x)</strong></td>
-<td>3.3V</td>
-<td>150mA each (300mA total)</td>
-<td>1.0W</td>
-<td>Continuous backlight</td>
-</tr>
-<tr>
-<td><strong>ST7789 Mouth Display</strong></td>
-<td>3.3V</td>
-<td>120mA</td>
-<td>0.4W</td>
-<td>Continuous backlight</td>
-</tr>
-<tr>
-<td><strong>HC-SR04 Sensor</strong></td>
-<td>5V</td>
-<td>15mA active / 2mA standby</td>
-<td>0.075W / 0.01W</td>
-<td>10Hz polling</td>
-</tr>
-<tr>
-<td><strong>MAX98357A + Speaker</strong></td>
-<td>5V</td>
-<td>500mA peak / 50mA idle</td>
-<td>2.5W / 0.25W</td>
-<td>Audio events only</td>
-</tr>
-<tr>
-<td><strong>Power Supply Efficiency</strong></td>
-<td>-</td>
-<td>-</td>
-<td>-15% loss</td>
-<td>Regulator overhead</td>
-</tr>
-</tbody>
-</table>
-<h4 id="power-states">Power States</h4>
-<table>
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 24%" />
-<col style="width: 19%" />
-<col style="width: 16%" />
-<col style="width: 30%" />
-</colgroup>
-<thead>
-<tr>
-<th>State</th>
-<th>Components Active</th>
-<th>Total Current</th>
-<th>Total Power</th>
-<th>Battery Life (5000mAh)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Sleep Mode</strong></td>
-<td>ESP32 sleep, displays dim</td>
-<td>200mA</td>
-<td>1.0W</td>
-<td>~25 hours</td>
-</tr>
-<tr>
-<td><strong>Idle Active</strong></td>
-<td>All on, no audio</td>
-<td>680mA</td>
-<td>3.4W</td>
-<td>~7.4 hours</td>
-</tr>
-<tr>
-<td><strong>Interactive</strong></td>
-<td>All on + audio</td>
-<td>1180mA</td>
-<td>5.9W</td>
-<td>~4.2 hours</td>
-</tr>
-<tr>
-<td><strong>Audio Peak</strong></td>
-<td>Maximum volume</td>
-<td>1680mA</td>
-<td>8.4W</td>
-<td>~3.0 hours</td>
-</tr>
-</tbody>
-</table>
-<h3 id="enhanced-robot-configuration">Enhanced Robot Configuration</h3>
-<p><em>With LED strips and additional sensors</em></p>
-<table>
-<colgroup>
-<col style="width: 40%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-</colgroup>
-<thead>
-<tr>
-<th>Additional Components</th>
-<th>Voltage</th>
-<th>Current</th>
-<th>Power</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>WS2812 LED Strip (30 LEDs)</strong></td>
-<td>5V</td>
-<td>1800mA max</td>
-<td>9.0W</td>
-<td>All white at 100%</td>
-</tr>
-<tr>
-<td><strong>Neopixel Matrix 8x8</strong></td>
-<td>5V</td>
-<td>3840mA max</td>
-<td>19.2W</td>
-<td>All white at 100%</td>
-</tr>
-<tr>
-<td><strong>Servo Motors (4x)</strong></td>
-<td>5V</td>
-<td>650mA each</td>
-<td>13.0W</td>
-<td>During movement</td>
-</tr>
-<tr>
-<td><strong>PIR Motion Sensor</strong></td>
-<td>5V</td>
-<td>65mA</td>
-<td>0.325W</td>
-<td>Continuous</td>
-</tr>
-<tr>
-<td><strong>OLED Display</strong></td>
-<td>3.3V</td>
-<td>20mA</td>
-<td>0.066W</td>
-<td>Continuous</td>
-</tr>
-</tbody>
-</table>
-<h4 id="realistic-usage-patterns">Realistic Usage Patterns</h4>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Typical Usage</th>
-<th>Power Draw</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LED Strips</td>
-<td>30% brightness, animated</td>
-<td>2.7W</td>
-</tr>
-<tr>
-<td>LED Matrix</td>
-<td>50% brightness, status display</td>
-<td>4.8W</td>
-</tr>
-<tr>
-<td>Servos</td>
-<td>20% duty cycle (movement)</td>
-<td>2.6W</td>
-</tr>
-<tr>
-<td>All Sensors</td>
-<td>Continuous monitoring</td>
-<td>0.4W</td>
-</tr>
-</tbody>
-</table>
-<h2 id="battery-life-projections">📊 Battery Life Projections</h2>
-<h3 id="conservative-usage-realistic">Conservative Usage
-(Realistic)</h3>
-<p><em>30% LED brightness, moderate animations, periodic audio</em></p>
-<p><strong>Total System Draw: ~6.5W (1.3A @ 5V)</strong> - 5000mAh
-battery: <strong>3.8 hours</strong> - 10000mAh battery: <strong>7.7
-hours</strong> - 20000mAh power bank: <strong>15.4 hours</strong></p>
-<h3 id="aggressive-usage-demo-mode">Aggressive Usage (Demo Mode)</h3>
-<p><em>High brightness LEDs, constant servo movement, frequent
-audio</em></p>
-<p><strong>Total System Draw: ~15W (3A @ 5V)</strong> - 5000mAh battery:
-<strong>1.7 hours</strong> - 10000mAh battery: <strong>3.3
-hours</strong> - 20000mAh power bank: <strong>6.7 hours</strong></p>
-<h3 id="power-saving-mode">Power Saving Mode</h3>
-<p><em>Dimmed displays, minimal LEDs, sleep between
-interactions</em></p>
-<p><strong>Total System Draw: ~2W (400mA @ 5V)</strong> - 5000mAh
-battery: <strong>12.5 hours</strong> - 10000mAh battery: <strong>25
-hours</strong> - 20000mAh power bank: <strong>50 hours</strong></p>
-<h2 id="power-optimization-strategies">🔧 Power Optimization
-Strategies</h2>
-<h3 id="software-optimizations">Software Optimizations</h3>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dynamic brightness control</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> adjustBrightnessBasedOnBattery<span class="op">(</span><span class="dt">int</span> batteryPercent<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>batteryPercent <span class="op">&lt;</span> <span class="dv">20</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>  <span class="co">// Dim displays</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// Minimal LEDs</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>batteryPercent <span class="op">&lt;</span> <span class="dv">50</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">40</span><span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">80</span><span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Sleep scheduling</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> enterPowerSaveMode<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    esp_sleep_enable_timer_wakeup<span class="op">(</span><span class="dv">30</span> <span class="op">*</span> <span class="dv">1000000</span><span class="op">);</span> <span class="co">// 30 seconds</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    esp_deep_sleep_start<span class="op">();</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h3 id="hardware-optimizations">Hardware Optimizations</h3>
-<ol type="1">
-<li><strong>Voltage Regulation</strong>: Use efficient buck converters
-(&gt;90% efficiency)</li>
-<li><strong>Display Control</strong>: PWM backlight control for dynamic
-dimming</li>
-<li><strong>LED Management</strong>: Smart pixel addressing to reduce
-active LED count</li>
-<li><strong>Servo Control</strong>: Power down servos when not
-moving</li>
-<li><strong>Sensor Polling</strong>: Reduce HC-SR04 polling frequency
-during idle</li>
-</ol>
-<h3 id="battery-recommendations">Battery Recommendations</h3>
-<h4 id="short-demo-sessions-1-3-hours">Short Demo Sessions (1-3
-hours)</h4>
-<ul>
-<li><strong>Anker PowerCore 10000</strong> - $25</li>
-<li>Compact, 10000mAh, perfect for demos</li>
-</ul>
-<h4 id="all-day-operation-6-8-hours">All-Day Operation (6-8 hours)</h4>
-<ul>
-<li><strong>Anker PowerCore 20000</strong> - $40</li>
-<li>High capacity, dual output ports</li>
-</ul>
-<h4 id="permanent-installation">Permanent Installation</h4>
-<ul>
-<li><strong>12V 7Ah SLA Battery + Buck Converter</strong> - $35</li>
-<li>Long life, rechargeable, wall-mount friendly</li>
-</ul>
-<h4 id="professionalcommercial">Professional/Commercial</h4>
-<ul>
-<li><strong>LiFePO4 12V 20Ah Battery</strong> - $150</li>
-<li>2000+ cycle life, very safe, 10+ hour runtime</li>
-</ul>
-<h2 id="power-safety-considerations">⚠️ Power Safety Considerations</h2>
-<h3 id="current-limits">Current Limits</h3>
-<ul>
-<li><strong>ESP32 GPIO</strong>: 40mA max per pin</li>
-<li><strong>USB Power</strong>: 500mA-900mA (insufficient for full
-system)</li>
-<li><strong>5V Rail</strong>: Ensure adequate current rating (3A+
-recommended)</li>
-</ul>
-<h3 id="thermal-management">Thermal Management</h3>
-<ul>
-<li>Peak LED operation generates significant heat</li>
-<li>Consider heatsinks for high-power components</li>
-<li>Monitor ESP32 temperature via built-in sensor</li>
-</ul>
-<h3 id="protection-features">Protection Features</h3>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Battery voltage monitoring</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> batteryVoltage <span class="op">=</span> analogRead<span class="op">(</span>BATTERY_SENSE_PIN<span class="op">)</span> <span class="op">*</span> <span class="fl">3.3</span> <span class="op">/</span> <span class="dv">4096</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>batteryVoltage <span class="op">&lt;</span> <span class="fl">3.2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    enterEmergencyShutdown<span class="op">();</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Overcurrent detection</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>systemCurrent <span class="op">&gt;</span> <span class="dv">4000</span><span class="op">)</span> <span class="op">{</span>  <span class="co">// 4A limit</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    disableNonEssentialSystems<span class="op">();</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h2 id="recommended-starting-configuration">🎯 Recommended Starting
-Configuration</h2>
-<p><strong>For Initial Testing (2-4 hour runtime):</strong> - Anker
-PowerCore 10000 (10000mAh) - 30% LED brightness - Audio at 70% volume -
-Servo movements during interactions only</p>
-<p><strong>Estimated Runtime: 6-8 hours typical use</strong></p>
-<p>This provides excellent battery life while maintaining full
-functionality for development and demonstration purposes.</p>
-<h2 id="full-body-humanoid-power-analysis">🤖 Full Body Humanoid Power
-Analysis</h2>
-<h3 id="complete-humanoid-component-breakdown">Complete Humanoid
-Component Breakdown</h3>
-<p><em>Based on P32 distributed architecture with multiple ESP32
-controllers</em></p>
-<table>
-<colgroup>
-<col style="width: 23%" />
-<col style="width: 12%" />
-<col style="width: 14%" />
-<col style="width: 16%" />
-<col style="width: 14%" />
-<col style="width: 18%" />
-</colgroup>
-<thead>
-<tr>
-<th>Component Category</th>
-<th>Quantity</th>
-<th>Unit Power</th>
-<th>Total Power</th>
-<th>Duty Cycle</th>
-<th>Average Power</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ESP32 Controllers</strong></td>
-<td>4</td>
-<td>0.8W each</td>
-<td>3.2W</td>
-<td>100%</td>
-<td>3.2W</td>
-</tr>
-<tr>
-<td><strong>NEMA 17 Steppers</strong></td>
-<td>16</td>
-<td>5W each</td>
-<td>80W</td>
-<td>20%</td>
-<td>16W</td>
-</tr>
-<tr>
-<td><strong>28BYJ-48 Steppers</strong></td>
-<td>6</td>
-<td>1W each</td>
-<td>6W</td>
-<td>30%</td>
-<td>1.8W</td>
-</tr>
-<tr>
-<td><strong>Servo Motors (SG90)</strong></td>
-<td>8</td>
-<td>2W each</td>
-<td>16W</td>
-<td>15%</td>
-<td>2.4W</td>
-</tr>
-<tr>
-<td><strong>A4988 Stepper Drivers</strong></td>
-<td>22</td>
-<td>0.5W each</td>
-<td>11W</td>
-<td>Active with motors</td>
-<td>3.6W</td>
-</tr>
-<tr>
-<td><strong>Head Assembly</strong></td>
-<td>1</td>
-<td>6.5W</td>
-<td>6.5W</td>
-<td>100%</td>
-<td>6.5W</td>
-</tr>
-<tr>
-<td><strong>Sensor Array</strong></td>
-<td>12</td>
-<td>0.3W each</td>
-<td>3.6W</td>
-<td>100%</td>
-<td>3.6W</td>
-</tr>
-<tr>
-<td><strong>LED Strips/Matrices</strong></td>
-<td>8</td>
-<td>3W each</td>
-<td>24W</td>
-<td>50% brightness</td>
-<td>12W</td>
-</tr>
-<tr>
-<td><strong>Communication (WiFi/BLE)</strong></td>
-<td>4</td>
-<td>0.5W each</td>
-<td>2W</td>
-<td>100%</td>
-<td>2W</td>
-</tr>
-<tr>
-<td><strong>Power Distribution</strong></td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>10% loss</td>
-<td>5.1W</td>
-</tr>
-</tbody>
-</table>
-<h4 id="full-body-power-states">Full Body Power States</h4>
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 18%" />
-<col style="width: 18%" />
-<col style="width: 26%" />
-<col style="width: 26%" />
-</colgroup>
-<thead>
-<tr>
-<th>State</th>
-<th>Description</th>
-<th>Total Power</th>
-<th>12V 20Ah Runtime</th>
-<th>12V 50Ah Runtime</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Sleep Mode</strong></td>
-<td>All systems minimal, no movement</td>
-<td>8W</td>
-<td>30 hours</td>
-<td>75 hours</td>
-</tr>
-<tr>
-<td><strong>Idle Standing</strong></td>
-<td>Awake, balance control, minimal movement</td>
-<td>25W</td>
-<td>9.6 hours</td>
-<td>24 hours</td>
-</tr>
-<tr>
-<td><strong>Walking/Moving</strong></td>
-<td>Active locomotion, full servo operation</td>
-<td>75W</td>
-<td>3.2 hours</td>
-<td>8 hours</td>
-</tr>
-<tr>
-<td><strong>Performance Mode</strong></td>
-<td>Dancing, complex movements, full LEDs</td>
-<td>120W</td>
-<td>2 hours</td>
-<td>5 hours</td>
-</tr>
-<tr>
-<td><strong>Emergency/Demo</strong></td>
-<td>All systems maximum</td>
-<td>156W</td>
-<td>1.5 hours</td>
-<td>3.8 hours</td>
-</tr>
-</tbody>
-</table>
-<h3 id="detailed-motor-power-analysis">Detailed Motor Power
-Analysis</h3>
-<h4 id="nema-17-stepper-motors-16-units">NEMA 17 Stepper Motors (16
-units)</h4>
-<p><em>Primary joints: shoulders, elbows, hips, knees, ankles</em> -
-<strong>Holding Current</strong>: 1.2A @ 12V = 14.4W each -
-<strong>Moving Current</strong>: 1.7A @ 12V = 20.4W each -
-<strong>Realistic Usage</strong>: 20% movement, 80% holding -
-<strong>Average Power</strong>: (20.4W × 0.2) + (14.4W × 0.8) = 15.6W
-each - <strong>Total 16 Motors</strong>: 250W peak, 62W average</p>
-<h4 id="byj-48-stepper-motors-6-units">28BYJ-48 Stepper Motors (6
-units)</h4>
-<p><em>Fine control: head rotation, finger articulation, facial
-features</em> - <strong>Operating Current</strong>: 200mA @ 5V = 1W each
-- <strong>Realistic Usage</strong>: 30% active movement -
-<strong>Average Power</strong>: 1W × 0.3 = 0.3W each - <strong>Total 6
-Motors</strong>: 6W peak, 1.8W average</p>
-<h4 id="sg90-servo-motors-8-units">SG90 Servo Motors (8 units)</h4>
-<p><em>Precision joints: wrists, fingers, facial expressions</em> -
-<strong>Peak Current</strong>: 650mA @ 5V = 3.25W each - <strong>Idle
-Current</strong>: 50mA @ 5V = 0.25W each - <strong>Realistic
-Usage</strong>: 15% active positioning - <strong>Average Power</strong>:
-(3.25W × 0.15) + (0.25W × 0.85) = 0.7W each - <strong>Total 8
-Servos</strong>: 26W peak, 5.6W average</p>
-<h3 id="power-supply-architecture">Power Supply Architecture</h3>
-<h4 id="recommended-12v-battery-system">Recommended 12V Battery
-System</h4>
-<pre><code>12V 50Ah LiFePO4 Battery ($300-400)
-├── 12V → 5V Buck Converter (15A capacity)
-│   ├── ESP32 Controllers (4x)
-│   ├── Servos and small steppers
-│   └── Sensors and displays
-├── 12V → Stepper Driver Power (Direct)
-│   └── NEMA 17 Motors via A4988 drivers
-└── Battery Management System (BMS)
-    ├── Voltage monitoring
-    ├── Overcurrent protection
-    └── Cell balancing</code></pre>
-<h4 id="alternative-power-banks">Alternative Power Banks</h4>
-<table>
-<thead>
-<tr>
-<th>Battery Type</th>
-<th>Capacity</th>
-<th>Peak Power</th>
-<th>Runtime (Walking)</th>
-<th>Cost</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>LiFePO4 12V 20Ah</strong></td>
-<td>240Wh</td>
-<td>120W</td>
-<td>3.2 hours</td>
-<td>$150</td>
-</tr>
-<tr>
-<td><strong>LiFePO4 12V 50Ah</strong></td>
-<td>600Wh</td>
-<td>200W</td>
-<td>8 hours</td>
-<td>$350</td>
-</tr>
-<tr>
-<td><strong>Li-ion 12V 100Ah</strong></td>
-<td>1200Wh</td>
-<td>300W</td>
-<td>16 hours</td>
-<td>$600</td>
-</tr>
-<tr>
-<td><strong>Lead Acid 12V 35Ah</strong></td>
-<td>420Wh</td>
-<td>150W</td>
-<td>5.6 hours</td>
-<td>$80</td>
-</tr>
-</tbody>
-</table>
-<h3 id="advanced-power-management">Advanced Power Management</h3>
-<h4 id="distributed-controller-power-management">Distributed Controller
-Power Management</h4>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Master controller coordinates power states</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> PowerState <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    SLEEP_MODE<span class="op">,</span>      <span class="co">// 8W  - Emergency standby</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    IDLE_MODE<span class="op">,</span>       <span class="co">// 25W - Awake, minimal movement  </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ACTIVE_MODE<span class="op">,</span>     <span class="co">// 75W - Walking, interaction</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    PERFORMANCE_MODE <span class="co">// 120W - Dancing, demos</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setPowerMode<span class="op">(</span>PowerState mode<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span><span class="op">(</span>mode<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> SLEEP_MODE<span class="op">:</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            disableNonEssentialMotors<span class="op">();</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            dimAllDisplays<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            setStepperCurrent<span class="op">(</span><span class="fl">0.5</span><span class="op">);</span> <span class="co">// Reduce holding current</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> ACTIVE_MODE<span class="op">:</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            enableAllSystems<span class="op">();</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            setStepperCurrent<span class="op">(</span><span class="fl">1.0</span><span class="op">);</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h4 id="smart-motor-management">Smart Motor Management</h4>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PowerAwareMotorController <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> batteryVoltage<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> powerBudgetWatts<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> updatePowerBudget<span class="op">(</span><span class="dt">float</span> voltage<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>voltage <span class="op">&lt;</span> <span class="fl">11.0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>  <span class="co">// Emergency mode</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>voltage <span class="op">&lt;</span> <span class="fl">11.5</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">60</span><span class="op">;</span>  <span class="co">// Conservation mode</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> <span class="co">// Full performance</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> requestMotorPower<span class="op">(</span><span class="dt">int</span> motorId<span class="op">,</span> <span class="dt">int</span> requestedWatts<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>currentPowerUsage <span class="op">+</span> requestedWatts <span class="op">&gt;</span> powerBudgetWatts<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// Power denied</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 id="thermal-considerations">Thermal Considerations</h3>
-<h4 id="heat-generation-points">Heat Generation Points</h4>
-<ul>
-<li><strong>Stepper Drivers</strong>: 2W each × 22 = 44W heat
-generation</li>
-<li><strong>Motor Coils</strong>: ~15% energy lost as heat = ~12W</li>
-<li><strong>Voltage Regulators</strong>: ~10% efficiency loss = ~8W</li>
-<li><strong>Total Heat</strong>: ~64W continuous</li>
-</ul>
-<h4 id="cooling-requirements">Cooling Requirements</h4>
-<ul>
-<li><strong>Passive Cooling</strong>: Heat sinks on stepper drivers
-mandatory</li>
-<li><strong>Active Cooling</strong>: 80mm fan for electronics
-compartment</li>
-<li><strong>Thermal Monitoring</strong>: Temperature sensors on critical
-components</li>
-</ul>
-<h3 id="real-world-runtime-expectations">Real-World Runtime
-Expectations</h3>
-<h4 id="typical-usage-patterns">Typical Usage Patterns</h4>
-<table>
-<thead>
-<tr>
-<th>Activity</th>
-<th>Duration</th>
-<th>Power Level</th>
-<th>Battery Impact</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Startup/Calibration</strong></td>
-<td>2 min</td>
-<td>100W</td>
-<td>3.3Wh</td>
-</tr>
-<tr>
-<td><strong>Walking Demo</strong></td>
-<td>10 min</td>
-<td>75W</td>
-<td>12.5Wh</td>
-</tr>
-<tr>
-<td><strong>Interactive Standing</strong></td>
-<td>30 min</td>
-<td>35W</td>
-<td>17.5Wh</td>
-</tr>
-<tr>
-<td><strong>Performance Dance</strong></td>
-<td>5 min</td>
-<td>120W</td>
-<td>10Wh</td>
-</tr>
-<tr>
-<td><strong>Idle Monitoring</strong></td>
-<td>60 min</td>
-<td>25W</td>
-<td>25Wh</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Total Demo Session</strong>: 107 minutes, 68.3Wh consumed
-<strong>12V 20Ah Battery</strong>: 3.5 such sessions possible
-<strong>12V 50Ah Battery</strong>: 8.8 such sessions possible</p>
-<h2 id="scalability-planning">📈 Scalability Planning</h2>
-<h3 id="multi-bot-systems">Multi-Bot Systems</h3>
-<p>Each additional bot adds ~6.5W average power draw: - 2 bots: 13W
-total (requires 20000mAh for 8 hours)<br />
-- 4 bots: 26W total (requires central power distribution) - 8+ bots:
-Consider 12V battery bank with distributed converters</p>
-<h3 id="full-humanoid-vs-head-comparison">Full Humanoid vs Head
-Comparison</h3>
-<table>
-<thead>
-<tr>
-<th>System</th>
-<th>Peak Power</th>
-<th>Average Power</th>
-<th>Recommended Battery</th>
-<th>Runtime</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Goblin Head</strong></td>
-<td>8.4W</td>
-<td>3.4W</td>
-<td>10Ah power bank</td>
-<td>6-8 hours</td>
-</tr>
-<tr>
-<td><strong>Full Humanoid</strong></td>
-<td>156W</td>
-<td>56W</td>
-<td>12V 50Ah LiFePO4</td>
-<td>6-8 hours</td>
-</tr>
-</tbody>
-</table>
-<p>The humanoid requires ~16x more power but provides full mobility and
-complex interactions. Battery technology and cost scale appropriately
-for the capability increase.</p>
-<h2 id="solar-power-integration-analysis">☀️ Solar Power Integration
-Analysis</h2>
-<h3 id="solar-cell-surface-area-available">Solar Cell Surface Area
-Available</h3>
-<p><em>Humanoid robot body surface suitable for solar panels</em></p>
-<table>
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 17%" />
-<col style="width: 23%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
-</colgroup>
-<thead>
-<tr>
-<th>Body Section</th>
-<th>Surface Area</th>
-<th>Usable Solar Area</th>
-<th>Panel Efficiency</th>
-<th>Peak Power Output</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Back Panel</strong></td>
-<td>0.3 m²</td>
-<td>0.25 m²</td>
-<td>22%</td>
-<td>55W</td>
-</tr>
-<tr>
-<td><strong>Chest Panel</strong></td>
-<td>0.2 m²</td>
-<td>0.15 m²</td>
-<td>22%</td>
-<td>33W</td>
-</tr>
-<tr>
-<td><strong>Shoulder Panels</strong></td>
-<td>0.15 m²</td>
-<td>0.12 m²</td>
-<td>22%</td>
-<td>26W</td>
-</tr>
-<tr>
-<td><strong>Arm Sections</strong></td>
-<td>0.25 m²</td>
-<td>0.15 m²</td>
-<td>22%</td>
-<td>33W</td>
-</tr>
-<tr>
-<td><strong>Leg Panels</strong></td>
-<td>0.4 m²</td>
-<td>0.25 m²</td>
-<td>22%</td>
-<td>55W</td>
-</tr>
-<tr>
-<td><strong>Head Crown</strong></td>
-<td>0.05 m²</td>
-<td>0.04 m²</td>
-<td>22%</td>
-<td>9W</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Total Solar Surface</strong>: 1.35 m² usable area
-<strong>Peak Solar Output</strong>: 211W @ 1000W/m² solar irradiance</p>
-<h3 id="solar-performance-by-conditions">Solar Performance by
-Conditions</h3>
-<h4 id="optimal-conditions-desert-noon-clear-sky">Optimal Conditions
-(Desert noon, clear sky)</h4>
-<ul>
-<li><strong>Solar Irradiance</strong>: 1000W/m²</li>
-<li><strong>Panel Output</strong>: 211W peak</li>
-<li><strong>System Consumption</strong>: 56W average</li>
-<li><strong>Net Energy</strong>: +155W (charging batteries)</li>
-<li><strong>Battery Charging Rate</strong>: 12.9A @ 12V</li>
-</ul>
-<h4 id="good-conditions-sunny-day-some-clouds">Good Conditions (Sunny
-day, some clouds)</h4>
-<ul>
-<li><strong>Solar Irradiance</strong>: 600W/m²</li>
-<li><strong>Panel Output</strong>: 127W</li>
-<li><strong>System Consumption</strong>: 56W average<br />
-</li>
-<li><strong>Net Energy</strong>: +71W (slow charging)</li>
-<li><strong>Battery Charging Rate</strong>: 5.9A @ 12V</li>
-</ul>
-<h4 id="overcast-conditions">Overcast Conditions</h4>
-<ul>
-<li><strong>Solar Irradiance</strong>: 200W/m²</li>
-<li><strong>Panel Output</strong>: 42W</li>
-<li><strong>System Consumption</strong>: 56W average</li>
-<li><strong>Net Energy</strong>: -14W (battery drain)</li>
-<li><strong>Runtime Extension</strong>: 3x longer than battery
-alone</li>
-</ul>
-<h4 id="indoornight-operation">Indoor/Night Operation</h4>
-<ul>
-<li><strong>Solar Output</strong>: 0W</li>
-<li><strong>System Consumption</strong>: 56W</li>
-<li><strong>Battery Runtime</strong>: Standard (6-8 hours)</li>
-</ul>
-<h3 id="solar-panel-implementation-options">Solar Panel Implementation
-Options</h3>
-<h4 id="flexible-solar-panels-recommended">Flexible Solar Panels
-(Recommended)</h4>
-<pre><code>SunPower Maxeon 3 Flexible Panels
-- Efficiency: 22%
-- Weight: 2.1 kg/m²
-- Thickness: 2.5mm
-- Bend Radius: 30° (perfect for curved robot surfaces)
-- Cost: ~$400/m² 
-
-Total Cost for 1.35m²: ~$540
-Total Weight Added: 2.8kg</code></pre>
-<h4 id="rigid-monocrystalline-alternative">Rigid Monocrystalline
-Alternative</h4>
-<pre><code>Standard Solar Cells with Custom Mounting
-- Efficiency: 20-21%
-- Weight: 1.8 kg/m²
-- Thickness: 3.5mm
-- Requires flat mounting surfaces
-- Cost: ~$250/m²
-
-Total Cost for 1.35m²: ~$340
-Total Weight Added: 2.4kg</code></pre>
-<h3 id="power-generation-scenarios">Power Generation Scenarios</h3>
-<h4 id="scenario-1-outdoor-security-robot">Scenario 1: Outdoor Security
-Robot</h4>
-<p><strong>Location</strong>: Phoenix, AZ (high sun exposure)
-<strong>Average Daily Solar</strong>: 6.5 peak sun hours <strong>Daily
-Solar Generation</strong>: 211W × 6.5h = 1,372Wh <strong>Daily
-Consumption</strong>: 56W × 24h = 1,344Wh <strong>Result</strong>:
-<strong>Net positive energy</strong> - Self-sustaining!</p>
-<h4 id="scenario-2-park-entertainment-robot">Scenario 2: Park
-Entertainment Robot</h4>
-<p><strong>Location</strong>: Seattle, WA (moderate sun) <strong>Average
-Daily Solar</strong>: 3.8 peak sun hours <strong>Daily Solar
-Generation</strong>: 211W × 3.8h = 802Wh<br />
-<strong>Daily Consumption</strong>: 56W × 24h = 1,344Wh <strong>Battery
-Deficit</strong>: 542Wh daily <strong>Result</strong>: Extends 50Ah
-battery from 10 hours to <strong>25+ hours</strong></p>
-<h4 id="scenario-3-indooroutdoor-mixed-use">Scenario 3: Indoor/Outdoor
-Mixed Use</h4>
-<p><strong>Outdoor Time</strong>: 8 hours (average conditions)
-<strong>Indoor Time</strong>: 16 hours <strong>Solar
-Generation</strong>: 127W × 8h = 1,016Wh <strong>Total
-Consumption</strong>: 1,344Wh daily<br />
-<strong>Battery Deficit</strong>: 328Wh <strong>Result</strong>: Extends
-battery life by <strong>76%</strong></p>
-<h3 id="solar-system-architecture">Solar System Architecture</h3>
-<h4 id="complete-solar-integration">Complete Solar Integration</h4>
-<pre><code>Solar Panel Array (1.35m², 211W peak)
-├── MPPT Charge Controller (30A, 12V)
-│   ├── Battery voltage regulation
-│   ├── Maximum power point tracking
-│   └── Overcharge protection
-├── Power Distribution Hub
-│   ├── Solar input priority
-│   ├── Battery backup seamless switch
-│   └── Load balancing
-└── Monitoring System
-    ├── Solar generation tracking
-    ├── Battery state of charge
-    └── Power consumption analysis</code></pre>
-<h4 id="smart-power-management-with-solar">Smart Power Management with
-Solar</h4>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SolarPowerManager <span class="op">{</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> solarWatts<span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> batteryVoltage<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> systemLoad<span class="op">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> optimizePowerMode<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>solarWatts <span class="op">&gt;</span> systemLoad <span class="op">+</span> <span class="dv">20</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Excess solar - performance mode</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>PERFORMANCE_MODE<span class="op">);</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            enableFastCharging<span class="op">();</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>solarWatts <span class="op">&gt;</span> systemLoad<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Balanced solar - normal operation</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>ACTIVE_MODE<span class="op">);</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>batteryVoltage <span class="op">&gt;</span> <span class="fl">12.0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Low solar, good battery - conservation</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>IDLE_MODE<span class="op">);</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Low solar, low battery - emergency</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>SLEEP_MODE<span class="op">);</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 id="cost-benefit-analysis">Cost-Benefit Analysis</h3>
-<h4 id="solar-investment">Solar Investment</h4>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Cost</th>
-<th>Benefit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Flexible Solar Panels</strong></td>
-<td>$540</td>
-<td>Enables autonomous operation</td>
-</tr>
-<tr>
-<td><strong>MPPT Controller</strong></td>
-<td>$80</td>
-<td>Optimizes solar efficiency</td>
-</tr>
-<tr>
-<td><strong>Wiring/Integration</strong></td>
-<td>$60</td>
-<td>Professional installation</td>
-</tr>
-<tr>
-<td><strong>Total System Cost</strong></td>
-<td>$680</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h4 id="break-even-analysis">Break-Even Analysis</h4>
-<ul>
-<li><strong>Without Solar</strong>: Replace 50Ah battery every 2-3 years
-($350)</li>
-<li><strong>With Solar</strong>: Batteries last 5-10 years (reduced
-cycling)</li>
-<li><strong>Energy Cost Savings</strong>: $0 (grid independence)</li>
-<li><strong>Autonomy Value</strong>: Priceless for remote
-applications</li>
-</ul>
-<h4 id="return-on-investment">Return on Investment</h4>
-<p><strong>Scenario 1</strong> (High sun): Pays for itself in energy
-independence <strong>Scenario 2</strong> (Moderate sun): 76% battery
-life extension = $260 value/year <strong>Scenario 3</strong>
-(Indoor/outdoor): Enables 24/7 outdoor operation</p>
-<h3 id="design-integration-challenges">Design Integration
-Challenges</h3>
-<h4 id="mechanical-considerations">Mechanical Considerations</h4>
-<ul>
-<li><strong>Weight</strong>: +2.8kg (manageable for humanoid)</li>
-<li><strong>Flexibility</strong>: Panels must bend with joint
-movement</li>
-<li><strong>Protection</strong>: Need impact-resistant covering</li>
-<li><strong>Wiring</strong>: Flexible connections at all joints</li>
-</ul>
-<h4 id="aesthetic-impact">Aesthetic Impact</h4>
-<ul>
-<li><strong>Appearance</strong>: Futuristic solar-powered look</li>
-<li><strong>Color Options</strong>: Blue, black, or custom colors
-available</li>
-<li><strong>Integration</strong>: Can be integrated into “skin”
-panels</li>
-<li><strong>LED Compatibility</strong>: Transparent panels allow
-underglow</li>
-</ul>
-<h3 id="real-world-performance-examples">Real-World Performance
-Examples</h3>
-<h4 id="commercial-solar-robot-precedents">Commercial Solar Robot
-Precedents</h4>
-<ul>
-<li><strong>Relay Robot</strong> (Savioke): 60W consumption, 40W solar →
-66% solar powered</li>
-<li><strong>Knightscope Security Robot</strong>: 200W consumption, 120W
-solar → 60% solar</li>
-<li><strong>Agricultural Robots</strong>: Often 100% solar powered for
-field work</li>
-</ul>
-<h4 id="weather-resilience">Weather Resilience</h4>
-<ul>
-<li><strong>Rain</strong>: Panels continue generating (10-30%
-reduced)</li>
-<li><strong>Snow</strong>: Panels self-clear when robot moves</li>
-<li><strong>Dust</strong>: Occasional cleaning required</li>
-<li><strong>Hail</strong>: Tempered glass panels survive 25mm hail</li>
-</ul>
-<h3 id="recommendation">Recommendation</h3>
-<p><strong>YES - Solar integration is highly beneficial!</strong></p>
-<p><strong>For outdoor applications:</strong> - 100% energy autonomous
-in sunny climates - 76% battery life extension in moderate climates -
-Enables true 24/7 operation without charging stations</p>
-<p><strong>Investment</strong>: $680 for complete solar system
-<strong>Payback</strong>: 1-3 years through battery savings and
-capabilities <strong>Added Capability</strong>: Unlimited outdoor
-runtime in sunny conditions</p>
-<p><strong>Best Use Cases:</strong> - Security/patrol robots -
-Garden/agricultural assistants<br />
-- Educational/research platforms - Emergency response robots -
-Entertainment robots for outdoor venues</p>
-<p>The solar integration transforms the robot from a battery-dependent
-device into a truly autonomous system capable of indefinite operation!
-🌞🤖</p>
-<h2 id="solar-parasolumbrella-enhancement">🌂 Solar Parasol/Umbrella
-Enhancement</h2>
-<h3 id="parasol-solar-array-specifications">Parasol Solar Array
-Specifications</h3>
-<p><em>Large deployable solar collector for maximum power
-generation</em></p>
-<table>
-<colgroup>
-<col style="width: 28%" />
-<col style="width: 12%" />
-<col style="width: 18%" />
-<col style="width: 15%" />
-<col style="width: 24%" />
-</colgroup>
-<thead>
-<tr>
-<th>Parasol Configuration</th>
-<th>Diameter</th>
-<th>Surface Area</th>
-<th>Peak Power</th>
-<th>Total System Power</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Compact Parasol</strong></td>
-<td>1.2m</td>
-<td>1.13 m²</td>
-<td>249W</td>
-<td>460W (body+parasol)</td>
-</tr>
-<tr>
-<td><strong>Standard Umbrella</strong></td>
-<td>1.8m</td>
-<td>2.54 m²</td>
-<td>559W</td>
-<td>770W (body+parasol)</td>
-</tr>
-<tr>
-<td><strong>Large Garden Umbrella</strong></td>
-<td>2.5m</td>
-<td>4.91 m²</td>
-<td>1,080W</td>
-<td>1,291W (body+parasol)</td>
-</tr>
-<tr>
-<td><strong>Deployable Solar Array</strong></td>
-<td>3.0m</td>
-<td>7.07 m²</td>
-<td>1,556W</td>
-<td>1,767W (body+parasol)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="power-generation-comparison">Power Generation Comparison</h3>
-<h4 id="standard-body-only-solar-211w-peak">Standard Body-Only Solar
-(211W peak)</h4>
-<pre><code>Sunny Day (6 hours peak sun):
-211W × 6h = 1,266Wh generated
-Robot consumption: 56W × 24h = 1,344Wh
-Net deficit: -78Wh daily (96% solar powered)</code></pre>
-<h4 id="body-compact-parasol-460w-peak">Body + Compact Parasol (460W
-peak)</h4>
-<pre><code>Sunny Day (6 hours peak sun):
-460W × 6h = 2,760Wh generated  
-Robot consumption: 1,344Wh daily
-Net surplus: +1,416Wh daily (206% solar powered!)
-Excess energy: Powers another robot or charges external devices</code></pre>
-<h4 id="body-standard-umbrella-770w-peak">Body + Standard Umbrella (770W
-peak)</h4>
-<pre><code>Sunny Day (6 hours peak sun):
-770W × 6h = 4,620Wh generated
-Robot consumption: 1,344Wh daily  
-Net surplus: +3,276Wh daily (344% solar powered!)
-Excess energy: Can power 3 additional robots</code></pre>
-<h4 id="body-large-array-1767w-peak">Body + Large Array (1,767W
-peak)</h4>
-<pre><code>Sunny Day (6 hours peak sun):
-1,767W × 6h = 10,602Wh generated
-Robot consumption: 1,344Wh daily
-Net surplus: +9,258Wh daily (789% solar powered!)
-Excess energy: Mobile solar power station!</code></pre>
-<h3 id="parasol-design-options">Parasol Design Options</h3>
-<h4 id="retractable-solar-parasol">Retractable Solar Parasol</h4>
-<pre><code>Automatic Deployment System:
-- Retracts for indoor operation/storage
-- Extends for outdoor power generation  
-- Weather-responsive (retracts in high wind)
-- Sun-tracking capability for maximum efficiency
-- Integrated into robot&#39;s arm/shoulder mount
-
-Materials:
-- Lightweight carbon fiber frame (2.5kg)
-- Flexible solar panels (3.2kg for 2.5m²)
-- Servo deployment mechanism (0.8kg)
-- Total parasol weight: 6.5kg</code></pre>
-<h4 id="multi-use-functionality">Multi-Use Functionality</h4>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SolarParasol <span class="op">{</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> ParasolMode <span class="op">{</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        RETRACTED<span class="op">,</span>      <span class="co">// Indoor/storage mode</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        SHADE_MODE<span class="op">,</span>     <span class="co">// Provides shade for humans</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        POWER_MODE<span class="op">,</span>     <span class="co">// Optimal sun tracking</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        WEATHER_MODE<span class="op">,</span>   <span class="co">// Storm protection position</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        CHARGING_MODE   <span class="co">// Stationary maximum generation</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> deployForOptimalPower<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        calculateSunPosition<span class="op">();</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        adjustParasolAngle<span class="op">();</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        maximizeSolarExposure<span class="op">();</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> provideShadeService<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        positionForHumanComfort<span class="op">();</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        maintainCoolShadowArea<span class="op">();</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 id="revolutionary-applications">Revolutionary Applications</h3>
-<h4 id="solar-power-station-robot">Solar Power Station Robot</h4>
-<p><strong>Scenario</strong>: Disaster relief or remote area power -
-<strong>Mobile Power</strong>: Drives to areas needing electricity -
-<strong>Emergency Charging</strong>: Powers phones, medical devices,
-lights - <strong>Grid Independence</strong>: Completely autonomous
-operation - <strong>Daily Generation</strong>: 10+ kWh in sunny
-conditions</p>
-<h4 id="garden-assistant-with-power-sharing">Garden Assistant with Power
-Sharing</h4>
-<p><strong>Scenario</strong>: Smart home integration -
-<strong>Self-Sustaining</strong>: Never needs wall charging -
-<strong>Home Power</strong>: Feeds excess back to house battery -
-<strong>Weather Station</strong>: Automatically adjusts for conditions -
-<strong>Dual Purpose</strong>: Gardening work + family power source</p>
-<h4 id="event-service-robot">Event Service Robot</h4>
-<p><strong>Scenario</strong>: Outdoor weddings, festivals, markets -
-<strong>Shade Provider</strong>: Keeps guests cool while generating
-power - <strong>Device Charging</strong>: USB outlets in parasol handle
-- <strong>Lighting</strong>: LED strips powered by daily solar
-collection - <strong>Entertainment</strong>: Powers sound system and
-displays</p>
-<h3 id="enhanced-power-management">Enhanced Power Management</h3>
-<h4 id="sun-tracking-algorithm">Sun Tracking Algorithm</h4>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SunTracker <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> latitude<span class="op">,</span> longitude<span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    DateTime currentTime<span class="op">;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    ParasolPosition calculateOptimalAngle<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> solarAzimuth <span class="op">=</span> calculateSunAzimuth<span class="op">();</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> solarElevation <span class="op">=</span> calculateSunElevation<span class="op">();</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ParasolPosition<span class="op">{</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>tilt <span class="op">=</span> <span class="dv">90</span> <span class="op">-</span> solarElevation<span class="op">,</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>rotation <span class="op">=</span> solarAzimuth<span class="op">,</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>expectedPower <span class="op">=</span> estimatePowerGeneration<span class="op">()</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> continuousTracking<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>timeSinceLastAdjustment <span class="op">&gt;</span> <span class="dv">15</span><span class="op">_minutes)</span> <span class="op">{</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>            adjustParasolToSun<span class="op">();</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>            logPowerGeneration<span class="op">();</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h4 id="weather-responsive-operation">Weather-Responsive Operation</h4>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WeatherManager <span class="op">{</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> handleWeatherConditions<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        WeatherCondition current <span class="op">=</span> getWeatherData<span class="op">();</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span><span class="op">(</span>current<span class="op">.</span>type<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> SUNNY<span class="op">:</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                deployParasolFull<span class="op">();</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                enableSunTracking<span class="op">();</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> PARTLY_CLOUDY<span class="op">:</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                deployParasolPartial<span class="op">();</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                enableBasicTracking<span class="op">();</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> WINDY<span class="op">:</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>current<span class="op">.</span>windSpeed <span class="op">&gt;</span> <span class="dv">25</span><span class="op">_mph)</span> <span class="op">{</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                    retractParasol<span class="op">();</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> STORM<span class="op">:</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                emergencyRetract<span class="op">();</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                seekShelter<span class="op">();</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h3 id="cost-benefit-analysis-1">Cost-Benefit Analysis</h3>
-<h4 id="parasol-investment">Parasol Investment</h4>
-<table>
-<colgroup>
-<col style="width: 14%" />
-<col style="width: 13%" />
-<col style="width: 17%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 13%" />
-</colgroup>
-<thead>
-<tr>
-<th>Parasol Size</th>
-<th>Solar Cost</th>
-<th>Mechanism Cost</th>
-<th>Total Investment</th>
-<th>Daily Generation</th>
-<th>ROI Period</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>1.2m Compact</strong></td>
-<td>$340</td>
-<td>$200</td>
-<td>$540</td>
-<td>2.76 kWh</td>
-<td>2 years</td>
-</tr>
-<tr>
-<td><strong>1.8m Standard</strong></td>
-<td>$560</td>
-<td>$300</td>
-<td>$860</td>
-<td>4.62 kWh</td>
-<td>1.5 years</td>
-</tr>
-<tr>
-<td><strong>2.5m Large</strong></td>
-<td>$980</td>
-<td>$400</td>
-<td>$1,380</td>
-<td>10.6 kWh</td>
-<td>1 year</td>
-</tr>
-</tbody>
-</table>
-<h4 id="value-added-services">Value-Added Services</h4>
-<ul>
-<li><strong>Shade Rental</strong>: $50/day at outdoor events</li>
-<li><strong>Phone Charging</strong>: $2/device at festivals<br />
-</li>
-<li><strong>Emergency Power</strong>: Priceless during disasters</li>
-<li><strong>Home Integration</strong>: $30/month electricity offset</li>
-</ul>
-<h3 id="mechanical-considerations-1">Mechanical Considerations</h3>
-<h4 id="weight-distribution">Weight Distribution</h4>
-<pre><code>Robot Base Weight: 45kg
-Body Solar Panels: +2.8kg  
-Parasol System: +6.5kg
-Total System: 54.3kg (20% increase)
-
-Center of Gravity Impact:
-- Parasol retracted: Minimal change
-- Parasol deployed: 15cm height increase  
-- Stability: Requires wider stance when deployed
-- Wind Loading: Auto-retract in high wind</code></pre>
-<h4 id="deployment-mechanism">Deployment Mechanism</h4>
-<pre><code>Parasol Deployment Sequence:
-1. Check wind conditions (&lt; 15 mph)
-2. Extend support arm to full length  
-3. Deploy parasol frame (telescoping ribs)
-4. Unfurl solar panel membrane
-5. Lock deployment mechanism
-6. Begin sun tracking routine
-Total deployment time: 45 seconds</code></pre>
-<h3 id="revolutionary-capability-summary">Revolutionary Capability
-Summary</h3>
-<p><strong>With Solar Parasol, your robot becomes:</strong></p>
-<p>🔋 <strong>Energy Independent</strong>: 200-800% solar powered ⚡
-<strong>Mobile Power Station</strong>: Generates 2-10+ kWh daily<br />
-🌂 <strong>Dual Purpose</strong>: Shade provider + power generator 🏠
-<strong>Home Integration</strong>: Can offset household electricity 🚨
-<strong>Emergency Ready</strong>: Disaster relief power source 💰
-<strong>Revenue Generator</strong>: Paid services at events 🌍
-<strong>Grid Independent</strong>: Operates anywhere with sun</p>
-<p>The parasol transforms your animatronic from a battery-powered device
-into a <strong>mobile renewable energy station</strong> that happens to
-be an intelligent robot! This is next-level sustainable robotics.
-🤖☀️🌂</p>
+<h1 id="p32-animatronic-bot---power-consumption-analysis">P32
+Animatronic Bot - Power Consumption Analysis</h1>
+<h2 id="power-requirements-overview"> Power Requirements Overview</h2>
+<h3 id="goblin-head-configuration-phase-1">Goblin Head Configuration
+(Phase 1)</h3>
+<p><em>Current minimal working system</em></p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 25%" />
+<col style="width: 12%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Voltage</th>
+<th>Current Draw</th>
+<th>Power</th>
+<th>Usage Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ESP32-S3-DevKitC-1</strong></td>
+<td>3.3V</td>
+<td>240mA active / 10mA sleep</td>
+<td>0.79W / 0.033W</td>
+<td>Continuous</td>
+</tr>
+<tr>
+<td><strong>GC9A01 Displays (2x)</strong></td>
+<td>3.3V</td>
+<td>150mA each (300mA total)</td>
+<td>1.0W</td>
+<td>Continuous backlight</td>
+</tr>
+<tr>
+<td><strong>ST7789 Mouth Display</strong></td>
+<td>3.3V</td>
+<td>120mA</td>
+<td>0.4W</td>
+<td>Continuous backlight</td>
+</tr>
+<tr>
+<td><strong>HC-SR04 Sensor</strong></td>
+<td>5V</td>
+<td>15mA active / 2mA standby</td>
+<td>0.075W / 0.01W</td>
+<td>10Hz polling</td>
+</tr>
+<tr>
+<td><strong>MAX98357A + Speaker</strong></td>
+<td>5V</td>
+<td>500mA peak / 50mA idle</td>
+<td>2.5W / 0.25W</td>
+<td>Audio events only</td>
+</tr>
+<tr>
+<td><strong>Power Supply Efficiency</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-15% loss</td>
+<td>Regulator overhead</td>
+</tr>
+</tbody>
+</table>
+<h4 id="power-states">Power States</h4>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 24%" />
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>State</th>
+<th>Components Active</th>
+<th>Total Current</th>
+<th>Total Power</th>
+<th>Battery Life (5000mAh)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sleep Mode</strong></td>
+<td>ESP32 sleep, displays dim</td>
+<td>200mA</td>
+<td>1.0W</td>
+<td>~25 hours</td>
+</tr>
+<tr>
+<td><strong>Idle Active</strong></td>
+<td>All on, no audio</td>
+<td>680mA</td>
+<td>3.4W</td>
+<td>~7.4 hours</td>
+</tr>
+<tr>
+<td><strong>Interactive</strong></td>
+<td>All on + audio</td>
+<td>1180mA</td>
+<td>5.9W</td>
+<td>~4.2 hours</td>
+</tr>
+<tr>
+<td><strong>Audio Peak</strong></td>
+<td>Maximum volume</td>
+<td>1680mA</td>
+<td>8.4W</td>
+<td>~3.0 hours</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enhanced-robot-configuration">Enhanced Robot Configuration</h3>
+<p><em>With LED strips and additional sensors</em></p>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Additional Components</th>
+<th>Voltage</th>
+<th>Current</th>
+<th>Power</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WS2812 LED Strip (30 LEDs)</strong></td>
+<td>5V</td>
+<td>1800mA max</td>
+<td>9.0W</td>
+<td>All white at 100%</td>
+</tr>
+<tr>
+<td><strong>Neopixel Matrix 8x8</strong></td>
+<td>5V</td>
+<td>3840mA max</td>
+<td>19.2W</td>
+<td>All white at 100%</td>
+</tr>
+<tr>
+<td><strong>Servo Motors (4x)</strong></td>
+<td>5V</td>
+<td>650mA each</td>
+<td>13.0W</td>
+<td>During movement</td>
+</tr>
+<tr>
+<td><strong>PIR Motion Sensor</strong></td>
+<td>5V</td>
+<td>65mA</td>
+<td>0.325W</td>
+<td>Continuous</td>
+</tr>
+<tr>
+<td><strong>OLED Display</strong></td>
+<td>3.3V</td>
+<td>20mA</td>
+<td>0.066W</td>
+<td>Continuous</td>
+</tr>
+</tbody>
+</table>
+<h4 id="realistic-usage-patterns">Realistic Usage Patterns</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Typical Usage</th>
+<th>Power Draw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED Strips</td>
+<td>30% brightness, animated</td>
+<td>2.7W</td>
+</tr>
+<tr>
+<td>LED Matrix</td>
+<td>50% brightness, status display</td>
+<td>4.8W</td>
+</tr>
+<tr>
+<td>Servos</td>
+<td>20% duty cycle (movement)</td>
+<td>2.6W</td>
+</tr>
+<tr>
+<td>All Sensors</td>
+<td>Continuous monitoring</td>
+<td>0.4W</td>
+</tr>
+</tbody>
+</table>
+<h2 id="battery-life-projections"> Battery Life Projections</h2>
+<h3 id="conservative-usage-realistic">Conservative Usage
+(Realistic)</h3>
+<p><em>30% LED brightness, moderate animations, periodic audio</em></p>
+<p><strong>Total System Draw: ~6.5W (1.3A @ 5V)</strong> - 5000mAh
+battery: <strong>3.8 hours</strong> - 10000mAh battery: <strong>7.7
+hours</strong> - 20000mAh power bank: <strong>15.4 hours</strong></p>
+<h3 id="aggressive-usage-demo-mode">Aggressive Usage (Demo Mode)</h3>
+<p><em>High brightness LEDs, constant servo movement, frequent
+audio</em></p>
+<p><strong>Total System Draw: ~15W (3A @ 5V)</strong> - 5000mAh battery:
+<strong>1.7 hours</strong> - 10000mAh battery: <strong>3.3
+hours</strong> - 20000mAh power bank: <strong>6.7 hours</strong></p>
+<h3 id="power-saving-mode">Power Saving Mode</h3>
+<p><em>Dimmed displays, minimal LEDs, sleep between
+interactions</em></p>
+<p><strong>Total System Draw: ~2W (400mA @ 5V)</strong> - 5000mAh
+battery: <strong>12.5 hours</strong> - 10000mAh battery: <strong>25
+hours</strong> - 20000mAh power bank: <strong>50 hours</strong></p>
+<h2 id="power-optimization-strategies"> Power Optimization
+Strategies</h2>
+<h3 id="software-optimizations">Software Optimizations</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dynamic brightness control</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> adjustBrightnessBasedOnBattery<span class="op">(</span><span class="dt">int</span> batteryPercent<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>batteryPercent <span class="op">&lt;</span> <span class="dv">20</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>  <span class="co">// Dim displays</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// Minimal LEDs</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>batteryPercent <span class="op">&lt;</span> <span class="dv">50</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">40</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        displayBrightness <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        ledBrightness <span class="op">=</span> <span class="dv">80</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Sleep scheduling</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> enterPowerSaveMode<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    esp_sleep_enable_timer_wakeup<span class="op">(</span><span class="dv">30</span> <span class="op">*</span> <span class="dv">1000000</span><span class="op">);</span> <span class="co">// 30 seconds</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    esp_deep_sleep_start<span class="op">();</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="hardware-optimizations">Hardware Optimizations</h3>
+<ol type="1">
+<li><strong>Voltage Regulation</strong>: Use efficient buck converters
+(&gt;90% efficiency)</li>
+<li><strong>Display Control</strong>: PWM backlight control for dynamic
+dimming</li>
+<li><strong>LED Management</strong>: Smart pixel addressing to reduce
+active LED count</li>
+<li><strong>Servo Control</strong>: Power down servos when not
+moving</li>
+<li><strong>Sensor Polling</strong>: Reduce HC-SR04 polling frequency
+during idle</li>
+</ol>
+<h3 id="battery-recommendations">Battery Recommendations</h3>
+<h4 id="short-demo-sessions-1-3-hours">Short Demo Sessions (1-3
+hours)</h4>
+<ul>
+<li><strong>Anker PowerCore 10000</strong> - $25</li>
+<li>Compact, 10000mAh, perfect for demos</li>
+</ul>
+<h4 id="all-day-operation-6-8-hours">All-Day Operation (6-8 hours)</h4>
+<ul>
+<li><strong>Anker PowerCore 20000</strong> - $40</li>
+<li>High capacity, dual output ports</li>
+</ul>
+<h4 id="permanent-installation">Permanent Installation</h4>
+<ul>
+<li><strong>12V 7Ah SLA Battery + Buck Converter</strong> - $35</li>
+<li>Long life, rechargeable, wall-mount friendly</li>
+</ul>
+<h4 id="professionalcommercial">Professional/Commercial</h4>
+<ul>
+<li><strong>LiFePO4 12V 20Ah Battery</strong> - $150</li>
+<li>2000+ cycle life, very safe, 10+ hour runtime</li>
+</ul>
+<h2 id="power-safety-considerations"> Power Safety Considerations</h2>
+<h3 id="current-limits">Current Limits</h3>
+<ul>
+<li><strong>ESP32 GPIO</strong>: 40mA max per pin</li>
+<li><strong>USB Power</strong>: 500mA-900mA (insufficient for full
+system)</li>
+<li><strong>5V Rail</strong>: Ensure adequate current rating (3A+
+recommended)</li>
+</ul>
+<h3 id="thermal-management">Thermal Management</h3>
+<ul>
+<li>Peak LED operation generates significant heat</li>
+<li>Consider heatsinks for high-power components</li>
+<li>Monitor ESP32 temperature via built-in sensor</li>
+</ul>
+<h3 id="protection-features">Protection Features</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Battery voltage monitoring</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> batteryVoltage <span class="op">=</span> analogRead<span class="op">(</span>BATTERY_SENSE_PIN<span class="op">)</span> <span class="op">*</span> <span class="fl">3.3</span> <span class="op">/</span> <span class="dv">4096</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>batteryVoltage <span class="op">&lt;</span> <span class="fl">3.2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    enterEmergencyShutdown<span class="op">();</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Overcurrent detection</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>systemCurrent <span class="op">&gt;</span> <span class="dv">4000</span><span class="op">)</span> <span class="op">{</span>  <span class="co">// 4A limit</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    disableNonEssentialSystems<span class="op">();</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="recommended-starting-configuration"> Recommended Starting
+Configuration</h2>
+<p><strong>For Initial Testing (2-4 hour runtime):</strong> - Anker
+PowerCore 10000 (10000mAh) - 30% LED brightness - Audio at 70% volume -
+Servo movements during interactions only</p>
+<p><strong>Estimated Runtime: 6-8 hours typical use</strong></p>
+<p>This provides excellent battery life while maintaining full
+functionality for development and demonstration purposes.</p>
+<h2 id="full-body-humanoid-power-analysis"> Full Body Humanoid Power
+Analysis</h2>
+<h3 id="complete-humanoid-component-breakdown">Complete Humanoid
+Component Breakdown</h3>
+<p><em>Based on P32 distributed architecture with multiple ESP32
+controllers</em></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component Category</th>
+<th>Quantity</th>
+<th>Unit Power</th>
+<th>Total Power</th>
+<th>Duty Cycle</th>
+<th>Average Power</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ESP32 Controllers</strong></td>
+<td>4</td>
+<td>0.8W each</td>
+<td>3.2W</td>
+<td>100%</td>
+<td>3.2W</td>
+</tr>
+<tr>
+<td><strong>NEMA 17 Steppers</strong></td>
+<td>16</td>
+<td>5W each</td>
+<td>80W</td>
+<td>20%</td>
+<td>16W</td>
+</tr>
+<tr>
+<td><strong>28BYJ-48 Steppers</strong></td>
+<td>6</td>
+<td>1W each</td>
+<td>6W</td>
+<td>30%</td>
+<td>1.8W</td>
+</tr>
+<tr>
+<td><strong>Servo Motors (SG90)</strong></td>
+<td>8</td>
+<td>2W each</td>
+<td>16W</td>
+<td>15%</td>
+<td>2.4W</td>
+</tr>
+<tr>
+<td><strong>A4988 Stepper Drivers</strong></td>
+<td>22</td>
+<td>0.5W each</td>
+<td>11W</td>
+<td>Active with motors</td>
+<td>3.6W</td>
+</tr>
+<tr>
+<td><strong>Head Assembly</strong></td>
+<td>1</td>
+<td>6.5W</td>
+<td>6.5W</td>
+<td>100%</td>
+<td>6.5W</td>
+</tr>
+<tr>
+<td><strong>Sensor Array</strong></td>
+<td>12</td>
+<td>0.3W each</td>
+<td>3.6W</td>
+<td>100%</td>
+<td>3.6W</td>
+</tr>
+<tr>
+<td><strong>LED Strips/Matrices</strong></td>
+<td>8</td>
+<td>3W each</td>
+<td>24W</td>
+<td>50% brightness</td>
+<td>12W</td>
+</tr>
+<tr>
+<td><strong>Communication (WiFi/BLE)</strong></td>
+<td>4</td>
+<td>0.5W each</td>
+<td>2W</td>
+<td>100%</td>
+<td>2W</td>
+</tr>
+<tr>
+<td><strong>Power Distribution</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>10% loss</td>
+<td>5.1W</td>
+</tr>
+</tbody>
+</table>
+<h4 id="full-body-power-states">Full Body Power States</h4>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+<th>Total Power</th>
+<th>12V 20Ah Runtime</th>
+<th>12V 50Ah Runtime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sleep Mode</strong></td>
+<td>All systems minimal, no movement</td>
+<td>8W</td>
+<td>30 hours</td>
+<td>75 hours</td>
+</tr>
+<tr>
+<td><strong>Idle Standing</strong></td>
+<td>Awake, balance control, minimal movement</td>
+<td>25W</td>
+<td>9.6 hours</td>
+<td>24 hours</td>
+</tr>
+<tr>
+<td><strong>Walking/Moving</strong></td>
+<td>Active locomotion, full servo operation</td>
+<td>75W</td>
+<td>3.2 hours</td>
+<td>8 hours</td>
+</tr>
+<tr>
+<td><strong>Performance Mode</strong></td>
+<td>Dancing, complex movements, full LEDs</td>
+<td>120W</td>
+<td>2 hours</td>
+<td>5 hours</td>
+</tr>
+<tr>
+<td><strong>Emergency/Demo</strong></td>
+<td>All systems maximum</td>
+<td>156W</td>
+<td>1.5 hours</td>
+<td>3.8 hours</td>
+</tr>
+</tbody>
+</table>
+<h3 id="detailed-motor-power-analysis">Detailed Motor Power
+Analysis</h3>
+<h4 id="nema-17-stepper-motors-16-units">NEMA 17 Stepper Motors (16
+units)</h4>
+<p><em>Primary joints: shoulders, elbows, hips, knees, ankles</em> -
+<strong>Holding Current</strong>: 1.2A @ 12V = 14.4W each -
+<strong>Moving Current</strong>: 1.7A @ 12V = 20.4W each -
+<strong>Realistic Usage</strong>: 20% movement, 80% holding -
+<strong>Average Power</strong>: (20.4W  0.2) + (14.4W  0.8) = 15.6W
+each - <strong>Total 16 Motors</strong>: 250W peak, 62W average</p>
+<h4 id="byj-48-stepper-motors-6-units">28BYJ-48 Stepper Motors (6
+units)</h4>
+<p><em>Fine control: head rotation, finger articulation, facial
+features</em> - <strong>Operating Current</strong>: 200mA @ 5V = 1W each
+- <strong>Realistic Usage</strong>: 30% active movement -
+<strong>Average Power</strong>: 1W  0.3 = 0.3W each - <strong>Total 6
+Motors</strong>: 6W peak, 1.8W average</p>
+<h4 id="sg90-servo-motors-8-units">SG90 Servo Motors (8 units)</h4>
+<p><em>Precision joints: wrists, fingers, facial expressions</em> -
+<strong>Peak Current</strong>: 650mA @ 5V = 3.25W each - <strong>Idle
+Current</strong>: 50mA @ 5V = 0.25W each - <strong>Realistic
+Usage</strong>: 15% active positioning - <strong>Average Power</strong>:
+(3.25W  0.15) + (0.25W  0.85) = 0.7W each - <strong>Total 8
+Servos</strong>: 26W peak, 5.6W average</p>
+<h3 id="power-supply-architecture">Power Supply Architecture</h3>
+<h4 id="recommended-12v-battery-system">Recommended 12V Battery
+System</h4>
+<pre><code>12V 50Ah LiFePO4 Battery ($300-400)
+ 12V  5V Buck Converter (15A capacity)
+    ESP32 Controllers (4x)
+    Servos and small steppers
+    Sensors and displays
+ 12V  Stepper Driver Power (Direct)
+    NEMA 17 Motors via A4988 drivers
+ Battery Management System (BMS)
+     Voltage monitoring
+     Overcurrent protection
+     Cell balancing</code></pre>
+<h4 id="alternative-power-banks">Alternative Power Banks</h4>
+<table>
+<thead>
+<tr>
+<th>Battery Type</th>
+<th>Capacity</th>
+<th>Peak Power</th>
+<th>Runtime (Walking)</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LiFePO4 12V 20Ah</strong></td>
+<td>240Wh</td>
+<td>120W</td>
+<td>3.2 hours</td>
+<td>$150</td>
+</tr>
+<tr>
+<td><strong>LiFePO4 12V 50Ah</strong></td>
+<td>600Wh</td>
+<td>200W</td>
+<td>8 hours</td>
+<td>$350</td>
+</tr>
+<tr>
+<td><strong>Li-ion 12V 100Ah</strong></td>
+<td>1200Wh</td>
+<td>300W</td>
+<td>16 hours</td>
+<td>$600</td>
+</tr>
+<tr>
+<td><strong>Lead Acid 12V 35Ah</strong></td>
+<td>420Wh</td>
+<td>150W</td>
+<td>5.6 hours</td>
+<td>$80</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-power-management">Advanced Power Management</h3>
+<h4 id="distributed-controller-power-management">Distributed Controller
+Power Management</h4>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Master controller coordinates power states</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> PowerState <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    SLEEP_MODE<span class="op">,</span>      <span class="co">// 8W  - Emergency standby</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    IDLE_MODE<span class="op">,</span>       <span class="co">// 25W - Awake, minimal movement  </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ACTIVE_MODE<span class="op">,</span>     <span class="co">// 75W - Walking, interaction</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    PERFORMANCE_MODE <span class="co">// 120W - Dancing, demos</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setPowerMode<span class="op">(</span>PowerState mode<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span><span class="op">(</span>mode<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> SLEEP_MODE<span class="op">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            disableNonEssentialMotors<span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            dimAllDisplays<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            setStepperCurrent<span class="op">(</span><span class="fl">0.5</span><span class="op">);</span> <span class="co">// Reduce holding current</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> ACTIVE_MODE<span class="op">:</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            enableAllSystems<span class="op">();</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            setStepperCurrent<span class="op">(</span><span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="smart-motor-management">Smart Motor Management</h4>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PowerAwareMotorController <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> batteryVoltage<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> powerBudgetWatts<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> updatePowerBudget<span class="op">(</span><span class="dt">float</span> voltage<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>voltage <span class="op">&lt;</span> <span class="fl">11.0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>  <span class="co">// Emergency mode</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>voltage <span class="op">&lt;</span> <span class="fl">11.5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">60</span><span class="op">;</span>  <span class="co">// Conservation mode</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            powerBudgetWatts <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> <span class="co">// Full performance</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> requestMotorPower<span class="op">(</span><span class="dt">int</span> motorId<span class="op">,</span> <span class="dt">int</span> requestedWatts<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>currentPowerUsage <span class="op">+</span> requestedWatts <span class="op">&gt;</span> powerBudgetWatts<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// Power denied</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="thermal-considerations">Thermal Considerations</h3>
+<h4 id="heat-generation-points">Heat Generation Points</h4>
+<ul>
+<li><strong>Stepper Drivers</strong>: 2W each  22 = 44W heat
+generation</li>
+<li><strong>Motor Coils</strong>: ~15% energy lost as heat = ~12W</li>
+<li><strong>Voltage Regulators</strong>: ~10% efficiency loss = ~8W</li>
+<li><strong>Total Heat</strong>: ~64W continuous</li>
+</ul>
+<h4 id="cooling-requirements">Cooling Requirements</h4>
+<ul>
+<li><strong>Passive Cooling</strong>: Heat sinks on stepper drivers
+mandatory</li>
+<li><strong>Active Cooling</strong>: 80mm fan for electronics
+compartment</li>
+<li><strong>Thermal Monitoring</strong>: Temperature sensors on critical
+components</li>
+</ul>
+<h3 id="real-world-runtime-expectations">Real-World Runtime
+Expectations</h3>
+<h4 id="typical-usage-patterns">Typical Usage Patterns</h4>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Duration</th>
+<th>Power Level</th>
+<th>Battery Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Startup/Calibration</strong></td>
+<td>2 min</td>
+<td>100W</td>
+<td>3.3Wh</td>
+</tr>
+<tr>
+<td><strong>Walking Demo</strong></td>
+<td>10 min</td>
+<td>75W</td>
+<td>12.5Wh</td>
+</tr>
+<tr>
+<td><strong>Interactive Standing</strong></td>
+<td>30 min</td>
+<td>35W</td>
+<td>17.5Wh</td>
+</tr>
+<tr>
+<td><strong>Performance Dance</strong></td>
+<td>5 min</td>
+<td>120W</td>
+<td>10Wh</td>
+</tr>
+<tr>
+<td><strong>Idle Monitoring</strong></td>
+<td>60 min</td>
+<td>25W</td>
+<td>25Wh</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Demo Session</strong>: 107 minutes, 68.3Wh consumed
+<strong>12V 20Ah Battery</strong>: 3.5 such sessions possible
+<strong>12V 50Ah Battery</strong>: 8.8 such sessions possible</p>
+<h2 id="scalability-planning"> Scalability Planning</h2>
+<h3 id="multi-bot-systems">Multi-Bot Systems</h3>
+<p>Each additional bot adds ~6.5W average power draw: - 2 bots: 13W
+total (requires 20000mAh for 8 hours)<br />
+- 4 bots: 26W total (requires central power distribution) - 8+ bots:
+Consider 12V battery bank with distributed converters</p>
+<h3 id="full-humanoid-vs-head-comparison">Full Humanoid vs Head
+Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Peak Power</th>
+<th>Average Power</th>
+<th>Recommended Battery</th>
+<th>Runtime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Goblin Head</strong></td>
+<td>8.4W</td>
+<td>3.4W</td>
+<td>10Ah power bank</td>
+<td>6-8 hours</td>
+</tr>
+<tr>
+<td><strong>Full Humanoid</strong></td>
+<td>156W</td>
+<td>56W</td>
+<td>12V 50Ah LiFePO4</td>
+<td>6-8 hours</td>
+</tr>
+</tbody>
+</table>
+<p>The humanoid requires ~16x more power but provides full mobility and
+complex interactions. Battery technology and cost scale appropriately
+for the capability increase.</p>
+<h2 id="solar-power-integration-analysis"> Solar Power Integration
+Analysis</h2>
+<h3 id="solar-cell-surface-area-available">Solar Cell Surface Area
+Available</h3>
+<p><em>Humanoid robot body surface suitable for solar panels</em></p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 17%" />
+<col style="width: 23%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Body Section</th>
+<th>Surface Area</th>
+<th>Usable Solar Area</th>
+<th>Panel Efficiency</th>
+<th>Peak Power Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Back Panel</strong></td>
+<td>0.3 m</td>
+<td>0.25 m</td>
+<td>22%</td>
+<td>55W</td>
+</tr>
+<tr>
+<td><strong>Chest Panel</strong></td>
+<td>0.2 m</td>
+<td>0.15 m</td>
+<td>22%</td>
+<td>33W</td>
+</tr>
+<tr>
+<td><strong>Shoulder Panels</strong></td>
+<td>0.15 m</td>
+<td>0.12 m</td>
+<td>22%</td>
+<td>26W</td>
+</tr>
+<tr>
+<td><strong>Arm Sections</strong></td>
+<td>0.25 m</td>
+<td>0.15 m</td>
+<td>22%</td>
+<td>33W</td>
+</tr>
+<tr>
+<td><strong>Leg Panels</strong></td>
+<td>0.4 m</td>
+<td>0.25 m</td>
+<td>22%</td>
+<td>55W</td>
+</tr>
+<tr>
+<td><strong>Head Crown</strong></td>
+<td>0.05 m</td>
+<td>0.04 m</td>
+<td>22%</td>
+<td>9W</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Solar Surface</strong>: 1.35 m usable area
+<strong>Peak Solar Output</strong>: 211W @ 1000W/m solar irradiance</p>
+<h3 id="solar-performance-by-conditions">Solar Performance by
+Conditions</h3>
+<h4 id="optimal-conditions-desert-noon-clear-sky">Optimal Conditions
+(Desert noon, clear sky)</h4>
+<ul>
+<li><strong>Solar Irradiance</strong>: 1000W/m</li>
+<li><strong>Panel Output</strong>: 211W peak</li>
+<li><strong>System Consumption</strong>: 56W average</li>
+<li><strong>Net Energy</strong>: +155W (charging batteries)</li>
+<li><strong>Battery Charging Rate</strong>: 12.9A @ 12V</li>
+</ul>
+<h4 id="good-conditions-sunny-day-some-clouds">Good Conditions (Sunny
+day, some clouds)</h4>
+<ul>
+<li><strong>Solar Irradiance</strong>: 600W/m</li>
+<li><strong>Panel Output</strong>: 127W</li>
+<li><strong>System Consumption</strong>: 56W average<br />
+</li>
+<li><strong>Net Energy</strong>: +71W (slow charging)</li>
+<li><strong>Battery Charging Rate</strong>: 5.9A @ 12V</li>
+</ul>
+<h4 id="overcast-conditions">Overcast Conditions</h4>
+<ul>
+<li><strong>Solar Irradiance</strong>: 200W/m</li>
+<li><strong>Panel Output</strong>: 42W</li>
+<li><strong>System Consumption</strong>: 56W average</li>
+<li><strong>Net Energy</strong>: -14W (battery drain)</li>
+<li><strong>Runtime Extension</strong>: 3x longer than battery
+alone</li>
+</ul>
+<h4 id="indoornight-operation">Indoor/Night Operation</h4>
+<ul>
+<li><strong>Solar Output</strong>: 0W</li>
+<li><strong>System Consumption</strong>: 56W</li>
+<li><strong>Battery Runtime</strong>: Standard (6-8 hours)</li>
+</ul>
+<h3 id="solar-panel-implementation-options">Solar Panel Implementation
+Options</h3>
+<h4 id="flexible-solar-panels-recommended">Flexible Solar Panels
+(Recommended)</h4>
+<pre><code>SunPower Maxeon 3 Flexible Panels
+- Efficiency: 22%
+- Weight: 2.1 kg/m
+- Thickness: 2.5mm
+- Bend Radius: 30 (perfect for curved robot surfaces)
+- Cost: ~$400/m 
+
+Total Cost for 1.35m: ~$540
+Total Weight Added: 2.8kg</code></pre>
+<h4 id="rigid-monocrystalline-alternative">Rigid Monocrystalline
+Alternative</h4>
+<pre><code>Standard Solar Cells with Custom Mounting
+- Efficiency: 20-21%
+- Weight: 1.8 kg/m
+- Thickness: 3.5mm
+- Requires flat mounting surfaces
+- Cost: ~$250/m
+
+Total Cost for 1.35m: ~$340
+Total Weight Added: 2.4kg</code></pre>
+<h3 id="power-generation-scenarios">Power Generation Scenarios</h3>
+<h4 id="scenario-1-outdoor-security-robot">Scenario 1: Outdoor Security
+Robot</h4>
+<p><strong>Location</strong>: Phoenix, AZ (high sun exposure)
+<strong>Average Daily Solar</strong>: 6.5 peak sun hours <strong>Daily
+Solar Generation</strong>: 211W  6.5h = 1,372Wh <strong>Daily
+Consumption</strong>: 56W  24h = 1,344Wh <strong>Result</strong>:
+<strong>Net positive energy</strong> - Self-sustaining!</p>
+<h4 id="scenario-2-park-entertainment-robot">Scenario 2: Park
+Entertainment Robot</h4>
+<p><strong>Location</strong>: Seattle, WA (moderate sun) <strong>Average
+Daily Solar</strong>: 3.8 peak sun hours <strong>Daily Solar
+Generation</strong>: 211W  3.8h = 802Wh<br />
+<strong>Daily Consumption</strong>: 56W  24h = 1,344Wh <strong>Battery
+Deficit</strong>: 542Wh daily <strong>Result</strong>: Extends 50Ah
+battery from 10 hours to <strong>25+ hours</strong></p>
+<h4 id="scenario-3-indooroutdoor-mixed-use">Scenario 3: Indoor/Outdoor
+Mixed Use</h4>
+<p><strong>Outdoor Time</strong>: 8 hours (average conditions)
+<strong>Indoor Time</strong>: 16 hours <strong>Solar
+Generation</strong>: 127W  8h = 1,016Wh <strong>Total
+Consumption</strong>: 1,344Wh daily<br />
+<strong>Battery Deficit</strong>: 328Wh <strong>Result</strong>: Extends
+battery life by <strong>76%</strong></p>
+<h3 id="solar-system-architecture">Solar System Architecture</h3>
+<h4 id="complete-solar-integration">Complete Solar Integration</h4>
+<pre><code>Solar Panel Array (1.35m, 211W peak)
+ MPPT Charge Controller (30A, 12V)
+    Battery voltage regulation
+    Maximum power point tracking
+    Overcharge protection
+ Power Distribution Hub
+    Solar input priority
+    Battery backup seamless switch
+    Load balancing
+ Monitoring System
+     Solar generation tracking
+     Battery state of charge
+     Power consumption analysis</code></pre>
+<h4 id="smart-power-management-with-solar">Smart Power Management with
+Solar</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SolarPowerManager <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> solarWatts<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> batteryVoltage<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> systemLoad<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> optimizePowerMode<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>solarWatts <span class="op">&gt;</span> systemLoad <span class="op">+</span> <span class="dv">20</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Excess solar - performance mode</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>PERFORMANCE_MODE<span class="op">);</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            enableFastCharging<span class="op">();</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>solarWatts <span class="op">&gt;</span> systemLoad<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Balanced solar - normal operation</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>ACTIVE_MODE<span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>batteryVoltage <span class="op">&gt;</span> <span class="fl">12.0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Low solar, good battery - conservation</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>IDLE_MODE<span class="op">);</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Low solar, low battery - emergency</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>            setPowerMode<span class="op">(</span>SLEEP_MODE<span class="op">);</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="cost-benefit-analysis">Cost-Benefit Analysis</h3>
+<h4 id="solar-investment">Solar Investment</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Cost</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Flexible Solar Panels</strong></td>
+<td>$540</td>
+<td>Enables autonomous operation</td>
+</tr>
+<tr>
+<td><strong>MPPT Controller</strong></td>
+<td>$80</td>
+<td>Optimizes solar efficiency</td>
+</tr>
+<tr>
+<td><strong>Wiring/Integration</strong></td>
+<td>$60</td>
+<td>Professional installation</td>
+</tr>
+<tr>
+<td><strong>Total System Cost</strong></td>
+<td>$680</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="break-even-analysis">Break-Even Analysis</h4>
+<ul>
+<li><strong>Without Solar</strong>: Replace 50Ah battery every 2-3 years
+($350)</li>
+<li><strong>With Solar</strong>: Batteries last 5-10 years (reduced
+cycling)</li>
+<li><strong>Energy Cost Savings</strong>: $0 (grid independence)</li>
+<li><strong>Autonomy Value</strong>: Priceless for remote
+applications</li>
+</ul>
+<h4 id="return-on-investment">Return on Investment</h4>
+<p><strong>Scenario 1</strong> (High sun): Pays for itself in energy
+independence <strong>Scenario 2</strong> (Moderate sun): 76% battery
+life extension = $260 value/year <strong>Scenario 3</strong>
+(Indoor/outdoor): Enables 24/7 outdoor operation</p>
+<h3 id="design-integration-challenges">Design Integration
+Challenges</h3>
+<h4 id="mechanical-considerations">Mechanical Considerations</h4>
+<ul>
+<li><strong>Weight</strong>: +2.8kg (manageable for humanoid)</li>
+<li><strong>Flexibility</strong>: Panels must bend with joint
+movement</li>
+<li><strong>Protection</strong>: Need impact-resistant covering</li>
+<li><strong>Wiring</strong>: Flexible connections at all joints</li>
+</ul>
+<h4 id="aesthetic-impact">Aesthetic Impact</h4>
+<ul>
+<li><strong>Appearance</strong>: Futuristic solar-powered look</li>
+<li><strong>Color Options</strong>: Blue, black, or custom colors
+available</li>
+<li><strong>Integration</strong>: Can be integrated into skin
+panels</li>
+<li><strong>LED Compatibility</strong>: Transparent panels allow
+underglow</li>
+</ul>
+<h3 id="real-world-performance-examples">Real-World Performance
+Examples</h3>
+<h4 id="commercial-solar-robot-precedents">Commercial Solar Robot
+Precedents</h4>
+<ul>
+<li><strong>Relay Robot</strong> (Savioke): 60W consumption, 40W solar 
+66% solar powered</li>
+<li><strong>Knightscope Security Robot</strong>: 200W consumption, 120W
+solar  60% solar</li>
+<li><strong>Agricultural Robots</strong>: Often 100% solar powered for
+field work</li>
+</ul>
+<h4 id="weather-resilience">Weather Resilience</h4>
+<ul>
+<li><strong>Rain</strong>: Panels continue generating (10-30%
+reduced)</li>
+<li><strong>Snow</strong>: Panels self-clear when robot moves</li>
+<li><strong>Dust</strong>: Occasional cleaning required</li>
+<li><strong>Hail</strong>: Tempered glass panels survive 25mm hail</li>
+</ul>
+<h3 id="recommendation">Recommendation</h3>
+<p><strong>YES - Solar integration is highly beneficial!</strong></p>
+<p><strong>For outdoor applications:</strong> - 100% energy autonomous
+in sunny climates - 76% battery life extension in moderate climates -
+Enables true 24/7 operation without charging stations</p>
+<p><strong>Investment</strong>: $680 for complete solar system
+<strong>Payback</strong>: 1-3 years through battery savings and
+capabilities <strong>Added Capability</strong>: Unlimited outdoor
+runtime in sunny conditions</p>
+<p><strong>Best Use Cases:</strong> - Security/patrol robots -
+Garden/agricultural assistants<br />
+- Educational/research platforms - Emergency response robots -
+Entertainment robots for outdoor venues</p>
+<p>The solar integration transforms the robot from a battery-dependent
+device into a truly autonomous system capable of indefinite operation!
+</p>
+<h2 id="solar-parasolumbrella-enhancement"> Solar Parasol/Umbrella
+Enhancement</h2>
+<h3 id="parasol-solar-array-specifications">Parasol Solar Array
+Specifications</h3>
+<p><em>Large deployable solar collector for maximum power
+generation</em></p>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr>
+<th>Parasol Configuration</th>
+<th>Diameter</th>
+<th>Surface Area</th>
+<th>Peak Power</th>
+<th>Total System Power</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Compact Parasol</strong></td>
+<td>1.2m</td>
+<td>1.13 m</td>
+<td>249W</td>
+<td>460W (body+parasol)</td>
+</tr>
+<tr>
+<td><strong>Standard Umbrella</strong></td>
+<td>1.8m</td>
+<td>2.54 m</td>
+<td>559W</td>
+<td>770W (body+parasol)</td>
+</tr>
+<tr>
+<td><strong>Large Garden Umbrella</strong></td>
+<td>2.5m</td>
+<td>4.91 m</td>
+<td>1,080W</td>
+<td>1,291W (body+parasol)</td>
+</tr>
+<tr>
+<td><strong>Deployable Solar Array</strong></td>
+<td>3.0m</td>
+<td>7.07 m</td>
+<td>1,556W</td>
+<td>1,767W (body+parasol)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="power-generation-comparison">Power Generation Comparison</h3>
+<h4 id="standard-body-only-solar-211w-peak">Standard Body-Only Solar
+(211W peak)</h4>
+<pre><code>Sunny Day (6 hours peak sun):
+211W  6h = 1,266Wh generated
+Robot consumption: 56W  24h = 1,344Wh
+Net deficit: -78Wh daily (96% solar powered)</code></pre>
+<h4 id="body-compact-parasol-460w-peak">Body + Compact Parasol (460W
+peak)</h4>
+<pre><code>Sunny Day (6 hours peak sun):
+460W  6h = 2,760Wh generated  
+Robot consumption: 1,344Wh daily
+Net surplus: +1,416Wh daily (206% solar powered!)
+Excess energy: Powers another robot or charges external devices</code></pre>
+<h4 id="body-standard-umbrella-770w-peak">Body + Standard Umbrella (770W
+peak)</h4>
+<pre><code>Sunny Day (6 hours peak sun):
+770W  6h = 4,620Wh generated
+Robot consumption: 1,344Wh daily  
+Net surplus: +3,276Wh daily (344% solar powered!)
+Excess energy: Can power 3 additional robots</code></pre>
+<h4 id="body-large-array-1767w-peak">Body + Large Array (1,767W
+peak)</h4>
+<pre><code>Sunny Day (6 hours peak sun):
+1,767W  6h = 10,602Wh generated
+Robot consumption: 1,344Wh daily
+Net surplus: +9,258Wh daily (789% solar powered!)
+Excess energy: Mobile solar power station!</code></pre>
+<h3 id="parasol-design-options">Parasol Design Options</h3>
+<h4 id="retractable-solar-parasol">Retractable Solar Parasol</h4>
+<pre><code>Automatic Deployment System:
+- Retracts for indoor operation/storage
+- Extends for outdoor power generation  
+- Weather-responsive (retracts in high wind)
+- Sun-tracking capability for maximum efficiency
+- Integrated into robot&#39;s arm/shoulder mount
+
+Materials:
+- Lightweight carbon fiber frame (2.5kg)
+- Flexible solar panels (3.2kg for 2.5m)
+- Servo deployment mechanism (0.8kg)
+- Total parasol weight: 6.5kg</code></pre>
+<h4 id="multi-use-functionality">Multi-Use Functionality</h4>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SolarParasol <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> ParasolMode <span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        RETRACTED<span class="op">,</span>      <span class="co">// Indoor/storage mode</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        SHADE_MODE<span class="op">,</span>     <span class="co">// Provides shade for humans</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        POWER_MODE<span class="op">,</span>     <span class="co">// Optimal sun tracking</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        WEATHER_MODE<span class="op">,</span>   <span class="co">// Storm protection position</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        CHARGING_MODE   <span class="co">// Stationary maximum generation</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> deployForOptimalPower<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        calculateSunPosition<span class="op">();</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        adjustParasolAngle<span class="op">();</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        maximizeSolarExposure<span class="op">();</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> provideShadeService<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        positionForHumanComfort<span class="op">();</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        maintainCoolShadowArea<span class="op">();</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="revolutionary-applications">Revolutionary Applications</h3>
+<h4 id="solar-power-station-robot">Solar Power Station Robot</h4>
+<p><strong>Scenario</strong>: Disaster relief or remote area power -
+<strong>Mobile Power</strong>: Drives to areas needing electricity -
+<strong>Emergency Charging</strong>: Powers phones, medical devices,
+lights - <strong>Grid Independence</strong>: Completely autonomous
+operation - <strong>Daily Generation</strong>: 10+ kWh in sunny
+conditions</p>
+<h4 id="garden-assistant-with-power-sharing">Garden Assistant with Power
+Sharing</h4>
+<p><strong>Scenario</strong>: Smart home integration -
+<strong>Self-Sustaining</strong>: Never needs wall charging -
+<strong>Home Power</strong>: Feeds excess back to house battery -
+<strong>Weather Station</strong>: Automatically adjusts for conditions -
+<strong>Dual Purpose</strong>: Gardening work + family power source</p>
+<h4 id="event-service-robot">Event Service Robot</h4>
+<p><strong>Scenario</strong>: Outdoor weddings, festivals, markets -
+<strong>Shade Provider</strong>: Keeps guests cool while generating
+power - <strong>Device Charging</strong>: USB outlets in parasol handle
+- <strong>Lighting</strong>: LED strips powered by daily solar
+collection - <strong>Entertainment</strong>: Powers sound system and
+displays</p>
+<h3 id="enhanced-power-management">Enhanced Power Management</h3>
+<h4 id="sun-tracking-algorithm">Sun Tracking Algorithm</h4>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SunTracker <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> latitude<span class="op">,</span> longitude<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    DateTime currentTime<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    ParasolPosition calculateOptimalAngle<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> solarAzimuth <span class="op">=</span> calculateSunAzimuth<span class="op">();</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> solarElevation <span class="op">=</span> calculateSunElevation<span class="op">();</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ParasolPosition<span class="op">{</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>tilt <span class="op">=</span> <span class="dv">90</span> <span class="op">-</span> solarElevation<span class="op">,</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>rotation <span class="op">=</span> solarAzimuth<span class="op">,</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span>expectedPower <span class="op">=</span> estimatePowerGeneration<span class="op">()</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> continuousTracking<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>timeSinceLastAdjustment <span class="op">&gt;</span> <span class="dv">15</span><span class="op">_minutes)</span> <span class="op">{</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>            adjustParasolToSun<span class="op">();</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>            logPowerGeneration<span class="op">();</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h4 id="weather-responsive-operation">Weather-Responsive Operation</h4>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WeatherManager <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> handleWeatherConditions<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        WeatherCondition current <span class="op">=</span> getWeatherData<span class="op">();</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span><span class="op">(</span>current<span class="op">.</span>type<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> SUNNY<span class="op">:</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                deployParasolFull<span class="op">();</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                enableSunTracking<span class="op">();</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> PARTLY_CLOUDY<span class="op">:</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                deployParasolPartial<span class="op">();</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                enableBasicTracking<span class="op">();</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> WINDY<span class="op">:</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>current<span class="op">.</span>windSpeed <span class="op">&gt;</span> <span class="dv">25</span><span class="op">_mph)</span> <span class="op">{</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                    retractParasol<span class="op">();</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> STORM<span class="op">:</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                emergencyRetract<span class="op">();</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                seekShelter<span class="op">();</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="cost-benefit-analysis-1">Cost-Benefit Analysis</h3>
+<h4 id="parasol-investment">Parasol Investment</h4>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr>
+<th>Parasol Size</th>
+<th>Solar Cost</th>
+<th>Mechanism Cost</th>
+<th>Total Investment</th>
+<th>Daily Generation</th>
+<th>ROI Period</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1.2m Compact</strong></td>
+<td>$340</td>
+<td>$200</td>
+<td>$540</td>
+<td>2.76 kWh</td>
+<td>2 years</td>
+</tr>
+<tr>
+<td><strong>1.8m Standard</strong></td>
+<td>$560</td>
+<td>$300</td>
+<td>$860</td>
+<td>4.62 kWh</td>
+<td>1.5 years</td>
+</tr>
+<tr>
+<td><strong>2.5m Large</strong></td>
+<td>$980</td>
+<td>$400</td>
+<td>$1,380</td>
+<td>10.6 kWh</td>
+<td>1 year</td>
+</tr>
+</tbody>
+</table>
+<h4 id="value-added-services">Value-Added Services</h4>
+<ul>
+<li><strong>Shade Rental</strong>: $50/day at outdoor events</li>
+<li><strong>Phone Charging</strong>: $2/device at festivals<br />
+</li>
+<li><strong>Emergency Power</strong>: Priceless during disasters</li>
+<li><strong>Home Integration</strong>: $30/month electricity offset</li>
+</ul>
+<h3 id="mechanical-considerations-1">Mechanical Considerations</h3>
+<h4 id="weight-distribution">Weight Distribution</h4>
+<pre><code>Robot Base Weight: 45kg
+Body Solar Panels: +2.8kg  
+Parasol System: +6.5kg
+Total System: 54.3kg (20% increase)
+
+Center of Gravity Impact:
+- Parasol retracted: Minimal change
+- Parasol deployed: 15cm height increase  
+- Stability: Requires wider stance when deployed
+- Wind Loading: Auto-retract in high wind</code></pre>
+<h4 id="deployment-mechanism">Deployment Mechanism</h4>
+<pre><code>Parasol Deployment Sequence:
+1. Check wind conditions (&lt; 15 mph)
+2. Extend support arm to full length  
+3. Deploy parasol frame (telescoping ribs)
+4. Unfurl solar panel membrane
+5. Lock deployment mechanism
+6. Begin sun tracking routine
+Total deployment time: 45 seconds</code></pre>
+<h3 id="revolutionary-capability-summary">Revolutionary Capability
+Summary</h3>
+<p><strong>With Solar Parasol, your robot becomes:</strong></p>
+<p> <strong>Energy Independent</strong>: 200-800% solar powered 
+<strong>Mobile Power Station</strong>: Generates 2-10+ kWh daily<br />
+ <strong>Dual Purpose</strong>: Shade provider + power generator 
+<strong>Home Integration</strong>: Can offset household electricity 
+<strong>Emergency Ready</strong>: Disaster relief power source 
+<strong>Revenue Generator</strong>: Paid services at events 
+<strong>Grid Independent</strong>: Operates anywhere with sun</p>
+<p>The parasol transforms your animatronic from a battery-powered device
+into a <strong>mobile renewable energy station</strong> that happens to
+be an intelligent robot! This is next-level sustainable robotics.
+</p>

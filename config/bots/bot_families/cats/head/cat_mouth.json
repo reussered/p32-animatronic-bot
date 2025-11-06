@@ -5,7 +5,7 @@
     "name": "cat_mouth",
     "subsystem": "HEAD",
     "components": [
-        "config/bots/bot_families/cats/head/cat_mouth.json"
+        "bots/bot_families/cats/head/cat_mouth.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

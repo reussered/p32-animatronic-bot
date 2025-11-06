@@ -7,7 +7,7 @@
     "description": "Shared goblin ear processing logic with directional sensitivity and goblin-specific audio characteristics",
     "created": "2025-10-22",
     "components": [
-        "config/components/hardware/hw496_microphone.json"
+        "components/hardware/hw496_microphone.json"
     ],
     "creature_audio_profile": {
         "species": "GOBLIN",

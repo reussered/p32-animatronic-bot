@@ -81,9 +81,9 @@
         "bone_prominence": "high_definition"
     },
     "components": [
-        "config/bots/bot_families/undead/head/skeleton_jaw_actuator.json",
-        "config/bots/bot_families/undead/head/skeleton_bone_structure.json",
-        "config/bots/bot_families/undead/head/skeleton_joint_mechanism.json"
+        "bots/bot_families/undead/head/skeleton_jaw_actuator.json",
+        "bots/bot_families/undead/head/skeleton_bone_structure.json",
+        "bots/bot_families/undead/head/skeleton_joint_mechanism.json"
     ],
     "skeletal_features": {
         "bone_mechanics": {

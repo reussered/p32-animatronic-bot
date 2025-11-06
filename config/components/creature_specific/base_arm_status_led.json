@@ -9,7 +9,7 @@
     "name": "base_arm_status_led",
     "subsystem": "INDICATOR",
     "components": [
-        "config/components/interfaces/gpio_pair_vibration_sensor.json"
+        "components/interfaces/gpio_pair_vibration_sensor.json"
     ],
     "author": "config/author.json",
     "position": {

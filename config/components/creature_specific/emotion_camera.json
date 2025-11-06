@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "subsystem": "UNKNOWN",
     "components": [
-        "config/components/interfaces/spi_bus.json"
+        "components/interfaces/spi_bus.json"
     ],
     "software": {
         "act_function": "emotion_camera_act",

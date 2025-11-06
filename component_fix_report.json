@@ -1,0 +1,660 @@
+{
+  "summary": {
+    "files_processed": 654,
+    "references_fixed": 0,
+    "bad_components_count": 130
+  },
+  "fixed_references": [],
+  "bad_components": [
+    {
+      "file": "config/bots/.archived_components/bot_families/androids/head/android_eye.json",
+      "component": "config/subsystems/android_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/androids/head/android_eye.json",
+      "component": "config/subsystems/android_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/androids/head/android_left_eye.json",
+      "component": "config/subsystems/android_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/androids/head/android_left_eye.json",
+      "component": "config/subsystems/android_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_eye_left.json",
+      "component": "config/subsystems/wolf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_eye_left.json",
+      "component": "config/subsystems/wolf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_eye_right.json",
+      "component": "config/subsystems/wolf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_eye_right.json",
+      "component": "config/subsystems/wolf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_speaker.json",
+      "component": "config/subsystems/wolf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/animals/head/wolf_speaker.json",
+      "component": "config/subsystems/wolf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_eye.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_eye.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_ice_sensors.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_ice_sensors.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_speaker.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/bears/head/bear_speaker.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_animated_ears.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_animated_ears.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_eye.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_eye.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_nose_sensor.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_nose_sensor.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_speaker.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_speaker.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_whisker_sensors.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/cats/head/cat_whisker_sensors.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_left.json",
+      "component": "config/subsystems/dragon_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_left.json",
+      "component": "config/subsystems/dragon_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_right.json",
+      "component": "config/subsystems/dragon_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_eye_right.json",
+      "component": "config/subsystems/dragon_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
+      "component": "config/subsystems/dragon_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
+      "component": "config/subsystems/dragon_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_eye_left.json",
+      "component": "config/subsystems/elf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_eye_left.json",
+      "component": "config/subsystems/elf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_eye_right.json",
+      "component": "config/subsystems/elf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_eye_right.json",
+      "component": "config/subsystems/elf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_speaker.json",
+      "component": "config/subsystems/elf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/elves/head/elf_speaker.json",
+      "component": "config/subsystems/elf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/fantasy/head/cyclops_eye_central.json",
+      "component": "config/subsystems/cyclops_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/fantasy/head/cyclops_eye_central.json",
+      "component": "config/subsystems/cyclops_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/fantasy/head/cyclops_speaker.json",
+      "component": "config/subsystems/cyclops_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/fantasy/head/cyclops_speaker.json",
+      "component": "config/subsystems/cyclops_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_eye_left.json",
+      "component": "config/subsystems/vampire_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_eye_left.json",
+      "component": "config/subsystems/vampire_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_eye_right.json",
+      "component": "config/subsystems/vampire_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_eye_right.json",
+      "component": "config/subsystems/vampire_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_speaker.json",
+      "component": "config/subsystems/vampire_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/.archived_components/bot_families/undead/head/vampire_speaker.json",
+      "component": "config/subsystems/vampire_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/bear_family.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/bear_family.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/cat_family.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/cat_family.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/wolf_family.json",
+      "component": "config/subsystems/wolf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/animals/wolf_family.json",
+      "component": "config/subsystems/wolf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/bears/bear_grizzly.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/bears/bear_grizzly.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/bears/bear_polar.json",
+      "component": "config/subsystems/bear_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/bears/bear_polar.json",
+      "component": "config/subsystems/bear_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/cat_family.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/cat_family.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/domestic/cat_interactive_tabby.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/domestic/cat_interactive_tabby.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/head/cat_tail_servo.json",
+      "component": "config/subsystems/cat_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/cats/head/cat_tail_servo.json",
+      "component": "config/subsystems/cat_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/cyclops_family.json",
+      "component": "config/subsystems/cyclops_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/cyclops_family.json",
+      "component": "config/subsystems/cyclops_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/dragon_family.json",
+      "component": "config/subsystems/dragon_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/dragon_family.json",
+      "component": "config/subsystems/dragon_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/elf_family.json",
+      "component": "config/subsystems/elf_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/elf_family.json",
+      "component": "config/subsystems/elf_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/vampire_family.json",
+      "component": "config/subsystems/vampire_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/fantasy/vampire_family.json",
+      "component": "config/subsystems/vampire_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/system_core.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/debug_controller.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/wifi_station.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/bluetooth_central.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/telemetry_hub.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/watchdog.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/goblins/torso/goblin_torso.json",
+      "component": "config/components/system/power_monitor.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/mechanical/android_family.json",
+      "component": "config/subsystems/android_head.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/bot_families/mechanical/android_family.json",
+      "component": "config/subsystems/android_torso.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/shoulder_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/shoulder_abduction_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/shoulder_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/elbow_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/forearm_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/wrist_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/wrist_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_left.json",
+      "component": "config/components/creature_specific/goblin/arm_components/left/arm_status_led.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/shoulder_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/shoulder_abduction_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/shoulder_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/elbow_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/forearm_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/wrist_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/wrist_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_arm_right.json",
+      "component": "config/components/creature_specific/goblin/arm_components/right/arm_status_led.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/thumb_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/index_finger_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/middle_finger_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/ring_finger_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/pinky_finger_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_hand_left.json",
+      "component": "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/hip_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/hip_abduction_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/hip_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/knee_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/ankle_flexion_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/ankle_rotation_servo.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/goblin_full_leg_left.json",
+      "component": "config/components/creature_specific/goblin/leg_components/left/leg_status_led.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/test_bot_minimal.json",
+      "component": "config/components/system/system_core.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/bots/test_bot_minimal.json",
+      "component": "config/components/system/power_monitor.json",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_central_hub.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_telescoping_ribs.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_solar_cell_mounts.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_deployment_servos.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_tracking_gimbal.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_weather_protection.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_cable_management.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/hardware/solar_parasol_system.json",
+      "component": "parasol_shoulder_interface.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_central_hub.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_telescoping_ribs.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_solar_cell_mounts.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_deployment_servos.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_tracking_gimbal.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_weather_protection.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_cable_management.scad",
+      "reason": "File not found anywhere in project"
+    },
+    {
+      "file": "config/components/hardware/solar_parasol_system.json",
+      "component": "parasol_shoulder_interface.scad",
+      "reason": "File not found anywhere in project"
+    }
+  ]
+}

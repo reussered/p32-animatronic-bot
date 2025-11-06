@@ -5,7 +5,7 @@
     "name": "zombie_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "config/bots/.archived_components/bot_families/undead/head/zombie_eye.json"
+        "bots/.archived_components/bot_families/undead/head/zombie_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",

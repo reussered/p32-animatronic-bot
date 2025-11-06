@@ -7,7 +7,7 @@
     "created": "2025-11-01",
     "relative_filename": "config/components/drivers/spi_display_bus.json",
     "components": [
-        "config/components/drivers/generic_spi_display.json"
+        "components/drivers/generic_spi_display.json"
     ],
     "software": {
         "init_function": "spi_display_bus_init",

@@ -16,15 +16,15 @@
         "mechanical_precision": "moderate_tolerance"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "config/bots/bot_families/goblins/head/goblin_ear_left.json",
-        "config/bots/bot_families/goblins/head/goblin_ear_right.json",
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
+        "bots/bot_families/goblins/head/goblin_ear_left.json",
+        "bots/bot_families/goblins/head/goblin_ear_right.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "family_characteristics": {
         "physical_features": {

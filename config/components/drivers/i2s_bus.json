@@ -28,7 +28,7 @@
         ]
     },
     "components": [
-        "config/components/drivers/i2s_driver.json"
+        "components/drivers/i2s_driver.json"
     ],
     "software": {
         "init_function": "i2s_bus_init",

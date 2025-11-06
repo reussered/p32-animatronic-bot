@@ -9,7 +9,7 @@
     "subsystem": "head",
     "created": "2025-10-23",
     "components": [
-        "config/components/hardware/hardware/ds18b20_temperature_sensor.json"
+        "components/hardware/hardware/ds18b20_temperature_sensor.json"
     ],
     "positioning": {
         "coordinate_system": "skull_3d",

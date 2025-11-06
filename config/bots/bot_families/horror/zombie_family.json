@@ -78,9 +78,9 @@
         "skull_scale": 1.1
     },
     "components": [
-        "config/bots/bot_families/undead/head/zombie_rotting_flesh.json",
-        "config/bots/bot_families/undead/head/zombie_exposed_bone.json",
-        "config/bots/bot_families/undead/head/zombie_oozing_wounds.json"
+        "bots/bot_families/undead/head/zombie_rotting_flesh.json",
+        "bots/bot_families/undead/head/zombie_exposed_bone.json",
+        "bots/bot_families/undead/head/zombie_oozing_wounds.json"
     ],
     "horror_features": {
         "decay_effects": {

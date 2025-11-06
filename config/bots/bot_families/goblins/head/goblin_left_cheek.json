@@ -5,7 +5,7 @@
     "name": "goblin_left_cheek",
     "subsystem": "HEAD",
     "components": [
-        "config/components/hardware/servo_sg90_micro.json"
+        "components/hardware/servo_sg90_micro.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

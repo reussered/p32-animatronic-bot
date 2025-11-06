@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "config/components/hardware/head_structural_assembly.json"
+        "components/hardware/head_structural_assembly.json"
     ],
     "facial_components": [
         "config/components/creature_specific/goblin_left_eye.json",

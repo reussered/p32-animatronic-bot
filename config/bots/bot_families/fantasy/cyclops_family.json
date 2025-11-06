@@ -16,9 +16,9 @@
         "central_eye_diameter": "4.0 INCH"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/fantasy/head/cyclops_eye_central.json",
-        "config/bots/.archived_components/bot_families/fantasy/head/cyclops_mouth.json",
-        "config/bots/.archived_components/bot_families/fantasy/head/cyclops_speaker.json",
+        "bots/.archived_components/bot_families/fantasy/head/cyclops_eye_central.json",
+        "bots/.archived_components/bot_families/fantasy/head/cyclops_mouth.json",
+        "bots/.archived_components/bot_families/fantasy/head/cyclops_speaker.json",
         "config/subsystems/cyclops_head.json",
         "config/subsystems/cyclops_torso.json"
     ],

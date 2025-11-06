@@ -16,15 +16,13 @@
         "description": "Head coordination every 2.5 seconds"
     },
     "components": [
-        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
-        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
-        "config/bots/bot_families/goblins/head/goblin_nose.json",
-        "config/bots/bot_families/goblins/head/goblin_mouth.json",
-        "config/bots/bot_families/goblins/head/goblin_speaker.json",
-        "config/bots/bot_families/goblins/head/goblin_left_ear.json",
-        "config/bots/bot_families/goblins/head/goblin_right_ear.json",
-        "config/subsystems/goblin_head.json",
-        "config/subsystems/goblin_torso.json"
+        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
+        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
+        "bots/bot_families/goblins/head/goblin_left_ear.json",
+        "bots/bot_families/goblins/head/goblin_right_ear.json"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",

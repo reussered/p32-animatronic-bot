@@ -81,9 +81,9 @@
         "human_proportions": "anatomically_accurate"
     },
     "components": [
-        "config/bots/bot_families/androids/head/android_synthetic_skin.json",
-        "config/bots/bot_families/androids/head/android_emotion_display.json",
-        "config/bots/bot_families/androids/head/android_neural_interface.json",
+        "bots/bot_families/androids/head/android_synthetic_skin.json",
+        "bots/bot_families/androids/head/android_emotion_display.json",
+        "bots/bot_families/androids/head/android_neural_interface.json",
         "config/subsystems/android_head.json",
         "config/subsystems/android_torso.json"
     ],

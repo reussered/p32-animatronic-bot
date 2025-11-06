@@ -39,8 +39,8 @@
         }
     },
     "components": [
-        "config/bots/bot_families/bears/head/bear_massive_claws.json",
-        "config/bots/bot_families/bears/head/bear_thick_fur.json",
+        "bots/bot_families/bears/head/bear_massive_claws.json",
+        "bots/bot_families/bears/head/bear_thick_fur.json",
         "config/subsystems/bear_head.json",
         "config/subsystems/bear_torso.json"
     ],

@@ -1,1194 +1,1194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flying Dragon - Deep Dive Analysis</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #2c3e50;
-            background: #ecf0f1;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            color: #2980b9;
-            margin: 40px 0 20px 0;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
-        }
-        
-        h2 {
-            font-size: 2em;
-            color: #2980b9;
-            margin: 35px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        h3 {
-            font-size: 1.5em;
-            color: #34495e;
-            margin: 25px 0 10px 0;
-        }
-        
-        h4, h5, h6 {
-            color: #34495e;
-            margin: 15px 0 8px 0;
-        }
-        
-        p {
-            margin: 12px 0;
-            text-align: justify;
-        }
-        
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        code {
-            background: #f4f4f4;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-            color: #c7254e;
-        }
-        
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-            line-height: 1.4;
-            font-size: 0.9em;
-        }
-        
-        pre code {
-            background: none;
-            color: inherit;
-            padding: 0;
-            border-radius: 0;
-        }
-        
-        ul, ol {
-            margin: 15px 0 15px 30px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        blockquote {
-            border-left: 4px solid #3498db;
-            margin: 20px 0;
-            padding-left: 20px;
-            color: #7f8c8d;
-            font-style: italic;
-        }
-        
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        th {
-            background: #3498db;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: bold;
-            border: 1px solid #2980b9;
-        }
-        
-        td {
-            padding: 10px 12px;
-            border: 1px solid #bdc3c7;
-        }
-        
-        tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-        
-        tr:hover {
-            background: #ecf0f1;
-        }
-        
-        .toc {
-            background: #ecf0f1;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        
-        .toc ul {
-            margin: 10px 0 10px 20px;
-        }
-        
-        .toc a {
-            text-decoration: none;
-        }
-        
-        strong {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-        
-        em {
-            color: #34495e;
-        }
-        
-        hr {
-            border: none;
-            height: 2px;
-            background: #bdc3c7;
-            margin: 30px 0;
-        }
-        
-        .page-break {
-            page-break-after: always;
-        }
-        
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .container {
-                max-width: 100%;
-                margin: 0;
-                padding: 0;
-                box-shadow: none;
-                page-break-inside: avoid;
-            }
-            h1, h2, h3 {
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-            pre, code, table {
-                page-break-inside: avoid;
-            }
-        }
-        
-        @page {
-            size: A4;
-            margin: 2cm;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 id="flying-dragon-robot-deep-dive-analysis">FLYING DRAGON ROBOT - DEEP DIVE ANALYSIS</h1>
-<p><strong>Date</strong>: November 4, 2025<br />
-<strong>Project</strong>: P32 Animatronic Bot<br />
-<strong>Subject</strong>: Hybrid Flapping Wing + Quadcopter Flight System<br />
-<strong>Status</strong>: Feasibility Analysis &amp; Architecture Design</p>
-<hr />
-<h2 id="executive-summary">EXECUTIVE SUMMARY</h2>
-<p>A flying dragon robot combining <strong>articulated flapping wings</strong> with <strong>quadcopter propulsion</strong> is technically feasible for:
-- <strong>Dragon body mass</strong>: 1.5–3.0 kg
-- <strong>Wing span</strong>: 1.0–1.5 m<br />
-- <strong>Flight duration</strong>: 8–15 minutes<br />
-- <strong>Flight envelope</strong>: Slow hovering to ≈15 m/s forward speed</p>
-<p><strong>Key finding</strong>: The hybrid model works best as <strong>wings-for-agility, quad-motors-for-lift</strong>, not wings-as-primary-lift. This leverages realism (flapping for visual appeal) while maintaining flight safety and control authority.</p>
-<hr />
-<h2 id="1-feasibility-assessment-mass-thrust-calculations">1. FEASIBILITY ASSESSMENT: MASS &amp; THRUST CALCULATIONS</h2>
-<h3 id="11-dragon-body-mass-budget">1.1 Dragon Body Mass Budget</h3>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Mass (g)</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Airframe Structure</strong></td>
-<td>400–600</td>
-<td>CF tube, 3D-printed joints, aluminum brackets</td>
-</tr>
-<tr>
-<td><strong>Wing Mechanism</strong></td>
-<td>300–400</td>
-<td>Servo actuators, linkages, wing fabric/foam</td>
-</tr>
-<tr>
-<td><strong>Quadcopter Motors</strong></td>
-<td>200–300</td>
-<td>4× brushless motors (~50–75g each)</td>
-</tr>
-<tr>
-<td><strong>ESCs (4×)</strong></td>
-<td>100–150</td>
-<td>40–50A ESCs for thrust control</td>
-</tr>
-<tr>
-<td><strong>Main Flight Controller</strong></td>
-<td>80–120</td>
-<td>Onboard ESP32-S3 + IMU + Barometer</td>
-</tr>
-<tr>
-<td><strong>LiPo Battery</strong></td>
-<td>400–700</td>
-<td>4S 5000–6000 mAh for 15 min flight</td>
-</tr>
-<tr>
-<td><strong>Wiring &amp; Power Distribution</strong></td>
-<td>100–150</td>
-<td>PDB, connectors, servo cables</td>
-</tr>
-<tr>
-<td><strong>Wing Servos</strong></td>
-<td>150–250</td>
-<td>4–6× servo motors for wing articulation</td>
-</tr>
-<tr>
-<td><strong>Payload (optional)</strong></td>
-<td>0–200</td>
-<td>Lights, camera, sound emitter</td>
-</tr>
-<tr>
-<td><strong>Structural Reinforcement</strong></td>
-<td>150–200</td>
-<td>Gussets, landing gear, antenna mounts</td>
-</tr>
-<tr>
-<td><strong>TOTAL</strong></td>
-<td><strong>1,880–3,270 g</strong></td>
-<td>Nominal: ~2.5 kg</td>
-</tr>
-</tbody>
-</table>
-<h3 id="12-lift-requirements">1.2 Lift Requirements</h3>
-<p><strong>Quadcopter thrust model</strong>:
-$$T_{\text{quad}} = 4 \times T_{\text{motor}} \quad \text{(static thrust per motor)}$$</p>
-<p><strong>For 2.5 kg dragon at sea level</strong> ($g = 9.81 \text{ m/s}^2$):
-$$W = 2.5 \times 9.81 = 24.5 \text{ N required to hover}$$</p>
-<p>Each motor must provide minimum:
-$$T_{\text{motor,min}} = \frac{24.5}{4} = 6.125 \text{ N} \approx 625 \text{ gf}$$</p>
-<p><strong>Recommended target</strong> (for maneuverability + safety margin):
-$$T_{\text{quad,total}} = 1.5 \times W = 36.75 \text{ N} \quad \text{(thrust-to-weight ratio ≈ 1.5)}$$</p>
-<p>This gives each motor:
-$$T_{\text{motor}} = \frac{36.75}{4} \approx 9.2 \text{ N} \approx 940 \text{ gf}$$</p>
-<h3 id="13-wing-contribution-to-lift">1.3 Wing Contribution to Lift</h3>
-<p><strong>Flapping wing aerodynamics</strong> (simplified):
-- Flapping frequency: 2–4 Hz (realistic dragon wing beat rate)
-- Wing area: 0.5–0.8 m² (conservative for 1.0–1.5 m wingspan)
-- Average coefficient of lift during flap cycle: $C_L \approx 0.6–1.2$ (lower than fixed wing due to dynamic motion)</p>
-<p><strong>Average lift from wings</strong> (forward flight at 5 m/s):
-$$L_{\text{wings}} = \frac{1}{2} \rho v^2 S C_L = \frac{1}{2} \times 1.225 \times 25 \times 0.6 \times 0.8 = 7.35 \text{ N}$$</p>
-<p><strong>Reduction needed from quad motors</strong>:
-$$T_{\text{quad}} = W - L_{\text{wings}} = 24.5 - 7.35 = 17.15 \text{ N}$$</p>
-<p><strong>Revised motor thrust per unit</strong> (with wing assist):
-$$T_{\text{motor}} = \frac{17.15}{4} \approx 4.3 \text{ N} \approx 440 \text{ gf}$$</p>
-<p><strong>Conclusion</strong>: Wings can reduce quad motor load by ~30% in forward flight, but cannot sustain hover alone. <strong>Quad motors remain primary lift source.</strong></p>
-<hr />
-<h2 id="2-hybrid-propulsion-architecture">2. HYBRID PROPULSION ARCHITECTURE</h2>
-<h3 id="21-architecture-option-a-distributed-quadcopter-articulated-wings">2.1 Architecture Option A: Distributed Quadcopter + Articulated Wings</h3>
-<pre class="codehilite"><code>┌─────────────────────────────────────────────────┐
-│          DRAGON BODY (Fuselage)                 │
-│   ┌─────────────────────────────────────────┐   │
-│   │  Wing Servo Controller (I2C/SPI)        │   │
-│   │  ├─ Left Wing Servos (3× for articulation) │ │
-│   │  └─ Right Wing Servos (3× for articulation)│ │
-│   │                                             │ │
-│   │  Flight Controller: ESP32-S3               │ │
-│   │  ├─ IMU (MPU6050 or ICM20689)             │ │
-│   │  ├─ Barometer (BMP390)                    │ │
-│   │  ├─ PID loops for stability               │ │
-│   │  └─ Command sequencing &amp; safety           │ │
-│   │                                             │ │
-│   │  ESC Controller (PWM signals to 4 ESCs)   │ │
-│   │  Power Distribution Board (PDB)           │ │
-│   │  LiPo Battery (4S, 5000–6000 mAh)         │ │
-│   └─────────────────────────────────────────┘   │
-│   ┌─────────────────────────────────────────┐   │
-│   │  MOTOR LAYOUT (Top View)                │   │
-│   │                                         │   │
-│   │     Motor 1 (Front-Left)    Motor 2    │   │
-│   │              ⬢         ⬢                │   │
-│   │              |         |                │   │
-│   │   ──────────────────────────────────    │   │
-│   │              |         |                │   │
-│   │              ⬢         ⬢                │   │
-│   │     Motor 3 (Rear-Left)     Motor 4    │   │
-│   └─────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────┘
-     ═════════════════════════════════════════
-         WING ARTICULATION (3 DoF per side):
-         • Shoulder rotation (pitch)
-         • Wing twist (yaw-like)
-         • Wing flap (beat cycle)
-</code></pre>
-
-<p><strong>Subsystems</strong>:
-1. <strong>Quad Motor Controller</strong> (PWM on GPIO pins 12, 13, 14, 15)
-2. <strong>Wing Servo Bus</strong> (I2C on GPIO 21/22 or PWM on pins 16–19)
-3. <strong>Sensor Fusion</strong> (I2C on GPIO 21/22 for IMU + Barometer)
-4. <strong>Safety Monitor</strong> (watchdog, battery voltage, gyro limits)</p>
-<h3 id="22-architecture-option-b-centralized-hub-motor-wing-assist">2.2 Architecture Option B: Centralized Hub Motor + Wing Assist</h3>
-<p>Alternative for heavier dragons or longer endurance:</p>
-<pre class="codehilite"><code>┌─────────────────────┐
-│  Central Hub Motor  │  (1× high-KV motor with large prop)
-│  ~40–60g            │  (replaces 4 distributed motors)
-│  ~1500 gf thrust    │  
-└─────────────────────┘
-        ↓ (LiPo direct drive via ESC)
-    ┌─────────────┐
-    │ Main ESC    │
-    │ (Voltage    │
-    │  monitoring)│
-    └─────────────┘
-        ↓
-  ┌──────────────┐
-  │ Body         │
-  │ + 4× Servos  │
-  │ (wing beat)  │
-  └──────────────┘
-</code></pre>
-
-<p><strong>Trade-off</strong>: Simpler ESC/motor management, but requires more wing lift contribution for thrust; less agile (no differential motor control for roll/pitch).</p>
-<p><strong>Recommendation</strong>: <strong>Option A (distributed quad)</strong> is more scalable and provides better control authority.</p>
-<hr />
-<h2 id="3-motor-esc-selection-recommendations">3. MOTOR &amp; ESC SELECTION RECOMMENDATIONS</h2>
-<h3 id="31-quadcopter-motor-specifications">3.1 Quadcopter Motor Specifications</h3>
-<p>For the 2.5 kg dragon with 1.5 thrust-to-weight ratio:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Recommendation</th>
-<th>Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Motor Type</strong></td>
-<td>Brushless, sensored (better control)</td>
-<td>T-Motor U3 PRO, DJI E305, Sunnysky X2212</td>
-</tr>
-<tr>
-<td><strong>KV Rating</strong></td>
-<td>500–800 KV</td>
-<td>(Lower KV → higher torque, more efficient at high load)</td>
-</tr>
-<tr>
-<td><strong>Weight (per motor)</strong></td>
-<td>45–60 g</td>
-<td>Ensures quad stays within mass budget</td>
-</tr>
-<tr>
-<td><strong>Max Continuous Thrust</strong></td>
-<td>950–1050 gf per motor</td>
-<td>Provides 3,800–4,200 gf total (1.55–1.71 T/W ratio)</td>
-</tr>
-<tr>
-<td><strong>Winding</strong></td>
-<td>12N14P (12 poles, 14 windings) or 14N12P</td>
-<td>Sensored for better startup/low-speed control</td>
-</tr>
-<tr>
-<td><strong>Voltage (nominal)</strong></td>
-<td>14.8 V (4S LiPo)</td>
-<td>Balances weight, efficiency, and power availability</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Selected Motor Profile</strong>:</p>
-<pre class="codehilite"><code>T-Motor U3 PRO 580KV / DJI E305 equivalent
-├─ Thrust: 950 gf per motor @ 4S
-├─ Weight: 55 g per motor
-├─ Sensored: Yes (better for flight stability)
-├─ Continuous Current: ~40 A per motor
-└─ Cost: ~$15–25 per motor
-</code></pre>
-
-<h3 id="32-propeller-specifications">3.2 Propeller Specifications</h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Recommendation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Diameter</strong></td>
-<td>10–11 inches (254–280 mm)</td>
-</tr>
-<tr>
-<td><strong>Pitch</strong></td>
-<td>4.5–5.5 inches (lower pitch for better climb)</td>
-</tr>
-<tr>
-<td><strong>Material</strong></td>
-<td>Carbon fiber composite (light, durable)</td>
-</tr>
-<tr>
-<td><strong>Type</strong></td>
-<td>Folding props (for compact transport)</td>
-</tr>
-<tr>
-<td><strong>Per-Motor Props</strong></td>
-<td>2 props per motor (spare set)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example</strong>: APC 10×5 CF carbon fiber props (~$8–12 pair)</p>
-<h3 id="33-esc-electronic-speed-controller-selection">3.3 ESC (Electronic Speed Controller) Selection</h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Recommendation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Type</strong></td>
-<td>BLHeli-32 or similar (programmable PWM frequency)</td>
-</tr>
-<tr>
-<td><strong>Continuous Current Rating</strong></td>
-<td>40–50 A per ESC</td>
-</tr>
-<tr>
-<td><strong>Voltage Tolerance</strong></td>
-<td>2–6S LiPo (we use 4S)</td>
-</tr>
-<tr>
-<td><strong>Firmware</strong></td>
-<td>BLHeli-32 or DShot600-compatible for fast loops</td>
-</tr>
-<tr>
-<td><strong>Weight</strong></td>
-<td>25–35 g per ESC</td>
-</tr>
-<tr>
-<td><strong>Input Protocol</strong></td>
-<td>PWM (1000–2000 µs) or DShot (digital)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Selected ESC Profile</strong>:</p>
-<pre class="codehilite"><code>Hobbywing 40A XRotor ESC (BLHeli-32)
-├─ Continuous: 40 A
-├─ Weight: 28 g
-├─ DShot600 support: Yes
-├─ Telemetry: ESC voltage/current available
-└─ Cost: ~$20–30 per ESC
-</code></pre>
-
-<h3 id="34-power-distribution-battery">3.4 Power Distribution &amp; Battery</h3>
-<p><strong>LiPo Battery</strong>:
-- Type: <strong>4S (14.8 V nominal, 16.8 V fully charged)</strong>
-- Capacity: <strong>5000–6000 mAh</strong>
-- C-Rating: <strong>50C or higher</strong> (burst capacity for quad motors)
-- Weight: ~500–600 g
-- Connector: XT60 (reliable, low-loss)</p>
-<p><strong>Power Distribution Board (PDB)</strong>:
-- 4× motor output pads
-- Voltage distribution (14.8 V main bus)
-- Current sensing (optional, for failsafe)
-- Total weight: ~15 g</p>
-<p><strong>Total power budget</strong>:
-- Hover current (est.): 40 A (10 A per motor @ 50% throttle)
-- Peak current (est.): 120 A (30 A per motor @ 75% throttle for agile maneuvers)
-- Flight time (hover): 5000 mAh ÷ 40 A = 7.5 min
-- Flight time (mixed): 8–12 min (realistic)</p>
-<hr />
-<h2 id="4-control-system-block-diagram">4. CONTROL SYSTEM BLOCK DIAGRAM</h2>
-<h3 id="41-hardware-block-diagram">4.1 Hardware Block Diagram</h3>
-<pre class="codehilite"><code>┌────────────────────────────────────────────────────────────┐
-│                     LiPo Battery (4S, 5000 mAh)            │
-│                    [XT60 Connector]                        │
-└────────────────┬───────────────────────────────────────────┘
-                 │
-        ┌────────▼──────────┐
-        │  Power Dist. Board│
-        │  • 14.8V Main Bus │
-        │  • 5V Aux (for ESC telemetry, if needed)
-        └────────┬──────────┘
-                 │
-        ┌────────▼─────────────────────────────────┐
-        │     ESP32-S3 Flight Controller           │
-        │  ┌──────────────────────────────────┐    │
-        │  │ Sensor Bus (I2C @ 400 kHz)      │    │
-        │  │ • ICM20689 IMU (accel + gyro)   │    │
-        │  │ • BMP390 Barometer              │    │
-        │  └──────────────────────────────────┘    │
-        │  ┌──────────────────────────────────┐    │
-        │  │ Motor Control Pins (PWM)        │    │
-        │  │ • GPIO 12 → Motor 1 (Front-L)   │    │
-        │  │ • GPIO 13 → Motor 2 (Front-R)   │    │
-        │  │ • GPIO 14 → Motor 3 (Rear-L)    │    │
-        │  │ • GPIO 15 → Motor 4 (Rear-R)    │    │
-        │  └──────────────────────────────────┘    │
-        │  ┌──────────────────────────────────┐    │
-        │  │ Wing Servo Bus (I2C or PWM)     │    │
-        │  │ • GPIO 21 (SDA), 22 (SCL)      │    │
-        │  │ • Or PWM pins 16–19 direct      │    │
-        │  │ • 6× Servo signals (L/R wings)  │    │
-        │  └──────────────────────────────────┘    │
-        │  ┌──────────────────────────────────┐    │
-        │  │ Failsafe &amp; Monitoring           │    │
-        │  │ • Watchdog timer                │    │
-        │  │ • Battery voltage ADC (GPIO 36)│    │
-        │  │ • Radio receiver (optional RX) │    │
-        │  └──────────────────────────────────┘    │
-        └────────┬─────────────────────────────────┘
-                 │
-    ┌────────────┼────────────┬──────────────┐
-    │            │            │              │
-    ▼            ▼            ▼              ▼
-┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
-│ ESC 1   │  │ ESC 2   │  │ ESC 3   │  │ ESC 4   │
-│ (40 A)  │  │ (40 A)  │  │ (40 A)  │  │ (40 A)  │
-└────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘
-     │            │            │            │
-     ▼            ▼            ▼            ▼
-┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
-│ Motor 1 │  │ Motor 2 │  │ Motor 3 │  │ Motor 4 │
-│ 580KV   │  │ 580KV   │  │ 580KV   │  │ 580KV   │
-│ 950 gf  │  │ 950 gf  │  │ 950 gf  │  │ 950 gf  │
-└────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘
-     │            │            │            │
-     └────────────┴────────────┴────────────┘
-              ▼ (Distributed thrust)
-       ┌──────────────────┐
-       │ Quad Lift System │
-       │ Total: 3800 gf   │
-       └──────────────────┘
-
-     ┌─────────────────────────────────┐
-     │  Wing Servo Control Bus (I2C)   │
-     │  PCA9685 (16-channel PWM if     │
-     │  using servo library, or direct │
-     │  ESP32 PWM pins)                │
-     │  ├─ Servo 1: L-Wing Shoulder    │
-     │  ├─ Servo 2: L-Wing Twist       │
-     │  ├─ Servo 3: L-Wing Flap        │
-     │  ├─ Servo 4: R-Wing Shoulder    │
-     │  ├─ Servo 5: R-Wing Twist       │
-     │  └─ Servo 6: R-Wing Flap        │
-     └─────────────────────────────────┘
-          (to wing actuator linkage)
-</code></pre>
-
-<h3 id="42-software-control-loop-pseudocode">4.2 Software Control Loop (Pseudocode)</h3>
-<pre class="codehilite"><code class="language-cpp">// Flight controller main loop (target: 100–200 Hz for quad stability)
-
-void flight_control_loop(void)
-{
-    static uint32_t last_cycle_us = 0;
-    uint32_t now_us = esp_timer_get_time();
-    uint32_t dt_us = now_us - last_cycle_us;
-
-    if (dt_us &lt; 5000) return;  // Skip if &lt;5ms elapsed (200 Hz target)
-    last_cycle_us = now_us;
-
-    // 1. Read sensors
-    imu_read(&amp;accel, &amp;gyro);           // IMU at 1 kHz, downsample
-    baro_read(&amp;altitude_m, &amp;climb_rate);
-
-    // 2. State estimation (sensor fusion)
-    attitude_estimate_complementary_filter(accel, gyro, &amp;roll, &amp;pitch, &amp;yaw);
-    altitude_update(baro_altitude, &amp;est_altitude);
-
-    // 3. Check failsafe conditions
-    if (battery_voltage &lt; 11.0V) {
-        set_failsafe_mode();  // Descend safely
-    }
-    if (gyro_magnitude &gt; GYRO_LIMIT) {
-        cut_thrust_and_descend();
-    }
-
-    // 4. Wing flapping cycle (coordinated with flight phase)
-    update_wing_flap_profile(hover_phase_pct);
-    write_wing_servos(flap_angles);
-
-    // 5. PID control for quad motors
-    // Target attitude from RC receiver or autonomous behavior
-    float target_roll, target_pitch, target_yaw_rate;
-    float target_throttle;  // 0.0 = idle, 1.0 = max
-
-    // Attitude error
-    float roll_error = target_roll - roll;
-    float pitch_error = target_pitch - pitch;
-    float yaw_error = target_yaw_rate - actual_yaw_rate;
-
-    // PID loops (cascaded: outer loop for attitude, inner loop for rate)
-    float roll_rate_cmd = pid_outer_roll.update(roll_error, dt_s);
-    float pitch_rate_cmd = pid_outer_pitch.update(pitch_error, dt_s);
-    float yaw_rate_cmd = pid_outer_yaw.update(yaw_error, dt_s);
-
-    float roll_thrust_delta = pid_inner_roll_rate.update(
-        roll_rate_cmd - actual_roll_rate, dt_s);
-    float pitch_thrust_delta = pid_inner_pitch_rate.update(
-        pitch_rate_cmd - actual_pitch_rate, dt_s);
-    float yaw_thrust_delta = pid_inner_yaw_rate.update(
-        yaw_rate_cmd - actual_yaw_rate, dt_s);
-
-    // Motor mixing (quad X-configuration)
-    // M1=FL, M2=FR, M3=RL, M4=RR
-    throttle_m1 = target_throttle + pitch_thrust_delta - roll_thrust_delta + yaw_thrust_delta;
-    throttle_m2 = target_throttle + pitch_thrust_delta + roll_thrust_delta - yaw_thrust_delta;
-    throttle_m3 = target_throttle - pitch_thrust_delta - roll_thrust_delta - yaw_thrust_delta;
-    throttle_m4 = target_throttle - pitch_thrust_delta + roll_thrust_delta + yaw_thrust_delta;
-
-    // Clamp to [0.0, 1.0]
-    throttle_m1 = constrain(throttle_m1, 0.0, 1.0);
-    throttle_m2 = constrain(throttle_m2, 0.0, 1.0);
-    throttle_m3 = constrain(throttle_m3, 0.0, 1.0);
-    throttle_m4 = constrain(throttle_m4, 0.0, 1.0);
-
-    // 6. Convert throttle [0–1] to PWM pulse width [1000–2000 µs]
-    pwm_m1 = 1000 + (uint32_t)(throttle_m1 * 1000);
-    pwm_m2 = 1000 + (uint32_t)(throttle_m2 * 1000);
-    pwm_m3 = 1000 + (uint32_t)(throttle_m3 * 1000);
-    pwm_m4 = 1000 + (uint32_t)(throttle_m4 * 1000);
-
-    // 7. Write motor PWM signals
-    ledc_set_duty_and_update(LEDC_CHANNEL_0, pwm_m1);
-    ledc_set_duty_and_update(LEDC_CHANNEL_1, pwm_m2);
-    ledc_set_duty_and_update(LEDC_CHANNEL_2, pwm_m3);
-    ledc_set_duty_and_update(LEDC_CHANNEL_3, pwm_m4);
-
-    // 8. Log telemetry for debugging
-    if (should_log_telemetry()) {
-        printf(&quot;Alt=%.1f Att=(%.1f,%.1f,%.1f) THR=(%.2f,%.2f,%.2f,%.2f)\n&quot;,
-               est_altitude, roll, pitch, yaw,
-               throttle_m1, throttle_m2, throttle_m3, throttle_m4);
-    }
-}
-</code></pre>
-
-<p><strong>Loop frequency</strong>: 100–200 Hz for quad stability (motor mixing updates)<br />
-<strong>Wing flap coordination</strong>: 2–4 Hz (synchronized with body attitude changes)</p>
-<hr />
-<h2 id="5-phased-implementation-roadmap">5. PHASED IMPLEMENTATION ROADMAP</h2>
-<h3 id="phase-1-prototype-ground-testing-weeks-13">Phase 1: Prototype &amp; Ground Testing (Weeks 1–3)</h3>
-<p><strong>Deliverables</strong>:
-- [ ] Structural airframe CAD (OpenSCAD + 3D print)
-- [ ] Motor/ESC bench test (thrust measurement jig)
-- [ ] ESP32 flight controller firmware skeleton
-- [ ] IMU + barometer sensor fusion validation</p>
-<p><strong>Tasks</strong>:
-1. Design fuselage with landing gear (foam/CF tube)
-2. Acquire &amp; test motors/ESCs with props (no wings yet)
-3. Build thrust-measurement stand (scale + load cell)
-4. Validate motor thrust data against specs
-5. Implement basic IMU complementary filter
-6. Create simple throttle sweep test (PWM 1000→2000 µs)
-7. Test barometer altitude reading indoors + outdoors</p>
-<p><strong>Exit Criteria</strong>:
-- Motors produce rated ~950 gf each (confirmed on scale)
-- IMU reads stable orientation in stationary test
-- Barometer altitude accuracy within ±2 m
-- All 4 motors respond correctly to PWM commands</p>
-<hr />
-<h3 id="phase-2-tethered-flight-testing-weeks-46">Phase 2: Tethered Flight Testing (Weeks 4–6)</h3>
-<p><strong>Deliverables</strong>:
-- [ ] Tethered flight test (up to 10m altitude)
-- [ ] PID tuning in stabilized flight mode
-- [ ] Wing servo integration (servo control signals)
-- [ ] Failsafe &amp; battery monitoring</p>
-<p><strong>Tasks</strong>:
-1. Assemble wings with 6 servos (3 per side, articulation linkages)
-2. Integrate wing servo control into flight controller (via I2C PWM expander or direct ESP32 PWM)
-3. Implement battery voltage monitoring + low-battery failsafe
-4. Tether dragon at ~3 m height using kevlar cord (non-conductive)
-5. Perform throttle step response (measure rise time, overshoot)
-6. Tune P, I, D gains for stable hover within ±0.5 m altitude error
-7. Test wing flap cycle at 2–4 Hz (verify servo health, measure current draw)
-8. Simulate motor failure (cut power to one motor, test recovery capability)</p>
-<p><strong>Exit Criteria</strong>:
-- Stable tethered hover for &gt;2 min without oscillation
-- Altitude hold accuracy ±0.5 m in still air
-- Wing servos operate smoothly without grinding/buzzing
-- Motor failure → system detects and alerts (safe descent)</p>
-<hr />
-<h3 id="phase-3-free-flight-testing-weeks-79">Phase 3: Free Flight Testing (Weeks 7–9)</h3>
-<p><strong>Deliverables</strong>:
-- [ ] Outdoor free flight in controlled area (large field)
-- [ ] Autonomous waypoint navigation (optional)
-- [ ] Flight telemetry logging &amp; analysis
-- [ ] Behavior sequencing (takeoff → climb → forward flight → landing)</p>
-<p><strong>Tasks</strong>:
-1. Choose safe test location (large, open field, no obstacles)
-2. Implement manual RC control mode (radio receiver input) or autonomous state machine
-3. Write takeoff/landing routines
-4. Test forward flight pitch control (nose down → increase speed)
-5. Log all IMU + motor throttle data to SD card during flight
-6. Analyze post-flight logs for oscillation, energy efficiency, wing contribution
-7. Perform 3–5 free flights, increasing complexity (manual → automated)
-8. Validate flight duration (target 10–12 min hover, 8–10 min active flight)</p>
-<p><strong>Exit Criteria</strong>:
-- Controlled takeoff from ground
-- Stable hover at ~1.5 m altitude
-- Forward flight at 5–8 m/s
-- Safe landing with minimal impact
-- Flight logs show low oscillation in attitude/altitude</p>
-<hr />
-<h3 id="phase-4-wing-optimization-aero-tuning-weeks-1012">Phase 4: Wing Optimization &amp; Aero Tuning (Weeks 10–12)</h3>
-<p><strong>Deliverables</strong>:
-- [ ] Wing morphing strategies (flap profile optimization)
-- [ ] Aerodynamic efficiency measurements
-- [ ] Extended flight duration (target 15+ min)
-- [ ] Agility/maneuver response quantification</p>
-<p><strong>Tasks</strong>:
-1. Analyze Phase 3 flight logs to extract wing lift contribution vs. quad thrust
-2. Adjust flap frequency/amplitude based on flight phase (hover vs. cruise)
-3. Test different wing fabric/rigidity (foam vs. Mylar, cambered vs. flat)
-4. Measure power consumption at different wing beat frequencies
-5. Implement dynamic wing control (vary flap profile based on gyro feedback)
-6. Re-test free flight with optimized wing profile
-7. Measure endurance at different throttle levels (hover @ 50% vs. 75%)</p>
-<p><strong>Exit Criteria</strong>:
-- Flight time 12–15 min at cruise throttle
-- Wing contributes 20–30% reduction in quad motor load during forward flight
-- Power consumption &lt;40 A average during mixed flight phase</p>
-<hr />
-<h3 id="phase-5-integration-with-p32-animatronic-system-weeks-1315">Phase 5: Integration with P32 Animatronic System (Weeks 13–15)</h3>
-<p><strong>Deliverables</strong>:
-- [ ] Component definitions (wing_flap_controller, quad_motor_manager, etc.)
-- [ ] JSON bot configuration for flying dragon
-- [ ] Integration with global shared memory for multi-chip coordination
-- [ ] Behavior scripting (personality, mood-based flight patterns)</p>
-<p><strong>Tasks</strong>:
-1. Create component source files following P32 pattern:
-   - <code>flying_dragon_motor_controller.src</code> / <code>.hdr</code>
-   - <code>flying_dragon_wing_servo_controller.src</code> / <code>.hdr</code>
-   - <code>flying_dragon_sensor_fusion.src</code> / <code>.hdr</code>
-   - <code>flying_dragon_flight_safety.src</code> / <code>.hdr</code>
-2. Define hardware templates for motor/servo configurations
-3. Write JSON hierarchy: <code>flying_dragon_full.json</code> + subsystem definitions
-4. Integrate with SharedMemory (broadcast flight state, receive commands from other chips)
-5. Implement mood-based flight behaviors (playful → sharp maneuvers, calm → smooth flight)
-6. Create emergency landing behavior (signal loss → auto-descend)
-7. Test communication between head/torso (if multi-chip) and flight controller</p>
-<p><strong>Exit Criteria</strong>:
-- All components deploy &amp; compile successfully
-- Flight controller responds to mood/behavior signals from SharedMemory
-- Graceful failsafe when SharedMemory link is lost
-- Telemetry visible in central logging system</p>
-<hr />
-<h2 id="6-risk-mitigation-strategies">6. RISK MITIGATION STRATEGIES</h2>
-<h3 id="61-critical-risks">6.1 Critical Risks</h3>
-<table>
-<thead>
-<tr>
-<th>Risk</th>
-<th>Severity</th>
-<th>Mitigation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Motor ESC synchronization failure</strong></td>
-<td>HIGH</td>
-<td>Use sensored motors + BLHeli-32 firmware (reliable initialization); test all 4 motors independently before tethering</td>
-</tr>
-<tr>
-<td><strong>LiPo battery failure / swelling</strong></td>
-<td>HIGH</td>
-<td>Use certified batteries with BEC integration; monitor cell voltage &amp; temperature; implement low-voltage cutoff (3.0 V/cell)</td>
-</tr>
-<tr>
-<td><strong>Wing servo strain / joint failure</strong></td>
-<td>MEDIUM</td>
-<td>Use high-torque servos (6–8 kg-cm min); design articulation with mechanical redundancy; test wing oscillation fatigue before flight</td>
-</tr>
-<tr>
-<td><strong>Gyro saturation during aggressive roll</strong></td>
-<td>MEDIUM</td>
-<td>Implement gyro limit watchdog (&gt;500°/s → reduce throttle); use low-pass filter on sensor input; constrain PID error accumulation</td>
-</tr>
-<tr>
-<td><strong>Inadequate ESP32 processing speed</strong></td>
-<td>MEDIUM</td>
-<td>Profile flight loop timing; use LEDC hardware PWM (not bit-banging); defer logging to separate task; target 100–200 Hz loop minimum</td>
-</tr>
-<tr>
-<td><strong>Loss of radio link</strong></td>
-<td>MEDIUM</td>
-<td>Implement watchdog timer (no valid command for &gt;500 ms → auto-land); store failsafe mode in NVRAM</td>
-</tr>
-<tr>
-<td><strong>Unbalanced motor thrust</strong></td>
-<td>LOW</td>
-<td>Calibrate ESC throttle curves individually; measure static thrust of each motor on scale</td>
-</tr>
-<tr>
-<td><strong>Prop damage mid-flight</strong></td>
-<td>LOW</td>
-<td>Carry spare props; design quick-release prop hub; inspect visually before each flight</td>
-</tr>
-</tbody>
-</table>
-<h3 id="62-safety-systems">6.2 Safety Systems</h3>
-<p><strong>Primary Failsafes</strong>:
-1. <strong>Altitude Floor</strong>: If barometer reads altitude &lt; 0.5 m, cut throttle &amp; alert pilot
-2. <strong>Gyro Limit</strong>: If gyro magnitude &gt; 500°/s, reduce throttle by 50%
-3. <strong>Battery LVC</strong> (Low Voltage Cutoff): If 4S drops below 11.0 V (2.75 V/cell), begin safe descent
-4. <strong>Watchdog Timer</strong>: No valid command received for &gt;500 ms → descend at fixed rate
-5. <strong>Tether Safety</strong> (for Phase 2): Non-conductive kevlar line + breakaway connector at airframe</p>
-<p><strong>Contingency Procedures</strong>:
-- <strong>Motor failure</strong>: Detect asymmetric gyro output; transition to auto-descend
-- <strong>ESC brownout</strong>: Capacitor bank + soft-start ESC sequencing (stagger motor initialization by 10 ms)
-- <strong>Servo jam</strong>: Monitor servo current; if &gt;1 A for &gt;500 ms, reduce wing flap amplitude</p>
-<h3 id="63-testing-validation-checklist">6.3 Testing Validation Checklist</h3>
-<p>Before any free flight:
-- [ ] All 4 motors respond to throttle independently (no cross-talk)
-- [ ] Quad hovers at 50% throttle without drift &gt;0.5 m/min
-- [ ] PID gains produce stable response (no oscillation) within 2 sec settling time
-- [ ] Battery voltage stable under load (drop &lt;0.5 V during full throttle)
-- [ ] Wing servos move smoothly, no grinding or buzzing
-- [ ] Barometer altitude accurate within ±2 m (ground truth GPS)
-- [ ] Accelerometer bias &lt; 0.1 g after calibration
-- [ ] Radio link range &gt; 100 m (2.4 GHz RC receiver)
-- [ ] Props spin freely without rubbing (check clearance after transport)
-- [ ] Tether tested with ~5 kg static load (safety factor 2×)</p>
-<hr />
-<h2 id="7-control-system-integration-with-p32">7. CONTROL SYSTEM INTEGRATION WITH P32</h2>
-<h3 id="71-component-architecture">7.1 Component Architecture</h3>
-<p><strong>Top-level flying dragon bot structure</strong>:</p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_full&quot;,
-  &quot;subsystems&quot;: [
-    &quot;flying_dragon_head&quot;,
-    &quot;flying_dragon_flight_controller&quot;
-  ]
-}
-</code></pre>
-
-<p><strong>Head subsystem</strong> (existing goblins pattern):</p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_head&quot;,
-  &quot;components&quot;: [
-    &quot;flying_dragon_left_eye&lt;GC9A01&gt;&quot;,
-    &quot;flying_dragon_right_eye&lt;GC9A01&gt;&quot;,
-    &quot;flying_dragon_mouth&lt;GC9A01&gt;&quot;,
-    &quot;flying_dragon_speaker&lt;MINISPKR&gt;&quot;
-  ]
-}
-</code></pre>
-
-<p><strong>Flight controller subsystem</strong> (new):</p>
-<pre class="codehilite"><code class="language-json">{
-  &quot;name&quot;: &quot;flying_dragon_flight_controller&quot;,
-  &quot;components&quot;: [
-    &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV,HOBBYWING_40A_ESC&gt;&quot;,
-    &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
-    &quot;flying_dragon_sensor_fusion&lt;ICM20689,BMP390&gt;&quot;,
-    &quot;flying_dragon_flight_safety&lt;WATCHDOG,BATTERY_MONITOR&gt;&quot;,
-    &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3&gt;&quot;
-  ]
-}
-</code></pre>
-
-<h3 id="72-component-definitions">7.2 Component Definitions</h3>
-<p><strong>Component 1: Motor Controller</strong></p>
-<p>File: <code>config/components/functional/flying_dragon_motor_controller.src</code></p>
-<pre class="codehilite"><code class="language-cpp">// flying_dragon_motor_controller.src
-// Manages 4 brushless motors (quad configuration) via ESC PWM control
-
-#include &quot;hal/ledc_types.h&quot;
-#include &quot;driver/ledc.h&quot;
-
-// Static state (shared with other flight controller components)
-static uint16_t motor_pwm[4] = {1000, 1000, 1000, 1000};  // µs
-static bool motor_armed = false;
-
-esp_err_t flying_dragon_motor_controller_init(void)
-{
-    // Initialize LEDC PWM for motor control
-    ledc_timer_config_t timer_conf = {
-        .speed_mode = LEDC_HIGH_SPEED_MODE,
-        .timer_num = LEDC_TIMER_0,
-        .freq_hz = 490,  // 490 Hz PWM (ESC standard)
-        .duty_resolution = LEDC_TIMER_13_BIT
-    };
-    ledc_timer_config(&amp;timer_conf);
-
-    // Configure 4 channels (motors 1–4)
-    int gpio_pins[4] = {12, 13, 14, 15};
-    ledc_channel_t channels[4] = {
-        LEDC_CHANNEL_0, LEDC_CHANNEL_1, LEDC_CHANNEL_2, LEDC_CHANNEL_3
-    };
-
-    for (int i = 0; i &lt; 4; i++) {
-        ledc_channel_config_t ch_conf = {
-            .channel = channels[i],
-            .duty = 0,
-            .gpio_num = gpio_pins[i],
-            .speed_mode = LEDC_HIGH_SPEED_MODE,
-            .timer_sel = LEDC_TIMER_0
-        };
-        ledc_channel_config(&amp;ch_conf);
-    }
-
-    motor_armed = false;
-    return ESP_OK;
-}
-
-void flying_dragon_motor_controller_act(void)
-{
-    // Arm check: allow motor commands only after 1 second idle
-    static uint32_t arm_countdown = 1000;  // ms
-    if (arm_countdown &gt; 0) {
-        arm_countdown--;
-        if (arm_countdown == 0) motor_armed = true;
-    }
-
-    if (!motor_armed) {
-        // Keep all motors at idle (1000 µs)
-        for (int i = 0; i &lt; 4; i++) {
-            motor_pwm[i] = 1000;
-        }
-        return;
-    }
-
-    // Update PWM outputs (called by flight controller during main loop)
-    // Motor PWM values come from flight_control_loop (via static shared array)
-    for (int i = 0; i &lt; 4; i++) {
-        uint32_t duty = (motor_pwm[i] - 1000) * 40.96;  // Convert µs to duty (0–4095)
-        ledc_set_duty_and_update(LEDC_HIGH_SPEED_MODE, (ledc_channel_t)i, duty);
-    }
-}
-</code></pre>
-
-<p>File: <code>config/components/functional/flying_dragon_motor_controller.hdr</code></p>
-<pre class="codehilite"><code class="language-cpp">// flying_dragon_motor_controller.hdr
-#ifndef FLYING_DRAGON_MOTOR_CONTROLLER_H
-#define FLYING_DRAGON_MOTOR_CONTROLLER_H
-
-#include &lt;stdint.h&gt;
-#include &lt;esp_err.h&gt;
-
-esp_err_t flying_dragon_motor_controller_init(void);
-void flying_dragon_motor_controller_act(void);
-
-// Public access for flight controller to set motor PWM
-extern uint16_t motor_pwm[4];  // [1000–2000 µs per motor]
-extern bool motor_armed;
-
-#endif
-</code></pre>
-
-<p><strong>Component 2: Wing Servo Controller</strong></p>
-<p>File: <code>config/components/functional/flying_dragon_wing_servo_controller.src</code></p>
-<pre class="codehilite"><code class="language-cpp">// flying_dragon_wing_servo_controller.src
-// Manages 6 servo motors for wing articulation (3 per wing)
-
-#include &quot;driver/ledc.h&quot;
-
-// Wing flap profile (beat frequency 2–4 Hz)
-static float wing_flap_phase = 0.0f;  // [0–1]
-static float wing_beat_freq_hz = 3.0f;
-static uint16_t servo_angles[6] = {90, 90, 90, 90, 90, 90};  // Degrees [0–180]
-
-esp_err_t flying_dragon_wing_servo_controller_init(void)
-{
-    // Initialize 6 PWM channels for servos (GPIO 16–21, or use I2C PWM expander)
-    // Using direct ESP32 PWM on pins 16–21
-    ledc_timer_config_t servo_timer = {
-        .speed_mode = LEDC_LOW_SPEED_MODE,
-        .timer_num = LEDC_TIMER_1,
-        .freq_hz = 50,  // Standard servo frequency (20 ms period)
-        .duty_resolution = LEDC_TIMER_13_BIT
-    };
-    ledc_timer_config(&amp;servo_timer);
-
-    int servo_pins[6] = {16, 17, 18, 19, 20, 21};
-    for (int i = 0; i &lt; 6; i++) {
-        ledc_channel_config_t ch = {
-            .channel = (ledc_channel_t)i,
-            .duty = 0,
-            .gpio_num = servo_pins[i],
-            .speed_mode = LEDC_LOW_SPEED_MODE,
-            .timer_sel = LEDC_TIMER_1
-        };
-        ledc_channel_config(&amp;ch);
-        servo_angles[i] = 90;  // Neutral (1.5 ms → 50% duty)
-    }
-
-    return ESP_OK;
-}
-
-void flying_dragon_wing_servo_controller_act(void)
-{
-    // Advance flap phase
-    static uint32_t last_update_ms = 0;
-    uint32_t now_ms = esp_timer_get_time() / 1000;
-    if (now_ms - last_update_ms &gt;= 20) {  // Update at 50 Hz (servo refresh rate)
-        last_update_ms = now_ms;
-
-        float dt_s = (now_ms - last_update_ms) / 1000.0f;
-        wing_flap_phase += wing_beat_freq_hz * dt_s;
-        if (wing_flap_phase &gt;= 1.0f) wing_flap_phase -= 1.0f;
-
-        // Compute wing positions based on flap phase (sinusoidal motion)
-        // Left wing shoulder (servo 0): main articulation
-        servo_angles[0] = 90 + (int)(30 * sin(2.0f * M_PI * wing_flap_phase));
-        // Left wing twist (servo 1): 
-        servo_angles[1] = 90 + (int)(15 * cos(4.0f * M_PI * wing_flap_phase));
-        // Left wing flap (servo 2): beat cycle
-        servo_angles[2] = 90 + (int)(45 * sin(2.0f * M_PI * wing_flap_phase));
-
-        // Right wing (servos 3–5): mirror of left
-        servo_angles[3] = servo_angles[0];
-        servo_angles[4] = servo_angles[1];
-        servo_angles[5] = servo_angles[2];
-    }
-
-    // Convert servo angles to PWM duty (1000–2000 µs)
-    for (int i = 0; i &lt; 6; i++) {
-        uint32_t pwm_us = 1000 + (servo_angles[i] * 1000) / 180;  // Linear map [0°–180°] → [1000–2000 µs]
-        uint32_t duty = (pwm_us * 4095) / 20000;  // 20 ms period
-        ledc_set_duty_and_update(LEDC_LOW_SPEED_MODE, (ledc_channel_t)i, duty);
-    }
-}
-</code></pre>
-
-<h3 id="73-sharedmemory-integration">7.3 SharedMemory Integration</h3>
-<p><strong>Define new shared state</strong> in <code>shared/FlightState.hpp</code>:</p>
-<pre class="codehilite"><code class="language-cpp">// shared/FlightState.hpp
-#ifndef FLIGHT_STATE_H
-#define FLIGHT_STATE_H
-
-#include &lt;stdint.h&gt;
-
-struct FlightState
-{
-    float altitude_m;        // Barometer reading (meters)
-    float roll_deg;          // Attitude (degrees)
-    float pitch_deg;
-    float yaw_deg;
-    uint16_t battery_mv;     // Battery voltage (millivolts)
-    uint8_t flight_phase;    // 0=idle, 1=arming, 2=hover, 3=cruise, 4=landing
-    uint8_t failsafe_active; // 0=nominal, 1=battery low, 2=comms lost
-    float wing_beat_freq;    // Current wing flap frequency (Hz)
-};
-
-#endif
-</code></pre>
-
-<p><strong>Usage in sensor fusion component</strong>:</p>
-<pre class="codehilite"><code class="language-cpp">// flying_dragon_sensor_fusion.src
-// Reads IMU + barometer, estimates attitude &amp; altitude
-
-void flying_dragon_sensor_fusion_act(void)
-{
-    // Read sensors, compute complementary filter
-    FlightState flight_state;
-    flight_state.altitude_m = baro_altitude_m;
-    flight_state.roll_deg = estimated_roll;
-    flight_state.pitch_deg = estimated_pitch;
-    flight_state.yaw_deg = estimated_yaw;
-    flight_state.battery_mv = adc_read_battery();
-    flight_state.flight_phase = current_flight_phase;
-
-    // Broadcast to all other chips
-    GSM.write&lt;FlightState&gt;(flight_state);
-}
-</code></pre>
-
-<hr />
-<h2 id="8-integration-checklist">8. INTEGRATION CHECKLIST</h2>
-<ul>
-<li>[ ] Motor drivers tested independently (thrust confirmation on scale)</li>
-<li>[ ] Wing servos articulate smoothly without binding</li>
-<li>[ ] IMU complimentary filter produces stable estimates</li>
-<li>[ ] Barometer altitude within ±2 m accuracy</li>
-<li>[ ] All 4 components (motor, wing, sensor, safety) compile together</li>
-<li>[ ] SharedMemory messages broadcast/receive correctly</li>
-<li>[ ] Failsafe routines test successfully (simulated battery/comms loss)</li>
-<li>[ ] Flight loop runs at ≥100 Hz (verified with timing instrumentation)</li>
-<li>[ ] Mood system influences flight behavior (e.g., playful → aggressive maneuvers)</li>
-<li>[ ] Emergency landing executes safely from any flight phase</li>
-</ul>
-<hr />
-<h2 id="9-reference-material-resources">9. REFERENCE MATERIAL &amp; RESOURCES</h2>
-<h3 id="91-key-hardware-specifications">9.1 Key Hardware Specifications</h3>
-<ul>
-<li><strong>Motor</strong>: T-Motor U3 PRO 580KV – https://store.tmotor.com/</li>
-<li><strong>ESC</strong>: Hobbywing 40A XRotor BLHeli-32 – https://www.hobbywing.com/</li>
-<li><strong>Propeller</strong>: APC 10×5 Carbon Fiber – https://www.apcprop.com/</li>
-<li><strong>IMU</strong>: ICM20689 6-axis 16-bit – https://invensense.tdk.com/</li>
-<li><strong>Barometer</strong>: BMP390 with I2C – https://www.bosch-sensortec.com/</li>
-<li><strong>LiPo</strong>: 4S 5000 mAh 50C – Turnigy, Tattu, or similar reputable brand</li>
-</ul>
-<h3 id="92-firmware-references">9.2 Firmware References</h3>
-<ul>
-<li><strong>BLHeli-32 Configurator</strong>: https://github.com/bitdump/BLHeli</li>
-<li><strong>PX4 Autopilot</strong>: https://px4.io/ (sensor fusion algorithms)</li>
-<li><strong>ArduCopter</strong>: https://github.com/ArduPilot/ardupilot (control loops, reference)</li>
-</ul>
-<h3 id="93-design-references">9.3 Design References</h3>
-<ul>
-<li><strong>Flapping Wing Aerodynamics</strong>: Shyy et al., "Aerodynamics of Low Reynolds Number Flyers" (textbook)</li>
-<li><strong>Quadcopter Control Theory</strong>: Bouabdallah, "Design and Control of Quadrotors with Application to Autonomous Flying" (PhD thesis, ETH Zurich)</li>
-<li><strong>Wing Design CAD</strong>: OpenSCAD tutorials, STEP format for FEA analysis</li>
-</ul>
-<h3 id="94-safety-standards">9.4 Safety Standards</h3>
-<ul>
-<li>Academy of Model Aeronautics (AMA): Flight safety guidelines</li>
-<li>FAA Part 107 (optional, if commercial operation considered)</li>
-<li>IP Rating 54 (water resistance) for outdoor operation</li>
-</ul>
-<hr />
-<h2 id="10-conclusion">10. CONCLUSION</h2>
-<p><strong>Feasibility</strong>: A flying dragon with hybrid flapping wings + quadcopter propulsion is <strong>highly feasible</strong> for a 2.5 kg system with:
-- 4× T-Motor U3 580KV brushless motors
-- 6× MG996R servo actuators for wing articulation
-- 4S LiPo battery (5000–6000 mAh, 50C rating)
-- ESP32-S3 flight controller with complementary filter + cascaded PID loops
-- 8–15 minute flight duration depending on flight mode</p>
-<p><strong>Key Design Insights</strong>:
-1. <strong>Wings contribute ~20–30% lift reduction</strong> during forward flight, not sufficient for solo hovering.
-2. <strong>Quad motors provide primary lift</strong> (1.5 thrust-to-weight ratio ensures maneuverability).
-3. <strong>Wing flapping adds visual realism</strong> without compromising flight stability if properly synchronized with gyro feedback.
-4. <strong>P32 component architecture fits perfectly</strong>: Motor/wing/sensor control as isolated components, SharedMemory for multi-chip coordination.</p>
-<p><strong>Next Steps</strong>:
-1. <strong>Immediate</strong>: Acquire motors/ESCs, begin Phase 1 prototyping
-2. <strong>Week 2</strong>: Thrust measurement validation
-3. <strong>Week 3</strong>: Tethered flight testing begins
-4. <strong>Week 7</strong>: Free flight trials in open field
-5. <strong>Week 13</strong>: Full P32 system integration</p>
-<p>This analysis provides a concrete roadmap for a realistic, safe, and high-performance flying dragon system within the P32 ecosystem.</p>
-<hr />
-<p><strong>Document Owner</strong>: AI Analysis System<br />
-<strong>Last Updated</strong>: November 4, 2025<br />
-<strong>Status</strong>: Ready for Phase 1 Implementation</p>
-    </div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Dragon - Deep Dive Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #2980b9;
+            margin: 40px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h2 {
+            font-size: 2em;
+            color: #2980b9;
+            margin: 35px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 25px 0 10px 0;
+        }
+        
+        h4, h5, h6 {
+            color: #34495e;
+            margin: 15px 0 8px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #c7254e;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.4;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            padding-left: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #2980b9;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border: 1px solid #bdc3c7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #ecf0f1;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        em {
+            color: #34495e;
+        }
+        
+        hr {
+            border: none;
+            height: 2px;
+            background: #bdc3c7;
+            margin: 30px 0;
+        }
+        
+        .page-break {
+            page-break-after: always;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            pre, code, table {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="flying-dragon-robot-deep-dive-analysis">FLYING DRAGON ROBOT - DEEP DIVE ANALYSIS</h1>
+<p><strong>Date</strong>: November 4, 2025<br />
+<strong>Project</strong>: P32 Animatronic Bot<br />
+<strong>Subject</strong>: Hybrid Flapping Wing + Quadcopter Flight System<br />
+<strong>Status</strong>: Feasibility Analysis &amp; Architecture Design</p>
+<hr />
+<h2 id="executive-summary">EXECUTIVE SUMMARY</h2>
+<p>A flying dragon robot combining <strong>articulated flapping wings</strong> with <strong>quadcopter propulsion</strong> is technically feasible for:
+- <strong>Dragon body mass</strong>: 1.53.0 kg
+- <strong>Wing span</strong>: 1.01.5 m<br />
+- <strong>Flight duration</strong>: 815 minutes<br />
+- <strong>Flight envelope</strong>: Slow hovering to 15 m/s forward speed</p>
+<p><strong>Key finding</strong>: The hybrid model works best as <strong>wings-for-agility, quad-motors-for-lift</strong>, not wings-as-primary-lift. This leverages realism (flapping for visual appeal) while maintaining flight safety and control authority.</p>
+<hr />
+<h2 id="1-feasibility-assessment-mass-thrust-calculations">1. FEASIBILITY ASSESSMENT: MASS &amp; THRUST CALCULATIONS</h2>
+<h3 id="11-dragon-body-mass-budget">1.1 Dragon Body Mass Budget</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Mass (g)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Airframe Structure</strong></td>
+<td>400600</td>
+<td>CF tube, 3D-printed joints, aluminum brackets</td>
+</tr>
+<tr>
+<td><strong>Wing Mechanism</strong></td>
+<td>300400</td>
+<td>Servo actuators, linkages, wing fabric/foam</td>
+</tr>
+<tr>
+<td><strong>Quadcopter Motors</strong></td>
+<td>200300</td>
+<td>4 brushless motors (~5075g each)</td>
+</tr>
+<tr>
+<td><strong>ESCs (4)</strong></td>
+<td>100150</td>
+<td>4050A ESCs for thrust control</td>
+</tr>
+<tr>
+<td><strong>Main Flight Controller</strong></td>
+<td>80120</td>
+<td>Onboard ESP32-S3 + IMU + Barometer</td>
+</tr>
+<tr>
+<td><strong>LiPo Battery</strong></td>
+<td>400700</td>
+<td>4S 50006000 mAh for 15 min flight</td>
+</tr>
+<tr>
+<td><strong>Wiring &amp; Power Distribution</strong></td>
+<td>100150</td>
+<td>PDB, connectors, servo cables</td>
+</tr>
+<tr>
+<td><strong>Wing Servos</strong></td>
+<td>150250</td>
+<td>46 servo motors for wing articulation</td>
+</tr>
+<tr>
+<td><strong>Payload (optional)</strong></td>
+<td>0200</td>
+<td>Lights, camera, sound emitter</td>
+</tr>
+<tr>
+<td><strong>Structural Reinforcement</strong></td>
+<td>150200</td>
+<td>Gussets, landing gear, antenna mounts</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>1,8803,270 g</strong></td>
+<td>Nominal: ~2.5 kg</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-lift-requirements">1.2 Lift Requirements</h3>
+<p><strong>Quadcopter thrust model</strong>:
+$$T_{\text{quad}} = 4 \times T_{\text{motor}} \quad \text{(static thrust per motor)}$$</p>
+<p><strong>For 2.5 kg dragon at sea level</strong> ($g = 9.81 \text{ m/s}^2$):
+$$W = 2.5 \times 9.81 = 24.5 \text{ N required to hover}$$</p>
+<p>Each motor must provide minimum:
+$$T_{\text{motor,min}} = \frac{24.5}{4} = 6.125 \text{ N} \approx 625 \text{ gf}$$</p>
+<p><strong>Recommended target</strong> (for maneuverability + safety margin):
+$$T_{\text{quad,total}} = 1.5 \times W = 36.75 \text{ N} \quad \text{(thrust-to-weight ratio  1.5)}$$</p>
+<p>This gives each motor:
+$$T_{\text{motor}} = \frac{36.75}{4} \approx 9.2 \text{ N} \approx 940 \text{ gf}$$</p>
+<h3 id="13-wing-contribution-to-lift">1.3 Wing Contribution to Lift</h3>
+<p><strong>Flapping wing aerodynamics</strong> (simplified):
+- Flapping frequency: 24 Hz (realistic dragon wing beat rate)
+- Wing area: 0.50.8 m (conservative for 1.01.5 m wingspan)
+- Average coefficient of lift during flap cycle: $C_L \approx 0.61.2$ (lower than fixed wing due to dynamic motion)</p>
+<p><strong>Average lift from wings</strong> (forward flight at 5 m/s):
+$$L_{\text{wings}} = \frac{1}{2} \rho v^2 S C_L = \frac{1}{2} \times 1.225 \times 25 \times 0.6 \times 0.8 = 7.35 \text{ N}$$</p>
+<p><strong>Reduction needed from quad motors</strong>:
+$$T_{\text{quad}} = W - L_{\text{wings}} = 24.5 - 7.35 = 17.15 \text{ N}$$</p>
+<p><strong>Revised motor thrust per unit</strong> (with wing assist):
+$$T_{\text{motor}} = \frac{17.15}{4} \approx 4.3 \text{ N} \approx 440 \text{ gf}$$</p>
+<p><strong>Conclusion</strong>: Wings can reduce quad motor load by ~30% in forward flight, but cannot sustain hover alone. <strong>Quad motors remain primary lift source.</strong></p>
+<hr />
+<h2 id="2-hybrid-propulsion-architecture">2. HYBRID PROPULSION ARCHITECTURE</h2>
+<h3 id="21-architecture-option-a-distributed-quadcopter-articulated-wings">2.1 Architecture Option A: Distributed Quadcopter + Articulated Wings</h3>
+<pre class="codehilite"><code>
+          DRAGON BODY (Fuselage)                 
+      
+     Wing Servo Controller (I2C/SPI)           
+      Left Wing Servos (3 for articulation)  
+      Right Wing Servos (3 for articulation) 
+                                                 
+     Flight Controller: ESP32-S3                
+      IMU (MPU6050 or ICM20689)              
+      Barometer (BMP390)                     
+      PID loops for stability                
+      Command sequencing &amp; safety            
+                                                 
+     ESC Controller (PWM signals to 4 ESCs)    
+     Power Distribution Board (PDB)            
+     LiPo Battery (4S, 50006000 mAh)          
+      
+      
+     MOTOR LAYOUT (Top View)                   
+                                               
+        Motor 1 (Front-Left)    Motor 2       
+                                             
+                 |         |                   
+             
+                 |         |                   
+                                             
+        Motor 3 (Rear-Left)     Motor 4       
+      
+
+     
+         WING ARTICULATION (3 DoF per side):
+          Shoulder rotation (pitch)
+          Wing twist (yaw-like)
+          Wing flap (beat cycle)
+</code></pre>
+
+<p><strong>Subsystems</strong>:
+1. <strong>Quad Motor Controller</strong> (PWM on GPIO pins 12, 13, 14, 15)
+2. <strong>Wing Servo Bus</strong> (I2C on GPIO 21/22 or PWM on pins 1619)
+3. <strong>Sensor Fusion</strong> (I2C on GPIO 21/22 for IMU + Barometer)
+4. <strong>Safety Monitor</strong> (watchdog, battery voltage, gyro limits)</p>
+<h3 id="22-architecture-option-b-centralized-hub-motor-wing-assist">2.2 Architecture Option B: Centralized Hub Motor + Wing Assist</h3>
+<p>Alternative for heavier dragons or longer endurance:</p>
+<pre class="codehilite"><code>
+  Central Hub Motor    (1 high-KV motor with large prop)
+  ~4060g              (replaces 4 distributed motors)
+  ~1500 gf thrust      
+
+         (LiPo direct drive via ESC)
+    
+     Main ESC    
+     (Voltage    
+      monitoring)
+    
+        
+  
+   Body         
+   + 4 Servos  
+   (wing beat)  
+  
+</code></pre>
+
+<p><strong>Trade-off</strong>: Simpler ESC/motor management, but requires more wing lift contribution for thrust; less agile (no differential motor control for roll/pitch).</p>
+<p><strong>Recommendation</strong>: <strong>Option A (distributed quad)</strong> is more scalable and provides better control authority.</p>
+<hr />
+<h2 id="3-motor-esc-selection-recommendations">3. MOTOR &amp; ESC SELECTION RECOMMENDATIONS</h2>
+<h3 id="31-quadcopter-motor-specifications">3.1 Quadcopter Motor Specifications</h3>
+<p>For the 2.5 kg dragon with 1.5 thrust-to-weight ratio:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Recommendation</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Motor Type</strong></td>
+<td>Brushless, sensored (better control)</td>
+<td>T-Motor U3 PRO, DJI E305, Sunnysky X2212</td>
+</tr>
+<tr>
+<td><strong>KV Rating</strong></td>
+<td>500800 KV</td>
+<td>(Lower KV  higher torque, more efficient at high load)</td>
+</tr>
+<tr>
+<td><strong>Weight (per motor)</strong></td>
+<td>4560 g</td>
+<td>Ensures quad stays within mass budget</td>
+</tr>
+<tr>
+<td><strong>Max Continuous Thrust</strong></td>
+<td>9501050 gf per motor</td>
+<td>Provides 3,8004,200 gf total (1.551.71 T/W ratio)</td>
+</tr>
+<tr>
+<td><strong>Winding</strong></td>
+<td>12N14P (12 poles, 14 windings) or 14N12P</td>
+<td>Sensored for better startup/low-speed control</td>
+</tr>
+<tr>
+<td><strong>Voltage (nominal)</strong></td>
+<td>14.8 V (4S LiPo)</td>
+<td>Balances weight, efficiency, and power availability</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Selected Motor Profile</strong>:</p>
+<pre class="codehilite"><code>T-Motor U3 PRO 580KV / DJI E305 equivalent
+ Thrust: 950 gf per motor @ 4S
+ Weight: 55 g per motor
+ Sensored: Yes (better for flight stability)
+ Continuous Current: ~40 A per motor
+ Cost: ~$1525 per motor
+</code></pre>
+
+<h3 id="32-propeller-specifications">3.2 Propeller Specifications</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diameter</strong></td>
+<td>1011 inches (254280 mm)</td>
+</tr>
+<tr>
+<td><strong>Pitch</strong></td>
+<td>4.55.5 inches (lower pitch for better climb)</td>
+</tr>
+<tr>
+<td><strong>Material</strong></td>
+<td>Carbon fiber composite (light, durable)</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Folding props (for compact transport)</td>
+</tr>
+<tr>
+<td><strong>Per-Motor Props</strong></td>
+<td>2 props per motor (spare set)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>: APC 105 CF carbon fiber props (~$812 pair)</p>
+<h3 id="33-esc-electronic-speed-controller-selection">3.3 ESC (Electronic Speed Controller) Selection</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td>BLHeli-32 or similar (programmable PWM frequency)</td>
+</tr>
+<tr>
+<td><strong>Continuous Current Rating</strong></td>
+<td>4050 A per ESC</td>
+</tr>
+<tr>
+<td><strong>Voltage Tolerance</strong></td>
+<td>26S LiPo (we use 4S)</td>
+</tr>
+<tr>
+<td><strong>Firmware</strong></td>
+<td>BLHeli-32 or DShot600-compatible for fast loops</td>
+</tr>
+<tr>
+<td><strong>Weight</strong></td>
+<td>2535 g per ESC</td>
+</tr>
+<tr>
+<td><strong>Input Protocol</strong></td>
+<td>PWM (10002000 s) or DShot (digital)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Selected ESC Profile</strong>:</p>
+<pre class="codehilite"><code>Hobbywing 40A XRotor ESC (BLHeli-32)
+ Continuous: 40 A
+ Weight: 28 g
+ DShot600 support: Yes
+ Telemetry: ESC voltage/current available
+ Cost: ~$2030 per ESC
+</code></pre>
+
+<h3 id="34-power-distribution-battery">3.4 Power Distribution &amp; Battery</h3>
+<p><strong>LiPo Battery</strong>:
+- Type: <strong>4S (14.8 V nominal, 16.8 V fully charged)</strong>
+- Capacity: <strong>50006000 mAh</strong>
+- C-Rating: <strong>50C or higher</strong> (burst capacity for quad motors)
+- Weight: ~500600 g
+- Connector: XT60 (reliable, low-loss)</p>
+<p><strong>Power Distribution Board (PDB)</strong>:
+- 4 motor output pads
+- Voltage distribution (14.8 V main bus)
+- Current sensing (optional, for failsafe)
+- Total weight: ~15 g</p>
+<p><strong>Total power budget</strong>:
+- Hover current (est.): 40 A (10 A per motor @ 50% throttle)
+- Peak current (est.): 120 A (30 A per motor @ 75% throttle for agile maneuvers)
+- Flight time (hover): 5000 mAh  40 A = 7.5 min
+- Flight time (mixed): 812 min (realistic)</p>
+<hr />
+<h2 id="4-control-system-block-diagram">4. CONTROL SYSTEM BLOCK DIAGRAM</h2>
+<h3 id="41-hardware-block-diagram">4.1 Hardware Block Diagram</h3>
+<pre class="codehilite"><code>
+                     LiPo Battery (4S, 5000 mAh)            
+                    [XT60 Connector]                        
+
+                 
+        
+          Power Dist. Board
+           14.8V Main Bus 
+           5V Aux (for ESC telemetry, if needed)
+        
+                 
+        
+             ESP32-S3 Flight Controller           
+              
+           Sensor Bus (I2C @ 400 kHz)          
+            ICM20689 IMU (accel + gyro)       
+            BMP390 Barometer                  
+              
+              
+           Motor Control Pins (PWM)            
+            GPIO 12  Motor 1 (Front-L)       
+            GPIO 13  Motor 2 (Front-R)       
+            GPIO 14  Motor 3 (Rear-L)        
+            GPIO 15  Motor 4 (Rear-R)        
+              
+              
+           Wing Servo Bus (I2C or PWM)         
+            GPIO 21 (SDA), 22 (SCL)          
+            Or PWM pins 1619 direct          
+            6 Servo signals (L/R wings)      
+              
+              
+           Failsafe &amp; Monitoring               
+            Watchdog timer                    
+            Battery voltage ADC (GPIO 36)    
+            Radio receiver (optional RX)     
+              
+        
+                 
+    
+                                          
+                                          
+      
+ ESC 1      ESC 2      ESC 3      ESC 4   
+ (40 A)     (40 A)     (40 A)     (40 A)  
+      
+                                         
+                                         
+      
+ Motor 1    Motor 2    Motor 3    Motor 4 
+ 580KV      580KV      580KV      580KV   
+ 950 gf     950 gf     950 gf     950 gf  
+      
+                                         
+     
+               (Distributed thrust)
+       
+        Quad Lift System 
+        Total: 3800 gf   
+       
+
+     
+       Wing Servo Control Bus (I2C)   
+       PCA9685 (16-channel PWM if     
+       using servo library, or direct 
+       ESP32 PWM pins)                
+        Servo 1: L-Wing Shoulder    
+        Servo 2: L-Wing Twist       
+        Servo 3: L-Wing Flap        
+        Servo 4: R-Wing Shoulder    
+        Servo 5: R-Wing Twist       
+        Servo 6: R-Wing Flap        
+     
+          (to wing actuator linkage)
+</code></pre>
+
+<h3 id="42-software-control-loop-pseudocode">4.2 Software Control Loop (Pseudocode)</h3>
+<pre class="codehilite"><code class="language-cpp">// Flight controller main loop (target: 100200 Hz for quad stability)
+
+void flight_control_loop(void)
+{
+    static uint32_t last_cycle_us = 0;
+    uint32_t now_us = esp_timer_get_time();
+    uint32_t dt_us = now_us - last_cycle_us;
+
+    if (dt_us &lt; 5000) return;  // Skip if &lt;5ms elapsed (200 Hz target)
+    last_cycle_us = now_us;
+
+    // 1. Read sensors
+    imu_read(&amp;accel, &amp;gyro);           // IMU at 1 kHz, downsample
+    baro_read(&amp;altitude_m, &amp;climb_rate);
+
+    // 2. State estimation (sensor fusion)
+    attitude_estimate_complementary_filter(accel, gyro, &amp;roll, &amp;pitch, &amp;yaw);
+    altitude_update(baro_altitude, &amp;est_altitude);
+
+    // 3. Check failsafe conditions
+    if (battery_voltage &lt; 11.0V) {
+        set_failsafe_mode();  // Descend safely
+    }
+    if (gyro_magnitude &gt; GYRO_LIMIT) {
+        cut_thrust_and_descend();
+    }
+
+    // 4. Wing flapping cycle (coordinated with flight phase)
+    update_wing_flap_profile(hover_phase_pct);
+    write_wing_servos(flap_angles);
+
+    // 5. PID control for quad motors
+    // Target attitude from RC receiver or autonomous behavior
+    float target_roll, target_pitch, target_yaw_rate;
+    float target_throttle;  // 0.0 = idle, 1.0 = max
+
+    // Attitude error
+    float roll_error = target_roll - roll;
+    float pitch_error = target_pitch - pitch;
+    float yaw_error = target_yaw_rate - actual_yaw_rate;
+
+    // PID loops (cascaded: outer loop for attitude, inner loop for rate)
+    float roll_rate_cmd = pid_outer_roll.update(roll_error, dt_s);
+    float pitch_rate_cmd = pid_outer_pitch.update(pitch_error, dt_s);
+    float yaw_rate_cmd = pid_outer_yaw.update(yaw_error, dt_s);
+
+    float roll_thrust_delta = pid_inner_roll_rate.update(
+        roll_rate_cmd - actual_roll_rate, dt_s);
+    float pitch_thrust_delta = pid_inner_pitch_rate.update(
+        pitch_rate_cmd - actual_pitch_rate, dt_s);
+    float yaw_thrust_delta = pid_inner_yaw_rate.update(
+        yaw_rate_cmd - actual_yaw_rate, dt_s);
+
+    // Motor mixing (quad X-configuration)
+    // M1=FL, M2=FR, M3=RL, M4=RR
+    throttle_m1 = target_throttle + pitch_thrust_delta - roll_thrust_delta + yaw_thrust_delta;
+    throttle_m2 = target_throttle + pitch_thrust_delta + roll_thrust_delta - yaw_thrust_delta;
+    throttle_m3 = target_throttle - pitch_thrust_delta - roll_thrust_delta - yaw_thrust_delta;
+    throttle_m4 = target_throttle - pitch_thrust_delta + roll_thrust_delta + yaw_thrust_delta;
+
+    // Clamp to [0.0, 1.0]
+    throttle_m1 = constrain(throttle_m1, 0.0, 1.0);
+    throttle_m2 = constrain(throttle_m2, 0.0, 1.0);
+    throttle_m3 = constrain(throttle_m3, 0.0, 1.0);
+    throttle_m4 = constrain(throttle_m4, 0.0, 1.0);
+
+    // 6. Convert throttle [01] to PWM pulse width [10002000 s]
+    pwm_m1 = 1000 + (uint32_t)(throttle_m1 * 1000);
+    pwm_m2 = 1000 + (uint32_t)(throttle_m2 * 1000);
+    pwm_m3 = 1000 + (uint32_t)(throttle_m3 * 1000);
+    pwm_m4 = 1000 + (uint32_t)(throttle_m4 * 1000);
+
+    // 7. Write motor PWM signals
+    ledc_set_duty_and_update(LEDC_CHANNEL_0, pwm_m1);
+    ledc_set_duty_and_update(LEDC_CHANNEL_1, pwm_m2);
+    ledc_set_duty_and_update(LEDC_CHANNEL_2, pwm_m3);
+    ledc_set_duty_and_update(LEDC_CHANNEL_3, pwm_m4);
+
+    // 8. Log telemetry for debugging
+    if (should_log_telemetry()) {
+        printf(&quot;Alt=%.1f Att=(%.1f,%.1f,%.1f) THR=(%.2f,%.2f,%.2f,%.2f)\n&quot;,
+               est_altitude, roll, pitch, yaw,
+               throttle_m1, throttle_m2, throttle_m3, throttle_m4);
+    }
+}
+</code></pre>
+
+<p><strong>Loop frequency</strong>: 100200 Hz for quad stability (motor mixing updates)<br />
+<strong>Wing flap coordination</strong>: 24 Hz (synchronized with body attitude changes)</p>
+<hr />
+<h2 id="5-phased-implementation-roadmap">5. PHASED IMPLEMENTATION ROADMAP</h2>
+<h3 id="phase-1-prototype-ground-testing-weeks-13">Phase 1: Prototype &amp; Ground Testing (Weeks 13)</h3>
+<p><strong>Deliverables</strong>:
+- [ ] Structural airframe CAD (OpenSCAD + 3D print)
+- [ ] Motor/ESC bench test (thrust measurement jig)
+- [ ] ESP32 flight controller firmware skeleton
+- [ ] IMU + barometer sensor fusion validation</p>
+<p><strong>Tasks</strong>:
+1. Design fuselage with landing gear (foam/CF tube)
+2. Acquire &amp; test motors/ESCs with props (no wings yet)
+3. Build thrust-measurement stand (scale + load cell)
+4. Validate motor thrust data against specs
+5. Implement basic IMU complementary filter
+6. Create simple throttle sweep test (PWM 10002000 s)
+7. Test barometer altitude reading indoors + outdoors</p>
+<p><strong>Exit Criteria</strong>:
+- Motors produce rated ~950 gf each (confirmed on scale)
+- IMU reads stable orientation in stationary test
+- Barometer altitude accuracy within 2 m
+- All 4 motors respond correctly to PWM commands</p>
+<hr />
+<h3 id="phase-2-tethered-flight-testing-weeks-46">Phase 2: Tethered Flight Testing (Weeks 46)</h3>
+<p><strong>Deliverables</strong>:
+- [ ] Tethered flight test (up to 10m altitude)
+- [ ] PID tuning in stabilized flight mode
+- [ ] Wing servo integration (servo control signals)
+- [ ] Failsafe &amp; battery monitoring</p>
+<p><strong>Tasks</strong>:
+1. Assemble wings with 6 servos (3 per side, articulation linkages)
+2. Integrate wing servo control into flight controller (via I2C PWM expander or direct ESP32 PWM)
+3. Implement battery voltage monitoring + low-battery failsafe
+4. Tether dragon at ~3 m height using kevlar cord (non-conductive)
+5. Perform throttle step response (measure rise time, overshoot)
+6. Tune P, I, D gains for stable hover within 0.5 m altitude error
+7. Test wing flap cycle at 24 Hz (verify servo health, measure current draw)
+8. Simulate motor failure (cut power to one motor, test recovery capability)</p>
+<p><strong>Exit Criteria</strong>:
+- Stable tethered hover for &gt;2 min without oscillation
+- Altitude hold accuracy 0.5 m in still air
+- Wing servos operate smoothly without grinding/buzzing
+- Motor failure  system detects and alerts (safe descent)</p>
+<hr />
+<h3 id="phase-3-free-flight-testing-weeks-79">Phase 3: Free Flight Testing (Weeks 79)</h3>
+<p><strong>Deliverables</strong>:
+- [ ] Outdoor free flight in controlled area (large field)
+- [ ] Autonomous waypoint navigation (optional)
+- [ ] Flight telemetry logging &amp; analysis
+- [ ] Behavior sequencing (takeoff  climb  forward flight  landing)</p>
+<p><strong>Tasks</strong>:
+1. Choose safe test location (large, open field, no obstacles)
+2. Implement manual RC control mode (radio receiver input) or autonomous state machine
+3. Write takeoff/landing routines
+4. Test forward flight pitch control (nose down  increase speed)
+5. Log all IMU + motor throttle data to SD card during flight
+6. Analyze post-flight logs for oscillation, energy efficiency, wing contribution
+7. Perform 35 free flights, increasing complexity (manual  automated)
+8. Validate flight duration (target 1012 min hover, 810 min active flight)</p>
+<p><strong>Exit Criteria</strong>:
+- Controlled takeoff from ground
+- Stable hover at ~1.5 m altitude
+- Forward flight at 58 m/s
+- Safe landing with minimal impact
+- Flight logs show low oscillation in attitude/altitude</p>
+<hr />
+<h3 id="phase-4-wing-optimization-aero-tuning-weeks-1012">Phase 4: Wing Optimization &amp; Aero Tuning (Weeks 1012)</h3>
+<p><strong>Deliverables</strong>:
+- [ ] Wing morphing strategies (flap profile optimization)
+- [ ] Aerodynamic efficiency measurements
+- [ ] Extended flight duration (target 15+ min)
+- [ ] Agility/maneuver response quantification</p>
+<p><strong>Tasks</strong>:
+1. Analyze Phase 3 flight logs to extract wing lift contribution vs. quad thrust
+2. Adjust flap frequency/amplitude based on flight phase (hover vs. cruise)
+3. Test different wing fabric/rigidity (foam vs. Mylar, cambered vs. flat)
+4. Measure power consumption at different wing beat frequencies
+5. Implement dynamic wing control (vary flap profile based on gyro feedback)
+6. Re-test free flight with optimized wing profile
+7. Measure endurance at different throttle levels (hover @ 50% vs. 75%)</p>
+<p><strong>Exit Criteria</strong>:
+- Flight time 1215 min at cruise throttle
+- Wing contributes 2030% reduction in quad motor load during forward flight
+- Power consumption &lt;40 A average during mixed flight phase</p>
+<hr />
+<h3 id="phase-5-integration-with-p32-animatronic-system-weeks-1315">Phase 5: Integration with P32 Animatronic System (Weeks 1315)</h3>
+<p><strong>Deliverables</strong>:
+- [ ] Component definitions (wing_flap_controller, quad_motor_manager, etc.)
+- [ ] JSON bot configuration for flying dragon
+- [ ] Integration with global shared memory for multi-chip coordination
+- [ ] Behavior scripting (personality, mood-based flight patterns)</p>
+<p><strong>Tasks</strong>:
+1. Create component source files following P32 pattern:
+   - <code>flying_dragon_motor_controller.src</code> / <code>.hdr</code>
+   - <code>flying_dragon_wing_servo_controller.src</code> / <code>.hdr</code>
+   - <code>flying_dragon_sensor_fusion.src</code> / <code>.hdr</code>
+   - <code>flying_dragon_flight_safety.src</code> / <code>.hdr</code>
+2. Define hardware templates for motor/servo configurations
+3. Write JSON hierarchy: <code>flying_dragon_full.json</code> + subsystem definitions
+4. Integrate with SharedMemory (broadcast flight state, receive commands from other chips)
+5. Implement mood-based flight behaviors (playful  sharp maneuvers, calm  smooth flight)
+6. Create emergency landing behavior (signal loss  auto-descend)
+7. Test communication between head/torso (if multi-chip) and flight controller</p>
+<p><strong>Exit Criteria</strong>:
+- All components deploy &amp; compile successfully
+- Flight controller responds to mood/behavior signals from SharedMemory
+- Graceful failsafe when SharedMemory link is lost
+- Telemetry visible in central logging system</p>
+<hr />
+<h2 id="6-risk-mitigation-strategies">6. RISK MITIGATION STRATEGIES</h2>
+<h3 id="61-critical-risks">6.1 Critical Risks</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Severity</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Motor ESC synchronization failure</strong></td>
+<td>HIGH</td>
+<td>Use sensored motors + BLHeli-32 firmware (reliable initialization); test all 4 motors independently before tethering</td>
+</tr>
+<tr>
+<td><strong>LiPo battery failure / swelling</strong></td>
+<td>HIGH</td>
+<td>Use certified batteries with BEC integration; monitor cell voltage &amp; temperature; implement low-voltage cutoff (3.0 V/cell)</td>
+</tr>
+<tr>
+<td><strong>Wing servo strain / joint failure</strong></td>
+<td>MEDIUM</td>
+<td>Use high-torque servos (68 kg-cm min); design articulation with mechanical redundancy; test wing oscillation fatigue before flight</td>
+</tr>
+<tr>
+<td><strong>Gyro saturation during aggressive roll</strong></td>
+<td>MEDIUM</td>
+<td>Implement gyro limit watchdog (&gt;500/s  reduce throttle); use low-pass filter on sensor input; constrain PID error accumulation</td>
+</tr>
+<tr>
+<td><strong>Inadequate ESP32 processing speed</strong></td>
+<td>MEDIUM</td>
+<td>Profile flight loop timing; use LEDC hardware PWM (not bit-banging); defer logging to separate task; target 100200 Hz loop minimum</td>
+</tr>
+<tr>
+<td><strong>Loss of radio link</strong></td>
+<td>MEDIUM</td>
+<td>Implement watchdog timer (no valid command for &gt;500 ms  auto-land); store failsafe mode in NVRAM</td>
+</tr>
+<tr>
+<td><strong>Unbalanced motor thrust</strong></td>
+<td>LOW</td>
+<td>Calibrate ESC throttle curves individually; measure static thrust of each motor on scale</td>
+</tr>
+<tr>
+<td><strong>Prop damage mid-flight</strong></td>
+<td>LOW</td>
+<td>Carry spare props; design quick-release prop hub; inspect visually before each flight</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-safety-systems">6.2 Safety Systems</h3>
+<p><strong>Primary Failsafes</strong>:
+1. <strong>Altitude Floor</strong>: If barometer reads altitude &lt; 0.5 m, cut throttle &amp; alert pilot
+2. <strong>Gyro Limit</strong>: If gyro magnitude &gt; 500/s, reduce throttle by 50%
+3. <strong>Battery LVC</strong> (Low Voltage Cutoff): If 4S drops below 11.0 V (2.75 V/cell), begin safe descent
+4. <strong>Watchdog Timer</strong>: No valid command received for &gt;500 ms  descend at fixed rate
+5. <strong>Tether Safety</strong> (for Phase 2): Non-conductive kevlar line + breakaway connector at airframe</p>
+<p><strong>Contingency Procedures</strong>:
+- <strong>Motor failure</strong>: Detect asymmetric gyro output; transition to auto-descend
+- <strong>ESC brownout</strong>: Capacitor bank + soft-start ESC sequencing (stagger motor initialization by 10 ms)
+- <strong>Servo jam</strong>: Monitor servo current; if &gt;1 A for &gt;500 ms, reduce wing flap amplitude</p>
+<h3 id="63-testing-validation-checklist">6.3 Testing Validation Checklist</h3>
+<p>Before any free flight:
+- [ ] All 4 motors respond to throttle independently (no cross-talk)
+- [ ] Quad hovers at 50% throttle without drift &gt;0.5 m/min
+- [ ] PID gains produce stable response (no oscillation) within 2 sec settling time
+- [ ] Battery voltage stable under load (drop &lt;0.5 V during full throttle)
+- [ ] Wing servos move smoothly, no grinding or buzzing
+- [ ] Barometer altitude accurate within 2 m (ground truth GPS)
+- [ ] Accelerometer bias &lt; 0.1 g after calibration
+- [ ] Radio link range &gt; 100 m (2.4 GHz RC receiver)
+- [ ] Props spin freely without rubbing (check clearance after transport)
+- [ ] Tether tested with ~5 kg static load (safety factor 2)</p>
+<hr />
+<h2 id="7-control-system-integration-with-p32">7. CONTROL SYSTEM INTEGRATION WITH P32</h2>
+<h3 id="71-component-architecture">7.1 Component Architecture</h3>
+<p><strong>Top-level flying dragon bot structure</strong>:</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_full&quot;,
+  &quot;subsystems&quot;: [
+    &quot;flying_dragon_head&quot;,
+    &quot;flying_dragon_flight_controller&quot;
+  ]
+}
+</code></pre>
+
+<p><strong>Head subsystem</strong> (existing goblins pattern):</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_head&quot;,
+  &quot;components&quot;: [
+    &quot;flying_dragon_left_eye&lt;GC9A01&gt;&quot;,
+    &quot;flying_dragon_right_eye&lt;GC9A01&gt;&quot;,
+    &quot;flying_dragon_mouth&lt;GC9A01&gt;&quot;,
+    &quot;flying_dragon_speaker&lt;MINISPKR&gt;&quot;
+  ]
+}
+</code></pre>
+
+<p><strong>Flight controller subsystem</strong> (new):</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;name&quot;: &quot;flying_dragon_flight_controller&quot;,
+  &quot;components&quot;: [
+    &quot;flying_dragon_motor_controller&lt;T_MOTOR_U3_580KV,HOBBYWING_40A_ESC&gt;&quot;,
+    &quot;flying_dragon_wing_servo_controller&lt;MG996R_SERVO&gt;&quot;,
+    &quot;flying_dragon_sensor_fusion&lt;ICM20689,BMP390&gt;&quot;,
+    &quot;flying_dragon_flight_safety&lt;WATCHDOG,BATTERY_MONITOR&gt;&quot;,
+    &quot;flying_dragon_behavior_sequencer&lt;ESP32_S3&gt;&quot;
+  ]
+}
+</code></pre>
+
+<h3 id="72-component-definitions">7.2 Component Definitions</h3>
+<p><strong>Component 1: Motor Controller</strong></p>
+<p>File: <code>config/components/functional/flying_dragon_motor_controller.src</code></p>
+<pre class="codehilite"><code class="language-cpp">// flying_dragon_motor_controller.src
+// Manages 4 brushless motors (quad configuration) via ESC PWM control
+
+#include &quot;hal/ledc_types.h&quot;
+#include &quot;driver/ledc.h&quot;
+
+// Static state (shared with other flight controller components)
+static uint16_t motor_pwm[4] = {1000, 1000, 1000, 1000};  // s
+static bool motor_armed = false;
+
+esp_err_t flying_dragon_motor_controller_init(void)
+{
+    // Initialize LEDC PWM for motor control
+    ledc_timer_config_t timer_conf = {
+        .speed_mode = LEDC_HIGH_SPEED_MODE,
+        .timer_num = LEDC_TIMER_0,
+        .freq_hz = 490,  // 490 Hz PWM (ESC standard)
+        .duty_resolution = LEDC_TIMER_13_BIT
+    };
+    ledc_timer_config(&amp;timer_conf);
+
+    // Configure 4 channels (motors 14)
+    int gpio_pins[4] = {12, 13, 14, 15};
+    ledc_channel_t channels[4] = {
+        LEDC_CHANNEL_0, LEDC_CHANNEL_1, LEDC_CHANNEL_2, LEDC_CHANNEL_3
+    };
+
+    for (int i = 0; i &lt; 4; i++) {
+        ledc_channel_config_t ch_conf = {
+            .channel = channels[i],
+            .duty = 0,
+            .gpio_num = gpio_pins[i],
+            .speed_mode = LEDC_HIGH_SPEED_MODE,
+            .timer_sel = LEDC_TIMER_0
+        };
+        ledc_channel_config(&amp;ch_conf);
+    }
+
+    motor_armed = false;
+    return ESP_OK;
+}
+
+void flying_dragon_motor_controller_act(void)
+{
+    // Arm check: allow motor commands only after 1 second idle
+    static uint32_t arm_countdown = 1000;  // ms
+    if (arm_countdown &gt; 0) {
+        arm_countdown--;
+        if (arm_countdown == 0) motor_armed = true;
+    }
+
+    if (!motor_armed) {
+        // Keep all motors at idle (1000 s)
+        for (int i = 0; i &lt; 4; i++) {
+            motor_pwm[i] = 1000;
+        }
+        return;
+    }
+
+    // Update PWM outputs (called by flight controller during main loop)
+    // Motor PWM values come from flight_control_loop (via static shared array)
+    for (int i = 0; i &lt; 4; i++) {
+        uint32_t duty = (motor_pwm[i] - 1000) * 40.96;  // Convert s to duty (04095)
+        ledc_set_duty_and_update(LEDC_HIGH_SPEED_MODE, (ledc_channel_t)i, duty);
+    }
+}
+</code></pre>
+
+<p>File: <code>config/components/functional/flying_dragon_motor_controller.hdr</code></p>
+<pre class="codehilite"><code class="language-cpp">// flying_dragon_motor_controller.hdr
+#ifndef FLYING_DRAGON_MOTOR_CONTROLLER_H
+#define FLYING_DRAGON_MOTOR_CONTROLLER_H
+
+#include &lt;stdint.h&gt;
+#include &lt;esp_err.h&gt;
+
+esp_err_t flying_dragon_motor_controller_init(void);
+void flying_dragon_motor_controller_act(void);
+
+// Public access for flight controller to set motor PWM
+extern uint16_t motor_pwm[4];  // [10002000 s per motor]
+extern bool motor_armed;
+
+#endif
+</code></pre>
+
+<p><strong>Component 2: Wing Servo Controller</strong></p>
+<p>File: <code>config/components/functional/flying_dragon_wing_servo_controller.src</code></p>
+<pre class="codehilite"><code class="language-cpp">// flying_dragon_wing_servo_controller.src
+// Manages 6 servo motors for wing articulation (3 per wing)
+
+#include &quot;driver/ledc.h&quot;
+
+// Wing flap profile (beat frequency 24 Hz)
+static float wing_flap_phase = 0.0f;  // [01]
+static float wing_beat_freq_hz = 3.0f;
+static uint16_t servo_angles[6] = {90, 90, 90, 90, 90, 90};  // Degrees [0180]
+
+esp_err_t flying_dragon_wing_servo_controller_init(void)
+{
+    // Initialize 6 PWM channels for servos (GPIO 1621, or use I2C PWM expander)
+    // Using direct ESP32 PWM on pins 1621
+    ledc_timer_config_t servo_timer = {
+        .speed_mode = LEDC_LOW_SPEED_MODE,
+        .timer_num = LEDC_TIMER_1,
+        .freq_hz = 50,  // Standard servo frequency (20 ms period)
+        .duty_resolution = LEDC_TIMER_13_BIT
+    };
+    ledc_timer_config(&amp;servo_timer);
+
+    int servo_pins[6] = {16, 17, 18, 19, 20, 21};
+    for (int i = 0; i &lt; 6; i++) {
+        ledc_channel_config_t ch = {
+            .channel = (ledc_channel_t)i,
+            .duty = 0,
+            .gpio_num = servo_pins[i],
+            .speed_mode = LEDC_LOW_SPEED_MODE,
+            .timer_sel = LEDC_TIMER_1
+        };
+        ledc_channel_config(&amp;ch);
+        servo_angles[i] = 90;  // Neutral (1.5 ms  50% duty)
+    }
+
+    return ESP_OK;
+}
+
+void flying_dragon_wing_servo_controller_act(void)
+{
+    // Advance flap phase
+    static uint32_t last_update_ms = 0;
+    uint32_t now_ms = esp_timer_get_time() / 1000;
+    if (now_ms - last_update_ms &gt;= 20) {  // Update at 50 Hz (servo refresh rate)
+        last_update_ms = now_ms;
+
+        float dt_s = (now_ms - last_update_ms) / 1000.0f;
+        wing_flap_phase += wing_beat_freq_hz * dt_s;
+        if (wing_flap_phase &gt;= 1.0f) wing_flap_phase -= 1.0f;
+
+        // Compute wing positions based on flap phase (sinusoidal motion)
+        // Left wing shoulder (servo 0): main articulation
+        servo_angles[0] = 90 + (int)(30 * sin(2.0f * M_PI * wing_flap_phase));
+        // Left wing twist (servo 1): 
+        servo_angles[1] = 90 + (int)(15 * cos(4.0f * M_PI * wing_flap_phase));
+        // Left wing flap (servo 2): beat cycle
+        servo_angles[2] = 90 + (int)(45 * sin(2.0f * M_PI * wing_flap_phase));
+
+        // Right wing (servos 35): mirror of left
+        servo_angles[3] = servo_angles[0];
+        servo_angles[4] = servo_angles[1];
+        servo_angles[5] = servo_angles[2];
+    }
+
+    // Convert servo angles to PWM duty (10002000 s)
+    for (int i = 0; i &lt; 6; i++) {
+        uint32_t pwm_us = 1000 + (servo_angles[i] * 1000) / 180;  // Linear map [0180]  [10002000 s]
+        uint32_t duty = (pwm_us * 4095) / 20000;  // 20 ms period
+        ledc_set_duty_and_update(LEDC_LOW_SPEED_MODE, (ledc_channel_t)i, duty);
+    }
+}
+</code></pre>
+
+<h3 id="73-sharedmemory-integration">7.3 SharedMemory Integration</h3>
+<p><strong>Define new shared state</strong> in <code>shared/FlightState.hpp</code>:</p>
+<pre class="codehilite"><code class="language-cpp">// shared/FlightState.hpp
+#ifndef FLIGHT_STATE_H
+#define FLIGHT_STATE_H
+
+#include &lt;stdint.h&gt;
+
+struct FlightState
+{
+    float altitude_m;        // Barometer reading (meters)
+    float roll_deg;          // Attitude (degrees)
+    float pitch_deg;
+    float yaw_deg;
+    uint16_t battery_mv;     // Battery voltage (millivolts)
+    uint8_t flight_phase;    // 0=idle, 1=arming, 2=hover, 3=cruise, 4=landing
+    uint8_t failsafe_active; // 0=nominal, 1=battery low, 2=comms lost
+    float wing_beat_freq;    // Current wing flap frequency (Hz)
+};
+
+#endif
+</code></pre>
+
+<p><strong>Usage in sensor fusion component</strong>:</p>
+<pre class="codehilite"><code class="language-cpp">// flying_dragon_sensor_fusion.src
+// Reads IMU + barometer, estimates attitude &amp; altitude
+
+void flying_dragon_sensor_fusion_act(void)
+{
+    // Read sensors, compute complementary filter
+    FlightState flight_state;
+    flight_state.altitude_m = baro_altitude_m;
+    flight_state.roll_deg = estimated_roll;
+    flight_state.pitch_deg = estimated_pitch;
+    flight_state.yaw_deg = estimated_yaw;
+    flight_state.battery_mv = adc_read_battery();
+    flight_state.flight_phase = current_flight_phase;
+
+    // Broadcast to all other chips
+    GSM.write&lt;FlightState&gt;(flight_state);
+}
+</code></pre>
+
+<hr />
+<h2 id="8-integration-checklist">8. INTEGRATION CHECKLIST</h2>
+<ul>
+<li>[ ] Motor drivers tested independently (thrust confirmation on scale)</li>
+<li>[ ] Wing servos articulate smoothly without binding</li>
+<li>[ ] IMU complimentary filter produces stable estimates</li>
+<li>[ ] Barometer altitude within 2 m accuracy</li>
+<li>[ ] All 4 components (motor, wing, sensor, safety) compile together</li>
+<li>[ ] SharedMemory messages broadcast/receive correctly</li>
+<li>[ ] Failsafe routines test successfully (simulated battery/comms loss)</li>
+<li>[ ] Flight loop runs at 100 Hz (verified with timing instrumentation)</li>
+<li>[ ] Mood system influences flight behavior (e.g., playful  aggressive maneuvers)</li>
+<li>[ ] Emergency landing executes safely from any flight phase</li>
+</ul>
+<hr />
+<h2 id="9-reference-material-resources">9. REFERENCE MATERIAL &amp; RESOURCES</h2>
+<h3 id="91-key-hardware-specifications">9.1 Key Hardware Specifications</h3>
+<ul>
+<li><strong>Motor</strong>: T-Motor U3 PRO 580KV  https://store.tmotor.com/</li>
+<li><strong>ESC</strong>: Hobbywing 40A XRotor BLHeli-32  https://www.hobbywing.com/</li>
+<li><strong>Propeller</strong>: APC 105 Carbon Fiber  https://www.apcprop.com/</li>
+<li><strong>IMU</strong>: ICM20689 6-axis 16-bit  https://invensense.tdk.com/</li>
+<li><strong>Barometer</strong>: BMP390 with I2C  https://www.bosch-sensortec.com/</li>
+<li><strong>LiPo</strong>: 4S 5000 mAh 50C  Turnigy, Tattu, or similar reputable brand</li>
+</ul>
+<h3 id="92-firmware-references">9.2 Firmware References</h3>
+<ul>
+<li><strong>BLHeli-32 Configurator</strong>: https://github.com/bitdump/BLHeli</li>
+<li><strong>PX4 Autopilot</strong>: https://px4.io/ (sensor fusion algorithms)</li>
+<li><strong>ArduCopter</strong>: https://github.com/ArduPilot/ardupilot (control loops, reference)</li>
+</ul>
+<h3 id="93-design-references">9.3 Design References</h3>
+<ul>
+<li><strong>Flapping Wing Aerodynamics</strong>: Shyy et al., "Aerodynamics of Low Reynolds Number Flyers" (textbook)</li>
+<li><strong>Quadcopter Control Theory</strong>: Bouabdallah, "Design and Control of Quadrotors with Application to Autonomous Flying" (PhD thesis, ETH Zurich)</li>
+<li><strong>Wing Design CAD</strong>: OpenSCAD tutorials, STEP format for FEA analysis</li>
+</ul>
+<h3 id="94-safety-standards">9.4 Safety Standards</h3>
+<ul>
+<li>Academy of Model Aeronautics (AMA): Flight safety guidelines</li>
+<li>FAA Part 107 (optional, if commercial operation considered)</li>
+<li>IP Rating 54 (water resistance) for outdoor operation</li>
+</ul>
+<hr />
+<h2 id="10-conclusion">10. CONCLUSION</h2>
+<p><strong>Feasibility</strong>: A flying dragon with hybrid flapping wings + quadcopter propulsion is <strong>highly feasible</strong> for a 2.5 kg system with:
+- 4 T-Motor U3 580KV brushless motors
+- 6 MG996R servo actuators for wing articulation
+- 4S LiPo battery (50006000 mAh, 50C rating)
+- ESP32-S3 flight controller with complementary filter + cascaded PID loops
+- 815 minute flight duration depending on flight mode</p>
+<p><strong>Key Design Insights</strong>:
+1. <strong>Wings contribute ~2030% lift reduction</strong> during forward flight, not sufficient for solo hovering.
+2. <strong>Quad motors provide primary lift</strong> (1.5 thrust-to-weight ratio ensures maneuverability).
+3. <strong>Wing flapping adds visual realism</strong> without compromising flight stability if properly synchronized with gyro feedback.
+4. <strong>P32 component architecture fits perfectly</strong>: Motor/wing/sensor control as isolated components, SharedMemory for multi-chip coordination.</p>
+<p><strong>Next Steps</strong>:
+1. <strong>Immediate</strong>: Acquire motors/ESCs, begin Phase 1 prototyping
+2. <strong>Week 2</strong>: Thrust measurement validation
+3. <strong>Week 3</strong>: Tethered flight testing begins
+4. <strong>Week 7</strong>: Free flight trials in open field
+5. <strong>Week 13</strong>: Full P32 system integration</p>
+<p>This analysis provides a concrete roadmap for a realistic, safe, and high-performance flying dragon system within the P32 ecosystem.</p>
+<hr />
+<p><strong>Document Owner</strong>: AI Analysis System<br />
+<strong>Last Updated</strong>: November 4, 2025<br />
+<strong>Status</strong>: Ready for Phase 1 Implementation</p>
+    </div>
+</body>
 </html>

@@ -7,7 +7,7 @@
     "description": "Enlarged and enhanced ears for scout goblin superior hearing",
     "created": "2025-10-12",
     "components": [
-        "config/components/hardware/directional_microphone.json"
+        "components/hardware/directional_microphone.json"
     ],
     "interface_reference": "config/components/interfaces/i2s_device_2.json",
     "coordinate_system": "skull_3d",

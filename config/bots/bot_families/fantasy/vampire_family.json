@@ -16,10 +16,10 @@
         "fang_extension": "0.8 INCH"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/undead/head/vampire_eye_left.json",
-        "config/bots/.archived_components/bot_families/undead/head/vampire_eye_right.json",
-        "config/bots/.archived_components/bot_families/undead/head/vampire_mouth.json",
-        "config/bots/.archived_components/bot_families/undead/head/vampire_speaker.json",
+        "bots/.archived_components/bot_families/undead/head/vampire_eye_left.json",
+        "bots/.archived_components/bot_families/undead/head/vampire_eye_right.json",
+        "bots/.archived_components/bot_families/undead/head/vampire_mouth.json",
+        "bots/.archived_components/bot_families/undead/head/vampire_speaker.json",
         "config/subsystems/vampire_head.json",
         "config/subsystems/vampire_torso.json"
     ],

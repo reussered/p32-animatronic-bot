@@ -24,9 +24,9 @@
         "config/components/functional/goblin_mood.json"
     ],
     "components": [
-        "config/bots/.archived_components/bot_families/goblins/head/goblin_head_left_eye_only.json",
-        "config/bots/bot_families/goblins/head/goblin_head.json",
-        "config/bots/bot_families/goblins/torso/goblin_torso.json"
+        "bots/.archived_components/bot_families/goblins/head/goblin_head_left_eye_only.json",
+        "bots/bot_families/goblins/head/goblin_head.json",
+        "bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

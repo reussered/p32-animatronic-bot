@@ -16,10 +16,10 @@
         "snout_extension": "1.8 INCH"
     },
     "components": [
-        "config/bots/.archived_components/bot_families/animals/head/wolf_eye_left.json",
-        "config/bots/.archived_components/bot_families/animals/head/wolf_eye_right.json",
-        "config/bots/.archived_components/bot_families/animals/head/wolf_snout.json",
-        "config/bots/.archived_components/bot_families/animals/head/wolf_speaker.json",
+        "bots/.archived_components/bot_families/animals/head/wolf_eye_left.json",
+        "bots/.archived_components/bot_families/animals/head/wolf_eye_right.json",
+        "bots/.archived_components/bot_families/animals/head/wolf_snout.json",
+        "bots/.archived_components/bot_families/animals/head/wolf_speaker.json",
         "config/subsystems/wolf_head.json",
         "config/subsystems/wolf_torso.json"
     ],

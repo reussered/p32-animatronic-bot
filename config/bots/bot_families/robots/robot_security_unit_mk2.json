@@ -27,10 +27,10 @@
         }
     },
     "components": [
-        "config/components/creature_specific/security_camera_array.json",
-        "config/components/creature_specific/thermal_sensor.json",
-        "config/components/creature_specific/audio_analysis_unit.json",
-        "config/components/creature_specific/emergency_beacon.json"
+        "components/creature_specific/security_camera_array.json",
+        "components/creature_specific/thermal_sensor.json",
+        "components/creature_specific/audio_analysis_unit.json",
+        "components/creature_specific/emergency_beacon.json"
     ],
     "specialized_behaviors": {
         "patrol_patterns": [

@@ -9,7 +9,7 @@
     "name": "vampire_eye_left",
     "subsystem": "VISION",
     "components": [
-        "config/components/interfaces/spi_bus.json"
+        "components/interfaces/spi_bus.json"
     ],
     "author": "config/author.json",
     "position": {

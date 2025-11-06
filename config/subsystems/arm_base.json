@@ -27,8 +27,8 @@
         "voltage_regulation": "ONBOARD_LDO"
     },
     "components": [
-        "config/subsystems/components/coordination_engine.json",
-        "config/subsystems/components/safety_monitor.json"
+        "subsystems/components/coordination_engine.json",
+        "subsystems/components/safety_monitor.json"
     ],
     "servo_specifications": {
         "shoulder_joint": {
