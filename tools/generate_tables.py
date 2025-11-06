@@ -147,6 +147,7 @@ class SubsystemContext:
     json_path: Optional[Path]
     visits: List[ComponentVisit] = field(default_factory=list)
     unique_components: Dict[str, ComponentDefinition] = field(default_factory=dict)
+    declared_fields: Dict[str, str] = field(default_factory=dict)  # Track {field_name: cpp_type} for first declarations
 
     def register_component(
         self,
@@ -373,56 +374,63 @@ def to_cpp_literal(value: Any) -> str:
     return f'"{escaped}"'
 
 
-def generate_struct_members(data: Dict[str, Any], indent: int = 4) -> List[str]:
+def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -> List[str]:
+    """Generate global declarations/assignments for inherited keyword fields from use_fields.
+    
+    On FIRST encounter of a field name: Generate declaration + assignment
+    On SUBSEQUENT encounters: Generate assignment only (no redeclaration)
+    
+    Type mismatches will cause compile errors (intentional validation).
+    
+    use_fields: { "color_schema": "RGB565", "eat_my_cupcakes": true }
+    
+    First component:
+      static char* color_schema = "RGB565";
+      static bool eat_my_cupcakes = true;
+    
+    Second component (same fields):
+      color_schema = "RGB565";
+      eat_my_cupcakes = true;
+    """
     lines: List[str] = []
-    for key, value in data.items():
-        if key == "components":
-            continue
+    use_fields = data.get("use_fields")
+    if not isinstance(use_fields, dict):
+        return lines
+    
+    for key, value in use_fields.items():
         sanitized_key = sanitize_identifier(key)
-        comment_needed = sanitized_key != key
-        indent_spaces = " " * indent
-        if isinstance(value, dict):
-            struct_type = f"{sanitized_key}_t"
-            if comment_needed:
-                lines.append(f"{indent_spaces}// {key}")
-            lines.append(f"{indent_spaces}struct {struct_type} {{")
-            lines.extend(generate_struct_members(value, indent + 4))
-            lines.append(f"{indent_spaces}}} {sanitized_key};")
-        elif isinstance(value, list):
-            if comment_needed:
-                lines.append(f"{indent_spaces}// {key}")
-            if not value:
-                lines.append(f"{indent_spaces}// Empty array: {sanitized_key}")
-                continue
-            if all(is_primitive(item) for item in value):
-                element_type = json_to_cpp_type(value[0])
-                homogeneous = all(isinstance(item, type(value[0])) for item in value)
-                if not homogeneous:
-                    element_type = "const char*"
-                literals = ", ".join(to_cpp_literal(item) for item in value)
-                lines.append(
-                    f"{indent_spaces}{element_type} {sanitized_key}[{len(value)}] = {{ {literals} }};"
-                )
-            else:
-                json_text = json.dumps(value, ensure_ascii=True)
-                literal = to_cpp_literal(json_text)
-                lines.append(f"{indent_spaces}const char* {sanitized_key} = {literal};")
+        cpp_type = json_to_cpp_type(value)
+        literal = to_cpp_literal(value)
+        
+        # Check if this field was already declared
+        if sanitized_key in context.declared_fields:
+            # Already declared - just generate assignment
+            lines.append(f"{sanitized_key} = {literal};")
         else:
-            if comment_needed:
-                lines.append(f"{indent_spaces}// {key}")
-            cpp_type = json_to_cpp_type(value)
-            literal = to_cpp_literal(value)
-            lines.append(f"{indent_spaces}{cpp_type} {sanitized_key} = {literal};")
-    if not lines:
-        lines.append(" " * indent + "// (empty)")
+            # First declaration - generate declaration + assignment
+            lines.append(f"static {cpp_type} {sanitized_key} = {literal};")
+            context.declared_fields[sanitized_key] = cpp_type
+    
     return lines
 
 
-def render_component_struct(component: ComponentDefinition) -> str:
+def render_component_struct(component: ComponentDefinition, context: SubsystemContext) -> str:
+    """Generate inherited field declarations/assignments for this component.
+    
+    Only generates declarations for use_fields (inherited keywords).
+    Arbitrary component data is no longer generated as structs.
+    """
     lines: List[str] = []
-    lines.append(f"struct {component.name}_config {{")
-    lines.extend(generate_struct_members(component.data))
-    lines.append("};")
+    inherited = generate_inherited_fields(component.data, context)
+    
+    if inherited:
+        lines.append(f"// Inherited fields for {component.name}")
+        lines.extend(inherited)
+    
+    # Return empty string if no inherited fields (skip section entirely)
+    if not lines:
+        return ""
+    
     return "\n".join(lines)
 
 
@@ -454,9 +462,14 @@ def render_component_header(context: SubsystemContext) -> str:
                 source_desc = definition.json_path
         else:
             source_desc = "inline component"
-        structs.append(f"// Component definition sourced from {source_desc}")
-        structs.append(render_component_struct(definition))
-        structs.append("")
+        
+        # Generate inherited fields (use_fields) if present
+        inherited_fields = render_component_struct(definition, context)
+        if inherited_fields:
+            structs.append(f"// Component: {definition.name} (sourced from {source_desc})")
+            structs.append(inherited_fields)
+            structs.append("")
+        
         prototypes.append(f"esp_err_t {definition.init_func}(void);")
         prototypes.append(f"void {definition.act_func}(void);")
         if definition.hdr_content and definition.hdr_path:
