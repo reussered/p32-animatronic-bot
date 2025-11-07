@@ -1,0 +1,90 @@
+{
+  "name": "stepper_nema23_standard",
+  "type": "stepper_motor",
+  "category": "heavy",
+  "nema_size": 23,
+  "description": "NEMA23 Standard - neck pan, heavy-load positioning",
+  "specifications": {
+    "voltage_nominal_mv": 24000,
+    "voltage_max_mv": 48000,
+    "current_per_coil_ma": 2500,
+    "holding_torque_ncm": 1500,
+    "max_torque_ncm": 3000,
+    "steps_per_revolution": 200,
+    "step_angle_degrees": 1.8,
+    "nominal_rpm_at_rated": 800,
+    "max_rpm_no_load": 4500,
+    "rotor_inertia_gcm2": 75.0,
+    "body_length_mm": 51,
+    "shaft_diameter_mm": 6,
+    "weight_g": 680
+  },
+  "control": {
+    "mode": "STEP_DIR_MODE",
+    "default_resolution": "FULL_STEP",
+    "min_step_interval_us": 40,
+    "recommended_step_interval_us": 200,
+    "max_acceleration_steps_s2": 100000
+  },
+  "mounting": {
+    "type": "NEMA23_FLANGE",
+    "bore_diameter_mm": 6,
+    "flange_diameter_mm": 56.4,
+    "bolt_circle_mm": 47.1
+  },
+  "typical_applications": [
+    "Neck pan (left-right)",
+    "Heavy load positioning",
+    "Industrial articulation"
+  ],
+  "variants": [
+    {
+      "name": "stepper_nema23_hightorque",
+      "voltage_nominal_mv": 48000,
+      "current_per_coil_ma": 3500,
+      "holding_torque_ncm": 3000,
+      "max_torque_ncm": 6000,
+      "nominal_rpm_at_rated": 500,
+      "max_rpm_no_load": 2500,
+      "typical_application": "Torso articulation"
+    },
+    {
+      "name": "stepper_nema23_geared_10",
+      "gear_ratio": 10.0,
+      "holding_torque_ncm": 15000,
+      "max_torque_ncm": 30000,
+      "nominal_rpm_at_rated": 80,
+      "max_rpm_no_load": 450,
+      "body_length_mm": 70,
+      "typical_application": "Heavy load positioning"
+    },
+    {
+      "name": "stepper_nema23_pancake",
+      "body_length_mm": 28,
+      "max_torque_ncm": 4000,
+      "typical_application": "Compact heavy load"
+    },
+    {
+      "name": "stepper_nema23_linear_12mm",
+      "mounting_type": "LEADSCREW_12MM",
+      "lead_mm": 12,
+      "typical_application": "Heavy eyelid"
+    },
+    {
+      "name": "stepper_nema23_hollow_25mm",
+      "mounting_type": "HOLLOW_25MM",
+      "bore_diameter_mm": 250,
+      "typical_application": "Neck rotation (cable pass)"
+    }
+  ],
+  "current_limiting": {
+    "type": "current_regulated",
+    "ms_per_step": 1,
+    "decay_mode": "mixed"
+  },
+  "thermal": {
+    "max_temperature_c": 80,
+    "thermal_resistance_c_per_w": 10,
+    "typical_power_dissipation_w": 7.5
+  }
+}

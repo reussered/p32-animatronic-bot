@@ -1,0 +1,67 @@
+{
+  "name": "stepper_nema14_standard",
+  "type": "stepper_motor",
+  "category": "light",
+  "nema_size": 14,
+  "description": "NEMA14 Standard - general purpose light articulation",
+  "specifications": {
+    "voltage_nominal_mv": 12000,
+    "voltage_max_mv": 24000,
+    "current_per_coil_ma": 1000,
+    "holding_torque_ncm": 100,
+    "max_torque_ncm": 200,
+    "steps_per_revolution": 200,
+    "step_angle_degrees": 1.8,
+    "nominal_rpm_at_rated": 400,
+    "max_rpm_no_load": 2000,
+    "rotor_inertia_gcm2": 20.0,
+    "body_length_mm": 33,
+    "shaft_diameter_mm": 4,
+    "weight_g": 150
+  },
+  "control": {
+    "mode": "STEP_DIR_MODE",
+    "default_resolution": "FULL_STEP",
+    "min_step_interval_us": 60,
+    "recommended_step_interval_us": 300,
+    "max_acceleration_steps_s2": 20000
+  },
+  "mounting": {
+    "type": "NEMA14_FLANGE",
+    "bore_diameter_mm": 4,
+    "flange_diameter_mm": 36,
+    "bolt_circle_mm": 26
+  },
+  "typical_applications": [
+    "Head rotation",
+    "Mouth corners",
+    "Light load positioning"
+  ],
+  "variants": [
+    {
+      "name": "stepper_nema14_highspeed",
+      "voltage_nominal_mv": 24000,
+      "current_per_coil_ma": 800,
+      "holding_torque_ncm": 80,
+      "max_torque_ncm": 160,
+      "nominal_rpm_at_rated": 600,
+      "max_rpm_no_load": 3500
+    },
+    {
+      "name": "stepper_nema14_pwm_servo",
+      "control_mode": "PWM_SERVO_MODE",
+      "default_resolution": "QUARTER_STEP",
+      "min_step_interval_us": 25
+    }
+  ],
+  "current_limiting": {
+    "type": "current_regulated",
+    "ms_per_step": 2,
+    "decay_mode": "mixed"
+  },
+  "thermal": {
+    "max_temperature_c": 80,
+    "thermal_resistance_c_per_w": 15,
+    "typical_power_dissipation_w": 2.4
+  }
+}

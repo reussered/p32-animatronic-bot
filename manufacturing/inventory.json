@@ -1,0 +1,536 @@
+{
+  "inventory": {
+    "metadata": {
+      "last_updated": "2025-11-07",
+      "version": "1.1",
+      "currency": "USD",
+      "organization": "P32 Animatronic Bot Project",
+      "note": "All current inventory is surplus/extra stock. Specific allocations tracked separately in allocations section."
+    },
+    "categories": {
+      "displays": {
+        "category_name": "Display Modules",
+        "description": "LCD/OLED screens and display controllers",
+        "items": []
+      },
+      "motors": {
+        "category_name": "Motors & Actuators",
+        "description": "Servo motors, stepper motors, DC motors",
+        "items": [
+          {
+            "item_id": "motor_17hs3401s_001",
+            "name": "NEMA 17 Stepper Motor 17HS3401S",
+            "model": "17HS3401S",
+            "category": "motors",
+            "type": "stepper",
+            "quantity_in_stock": 12,
+            "unit_cost_usd": 8.50,
+            "total_cost_usd": 102.00,
+            "specifications": {
+              "motor_type": "stepper",
+              "nema_size": "NEMA 17",
+              "voltage_rated": "12V",
+              "current_rating": "0.4A",
+              "holding_torque_ncm": 40,
+              "step_angle": 1.8,
+              "steps_per_revolution": 200,
+              "shaft_diameter_mm": 5,
+              "shaft_type": "D-cut"
+            },
+            "connector_type": "4-pin (coil)",
+            "use_case": "3D printer arms, precision positioning",
+            "reorder_point": 5,
+            "preferred_vendor": "vendor_aliexpress",
+            "notes": "Stock for robot arm and precision servos, reliable performers"
+          },
+          {
+            "item_id": "motor_28byj48_001",
+            "name": "28BYJ-48 Stepper Motor Geared",
+            "model": "28BYJ-48",
+            "category": "motors",
+            "type": "stepper",
+            "quantity_in_stock": 26,
+            "unit_cost_usd": 2.50,
+            "total_cost_usd": 65.00,
+            "specifications": {
+              "motor_type": "stepper",
+              "nema_size": "28mm",
+              "voltage_rated": "5V",
+              "current_rating": "0.3A",
+              "holding_torque_ncm": 3,
+              "step_angle": 5.625,
+              "steps_per_revolution": 64,
+              "reduction_ratio": "1:64",
+              "shaft_diameter_mm": 3,
+              "shaft_type": "round"
+            },
+            "connector_type": "4-pin JST",
+            "use_case": "Light positioning, animation, small movements",
+            "reorder_point": 10,
+            "preferred_vendor": "vendor_aliexpress",
+            "notes": "Very cost-effective geared steppers, excellent for eye/mouth movement"
+          },
+          {
+            "item_id": "motor_stepper_clock_type",
+            "name": "Clock-Type Stepper Motors (Unidentified)",
+            "model": "Various clock mechanisms",
+            "category": "motors",
+            "type": "stepper",
+            "quantity_in_stock": 0,
+            "unit_cost_usd": 0.00,
+            "total_cost_usd": 0.00,
+            "specifications": {
+              "motor_type": "stepper",
+              "size": "very small",
+              "voltage_rated": "unknown",
+              "current_rating": "unknown",
+              "holding_torque_ncm": "low",
+              "step_angle": "high precision",
+              "steps_per_revolution": "unknown",
+              "shaft_diameter_mm": "1-3mm"
+            },
+            "connector_type": "varies",
+            "use_case": "Precision timing, clock movements, delicate animations",
+            "reorder_point": 0,
+            "preferred_vendor": "unknown",
+            "notes": "Low-speed precision steppers from clocks and timing devices. Enter quantity when identified."
+          },
+          {
+            "item_id": "motor_stepper_industrial_large",
+            "name": "Industrial Large Stepper Motors (Unidentified)",
+            "model": "NEMA 23/34 or larger",
+            "category": "motors",
+            "type": "stepper",
+            "quantity_in_stock": 0,
+            "unit_cost_usd": 0.00,
+            "total_cost_usd": 0.00,
+            "specifications": {
+              "motor_type": "stepper",
+              "size": "very large",
+              "voltage_rated": "24-48V typical",
+              "current_rating": "2-5A+",
+              "holding_torque_ncm": "200+",
+              "step_angle": 1.8,
+              "steps_per_revolution": 200,
+              "shaft_diameter_mm": "8-10mm"
+            },
+            "connector_type": "6 or 8-pin",
+            "use_case": "Heavy lifting, large actuations, powerful movements",
+            "reorder_point": 0,
+            "preferred_vendor": "unknown",
+            "notes": "Industrial-grade steppers (NEMA 23/34+). Much heavier and more powerful than NEMA 17. Enter quantity when identified."
+          }
+        ]
+      },
+      "drivers": {
+        "category_name": "Motor Drivers & Controllers",
+        "description": "PWM drivers, H-bridges, servo controllers",
+        "items": []
+      },
+      "microcontrollers": {
+        "category_name": "Microcontroller Units",
+        "description": "ESP32, ESP32-S3, ESP32-C3, and variants",
+        "items": []
+      },
+      "power": {
+        "category_name": "Power Supply & Management",
+        "description": "Batteries, voltage regulators, power distribution",
+        "items": []
+      },
+      "sensors": {
+        "category_name": "Sensors",
+        "description": "Environmental and motion sensors",
+        "items": []
+      },
+      "connectors": {
+        "category_name": "Connectors & Cables",
+        "description": "Headers, JST connectors, wiring",
+        "items": []
+      },
+      "misc": {
+        "category_name": "Miscellaneous Components",
+        "description": "Resistors, capacitors, prototyping boards",
+        "items": []
+      }
+    },
+    "vendors": [
+      {
+        "vendor_id": "vendor_aliexpress",
+        "name": "AliExpress",
+        "website": "https://www.aliexpress.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 2.5,
+        "shipping_threshold_free": 50.0,
+        "average_lead_time_days": 14,
+        "reliability_score": 85.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "paypal",
+          "bitcoin"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "microcontrollers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Cheapest option, longest shipping, good for high-volume buys"
+      },
+      {
+        "vendor_id": "vendor_amazon",
+        "name": "Amazon",
+        "website": "https://www.amazon.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 0.0,
+        "shipping_threshold_free": 25.0,
+        "average_lead_time_days": 2,
+        "reliability_score": 95.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "amazon_pay"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "microcontrollers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Fast shipping (Prime), higher prices, excellent returns"
+      },
+      {
+        "vendor_id": "vendor_mouser",
+        "name": "Mouser Electronics",
+        "website": "https://www.mouser.com",
+        "api_endpoint": "https://api.mouser.com/v1/",
+        "api_key": null,
+        "shipping_cost_base": 5.0,
+        "shipping_threshold_free": 100.0,
+        "average_lead_time_days": 3,
+        "reliability_score": 98.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "purchase_order"
+        ],
+        "supported_components": [
+          "drivers",
+          "microcontrollers",
+          "power",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Professional supplier, good for ICs and discrete components"
+      },
+      {
+        "vendor_id": "vendor_digikey",
+        "name": "Digi-Key",
+        "website": "https://www.digikey.com",
+        "api_endpoint": "https://api.digikey.com/",
+        "api_key": null,
+        "shipping_cost_base": 4.0,
+        "shipping_threshold_free": 100.0,
+        "average_lead_time_days": 2,
+        "reliability_score": 97.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "purchase_order"
+        ],
+        "supported_components": [
+          "drivers",
+          "microcontrollers",
+          "power",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Professional supplier, fast shipping, excellent documentation"
+      },
+      {
+        "vendor_id": "vendor_ebay",
+        "name": "eBay",
+        "website": "https://www.ebay.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 3.0,
+        "shipping_threshold_free": 75.0,
+        "average_lead_time_days": 7,
+        "reliability_score": 80.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "paypal"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "microcontrollers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Marketplace, variable quality, good for used components"
+      },
+      {
+        "vendor_id": "vendor_adafruit",
+        "name": "Adafruit Industries",
+        "website": "https://www.adafruit.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 6.0,
+        "shipping_threshold_free": 75.0,
+        "average_lead_time_days": 2,
+        "reliability_score": 99.0,
+        "accepted_payment_methods": [
+          "credit_card"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Hobbyist friendly, excellent documentation, premium pricing"
+      },
+      {
+        "vendor_id": "vendor_sparkfun",
+        "name": "SparkFun Electronics",
+        "website": "https://www.sparkfun.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 7.0,
+        "shipping_threshold_free": 100.0,
+        "average_lead_time_days": 2,
+        "reliability_score": 96.0,
+        "accepted_payment_methods": [
+          "credit_card"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "Open source friendly, tutorials available, higher prices"
+      },
+      {
+        "vendor_id": "vendor_banggood",
+        "name": "Banggood",
+        "website": "https://www.banggood.com",
+        "api_endpoint": null,
+        "api_key": null,
+        "shipping_cost_base": 3.0,
+        "shipping_threshold_free": 60.0,
+        "average_lead_time_days": 15,
+        "reliability_score": 78.0,
+        "accepted_payment_methods": [
+          "credit_card",
+          "paypal"
+        ],
+        "supported_components": [
+          "displays",
+          "motors",
+          "drivers",
+          "microcontrollers",
+          "sensors",
+          "connectors",
+          "misc"
+        ],
+        "notes": "China-based, competitive pricing, slower shipping than AliExpress"
+      }
+    ],
+    "supply_chain_rules": {
+      "auto_reorder_rules": [],
+      "supplier_preferences": []
+    },
+    "allocations": {
+      "description": "Project-specific motor allocations and tracking with bulk pricing analysis",
+      "pricing_structure": {
+        "note": "Prices based on current AliExpress/Banggood marketplace data (Nov 2025). Retail pricing already heavily discounted due to marketplace competition.",
+        "retail_current": {
+          "motor_compact_nema17": 0.99,
+          "driver_a4988": 1.50,
+          "per_animatronic_cost": 22.41,
+          "notes": "2000+ units sold at this price; no further discount available for small quantities"
+        },
+        "bulk_5_units": {
+          "motor_compact_nema17": 0.95,
+          "driver_a4988": 1.45,
+          "per_animatronic_cost": 21.60,
+          "bulk_discount_percent": 4,
+          "notes": "Minimal savings; not recommended for prototype phase"
+        },
+        "bulk_10_units": {
+          "motor_compact_nema17": 0.92,
+          "driver_a4988": 1.40,
+          "per_animatronic_cost": 20.88,
+          "bulk_discount_percent": 7,
+          "notes": "Slight savings but still below economical threshold for R&D phase"
+        },
+        "bulk_20_units": {
+          "motor_compact_nema17": 0.89,
+          "driver_a4988": 1.35,
+          "per_animatronic_cost": 20.16,
+          "bulk_discount_percent": 10,
+          "notes": "Meaningful 10% discount begins; worthwhile for 2+ complete animatronics with spares"
+        },
+        "bulk_50_units": {
+          "motor_compact_nema17": 0.85,
+          "driver_a4988": 1.20,
+          "per_animatronic_cost": 19.05,
+          "bulk_discount_percent": 15,
+          "notes": "Full production tier discount; significant savings activate here"
+        },
+        "bulk_100_units": {
+          "motor_compact_nema17": 0.82,
+          "driver_a4988": 1.10,
+          "per_animatronic_cost": 17.28,
+          "bulk_discount_percent": 20,
+          "notes": "Enterprise pricing; consider only after validating prototype designs"
+        }
+      },
+      "projects": [
+        {
+          "project_name": "3-Bot Prototype Batch (Multiple Creature Types)",
+          "project_id": "prototype_batch_3_creatures",
+          "status": "ACTIVE_PLANNING",
+          "production_tier": "prototype_and_field_testing",
+          "quantity_animatronics": 3,
+          "creature_types_planned": [
+            "Goblin Head (primary)",
+            "Creature Type 2 (TBD)",
+            "Creature Type 3 (TBD)"
+          ],
+          "total_motors_required": 27,
+          "total_drivers_required": 27,
+          "unit_cost_motor": 0.99,
+          "unit_cost_driver": 1.50,
+          "cost_per_animatronic": 22.41,
+          "cost_breakdown": {
+            "motors_27x_at_0_99": 26.73,
+            "drivers_27x_at_1_50": 40.50,
+            "total_components_cost": 67.23,
+            "estimated_shipping": 5.00,
+            "estimated_total": 72.23
+          },
+          "spares_recommended": {
+            "spare_motors": 2,
+            "spare_drivers": 2,
+            "spare_cost": 4.98,
+            "rationale": "High probability of component failures during R&D; test different designs"
+          },
+          "total_with_spares": 77.21,
+          "bulk_discount_available": "NO - 27 units too small for meaningful tier activation",
+          "recommendation": "Order at current retail pricing. Any bulk order ≥20 units adds complexity without ROI savings for prototype phase.",
+          "timeline": "Prototype + substantial field testing before scaling",
+          "notes": "Use this batch to validate 3 different creature designs. Test facial animation, head positioning, and other subsystems in realistic environments before committing to larger production runs."
+        },
+        {
+          "project_name": "Pre-Production Batch (20-30 Units)",
+          "project_id": "preproduction_batch_20_30",
+          "status": "FUTURE_PLANNING",
+          "production_tier": "post_prototype_validation",
+          "quantity_animatronics": 25,
+          "total_motors_required": 225,
+          "total_drivers_required": 225,
+          "unit_cost_motor": 0.89,
+          "unit_cost_driver": 1.35,
+          "cost_per_animatronic": 20.16,
+          "cost_breakdown": {
+            "motors_225x_at_0_89": 200.25,
+            "drivers_225x_at_1_35": 303.75,
+            "total_components_cost": 504.00,
+            "estimated_shipping": 20.00,
+            "estimated_total": 524.00
+          },
+          "savings_vs_retail_pricing": {
+            "retail_total_cost": 560.25,
+            "bulk_10pct_cost": 504.00,
+            "total_savings": 56.25,
+            "savings_percent": 10
+          },
+          "trigger_point": "After successful validation of 3-bot prototypes in field testing",
+          "notes": "20-unit minimum order unlock 10% bulk discount. Worthwhile step before committing to 50+ unit manufacturing."
+        },
+        {
+          "project_name": "Production Batch 1 (50 Animatronics)",
+          "project_id": "production_batch_50",
+          "status": "FUTURE_PLANNING",
+          "production_tier": "mass_production_50_unit_batch",
+          "quantity_animatronics": 50,
+          "total_motors_required": 450,
+          "total_drivers_required": 450,
+          "unit_cost_motor": 0.85,
+          "unit_cost_driver": 1.20,
+          "cost_per_animatronic": 18.45,
+          "cost_breakdown": {
+            "motors_450x_at_0_85": 382.50,
+            "drivers_450x_at_1_20": 540.00,
+            "total_components_cost": 922.50,
+            "estimated_shipping": 40.00,
+            "estimated_total": 962.50
+          },
+          "savings_vs_retail_pricing": {
+            "retail_total_cost": 1120.50,
+            "bulk_15pct_cost": 922.50,
+            "total_savings": 198.00,
+            "savings_percent": 15
+          },
+          "notes": "15% bulk discount at 50+ units. Only pursue after 3-bot prototypes validated in actual deployment conditions."
+        }
+      ],
+      "spare_stock": {
+        "description": "Surplus motors beyond allocated projects - recommend using for non-face subsystems",
+        "allocation_strategy": "Use existing stock for head assembly positioning/rotation (12x 17HS3401S) and neck/arm subsystems (26x 28BYJ-48). Source compact nano-steppers only for facial animation.",
+        "motors": [
+          {
+            "motor_type": "17HS3401S (NEMA 17 - 40 N·cm)",
+            "quantity_in_spare": 12,
+            "status": "AVAILABLE",
+            "allocated_purpose": "Head assembly positioning and rotation (EXCELLENT for this)",
+            "cost_per_unit": 8.50,
+            "total_spare_value": 102.00,
+            "usage_recommendation": "Perfect for moving entire head assembly. Allocate 2-4 units for head pan/tilt when ready."
+          },
+          {
+            "motor_type": "28BYJ-48 (Geared stepper - 3 N·cm)",
+            "quantity_in_spare": 26,
+            "status": "AVAILABLE",
+            "allocated_purpose": "Neck movement, arm actuation, secondary animations",
+            "cost_per_unit": 2.50,
+            "total_spare_value": 65.00,
+            "usage_recommendation": "Overkill for delicate facial animation, excellent for larger movements. Use for neck bending, shoulder rotation, or arm gestures."
+          },
+          {
+            "motor_type": "Clock-type steppers (Very low torque - TBD specs)",
+            "quantity_in_spare": "UNKNOWN",
+            "status": "TBD - NEEDS IDENTIFICATION",
+            "allocated_purpose": "Precision fine-tuning animations (if suitable)",
+            "cost_per_unit": "UNKNOWN",
+            "usage_recommendation": "Identify model number, measure torque, and determine if suitable for secondary facial animations (e.g., nostril flare, eyebrow micro-adjustments)."
+          },
+          {
+            "motor_type": "Industrial large steppers (NEMA 23/34+ - high torque)",
+            "quantity_in_spare": "UNKNOWN",
+            "status": "TBD - NEEDS IDENTIFICATION",
+            "allocated_purpose": "Heavy subsystems (torso, legs, strong movements)",
+            "cost_per_unit": "UNKNOWN",
+            "usage_recommendation": "Identify specs. Use for powerful body movements, not suited for facial animation."
+          }
+        ],
+        "total_spare_motors": "38+ identified + 2 unknown categories",
+        "total_spare_value": 167.00,
+        "strategic_note": "All existing inventory should be allocated to non-facial subsystems. This strategy frees up budget for sourcing optimal compact nano-steppers for the face ($22.41 per single unit at retail; $9.63 per unit at 50-unit scale)."
+      }
+    }
+  }
+}

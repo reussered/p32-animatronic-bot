@@ -1,0 +1,59 @@
+{
+  "name": "stepper_nema8_standard",
+  "type": "stepper_motor",
+  "category": "micro",
+  "nema_size": 8,
+  "description": "NEMA8 Micro Standard - finger articulation, micro-positioning",
+  "specifications": {
+    "voltage_nominal_mv": 12000,
+    "voltage_max_mv": 15000,
+    "current_per_coil_ma": 400,
+    "holding_torque_ncm": 20,
+    "max_torque_ncm": 30,
+    "steps_per_revolution": 48,
+    "step_angle_degrees": 7.5,
+    "nominal_rpm_at_rated": 200,
+    "max_rpm_no_load": 2000,
+    "rotor_inertia_gcm2": 4.5,
+    "body_length_mm": 20,
+    "shaft_diameter_mm": 3,
+    "weight_g": 45
+  },
+  "control": {
+    "mode": "STEP_DIR_MODE",
+    "default_resolution": "FULL_STEP",
+    "min_step_interval_us": 100,
+    "recommended_step_interval_us": 500,
+    "max_acceleration_steps_s2": 10000
+  },
+  "mounting": {
+    "type": "CAPTIVE_SHAFT",
+    "bore_diameter_mm": 3,
+    "flange_diameter_mm": 20,
+    "bolt_circle_mm": 12
+  },
+  "typical_applications": [
+    "Finger articulation",
+    "Micro eye control",
+    "Precision positioning"
+  ],
+  "geared_variants": [
+    {
+      "ratio": 5.0,
+      "name": "stepper_nema8_geared_5",
+      "effective_torque_ncm": 100,
+      "effective_rpm": 40,
+      "body_length_mm": 35
+    }
+  ],
+  "current_limiting": {
+    "type": "current_regulated",
+    "ms_per_step": 4,
+    "decay_mode": "mixed"
+  },
+  "thermal": {
+    "max_temperature_c": 80,
+    "thermal_resistance_c_per_w": 25,
+    "typical_power_dissipation_w": 1.2
+  }
+}
