@@ -66,5 +66,9 @@
     "estimated_cost_usd": "8.50",
     "hardware_type": "GENERIC_HARDWARE",
     "name": "gc9a01_standard_mount",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: gc9a01_standard_mount",
+    "timing": {
+        "hitCount": 1
+    }
 }

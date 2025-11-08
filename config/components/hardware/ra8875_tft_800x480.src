@@ -1,8 +1,8 @@
-// ra8875 component implementation
+// ra8875_tft_800x480 component implementation
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-#include "ra8875.hdr"
+#include "ra8875_tft_800x480.hdr"
 
 static const char *TAG_ra8875_tft_800x480 = "ra8875_tft_800x480";
 

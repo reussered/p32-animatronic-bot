@@ -90,13 +90,13 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_horn_crown.json",
-        "bots/bot_families/goblins/head/goblin_authority_markings.json",
-        "bots/bot_families/goblins/head/goblin_tribal_tattoos.json",
-        "bots/bot_families/goblins/head/goblin_trophy_scars.json",
-        "bots/bot_families/goblins/head/goblin_enlarged_fangs.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_horn_crown",
+        "goblin_authority_markings",
+        "goblin_tribal_tattoos",
+        "goblin_trophy_scars",
+        "goblin_enlarged_fangs",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "pack_assembly": {
@@ -201,5 +201,8 @@
         "Trophy scar system indicating battle experience"
     ],
     "name": "goblin_chief",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

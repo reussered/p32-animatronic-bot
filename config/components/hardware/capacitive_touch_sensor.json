@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/capacitive_touch_sensor.json",
+    "relative_filename": "config/components/hardware/hardware/capacitive_touch_sensor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "CAPACITIVE_TOUCH_TTP223",
@@ -86,5 +86,8 @@
     "hardware_type": "TOUCH_SENSOR",
     "name": "capacitive_touch_sensor",
     "software": {},
-    "type": "TOUCH_SENSOR"
+    "type": "TOUCH_SENSOR",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,16 +1,56 @@
-// goblin_mouth component implementation
-// Auto-generated stub - needs actual implementation
+// goblin_mouth.src - Allocate shared display buffer for mouth
+// Component chain: goblin_mouth (allocate) -> goblin_mouth_render (render) -> generic_spi_display (send & free)
 
 #include "esp_log.h"
-static const char *TAG_goblin_mouth = "goblin_mouth";
+#include "config/shared_headers/color_schema.hpp"
+
+static const char* TAG = "goblin_mouth";
+
+// Shared display buffer - allocated here, used by goblin_mouth_render, freed by generic_spi_display
+// Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
+static unsigned char* display_buffer = nullptr;
+
+// Mouth position (relative to skull center)
+struct MouthPosition {
+    int16_t x;      // 0 = centered
+    int16_t y;      // -80 = below center
+    int16_t z;      // -20 = slightly back
+} mouth_position = {0, -80, -20};
+
+// Display configuration - set from use_fields in JSON
+// These values are injected at compile time via header includes
+extern uint32_t display_width;
+extern uint32_t display_height;
+extern uint32_t bytes_per_pixel;
 
 esp_err_t goblin_mouth_init(void) {
-    ESP_LOGI(TAG_goblin_mouth, "goblin_mouth init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    size_t display_buffer_size = display_width * display_height * bytes_per_pixel;
+    
+    ESP_LOGI(TAG, "Allocating display buffer for mouth (%u x %u, %u bytes total)",
+             display_width, display_height, display_buffer_size);
+    
+    // Allocate shared buffer as unsigned char*
+    // goblin_mouth_render will cast to PixelType* based on color_schema
+    display_buffer = (unsigned char*)malloc(display_buffer_size);
+    if (!display_buffer) {
+        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", display_buffer_size);
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Initialize buffer with neutral color (dark green)
+    uint16_t neutral = 0x0400;  // RGB565: (0, 8, 0)
+    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
+    for (uint32_t i = 0; i < (display_buffer_size / bytes_per_pixel); i++) {
+        buffer_u16[i] = neutral;
+    }
+    
+    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
+             mouth_position.x, mouth_position.y, mouth_position.z);
+    
     return ESP_OK;
 }
 
 void goblin_mouth_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_mouth, "goblin_mouth act");
+    // Buffer is managed by component chain
+    // goblin_mouth_render renders into it, generic_spi_display frees it
 }

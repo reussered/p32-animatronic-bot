@@ -1,0 +1,60 @@
+{
+    "relative_filename": "config/components/interfaces/interfaces/gpio_pair_hw506_temperature.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "interface_id": "GPIO_PAIR_HW506_TEMPERATURE",
+    "display_name": "GPIO Pair - HW-506 Temperature Sensor",
+    "description": "GPIO pin configured for HW-506 analog temperature sensor with ADC input",
+    "created": "2025-10-23",
+    "interface_type": "GPIO_ANALOG_SINGLE",
+    "hardware_platform": "ESP32_S3",
+    "pin_requirements": {
+        "analog_pin": {
+            "gpio_type": "analog_input",
+            "adc_capable": true,
+            "function": "temperature_measurement"
+        },
+        "power_pins": {
+            "vcc_source": "3V3_RAIL",
+            "ground_reference": "DIGITAL_GROUND"
+        }
+    },
+    "electrical_specs": {
+        "voltage_level": "3.3V_reference",
+        "input_impedance": "high_z",
+        "adc_resolution": "12_bit",
+        "adc_attenuation": "ADC_ATTEN_DB_11",
+        "measurement_range": "0V_to_3.1V"
+    },
+    "protocol_config": {
+        "protocol": "adc_polling",
+        "sampling_rate": "1Hz",
+        "oversampling": "8x_average",
+        "calibration_required": true
+    },
+    "calibration_config": {
+        "reference_points": [
+            {
+                "known_temp_c": 25,
+                "adc_reading": "TBD_during_calibration"
+            },
+            {
+                "known_temp_c": 0,
+                "adc_reading": "TBD_during_calibration"
+            }
+        ],
+        "calibration_method": "two_point_linear"
+    },
+    "conflict_detection": {
+        "shared_with": [],
+        "conflicts_with": [
+            "STRAPPING_PIN_CONFLICTS"
+        ],
+        "usage_priority": "temperature_monitoring"
+    },
+    "name": "gpio_pair_hw506_temperature",
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
+}

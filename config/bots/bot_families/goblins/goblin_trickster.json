@@ -85,12 +85,12 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_sly_grin.json",
-        "bots/bot_families/goblins/head/goblin_clever_eyes.json",
-        "bots/bot_families/goblins/head/goblin_nimble_fingers.json",
-        "bots/bot_families/goblins/head/goblin_prank_accessories.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_sly_grin",
+        "goblin_clever_eyes",
+        "goblin_nimble_fingers",
+        "goblin_prank_accessories",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "prank_execution": {
@@ -197,5 +197,8 @@
         "Creative problem-solving for trick development"
     ],
     "name": "goblin_trickster",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

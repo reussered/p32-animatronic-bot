@@ -27,10 +27,10 @@
         }
     },
     "components": [
-        "components/creature_specific/security_camera_array.json",
-        "components/creature_specific/thermal_sensor.json",
-        "components/creature_specific/audio_analysis_unit.json",
-        "components/creature_specific/emergency_beacon.json"
+        "security_camera_array",
+        "thermal_sensor",
+        "audio_analysis_unit",
+        "emergency_beacon"
     ],
     "specialized_behaviors": {
         "patrol_patterns": [
@@ -66,5 +66,8 @@
         "communication_range": "500_METERS"
     },
     "name": "robot_security_unit_mk2",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

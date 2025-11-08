@@ -20,13 +20,13 @@
     "reference_point": "nose_center",
     "eye_spacing": "6.5 INCH",
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_left_eye",
+        "goblin_right_eye",
+        "goblin_mouth",
+        "goblin_speaker",
+        "goblin_nose",
+        "goblin_head",
+        "goblin_torso"
     ],
     "servo_specifications": {
         "primary_servos": "NEMA23_HEAVY_DUTY_SERVO_MOTORS",
@@ -68,5 +68,8 @@
         "power_capacity": "EXTENDED_OPERATION_HIGH_DRAW"
     },
     "name": "ogre_brute",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

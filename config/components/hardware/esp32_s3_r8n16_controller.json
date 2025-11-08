@@ -6,7 +6,7 @@
     "description": "Controller component for ESP32-S3-R8N16 module with 8MB flash and 16MB PSRAM",
     "author": "config/authors/developer.json",
     "version": "1.0.0",
-    "relative_filename": "config/components/hardware/esp32_s3_r8n16_controller.json",
+    "relative_filename": "config/components/hardware/hardware/esp32_s3_r8n16_controller.json",
     "pin_assignments": {
         "spi_assignable": [
             "GPIO_NUM_2",
@@ -158,5 +158,8 @@
             "GPIO_NUM_43",
             "GPIO_NUM_44"
         ]
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

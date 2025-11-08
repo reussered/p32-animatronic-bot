@@ -15,5 +15,8 @@
     "init_function": "simple_display_init",
     "functions": {
         "show_expression": "simple_display_show_eyes"
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

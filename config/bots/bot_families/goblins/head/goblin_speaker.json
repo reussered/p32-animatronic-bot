@@ -1,7 +1,31 @@
 {
+    "relative_filename": "config\\bots\\bot_families\\goblins\\head\\goblin_speaker.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
     "name": "goblin_speaker",
-    "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_speaker.json",
-    "description": "Auto-generated component.",
-    "components": []
+    "subsystem": "HEAD",
+    "components": [
+        "speaker",
+        "goblin_head",
+        "goblin_torso"
+    ],
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "-0.5 INCH",
+        "y": "+0.5 INCH",
+        "z": "-1.0 INCH"
+    },
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "function": "primary_audio_output",
+    "description": "Audio output processing",
+    "timing": {
+        "hitCount": 84000
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
 }

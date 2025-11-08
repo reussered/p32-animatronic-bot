@@ -83,9 +83,9 @@
         "ethereal_extension": "1.5 INCH"
     },
     "components": [
-        "bots/bot_families/horror/head/ghost_ectoplasm_generator.json",
-        "bots/bot_families/horror/head/ghost_floating_mechanism.json",
-        "bots/bot_families/horror/head/ghost_phase_lights.json"
+        "ghost_ectoplasm_generator",
+        "ghost_floating_mechanism",
+        "ghost_phase_lights"
     ],
     "supernatural_features": {
         "manifestation_effects": {
@@ -164,5 +164,8 @@
         "Construction types support both translucent hard shells and flowing fabric approaches"
     ],
     "name": "ghost_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

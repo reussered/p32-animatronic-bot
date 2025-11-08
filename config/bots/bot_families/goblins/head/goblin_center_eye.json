@@ -3,5 +3,8 @@
     "type": "SCAFFOLDED",
     "relative_filename": "config/bots/bot_families/goblins/head/goblin_center_eye.json",
     "description": "Auto-generated component.",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -385,5 +385,8 @@
         "vibration_immunity": "EXCELLENT_MEMS_TECHNOLOGY"
     },
     "name": "mpu6050_imu_sensor",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

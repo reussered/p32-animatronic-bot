@@ -36,5 +36,9 @@
     "name": "hobbywing_40a_esc",
     "relative_filename": "config/bots/bot_families/dragons/hardware_templates/hobbywing_40a_esc.json",
     "type": "BOT",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: hobbywing_40a_esc",
+    "timing": {
+        "hitCount": 1
+    }
 }

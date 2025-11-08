@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/esp32_c3_mini_controller.json",
+    "relative_filename": "config/components/hardware/hardware/esp32_c3_mini_controller.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "esp32_c3_mini_controller",
@@ -129,5 +129,8 @@
         "low_latency": "DIRECT_MESH_COMMUNICATION"
     },
     "hardware_type": "MICRO_CONTROLLER_MODULE",
-    "type": "MICRO_CONTROLLER_MODULE"
+    "type": "MICRO_CONTROLLER_MODULE",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/st7796s.json",
+    "relative_filename": "config/components/hardware/hardware/st7796s.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ST7796S_DISPLAY",
@@ -132,7 +132,7 @@
         "init_function": "st7796s_init",
         "act_function": "st7796s_act",
         "components": [
-            "config/components/drivers/spi_display_bus.json"
+            "config/interfaces/spi_display_bus.json"
         ]
     },
     "required_interface_functions": [
@@ -140,5 +140,9 @@
         "getFrameSize",
         "getFrameRowSize"
     ],
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "description": "Auto-generated component: st7796s",
+    "timing": {
+        "hitCount": 1
+    }
 }

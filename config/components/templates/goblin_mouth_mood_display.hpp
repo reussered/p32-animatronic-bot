@@ -1,14 +1,18 @@
 /**
  * @file goblin_mouth_mood_display.hpp
- * @brief Mouth display with chunking support for large high-resolution displays
+ * @brief Mouth display with row-by-row streaming from PSRAM
  * 
- * Supports rendering large displays (ILI9341 800x480, RA8875) by:
- * 1. Dividing the display into horizontal chunks
- * 2. Rendering one chunk at a time into a single buffer
- * 3. Sending chunks to driver sequentially
+ * STREAMING ARCHITECTURE (Zero Full-Frame Buffering):
+ * 1. Complete frame stored in PSRAM (unlimited size)
+ * 2. Read frame row-by-row from PSRAM
+ * 3. Apply mood modifications to row
+ * 4. Send row to display driver
+ * 5. Free row (single row buffer reused)
  * 
- * Memory-efficient: Only ONE chunk buffer in RAM at a time.
- * Trade-off: Slower refresh rate for large displays (e.g., 15 FPS vs 60 FPS)
+ * Supports any display size with constant RAM footprint:
+ *   - ILI9341 480×320 → Only one row buffer (480×3 = 1440 bytes)
+ *   - RA8875 800×480 → Only one row buffer (800×3 = 2400 bytes)
+ *   - ILI9481 800×480 → Only one row buffer (800×3 = 2400 bytes)
  * 
  * Configuration:
  * {
@@ -16,12 +20,8 @@
  *   "display_config": {
  *     "resolution": "480x320",
  *     "color_schema": "RGB666",
- *     "driver": "ili9341"
- *   },
- *   "chunking": {
- *     "enabled": true,
- *     "chunk_height": 80,
- *     "sequential_render": true
+ *     "driver": "ili9341",
+ *     "psram_frame_address": "0x3d900000"
  *   },
  *   "mood_enabled": true
  * }
@@ -33,6 +33,7 @@
 #include <cstring>
 #include "config/components/templates/mood_calculator_template.hpp"
 #include "shared/Mood.hpp"
+#include "esp_spiram.h"  // For PSRAM access
 
 /**
  * @struct MouthDisplayConfig

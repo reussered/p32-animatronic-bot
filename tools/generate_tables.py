@@ -41,13 +41,17 @@ class JsonLoader:
         path = path.resolve()
         if path in self._cache:
             return self._cache[path]
-        try:
-            with path.open("r", encoding="ascii") as handle:
-                data = json.load(handle)
-        except UnicodeDecodeError as exc:
-            raise RuntimeError(f"File {path} is not ASCII encoded") from exc
-        except json.JSONDecodeError as exc:
-            raise RuntimeError(f"Malformed JSON in {path}: {exc}") from exc
+        encodings_to_try = ["ascii", "utf-8-sig", "utf-8", "utf-16"]
+        data = None
+        for encoding in encodings_to_try:
+            try:
+                with path.open("r", encoding=encoding) as handle:
+                    data = json.load(handle)
+                break
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                continue
+        if data is None:
+            raise RuntimeError(f"File {path} could not be decoded with any supported encoding")
         self._cache[path] = data
         return data
 
@@ -321,17 +325,29 @@ def resolve_json_reference(base_path: Path, reference: str) -> Tuple[Path, Optio
 
     candidate = Path(path_part)
     if not candidate.is_absolute():
-        if path_part.startswith("config/"):
+        if path_part.startswith("config/") or path_part.startswith("bots/"):
             candidate = PROJECT_ROOT / path_part
         else:
             # Try as a file path first
             candidate = base_path.parent / path_part
             if not candidate.exists():
-                # Try as a component name by searching in config/components
-                from pathlib import Path as PathlibPath
-                matches = list((PROJECT_ROOT / "config" / "components").rglob(f"{path_part}.json"))
-                if matches:
-                    candidate = matches[0]  # Use first match
+                # Try as a component name - look up in registry
+                registry_path = PROJECT_ROOT / "config" / "component_registry.json"
+                if registry_path.exists():
+                    try:
+                        with registry_path.open("r", encoding="ascii") as f:
+                            registry = json.load(f)
+                        for comp in registry.get("components", []):
+                            if comp.get("name") == path_part:
+                                candidate = PROJECT_ROOT / comp.get("path", "").replace("\\", "/")
+                                break
+                    except (json.JSONDecodeError, UnicodeDecodeError):
+                        pass
+                # Fallback: search recursively if registry didn't find it
+                if not candidate.exists():
+                    matches = list((PROJECT_ROOT / "config").rglob(f"{path_part}.json"))
+                    if matches:
+                        candidate = matches[0]
     
     candidate = candidate.resolve()
     if not candidate.exists():
@@ -384,13 +400,6 @@ def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -
        First: static char* color_schema = "RGB565";
        Later: color_schema = "RGB565";
     
-    2. ADD_ONCE DIRECTIVES: outputs the value as literal code, deduplicated by value
-       Keys with ### markers (e.g., ###1###, ###2###) indicate unique add-once lines
-       "###1###": "#include display_classes.hdr"
-       "###2###": "#include mood_system.hdr"
-       First: #include display_classes.hdr
-       Later: (skipped if same value seen before)
-    
     Type mismatches on normal fields will cause compile errors (intentional validation).
     """
     lines: List[str] = []
@@ -399,26 +408,19 @@ def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -
         return lines
     
     for key, value in use_fields.items():
-        # Check if this is a directive (contains ### markers)
-        if "###" in key:
-            # Output the value as literal code if not already output
-            if value not in context.declared_fields:
-                lines.append(str(value))  # Output directive as-is
-                context.declared_fields[value] = "add_once"  # Mark as declared
+        # Normal field: generate C++ variable declaration/assignment
+        sanitized_key = sanitize_identifier(key)
+        literal = to_cpp_literal(value)
+        
+        # Check if this field was already declared
+        if sanitized_key in context.declared_fields:
+            # Already declared - just generate assignment
+            lines.append(f"{sanitized_key} = {literal};")
         else:
-            # Normal field: generate C++ variable declaration/assignment
-            sanitized_key = sanitize_identifier(key)
-            cpp_type = json_to_cpp_type(value)
-            literal = to_cpp_literal(value)
-            
-            # Check if this field was already declared
-            if sanitized_key in context.declared_fields:
-                # Already declared - just generate assignment
-                lines.append(f"{sanitized_key} = {literal};")
-            else:
-                # First declaration - generate declaration + assignment
-                lines.append(f"static {cpp_type} {sanitized_key} = {literal};")
-                context.declared_fields[sanitized_key] = cpp_type
+            # First declaration - generate declaration + assignment
+            # Use char* (pointer) not const char* so it can be reassigned
+            lines.append(f"static char* {sanitized_key} = {literal};")
+            context.declared_fields[sanitized_key] = "char*"
     
     return lines
 
@@ -458,7 +460,6 @@ def render_component_header(context: SubsystemContext) -> str:
         f"// Controller: {context.controller}",
         "",
     ]
-    structs: List[str] = []
     prototypes: List[str] = []
     additional: List[str] = []
     included_hdrs: Set[Path] = set()
@@ -471,13 +472,6 @@ def render_component_header(context: SubsystemContext) -> str:
                 source_desc = definition.json_path
         else:
             source_desc = "inline component"
-        
-        # Generate inherited fields (use_fields) if present
-        inherited_fields = render_component_struct(definition, context)
-        if inherited_fields:
-            structs.append(f"// Component: {definition.name} (sourced from {source_desc})")
-            structs.append(inherited_fields)
-            structs.append("")
         
         prototypes.append(f"esp_err_t {definition.init_func}(void);")
         prototypes.append(f"void {definition.act_func}(void);")
@@ -492,7 +486,6 @@ def render_component_header(context: SubsystemContext) -> str:
                 additional.append(definition.hdr_content.strip())
                 additional.append("")
                 included_hdrs.add(resolved_hdr_path)
-    header_lines.extend(structs)
     header_lines.append("// ---------------------------------------------------------------------------")
     header_lines.append("// Function prototypes")
     header_lines.append("// ---------------------------------------------------------------------------")
@@ -529,6 +522,42 @@ def collect_interface_includes(context: SubsystemContext) -> Set[str]:
     return includes
 
 
+def inject_inherited_fields_into_src(src_content: str, assignments: List[str], init_func: str, act_func: str) -> str:
+    """Inject use_fields assignments as first lines in init() and act() functions.
+    
+    Looks for function signatures and inserts assignments right after opening brace.
+    """
+    if not assignments:
+        return src_content
+    
+    result = src_content
+    injection = "\n".join("    " + line for line in assignments)
+    
+    # Inject into init function
+    init_pattern = f"{init_func}(void)"
+    if init_pattern in result:
+        # Find the opening brace after the function signature
+        idx = result.find(init_pattern)
+        if idx >= 0:
+            brace_idx = result.find("{", idx)
+            if brace_idx >= 0:
+                # Insert after the opening brace, with proper indentation
+                result = result[:brace_idx+1] + "\n" + injection + "\n" + result[brace_idx+1:]
+    
+    # Inject into act function
+    act_pattern = f"{act_func}(void)"
+    if act_pattern in result:
+        # Find the opening brace after the function signature
+        idx = result.find(act_pattern)
+        if idx >= 0:
+            brace_idx = result.find("{", idx)
+            if brace_idx >= 0:
+                # Insert after the opening brace, with proper indentation
+                result = result[:brace_idx+1] + "\n" + injection + "\n" + result[brace_idx+1:]
+    
+    return result
+
+
 def render_component_source(context: SubsystemContext) -> str:
     lines: List[str] = [
         f'#include "subsystems/{context.name}/{context.name}_component_functions.hpp"',
@@ -546,14 +575,38 @@ def render_component_source(context: SubsystemContext) -> str:
     for definition in sorted(context.unique_components.values(), key=lambda item: item.name):
         if definition.src_content and definition.src_path:
             resolved_src_path = definition.src_path.resolve()
+            src_to_add = definition.src_content
+            
             if resolved_src_path in included_srcs:
+                # DUPLICATE ENCOUNTER: Inject use_fields assignments as first lines in init() and act()
+                inherited_fields = generate_inherited_fields(definition.data, context)
+                if inherited_fields:
+                    src_to_add = inject_inherited_fields_into_src(
+                        src_to_add, 
+                        inherited_fields, 
+                        definition.init_func, 
+                        definition.act_func
+                    )
+                    lines.append(f"// --- Begin (duplicate): {definition.src_path.name} ---")
+                    lines.append(src_to_add.rstrip())
+                    lines.append(f"// --- End (duplicate): {definition.src_path.name} ---")
+                    lines.append("")
                 continue
+            
             try:
                 rel = definition.src_path.relative_to(PROJECT_ROOT)
             except ValueError:
                 rel = definition.src_path
+            
+            # FIRST ENCOUNTER: Insert use_fields declaration before component code
+            inherited_fields = generate_inherited_fields(definition.data, context)
+            if inherited_fields:
+                lines.append(f"// Inherited fields for {definition.name}")
+                lines.extend(inherited_fields)
+                lines.append("")
+            
             lines.append(f"// --- Begin: {rel} ---")
-            lines.append(definition.src_content.rstrip())
+            lines.append(src_to_add.rstrip())
             lines.append(f"// --- End: {rel} ---")
             included_srcs.add(resolved_src_path)
         else:
@@ -790,41 +843,59 @@ class TableGenerator:
         generate_cmake_metadata(self.subsystem_order)
 
     def _process_json(self, json_path: Path, stack: List[SubsystemContext], template_type: Optional[str]) -> None:
-        data = self.loader.load(json_path)
-        component_name = data.get("name")
-        controller_value = data.get("controller")
-        is_controller = bool(controller_value and component_name)
-        new_context: Optional[SubsystemContext] = None
-        if is_controller:
-            controller_str = str(controller_value)
-            context = self.subsystems.get(component_name)
-            if context is None:
-                context = SubsystemContext(
-                    name=component_name,
-                    controller=controller_str,
-                    json_path=json_path,
-                )
-                self.subsystems[component_name] = context
-                self.subsystem_order.append(context)
-            else:
-                context.controller = controller_str
-                if context.json_path is None:
-                    context.json_path = json_path
-            stack.append(context)
-            new_context = context
-        active_context = stack[-1] if stack else None
-        if active_context is not None and component_name and not is_controller:
-            active_context.register_component(json_path, data, self.sources, template_type)
-        components = data.get("components")
-        if isinstance(components, list):
-            for entry in components:
-                if isinstance(entry, str):
-                    child_path, child_template_type = resolve_json_reference(json_path, entry)
-                    self._process_json(child_path, stack, child_template_type)
-                elif isinstance(entry, dict):
-                    self._process_inline(entry, json_path, stack)
-        if new_context is not None:
-            stack.pop()
+        json_path = json_path.resolve()
+        
+        # Check for circular reference (path already in current recursion stack)
+        # But allow the same component to be used by multiple parents
+        if hasattr(self, '_recursion_stack'):
+            if json_path in self._recursion_stack:
+                return  # Circular reference detected
+        else:
+            self._recursion_stack = []
+        
+        self._recursion_stack.append(json_path)
+        try:
+            data = self.loader.load(json_path)
+            component_name = data.get("name")
+            controller_value = data.get("controller")
+            is_controller = bool(controller_value and component_name)
+            new_context: Optional[SubsystemContext] = None
+            if is_controller:
+                controller_str = str(controller_value)
+                context = self.subsystems.get(component_name)
+                if context is None:
+                    context = SubsystemContext(
+                        name=component_name,
+                        controller=controller_str,
+                        json_path=json_path,
+                    )
+                    self.subsystems[component_name] = context
+                    self.subsystem_order.append(context)
+                else:
+                    context.controller = controller_str
+                    if context.json_path is None:
+                        context.json_path = json_path
+                stack.append(context)
+                new_context = context
+            active_context = stack[-1] if stack else None
+            if active_context is not None and component_name and not is_controller:
+                active_context.register_component(json_path, data, self.sources, template_type)
+            components = data.get("components")
+            if isinstance(components, list):
+                for entry in components:
+                    if isinstance(entry, str):
+                        try:
+                            child_path, child_template_type = resolve_json_reference(json_path, entry)
+                            self._process_json(child_path, stack, child_template_type)
+                        except FileNotFoundError as exc:
+                            print(f"ERROR: Missing component '{entry}' referenced from {json_path}: {exc}", file=sys.stderr)
+                            raise
+                    elif isinstance(entry, dict):
+                        self._process_inline(entry, json_path, stack)
+            if new_context is not None:
+                stack.pop()
+        finally:
+            self._recursion_stack.pop()
 
     def _process_inline(
         self,
@@ -858,8 +929,12 @@ class TableGenerator:
         if isinstance(nested, list):
             for entry in nested:
                 if isinstance(entry, str):
-                    child_path, child_template_type = resolve_json_reference(base_path, entry)
-                    self._process_json(child_path, stack, child_template_type)
+                    try:
+                        child_path, child_template_type = resolve_json_reference(base_path, entry)
+                        self._process_json(child_path, stack, child_template_type)
+                    except FileNotFoundError as exc:
+                        print(f"ERROR: Missing component '{entry}' referenced from inline config at {base_path}: {exc}", file=sys.stderr)
+                        raise
                 elif isinstance(entry, dict):
                     self._process_inline(entry, base_path, stack)
         if new_context is not None:

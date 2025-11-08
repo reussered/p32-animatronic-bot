@@ -17,5 +17,8 @@
     "altitude_resolution_m": 0.1,
     "sample_rate_hz": 50,
     "power_consumption_ma": 0.2,
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

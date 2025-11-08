@@ -43,9 +43,11 @@ void goblin_eye_act(void);
 - Dynamic pin assignment lives in `include/esp32_s3_r8n16_pin_assignments.h`; SPI/I2C/ADC buses assign pins during their `init()` and rotate within `act()`.
 
 ## Reference map
-- Component logic: `config/components/creature_specific/`, `config/components/drivers/`, `config/components/hardware/`.
+- Component logic: `config/components/hardware/`, `config/components/drivers/`, `config/components/behaviors/`, `config/components/functional/`, `config/components/interfaces/`
+- Creature-specific components: `config/bots/bot_families/{family}/{subsystem}/{component_name}.json|src|hdr`
 - Bot assemblies: `config/bots/bot_families/goblins/goblin_full.json` (root for head/torso/etc.).
-- Shared structs (`Mood`, `Environment`, future `Personality`): `shared/`.
-- Tooling helpers: `tools/generate_tables.py`, `generate_file_structure.ps1`, pin guidance `PIN_ASSIGNMENT_RULES.md`.
+- Shared state classes: `shared/*.hpp` (Mood, Environment, Personality, SysTest, etc.)
+- Shared header definitions: `config/shared_headers/*.hpp` (color_schema, etc.)
+- Tooling helpers: `tools/generate_tables.py`, `tools/generate_file_structure.ps1`, pin guidance `PIN_ASSIGNMENT_RULES.md`.
 - Build configs: `platformio.ini` (env filters), `.pio/**` for build outputs (never edit).
 

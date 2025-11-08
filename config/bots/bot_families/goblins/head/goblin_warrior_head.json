@@ -54,5 +54,8 @@
     },
     "name": "goblin_warrior_head",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

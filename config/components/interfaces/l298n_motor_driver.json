@@ -421,5 +421,8 @@
         }
     },
     "name": "l298n_motor_driver",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

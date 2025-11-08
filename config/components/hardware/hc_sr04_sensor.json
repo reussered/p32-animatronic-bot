@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/hc_sr04_sensor.json",
+    "relative_filename": "config/components/hardware/hardware/hc_sr04_sensor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "HC_SR04_SENSOR",
@@ -27,11 +27,15 @@
         "beam_angle": "15 DEGREES"
     },
     "software": {
-        "init_function": "hc_sr04_init",
-        "act_function": "hc_sr04_act",
+        "init_function": "hc_sr04_ultrasonic_distance_sensor_init",
+        "act_function": "hc_sr04_ultrasonic_distance_sensor_act",
         "components": [
             "config/components/drivers/gpio_bus.json"
         ]
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: hc_sr04_sensor",
+    "timing": {
+        "hitCount": 1
+    }
 }

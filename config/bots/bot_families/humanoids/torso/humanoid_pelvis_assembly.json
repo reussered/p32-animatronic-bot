@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/pelvis_structural_assembly.json"
+        "pelvis_structural_assembly"
     ],
     "attachment_points": {
         "hip_left_connection": {
@@ -80,5 +80,8 @@
         "structural_scaling": "LOAD_CAPACITY_SCALES_WITH_CREATURE_MASS"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "STRUCTURAL_FOUNDATION"
+    "type": "STRUCTURAL_FOUNDATION",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,0 +1,224 @@
+Display,Resolution Width,Resolution Height,Total Pixels,Color Depth,Bits Per Pixel,Bytes Per Pixel,Buffer Size (Bytes),Buffer Size (KB),Buffer Size (MB),Notes
+GC9A01,240,240,57600,RGB565,16,2,115200,112.5,0.1094,Perfect for goblin eyes
+ST7789,240,320,76800,RGB565,16,2,153600,150,0.1465,Tall rectangular alternative
+ST7735,160,128,20480,RGB565,16,2,40960,40,0.0391,Budget eye or mouth
+ILI9341,480,320,153600,RGB666,18,3,460800,450,0.4395,High-res mouth (exceeds 300KB limit)
+ILI9486,480,320,153600,RGB888,24,3,460800,450,0.4395,Large display variant
+ILI9481,800,480,384000,RGB888,24,3,1152000,1125,1.0986,XL display (huge buffer)
+RA8875,800,480,384000,RGB666,18,3,1152000,1125,1.0986,Large with acceleration
+SSD1306,128,64,8192,Monochrome,1,0.125,1024,1,0.001,Ultra-low power status display
+SSD1331,96,64,6144,RGB565,16,2,12288,12,0.0117,Micro RGB OLED accent
+SSD1351,128,128,16384,RGB565,16,2,32768,32,0.0313,Small RGB OLED accent
+GMT12864,128,64,8192,Monochrome,1,0.125,1024,1,0.001,Simple LCD status display
+ILI9341 Chunk (480x80),480,80,38400,RGB666,18,3,115200,112.5,0.1094,One horizontal strip of ILI9341 (4 total)
+
+
+GOBLIN HEAD RECOMMENDED CONFIGURATIONS
+
+
+Configuration A: Dual Eyes + Budget Mouth (RECOMMENDED),,,,,,,,,
+Display Component,Resolution,Pixels,Color,Bytes/Pixel,Buffer Bytes,Buffer KB,Status,Notes
+Left Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Right Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Mouth,160x128,20480,RGB565,2,40960,40,✓ OK,ST7735
+Total Peak Memory,,,,,271360,265,✓ FITS,Clean 300KB budget
+Headroom Available,,,,,28640,35,✓ EXCELLENT,35KB spare for system use
+Frame Rate,,,,,,,60 FPS,All displays full speed
+
+
+Configuration B: Dual Eyes + High-Res Mouth (Chunked),,,,,,,,,
+Display Component,Resolution,Pixels,Color,Bytes/Pixel,Buffer Bytes,Buffer KB,Status,Notes
+Left Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Right Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Mouth Chunk,480x80,38400,RGB666,3,115200,112.5,✓ OK,ILI9341 (one of 4 strips)
+Total Peak Memory,,,,,345600,337.5,✗ EXCEEDS,Overflows by 37.5KB
+Alternative Strategy,,,,,230400,225,✓ FITS,Reuse buffer for chunks sequentially
+Frame Rate,,,,,,,Eyes 60 FPS / Mouth 15 FPS,Acceptable compromise
+
+
+Configuration C: Single Eye + Dual Secondary,,,,,,,,,
+Display Component,Resolution,Pixels,Color,Bytes/Pixel,Buffer Bytes,Buffer KB,Status,Notes
+Primary Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Secondary 1,160x128,20480,RGB565,2,40960,40,✓ OK,ST7735 (nostril/accent)
+Secondary 2,160x128,20480,RGB565,2,40960,40,✓ OK,ST7735 (nostril/accent)
+Total Peak Memory,,,,,196480,192,✓ FITS,Excellent headroom (108KB spare)
+Frame Rate,,,,,,,60 FPS all,Not suitable for dual-eye goblin though
+
+
+Configuration D: Eyes Only + Status Display,,,,,,,,,
+Display Component,Resolution,Pixels,Color,Bytes/Pixel,Buffer Bytes,Buffer KB,Status,Notes
+Left Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Right Eye,240x240,57600,RGB565,2,115200,112.5,✓ OK,GC9A01
+Status Screen,128x64,8192,Monochrome,0.125,1024,1,✓ OK,SSD1306 (I2C bus)
+Total Peak Memory,,,,,231424,226,✓ FITS,Excellent headroom (74KB spare)
+Frame Rate,,,,,,,60 FPS,I2C allows simultaneous use
+Notes,,,,,,,Status shows battery / health / mode,No mouth display though
+
+
+DETAILED BUFFER CALCULATIONS
+
+
+GC9A01 (240 x 240 RGB565):
+Calculation: 240 width × 240 height = 57,600 pixels
+Each pixel: RGB565 = 5+6+5 bits = 16 bits per pixel = 2 bytes per pixel
+Total bytes: 57,600 pixels × 2 bytes = 115,200 bytes
+Convert to KB: 115,200 bytes ÷ 1,024 bytes/KB = 112.5 KB
+Convert to MB: 115,200 bytes ÷ 1,048,576 bytes/MB = 0.1094 MB
+Per eye: 112.5 KB
+Dual eyes: 225 KB
+
+
+ST7789 (240 x 320 RGB565):
+Calculation: 240 width × 320 height = 76,800 pixels
+Each pixel: RGB565 = 2 bytes per pixel
+Total bytes: 76,800 pixels × 2 bytes = 153,600 bytes
+Convert to KB: 153,600 ÷ 1,024 = 150 KB
+Status: Fits in 300KB but with less margin than ST7735
+
+
+ST7735 (160 x 128 RGB565):
+Calculation: 160 width × 128 height = 20,480 pixels
+Each pixel: RGB565 = 2 bytes per pixel
+Total bytes: 20,480 pixels × 2 bytes = 40,960 bytes
+Convert to KB: 40,960 ÷ 1,024 = 40 KB
+Status: Very compact, excellent for mouth or accent display
+
+
+ILI9341 Full Frame (480 x 320 RGB666):
+Calculation: 480 width × 320 height = 153,600 pixels
+Each pixel: RGB666 = 6+6+6 bits = 18 bits per pixel = 3 bytes per pixel (packed)
+Total bytes: 153,600 pixels × 3 bytes = 460,800 bytes
+Convert to KB: 460,800 ÷ 1,024 = 450 KB
+Status: EXCEEDS 300KB limit - requires chunking or alternative
+
+
+ILI9341 Chunked (480 x 80 = one horizontal strip):
+Calculation: 480 width × 80 height = 38,400 pixels
+Each pixel: RGB666 = 3 bytes per pixel
+Total bytes: 38,400 pixels × 3 bytes = 115,200 bytes
+Convert to KB: 115,200 ÷ 1,024 = 112.5 KB
+Number of chunks: 4 (rows 0-79, 80-159, 160-239, 240-319)
+Status: Single chunk FITS - reuse buffer for each chunk sequentially
+
+
+SSD1306 (128 x 64 Monochrome):
+Calculation: 128 width × 64 height = 8,192 pixels
+Each pixel: Monochrome = 1 bit per pixel
+Total bits: 8,192 bits
+Total bytes: 8,192 bits ÷ 8 bits/byte = 1,024 bytes
+Convert to KB: 1,024 ÷ 1,024 = 1 KB
+Status: Negligible - perfect for I2C status display
+
+
+GOBLIN HEAD FINAL RECOMMENDATION
+
+
+BEST CHOICE: Configuration A (Dual GC9A01 Eyes + ST7735 Mouth)
+
+Why this configuration:
+- Left Eye (GC9A01): 112.5 KB buffer
+- Right Eye (GC9A01): 112.5 KB buffer
+- Mouth (ST7735): 40 KB buffer
+- Total: 265 KB (fits with 35KB headroom)
+
+Performance:
+- Eyes: 60 FPS smooth animation
+- Mouth: 60 FPS smooth animation (160x128 adequate for expressions)
+- All displays real-time responsive
+- No chunking complexity
+
+Memory footprint: 265 KB
+Headroom available: 35 KB
+GPIO pins used: 12
+Power consumption: 1.04W
+Cost estimate: ~$45-60 for all three displays
+
+
+ALTERNATIVE IF HIGH-RES MOUTH CRITICAL: Configuration B (Chunked ILI9341)
+
+Complexity: Implement chunking (render 4 strips of 480×80 each)
+Peak memory: 225 KB (buffer reuse strategy)
+Eyes: 60 FPS
+Mouth: 15 FPS effective (full refresh every ~260ms)
+Status: Acceptable for expression display, adds rendering complexity
+
+
+MEMORY CONSTRAINT SUMMARY
+
+Hard limit: 300 KB available heap
+Recommended safety margin: 30-50 KB (leave for system use)
+Practical maximum: 250-270 KB for display buffers
+
+Configurations that FIT:
+✓ Configuration A (Dual eyes + small mouth): 265 KB
+✓ Configuration B (Dual eyes + chunked high-res mouth): 225 KB sequential
+✓ Configuration C (Single eye + dual accents): 192 KB
+✓ Configuration D (Dual eyes + status only): 226 KB
+
+Configurations that DON'T FIT without modification:
+✗ Dual GC9A01 + Full ILI9341 (no chunking): 691.2 KB (exceeds by 391 KB)
+✗ Dual ST7789 displays: 300 KB exactly (no headroom)
+
+
+COLOR SCHEMA REFERENCE
+
+RGB565 (16-bit): 5 bits red, 6 bits green, 5 bits blue
+- 2 bytes per pixel
+- 65,536 total colors
+- Sufficient for smooth eye gradients and expressions
+- Used by: GC9A01, ST7789, ST7735, SSD1331, SSD1351
+
+RGB666 (18-bit): 6 bits red, 6 bits green, 6 bits blue
+- 3 bytes per pixel (packed)
+- 262,144 total colors
+- Better color accuracy than RGB565
+- Used by: ILI9341, RA8875
+
+RGB888 (24-bit): 8 bits red, 8 bits green, 8 bits blue
+- 3 bytes per pixel (can be 4 with padding)
+- 16,777,216 total colors (true color)
+- Rarely needed for animatronic expressions
+- Used by: ILI9486, ILI9481, ILI9488
+
+Monochrome (1-bit): Black or white only
+- 0.125 bytes per pixel (8 pixels per byte)
+- Perfect for text and simple graphics
+- Lowest power and memory
+- Used by: SSD1306, GMT12864
+
+
+SPI BUS SHARING (Multiple displays on same bus)
+
+Shared pins (one per SPI bus):
+- CLK (clock): GPIO 35
+- MOSI (data out): GPIO 37
+- MISO (data in): GPIO 36
+
+Per-device unique pins:
+- CS (chip select): One GPIO per display
+- DC (data/command): One GPIO per display
+- RST (reset): One GPIO per display
+
+Example: Dual GC9A01 + ILI9341
+- Shared: GPIO 35, 37, 36 (3 pins, shared by all 3 displays)
+- Left eye unique: GPIO 10 (CS), 11 (DC), 12 (RST)
+- Right eye unique: GPIO 8 (CS), 9 (DC), 39 (RST)
+- Mouth unique: GPIO 5 (CS), 6 (DC), 7 (RST)
+- Total: 12 GPIO pins (3 shared + 9 unique)
+
+
+I2C BUS SHARING (Low-bandwidth devices)
+
+Shared pins (one per I2C bus):
+- SDA (data): GPIO 21
+- SCL (clock): GPIO 22
+
+Per-device configuration:
+- Address: Assigned in software (0x3C for SSD1306, etc.)
+- No additional GPIO needed
+
+Example: Dual GC9A01 eyes + SSD1306 status
+- SPI for eyes: 9 GPIO (3 shared + 6 unique)
+- I2C for status: 2 GPIO (shared)
+- Total: 11 GPIO pins (5 unique, 2 shared)
+- Can stack multiple I2C devices on same bus (max 127 addresses)

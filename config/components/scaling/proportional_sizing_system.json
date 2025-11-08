@@ -274,5 +274,8 @@
             ]
         }
     },
-    "type": "SCALABLE_DESIGN_ARCHITECTURE"
+    "type": "SCALABLE_DESIGN_ARCHITECTURE",
+    "timing": {
+        "hitCount": 1
+    }
 }

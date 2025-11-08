@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/color_changing_leds.json",
+    "relative_filename": "config/components/hardware/hardware/color_changing_leds.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "COLOR_CHANGING_LEDS",
@@ -54,5 +54,8 @@
     ],
     "name": "color_changing_leds",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

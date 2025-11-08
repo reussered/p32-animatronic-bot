@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/servo_assembly.json",
+    "relative_filename": "config/components/hardware/hardware/servo_assembly.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "SERVO_ASSEMBLY",
@@ -57,5 +57,8 @@
         "control_signal": "3.3V_LOGIC_COMPATIBLE"
     },
     "name": "servo_assembly",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

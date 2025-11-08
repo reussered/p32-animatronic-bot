@@ -1,51 +1,42 @@
-// GMT12864 OLED Display - Monochrome (1-bit) pixel format
-// Forward declaration to resolve circular dependency
-struct GMT12864_Pixel;
-extern GMT12864_Pixel GMT12864_InitialPixel;
+#ifndef GMT12864_HDR
+#define GMT12864_HDR
 
-struct GMT12864_Pixel {
-    unsigned int value : 1;  // 1 bit: 0 = off, 1 = on
-    unsigned int pad : 7;    // 7 bits padding to byte boundary
+#include <stdint.h>
 
-    // Maximum value for monochrome display (for mood calculations)
-    static constexpr unsigned int maxValue = 0x1;  // 1 bit = 1
-    
-    // Default constructor initializes to InitialPixel
-    GMT12864_Pixel() { *this = GMT12864_InitialPixel; }
-    
-    // Copy constructor
-    GMT12864_Pixel(const GMT12864_Pixel& other) {
-        value = other.value;
-        pad = 0;
-    }
-    
-    // Assignment operator
-    GMT12864_Pixel& operator=(const GMT12864_Pixel& other) {
-        value = other.value;
-        pad = 0;
-        return *this;
-    }
+// This struct acts as a "type bundle" for the gmt12864 hardware.
+// Based on its JSON, it is a 128x64 monochrome display.
+struct gmt12864
+{
+    // Standardized interface members
+    static const int WIDTH = 128;
+    static const int HEIGHT = 64;
 
-    // Add two pixels with saturation (overflow caps at max value: 1)
-    GMT12864_Pixel operator+(const GMT12864_Pixel& other) const
+    // Monochrome display, so max value is 1 (on).
+    static const int MAX_VALUE = 1;
+
+    // Standardized nested Pixel type for monochrome displays.
+    struct Pixel
     {
-        GMT12864_Pixel result;
-        
-        // Add value
-        unsigned int sum = value + other.value;
-        result.value = (sum > maxValue) ? maxValue : sum;
-        result.pad = 0;
-        
-        return result;
-    }
+        unsigned int value : 1;
 
-    // Add-assign operator with saturation
-    GMT12864_Pixel& operator+=(const GMT12864_Pixel& other)
-    {
-        // Add value
-        unsigned int sum = value + other.value;
-        value = (sum > maxValue) ? maxValue : sum;
-        
-        return *this;
-    }
+        Pixel() : value(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel(bool on) : value(on ? 1 : 0) {}
+
+        Pixel& operator=(const Pixel& other)
+        {
+            value = other.value;
+            return *this;
+        }
+
+        // For monochrome, 'adding' is like a logical OR.
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            result.value = (value || other.value) ? 1 : 0;
+            return result;
+        }
+    };
 };
+
+#endif // GMT12864_HDR

@@ -1,99 +1,53 @@
 // ST7796S Display Header
-// RGB565 (16-bit color)
+// RGB666 (18-bit color)
 
 #ifndef ST7796S_HDR
 #define ST7796S_HDR
 
-#include <cstdint>
+#include <stdint.h>
 
-// Forward declaration
-struct ST7796S_Pixel;
-
-// Global InitialPixel - must be set before allocating buffers containing Pixels
-extern ST7796S_Pixel ST7796S_InitialPixel;
-
-/**
- * @brief Pixel struct for ST7796S display (RGB565 format)
- * 16-bit color: 5-6-5 bits
- */
-struct ST7796S_Pixel
+// This struct acts as a "type bundle" for the st7796s hardware.
+// Based on its JSON, it has a 320x480 resolution. Color depth is
+// assumed to be 18-bit (RGB666) like its 'st7796' sibling.
+struct st7796s
 {
-    unsigned int red : 5;
-    unsigned int green : 6;
-    unsigned int blue : 5;
+    // Standardized interface members
+    static const int WIDTH = 320;
+    static const int HEIGHT = 480;
 
-    // Maximum values for each color channel (for mood calculations)
-    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
-    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
-    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
-    
-    ST7796S_Pixel() 
-    {
-        *this = ST7796S_InitialPixel;
-    }
-    
-    // Copy constructor
-    ST7796S_Pixel(const ST7796S_Pixel& other) 
-        : red(other.red), green(other.green), blue(other.blue)
-    {}
-    
-    // Assignment operator
-    ST7796S_Pixel& operator=(const ST7796S_Pixel& other)
-    {
-        red = other.red;
-        green = other.green;
-        blue = other.blue;
-        return *this;
-    }
+    // 18-bit color depth (6 bits per channel)
+    static const int MAX_RED   = 0x3F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x3F;
 
-    // Add two pixels with saturation (overflow caps at max value per channel)
-    ST7796S_Pixel operator+(const ST7796S_Pixel& other) const
+    // Standardized nested Pixel type for RGB666
+    struct Pixel
     {
-        ST7796S_Pixel result;
-        
-        // Add red channel
-        unsigned int sum_r = red + other.red;
-        result.red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
-        unsigned int sum_g = green + other.green;
-        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
-        unsigned int sum_b = blue + other.blue;
-        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
-        return result;
-    }
+        unsigned int red : 6;
+        unsigned int green : 6;
+        unsigned int blue : 6;
 
-    // Add-assign operator with saturation
-    ST7796S_Pixel& operator+=(const ST7796S_Pixel& other)
-    {
-        // Add red channel
-        unsigned int sum_r = red + other.red;
-        red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
-        unsigned int sum_g = green + other.green;
-        green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
-        unsigned int sum_b = blue + other.blue;
-        blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
-        return *this;
-    }
+        Pixel() : red(0), green(0), blue(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
 };
-
-// Display specifications
-size_t st7796s_get_width(void);
-size_t st7796s_get_height(void);
-size_t getFrameSize(void);
-size_t getFrameRowSize(void);
-size_t getDisplaySize(void);
-
-// Component functions
-esp_err_t st7796s_init(void);
-void st7796s_act(void);
 
 #endif // ST7796S_HDR

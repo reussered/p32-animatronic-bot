@@ -207,5 +207,8 @@
         }
     },
     "name": "skeletal_power_distribution",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

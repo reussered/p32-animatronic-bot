@@ -18,5 +18,9 @@
         "y": "0.0 INCH"
     },
     "type": "POSITIONED_COMPONENT",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: goblin_ritual_scars",
+    "timing": {
+        "hitCount": 1
+    }
 }

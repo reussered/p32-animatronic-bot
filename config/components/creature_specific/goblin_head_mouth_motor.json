@@ -1,215 +1,222 @@
 {
-  "name": "goblin_head_mouth_motor",
-  "type": "motor_controller",
-  "description": "5-DOF mouth articulation with expression presets and speech sync",
-  "subsystem": "goblin_head",
-  "dependencies": [
-    "stepper_jaw_vertical",
-    "stepper_mouth_corner_left",
-    "stepper_mouth_corner_right",
-    "stepper_cheek_puff_left",
-    "stepper_cheek_puff_right",
-    "ili9341_mouth_display"
-  ],
-  "hardware": {
-    "motors": [
-      {
-        "name": "stepper_jaw_vertical",
-        "type": "NEMA17_HIGHTORQUE",
-        "gpio": {
-          "step_pin": 23,
-          "direction_pin": 24,
-          "enable_pin": 25
-        },
-        "range_degrees": {
-          "min": 0,
-          "max": 60
-        },
-        "description": "Main jaw rotation (vertical hinge)"
-      },
-      {
-        "name": "stepper_mouth_corner_left",
-        "type": "NEMA14_STANDARD",
-        "gpio": {
-          "step_pin": 26,
-          "direction_pin": 27,
-          "enable_pin": 28
-        },
-        "range_degrees": {
-          "min": -30,
-          "max": 30
-        },
-        "description": "Left mouth corner up/down"
-      },
-      {
-        "name": "stepper_mouth_corner_right",
-        "type": "NEMA14_STANDARD",
-        "gpio": {
-          "step_pin": 29,
-          "direction_pin": 30,
-          "enable_pin": 31
-        },
-        "range_degrees": {
-          "min": -30,
-          "max": 30
-        },
-        "description": "Right mouth corner up/down"
-      },
-      {
-        "name": "stepper_cheek_puff_left",
-        "type": "NEMA8_GEARED_5",
-        "gpio": {
-          "step_pin": 32,
-          "direction_pin": 33,
-          "enable_pin": 34
-        },
-        "range_mm": {
-          "min": 0,
-          "max": 20
-        },
-        "description": "Left cheek puff (linear)"
-      },
-      {
-        "name": "stepper_cheek_puff_right",
-        "type": "NEMA8_GEARED_5",
-        "gpio": {
-          "step_pin": 35,
-          "direction_pin": 36,
-          "enable_pin": 37
-        },
-        "range_mm": {
-          "min": 0,
-          "max": 20
-        },
-        "description": "Right cheek puff (linear)"
-      }
+    "name": "goblin_head_mouth_motor",
+    "type": "motor_controller",
+    "description": "5-DOF mouth articulation with expression presets and speech sync",
+    "subsystem": "goblin_head",
+    "dependencies": [
+        "stepper_jaw_vertical",
+        "stepper_mouth_corner_left",
+        "stepper_mouth_corner_right",
+        "stepper_cheek_puff_left",
+        "stepper_cheek_puff_right",
+        "ili9341_mouth_display"
     ],
-    "display": {
-      "driver": "ili9341",
-      "resolution": "480x320",
-      "color_format": "RGB666",
-      "chunking": {
-        "enabled": true,
-        "chunk_height": 80
-      },
-      "chunk_buffer_kb": 115.2
+    "hardware": {
+        "motors": [
+            {
+                "name": "stepper_jaw_vertical",
+                "type": "NEMA17_HIGHTORQUE",
+                "gpio": {
+                    "step_pin": 23,
+                    "direction_pin": 24,
+                    "enable_pin": 25
+                },
+                "range_degrees": {
+                    "min": 0,
+                    "max": 60
+                },
+                "description": "Main jaw rotation (vertical hinge)"
+            },
+            {
+                "name": "stepper_mouth_corner_left",
+                "type": "NEMA14_STANDARD",
+                "gpio": {
+                    "step_pin": 26,
+                    "direction_pin": 27,
+                    "enable_pin": 28
+                },
+                "range_degrees": {
+                    "min": -30,
+                    "max": 30
+                },
+                "description": "Left mouth corner up/down"
+            },
+            {
+                "name": "stepper_mouth_corner_right",
+                "type": "NEMA14_STANDARD",
+                "gpio": {
+                    "step_pin": 29,
+                    "direction_pin": 30,
+                    "enable_pin": 31
+                },
+                "range_degrees": {
+                    "min": -30,
+                    "max": 30
+                },
+                "description": "Right mouth corner up/down"
+            },
+            {
+                "name": "stepper_cheek_puff_left",
+                "type": "NEMA8_GEARED_5",
+                "gpio": {
+                    "step_pin": 32,
+                    "direction_pin": 33,
+                    "enable_pin": 34
+                },
+                "range_mm": {
+                    "min": 0,
+                    "max": 20
+                },
+                "description": "Left cheek puff (linear)"
+            },
+            {
+                "name": "stepper_cheek_puff_right",
+                "type": "NEMA8_GEARED_5",
+                "gpio": {
+                    "step_pin": 35,
+                    "direction_pin": 36,
+                    "enable_pin": 37
+                },
+                "range_mm": {
+                    "min": 0,
+                    "max": 20
+                },
+                "description": "Right cheek puff (linear)"
+            }
+        ],
+        "display": {
+            "driver": "ili9341",
+            "resolution": "480x320",
+            "color_format": "RGB666",
+            "chunking": {
+                "enabled": true,
+                "chunk_height": 80
+            },
+            "chunk_buffer_kb": 115.2
+        }
+    },
+    "animation_timing": {
+        "update_hz": 30,
+        "motor_update_hz": 100,
+        "expression_transition_ms": 300,
+        "speech_phoneme_duration_ms": 50
+    },
+    "expressions": [
+        {
+            "name": "NEUTRAL",
+            "jaw_open": 0,
+            "corner_l": 0,
+            "corner_r": 0,
+            "cheek_l": 0,
+            "cheek_r": 0
+        },
+        {
+            "name": "SMILE",
+            "jaw_open": 5,
+            "corner_l": 20,
+            "corner_r": 20,
+            "cheek_l": 15,
+            "cheek_r": 15
+        },
+        {
+            "name": "FROWN",
+            "jaw_open": 5,
+            "corner_l": -20,
+            "corner_r": -20,
+            "cheek_l": 0,
+            "cheek_r": 0
+        },
+        {
+            "name": "OPEN_LAUGH",
+            "jaw_open": 50,
+            "corner_l": 25,
+            "corner_r": 25,
+            "cheek_l": 20,
+            "cheek_r": 20
+        },
+        {
+            "name": "SHOCK",
+            "jaw_open": 55,
+            "corner_l": 15,
+            "corner_r": 15,
+            "cheek_l": 0,
+            "cheek_r": 0
+        },
+        {
+            "name": "ANGRY",
+            "jaw_open": 5,
+            "corner_l": -15,
+            "corner_r": -15,
+            "cheek_l": 10,
+            "cheek_r": 10
+        }
+    ],
+    "phonemes": [
+        {
+            "id": 0,
+            "name": "AH",
+            "jaw_open": 50,
+            "corner_l": 0,
+            "corner_r": 0,
+            "duration_ms": 50
+        },
+        {
+            "id": 1,
+            "name": "EH_IH",
+            "jaw_open": 20,
+            "corner_l": 10,
+            "corner_r": 10,
+            "duration_ms": 50
+        },
+        {
+            "id": 2,
+            "name": "OH",
+            "jaw_open": 30,
+            "corner_l": -5,
+            "corner_r": -5,
+            "duration_ms": 50
+        },
+        {
+            "id": 3,
+            "name": "OO",
+            "jaw_open": 15,
+            "corner_l": -10,
+            "corner_r": -10,
+            "duration_ms": 50
+        },
+        {
+            "id": 4,
+            "name": "M_B_P",
+            "jaw_open": 5,
+            "corner_l": 0,
+            "corner_r": 0,
+            "duration_ms": 50
+        }
+    ],
+    "mood_integration": {
+        "affects": [
+            "expression",
+            "intensity",
+            "mouth_color"
+        ],
+        "base_color_rgb888": "0xFF6600",
+        "mood_effects": {
+            "ANGER": "red_frown",
+            "HAPPINESS": "wide_smile",
+            "SADNESS": "downturned_corners",
+            "EXCITEMENT": "open_laugh"
+        }
+    },
+    "min_step_interval_us": {
+        "jaw": 40,
+        "corner_l": 60,
+        "corner_r": 60,
+        "cheek_l": 30,
+        "cheek_r": 30
+    },
+    "memory_budget_kb": 115.5,
+    "notes": "5 motors synchronized for natural expressions. Mouth display uses chunked rendering for large ILI9341. Phoneme library for speech sync.",
+    "timing": {
+        "hitCount": 1
     }
-  },
-  "animation_timing": {
-    "update_hz": 30,
-    "motor_update_hz": 100,
-    "expression_transition_ms": 300,
-    "speech_phoneme_duration_ms": 50
-  },
-  "expressions": [
-    {
-      "name": "NEUTRAL",
-      "jaw_open": 0,
-      "corner_l": 0,
-      "corner_r": 0,
-      "cheek_l": 0,
-      "cheek_r": 0
-    },
-    {
-      "name": "SMILE",
-      "jaw_open": 5,
-      "corner_l": 20,
-      "corner_r": 20,
-      "cheek_l": 15,
-      "cheek_r": 15
-    },
-    {
-      "name": "FROWN",
-      "jaw_open": 5,
-      "corner_l": -20,
-      "corner_r": -20,
-      "cheek_l": 0,
-      "cheek_r": 0
-    },
-    {
-      "name": "OPEN_LAUGH",
-      "jaw_open": 50,
-      "corner_l": 25,
-      "corner_r": 25,
-      "cheek_l": 20,
-      "cheek_r": 20
-    },
-    {
-      "name": "SHOCK",
-      "jaw_open": 55,
-      "corner_l": 15,
-      "corner_r": 15,
-      "cheek_l": 0,
-      "cheek_r": 0
-    },
-    {
-      "name": "ANGRY",
-      "jaw_open": 5,
-      "corner_l": -15,
-      "corner_r": -15,
-      "cheek_l": 10,
-      "cheek_r": 10
-    }
-  ],
-  "phonemes": [
-    {
-      "id": 0,
-      "name": "AH",
-      "jaw_open": 50,
-      "corner_l": 0,
-      "corner_r": 0,
-      "duration_ms": 50
-    },
-    {
-      "id": 1,
-      "name": "EH_IH",
-      "jaw_open": 20,
-      "corner_l": 10,
-      "corner_r": 10,
-      "duration_ms": 50
-    },
-    {
-      "id": 2,
-      "name": "OH",
-      "jaw_open": 30,
-      "corner_l": -5,
-      "corner_r": -5,
-      "duration_ms": 50
-    },
-    {
-      "id": 3,
-      "name": "OO",
-      "jaw_open": 15,
-      "corner_l": -10,
-      "corner_r": -10,
-      "duration_ms": 50
-    },
-    {
-      "id": 4,
-      "name": "M_B_P",
-      "jaw_open": 5,
-      "corner_l": 0,
-      "corner_r": 0,
-      "duration_ms": 50
-    }
-  ],
-  "mood_integration": {
-    "affects": ["expression", "intensity", "mouth_color"],
-    "base_color_rgb888": "0xFF6600",
-    "mood_effects": {
-      "ANGER": "red_frown",
-      "HAPPINESS": "wide_smile",
-      "SADNESS": "downturned_corners",
-      "EXCITEMENT": "open_laugh"
-    }
-  },
-  "min_step_interval_us": {
-    "jaw": 40,
-    "corner_l": 60,
-    "corner_r": 60,
-    "cheek_l": 30,
-    "cheek_r": 30
-  },
-  "memory_budget_kb": 115.5,
-  "notes": "5 motors synchronized for natural expressions. Mouth display uses chunked rendering for large ILI9341. Phoneme library for speech sync."
 }

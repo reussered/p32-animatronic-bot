@@ -1,0 +1,76 @@
+// goblin_personality.src - Torso-based personality trait management
+// Loads family-level personality traits and broadcasts to all subsystems via ESP-NOW
+
+#include "esp_log.h"
+#include "Personality.hpp"
+#include "core/memory/SharedMemory.hpp"
+
+static const char* TAG = "goblin_personality";
+
+esp_err_t goblin_personality_init(void) {
+    ESP_LOGI(TAG, "Initializing goblin personality traits");
+    
+    // Get or create personality instance in SharedMemory
+    Personality* pers = GSM.read<Personality>();
+    if (!pers) {
+        ESP_LOGE(TAG, "Failed to get personality from SharedMemory");
+        return ESP_FAIL;
+    }
+    
+    // Load from goblin_personality.json configuration
+    // In production, these would be injected via use_fields mechanism
+    // For now, set from family archetype:
+    pers->base_aggression = 60;   // From JSON: "base_aggression": 60
+    pers->base_curiosity = 70;    // From JSON: "base_curiosity": 70
+    pers->base_fear = 20;         // From JSON: "base_fear": 20
+    pers->base_affection = 40;    // Reasonable default for mischievous but not cruel
+    
+    // Broadcast personality to all other ESP32 chips (head, limbs, etc.)
+    // This ensures head displays receive personality before rendering
+    GSM.write<Personality>();
+    
+    ESP_LOGI(TAG, "Personality loaded: aggression=%d, curiosity=%d, fear=%d, affection=%d",
+             pers->base_aggression, pers->base_curiosity, pers->base_fear, pers->base_affection);
+    
+    return ESP_OK;
+}
+
+void goblin_personality_act(void) {
+    // Optional: In a more sophisticated implementation, personality could react to sensors:
+    // - Camera detects threat → increase aggression/fear
+    // - Idle for long time → increase curiosity (boredom)
+    // - Touch sensor activation → increase affection/happiness
+    // - Battery low → increase fear
+    
+    // For now, personality is static (set once at init)
+    // Uncomment to implement dynamic personality changes:
+    
+    /*
+    Personality* pers = GSM.read<Personality>();
+    if (!pers) return;
+    
+    // Example: threat detected → boost aggression
+    if (threat_detected_sensor()) {
+        int8_t new_aggression = pers->base_aggression + 20;
+        if (new_aggression > 127) new_aggression = 127;
+        
+        if (new_aggression != pers->base_aggression) {
+            pers->base_aggression = new_aggression;
+            GSM.write<Personality>();
+            ESP_LOGI(TAG, "Threat detected! Aggression boosted to %d", new_aggression);
+        }
+    }
+    
+    // Example: idle time → increase curiosity
+    if (idle_time_ms() > 30000) {
+        int8_t new_curiosity = pers->base_curiosity + 15;
+        if (new_curiosity > 127) new_curiosity = 127;
+        
+        if (new_curiosity != pers->base_curiosity) {
+            pers->base_curiosity = new_curiosity;
+            GSM.write<Personality>();
+            ESP_LOGI(TAG, "Idle! Curiosity increased to %d", new_curiosity);
+        }
+    }
+    */
+}

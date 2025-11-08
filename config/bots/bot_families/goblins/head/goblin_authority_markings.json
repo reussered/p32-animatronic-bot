@@ -2,5 +2,8 @@
     "name": "goblin_authority_markings",
     "type": "BOT",
     "relative_filename": "config/bots/bot_families/goblins/head/goblin_authority_markings.json",
-    "description": "Defines the authority markings for a goblin head, likely a cosmetic or status-display component."
+    "description": "Defines the authority markings for a goblin head, likely a cosmetic or status-display component.",
+    "timing": {
+        "hitCount": 1
+    }
 }

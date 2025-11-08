@@ -327,5 +327,8 @@
         }
     },
     "name": "linear_actuator_electric",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

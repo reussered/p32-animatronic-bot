@@ -26,8 +26,8 @@
         ]
     },
     "components": [
-        "components/drivers/gpio_pair_driver.json",
-        "components/drivers/gpio_single_driver.json"
+        "gpio_pair_driver",
+        "gpio_single_driver"
     ],
     "software": {
         "init_function": "gpio_bus_init",
@@ -52,5 +52,8 @@
             "ESP32-DevKitC"
         ]
     },
-    "relative_filename": "config/components/drivers/gpio_bus.json"
+    "relative_filename": "config/components/drivers/driver/gpio_bus.json",
+    "timing": {
+        "hitCount": 1
+    }
 }

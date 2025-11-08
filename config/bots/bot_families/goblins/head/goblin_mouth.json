@@ -1,11 +1,27 @@
 {
+    "relative_filename": "config\\bots\\bot_families\\goblins\\head\\goblin_mouth.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
     "name": "goblin_mouth",
-    "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_mouth.json",
-    "description": "Auto-generated component.",
-    "use_fields": {
-        "color_schema": "RGB666",
-        "###1###": "#include config/shared_headers/color_schema.hpp"
+    "subsystem": "HEAD",
+    "components": ["ili9341"],
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "0 INCH",
+        "y": "-1.05 INCH",
+        "z": "0 INCH"
     },
-    "components": []
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "function": "mouth_display",
+    "description": "Mouth display animation",
+    "timing": {
+        "hitCount": 36000
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
 }

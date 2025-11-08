@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/st7735_tft_rgb.json",
+    "relative_filename": "config/components/hardware/hardware/st7735_tft_rgb.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ST7735_TFT_RGB",
@@ -137,5 +137,8 @@
     ],
     "estimated_cost_usd": "19.95",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

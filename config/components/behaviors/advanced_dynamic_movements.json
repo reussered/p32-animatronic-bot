@@ -315,5 +315,8 @@
         }
     },
     "name": "advanced_dynamic_movements",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

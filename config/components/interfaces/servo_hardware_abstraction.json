@@ -246,5 +246,8 @@
         }
     },
     "name": "servo_hardware_abstraction",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ra8875_tft_1024x600.json",
+    "relative_filename": "config/components/hardware/hardware/ra8875_tft_1024x600.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "RA8875_DISPLAY",
@@ -62,5 +62,9 @@
         ],
         "advantages": "Built-in frame buffer reduces ESP32 memory pressure"
     },
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "description": "Auto-generated component: ra8875_tft_1024x600",
+    "timing": {
+        "hitCount": 1
+    }
 }

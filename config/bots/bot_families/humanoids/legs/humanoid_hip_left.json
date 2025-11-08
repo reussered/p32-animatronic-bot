@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/hip_joint_assembly.json"
+        "hip_joint_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 3,
@@ -90,5 +90,8 @@
         "structural_scaling": "LOAD_BEARING_SCALES_QUADRATICALLY"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "ARTICULATED_JOINT_3DOF"
+    "type": "ARTICULATED_JOINT_3DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

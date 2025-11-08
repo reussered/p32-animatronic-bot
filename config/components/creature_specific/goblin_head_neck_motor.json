@@ -1,204 +1,243 @@
 {
-  "name": "goblin_head_neck_motor",
-  "type": "motor_controller",
-  "description": "3-DOF neck articulation with smooth easing and preset poses",
-  "subsystem": "goblin_head",
-  "dependencies": [
-    "stepper_neck_pan",
-    "stepper_neck_tilt",
-    "stepper_neck_roll"
-  ],
-  "hardware": {
-    "motors": [
-      {
-        "name": "stepper_neck_pan",
-        "type": "NEMA23_STANDARD",
-        "gpio": {
-          "step_pin": 38,
-          "direction_pin": 39,
-          "enable_pin": 40
+    "name": "goblin_head_neck_motor",
+    "type": "motor_controller",
+    "description": "3-DOF neck articulation with smooth easing and preset poses",
+    "subsystem": "goblin_head",
+    "dependencies": [
+        "stepper_neck_pan",
+        "stepper_neck_tilt",
+        "stepper_neck_roll"
+    ],
+    "hardware": {
+        "motors": [
+            {
+                "name": "stepper_neck_pan",
+                "type": "NEMA23_STANDARD",
+                "gpio": {
+                    "step_pin": 38,
+                    "direction_pin": 39,
+                    "enable_pin": 40
+                },
+                "range_degrees": {
+                    "min": -60,
+                    "max": 60
+                },
+                "description": "Head left-right rotation"
+            },
+            {
+                "name": "stepper_neck_tilt",
+                "type": "NEMA17_HIGHTORQUE",
+                "gpio": {
+                    "step_pin": 41,
+                    "direction_pin": 42,
+                    "enable_pin": 43
+                },
+                "range_degrees": {
+                    "min": -30,
+                    "max": 45
+                },
+                "description": "Head up-down tilt"
+            },
+            {
+                "name": "stepper_neck_roll",
+                "type": "NEMA14_STANDARD",
+                "gpio": {
+                    "step_pin": 44,
+                    "direction_pin": 45,
+                    "enable_pin": 46
+                },
+                "range_degrees": {
+                    "min": -25,
+                    "max": 25
+                },
+                "description": "Head shoulder tilt (roll)"
+            }
+        ]
+    },
+    "animation_timing": {
+        "update_hz": 30,
+        "motor_update_hz": 100,
+        "default_motion_duration_ms": 300,
+        "motion_easing": "ease-in-out-cubic"
+    },
+    "preset_poses": [
+        {
+            "name": "CENTER",
+            "pan": 0,
+            "tilt": 0,
+            "roll": 0,
+            "duration_ms": 400
         },
-        "range_degrees": {
-          "min": -60,
-          "max": 60
+        {
+            "name": "LEFT_TURN",
+            "pan": -45,
+            "tilt": 0,
+            "roll": -10,
+            "duration_ms": 500,
+            "description": "Look left with shoulder"
         },
-        "description": "Head left-right rotation"
-      },
-      {
-        "name": "stepper_neck_tilt",
-        "type": "NEMA17_HIGHTORQUE",
-        "gpio": {
-          "step_pin": 41,
-          "direction_pin": 42,
-          "enable_pin": 43
+        {
+            "name": "RIGHT_TURN",
+            "pan": 45,
+            "tilt": 0,
+            "roll": 10,
+            "duration_ms": 500,
+            "description": "Look right with shoulder"
         },
-        "range_degrees": {
-          "min": -30,
-          "max": 45
+        {
+            "name": "DOWN_LOOK",
+            "pan": 0,
+            "tilt": -25,
+            "roll": 0,
+            "duration_ms": 400,
+            "description": "Look down"
         },
-        "description": "Head up-down tilt"
-      },
-      {
-        "name": "stepper_neck_roll",
-        "type": "NEMA14_STANDARD",
-        "gpio": {
-          "step_pin": 44,
-          "direction_pin": 45,
-          "enable_pin": 46
+        {
+            "name": "UP_LOOK",
+            "pan": 0,
+            "tilt": 35,
+            "roll": 0,
+            "duration_ms": 400,
+            "description": "Look up"
         },
-        "range_degrees": {
-          "min": -25,
-          "max": 25
+        {
+            "name": "SHY_TILT",
+            "pan": -15,
+            "tilt": -10,
+            "roll": -20,
+            "duration_ms": 500,
+            "description": "Head down-left with shoulder"
         },
-        "description": "Head shoulder tilt (roll)"
-      }
-    ]
-  },
-  "animation_timing": {
-    "update_hz": 30,
-    "motor_update_hz": 100,
-    "default_motion_duration_ms": 300,
-    "motion_easing": "ease-in-out-cubic"
-  },
-  "preset_poses": [
-    {
-      "name": "CENTER",
-      "pan": 0,
-      "tilt": 0,
-      "roll": 0,
-      "duration_ms": 400
+        {
+            "name": "CONFUSED_TILT",
+            "pan": 0,
+            "tilt": 15,
+            "roll": 20,
+            "duration_ms": 450,
+            "description": "Head tilted up-right (confused)"
+        },
+        {
+            "name": "AGGRESSIVE",
+            "pan": 0,
+            "tilt": -15,
+            "roll": 5,
+            "duration_ms": 350,
+            "description": "Chin forward, slight shoulder"
+        }
+    ],
+    "motion_sequences": [
+        {
+            "name": "NODDING_YES",
+            "type": "tilt_repetitive",
+            "pattern": [
+                {
+                    "tilt": 25,
+                    "duration_ms": 200
+                },
+                {
+                    "tilt": -10,
+                    "duration_ms": 200
+                },
+                {
+                    "tilt": 25,
+                    "duration_ms": 200
+                },
+                {
+                    "tilt": 0,
+                    "duration_ms": 300
+                }
+            ]
+        },
+        {
+            "name": "SHAKING_NO",
+            "type": "pan_repetitive",
+            "pattern": [
+                {
+                    "pan": -30,
+                    "duration_ms": 150
+                },
+                {
+                    "pan": 30,
+                    "duration_ms": 150
+                },
+                {
+                    "pan": -30,
+                    "duration_ms": 150
+                },
+                {
+                    "pan": 0,
+                    "duration_ms": 250
+                }
+            ]
+        },
+        {
+            "name": "CONFUSED_WOBBLE",
+            "type": "roll_repetitive",
+            "pattern": [
+                {
+                    "roll": 20,
+                    "duration_ms": 200
+                },
+                {
+                    "roll": -15,
+                    "duration_ms": 200
+                },
+                {
+                    "roll": 20,
+                    "duration_ms": 200
+                },
+                {
+                    "roll": 0,
+                    "duration_ms": 300
+                }
+            ]
+        }
+    ],
+    "motion_ranges": {
+        "pan": {
+            "min_degrees": -60,
+            "max_degrees": 60,
+            "typical_speed_rpm": 150
+        },
+        "tilt": {
+            "min_degrees": -30,
+            "max_degrees": 45,
+            "typical_speed_rpm": 100
+        },
+        "roll": {
+            "min_degrees": -25,
+            "max_degrees": 25,
+            "typical_speed_rpm": 120
+        }
     },
-    {
-      "name": "LEFT_TURN",
-      "pan": -45,
-      "tilt": 0,
-      "roll": -10,
-      "duration_ms": 500,
-      "description": "Look left with shoulder"
+    "motor_specs": {
+        "pan": {
+            "nema": 23,
+            "voltage_v": 24,
+            "rated_torque_ncm": 1500,
+            "holding_torque_ncm": 1500
+        },
+        "tilt": {
+            "nema": 17,
+            "voltage_v": 24,
+            "rated_torque_ncm": 1200,
+            "holding_torque_ncm": 1200
+        },
+        "roll": {
+            "nema": 14,
+            "voltage_v": 12,
+            "rated_torque_ncm": 100,
+            "holding_torque_ncm": 100
+        }
     },
-    {
-      "name": "RIGHT_TURN",
-      "pan": 45,
-      "tilt": 0,
-      "roll": 10,
-      "duration_ms": 500,
-      "description": "Look right with shoulder"
+    "min_step_interval_us": {
+        "pan": 50,
+        "tilt": 40,
+        "roll": 60
     },
-    {
-      "name": "DOWN_LOOK",
-      "pan": 0,
-      "tilt": -25,
-      "roll": 0,
-      "duration_ms": 400,
-      "description": "Look down"
-    },
-    {
-      "name": "UP_LOOK",
-      "pan": 0,
-      "tilt": 35,
-      "roll": 0,
-      "duration_ms": 400,
-      "description": "Look up"
-    },
-    {
-      "name": "SHY_TILT",
-      "pan": -15,
-      "tilt": -10,
-      "roll": -20,
-      "duration_ms": 500,
-      "description": "Head down-left with shoulder"
-    },
-    {
-      "name": "CONFUSED_TILT",
-      "pan": 0,
-      "tilt": 15,
-      "roll": 20,
-      "duration_ms": 450,
-      "description": "Head tilted up-right (confused)"
-    },
-    {
-      "name": "AGGRESSIVE",
-      "pan": 0,
-      "tilt": -15,
-      "roll": 5,
-      "duration_ms": 350,
-      "description": "Chin forward, slight shoulder"
+    "memory_budget_kb": 0.1,
+    "notes": "Neck provides full 3-DOF articulation for gaze control, emotional expression, and attention. Smooth easing prevents jerky motion. Can synchronize with eye/mouth for coordinated animation.",
+    "timing": {
+        "hitCount": 1
     }
-  ],
-  "motion_sequences": [
-    {
-      "name": "NODDING_YES",
-      "type": "tilt_repetitive",
-      "pattern": [
-        { "tilt": 25, "duration_ms": 200 },
-        { "tilt": -10, "duration_ms": 200 },
-        { "tilt": 25, "duration_ms": 200 },
-        { "tilt": 0, "duration_ms": 300 }
-      ]
-    },
-    {
-      "name": "SHAKING_NO",
-      "type": "pan_repetitive",
-      "pattern": [
-        { "pan": -30, "duration_ms": 150 },
-        { "pan": 30, "duration_ms": 150 },
-        { "pan": -30, "duration_ms": 150 },
-        { "pan": 0, "duration_ms": 250 }
-      ]
-    },
-    {
-      "name": "CONFUSED_WOBBLE",
-      "type": "roll_repetitive",
-      "pattern": [
-        { "roll": 20, "duration_ms": 200 },
-        { "roll": -15, "duration_ms": 200 },
-        { "roll": 20, "duration_ms": 200 },
-        { "roll": 0, "duration_ms": 300 }
-      ]
-    }
-  ],
-  "motion_ranges": {
-    "pan": {
-      "min_degrees": -60,
-      "max_degrees": 60,
-      "typical_speed_rpm": 150
-    },
-    "tilt": {
-      "min_degrees": -30,
-      "max_degrees": 45,
-      "typical_speed_rpm": 100
-    },
-    "roll": {
-      "min_degrees": -25,
-      "max_degrees": 25,
-      "typical_speed_rpm": 120
-    }
-  },
-  "motor_specs": {
-    "pan": {
-      "nema": 23,
-      "voltage_v": 24,
-      "rated_torque_ncm": 1500,
-      "holding_torque_ncm": 1500
-    },
-    "tilt": {
-      "nema": 17,
-      "voltage_v": 24,
-      "rated_torque_ncm": 1200,
-      "holding_torque_ncm": 1200
-    },
-    "roll": {
-      "nema": 14,
-      "voltage_v": 12,
-      "rated_torque_ncm": 100,
-      "holding_torque_ncm": 100
-    }
-  },
-  "min_step_interval_us": {
-    "pan": 50,
-    "tilt": 40,
-    "roll": 60
-  },
-  "memory_budget_kb": 0.1,
-  "notes": "Neck provides full 3-DOF articulation for gaze control, emotional expression, and attention. Smooth easing prevents jerky motion. Can synchronize with eye/mouth for coordinated animation."
 }

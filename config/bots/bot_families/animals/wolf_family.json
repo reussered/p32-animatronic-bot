@@ -16,12 +16,10 @@
         "snout_extension": "1.8 INCH"
     },
     "components": [
-        "bots/.archived_components/bot_families/animals/head/wolf_eye_left.json",
-        "bots/.archived_components/bot_families/animals/head/wolf_eye_right.json",
-        "bots/.archived_components/bot_families/animals/head/wolf_snout.json",
-        "bots/.archived_components/bot_families/animals/head/wolf_speaker.json",
-        "config/subsystems/wolf_head.json",
-        "config/subsystems/wolf_torso.json"
+        "wolf_eye_left",
+        "wolf_eye_right",
+        "wolf_snout",
+        "wolf_speaker"
     ],
     "family_mood_profile": {
         "FEAR": 10,
@@ -165,5 +163,8 @@
         }
     },
     "name": "wolf_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

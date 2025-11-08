@@ -37,7 +37,7 @@
         }
     ],
     "components": [
-        "components/hardware/spine_vertebrae_assembly.json"
+        "spine_vertebrae_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 6,
@@ -122,5 +122,8 @@
         "z": "0.0 INCH",
         "x": "0.0 INCH"
     },
-    "type": "ARTICULATED_CHAIN_3DOF"
+    "type": "ARTICULATED_CHAIN_3DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

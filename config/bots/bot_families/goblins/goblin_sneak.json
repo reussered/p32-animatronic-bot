@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_enlarged_eyes.json",
-        "bots/bot_families/goblins/head/goblin_pale_skin.json",
-        "bots/bot_families/goblins/head/goblin_shadow_sensors.json",
-        "bots/bot_families/goblins/head/goblin_malnutrition_features.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_enlarged_eyes",
+        "goblin_pale_skin",
+        "goblin_shadow_sensors",
+        "goblin_malnutrition_features",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "shadow_meld": {
@@ -192,5 +192,8 @@
         "Hypervigilant sensor configuration for paranoid scanning"
     ],
     "name": "goblin_sneak",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

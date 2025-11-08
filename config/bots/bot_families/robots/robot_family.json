@@ -63,5 +63,8 @@
     },
     "name": "robot_family",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

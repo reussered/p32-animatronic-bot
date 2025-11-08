@@ -13,8 +13,12 @@
     "relative_filename": "config/components/interfaces/i2c_bus_1.json",
     "interface_id": "I2C_BUS_1",
     "components": [
-        "components/drivers/i2c_driver.json"
+        "i2c_driver"
     ],
     "name": "i2c_bus_1",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "description": "Auto-generated component: i2c_bus_1",
+    "timing": {
+        "hitCount": 1
+    }
 }

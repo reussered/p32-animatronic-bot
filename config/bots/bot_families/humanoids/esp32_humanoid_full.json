@@ -157,5 +157,8 @@
     },
     "name": "esp32_humanoid_full",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -10,11 +10,11 @@
     "reference_point": "nose_center",
     "eye_spacing": "3.0 INCH",
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_left_eye",
+        "goblin_right_eye",
+        "goblin_nose",
+        "goblin_head",
+        "goblin_torso"
     ],
     "mood_defaults": {
         "FEAR": 20,
@@ -40,5 +40,8 @@
         "Uses component table generation system"
     ],
     "name": "goblin_simple",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

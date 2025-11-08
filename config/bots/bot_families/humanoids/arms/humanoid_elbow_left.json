@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/elbow_joint_assembly.json"
+        "elbow_joint_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 1,
@@ -67,5 +67,8 @@
         "structural_scaling": "MATERIAL_THICKNESS_SCALES_WITH_SIZE"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "ARTICULATED_JOINT_1DOF"
+    "type": "ARTICULATED_JOINT_1DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

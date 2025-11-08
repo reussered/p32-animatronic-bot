@@ -29,10 +29,10 @@
         }
     },
     "components": [
-        "components/creature_specific/emotion_camera.json",
-        "components/creature_specific/touch_sensor_array.json",
-        "components/creature_specific/comfort_speaker.json",
-        "components/creature_specific/pet_simulation_servos.json"
+        "emotion_camera",
+        "touch_sensor_array",
+        "comfort_speaker",
+        "pet_simulation_servos"
     ],
     "social_behaviors": {
         "greeting_patterns": [
@@ -83,5 +83,8 @@
         "supervised_learning": true
     },
     "name": "robot_companion_buddy",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

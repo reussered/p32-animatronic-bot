@@ -16,15 +16,15 @@
         "mechanical_precision": "moderate_tolerance"
     },
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_ear_left.json",
-        "bots/bot_families/goblins/head/goblin_ear_right.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_left_eye",
+        "goblin_right_eye",
+        "goblin_mouth",
+        "goblin_nose",
+        "goblin_ear_left",
+        "goblin_ear_right",
+        "goblin_speaker",
+        "goblin_head",
+        "goblin_torso"
     ],
     "family_characteristics": {
         "physical_features": {
@@ -90,5 +90,8 @@
         "humans": "SUSPICIOUS"
     },
     "name": "goblin_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

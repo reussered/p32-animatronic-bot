@@ -44,5 +44,9 @@
     "hardware_type": "POSITIONED_COMPONENT",
     "name": "dragon_mouth",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: dragon_mouth",
+    "timing": {
+        "hitCount": 1
+    }
 }

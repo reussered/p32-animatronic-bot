@@ -4,11 +4,11 @@
     "description": "Integrated flight control subsystem (motors + wings + sensors + safety)",
     "type": "CONTAINER",
     "components": [
-        "bots/bot_families/dragons/wings/flying_dragon_sensor_fusion.json",
-        "bots/bot_families/dragons/wings/flying_dragon_flight_safety.json",
-        "bots/bot_families/dragons/wings/flying_dragon_motor_controller.json",
-        "bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.json",
-        "bots/bot_families/dragons/flying_dragon_behavior_sequencer.json"
+        "flying_dragon_sensor_fusion",
+        "flying_dragon_flight_safety",
+        "flying_dragon_motor_controller",
+        "flying_dragon_wing_servo_controller",
+        "flying_dragon_behavior_sequencer"
     ],
     "execution_priority": [
         1,
@@ -18,5 +18,8 @@
         5
     ],
     "notes": "Execute in order: sensors -> safety -> motors -> servos -> behavior logic",
-    "relative_filename": "config/components/subsystem/flying_dragon_flight_system.json"
+    "relative_filename": "config/components/subsystem/flying_dragon_flight_system.json",
+    "timing": {
+        "hitCount": 1
+    }
 }

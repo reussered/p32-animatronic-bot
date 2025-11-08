@@ -1,0 +1,147 @@
+[
+  {
+    "name": "humanoid_ankle_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_ankle_left.json",
+    "index": 299
+  },
+  {
+    "name": "humanoid_ankle_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_ankle_right.json",
+    "index": 301
+  },
+  {
+    "name": "humanoid_elbow_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_elbow_left.json",
+    "index": 303
+  },
+  {
+    "name": "humanoid_elbow_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_elbow_right.json",
+    "index": 305
+  },
+  {
+    "name": "humanoid_head_assembly",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_head_assembly.json",
+    "index": 307
+  },
+  {
+    "name": "humanoid_hip_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_hip_left.json",
+    "index": 310
+  },
+  {
+    "name": "humanoid_hip_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_hip_right.json",
+    "index": 312
+  },
+  {
+    "name": "humanoid_knee_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_knee_left.json",
+    "index": 314
+  },
+  {
+    "name": "humanoid_knee_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_knee_right.json",
+    "index": 316
+  },
+  {
+    "name": "humanoid_neck_assembly",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_neck_assembly.json",
+    "index": 319
+  },
+  {
+    "name": "humanoid_pelvis_assembly",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_pelvis_assembly.json",
+    "index": 321
+  },
+  {
+    "name": "humanoid_shoulder_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_shoulder_left.json",
+    "index": 323
+  },
+  {
+    "name": "humanoid_shoulder_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_shoulder_right.json",
+    "index": 325
+  },
+  {
+    "name": "humanoid_spine_vertebrae",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_spine_vertebrae.json",
+    "index": 327
+  },
+  {
+    "name": "humanoid_wrist_left",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_wrist_left.json",
+    "index": 330
+  },
+  {
+    "name": "humanoid_wrist_right",
+    "path": "config\\bots\\multi_family\\humanoid\\humanoid_wrist_right.json",
+    "index": 332
+  },
+  {
+    "name": "generic_spi_display",
+    "path": "config\\components\\drivers\\generic_spi_display.json",
+    "index": 176
+  },
+  {
+    "name": "i2c_bus",
+    "path": "config\\components\\drivers\\i2c_bus.json",
+    "index": 338
+  },
+  {
+    "name": "i2s_bus",
+    "path": "config\\components\\drivers\\i2s_bus.json",
+    "index": 342
+  },
+  {
+    "name": "spi_display_bus",
+    "path": "config\\components\\drivers\\spi_display_bus.json",
+    "index": 465
+  },
+  {
+    "name": "gc9a01",
+    "path": "config\\components\\gc9a01.json",
+    "index": 171
+  },
+  {
+    "name": "goblin_eye",
+    "path": "config\\components\\goblin_eye.json",
+    "index": 202
+  },
+  {
+    "name": "goblin_left_eye",
+    "path": "config\\components\\goblin_left_eye.json",
+    "index": 228
+  },
+  {
+    "name": "goblin_right_eye",
+    "path": "config\\components\\goblin_right_eye.json",
+    "index": 251
+  },
+  {
+    "name": "mg996r_servo",
+    "path": "config\\components\\hardware\\mg996r_servo.json",
+    "index": 379
+  },
+  {
+    "name": "test_head",
+    "path": "config\\components\\test_head.json",
+    "index": 506
+  },
+  {
+    "name": "arm_base",
+    "path": "config\\subsystems\\arm_base.json",
+    "index": 23
+  },
+  {
+    "name": "torso_base",
+    "path": "config\\subsystems\\torso_base.json",
+    "index": 518
+  },
+  {
+    "name": "goblin_family",
+    "path": "config\\templates\\families\\goblin_family.json",
+    "index": 206
+  }
+]

@@ -6,9 +6,9 @@
     "description": "Left eye positioned display with goblin-specific visual processing",
     "created": "2025-10-22",
     "components": [
-        "bots/bot_families/goblins/head/goblin_eye.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_eye",
+        "goblin_head",
+        "goblin_torso"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

@@ -1,0 +1,26 @@
+{
+    "relative_filename": "config/components/hardware/hardware/servo_9g_micro.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "hardware_type": "SERVO_MOTOR",
+    "model": "SG90_9G_MICRO",
+    "specifications": {
+        "operating_voltage": "4.8V-6.0V",
+        "stall_torque": "1.8kg*cm",
+        "operating_speed": "0.1s/60degrees",
+        "rotation_range": "180_degrees",
+        "pulse_width": "1ms-2ms",
+        "neutral_position": "1.5ms"
+    },
+    "pin_requirements": {
+        "signal_pin": "PWM_CAPABLE",
+        "power_pin": "5V",
+        "ground_pin": "GND"
+    },
+    "name": "servo_9g_micro",
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: servo_9g_micro",
+    "timing": {
+        "hitCount": 1
+    }
+}

@@ -5,7 +5,7 @@
     "name": "cat_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bots/.archived_components/bot_families/cats/head/cat_eye.json"
+        "cat_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",
@@ -39,5 +39,9 @@
         "affectionate": "cat_loving_left_eye.anim"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: cat_left_eye",
+    "timing": {
+        "hitCount": 1
+    }
 }

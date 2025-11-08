@@ -147,5 +147,8 @@
                 "proper_disposal"
             ]
         }
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

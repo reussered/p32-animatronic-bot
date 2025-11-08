@@ -12,18 +12,18 @@
     "reference_point": "center",
     "units": "PIXELS",
     "components": [
-        "components/hardware/esp32_s3_devkit_chip.json",
-        "config/components/system/system_core.json",
-        "config/components/system/power_monitor.json",
-        "components/heartbeat.json",
-        "components/network_monitor.json",
-        "bots/bot_families/tests/head/test_head.json",
-        "bots/bot_families/goblins/head/goblin_eye.json",
-        "components/gc9a01.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "esp32_s3_devkit_chip",
+        "system_core",
+        "power_monitor",
+        "heartbeat",
+        "network_monitor",
+        "test_head",
+        "goblin_eye",
+        "gc9a01",
+        "goblin_left_eye",
+        "goblin_right_eye",
+        "goblin_head",
+        "goblin_torso"
     ],
     "degrees_of_freedom": {
         "eye_movement_dof": "4",
@@ -63,5 +63,8 @@
         "SLEEPINESS": 0,
         "EXCITEMENT": 0
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

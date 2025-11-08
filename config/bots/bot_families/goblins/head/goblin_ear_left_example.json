@@ -4,7 +4,7 @@
     "author": "config/author.json",
     "name": "goblin_ear_left_example",
     "components": [
-        "components/hardware/speaker.json"
+        "speaker"
     ],
     "mounting_architecture": {
         "type": "integrated",

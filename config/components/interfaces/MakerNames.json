@@ -99,5 +99,8 @@
     },
     "interface_id": "MAKERNAMES",
     "name": "makernames",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

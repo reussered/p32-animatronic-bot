@@ -7,7 +7,7 @@
     "description": "Left ear positioned microphone with goblin-specific directional processing",
     "created": "2025-10-22",
     "components": [
-        "bots/bot_families/goblins/head/goblin_ear.json"
+        "goblin_ear"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

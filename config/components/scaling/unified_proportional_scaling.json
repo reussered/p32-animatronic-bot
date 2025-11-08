@@ -255,5 +255,8 @@
         "customization_flexibility": "INFINITE_CREATURE_VARIATIONS_POSSIBLE",
         "maintenance_ease": "FAMILIAR_SCALING_SYSTEM_EASY_MODIFICATIONS"
     },
-    "type": "COORDINATE_SCALING_SYSTEM"
+    "type": "COORDINATE_SCALING_SYSTEM",
+    "timing": {
+        "hitCount": 1
+    }
 }

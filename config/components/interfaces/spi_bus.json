@@ -8,7 +8,7 @@
     "bus_name": "VSPI",
     "description": "ESP32 VSPI bus interface for SPI communication (bidirectional MOSI/MISO for sensors)",
     "components": [
-        "components/drivers/generic_spi_data_driver.json"
+        "generic_spi_data_driver"
     ],
     "pin_requirements": {
         "shared_pins_needed": [

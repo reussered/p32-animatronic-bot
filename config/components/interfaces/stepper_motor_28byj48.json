@@ -265,5 +265,8 @@
         }
     },
     "name": "stepper_motor_28byj48",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,49 +1,48 @@
 {
-    "relative_filename": "config/components/interfaces/gpio_pair_vibration_sensor.json",
+    "relative_filename": "config/components/interfaces/interfaces/gpio_pair_vibration_sensor.json",
     "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "interface_type": "GPIO_PAIR",
     "author": "config/author.json",
-    "name": "gpio_pair_vibration_sensor",
-    "bus_type": "GPIO_PAIR",
-    "bus_name": "GPIO_PAIR",
-    "description": "GPIO pair interface for vibration sensors",
-    "components": [
-        "components/drivers/gpio_pair_driver.json"
-    ],
+    "interface_id": "GPIO_PAIR_VIBRATION_SENSOR",
+    "display_name": "GPIO Pair - HW-500 Vibration Sensor",
+    "description": "GPIO pin pair configured for HW-500 vibration sensor digital and analog outputs",
+    "created": "2025-10-23",
+    "interface_type": "GPIO_PAIR_DIGITAL_ANALOG",
+    "hardware_platform": "ESP32_S3",
     "pin_requirements": {
-        "shared_pins_needed": [],
-        "unique_pins_needed": [
-            {
-                "function": "GPIO_TRIGGER",
-                "count": 1,
-                "description": "GPIO trigger/output pin"
-            },
-            {
-                "function": "GPIO_ECHO",
-                "count": 1,
-                "description": "GPIO echo/input pin"
-            }
-        ]
+        "digital_pin": {
+            "gpio_type": "digital_input",
+            "function": "vibration_detection_interrupt",
+            "interrupt_capable": true
+        },
+        "analog_pin": {
+            "gpio_type": "analog_input",
+            "adc_capable": true,
+            "function": "vibration_level_measurement"
+        }
     },
+    "electrical_specs": {
+        "voltage_level": "3.3V",
+        "digital_current": "40mA",
+        "analog_impedance": "high_z",
+        "adc_resolution": "12_bit"
+    },
+    "protocol_config": {
+        "digital_protocol": "interrupt_driven",
+        "analog_protocol": "adc_polling",
+        "interrupt_trigger": "falling_edge",
+        "debounce_required": true
+    },
+    "conflict_detection": {
+        "shared_with": [],
+        "conflicts_with": [
+            "WIFI_RF_CIRCUITS",
+            "ADC2_DURING_WIFI"
+        ],
+        "usage_priority": "vibration_sensing"
+    },
+    "name": "gpio_pair_vibration_sensor",
+    "type": "UNKNOWN",
     "timing": {
         "hitCount": 1
-    },
-    "software": {
-        "init_function": "gpio_pair_vibration_sensor_init",
-        "act_function": "gpio_pair_vibration_sensor_act"
-    },
-    "pin_allocation": {
-        "shared_pins": [],
-        "unique_pins": []
-    },
-    "connectivity": {
-        "compatible_devices": [
-            "vibration_sensors",
-            "shock_sensors",
-            "motion_detectors"
-        ],
-        "protocol": "GPIO"
-    },
-    "type": "INTERFACE_BUS"
+    }
 }

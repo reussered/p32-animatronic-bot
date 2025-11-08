@@ -36,5 +36,9 @@
     "name": "mg996r_servo",
     "relative_filename": "config/bots/bot_families/dragons/hardware_templates/mg996r_servo.json",
     "type": "BOT",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: mg996r_servo",
+    "timing": {
+        "hitCount": 1
+    }
 }

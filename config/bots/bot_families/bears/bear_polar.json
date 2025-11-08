@@ -39,10 +39,8 @@
         }
     },
     "components": [
-        "bots/bot_families/bears/head/bear_arctic_fur.json",
-        "bots/.archived_components/bot_families/bears/head/bear_ice_sensors.json",
-        "config/subsystems/bear_head.json",
-        "config/subsystems/bear_torso.json"
+        "bear_arctic_fur",
+        "bear_ice_sensors"
     ],
     "custom_behaviors": {
         "ice_hunting": {
@@ -70,5 +68,8 @@
         "Audio effects include ice and water sounds"
     ],
     "name": "bear_polar",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

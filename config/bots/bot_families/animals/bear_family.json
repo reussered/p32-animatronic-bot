@@ -16,12 +16,10 @@
         "snout_extension": "1.2 INCH"
     },
     "components": [
-        "bots/bot_families/bears/head/bear_left_eye.json",
-        "bots/bot_families/bears/head/bear_right_eye.json",
-        "bots/.archived_components/bot_families/bears/head/bear_snout.json",
-        "bots/.archived_components/bot_families/bears/head/bear_speaker.json",
-        "config/subsystems/bear_head.json",
-        "config/subsystems/bear_torso.json"
+        "bear_left_eye",
+        "bear_right_eye",
+        "bear_snout",
+        "bear_speaker"
     ],
     "family_mood_profile": {
         "FEAR": 5,
@@ -165,5 +163,8 @@
         }
     },
     "name": "bear_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

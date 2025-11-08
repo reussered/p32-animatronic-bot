@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/speaker.json",
+    "relative_filename": "config/components/hardware/hardware/speaker.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "I2S_SPEAKER",
@@ -99,5 +99,10 @@
         "expected_arrival": "few days",
         "testing_strategy": "Use stub component until hardware arrives, then measure and create exact manufacturer variant"
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: speaker",
+    "components": ["i2s_bus"],
+    "timing": {
+        "hitCount": 1
+    }
 }

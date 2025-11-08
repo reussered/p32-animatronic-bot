@@ -8,7 +8,7 @@
     "description": "Shared goblin eye processing logic with palette and mood-based rendering",
     "created": "2025-10-22",
     "components": [
-        "components/gc9a01.json"
+        "gc9a01"
     ],
     "component_constraints": {
         "required_contained_types": [

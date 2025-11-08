@@ -15,13 +15,13 @@
         "skull_scale": 1.0
     },
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_left_eye",
+        "goblin_right_eye",
+        "goblin_mouth",
+        "goblin_speaker",
+        "goblin_nose",
+        "goblin_head",
+        "goblin_torso"
     ],
     "family_mood_profile": {
         "FEAR": 20,
@@ -202,5 +202,8 @@
         "Construction type determines mounting system and user interaction model"
     ],
     "name": "goblin_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

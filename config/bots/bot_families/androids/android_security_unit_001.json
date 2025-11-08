@@ -74,5 +74,8 @@
     "component_count": 0,
     "components": [],
     "name": "android_security_unit_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

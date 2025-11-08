@@ -267,5 +267,8 @@
         }
     },
     "name": "walking_gait_controllers",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -10,6 +10,7 @@
 
 // Include shared state types
 #include "Mood.hpp"
+#include "Personality.hpp"
 #include "../shared/Environment.hpp"
 #include "../shared/MicrophoneData.hpp"
 
@@ -35,6 +36,11 @@ inline shared_type_id_t getTypeId<Mood>() {
 template<>
 inline shared_type_id_t getTypeId<MicrophoneData>() {
     return 3;
+}
+
+template<>
+inline shared_type_id_t getTypeId<Personality>() {
+    return 4;
 }
 
 #ifdef ESP_PLATFORM

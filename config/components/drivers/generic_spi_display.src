@@ -2,6 +2,7 @@
 // Generic SPI display interface for basic drawing operations
 
 #include "esp_log.h"
+#include "esp_heap_caps.h"
 #include "driver/spi_master.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -77,23 +78,24 @@ esp_err_t generic_spi_display_init(void) {
 }
 
 void generic_spi_display_act(void) {
-    ESP_LOGI(TAG_generic_spi_display, "generic_spi_display_act called - handle: %p, CS: %d", 
-             (void*)cur_spi_display_pin.handle, cur_spi_display_pin.cs);
     if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
         return;
     }
 
-    // Use the global frame_ptr set by the positioned component (left_eye/right_eye)
-    // This allows generic driver to work without knowing about specific eyes
-    extern Pixel* frame_ptr;
-    
-    if (!frame_ptr) {
-        ESP_LOGW(TAG_generic_spi_display, "No frame_ptr set for CS=%d", cur_spi_display_pin.cs);
+    // Get the appropriate framebuffer based on which display we're driving
+    // CS=3 is left eye, CS=6 is right eye
+    uint16_t* framebuffer = nullptr;
+    if (cur_spi_display_pin.cs == 3) {
+        framebuffer = goblin_left_eye_get_buffer();
+    } else if (cur_spi_display_pin.cs == 6) {
+        framebuffer = goblin_right_eye_get_buffer();
+    }
+
+    if (!framebuffer) {
+        ESP_LOGE(TAG_generic_spi_display, "No framebuffer available for CS=%d", cur_spi_display_pin.cs);
         return;
     }
-    
-    uint16_t* framebuffer = (uint16_t*)frame_ptr;
 
     // Set column address (0-239)
     spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
@@ -108,32 +110,31 @@ void generic_spi_display_act(void) {
     // Memory write
     spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
 
-    // Send the actual framebuffer data
+    // Send the entire framebuffer at once (no chunking)
     // Convert RGB565 pixels to byte stream (big-endian)
     const size_t total_pixels = 240 * 240;
-    const size_t row_size = 240 * 2;  // 240 pixels * 2 bytes per pixel
-    uint8_t* row_buffer = (uint8_t*)malloc(row_size);
-    
-    if (!row_buffer) {
-        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate row buffer");
+    const size_t frame_size_bytes = total_pixels * 2;  // 240 * 240 * 2 bytes
+
+    // Allocate full frame buffer in PSRAM for transmission
+    uint8_t* frame_buffer = (uint8_t*)heap_caps_malloc(frame_size_bytes, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+
+    if (!frame_buffer) {
+        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate PSRAM frame buffer for transmission");
         return;
     }
 
-    // Send framebuffer row by row
-    for (uint32_t row = 0; row < 240; row++) {
-        uint16_t* row_pixels = framebuffer + (row * 240);
-        
-        // Convert uint16_t pixels to byte stream
-        for (uint32_t col = 0; col < 240; col++) {
-            uint16_t pixel = row_pixels[col];
-            row_buffer[col * 2] = pixel >> 8;       // High byte
-            row_buffer[col * 2 + 1] = pixel & 0xFF; // Low byte
-        }
-        
-        generic_spi_write_data(cur_spi_display_pin.handle, row_buffer, row_size);
+    // Convert entire uint16_t framebuffer to byte stream
+    for (size_t i = 0; i < total_pixels; i++) {
+        uint16_t pixel = framebuffer[i];
+        frame_buffer[i * 2] = pixel >> 8;       // High byte
+        frame_buffer[i * 2 + 1] = pixel & 0xFF; // Low byte
     }
-    
-    free(row_buffer);
+
+    // Send entire frame at once
+    generic_spi_write_data(cur_spi_display_pin.handle, frame_buffer, frame_size_bytes);
+
+    // Free the transmission buffer
+    heap_caps_free(frame_buffer);
 }
 
 

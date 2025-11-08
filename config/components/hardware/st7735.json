@@ -35,9 +35,12 @@
         "init_function": "st7735_init",
         "act_function": "st7735_act",
         "components": [
-            "config/components/drivers/spi_display_bus.json",
-            "config/components/drivers/spi_data_bus.json"
+            "config/components/drivers/spi_display_bus.json"
         ]
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: st7735",
+    "timing": {
+        "hitCount": 1
+    }
 }

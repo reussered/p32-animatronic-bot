@@ -9,7 +9,7 @@
     "bus_name": "I2C",
     "description": "ESP32 I2C bus interface for sensor and peripheral communication",
     "components": [
-        "components/drivers/i2c_driver.json"
+        "i2c_driver"
     ],
     "pin_requirements": {
         "shared_pins_needed": [

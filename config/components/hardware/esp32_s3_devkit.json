@@ -20,7 +20,7 @@
         "gpio_pins": 45
     },
     "name": "esp32_s3_devkit",
-    "relative_filename": "config/components/hardware/esp32_s3_devkit.json",
+    "relative_filename": "config/components/hardware/hardware/esp32_s3_devkit.json",
     "description": "ESP32-S3-DevKitC-1 development board",
     "cost_performance": {
         "lead_time_days": 7,
@@ -656,5 +656,8 @@
             "EN": "CHIP_EN"
         }
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

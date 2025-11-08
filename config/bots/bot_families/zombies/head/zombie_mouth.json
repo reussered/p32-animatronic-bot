@@ -39,5 +39,9 @@
     },
     "hardware_type": "POSITIONED_COMPONENT",
     "type": "POSITIONED_COMPONENT",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: zombie_mouth",
+    "timing": {
+        "hitCount": 1
+    }
 }

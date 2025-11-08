@@ -10,5 +10,9 @@
         "channel": "left"
     },
     "name": "i2s_device_1",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "description": "Auto-generated component: i2s_device_1",
+    "timing": {
+        "hitCount": 1
+    }
 }

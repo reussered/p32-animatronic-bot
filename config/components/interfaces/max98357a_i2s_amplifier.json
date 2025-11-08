@@ -337,5 +337,8 @@
         }
     },
     "name": "max98357a_i2s_amplifier",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/neck_joint_assembly.json"
+        "neck_joint_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 3,
@@ -97,5 +97,8 @@
         "structural_scaling": "NECK_LENGTH_SCALES_WITH_CREATURE_HEIGHT"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "ARTICULATED_JOINT_3DOF"
+    "type": "ARTICULATED_JOINT_3DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

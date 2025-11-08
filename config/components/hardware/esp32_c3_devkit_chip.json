@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/esp32_c3_devkit_chip.json",
+    "relative_filename": "config/components/hardware/hardware/esp32_c3_devkit_chip.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "esp32_c3_devkit_chip",
@@ -209,5 +209,9 @@
     "price_usd": 12.99,
     "price_last_updated": "2025-10-28T00:00:00Z",
     "notes": "ESP32-C3-DevKitC-02 development board with 15 GPIO pins, 400KB SRAM, 4MB flash. No PSRAM.",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: esp32_c3_devkit_chip",
+    "timing": {
+        "hitCount": 1
+    }
 }

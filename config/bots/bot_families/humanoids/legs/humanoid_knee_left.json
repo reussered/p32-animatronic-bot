@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/knee_joint_assembly.json"
+        "knee_joint_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 1,
@@ -75,5 +75,8 @@
         "structural_scaling": "LOAD_BEARING_SCALES_QUADRATICALLY"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "ARTICULATED_JOINT_1DOF"
+    "type": "ARTICULATED_JOINT_1DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

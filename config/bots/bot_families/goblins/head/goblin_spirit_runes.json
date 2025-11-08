@@ -7,7 +7,7 @@
     "description": "Glowing mystical runes for shaman goblin spiritual communication",
     "created": "2025-10-12",
     "components": [
-        "components/hardware/led_matrix_small.json"
+        "led_matrix_small"
     ],
     "interface_reference": "config/components/interfaces/spi_device_3.json",
     "coordinate_system": "skull_3d",
@@ -116,5 +116,8 @@
         "z": "0.0 INCH",
         "x": "0.0 INCH"
     },
-    "type": "MYSTICAL_DISPLAY"
+    "type": "MYSTICAL_DISPLAY",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -54,5 +54,8 @@
         "debugging": "STANDARD_PWM_SCOPE_ANALYSIS"
     },
     "name": "esp32_servo_controller",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

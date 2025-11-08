@@ -17,5 +17,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: elf_mouth",
+    "timing": {
+        "hitCount": 1
+    }
 }

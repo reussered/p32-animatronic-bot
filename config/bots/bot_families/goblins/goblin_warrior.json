@@ -74,10 +74,10 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_battle_scars.json",
-        "bots/bot_families/goblins/head/goblin_war_paint.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_battle_scars",
+        "goblin_war_paint",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "combat_ready_stance": {
@@ -131,5 +131,8 @@
         "Higher audio amplification for intimidation factor"
     ],
     "name": "goblin_warrior",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

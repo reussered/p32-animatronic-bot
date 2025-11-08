@@ -16,11 +16,9 @@
         "central_eye_diameter": "4.0 INCH"
     },
     "components": [
-        "bots/.archived_components/bot_families/fantasy/head/cyclops_eye_central.json",
-        "bots/.archived_components/bot_families/fantasy/head/cyclops_mouth.json",
-        "bots/.archived_components/bot_families/fantasy/head/cyclops_speaker.json",
-        "config/subsystems/cyclops_head.json",
-        "config/subsystems/cyclops_torso.json"
+        "cyclops_eye_central",
+        "cyclops_mouth",
+        "cyclops_speaker"
     ],
     "family_mood_profile": {
         "FEAR": 30,
@@ -119,5 +117,8 @@
         }
     },
     "name": "cyclops_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

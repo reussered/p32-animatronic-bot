@@ -260,5 +260,8 @@
         }
     },
     "name": "hc_sr04_ultrasonic_sensor",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -9,7 +9,7 @@
     "name": "steampunk_eye_right",
     "subsystem": "VISION",
     "components": [
-        "components/interfaces/spi_bus.json"
+        "spi_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -20,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: steampunk_eye_right",
+    "timing": {
+        "hitCount": 1
+    }
 }

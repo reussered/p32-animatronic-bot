@@ -10,8 +10,8 @@
     "software": {
         "init_function": "test_system_controller_init",
         "act_function": "test_system_controller_act",
-        "header_file": "components/test/test_system_controller.hpp",
-        "source_file": "components/test/test_system_controller.cpp"
+        "header_file": "config/components/test/test_system_controller.hpp",
+        "source_file": "config/components/test/test_system_controller.cpp"
     },
     "test_management": {
         "manages_systest_class": true,
@@ -26,5 +26,6 @@
         "test_results_logging": true,
         "performance_metrics": true
     },
-    "type": "SYSTEM_CONTROLLER"
+    "type": "SYSTEM_CONTROLLER",
+    "description": "Auto-generated component: test_system_controller"
 }

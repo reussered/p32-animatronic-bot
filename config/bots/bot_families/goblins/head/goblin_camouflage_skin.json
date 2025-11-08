@@ -7,7 +7,7 @@
     "description": "Forest camouflage skin patterns for scout goblin stealth",
     "created": "2025-10-12",
     "components": [
-        "components/hardware/color_changing_leds.json"
+        "color_changing_leds"
     ],
     "interface_reference": "config/components/interfaces/spi_device_3.json",
     "coordinate_system": "skull_3d",
@@ -91,5 +91,8 @@
         "z": "0.0 INCH",
         "x": "0.0 INCH"
     },
-    "type": "ADAPTIVE_CAMOUFLAGE"
+    "type": "ADAPTIVE_CAMOUFLAGE",
+    "timing": {
+        "hitCount": 1
+    }
 }

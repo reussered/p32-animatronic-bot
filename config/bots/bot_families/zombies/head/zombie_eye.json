@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/bots/bot_families/zombies/head/zombie_eye.json",
+    "relative_filename": "config\\bots\\bot_families\\zombies\\head\\zombie_eye.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "zombie_eye",
@@ -7,7 +7,7 @@
     "description": "Shared zombie eye processing logic with palette and undead mood-based rendering",
     "created": "2025-10-22",
     "components": [
-        "components/gc9a01.json"
+        "gc9a01"
     ],
     "component_constraints": {
         "required_contained_types": [

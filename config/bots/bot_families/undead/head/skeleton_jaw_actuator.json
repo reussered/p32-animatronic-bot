@@ -18,5 +18,9 @@
         "y": "0.0 INCH"
     },
     "type": "POSITIONED_COMPONENT",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: skeleton_jaw_actuator",
+    "timing": {
+        "hitCount": 1
+    }
 }

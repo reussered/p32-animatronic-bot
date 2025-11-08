@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ili9486.json",
+    "relative_filename": "config/components/hardware/hardware/ili9486.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ILI9486_DISPLAY",
@@ -36,7 +36,7 @@
         "init_function": "ili9486_init",
         "act_function": "ili9486_act",
         "components": [
-            "config/components/drivers/spi_display_bus.json"
+            "config/interfaces/spi_display_bus.json"
         ]
     },
     "required_interface_functions": [
@@ -52,5 +52,9 @@
             "DETAILED_EXPRESSIONS"
         ]
     },
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "description": "Auto-generated component: ili9486",
+    "timing": {
+        "hitCount": 1
+    }
 }

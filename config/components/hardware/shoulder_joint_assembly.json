@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/shoulder_joint_assembly.json",
+    "relative_filename": "config/components/hardware/hardware/shoulder_joint_assembly.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "SHOULDER_JOINT_ASSEMBLY",
@@ -34,5 +34,8 @@
         "arm_connection": "M6_HUMERUS_COUPLING"
     },
     "name": "shoulder_joint_assembly",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

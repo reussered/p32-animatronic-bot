@@ -1,0 +1,26 @@
+{
+    "name": "shoulder_flexion",
+    "version": "2.0.0",
+    "author": "config/author.json",
+    "component_type": "SERVO_ASSEMBLY",
+    "subsystem": "ARM",
+    "components": [
+        "mg996r_servo"
+    ],
+    "relative_filename": "config/bots/bot_families/goblins/arms/right/shoulder_flexion.json",
+    "shape_reference": "assets/shapes/scad/creature_shells/goblin/shoulder_flexion_mount.scad",
+    "servo_specific_config": {
+        "joint_type": "SHOULDER_FLEXION_EXTENSION",
+        "range_degrees": 120,
+        "center_position": 90,
+        "movement_direction": "FORWARD_BACKWARD",
+        "max_torque_required_kg_cm": 15
+    },
+    "function": "shoulder_primary_movement",
+    "description": "Goblin right shoulder flexion/extension servo - primary arm lift (Poppy-derived balancing algorithm)",
+    "timing": {
+        "hitCount": 10
+    },
+    "hardware_type": "SERVO_ASSEMBLY",
+    "type": "ASSEMBLY"
+}

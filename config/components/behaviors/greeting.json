@@ -34,5 +34,8 @@
         "motion_sensor"
     ],
     "version": "1.0.0",
-    "relative_filename": "config/components/behaviors/greeting.json"
+    "relative_filename": "config/components/behaviors/greeting.json",
+    "timing": {
+        "hitCount": 1
+    }
 }

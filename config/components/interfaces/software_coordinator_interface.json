@@ -9,5 +9,9 @@
     "relative_filename": "config/components/interfaces/software_coordinator_interface.json",
     "interface_id": "SOFTWARE_COORDINATOR_INTERFACE",
     "name": "software_coordinator_interface",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "description": "Auto-generated component: software_coordinator_interface",
+    "timing": {
+        "hitCount": 1
+    }
 }

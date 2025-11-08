@@ -68,5 +68,8 @@
     "tested": false,
     "estimated_cost_usd": "45.00",
     "name": "test_goblin_head_dual_eyes",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

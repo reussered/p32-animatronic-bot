@@ -78,9 +78,9 @@
         "skull_scale": 1.1
     },
     "components": [
-        "bots/bot_families/undead/head/zombie_rotting_flesh.json",
-        "bots/bot_families/undead/head/zombie_exposed_bone.json",
-        "bots/bot_families/undead/head/zombie_oozing_wounds.json"
+        "zombie_rotting_flesh",
+        "zombie_exposed_bone",
+        "zombie_oozing_wounds"
     ],
     "horror_features": {
         "decay_effects": {
@@ -149,5 +149,8 @@
         "Hard shell for realistic horror, soft body for safe scary fun"
     ],
     "name": "zombie_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -12,7 +12,7 @@
         }
     },
     "name": "esp32_s3_wifi",
-    "relative_filename": "config/components/hardware/esp32_s3_wifi.json",
+    "relative_filename": "config/components/hardware/hardware/esp32_s3_wifi.json",
     "description": "ESP32-S3 WiFi and Bluetooth controller",
     "cost_performance": {
         "lead_time_days": 3,
@@ -22,5 +22,8 @@
     },
     "author": "config/author.json",
     "hardware_type": "WIRELESS_CONTROLLER",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

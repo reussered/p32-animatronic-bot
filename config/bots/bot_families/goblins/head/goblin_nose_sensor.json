@@ -7,7 +7,7 @@
     "description": "Goblin-specific proximity sensor with aggressive threat detection and territorial awareness",
     "created": "2025-10-22",
     "components": [
-        "components/hardware/hc_sr04_sensor.json"
+        "hc_sr04_sensor"
     ],
     "creature_sensor_profile": {
         "species": "GOBLIN",

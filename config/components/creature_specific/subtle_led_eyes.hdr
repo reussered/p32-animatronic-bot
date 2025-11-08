@@ -1,5 +1,0 @@
-// Auto-generated header for subtle_led_eyes
-#include <esp_err.h>
-
-esp_err_t subtle_led_eyes_init(void);
-void subtle_led_eyes_act(void);

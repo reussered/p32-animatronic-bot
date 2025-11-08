@@ -39,5 +39,8 @@
         ]
     },
     "name": "robots_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

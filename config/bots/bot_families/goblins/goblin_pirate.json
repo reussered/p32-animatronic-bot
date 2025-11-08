@@ -15,18 +15,18 @@
     "eye_spacing": "3.0 INCH",
     "compression_factor": 0.7,
     "components": [
-        "components/functional/goblin_pirate_personality.json",
-        "components/functional/goblin_mood.json",
-        "components/functional/goblin_behavior_engine.json",
-        "bots/bot_families/goblins/head/goblin_pirate_head.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_left_ear.json",
-        "bots/bot_families/goblins/head/goblin_right_ear.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_pirate_personality",
+        "goblin_mood",
+        "goblin_behavior_engine",
+        "goblin_pirate_head",
+        "goblin_left_eye",
+        "goblin_mouth",
+        "goblin_speaker",
+        "goblin_nose",
+        "goblin_left_ear",
+        "goblin_right_ear",
+        "goblin_head",
+        "goblin_torso"
     ],
     "mood_defaults": {
         "FEAR": 5,
@@ -73,5 +73,8 @@
         "More aggressive power management due to battle-hardened nature"
     ],
     "name": "goblin_pirate",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

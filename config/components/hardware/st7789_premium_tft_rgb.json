@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/st7789_premium_tft_rgb.json",
+    "relative_filename": "config/components/hardware/hardware/st7789_premium_tft_rgb.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ST7789_PREMIUM_TFT_RGB",
@@ -135,5 +135,8 @@
     ],
     "estimated_cost_usd": "14.95",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

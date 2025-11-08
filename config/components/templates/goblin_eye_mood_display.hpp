@@ -1,11 +1,19 @@
 /**
  * @file goblin_eye_mood_display.hpp
- * @brief Generic goblin eye display with mood-based color rendering
+ * @brief Streaming eye display with mood-based color rendering
  * 
- * This component works with ANY color schema (RGB565, RGB666, RGB888) by:
- * 1. Reading color_schema from config at initialization
- * 2. Instantiating the appropriate MoodCalculator template
- * 3. Applying mood modifications at render time
+ * PSRAM-STREAMING ARCHITECTURE:
+ * 1. Render frame from PSRAM row-by-row
+ * 2. Apply mood modifications while reading
+ * 3. Push to display immediately
+ * 4. Free the row from PSRAM
+ * 5. Repeat for next row
+ * 
+ * Memory model:
+ *   - No full frame buffer in RAM
+ *   - Only one row buffer (width × bytes_per_pixel) in RAM
+ *   - Full frame stored in PSRAM (32MB available)
+ *   - Streaming maintains constant small RAM footprint
  * 
  * Configuration example:
  * {
@@ -13,7 +21,8 @@
  *   "display_config": {
  *     "resolution": "240x240",
  *     "color_schema": "RGB565",
- *     "driver": "gc9a01"
+ *     "driver": "gc9a01",
+ *     "psram_frame_address": "0x3d800000"
  *   },
  *   "mood_enabled": true
  * }
@@ -26,6 +35,7 @@
 #include "config/components/templates/mood_calculator_template.hpp"
 #include "shared/Mood.hpp"
 #include "include/FrameProcessor.hpp"
+#include "esp_spiram.h"  // For PSRAM access
 
 /**
  * @enum ColorSchema
@@ -53,12 +63,18 @@ struct EyeDisplayConfig {
 
 /**
  * @class GoblinEyeMoodDisplay
- * @brief Mood-aware eye display renderer (format-agnostic)
+ * @brief Streaming eye display renderer with PSRAM source
+ * 
+ * Memory model: Zero full-frame buffering
+ *   - Frame data stored in PSRAM (unlimited)
+ *   - Only row_buffer in RAM (width × bytes_per_pixel)
+ *   - Process row → apply mood → push to display → free row
  */
 class GoblinEyeMoodDisplay {
 private:
     EyeDisplayConfig config;
-    uint8_t* frame_buffer;
+    uint8_t* row_buffer;        // Single row buffer (width × bytes_per_pixel)
+    uint32_t psram_frame_addr;  // Address of complete frame in PSRAM
     bool initialized;
     
     // Generic mood calculator wrapper
@@ -75,7 +91,8 @@ private:
     
 public:
     GoblinEyeMoodDisplay()
-        : frame_buffer(nullptr), initialized(false), mood_calculator(nullptr)
+        : row_buffer(nullptr), psram_frame_addr(0), initialized(false), 
+          mood_calculator(nullptr)
     {
         memset(&config, 0, sizeof(config));
         memset(&eye_state, 0, sizeof(eye_state));
@@ -84,14 +101,16 @@ public:
     }
     
     /**
-     * @brief Initialize display with auto-detected color format
+     * @brief Initialize display for streaming from PSRAM
      * @param width Display width in pixels
      * @param height Display height in pixels
      * @param color_schema Color format (RGB565, RGB666, RGB888)
+     * @param psram_addr Address of complete frame in PSRAM
      * @return true if initialization successful
      */
-    bool init(uint16_t width, uint16_t height, ColorSchema color_schema) {
-        if (frame_buffer != nullptr) {
+    bool init(uint16_t width, uint16_t height, ColorSchema color_schema, 
+              uint32_t psram_addr) {
+        if (row_buffer != nullptr) {
             return false;  // Already initialized
         }
         
@@ -99,24 +118,22 @@ public:
         config.height = height;
         config.color_format = color_schema;
         config.total_pixels = width * height;
+        psram_frame_addr = psram_addr;
         
-        // Configure bytes per pixel and allocate buffer
+        // Configure bytes per pixel
         switch (color_schema) {
             case RGB565_FORMAT:
                 config.bytes_per_pixel = 2;
-                config.buffer_size_bytes = config.total_pixels * 2;
                 mood_calculator = new MoodCalcRGB565();
                 break;
                 
             case RGB666_FORMAT:
                 config.bytes_per_pixel = 3;
-                config.buffer_size_bytes = config.total_pixels * 3;
                 mood_calculator = new MoodCalcRGB666();
                 break;
                 
             case RGB888_FORMAT:
                 config.bytes_per_pixel = 3;
-                config.buffer_size_bytes = config.total_pixels * 3;
                 mood_calculator = new MoodCalcRGB888();
                 break;
                 
@@ -126,75 +143,69 @@ public:
         
         config.mood_enabled = true;
         
-        // Allocate frame buffer
-        frame_buffer = new uint8_t[config.buffer_size_bytes];
-        if (!frame_buffer) {
+        // Allocate ONLY ONE ROW BUFFER
+        uint32_t row_size = config.width * config.bytes_per_pixel;
+        row_buffer = new uint8_t[row_size];
+        if (!row_buffer) {
             return false;
         }
         
-        // Clear buffer
-        memset(frame_buffer, 0, config.buffer_size_bytes);
         initialized = true;
-        
         return true;
     }
     
     /**
-     * @brief Render eye animation frame with mood effects applied
-     * @param mood Current emotional state (from SharedMemory.read<Mood>())
-     * @param base_color Color to render (before mood modification)
+     * @brief Stream frame from PSRAM row-by-row with mood effects
+     * @param mood Current emotional state
+     * @param base_color Color to render
+     * @param display_driver Callback to send rows to display
+     * 
+     * Usage:
+     *   GoblinEyeMoodDisplay eye;
+     *   eye.streamFrame(mood, 0x00AA00, 
+     *     [](const uint8_t* row, uint32_t size) { 
+     *       driver.sendRow(row, size); 
+     *     });
      */
-    void renderFrame(const Mood& mood, uint32_t base_color_rgb888) {
-        if (!initialized) return;
+    typedef void (*DisplaySendCallback)(const uint8_t* row_data, uint32_t row_size);
+    
+    void streamFrame(const Mood& mood, uint32_t base_color_rgb888, 
+                     DisplaySendCallback send_callback) {
+        if (!initialized || !send_callback) return;
         
-        // Dispatch to appropriate color-specific renderer
-        switch (config.color_format) {
-            case RGB565_FORMAT:
-                renderFrameRGB565(mood, base_color_rgb888);
-                break;
-            case RGB666_FORMAT:
-                renderFrameRGB666(mood, base_color_rgb888);
-                break;
-            case RGB888_FORMAT:
-                renderFrameRGB888(mood, base_color_rgb888);
-                break;
+        // Process each row
+        for (uint16_t row = 0; row < config.height; ++row) {
+            // Read row from PSRAM
+            uint32_t row_offset = row * config.width * config.bytes_per_pixel;
+            uint8_t* psram_row = reinterpret_cast<uint8_t*>(
+                psram_frame_addr + row_offset);
+            
+            // Copy row to buffer and apply mood
+            switch (config.color_format) {
+                case RGB565_FORMAT:
+                    processRowRGB565(psram_row, mood, base_color_rgb888);
+                    break;
+                case RGB666_FORMAT:
+                    processRowRGB666(psram_row, mood, base_color_rgb888);
+                    break;
+                case RGB888_FORMAT:
+                    processRowRGB888(psram_row, mood, base_color_rgb888);
+                    break;
+            }
+            
+            // Send processed row to display
+            uint32_t row_size = config.width * config.bytes_per_pixel;
+            send_callback(row_buffer, row_size);
         }
+        
+        // Row buffer automatically freed when object destroyed
     }
     
     /**
-     * @brief Update pupil position (for gaze direction)
+     * @brief Get row buffer size (useful for DMA setup)
      */
-    void setPupilPosition(uint16_t x, uint16_t y) {
-        eye_state.pupil_x = (x < config.width) ? x : config.width - 1;
-        eye_state.pupil_y = (y < config.height) ? y : config.height - 1;
-    }
-    
-    /**
-     * @brief Update eyelid openness (0=closed, 255=fully open)
-     */
-    void setEyelidOpenness(uint8_t openness) {
-        eye_state.eyelid_openness = openness;
-    }
-    
-    /**
-     * @brief Trigger blink animation
-     */
-    void blink() {
-        eye_state.blink_active = true;
-    }
-    
-    /**
-     * @brief Get frame buffer pointer
-     */
-    const uint8_t* getFrameBuffer() const {
-        return frame_buffer;
-    }
-    
-    /**
-     * @brief Get buffer size in bytes
-     */
-    uint32_t getBufferSize() const {
-        return config.buffer_size_bytes;
+    uint32_t getRowBufferSize() const {
+        return config.width * config.bytes_per_pixel;
     }
     
     /**
@@ -222,9 +233,9 @@ public:
      * @brief Cleanup
      */
     ~GoblinEyeMoodDisplay() {
-        if (frame_buffer) {
-            delete[] frame_buffer;
-            frame_buffer = nullptr;
+        if (row_buffer) {
+            delete[] row_buffer;
+            row_buffer = nullptr;
         }
         if (mood_calculator) {
             switch (config.color_format) {
@@ -244,89 +255,81 @@ public:
 
 private:
     /**
-     * @brief Render RGB565 frame with mood modifications
+     * @brief Process RGB565 row: read from PSRAM, apply mood, write to buffer
      */
-    void renderFrameRGB565(const Mood& mood, uint32_t base_color_rgb888) {
+    void processRowRGB565(const uint8_t* psram_row, const Mood& mood, 
+                         uint32_t base_color_rgb888) {
         MoodCalcRGB565* calc = static_cast<MoodCalcRGB565*>(mood_calculator);
         
-        // Convert RGB888 base color to RGB565
+        // Setup mood
+        MoodState mood_state = getMoodState(mood);
+        float intensity = static_cast<float>(mood.intensity) / 255.0f;
+        calc->setMood(mood_state, intensity);
+        
+        // Convert base color
         uint8_t r8 = (base_color_rgb888 >> 16) & 0xFF;
         uint8_t g8 = (base_color_rgb888 >> 8) & 0xFF;
         uint8_t b8 = base_color_rgb888 & 0xFF;
         Pixel_RGB565 base_pixel(r8, g8, b8);
-        
-        // Set mood (convert from Mood struct to MoodState enum)
-        MoodState mood_state = getMoodState(mood);
-        float intensity = static_cast<float>(mood.intensity) / 255.0f;
-        calc->setMood(mood_state, intensity);
-        
-        // Apply mood and render to buffer
         Pixel_RGB565 mood_pixel = calc->applyMoodDelta(base_pixel);
         
-        // Fill entire frame with mood-modified color
-        uint16_t* buffer_16 = reinterpret_cast<uint16_t*>(frame_buffer);
+        // Process each pixel in row
+        uint16_t* src = (uint16_t*)psram_row;
+        uint16_t* dst = (uint16_t*)row_buffer;
         uint16_t pixel_value = (mood_pixel.red << 11) | (mood_pixel.green << 5) | mood_pixel.blue;
         
-        for (uint32_t i = 0; i < config.total_pixels; ++i) {
-            buffer_16[i] = pixel_value;
+        for (uint16_t x = 0; x < config.width; ++x) {
+            dst[x] = pixel_value;  // Apply mood-modified color
         }
     }
     
     /**
-     * @brief Render RGB666 frame with mood modifications
+     * @brief Process RGB666 row
      */
-    void renderFrameRGB666(const Mood& mood, uint32_t base_color_rgb888) {
+    void processRowRGB666(const uint8_t* psram_row, const Mood& mood,
+                         uint32_t base_color_rgb888) {
         MoodCalcRGB666* calc = static_cast<MoodCalcRGB666*>(mood_calculator);
         
-        // Convert RGB888 base color to RGB666
+        MoodState mood_state = getMoodState(mood);
+        float intensity = static_cast<float>(mood.intensity) / 255.0f;
+        calc->setMood(mood_state, intensity);
+        
         uint8_t r8 = (base_color_rgb888 >> 16) & 0xFF;
         uint8_t g8 = (base_color_rgb888 >> 8) & 0xFF;
         uint8_t b8 = base_color_rgb888 & 0xFF;
         Pixel_RGB666 base_pixel(r8, g8, b8);
-        
-        // Set mood
-        MoodState mood_state = getMoodState(mood);
-        float intensity = static_cast<float>(mood.intensity) / 255.0f;
-        calc->setMood(mood_state, intensity);
-        
-        // Apply mood and render to buffer
         Pixel_RGB666 mood_pixel = calc->applyMoodDelta(base_pixel);
         
-        // Fill entire frame with mood-modified color (3 bytes per pixel)
-        for (uint32_t i = 0; i < config.total_pixels; ++i) {
-            uint32_t offset = i * 3;
-            frame_buffer[offset] = mood_pixel.r;
-            frame_buffer[offset + 1] = mood_pixel.g;
-            frame_buffer[offset + 2] = mood_pixel.b;
+        for (uint16_t x = 0; x < config.width; ++x) {
+            uint32_t dst_offset = x * 3;
+            row_buffer[dst_offset] = mood_pixel.r;
+            row_buffer[dst_offset + 1] = mood_pixel.g;
+            row_buffer[dst_offset + 2] = mood_pixel.b;
         }
     }
     
     /**
-     * @brief Render RGB888 frame with mood modifications
+     * @brief Process RGB888 row
      */
-    void renderFrameRGB888(const Mood& mood, uint32_t base_color_rgb888) {
+    void processRowRGB888(const uint8_t* psram_row, const Mood& mood,
+                         uint32_t base_color_rgb888) {
         MoodCalcRGB888* calc = static_cast<MoodCalcRGB888*>(mood_calculator);
         
-        // RGB888 is native format
-        uint8_t r8 = (base_color_rgb888 >> 16) & 0xFF;
-        uint8_t g8 = (base_color_rgb888 >> 8) & 0xFF;
-        uint8_t b8 = base_color_rgb888 & 0xFF;
-        Pixel_RGB888 base_pixel(r8, g8, b8);
-        
-        // Set mood
         MoodState mood_state = getMoodState(mood);
         float intensity = static_cast<float>(mood.intensity) / 255.0f;
         calc->setMood(mood_state, intensity);
         
-        // Apply mood and render to buffer
+        uint8_t r8 = (base_color_rgb888 >> 16) & 0xFF;
+        uint8_t g8 = (base_color_rgb888 >> 8) & 0xFF;
+        uint8_t b8 = base_color_rgb888 & 0xFF;
+        Pixel_RGB888 base_pixel(r8, g8, b8);
         Pixel_RGB888 mood_pixel = calc->applyMoodDelta(base_pixel);
         
-        // Fill entire frame with mood-modified color (3 bytes per pixel)
-        for (uint32_t i = 0; i < config.total_pixels; ++i) {
-            uint32_t offset = i * 3;
-            frame_buffer[offset] = mood_pixel.r;
-            frame_buffer[offset + 1] = mood_pixel.g;
-            frame_buffer[offset + 2] = mood_pixel.b;
+        for (uint16_t x = 0; x < config.width; ++x) {
+            uint32_t dst_offset = x * 3;
+            row_buffer[dst_offset] = mood_pixel.r;
+            row_buffer[dst_offset + 1] = mood_pixel.g;
+            row_buffer[dst_offset + 2] = mood_pixel.b;
         }
     }
     
@@ -334,8 +337,6 @@ private:
      * @brief Convert from Mood struct to MoodState enum
      */
     MoodState getMoodState(const Mood& mood) const {
-        // Assuming Mood struct has a 'state' or similar field
-        // This is a placeholder - adjust based on actual Mood.hpp
         return NEUTRAL;  // TODO: Map actual mood field
     }
 };

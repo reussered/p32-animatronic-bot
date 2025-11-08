@@ -85,11 +85,11 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_enhanced_ears.json",
-        "bots/bot_families/goblins/head/goblin_camouflage_skin.json",
-        "bots/bot_families/goblins/head/goblin_scent_sensor.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_enhanced_ears",
+        "goblin_camouflage_skin",
+        "goblin_scent_sensor",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "reconnaissance_mode": {
@@ -174,5 +174,8 @@
         "Higher microphone gain for environmental listening"
     ],
     "name": "goblin_scout",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

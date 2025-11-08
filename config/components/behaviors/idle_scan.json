@@ -36,5 +36,8 @@
         "idle_timeout"
     ],
     "version": "1.0.0",
-    "relative_filename": "config/components/behaviors/idle_scan.json"
+    "relative_filename": "config/components/behaviors/idle_scan.json",
+    "timing": {
+        "hitCount": 1
+    }
 }

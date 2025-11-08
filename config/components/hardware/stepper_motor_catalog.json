@@ -1,140 +1,216 @@
 {
-  "stepper_motor_library": {
-    "version": "1.0",
-    "description": "Comprehensive stepper motor catalog with 30 configurations",
-    "total_motors": 30,
-    "categories": {
-      "micro": {
-        "description": "NEMA8 motors - micro positioning, light articulation",
-        "motors": ["NEMA8_STANDARD", "NEMA8_GEARED_5"]
-      },
-      "light": {
-        "description": "NEMA11-14 motors - light to general purpose",
-        "motors": ["NEMA11_STANDARD", "NEMA14_STANDARD", "NEMA14_HIGHSPEED"]
-      },
-      "standard": {
-        "description": "NEMA17 motors - standard workhorse", 
-        "motors": [
-          "NEMA17_STANDARD", "NEMA17_PRECISION", "NEMA17_HIGHTORQUE",
-          "NEMA17_GEARED_3", "NEMA17_GEARED_5", "NEMA17_PANCAKE",
-          "NEMA17_LINEAR_5MM", "NEMA17_LINEAR_8MM", "NEMA17_DUAL_SHAFT",
-          "NEMA17_LSHT_100", "NEMA17_PWM_SERVO", "NEMA17_IP54_SEALED",
-          "NEMA17_FLAT_15MM"
-        ]
-      },
-      "heavy": {
-        "description": "NEMA23-34 motors - heavy load, precision",
-        "motors": [
-          "NEMA23_STANDARD", "NEMA23_HIGHTORQUE", "NEMA23_GEARED_10",
-          "NEMA23_PANCAKE", "NEMA23_LINEAR_12MM", "NEMA23_HOLLOW_25MM",
-          "NEMA24_PRECISION", "NEMA34_STANDARD", "NEMA34_HIGHSPEED",
-          "NEMA34_GEARED_20"
-        ]
-      },
-      "industrial": {
-        "description": "NEMA42 motors - maximum torque, heavy industry",
-        "motors": ["NEMA42_STANDARD"]
-      },
-      "servo_like": {
-        "description": "PWM-capable steppers with smooth motion",
-        "motors": ["NEMA14_PWM_SERVO", "NEMA17_PWM_SERVO"]
-      }
+    "stepper_motor_library": {
+        "version": "1.0",
+        "description": "Comprehensive stepper motor catalog with 30 configurations",
+        "total_motors": 30,
+        "categories": {
+            "micro": {
+                "description": "NEMA8 motors - micro positioning, light articulation",
+                "motors": [
+                    "NEMA8_STANDARD",
+                    "NEMA8_GEARED_5"
+                ]
+            },
+            "light": {
+                "description": "NEMA11-14 motors - light to general purpose",
+                "motors": [
+                    "NEMA11_STANDARD",
+                    "NEMA14_STANDARD",
+                    "NEMA14_HIGHSPEED"
+                ]
+            },
+            "standard": {
+                "description": "NEMA17 motors - standard workhorse",
+                "motors": [
+                    "NEMA17_STANDARD",
+                    "NEMA17_PRECISION",
+                    "NEMA17_HIGHTORQUE",
+                    "NEMA17_GEARED_3",
+                    "NEMA17_GEARED_5",
+                    "NEMA17_PANCAKE",
+                    "NEMA17_LINEAR_5MM",
+                    "NEMA17_LINEAR_8MM",
+                    "NEMA17_DUAL_SHAFT",
+                    "NEMA17_LSHT_100",
+                    "NEMA17_PWM_SERVO",
+                    "NEMA17_IP54_SEALED",
+                    "NEMA17_FLAT_15MM"
+                ]
+            },
+            "heavy": {
+                "description": "NEMA23-34 motors - heavy load, precision",
+                "motors": [
+                    "NEMA23_STANDARD",
+                    "NEMA23_HIGHTORQUE",
+                    "NEMA23_GEARED_10",
+                    "NEMA23_PANCAKE",
+                    "NEMA23_LINEAR_12MM",
+                    "NEMA23_HOLLOW_25MM",
+                    "NEMA24_PRECISION",
+                    "NEMA34_STANDARD",
+                    "NEMA34_HIGHSPEED",
+                    "NEMA34_GEARED_20"
+                ]
+            },
+            "industrial": {
+                "description": "NEMA42 motors - maximum torque, heavy industry",
+                "motors": [
+                    "NEMA42_STANDARD"
+                ]
+            },
+            "servo_like": {
+                "description": "PWM-capable steppers with smooth motion",
+                "motors": [
+                    "NEMA14_PWM_SERVO",
+                    "NEMA17_PWM_SERVO"
+                ]
+            }
+        },
+        "motor_index": {
+            "0": "NEMA8_STANDARD",
+            "1": "NEMA8_GEARED_5",
+            "2": "NEMA11_STANDARD",
+            "3": "NEMA14_STANDARD",
+            "4": "NEMA14_HIGHSPEED",
+            "5": "NEMA17_STANDARD",
+            "6": "NEMA17_PRECISION",
+            "7": "NEMA17_HIGHTORQUE",
+            "8": "NEMA17_GEARED_3",
+            "9": "NEMA17_GEARED_5",
+            "10": "NEMA23_STANDARD",
+            "11": "NEMA23_HIGHTORQUE",
+            "12": "NEMA23_GEARED_10",
+            "13": "NEMA24_PRECISION",
+            "14": "NEMA34_STANDARD",
+            "15": "NEMA34_HIGHSPEED",
+            "16": "NEMA34_GEARED_20",
+            "17": "NEMA42_STANDARD",
+            "18": "NEMA17_PANCAKE",
+            "19": "NEMA23_PANCAKE",
+            "20": "NEMA17_LINEAR_5MM",
+            "21": "NEMA17_LINEAR_8MM",
+            "22": "NEMA23_LINEAR_12MM",
+            "23": "NEMA23_HOLLOW_25MM",
+            "24": "NEMA17_DUAL_SHAFT",
+            "25": "NEMA17_LSHT_100",
+            "26": "NEMA14_PWM_SERVO",
+            "27": "NEMA17_PWM_SERVO",
+            "28": "NEMA17_IP54_SEALED",
+            "29": "NEMA17_FLAT_15MM"
+        },
+        "typical_applications": {
+            "eye_movement": {
+                "motors": [
+                    "NEMA17_STANDARD",
+                    "NEMA14_STANDARD",
+                    "NEMA14_PWM_SERVO"
+                ],
+                "description": "Horizontal pan (NEMA17), vertical tilt (NEMA14), blink (NEMA8)"
+            },
+            "jaw_articulation": {
+                "motors": [
+                    "NEMA17_HIGHTORQUE",
+                    "NEMA17_LINEAR_5MM",
+                    "NEMA17_LINEAR_8MM"
+                ],
+                "description": "Jaw rotation or opening, mouth corners"
+            },
+            "head_rotation": {
+                "motors": [
+                    "NEMA23_STANDARD",
+                    "NEMA17_HIGHTORQUE",
+                    "NEMA14_STANDARD"
+                ],
+                "description": "Pan (NEMA23), tilt (NEMA17), roll (NEMA14)"
+            },
+            "finger_articulation": {
+                "motors": [
+                    "NEMA8_STANDARD",
+                    "NEMA8_GEARED_5"
+                ],
+                "description": "Compact finger movement, high-ratio geared"
+            },
+            "full_body_limbs": {
+                "motors": [
+                    "NEMA34_STANDARD",
+                    "NEMA34_HIGHSPEED",
+                    "NEMA34_GEARED_20"
+                ],
+                "description": "Arm/leg joints, base rotation"
+            },
+            "linear_motion": {
+                "motors": [
+                    "NEMA17_LINEAR_5MM",
+                    "NEMA17_LINEAR_8MM",
+                    "NEMA23_LINEAR_12MM"
+                ],
+                "description": "Eyelid opening, cheek puff, actuator push"
+            }
+        },
+        "selection_guide": {
+            "low_torque_high_speed": "NEMA14_HIGHSPEED, NEMA17_PRECISION",
+            "balanced_performance": "NEMA17_STANDARD, NEMA23_STANDARD",
+            "high_torque_smooth": "NEMA17_HIGHTORQUE, NEMA23_HIGHTORQUE",
+            "extreme_reduction": "NEMA17_LSHT_100, NEMA23_GEARED_10, NEMA34_GEARED_20",
+            "compact_spaces": "NEMA8_STANDARD, NEMA17_PANCAKE, NEMA17_FLAT_15MM",
+            "servo_like_smooth": "NEMA14_PWM_SERVO, NEMA17_PWM_SERVO",
+            "weather_resistant": "NEMA17_IP54_SEALED",
+            "cable_passthrough": "NEMA23_HOLLOW_25MM"
+        },
+        "memory_characteristics": {
+            "frame_buffer_eye_240x240_rgb565": "115.2 KB",
+            "frame_buffer_mouth_480x320_rgb666_chunked_80": "115.2 KB",
+            "motor_state_single": "48 bytes",
+            "motor_state_5_axis": "240 bytes",
+            "display_callback_overhead": "32 bytes"
+        },
+        "timing_characteristics": {
+            "fastest_full_step_motor": "NEMA14_HIGHSPEED (20 us min interval)",
+            "smooth_srv_motion": "NEMA17_PWM_SERVO (20 us min interval)",
+            "comfortable_sustained_speed": "250-600 us interval",
+            "slow_smooth_motion": "1000+ us interval"
+        },
+        "power_requirements": {
+            "NEMA8": "0.3-0.5 A per coil @ 12V",
+            "NEMA11": "0.7 A per coil @ 12V",
+            "NEMA14": "1.0 A per coil @ 12V",
+            "NEMA17": "1.5-2.0 A per coil @ 12-24V",
+            "NEMA23": "2.5-3.5 A per coil @ 24-48V",
+            "NEMA34": "5.0+ A per coil @ 48V",
+            "NEMA42": "6.0+ A per coil @ 48V"
+        },
+        "voltage_options": {
+            "12V": [
+                "NEMA8",
+                "NEMA11",
+                "NEMA14",
+                "NEMA17"
+            ],
+            "24V": [
+                "NEMA11",
+                "NEMA14",
+                "NEMA17",
+                "NEMA23",
+                "NEMA24"
+            ],
+            "36V": [
+                "NEMA17",
+                "NEMA23",
+                "NEMA24",
+                "NEMA34"
+            ],
+            "48V": [
+                "NEMA23",
+                "NEMA24",
+                "NEMA34",
+                "NEMA42"
+            ]
+        }
     },
-    "motor_index": {
-      "0": "NEMA8_STANDARD",
-      "1": "NEMA8_GEARED_5",
-      "2": "NEMA11_STANDARD",
-      "3": "NEMA14_STANDARD",
-      "4": "NEMA14_HIGHSPEED",
-      "5": "NEMA17_STANDARD",
-      "6": "NEMA17_PRECISION",
-      "7": "NEMA17_HIGHTORQUE",
-      "8": "NEMA17_GEARED_3",
-      "9": "NEMA17_GEARED_5",
-      "10": "NEMA23_STANDARD",
-      "11": "NEMA23_HIGHTORQUE",
-      "12": "NEMA23_GEARED_10",
-      "13": "NEMA24_PRECISION",
-      "14": "NEMA34_STANDARD",
-      "15": "NEMA34_HIGHSPEED",
-      "16": "NEMA34_GEARED_20",
-      "17": "NEMA42_STANDARD",
-      "18": "NEMA17_PANCAKE",
-      "19": "NEMA23_PANCAKE",
-      "20": "NEMA17_LINEAR_5MM",
-      "21": "NEMA17_LINEAR_8MM",
-      "22": "NEMA23_LINEAR_12MM",
-      "23": "NEMA23_HOLLOW_25MM",
-      "24": "NEMA17_DUAL_SHAFT",
-      "25": "NEMA17_LSHT_100",
-      "26": "NEMA14_PWM_SERVO",
-      "27": "NEMA17_PWM_SERVO",
-      "28": "NEMA17_IP54_SEALED",
-      "29": "NEMA17_FLAT_15MM"
-    },
-    "typical_applications": {
-      "eye_movement": {
-        "motors": ["NEMA17_STANDARD", "NEMA14_STANDARD", "NEMA14_PWM_SERVO"],
-        "description": "Horizontal pan (NEMA17), vertical tilt (NEMA14), blink (NEMA8)"
-      },
-      "jaw_articulation": {
-        "motors": ["NEMA17_HIGHTORQUE", "NEMA17_LINEAR_5MM", "NEMA17_LINEAR_8MM"],
-        "description": "Jaw rotation or opening, mouth corners"
-      },
-      "head_rotation": {
-        "motors": ["NEMA23_STANDARD", "NEMA17_HIGHTORQUE", "NEMA14_STANDARD"],
-        "description": "Pan (NEMA23), tilt (NEMA17), roll (NEMA14)"
-      },
-      "finger_articulation": {
-        "motors": ["NEMA8_STANDARD", "NEMA8_GEARED_5"],
-        "description": "Compact finger movement, high-ratio geared"
-      },
-      "full_body_limbs": {
-        "motors": ["NEMA34_STANDARD", "NEMA34_HIGHSPEED", "NEMA34_GEARED_20"],
-        "description": "Arm/leg joints, base rotation"
-      },
-      "linear_motion": {
-        "motors": ["NEMA17_LINEAR_5MM", "NEMA17_LINEAR_8MM", "NEMA23_LINEAR_12MM"],
-        "description": "Eyelid opening, cheek puff, actuator push"
-      }
-    },
-    "selection_guide": {
-      "low_torque_high_speed": "NEMA14_HIGHSPEED, NEMA17_PRECISION",
-      "balanced_performance": "NEMA17_STANDARD, NEMA23_STANDARD",
-      "high_torque_smooth": "NEMA17_HIGHTORQUE, NEMA23_HIGHTORQUE",
-      "extreme_reduction": "NEMA17_LSHT_100, NEMA23_GEARED_10, NEMA34_GEARED_20",
-      "compact_spaces": "NEMA8_STANDARD, NEMA17_PANCAKE, NEMA17_FLAT_15MM",
-      "servo_like_smooth": "NEMA14_PWM_SERVO, NEMA17_PWM_SERVO",
-      "weather_resistant": "NEMA17_IP54_SEALED",
-      "cable_passthrough": "NEMA23_HOLLOW_25MM"
-    },
-    "memory_characteristics": {
-      "frame_buffer_eye_240x240_rgb565": "115.2 KB",
-      "frame_buffer_mouth_480x320_rgb666_chunked_80": "115.2 KB",
-      "motor_state_single": "48 bytes",
-      "motor_state_5_axis": "240 bytes",
-      "display_callback_overhead": "32 bytes"
-    },
-    "timing_characteristics": {
-      "fastest_full_step_motor": "NEMA14_HIGHSPEED (20 us min interval)",
-      "smooth_srv_motion": "NEMA17_PWM_SERVO (20 us min interval)",
-      "comfortable_sustained_speed": "250-600 us interval",
-      "slow_smooth_motion": "1000+ us interval"
-    },
-    "power_requirements": {
-      "NEMA8": "0.3-0.5 A per coil @ 12V",
-      "NEMA11": "0.7 A per coil @ 12V",
-      "NEMA14": "1.0 A per coil @ 12V",
-      "NEMA17": "1.5-2.0 A per coil @ 12-24V",
-      "NEMA23": "2.5-3.5 A per coil @ 24-48V",
-      "NEMA34": "5.0+ A per coil @ 48V",
-      "NEMA42": "6.0+ A per coil @ 48V"
-    },
-    "voltage_options": {
-      "12V": ["NEMA8", "NEMA11", "NEMA14", "NEMA17"],
-      "24V": ["NEMA11", "NEMA14", "NEMA17", "NEMA23", "NEMA24"],
-      "36V": ["NEMA17", "NEMA23", "NEMA24", "NEMA34"],
-      "48V": ["NEMA23", "NEMA24", "NEMA34", "NEMA42"]
+    "name": "stepper_motor_catalog",
+    "type": "COMPONENT",
+    "description": "Auto-generated component: stepper_motor_catalog",
+    "timing": {
+        "hitCount": 1
     }
-  }
 }

@@ -4,8 +4,8 @@
     "author": "config/author.json",
     "subsystem_type": "HEAD",
     "subsystem_id": "test_head_v1",
-    "description": "Test head subsystem with single left display for hardware validation",
-    "created": "2025-10-23",
+    "description": "Minimal test head subsystem for testing generate_tables.py",
+    "created": "2025-11-07",
     "controller": "ESP32_S3_DEVKITC_1",
     "coords": "planar_2d",
     "ref": "nose_center",
@@ -16,17 +16,13 @@
         "description": "Test head coordination every cycle for real-time validation"
     },
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_right_eye.json",
-        "components/gc9a01.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_left_eye",
+        "goblin_right_eye"
     ],
     "test_configuration": {
         "hardware_validation": true,
         "continuous_testing": true,
-        "verbose_logging": true,
-        "power_monitoring": true
+        "verbose_logging": true
     },
     "type": "SUBSYSTEM_ASSEMBLY"
 }

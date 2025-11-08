@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ips_round_rgb.json",
+    "relative_filename": "config/components/hardware/hardware/ips_round_rgb.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "IPS_ROUND_RGB_DISPLAY",
@@ -140,5 +140,8 @@
     ],
     "estimated_cost_usd": "16.99",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

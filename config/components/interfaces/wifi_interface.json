@@ -6,5 +6,9 @@
     "relative_filename": "config/components/interfaces/wifi_interface.json",
     "interface_id": "WIFI_INTERFACE",
     "name": "wifi_interface",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "description": "Auto-generated component: wifi_interface",
+    "timing": {
+        "hitCount": 1
+    }
 }

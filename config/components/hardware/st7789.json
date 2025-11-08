@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/st7789.json",
+    "relative_filename": "config/components/hardware/hardware/st7789.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ST7789_DISPLAY",
@@ -132,7 +132,7 @@
         "init_function": "st7789_240x128_init",
         "act_function": "st7789_240x128_act",
         "components": [
-            "config/components/drivers/spi_display_bus.json"
+            "config/interfaces/spi_display_bus.json"
         ]
     },
     "required_interface_functions": [
@@ -140,5 +140,9 @@
         "getFrameSize",
         "getFrameRowSize"
     ],
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "description": "Auto-generated component: st7789",
+    "timing": {
+        "hitCount": 1
+    }
 }

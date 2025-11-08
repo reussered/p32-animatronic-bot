@@ -435,5 +435,8 @@
         }
     },
     "name": "micro_servo_array",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

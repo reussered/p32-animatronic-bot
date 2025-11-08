@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_rage_foam.json",
-        "bots/bot_families/goblins/head/goblin_bloodshot_eyes.json",
-        "bots/bot_families/goblins/head/goblin_self_wounds.json",
-        "bots/bot_families/goblins/head/goblin_fury_veins.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_rage_foam",
+        "goblin_bloodshot_eyes",
+        "goblin_self_wounds",
+        "goblin_fury_veins",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "berserker_frenzy": {
@@ -151,5 +151,8 @@
         "NOT RECOMMENDED for family-friendly environments"
     ],
     "name": "goblin_berserker",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -16,14 +16,12 @@
         "snout_extension": "2.5 INCH"
     },
     "components": [
-        "bots/.archived_components/bot_families/dragons/head/dragon_eye_left.json",
-        "bots/.archived_components/bot_families/dragons/head/dragon_eye_right.json",
-        "bots/.archived_components/bot_families/dragons/head/dragon_snout.json",
-        "bots/.archived_components/bot_families/dragons/head/dragon_speaker.json",
-        "bots/bot_families/dragons/head/dragon_nostril_left.json",
-        "bots/bot_families/dragons/head/dragon_nostril_right.json",
-        "config/subsystems/dragon_head.json",
-        "config/subsystems/dragon_torso.json"
+        "dragon_eye_left",
+        "dragon_eye_right",
+        "dragon_snout",
+        "dragon_speaker",
+        "dragon_nostril_left",
+        "dragon_nostril_right"
     ],
     "family_mood_profile": {
         "FEAR": 2,
@@ -126,5 +124,8 @@
         }
     },
     "name": "dragon_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

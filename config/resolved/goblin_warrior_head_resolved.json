@@ -11,9 +11,9 @@
     "reference_point": "nose_center",
     "units": "INCHES",
     "components": [
-        "components/creature_specific/base_eye_left.json",
-        "components/creature_specific/base_eye_right.json",
-        "components/creature_specific/base_speaker.json"
+        "config/components/creature_specific/base_eye_left.json",
+        "config/components/creature_specific/base_eye_right.json",
+        "config/components/creature_specific/base_speaker.json"
     ],
     "hardware_interface_defaults": {
         "spi_bus": "spi_bus",

@@ -34,8 +34,8 @@
         }
     },
     "components": [
-        "bots/bot_families/undead/head/zombie_rotting_flesh.json",
-        "bots/.archived_components/bot_families/undead/head/zombie_shamble_actuator.json"
+        "zombie_rotting_flesh",
+        "zombie_shamble_actuator"
     ],
     "custom_behaviors": {
         "hunger_response": {
@@ -64,5 +64,8 @@
         "Hunger-driven behaviors dominate decision making"
     ],
     "name": "zombie_walker",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

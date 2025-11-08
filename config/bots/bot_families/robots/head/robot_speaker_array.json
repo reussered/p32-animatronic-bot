@@ -5,11 +5,11 @@
         "init_function": "robot_speaker_array_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/robots/head/robot_speaker_array.json",
+    "relative_filename": "config\\bots\\bot_families\\robots\\head\\robot_speaker_array.json",
     "name": "robot_speaker_array",
     "subsystem": "AUDIO",
     "components": [
-        "components/drivers/i2s_bus.json"
+        "i2s_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -20,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: robot_speaker_array",
+    "timing": {
+        "hitCount": 1
+    }
 }

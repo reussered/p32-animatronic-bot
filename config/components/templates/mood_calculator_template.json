@@ -10,7 +10,14 @@
     "purpose": "Provides template-based color modification system that adapts to display color format at compile time",
     "template_features": {
         "color_schema_agnostic": "Works with RGB565, RGB666, RGB888, etc.",
-        "mood_states": ["ANGER", "CURIOSITY", "FEAR", "HAPPINESS", "SADNESS", "NEUTRAL"],
+        "mood_states": [
+            "ANGER",
+            "CURIOSITY",
+            "FEAR",
+            "HAPPINESS",
+            "SADNESS",
+            "NEUTRAL"
+        ],
         "effects": [
             "Color delta shifts",
             "Glow overlay",
@@ -40,5 +47,8 @@
     ],
     "prototype_status": "template_ready",
     "tested": false,
-    "header_file": "config/components/templates/mood_calculator_template.hpp"
+    "header_file": "config/components/templates/mood_calculator_template.hpp",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -5,7 +5,7 @@
     "name": "pixie_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bots/.archived_components/bot_families/fantasy/head/pixie_eye.json"
+        "pixie_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gmt12864.json",

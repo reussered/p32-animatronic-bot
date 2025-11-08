@@ -8,7 +8,7 @@
         "description": "Test left eye updates every cycle"
     },
     "components": [
-        "components/gc9a01.json"
+        "gc9a01"
     ],
     "position": {
         "coordinate_system": "planar_2d",
@@ -40,5 +40,6 @@
         ],
         "validation_enabled": true
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: test_left_eye_positioned"
 }

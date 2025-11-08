@@ -74,5 +74,8 @@
     "component_count": 0,
     "components": [],
     "name": "cat_panther_shadow_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -114,5 +114,8 @@
             ]
         }
     },
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

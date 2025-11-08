@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/oled_ssd1306_128x64.json",
+    "relative_filename": "config/components/hardware/hardware/oled_ssd1306_128x64.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "display_driver": true,
@@ -102,5 +102,8 @@
     ],
     "hardware_type": "OLED_DISPLAY",
     "name": "oled_ssd1306_128x64",
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -16,12 +16,10 @@
         "whisker_span": "3.5 INCH"
     },
     "components": [
-        "bots/bot_families/cats/head/cat_left_eye.json",
-        "bots/bot_families/cats/head/cat_right_eye.json",
-        "bots/.archived_components/bot_families/cats/head/cat_nose.json",
-        "bots/.archived_components/bot_families/cats/head/cat_speaker.json",
-        "config/subsystems/cat_head.json",
-        "config/subsystems/cat_torso.json"
+        "cat_left_eye",
+        "cat_right_eye",
+        "cat_nose",
+        "cat_speaker"
     ],
     "family_mood_profile": {
         "FEAR": 15,
@@ -165,5 +163,8 @@
         }
     },
     "name": "cat_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

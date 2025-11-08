@@ -34,5 +34,8 @@
         "Shares I2S bus with other devices"
     ],
     "name": "i2s_device_2",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

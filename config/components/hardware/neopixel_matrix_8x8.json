@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/neopixel_matrix_8x8.json",
+    "relative_filename": "config/components/hardware/hardware/neopixel_matrix_8x8.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "NEOPIXEL_MATRIX_8X8",
@@ -73,5 +73,8 @@
     },
     "hardware_type": "LED_MATRIX",
     "name": "neopixel_matrix_8x8",
-    "type": "LED_MATRIX"
+    "type": "LED_MATRIX",
+    "timing": {
+        "hitCount": 1
+    }
 }

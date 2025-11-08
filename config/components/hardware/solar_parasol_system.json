@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/solar_parasol_system.json",
+    "relative_filename": "config/components/hardware/hardware/solar_parasol_system.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "SOLAR_PARASOL_2M_DEPLOYABLE",
@@ -113,5 +113,8 @@
     },
     "hardware_type": "SOLAR_PARASOL_ASSEMBLY",
     "name": "solar_parasol_system",
-    "type": "SOLAR_PARASOL_ASSEMBLY"
+    "type": "SOLAR_PARASOL_ASSEMBLY",
+    "timing": {
+        "hitCount": 1
+    }
 }

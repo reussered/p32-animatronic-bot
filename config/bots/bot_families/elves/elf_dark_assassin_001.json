@@ -74,5 +74,8 @@
     "component_count": 0,
     "components": [],
     "name": "elf_dark_assassin_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -96,5 +96,6 @@
         "generic_display_get_frame_width",
         "generic_display_get_frame_height"
     ],
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "description": "Auto-generated component: generic_spi_display"
 }

@@ -4,54 +4,50 @@
 #ifndef ILI9488_HDR
 #define ILI9488_HDR
 
-#include <cstdint>
+#include <stdint.h>
 
-// Forward declaration
-struct ILI9488_Pixel;
-
-// Global InitialPixel - must be set before allocating buffers containing Pixels
-extern ILI9488_Pixel ILI9488_InitialPixel;
-
-/**
- * @brief Pixel struct for ILI9488 display (RGB666 format)
- * 18-bit color: 6 bits per channel
- */
-struct ILI9488_Pixel
+// This struct acts as a "type bundle" for the ili9488 hardware.
+// Based on its JSON, it has a 480x320 resolution. Color depth is
+// assumed to be 18-bit (RGB666) similar to other Ilitek drivers.
+struct ili9488
 {
-    unsigned int red : 6;
-    unsigned int green : 6;
-    unsigned int blue : 6;
-    unsigned int : 6;  // Padding to align to 24 bits
-    
-    ILI9488_Pixel() 
+    // Standardized interface members
+    static const int WIDTH = 480;
+    static const int HEIGHT = 320;
+
+    // Assumed 18-bit color depth (6 bits per channel)
+    static const int MAX_RED   = 0x3F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x3F;
+
+    // Standardized nested Pixel type for RGB666
+    struct Pixel
     {
-        *this = ILI9488_InitialPixel;
-    }
-    
-    // Copy constructor
-    ILI9488_Pixel(const ILI9488_Pixel& other) 
-        : red(other.red), green(other.green), blue(other.blue)
-    {}
-    
-    // Assignment operator
-    ILI9488_Pixel& operator=(const ILI9488_Pixel& other)
-    {
-        red = other.red;
-        green = other.green;
-        blue = other.blue;
-        return *this;
-    }
+        unsigned int red : 6;
+        unsigned int green : 6;
+        unsigned int blue : 6;
+
+        Pixel() : red(0), green(0), blue(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
 };
-
-// Display specifications
-size_t ili9488_get_width(void);
-size_t ili9488_get_height(void);
-size_t getFrameSize(void);
-size_t getFrameRowSize(void);
-size_t getDisplaySize(void);
-
-// Component functions
-esp_err_t ili9488_init(void);
-void ili9488_act(void);
 
 #endif // ILI9488_HDR

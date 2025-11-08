@@ -34,8 +34,8 @@
         }
     },
     "components": [
-        "bots/bot_families/undead/head/zombie_exposed_bone.json",
-        "bots/bot_families/undead/head/zombie_drag_mechanism.json"
+        "zombie_exposed_bone",
+        "zombie_drag_mechanism"
     ],
     "custom_behaviors": {
         "ambush_crawling": {
@@ -71,5 +71,8 @@
         "Ambush behaviors add stealth horror element"
     ],
     "name": "zombie_crawler",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

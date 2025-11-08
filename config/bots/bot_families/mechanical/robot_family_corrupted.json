@@ -39,5 +39,8 @@
         ]
     },
     "name": "robot_family_corrupted",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

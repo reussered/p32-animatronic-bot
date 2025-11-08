@@ -74,5 +74,8 @@
     "component_count": 0,
     "components": [],
     "name": "dragon_hatchling_001",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

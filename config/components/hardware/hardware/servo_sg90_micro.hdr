@@ -1,5 +1,0 @@
-// Auto-generated header for servo_sg90_micro
-#include <esp_err.h>
-
-esp_err_t servo_sg90_micro_init(void);
-void servo_sg90_micro_act(void);

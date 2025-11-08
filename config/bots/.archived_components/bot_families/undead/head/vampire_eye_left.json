@@ -9,9 +9,7 @@
     "name": "vampire_eye_left",
     "subsystem": "VISION",
     "components": [
-        "components/interfaces/spi_bus.json",
-        "config/subsystems/vampire_head.json",
-        "config/subsystems/vampire_torso.json"
+        "spi_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -22,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: vampire_eye_left",
+    "timing": {
+        "hitCount": 1
+    }
 }

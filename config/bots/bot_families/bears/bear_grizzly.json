@@ -39,10 +39,8 @@
         }
     },
     "components": [
-        "bots/bot_families/bears/head/bear_massive_claws.json",
-        "bots/bot_families/bears/head/bear_thick_fur.json",
-        "config/subsystems/bear_head.json",
-        "config/subsystems/bear_torso.json"
+        "bear_massive_claws",
+        "bear_thick_fur"
     ],
     "custom_behaviors": {
         "territorial_display": {
@@ -70,5 +68,8 @@
         "Audio effects emphasize raw power and dominance"
     ],
     "name": "bear_grizzly",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

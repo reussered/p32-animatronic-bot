@@ -1,8 +1,8 @@
-// ra8875 component implementation
+// ra8875_tft_1024x600 component implementation
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-#include "ra8875.hdr"
+#include "ra8875_tft_1024x600.hdr"
 
 static const char *TAG_ra8875_tft_1024x600 = "ra8875_tft_1024x600";
 
@@ -10,14 +10,14 @@ static const char *TAG_ra8875_tft_1024x600 = "ra8875_tft_1024x600";
 RA8875_Pixel RA8875_InitialPixel = {0, 0, 0};
 
 esp_err_t ra8875_init(void) {
-    ESP_LOGI(TAG_ra8875_tft_1024x600, "ra8875 init - STUB IMPLEMENTATION");
+    ESP_LOGI(TAG_ra8875_tft_800x480, "ra8875 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void ra8875_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_ra8875_tft_1024x600, "ra8875 act");
+    // ESP_LOGD(TAG_ra8875_tft_800x480, "ra8875 act");
 }
 
 

@@ -58,7 +58,7 @@ esp_err_t spi_data_bus_init(void) {
     {
         spi_data_slots[0].mosi = get_next_assignable(spi_assignable, spi_assignable_count);
         spi_data_slots[0].miso = get_next_assignable(spi_assignable, spi_assignable_count);
-        spi_data_slots[0].sclk = get_next_assignable(spi_assignable, spi_assignable_count);
+        spi_data_slots[0].clk = get_next_assignable(spi_assignable, spi_assignable_count);
 
         spi_bus_config_t bus_cfg = {
             .mosi_io_num = spi_data_slots[0].mosi,
@@ -80,7 +80,7 @@ esp_err_t spi_data_bus_init(void) {
                  "Shared SPI data pins assigned MOSI:%d MISO:%d CLK:%d",
                  spi_data_slots[0].mosi,
                  spi_data_slots[0].miso,
-                 spi_data_slots[0].sclk);
+                 spi_data_slots[0].clk);
     }
 
     // For subsequent devices, copy the shared pin configuration from the first device
@@ -88,12 +88,12 @@ esp_err_t spi_data_bus_init(void) {
     {
         spi_data_slots[device_count].mosi = spi_data_slots[0].mosi;
         spi_data_slots[device_count].miso = spi_data_slots[0].miso;
-        spi_data_slots[device_count].sclk = spi_data_slots[0].sclk;
+        spi_data_slots[device_count].clk = spi_data_slots[0].clk;
     }
 
     // For every device (including the first), allocate its unique CS pin
     spi_data_slots[device_count].cs = get_next_assignable(spi_assignable, spi_assignable_count);
-    spi_data_slots[device_count].device_handle = nullptr;
+    spi_data_slots[device_count].handle = nullptr;
 
     ESP_LOGI(TAG_spi_data_bus,
              "Data slot %u assigned unique pin CS:%d",

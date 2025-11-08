@@ -12,14 +12,14 @@
     "reference_point": "wrist_joint_left",
     "units": "INCHES",
     "components": [
-        "config/components/creature_specific/goblin/hand_components/left/thumb_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/index_finger_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/middle_finger_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/ring_finger_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/pinky_finger_servo.json",
-        "config/components/creature_specific/goblin/hand_components/left/hand_status_led.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "thumb_servo",
+        "index_finger_servo",
+        "middle_finger_servo",
+        "ring_finger_servo",
+        "pinky_finger_servo",
+        "hand_status_led",
+        "goblin_head",
+        "goblin_torso"
     ],
     "degrees_of_freedom": {
         "thumb_dof": "1",
@@ -83,5 +83,8 @@
     "tested": false,
     "estimated_cost_usd": "75.00",
     "name": "goblin_full_hand_left",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

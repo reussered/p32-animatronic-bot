@@ -362,5 +362,8 @@
     },
     "name": "quadruped_walker_mk1",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

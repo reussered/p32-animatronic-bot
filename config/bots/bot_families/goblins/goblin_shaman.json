@@ -84,12 +84,12 @@
         }
     },
     "components": [
-        "bots/bot_families/goblins/head/goblin_spirit_runes.json",
-        "bots/bot_families/goblins/head/goblin_ritual_scars.json",
-        "bots/bot_families/goblins/head/goblin_bone_ornaments.json",
-        "bots/bot_families/goblins/head/goblin_mystical_glow.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "goblin_spirit_runes",
+        "goblin_ritual_scars",
+        "goblin_bone_ornaments",
+        "goblin_mystical_glow",
+        "goblin_head",
+        "goblin_torso"
     ],
     "custom_behaviors": {
         "ritual_casting": {
@@ -196,5 +196,8 @@
         "Specialized magical ability system integration"
     ],
     "name": "goblin_shaman",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

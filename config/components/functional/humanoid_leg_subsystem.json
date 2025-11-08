@@ -146,5 +146,8 @@
         "maintenance": "REPLACE_FAILED_COMPONENTS_INDEPENDENTLY",
         "scaling": "ADD_MORE_SERVOS_WITHOUT_ARCHITECTURE_CHANGES"
     },
-    "type": "FUNCTIONAL_SUBSYSTEM"
+    "type": "FUNCTIONAL_SUBSYSTEM",
+    "timing": {
+        "hitCount": 1
+    }
 }

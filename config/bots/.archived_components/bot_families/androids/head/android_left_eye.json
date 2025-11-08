@@ -4,9 +4,7 @@
     "author": "config/author.json",
     "name": "android_left_eye",
     "components": [
-        "bots/.archived_components/bot_families/androids/head/android_eye.json",
-        "config/subsystems/android_head.json",
-        "config/subsystems/android_torso.json"
+        "android_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/led_matrix_small.json",
@@ -42,5 +40,9 @@
         "error": "android_malfunction_left.anim"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: android_left_eye",
+    "timing": {
+        "hitCount": 1
+    }
 }

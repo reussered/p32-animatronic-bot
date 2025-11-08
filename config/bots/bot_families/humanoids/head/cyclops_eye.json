@@ -41,5 +41,9 @@
     "hardware_type": "POSITIONED_COMPONENT",
     "name": "cyclops_eye",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: cyclops_eye",
+    "timing": {
+        "hitCount": 1
+    }
 }

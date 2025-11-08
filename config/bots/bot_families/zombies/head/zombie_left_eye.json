@@ -5,7 +5,7 @@
     "name": "zombie_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bots/.archived_components/bot_families/undead/head/zombie_eye.json"
+        "zombie_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",
@@ -40,5 +40,9 @@
         "decay": "zombie_deteriorating_left.anim"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: zombie_left_eye",
+    "timing": {
+        "hitCount": 1
+    }
 }

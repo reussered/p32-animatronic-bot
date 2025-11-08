@@ -42,5 +42,9 @@
     "hardware_type": "POSITIONED_COMPONENT",
     "name": "bear_mouth",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "description": "Auto-generated component: bear_mouth",
+    "timing": {
+        "hitCount": 1
+    }
 }

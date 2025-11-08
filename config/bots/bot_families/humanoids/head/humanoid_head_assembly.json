@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/head_structural_assembly.json"
+        "head_structural_assembly"
     ],
     "facial_components": [
         "config/bots/bot_families/goblins/head/goblin_left_eye.json",
@@ -115,5 +115,8 @@
         "sensor_scaling": "FIELD_OF_VIEW_ADAPTS_TO_CREATURE_SIZE"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "FACIAL_EXPRESSION_PLATFORM"
+    "type": "FACIAL_EXPRESSION_PLATFORM",
+    "timing": {
+        "hitCount": 1
+    }
 }

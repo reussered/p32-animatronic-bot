@@ -5,11 +5,11 @@
         "init_function": "steampunk_eye_left_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/steampunk/head/steampunk_eye_left.json",
+    "relative_filename": "config\\bots\\bot_families\\steampunk\\head\\steampunk_eye_left.json",
     "name": "steampunk_eye_left",
     "subsystem": "VISION",
     "components": [
-        "components/interfaces/spi_bus.json"
+        "spi_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -20,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: steampunk_eye_left",
+    "timing": {
+        "hitCount": 1
+    }
 }

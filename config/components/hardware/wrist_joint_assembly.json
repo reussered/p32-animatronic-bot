@@ -20,7 +20,7 @@
         }
     },
     "name": "wrist_joint_assembly",
-    "relative_filename": "config/components/hardware/wrist_joint_assembly.json",
+    "relative_filename": "config/components/hardware/hardware/wrist_joint_assembly.json",
     "description": "Generated hardware component for wrist_joint_assembly",
     "cost_performance": {
         "lead_time_days": 7,
@@ -30,5 +30,8 @@
     },
     "author": "config/author.json",
     "hardware_type": "HARDWARE",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

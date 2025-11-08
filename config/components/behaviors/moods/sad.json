@@ -35,5 +35,8 @@
         "negative_interaction",
         "timeout"
     ],
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

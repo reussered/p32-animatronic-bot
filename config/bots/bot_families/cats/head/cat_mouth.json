@@ -5,7 +5,7 @@
     "name": "cat_mouth",
     "subsystem": "HEAD",
     "components": [
-        "bots/bot_families/cats/head/cat_mouth.json"
+        "cat_mouth"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",
@@ -35,5 +35,9 @@
         "grooming": "cat_tongue_cleaning.anim"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: cat_mouth",
+    "timing": {
+        "hitCount": 1
+    }
 }

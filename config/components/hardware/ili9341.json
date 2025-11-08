@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ili9341.json",
+    "relative_filename": "config/components/hardware/hardware/ili9341.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ILI9341_3P5INCH_TFT",
@@ -151,5 +151,8 @@
     ],
     "estimated_cost_usd": "34.95",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

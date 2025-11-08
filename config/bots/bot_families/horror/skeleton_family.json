@@ -81,9 +81,9 @@
         "bone_prominence": "high_definition"
     },
     "components": [
-        "bots/bot_families/undead/head/skeleton_jaw_actuator.json",
-        "bots/bot_families/undead/head/skeleton_bone_structure.json",
-        "bots/bot_families/undead/head/skeleton_joint_mechanism.json"
+        "skeleton_jaw_actuator",
+        "skeleton_bone_structure",
+        "skeleton_joint_mechanism"
     ],
     "skeletal_features": {
         "bone_mechanics": {
@@ -162,5 +162,8 @@
         "Construction types support both hard bone shells and fabric costume approaches"
     ],
     "name": "skeleton_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

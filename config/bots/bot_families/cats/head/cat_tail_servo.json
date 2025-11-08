@@ -9,9 +9,7 @@
     "name": "cat_tail_servo",
     "subsystem": "ACTUATOR",
     "components": [
-        "components/interfaces/esp32_servo_controller.json",
-        "config/subsystems/cat_head.json",
-        "config/subsystems/cat_torso.json"
+        "esp32_servo_controller"
     ],
     "author": "config/author.json",
     "position": {
@@ -22,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: cat_tail_servo",
+    "timing": {
+        "hitCount": 1
+    }
 }

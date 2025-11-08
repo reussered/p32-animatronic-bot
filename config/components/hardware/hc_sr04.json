@@ -33,5 +33,9 @@
             "config/components/drivers/gpio_bus.json"
         ]
     },
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "description": "Auto-generated component: hc_sr04",
+    "timing": {
+        "hitCount": 1
+    }
 }

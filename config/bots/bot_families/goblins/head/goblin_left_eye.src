@@ -1,16 +1,62 @@
-// head_components_goblin_left_eye component implementation
-// Auto-generated stub - needs actual implementation
+// goblin_left_eye.src - Allocate shared display buffer and left eye position
+// Component chain: goblin_left_eye (allocate) -> goblin_eye (render) -> generic_spi_display (send & free)
 
 #include "esp_log.h"
-static const char *TAG_goblin_left_eye = "goblin_left_eye";
+#include "shared_headers/color_schema.hpp"
 
-esp_err_t goblin_left_eye_init(void) {
-    ESP_LOGI(TAG_goblin_left_eye, "head_components_goblin_left_eye init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+static const char* TAG = "goblin_left_eye";
+
+// Shared display buffer - allocated here, used by goblin_eye, freed by generic_spi_display
+// Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
+static unsigned char* display_buffer = nullptr;
+
+// Eye position (left eye relative to skull center)
+struct EyePosition {
+    int16_t x;      // -50 = left of center
+    int16_t y;      // +30 = above center
+    int16_t z;      // -35 = slightly back
+} left_eye_position = {-50, 30, -35};
+
+// Display configuration - from use_fields in goblin_left_eye.json
+// Declared static here (first definition), used by child components via extern
+static uint32_t display_width = 240;
+static uint32_t display_height = 240;
+static uint32_t bytes_per_pixel = 2;
+static char* color_schema = "Pixel_RGB565";
+
+void goblin_left_eye_init(void)
+{
+
+}
+void goblin_left_eye_act(void) {
+
+    size_t display_buffer_size_in_pixels = display_width * display_height;
+    size_t display_buffer_size = display_buffer_size_in_pixels * bytes_per_pixel;
+    
+    ESP_LOGI(TAG, "Allocating display buffer for left eye (%u x %u, %u bytes total)",
+             display_width, display_height, display_buffer_size);
+    
+    // Allocate shared buffer as unsigned char*
+    // goblin_eye will cast to PixelType* based on color_schema
+    display_buffer = (unsigned char*)malloc(display_buffer_size);
+    if (!display_buffer) {
+        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", display_buffer_size);
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Initialize buffer with neutral color (dark green iris)
+    uint16_t neutral = 0x0400;  // RGB565: (0, 8, 0)
+    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
+    for (uint32_t i = 0; i < display_buffer_size_in_pixels; i++) {
+        buffer_u16[i] = neutral;
+    }
+    
+    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
+             left_eye_position.x, left_eye_position.y, left_eye_position.z);
+    
     return ESP_OK;
 }
 
-void goblin_left_eye_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_left_eye, "head_components_goblin_left_eye act");
-}
+
+
+ 

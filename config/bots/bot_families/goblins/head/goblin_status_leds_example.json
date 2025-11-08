@@ -5,7 +5,7 @@
     "name": "goblin_status_leds_example",
     "subsystem": "UNKNOWN",
     "components": [
-        "components/hardware/ws2812b_strip.json"
+        "ws2812b_strip"
     ],
     "mounting_architecture": {
         "type": "hardware_direct",

@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/drivers/adc_driver.json",
+    "relative_filename": "config/components/drivers/driver/adc_driver.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "adc_driver",
@@ -69,5 +69,8 @@
     },
     "prototype_status": "ready_for_implementation",
     "tested": false,
-    "type": "GENERIC_DRIVER"
+    "type": "GENERIC_DRIVER",
+    "timing": {
+        "hitCount": 1
+    }
 }

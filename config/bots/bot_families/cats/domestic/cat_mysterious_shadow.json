@@ -27,12 +27,10 @@
         }
     },
     "components": [
-        "bots/.archived_components/bot_families/cats/head/cat_animated_ears.json",
-        "components/creature_specific/subtle_led_eyes.json",
-        "components/creature_specific/ambient_purr_speaker.json",
-        "components/creature_specific/motion_stealth_sensor.json",
-        "config/subsystems/cat_head.json",
-        "config/subsystems/cat_torso.json"
+        "cat_animated_ears",
+        "subtle_led_eyes",
+        "ambient_purr_speaker",
+        "motion_stealth_sensor"
     ],
     "mystical_behaviors": {
         "appearance_patterns": [
@@ -81,5 +79,8 @@
         "disappearance_style": "gradual_fade"
     },
     "name": "cat_mysterious_shadow",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

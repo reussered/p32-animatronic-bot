@@ -5,9 +5,9 @@
     "name": "goblin_nose",
     "subsystem": "HEAD",
     "components": [
-        "components/hardware/hc_sr04_sensor.json",
-        "bots/bot_families/goblins/head/goblin_head.json",
-        "bots/bot_families/goblins/torso/goblin_torso.json"
+        "hc_sr04_sensor",
+        "goblin_head",
+        "goblin_torso"
     ],
     "mounting_architecture": {
         "type": "two_tier",

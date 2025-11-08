@@ -129,5 +129,9 @@
         }
     },
     "name": "creature_library_master",
-    "type": "SCALING_LIBRARY"
+    "type": "SCALING_LIBRARY",
+    "description": "Auto-generated component: creature_library_master",
+    "timing": {
+        "hitCount": 1
+    }
 }

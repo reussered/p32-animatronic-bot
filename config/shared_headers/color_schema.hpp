@@ -80,7 +80,9 @@ struct Pixel_RGB565
         blue = other.blue;
         return *this;
     }
-    
+
+    static const unsigned int bytes_per_pixel = 2;
+
     // Static color constants (using 8-bit values 0-255, auto-scaled to bit-fields)
     static constexpr Pixel_RGB565 Red()   { return Pixel_RGB565(255, 0,   0); }
     static constexpr Pixel_RGB565 Green() { return Pixel_RGB565(0,   255, 0); }
@@ -118,6 +120,31 @@ struct Pixel_RGB565
     explicit operator const uint8_t*() const 
     { 
         return reinterpret_cast<const uint8_t*>(this); 
+    }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    // Usage: Pixel_RGB565* pixels = Pixel_RGB565::fromBytes(buffer);
+    static Pixel_RGB565* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB565*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB565* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB565*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    // Usage: uint8_t* buffer = pixel.toBytes();
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
     }
 };
 
@@ -166,6 +193,8 @@ struct Pixel_RGB444
         blue = other.blue;
         return *this;
     }
+    
+    static const unsigned int bytes_per_pixel = 2;
     
     // Static color constants (using 8-bit values 0-255, auto-scaled to bit-fields)
     static constexpr Pixel_RGB444 Red()   { return Pixel_RGB444(255, 0,   0); }
@@ -234,6 +263,29 @@ struct Pixel_RGB444
     { 
         return reinterpret_cast<const uint8_t*>(this); 
     }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_RGB444* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB444*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB444* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB444*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
+    }
 };
 
 
@@ -283,7 +335,7 @@ struct Pixel_RGB555
         unused = 0;
         return *this;
     }
-    
+    static const unsigned int bytes_per_pixel = 2;
     // Static color constants (using 8-bit values 0-255, auto-scaled to bit-fields)
     static constexpr Pixel_RGB555 Red()   { return Pixel_RGB555(255, 0,   0); }
     static constexpr Pixel_RGB555 Green() { return Pixel_RGB555(0,   255, 0); }
@@ -352,6 +404,29 @@ struct Pixel_RGB555
     { 
         return reinterpret_cast<const uint8_t*>(this); 
     }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_RGB555* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB555*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB555* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB555*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
+    }
 };
 
 
@@ -392,6 +467,7 @@ struct Pixel_RGB666
     uint8_t green() const { return (g & 0x3F) << 2; }
     uint8_t blue() const  { return (b & 0x3F) << 2; }
     
+    static const unsigned int bytes_per_pixel = 4;
     // Static color constants (using 8-bit values 0-255, auto-scaled to 6-bit)
     static constexpr Pixel_RGB666 Red()   { return Pixel_RGB666(255, 0,   0); }
     static constexpr Pixel_RGB666 Green() { return Pixel_RGB666(0,   255, 0); }
@@ -468,6 +544,29 @@ struct Pixel_RGB666
     { 
         return reinterpret_cast<const uint8_t*>(this); 
     }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_RGB666* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB666*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB666* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB666*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
+    }
 };
 
 
@@ -499,7 +598,8 @@ struct Pixel_RGB888
     Pixel_RGB888(uint8_t r_val, uint8_t g_val, uint8_t b_val)
         : r(r_val), g(g_val), b(b_val)
     {}
-    
+       
+    static const unsigned int bytes_per_pixel = 3;
     // Extract RGB components (no conversion needed - already 8-bit)
     uint8_t red() const   { return r; }
     uint8_t green() const { return g; }
@@ -702,6 +802,29 @@ struct Pixel_RGB888
     { 
         return reinterpret_cast<const uint8_t*>(this); 
     }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_RGB888* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB888*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB888* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB888*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
+    }
 };
 
 
@@ -798,5 +921,28 @@ struct Pixel_Grayscale
     explicit operator const uint8_t*() const 
     { 
         return reinterpret_cast<const uint8_t*>(this); 
+    }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_Grayscale* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_Grayscale*>(byte_ptr);
+    }
+    
+    static const Pixel_Grayscale* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_Grayscale*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
     }
 };

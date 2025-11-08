@@ -74,5 +74,8 @@
         "mood_calculator_template.hpp",
         "color_schema.hpp",
         "Mood.hpp"
-    ]
+    ],
+    "timing": {
+        "hitCount": 1
+    }
 }

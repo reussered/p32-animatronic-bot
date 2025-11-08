@@ -81,11 +81,9 @@
         "human_proportions": "anatomically_accurate"
     },
     "components": [
-        "bots/bot_families/androids/head/android_synthetic_skin.json",
-        "bots/bot_families/androids/head/android_emotion_display.json",
-        "bots/bot_families/androids/head/android_neural_interface.json",
-        "config/subsystems/android_head.json",
-        "config/subsystems/android_torso.json"
+        "android_synthetic_skin",
+        "android_emotion_display",
+        "android_neural_interface"
     ],
     "android_features": {
         "artificial_intelligence": {
@@ -164,5 +162,8 @@
         "Construction types support both hard synthetic shells and soft humanoid approaches"
     ],
     "name": "android_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

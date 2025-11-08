@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/hw496_microphone.json",
+    "relative_filename": "config/components/hardware/hardware/hw496_microphone.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_name": "HW-496 MEMS Microphone Module",
@@ -80,5 +80,8 @@
         "init_function": "hw496_microphone_init",
         "act_function": "hw496_microphone_act"
     },
-    "type": "MEMS_MICROPHONE"
+    "type": "MEMS_MICROPHONE",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -16,14 +16,12 @@
         "ear_extension": "1.5 INCH"
     },
     "components": [
-        "bots/.archived_components/bot_families/elves/head/elf_eye_left.json",
-        "bots/.archived_components/bot_families/elves/head/elf_eye_right.json",
-        "bots/.archived_components/bot_families/elves/head/elf_mouth.json",
-        "bots/.archived_components/bot_families/elves/head/elf_speaker.json",
-        "bots/bot_families/elves/head/elf_ear_left.json",
-        "bots/bot_families/elves/head/elf_ear_right.json",
-        "config/subsystems/elf_head.json",
-        "config/subsystems/elf_torso.json"
+        "elf_eye_left",
+        "elf_eye_right",
+        "elf_mouth",
+        "elf_speaker",
+        "elf_ear_left",
+        "elf_ear_right"
     ],
     "family_mood_profile": {
         "FEAR": 8,
@@ -122,5 +120,8 @@
         }
     },
     "name": "elf_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

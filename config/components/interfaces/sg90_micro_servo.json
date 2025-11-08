@@ -300,5 +300,8 @@
         "total_system_cost": "LOW_FOR_MULTI_SERVO_FACIAL_ANIMATION"
     },
     "name": "sg90_micro_servo",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

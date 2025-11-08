@@ -16,12 +16,12 @@
         "description": "Pirate head coordination every 2.5 seconds"
     },
     "components": [
-        "bots/.archived_components/bot_families/goblins/head/goblin_left_eye.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_mouth.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_speaker.json",
-        "bots/.archived_components/bot_families/goblins/head/goblin_nose.json",
-        "bots/bot_families/goblins/head/goblin_left_ear.json",
-        "bots/bot_families/goblins/head/goblin_right_ear.json"
+        "goblin_left_eye",
+        "goblin_mouth",
+        "goblin_speaker",
+        "goblin_nose",
+        "goblin_left_ear",
+        "goblin_right_ear"
     ],
     "pirate_specific_features": {
         "missing_eye_compensation": {

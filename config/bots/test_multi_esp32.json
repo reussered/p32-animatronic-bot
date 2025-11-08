@@ -49,5 +49,8 @@
         }
     },
     "name": "test_multi_esp32",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

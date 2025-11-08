@@ -15,5 +15,8 @@
     "init_function": "simple_audio_init",
     "functions": {
         "play_sound": "simple_audio_play"
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

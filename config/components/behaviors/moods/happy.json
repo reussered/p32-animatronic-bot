@@ -35,5 +35,8 @@
         "positive_interaction",
         "reward"
     ],
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

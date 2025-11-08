@@ -7,6 +7,9 @@
     "controller": "esp32-s3-devkitc-1",
     "description": "A subsystem for testing the dynamic pin allocation.",
     "components": [
-        "components/tests/test_component.json"
-    ]
+        "test_component"
+    ],
+    "timing": {
+        "hitCount": 1
+    }
 }

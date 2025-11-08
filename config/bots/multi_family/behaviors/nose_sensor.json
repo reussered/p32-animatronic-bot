@@ -15,5 +15,8 @@
     "init_function": "simple_sensor_init",
     "functions": {
         "read_distance": "simple_sensor_read_distance"
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

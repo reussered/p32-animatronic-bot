@@ -1,142 +1,145 @@
 {
-  "name": "stepper_nema17_standard",
-  "type": "stepper_motor",
-  "category": "standard",
-  "nema_size": 17,
-  "description": "NEMA17 Standard - workhorse motor for eye pan, general articulation",
-  "specifications": {
-    "voltage_nominal_mv": 12000,
-    "voltage_max_mv": 24000,
-    "current_per_coil_ma": 1500,
-    "holding_torque_ncm": 400,
-    "max_torque_ncm": 800,
-    "steps_per_revolution": 200,
-    "step_angle_degrees": 1.8,
-    "nominal_rpm_at_rated": 500,
-    "max_rpm_no_load": 3000,
-    "rotor_inertia_gcm2": 40.0,
-    "body_length_mm": 38,
-    "shaft_diameter_mm": 5,
-    "weight_g": 280
-  },
-  "control": {
-    "mode": "STEP_DIR_MODE",
-    "default_resolution": "FULL_STEP",
-    "min_step_interval_us": 50,
-    "recommended_step_interval_us": 250,
-    "max_acceleration_steps_s2": 50000
-  },
-  "mounting": {
-    "type": "NEMA17_FLANGE",
-    "bore_diameter_mm": 5,
-    "flange_diameter_mm": 42.3,
-    "bolt_circle_mm": 31
-  },
-  "typical_applications": [
-    "Eye pan (horizontal)",
-    "Jaw rotation",
-    "General articulation",
-    "Standard workhorse"
-  ],
-  "variants": [
-    {
-      "name": "stepper_nema17_precision",
-      "voltage_nominal_mv": 24000,
-      "current_per_coil_ma": 1200,
-      "default_resolution": "SIXTEENTH_STEP",
-      "min_step_interval_us": 20,
-      "max_rpm_no_load": 4000,
-      "typical_application": "Precision articulation"
+    "name": "stepper_nema17_standard",
+    "type": "stepper_motor",
+    "category": "standard",
+    "nema_size": 17,
+    "description": "NEMA17 Standard - workhorse motor for eye pan, general articulation",
+    "specifications": {
+        "voltage_nominal_mv": 12000,
+        "voltage_max_mv": 24000,
+        "current_per_coil_ma": 1500,
+        "holding_torque_ncm": 400,
+        "max_torque_ncm": 800,
+        "steps_per_revolution": 200,
+        "step_angle_degrees": 1.8,
+        "nominal_rpm_at_rated": 500,
+        "max_rpm_no_load": 3000,
+        "rotor_inertia_gcm2": 40.0,
+        "body_length_mm": 38,
+        "shaft_diameter_mm": 5,
+        "weight_g": 280
     },
-    {
-      "name": "stepper_nema17_hightorque",
-      "voltage_nominal_mv": 24000,
-      "current_per_coil_ma": 2000,
-      "holding_torque_ncm": 1200,
-      "max_torque_ncm": 2500,
-      "nominal_rpm_at_rated": 300,
-      "max_rpm_no_load": 1500,
-      "typical_application": "Heavy jaw, cheek pulling"
+    "control": {
+        "mode": "STEP_DIR_MODE",
+        "default_resolution": "FULL_STEP",
+        "min_step_interval_us": 50,
+        "recommended_step_interval_us": 250,
+        "max_acceleration_steps_s2": 50000
     },
-    {
-      "name": "stepper_nema17_geared_3",
-      "gear_ratio": 3.0,
-      "holding_torque_ncm": 1200,
-      "max_torque_ncm": 2400,
-      "nominal_rpm_at_rated": 150,
-      "body_length_mm": 50,
-      "typical_application": "Jaw opening (heavy)"
+    "mounting": {
+        "type": "NEMA17_FLANGE",
+        "bore_diameter_mm": 5,
+        "flange_diameter_mm": 42.3,
+        "bolt_circle_mm": 31
     },
-    {
-      "name": "stepper_nema17_geared_5",
-      "gear_ratio": 5.0,
-      "holding_torque_ncm": 2000,
-      "max_torque_ncm": 4000,
-      "nominal_rpm_at_rated": 100,
-      "body_length_mm": 55,
-      "typical_application": "Mouth corner pull"
+    "typical_applications": [
+        "Eye pan (horizontal)",
+        "Jaw rotation",
+        "General articulation",
+        "Standard workhorse"
+    ],
+    "variants": [
+        {
+            "name": "stepper_nema17_precision",
+            "voltage_nominal_mv": 24000,
+            "current_per_coil_ma": 1200,
+            "default_resolution": "SIXTEENTH_STEP",
+            "min_step_interval_us": 20,
+            "max_rpm_no_load": 4000,
+            "typical_application": "Precision articulation"
+        },
+        {
+            "name": "stepper_nema17_hightorque",
+            "voltage_nominal_mv": 24000,
+            "current_per_coil_ma": 2000,
+            "holding_torque_ncm": 1200,
+            "max_torque_ncm": 2500,
+            "nominal_rpm_at_rated": 300,
+            "max_rpm_no_load": 1500,
+            "typical_application": "Heavy jaw, cheek pulling"
+        },
+        {
+            "name": "stepper_nema17_geared_3",
+            "gear_ratio": 3.0,
+            "holding_torque_ncm": 1200,
+            "max_torque_ncm": 2400,
+            "nominal_rpm_at_rated": 150,
+            "body_length_mm": 50,
+            "typical_application": "Jaw opening (heavy)"
+        },
+        {
+            "name": "stepper_nema17_geared_5",
+            "gear_ratio": 5.0,
+            "holding_torque_ncm": 2000,
+            "max_torque_ncm": 4000,
+            "nominal_rpm_at_rated": 100,
+            "body_length_mm": 55,
+            "typical_application": "Mouth corner pull"
+        },
+        {
+            "name": "stepper_nema17_pancake",
+            "body_length_mm": 20,
+            "max_torque_ncm": 1200,
+            "typical_application": "Compact articulation"
+        },
+        {
+            "name": "stepper_nema17_linear_5mm",
+            "mounting_type": "LEADSCREW_5MM",
+            "lead_mm": 5,
+            "typical_application": "Eyelid opening"
+        },
+        {
+            "name": "stepper_nema17_linear_8mm",
+            "mounting_type": "LEADSCREW_8MM",
+            "lead_mm": 8,
+            "typical_application": "Jaw opening (linear)"
+        },
+        {
+            "name": "stepper_nema17_dual_shaft",
+            "mounting_type": "DUAL_SHAFT",
+            "typical_application": "Symmetric load distribution"
+        },
+        {
+            "name": "stepper_nema17_lsht_100",
+            "gear_ratio": 100.0,
+            "holding_torque_ncm": 40000,
+            "max_torque_ncm": 80000,
+            "nominal_rpm_at_rated": 30,
+            "max_rpm_no_load": 200,
+            "body_length_mm": 75,
+            "typical_application": "Ultra-slow smooth motion"
+        },
+        {
+            "name": "stepper_nema17_pwm_servo",
+            "control_mode": "PWM_SERVO_MODE",
+            "default_resolution": "SIXTEENTH_STEP",
+            "min_step_interval_us": 20,
+            "typical_application": "Smooth servo-like motion"
+        },
+        {
+            "name": "stepper_nema17_ip54_sealed",
+            "mounting_type": "SEALED_IP54",
+            "environmental_rating": "IP54",
+            "typical_application": "Weather-resistant motion"
+        },
+        {
+            "name": "stepper_nema17_flat_15mm",
+            "body_length_mm": 15,
+            "mounting_type": "FLAT_MOUNT",
+            "typical_application": "Space-constrained"
+        }
+    ],
+    "current_limiting": {
+        "type": "current_regulated",
+        "ms_per_step": 1,
+        "decay_mode": "mixed"
     },
-    {
-      "name": "stepper_nema17_pancake",
-      "body_length_mm": 20,
-      "max_torque_ncm": 1200,
-      "typical_application": "Compact articulation"
+    "thermal": {
+        "max_temperature_c": 80,
+        "thermal_resistance_c_per_w": 12,
+        "typical_power_dissipation_w": 3.6
     },
-    {
-      "name": "stepper_nema17_linear_5mm",
-      "mounting_type": "LEADSCREW_5MM",
-      "lead_mm": 5,
-      "typical_application": "Eyelid opening"
-    },
-    {
-      "name": "stepper_nema17_linear_8mm",
-      "mounting_type": "LEADSCREW_8MM",
-      "lead_mm": 8,
-      "typical_application": "Jaw opening (linear)"
-    },
-    {
-      "name": "stepper_nema17_dual_shaft",
-      "mounting_type": "DUAL_SHAFT",
-      "typical_application": "Symmetric load distribution"
-    },
-    {
-      "name": "stepper_nema17_lsht_100",
-      "gear_ratio": 100.0,
-      "holding_torque_ncm": 40000,
-      "max_torque_ncm": 80000,
-      "nominal_rpm_at_rated": 30,
-      "max_rpm_no_load": 200,
-      "body_length_mm": 75,
-      "typical_application": "Ultra-slow smooth motion"
-    },
-    {
-      "name": "stepper_nema17_pwm_servo",
-      "control_mode": "PWM_SERVO_MODE",
-      "default_resolution": "SIXTEENTH_STEP",
-      "min_step_interval_us": 20,
-      "typical_application": "Smooth servo-like motion"
-    },
-    {
-      "name": "stepper_nema17_ip54_sealed",
-      "mounting_type": "SEALED_IP54",
-      "environmental_rating": "IP54",
-      "typical_application": "Weather-resistant motion"
-    },
-    {
-      "name": "stepper_nema17_flat_15mm",
-      "body_length_mm": 15,
-      "mounting_type": "FLAT_MOUNT",
-      "typical_application": "Space-constrained"
+    "timing": {
+        "hitCount": 1
     }
-  ],
-  "current_limiting": {
-    "type": "current_regulated",
-    "ms_per_step": 1,
-    "decay_mode": "mixed"
-  },
-  "thermal": {
-    "max_temperature_c": 80,
-    "thermal_resistance_c_per_w": 12,
-    "typical_power_dissipation_w": 3.6
-  }
 }

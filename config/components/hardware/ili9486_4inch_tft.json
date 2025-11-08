@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ili9486_4inch_tft.json",
+    "relative_filename": "config/components/hardware/hardware/ili9486_4inch_tft.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "ILI9486_4INCH_TFT",
@@ -152,5 +152,8 @@
     ],
     "estimated_cost_usd": "45.00",
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

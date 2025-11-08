@@ -210,5 +210,8 @@
     },
     "name": "modular_humanoid_esp32",
     "type": "UNKNOWN",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

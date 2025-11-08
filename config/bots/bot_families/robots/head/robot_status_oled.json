@@ -7,7 +7,7 @@
     "description": "Small OLED display for text-based status information and diagnostics",
     "created": "2025-10-12",
     "components": [
-        "components/hardware/ssd1306.json"
+        "ssd1306"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",
@@ -84,5 +84,8 @@
         "z": "0.0 INCH",
         "x": "0.0 INCH"
     },
-    "type": "DISPLAY_DRIVER"
+    "type": "DISPLAY_DRIVER",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -135,5 +135,8 @@
                 "completely_invisible"
             ]
         }
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

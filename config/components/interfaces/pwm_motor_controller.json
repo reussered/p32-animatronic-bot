@@ -238,5 +238,8 @@
         }
     },
     "name": "pwm_motor_controller",
-    "type": "INTERFACE_BUS"
+    "type": "INTERFACE_BUS",
+    "timing": {
+        "hitCount": 1
+    }
 }

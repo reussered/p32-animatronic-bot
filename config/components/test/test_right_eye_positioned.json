@@ -8,7 +8,7 @@
         "description": "Test right eye updates every cycle"
     },
     "components": [
-        "components/gc9a01.json"
+        "gc9a01"
     ],
     "additional_interfaces": [
         "config/interfaces/gpio_pin_33.json",
@@ -29,8 +29,8 @@
     "software": {
         "init_function": "test_right_eye_init",
         "act_function": "test_right_eye_act",
-        "header_file": "components/test/test_right_eye.hpp",
-        "source_file": "components/test/test_right_eye.cpp"
+        "header_file": "config/components/test/test_right_eye.hpp",
+        "source_file": "config/components/test/test_right_eye.cpp"
     },
     "test_configuration": {
         "test_type": "COLOR_CYCLE",
@@ -48,5 +48,6 @@
         "validation_enabled": true,
         "sync_offset_frames": 30
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: test_right_eye_positioned"
 }

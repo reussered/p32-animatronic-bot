@@ -24,7 +24,7 @@
         "config/components/functional/test_system_controller.json"
     ],
     "components": [
-        "bots/bot_families/tests/head/test_head.json"
+        "test_head"
     ],
     "mood_defaults": {
         "FEAR": 0,

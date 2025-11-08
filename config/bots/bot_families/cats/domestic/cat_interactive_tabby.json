@@ -27,12 +27,10 @@
         }
     },
     "components": [
-        "bots/.archived_components/bot_families/cats/head/cat_animated_ears.json",
-        "bots/.archived_components/bot_families/cats/head/cat_whisker_sensors.json",
-        "bots/bot_families/cats/head/cat_purr_generator.json",
-        "bots/bot_families/cats/head/cat_tail_servo.json",
-        "config/subsystems/cat_head.json",
-        "config/subsystems/cat_torso.json"
+        "cat_animated_ears",
+        "cat_whisker_sensors",
+        "cat_purr_generator",
+        "cat_tail_servo"
     ],
     "interactive_behaviors": {
         "greeting_patterns": [
@@ -80,5 +78,8 @@
         "grooming_requests": true
     },
     "name": "cat_interactive_tabby",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

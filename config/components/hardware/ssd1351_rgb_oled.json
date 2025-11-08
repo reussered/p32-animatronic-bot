@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/ssd1351_rgb_oled.json",
+    "relative_filename": "config/components/hardware/hardware/ssd1351_rgb_oled.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "SSD1351_RGB_OLED",
@@ -255,5 +255,8 @@
         }
     },
     "software": {},
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

@@ -1,100 +1,64 @@
-#ifndef GC9A01_HPP
-#define GC9A01_HPP
+// gc9a01 component header
+// Defines data structures for GC9A01 display
 
-/**
- * @file gc9a01.hpp
- * @brief GC9A01 240x240 circular display hardware driver
- * @author P32 Animatronic Bot Project
- */
+#ifndef GC9A01_HDR
+#define GC9A01_HDR
 
-#include "core/memory/SharedMemory.hpp"
-#include <cstdint>
+#include <stdint.h>
 
-// Forward declaration
-struct GC9A01_Pixel;
-
-// Global InitialPixel - must be set before allocating buffers containing Pixels
-extern GC9A01_Pixel GC9A01_InitialPixel;
-
-/**
- * @brief Pixel struct for GC9A01 display (RGB565 format)
- * Simple bit-field representation for RGB565 color format
- */
-struct GC9A01_Pixel
+// This struct acts as a "type bundle" for the gc9a01 hardware.
+// It will be used as a template parameter for components that need its properties.
+struct gc9a01
 {
-    unsigned int red : 5;
-    unsigned int green : 6;
-    unsigned int blue : 5;
-    
-    // Default constructor using InitialPixel
-    GC9A01_Pixel() 
+    // Standardized interface members
+    static const int WIDTH = 240;
+    static const int HEIGHT = 240;
+
+    // Standardized color channel maximums
+    static const int MAX_RED   = 0x1F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x1F;
+
+    // Standardized nested Pixel type
+    struct Pixel
     {
-        *this = GC9A01_InitialPixel;
-    }
-    
-    // Constexpr constructor for static colors
-    constexpr GC9A01_Pixel(unsigned int r, unsigned int g, unsigned int b)
-        : red(r), green(g), blue(b)
-    {}
-    
-    // Copy constructor
-    GC9A01_Pixel(const GC9A01_Pixel& other) 
-        : red(other.red), green(other.green), blue(other.blue)
-    {}
-    
-    // Assignment operator
-    GC9A01_Pixel& operator=(const GC9A01_Pixel& other)
-    {
-        red = other.red;
-        green = other.green;
-        blue = other.blue;
-        return *this;
-    }
-    
-    // Static color constants
-    static constexpr GC9A01_Pixel Red() { return GC9A01_Pixel(31, 0, 0); }
-    static constexpr GC9A01_Pixel Green() { return GC9A01_Pixel(0, 63, 0); }
-    static constexpr GC9A01_Pixel Blue() { return GC9A01_Pixel(0, 0, 31); }
-    static constexpr GC9A01_Pixel Black() { return GC9A01_Pixel(0, 0, 0); }
-    static constexpr GC9A01_Pixel White() { return GC9A01_Pixel(31, 63, 31); }
+        unsigned int red : 5;
+        unsigned int green : 6;
+        unsigned int blue : 5;
+
+        // Default constructor
+        Pixel() : red(0), green(0), blue(0) {}
+
+        // Copy constructor
+        Pixel(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+        }
+
+        // Assignment operator
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+
+        // Add two pixels with saturation
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
 };
 
-// Type alias to use 'Pixel' instead of 'GC9A01_Pixel'
-using Pixel = GC9A01_Pixel;
-
-// GC9A01 Display Specifications
-#define GC9A01_WIDTH  240
-#define GC9A01_HEIGHT 240
-#define GC9A01_PIXELS (GC9A01_WIDTH * GC9A01_HEIGHT)
-
-/**
- * @brief Initialize GC9A01 hardware driver using generic SPI display
- * Called once during system startup
- */
-esp_err_t gc9a01_init(void);
-
-/**
- * @brief Send current frame buffer to GC9A01 display using generic SPI display
- * Reads currentFrame set by higher-level components
- */
-void gc9a01_act(void);
-
-/**
- * @brief Display Buffer Interface - get total frame size in pixels
- * @return Total number of pixels in frame (57,600)
- */
-size_t getFrameSize(void);
-
-/**
- * @brief Display Buffer Interface - get frame row size in pixels
- * @return Number of pixels per row (240)
- */
-size_t getFrameRowSize(void);
-
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame (width * height)
- */
-size_t getDisplaySize(void);
-
-#endif // GC9A01_HPP
+#endif // GC9A01_HDR

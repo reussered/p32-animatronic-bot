@@ -5,7 +5,7 @@
     "name": "bear_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bots/.archived_components/bot_families/bears/head/bear_eye.json"
+        "bear_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",

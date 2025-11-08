@@ -1,82 +1,89 @@
 {
-  "name": "goblin_head_eye_motor",
-  "type": "motor_controller",
-  "description": "Stepper-controlled eye movement with mood-based display",
-  "subsystem": "goblin_head",
-  "dependencies": [
-    "stepper_pan_left_eye",
-    "stepper_tilt_both_eyes",
-    "stepper_blink_motor",
-    "gc9a01_left_eye_display"
-  ],
-  "hardware": {
-    "motors": [
-      {
-        "name": "stepper_pan_left_eye",
-        "type": "NEMA17_STANDARD",
-        "gpio": {
-          "step_pin": 14,
-          "direction_pin": 15,
-          "enable_pin": 16
-        },
-        "range_degrees": {
-          "min": -45,
-          "max": 45
-        }
-      },
-      {
-        "name": "stepper_tilt_both_eyes",
-        "type": "NEMA14_STANDARD",
-        "gpio": {
-          "step_pin": 17,
-          "direction_pin": 18,
-          "enable_pin": 19
-        },
-        "range_degrees": {
-          "min": -30,
-          "max": 30
-        }
-      },
-      {
-        "name": "stepper_blink_motor",
-        "type": "NEMA8_GEARED_5",
-        "gpio": {
-          "step_pin": 20,
-          "direction_pin": 21,
-          "enable_pin": 22
-        },
-        "range": "0-255"
-      }
+    "name": "goblin_head_eye_motor",
+    "type": "motor_controller",
+    "description": "Stepper-controlled eye movement with mood-based display",
+    "subsystem": "goblin_head",
+    "dependencies": [
+        "stepper_pan_left_eye",
+        "stepper_tilt_both_eyes",
+        "stepper_blink_motor",
+        "gc9a01_left_eye_display"
     ],
-    "display": {
-      "driver": "gc9a01",
-      "resolution": "240x240",
-      "color_format": "RGB565",
-      "buffer_size_kb": 112.5
+    "hardware": {
+        "motors": [
+            {
+                "name": "stepper_pan_left_eye",
+                "type": "NEMA17_STANDARD",
+                "gpio": {
+                    "step_pin": 14,
+                    "direction_pin": 15,
+                    "enable_pin": 16
+                },
+                "range_degrees": {
+                    "min": -45,
+                    "max": 45
+                }
+            },
+            {
+                "name": "stepper_tilt_both_eyes",
+                "type": "NEMA14_STANDARD",
+                "gpio": {
+                    "step_pin": 17,
+                    "direction_pin": 18,
+                    "enable_pin": 19
+                },
+                "range_degrees": {
+                    "min": -30,
+                    "max": 30
+                }
+            },
+            {
+                "name": "stepper_blink_motor",
+                "type": "NEMA8_GEARED_5",
+                "gpio": {
+                    "step_pin": 20,
+                    "direction_pin": 21,
+                    "enable_pin": 22
+                },
+                "range": "0-255"
+            }
+        ],
+        "display": {
+            "driver": "gc9a01",
+            "resolution": "240x240",
+            "color_format": "RGB565",
+            "buffer_size_kb": 112.5
+        }
+    },
+    "animation_timing": {
+        "update_hz": 30,
+        "motor_update_hz": 100,
+        "blink_interval_ms": "3000-4500",
+        "blink_close_ms": 100,
+        "blink_open_ms": 80
+    },
+    "mood_integration": {
+        "affects": [
+            "pupil_dilation",
+            "eye_color",
+            "blink_rate"
+        ],
+        "base_color_rgb888": "0x00FF00",
+        "mood_effects": {
+            "ANGER": "red_shift",
+            "FEAR": "dilated_pupils",
+            "HAPPINESS": "bright_green",
+            "SADNESS": "blue_cast"
+        }
+    },
+    "min_step_interval_us": {
+        "pan": 50,
+        "tilt": 60,
+        "blink": 30
+    },
+    "memory_budget_kb": 115.5,
+    "notes": "Eyes update independently but synchronized via shared Mood struct. Pupil tracking uses interpolation for smooth motion.",
+    "timing": {
+        "hitCount": 1
     }
-  },
-  "animation_timing": {
-    "update_hz": 30,
-    "motor_update_hz": 100,
-    "blink_interval_ms": "3000-4500",
-    "blink_close_ms": 100,
-    "blink_open_ms": 80
-  },
-  "mood_integration": {
-    "affects": ["pupil_dilation", "eye_color", "blink_rate"],
-    "base_color_rgb888": "0x00FF00",
-    "mood_effects": {
-      "ANGER": "red_shift",
-      "FEAR": "dilated_pupils",
-      "HAPPINESS": "bright_green",
-      "SADNESS": "blue_cast"
-    }
-  },
-  "min_step_interval_us": {
-    "pan": 50,
-    "tilt": 60,
-    "blink": 30
-  },
-  "memory_budget_kb": 115.5,
-  "notes": "Eyes update independently but synchronized via shared Mood struct. Pupil tracking uses interpolation for smooth motion."
 }

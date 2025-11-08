@@ -9,9 +9,7 @@
     "name": "wolf_speaker",
     "subsystem": "AUDIO",
     "components": [
-        "components/drivers/i2s_bus.json",
-        "config/subsystems/wolf_head.json",
-        "config/subsystems/wolf_torso.json"
+        "i2s_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -22,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: wolf_speaker",
+    "timing": {
+        "hitCount": 1
+    }
 }

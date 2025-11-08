@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/drivers/adc_bus.json",
+    "relative_filename": "config/components/drivers/driver/adc_bus.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "adc_bus",

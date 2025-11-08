@@ -15,11 +15,11 @@
         "component_spacing": "1.5 INCH"
     },
     "components": [
-        "bots/.archived_components/bot_families/steampunk/head/steampunk_eye_left.json",
-        "bots/.archived_components/bot_families/steampunk/head/steampunk_eye_right.json",
-        "bots/.archived_components/bot_families/steampunk/head/steampunk_nose.json",
-        "bots/.archived_components/bot_families/steampunk/head/steampunk_mouth.json",
-        "bots/.archived_components/bot_families/steampunk/head/steampunk_speaker.json"
+        "steampunk_eye_left",
+        "steampunk_eye_right",
+        "steampunk_nose",
+        "steampunk_mouth",
+        "steampunk_speaker"
     ],
     "family_mood_profile": {
         "FEAR": 15,
@@ -85,5 +85,8 @@
     "prototype_status": "template_generated",
     "tested": false,
     "name": "steampunk_family",
-    "type": "UNKNOWN"
+    "type": "UNKNOWN",
+    "timing": {
+        "hitCount": 1
+    }
 }

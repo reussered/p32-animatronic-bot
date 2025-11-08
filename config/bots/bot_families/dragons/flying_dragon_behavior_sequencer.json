@@ -45,5 +45,8 @@
     "function_signature": "flying_dragon_behavior_sequencer_init(void); void flying_dragon_behavior_sequencer_act(void);",
     "relative_filename": "config/bots/bot_families/dragons/flying_dragon_behavior_sequencer.json",
     "type": "BOT",
-    "components": []
+    "components": [],
+    "timing": {
+        "hitCount": 1
+    }
 }

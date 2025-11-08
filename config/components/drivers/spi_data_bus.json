@@ -26,9 +26,9 @@
             "communication modules"
         ]
     },
-    "relative_filename": "config/components/drivers/spi_data_bus.json",
+    "relative_filename": "config/components/drivers/driver/spi_data_bus.json",
     "components": [
-        "components/drivers/generic_spi_data_driver.json"
+        "generic_spi_data_driver"
     ],
     "software": {
         "init_function": "spi_data_bus_init",
@@ -43,5 +43,8 @@
             "ESP32-S3-WROOM-1",
             "ESP32-DevKitC"
         ]
+    },
+    "timing": {
+        "hitCount": 1
     }
 }

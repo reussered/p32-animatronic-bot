@@ -1,5 +1,5 @@
 {
-    "relative_filename": "config/components/hardware/pir_motion_sensor.json",
+    "relative_filename": "config/components/hardware/hardware/pir_motion_sensor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_id": "PIR_MOTION_HC_SR501",
@@ -86,5 +86,8 @@
     "hardware_type": "MOTION_SENSOR",
     "name": "pir_motion_sensor",
     "software": {},
-    "type": "MOTION_SENSOR"
+    "type": "MOTION_SENSOR",
+    "timing": {
+        "hitCount": 1
+    }
 }

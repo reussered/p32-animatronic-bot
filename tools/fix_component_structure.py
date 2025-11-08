@@ -35,11 +35,35 @@ class ComponentStructureFixer:
         self.fixed_references: List[Dict] = []
         
         print("[*] Initializing ComponentStructureFixer")
+        self._load_master_rules()
         self._build_file_index()
+    
+    def _load_master_rules(self):
+        """Load master_rules.json to get authoritative list of all project files"""
+        master_rules_path = self.project_root / "master_rules.json"
+        
+        if not master_rules_path.exists():
+            print("[!] WARNING: master_rules.json not found - will use filesystem scan only")
+            return
+        
+        print("[*] Loading master_rules.json...")
+        try:
+            with open(master_rules_path, 'r', encoding='ascii') as f:
+                master_rules = json.load(f)
+            
+            # Store all files from master_rules for reference
+            self.master_rules_files = set()
+            if "project_files" in master_rules and "files" in master_rules["project_files"]:
+                self.master_rules_files = set(master_rules["project_files"]["files"])
+                print(f"[+] Loaded {len(self.master_rules_files)} files from master_rules.json")
+            else:
+                print("[!] WARNING: master_rules.json has unexpected format")
+        except Exception as e:
+            print(f"[!] ERROR loading master_rules.json: {e}")
     
     def _build_file_index(self):
         """Build master index of all JSON files in config/"""
-        print("[*] Building master file index...")
+        print("[*] Building master file index from actual project files...")
         
         for json_file in self.config_root.rglob("*.json"):
             basename = json_file.name
@@ -62,17 +86,23 @@ class ComponentStructureFixer:
     
     def _resolve_reference(self, reference: str, current_file: Path) -> Tuple[bool, str, str]:
         """
-        Try to resolve a component reference.
+        Try to resolve a component reference using master_rules.json as source of truth.
         
         Returns: (was_fixed, original_path, resolved_path)
         If already valid: (False, reference, reference)
         If fixed: (True, reference, new_path)
         If not found: (False, reference, "NOT_FOUND")
         """
-        # Normalize the reference path
-        ref_path = Path(reference)
+        # Normalize the reference path (convert backslashes to forward slashes)
+        reference_normalized = reference.replace("\\", "/")
+        ref_path = Path(reference_normalized)
         
-        # Check if reference exists as-is
+        # Check if reference exists as-is in master_rules
+        if hasattr(self, 'master_rules_files'):
+            if reference_normalized in self.master_rules_files:
+                return (False, reference, reference)
+        
+        # Check if reference exists on filesystem
         full_path = self.config_root / ref_path
         if full_path.exists():
             return (False, reference, reference)
@@ -81,6 +111,15 @@ class ComponentStructureFixer:
         basename = ref_path.name
         
         if basename not in self.file_index:
+            # Check if it's in master_rules
+            if hasattr(self, 'master_rules_files'):
+                for file_entry in self.master_rules_files:
+                    if file_entry.endswith(basename):
+                        new_path = file_entry
+                        if reference != new_path:
+                            return (True, reference, new_path)
+                        else:
+                            return (False, reference, reference)
             return (False, reference, "NOT_FOUND")
         
         # Get list of locations where this file exists
@@ -116,6 +155,7 @@ class ComponentStructureFixer:
         
         original_components = data["components"].copy()
         modified = False
+        components_to_remove = []
         
         for i, component_ref in enumerate(data["components"]):
             if not isinstance(component_ref, str):
@@ -138,12 +178,25 @@ class ComponentStructureFixer:
                 print(f"  [*] Fixed: {original} -> {resolved}")
             
             elif resolved == "NOT_FOUND":
-                self.bad_components.append({
-                    "file": str(json_path.relative_to(self.project_root)).replace("\\", "/"),
-                    "component": component_ref,
-                    "reason": "File not found anywhere in project"
-                })
-                print(f"  [!] BAD: {component_ref} (not found anywhere)")
+                # Check if this is a non-existent subsystem reference (RULE 3/4 violation)
+                # These should be removed, not kept as bad components
+                if "config/subsystems/" in component_ref and "_head.json" in component_ref or "_torso.json" in component_ref:
+                    # Mark for removal
+                    components_to_remove.append(i)
+                    self.references_fixed += 1
+                    modified = True
+                    print(f"  [*] Removed (RULE 3/4 violation): {component_ref}")
+                else:
+                    self.bad_components.append({
+                        "file": str(json_path.relative_to(self.project_root)).replace("\\", "/"),
+                        "component": component_ref,
+                        "reason": "File not found anywhere in project"
+                    })
+                    print(f"  [!] BAD: {component_ref} (not found anywhere)")
+        
+        # Remove components in reverse order to maintain correct indices
+        for idx in sorted(components_to_remove, reverse=True):
+            del data["components"][idx]
         
         # Write back if modified
         if modified:

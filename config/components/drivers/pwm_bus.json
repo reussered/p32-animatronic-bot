@@ -17,7 +17,7 @@
         ]
     },
     "components": [
-        "components/drivers/pwm_driver.json"
+        "pwm_driver"
     ],
     "software": {
         "init_function": "pwm_bus_init",
@@ -39,5 +39,8 @@
             "ESP32-DevKitC"
         ]
     },
-    "relative_filename": "config/components/drivers/pwm_bus.json"
+    "relative_filename": "config/components/drivers/driver/pwm_bus.json",
+    "timing": {
+        "hitCount": 1
+    }
 }

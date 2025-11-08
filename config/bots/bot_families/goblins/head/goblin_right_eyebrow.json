@@ -5,7 +5,7 @@
     "name": "goblin_right_eyebrow",
     "subsystem": "HEAD",
     "components": [
-        "components/hardware/servo_sg90_micro.json"
+        "servo_sg90_micro"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

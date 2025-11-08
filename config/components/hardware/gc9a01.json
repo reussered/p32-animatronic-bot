@@ -1,13 +1,12 @@
 {
-    "relative_filename": "config/components/hardware/gc9a01.json",
+    "relative_filename": "config/components/hardware/hardware/gc9a01.json",
     "version": "1.0.0",
     "author": "config/author.json",
-    "hardware_type": "GC9A01_DISPLAY",
     "display_driver": true,
     "name": "gc9a01",
-    "subsystem": "HEAD",
+    "type": "DISPLAY_DRIVER",
     "components": [
-        "components/drivers/spi_display_bus.json"
+        "spi_display_bus"
     ],
     "physical_specs": {
         "diameter": "1.28 INCH",
@@ -20,130 +19,7 @@
         }
     },
     "timing": {
-        "hitCount": 1,
-        "description": "Display updates every loop for smooth animation"
-    },
-    "pin_mapping": {
-        "description": "GC9A01 displays have varying pin labels depending on manufacturer. See MakerNames.json for complete mapping.",
-        "manufacturer_mapping_reference": "config/components/interfaces/MakerNames.json",
-        "generic_pins": {
-            "clock": {
-                "function": "SPI Clock",
-                "required": true,
-                "manufacturer_labels": [
-                    "CLK",
-                    "SCK",
-                    "SCLK",
-                    "SCL"
-                ]
-            },
-            "data_input": {
-                "function": "SPI Master Out Slave In (Data)",
-                "required": true,
-                "manufacturer_labels": [
-                    "MOSI",
-                    "SDA",
-                    "SDI",
-                    "DIN"
-                ]
-            },
-            "data_command": {
-                "function": "Data/Command Select",
-                "required": true,
-                "manufacturer_labels": [
-                    "DC",
-                    "D/C",
-                    "RS",
-                    "A0"
-                ]
-            },
-            "chip_select": {
-                "function": "Chip Select (Slave Select)",
-                "required": true,
-                "manufacturer_labels": [
-                    "CS",
-                    "SS",
-                    "CE"
-                ]
-            },
-            "reset": {
-                "function": "Hardware Reset",
-                "required": true,
-                "manufacturer_labels": [
-                    "RST",
-                    "RESET",
-                    "RES"
-                ]
-            },
-            "backlight": {
-                "function": "Backlight Control (PWM)",
-                "required": false,
-                "manufacturer_labels": [
-                    "BL",
-                    "BLK",
-                    "LED"
-                ]
-            },
-            "power_positive": {
-                "function": "Power Supply (3.3V)",
-                "required": true,
-                "manufacturer_labels": [
-                    "VCC",
-                    "VDD",
-                    "3V3",
-                    "+3.3V"
-                ]
-            },
-            "power_ground": {
-                "function": "Ground Reference",
-                "required": true,
-                "manufacturer_labels": [
-                    "GND",
-                    "VSS",
-                    "0V"
-                ]
-            }
-        },
-        "common_manufacturer_variations": {
-            "variation_1": {
-                "description": "Most common pinout (your displays)",
-                "pins_exposed": [
-                    "SCK",
-                    "SDA",
-                    "DC",
-                    "CS",
-                    "RST",
-                    "VCC",
-                    "GND"
-                ]
-            },
-            "variation_2": {
-                "description": "Waveshare/Adafruit style",
-                "pins_exposed": [
-                    "CLK",
-                    "MOSI",
-                    "DC",
-                    "CS",
-                    "RST",
-                    "BL",
-                    "VCC",
-                    "GND"
-                ]
-            },
-            "variation_3": {
-                "description": "Generic Chinese modules",
-                "pins_exposed": [
-                    "SCLK",
-                    "SDI",
-                    "RS",
-                    "CS",
-                    "RESET",
-                    "LED",
-                    "VDD",
-                    "GND"
-                ]
-            }
-        }
+        "hitCount": 1
     },
     "driver_config": {
         "rotation": 0,
@@ -180,5 +56,5 @@
         "getFrameSize",
         "getFrameRowSize"
     ],
-    "type": "DISPLAY_DRIVER"
+    "description": "Auto-generated component: gc9a01"
 }

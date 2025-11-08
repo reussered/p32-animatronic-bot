@@ -14,7 +14,7 @@
         "scaling_applies": true
     },
     "components": [
-        "components/hardware/wrist_joint_assembly.json"
+        "wrist_joint_assembly"
     ],
     "degrees_of_freedom": {
         "total_dof": 2,
@@ -77,5 +77,8 @@
         "structural_scaling": "MATERIAL_THICKNESS_SCALES_WITH_SIZE"
     },
     "hardware_type": "POSITIONED_COMPONENT",
-    "type": "ARTICULATED_JOINT_2DOF"
+    "type": "ARTICULATED_JOINT_2DOF",
+    "timing": {
+        "hitCount": 1
+    }
 }

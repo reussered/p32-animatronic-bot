@@ -4,96 +4,50 @@
 #ifndef ST7789_HDR
 #define ST7789_HDR
 
-#include <cstdint>
+#include <stdint.h>
 
-// Forward declaration
-struct ST7789_Pixel;
-
-// Global InitialPixel - must be set before allocating buffers containing Pixels
-extern ST7789_Pixel ST7789_InitialPixel;
-
-/**
- * @brief Pixel struct for ST7789 display (RGB565 format)
- * 16-bit color: 5-6-5 bits
- */
-struct ST7789_Pixel
+// This struct acts as a "type bundle" for the st7789 hardware.
+// Based on its JSON, it has a 240x128 resolution. Color depth is
+// assumed to be 16-bit (RGB565), which is common for this driver.
+struct st7789
 {
-    unsigned int red : 5;
-    unsigned int green : 6;
-    unsigned int blue : 5;
+    // Standardized interface members
+    static const int WIDTH = 240;
+    static const int HEIGHT = 128;
 
-    // Maximum values for each color channel (for mood calculations)
-    static constexpr unsigned int maxRed = 0x1F;    // 5 bits = 31
-    static constexpr unsigned int maxGreen = 0x3F;  // 6 bits = 63
-    static constexpr unsigned int maxBlue = 0x1F;   // 5 bits = 31
-    
-    ST7789_Pixel() 
-    {
-        *this = ST7789_InitialPixel;
-    }
-    
-    // Copy constructor
-    ST7789_Pixel(const ST7789_Pixel& other) 
-        : red(other.red), green(other.green), blue(other.blue)
-    {}
-    
-    // Assignment operator
-    ST7789_Pixel& operator=(const ST7789_Pixel& other)
-    {
-        red = other.red;
-        green = other.green;
-        blue = other.blue;
-        return *this;
-    }
+    // 16-bit color depth (5 bits red, 6 green, 5 blue)
+    static const int MAX_RED   = 0x1F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x1F;
 
-    // Add two pixels with saturation (overflow caps at max value per channel)
-    ST7789_Pixel operator+(const ST7789_Pixel& other) const
+    // Standardized nested Pixel type for RGB565
+    struct Pixel
     {
-        ST7789_Pixel result;
-        
-        // Add red channel
-        unsigned int sum_r = red + other.red;
-        result.red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
-        unsigned int sum_g = green + other.green;
-        result.green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
-        unsigned int sum_b = blue + other.blue;
-        result.blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
-        return result;
-    }
+        unsigned int red : 5;
+        unsigned int green : 6;
+        unsigned int blue : 5;
 
-    // Add-assign operator with saturation
-    ST7789_Pixel& operator+=(const ST7789_Pixel& other)
-    {
-        // Add red channel
-        unsigned int sum_r = red + other.red;
-        red = (sum_r > maxRed) ? maxRed : sum_r;
-        
-        // Add green channel
-        unsigned int sum_g = green + other.green;
-        green = (sum_g > maxGreen) ? maxGreen : sum_g;
-        
-        // Add blue channel
-        unsigned int sum_b = blue + other.blue;
-        blue = (sum_b > maxBlue) ? maxBlue : sum_b;
-        
-        return *this;
-    }
+        Pixel() : red(0), green(0), blue(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
 };
-
-// Display specifications
-size_t st7789_get_width(void);
-size_t st7789_get_height(void);
-size_t getFrameSize(void);
-size_t getFrameRowSize(void);
-size_t getDisplaySize(void);
-
-// Component functions
-esp_err_t st7789_240x128_init(void);
-void st7789_240x128_act(void);
 
 #endif // ST7789_HDR

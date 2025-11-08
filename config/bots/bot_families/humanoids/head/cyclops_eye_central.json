@@ -5,11 +5,11 @@
         "init_function": "cyclops_eye_central_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/humanoids/head/cyclops_eye_central.json",
+    "relative_filename": "config\\bots\\bot_families\\humanoids\\head\\cyclops_eye_central.json",
     "name": "cyclops_eye_central",
     "subsystem": "VISION",
     "components": [
-        "components/interfaces/spi_bus.json"
+        "spi_bus"
     ],
     "author": "config/author.json",
     "position": {
@@ -20,5 +20,9 @@
         "reference_point": "nose_center",
         "y": "0.0 INCH"
     },
-    "type": "POSITIONED_COMPONENT"
+    "type": "POSITIONED_COMPONENT",
+    "description": "Auto-generated component: cyclops_eye_central",
+    "timing": {
+        "hitCount": 1
+    }
 }

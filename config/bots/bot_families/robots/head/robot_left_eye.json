@@ -5,7 +5,7 @@
     "name": "robot_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bots/.archived_components/bot_families/robots/head/robot_eye.json"
+        "robot_eye"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/neopixel_matrix_8x8.json",

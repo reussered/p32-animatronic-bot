@@ -1,27 +1,49 @@
 #ifndef RA8875_TFT_1024X600_HDR
 #define RA8875_TFT_1024X600_HDR
 
-#include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+// This struct acts as a "type bundle" for the ra8875_tft_1024x600 hardware.
+// Based on its JSON, it has a 1024x600 resolution and 16-bit color.
+struct ra8875_tft_1024x600
+{
+    // Standardized interface members
+    static const int WIDTH = 1024;
+    static const int HEIGHT = 600;
 
-/**
- * @brief Initialize ra8875_tft_1024x600 component
- * @return ESP_OK on success, error code otherwise
- */
-esp_err_t ra8875_tft_1024x600_init(void);
+    // 16-bit color depth (5 bits red, 6 green, 5 blue)
+    static const int MAX_RED   = 0x1F;
+    static const int MAX_GREEN = 0x3F;
+    static const int MAX_BLUE  = 0x1F;
 
-/**
- * @brief Execute ra8875_tft_1024x600 component action
- * Called periodically by subsystem dispatcher
- */
-void ra8875_tft_1024x600_act(void);
+    // Standardized nested Pixel type for RGB565
+    struct Pixel
+    {
+        unsigned int red : 5;
+        unsigned int green : 6;
+        unsigned int blue : 5;
 
-#ifdef __cplusplus
-}
-#endif
+        Pixel() : red(0), green(0), blue(0) {}
+        Pixel(const Pixel& other) { *this = other; }
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
+};
 
 #endif // RA8875_TFT_1024X600_HDR
