@@ -1,3 +1,40 @@
+# META-RULE: RULE PRESERVATION AND MODIFICATION
+
+**CRITICAL: Rules Must Never Be Weakened Through Consolidation**
+
+1. **Rule Files Are Evidence**
+   - Each rule file exists because a specific problem occurred
+   - The exact wording was chosen to prevent that problem
+   - Context and examples show how the rule prevents issues
+   - Rules are discovered through failure and fixed through specificity
+
+2. **Prohibited Rule Changes**
+   - NO deleting rule files during "cleanup"
+   - NO weakening rules during consolidation
+   - NO removing specific examples
+   - NO making explicit rules more general
+   - NO loss of context that explains why rule exists
+
+3. **Required Process for Rule Changes**
+   - Document specific reason for change
+   - Validate no loss of original protections
+   - Verify all examples still covered
+   - Confirm original problem still prevented
+   - Get explicit approval for modification
+
+4. **Rule Redundancy Is Preferable to Rule Loss**
+   - Better to have duplicate rules than missing rules
+   - Better to have multiple specific examples than one general rule
+   - Better to keep old rule files than risk losing edge cases
+   - If consolidating, keep originals until new rules proven effective
+
+5. **Rule Changes Require**
+   - Original rule file
+   - Proposed changes
+   - Validation of equivalent protection
+   - Test cases showing same prevention
+   - User approval of complete analysis
+
 #  CRITICAL: EMBEDDED SYSTEMS DEVELOPMENT CONTEXT 
 
 
@@ -11,6 +48,9 @@
 **Framework**: ESP-IDF native APIs (NOT Arduino, NOT web frameworks)
 
 **Resource Constraints**: Memory and performance constrained embedded environment
+
+**Source File Rules**: See SOURCE_FILE_MODIFICATION_RULES.md for critical rules about
+    how source files (.src and .hdr) can and cannot be modified.
 
 **Encoding**: ASCII-only for files with extensions: json, src, hdr, cpp, hpp.  
 	Encountering a non-ascii character in a file with one of these 5 extensions
@@ -277,7 +317,73 @@ The agent MUST NEVER commit or push code without explicit user approval.
 
 
 
-## RULE 2: NAMING Rules ARE FOUND IN this file as well as in NAMING_RULES.MD.  If a conflict is detected ask the human
+## RULE 2: SOURCE FILE MODIFICATION
+
+Changes to source files (.src and .hdr) must be INTENTIONAL, not INCIDENTAL. The distinction is between direct, purposeful modifications and indirect side-effects of automation.
+
+### ALLOWED Modifications (Intentional Changes)
+
+These are direct consequences of development work:
+
+- Human developers implementing features
+- AI agent implementing requested features
+- AI agent fixing bugs
+- AI agent refactoring code
+- Any changes that are:
+  - Directly related to a task
+  - Visible in git diffs
+  - Reviewable by users
+  - Part of normal development flow
+
+### PROHIBITED Modifications (Automated Processes)
+
+These are side-effects that must be prevented:
+
+- NO modifications during build/aggregation
+- NO changes during table generation
+- NO side-effects from tooling
+- Examples of prohibited modifications:
+  - generate_tables.py modifying .src files when injecting use_fields
+  - Build tools altering include paths
+  - Automated formatting during aggregation
+  - Any "temporary" changes for processing
+
+### Required Pattern for Automation
+
+When automated processes need to modify content:
+
+1. Create temporary working files
+2. Copy source content to temp files
+3. Make ALL modifications in temp space
+4. Use modified temp files for processing
+5. Delete temp files after use
+6. NEVER modify original source files
+
+Example:
+
+```python
+# INCORRECT:
+with open(f"{component}.src", "r+") as f:
+    content = f.read()
+    modified = inject_use_fields(content)  # Modifies source file!
+    f.write(modified)
+
+# CORRECT:
+with open(f"{component}.src", "r") as src:
+    content = src.read()
+    
+with open(f"{component}.src.tmp", "w") as tmp:
+    modified = inject_use_fields(content)
+    tmp.write(modified)
+
+# Use tmp file for aggregation
+aggregate_files([f"{component}.src.tmp"])
+
+# Clean up
+os.remove(f"{component}.src.tmp")
+```
+
+## RULE 3: NAMING Rules ARE FOUND IN this file as well as in NAMING_RULES.MD.  If a conflict is detected ask the human
 
 **ALL functionality is implemented as components defined in JSON files.**
 
