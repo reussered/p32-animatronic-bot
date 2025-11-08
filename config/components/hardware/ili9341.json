@@ -150,6 +150,9 @@
         "medium_dragons"
     ],
     "estimated_cost_usd": "34.95",
+    "use_fields": {
+        "chunk_count": 1
+    },
     "software": {},
     "type": "UNKNOWN",
     "timing": {

@@ -3,13 +3,23 @@
 
 #include <stdint.h>
 
+// Display driver parameters for ILI9341 3.5" TFT display
+static const uint16_t display_width = 320;
+static const uint16_t display_height = 240;
+static const uint8_t bytes_per_pixel = 2;
+static const char* color_schema = "RGB565";
+
+// Derived values
+static const uint32_t display_pixels = display_width * display_height;
+static const uint32_t display_buffer_size = display_pixels * bytes_per_pixel;
+
 // This struct acts as a "type bundle" for the ili9341 hardware.
 // It will be used as a template parameter for components that need its properties.
 struct ili9341
 {
     // Standardized interface members from ili9341.json
-    static const int WIDTH = 480;
-    static const int HEIGHT = 320;
+    static const int WIDTH = 320;
+    static const int HEIGHT = 240;
 
     // Standardized color channel maximums from "bits_per_pixel": 18
     static const int MAX_RED   = 0x3F; // 6 bits

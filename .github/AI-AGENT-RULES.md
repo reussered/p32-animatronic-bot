@@ -6,67 +6,28 @@
 
 
 
-**Target Hardware**: ESP32-S3 microcontroller
+**Target Hardware**: ESP32 and STM families of microcontroller
 
 **Framework**: ESP-IDF native APIs (NOT Arduino, NOT web frameworks)
 
 **Resource Constraints**: Memory and performance constrained embedded environment
 
-**Encoding**: ASCII-only for toolchain compatibility (NO UTF-8, NO Unicode - ABSOLUTE MANDATORY RULE)
-
-**Dependencies**: Hardware drivers, FreeRTOS, SPI/I2S protocols
+**Encoding**: ASCII-only for files with extensions: json, src, hdr, cpp, hpp.  
+	Encountering a non-ascii character in a file with one of these 5 extensions
+	indicates a fundemental issue that must be resolved before continuing.
 
 **Toolchain**: PlatformIO + ESP-IDF, GCC cross-compiler
-
-**Debugging**: Serial console, hardware debugger (NOT browser dev tools)
-
-**Performance**: Real-time constraints, interrupt-driven (NOT async/await patterns)
-
-**CHARACTER ENCODING MANDATE**: NO Unicode characters in ANY production files or included documentation. ASCII 0x00-0x7F ONLY.
-
-
-
-**NEVER THINK LIKE A WEB DEVELOPER:**
-
-- NO npm packages, node_modules, or JavaScript patterns
-
-- NO web servers, REST APIs, or HTTP frameworks
-
-- NO browser compatibility concerns or DOM manipulation
-
-- NO database ORMs or cloud service integrations
-
-- NO UTF-8 encoding assumptions or web character sets
-
 
 
 **ALWAYS THINK LIKE AN EMBEDDED DEVELOPER:**
 
-- Memory usage in bytes, not megabytes
+- Memory and CPU cycles matter
 
-- CPU cycles matter, power consumption matters
+- always use ASCII encoding, never us UTF-8 
 
-- Hardware registers, GPIO pins, SPI buses
-
-- Interrupt handlers, task priorities, timing constraints
-
-- Component datasheets, electrical specifications
-
-- ASCII encoding, fixed-point math, lookup tables
-
-
-
-# AI AGENT IRONCLAD RULES - NEVER BREAK THESE
-
-
+**BEFORE implementing ANY changes, the AI agent MUST read and internalize what is already present on the hard disk or project**
 
 ##  MANDATORY PREREQUISITE: READ ALL RULE DOCUMENTS
-
-
-
-**BEFORE implementing ANY changes, the AI agent MUST read and internalize:**
-
-
 
 1. **`.github/AI-AGENT-RULES.md`** - This file (comprehensive architecture rules - SINGLE SOURCE OF TRUTH)
 
@@ -108,32 +69,26 @@
 
 
 
-3b. **ABSOLUTE: NEVER CREATE FILES WITH UNICODE**: 
+3b. **NEVER CREATE FILES WITH UNICODE**: 
 
-   IF creating ANY file (code, docs, config, scripts, headers, JSON, Python, PowerShell, C++, C) AND that file will be:
+   IF creating ANY file (code, config, scripts, headers, JSON, Python, PowerShell, C++, C) AND that file will be:
    - Included in the build system
    - Included in the project repository
-   - Used by any part of the production system
    - Imported or referenced by other files
    
    THEN: **File MUST be 100% ASCII (0x00-0x7F) - NO EXCEPTIONS**
    
    **EXCEPTION (STANDALONE DOCUMENTATION ONLY)**: 
-   - IF creating a standalone documentation file (e.g., `.md`, `.txt` file) that is:
+   - IF creating a standalone documentation file (e.g., `.doc`, `.pdf`` files) that is:
      - NEVER included in any build process
-     - NEVER imported or referenced by any code
-     - NEVER included in Git commits to production branches
-     - Used ONLY for human reference/communication (research notes, analysis, decision docs)
-   - THEN: Unicode is permitted for readability ONLY if:
-     - The file explicitly states at the top: "STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD"
-     - The file is clearly outside the `src/`, `include/`, `config/`, `tools/` directories
-     - Example: `CAMERA_RESEARCH.md` in root directory with explicit disclaimer
-   
+     - NEVER imported by any code
+     - NEVER included in Git commits to production branches     - Used ONLY for human reference/communication (research notes, analysis, decision docs)
+     
    **IF UNSURE WHETHER UNICODE IS ALLOWED**: Default to ASCII. Clean documentation is better than "pretty" documentation with Unicode.
 
 
 
-4. **Completing defined work**: IF you're filling empty directories with standard components following RULE 6 structure AND the component pattern matches existing implementations  **GENERATE IT** (no approval needed)
+4. **Completing defined work**: if you arte creating a component that doesn't exist in the component registry **GENERATE IT** (no approval needed).
 
 
 
@@ -168,6 +123,7 @@
 When escalating, provide:
 
 - **Specific rule or pattern** that applies (with line number if possible)
+
 
 - **Situation details** - exact problem and context
 
@@ -217,7 +173,7 @@ When escalating, provide:
 
 
 
-4.  Are you creating ANY new files (code, docs, config, scripts)?
+4.  Are you creating ANY new files (code, config, scripts)?
 
    - If YES: **STOP - RULE 3b APPLIES (see above)**
    
@@ -321,7 +277,7 @@ The agent MUST NEVER commit or push code without explicit user approval.
 
 
 
-## RULE 2: NAMING Rules ARE FOUND IN NAMING_RULES.MD
+## RULE 2: NAMING Rules ARE FOUND IN this file as well as in NAMING_RULES.MD.  If a conflict is detected ask the human
 
 **ALL functionality is implemented as components defined in JSON files.**
 
@@ -361,7 +317,7 @@ The agent MUST NEVER commit or push code without explicit user approval.
 
 ### Pipeline Architecture
 
-
+many components are part of a data chain.  the top of the chain usually defines the shape and position. It can be used for other things as required by the software, but knowledge of subsequence 
 
 Each JSON component defines `components: []` array that specifies child components for execution. The `components: []` array defines the execution sequence:
 
@@ -371,25 +327,25 @@ Each JSON component defines `components: []` array that specifies child componen
 
 goblin_left_eye.json:
 
-  components: [goblin_eye.json]           // Single child in this case
+  components: [goblin_eye]           // Single child in this case
 
 
 
 goblin_eye.json:
 
-  components: [gc9a01.json]               // Single child in this case
+  components: [gc9a01]               // Single child in this case
 
 
 
 gc9a01.json:
 
-  components: [spi_display_bus.json]      // Single child in this case
+  components: [spi_display_bus]      // Single child in this case
 
 
 
 spi_display_bus.json:
 
-  components: [generic_spi_display.json]  // Single child in this case
+  components: [generic_spi_display]  // Single child in this case
 
 
 
@@ -507,6 +463,7 @@ When the generator processes a component JSON, it performs a **depth-first tree 
      ├─ goblin_eye
      │  └─ gc9a01
      │     └─ spi_display_bus
+
      │        └─ generic_spi_display
      └─ (end of left_eye branch)
    
@@ -570,10 +527,10 @@ goblin_head
   │           └─ generic_spi_display (first encounter)
   │
   └─ goblin_right_eye
-     └─ goblin_eye (duplicate - skip aggregation)
-        └─ gc9a01 (duplicate - skip aggregation)
-           └─ spi_display_bus (duplicate - skip aggregation)
-              └─ generic_spi_display (duplicate - skip aggregation)
+     └─ goblin_eye (duplicate - skip aggregation - still added to dispatch table
+        └─ gc9a01 (duplicate - skip aggregation- still added to dispatch table)
+           └─ spi_display_bus (duplicate - skip aggregation- still added to dispatch table)
+              └─ generic_spi_display (duplicate - skip aggregation- still added to dispatch table)
 
 
 Aggregated files created:
@@ -678,63 +635,6 @@ esp_err_t {component_name}_init(void);  // NO ARGUMENTS
 void {component_name}_act(void);        // NO ARGUMENTS
 ```
 
-**How different data contexts work** (when same component executes multiple times):
-
-- Component `gc9a01_init()` is called once per dispatch table entry
-- Each call initializes/modifies file-scoped static variables (e.g., pointers to different display buffers)
-- Component `gc9a01_act()` is called once per dispatch table entry
-- Each call reads/writes to the appropriate static buffer (set during that entry's init)
-- **Data isolation is achieved through file-scoped statics, NOT function arguments**
-
-**Example - Two displays, same driver code:**
-
-```cpp
-// In gc9a01.src - file scope
-
-// Display 1 static buffer
-static uint16_t* display_1_buffer = NULL;
-static int display_1_id = 0;
-
-// Display 2 static buffer  
-static uint16_t* display_2_buffer = NULL;
-static int display_2_id = 1;
-
-// Init function - NO ARGUMENTS
-esp_err_t gc9a01_init(void)
-{
-    // Check which dispatch table entry this is via some mechanism
-    // (e.g., incrementing counter, or context from parent component)
-    // Set the appropriate static pointer
-    if (first_call) {
-        display_1_buffer = malloc(BUFFER_SIZE);
-    } else {
-        display_2_buffer = malloc(BUFFER_SIZE);
-    }
-    return ESP_OK;
-}
-
-// Act function - NO ARGUMENTS
-void gc9a01_act(void)
-{
-    // Operates on whichever buffer was set during init
-    // NO way to pass which buffer to use - must be via static
-    if (display_1_buffer != NULL) {
-        // write to display 1
-    }
-    if (display_2_buffer != NULL) {
-        // write to display 2
-    }
-}
-```
-
-**This is a constraint, not a limitation:**
-- Forces clean separation of concerns
-- Prevents hidden dependencies on function arguments
-- Makes data flow explicit through static variables
-- Ensures dispatch table can call functions in arbitrary order without parameter passing
-
-
-
 
 
 ### INTRA-SUBSYSTEM vs INTER-SUBSYSTEM COMMUNICATION
@@ -755,11 +655,15 @@ void gc9a01_act(void)
 
 - **Data flow**: 
 
-  - goblin_left_eye writes to `static uint16_t* display_buffer`
+  - goblin_left_eye writes to `static uint8_t* display_buffer`  using globals defined in the `use_fields` portion of the component
 
-  - goblin_eye reads from same buffer, processes, writes back
+  - goblin_eye reads from same buffer, processes, writes back using color_schema defined in its `use_fields`
 
-  - gc9a01 reads from buffer, processes, writes to command buffer
+  - gc9a01 defines how it is written using components:[ spi_display_bus ]
+
+  - spi_display_bus allocates the GPIO pins required use to send data to the physical display,
+  
+  then because it has components:[ generic_spi_display ] the next component called is generic_spi_display which actually sends the data to the display hardware. 
 
 - **Speed**: Fast (zero-copy, direct memory access)
 
@@ -929,7 +833,7 @@ Environment *env = GSM.read<Environment>();
 
 mood->anger = 75;
 
-env->temperature = 25.5;
+env->temperature = 25;
 
 
 
@@ -977,7 +881,7 @@ GSM.write<Environment>(); // Broadcasts current environment state
 
 - Functional: `config/components/functional/{name}.json|src|hdr`
 
-- Moods: `config/components/behaviors/moods/{name}.json`
+- Moods: `config/components/behaviors/moods/{name}.json|src|hdr`
 
 
 
@@ -1009,7 +913,7 @@ GSM.write<Environment>(); // Broadcasts current environment state
 
   - Components in subsystems: `{subsystem}/{component_name}.json|src|hdr`
 
-- Creature Families (on disk): `androids/`, `animals/`, `bears/`, `cats/`, `dragons/`, `elves/`, `fantasy/`, `goblins/`, `horror/`, `humanoids/`, `mechanical/`, `orcs/`, `robots/`, `steampunk/`, `undead/`, `vampires/`, `wolves/`, `zombies/`
+- Creature Families (on disk): `androids/`, `animals/`, `bears/`, `cats/`, `dragons/`, `elves/`, `fantasy/`, `goblins/`, `horror/`, `humanoids/`, `mechanical/`, `orcs/`, `robots/`, `steampunk/`, `tests/`, `undead/`, `vampires/`, `wolves/`, `zombies/`
 
 
 
@@ -1079,19 +983,19 @@ A creature's eye component references a templatable display component:
 
 bear_left_eye.json (concrete component - fermionic unique name):
 
-  components: ["bear_eye.json"]
+  components: ["bear_eye"]
 
 
 
 bear_eye.json (templatable - accepts different displays):
 
-  components: ["gc9a01.json"]            // Configured for gc9a01 display
+  components: ["gc9a01"]            // Configured for gc9a01 display
 
   
 
 bear_eye_alt.json (same creature logic, different display):
 
-  components: ["st9943.json"]            // Configured for st9943 display
+  components: ["st9943"]            // Configured for st9943 display
 
 
 
@@ -1121,29 +1025,29 @@ Different creatures can reference the same generic display driver:
 
 goblin_left_eye.json:
 
-  components: ["goblin_eye.json"]
+  components: ["goblin_eye"]
 
 
 
-goblin_eye.json:
+goblin_eye:
 
-  components: ["gc9a01.json"]
-
-
-
-bear_left_eye.json:
-
-  components: ["bear_eye.json"]
+  components: ["gc9a01"]
 
 
 
-bear_eye.json:
+bear_left_eye:
 
-  components: ["gc9a01.json"]
+  components: ["bear_eye"]
 
 
 
-Both creatures' pipelines eventually reference the same gc9a01.json file:
+bear_eye:
+
+  components: ["gc9a01"]
+
+
+
+Both creatures' pipelines eventually reference the same gc9a01 file:
 
   goblin_left_eye -> goblin_eye -> gc9a01 -> spi_display_bus -> generic_spi_display
 
@@ -1167,9 +1071,9 @@ Both creatures' pipelines eventually reference the same gc9a01.json file:
 
 - **Fermionic Uniqueness**: `goblin_left_eye`, `goblin_eye`, `bear_left_eye`, `bear_eye` are all unique names
 
-- **Code Reuse**: Same `gc9a01.json` can be used by both goblins and bears
+- **Code Reuse**: Same `gc9a01` can be used by both goblins and bears
 
-- **Variants**: `bear_eye_alt.json` is an alternate version of `bear_eye` using different display, avoids combinatorial explosion
+- **Variants**: `bear_eye_alt` is an alternate version of `bear_eye` using different display, avoids combinatorial explosion
 
 
 
@@ -1185,7 +1089,7 @@ JSON `components: []` arrays specify the next component in the chain:
 
   "name": "bear_left_eye",
 
-  "components": ["bear_eye.json"]
+  "components": ["bear_eye"]
 
 }
 
@@ -1195,7 +1099,7 @@ JSON `components: []` arrays specify the next component in the chain:
 
   "name": "bear_eye",
 
-  "components": ["gc9a01.json"]
+  "components": ["gc9a01"]
 
 }
 
@@ -1205,7 +1109,7 @@ JSON `components: []` arrays specify the next component in the chain:
 
   "name": "bear_eye_alt",
 
-  "components": ["st9943.json"]
+  "components": ["st9943"]
 
 }
 

@@ -102,6 +102,9 @@
     "type": "UNKNOWN",
     "description": "Auto-generated component: speaker",
     "components": ["i2s_bus"],
+    "use_fields": {
+        "chunk_count": 1
+    },
     "timing": {
         "hitCount": 1
     }

@@ -21,6 +21,9 @@
     "timing": {
         "hitCount": 1
     },
+    "use_fields": {
+        "chunk_count": 1
+    },
     "driver_config": {
         "rotation": 0,
         "invert_colors": false,
