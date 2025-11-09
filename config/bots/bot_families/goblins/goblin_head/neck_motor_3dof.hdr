@@ -1,0 +1,32 @@
+#ifndef NECK_MOTOR_3DOF_H
+#define NECK_MOTOR_3DOF_H
+
+#include <esp_err.h>
+#include <stdint.h>
+
+// Motor IDs
+#define NECK_MOTOR_PAN  0
+#define NECK_MOTOR_TILT 1
+#define NECK_MOTOR_ROLL 2
+
+// Motion limits (in steps)
+#define PAN_LIMIT_LEFT   -6400  // -60 degrees
+#define PAN_LIMIT_RIGHT   6400  // +60 degrees
+#define TILT_LIMIT_DOWN  -3200  // -30 degrees
+#define TILT_LIMIT_UP     4800  // +45 degrees
+#define ROLL_LIMIT_CCW   -4267  // -40 degrees
+#define ROLL_LIMIT_CW     4267  // +40 degrees
+
+// Function declarations
+esp_err_t neck_motor_3dof_init(void);
+void neck_motor_3dof_act(void);
+
+// Position control
+esp_err_t neck_set_pan(int32_t position, uint32_t speed);
+esp_err_t neck_set_tilt(int32_t position, uint32_t speed);
+esp_err_t neck_set_roll(int32_t position, uint32_t speed);
+
+// Emergency control
+esp_err_t neck_emergency_stop(void);
+
+#endif // NECK_MOTOR_3DOF_H

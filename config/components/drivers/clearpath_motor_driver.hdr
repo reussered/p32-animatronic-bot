@@ -1,0 +1,37 @@
+#ifndef CLEARPATH_MOTOR_DRIVER_H
+#define CLEARPATH_MOTOR_DRIVER_H
+
+#include <esp_err.h>
+#include <stdint.h>
+
+// ClearPath motor driver configuration
+typedef struct {
+    uint8_t step_pin;      // Step signal GPIO pin
+    uint8_t dir_pin;       // Direction signal GPIO pin
+    uint8_t enable_pin;    // Enable signal GPIO pin
+    uint32_t max_speed;    // Maximum speed in steps/second
+    uint32_t acceleration; // Acceleration in steps/second²
+} clearpath_config_t;
+
+// ClearPath motor driver state
+typedef struct {
+    clearpath_config_t config;
+    bool initialized;
+    bool enabled;
+    int32_t current_position;
+    uint32_t current_speed;
+} clearpath_state_t;
+
+// Driver interface functions
+esp_err_t clearpath_motor_driver_init(void);
+void clearpath_motor_driver_act(void);
+
+// Motor control functions
+esp_err_t clearpath_init_motor(uint8_t motor_id, const clearpath_config_t* config);
+esp_err_t clearpath_enable_motor(uint8_t motor_id);
+esp_err_t clearpath_disable_motor(uint8_t motor_id);
+esp_err_t clearpath_move_to_position(uint8_t motor_id, int32_t position, uint32_t speed);
+esp_err_t clearpath_stop_motor(uint8_t motor_id);
+esp_err_t clearpath_emergency_stop(uint8_t motor_id);
+
+#endif // CLEARPATH_MOTOR_DRIVER_H

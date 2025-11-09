@@ -1,0 +1,106 @@
+#include "esp_log.h"
+#include "neck_motor_3dof.hdr"
+#include "clearpath_motor_driver.hdr"
+
+static const char* TAG = "neck_3dof";
+
+// Motor configurations
+static const clearpath_config_t motor_configs[3] = {
+    {
+        // Pan motor (NEMA 23)
+        .max_speed = 200000,    // 200k steps/sec max
+        .acceleration = 100000   // 100k steps/sec²
+    },
+    {
+        // Tilt motor (NEMA 23)
+        .max_speed = 150000,    // 150k steps/sec max
+        .acceleration = 75000    // 75k steps/sec²
+    },
+    {
+        // Roll motor (NEMA 23)
+        .max_speed = 100000,    // 100k steps/sec max
+        .acceleration = 50000    // 50k steps/sec²
+    }
+};
+
+esp_err_t neck_motor_3dof_init(void)
+{
+    esp_err_t ret;
+    
+    // Initialize ClearPath driver
+    ret = clearpath_motor_driver_init();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize ClearPath driver");
+        return ret;
+    }
+    
+    // Initialize each motor
+    for (int i = 0; i < 3; i++) {
+        ret = clearpath_init_motor(i, &motor_configs[i]);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to initialize motor %d", i);
+            return ret;
+        }
+        
+        // Enable motor
+        ret = clearpath_enable_motor(i);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to enable motor %d", i);
+            return ret;
+        }
+    }
+    
+    ESP_LOGI(TAG, "3-DOF neck motors initialized");
+    return ESP_OK;
+}
+
+void neck_motor_3dof_act(void)
+{
+    // This runs at half the base system rate (15Hz)
+    // The ClearPath driver handles the high-speed step generation
+    clearpath_motor_driver_act();
+}
+
+esp_err_t neck_set_pan(int32_t position, uint32_t speed)
+{
+    // Clamp position to limits
+    if (position < PAN_LIMIT_LEFT) position = PAN_LIMIT_LEFT;
+    if (position > PAN_LIMIT_RIGHT) position = PAN_LIMIT_RIGHT;
+    
+    return clearpath_move_to_position(NECK_MOTOR_PAN, position, speed);
+}
+
+esp_err_t neck_set_tilt(int32_t position, uint32_t speed)
+{
+    // Clamp position to limits
+    if (position < TILT_LIMIT_DOWN) position = TILT_LIMIT_DOWN;
+    if (position > TILT_LIMIT_UP) position = TILT_LIMIT_UP;
+    
+    return clearpath_move_to_position(NECK_MOTOR_TILT, position, speed);
+}
+
+esp_err_t neck_set_roll(int32_t position, uint32_t speed)
+{
+    // Clamp position to limits
+    if (position < ROLL_LIMIT_CCW) position = ROLL_LIMIT_CCW;
+    if (position > ROLL_LIMIT_CW) position = ROLL_LIMIT_CW;
+    
+    return clearpath_move_to_position(NECK_MOTOR_ROLL, position, speed);
+}
+
+esp_err_t neck_emergency_stop(void)
+{
+    esp_err_t ret;
+    
+    // Stop all motors
+    for (int i = 0; i < 3; i++) {
+        ret = clearpath_emergency_stop(i);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to emergency stop motor %d", i);
+            return ret;
+        }
+    }
+    
+    ESP_LOGW(TAG, "Emergency stop triggered for all neck motors");
+    return ESP_OK;
+}
