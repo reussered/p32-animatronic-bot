@@ -20,7 +20,6 @@
         }
     },
     "name": "ws2812b_strip",
-    "relative_filename": "config/components/hardware/hardware/ws2812b_strip.json",
     "description": "Generated hardware component for ws2812b_strip",
     "cost_performance": {
         "lead_time_days": 7,

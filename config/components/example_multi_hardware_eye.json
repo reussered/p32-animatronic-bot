@@ -177,7 +177,6 @@
     "init_signature": "esp_err_t example_multi_hardware_eye_init(void)",
     "act_signature": "void example_multi_hardware_eye_act(void)",
     "notes": "Component will receive config struct populated with chosen template args at init() time. Use hardware-agnostic functions like display_draw_pixel(x, y, color) instead of device-specific calls.",
-    "relative_filename": "config/components/example_multi_hardware_eye.json",
     "type": "UNKNOWN",
     "timing": {
         "hitCount": 1

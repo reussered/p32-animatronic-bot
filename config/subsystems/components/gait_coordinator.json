@@ -1,7 +1,6 @@
 {
     "name": "gait_coordinator",
     "type": "GAIT_COORDINATOR",
-    "relative_filename": "config/subsystems/components/gait_coordinator.json",
     "description": "Auto-migrated from inline component",
     "function_name": "gait_coordinator_update",
     "default_hitCount": 8,

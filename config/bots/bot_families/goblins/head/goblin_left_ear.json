@@ -19,7 +19,6 @@
         "init_function": "goblin_left_ear_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_left_ear.json",
     "type": "POSITIONED_COMPONENT",
     "description": "Auto-generated component: goblin_left_ear",
     "timing": {

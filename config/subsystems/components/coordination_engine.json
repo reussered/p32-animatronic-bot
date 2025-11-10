@@ -1,7 +1,6 @@
 {
     "name": "coordination_engine",
     "type": "COORDINATION_ENGINE",
-    "relative_filename": "config/subsystems/components/coordination_engine.json",
     "description": "Auto-migrated from inline component",
     "function_name": "coordination_update",
     "default_hitCount": 10,

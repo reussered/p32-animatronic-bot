@@ -1,7 +1,6 @@
 {
     "name": "mouth_display",
     "type": "SIMPLE_DISPLAY",
-    "relative_filename": "config/bots/multi_family/behaviors/mouth_display.json",
     "description": "Auto-migrated from inline component",
     "subsystem": "UNKNOWN",
     "ifdef_variable": "ENABLE_SIMPLE_DISPLAY",

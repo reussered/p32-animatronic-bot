@@ -5,7 +5,6 @@
         "init_function": "steampunk_mouth_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/steampunk/head/steampunk_mouth.json",
     "name": "steampunk_mouth",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

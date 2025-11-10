@@ -1,7 +1,6 @@
 {
     "name": "power_management",
     "type": "POWER_MANAGEMENT",
-    "relative_filename": "config/subsystems/components/power_management.json",
     "description": "Auto-migrated from inline component",
     "function_name": "power_management_update",
     "default_hitCount": 25,

@@ -20,7 +20,6 @@
         }
     },
     "name": "pelvis_structural_assembly",
-    "relative_filename": "config/components/hardware/hardware/pelvis_structural_assembly.json",
     "description": "Generated hardware component for pelvis_structural_assembly",
     "cost_performance": {
         "lead_time_days": 7,

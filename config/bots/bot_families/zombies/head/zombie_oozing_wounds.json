@@ -5,7 +5,6 @@
         "init_function": "zombie_oozing_wounds_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/zombies/head/zombie_oozing_wounds.json",
     "name": "zombie_oozing_wounds",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

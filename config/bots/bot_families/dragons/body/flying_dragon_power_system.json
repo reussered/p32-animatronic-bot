@@ -29,7 +29,6 @@
     },
     "dependencies": [],
     "function_signature": "flying_dragon_power_system_init(void); void flying_dragon_power_system_act(void);",
-    "relative_filename": "config/bots/bot_families/dragons/body/flying_dragon_power_system.json",
     "type": "BOT",
     "components": [],
     "timing": {

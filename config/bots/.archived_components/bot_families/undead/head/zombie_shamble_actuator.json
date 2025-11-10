@@ -5,7 +5,6 @@
         "init_function": "zombie_shamble_actuator_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/.archived_components/bot_families/undead/head/zombie_shamble_actuator.json",
     "name": "zombie_shamble_actuator",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

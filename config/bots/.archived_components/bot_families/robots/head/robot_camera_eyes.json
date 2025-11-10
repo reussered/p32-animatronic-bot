@@ -5,7 +5,6 @@
         "init_function": "robot_camera_eyes_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/.archived_components/bot_families/robots/head/robot_camera_eyes.json",
     "name": "robot_camera_eyes",
     "subsystem": "VISION",
     "components": [

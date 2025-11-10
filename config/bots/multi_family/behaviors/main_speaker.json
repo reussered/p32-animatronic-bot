@@ -1,7 +1,6 @@
 {
     "name": "main_speaker",
     "type": "SIMPLE_AUDIO",
-    "relative_filename": "config/bots/multi_family/behaviors/main_speaker.json",
     "description": "Auto-migrated from inline component",
     "subsystem": "UNKNOWN",
     "ifdef_variable": "ENABLE_SIMPLE_AUDIO",

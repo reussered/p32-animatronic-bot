@@ -25,7 +25,6 @@
         "flying_dragon_motor_controller"
     ],
     "function_signature": "flying_dragon_flight_safety_init(void); void flying_dragon_flight_safety_act(void);",
-    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_flight_safety.json",
     "type": "BOT",
     "components": [],
     "timing": {

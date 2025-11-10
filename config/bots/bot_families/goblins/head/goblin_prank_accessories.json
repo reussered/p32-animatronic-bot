@@ -5,7 +5,6 @@
         "init_function": "goblin_prank_accessories_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_prank_accessories.json",
     "name": "goblin_prank_accessories",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

@@ -34,7 +34,6 @@
         "gear_type": "plastic"
     },
     "name": "mg996r_servo",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/mg996r_servo.json",
     "type": "BOT",
     "components": [],
     "description": "Auto-generated component: mg996r_servo",

@@ -6,7 +6,6 @@
     "pin_assignments": {
         "coordination_channel": "ESP_NOW_CHANNEL_1"
     },
-    "relative_filename": "config/components/interfaces/software_coordinator_interface.json",
     "interface_id": "SOFTWARE_COORDINATOR_INTERFACE",
     "name": "software_coordinator_interface",
     "type": "INTERFACE_BUS",

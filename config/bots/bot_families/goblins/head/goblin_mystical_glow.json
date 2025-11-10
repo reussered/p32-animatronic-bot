@@ -5,7 +5,6 @@
         "init_function": "goblin_mystical_glow_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_mystical_glow.json",
     "name": "goblin_mystical_glow",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

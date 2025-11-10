@@ -5,7 +5,6 @@
         "init_function": "goblin_tribal_tattoos_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_tribal_tattoos.json",
     "name": "goblin_tribal_tattoos",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

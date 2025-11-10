@@ -1,7 +1,6 @@
 {
     "name": "safety_monitor",
     "type": "SAFETY_MONITOR",
-    "relative_filename": "config/subsystems/components/safety_monitor.json",
     "description": "Auto-migrated from inline component",
     "function_name": "safety_monitor_update",
     "default_hitCount": 2,

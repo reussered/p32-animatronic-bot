@@ -1,0 +1,184 @@
+// generic_console_display.src - Non-blocking display pipeline that sends to Windows console
+// Same logic as SPI version but outputs to Python server for visualization
+
+#include "esp_log.h"
+#include "esp_wifi.h"
+#include "lwip/sockets.h"
+#include "string.h"
+
+static const char* TAG = "generic_console_display";
+
+// Console pipeline state
+static struct {
+    // Transfer states (simple boolean flags)
+    bool buffer_copy_busy;    // PSRAM -> buffer copy active
+    bool network_send_busy;   // buffer -> network send active
+    
+    // Network connection
+    int socket_fd;
+    bool connected_to_server;
+    
+    // Current operation tracking
+    uint32_t current_chunk;
+    bool ping_pong_state;  // false = use front/load back, true = use back/load front
+    
+    // Buffer for network transmission
+    uint8_t* network_buffer;
+    size_t network_buffer_size;
+    
+} console_pipeline = {
+    .buffer_copy_busy = false,
+    .network_send_busy = false,
+    .socket_fd = -1,
+    .connected_to_server = false,
+    .current_chunk = 0,
+    .ping_pong_state = false,
+    .network_buffer = NULL,
+    .network_buffer_size = 0
+};
+
+void generic_console_display_init(void) {
+    // Initialize pipeline state
+    console_pipeline.buffer_copy_busy = false;
+    console_pipeline.network_send_busy = false;
+    console_pipeline.current_chunk = 0;
+    console_pipeline.ping_pong_state = false;
+    console_pipeline.connected_to_server = false;
+    
+    // TODO: Setup WiFi connection to Windows machine
+    // TODO: Connect to Python visualization server
+    
+    ESP_LOGI(TAG, "Generic console display pipeline initialized");
+}
+
+static bool start_buffer_copy(uint8_t* source_psram, uint8_t* target_buffer, uint32_t chunk_size) {
+    if (console_pipeline.buffer_copy_busy) {
+        return false;  // Already busy
+    }
+    
+    // Start async memory copy (could use DMA or just memcpy for now)
+    memcpy(target_buffer, source_psram, chunk_size);
+    console_pipeline.buffer_copy_busy = true;
+    
+    ESP_LOGD(TAG, "Buffer copy started: PSRAM->buffer chunk %d", console_pipeline.current_chunk);
+    
+    // For simulation, mark as complete immediately (real version might use DMA)
+    console_pipeline.buffer_copy_busy = false;
+    return true;
+}
+
+static bool start_network_send(uint8_t* buffer, uint32_t chunk_size, struct EyePosition position) {
+    if (console_pipeline.network_send_busy || !console_pipeline.connected_to_server) {
+        return false;  // Busy or not connected
+    }
+    
+    // Prepare network packet with header info
+    typedef struct {
+        uint32_t magic;           // 0xDEADBEEF
+        uint32_t chunk_number;    // Current chunk
+        uint32_t chunk_size;      // Size in bytes
+        int16_t eye_x, eye_y, eye_z;  // Position
+        uint8_t data[];           // Pixel data follows
+    } display_packet_t;
+    
+    size_t packet_size = sizeof(display_packet_t) + chunk_size;
+    
+    // Allocate network buffer if needed
+    if (!console_pipeline.network_buffer || console_pipeline.network_buffer_size < packet_size) {
+        if (console_pipeline.network_buffer) {
+            free(console_pipeline.network_buffer);
+        }
+        console_pipeline.network_buffer = malloc(packet_size);
+        console_pipeline.network_buffer_size = packet_size;
+        
+        if (!console_pipeline.network_buffer) {
+            ESP_LOGE(TAG, "Failed to allocate network buffer");
+            return false;
+        }
+    }
+    
+    // Build packet
+    display_packet_t* packet = (display_packet_t*)console_pipeline.network_buffer;
+    packet->magic = 0xDEADBEEF;
+    packet->chunk_number = console_pipeline.current_chunk;
+    packet->chunk_size = chunk_size;
+    packet->eye_x = position.x;
+    packet->eye_y = position.y; 
+    packet->eye_z = position.z;
+    memcpy(packet->data, buffer, chunk_size);
+    
+    // Send to Python server (non-blocking)
+    int flags = MSG_DONTWAIT;  // Non-blocking send
+    ssize_t sent = send(console_pipeline.socket_fd, console_pipeline.network_buffer, packet_size, flags);
+    
+    if (sent > 0) {
+        console_pipeline.network_send_busy = true;
+        ESP_LOGD(TAG, "Network send started: buffer->console chunk %d (%d bytes)", 
+                 console_pipeline.current_chunk, sent);
+        
+        // For simulation, mark as complete immediately
+        console_pipeline.network_send_busy = false;
+        return true;
+    } else if (sent == -1 && errno == EWOULDBLOCK) {
+        // Would block - try again later
+        return false;
+    } else {
+        ESP_LOGW(TAG, "Network send failed: %d", errno);
+        return false;
+    }
+}
+
+esp_err_t generic_console_display_act(uint8_t* front_buffer, uint8_t* back_buffer, 
+                                     uint32_t chunk_size, struct EyePosition position) {
+    
+    // === CHECK TRANSFER COMPLETIONS (non-blocking) ===
+    
+    // Buffer copy completion (already handled synchronously for now)
+    if (console_pipeline.buffer_copy_busy) {
+        console_pipeline.buffer_copy_busy = false;
+        ESP_LOGD(TAG, "Buffer copy completed: PSRAM->buffer chunk %d", console_pipeline.current_chunk);
+    }
+    
+    // Network send completion
+    if (console_pipeline.network_send_busy) {
+        console_pipeline.network_send_busy = false;
+        
+        // Advance to next chunk (round-robin)
+        console_pipeline.current_chunk++;
+        if (console_pipeline.current_chunk >= chunk) {
+            console_pipeline.current_chunk = 0;
+        }
+        
+        // Flip ping-pong state for next frame
+        console_pipeline.ping_pong_state = !console_pipeline.ping_pong_state;
+        
+        ESP_LOGD(TAG, "Network send completed: buffer->console, next chunk: %d", console_pipeline.current_chunk);
+    }
+    
+    // === START NEW TRANSFERS IF AVAILABLE ===
+    
+    // Try to start buffer copy (PSRAM->buffer) if not busy
+    if (!console_pipeline.buffer_copy_busy) {
+        // Determine which buffer to load into (opposite of display buffer)
+        uint8_t* target_buffer = console_pipeline.ping_pong_state ? front_buffer : back_buffer;
+        
+        // Calculate PSRAM source address for current chunk
+        uint32_t chunk_offset = console_pipeline.current_chunk * chunk_size;
+        // uint8_t* source_psram = psram_display_buffer + chunk_offset;  // use_fields variable
+        
+        // For now, simulate PSRAM source (would be real PSRAM address)
+        static uint8_t dummy_psram[1024];  // Placeholder
+        start_buffer_copy(dummy_psram, target_buffer, chunk_size);
+    }
+    
+    // Try to start network send (buffer->console) if not busy  
+    if (!console_pipeline.network_send_busy && console_pipeline.connected_to_server) {
+        // Use current display buffer
+        uint8_t* source_buffer = console_pipeline.ping_pong_state ? back_buffer : front_buffer;
+        
+        start_network_send(source_buffer, chunk_size, position);
+    }
+    
+    // === EXIT IMMEDIATELY - NEVER WAIT ===
+    return ESP_OK;
+}

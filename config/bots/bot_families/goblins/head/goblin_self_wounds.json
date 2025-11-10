@@ -5,7 +5,6 @@
         "init_function": "goblin_self_wounds_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_self_wounds.json",
     "name": "goblin_self_wounds",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

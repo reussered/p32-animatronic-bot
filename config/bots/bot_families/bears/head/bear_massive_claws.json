@@ -5,7 +5,6 @@
         "init_function": "bear_massive_claws_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/bears/head/bear_massive_claws.json",
     "name": "bear_massive_claws",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

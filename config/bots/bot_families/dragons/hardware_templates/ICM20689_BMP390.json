@@ -14,7 +14,6 @@
         "address_selectable": false
     },
     "name": "icm20689_bmp390",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/icm20689_bmp390.json",
     "type": "BOT",
     "description": "Auto-generated component: icm20689_bmp390",
     "timing": {

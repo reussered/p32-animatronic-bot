@@ -5,7 +5,6 @@
         "init_function": "zombie_rotting_flesh_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/undead/head/zombie_rotting_flesh.json",
     "name": "zombie_rotting_flesh",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

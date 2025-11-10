@@ -5,7 +5,6 @@
         "init_function": "goblin_nimble_fingers_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_nimble_fingers.json",
     "name": "goblin_nimble_fingers",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

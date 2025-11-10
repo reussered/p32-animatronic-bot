@@ -5,7 +5,6 @@
         "init_function": "goblin_scent_sensor_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_scent_sensor.json",
     "name": "goblin_scent_sensor",
     "subsystem": "SENSOR",
     "components": [

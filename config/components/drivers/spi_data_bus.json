@@ -26,7 +26,6 @@
             "communication modules"
         ]
     },
-    "relative_filename": "config/components/drivers/driver/spi_data_bus.json",
     "components": [
         "generic_spi_data_driver"
     ],

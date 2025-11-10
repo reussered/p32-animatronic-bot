@@ -18,7 +18,6 @@
         5
     ],
     "notes": "Execute in order: sensors -> safety -> motors -> servos -> behavior logic",
-    "relative_filename": "config/components/subsystem/flying_dragon_flight_system.json",
     "timing": {
         "hitCount": 1
     }

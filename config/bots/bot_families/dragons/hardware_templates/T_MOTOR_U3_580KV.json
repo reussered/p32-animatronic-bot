@@ -36,7 +36,6 @@
         "mount_diameter_mm": 19
     },
     "name": "t_motor_u3_580kv",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/t_motor_u3_580kv.json",
     "type": "BOT",
     "components": [],
     "description": "Auto-generated component: t_motor_u3_580kv",

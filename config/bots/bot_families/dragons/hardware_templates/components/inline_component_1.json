@@ -1,7 +1,6 @@
 {
     "name": "inline_component_1",
     "type": "BAROMETER",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/components/inline_component_1.json",
     "description": "Auto-migrated from inline component",
     "sensor": "BMP390",
     "i2c_address": "0x77",

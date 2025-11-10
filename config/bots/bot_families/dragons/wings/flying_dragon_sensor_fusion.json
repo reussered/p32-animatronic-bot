@@ -30,7 +30,6 @@
         "flying_dragon_flight_safety"
     ],
     "function_signature": "flying_dragon_sensor_fusion_init(void); void flying_dragon_sensor_fusion_act(void);",
-    "relative_filename": "config/bots/bot_families/dragons/wings/flying_dragon_sensor_fusion.json",
     "type": "BOT",
     "components": [],
     "timing": {

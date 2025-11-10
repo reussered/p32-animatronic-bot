@@ -37,7 +37,6 @@
         "positive_feedback"
     ],
     "version": "1.0.0",
-    "relative_filename": "config/components/behaviors/celebration.json",
     "timing": {
         "hitCount": 1
     }

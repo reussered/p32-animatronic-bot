@@ -5,7 +5,6 @@
         "init_function": "elf_eye_right_init",
         "hitCount": 10
     },
-    "relative_filename": "config\\bots\\bot_families\\elves\\head\\elf_eye_right.json",
     "name": "elf_eye_right",
     "subsystem": "VISION",
     "components": [

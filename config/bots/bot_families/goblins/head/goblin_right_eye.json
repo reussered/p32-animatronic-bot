@@ -3,9 +3,17 @@
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "goblin_right_eye",
-    "components": [ // Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)  // Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)// Please configure your ChatAI endpoint and API key (run: ChatAI: Configure API Endpoint and Key)az
-        "goblin_eye"
-    ],
+    "use_fields": 
+    {
+        "display_width": 240,
+        "display_height": 240,
+        "bytes_per_pixel": 2,
+        "color_schema": "RGB565",
+        "chunk": 10
+    },
+    "components": [  
+        "goblin_eye"   
+     ],
     "template_inheritance": {
         "hardware_template": "config/hardware/gc9a01.json",
         "display_type": "CIRCULAR_LCD_FULL_COLOR",

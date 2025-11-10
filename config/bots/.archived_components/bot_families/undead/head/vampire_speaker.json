@@ -5,7 +5,6 @@
         "init_function": "vampire_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/.archived_components/bot_families/undead/head/vampire_speaker.json",
     "name": "vampire_speaker",
     "subsystem": "AUDIO",
     "components": [

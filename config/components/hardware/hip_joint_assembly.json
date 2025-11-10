@@ -20,7 +20,6 @@
         }
     },
     "name": "hip_joint_assembly",
-    "relative_filename": "config/components/hardware/hardware/hip_joint_assembly.json",
     "description": "Generated hardware component for hip_joint_assembly",
     "cost_performance": {
         "lead_time_days": 7,

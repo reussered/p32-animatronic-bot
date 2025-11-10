@@ -1,3 +1,28 @@
+# RULE 0: COMPONENT REGISTRY MAINTENANCE (CRITICAL)
+
+**MANDATORY: Component Registry Must Always Be Synchronized**
+
+When adding, deleting, or moving any component files (.json/.src/.hdr):
+1. **CHECK REGISTRY FIRST** - Search `config/component_registry.json` for existing entries
+2. **PREVENT DUPLICATES** - Never create components that already exist elsewhere
+3. **ADD REGISTRY ENTRIES** - Immediately add new components to registry with correct paths
+4. **UPDATE REGISTRY PATHS** - When moving components, update registry paths
+5. **REMOVE REGISTRY ENTRIES** - When deleting components, remove from registry
+6. **VERIFY SYNC** - Confirm filesystem matches registry before proceeding
+
+**Why This Rule Exists:**
+- Component registry prevents duplicate creation
+- Build system relies on registry for component discovery
+- Broken registry = broken builds and deployment failures
+- Registry is the single source of truth for component locations
+
+**Failure Pattern:**
+- Agent creates `base_battery_monitor` in creature_specific/ 
+- Registry already has `main_battery_monitor` with same functionality
+- Result: Duplicate components, build conflicts, wasted effort
+
+---
+
 # META-RULE: RULE PRESERVATION AND MODIFICATION
 
 **CRITICAL: Rules Must Never Be Weakened Through Consolidation**
@@ -616,6 +641,16 @@ When the generator processes a component JSON, it performs a **depth-first tree 
 
 - **Same code, different data contexts**: `gc9a01` code executes twice per loop if it's in two different pipelines, but operates on different buffers (managed by file-scoped statics)
 
+**CRITICAL AGGREGATION RULES (MISSING FROM ABOVE):**
+
+- **HDR AGGREGATION PARALLEL TO SRC**: `.hdr` files are aggregated into `*_component_functions.hpp` exactly like `.src` files into `.cpp`
+
+- **USE_FIELDS INJECTION SYSTEM**: JSON `use_fields: {}` generates `static char* variable = "value";` declarations (first encounter) or `variable = "value";` assignments (subsequent encounters)
+
+- **ABSOLUTE FILE MODIFICATION PROHIBITION**: NO `.src` or `.hdr` files can EVER be modified during aggregation process - build system MUST work on temporary copies only
+
+- **COMPONENT REGISTRY MAINTENANCE MANDATORY**: When new components are added, `config/component_registry.json` MUST be updated via `tools/component_registry.py` to maintain binary search index
+
 
 
 **Visual Example:**
@@ -804,6 +839,83 @@ void {component_name}_act(void);        // NO ARGUMENTS
 - **Both exist simultaneously** - different data types use different mechanisms based on scope and persistence needs
 
 - Example: Display frame buffer stays in file-scoped globals (fast), Mood state moves via `GSM.write<Mood>()` to other ESP32s
+
+
+
+## RULE 4C: THREE-LAYER COMPONENT ARCHITECTURE
+
+
+
+**CRITICAL: Components have three distinct layers that work together during build aggregation**
+
+
+
+### Layer 1: Interface Layer (.hdr Aggregation)
+
+- **Purpose**: Struct definitions, constants, type declarations, forward declarations
+- **Aggregation**: All `.hdr` files aggregated into `*_component_functions.hpp` (parallel to .src → .cpp)
+- **Content Example**: 
+  ```cpp
+  struct gc9a01 {
+      static const int WIDTH = 240;
+      static const int HEIGHT = 240;
+  };
+  ```
+- **Usage**: Other components can use `gc9a01::WIDTH` after aggregation
+- **Rule**: `.hdr` aggregation follows same rules as `.src` - first encounter only, reused for duplicates
+
+### Layer 2: Implementation Layer (.src Aggregation) 
+
+- **Purpose**: Actual `init()` and `act()` function implementations
+- **Aggregation**: All `.src` files concatenated into `*_component_functions.cpp`
+- **Content Example**: 
+  ```cpp
+  esp_err_t gc9a01_init(void) { /* implementation */ }
+  void gc9a01_act(void) { /* implementation */ }
+  ```
+- **Rule**: Same as existing - first encounter aggregated, duplicates reference same code
+
+### Layer 3: Parameterization Layer (use_fields Injection)
+
+- **Purpose**: Instance-specific variables injected from JSON `use_fields: {}`
+- **Mechanism**: Build system generates C++ static variables from JSON values
+- **Injection Pattern**:
+  - **First encounter**: `static char* display_width = "240";` (declaration + assignment)
+  - **Subsequent encounters**: `display_width = "320";` (assignment only - different value for different instances)
+- **Example Flow**:
+  ```json
+  // goblin_left_eye.json
+  "use_fields": { "display_width": 240, "color_schema": "RGB565" }
+  
+  // bear_left_eye.json  
+  "use_fields": { "display_width": 320, "color_schema": "RGB888" }
+  ```
+  ```cpp
+  // Generated in aggregated .cpp (first encounter):
+  static char* display_width = "240";
+  static char* color_schema = "RGB565";
+  
+  // Later in same file (second encounter):
+  display_width = "320";
+  color_schema = "RGB888";
+  ```
+
+### Critical Build Rules
+
+1. **NO MODIFICATION DURING AGGREGATION**: `.src` and `.hdr` files MUST NEVER be modified during build process
+2. **TEMPORARY FILES ONLY**: Build system creates `.tmp` files for any processing, deletes after use
+3. **COMPONENT REGISTRY UPDATES**: New components MUST be registered in `config/component_registry.json` via `tools/component_registry.py`
+4. **THREE LAYERS MANDATORY**: Every component must have interface (.hdr), implementation (.src), and parameterization (use_fields) considerations
+
+### Integration Example
+
+```
+gc9a01.hdr → goblin_head_component_functions.hpp (struct definitions available)
+gc9a01.src → goblin_head_component_functions.cpp (function implementations)  
+use_fields → goblin_head_component_functions.cpp (static variables injected)
+
+Result: goblin_left_eye can use gc9a01::WIDTH constant, call gc9a01_init(), and access display_width variable - all in same compilation unit
+```
 
 
 
@@ -2416,6 +2528,162 @@ ELSE
 - Dispatch table integration
 
 - Multi-ESP32 variant support
+
+
+
+## RULE 27: COMPONENT REGISTRY MAINTENANCE MANDATORY
+
+
+
+**ALL new components MUST be registered in the component registry**
+
+
+
+**CRITICAL TRACKING REQUIREMENT:**
+
+
+
+When creating ANY new component (`.json/.src/.hdr` triplet), the component registry MUST be updated:
+
+
+
+```
+
+IF creating_new_component THEN
+
+     Add to registry: `python tools\component_registry.py add {component_name} {path}`
+
+     Verify registration: `python tools\component_registry.py list | grep {component_name}`
+
+ELSE
+
+     Component lookup failures during generation
+
+     Binary search index corruption
+
+     Build system inconsistencies
+
+```
+
+
+
+**Registry Commands:**
+
+
+
+- Add component: `python tools\component_registry.py add goblin_new_eye config/bots/bot_families/goblins/head/`
+
+- List all components: `python tools\component_registry.py list`
+
+- Verify component exists: `python tools\component_registry.py find goblin_new_eye`
+
+
+
+**Registry maintains binary search index** - required for:
+
+
+
+- Fast component lookup during generation
+
+- Duplicate component detection
+
+- Build optimization and caching
+
+- Multi-repository component tracking
+
+
+
+## RULE 28: SOURCE FILE IMMUTABILITY DURING AGGREGATION
+
+
+
+**NO .src or .hdr files can EVER be modified during build process**
+
+
+
+**ABSOLUTE PROHIBITION:**
+
+
+
+The aggregation process MUST NOT modify any source files - only read them:
+
+
+
+```
+
+IF aggregating_components THEN
+
+     Read .src/.hdr files (read-only access)
+
+     Create temporary .tmp files for any processing
+
+     Write aggregated output to generated files
+
+     Delete all .tmp files after processing
+
+     NEVER write back to original .src/.hdr files
+
+ELSE
+
+     Source file corruption
+
+     Git repository contamination
+
+     Reproducible build failures
+
+```
+
+
+
+**Required Pattern for Build Tools:**
+
+
+
+```python
+
+# PROHIBITED - modifies source file
+
+with open("component.src", "r+") as f:
+
+    content = f.read()
+
+    modified = inject_use_fields(content)
+
+    f.write(modified)  # NEVER DO THIS
+
+
+
+# REQUIRED - uses temporary files
+
+with open("component.src", "r") as src:
+
+    content = src.read()
+
+with open("component.src.tmp", "w") as tmp:
+
+    modified = inject_use_fields(content)
+
+    tmp.write(modified)
+
+# Process tmp file, then delete it
+
+os.remove("component.src.tmp")
+
+```
+
+
+
+**Rationale:**
+
+
+
+- Source files are version-controlled truth
+
+- Builds must be reproducible
+
+- Multiple developers must get identical results
+
+- Automation must not contaminate source repository
 
 
 

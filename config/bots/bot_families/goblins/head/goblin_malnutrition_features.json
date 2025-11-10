@@ -5,7 +5,6 @@
         "init_function": "goblin_malnutrition_features_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_malnutrition_features.json",
     "name": "goblin_malnutrition_features",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

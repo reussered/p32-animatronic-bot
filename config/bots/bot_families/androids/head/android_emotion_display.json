@@ -5,7 +5,6 @@
         "init_function": "android_emotion_display_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/androids/head/android_emotion_display.json",
     "name": "android_emotion_display",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

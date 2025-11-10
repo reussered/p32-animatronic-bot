@@ -5,7 +5,6 @@
         "init_function": "goblin_trophy_scars_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_trophy_scars.json",
     "name": "goblin_trophy_scars",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

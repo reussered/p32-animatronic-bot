@@ -1,7 +1,6 @@
 {
     "name": "inline_component_0",
     "type": "6_AXIS_IMU",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/components/inline_component_0.json",
     "description": "Auto-migrated from inline component",
     "sensor": "ICM20689",
     "i2c_address": "0x68",

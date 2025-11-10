@@ -56,7 +56,6 @@
         "service_ceiling_m": 50,
         "thrust_to_weight": 1.5
     },
-    "relative_filename": "config/bots/bot_families/dragons/flying_dragon_full.json",
     "type": "BOT",
     "components": [],
     "timing": {

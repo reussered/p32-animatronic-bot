@@ -1,7 +1,6 @@
 {
     "name": "sensor_fusion",
     "type": "SENSOR_FUSION",
-    "relative_filename": "config/subsystems/components/sensor_fusion.json",
     "description": "Auto-migrated from inline component",
     "function_name": "sensor_fusion_update",
     "default_hitCount": 20,

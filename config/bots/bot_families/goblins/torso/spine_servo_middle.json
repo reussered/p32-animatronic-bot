@@ -1,7 +1,6 @@
 {
     "name": "spine_servo_middle",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/torso/spine_servo_middle.json",
     "description": "Auto-generated component.",
     "components": [],
     "timing": {

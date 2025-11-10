@@ -5,7 +5,6 @@
         "init_function": "cyclops_mouth_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/humanoids/head/cyclops_mouth.json",
     "name": "cyclops_mouth",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

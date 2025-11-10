@@ -10,7 +10,6 @@
         ],
         "device_pins": []
     },
-    "relative_filename": "config/components/interfaces/i2c_bus_1.json",
     "interface_id": "I2C_BUS_1",
     "components": [
         "i2c_driver"

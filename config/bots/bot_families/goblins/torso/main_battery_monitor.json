@@ -1,7 +1,6 @@
 {
     "name": "main_battery_monitor",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/torso/main_battery_monitor.json",
     "description": "Auto-generated component.",
     "components": [],
     "timing": {

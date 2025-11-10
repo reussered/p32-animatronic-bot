@@ -5,7 +5,6 @@
         "init_function": "skeleton_joint_mechanism_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/undead/head/skeleton_joint_mechanism.json",
     "name": "skeleton_joint_mechanism",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

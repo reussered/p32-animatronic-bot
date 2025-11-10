@@ -2702,6 +2702,16 @@
       "name": "zombies_family",
       "path": "config\\bots\\bot_families\\horror\\zombies_family.json",
       "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "ambient_temperature_sensor",
+      "path": "config\\components\\creature_specific\\ambient_temperature_sensor.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "audio_analysis_unit",
+      "path": "config\\components\\creature_specific\\audio_analysis_unit.json",
+      "git_repo": "p32-animatronic-bot"
     }
   ]
 }

@@ -5,7 +5,6 @@
         "init_function": "zombie_drag_mechanism_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/undead/head/zombie_drag_mechanism.json",
     "name": "zombie_drag_mechanism",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

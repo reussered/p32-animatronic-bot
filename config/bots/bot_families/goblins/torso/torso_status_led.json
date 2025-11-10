@@ -1,7 +1,6 @@
 {
     "name": "torso_status_led",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/torso/torso_status_led.json",
     "description": "Auto-generated component.",
     "components": [],
     "timing": {

@@ -34,7 +34,6 @@
         "overtemp_cutoff_c": 120
     },
     "name": "hobbywing_40a_esc",
-    "relative_filename": "config/bots/bot_families/dragons/hardware_templates/hobbywing_40a_esc.json",
     "type": "BOT",
     "components": [],
     "description": "Auto-generated component: hobbywing_40a_esc",

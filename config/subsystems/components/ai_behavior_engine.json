@@ -1,7 +1,6 @@
 {
     "name": "ai_behavior_engine",
     "type": "AI_BEHAVIOR_ENGINE",
-    "relative_filename": "config/subsystems/components/ai_behavior_engine.json",
     "description": "Auto-migrated from inline component",
     "function_name": "ai_behavior_update",
     "default_hitCount": 100,

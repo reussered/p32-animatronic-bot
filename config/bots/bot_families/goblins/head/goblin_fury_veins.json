@@ -5,7 +5,6 @@
         "init_function": "goblin_fury_veins_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_fury_veins.json",
     "name": "goblin_fury_veins",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

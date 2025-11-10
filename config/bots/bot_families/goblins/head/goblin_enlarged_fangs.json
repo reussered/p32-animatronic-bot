@@ -5,7 +5,6 @@
         "init_function": "goblin_enlarged_fangs_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_enlarged_fangs.json",
     "name": "goblin_enlarged_fangs",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

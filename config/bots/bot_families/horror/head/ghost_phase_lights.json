@@ -5,7 +5,6 @@
         "init_function": "ghost_phase_lights_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/horror/head/ghost_phase_lights.json",
     "name": "ghost_phase_lights",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

@@ -20,7 +20,6 @@
         }
     },
     "name": "spine_vertebrae_assembly",
-    "relative_filename": "config/components/hardware/hardware/spine_vertebrae_assembly.json",
     "description": "Generated hardware component for spine_vertebrae_assembly",
     "cost_performance": {
         "lead_time_days": 7,

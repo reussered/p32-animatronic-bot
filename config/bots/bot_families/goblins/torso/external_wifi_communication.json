@@ -1,7 +1,6 @@
 {
     "name": "external_wifi_communication",
     "type": "SCAFFOLDED",
-    "relative_filename": "config/bots/bot_families/goblins/torso/external_wifi_communication.json",
     "description": "Auto-generated component.",
     "components": [],
     "timing": {

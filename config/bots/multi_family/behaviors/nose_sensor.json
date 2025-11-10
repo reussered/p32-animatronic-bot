@@ -1,7 +1,6 @@
 {
     "name": "nose_sensor",
     "type": "SIMPLE_SENSOR",
-    "relative_filename": "config/bots/multi_family/behaviors/nose_sensor.json",
     "description": "Auto-migrated from inline component",
     "subsystem": "UNKNOWN",
     "ifdef_variable": "ENABLE_SIMPLE_SENSOR",

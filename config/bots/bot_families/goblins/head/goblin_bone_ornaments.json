@@ -5,7 +5,6 @@
         "init_function": "goblin_bone_ornaments_init",
         "hitCount": 10
     },
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_bone_ornaments.json",
     "name": "goblin_bone_ornaments",
     "subsystem": "UNKNOWN",
     "author": "config/author.json",

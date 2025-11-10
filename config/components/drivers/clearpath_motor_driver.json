@@ -1,0 +1,51 @@
+{
+    "relative_filename": "config/components/drivers/clearpath_motor_driver.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_type": "DRIVER",
+    "description": "ClearPath MCPV-RB-2310V-ELN stepper motor driver component",
+    "source_files": [
+        "clearpath_motor_driver.src",
+        "clearpath_motor_driver.hdr"
+    ],
+    "dependencies": [],
+    "timing": {
+        "hitCount": 1
+    },
+    "software": {
+        "init_function": "clearpath_motor_driver_init",
+        "act_function": "clearpath_motor_driver_act"
+    },
+    "hardware": {
+        "voltage": "48V",
+        "current_draw": "5.0A",
+        "thermal_requirements": {
+            "operating_temp": "0-40C",
+            "requires_airflow": true
+        }
+    },
+    "pins": {
+        "required": [
+            {
+                "function": "STEP",
+                "count": 1,
+                "type": "OUTPUT",
+                "frequency": "2MHz",
+                "description": "Step pulse output"
+            },
+            {
+                "function": "DIRECTION",
+                "count": 1,
+                "type": "OUTPUT",
+                "description": "Direction control"
+            },
+            {
+                "function": "ENABLE",
+                "count": 1,
+                "type": "OUTPUT",
+                "description": "Motor enable control"
+            }
+        ]
+    },
+    "notes": "Integrates with ClearPath MCPV-RB-2310V-ELN closed-loop stepper system"
+}

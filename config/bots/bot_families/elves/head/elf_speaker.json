@@ -5,7 +5,6 @@
         "init_function": "elf_speaker_init",
         "hitCount": 10
     },
-    "relative_filename": "config\\bots\\bot_families\\elves\\head\\elf_speaker.json",
     "name": "elf_speaker",
     "subsystem": "AUDIO",
     "components": [
