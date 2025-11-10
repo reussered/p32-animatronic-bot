@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "description": "Master component registry - maps component names to paths and git repositories. Sorted alphabetically by name. Duplicates allowed and tracked.",
-  "last_updated": "2025-11-07T15:57:22.986916",
+  "last_updated": "2025-11-10T13:17:46.455528",
   "components": [
     {
       "name": "a4988_stepper_driver",
@@ -36,6 +36,11 @@
     {
       "name": "ambient_breathing",
       "path": "assets\\sounds\\goblin\\ambient_breathing.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "ambient_temperature_sensor",
+      "path": "config\\components\\creature_specific\\ambient_temperature_sensor.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -121,6 +126,11 @@
     {
       "name": "audio",
       "path": "config\\components\\hardware\\audio.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "audio_analysis_unit",
+      "path": "config\\components\\creature_specific\\audio_analysis_unit.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -256,11 +266,6 @@
     {
       "name": "capacitive_touch_sensor",
       "path": "config\\components\\hardware\\capacitive_touch_sensor.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
-      "name": "clearpath_motor_driver",
-      "path": "config\\components\\drivers\\clearpath_motor_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -416,6 +421,11 @@
     {
       "name": "celebration",
       "path": "config\\components\\behaviors\\celebration.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "clearpath_motor_driver",
+      "path": "config\\components\\drivers\\clearpath_motor_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -974,6 +984,11 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "goblin_ear",
+      "path": "config\\components\\creature_specific\\goblin_ear.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "goblin_ear_left",
       "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ear_left.json",
       "git_repo": "p32-animatronic-bot"
@@ -1439,6 +1454,16 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "hc_sr04_debug_sensor",
+      "path": "config\\components\\hardware\\hc_sr04_debug_sensor.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "hc_sr04_debug_ultrasonic_sensor",
+      "path": "config\\components\\interfaces\\hc_sr04_debug_ultrasonic_sensor.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "hc_sr04_sensor",
       "path": "config\\components\\hardware\\hc_sr04_sensor.json",
       "git_repo": "p32-animatronic-bot"
@@ -1471,6 +1496,11 @@
     {
       "name": "hobbywing_40a_esc",
       "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\hobbywing_40a_esc.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "HOBBYWING_40A_ESC",
+      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\HOBBYWING_40A_ESC.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1599,11 +1629,6 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
-      "name": "serial_debug_driver",
-      "path": "config\\components\\drivers\\serial_debug_driver.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
       "name": "i2c_driver",
       "path": "config\\components\\drivers\\i2c_driver.json",
       "git_repo": "p32-animatronic-bot"
@@ -1616,6 +1641,11 @@
     {
       "name": "i2s_bus_i2s0",
       "path": "config\\components\\interfaces\\i2s_bus_i2s0.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "i2s_debug_driver",
+      "path": "config\\components\\drivers\\i2s_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1634,8 +1664,18 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "i2s_generic_driver",
+      "path": "config\\components\\drivers\\i2s_generic_driver.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "icm20689_bmp390",
       "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\icm20689_bmp390.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "ICM20689_BMP390",
+      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\ICM20689_BMP390.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1691,6 +1731,11 @@
     {
       "name": "inline_component_1",
       "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\components\\inline_component_1.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "inmp441_microphone",
+      "path": "config\\components\\hardware\\inmp441_microphone.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1799,6 +1844,11 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "MG996R_SERVO",
+      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\MG996R_SERVO.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "micro_servo_array",
       "path": "config\\components\\interfaces\\micro_servo_array.json",
       "git_repo": "p32-animatronic-bot"
@@ -1831,6 +1881,11 @@
     {
       "name": "neck_motor_3dof",
       "path": "config\\components\\hardware\\motors\\neck_motor_3dof.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "neck_motor_3dof",
+      "path": "config\\bots\\bot_families\\goblins\\goblin_head\\neck_motor_3dof.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -2091,6 +2146,11 @@
     {
       "name": "sensors",
       "path": "config\\components\\hardware\\sensors.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "serial_debug_driver",
+      "path": "config\\components\\drivers\\serial_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -2396,6 +2456,11 @@
     {
       "name": "t_motor_u3_580kv",
       "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\t_motor_u3_580kv.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "T_MOTOR_U3_580KV",
+      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\T_MOTOR_U3_580KV.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -2726,16 +2791,6 @@
     {
       "name": "zombies_family",
       "path": "config\\bots\\bot_families\\horror\\zombies_family.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
-      "name": "ambient_temperature_sensor",
-      "path": "config\\components\\creature_specific\\ambient_temperature_sensor.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
-      "name": "audio_analysis_unit",
-      "path": "config\\components\\creature_specific\\audio_analysis_unit.json",
       "git_repo": "p32-animatronic-bot"
     }
   ]
