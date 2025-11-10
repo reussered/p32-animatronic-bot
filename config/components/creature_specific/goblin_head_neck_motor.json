@@ -3,10 +3,12 @@
     "type": "motor_controller",
     "description": "3-DOF neck articulation with smooth easing and preset poses",
     "subsystem": "goblin_head",
+    "source_files": [
+        "goblin_head_neck_motor.src",
+        "goblin_head_neck_motor.hdr"
+    ],
     "dependencies": [
-        "stepper_neck_pan",
-        "stepper_neck_tilt",
-        "stepper_neck_roll"
+        "config/components/hardware/motors/neck_motor_3dof.json"
     ],
     "hardware": {
         "motors": [
@@ -237,6 +239,10 @@
     },
     "memory_budget_kb": 0.1,
     "notes": "Neck provides full 3-DOF articulation for gaze control, emotional expression, and attention. Smooth easing prevents jerky motion. Can synchronize with eye/mouth for coordinated animation.",
+    "software": {
+        "init_function": "goblin_head_neck_motor_init",
+        "act_function": "goblin_head_neck_motor_act"
+    },
     "timing": {
         "hitCount": 1
     }

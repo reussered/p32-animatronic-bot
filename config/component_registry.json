@@ -1815,7 +1815,7 @@
     },
     {
       "name": "neck_motor_3dof",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_head\\neck_motor_3dof.json",
+      "path": "config\\components\\hardware\\motors\\neck_motor_3dof.json",
       "git_repo": "p32-animatronic-bot"
     },
     {

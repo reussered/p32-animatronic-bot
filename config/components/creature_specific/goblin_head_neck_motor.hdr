@@ -1,0 +1,19 @@
+#ifndef GOBLIN_HEAD_NECK_MOTOR_H
+#define GOBLIN_HEAD_NECK_MOTOR_H
+
+#include <esp_err.h>
+#include "../../hardware/motors/neck_motor_3dof.hdr"
+
+// Goblin-specific neck motor controller
+// This component provides high-level control interface for the 3-DOF neck system
+
+esp_err_t goblin_head_neck_motor_init(void);
+void goblin_head_neck_motor_act(void);
+
+// High-level movement functions
+esp_err_t goblin_head_neck_motor_set_pose(float pan_degrees, float tilt_degrees, float roll_degrees);
+esp_err_t goblin_head_neck_motor_center(void);
+esp_err_t goblin_head_neck_motor_nod(void);
+esp_err_t goblin_head_neck_motor_shake(void);
+
+#endif // GOBLIN_HEAD_NECK_MOTOR_H

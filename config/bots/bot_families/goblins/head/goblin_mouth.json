@@ -1,1 +1,27 @@
-{w4 }
+{
+
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_mouth",
+    "subsystem": "HEAD",
+    "components": [],
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "0 INCH",
+        "y": "-1.05 INCH",
+        "z": "0 INCH"
+    },
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "function": "mouth_display",
+    "description": "Mouth display animation",
+    "timing": {
+        "hitCount": 36000
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
+}

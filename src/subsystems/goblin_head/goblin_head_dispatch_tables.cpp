@@ -17,7 +17,6 @@ const init_function_t goblin_head_init_table[] = {
     &goblin_nose_init,
     &hc_sr04_ultrasonic_distance_sensor_init,
     &goblin_mouth_init,
-    &ili9341_init,
     &goblin_speaker_init,
     &speaker_init,
     &i2s_bus_0_init,
@@ -27,7 +26,8 @@ const init_function_t goblin_head_init_table[] = {
     &hw496_microphone_init,
     &goblin_right_ear_init,
     &servo_sg90_micro_init,
-    &hw496_microphone_init
+    &hw496_microphone_init,
+    &goblin_head_neck_motor_init
 };
 
 const act_function_t goblin_head_act_table[] = {
@@ -44,7 +44,6 @@ const act_function_t goblin_head_act_table[] = {
     &goblin_nose_act,
     &hc_sr04_ultrasonic_distance_sensor_act,
     &goblin_mouth_act,
-    &ili9341_act,
     &goblin_speaker_act,
     &speaker_act,
     &i2s_bus_0_act,
@@ -54,7 +53,8 @@ const act_function_t goblin_head_act_table[] = {
     &hw496_microphone_act,
     &goblin_right_ear_act,
     &servo_sg90_micro_act,
-    &hw496_microphone_act
+    &hw496_microphone_act,
+    &goblin_head_neck_motor_act
 };
 
 const uint32_t goblin_head_hitcount_table[] = {
@@ -71,8 +71,8 @@ const uint32_t goblin_head_hitcount_table[] = {
     180000,
     1,
     36000,
-    1,
     84000,
+    1,
     1,
     1,
     1,

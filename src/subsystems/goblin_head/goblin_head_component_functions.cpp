@@ -3,67 +3,28 @@
 
 // Auto-generated component aggregation file
 
+// Inherited fields for gc9a01
+static char* chunk_count = 1;
+
 // --- Begin: config\components\hardware\gc9a01.src ---
 // gc9a01 component implementation
-// This component is a data provider. It defines the physical characteristics
-// of the GC9A01 display but contains no active logic.
+// Defines display parameters via gc9a01.hdr for upstream components
+// Actual display I/O handled by lower-level driver (generic_spi_display)
 
 #include "esp_log.h"
-#include "esp_heap_caps.h"
 #include "config/components/hardware/gc9a01.hdr"
-#include <stdlib.h>
 
 static const char *TAG_gc9a01 = "gc9a01";
 
-// Define GC9A01_InitialPixel
-// Note: value should be set before allocating buffers containing GC9A01_Pixels
-Pixel GC9A01_InitialPixel;
-
-// Display Buffer Interface - provides buffer allocation and size info
-// to positioned components (eyes, mouth, etc.)
-
-/**
- * @brief Get display width in pixels
- * @return Display width (240 for GC9A01)
- */
-uint16_t gc9a01_get_width(void) {
-    return 240;
-}
-
-/**
- * @brief Get display height in pixels
- * @return Display height (240 for GC9A01)
- */
-uint16_t gc9a01_get_height(void) {
-    return 240;
-}
-
-/**
- * @brief Get total frame size in pixels
- * @return Total pixels in one frame (width * height)
- */
-uint32_t getFrameSize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
-
-/**
- * @brief Get pixels per row (display width)
- * @return Number of pixels per row
- */
-uint32_t getFrameRowSize(void) {
-    return 240;
-}
-
-/**
- * @brief Get display size in pixels
- * @return Total number of pixels in one frame
- */
-uint32_t getDisplaySize(void) {
-    return 240 * 240;  // 57,600 pixels
-}
-
 esp_err_t gc9a01_init(void) {
-    ESP_LOGI(TAG_gc9a01, "gc9a01 component initialized (passive)");
+    ESP_LOGI(TAG_gc9a01, "gc9a01 init - %ux%u, %s, chunk_count=%s",
+             display_width, display_height, color_schema, chunk_count);
+    return ESP_OK;
+}
+
+void gc9a01_act(void) {
+    // No-op: display I/O handled by lower layers
+}
     return ESP_OK;
 }
 
@@ -215,6 +176,114 @@ void goblin_eye_act(void)
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_eye.src ---
 
+// --- Begin: config\components\creature_specific\goblin_head_neck_motor.src ---
+#include "goblin_head_neck_motor.hdr"
+#include "esp_log.h"
+
+static const char* TAG = "goblin_neck";
+
+// Initialize the goblin head neck motor controller
+esp_err_t goblin_head_neck_motor_init(void)
+{
+    ESP_LOGI(TAG, "Initializing goblin head neck motor controller");
+    
+    // Initialize the underlying hardware
+    esp_err_t ret = neck_motor_3dof_init();
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Center the neck to neutral position
+    ret = goblin_head_neck_motor_center();
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "Goblin head neck motor controller initialized successfully");
+    return ESP_OK;
+}
+
+// Main activity loop for neck motor
+void goblin_head_neck_motor_act(void)
+{
+    // Delegate to hardware layer
+    neck_motor_3dof_act();
+}
+
+// Set specific pose in degrees
+esp_err_t goblin_head_neck_motor_set_pose(float pan_degrees, float tilt_degrees, float roll_degrees)
+{
+    // Validate ranges for goblin-specific limits
+    if (pan_degrees < -60.0f || pan_degrees > 60.0f)
+    {
+        ESP_LOGW(TAG, "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
+        pan_degrees = (pan_degrees < -60.0f) ? -60.0f : 60.0f;
+    }
+    
+    if (tilt_degrees < -30.0f || tilt_degrees > 45.0f)
+    {
+        ESP_LOGW(TAG, "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
+        tilt_degrees = (tilt_degrees < -30.0f) ? -30.0f : 45.0f;
+    }
+    
+    if (roll_degrees < -15.0f || roll_degrees > 15.0f)
+    {
+        ESP_LOGW(TAG, "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
+        roll_degrees = (roll_degrees < -15.0f) ? -15.0f : 15.0f;
+    }
+    
+    // Call hardware layer with validated parameters
+    return neck_motor_3dof_set_position(pan_degrees, tilt_degrees, roll_degrees);
+}
+
+// Center neck to neutral position
+esp_err_t goblin_head_neck_motor_center(void)
+{
+    ESP_LOGI(TAG, "Centering neck to neutral position");
+    return goblin_head_neck_motor_set_pose(0.0f, 0.0f, 0.0f);
+}
+
+// Perform a nodding motion
+esp_err_t goblin_head_neck_motor_nod(void)
+{
+    ESP_LOGI(TAG, "Performing nod gesture");
+    
+    esp_err_t ret = goblin_head_neck_motor_set_pose(0.0f, 15.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(500));
+    
+    ret = goblin_head_neck_motor_set_pose(0.0f, -10.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(500));
+    
+    return goblin_head_neck_motor_center();
+}
+
+// Perform a head shake motion
+esp_err_t goblin_head_neck_motor_shake(void)
+{
+    ESP_LOGI(TAG, "Performing shake gesture");
+    
+    esp_err_t ret = goblin_head_neck_motor_set_pose(-30.0f, 0.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(300));
+    
+    ret = goblin_head_neck_motor_set_pose(30.0f, 0.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(300));
+    
+    return goblin_head_neck_motor_center();
+}
+// --- End: config\components\creature_specific\goblin_head_neck_motor.src ---
+
 // --- Begin: config\bots\bot_families\goblins\head\goblin_left_ear.src ---
 // goblin_left_ear component implementation
 // Auto-generated stub - needs actual implementation
@@ -235,23 +304,25 @@ void goblin_left_ear_act(void) {
 // --- End: config\bots\bot_families\goblins\head\goblin_left_ear.src ---
 
 // Inherited fields for goblin_left_eye
-static char* color_schema = "Pixel_RGB565";
 static char* display_width = 240;
 static char* display_height = 240;
 static char* bytes_per_pixel = 2;
+static char* color_schema = "RGB565";
+static char* chunk = 10;
 
 // --- Begin: config\bots\bot_families\goblins\head\goblin_left_eye.src ---
 // goblin_left_eye.src - Allocate shared display buffer and left eye position
 // Component chain: goblin_left_eye (allocate) -> goblin_eye (render) -> generic_spi_display (send & free)
 
 #include "esp_log.h"
+#include "esp_heap_caps.h"
 #include "shared_headers/color_schema.hpp"
 
-static const char* TAG = "goblin_left_eye";
+// Forward declaration for generic display handler
+esp_err_t generic_spi_display_act(uint8_t* front_buffer, uint8_t* back_buffer, 
+                                 uint32_t size, struct EyePosition position);
 
-// Shared display buffer - allocated here, used by goblin_eye, freed by generic_spi_display
-// Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
-static unsigned char* display_buffer = nullptr;
+static const char* TAG = "goblin_left_eye";
 
 // Eye position (left eye relative to skull center)
 struct EyePosition {
@@ -260,44 +331,63 @@ struct EyePosition {
     int16_t z;      // -35 = slightly back
 } left_eye_position = {-50, 30, -35};
 
-// Display configuration - from use_fields in goblin_left_eye.json
-// Declared static here (first definition), used by child components via extern
-static uint32_t display_width = 240;
-static uint32_t display_height = 240;
-static uint32_t bytes_per_pixel = 2;
-static char* color_schema = "Pixel_RGB565";
+// Display buffers - front and back for ping-pong
+static uint8_t* front_buffer = NULL;
+static uint8_t* back_buffer = NULL;
+static uint32_t display_size = 0; 
 
 void goblin_left_eye_init(void)
 {
-
 }
-void goblin_left_eye_act(void) {
+esp_err_t goblin_left_eye_act(void) {
+    verify(display_height % chunk == 0);
 
-    size_t display_buffer_size_in_pixels = display_width * display_height;
-    size_t display_buffer_size = display_buffer_size_in_pixels * bytes_per_pixel;
-    
-    ESP_LOGI(TAG, "Allocating display buffer for left eye (%u x %u, %u bytes total)",
-             display_width, display_height, display_buffer_size);
-    
-    // Allocate shared buffer as unsigned char*
-    // goblin_eye will cast to PixelType* based on color_schema
-    display_buffer = (unsigned char*)malloc(display_buffer_size);
-    if (!display_buffer) {
-        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", display_buffer_size);
-        return ESP_ERR_NO_MEM;
+    // Allocate buffers if not already done
+    if (!front_buffer || !back_buffer) {
+        display_size = display_width * (display_height/chunk) * bytes_per_pixel;
+        size_t buffer_size_in_pixels = display_width * display_height;
+        size_t buffer_size = buffer_size_in_pixels * bytes_per_pixel;
+        
+        ESP_LOGI(TAG, "Allocating display buffers for left eye (%u x %u, %u bytes each)",
+                 display_width, display_height, buffer_size);
+        
+        // Allocate front buffer (DMA-capable internal RAM)
+        front_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
+        if (!front_buffer) {
+            ESP_LOGE(TAG, "Failed to allocate %u bytes for front buffer", buffer_size);
+            return ESP_ERR_NO_MEM;
+        }
+        
+        // Allocate back buffer (DMA-capable internal RAM)
+        back_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
+        if (!back_buffer) {
+            ESP_LOGE(TAG, "Failed to allocate %u bytes for back buffer", buffer_size);
+            free(front_buffer);
+            front_buffer = NULL;
+            return ESP_ERR_NO_MEM;
+        }
+        
+        // Initialize both buffers with neutral color (dark green iris)
+        uint16_t neutral = 0x0400;  // RGB565: (0, 8, 0)
+        uint16_t* front_u16 = (uint16_t*)front_buffer;
+        uint16_t* back_u16 = (uint16_t*)back_buffer;
+        
+        for (uint32_t i = 0; i < buffer_size_in_pixels; i++) {
+            front_u16[i] = neutral;
+            back_u16[i] = neutral;
+        }
+        
+        ESP_LOGI(TAG, "Display buffers allocated (position: %d,%d,%d mm)",
+                 left_eye_position.x, left_eye_position.y, left_eye_position.z);
     }
     
-    // Initialize buffer with neutral color (dark green iris)
-    uint16_t neutral = 0x0400;  // RGB565: (0, 8, 0)
-    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
-    for (uint32_t i = 0; i < display_buffer_size_in_pixels; i++) {
-        buffer_u16[i] = neutral;
-    }
+    // === MOOD PROCESSING SECTION ===
+    // TODO: Add mood-based eye rendering here
+    // This is where goblin_eye rendering logic would go
     
-    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
-             left_eye_position.x, left_eye_position.y, left_eye_position.z);
-    
-    return ESP_OK;
+    // === PASS TO GENERIC SPI DISPLAY ===
+    // Fire and forget - generic_spi_display handles the DMA pipeline
+    return generic_spi_display_act(front_buffer, back_buffer, display_size, left_eye_position);
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_left_eye.src ---
 
@@ -397,6 +487,13 @@ void goblin_right_ear_act(void) {
     // ESP_LOGD(TAG_goblin_right_ear, "goblin_right_ear act");
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_right_ear.src ---
+
+// Inherited fields for goblin_right_eye
+display_width = 240;
+display_height = 240;
+bytes_per_pixel = 2;
+color_schema = "RGB565";
+chunk = 10;
 
 // --- Begin: config\bots\bot_families\goblins\head\goblin_right_eye.src ---
 // goblin_right_eye.src - Allocate shared display buffer for right eye
@@ -590,42 +687,6 @@ void i2s_driver_act(void) {
 }
 // --- End: config\components\drivers\i2s_driver.src ---
 
-// --- Begin: config\components\hardware\ili9341.src ---
-// ili9341 component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-#include "ili9341.hdr"
-
-static const char *TAG_ili9341 = "ili9341";
-
-// Define the initial pixel value (default black)
-ILI9341_Pixel ILI9341_InitialPixel = {0, 0, 0};
-
-esp_err_t ili9341_init(void) {
-    ESP_LOGI(TAG_ili9341, "ili9341 init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void ili9341_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_ili9341, "ili9341 act");
-}
-
-size_t ili9341_get_width(void) {
-    return 320;
-}
-
-size_t ili9341_get_height(void) {
-    return 240;
-}
-
-size_t ili9341_getFrameSize(void) {
-    return ili9341_get_width() * ili9341_get_height() * sizeof(ILI9341_Pixel);
-}
-// --- End: config\components\hardware\ili9341.src ---
-
 // --- Begin: config\components\hardware\servo_sg90_micro.src ---
 // servo_sg90_micro component implementation
 // Auto-generated stub - needs actual implementation
@@ -644,6 +705,9 @@ void servo_sg90_micro_act(void) {
     // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
 }
 // --- End: config\components\hardware\servo_sg90_micro.src ---
+
+// Inherited fields for speaker
+chunk_count = 1;
 
 // --- Begin: config\components\hardware\speaker.src ---
 // speaker component implementation

@@ -1,0 +1,105 @@
+#include "goblin_head_neck_motor.hdr"
+#include "esp_log.h"
+
+static const char* TAG = "goblin_neck";
+
+// Initialize the goblin head neck motor controller
+esp_err_t goblin_head_neck_motor_init(void)
+{
+    ESP_LOGI(TAG, "Initializing goblin head neck motor controller");
+    
+    // Initialize the underlying hardware
+    esp_err_t ret = neck_motor_3dof_init();
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Center the neck to neutral position
+    ret = goblin_head_neck_motor_center();
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "Goblin head neck motor controller initialized successfully");
+    return ESP_OK;
+}
+
+// Main activity loop for neck motor
+void goblin_head_neck_motor_act(void)
+{
+    // Delegate to hardware layer
+    neck_motor_3dof_act();
+}
+
+// Set specific pose in degrees
+esp_err_t goblin_head_neck_motor_set_pose(float pan_degrees, float tilt_degrees, float roll_degrees)
+{
+    // Validate ranges for goblin-specific limits
+    if (pan_degrees < -60.0f || pan_degrees > 60.0f)
+    {
+        ESP_LOGW(TAG, "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
+        pan_degrees = (pan_degrees < -60.0f) ? -60.0f : 60.0f;
+    }
+    
+    if (tilt_degrees < -30.0f || tilt_degrees > 45.0f)
+    {
+        ESP_LOGW(TAG, "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
+        tilt_degrees = (tilt_degrees < -30.0f) ? -30.0f : 45.0f;
+    }
+    
+    if (roll_degrees < -15.0f || roll_degrees > 15.0f)
+    {
+        ESP_LOGW(TAG, "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
+        roll_degrees = (roll_degrees < -15.0f) ? -15.0f : 15.0f;
+    }
+    
+    // Call hardware layer with validated parameters
+    return neck_motor_3dof_set_position(pan_degrees, tilt_degrees, roll_degrees);
+}
+
+// Center neck to neutral position
+esp_err_t goblin_head_neck_motor_center(void)
+{
+    ESP_LOGI(TAG, "Centering neck to neutral position");
+    return goblin_head_neck_motor_set_pose(0.0f, 0.0f, 0.0f);
+}
+
+// Perform a nodding motion
+esp_err_t goblin_head_neck_motor_nod(void)
+{
+    ESP_LOGI(TAG, "Performing nod gesture");
+    
+    esp_err_t ret = goblin_head_neck_motor_set_pose(0.0f, 15.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(500));
+    
+    ret = goblin_head_neck_motor_set_pose(0.0f, -10.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(500));
+    
+    return goblin_head_neck_motor_center();
+}
+
+// Perform a head shake motion
+esp_err_t goblin_head_neck_motor_shake(void)
+{
+    ESP_LOGI(TAG, "Performing shake gesture");
+    
+    esp_err_t ret = goblin_head_neck_motor_set_pose(-30.0f, 0.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(300));
+    
+    ret = goblin_head_neck_motor_set_pose(30.0f, 0.0f, 0.0f);
+    if (ret != ESP_OK) return ret;
+    
+    vTaskDelay(pdMS_TO_TICKS(300));
+    
+    return goblin_head_neck_motor_center();
+}

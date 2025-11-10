@@ -22,7 +22,8 @@
         "goblin_mouth",
         "goblin_speaker",
         "goblin_left_ear",
-        "goblin_right_ear"
+        "goblin_right_ear",
+        "goblin_head_neck_motor"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",
