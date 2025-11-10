@@ -391,6 +391,12 @@ esp_err_t goblin_left_eye_act(void) {
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_left_eye.src ---
 
+// Inherited fields for goblin_mouth
+display_width = 480;
+display_height = 320;
+bytes_per_pixel = 3;
+color_schema = "RGB666";
+
 // --- Begin: config\bots\bot_families\goblins\head\goblin_mouth.src ---
 // goblin_mouth.src - Allocate shared display buffer for mouth
 // Component chain: goblin_mouth (allocate) -> goblin_mouth_render (render) -> generic_spi_display (send & free)
@@ -686,6 +692,30 @@ void i2s_driver_act(void) {
     // ESP_LOGD(TAG_i2s_driver, "i2s_driver act");
 }
 // --- End: config\components\drivers\i2s_driver.src ---
+
+// Inherited fields for ili9341
+chunk_count = 1;
+
+// --- Begin: config\components\hardware\ili9341.src ---
+// ili9341 component implementation
+// Defines display parameters via ili9341.hdr for upstream components
+// Actual display I/O handled by lower-level driver (generic_spi_display)
+
+#include "esp_log.h"
+#include "ili9341.hdr"
+
+static const char *TAG_ili9341 = "ili9341";
+
+esp_err_t ili9341_init(void) {
+    ESP_LOGI(TAG_ili9341, "ili9341 init - %ux%u, %s, chunk_count=%s",
+             display_width, display_height, color_schema, chunk_count);
+    return ESP_OK;
+}
+
+void ili9341_act(void) {
+    // No-op: display I/O handled by lower layers
+}
+// --- End: config\components\hardware\ili9341.src ---
 
 // --- Begin: config\components\hardware\servo_sg90_micro.src ---
 // servo_sg90_micro component implementation

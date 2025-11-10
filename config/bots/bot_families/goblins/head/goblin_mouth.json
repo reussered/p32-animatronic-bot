@@ -4,7 +4,10 @@
     "author": "config/author.json",
     "name": "goblin_mouth",
     "subsystem": "HEAD",
-    "components": [],
+    "components": [
+        "ili9341",
+        "speaker"
+    ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",
     "position": {
@@ -19,8 +22,14 @@
     },
     "function": "mouth_display",
     "description": "Mouth display animation",
+    "use_fields": {
+        "display_width": 480,
+        "display_height": 320,
+        "bytes_per_pixel": 3,
+        "color_schema": "RGB666"
+    },
     "timing": {
-        "hitCount": 36000
+        "hitCount": 1
     },
     "hardware_type": "POSITIONED_COMPONENT",
     "type": "POSITIONED_COMPONENT"

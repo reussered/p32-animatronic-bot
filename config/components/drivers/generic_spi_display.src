@@ -1,15 +1,39 @@
 // generic_spi_display component implementation
-// Generic SPI display interface for basic drawing operations
+// Generic SPI display interface with double-buffered DMA chunking
 
 #include "esp_log.h"
 #include "esp_heap_caps.h"
 #include "driver/spi_master.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/semphr.h"
 #include "components/spi_display_bus.hdr"
 #include "driver/gpio.h"
 
 static const char *TAG_generic_spi_display = "generic_spi_display";
+
+// Double-buffered chunking configuration
+#define CHUNK_HEIGHT 80        // Render 80 lines at a time
+#define MAX_DISPLAY_WIDTH 480  // ILI9341 width
+#define MAX_DISPLAY_HEIGHT 320 // ILI9341 height
+#define BYTES_PER_PIXEL 3      // RGB666
+#define CHUNK_SIZE_BYTES (MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL)
+
+// DMA state tracking
+typedef struct {
+    uint8_t* buffer_a;           // Double buffer A
+    uint8_t* buffer_b;           // Double buffer B
+    uint8_t* active_buffer;      // Currently transmitting
+    uint8_t* loading_buffer;     // Currently loading from PSRAM
+    size_t current_chunk;        // Which chunk we're processing (0-3)
+    size_t total_chunks;         // Total chunks for current display
+    bool psram_dma_active;       // PSRAM->buffer DMA in progress
+    bool spi_dma_active;         // Buffer->display DMA in progress
+    SemaphoreHandle_t dma_complete_sem;  // DMA completion notification
+    uint16_t* source_framebuffer; // Source PSRAM framebuffer
+} dma_chunking_state_t;
+
+static dma_chunking_state_t dma_state = {0};
 
 // Display commands
 #define GC9A01_SWRESET 0x01
@@ -19,8 +43,18 @@ static const char *TAG_generic_spi_display = "generic_spi_display";
 #define GC9A01_RASET  0x2B
 #define GC9A01_RAMWR  0x2C
 
+// DMA completion callback
+static void IRAM_ATTR spi_dma_callback(spi_transaction_t *trans) {
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    dma_state.spi_dma_active = false;
+    xSemaphoreGiveFromISR(dma_state.dma_complete_sem, &xHigherPriorityTaskWoken);
+    if (xHigherPriorityTaskWoken) {
+        portYIELD_FROM_ISR();
+    }
+}
+
 // Internal helper functions to send commands and data
-static void generic_spi_write_data(spi_device_handle_t spi, const uint8_t *data, size_t len) {
+static void generic_spi_write_data_blocking(spi_device_handle_t spi, const uint8_t *data, size_t len) {
     if (!spi) return;
     esp_err_t ret;
     spi_transaction_t t;
@@ -31,6 +65,20 @@ static void generic_spi_write_data(spi_device_handle_t spi, const uint8_t *data,
     t.user = (void*)1; // D/C = 1 for data
     ret = spi_device_polling_transmit(spi, &t);
     ESP_ERROR_CHECK(ret);
+}
+
+// Non-blocking DMA transfer for chunk data
+static esp_err_t generic_spi_write_data_dma(spi_device_handle_t spi, const uint8_t *data, size_t len) {
+    if (!spi || len == 0) return ESP_ERR_INVALID_ARG;
+    
+    static spi_transaction_t trans = {0};
+    trans.length = len * 8;
+    trans.tx_buffer = data;
+    trans.user = (void*)1; // D/C = 1 for data
+    
+    dma_state.spi_dma_active = true;
+    esp_err_t ret = spi_device_queue_trans(spi, &trans, portMAX_DELAY);
+    return ret;
 }
 
 static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
@@ -46,7 +94,34 @@ static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
 }
 
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with CS=%d", cur_spi_display_pin.cs);
+    ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with double-buffered DMA chunking, CS=%d", cur_spi_display_pin.cs);
+    
+    // Initialize DMA state
+    memset(&dma_state, 0, sizeof(dma_state));
+    
+    // Create semaphore for DMA completion signaling
+    dma_state.dma_complete_sem = xSemaphoreCreateBinary();
+    if (!dma_state.dma_complete_sem) {
+        ESP_LOGE(TAG_generic_spi_display, "Failed to create DMA completion semaphore");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Allocate double buffers in DMA-capable memory
+    dma_state.buffer_a = (uint8_t*)heap_caps_malloc(CHUNK_SIZE_BYTES, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+    dma_state.buffer_b = (uint8_t*)heap_caps_malloc(CHUNK_SIZE_BYTES, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+    
+    if (!dma_state.buffer_a || !dma_state.buffer_b) {
+        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate DMA buffers (%d bytes each)", CHUNK_SIZE_BYTES);
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Initialize buffer pointers
+    dma_state.active_buffer = dma_state.buffer_a;
+    dma_state.loading_buffer = dma_state.buffer_b;
+    dma_state.total_chunks = (MAX_DISPLAY_HEIGHT + CHUNK_HEIGHT - 1) / CHUNK_HEIGHT; // Ceiling division
+    
+    ESP_LOGI(TAG_generic_spi_display, "Allocated DMA buffers: %d bytes each, %d chunks total", 
+             CHUNK_SIZE_BYTES, dma_state.total_chunks);
 
     if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
@@ -77,6 +152,56 @@ esp_err_t generic_spi_display_init(void) {
     return ESP_OK;
 }
 
+// Convert and load a chunk from PSRAM framebuffer to DMA buffer
+static void load_chunk_from_psram(size_t chunk_index, uint8_t* dest_buffer) {
+    if (!dma_state.source_framebuffer || !dest_buffer) return;
+    
+    size_t start_row = chunk_index * CHUNK_HEIGHT;
+    size_t end_row = (chunk_index + 1) * CHUNK_HEIGHT;
+    if (end_row > MAX_DISPLAY_HEIGHT) end_row = MAX_DISPLAY_HEIGHT;
+    
+    size_t rows_in_chunk = end_row - start_row;
+    
+    // Convert RGB565 (PSRAM) to RGB666 (DMA buffer) for this chunk
+    for (size_t row = 0; row < rows_in_chunk; row++) {
+        for (size_t col = 0; col < MAX_DISPLAY_WIDTH; col++) {
+            size_t src_index = (start_row + row) * MAX_DISPLAY_WIDTH + col;
+            size_t dest_index = (row * MAX_DISPLAY_WIDTH + col) * BYTES_PER_PIXEL;
+            
+            uint16_t rgb565 = dma_state.source_framebuffer[src_index];
+            
+            // Convert RGB565 to RGB666
+            uint8_t r = ((rgb565 >> 11) & 0x1F) << 1; // 5->6 bits
+            uint8_t g = ((rgb565 >> 5) & 0x3F);       // 6 bits
+            uint8_t b = (rgb565 & 0x1F) << 1;        // 5->6 bits
+            
+            dest_buffer[dest_index] = r << 2;     // 6-bit R to 8-bit
+            dest_buffer[dest_index + 1] = g << 2; // 6-bit G to 8-bit  
+            dest_buffer[dest_index + 2] = b << 2; // 6-bit B to 8-bit
+        }
+    }
+}
+
+// Set display window for current chunk
+static void set_display_window(size_t chunk_index) {
+    size_t start_row = chunk_index * CHUNK_HEIGHT;
+    size_t end_row = (chunk_index + 1) * CHUNK_HEIGHT - 1;
+    if (end_row >= MAX_DISPLAY_HEIGHT) end_row = MAX_DISPLAY_HEIGHT - 1;
+    
+    // Set column address (0 to MAX_DISPLAY_WIDTH-1)
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
+    uint8_t col_data[] = {0x00, 0x00, (MAX_DISPLAY_WIDTH - 1) >> 8, (MAX_DISPLAY_WIDTH - 1) & 0xFF};
+    generic_spi_write_data_blocking(cur_spi_display_pin.handle, col_data, 4);
+
+    // Set row address for this chunk
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
+    uint8_t row_data[] = {start_row >> 8, start_row & 0xFF, end_row >> 8, end_row & 0xFF};
+    generic_spi_write_data_blocking(cur_spi_display_pin.handle, row_data, 4);
+
+    // Memory write command
+    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
+}
+
 void generic_spi_display_act(void) {
     if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
@@ -84,7 +209,6 @@ void generic_spi_display_act(void) {
     }
 
     // Get the appropriate framebuffer based on which display we're driving
-    // CS=3 is left eye, CS=6 is right eye
     uint16_t* framebuffer = nullptr;
     if (cur_spi_display_pin.cs == 3) {
         framebuffer = goblin_left_eye_get_buffer();
@@ -97,44 +221,50 @@ void generic_spi_display_act(void) {
         return;
     }
 
-    // Set column address (0-239)
-    spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
-    uint8_t col_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_display_pin.handle, col_data, 4);
-
-    // Set row address (0-239)
-    spi_write_command(cur_spi_display_pin.handle, GC9A01_RASET);
-    uint8_t row_data[] = {0x00, 0x00, 0x00, 0xEF};
-    generic_spi_write_data(cur_spi_display_pin.handle, row_data, 4);
-
-    // Memory write
-    spi_write_command(cur_spi_display_pin.handle, GC9A01_RAMWR);
-
-    // Send the entire framebuffer at once (no chunking)
-    // Convert RGB565 pixels to byte stream (big-endian)
-    const size_t total_pixels = 240 * 240;
-    const size_t frame_size_bytes = total_pixels * 2;  // 240 * 240 * 2 bytes
-
-    // Allocate full frame buffer in PSRAM for transmission
-    uint8_t* frame_buffer = (uint8_t*)heap_caps_malloc(frame_size_bytes, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
-
-    if (!frame_buffer) {
-        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate PSRAM frame buffer for transmission");
-        return;
+    // Start new frame - reset chunk state
+    if (!dma_state.psram_dma_active && !dma_state.spi_dma_active) {
+        dma_state.source_framebuffer = framebuffer;
+        dma_state.current_chunk = 0;
+        
+        // Load first chunk into loading buffer
+        load_chunk_from_psram(0, dma_state.loading_buffer);
+        
+        // Swap buffers for first transmission
+        uint8_t* temp = dma_state.active_buffer;
+        dma_state.active_buffer = dma_state.loading_buffer;
+        dma_state.loading_buffer = temp;
+        
+        // Set display window and start first DMA transmission
+        set_display_window(0);
+        size_t chunk_bytes = MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL;
+        generic_spi_write_data_dma(cur_spi_display_pin.handle, dma_state.active_buffer, chunk_bytes);
+        
+        dma_state.current_chunk = 1;
     }
-
-    // Convert entire uint16_t framebuffer to byte stream
-    for (size_t i = 0; i < total_pixels; i++) {
-        uint16_t pixel = framebuffer[i];
-        frame_buffer[i * 2] = pixel >> 8;       // High byte
-        frame_buffer[i * 2 + 1] = pixel & 0xFF; // Low byte
+    
+    // Check if SPI DMA completed
+    if (!dma_state.spi_dma_active) {
+        // Previous transmission done, start next chunk if available
+        if (dma_state.current_chunk < dma_state.total_chunks) {
+            
+            // Load next chunk into loading buffer while we transmit current
+            if (!dma_state.psram_dma_active) {
+                load_chunk_from_psram(dma_state.current_chunk, dma_state.loading_buffer);
+            }
+            
+            // Swap buffers
+            uint8_t* temp = dma_state.active_buffer;
+            dma_state.active_buffer = dma_state.loading_buffer;
+            dma_state.loading_buffer = temp;
+            
+            // Set window and transmit
+            set_display_window(dma_state.current_chunk);
+            size_t chunk_bytes = MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL;
+            generic_spi_write_data_dma(cur_spi_display_pin.handle, dma_state.active_buffer, chunk_bytes);
+            
+            dma_state.current_chunk++;
+        }
     }
-
-    // Send entire frame at once
-    generic_spi_write_data(cur_spi_display_pin.handle, frame_buffer, frame_size_bytes);
-
-    // Free the transmission buffer
-    heap_caps_free(frame_buffer);
 }
 
 

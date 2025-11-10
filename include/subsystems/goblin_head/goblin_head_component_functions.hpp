@@ -42,6 +42,8 @@ esp_err_t i2s_bus_0_init(void);
 void i2s_bus_0_act(void);
 esp_err_t i2s_driver_init(void);
 void i2s_driver_act(void);
+esp_err_t ili9341_init(void);
+void ili9341_act(void);
 esp_err_t servo_sg90_micro_init(void);
 void servo_sg90_micro_act(void);
 esp_err_t speaker_init(void);
@@ -351,6 +353,79 @@ void i2s_driver_act(void);
 #endif
 
 #endif // I2S_DRIVER_HDR
+
+// Declarations from config\components\hardware\ili9341.hdr
+#ifndef ILI9341_HDR
+#define ILI9341_HDR
+
+#include <stdint.h>
+
+// Display driver parameters for ILI9341 3.5" TFT display
+static const uint16_t display_width = 320;
+static const uint16_t display_height = 240;
+static const uint8_t bytes_per_pixel = 2;
+static const char* color_schema = "RGB565";
+
+// Derived values
+static const uint32_t display_pixels = display_width * display_height;
+static const uint32_t display_buffer_size = display_pixels * bytes_per_pixel;
+
+// This struct acts as a "type bundle" for the ili9341 hardware.
+// It will be used as a template parameter for components that need its properties.
+struct ili9341
+{
+    // Standardized interface members from ili9341.json
+    static const int WIDTH = 320;
+    static const int HEIGHT = 240;
+
+    // Standardized color channel maximums from "bits_per_pixel": 18
+    static const int MAX_RED   = 0x3F; // 6 bits
+    static const int MAX_GREEN = 0x3F; // 6 bits
+    static const int MAX_BLUE  = 0x3F; // 6 bits
+
+    // Standardized nested Pixel type for RGB666
+    struct Pixel
+    {
+        unsigned int red : 6;
+        unsigned int green : 6;
+        unsigned int blue : 6;
+
+        // Default constructor
+        Pixel() : red(0), green(0), blue(0) {}
+
+        // Copy constructor
+        Pixel(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+        }
+
+        // Assignment operator
+        Pixel& operator=(const Pixel& other)
+        {
+            red = other.red;
+            green = other.green;
+            blue = other.blue;
+            return *this;
+        }
+
+        // Add two pixels with saturation
+        Pixel operator+(const Pixel& other) const
+        {
+            Pixel result;
+            unsigned int sum_r = red + other.red;
+            result.red = (sum_r > MAX_RED) ? MAX_RED : sum_r;
+            unsigned int sum_g = green + other.green;
+            result.green = (sum_g > MAX_GREEN) ? MAX_GREEN : sum_g;
+            unsigned int sum_b = blue + other.blue;
+            result.blue = (sum_b > MAX_BLUE) ? MAX_BLUE : sum_b;
+            return result;
+        }
+    };
+};
+
+#endif // ILI9341_HDR
 
 // Declarations from config\components\hardware\servo_sg90_micro.hdr
 // Auto-generated header for servo_sg90_micro
