@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Fix use_fields declarations in all .src files
 Change from extern to static declarations with values from corresponding .json
@@ -99,7 +99,7 @@ def main():
         stats[status] += 1
         
         if status == "FIXED":
-            print(f"✓ FIXED: {src_file.name:50s} {message}")
+            print(f" FIXED: {src_file.name:50s} {message}")
         elif status == "OK":
             pass  # Don't print OK files
     

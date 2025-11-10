@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Restore Complete Component Definitions from Archive
 Replaces current versions with archived versions where archived is longer/more complete.
@@ -29,7 +29,7 @@ def restore_from_archive():
         current_files = list(current_dir.rglob(f"{component_name}.json"))
         
         if not current_files:
-            print(f"⊘ {component_name:40s} - Not found in current, skipping")
+            print(f" {component_name:40s} - Not found in current, skipping")
             skipped_count += 1
             continue
         
@@ -55,11 +55,11 @@ def restore_from_archive():
                     json.dump(data, f, indent=4)
                 
                 diff = archived_size - current_size
-                print(f"✓ RESTORED: {component_name:40s} +{diff:4d}B")
+                print(f" RESTORED: {component_name:40s} +{diff:4d}B")
                 restored_count += 1
                 
             except Exception as e:
-                print(f"✗ FAILED:   {component_name:40s} - {str(e)[:40]}")
+                print(f" FAILED:   {component_name:40s} - {str(e)[:40]}")
         else:
             skipped_count += 1
     

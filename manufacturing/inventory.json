@@ -1,4 +1,4 @@
-{
+﻿{
   "inventory": {
     "metadata": {
       "last_updated": "2025-11-07",
@@ -430,7 +430,7 @@
           },
           "total_with_spares": 77.21,
           "bulk_discount_available": "NO - 27 units too small for meaningful tier activation",
-          "recommendation": "Order at current retail pricing. Any bulk order ≥20 units adds complexity without ROI savings for prototype phase.",
+          "recommendation": "Order at current retail pricing. Any bulk order 20 units adds complexity without ROI savings for prototype phase.",
           "timeline": "Prototype + substantial field testing before scaling",
           "notes": "Use this batch to validate 3 different creature designs. Test facial animation, head positioning, and other subsystems in realistic environments before committing to larger production runs."
         },
@@ -493,7 +493,7 @@
         "allocation_strategy": "Use existing stock for head assembly positioning/rotation (12x 17HS3401S) and neck/arm subsystems (26x 28BYJ-48). Source compact nano-steppers only for facial animation.",
         "motors": [
           {
-            "motor_type": "17HS3401S (NEMA 17 - 40 N·cm)",
+            "motor_type": "17HS3401S (NEMA 17 - 40 Ncm)",
             "quantity_in_spare": 12,
             "status": "AVAILABLE",
             "allocated_purpose": "Head assembly positioning and rotation (EXCELLENT for this)",
@@ -502,7 +502,7 @@
             "usage_recommendation": "Perfect for moving entire head assembly. Allocate 2-4 units for head pan/tilt when ready."
           },
           {
-            "motor_type": "28BYJ-48 (Geared stepper - 3 N·cm)",
+            "motor_type": "28BYJ-48 (Geared stepper - 3 Ncm)",
             "quantity_in_spare": 26,
             "status": "AVAILABLE",
             "allocated_purpose": "Neck movement, arm actuation, secondary animations",

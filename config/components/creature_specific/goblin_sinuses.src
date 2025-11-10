@@ -1,0 +1,85 @@
+// goblin_sinuses component implementation
+// 3D-printed acoustic resonance chambers for natural sound amplification
+
+#include "esp_log.h"
+
+static const char *TAG_goblin_sinuses = "goblin_sinuses";
+
+// Configuration variables set via use_fields
+static uint16_t current_resonance_freq = 800;
+static float current_amplification = 1.5f;
+static uint8_t active_chambers = 3;
+
+esp_err_t goblin_sinuses_init(void) {
+    // Set resonance frequency from use_fields
+    resonance_frequency = current_resonance_freq;
+    amplification_factor = current_amplification;
+    chamber_count = active_chambers;
+    
+    ESP_LOGI(TAG_goblin_sinuses, "Sinus cavity initialized - %d chambers, %.1fx amplification, %dHz resonance", 
+             chamber_count, amplification_factor, resonance_frequency);
+    
+    // Physical cavity is passive - no electrical initialization needed
+    // Configuration is handled through mechanical design and 3D printing
+    
+    return ESP_OK;
+}
+
+void goblin_sinuses_act(void) {
+    // Passive acoustic system - no active processing needed
+    // Sound waves naturally resonate through the 3D-printed chambers
+    
+    // Could add dynamic tuning in future versions with:
+    // - Adjustable chamber volumes via servo-controlled baffles
+    // - Variable resonance via mechanical dampers
+    // - Real-time frequency analysis and optimization
+}
+
+esp_err_t goblin_sinuses_set_resonance(uint16_t frequency) {
+    if (frequency < 100 || frequency > 10000) {
+        ESP_LOGW(TAG_goblin_sinuses, "Resonance frequency %d out of optimal range", frequency);
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    current_resonance_freq = frequency;
+    resonance_frequency = frequency;
+    
+    ESP_LOGI(TAG_goblin_sinuses, "Resonance tuned to %dHz", frequency);
+    return ESP_OK;
+}
+
+esp_err_t goblin_sinuses_get_amplification(float *factor) {
+    if (!factor) return ESP_ERR_INVALID_ARG;
+    
+    *factor = current_amplification;
+    return ESP_OK;
+}
+
+esp_err_t goblin_sinuses_configure_voice(uint8_t voice_type) {
+    switch (voice_type) {
+        case 0: // Deep/bass voice
+            current_resonance_freq = 400;
+            current_amplification = 2.0f;
+            break;
+        case 1: // Normal voice  
+            current_resonance_freq = 800;
+            current_amplification = 1.5f;
+            break;
+        case 2: // High pitched voice
+            current_resonance_freq = 1200;
+            current_amplification = 1.2f;
+            break;
+        default:
+            ESP_LOGW(TAG_goblin_sinuses, "Unknown voice type %d", voice_type);
+            return ESP_ERR_INVALID_ARG;
+    }
+    
+    // Apply new configuration
+    resonance_frequency = current_resonance_freq;
+    amplification_factor = current_amplification;
+    
+    ESP_LOGI(TAG_goblin_sinuses, "Voice configured: type=%d, freq=%dHz, amp=%.1fx", 
+             voice_type, current_resonance_freq, current_amplification);
+    
+    return ESP_OK;
+}

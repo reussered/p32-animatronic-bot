@@ -1,4 +1,4 @@
-# Pixel Format Casting Interface - All Classes Updated
+﻿# Pixel Format Casting Interface - All Classes Updated
 
 ## Summary
 
@@ -52,22 +52,22 @@ void adjustMood(
 ```
 
 **Template instantiation is determined at compile time:**
-- `adjustMood<Pixel_RGB565>()` → calls `Pixel_RGB565::fromBytes()`
-- `adjustMood<Pixel_RGB888>()` → calls `Pixel_RGB888::fromBytes()`
-- `adjustMood<Pixel_Grayscale>()` → calls `Pixel_Grayscale::fromBytes()`
+- `adjustMood<Pixel_RGB565>()`  calls `Pixel_RGB565::fromBytes()`
+- `adjustMood<Pixel_RGB888>()`  calls `Pixel_RGB888::fromBytes()`
+- `adjustMood<Pixel_Grayscale>()`  calls `Pixel_Grayscale::fromBytes()`
 
 If a pixel format is missing `fromBytes()`, the template instantiation **fails at compile time** with clear errors.
 
 ## Pixel Formats Now Complete
 
-| Format | Bits | Bytes/Px | Memory (240×240) | fromBytes | toBytes | +=op |
+| Format | Bits | Bytes/Px | Memory (240240) | fromBytes | toBytes | +=op |
 |--------|------|----------|-----------------|-----------|---------|------|
-| RGB565 | 5-6-5 | 2 | 115.2 KB | ✅ | ✅ | ✅ |
-| RGB444 | 4-4-4 | 1.5 | 86.4 KB | ✅ | ✅ | ✅ |
-| RGB555 | 5-5-5 | 2 | 115.2 KB | ✅ | ✅ | ✅ |
-| RGB666 | 6-6-6 | 3 | 172.8 KB | ✅ | ✅ | ✅ |
-| RGB888 | 8-8-8 | 3 | 172.8 KB | ✅ | ✅ | ✅ |
-| Grayscale | 8 | 1 | 57.6 KB | ✅ | ✅ | ✅ |
+| RGB565 | 5-6-5 | 2 | 115.2 KB |  |  |  |
+| RGB444 | 4-4-4 | 1.5 | 86.4 KB |  |  |  |
+| RGB555 | 5-5-5 | 2 | 115.2 KB |  |  |  |
+| RGB666 | 6-6-6 | 3 | 172.8 KB |  |  |  |
+| RGB888 | 8-8-8 | 3 | 172.8 KB |  |  |  |
+| Grayscale | 8 | 1 | 57.6 KB |  |  |  |
 
 ## Why += Operators Are Critical
 
@@ -123,8 +123,8 @@ To support a hypothetical `Pixel_RGB1555` (1-bit alpha + 5-5-5 RGB):
    - Constructors (default, with RGB values)
    - `operator=` (assignment)
    - `operator==`, `operator!=` (comparison)
-   - `operator+`, `operator+=` (saturating arithmetic) ← **REQUIRED FOR TEMPLATE**
-   - `fromBytes()`, `toBytes()` ← **REQUIRED FOR TEMPLATE**
+   - `operator+`, `operator+=` (saturating arithmetic)  **REQUIRED FOR TEMPLATE**
+   - `fromBytes()`, `toBytes()`  **REQUIRED FOR TEMPLATE**
 3. Creature components automatically work:
    ```cpp
    adjustMood<Pixel_RGB1555>(buffer, size, mood, effects);  // Just works!

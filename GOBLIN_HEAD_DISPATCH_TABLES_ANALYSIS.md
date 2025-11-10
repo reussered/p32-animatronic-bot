@@ -1,4 +1,4 @@
-# Goblin Head Dispatch Tables Analysis
+﻿# Goblin Head Dispatch Tables Analysis
 
 ## Overview
 
@@ -131,30 +131,30 @@ The dispatch table entries reflect the depth-first tree traversal of the compone
 
 ```
 goblin_head
-├─ goblin_left_eye (Entry 0)
-│  └─ goblin_eye (Entry 1)
-│     └─ gc9a01 (Entry 2)
-│        └─ spi_display_bus (Entry 3)
-│           └─ generic_spi_display (Entry 4)
-├─ goblin_right_eye (Entry 5)
-│  └─ goblin_eye (Entry 6 - DUPLICATE)
-│     └─ gc9a01 (Entry 7 - DUPLICATE)
-│        └─ spi_display_bus (Entry 8 - DUPLICATE)
-│           └─ generic_spi_display (Entry 9 - DUPLICATE)
-├─ goblin_nose (Entry 10)
-│  └─ hc_sr04_ultrasonic_distance_sensor (Entry 11)
-├─ goblin_mouth (Entry 12)
-│  └─ ili9341 (Entry 13)
-├─ goblin_speaker (Entry 14)
-│  ├─ speaker (Entry 15)
-│  ├─ i2s_bus_0 (Entry 16)
-│  └─ i2s_driver (Entry 17)
-├─ goblin_left_ear (Entry 18)
-│  ├─ servo_sg90_micro (Entry 19)
-│  └─ hw496_microphone (Entry 20)
-└─ goblin_right_ear (Entry 21)
-   ├─ servo_sg90_micro (Entry 22 - DUPLICATE)
-   └─ hw496_microphone (Entry 23 - DUPLICATE)
+ goblin_left_eye (Entry 0)
+   goblin_eye (Entry 1)
+      gc9a01 (Entry 2)
+         spi_display_bus (Entry 3)
+            generic_spi_display (Entry 4)
+ goblin_right_eye (Entry 5)
+   goblin_eye (Entry 6 - DUPLICATE)
+      gc9a01 (Entry 7 - DUPLICATE)
+         spi_display_bus (Entry 8 - DUPLICATE)
+            generic_spi_display (Entry 9 - DUPLICATE)
+ goblin_nose (Entry 10)
+   hc_sr04_ultrasonic_distance_sensor (Entry 11)
+ goblin_mouth (Entry 12)
+   ili9341 (Entry 13)
+ goblin_speaker (Entry 14)
+   speaker (Entry 15)
+   i2s_bus_0 (Entry 16)
+   i2s_driver (Entry 17)
+ goblin_left_ear (Entry 18)
+   servo_sg90_micro (Entry 19)
+   hw496_microphone (Entry 20)
+ goblin_right_ear (Entry 21)
+    servo_sg90_micro (Entry 22 - DUPLICATE)
+    hw496_microphone (Entry 23 - DUPLICATE)
 ```
 
 ---
@@ -212,25 +212,25 @@ goblin_head
 ### 3. COMPONENT ORGANIZATION BY FUNCTION
 
 #### Display Pipeline (Entries 0-9)
-- Left eye: goblin_left_eye → goblin_eye → gc9a01 → spi_display_bus → generic_spi_display
-- Right eye: goblin_right_eye → goblin_eye → gc9a01 → spi_display_bus → generic_spi_display
+- Left eye: goblin_left_eye  goblin_eye  gc9a01  spi_display_bus  generic_spi_display
+- Right eye: goblin_right_eye  goblin_eye  gc9a01  spi_display_bus  generic_spi_display
 - Status: HIGH FREQUENCY (continuous visual updates)
 
 #### Sensor Pipeline (Entries 10-11)
-- Nose: goblin_nose → hc_sr04_ultrasonic_distance_sensor
+- Nose: goblin_nose  hc_sr04_ultrasonic_distance_sensor
 - Status: LOW FREQUENCY (only when needed)
 
 #### Mouth/Expression Pipeline (Entries 12-13)
-- Expression: goblin_mouth → ili9341 display driver
+- Expression: goblin_mouth  ili9341 display driver
 - Status: MEDIUM FREQUENCY (animation updates)
 
 #### Audio Pipeline (Entries 14-17)
-- Speaker: goblin_speaker → speaker → i2s_bus_0 → i2s_driver
+- Speaker: goblin_speaker  speaker  i2s_bus_0  i2s_driver
 - Status: HIGH FREQUENCY I2S driver for audio quality
 
 #### Ear/Listening Pipeline (Entries 18-23)
-- Left ear: goblin_left_ear → servo_sg90_micro → hw496_microphone
-- Right ear: goblin_right_ear → servo_sg90_micro → hw496_microphone
+- Left ear: goblin_left_ear  servo_sg90_micro  hw496_microphone
+- Right ear: goblin_right_ear  servo_sg90_micro  hw496_microphone
 - Status: HIGH FREQUENCY (audio input monitoring)
 
 ---
@@ -284,14 +284,14 @@ void goblin_head_main_loop() {
 
 ```
 src/subsystems/goblin_head/
-├─ goblin_head_dispatch_tables.cpp        (This document shows the content)
-├─ goblin_head_component_functions.cpp    (Aggregated .src files)
-└─ goblin_head_main.cpp                   (FreeRTOS task setup)
+ goblin_head_dispatch_tables.cpp        (This document shows the content)
+ goblin_head_component_functions.cpp    (Aggregated .src files)
+ goblin_head_main.cpp                   (FreeRTOS task setup)
 
 include/subsystems/goblin_head/
-├─ goblin_head_dispatch_tables.hpp        (Header declarations)
-├─ goblin_head_component_functions.hpp    (Function prototypes)
-└─ goblin_head_main.hpp                   (Task declarations)
+ goblin_head_dispatch_tables.hpp        (Header declarations)
+ goblin_head_component_functions.hpp    (Function prototypes)
+ goblin_head_main.hpp                   (Task declarations)
 ```
 
 ---

@@ -1,29 +1,133 @@
 #include <esp_err.h>
+#include <esp_log.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
+#include <math.h>
+#include <sys/time.h>
+#include "components/hardware/hc_sr04_sensor.hdr"
 
 /**
  * @file hc_sr04_sensor.src
- * @brief Implementation for hc_sr04_sensor component
+ * @brief Debug implementation for HC-SR04 ultrasonic sensor
  * 
- * TODO: Implement component initialization and action logic
+ * This debug version simulates realistic distance readings for the goblin nose
+ * without requiring actual GPIO pins or hardware setup.
  */
 
+static const char* TAG_hc_sr04 = "hc_sr04_sensor";
+
+// Debug sensor state
+typedef struct {
+    float current_distance_cm;    // Current simulated distance reading
+    bool valid_reading;           // Whether current reading is valid
+    uint32_t measurement_count;   // Number of measurements taken
+    uint32_t last_update_ms;      // Last time reading was updated
+} hc_sr04_debug_state_t;
+
+static hc_sr04_debug_state_t sensor_state = {
+    .current_distance_cm = 50.0f,  // Start at 50cm
+    .valid_reading = true,
+    .measurement_count = 0,
+    .last_update_ms = 0
+};
+
+// Debug configuration
+#define UPDATE_INTERVAL_MS 100      // Update readings every 100ms
+#define MIN_DISTANCE_CM 2.0f        // HC-SR04 minimum range
+#define MAX_DISTANCE_CM 400.0f      // HC-SR04 maximum range
+#define NOISE_AMPLITUDE_CM 0.5f     // Random noise amplitude
+
 /**
- * @brief Initialize hc_sr04_sensor
- * Performs any setup needed for this component
+ * @brief Get current time in milliseconds
+ */
+static uint32_t get_time_ms(void) {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
+
+/**
+ * @brief Generate realistic simulated distance reading
+ */
+static void update_simulated_distance(void) {
+    uint32_t now = get_time_ms();
+    
+    if (now - sensor_state.last_update_ms < UPDATE_INTERVAL_MS) {
+        return; // Too soon to update
+    }
+    
+    sensor_state.last_update_ms = now;
+    sensor_state.measurement_count++;
+    
+    // Create a realistic varying distance pattern
+    float time_sec = (float)sensor_state.measurement_count * (UPDATE_INTERVAL_MS / 1000.0f);
+    
+    // Simulate someone moving back and forth in front of the sensor
+    float base_distance = 30.0f + 20.0f * sinf(time_sec * 0.1f);  // 10-50cm oscillation
+    
+    // Add some random noise
+    float noise = ((float)(esp_random() % 1000) / 1000.0f - 0.5f) * 2.0f * NOISE_AMPLITUDE_CM;
+    
+    sensor_state.current_distance_cm = base_distance + noise;
+    
+    // Clamp to sensor range
+    if (sensor_state.current_distance_cm < MIN_DISTANCE_CM) {
+        sensor_state.current_distance_cm = MIN_DISTANCE_CM;
+    } else if (sensor_state.current_distance_cm > MAX_DISTANCE_CM) {
+        sensor_state.current_distance_cm = MAX_DISTANCE_CM;
+    }
+    
+    // Occasionally simulate no reading (out of range or obstacle)
+    sensor_state.valid_reading = (esp_random() % 100) < 95; // 95% success rate
+    
+    ESP_LOGD(TAG_hc_sr04, "Distance: %.1f cm, valid: %s", 
+             sensor_state.current_distance_cm, 
+             sensor_state.valid_reading ? "true" : "false");
+}
+
+/**
+ * @brief Initialize HC-SR04 sensor (debug version)
  */
 esp_err_t hc_sr04_sensor_init(void)
 {
-    // TODO: Implement initialization
+    ESP_LOGI(TAG_hc_sr04, "Initializing HC-SR04 sensor (DEBUG MODE)");
+    ESP_LOGI(TAG_hc_sr04, "Range: %.1f - %.1f cm, Update interval: %d ms", 
+             MIN_DISTANCE_CM, MAX_DISTANCE_CM, UPDATE_INTERVAL_MS);
+    
+    sensor_state.last_update_ms = get_time_ms();
+    sensor_state.measurement_count = 0;
+    
     return ESP_OK;
 }
 
 /**
- * @brief Execute hc_sr04_sensor action
- * Called periodically during subsystem dispatch
+ * @brief Execute HC-SR04 sensor action (debug version)
  */
 void hc_sr04_sensor_act(void)
 {
-    // TODO: Implement component behavior
+    update_simulated_distance();
+}
+
+/**
+ * @brief Get the current distance reading in centimeters
+ */
+float hc_sr04_get_distance_cm(void) 
+{
+    return sensor_state.valid_reading ? sensor_state.current_distance_cm : -1.0f;
+}
+
+/**
+ * @brief Get the current distance reading in millimeters
+ */
+float hc_sr04_get_distance_mm(void) 
+{
+    return sensor_state.valid_reading ? (sensor_state.current_distance_cm * 10.0f) : -1.0f;
+}
+
+/**
+ * @brief Check if sensor has a valid reading
+ */
+bool hc_sr04_is_valid_reading(void) 
+{
+    return sensor_state.valid_reading;
 }

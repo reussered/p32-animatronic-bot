@@ -1,4 +1,4 @@
-# AI Agent Rule Enforcement Tightening
+﻿# AI Agent Rule Enforcement Tightening
 
 **Date**: November 6, 2025
 
@@ -17,7 +17,7 @@
 **New Rule**:
 ```
 3b. REFUSE to create files with Unicode: IF creating ANY file (code, docs, config, scripts) 
-AND that file would contain non-ASCII characters (°, ±, →, ⭐, ⚠️, etc.) 
+AND that file would contain non-ASCII characters (, , , , , etc.) 
 REJECT the file creation and rewrite using only ASCII 
 (RULE 25 enforcement - do not create files then cleanup Unicode afterward; 
 write ASCII-only from the start)
@@ -35,7 +35,7 @@ write ASCII-only from the start)
 ```
 4. Are you creating ANY new files (code, docs, config, scripts)?
    - If YES: STOP and verify the content is 100% ASCII-only BEFORE creation (RULE 25)
-   - Check for: °, ±, →, ⭐, ⚠️, ≈, ×, µ, ∞, or any non-ASCII characters
+   - Check for: , , , , , , , , , or any non-ASCII characters
    - If Unicode is needed, replace with ASCII: degrees, +/-, ->, [STARS], [WARNING], 
      approx, x, micro, infinity
    - Create files ASCII-only from the start. Do not create with Unicode then cleanup afterward.
@@ -69,7 +69,7 @@ APPLIES TO:
 
 NO EXCEPTIONS FOR:
 - Special Unicode characters (degree symbol, arrows, checkmarks, emoji, box drawing)
-- Mathematical symbols (±, ≈, ∞, µ, Ω)
+- Mathematical symbols (, , , , )
 - Non-ASCII punctuation or decorative elements
 - Markdown emphasis tricks (decorative Unicode borders)
 
@@ -77,14 +77,14 @@ ENFORCEMENT:
 - DO NOT create files with Unicode - use ASCII replacements from the start
 - DO NOT use Unicode in documentation, comments, or strings
 - Common replacements:
-  - `degrees` instead of `°`
-  - `+/-` instead of `±`
-  - `approx` instead of `≈`
-  - `->` instead of `→`
-  - `[WARNING]` instead of `⚠️`
-  - `x` instead of `×`
-  - `infinity` instead of `∞`
-  - `micro` or `u` instead of `µ`
+  - `degrees` instead of ``
+  - `+/-` instead of ``
+  - `approx` instead of ``
+  - `->` instead of ``
+  - `[WARNING]` instead of ``
+  - `x` instead of ``
+  - `infinity` instead of ``
+  - `micro` or `u` instead of ``
 
 VERIFICATION:
 - All documentation created MUST be ASCII-compliant from the first draft
@@ -109,7 +109,7 @@ The root cause was that the agent could create Unicode files and "fix them later
 
 **BAD (Old way)**:
 ```python
-content = "Temperature: 25°C, Tolerance: ±2°, Error Rate: ≈0.5%"
+content = "Temperature: 25C, Tolerance: 2, Error Rate: 0.5%"
 create_file("report.md", content)  # Contains Unicode
 # Later: Run cleanup script to fix
 ```

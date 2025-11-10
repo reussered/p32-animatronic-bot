@@ -1,4 +1,4 @@
-"""
+﻿"""
 Deduplicate Registry - Keep bot_families, Delete Others
 Rule: For each duplicate component name, keep the one in config/bots/bot_families/
       Delete all other versions.
@@ -57,7 +57,7 @@ def deduplicate_registry(registry_path: str = "config/component_registry.json") 
         
         if not bot_families_entry:
             # No bot_families version - keep first, delete rest
-            print("  ⚠ No bot_families version found - keeping first, deleting rest")
+            print("   No bot_families version found - keeping first, deleting rest")
             bot_families_entry = other_entries[0]
             other_entries = other_entries[1:]
         
@@ -85,7 +85,7 @@ def deduplicate_registry(registry_path: str = "config/component_registry.json") 
         with open("tools/duplicates_to_delete.json", 'w', encoding='utf-8') as f:
             json.dump(deletion_entries, f, indent=2)
         
-        print(f"\n✓ Deletion list saved to: tools/duplicates_to_delete.json")
+        print(f"\n Deletion list saved to: tools/duplicates_to_delete.json")
         print(f"  Review it before running cleanup")
 
 

@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Normalize all component arrays to contain ONLY component names (no paths).
 Step 1: Restore components arrays from commit 018e3d2
 Step 2: Convert all file paths to component names (stem only)
-Result: ["config/components/goblin_eye.json"] → ["goblin_eye"]
+Result: ["config/components/goblin_eye.json"]  ["goblin_eye"]
 """
 
 import json
@@ -50,14 +50,14 @@ def write_json_file(filepath: str, data: Dict) -> bool:
 def path_to_component_name(path: str) -> str:
     """Convert file path to component name (stem only)."""
     p = Path(path)
-    return p.stem  # e.g., "config/components/goblin_eye.json" → "goblin_eye"
+    return p.stem  # e.g., "config/components/goblin_eye.json"  "goblin_eye"
 
 def normalize_components_array(components_array: List) -> List[str]:
     """
     Convert components array to names only.
     Handles both formats:
-    - ["config/components/goblin_eye.json"] → ["goblin_eye"]
-    - ["goblin_eye"] → ["goblin_eye"]  (already normalized)
+    - ["config/components/goblin_eye.json"]  ["goblin_eye"]
+    - ["goblin_eye"]  ["goblin_eye"]  (already normalized)
     """
     if not components_array:
         return []
@@ -100,7 +100,7 @@ def process_file(filepath: str) -> tuple:
     if write_json_file(filepath, current):
         before = ', '.join(str(c) for c in current_components[:2]) if current_components else "(empty)"
         after = ', '.join(normalized[:2]) if normalized else "(empty)"
-        return ("FIXED", f"{len(current_components)} → {len(normalized)}: [{before}] → [{after}]")
+        return ("FIXED", f"{len(current_components)}  {len(normalized)}: [{before}]  [{after}]")
     else:
         return ("FAILED", f"Cannot write: {filepath}")
 
@@ -133,10 +133,10 @@ def scan_and_process(base_dirs: List[str] = None) -> None:
         stats[status] += 1
         
         if status == "FIXED":
-            print(f"[{i:3d}] ✓ FIXED: {json_file.name:40s} {message}")
+            print(f"[{i:3d}]  FIXED: {json_file.name:40s} {message}")
             fixed_files.append(filepath)
         elif status == "FAILED":
-            print(f"[{i:3d}] ✗ FAILED: {json_file.name:40s} {message}")
+            print(f"[{i:3d}]  FAILED: {json_file.name:40s} {message}")
         elif status == "SKIP":
             pass  # Don't print skipped files, too many
     
@@ -159,7 +159,7 @@ def scan_and_process(base_dirs: List[str] = None) -> None:
             print(f"  ... and {len(fixed_files) - 10} more")
     
     if stats['FAILED'] > 0:
-        print(f"\n⚠ WARNING: {stats['FAILED']} files failed to process")
+        print(f"\n WARNING: {stats['FAILED']} files failed to process")
         return 1
     
     return 0

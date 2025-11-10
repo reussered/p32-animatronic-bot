@@ -1,4 +1,4 @@
-"""
+﻿"""
 Delete multi_family humanoid duplicates and update registry
 Keep bot_families versions, delete multi_family versions.
 """
@@ -40,15 +40,15 @@ def main():
         filepath = Path(path)
         
         if not filepath.exists():
-            print(f"⊘ Not found: {path}")
+            print(f" Not found: {path}")
             continue
         
         try:
             os.remove(filepath)
-            print(f"✓ Deleted: {path}")
+            print(f" Deleted: {path}")
             deleted_count += 1
         except Exception as e:
-            print(f"✗ Failed: {path} - {e}")
+            print(f" Failed: {path} - {e}")
             failed_count += 1
     
     print("\n" + "=" * 80)
@@ -70,7 +70,7 @@ def main():
             if comp["path"] == path:
                 name = comp["name"]
                 del data["components"][i]
-                print(f"✓ Removed: {name} @ {path}")
+                print(f" Removed: {name} @ {path}")
                 removed_count += 1
                 break
     

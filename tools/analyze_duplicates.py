@@ -1,4 +1,4 @@
-"""
+﻿"""
 Duplicate Resolution Tool
 Uses file modification dates to identify which duplicates are truly redundant.
 Marks older files for deletion, keeps newest version.
@@ -138,14 +138,14 @@ Write-Host "=" * 80
 if (Test-Path "{path}") {{
     Remove-Item -Force "{path}" -ErrorAction SilentlyContinue
     if ($?) {{
-        Write-Host "✓ Deleted: {path}" -ForegroundColor Green
+        Write-Host " Deleted: {path}" -ForegroundColor Green
         $DeletedCount++
     }} else {{
-        Write-Host "✗ Failed:  {path}" -ForegroundColor Red
+        Write-Host " Failed:  {path}" -ForegroundColor Red
         $FailedCount++
     }}
 }} else {{
-    Write-Host "⊘ Not found: {path}" -ForegroundColor Gray
+    Write-Host " Not found: {path}" -ForegroundColor Gray
 }}
 
 """
@@ -160,7 +160,7 @@ Write-Host "Next step: Update config/component_registry.json to remove obsolete 
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(script)
     
-    print(f"\n✓ Deletion script generated: {output_file}")
+    print(f"\n Deletion script generated: {output_file}")
     print(f"  Will delete {len(deletion_entries)} obsolete files")
     
     return deletion_entries
@@ -208,7 +208,7 @@ for entry_info in to_remove:
     for i, comp in enumerate(data["components"]):
         if comp["name"] == name and comp["path"] == path:
             del data["components"][i]
-            print(f"✓ Removed: {{name}} @ {{path}}")
+            print(f" Removed: {{name}} @ {{path}}")
             removed_count += 1
             break
 
@@ -223,7 +223,7 @@ print(f"Total entries now: {{len(data['components'])}}")
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(script)
     
-    print(f"✓ Registry update script generated: {output_file}")
+    print(f" Registry update script generated: {output_file}")
 
 
 def main():

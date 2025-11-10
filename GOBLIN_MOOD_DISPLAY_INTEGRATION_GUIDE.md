@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file GOBLIN_MOOD_DISPLAY_INTEGRATION_GUIDE.md
  * @brief Complete guide for integrating mood-based display system into goblin head
  * 
@@ -26,11 +26,11 @@ This means character emotions automatically affect visual appearance:
 
 ```
 SharedMemory (Mood struct)
-    ↓
+    
 MoodCalculator<PixelType> (template-based)
-    ↓
+    
 Display Rendering (Eyes or Mouth)
-    ↓
+    
 Display Driver (SPI to hardware)
 ```
 
@@ -120,10 +120,10 @@ void goblin_head_act(void) {
 
 | Display | Resolution | Color Schema | Buffer | Chips |
 |---------|-----------|--------------|--------|-------|
-| GC9A01  | 240×240   | RGB565       | 112.5 KB | 2 |
-| ST7789  | 240×320   | RGB565       | 150 KB   | 2 |
-| ST7735  | 160×128   | RGB565       | 40 KB    | 2 |
-| SSD1331 | 96×64     | RGB565       | 12 KB    | 2 |
+| GC9A01  | 240240   | RGB565       | 112.5 KB | 2 |
+| ST7789  | 240320   | RGB565       | 150 KB   | 2 |
+| ST7735  | 160128   | RGB565       | 40 KB    | 2 |
+| SSD1331 | 9664     | RGB565       | 12 KB    | 2 |
 
 **Total for dual eyes (GC9A01):** 225 KB (good headroom)
 
@@ -131,9 +131,9 @@ void goblin_head_act(void) {
 
 | Display | Resolution | Color Schema | Full Size | Chunk | Chunks | Peak Memory |
 |---------|-----------|--------------|-----------|-------|--------|-------------|
-| ILI9341 | 480×320   | RGB666       | 450 KB    | 480×80 | 4 | 112.5 KB ✓ |
-| RA8875  | 800×480   | RGB666       | 1125 KB   | 800×80 | 6 | 150 KB ✓ |
-| ILI9481 | 800×480   | RGB888       | 1152 KB   | 800×40 | 12| 96 KB ✓ |
+| ILI9341 | 480320   | RGB666       | 450 KB    | 48080 | 4 | 112.5 KB  |
+| RA8875  | 800480   | RGB666       | 1125 KB   | 80080 | 6 | 150 KB  |
+| ILI9481 | 800480   | RGB888       | 1152 KB   | 80040 | 12| 96 KB  |
 
 ## Memory Analysis
 
@@ -154,9 +154,9 @@ Available (300 KB constraint):
 
 ### Budget Impact
 
-- **Eyes only (dual GC9A01):** 225 KB → 75 KB headroom for animations
-- **Eyes + ST7735 mouth:** 265 KB → 35 KB headroom
-- **Eyes + ILI9341 chunked:** ~330 KB → requires tight heap management but works
+- **Eyes only (dual GC9A01):** 225 KB  75 KB headroom for animations
+- **Eyes + ST7735 mouth:** 265 KB  35 KB headroom
+- **Eyes + ILI9341 chunked:** ~330 KB  requires tight heap management but works
 
 ## Mood Customization
 
@@ -236,7 +236,7 @@ mouth.setSmile(true);
 
 - **MoodCalculator instantiation:** Compile-time (zero runtime cost)
 - **Per-pixel mood application:** ~50 CPU cycles on ESP32-S3
-- **Full frame render (240×240):** ~2.4M cycles (57.6K pixels × 50 cycles)
+- **Full frame render (240240):** ~2.4M cycles (57.6K pixels  50 cycles)
 - **At 240 MHz:** ~10 ms to render dual eyes
 
 ### Memory Usage
@@ -244,19 +244,19 @@ mouth.setSmile(true);
 | Component | Size |
 |-----------|------|
 | MoodCalculator<T> instance | ~200 bytes |
-| GC9A01 eye buffer (240×240 RGB565) | 115,200 bytes |
-| ST7735 mouth buffer (160×128 RGB565) | 40,960 bytes |
-| ILI9341 chunk buffer (480×80 RGB666) | 115,200 bytes |
+| GC9A01 eye buffer (240240 RGB565) | 115,200 bytes |
+| ST7735 mouth buffer (160128 RGB565) | 40,960 bytes |
+| ILI9341 chunk buffer (48080 RGB666) | 115,200 bytes |
 | **Total (dual eyes + mouth chunk)** | **~330 KB** |
 
 ### Refresh Rates
 
 | Display | Resolution | Chunks | Render Time | FPS |
 |---------|-----------|--------|-----------|-----|
-| GC9A01 (eye) | 240×240 | 1 | 10 ms | 100+ |
-| ST7735 (mouth) | 160×128 | 1 | 2.6 ms | 100+ |
-| ILI9341 (mouth) | 480×320 | 4 | 40 ms | 25 |
-| RA8875 (mouth) | 800×480 | 6 | 60 ms | 16 |
+| GC9A01 (eye) | 240240 | 1 | 10 ms | 100+ |
+| ST7735 (mouth) | 160128 | 1 | 2.6 ms | 100+ |
+| ILI9341 (mouth) | 480320 | 4 | 40 ms | 25 |
+| RA8875 (mouth) | 800480 | 6 | 60 ms | 16 |
 
 ## Debugging
 
@@ -316,12 +316,12 @@ ESP_LOGI(TAG, "Total peak: %d bytes", left_size + right_size + mouth_chunk_size)
 
 ## Next Steps
 
-1. ✅ Create display templates (DONE)
-2. ⏳ Integrate into `goblin_left_eye.src` / `goblin_right_eye.src`
-3. ⏳ Integrate into `goblin_mouth.src`
-4. ⏳ Update `goblin_eye.json` with color_schema parameter
-5. ⏳ Test mood transitions on actual hardware
-6. ⏳ Optimize chunk sizes for your specific displays
+1.  Create display templates (DONE)
+2.  Integrate into `goblin_left_eye.src` / `goblin_right_eye.src`
+3.  Integrate into `goblin_mouth.src`
+4.  Update `goblin_eye.json` with color_schema parameter
+5.  Test mood transitions on actual hardware
+6.  Optimize chunk sizes for your specific displays
 
 ## References
 

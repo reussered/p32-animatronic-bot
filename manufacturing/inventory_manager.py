@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Inventory Management & Automatic Ordering System
 P32 Animatronic Bot Project
@@ -97,7 +97,7 @@ class InventoryManager:
         for item_id, item in self.items.items():
             if item.current_stock <= item.reorder_point:
                 reorder_list.append(item_id)
-                print(f"⚠️  REORDER NEEDED: {item.name}")
+                print(f"  REORDER NEEDED: {item.name}")
                 print(f"   Current: {item.current_stock}, Minimum: {item.reorder_point}")
         return reorder_list
     
@@ -244,10 +244,10 @@ class InventoryManager:
             by_category[item.category].append(item)
         
         for category, items in by_category.items():
-            print(f"\n📦 {category.upper()}")
+            print(f"\n {category.upper()}")
             print("-" * 80)
             for item in items:
-                status = "✅" if item.current_stock > item.reorder_point else "⚠️ "
+                status = "" if item.current_stock > item.reorder_point else " "
                 print(f"{status} {item.name}")
                 print(f"   Manufacturer: {item.manufacturer} ({item.manufacturer_sku})")
                 print(f"   Stock: {item.current_stock} (reorder point: {item.reorder_point})")
@@ -263,16 +263,16 @@ class InventoryManager:
         reorder_items = self.check_reorder_needed()
         
         if not reorder_items:
-            print("\n✅ All items are adequately stocked!")
+            print("\n All items are adequately stocked!")
             return
         
-        print(f"\n⚠️  {len(reorder_items)} items need reordering:")
+        print(f"\n  {len(reorder_items)} items need reordering:")
         total_cost = 0
         for item_id in reorder_items:
             item = self.items[item_id]
             cost = item.reorder_quantity * item.unit_cost
             total_cost += cost
-            print(f"  • {item.name}: order {item.reorder_quantity} units @ ${item.unit_cost}/ea = ${cost:.2f}")
+            print(f"   {item.name}: order {item.reorder_quantity} units @ ${item.unit_cost}/ea = ${cost:.2f}")
         
         print(f"\nEstimated total cost (before shipping): ${total_cost:.2f}")
 
@@ -293,7 +293,7 @@ def main():
     # Generate sample bulk purchase order
     reorder_items = manager.check_reorder_needed()
     if reorder_items:
-        print("\n📋 Generating bulk purchase order...")
+        print("\n Generating bulk purchase order...")
         bulk_order = manager.generate_bulk_purchase_order(reorder_items)
         print(json.dumps(bulk_order, indent=2))
 

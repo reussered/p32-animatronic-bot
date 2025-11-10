@@ -12,28 +12,141 @@
 
 static const char *TAG_generic_spi_display = "generic_spi_display";
 
-// Double-buffered chunking configuration
-#define CHUNK_HEIGHT 80        // Render 80 lines at a time
-#define MAX_DISPLAY_WIDTH 480  // ILI9341 width
-#define MAX_DISPLAY_HEIGHT 320 // ILI9341 height
-#define BYTES_PER_PIXEL 3      // RGB666
-#define CHUNK_SIZE_BYTES (MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL)
+// Dynamic chunking configuration
+#define MIN_CHUNK_HEIGHT 2         // Minimum chunk size (too small = excessive overhead)
+#define MAX_CHUNK_HEIGHT 40        // Maximum chunk size (too large = poor fairness)
+#define INITIAL_CHUNK_HEIGHT 10    // Starting point for adaptive algorithm
+#define MAX_DISPLAY_WIDTH 480      // ILI9341 width (mouth), eyes are 240x240
+#define MAX_DISPLAY_HEIGHT 320     // ILI9341 height
+#define BYTES_PER_PIXEL 3          // RGB666
 
-// DMA state tracking
+// Dynamic chunk sizing state
 typedef struct {
-    uint8_t* buffer_a;           // Double buffer A
-    uint8_t* buffer_b;           // Double buffer B
+    uint16_t current_chunk_height;     // Current adaptive chunk height
+    uint32_t act_call_count;           // Total calls to generic_spi_display_act()
+    uint32_t dma_busy_count;           // Calls where DMA was busy (couldn't start new transfer)
+    uint32_t dma_started_count;        // Calls where new DMA transfer was started
+    uint32_t adjustment_timer;         // Counter for periodic adjustments
+    size_t current_buffer_size;        // Current allocated buffer size in bytes
+} dynamic_chunk_state_t;
+
+static dynamic_chunk_state_t chunk_state = {
+    .current_chunk_height = INITIAL_CHUNK_HEIGHT,
+    .act_call_count = 0,
+    .dma_busy_count = 0,
+    .dma_started_count = 0,
+    .adjustment_timer = 0,
+    .current_buffer_size = 0
+};
+
+#define CHUNK_SIZE_BYTES (MAX_DISPLAY_WIDTH * chunk_state.current_chunk_height * BYTES_PER_PIXEL)
+
+// Multi-display round-robin scheduling
+typedef enum {
+    DISPLAY_LEFT_EYE = 0,   // CS=3
+    DISPLAY_RIGHT_EYE = 1,  // CS=6  
+    DISPLAY_MOUTH = 2,      // CS=? (to be determined)
+    DISPLAY_COUNT = 3
+} display_id_t;
+
+// Per-display state tracking
+typedef struct {
+    uint8_t cs_pin;              // Chip select pin for this display
+    uint16_t* framebuffer;       // Source PSRAM framebuffer for this display
+    uint16_t width;              // Display width in pixels
+    uint16_t height;             // Display height in pixels
+    size_t current_chunk;        // Which chunk we're processing (0-63 for mouth, 0-47 for eyes)
+    size_t total_chunks;         // Total chunks for this display
+    bool frame_pending;          // This display has a new frame to send
+    bool chunks_remaining;       // This display still has chunks to send
+} display_state_t;
+
+// Global DMA state tracking
+typedef struct {
+    uint8_t* buffer_a;           // Double buffer A (shared across displays)
+    uint8_t* buffer_b;           // Double buffer B (shared across displays)
     uint8_t* active_buffer;      // Currently transmitting
     uint8_t* loading_buffer;     // Currently loading from PSRAM
-    size_t current_chunk;        // Which chunk we're processing (0-3)
-    size_t total_chunks;         // Total chunks for current display
     bool psram_dma_active;       // PSRAM->buffer DMA in progress
     bool spi_dma_active;         // Buffer->display DMA in progress
     SemaphoreHandle_t dma_complete_sem;  // DMA completion notification
-    uint16_t* source_framebuffer; // Source PSRAM framebuffer
+    
+    // Round-robin scheduling
+    display_id_t current_display;    // Which display is currently being served
+    display_state_t displays[DISPLAY_COUNT];  // Per-display state
 } dma_chunking_state_t;
 
 static dma_chunking_state_t dma_state = {0};
+
+// Simple adaptive chunk size adjustment - just respond to DMA completion ratio
+#define ADJUSTMENT_INTERVAL 200  // Adjust every 200 calls to act()
+#define TARGET_BUSY_RATIO 50     // Target: ~50% of calls should find DMA busy
+
+static void adjust_chunk_size(void) {
+    chunk_state.adjustment_timer++;
+    if (chunk_state.adjustment_timer < ADJUSTMENT_INTERVAL) return;
+    
+    // Simple algorithm: just respond to DMA completion ratio
+    uint32_t busy_ratio_percent = 0;
+    if (chunk_state.act_call_count > 0) {
+        busy_ratio_percent = (chunk_state.dma_busy_count * 100) / chunk_state.act_call_count;
+    }
+    
+    uint16_t old_height = chunk_state.current_chunk_height;
+    
+    if (busy_ratio_percent < (TARGET_BUSY_RATIO - 10)) {
+        // DMA being started too often - increase chunk size by 1 for fewer, larger transfers
+        if (chunk_state.current_chunk_height < MAX_CHUNK_HEIGHT) {
+            chunk_state.current_chunk_height++;
+        }
+    } else if (busy_ratio_percent > (TARGET_BUSY_RATIO + 10)) {
+        // DMA not started enough - decrease chunk size by 1 for more frequent transfers
+        if (chunk_state.current_chunk_height > MIN_CHUNK_HEIGHT) {
+            chunk_state.current_chunk_height--;
+        }
+    }
+    
+    // Reallocate buffers if chunk size changed
+    
+    if (old_height != chunk_state.current_chunk_height) {
+        ESP_LOGI(TAG_generic_spi_display, "Adaptive chunk adjustment: %d->%d rows (busy ratio: %lu%%)", 
+                 old_height, chunk_state.current_chunk_height, busy_ratio_percent);
+        
+        // Recalculate buffer sizes and total chunks for all displays
+        size_t new_buffer_size = MAX_DISPLAY_WIDTH * chunk_state.current_chunk_height * BYTES_PER_PIXEL;
+        if (new_buffer_size != chunk_state.current_buffer_size) {
+            // Reallocate buffers if size changed significantly
+            if (dma_state.buffer_a) heap_caps_free(dma_state.buffer_a);
+            if (dma_state.buffer_b) heap_caps_free(dma_state.buffer_b);
+            
+            dma_state.buffer_a = (uint8_t*)heap_caps_malloc(new_buffer_size, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+            dma_state.buffer_b = (uint8_t*)heap_caps_malloc(new_buffer_size, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+            
+            if (dma_state.buffer_a && dma_state.buffer_b) {
+                chunk_state.current_buffer_size = new_buffer_size;
+                dma_state.active_buffer = dma_state.buffer_a;
+                dma_state.loading_buffer = dma_state.buffer_b;
+                
+                // Recalculate total chunks for all displays
+                for (int i = 0; i < DISPLAY_COUNT; i++) {
+                    dma_state.displays[i].total_chunks = 
+                        (dma_state.displays[i].height + chunk_state.current_chunk_height - 1) / chunk_state.current_chunk_height;
+                }
+                
+                ESP_LOGI(TAG_generic_spi_display, "Reallocated buffers: %zu bytes each", new_buffer_size);
+            } else {
+                ESP_LOGE(TAG_generic_spi_display, "Failed to reallocate adaptive buffers!");
+                chunk_state.current_chunk_height = old_height; // Revert change
+            }
+        }
+    }
+    
+    // Reset statistics for next measurement period
+    chunk_state.adjustment_timer = 0;
+    chunk_state.act_call_count = 0;
+    chunk_state.dma_busy_count = 0;
+    chunk_state.dma_started_count = 0;
+}
 
 // Display commands
 #define GC9A01_SWRESET 0x01
@@ -43,11 +156,16 @@ static dma_chunking_state_t dma_state = {0};
 #define GC9A01_RASET  0x2B
 #define GC9A01_RAMWR  0x2C
 
-// DMA completion callback
+// DMA completion callback - triggers continued round-robin processing
 static void IRAM_ATTR spi_dma_callback(spi_transaction_t *trans) {
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     dma_state.spi_dma_active = false;
+    
+    // Trigger continued processing by calling the act function
+    // This ensures the pipeline continues with the next chunk or next display
+    // Note: This is a simplified approach - in production you might want to use a task notification
     xSemaphoreGiveFromISR(dma_state.dma_complete_sem, &xHigherPriorityTaskWoken);
+    
     if (xHigherPriorityTaskWoken) {
         portYIELD_FROM_ISR();
     }
@@ -96,32 +214,59 @@ static void spi_write_command(spi_device_handle_t spi, const uint8_t cmd) {
 esp_err_t generic_spi_display_init(void) {
     ESP_LOGI(TAG_generic_spi_display, "Initializing generic SPI display with double-buffered DMA chunking, CS=%d", cur_spi_display_pin.cs);
     
-    // Initialize DMA state
-    memset(&dma_state, 0, sizeof(dma_state));
-    
-    // Create semaphore for DMA completion signaling
-    dma_state.dma_complete_sem = xSemaphoreCreateBinary();
-    if (!dma_state.dma_complete_sem) {
-        ESP_LOGE(TAG_generic_spi_display, "Failed to create DMA completion semaphore");
-        return ESP_ERR_NO_MEM;
+    // Initialize DMA state (one-time global setup)
+    static bool dma_initialized = false;
+    if (!dma_initialized) {
+        memset(&dma_state, 0, sizeof(dma_state));
+        
+        // Create semaphore for DMA completion signaling
+        dma_state.dma_complete_sem = xSemaphoreCreateBinary();
+        if (!dma_state.dma_complete_sem) {
+            ESP_LOGE(TAG_generic_spi_display, "Failed to create DMA completion semaphore");
+            return ESP_ERR_NO_MEM;
+        }
+        
+        // Initialize adaptive chunk sizing
+        chunk_state.current_buffer_size = MAX_DISPLAY_WIDTH * chunk_state.current_chunk_height * BYTES_PER_PIXEL;
+        
+        // Allocate initial shared double buffers in DMA-capable memory
+        dma_state.buffer_a = (uint8_t*)heap_caps_malloc(chunk_state.current_buffer_size, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+        dma_state.buffer_b = (uint8_t*)heap_caps_malloc(chunk_state.current_buffer_size, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
+        
+        if (!dma_state.buffer_a || !dma_state.buffer_b) {
+            ESP_LOGE(TAG_generic_spi_display, "Failed to allocate initial DMA buffers (%zu bytes each)", chunk_state.current_buffer_size);
+            return ESP_ERR_NO_MEM;
+        }
+        
+        // Initialize buffer pointers
+        dma_state.active_buffer = dma_state.buffer_a;
+        dma_state.loading_buffer = dma_state.buffer_b;
+        dma_state.current_display = DISPLAY_LEFT_EYE;  // Start with left eye
+        
+        // Initialize per-display state
+        dma_state.displays[DISPLAY_LEFT_EYE].cs_pin = 3;
+        dma_state.displays[DISPLAY_LEFT_EYE].width = 240;
+        dma_state.displays[DISPLAY_LEFT_EYE].height = 240;
+        
+        dma_state.displays[DISPLAY_RIGHT_EYE].cs_pin = 6;  
+        dma_state.displays[DISPLAY_RIGHT_EYE].width = 240;
+        dma_state.displays[DISPLAY_RIGHT_EYE].height = 240;
+        
+        dma_state.displays[DISPLAY_MOUTH].cs_pin = 10;  // TODO: Determine actual CS pin for mouth
+        dma_state.displays[DISPLAY_MOUTH].width = 480;
+        dma_state.displays[DISPLAY_MOUTH].height = 320;
+        
+        for (int i = 0; i < DISPLAY_COUNT; i++) {
+            dma_state.displays[i].total_chunks = (dma_state.displays[i].height + chunk_state.current_chunk_height - 1) / chunk_state.current_chunk_height;
+            dma_state.displays[i].current_chunk = 0;
+            dma_state.displays[i].frame_pending = false;
+            dma_state.displays[i].chunks_remaining = false;
+        }
+        
+        dma_initialized = true;
+        ESP_LOGI(TAG_generic_spi_display, "Adaptive DMA system initialized: %zu bytes per buffer, %d displays, initial chunk height: %d", 
+                 chunk_state.current_buffer_size, DISPLAY_COUNT, chunk_state.current_chunk_height);
     }
-    
-    // Allocate double buffers in DMA-capable memory
-    dma_state.buffer_a = (uint8_t*)heap_caps_malloc(CHUNK_SIZE_BYTES, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
-    dma_state.buffer_b = (uint8_t*)heap_caps_malloc(CHUNK_SIZE_BYTES, MALLOC_CAP_DMA | MALLOC_CAP_8BIT);
-    
-    if (!dma_state.buffer_a || !dma_state.buffer_b) {
-        ESP_LOGE(TAG_generic_spi_display, "Failed to allocate DMA buffers (%d bytes each)", CHUNK_SIZE_BYTES);
-        return ESP_ERR_NO_MEM;
-    }
-    
-    // Initialize buffer pointers
-    dma_state.active_buffer = dma_state.buffer_a;
-    dma_state.loading_buffer = dma_state.buffer_b;
-    dma_state.total_chunks = (MAX_DISPLAY_HEIGHT + CHUNK_HEIGHT - 1) / CHUNK_HEIGHT; // Ceiling division
-    
-    ESP_LOGI(TAG_generic_spi_display, "Allocated DMA buffers: %d bytes each, %d chunks total", 
-             CHUNK_SIZE_BYTES, dma_state.total_chunks);
 
     if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "SPI handle is NULL, cannot initialize display.");
@@ -152,23 +297,69 @@ esp_err_t generic_spi_display_init(void) {
     return ESP_OK;
 }
 
-// Convert and load a chunk from PSRAM framebuffer to DMA buffer
-static void load_chunk_from_psram(size_t chunk_index, uint8_t* dest_buffer) {
-    if (!dma_state.source_framebuffer || !dest_buffer) return;
+// Get framebuffer for a specific display
+static uint16_t* get_framebuffer_for_display(display_id_t display_id) {
+    switch (display_id) {
+        case DISPLAY_LEFT_EYE:
+            return goblin_left_eye_get_buffer();
+        case DISPLAY_RIGHT_EYE:
+            return goblin_right_eye_get_buffer();
+        case DISPLAY_MOUTH:
+            // TODO: Implement goblin_mouth_get_buffer() or similar
+            return nullptr; // Placeholder for now
+        default:
+            return nullptr;
+    }
+}
+
+// Find next display with pending work (round-robin)
+static display_id_t find_next_display_with_work(void) {
+    for (int i = 0; i < DISPLAY_COUNT; i++) {
+        display_id_t check_display = (display_id_t)((dma_state.current_display + i) % DISPLAY_COUNT);
+        if (dma_state.displays[check_display].frame_pending || 
+            dma_state.displays[check_display].chunks_remaining) {
+            return check_display;
+        }
+    }
+    return DISPLAY_COUNT; // No work found
+}
+
+// Switch SPI bus to target a specific display
+static void switch_to_display(display_id_t display_id) {
+    if (display_id >= DISPLAY_COUNT) return;
     
-    size_t start_row = chunk_index * CHUNK_HEIGHT;
-    size_t end_row = (chunk_index + 1) * CHUNK_HEIGHT;
-    if (end_row > MAX_DISPLAY_HEIGHT) end_row = MAX_DISPLAY_HEIGHT;
+    // Update current display selection
+    dma_state.current_display = display_id;
+    
+    // Switch SPI CS pin (this might need to be implemented differently based on your SPI bus setup)
+    // For now, assume we update the global cur_spi_display_pin
+    cur_spi_display_pin.cs = dma_state.displays[display_id].cs_pin;
+    
+    ESP_LOGD(TAG_generic_spi_display, "Switched to display %d (CS=%d)", 
+             display_id, dma_state.displays[display_id].cs_pin);
+}
+
+// Convert and load a chunk from PSRAM framebuffer to DMA buffer
+static void load_chunk_from_psram(display_id_t display_id, size_t chunk_index, uint8_t* dest_buffer) {
+    uint16_t* source_framebuffer = dma_state.displays[display_id].framebuffer;
+    if (!source_framebuffer || !dest_buffer) return;
+    
+    uint16_t display_width = dma_state.displays[display_id].width;
+    uint16_t display_height = dma_state.displays[display_id].height;
+    
+    size_t start_row = chunk_index * chunk_state.current_chunk_height;
+    size_t end_row = (chunk_index + 1) * chunk_state.current_chunk_height;
+    if (end_row > display_height) end_row = display_height;
     
     size_t rows_in_chunk = end_row - start_row;
     
     // Convert RGB565 (PSRAM) to RGB666 (DMA buffer) for this chunk
     for (size_t row = 0; row < rows_in_chunk; row++) {
-        for (size_t col = 0; col < MAX_DISPLAY_WIDTH; col++) {
-            size_t src_index = (start_row + row) * MAX_DISPLAY_WIDTH + col;
-            size_t dest_index = (row * MAX_DISPLAY_WIDTH + col) * BYTES_PER_PIXEL;
+        for (size_t col = 0; col < display_width; col++) {
+            size_t src_index = (start_row + row) * display_width + col;
+            size_t dest_index = (row * display_width + col) * BYTES_PER_PIXEL;
             
-            uint16_t rgb565 = dma_state.source_framebuffer[src_index];
+            uint16_t rgb565 = source_framebuffer[src_index];
             
             // Convert RGB565 to RGB666
             uint8_t r = ((rgb565 >> 11) & 0x1F) << 1; // 5->6 bits
@@ -183,14 +374,16 @@ static void load_chunk_from_psram(size_t chunk_index, uint8_t* dest_buffer) {
 }
 
 // Set display window for current chunk
-static void set_display_window(size_t chunk_index) {
-    size_t start_row = chunk_index * CHUNK_HEIGHT;
-    size_t end_row = (chunk_index + 1) * CHUNK_HEIGHT - 1;
-    if (end_row >= MAX_DISPLAY_HEIGHT) end_row = MAX_DISPLAY_HEIGHT - 1;
+static void set_display_window(display_id_t display_id, size_t chunk_index) {
+    size_t start_row = chunk_index * chunk_state.current_chunk_height;
+    size_t end_row = (chunk_index + 1) * chunk_state.current_chunk_height - 1;
+    uint16_t display_height = dma_state.displays[display_id].height;
+    uint16_t display_width = dma_state.displays[display_id].width;
+    if (end_row >= display_height) end_row = display_height - 1;
     
-    // Set column address (0 to MAX_DISPLAY_WIDTH-1)
+    // Set column address (0 to display_width-1)
     spi_write_command(cur_spi_display_pin.handle, GC9A01_CASET);
-    uint8_t col_data[] = {0x00, 0x00, (MAX_DISPLAY_WIDTH - 1) >> 8, (MAX_DISPLAY_WIDTH - 1) & 0xFF};
+    uint8_t col_data[] = {0x00, 0x00, (display_width - 1) >> 8, (display_width - 1) & 0xFF};
     generic_spi_write_data_blocking(cur_spi_display_pin.handle, col_data, 4);
 
     // Set row address for this chunk
@@ -203,68 +396,99 @@ static void set_display_window(size_t chunk_index) {
 }
 
 void generic_spi_display_act(void) {
+    // Adaptive chunk sizing - track every call to act()
+    chunk_state.act_call_count++;
+    
     if (cur_spi_display_pin.handle == NULL) {
         ESP_LOGE(TAG_generic_spi_display, "act: SPI handle is NULL for CS=%d", cur_spi_display_pin.cs);
         return;
     }
 
-    // Get the appropriate framebuffer based on which display we're driving
-    uint16_t* framebuffer = nullptr;
+    // Identify which display called us and update its framebuffer
+    display_id_t calling_display = DISPLAY_COUNT;
     if (cur_spi_display_pin.cs == 3) {
-        framebuffer = goblin_left_eye_get_buffer();
+        calling_display = DISPLAY_LEFT_EYE;
     } else if (cur_spi_display_pin.cs == 6) {
-        framebuffer = goblin_right_eye_get_buffer();
+        calling_display = DISPLAY_RIGHT_EYE;
+    } else if (cur_spi_display_pin.cs == 10) { // TODO: Update with actual mouth CS pin
+        calling_display = DISPLAY_MOUTH;
     }
 
-    if (!framebuffer) {
-        ESP_LOGE(TAG_generic_spi_display, "No framebuffer available for CS=%d", cur_spi_display_pin.cs);
-        return;
+    if (calling_display < DISPLAY_COUNT) {
+        // Update framebuffer for the calling display
+        uint16_t* framebuffer = get_framebuffer_for_display(calling_display);
+        if (framebuffer) {
+            dma_state.displays[calling_display].framebuffer = framebuffer;
+            dma_state.displays[calling_display].frame_pending = true;
+            dma_state.displays[calling_display].current_chunk = 0;
+            dma_state.displays[calling_display].chunks_remaining = true;
+        }
     }
 
-    // Start new frame - reset chunk state
+    // Check if DMA operations are active for adaptive algorithm
     if (!dma_state.psram_dma_active && !dma_state.spi_dma_active) {
-        dma_state.source_framebuffer = framebuffer;
-        dma_state.current_chunk = 0;
+        // DMA is idle - we can start new transfer
+        chunk_state.dma_started_count++;
         
-        // Load first chunk into loading buffer
-        load_chunk_from_psram(0, dma_state.loading_buffer);
+        // Find next display that needs service (round-robin)
+        display_id_t next_display = find_next_display_with_work();
+        if (next_display >= DISPLAY_COUNT) {
+            return; // No displays need service
+        }
         
-        // Swap buffers for first transmission
-        uint8_t* temp = dma_state.active_buffer;
-        dma_state.active_buffer = dma_state.loading_buffer;
-        dma_state.loading_buffer = temp;
+        // Switch to the selected display
+        switch_to_display(next_display);
         
-        // Set display window and start first DMA transmission
-        set_display_window(0);
-        size_t chunk_bytes = MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL;
-        generic_spi_write_data_dma(cur_spi_display_pin.handle, dma_state.active_buffer, chunk_bytes);
+        display_state_t* display = &dma_state.displays[next_display];
         
-        dma_state.current_chunk = 1;
-    }
-    
-    // Check if SPI DMA completed
-    if (!dma_state.spi_dma_active) {
-        // Previous transmission done, start next chunk if available
-        if (dma_state.current_chunk < dma_state.total_chunks) {
+        // Start new frame or continue existing frame
+        if (display->frame_pending) {
+            display->frame_pending = false;
+            display->current_chunk = 0;
+            display->chunks_remaining = true;
+        }
+        
+        if (display->chunks_remaining && display->current_chunk < display->total_chunks) {
             
-            // Load next chunk into loading buffer while we transmit current
-            if (!dma_state.psram_dma_active) {
-                load_chunk_from_psram(dma_state.current_chunk, dma_state.loading_buffer);
-            }
+            // Load chunk into loading buffer
+            load_chunk_from_psram(next_display, display->current_chunk, dma_state.loading_buffer);
             
-            // Swap buffers
+            // Swap buffers for transmission
             uint8_t* temp = dma_state.active_buffer;
             dma_state.active_buffer = dma_state.loading_buffer;
             dma_state.loading_buffer = temp;
             
-            // Set window and transmit
-            set_display_window(dma_state.current_chunk);
-            size_t chunk_bytes = MAX_DISPLAY_WIDTH * CHUNK_HEIGHT * BYTES_PER_PIXEL;
+            // Set display window and start DMA transmission
+            set_display_window(next_display, display->current_chunk);
+            
+            // Calculate actual chunk size (handle leftover rows in final chunk)
+            size_t rows_in_chunk = chunk_state.current_chunk_height;
+            size_t start_row = display->current_chunk * chunk_state.current_chunk_height;
+            if (start_row + rows_in_chunk > display->height) {
+                rows_in_chunk = display->height - start_row; // Handle leftover rows
+            }
+            
+            size_t chunk_bytes = display->width * rows_in_chunk * BYTES_PER_PIXEL;
             generic_spi_write_data_dma(cur_spi_display_pin.handle, dma_state.active_buffer, chunk_bytes);
             
-            dma_state.current_chunk++;
+            display->current_chunk++;
+            
+            // Check if this display is done
+            if (display->current_chunk >= display->total_chunks) {
+                display->chunks_remaining = false;
+                ESP_LOGD(TAG_generic_spi_display, "Display %d frame complete", next_display);
+            }
         }
+    } else {
+        // DMA is busy - track this for adaptive algorithm
+        chunk_state.dma_busy_count++;
     }
+    
+    // Run adaptive chunk size adjustment periodically
+    adjust_chunk_size();
+    
+    // Note: When SPI DMA completes, the callback will trigger this function again
+    // ensuring continuous round-robin service of all displays
 }
 
 

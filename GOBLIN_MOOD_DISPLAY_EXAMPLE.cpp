@@ -1,4 +1,4 @@
-/**
+﻿/**
  * GOBLIN_MOOD_DISPLAY_EXAMPLE.cpp
  * 
  * Quick reference: How to use mood-based display templates
@@ -275,7 +275,7 @@ Example 1 (Dual GC9A01 + ST7735):
   Total: 271,360 bytes = 265 KB
   
   Available heap: 300 KB
-  Headroom:       35 KB ✓ GOOD
+  Headroom:       35 KB  GOOD
 
 Example 2 (Dual GC9A01 + ILI9341 chunked):
   Left eye:     240x240x2 = 115,200 bytes = 112.5 KB
@@ -285,7 +285,7 @@ Example 2 (Dual GC9A01 + ILI9341 chunked):
   Total: 345,600 bytes = 337.5 KB
   
   Available heap: 300 KB
-  Over by:        37.5 KB ⚠️ TIGHT
+  Over by:        37.5 KB  TIGHT
   
   Solution: Reduce chunk height to 64 pixels:
     480x64x3 = 92,160 bytes = 90 KB per chunk
@@ -294,5 +294,5 @@ Example 2 (Dual GC9A01 + ILI9341 chunked):
   Or drop to single large ST7735 eye + ILI9341:
     240x240x2 = 112.5 KB (1 eye)
     480x80x3  = 112.5 KB (mouth chunk)
-    Total = 225 KB ✓ SAFE
+    Total = 225 KB  SAFE
 */

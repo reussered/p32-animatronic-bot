@@ -1,4 +1,4 @@
-# Offline Agent Task: Complete Goblin Eye Display Pipeline
+﻿# Offline Agent Task: Complete Goblin Eye Display Pipeline
 
 ## Task Status: READY FOR OFFLINE AGENT
 **Created**: 2025-11-06  
@@ -11,20 +11,20 @@
 
 Complete the goblin eye display rendering pipeline. The architecture is designed, templates are written, and component skeletons exist. This task consolidates all components into a working system.
 
-## What's Already Done ✅
+## What's Already Done 
 
 ### Architecture & Templates
-- ✅ `config/shared_headers/color_schema.hpp` - All 6 pixel formats with `fromBytes()`/`toBytes()` + saturating `+=` operators
-- ✅ `config/shared_headers/mood_effects.hpp` - Template `adjustMood<PixelType>()` using clean casting interface
-- ✅ Documentation: `CLEAN_POINTER_CASTING_ARCHITECTURE.md`, `PIXEL_CASTING_INTERFACE_COMPLETE.md`
+-  `config/shared_headers/color_schema.hpp` - All 6 pixel formats with `fromBytes()`/`toBytes()` + saturating `+=` operators
+-  `config/shared_headers/mood_effects.hpp` - Template `adjustMood<PixelType>()` using clean casting interface
+-  Documentation: `CLEAN_POINTER_CASTING_ARCHITECTURE.md`, `PIXEL_CASTING_INTERFACE_COMPLETE.md`
 
 ### Component Allocation (Positioned Components)
-- ✅ `config/bots/bot_families/goblins/head/goblin_left_eye.src` - Allocates `unsigned char* display_buffer`
-- ✅ `config/bots/bot_families/goblins/head/goblin_right_eye.src` - Allocates `unsigned char* display_buffer`
-- ✅ `config/bots/bot_families/goblins/head/goblin_mouth.src` - Allocates `unsigned char* display_buffer`
+-  `config/bots/bot_families/goblins/head/goblin_left_eye.src` - Allocates `unsigned char* display_buffer`
+-  `config/bots/bot_families/goblins/head/goblin_right_eye.src` - Allocates `unsigned char* display_buffer`
+-  `config/bots/bot_families/goblins/head/goblin_mouth.src` - Allocates `unsigned char* display_buffer`
 
 ### Component Processing
-- ✅ `config/bots/bot_families/goblins/head/goblin_eye.src` - Calls `adjustMood<Pixel_RGB565>()` template with `goblin_mood_effects[]`
+-  `config/bots/bot_families/goblins/head/goblin_eye.src` - Calls `adjustMood<Pixel_RGB565>()` template with `goblin_mood_effects[]`
 
 ## What Needs to be Done
 
@@ -38,7 +38,7 @@ Complete the goblin eye display rendering pipeline. The architecture is designed
 
 **Verification Steps**:
 1. Check that `goblin_eye.src` is listed **after** the positioned component in the JSON configuration
-   - Example order: `goblin_left_eye` → `goblin_eye` → `generic_spi_display`
+   - Example order: `goblin_left_eye`  `goblin_eye`  `generic_spi_display`
 2. Verify build output for linker errors related to `display_buffer`
 3. Test on hardware or simulator to confirm mood effects render
 
@@ -108,9 +108,9 @@ python tools/generate_tables.py goblin_full src
 4. Observe display color changes matching mood intensity
 
 **Expected Behavior**:
-- Anger (high) → Red tint with reduced green/blue
-- Happiness (high) → Yellow/warm tint
-- Fear (high) → Blue tint with reduced saturation
+- Anger (high)  Red tint with reduced green/blue
+- Happiness (high)  Yellow/warm tint
+- Fear (high)  Blue tint with reduced saturation
 - Colors shift smoothly as mood components change
 
 **Debug Points**:
@@ -225,7 +225,7 @@ Result: File-scoped `static` variables in `goblin_left_eye.src` are visible to `
 
 ## Success Criteria
 
-✅ **Task Complete When**:
+ **Task Complete When**:
 1. All components compile without errors
 2. Component chain correctly resolves `display_buffer` symbol
 3. Display renders initial neutral color without errors

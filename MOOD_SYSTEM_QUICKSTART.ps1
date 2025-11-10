@@ -1,4 +1,4 @@
-#!/usr/bin/env powershell
+﻿#!/usr/bin/env powershell
 <#
 QUICK START: Goblin Mood Display System
 ========================================
@@ -30,21 +30,21 @@ Write-Host "`n CHOOSE YOUR DISPLAY CONFIGURATION:" -ForegroundColor Cyan
 Write-Host @"
 
 CONFIG A: Safe & Simple (Recommended)
-  - Left eye:  GC9A01 240×240 RGB565   (112.5 KB)
-  - Right eye: GC9A01 240×240 RGB565   (112.5 KB)
-  - Mouth:     ST7735 160×128 RGB565   (40 KB)
-  TOTAL: 265 KB (35 KB HEADROOM) ✓
+  - Left eye:  GC9A01 240240 RGB565   (112.5 KB)
+  - Right eye: GC9A01 240240 RGB565   (112.5 KB)
+  - Mouth:     ST7735 160128 RGB565   (40 KB)
+  TOTAL: 265 KB (35 KB HEADROOM) 
 
 CONFIG B: High-Res Mouth (Tight)
-  - Left eye:  GC9A01 240×240 RGB565   (112.5 KB)
-  - Right eye: GC9A01 240×240 RGB565   (112.5 KB)
-  - Mouth:     ILI9341 480×320 chunked (112.5 KB)
-  TOTAL: 337.5 KB (BARELY FITS) ⚠️
+  - Left eye:  GC9A01 240240 RGB565   (112.5 KB)
+  - Right eye: GC9A01 240240 RGB565   (112.5 KB)
+  - Mouth:     ILI9341 480320 chunked (112.5 KB)
+  TOTAL: 337.5 KB (BARELY FITS) 
 
 CONFIG C: Balanced
-  - Left eye:  GC9A01 240×240 RGB565   (112.5 KB)
-  - Mouth:     ILI9341 480×320 chunked (112.5 KB)
-  TOTAL: 225 KB (75 KB HEADROOM) ✓
+  - Left eye:  GC9A01 240240 RGB565   (112.5 KB)
+  - Mouth:     ILI9341 480320 chunked (112.5 KB)
+  TOTAL: 225 KB (75 KB HEADROOM) 
 
 CONFIG D: Custom
   Edit GOBLIN_MOOD_DISPLAY_EXAMPLE.cpp and mix/match displays
@@ -135,23 +135,23 @@ Write-Host "COMMON ISSUES:" -ForegroundColor Yellow
 Write-Host @"
 
 Buffer exceeds 300 KB?
-  → Use CONFIG A (ST7735 mouth) or CONFIG C (single eye)
-  → Enable chunking in mouth.init()
+   Use CONFIG A (ST7735 mouth) or CONFIG C (single eye)
+   Enable chunking in mouth.init()
 
 Mood changes not visible?
-  → Check GSM.read<Mood>() returns valid values
-  → Verify base color isn't too dark (mood shifts need room)
-  → Check mood_calc is instantiated correctly
+   Check GSM.read<Mood>() returns valid values
+   Verify base color isn't too dark (mood shifts need room)
+   Check mood_calc is instantiated correctly
 
 Compilation errors?
-  → Verify color_schema.hpp exists
-  → Check Mood.hpp defines all 5 mood states
-  → Confirm MoodState enum matches
+   Verify color_schema.hpp exists
+   Check Mood.hpp defines all 5 mood states
+   Confirm MoodState enum matches
 
 Flicker on screen?
-  → Reduce mood intensity (set lower than 1.0)
-  → Smooth transitions: intensity * 0.9f for gradual fade
-  → Check chunk rendering completes before timeout
+   Reduce mood intensity (set lower than 1.0)
+   Smooth transitions: intensity * 0.9f for gradual fade
+   Check chunk rendering completes before timeout
 
 "@
 
@@ -159,14 +159,14 @@ Write-Host "`nFILES READY TO INTEGRATE:" -ForegroundColor Green
 Write-Host @"
 
 Templates (copy into your .src files):
-  ✓ config/components/templates/mood_calculator_template.hpp
-  ✓ config/components/templates/goblin_eye_mood_display.hpp
-  ✓ config/components/templates/goblin_mouth_mood_display.hpp
+   config/components/templates/mood_calculator_template.hpp
+   config/components/templates/goblin_eye_mood_display.hpp
+   config/components/templates/goblin_mouth_mood_display.hpp
 
 Documentation:
-  ✓ GOBLIN_MOOD_DISPLAY_INTEGRATION_GUIDE.md
-  ✓ GOBLIN_MOOD_DISPLAY_EXAMPLE.cpp
-  ✓ GOBLIN_MOOD_DISPLAY_IMPLEMENTATION_SUMMARY.md
+   GOBLIN_MOOD_DISPLAY_INTEGRATION_GUIDE.md
+   GOBLIN_MOOD_DISPLAY_EXAMPLE.cpp
+   GOBLIN_MOOD_DISPLAY_IMPLEMENTATION_SUMMARY.md
 
 "@
 
@@ -180,11 +180,11 @@ Write-Host ("="*60)
 Write-Host @"
 
 What you have:
-  • Template-based color modification (0 runtime overhead)
-  • Auto-detecting pixel format (just set resolution)
-  • Memory-efficient chunking (fits 300 KB constraint)
-  • 5 mood states with customizable effects
-  • Complete integration guide + working examples
+   Template-based color modification (0 runtime overhead)
+   Auto-detecting pixel format (just set resolution)
+   Memory-efficient chunking (fits 300 KB constraint)
+   5 mood states with customizable effects
+   Complete integration guide + working examples
 
 Next:
   1. Review all files

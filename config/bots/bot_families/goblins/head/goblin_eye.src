@@ -5,7 +5,6 @@
 #include "esp_log.h"
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "config/shared_headers/mood_effects.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 

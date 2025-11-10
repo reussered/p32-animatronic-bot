@@ -1,4 +1,4 @@
-# Electromagnetic Actuator Design Specification
+﻿# Electromagnetic Actuator Design Specification
 ## DIY Motor Assembly for Goblin Face Animation
 
 **Project Context:** Build cost-effective animatronic facial features using 3D-printed housings + copper coil electromagnets + small magnets and iron cores.
@@ -58,7 +58,7 @@ Raise/lower eyebrows independently for expression (sad, angry, surprised, neutra
 | Component | Qty | Unit Cost | Notes |
 |-----------|-----|-----------|-------|
 | 3D-printed housing | 1 | $0.50 | PETG, 15g filament |
-| Iron rod (4mm × 30mm) | 1 | $0.05 | Scrap/bulk steel |
+| Iron rod (4mm  30mm) | 1 | $0.05 | Scrap/bulk steel |
 | Copper wire 26 AWG | 15m | $0.10 | Bulk spool ~$8/kg |
 | Neodymium magnets 5mm | 2 | $0.10 | Positioning/detent |
 | Spring (compression, 3mm) | 1 | $0.05 | Return mechanism |
@@ -71,7 +71,7 @@ Raise/lower eyebrows independently for expression (sad, angry, surprised, neutra
 
 ## 2. JAW ACTUATOR
 ### Purpose
-Open/close jaw for speech, eating animations, expression (smile ↔ frown)
+Open/close jaw for speech, eating animations, expression (smile  frown)
 
 ### Mechanical Design
 **Housing Dimensions:**
@@ -88,7 +88,7 @@ Open/close jaw for speech, eating animations, expression (smile ↔ frown)
 
 **Motion Spec:**
 - Stroke: 20-30mm vertical (full open to closed)
-- Rotation: ~30-45° jaw rotation around hinge point
+- Rotation: ~30-45 jaw rotation around hinge point
 - Speed: 300-600ms full cycle (speech requires moderate speed)
 - Holding force: ~300-500g (jaw weight + resistance to closure)
 - Duty cycle: Speech animation (frequent motion) or expression holds
@@ -119,7 +119,7 @@ Open/close jaw for speech, eating animations, expression (smile ↔ frown)
 | Component | Qty | Unit Cost | Notes |
 |-----------|-----|-----------|-------|
 | 3D-printed housing | 1 | $0.75 | ABS, 25g filament, more rigid |
-| Iron rod (5mm × 40mm) | 1 | $0.08 | Larger core for more force |
+| Iron rod (5mm  40mm) | 1 | $0.08 | Larger core for more force |
 | Copper wire 24 AWG | 20m | $0.15 | Thicker wire, ~600-750 turns |
 | Neodymium magnets 5-8mm | 3 | $0.20 | Positioning + detent |
 | Spring (compression, 4mm) | 2 | $0.10 | Stronger return force |
@@ -181,7 +181,7 @@ Puff/depress cheeks for expression (happy puff, sad hollow), speech enhancement,
 | Component | Qty | Unit Cost | Notes |
 |-----------|-----|-----------|-------|
 | 3D-printed housing | 1 | $0.50 | PETG, 12g filament |
-| Iron rod (3mm × 25mm) | 1 | $0.04 | Smaller core, light force |
+| Iron rod (3mm  25mm) | 1 | $0.04 | Smaller core, light force |
 | Copper wire 28 AWG | 10m | $0.08 | Fine wire, ~250-350 turns |
 | Neodymium magnets 3-5mm | 1 | $0.05 | Light positioning |
 | Spring (compression, 2mm) | 1 | $0.03 | Light return |
@@ -206,14 +206,14 @@ Swivel ears for attention (perk up), expression (droop), animation (twitch)
 **Operating Principle:**
 - **Rotary solenoid** with permanent magnet latch
 - Electromagnet pulls against spring-loaded detent
-- Enables ~45-90° ear rotation around pivot axis
+- Enables ~45-90 ear rotation around pivot axis
 - Option A: Linear solenoid with cam linkage converts to rotation
 - Option B: Direct rotary electromagnet (requires more complex winding)
 - **Recommended: Option A** (proven, lower cost)
 
 **Motion Spec:**
-- Rotation: 45-90° (ear swivel from neutral to perked/drooped)
-- Torque: ~200-400g·cm (supporting ear weight + positioning against air resistance)
+- Rotation: 45-90 (ear swivel from neutral to perked/drooped)
+- Torque: ~200-400gcm (supporting ear weight + positioning against air resistance)
 - Speed: 250-500ms per full motion (responsive but not jittery)
 - Holding: Spring-loaded detent (passive hold at extremes)
 - Duty cycle: 5-10% (ears animate less frequently than jaw/eyebrows)
@@ -244,7 +244,7 @@ Swivel ears for attention (perk up), expression (droop), animation (twitch)
 | Component | Qty | Unit Cost | Notes |
 |-----------|-----|-----------|-------|
 | 3D-printed housing | 1 | $0.60 | ABS, 18g filament |
-| Iron rod (4mm × 35mm) | 1 | $0.06 | Moderate core for torque |
+| Iron rod (4mm  35mm) | 1 | $0.06 | Moderate core for torque |
 | Copper wire 26 AWG | 15m | $0.10 | ~400-600 turns |
 | Neodymium magnets 5mm | 2 | $0.10 | Magnetic detents at positions |
 | Spring (compression, 3mm) | 1 | $0.05 | Return to neutral |
@@ -261,14 +261,14 @@ Swivel ears for attention (perk up), expression (droop), animation (twitch)
 ### Master Control Architecture
 ```
 ESP32-S3 (primary controller)
-    ├─ Eyebrow Left (GPIO X) → ULN2003 ch1
-    ├─ Eyebrow Right (GPIO Y) → ULN2003 ch2
-    ├─ Jaw Left (GPIO Z) → 2N2222 transistor
-    ├─ Jaw Right (GPIO W) → 2N2222 transistor
-    ├─ Cheek Left (GPIO V) → ULN2003 ch3
-    ├─ Cheek Right (GPIO U) → ULN2003 ch4
-    ├─ Ear Left (GPIO T) → 2N2222 transistor
-    └─ Ear Right (GPIO S) → 2N2222 transistor
+     Eyebrow Left (GPIO X)  ULN2003 ch1
+     Eyebrow Right (GPIO Y)  ULN2003 ch2
+     Jaw Left (GPIO Z)  2N2222 transistor
+     Jaw Right (GPIO W)  2N2222 transistor
+     Cheek Left (GPIO V)  ULN2003 ch3
+     Cheek Right (GPIO U)  ULN2003 ch4
+     Ear Left (GPIO T)  2N2222 transistor
+     Ear Right (GPIO S)  2N2222 transistor
 ```
 
 ### Power Distribution
@@ -278,8 +278,8 @@ ESP32-S3 (primary controller)
 
 **Per-Channel Protection:**
 - Diodes on all coils (1N4007)
-- 100µF bulk capacitor at power entry
-- 10µF bypass capacitor per driver IC
+- 100F bulk capacitor at power entry
+- 10F bypass capacitor per driver IC
 - Current-limiting resistor at transistor base (10k-47k)
 
 ### GPIO/Pin Usage
@@ -335,10 +335,10 @@ If GPIO scarce, use PCA9685 (16-channel I2C PWM expander) for all 8 channels + f
 | **Jaws** | 1 | 1 | $1.75 each | $3.50 |
 | **Cheeks** | 1 | 1 | $0.97 each | $1.94 |
 | **Ears** | 1 | 1 | $1.46 each | $2.92 |
-| **Shared Driver ICs** (ULN2003×2, 2N2222×2) | — | — | — | $1.00 |
-| **Diodes, caps, resistors** (miscellaneous) | — | — | — | $0.50 |
-| **Power supply (12V, 2A) + connectors** | — | — | — | $3.00 |
-| **3D-printed mounting brackets** (integration) | — | — | — | $1.50 |
+| **Shared Driver ICs** (ULN20032, 2N22222) | - | - | - | $1.00 |
+| **Diodes, caps, resistors** (miscellaneous) | - | - | - | $0.50 |
+| **Power supply (12V, 2A) + connectors** | - | - | - | $3.00 |
+| **3D-printed mounting brackets** (integration) | - | - | - | $1.50 |
 | **Total Face Animation System** | | | | **$16.46** |
 | **Per-actuator average** | | | | **$1.03** |
 
@@ -362,12 +362,12 @@ If GPIO scarce, use PCA9685 (16-channel I2C PWM expander) for all 8 channels + f
 - [ ] Order 3D printer filament (PETG/ABS, 500g = $8-15)
 
 ### Phase 3: Assembly & Testing (Week 3-4)
-- [ ] Print all housings (eyebrow×2, jaw×2, cheek×2, ear×2)
+- [ ] Print all housings (eyebrow2, jaw2, cheek2, ear2)
 - [ ] Wind coils for each actuator (estimated 30 minutes per coil)
 - [ ] Assemble iron cores, springs, magnets into housings
 - [ ] Mount drivers on PCB or breadboard
 - [ ] Wire to ESP32 test rig
-- [ ] Validate individual actuator response (GPIO pulse → motion)
+- [ ] Validate individual actuator response (GPIO pulse  motion)
 - [ ] Measure actual power consumption per feature
 
 ### Phase 4: Integration (Week 4-5)
@@ -383,13 +383,13 @@ If GPIO scarce, use PCA9685 (16-channel I2C PWM expander) for all 8 channels + f
 
 | Risk | Probability | Impact | Mitigation |
 |------|-------------|--------|-----------|
-| Coil windings too loose → insufficient magnetic force | Medium | High | Build winding jig, tension wire during coil wrapping |
-| Iron rod diameter mismatch → binding or excessive play | Medium | Medium | Ream housing bore to specific tolerance (±0.1mm) |
-| Spring rate too weak → incomplete motion | Medium | Medium | Test with assorted springs; purchase spring variety pack |
-| Neodymium magnet orientation wrong → repulsion instead of attraction | Low | High | Mark polarity with marker; test before installation |
-| Excessive current draw → ESP32 GPIO damaged | Low | High | Always use transistor driver IC; never direct-drive coil from GPIO |
-| Copper wire insulation damaged during winding → short circuit | Low | Medium | Use enamel-coated wire (34 AWG rated); inspect before power-on |
-| Housing warping during printing → misalignment | Low | Medium | Print at low temperature (185-195°C for PETG), slow speed |
+| Coil windings too loose  insufficient magnetic force | Medium | High | Build winding jig, tension wire during coil wrapping |
+| Iron rod diameter mismatch  binding or excessive play | Medium | Medium | Ream housing bore to specific tolerance (0.1mm) |
+| Spring rate too weak  incomplete motion | Medium | Medium | Test with assorted springs; purchase spring variety pack |
+| Neodymium magnet orientation wrong  repulsion instead of attraction | Low | High | Mark polarity with marker; test before installation |
+| Excessive current draw  ESP32 GPIO damaged | Low | High | Always use transistor driver IC; never direct-drive coil from GPIO |
+| Copper wire insulation damaged during winding  short circuit | Low | Medium | Use enamel-coated wire (34 AWG rated); inspect before power-on |
+| Housing warping during printing  misalignment | Low | Medium | Print at low temperature (185-195C for PETG), slow speed |
 
 ---
 

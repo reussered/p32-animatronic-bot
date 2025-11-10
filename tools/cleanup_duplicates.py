@@ -1,4 +1,4 @@
-"""
+﻿"""
 Delete Duplicate Files and Update Registry
 Deletes individual files from duplicates_to_delete.json
 Does NOT delete directories even if they become empty.
@@ -29,15 +29,15 @@ def delete_duplicate_files(deletion_list_path: str = "tools/duplicates_to_delete
         filepath = Path(path)
         
         if not filepath.exists():
-            print(f"⊘ Not found: {path}")
+            print(f" Not found: {path}")
             continue
         
         try:
             os.remove(filepath)
-            print(f"✓ Deleted: {path}")
+            print(f" Deleted: {path}")
             deleted_count += 1
         except Exception as e:
-            print(f"✗ Failed: {path} - {e}")
+            print(f" Failed: {path} - {e}")
             failed_count += 1
     
     print("\n" + "=" * 80)
@@ -70,7 +70,7 @@ def update_registry_after_deletion(registry_path: str = "config/component_regist
         for i, comp in enumerate(data["components"]):
             if comp["name"] == name and comp["path"] == path:
                 del data["components"][i]
-                print(f"✓ Removed from registry: {name} @ {path}")
+                print(f" Removed from registry: {name} @ {path}")
                 removed_count += 1
                 break
     

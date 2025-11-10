@@ -1,4 +1,4 @@
-# Comprehensive Sensor Architecture for P32 Animatronic Bot
+﻿# Comprehensive Sensor Architecture for P32 Animatronic Bot
 
 ## Overview
 
@@ -15,13 +15,13 @@ Located in: `config/components/drivers/`
 Each protocol gets its own driver component:
 
 ```
-generic_adc_sensor_driver.src        → Reads analog values from ADC pins
-generic_i2c_sensor_driver.src        → I2C protocol handler
-generic_spi_sensor_driver.src        → SPI protocol handler  
-generic_gpio_sensor_driver.src       → Simple GPIO (digital on/off)
-generic_uart_sensor_driver.src       → Serial communication
-generic_pwm_sensor_driver.src        → Pulse width measurement
-generic_1wire_sensor_driver.src      → Dallas 1-Wire protocol
+generic_adc_sensor_driver.src         Reads analog values from ADC pins
+generic_i2c_sensor_driver.src         I2C protocol handler
+generic_spi_sensor_driver.src         SPI protocol handler  
+generic_gpio_sensor_driver.src        Simple GPIO (digital on/off)
+generic_uart_sensor_driver.src        Serial communication
+generic_pwm_sensor_driver.src         Pulse width measurement
+generic_1wire_sensor_driver.src       Dallas 1-Wire protocol
 ```
 
 ### Layer 2: Sensor-Specific Wrappers
@@ -71,10 +71,10 @@ class SensorReadings {
     struct Reading {
         uint8_t sensor_id;           // Unique ID
         uint16_t raw_value;          // 0-4095 for ADC, raw ticks for PWM, etc.
-        int16_t calibrated_value;    // After conversion (temp in °C, distance in cm, etc.)
+        int16_t calibrated_value;    // After conversion (temp in C, distance in cm, etc.)
         int8_t validity;             // -1=error, 0=stale, 1=fresh
         uint32_t timestamp_ms;       // When last read
-        char unit[8];                // "°C", "cm", "lux", etc.
+        char unit[8];                // "C", "cm", "lux", etc.
     };
 };
 ```
@@ -86,9 +86,9 @@ Located in: `config/bots/bot_families/goblins/sensors/`
 Goblin-specific sensor configuration and behavior:
 
 ```
-goblin_sensor_init.src              → Register which sensors goblin has
-goblin_sensor_aggregator.src        → Collect all readings
-goblin_sensor_behaviors.src         → React to sensor data
+goblin_sensor_init.src               Register which sensors goblin has
+goblin_sensor_aggregator.src         Collect all readings
+goblin_sensor_behaviors.src          React to sensor data
 ```
 
 ---
@@ -243,7 +243,7 @@ void temperature_sensor_i2c_act(void) {
     SensorReadings* readings = GSM.read<SensorReadings>();
     if (readings) {
         readings->update_reading(TEMP_SENSOR_ID, raw_temp);
-        readings->set_calibrated(TEMP_SENSOR_ID, temp_c, "°C");
+        readings->set_calibrated(TEMP_SENSOR_ID, temp_c, "C");
         GSM.write<SensorReadings>(*readings);
     }
 }
@@ -314,7 +314,7 @@ esp_err_t distance_sensor_pwm_init(void) {
 }
 
 void distance_sensor_pwm_act(void) {
-    // Send 10µs trigger pulse
+    // Send 10s trigger pulse
     gpio_set_level(TRIGGER_PIN, 1);
     esp_rom_delay_us(10);
     gpio_set_level(TRIGGER_PIN, 0);
@@ -323,7 +323,7 @@ void distance_sensor_pwm_act(void) {
     uint32_t timeout = 23200;  // 23.2ms timeout
     uint32_t duration = pulseIn(ECHO_PIN, HIGH, timeout);
     
-    // Convert to cm: duration_µs * 0.034 / 2
+    // Convert to cm: duration_s * 0.034 / 2
     uint16_t distance_cm = (duration * 34) / 2000;
     
     SensorReadings* readings = GSM.read<SensorReadings>();
@@ -359,12 +359,12 @@ esp_err_t temperature_sensor_1wire_init(void) {
 void temperature_sensor_1wire_act(void) {
     sensors.requestTemperatures();
     float temp_c = sensors.getTempCByIndex(0);
-    int16_t temp_int = (int16_t)(temp_c * 100);  // Store as int (°C * 100)
+    int16_t temp_int = (int16_t)(temp_c * 100);  // Store as int (C * 100)
     
     SensorReadings* readings = GSM.read<SensorReadings>();
     if (readings) {
         readings->update_reading(TEMP_1WIRE_SENSOR_ID, (uint16_t)temp_c);
-        readings->set_calibrated(TEMP_1WIRE_SENSOR_ID, temp_int, "°C");
+        readings->set_calibrated(TEMP_1WIRE_SENSOR_ID, temp_int, "C");
         GSM.write<SensorReadings>(*readings);
     }
 }
@@ -501,17 +501,17 @@ void sensor_reactions_act(void) {
 
 ```
 All Sensors
-    ↓
+    
 Specific Drivers (ADC, I2C, GPIO, PWM, 1-Wire, SPI, UART)
-    ↓
+    
 Sensor Wrappers (light_sensor, temp_sensor, motion_sensor, etc.)
-    ↓
+    
 SensorReadings (SharedMemory)
-    ↓
+    
 Goblin Sensor Aggregator
-    ↓
+    
 Mood/Behavior System
-    ↓
+    
 Servos/Display Output
 ```
 
@@ -535,5 +535,5 @@ Servos/Display Output
 
 ---
 
-This gives you a complete, unified sensor system that feeds all data into SharedMemory, which drives mood, which drives servos and displays. Everything integrated! 🎯
+This gives you a complete, unified sensor system that feeds all data into SharedMemory, which drives mood, which drives servos and displays. Everything integrated! 
 

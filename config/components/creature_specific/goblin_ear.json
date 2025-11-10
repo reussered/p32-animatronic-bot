@@ -1,0 +1,92 @@
+{
+    "relative_filename": "config/components/creature_specific/goblin_ear.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_ear",
+    "hardware_type": "CREATURE_SPECIFIC",
+    "description": "Goblin ear audio input system using I2S digital microphones",
+    "created": "2025-11-10",
+    "creature_family": "goblins",
+    "subsystem": "head",
+    "audio_specs": {
+        "microphone_type": "i2s_digital_mems",
+        "sample_rate": "16000Hz",
+        "bit_depth": "32bit_i2s",
+        "channel": "mono",
+        "frequency_response": "60Hz_to_15kHz"
+    },
+    "physical_integration": {
+        "mounting_location": "ear_cavity",
+        "orientation": "forward_facing",
+        "acoustic_design": "omnidirectional_pickup"
+    },
+    "3d_design_specs": {
+        "ear_shape": "goblin_pointed_ear",
+        "dimensions": {
+            "height": "45mm",
+            "width": "25mm", 
+            "depth": "15mm",
+            "ear_tip_angle": "35_degrees"
+        },
+        "internal_cavity": {
+            "microphone_chamber": {
+                "diameter": "8mm",
+                "depth": "12mm",
+                "position": "upper_ear_canal"
+            },
+            "acoustic_channel": {
+                "entry_diameter": "4mm",
+                "channel_length": "20mm",
+                "taper": "funnel_to_chamber"
+            }
+        },
+        "material_properties": {
+            "wall_thickness": "2mm",
+            "infill_percentage": "15%",
+            "support_material": "required_for_overhangs",
+            "print_orientation": "ear_tip_up"
+        },
+        "mounting_features": {
+            "head_attachment": {
+                "type": "threaded_insert",
+                "thread_size": "M3",
+                "attachment_points": 2
+            },
+            "microphone_mount": {
+                "type": "press_fit",
+                "board_size": "15.5mm_x_13.2mm",
+                "retention_clips": true
+            }
+        }
+    },
+    "stl_generation": {
+        "base_primitive": "ear_cone_with_point",
+        "parametric_variables": [
+            "ear_height",
+            "ear_width", 
+            "tip_sharpness",
+            "cavity_depth",
+            "mounting_hole_positions"
+        ],
+        "cad_notes": "Goblin ears should be asymmetric - left ear slightly forward-angled"
+    },
+    "components": [
+        "config/components/hardware/inmp441_microphone.json"
+    ],
+    "dependencies": [
+        "config/components/hardware/inmp441_microphone.json"
+    ],
+    "software": {
+        "init_function": "goblin_ear_init",
+        "act_function": "goblin_ear_act"
+    },
+    "type": "CREATURE_SPECIFIC",
+    "timing": {
+        "hitCount": 1
+    },
+    "notes": [
+        "I2S digital microphone for better noise immunity",
+        "DMA-based audio streaming for real-time processing",
+        "Replaces analog hw496_microphone approach"
+    ]
+}

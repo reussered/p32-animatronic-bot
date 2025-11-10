@@ -1,4 +1,4 @@
-# Goblin Display System - Complete Mapping Reference
+﻿# Goblin Display System - Complete Mapping Reference
 
 Display Type | Color Schema | Resolution | Bus Interface | Power | Use Case | Config File
 ---|---|---|---|---|---|---
@@ -71,7 +71,7 @@ Total GPIO for dual GC9A01: 9 pins (3 shared + 6 unique)
 - **Resolution:** 480x320 pixels
 - **Bus:** SPI (40 MHz max)
 - **Power:** 0.8W
-- **Physical:** 3.5" diagonal, 76.8mm × 57.6mm
+- **Physical:** 3.5" diagonal, 76.8mm  57.6mm
 - **Use Case:** Mouth display, detailed expressions, teeth/tongue animation
 - **Brightness:** 350 cd/m2
 - **Frame Rate:** 60 Hz
@@ -94,7 +94,7 @@ Total GPIO for dual GC9A01: 9 pins (3 shared + 6 unique)
 - **Resolution:** 96x64 pixels
 - **Bus:** SPI (25 MHz)
 - **Power:** 0.20W
-- **Physical:** 0.95" diagonal, 18.66mm × 11.9mm
+- **Physical:** 0.95" diagonal, 18.66mm  11.9mm
 - **Use Case:** Nostril glow, accent lighting, status indicator
 - **Advantage:** OLED (true black, instant response, no backlight)
 
@@ -103,7 +103,7 @@ Total GPIO for dual GC9A01: 9 pins (3 shared + 6 unique)
 - **Resolution:** 128x128 pixels
 - **Bus:** SPI
 - **Power:** 0.35W
-- **Physical:** 1.27" diagonal, 28.35mm × 28.35mm
+- **Physical:** 1.27" diagonal, 28.35mm  28.35mm
 - **Use Case:** Secondary feature display (nostril, mouth accent)
 - **Advantage:** Square, perfect for eyes if GC9A01 unavailable
 
@@ -145,14 +145,14 @@ Left Eye | GC9A01 | 240x240 | SPI | 0.3W | 6 (shared clock)
 Right Eye | GC9A01 | 240x240 | SPI | 0.3W | 3 (separate CS/DC/RST)
 Mouth | ILI9341 | 480x320 | SPI | 0.8W | 3 (separate CS/DC/RST)
 Status (optional) | SSD1306 | 128x64 | I2C | 0.06W | 0 (shared I2C)
-**Total** | — | — | **SPI + I2C** | **1.46W** | **12 GPIO**
+**Total** | - | - | **SPI + I2C** | **1.46W** | **12 GPIO**
 
 ### Budget Face Setup (Dual Eyes Only)
 Component | Display | Resolution | Bus | Power | GPIO Cost
 ---|---|---|---|---|---
 Left Eye | GC9A01 | 240x240 | SPI | 0.3W | 6
 Right Eye | GC9A01 | 240x240 | SPI | 0.3W | 3
-**Total** | — | — | **SPI** | **0.6W** | **9 GPIO**
+**Total** | - | - | **SPI** | **0.6W** | **9 GPIO**
 
 ### Premium Face Setup (Dual Eyes + Mouth + Nostril Accents)
 Component | Display | Resolution | Bus | Power | GPIO Cost
@@ -163,7 +163,7 @@ Mouth | ILI9341 | 480x320 | SPI | 0.8W | 3
 Left Nostril | SSD1331 | 96x64 | SPI | 0.2W | 3
 Right Nostril | SSD1331 | 96x64 | SPI | 0.2W | 1 (shared CS pin with timing)
 Status | SSD1306 | 128x64 | I2C | 0.06W | 0
-**Total** | — | — | **SPI + I2C** | **1.86W** | **16 GPIO**
+**Total** | - | - | **SPI + I2C** | **1.86W** | **16 GPIO**
 
 
 ## BUS ARCHITECTURE SUMMARY
@@ -293,10 +293,10 @@ Status | SSD1306 | 128x64 | I2C | 0.06W | 0
 
 Setup | Display Config | Total Power | Total GPIO | Recommended Supply | Frame Rate
 ---|---|---|---|---|---
-Budget | 2× GC9A01 only | 0.6W | 9 | 5V 1A | 60 FPS
-Standard | 2× GC9A01 + ILI9341 | 1.46W | 12 | 5V 1-2A | 60 FPS
-Premium | 2× GC9A01 + ILI9341 + 2× SSD1331 + SSD1306 | 1.86W | 16 | 5V 2A | 60 FPS
-XL | 2× GC9A01 + ILI9341 + RA8875 + SSD1306 | 3.0W | 15 | 5V 3A | 30 FPS
+Budget | 2 GC9A01 only | 0.6W | 9 | 5V 1A | 60 FPS
+Standard | 2 GC9A01 + ILI9341 | 1.46W | 12 | 5V 1-2A | 60 FPS
+Premium | 2 GC9A01 + ILI9341 + 2 SSD1331 + SSD1306 | 1.86W | 16 | 5V 2A | 60 FPS
+XL | 2 GC9A01 + ILI9341 + RA8875 + SSD1306 | 3.0W | 15 | 5V 3A | 30 FPS
 
 
 ## FILE REFERENCES

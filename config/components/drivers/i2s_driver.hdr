@@ -20,6 +20,19 @@ esp_err_t i2s_driver_init(void);
  */
 void i2s_driver_act(void);
 
+/**
+ * @brief Start playing a sound effect (debug mode)
+ * @param sound_name Name of the sound effect
+ * @param frequency Frequency in Hz
+ * @param volume Volume level (0.0 to 1.0)
+ */
+void i2s_driver_play_sound(const char* sound_name, float frequency, float volume);
+
+/**
+ * @brief Stop audio playback
+ */
+void i2s_driver_stop_sound(void);
+
 #ifdef __cplusplus
 }
 #endif

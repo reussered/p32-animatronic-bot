@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Archive vs Current Component Analysis & Merge
 Compares archived_components vs bot_families versions.
@@ -91,7 +91,7 @@ def main():
     # Find all archived components
     archived_dir = Path("config/bots/.archived_components")
     if not archived_dir.exists():
-        print("✗ No archived components directory found")
+        print(" No archived components directory found")
         return 1
     
     archived_files = list(archived_dir.rglob("*.json"))
@@ -160,13 +160,13 @@ def main():
     # Recommendation
     print("RECOMMENDATION:")
     if archived_longer > current_longer:
-        print(f"✓ ARCHIVED components are MORE COMPLETE ({archived_longer} vs {current_longer})")
+        print(f" ARCHIVED components are MORE COMPLETE ({archived_longer} vs {current_longer})")
         print("  Action: Keep archived versions as primary source")
     elif current_longer > archived_longer:
-        print(f"✓ CURRENT components are MORE COMPLETE ({current_longer} vs {archived_longer})")
+        print(f" CURRENT components are MORE COMPLETE ({current_longer} vs {archived_longer})")
         print("  Action: Keep current versions as primary source")
     else:
-        print("✓ Both versions are equally complete")
+        print(" Both versions are equally complete")
         print("  Action: Keep current versions (more recent)")
     
     return 0

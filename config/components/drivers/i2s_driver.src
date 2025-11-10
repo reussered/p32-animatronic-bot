@@ -1,18 +1,170 @@
 // i2s_driver component implementation
-// Auto-generated stub - needs actual implementation
+// Debug implementation - streams audio data to PC via serial
 
 #include "esp_log.h"
+#include "esp_timer.h"
+#include <math.h>
+
 static const char *TAG_i2s_driver = "i2s_driver";
 
+// Debug audio configuration
+#define DEBUG_AUDIO_MODE 1      // Set to 0 for real I2S hardware
+#define SAMPLE_RATE 44100       // 44.1kHz sample rate
+#define AUDIO_BUFFER_SIZE 1024  // Samples per buffer
+#define CHANNELS 1              // Mono audio
+
+// Audio generation state
+typedef struct {
+    bool initialized;
+    bool playing;
+    uint32_t sample_count;
+    float frequency_hz;         // Current tone frequency
+    float amplitude;           // Current volume (0.0-1.0)
+    uint64_t last_update_us;
+    char sound_type[32];       // Current sound being played
+} debug_audio_state_t;
+
+static debug_audio_state_t audio_state = {
+    .initialized = false,
+    .playing = false,
+    .sample_count = 0,
+    .frequency_hz = 440.0f,    // A4 note
+    .amplitude = 0.3f,         // 30% volume
+    .last_update_us = 0,
+    .sound_type = "idle"
+};
+
 esp_err_t i2s_driver_init(void) {
-    ESP_LOGI(TAG_i2s_driver, "i2s_driver init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    if (DEBUG_AUDIO_MODE) {
+        ESP_LOGI(TAG_i2s_driver, "I2S driver init (DEBUG AUDIO MODE)");
+        ESP_LOGI(TAG_i2s_driver, "Audio will be streamed to PC via serial");
+        ESP_LOGI(TAG_i2s_driver, "Sample rate: %d Hz, Channels: %d", SAMPLE_RATE, CHANNELS);
+        
+        // Print header for PC audio capture script
+        printf("AUDIO_STREAM_START\n");
+        printf("SAMPLE_RATE=%d\n", SAMPLE_RATE);
+        printf("CHANNELS=%d\n", CHANNELS);
+        printf("BUFFER_SIZE=%d\n", AUDIO_BUFFER_SIZE);
+        printf("FORMAT=INT16\n");
+        printf("AUDIO_HEADER_END\n");
+        
+    } else {
+        ESP_LOGI(TAG_i2s_driver, "I2S driver init (HARDWARE MODE)");
+        // TODO: Initialize real I2S hardware on GPIO 4,5,6
+    }
+    
+    audio_state.initialized = true;
+    audio_state.last_update_us = esp_timer_get_time();
     return ESP_OK;
 }
 
 void i2s_driver_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_i2s_driver, "i2s_driver act");
+    if (!audio_state.initialized) return;
+    
+    uint64_t current_time_us = esp_timer_get_time();
+    
+    // Generate audio at ~44.1kHz rate (every ~22.7us)
+    if ((current_time_us - audio_state.last_update_us) >= 23) {
+        
+        if (DEBUG_AUDIO_MODE && audio_state.playing) {
+            // Generate complex goblin audio sample
+            float sample_time = (float)audio_state.sample_count / (float)SAMPLE_RATE;
+            float sample_value;
+            
+            // Use different waveforms based on sound type
+            if (strstr(audio_state.sound_type, "speech") || 
+                strstr(audio_state.sound_type, "growl") || 
+                strstr(audio_state.sound_type, "roar")) {
+                // Complex goblin waveform for speech and vocalizations
+                sample_value = generate_goblin_waveform(sample_time, audio_state.frequency_hz);
+            } else {
+                // Simple sine wave for system sounds
+                sample_value = sinf(2.0f * M_PI * audio_state.frequency_hz * sample_time);
+            }
+            
+            // Apply amplitude and clamp
+            sample_value *= audio_state.amplitude;
+            if (sample_value > 1.0f) sample_value = 1.0f;
+            if (sample_value < -1.0f) sample_value = -1.0f;
+            
+            // Convert to 16-bit integer
+            int16_t audio_sample = (int16_t)(sample_value * 32767.0f);
+            
+            // Stream to PC via serial (every 16 samples for better quality)
+            if ((audio_state.sample_count % 16) == 0) {
+                printf("AUDIO_DATA:%d\n", audio_sample);
+            }
+            
+            audio_state.sample_count++;
+        }
+        
+        audio_state.last_update_us = current_time_us;
+    }
+}
+
+/**
+ * @brief Generate complex waveform for goblin speech synthesis
+ */
+static float generate_goblin_waveform(float sample_time, float base_freq) {
+    // Base sine wave
+    float base_wave = sinf(2.0f * M_PI * base_freq * sample_time);
+    
+    // Add harmonics for goblin-like roughness
+    float harmonic2 = 0.3f * sinf(2.0f * M_PI * base_freq * 2.0f * sample_time);
+    float harmonic3 = 0.2f * sinf(2.0f * M_PI * base_freq * 3.0f * sample_time);
+    
+    // Add noise for growling effect
+    float noise = ((float)(esp_random() % 1000) / 1000.0f - 0.5f) * 0.1f;
+    
+    // Add frequency modulation for warbling effect
+    float fm_freq = base_freq + 20.0f * sinf(2.0f * M_PI * 3.0f * sample_time);
+    float fm_wave = 0.4f * sinf(2.0f * M_PI * fm_freq * sample_time);
+    
+    return base_wave + harmonic2 + harmonic3 + noise + fm_wave;
+}
+
+/**
+ * @brief Start playing a sound effect
+ */
+void i2s_driver_play_sound(const char* sound_name, float frequency, float volume) {
+    ESP_LOGI(TAG_i2s_driver, "Playing sound: %s (%.1f Hz, %.1f vol)", sound_name, frequency, volume);
+    
+    strncpy(audio_state.sound_type, sound_name, sizeof(audio_state.sound_type) - 1);
+    audio_state.frequency_hz = frequency;
+    audio_state.amplitude = volume;
+    audio_state.playing = true;
+    audio_state.sample_count = 0;
+    
+    // Notify PC about sound change with enhanced info
+    if (DEBUG_AUDIO_MODE) {
+        printf("AUDIO_EVENT:PLAY=%s,FREQ=%.1f,VOL=%.2f,TYPE=", sound_name, frequency, volume);
+        
+        // Categorize sound type for PC audio processing
+        if (strstr(sound_name, "speech")) {
+            printf("SPEECH\n");
+        } else if (strstr(sound_name, "growl") || strstr(sound_name, "roar")) {
+            printf("VOCALIZATION\n");
+        } else if (strstr(sound_name, "emotional")) {
+            printf("EMOTION\n");
+        } else if (strstr(sound_name, "proximity")) {
+            printf("ALERT\n");
+        } else {
+            printf("EFFECT\n");
+        }
+    }
+}
+
+/**
+ * @brief Stop audio playback
+ */
+void i2s_driver_stop_sound(void) {
+    ESP_LOGI(TAG_i2s_driver, "Stopping audio playback");
+    audio_state.playing = false;
+    strcpy(audio_state.sound_type, "idle");
+    
+    if (DEBUG_AUDIO_MODE) {
+        printf("AUDIO_EVENT:STOP\n");
+    }
 }
 
 

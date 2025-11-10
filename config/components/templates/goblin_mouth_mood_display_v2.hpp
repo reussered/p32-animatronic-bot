@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file goblin_mouth_mood_display_v2.hpp
  * @brief Streaming mouth display with chunking and mood effects
  * 
@@ -7,7 +7,7 @@
  * - Single chunk buffer: malloc at init, reuse for each chunk, free at cleanup
  * - Color schema determines pixel format only (RGB565/666/888)
  * - Large displays divided into horizontal chunks for memory efficiency
- * - Each chunk: render → send to display → buffer ready for next chunk
+ * - Each chunk: render  send to display  buffer ready for next chunk
  * 
  * Configuration:
  * {

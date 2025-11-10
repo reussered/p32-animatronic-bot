@@ -1,0 +1,25 @@
+#ifndef GOBLIN_EAR_H
+#define GOBLIN_EAR_H
+
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include "esp_log.h"
+#include "esp_timer.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Component interface functions
+esp_err_t goblin_ear_init(void);
+void goblin_ear_act(void);
+
+// Dependencies on I2S driver (real or debug version)
+esp_err_t i2s_generic_driver_read_samples(int32_t *buffer, size_t *bytes_read);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GOBLIN_EAR_H

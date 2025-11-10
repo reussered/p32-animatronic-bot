@@ -145,13 +145,23 @@ class ComponentDefinition:
 
 
 @dataclass
+class UseFieldVariable:
+    """Tracks a use_fields variable across all components that use it."""
+    name: str                           # Variable name (sanitized)
+    cpp_type: str                      # C++ type (uint16_t, char*, etc.)
+    components: List[str] = field(default_factory=list)  # Components that use this variable
+    values: Dict[str, Any] = field(default_factory=dict)  # component_name -> value mapping
+    timestamp: Optional[float] = None   # For ordering/debugging
+
+
+@dataclass
 class SubsystemContext:
     name: str
     controller: str
     json_path: Optional[Path]
     visits: List[ComponentVisit] = field(default_factory=list)
     unique_components: Dict[str, ComponentDefinition] = field(default_factory=dict)
-    declared_fields: Dict[str, str] = field(default_factory=dict)  # Track {field_name: cpp_type} for first declarations
+    use_field_vars: Dict[str, UseFieldVariable] = field(default_factory=dict)  # Track use_fields variables
 
     def register_component(
         self,
@@ -205,6 +215,9 @@ class SubsystemContext:
         )
         definition.load_artifacts()
         self.unique_components[component_name] = definition
+        
+        # Collect use_fields from this component for later generation
+        collect_use_fields(component_name, cloned_data, self)
 
     @property
     def identifier(self) -> str:
@@ -390,17 +403,63 @@ def to_cpp_literal(value: Any) -> str:
     return f'"{escaped}"'
 
 
-def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -> List[str]:
-    """Generate global declarations/assignments for inherited keyword fields from use_fields.
+def collect_use_fields(component_name: str, data: Dict[str, Any], context: SubsystemContext) -> None:
+    """Collect use_fields from a component into the subsystem's use_field_vars tracking.
     
-    Two types of entries:
+    This builds up the complete picture of which components use which variables.
+    """
+    use_fields = data.get("use_fields")
+    if not isinstance(use_fields, dict):
+        return
     
-    1. NORMAL FIELDS: generates variable declaration/assignment
-       "color_schema": "RGB565"
-       First: static char* color_schema = "RGB565";
-       Later: color_schema = "RGB565";
+    import time
+    timestamp = time.time()
     
-    Type mismatches on normal fields will cause compile errors (intentional validation).
+    for key, value in use_fields.items():
+        sanitized_key = sanitize_identifier(key)
+        cpp_type = infer_cpp_type(value)
+        
+        # Get or create the UseFieldVariable tracking structure
+        if sanitized_key not in context.use_field_vars:
+            context.use_field_vars[sanitized_key] = UseFieldVariable(
+                name=sanitized_key,
+                cpp_type=cpp_type,
+                timestamp=timestamp
+            )
+        
+        var_tracker = context.use_field_vars[sanitized_key]
+        
+        # Add this component if not already tracked
+        if component_name not in var_tracker.components:
+            var_tracker.components.append(component_name)
+        
+        # Record the value this component wants
+        var_tracker.values[component_name] = value
+
+
+def generate_use_field_declarations(context: SubsystemContext) -> List[str]:
+    """Generate static variable declarations for all collected use_fields.
+    
+    Creates uninitialized static variables - components will assign values in init/act.
+    """
+    lines: List[str] = []
+    
+    if context.use_field_vars:
+        lines.append("// Static variables for use_fields (uninitialized - set by components)")
+        
+        for var_name in sorted(context.use_field_vars.keys()):
+            var_tracker = context.use_field_vars[var_name]
+            lines.append(f"static {var_tracker.cpp_type} {var_tracker.name};")
+        
+        lines.append("")
+    
+    return lines
+
+
+def generate_use_field_assignments(component_name: str, data: Dict[str, Any], context: SubsystemContext) -> List[str]:
+    """Generate assignment statements for this component's use_fields.
+    
+    Only generates assignments for fields this component actually uses.
     """
     lines: List[str] = []
     use_fields = data.get("use_fields")
@@ -408,35 +467,40 @@ def generate_inherited_fields(data: Dict[str, Any], context: SubsystemContext) -
         return lines
     
     for key, value in use_fields.items():
-        # Normal field: generate C++ variable declaration/assignment
         sanitized_key = sanitize_identifier(key)
-        literal = to_cpp_literal(value)
-        
-        # Check if this field was already declared
-        if sanitized_key in context.declared_fields:
-            # Already declared - just generate assignment
+        if sanitized_key in context.use_field_vars:
+            literal = to_cpp_literal(value)
             lines.append(f"{sanitized_key} = {literal};")
-        else:
-            # First declaration - generate declaration + assignment
-            # Use char* (pointer) not const char* so it can be reassigned
-            lines.append(f"static char* {sanitized_key} = {literal};")
-            context.declared_fields[sanitized_key] = "char*"
     
     return lines
 
 
+def infer_cpp_type(value: Any) -> str:
+    """Infer appropriate C++ type from Python value."""
+    if isinstance(value, str):
+        return "char*"
+    elif isinstance(value, bool):
+        return "bool"
+    elif isinstance(value, int):
+        if 0 <= value <= 255:
+            return "uint8_t"
+        elif 0 <= value <= 65535:
+            return "uint16_t"
+        else:
+            return "uint32_t"
+    elif isinstance(value, float):
+        return "float"
+    else:
+        return "char*"  # fallback
+
+
 def render_component_struct(component: ComponentDefinition, context: SubsystemContext) -> str:
-    """Generate inherited field declarations/assignments for this component.
+    """Generate component struct - no longer used for use_fields.
     
-    Only generates declarations for use_fields (inherited keywords).
-    Arbitrary component data is no longer generated as structs.
+    Use_fields are now handled globally via generate_use_field_declarations.
+    This function is kept for compatibility but returns empty.
     """
-    lines: List[str] = []
-    inherited = generate_inherited_fields(component.data, context)
-    
-    if inherited:
-        lines.append(f"// Inherited fields for {component.name}")
-        lines.extend(inherited)
+    return ""
     
     # Return empty string if no inherited fields (skip section entirely)
     if not lines:
@@ -558,6 +622,29 @@ def inject_inherited_fields_into_src(src_content: str, assignments: List[str], i
     return result
 
 
+def clean_src_content(src_content: str, component_name: str) -> str:
+    """Remove incorrect .hdr includes from .src file content.
+    
+    .src files should never include .hdr files since both get 
+    aggregated into the same compilation unit by the generator.
+    """
+    if not src_content:
+        return src_content
+    
+    lines = src_content.split('\n')
+    cleaned_lines = []
+    
+    for line in lines:
+        # Remove ALL .hdr includes (self-includes and cross-component includes)
+        if line.strip().startswith('#include') and '.hdr' in line:
+            # Replace with a comment explaining why it was removed
+            cleaned_lines.append(f'// Removed: {line.strip()} - .hdr content aggregated into .hpp')
+            continue
+        cleaned_lines.append(line)
+    
+    return '\n'.join(cleaned_lines)
+
+
 def render_component_source(context: SubsystemContext) -> str:
     lines: List[str] = [
         f'#include "subsystems/{context.name}/{context.name}_component_functions.hpp"',
@@ -571,47 +658,48 @@ def render_component_source(context: SubsystemContext) -> str:
     for include in sorted(interface_includes):
         lines.insert(1, f'#include "{include}"')
 
+    # Generate static variable declarations for ALL use_fields (uninitialized)
+    use_field_declarations = generate_use_field_declarations(context)
+    if use_field_declarations:
+        lines.extend(use_field_declarations)
+
+    # Process each component exactly once - inject assignments for components that use use_fields
     included_srcs: Set[Path] = set()
     for definition in sorted(context.unique_components.values(), key=lambda item: item.name):
         if definition.src_content and definition.src_path:
             resolved_src_path = definition.src_path.resolve()
-            src_to_add = definition.src_content
             
+            # Skip if we've already included this source file
             if resolved_src_path in included_srcs:
-                # DUPLICATE ENCOUNTER: Inject use_fields assignments as first lines in init() and act()
-                inherited_fields = generate_inherited_fields(definition.data, context)
-                if inherited_fields:
-                    src_to_add = inject_inherited_fields_into_src(
-                        src_to_add, 
-                        inherited_fields, 
-                        definition.init_func, 
-                        definition.act_func
-                    )
-                    lines.append(f"// --- Begin (duplicate): {definition.src_path.name} ---")
-                    lines.append(src_to_add.rstrip())
-                    lines.append(f"// --- End (duplicate): {definition.src_path.name} ---")
-                    lines.append("")
                 continue
+                
+            # Clean the src content to remove incorrect self-includes
+            src_to_add = clean_src_content(definition.src_content, definition.name)
+            
+            # Inject use_field assignments into this component's init() and act() functions
+            assignments = generate_use_field_assignments(definition.name, definition.data, context)
+            if assignments:
+                src_to_add = inject_inherited_fields_into_src(
+                    src_to_add, 
+                    assignments, 
+                    definition.init_func, 
+                    definition.act_func
+                )
             
             try:
                 rel = definition.src_path.relative_to(PROJECT_ROOT)
             except ValueError:
                 rel = definition.src_path
             
-            # FIRST ENCOUNTER: Insert use_fields declaration before component code
-            inherited_fields = generate_inherited_fields(definition.data, context)
-            if inherited_fields:
-                lines.append(f"// Inherited fields for {definition.name}")
-                lines.extend(inherited_fields)
-                lines.append("")
-            
             lines.append(f"// --- Begin: {rel} ---")
             lines.append(src_to_add.rstrip())
             lines.append(f"// --- End: {rel} ---")
+            lines.append("")
             included_srcs.add(resolved_src_path)
         else:
             lines.append(f"// NOTE: Source for component '{definition.name}' not found.")
-        lines.append("")
+            lines.append("")
+    
     return "\n".join(lines).rstrip() + "\n"
 
 

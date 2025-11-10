@@ -1,0 +1,257 @@
+/**
+ * @file serial_debug_driver.src
+ * @brief Serial debug driver implementation for PC audio redirection
+ * 
+ * Self-contained ESP32 component that intercepts audio streams intended 
+ * for embedded speakers and redirects them to PC sound system via UART 
+ * serial port. Complete ESP32 UART implementation included.
+ */
+
+#include "driver/uart.h"
+#include "driver/gpio.h"
+#include <string.h>
+#include <stdlib.h>
+
+// ESP32 UART configuration
+#define SERIAL_DEBUG_UART_NUM UART_NUM_0
+#define SERIAL_DEBUG_BUF_SIZE 2048
+#define SERIAL_DEBUG_BAUD_RATE 115200
+
+// Audio debug state
+static bool debug_mode_enabled = false;
+static bool pc_audio_connected = false;
+static uint32_t current_sample_rate = 44100;
+static uint8_t current_bit_depth = 16;
+static uint16_t buffer_size = 1024;
+static uint32_t audio_frames_processed = 0;
+static uint32_t audio_bytes_sent = 0;
+static QueueHandle_t audio_queue = NULL;
+
+esp_err_t serial_debug_driver_init(void)
+{
+    ESP_LOGI("SERIAL_DEBUG_DRIVER", "Initializing serial debug audio driver");
+    
+    // Configure ESP32 UART for audio debugging
+    uart_config_t uart_config = {
+        .baud_rate = SERIAL_DEBUG_BAUD_RATE,
+        .data_bits = UART_DATA_8_BITS,
+        .parity = UART_PARITY_DISABLE,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+        .source_clk = UART_SCLK_APB,
+    };
+    
+    // Install UART driver with TX/RX buffers
+    esp_err_t ret = uart_driver_install(SERIAL_DEBUG_UART_NUM, 
+                                       SERIAL_DEBUG_BUF_SIZE, 
+                                       SERIAL_DEBUG_BUF_SIZE, 
+                                       0, NULL, 0);
+    if (ret != ESP_OK) {
+        ESP_LOGE("SERIAL_DEBUG_DRIVER", "Failed to install UART driver: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Configure UART parameters
+    ret = uart_param_config(SERIAL_DEBUG_UART_NUM, &uart_config);
+    if (ret != ESP_OK) {
+        ESP_LOGE("SERIAL_DEBUG_DRIVER", "Failed to configure UART: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // Create audio data queue for buffering
+    audio_queue = xQueueCreate(10, sizeof(void*));
+    if (audio_queue == NULL) {
+        ESP_LOGE("SERIAL_DEBUG_DRIVER", "Failed to create audio queue");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Initialize debug state
+    debug_mode_enabled = true;
+    pc_audio_connected = true;  // Assume PC tool is running
+    audio_frames_processed = 0;
+    audio_bytes_sent = 0;
+    
+    ESP_LOGI("SERIAL_DEBUG_DRIVER", "ESP32 UART initialized for audio debugging");
+    ESP_LOGI("SERIAL_DEBUG_DRIVER", "Baud rate: %d, Buffer size: %d", 
+             SERIAL_DEBUG_BAUD_RATE, SERIAL_DEBUG_BUF_SIZE);
+    ESP_LOGI("SERIAL_DEBUG_DRIVER", "Run: python tools/pc_audio_capture.py COM_PORT");
+    
+    return ESP_OK;
+}
+
+void serial_debug_driver_act(void)
+{
+    // Fast exit if disabled
+    if (!debug_mode_enabled) {
+        return;
+    }
+    
+    // Non-blocking check: process one queued audio packet if available
+    uint8_t* audio_packet;
+    if (xQueueReceive(audio_queue, &audio_packet, 0) == pdTRUE) {
+        // Extract length and audio data from packet
+        size_t data_len;
+        memcpy(&data_len, audio_packet, sizeof(size_t));
+        uint8_t* audio_data = audio_packet + sizeof(size_t);
+        
+        // Send one packet quickly via UART (non-blocking)
+        serial_debug_driver_send_to_pc(audio_data, data_len);
+        
+        free(audio_packet);  // Free the queued audio data
+    }
+    
+    // Quick UART TX buffer check (non-blocking)
+    size_t tx_waiting = 0;
+    uart_get_buffered_data_len(SERIAL_DEBUG_UART_NUM, &tx_waiting);
+    if (tx_waiting > SERIAL_DEBUG_BUF_SIZE / 2) {
+        // TX buffer getting full - could throttle audio input
+        ESP_LOGD("SERIAL_DEBUG_DRIVER", "UART TX buffer: %zu bytes pending", tx_waiting);
+    }
+    
+    // Exit immediately - no blocking operations
+}
+
+esp_err_t serial_debug_driver_intercept_audio(const uint8_t* audio_data, size_t data_len)
+{
+    if (!debug_mode_enabled || !audio_data || data_len == 0) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    // Non-blocking: queue audio data for processing by act()
+    // Copy audio data to prevent use-after-free
+    uint8_t* audio_copy = malloc(data_len + sizeof(size_t));
+    if (!audio_copy) {
+        ESP_LOGW("SERIAL_DEBUG_DRIVER", "Audio dropped - no memory");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // Store length at start of buffer, then audio data
+    memcpy(audio_copy, &data_len, sizeof(size_t));
+    memcpy(audio_copy + sizeof(size_t), audio_data, data_len);
+    
+    // Try to queue (non-blocking)
+    if (xQueueSend(audio_queue, &audio_copy, 0) != pdTRUE) {
+        // Queue full - drop this audio packet
+        free(audio_copy);
+        ESP_LOGV("SERIAL_DEBUG_DRIVER", "Audio queue full - packet dropped");
+        return ESP_ERR_TIMEOUT;
+    }
+    
+    ESP_LOGV("SERIAL_DEBUG_DRIVER", "Audio queued: %zu bytes", data_len);
+    return ESP_OK;
+}
+
+esp_err_t serial_debug_driver_send_to_pc(const uint8_t* audio_data, size_t data_len)
+{
+    if (!debug_mode_enabled || !pc_audio_connected)
+    {
+        ESP_LOGW("SERIAL_DEBUG_DRIVER", "PC not connected - audio data discarded");
+        return ESP_ERR_NOT_FOUND;
+    }
+    
+    if (!audio_data || data_len == 0) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    // Send audio data via ESP32 UART
+    // Format: AUDIO_START:length:sample_rate:bit_depth:data:AUDIO_END
+    char header[64];
+    snprintf(header, sizeof(header), "AUDIO_START:%zu:%lu:%u:", 
+             data_len, current_sample_rate, current_bit_depth);
+    
+    // Send header via UART
+    int header_len = strlen(header);
+    int sent_header = uart_write_bytes(SERIAL_DEBUG_UART_NUM, header, header_len);
+    if (sent_header != header_len) {
+        ESP_LOGW("SERIAL_DEBUG_DRIVER", "Failed to send audio header");
+        return ESP_ERR_TIMEOUT;
+    }
+    
+    // Send audio data via UART
+    int sent_data = uart_write_bytes(SERIAL_DEBUG_UART_NUM, audio_data, data_len);
+    if (sent_data != data_len) {
+        ESP_LOGW("SERIAL_DEBUG_DRIVER", "Failed to send complete audio data");
+        return ESP_ERR_TIMEOUT;
+    }
+    
+    // Send terminator
+    const char* terminator = ":AUDIO_END\n";
+    int term_len = strlen(terminator);
+    int sent_term = uart_write_bytes(SERIAL_DEBUG_UART_NUM, terminator, term_len);
+    if (sent_term != term_len) {
+        ESP_LOGW("SERIAL_DEBUG_DRIVER", "Failed to send audio terminator");
+    }
+    
+    // Wait for transmission to complete
+    uart_wait_tx_done(SERIAL_DEBUG_UART_NUM, pdMS_TO_TICKS(100));
+    
+    audio_frames_processed++;
+    audio_bytes_sent += data_len;
+    
+    ESP_LOGV("SERIAL_DEBUG_DRIVER", "Sent %zu bytes to PC via ESP32 UART", data_len);
+    
+    return ESP_OK;
+}
+
+esp_err_t serial_debug_driver_enable_pc_audio(bool enable)
+{
+    debug_mode_enabled = enable;
+    
+    if (enable)
+    {
+        ESP_LOGI("serial_debug_driver", "PC audio redirection ENABLED");
+        // Attempt to connect to PC audio system
+        pc_audio_connected = true;  // Simulated for now
+    }
+    else
+    {
+        ESP_LOGI("serial_debug_driver", "PC audio redirection DISABLED");
+        pc_audio_connected = false;
+    }
+    
+    return ESP_OK;
+}
+
+esp_err_t serial_debug_driver_set_sample_rate(uint32_t sample_rate)
+{
+    current_sample_rate = sample_rate;
+    ESP_LOGI("serial_debug_driver", "Sample rate set to %lu Hz", sample_rate);
+    return ESP_OK;
+}
+
+esp_err_t serial_debug_driver_set_bit_depth(uint8_t bit_depth)
+{
+    current_bit_depth = bit_depth;
+    ESP_LOGI("serial_debug_driver", "Bit depth set to %u bits", bit_depth);
+    return ESP_OK;
+}
+
+esp_err_t serial_debug_driver_set_buffer_size(uint16_t new_buffer_size)
+{
+    buffer_size = new_buffer_size;
+    ESP_LOGI("serial_debug_driver", "Buffer size set to %u bytes", buffer_size);
+    return ESP_OK;
+}
+
+bool serial_debug_driver_is_pc_connected(void)
+{
+    return pc_audio_connected;
+}
+
+uint32_t serial_debug_driver_get_audio_stats(void)
+{
+    return audio_frames_processed;
+}
+
+void serial_debug_driver_print_debug_info(void)
+{
+    ESP_LOGI("serial_debug_driver", "=== Audio Debug Status ===");
+    ESP_LOGI("serial_debug_driver", "Debug mode: %s", debug_mode_enabled ? "ENABLED" : "DISABLED");
+    ESP_LOGI("serial_debug_driver", "PC connected: %s", pc_audio_connected ? "YES" : "NO");
+    ESP_LOGI("serial_debug_driver", "Sample rate: %lu Hz", current_sample_rate);
+    ESP_LOGI("serial_debug_driver", "Bit depth: %u bits", current_bit_depth);
+    ESP_LOGI("serial_debug_driver", "Buffer size: %u bytes", buffer_size);
+    ESP_LOGI("serial_debug_driver", "Frames processed: %lu", audio_frames_processed);
+    ESP_LOGI("serial_debug_driver", "Bytes sent to PC: %lu", audio_bytes_sent);
+    ESP_LOGI("serial_debug_driver", "========================");
+}

@@ -1,4 +1,4 @@
-# Goblin Camera System - Cost vs. Reliability Analysis
+﻿# Goblin Camera System - Cost vs. Reliability Analysis
 ## Final Decision Framework
 
 **Date:** November 6, 2025  
@@ -56,11 +56,11 @@
 - [NO] **Fixed focus only** (unless stepper mechanical barrel added)
 - [NO] **2MP resolution** (adequate for gaze tracking, poor for fine expression recognition)
 - [NO] **Stepper focus unreliable** (mechanical wear, thermal drift in narrow tolerance M25.4x0.5mm thread)
-- [NO] **Focus step resolution**: stepper at 1/16 microstepping ≈ 20µm per step; barrel travel ~50mm = 2500 steps to traverse full range
+- [NO] **Focus step resolution**: stepper at 1/16 microstepping  20m per step; barrel travel ~50mm = 2500 steps to traverse full range
   - **Problem:** Slow to focus (2-5s per full sweep), mechanical hysteresis causes "hunting"
   - **Real risk:** Stepper stalling under load, focus calibration drift after power cycles
 
-**Reliability Rating:** ⭐⭐⭐ (Fixed focus) / ⭐⭐ (With stepper focus)
+**Reliability Rating:**  (Fixed focus) /  (With stepper focus)
 
 **Failure Modes:**
 1. Stepper missed steps (jitter in servo power rails)
@@ -123,7 +123,7 @@ libcamera-still -o capture.jpg --autofocus continuous
 - [WARNING] **Cost** ($105-116 per system = $210-232 for stereo pair)
 - [WARNING] **USB adapter reliability** (if using ISP board; USB hubs are historically flaky on ESP32)
 
-**Reliability Rating:** ⭐⭐⭐⭐⭐ (Electronic AF, proven hardware)
+**Reliability Rating:**  (Electronic AF, proven hardware)
 
 **Failure Modes:**
 1. **USB adapter flakiness** (if ISP path): USB driver crashes, requires restart
@@ -164,7 +164,7 @@ libcamera-still -o capture.jpg --autofocus continuous
 - [NO] **Highest cost** ($170 per system, $340 for pair)
 - [WARNING] **Power hungry** (1.2W per module, USB hub adds 0.5W)
 
-**Reliability Rating:** ⭐⭐⭐⭐ (Proven hardware, but overkill)
+**Reliability Rating:**  (Proven hardware, but overkill)
 
 **Failure Modes:**
 1. USB 3.1 hub power issues (inadequate PSU for dual cameras + servos)
@@ -185,7 +185,7 @@ libcamera-still -o capture.jpg --autofocus continuous
 | Resolution | 2MP ([WARNING] low for AI) |
 | Power (idle) | ~0.5W |
 | Power (active movement) | ~2.5W |
-| Reliability Rating | ⭐⭐⭐ |
+| Reliability Rating |  |
 | **Best For** | **Proof-of-concept, prototype** |
 
 ---
@@ -194,12 +194,12 @@ libcamera-still -o capture.jpg --autofocus continuous
 | Metric | Value |
 |--------|-------|
 | Total Hardware Cost | $210-232 |
-| Focus Quality | Electronic autofocus, ~20cm-∞ |
+| Focus Quality | Electronic autofocus, ~20cm- |
 | Autofocus | [OK] Continuous, reliable |
 | Resolution | 32MP ([YES] excellent for AI) |
 | Power (idle) | ~2W |
 | Power (active movement) | ~4W |
-| Reliability Rating | ⭐⭐⭐⭐⭐ |
+| Reliability Rating |  |
 | **Best For** | **Production animatronic, balanced cost/reliability** |
 
 ---
@@ -213,7 +213,7 @@ libcamera-still -o capture.jpg --autofocus continuous
 | Resolution | 2MP |
 | Power (idle) | ~0.5W |
 | Power (active focus) | ~3W (stepper holds torque) |
-| Reliability Rating | ⭐⭐ (mechanical wear risk) |
+| Reliability Rating |  (mechanical wear risk) |
 | **Best For** | **Budget option, accept maintenance risk** |
 
 ---
@@ -227,7 +227,7 @@ libcamera-still -o capture.jpg --autofocus continuous
 | Resolution | 12MP RGB + depth |
 | Power (idle) | ~2.5W |
 | Power (active) | ~6W (dual cameras) |
-| Reliability Rating | ⭐⭐⭐⭐ |
+| Reliability Rating |  |
 | **Best For** | **Advanced perception, depth-aware tracking** |
 
 ---

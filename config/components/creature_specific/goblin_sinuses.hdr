@@ -1,0 +1,44 @@
+#ifndef GOBLIN_SINUSES_HDR
+#define GOBLIN_SINUSES_HDR
+
+#include "esp_err.h"
+
+/**
+ * @file goblin_sinuses.hdr
+ * @brief Acoustic resonance chamber system for natural sound amplification
+ * @description 3D-printed sinus cavity that mimics biological skull acoustics
+ */
+
+/**
+ * @brief Initialize goblin_sinuses component
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_init(void);
+
+/**
+ * @brief Execute goblin_sinuses component logic
+ */
+void goblin_sinuses_act(void);
+
+/**
+ * @brief Set resonance frequency for acoustic optimization
+ * @param frequency Target resonance frequency in Hz
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_set_resonance(uint16_t frequency);
+
+/**
+ * @brief Get current amplification factor
+ * @param factor Pointer to store current amplification factor
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_get_amplification(float *factor);
+
+/**
+ * @brief Configure chamber acoustics for different voice types
+ * @param voice_type 0=deep, 1=normal, 2=high pitched
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_configure_voice(uint8_t voice_type);
+
+#endif // GOBLIN_SINUSES_HDR

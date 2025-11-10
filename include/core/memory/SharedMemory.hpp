@@ -8,40 +8,17 @@
 #include <algorithm>
 #include <cctype>
 
-// Include shared state types
-#include "Mood.hpp"
-#include "Personality.hpp"
-#include "../shared/Environment.hpp"
-#include "../shared/MicrophoneData.hpp"
-
 // Type ID definition - using int for type IDs
 typedef int shared_type_id_t;
 
 // Template function to get type ID for each class
-// Each class must specialize this template
+// Each usage site must specialize this template for their specific type
+// Example:
+//   #include "MyClass.hpp"
+//   #include "core/memory/SharedMemory.hpp"
+//   template<> shared_type_id_t getTypeId<MyClass>() { return UNIQUE_ID; }
 template<typename T>
 shared_type_id_t getTypeId();
-
-// Template specializations for known types
-template<>
-inline shared_type_id_t getTypeId<Environment>() {
-    return 1;
-}
-
-template<>
-inline shared_type_id_t getTypeId<Mood>() {
-    return 2;
-}
-
-template<>
-inline shared_type_id_t getTypeId<MicrophoneData>() {
-    return 3;
-}
-
-template<>
-inline shared_type_id_t getTypeId<Personality>() {
-    return 4;
-}
 
 #ifdef ESP_PLATFORM
 #ifdef CONFIG_ESP_WIFI_ESPNOW

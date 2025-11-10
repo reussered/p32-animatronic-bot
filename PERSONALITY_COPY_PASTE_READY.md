@@ -1,4 +1,4 @@
-# Personality System: Copy-Paste Ready Code
+﻿# Personality System: Copy-Paste Ready Code
 
 ## Ready-to-Use Code Snippets
 
@@ -151,7 +151,7 @@ void goblin_eyes_combined_act(void) {
 
 ## Implementation Checklist
 
-### Phase 1: Foundation (DONE ✅)
+### Phase 1: Foundation (DONE )
 - [x] Create `Personality.hpp` in `shared/`
 - [x] Create `Personality.hpp` in `include/`
 - [x] Add Personality to SharedMemory type IDs
@@ -170,7 +170,7 @@ void goblin_eyes_combined_act(void) {
 - [ ] Flash torso + head
 - [ ] Check serial logs for "Personality loaded"
 - [ ] Verify eyes display with baseline mood colors
-- [ ] Change personality values → verify intensity changes
+- [ ] Change personality values  verify intensity changes
 
 ### Phase 4: Optimization (OPTIONAL)
 - [ ] Add dynamic personality changes based on sensor input
@@ -200,18 +200,18 @@ assert(dampen == 0.5f);                           // Maximum dampening
 // Test 3: Verify color rendering
 // With mood->anger = 80, personality aggression = 100
 // Expected: intensity = 1.79x
-// Expected red_tint = 80 * 255 * 1.5 * 1.79 ≈ 54,927 (clamped to 255)
+// Expected red_tint = 80 * 255 * 1.5 * 1.79  54,927 (clamped to 255)
 // Expected visual: bright red overlay
 ```
 
 ## Success Criteria
 
-- ✅ All three eye displays use identical code (only buffer names differ)
-- ✅ Personality is read from SharedMemory in all displays
-- ✅ Intensity multiplier scales mood effects consistently
-- ✅ All eyes respond together to personality changes
-- ✅ Code is modular and works for any future display component
-- ✅ No hardcoded personality values in display components
+-  All three eye displays use identical code (only buffer names differ)
+-  Personality is read from SharedMemory in all displays
+-  Intensity multiplier scales mood effects consistently
+-  All eyes respond together to personality changes
+-  Code is modular and works for any future display component
+-  No hardcoded personality values in display components
 
 ## Common Issues & Solutions
 

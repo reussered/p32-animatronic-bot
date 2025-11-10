@@ -1,4 +1,4 @@
-# Goblin Head Motor Control System - Complete Implementation Guide
+﻿# Goblin Head Motor Control System - Complete Implementation Guide
 
 ## Overview
 
@@ -20,19 +20,19 @@ This guide documents the complete stepper motor system for the P32 Goblin head, 
 | **Heavy** | NEMA23-34 | Neck, torso, heavy load | 10 |
 | **Industrial** | NEMA42 | Maximum torque | 1 |
 | **Specialized** | Pancake, Linear, Servo | Compact/special apps | 6 |
-| **TOTAL** | — | — | **30** |
+| **TOTAL** | - | - | **30** |
 
 ### Head Subsystems
 
 #### 1. Eye Motor System (`goblin_head_eye_motor.hpp`)
 
 **Articulation (3-DOF per eye):**
-- Pan (L/R): NEMA17_STANDARD × 1 (shared for both eyes)
-- Tilt (U/D): NEMA14_STANDARD × 1 (shared for both eyes)
-- Blink: NEMA8_GEARED_5 × 1 (eyelid linear actuator)
+- Pan (L/R): NEMA17_STANDARD  1 (shared for both eyes)
+- Tilt (U/D): NEMA14_STANDARD  1 (shared for both eyes)
+- Blink: NEMA8_GEARED_5  1 (eyelid linear actuator)
 
 **Display:**
-- Driver: GC9A01 (240×240 RGB565)
+- Driver: GC9A01 (240240 RGB565)
 - Buffer: 115.2 KB (allocated once, reused every frame)
 - Update: 30 Hz
 
@@ -54,9 +54,9 @@ left_eye.setGazeStyle(NEUTRAL);  // or FOCUSED, WANDERING
 ```
 
 **Motor Timing:**
-- Pan: 50 µs min interval, 250 µs recommended
-- Tilt: 60 µs min, 250 µs recommended
-- Blink: 30 µs min, 150 µs recommended
+- Pan: 50 s min interval, 250 s recommended
+- Tilt: 60 s min, 250 s recommended
+- Blink: 30 s min, 150 s recommended
 
 ---
 
@@ -70,8 +70,8 @@ left_eye.setGazeStyle(NEUTRAL);  // or FOCUSED, WANDERING
 - Cheek R: NEMA8_GEARED_5 (right puff linear)
 
 **Display:**
-- Driver: ILI9341 (480×320 RGB666)
-- Buffer: 115.2 KB chunk (480×80 pixels × 3 bytes)
+- Driver: ILI9341 (480320 RGB666)
+- Buffer: 115.2 KB chunk (48080 pixels  3 bytes)
 - Chunks: 4 horizontal strips
 - Update: 30 Hz (chunks sent sequentially)
 
@@ -100,9 +100,9 @@ mouth.speakPhoneme(phoneme_id);         // 0-19 phonemes
 ```
 
 **Motor Timing:**
-- Jaw: 40 µs min, 200 µs recommended
-- Corners L/R: 60 µs min, 250 µs recommended
-- Cheeks L/R: 30 µs min, 150 µs recommended
+- Jaw: 40 s min, 200 s recommended
+- Corners L/R: 60 s min, 250 s recommended
+- Cheeks L/R: 30 s min, 150 s recommended
 
 ---
 
@@ -144,9 +144,9 @@ neck.performMotion(NODDING_YES, amplitude, frequency);
 ```
 
 **Motor Timing:**
-- Pan: 50 µs min, 200 µs recommended
-- Tilt: 40 µs min, 200 µs recommended
-- Roll: 60 µs min, 250 µs recommended
+- Pan: 50 s min, 200 s recommended
+- Tilt: 40 s min, 200 s recommended
+- Roll: 60 s min, 250 s recommended
 
 ---
 
@@ -156,30 +156,30 @@ neck.performMotion(NODDING_YES, amplitude, frequency);
 
 ```
 config/components/hardware/
-├── stepper_motor_library.hpp         ← Core library (30 motors)
-│
+ stepper_motor_library.hpp          Core library (30 motors)
+
 config/components/templates/
-├── goblin_head_eye_motor.hpp         ← Eye control (3-DOF + display)
-├── goblin_head_mouth_motor.hpp       ← Mouth control (5-DOF + chunked display)
-├── goblin_head_neck_motor.hpp        ← Neck control (3-DOF smooth easing)
-├── goblin_eye_mood_display_v2.hpp    ← Eye display rendering (single buffer)
-└── goblin_mouth_mood_display_v2.hpp  ← Mouth display chunked rendering
+ goblin_head_eye_motor.hpp          Eye control (3-DOF + display)
+ goblin_head_mouth_motor.hpp        Mouth control (5-DOF + chunked display)
+ goblin_head_neck_motor.hpp         Neck control (3-DOF smooth easing)
+ goblin_eye_mood_display_v2.hpp     Eye display rendering (single buffer)
+ goblin_mouth_mood_display_v2.hpp   Mouth display chunked rendering
 ```
 
 ### JSON Configurations
 
 ```
 config/components/hardware/
-├── stepper_motor_catalog.json                 ← All 30 motor specs + guide
-├── stepper_nema8_standard.json                ← NEMA8 variant configs
-├── stepper_nema14_standard.json               ← NEMA14 variant configs
-├── stepper_nema17_standard.json               ← NEMA17 variant configs (13 variants)
-├── stepper_nema23_standard.json               ← NEMA23 variant configs (5 variants)
-│
+ stepper_motor_catalog.json                  All 30 motor specs + guide
+ stepper_nema8_standard.json                 NEMA8 variant configs
+ stepper_nema14_standard.json                NEMA14 variant configs
+ stepper_nema17_standard.json                NEMA17 variant configs (13 variants)
+ stepper_nema23_standard.json                NEMA23 variant configs (5 variants)
+
 config/components/creature_specific/
-├── goblin_head_eye_motor.json                 ← Eye motor configuration
-├── goblin_head_mouth_motor.json               ← Mouth motor + expressions
-└── goblin_head_neck_motor.json                ← Neck motor + presets
+ goblin_head_eye_motor.json                  Eye motor configuration
+ goblin_head_mouth_motor.json                Mouth motor + expressions
+ goblin_head_neck_motor.json                 Neck motor + presets
 ```
 
 ---
@@ -187,8 +187,8 @@ config/components/creature_specific/
 ## Memory Budget
 
 ### Display Buffers
-- **Eye Display (GC9A01):** 240×240×2 = 115.2 KB
-- **Mouth Display (ILI9341 chunked):** 480×80×3 = 115.2 KB
+- **Eye Display (GC9A01):** 2402402 = 115.2 KB
+- **Mouth Display (ILI9341 chunked):** 480803 = 115.2 KB
 - **Total Display:** 230.4 KB
 
 ### Motor State
@@ -253,7 +253,7 @@ void goblin_head_eye_motor_act(void) {
 ### For Eye Movement
 **Recommended:** `NEMA17_STANDARD` (pan) + `NEMA14_STANDARD` (tilt)
 - Good balance of speed/torque
-- 50-60 µs min intervals allow smooth 30 Hz updates
+- 50-60 s min intervals allow smooth 30 Hz updates
 - 400-100 ncm torque handles typical eye load
 
 ### For Mouth/Jaw
@@ -270,7 +270,7 @@ void goblin_head_eye_motor_act(void) {
 
 ### For Precision Articulation
 **Use:** `NEMA17_PRECISION` with SIXTEENTH_STEP
-- 20 µs min interval
+- 20 s min interval
 - Smooth servo-like motion
 - Useful for finger control
 
@@ -283,7 +283,7 @@ void goblin_head_eye_motor_act(void) {
 **Use:** `NEMA17_LSHT_100` or `NEMA23_GEARED_10`
 - 100:1 reduction for ultra-smooth slow motion
 - Extreme holding torque (40K+ ncm)
-- ~1500 µs step interval (very slow, very smooth)
+- ~1500 s step interval (very slow, very smooth)
 
 ---
 
@@ -292,14 +292,14 @@ void goblin_head_eye_motor_act(void) {
 ### Timing Budget (30 Hz update)
 - **Frame time:** 33 ms
 - **Display rendering:** ~5 ms (display driver dependent)
-- **Motor stepping:** ~1 ms (20-100 µs × multiple motors)
+- **Motor stepping:** ~1 ms (20-100 s  multiple motors)
 - **Mood calculations:** ~2 ms
 - **Easing/interpolation:** <1 ms
 - **Remaining:** ~24 ms (plenty of headroom)
 
 ### Step Intervals (For Reference)
 
-| Motor Type | Min (µs) | Recommended (µs) | Max RPM |
+| Motor Type | Min (s) | Recommended (s) | Max RPM |
 |-----------|----------|-----------------|---------|
 | NEMA8 | 100 | 500 | 2000 |
 | NEMA14 | 60 | 300 | 3000-3500 |
@@ -310,17 +310,17 @@ void goblin_head_eye_motor_act(void) {
 
 ## Mood Integration
 
-### Mood → Expression Mapping
+### Mood  Expression Mapping
 
 ```
-Mood Component    → Expression     → Motor Effect
-─────────────────────────────────────────────────
-HIGH happiness    → SMILE          → corners up
-HIGH sadness      → FROWN          → corners down
-HIGH anger        → ANGRY          → jaw tight, corners down
-HIGH excitement   → OPEN_LAUGH     → jaw wide, cheeks puff
-HIGH curiosity    → CONFUSED_TILT  → head tilt
-HIGH fear        → SHOCK          → jaw dropped, eyes wide
+Mood Component     Expression      Motor Effect
+
+HIGH happiness     SMILE           corners up
+HIGH sadness       FROWN           corners down
+HIGH anger         ANGRY           jaw tight, corners down
+HIGH excitement    OPEN_LAUGH      jaw wide, cheeks puff
+HIGH curiosity     CONFUSED_TILT   head tilt
+HIGH fear         SHOCK           jaw dropped, eyes wide
 ```
 
 ### Intensity Modulation

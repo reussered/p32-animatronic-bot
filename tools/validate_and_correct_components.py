@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Complete Component Validation & Correction Suite
 Fixes all common component definition issues:
@@ -201,24 +201,24 @@ def main():
     print("="*80)
     
     if stats['FIXED'] > 0:
-        print(f"\n✓ {stats['FIXED']} components auto-corrected")
+        print(f"\n {stats['FIXED']} components auto-corrected")
     
     if stats['PARTIAL'] > 0:
-        print(f"\n⚠ {stats['PARTIAL']} components partially corrected (manual review):")
+        print(f"\n {stats['PARTIAL']} components partially corrected (manual review):")
         for name, msg in detailed_issues['PARTIAL'][:5]:
             print(f"   - {name}: {msg}")
         if stats['PARTIAL'] > 5:
             print(f"   ... and {stats['PARTIAL'] - 5} more")
     
     if stats['UNFIXABLE'] > 0:
-        print(f"\n✗ {stats['UNFIXABLE']} components cannot auto-fix (manual review):")
+        print(f"\n {stats['UNFIXABLE']} components cannot auto-fix (manual review):")
         for name, msg in detailed_issues['UNFIXABLE'][:5]:
             print(f"   - {name}: {msg}")
         if stats['UNFIXABLE'] > 5:
             print(f"   ... and {stats['UNFIXABLE'] - 5} more")
     
     if stats['ERROR'] > 0:
-        print(f"\n✗ {stats['ERROR']} files have errors:")
+        print(f"\n {stats['ERROR']} files have errors:")
         for name, msg in detailed_issues['ERROR'][:5]:
             print(f"   - {name}: {msg}")
         if stats['ERROR'] > 5:

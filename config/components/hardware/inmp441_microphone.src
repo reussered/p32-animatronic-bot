@@ -1,0 +1,44 @@
+esp_err_t inmp441_microphone_init(void)
+{
+    ESP_LOGI("inmp441_microphone", "Initializing INMP441 I2S microphone");
+    
+    // INMP441 doesn't have a reset pin - it auto-starts with I2S clock
+    // But we need to ensure proper power-on sequence
+    
+    // Power stabilization delay (hardware requirement)
+    vTaskDelay(pdMS_TO_TICKS(10)); // 10ms power-on delay
+    
+    // Note: The actual I2S interface setup is handled by i2s_generic_driver
+    // This component just handles hardware-specific timing and configuration
+    
+    ESP_LOGI("inmp441_microphone", "Waiting for clock stabilization...");
+    vTaskDelay(pdMS_TO_TICKS(50)); // 50ms for clock stabilization
+    
+    ESP_LOGI("inmp441_microphone", "INMP441 microphone ready");
+    return ESP_OK;
+}
+
+void inmp441_microphone_act(void)
+{
+    // INMP441 is very simple - no ongoing hardware management needed
+    // The I2S interface handles all data transfer
+    // This function could monitor for hardware health if needed
+    
+    static uint32_t last_health_check = 0;
+    uint32_t current_time = esp_timer_get_time() / 1000;
+    
+    // Health check every 5 seconds
+    if (current_time - last_health_check > 5000)
+    {
+        last_health_check = current_time;
+        
+        // Could check if I2S data is flowing properly
+        // For now, just log that microphone is operational
+        ESP_LOGV("inmp441_microphone", "INMP441 microphone operational");
+        
+        // In a more advanced implementation, could detect:
+        // - Clock presence
+        // - Data flow rate
+        // - Audio level sanity checks
+    }
+}

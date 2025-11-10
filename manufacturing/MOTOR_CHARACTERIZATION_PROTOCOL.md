@@ -1,4 +1,4 @@
-# Motor Characterization Protocol - Multimeter Only
+﻿# Motor Characterization Protocol - Multimeter Only
 **Date Created**: November 7, 2025  
 **Purpose**: Identify unknown stepper motors and clock motors to determine suitability for facial animation  
 **Equipment Required**: 
@@ -15,8 +15,8 @@
 
 | Parameter | Needed For Face | Red Flag |
 |---|---|---|
-| **Torque** | 0.5 - 2 N·cm minimum | < 0.3 N·cm = too weak |
-| **Step Angle** | 1.8° - 5.6° (standard) | > 15° = too coarse |
+| **Torque** | 0.5 - 2 Ncm minimum | < 0.3 Ncm = too weak |
+| **Step Angle** | 1.8 - 5.6 (standard) | > 15 = too coarse |
 | **Voltage** | 5V or 12V preferred | > 24V = power supply headache |
 | **Current Draw** | < 500 mA per motor | > 1A = needs big power supply |
 | **Holding Power** | Should lock when powered | Spins freely = wrong type |
@@ -36,31 +36,31 @@
 
 ### Step 1.1: Visual Inspection
 - [ ] Count the wires coming out of the motor
-  - **2 wires** → Likely DC brushed motor (will spin continuously)
-  - **4 wires** → Likely stepper motor or bipolar DC
-  - **5 wires** → Likely unipolar stepper motor
-  - **6+ wires** → Clock motor or multi-phase stepper
+  - **2 wires**  Likely DC brushed motor (will spin continuously)
+  - **4 wires**  Likely stepper motor or bipolar DC
+  - **5 wires**  Likely unipolar stepper motor
+  - **6+ wires**  Clock motor or multi-phase stepper
 
 - [ ] Look for coils (looped wires) visible inside
-  - **Multiple distinct coils** → Stepper motor (GOOD for animation)
-  - **Smooth copper contacts** → DC brushed motor (spins continuously)
-  - **Tiny gear visible** → Clock motor (precision, but may be too slow)
+  - **Multiple distinct coils**  Stepper motor (GOOD for animation)
+  - **Smooth copper contacts**  DC brushed motor (spins continuously)
+  - **Tiny gear visible**  Clock motor (precision, but may be too slow)
 
 ### Step 1.2: Resistance Check (Multimeter - Resistance Mode)
 **Procedure**: 
 - Disconnect motor from any power
-- Set multimeter to Resistance (Ω) mode
+- Set multimeter to Resistance () mode
 - Probe between each pair of wires
 - Record all readings
 
 | Wire Pair | Resistance | Motor Type Indicator |
 |---|---|---|
-| All pairs high (> 1 MΩ) | Open circuit | Broken motor, SKIP THIS ONE |
-| All pairs 0 Ω | Short circuit | Broken motor, SKIP THIS ONE |
-| Two pairs ~10-100 Ω, rest high | Unipolar stepper | ✓ Good for animation |
-| Two pairs ~5-20 Ω, diagonal match | Bipolar stepper | ✓ Good for animation |
-| One pair 0-10 Ω, others high | DC brushed motor | ✗ Wrong type for animation |
-| All pairs 50-200 Ω similar | Clock motor or DC | ? Unknown, test more |
+| All pairs high (> 1 M) | Open circuit | Broken motor, SKIP THIS ONE |
+| All pairs 0  | Short circuit | Broken motor, SKIP THIS ONE |
+| Two pairs ~10-100 , rest high | Unipolar stepper |  Good for animation |
+| Two pairs ~5-20 , diagonal match | Bipolar stepper |  Good for animation |
+| One pair 0-10 , others high | DC brushed motor |  Wrong type for animation |
+| All pairs 50-200  similar | Clock motor or DC | ? Unknown, test more |
 
 **Record**: ________________
 
@@ -81,7 +81,7 @@
 ---
 
 ## **TEST 2: MEASURE TORQUE (10 minutes)**
-**Goal**: Determine if motor is strong enough for facial animation (need ≥ 0.5 N·cm)
+**Goal**: Determine if motor is strong enough for facial animation (need  0.5 Ncm)
 
 ### Step 2.1: Build Test Rig
 - [ ] Mount motor vertically on a stand/clamp so shaft points straight up
@@ -113,29 +113,29 @@
 
 ### Step 2.4: Calculate Torque
 ```
-Torque (N·cm) = (Weight in grams × 0.00981) × Distance in cm
+Torque (Ncm) = (Weight in grams  0.00981)  Distance in cm
 
-Example: 100 grams at 2 cm = (100 × 0.00981) × 2 = 1.96 N·cm
+Example: 100 grams at 2 cm = (100  0.00981)  2 = 1.96 Ncm
 ```
 
 **MY CALCULATION**:  
-Weight: _______ g × 0.00981 = _______ N  
+Weight: _______ g  0.00981 = _______ N  
 Distance: _______ cm  
-**TORQUE = _______ N·cm**
+**TORQUE = _______ Ncm**
 
 ### **TEST 2 RESULT**:
-- [ ] **> 2 N·cm**: Strong! Good for cheek movement or head rotation
-- [ ] **0.5 - 2 N·cm**: Perfect! Suitable for facial animation (cheeks, jaw, eyebrows)
-- [ ] **0.1 - 0.5 N·cm**: Weak. Only suitable for nostril/eyebrow twitches, not cheek raise
-- [ ] **< 0.1 N·cm**: Too weak. Not suitable for facial animation.
+- [ ] **> 2 Ncm**: Strong! Good for cheek movement or head rotation
+- [ ] **0.5 - 2 Ncm**: Perfect! Suitable for facial animation (cheeks, jaw, eyebrows)
+- [ ] **0.1 - 0.5 Ncm**: Weak. Only suitable for nostril/eyebrow twitches, not cheek raise
+- [ ] **< 0.1 Ncm**: Too weak. Not suitable for facial animation.
 
 ---
 
 ## **TEST 3: MEASURE STEP ANGLE & RESOLUTION (10 minutes)**
-**Goal**: Determine if motor can do fine, controlled movements (need ≤ 5.6° per step)
+**Goal**: Determine if motor can do fine, controlled movements (need  5.6 per step)
 
 ### Step 3.1: Setup for Step Testing
-- [ ] Mark shaft position with marker/tape (reference point at "0°")
+- [ ] Mark shaft position with marker/tape (reference point at "0")
 - [ ] Place protractor under shaft so you can measure rotation
 - [ ] Have power supply and multimeter ready
 
@@ -153,18 +153,18 @@ Distance: _______ cm
 
 ### Step 3.3: Calculate Useful Resolution
 ```
-If motor steps at 1.8°:     Can position at 1.8°, 3.6°, 5.4°, etc.  → EXCELLENT
-If motor steps at 5.6°:     Can position at 5.6°, 11.2°, 16.8°, etc. → GOOD
-If motor steps at 11.2°:    Too coarse for smooth face animation → POOR
-If motor spins continuously: Not a stepper → Can't control position
+If motor steps at 1.8:     Can position at 1.8, 3.6, 5.4, etc.   EXCELLENT
+If motor steps at 5.6:     Can position at 5.6, 11.2, 16.8, etc.  GOOD
+If motor steps at 11.2:    Too coarse for smooth face animation  POOR
+If motor spins continuously: Not a stepper  Can't control position
 ```
 
 **MY MEASUREMENT**: _______ degrees per step
 
 ### **TEST 3 RESULT**:
-- [ ] **1.8° - 5.6°**: Excellent resolution. Perfect for facial animation.
-- [ ] **5.6° - 11.2°**: Acceptable but coarse. May see jerky animation.
-- [ ] **> 11.2°**: Too coarse. Poor for facial animation.
+- [ ] **1.8 - 5.6**: Excellent resolution. Perfect for facial animation.
+- [ ] **5.6 - 11.2**: Acceptable but coarse. May see jerky animation.
+- [ ] **> 11.2**: Too coarse. Poor for facial animation.
 - [ ] **Continuous rotation**: Not a stepper. Wrong motor type.
 
 ---
@@ -178,9 +178,9 @@ If motor spins continuously: Not a stepper → Can't control position
 - [ ] Try to turn motor shaft by hand with gentle force
 
 ### Step 4.2: Record Result
-- [ ] **Shaft is locked solid** → Has permanent magnet. Good! Will hold expression if power fails.
-- [ ] **Shaft turns with light force (< 50g resistance)** → Weak holding. Risky.
-- [ ] **Shaft spins freely** → No holding power. Clock motor or brushed DC motor.
+- [ ] **Shaft is locked solid**  Has permanent magnet. Good! Will hold expression if power fails.
+- [ ] **Shaft turns with light force (< 50g resistance)**  Weak holding. Risky.
+- [ ] **Shaft spins freely**  No holding power. Clock motor or brushed DC motor.
 
 **MY RESULT**: ________________
 
@@ -202,10 +202,10 @@ If motor spins continuously: Not a stepper → Can't control position
 
 ### Step 5.2: Calculate Power Supply Needs for 9 Motors
 ```
-Total Current for 9 motors = 9 × (current per motor in amps)
-Total Power needed = Voltage × Total Current
+Total Current for 9 motors = 9  (current per motor in amps)
+Total Power needed = Voltage  Total Current
 
-Example: 9 motors × 300 mA = 2700 mA = 2.7 A at 12V
+Example: 9 motors  300 mA = 2700 mA = 2.7 A at 12V
 Recommended PSU: 5A at 12V (gives headroom)
 ```
 
@@ -221,21 +221,21 @@ Voltage needed: _______ V
 
 | Test | Result | Pass/Fail |
 |---|---|---|
-| **Test 1: Motor Type** | Stepper / DC / Clock | ☐ PASS ☐ FAIL |
-| **Test 2: Torque** | _______ N·cm | ☐ PASS ☐ FAIL |
-| **Test 3: Step Angle** | _______ ° per step | ☐ PASS ☐ FAIL |
-| **Test 4: Holding Power** | Locked / Weak / Free | ☐ PASS ☐ FAIL |
-| **Test 5: Power Draw** | _______ mA per motor | ☐ PASS ☐ FAIL |
+| **Test 1: Motor Type** | Stepper / DC / Clock |  PASS  FAIL |
+| **Test 2: Torque** | _______ Ncm |  PASS  FAIL |
+| **Test 3: Step Angle** | _______  per step |  PASS  FAIL |
+| **Test 4: Holding Power** | Locked / Weak / Free |  PASS  FAIL |
+| **Test 5: Power Draw** | _______ mA per motor |  PASS  FAIL |
 
 ---
 
 ## **RECOMMENDATION**
 
 ### For Facial Animation (Cheeks, Jaw, Eyebrows):
-- [ ] **✓ YES - Use these motors**  
+- [ ] ** YES - Use these motors**  
   Reason: ________________________________________________
 
-- [ ] **✗ NO - Do not use for face**  
+- [ ] ** NO - Do not use for face**  
   Reason: ________________________________________________
 
 - [ ] **? MAYBE - Use for specific features only**  
@@ -256,13 +256,13 @@ ________________________________________________
 
 **Estimated specs**:
 - Voltage: _______ V
-- Torque: _______ N·cm
-- Step angle: _______ °
+- Torque: _______ Ncm
+- Step angle: _______ 
 - Current draw: _______ mA
-- Type: ☐ Unipolar Stepper ☐ Bipolar Stepper ☐ Clock Motor ☐ DC Brushed
+- Type:  Unipolar Stepper  Bipolar Stepper  Clock Motor  DC Brushed
 
 **Internet search to try**:
-"Stepper motor _______ degrees _______ N·cm _______ V"
+"Stepper motor _______ degrees _______ Ncm _______ V"
 
 ---
 

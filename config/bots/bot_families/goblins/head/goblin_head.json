@@ -21,6 +21,7 @@
         "goblin_nose",
         "goblin_mouth",
         "goblin_speaker",
+        "goblin_sinuses",
         "goblin_left_ear",
         "goblin_right_ear",
         "goblin_head_neck_motor"

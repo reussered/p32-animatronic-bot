@@ -1,0 +1,30 @@
+{
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_sinuses",
+    "type": "ACOUSTIC_RESONATOR",
+    "components": [
+        "max98357a_i2s_amplifier"
+    ],
+    "description": "3D-printed sinus cavity system that provides natural acoustic amplification and resonance for speaker output, mimicking biological skull acoustics",
+    "physical_specs": {
+        "material": "PLA or PETG",
+        "wall_thickness": "2-3mm",
+        "resonance_chambers": 3,
+        "frequency_response": "200Hz-8kHz optimized",
+        "mounting": "fits within skull cavity"
+    },
+    "timing": {
+        "hitCount": 5
+    },
+    "use_fields": {
+        "resonance_frequency": 800,
+        "amplification_factor": 1.5,
+        "chamber_count": 3
+    },
+    "interfaces": {
+        "acoustic_input": "speaker output",
+        "acoustic_output": "mouth opening",
+        "mounting_points": "skull attachment"
+    }
+}

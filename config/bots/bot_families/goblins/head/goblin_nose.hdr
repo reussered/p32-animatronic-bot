@@ -1,5 +1,49 @@
-// Auto-generated header for goblin_nose
-#include <esp_err.h>
+// Goblin nose component with HC-SR04 ultrasonic sensor
+#ifndef GOBLIN_NOSE_HDR
+#define GOBLIN_NOSE_HDR
 
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize goblin nose with HC-SR04 sensor
+ * @return ESP_OK on success, error code otherwise
+ */
 esp_err_t goblin_nose_init(void);
+
+/**
+ * @brief Process nose sensor readings and update state
+ * Called periodically by subsystem dispatcher
+ */
 void goblin_nose_act(void);
+
+/**
+ * @brief Get the current nose sensor distance reading
+ * @return Distance in cm, or -1 if no valid reading
+ */
+float goblin_nose_get_distance(void);
+
+/**
+ * @brief Check if there's a proximity alert (object very close)
+ * @return true if object is closer than proximity threshold (10cm)
+ */
+bool goblin_nose_proximity_alert(void);
+
+/**
+ * @brief Get sensor statistics
+ * @param total_readings Output: total number of readings attempted (can be NULL)
+ * @param valid_readings Output: number of successful readings (can be NULL)
+ * @return Current success rate as percentage
+ */
+float goblin_nose_get_stats(uint32_t* total_readings, uint32_t* valid_readings);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GOBLIN_NOSE_HDR

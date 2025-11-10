@@ -1,4 +1,4 @@
-[STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD - HUMAN REFERENCE ONLY]
+﻿[STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD - HUMAN REFERENCE ONLY]
 
 # ASCII ENCODING MANDATE - Clear Guidelines
 
@@ -21,7 +21,7 @@ Production files = any file that is:
 **C++ Code** - NEVER use Unicode
 ```cpp
 // WRONG - contains degree symbol
-float temp = 25°C;
+float temp = 25C;
 
 // RIGHT - ASCII only
 float temp = 25; // degrees C
@@ -39,7 +39,7 @@ float temp = 25; // degrees C
 ```python
 # WRONG
 def get_angle():
-    return "→ 90 degrees"
+    return " 90 degrees"
 
 # RIGHT
 def get_angle():
@@ -49,7 +49,7 @@ def get_angle():
 **Documentation in src/, include/, config/, tools/** - NEVER use Unicode
 ```markdown
 # WRONG - in src/components/README.md
-This requires ±2 degrees tolerance
+This requires 2 degrees tolerance
 
 # RIGHT - in src/components/README.md
 This requires +/- 2 degrees tolerance
@@ -97,13 +97,13 @@ This requires +/- 2 degrees tolerance
   - Standalone research document
   - Never imported by code
   - Purely for human reference
-  - Contains: "Temperature tolerance: ±2°C" (OK - Unicode allowed here)
+  - Contains: "Temperature tolerance: 2C" (OK - Unicode allowed here)
 
 - `FLYING_DRAGON_DECISION_LOG.md` at root with disclaimer
   - Historical design decisions
   - Never used in build
   - Research/analysis only
-  - Contains: "Arrow direction: → northwest" (OK - Unicode allowed here)
+  - Contains: "Arrow direction:  northwest" (OK - Unicode allowed here)
 
 - `.github/ARCHITECTURE_NOTES.md` with disclaimer
   - Design notes, not part of build
@@ -129,32 +129,32 @@ If Unicode seems necessary, replace it with ASCII from this table:
 
 | Symbol | ASCII Replacement | Example |
 |--------|-------------------|---------|
-| `°` | `degrees` | 25 degrees C |
-| `±` | `+/-` | +/- 5 |
-| `×` | `x` | 1024x768 |
-| `≈` | `approx` | approx 3.14 |
-| `→` | `->` | start -> end |
-| `←` | `<-` | left <- right |
-| `⟹` | `=>` | implies => result |
-| `∞` | `infinity` | -infinity to +infinity |
-| `∆` | `DELTA` | DELTA = change |
-| `Ω` | `OMEGA` | R = OMEGA |
-| `µ` | `micro` or `u` | microamps, uA |
-| `⭐` | `[STAR]` | [STAR] excellent |
-| `✓` | `[OK]` | [OK] passed |
-| `✗` | `[FAIL]` | [FAIL] failed |
-| `⚠️` | `[WARNING]` | [WARNING] unstable |
-| `ℹ️` | `[INFO]` | [INFO] note |
-| `❌` | `[REJECT]` | [REJECT] invalid |
-| `✅` | `[ACCEPT]` | [ACCEPT] valid |
-| `—` | `-` or `--` | text - more text |
-| `…` | `...` | wait... |
-| `«` | `"` | "quote" |
-| `»` | `"` | "quote" |
-| `━` | `-` or `--` | ---------- |
-| `│` | `\|` | \| bar |
-| `├` | `\|` | \|- junction |
-| `└` | `\` | \ end |
+| `` | `degrees` | 25 degrees C |
+| `` | `+/-` | +/- 5 |
+| `` | `x` | 1024x768 |
+| `` | `approx` | approx 3.14 |
+| `` | `->` | start -> end |
+| `` | `<-` | left <- right |
+| `` | `=>` | implies => result |
+| `` | `infinity` | -infinity to +infinity |
+| `` | `DELTA` | DELTA = change |
+| `` | `OMEGA` | R = OMEGA |
+| `` | `micro` or `u` | microamps, uA |
+| `` | `[STAR]` | [STAR] excellent |
+| `` | `[OK]` | [OK] passed |
+| `` | `[FAIL]` | [FAIL] failed |
+| `` | `[WARNING]` | [WARNING] unstable |
+| `` | `[INFO]` | [INFO] note |
+| `` | `[REJECT]` | [REJECT] invalid |
+| `` | `[ACCEPT]` | [ACCEPT] valid |
+| `-` | `-` or `--` | text - more text |
+| `` | `...` | wait... |
+| `` | `"` | "quote" |
+| `` | `"` | "quote" |
+| `` | `-` or `--` | ---------- |
+| `` | `\|` | \| bar |
+| `` | `\|` | \|- junction |
+| `` | `\` | \ end |
 
 ---
 
@@ -165,23 +165,23 @@ When creating a file, follow this tree:
 ```
 START: Creating a new file?
 
-  ├─ Will it ever be imported/included/referenced by code?
-  │  └─ YES → ASCII ONLY (RULE 25)
-  │
-  ├─ Will it be in src/, include/, config/, tools/?
-  │  └─ YES → ASCII ONLY (RULE 25)
-  │
-  ├─ Will it be part of the build system?
-  │  └─ YES → ASCII ONLY (RULE 25)
-  │
-  ├─ Is it standalone documentation in root or docs folder?
-  │  ├─ YES + has disclaimer label
-  │  │  ├─ YES → Unicode OK (research/reference only)
-  │  │  └─ NO → Add disclaimer at top, then Unicode OK
-  │  └─ NO → ASCII ONLY (RULE 25)
-  │
-  └─ UNSURE?
-     └─ → ASCII ONLY (RULE 25) - Default to ASCII
+   Will it ever be imported/included/referenced by code?
+     YES  ASCII ONLY (RULE 25)
+  
+   Will it be in src/, include/, config/, tools/?
+     YES  ASCII ONLY (RULE 25)
+  
+   Will it be part of the build system?
+     YES  ASCII ONLY (RULE 25)
+  
+   Is it standalone documentation in root or docs folder?
+     YES + has disclaimer label
+       YES  Unicode OK (research/reference only)
+       NO  Add disclaimer at top, then Unicode OK
+     NO  ASCII ONLY (RULE 25)
+  
+   UNSURE?
+       ASCII ONLY (RULE 25) - Default to ASCII
 ```
 
 ---
@@ -192,7 +192,7 @@ START: Creating a new file?
 ```
 # WRONG
 File: src/components/eye_control/README.md
-Content: "Pan angle: 180° ± 5°"
+Content: "Pan angle: 180  5"
 Problem: In src/ directory = production file = ASCII only
 
 # RIGHT
@@ -205,7 +205,7 @@ Content: "Pan angle: 180 degrees +/- 5 degrees"
 # WRONG
 File: CAMERA_INTEGRATION.md
 Problem: If this file is imported or referenced by code (e.g., in build script)
-Content: "Field of view: ±45°"
+Content: "Field of view: 45"
 
 # RIGHT
 File: CAMERA_INTEGRATION.md (if NOT referenced by code)
@@ -219,14 +219,14 @@ Content: "Field of view: +/- 45 degrees" (always use ASCII unless standalone exc
 # WRONG
 File: RESEARCH_FINDINGS.md
 Content: [No disclaimer]
-Content: "Results showed ≈ 5% improvement"
+Content: "Results showed  5% improvement"
 
 # RIGHT
 File: RESEARCH_FINDINGS.md
 [STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD - HUMAN REFERENCE ONLY]
 
 Results showed approximately 5% improvement
-(OR with Unicode if criteria met: ≈ 5% improvement)
+(OR with Unicode if criteria met:  5% improvement)
 ```
 
 ---
@@ -253,7 +253,7 @@ If you create a production file with Unicode, you've violated RULE 3b and RULE 2
 
 ## Questions?
 
-- Is the file in src/, include/, config/, or tools/? → ASCII ONLY
-- Will code import/reference it? → ASCII ONLY  
-- Is it standalone documentation at root with disclaimer? → Check all 5 criteria
-- Unsure? → Default to ASCII
+- Is the file in src/, include/, config/, or tools/?  ASCII ONLY
+- Will code import/reference it?  ASCII ONLY  
+- Is it standalone documentation at root with disclaimer?  Check all 5 criteria
+- Unsure?  Default to ASCII

@@ -1,0 +1,86 @@
+esp_err_t goblin_ear_init(void)
+{
+    ESP_LOGI("goblin_ear", "Initializing goblin ear audio input");
+    
+    // Component chain handles all hardware setup:
+    // hw496_microphone -> adc_bus -> generic_mic_driver
+    // This component just provides creature-specific behavioral interface
+    
+    ESP_LOGI("goblin_ear", "Goblin ear initialized - ready for audio processing");
+    return ESP_OK;
+}
+
+void goblin_ear_act(void)
+{
+    // Component chain handles all hardware details automatically
+    // This component processes audio for behavioral responses only
+    
+    static uint32_t last_audio_check = 0;
+    uint32_t current_time = esp_timer_get_time() / 1000;
+    
+    // Process audio every 100ms for behavioral analysis
+    if (current_time - last_audio_check < 100)
+    {
+        return;
+    }
+    last_audio_check = current_time;
+    
+    // Read I2S audio samples from component chain (works with real or debug driver)
+    static int32_t audio_buffer[64]; // Smaller buffer for behavioral analysis
+    size_t bytes_read = 0;
+    esp_err_t result = i2s_generic_driver_read_samples(audio_buffer, &bytes_read);
+    
+    if (result == ESP_OK && bytes_read > 0)
+    {
+        // Calculate RMS level for audio activity detection
+        uint32_t samples_count = bytes_read / sizeof(int32_t);
+        uint64_t sum_squares = 0;
+        
+        for (uint32_t i = 0; i < samples_count; i++)
+        {
+            int32_t sample = audio_buffer[i] >> 16; // Convert 32-bit I2S to 16-bit for processing
+            sum_squares += (sample * sample);
+        }
+        
+        uint32_t rms_level = (uint32_t)sqrt(sum_squares / samples_count);
+        
+        // Auto-calibrating baseline for activity detection
+        static uint32_t baseline_rms = 100;
+        static uint32_t quiet_samples = 0;
+        
+        if (rms_level < baseline_rms + 50) {
+            quiet_samples++;
+            if (quiet_samples > 10) { // Calibrate after 1 second of quiet
+                baseline_rms = (baseline_rms * 9 + rms_level) / 10;
+                quiet_samples = 0;
+            }
+        } else {
+            quiet_samples = 0;
+        }
+        
+        uint32_t activity_level = (rms_level > baseline_rms) ? (rms_level - baseline_rms) : 0;
+        
+        // Behavioral response based on audio activity level
+        if (activity_level > 200) // Significant audio activity threshold
+        {
+            ESP_LOGD("goblin_ear", "Audio activity detected: RMS %lu (baseline: %lu, activity: %lu)", 
+                    rms_level, baseline_rms, activity_level);
+            
+            // Trigger creature behavioral responses
+            // Mood currentMood = GSM.read<Mood>();
+            // if (activity_level > 1000) {
+            //     currentMood.curiosity += 3; // Strong audio = high curiosity
+            // } else {
+            //     currentMood.curiosity += 1; // Moderate audio = mild interest
+            // }
+            // GSM.write<Mood>(currentMood);
+        }
+        
+        ESP_LOGV("goblin_ear", "Audio RMS: %lu (baseline: %lu, activity: %lu)", 
+                rms_level, baseline_rms, activity_level);
+    }
+    else
+    {
+        ESP_LOGW("goblin_ear", "Failed to read audio data from component chain: %d", result);
+    }
+}

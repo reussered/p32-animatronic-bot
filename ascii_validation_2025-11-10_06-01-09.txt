@@ -1,0 +1,11 @@
+ASCII VALIDATION REPORT
+Generated: 11/10/2025 06:01:09
+Files Scanned: 6643
+Unicode Violations: 37897  
+Filename Violations: 2291
+Status: NON-COMPLIANT
+
+RULES:
+1. Only ASCII characters 32-126 plus tab/newline/return
+2. Lowercase filenames except class definition files
+3. Class files must match class name exactly

@@ -4,7 +4,7 @@
 #include "esp_log.h"
 #include "gc9a01.hpp"
 #include "Mood.hpp"
-#include "SharedMemory.hpp"
+#include "core/memory/SharedMemory.hpp"
 
 static const char *TAG_cat_eye = "cat_eye";
 

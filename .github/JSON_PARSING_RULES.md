@@ -1,4 +1,4 @@
-[STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD - HUMAN REFERENCE ONLY]
+﻿[STANDALONE DOCUMENTATION - NOT PART OF PROJECT BUILD - HUMAN REFERENCE ONLY]
 
 # JSON Parsing Rules - Complete Reference
 
@@ -112,14 +112,14 @@ Walk the tree in order, going deep before going wide.
 **Example tree visualization:**
 ```
 goblin_left_eye
-  ├─ goblin_eye
-  │  └─ gc9a01
-  │     └─ spi_display_bus
-  │        └─ generic_spi_display
-  └─ (end of left_eye branch)
+   goblin_eye
+     gc9a01
+        spi_display_bus
+           generic_spi_display
+   (end of left_eye branch)
 
 Depth-first order encountered:
-goblin_left_eye → goblin_eye → gc9a01 → spi_display_bus → generic_spi_display
+goblin_left_eye  goblin_eye  gc9a01  spi_display_bus  generic_spi_display
 ```
 
 #### Step 2: FOR EACH COMPONENT ENCOUNTERED
@@ -164,17 +164,17 @@ goblin_left_eye → goblin_eye → gc9a01 → spi_display_bus → generic_spi_di
 Bot tree structure:
 
 goblin_head
-  ├─ goblin_left_eye
-  │  └─ goblin_eye (first encounter)
-  │     └─ gc9a01 (first encounter)
-  │        └─ spi_display_bus (first encounter)
-  │           └─ generic_spi_display (first encounter)
-  │
-  └─ goblin_right_eye
-     └─ goblin_eye (duplicate - skip aggregation)
-        └─ gc9a01 (duplicate - skip aggregation)
-           └─ spi_display_bus (duplicate - skip aggregation)
-              └─ generic_spi_display (duplicate - skip aggregation)
+   goblin_left_eye
+     goblin_eye (first encounter)
+        gc9a01 (first encounter)
+           spi_display_bus (first encounter)
+              generic_spi_display (first encounter)
+  
+   goblin_right_eye
+      goblin_eye (duplicate - skip aggregation)
+         gc9a01 (duplicate - skip aggregation)
+            spi_display_bus (duplicate - skip aggregation)
+               generic_spi_display (duplicate - skip aggregation)
 
 AGGREGATED FILES CREATED:
 - goblin_left_eye_component_functions.cpp (aggregates: goblin_left_eye.src)
@@ -302,14 +302,14 @@ Subsystem components (e.g., `goblin_head`, `goblin_torso`) represent the aggrega
 
 **Example Structure:**
 ```
-config/bots/bot_families/goblins/head/goblin_head.json ← SOURCE (hand-written)
+config/bots/bot_families/goblins/head/goblin_head.json  SOURCE (hand-written)
 config/bots/bot_families/goblins/head/goblin_head.json can optionally reference:
   - config/bots/bot_families/goblins/head/goblin_head.hdr (optional)
   - config/bots/bot_families/goblins/head/goblin_head.src (optional)
 
 BUT the real generated files are:
-components/goblin_full/goblin_head.src ← GENERATED (do not edit)
-include/components/goblin_head.hdr ← GENERATED (do not edit)
+components/goblin_full/goblin_head.src  GENERATED (do not edit)
+include/components/goblin_head.hdr  GENERATED (do not edit)
 ```
 
 **Key Points:**
@@ -401,7 +401,7 @@ Animations use a different pattern than component pipelines:
 
 5. **Circular References**
    - Symptom: Infinite loop during traversal
-   - Cause: A→B→C→A or A→B→A in components arrays
+   - Cause: ABCA or ABA in components arrays
    - Fix: Break the cycle in components arrays
 
 6. **Duplicate Component Names**

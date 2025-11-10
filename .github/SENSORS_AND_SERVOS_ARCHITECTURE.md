@@ -1,4 +1,4 @@
-# Sensors & Servos Architecture Plan
+﻿# Sensors & Servos Architecture Plan
 
 ## Current State
 
@@ -32,7 +32,7 @@
 
 Handles:
 - PWM signal generation (50Hz for servos = 20ms period)
-- Duty cycle calculation (angle 0° = 1ms, 90° = 1.5ms, 180° = 2ms)
+- Duty cycle calculation (angle 0 = 1ms, 90 = 1.5ms, 180 = 2ms)
 - Pin management (dynamic assignment from pin configuration)
 - Frequency tuning per servo type
 
@@ -167,7 +167,7 @@ esp_err_t goblin_servo_manager_init(void) {
 void goblin_servo_manager_act(void) {
     // Read mood from GSM
     // Convert mood components to servo movements
-    // Example: anger → shoulder raise, tension in waist
+    // Example: anger  shoulder raise, tension in waist
     // Write servo commands to ServoState via GSM
 }
 ```
@@ -209,7 +209,7 @@ void goblin_sensor_aggregator_act(void) {
    - Handle PWM pin setup
    - Test with one servo (e.g., shoulder)
 2. Create goblin servo manager that reads/writes to SharedMemory
-3. Test mood → servo movement feedback loop
+3. Test mood  servo movement feedback loop
 
 ### Phase 3: Sensor Reading (Medium Priority)
 1. Implement `generic_sensor_reader_driver.src`:
@@ -221,7 +221,7 @@ void goblin_sensor_aggregator_act(void) {
 
 ### Phase 4: Integration (High Priority After Above)
 1. Coordinate servo timing (don't update all at once)
-2. Create feedback loops (sensors → mood → servos)
+2. Create feedback loops (sensors  mood  servos)
 3. Add safety limits (servo angle bounds, max speed)
 4. Creature-specific behaviors (each family has different servo count/config)
 
@@ -233,7 +233,7 @@ void goblin_sensor_aggregator_act(void) {
 Options:
 - **0-180 degrees** (standard servo range)
 - **0-255 units** (easier to pack, loses precision)
-- **Signed ±90 degrees** (allows bidirectional motion specification)
+- **Signed 90 degrees** (allows bidirectional motion specification)
 
 **Recommendation**: Use 0-180 degrees (human-readable), convert to duty cycle at driver level
 
@@ -256,10 +256,10 @@ Options:
 
 ### Q4: Feedback Loop: Who Drives Servos?
 Options:
-- **Mood-based** (mood intensity → servo angle)
-- **Behavior-based** (behavior rules → servo angle)
+- **Mood-based** (mood intensity  servo angle)
+- **Behavior-based** (behavior rules  servo angle)
 - **Remote command** (host sends servo angles)
-- **Sensor-based** (sensor reading → servo reaction)
+- **Sensor-based** (sensor reading  servo reaction)
 
 **Recommendation**: All of the above eventually, start with mood-based (already have Mood system)
 
@@ -276,25 +276,25 @@ Options:
 
 ```
 SENSORS                    PROCESSING                      SERVOS
-═══════                    ══════════                      ══════
+                                          
 
 Physical           Generic Sensor         SensorReadings      Mood/
-Sensors       →    Reader Driver    →     (SharedMemory) →   Behavior
+Sensors           Reader Driver         (SharedMemory)    Behavior
 (ADC, I2C)        (.src stub)              (Type ID: 6)       Logic
                    
-                                          ↓
+                                          
                                           
                                     Creature Sensor
                                     Aggregator
                                     (goblin_sensor_aggregator.src)
                                     
-                                          ↓
                                           
-Physical           Generic PWM           ServoState     ←    Creature
-Servos       ←     Servo Driver    ←     (SharedMemory)       Servo
+                                          
+Physical           Generic PWM           ServoState         Creature
+Servos            Servo Driver         (SharedMemory)       Servo
 (GPIO PWM)        (.src stub)           (Type ID: 5)         Manager
                    
-                                        ↑
+                                        
                                         
                                     Creature Servo
                                     Manager
@@ -325,23 +325,23 @@ Servos       ←     Servo Driver    ←     (SharedMemory)       Servo
 
 ## Success Criteria
 
-✅ **Phase 1 Complete When**:
+ **Phase 1 Complete When**:
 - ServoState and SensorReadings classes compile
 - Both registered in SharedMemory
 - Generic drivers are callable (even if empty)
 
-✅ **Phase 2 Complete When**:
+ **Phase 2 Complete When**:
 - One servo successfully accepts angle commands via SharedMemory
 - Servo moves in response to mood changes
 - Angle read-back works
 
-✅ **Phase 3 Complete When**:
+ **Phase 3 Complete When**:
 - One sensor successfully reads values
 - Values appear in SensorReadings
 - Sensor aggregator updates SharedMemory
 
-✅ **Phase 4 Complete When**:
-- Full loop: Sensor → Mood → Servo works
+ **Phase 4 Complete When**:
+- Full loop: Sensor  Mood  Servo works
 - Multiple servos coordinate without conflicts
 - Creature-specific behaviors work
 
@@ -367,6 +367,6 @@ Start with **Option A (Servos)** because:
 
 1. **Servo scope**: How many servos do you need to control? (Just goblins or all creatures?)
 2. **Sensor scope**: How many sensors? Which types (ADC, I2C, GPIO)?
-3. **Feedback priority**: Do you want mood → servo movement first, or sensor → behavior first?
+3. **Feedback priority**: Do you want mood  servo movement first, or sensor  behavior first?
 4. **Hardware constraints**: Any PWM pin limitations? I2C/ADC availability on head vs torso?
 

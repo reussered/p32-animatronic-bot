@@ -1,4 +1,4 @@
-ESP32-S3 Head Controller - GPIO and Power Budget Analysis
+﻿ESP32-S3 Head Controller - GPIO and Power Budget Analysis
 ============================================================
 
 Controller: ESP32-S3 R8N16 (Goblin Head Primary)
@@ -122,7 +122,7 @@ Direct GPIO Allocation (Scenario: Individual transistor drivers):
   Servo PWM: 2 pins
   Facial actuators (individual): 6 pins
   Optional sensors: 2-3 pins
-  ─────────────────────
+  
   Total used: 24-26 pins
   Available (38 usable): 12-14 pins remaining
 
@@ -133,7 +133,7 @@ GPIO Allocation (Scenario: I2C PWM expander for actuators):
   Servo PWM: 2 pins
   Facial actuators: 0 pins (on I2C expander)
   Optional sensors: 0 pins (on I2C bus)
-  ─────────────────────
+  
   Total used: 16 pins
   Available: 22 pins remaining
 
@@ -185,10 +185,10 @@ Current System Power Consumers:
 3. ELECTROMAGNETIC FACIAL ACTUATORS:
    
    From refined spec:
-     - Eyebrows: 2 × 0.25W = 0.5W
-     - Cheeks (4): 4 × 0.25W = 1.0W
-     - Jaws (2): 2 × 1.0W = 2.0W
-     - Ears (2): 2 × 0.9W = 1.8W
+     - Eyebrows: 2  0.25W = 0.5W
+     - Cheeks (4): 4  0.25W = 1.0W
+     - Jaws (2): 2  1.0W = 2.0W
+     - Ears (2): 2  0.9W = 1.8W
      - Peak simultaneous: 5.3W
      - Average (50% duty): 2.5-3.0W
      - Idle: 0W (springs hold)
@@ -240,7 +240,7 @@ Operating Scenario A: Normal Animation (Eyes animated, speaking, servos idle)
   - Actuators: 2.5W (facial expressions)
   - Servos: 0.1W (idle, holding)
   - Processor: 0.5W
-  - ──────────────
+  - 
   - Total: ~7.4W @ 5V (~1.5A)
 
 Operating Scenario B: Peak Load (Eyes full bright, loud audio, all animation, servos moving)
@@ -249,7 +249,7 @@ Operating Scenario B: Peak Load (Eyes full bright, loud audio, all animation, se
   - Actuators: 5.3W (simultaneous pulse)
   - Servos: 2.0W (both pan/tilt moving)
   - Processor: 0.5W
-  - ──────────────
+  - 
   - Total: ~14.8W @ 5V (~3.0A)
 
 Operating Scenario C: Idle (Displays dim, no audio, no animation)
@@ -258,7 +258,7 @@ Operating Scenario C: Idle (Displays dim, no audio, no animation)
   - Actuators: 0W (springs holding)
   - Servos: 0.1W (idle)
   - Processor: 0.1W
-  - ──────────────
+  - 
   - Total: ~1.7W @ 5V (~0.35A)
 
 Operating Scenario D: High-Priority Animation (Eyes bright, speech + loud, facial actuators + servos)
@@ -283,8 +283,8 @@ For Head Subsystem (assuming independent supply):
     - 12V to 5V buck converter (for distributed power): ~$5
   
   Local capacitor filtering:
-    - 1000µF electrolytic at supply entry (bulk energy storage)
-    - 100µF ceramic at each major consumer (display, speaker, actuators)
+    - 1000F electrolytic at supply entry (bulk energy storage)
+    - 100F ceramic at each major consumer (display, speaker, actuators)
     - Prevents brownout when speakers spike
 
 
@@ -307,7 +307,7 @@ VOLTAGE CONSIDERATIONS
 
   Regulatory structure:
     - External 5V supply (USB-C PD or wall adapter)
-    - 5V → 3.3V regulator (onboard ESP32 or external AMS1117)
+    - 5V  3.3V regulator (onboard ESP32 or external AMS1117)
     - Separate 5V rail for high-current loads (displays, speaker, actuators)
 
 
@@ -317,41 +317,41 @@ PART 3: COMPLETE HEAD CONTROLLER ARCHITECTURE
 Block Diagram (Logical Flow):
 
   [5V Supply 3-5A]
-    ├─ ESP32-S3 (5V → 3.3V regulator onboard)
-    │   ├─ SPI0 (GPIO 35-37, 10-12, 8-9, 39)
-    │   │   ├─ Left Eye Display (GC9A01)
-    │   │   └─ Right Eye Display (GC9A01)
-    │   ├─ I2C0 (GPIO 21-22)
-    │   │   ├─ PCA9685 PWM expander (address 0x40)
-    │   │   │   ├─ Eyebrow Left (PWM ch0)
-    │   │   │   ├─ Eyebrow Right (PWM ch1)
-    │   │   │   ├─ Cheek L Upper (PWM ch2)
-    │   │   │   ├─ Cheek L Lower (PWM ch3)
-    │   │   │   ├─ Cheek R Upper (PWM ch4)
-    │   │   │   ├─ Cheek R Lower (PWM ch5)
-    │   │   │   ├─ Jaw Left (PWM ch6)
-    │   │   │   ├─ Jaw Right (PWM ch7)
-    │   │   │   ├─ Ear Left (PWM ch8)
-    │   │   │   └─ Ear Right (PWM ch9)
-    │   │   ├─ DHT22 temp sensor (address 0x00 onewire → GPIO 42)
-    │   │   └─ BMP280 barometer (address 0x76)
-    │   ├─ I2S0 (GPIO 13-14, 11 or separate pin)
-    │   │   └─ Speaker DAC / Audio codec
-    │   ├─ PWM/Servo outputs (GPIO 16-17)
-    │   │   ├─ Neck Pan Servo
-    │   │   └─ Neck Tilt Servo
-    │   ├─ Analog inputs (GPIO 1-10, 32-39)
-    │   │   └─ Light level sensor (ADC on GPIO 32)
-    │   └─ UART debug (GPIO 43-44, optional)
-    │
-    └─ External Power Distribution
-        ├─ 5V → Display backlight LEDs (via current limiting resistors)
-        ├─ 5V → Speaker amplifier (if separate IC)
-        ├─ 5V/9V → Actuator driver outputs
-        │   ├─ ULN2003 (6-8 channels via GPIO or I2C PWM)
-        │   └─ Discrete transistors for jaws/ears (or I2C PWM)
-        ├─ 5V → Servo motors (pan + tilt)
-        └─ Bulk 1000µF cap at supply entry
+     ESP32-S3 (5V  3.3V regulator onboard)
+        SPI0 (GPIO 35-37, 10-12, 8-9, 39)
+           Left Eye Display (GC9A01)
+           Right Eye Display (GC9A01)
+        I2C0 (GPIO 21-22)
+           PCA9685 PWM expander (address 0x40)
+              Eyebrow Left (PWM ch0)
+              Eyebrow Right (PWM ch1)
+              Cheek L Upper (PWM ch2)
+              Cheek L Lower (PWM ch3)
+              Cheek R Upper (PWM ch4)
+              Cheek R Lower (PWM ch5)
+              Jaw Left (PWM ch6)
+              Jaw Right (PWM ch7)
+              Ear Left (PWM ch8)
+              Ear Right (PWM ch9)
+           DHT22 temp sensor (address 0x00 onewire  GPIO 42)
+           BMP280 barometer (address 0x76)
+        I2S0 (GPIO 13-14, 11 or separate pin)
+           Speaker DAC / Audio codec
+        PWM/Servo outputs (GPIO 16-17)
+           Neck Pan Servo
+           Neck Tilt Servo
+        Analog inputs (GPIO 1-10, 32-39)
+           Light level sensor (ADC on GPIO 32)
+        UART debug (GPIO 43-44, optional)
+    
+     External Power Distribution
+         5V  Display backlight LEDs (via current limiting resistors)
+         5V  Speaker amplifier (if separate IC)
+         5V/9V  Actuator driver outputs
+            ULN2003 (6-8 channels via GPIO or I2C PWM)
+            Discrete transistors for jaws/ears (or I2C PWM)
+         5V  Servo motors (pan + tilt)
+         Bulk 1000F cap at supply entry
 
 
 GPIO PIN FINAL ALLOCATION TABLE
@@ -359,7 +359,7 @@ GPIO PIN FINAL ALLOCATION TABLE
 
 | GPIO | Function | Level | Notes |
 |------|----------|-------|-------|
-| 0 | RESERVED | — | Internal use |
+| 0 | RESERVED | - | Internal use |
 | 1 | ADC/Echo (HC-SR04) | 3.3V | Optional ultrasonic |
 | 2 | Trigger (HC-SR04) | 3.3V | Optional ultrasonic |
 | 3 | Ear Right (direct) OR Free | 3.3V | If using I2C PWM, this is free |
@@ -382,8 +382,8 @@ GPIO PIN FINAL ALLOCATION TABLE
 | 20 | Cheek L Lower OR Free | 3.3V | If using I2C PWM, this is free |
 | 21 | I2C SDA | 3.3V | Shared bus for PCA9685, sensors |
 | 22 | I2C SCL | 3.3V | Shared bus for PCA9685, sensors |
-| 23 | RESERVED | — | May be used by flash |
-| 24 | RESERVED | — | May be used by flash |
+| 23 | RESERVED | - | May be used by flash |
+| 24 | RESERVED | - | May be used by flash |
 | 25 | Free | 3.3V | Available for future use |
 | 26 | Free | 3.3V | Available for future use |
 | 27 | Free | 3.3V | Available for future use |
@@ -397,17 +397,17 @@ GPIO PIN FINAL ALLOCATION TABLE
 | 35 | SPI CLK | 3.3V | Shared display clock |
 | 36 | SPI MOSI | 3.3V | Shared display data |
 | 37 | SPI MISO | 3.3V | Shared display data in |
-| 38 | RESERVED | — | JTAG / reserved |
+| 38 | RESERVED | - | JTAG / reserved |
 | 39 | SPI1 RST (Eye Right) | 3.3V | Display reset |
 | 40 | LED Status (optional) | 3.3V | Optional indicator |
-| 41 | RESERVED | — | JTAG / reserved |
+| 41 | RESERVED | - | JTAG / reserved |
 | 42 | DHT22 OneWire | 3.3V | Temperature/humidity sensor |
 | 43 | UART TX (debug) | 3.3V | Optional serial debug |
 | 44 | UART RX (debug) | 3.3V | Optional serial debug |
-| 45 | RESERVED | — | Strapping pin |
-| 46 | RESERVED | — | Not available |
-| 47 | RESERVED | — | Not available |
-| 48 | RESERVED | — | Not available |
+| 45 | RESERVED | - | Strapping pin |
+| 46 | RESERVED | - | Not available |
+| 47 | RESERVED | - | Not available |
+| 48 | RESERVED | - | Not available |
 
 
 FINAL SUMMARY

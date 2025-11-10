@@ -1,4 +1,4 @@
-"""
+﻿"""
 Final Deduplication - Delete True Duplicates Outside bot_families
 Rule: For each duplicate component name:
   - If any version is in bot_families/, keep ALL bot_families versions
@@ -92,7 +92,7 @@ def final_deduplicate(registry_path: str = "config/component_registry.json") -> 
         with open("tools/final_duplicates_to_delete.json", 'w', encoding='utf-8') as f:
             json.dump(deletion_entries, f, indent=2)
         
-        print(f"\n✓ Deletion list saved to: tools/final_duplicates_to_delete.json")
+        print(f"\n Deletion list saved to: tools/final_duplicates_to_delete.json")
         print(f"  Review it before running cleanup")
 
 

@@ -1,18 +1,287 @@
 // gpio_pair_driver component implementation
-// Auto-generated stub - needs actual implementation
+// Debug driver for GPIO pairs - simulates HC-SR04 ultrasonic sensor timing
 
 #include "esp_log.h"
+#include "esp_err.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_timer.h"
+#include <math.h>
+
 static const char *TAG_gpio_pair_driver = "gpio_pair_driver";
 
+// Debug configuration
+#define DEBUG_MODE 1  // Set to 0 for real GPIO hardware
+#define SOUND_SPEED_CM_US 0.0343f  // Speed of sound: 343 m/s = 0.0343 cm/?s
+#define MIN_DISTANCE_CM 2.0f
+#define MAX_DISTANCE_CM 400.0f
+
+// HC-SR04 measurement states
+typedef enum {
+    HC_SR04_IDLE = 0,
+    HC_SR04_TRIGGERED,      // Trigger pulse sent, waiting for echo to start
+    HC_SR04_MEASURING,      // Echo started, measuring duration
+    HC_SR04_COMPLETE,       // Measurement done, result ready
+    HC_SR04_TIMEOUT         // Measurement failed
+} hc_sr04_state_t;
+
+// GPIO pair debug simulation state
+typedef struct {
+    int trigger_pin;
+    int echo_pin;
+    bool configured;
+    
+    // Debug simulation state
+    hc_sr04_state_t measurement_state;
+    uint64_t trigger_time_us;
+    uint64_t echo_start_us;
+    uint32_t simulated_pulse_duration_us;
+    uint32_t measurement_count;
+    float current_distance_cm;
+} gpio_pair_state_t;
+
+static gpio_pair_state_t pair_state = {
+    .trigger_pin = -1,
+    .echo_pin = -1,
+    .configured = false,
+    .measurement_state = HC_SR04_IDLE,
+    .trigger_time_us = 0,
+    .echo_start_us = 0,
+    .simulated_pulse_duration_us = 0,
+    .measurement_count = 0,
+    .current_distance_cm = 30.0f
+};
+
+/**
+ * @brief Generate simulated distance for debug mode
+ */
+static float generate_simulated_distance(void) {
+    pair_state.measurement_count++;
+    
+    // Simulate someone moving back and forth
+    float time_factor = (float)pair_state.measurement_count * 0.05f;  // Slower oscillation
+    float base_distance = 30.0f + 20.0f * sinf(time_factor * 0.2f);  // 10-50cm oscillation
+    
+    // Add noise
+    float noise = ((float)(esp_random() % 1000) / 1000.0f - 0.5f) * 2.0f;  // ?1cm noise
+    base_distance += noise;
+    
+    // Clamp to sensor range
+    if (base_distance < MIN_DISTANCE_CM) base_distance = MIN_DISTANCE_CM;
+    if (base_distance > MAX_DISTANCE_CM) base_distance = MAX_DISTANCE_CM;
+    
+    return base_distance;
+}
+
+/**
+ * @brief Initialize GPIO pair driver
+ */
 esp_err_t gpio_pair_driver_init(void) {
-    ESP_LOGI(TAG_gpio_pair_driver, "gpio_pair_driver init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    if (DEBUG_MODE) {
+        ESP_LOGI(TAG_gpio_pair_driver, "GPIO pair driver init (DEBUG MODE)");
+        ESP_LOGI(TAG_gpio_pair_driver, "Simulating HC-SR04 ultrasonic sensor timing");
+    } else {
+        ESP_LOGI(TAG_gpio_pair_driver, "GPIO pair driver init (HARDWARE MODE)");
+    }
+    
+    pair_state.measurement_state = HC_SR04_IDLE;
     return ESP_OK;
 }
 
+/**
+ * @brief Execute GPIO pair driver action
+ */
 void gpio_pair_driver_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_gpio_pair_driver, "gpio_pair_driver act");
+    // This driver is passive - actual work done on demand via measure functions
+    ESP_LOGD(TAG_gpio_pair_driver, "GPIO pair driver act");
+}
+
+/**
+ * @brief Configure GPIO pair for ultrasonic sensor
+ */
+esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin) {
+    ESP_LOGI(TAG_gpio_pair_driver, "Configuring GPIO pair: trigger=%d, echo=%d", 
+             trigger_pin, echo_pin);
+    
+    pair_state.trigger_pin = trigger_pin;
+    pair_state.echo_pin = echo_pin;
+    
+    if (!DEBUG_MODE) {
+        // Configure real GPIO pins
+        gpio_config_t trigger_config = {
+            .pin_bit_mask = (1ULL << trigger_pin),
+            .mode = GPIO_MODE_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE
+        };
+        
+        gpio_config_t echo_config = {
+            .pin_bit_mask = (1ULL << echo_pin),
+            .mode = GPIO_MODE_INPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE
+        };
+        
+        esp_err_t ret = gpio_config(&trigger_config);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG_gpio_pair_driver, "Failed to configure trigger pin: %s", esp_err_to_name(ret));
+            return ret;
+        }
+        
+        ret = gpio_config(&echo_config);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG_gpio_pair_driver, "Failed to configure echo pin: %s", esp_err_to_name(ret));
+            return ret;
+        }
+        
+        // Set trigger pin low initially
+        gpio_set_level(trigger_pin, 0);
+    }
+    
+    pair_state.configured = true;
+    return ESP_OK;
+}
+
+/**
+ * @brief Send trigger pulse to start ultrasonic measurement
+ */
+esp_err_t gpio_pair_trigger_ultrasonic(void) {
+    if (!pair_state.configured) {
+        ESP_LOGE(TAG_gpio_pair_driver, "GPIO pair not configured");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    if (pair_state.measurement_state != HC_SR04_IDLE) {
+        ESP_LOGW(TAG_gpio_pair_driver, "Measurement already in progress");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    if (DEBUG_MODE) {
+        // Debug simulation: prepare the measurement
+        pair_state.current_distance_cm = generate_simulated_distance();
+        
+        // Simulate occasional failures (5% chance)
+        if ((esp_random() % 100) < 5) {
+            pair_state.measurement_state = HC_SR04_TIMEOUT;
+            ESP_LOGD(TAG_gpio_pair_driver, "Simulated trigger failure");
+            return ESP_ERR_TIMEOUT;
+        }
+        
+        // Calculate pulse duration for the simulated distance
+        // duration = (distance * 2) / sound_speed (round trip)
+        pair_state.simulated_pulse_duration_us = (uint32_t)((pair_state.current_distance_cm * 2.0f) / SOUND_SPEED_CM_US);
+        
+        ESP_LOGD(TAG_gpio_pair_driver, "Debug trigger: %.1f cm -> %lu ?s pulse", 
+                 pair_state.current_distance_cm, pair_state.simulated_pulse_duration_us);
+    } else {
+        // Real hardware: send 10?s trigger pulse
+        gpio_set_level(pair_state.trigger_pin, 1);
+        esp_rom_delay_us(10);
+        gpio_set_level(pair_state.trigger_pin, 0);
+    }
+    
+    pair_state.trigger_time_us = esp_timer_get_time();
+    pair_state.measurement_state = HC_SR04_TRIGGERED;
+    
+    return ESP_OK;
+}
+
+/**
+ * @brief Check echo pin status and return measurement when ready
+ * Call this repeatedly after trigger until ESP_OK is returned
+ */
+esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us) {
+    if (!pair_state.configured) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    uint64_t current_time_us = esp_timer_get_time();
+    
+    if (DEBUG_MODE) {
+        // Debug simulation timing
+        switch (pair_state.measurement_state) {
+            case HC_SR04_IDLE:
+                return ESP_ERR_INVALID_STATE;
+                
+            case HC_SR04_TRIGGERED:
+                // Simulate delay before echo starts (typ. 100-200?s)
+                if ((current_time_us - pair_state.trigger_time_us) > 150) {
+                    pair_state.echo_start_us = current_time_us;
+                    pair_state.measurement_state = HC_SR04_MEASURING;
+                }
+                return ESP_ERR_NOT_FINISHED;
+                
+            case HC_SR04_MEASURING:
+                // Check if simulated echo pulse is complete
+                if ((current_time_us - pair_state.echo_start_us) >= pair_state.simulated_pulse_duration_us) {
+                    pair_state.measurement_state = HC_SR04_COMPLETE;
+                    *pulse_duration_us = pair_state.simulated_pulse_duration_us;
+                    ESP_LOGD(TAG_gpio_pair_driver, "Debug measurement complete: %.1f cm", pair_state.current_distance_cm);
+                    return ESP_OK;
+                }
+                return ESP_ERR_NOT_FINISHED;
+                
+            case HC_SR04_COMPLETE:
+                // Measurement already complete
+                *pulse_duration_us = pair_state.simulated_pulse_duration_us;
+                return ESP_OK;
+                
+            case HC_SR04_TIMEOUT:
+                return ESP_ERR_TIMEOUT;
+        }
+    } else {
+        // Real hardware echo checking
+        switch (pair_state.measurement_state) {
+            case HC_SR04_TRIGGERED:
+                // Wait for echo to go HIGH
+                if (gpio_get_level(pair_state.echo_pin) == 1) {
+                    pair_state.echo_start_us = current_time_us;
+                    pair_state.measurement_state = HC_SR04_MEASURING;
+                }
+                // Check for timeout waiting for echo start
+                if ((current_time_us - pair_state.trigger_time_us) > 30000) {
+                    pair_state.measurement_state = HC_SR04_TIMEOUT;
+                    return ESP_ERR_TIMEOUT;
+                }
+                return ESP_ERR_NOT_FINISHED;
+                
+            case HC_SR04_MEASURING:
+                // Check if echo is still HIGH
+                if (gpio_get_level(pair_state.echo_pin) == 0) {
+                    // Echo went LOW - measurement complete
+                    uint32_t duration = (uint32_t)(current_time_us - pair_state.echo_start_us);
+                    pair_state.measurement_state = HC_SR04_COMPLETE;
+                    *pulse_duration_us = duration;
+                    return ESP_OK;
+                }
+                // Check for timeout during measurement
+                if ((current_time_us - pair_state.echo_start_us) > 30000) {
+                    pair_state.measurement_state = HC_SR04_TIMEOUT;
+                    return ESP_ERR_TIMEOUT;
+                }
+                return ESP_ERR_NOT_FINISHED;
+                
+            case HC_SR04_COMPLETE:
+                // Measurement already done
+                return ESP_OK;
+                
+            default:
+                return ESP_ERR_INVALID_STATE;
+        }
+    }
+    
+    return ESP_ERR_NOT_FINISHED;
+}
+
+/**
+ * @brief Reset measurement state to idle
+ */
+void gpio_pair_reset_measurement(void) {
+    pair_state.measurement_state = HC_SR04_IDLE;
+    ESP_LOGD(TAG_gpio_pair_driver, "Measurement reset to idle");
 }
 
 

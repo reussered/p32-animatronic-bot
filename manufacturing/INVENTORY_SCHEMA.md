@@ -1,4 +1,4 @@
-# Inventory System Schema & Format
+﻿# Inventory System Schema & Format
 
 ## JSON Structure
 
@@ -63,7 +63,7 @@ Items are organized into categories. Each category has items array:
 | `manufacturer_sku` | string | Yes | Part number from manufacturer |
 | `current_stock` | integer | Yes | Units currently in inventory |
 | `unit_cost` | float | Yes | Price per unit in USD |
-| `reorder_point` | integer | Yes | Auto-reorder when stock ≤ this value |
+| `reorder_point` | integer | Yes | Auto-reorder when stock  this value |
 | `reorder_quantity` | integer | Yes | How many units to order each reorder |
 | `lead_time_days` | integer | Yes | Days from order to delivery |
 | `preferred_vendors` | array | Yes | Ordered list of vendor IDs to try |
@@ -263,13 +263,13 @@ Output:
 ```
 INVENTORY REPORT
 ================
-📦 DISPLAYS
-✅ GC9A01 240x240 Round LCD
+ DISPLAYS
+ GC9A01 240x240 Round LCD
    Stock: 15 (reorder point: 5)
    Unit Cost: $12.50
 
-⚠️  📦 MOTORS
-⚠️  SG90 Micro Servo
+   MOTORS
+  SG90 Micro Servo
    Stock: 3 (reorder point: 5)
    Unit Cost: $3.20
 ```
@@ -282,9 +282,9 @@ python manufacturing/inventory_manager.py --reorder
 
 Output:
 ```
-⚠️  2 items need reordering:
-  • SG90 Micro Servo: order 20 units @ $3.20/ea = $64.00
-  • ESP32-S3: order 10 units @ $8.50/ea = $85.00
+  2 items need reordering:
+   SG90 Micro Servo: order 20 units @ $3.20/ea = $64.00
+   ESP32-S3: order 10 units @ $8.50/ea = $85.00
 
 Estimated total cost (before shipping): $149.00
 ```

@@ -4,14 +4,7 @@
 #include <stdint.h>
 
 // Display driver parameters for ILI9341 3.5" TFT display
-static const uint16_t display_width = 320;
-static const uint16_t display_height = 240;
-static const uint8_t bytes_per_pixel = 2;
-static const char* color_schema = "RGB565";
-
-// Derived values
-static const uint32_t display_pixels = display_width * display_height;
-static const uint32_t display_buffer_size = display_pixels * bytes_per_pixel;
+// Note: Variables scoped within ili9341 struct to avoid global namespace conflicts
 
 // This struct acts as a "type bundle" for the ili9341 hardware.
 // It will be used as a template parameter for components that need its properties.

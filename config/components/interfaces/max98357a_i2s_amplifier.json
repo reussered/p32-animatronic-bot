@@ -336,6 +336,10 @@
             "airflow": "NATURAL_CONVECTION_USUALLY_ADEQUATE"
         }
     },
+    "dependencies": [
+        "config/components/drivers/i2s_bus.json",
+        "config/components/drivers/i2s_driver.json"
+    ],
     "name": "max98357a_i2s_amplifier",
     "type": "INTERFACE_BUS",
     "timing": {

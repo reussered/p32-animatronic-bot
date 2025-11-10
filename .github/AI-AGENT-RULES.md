@@ -1,4 +1,4 @@
-# RULE 0: COMPONENT REGISTRY MAINTENANCE (CRITICAL)
+﻿# RULE 0: COMPONENT REGISTRY MAINTENANCE (CRITICAL)
 
 **MANDATORY: Component Registry Must Always Be Synchronized**
 
@@ -251,7 +251,7 @@ When escalating, provide:
        - If meets criteria: Unicode allowed for readability
        - If unsure: Default to ASCII
    
-   - Question 2: Does the file content contain ANY Unicode characters (°, ±, →, ⭐, ⚠️, ≈, ×, µ, ∞, etc.)?
+   - Question 2: Does the file content contain ANY Unicode characters (, , , , , , , , , etc.)?
      - If YES (production file): **REWRITE immediately using ASCII replacements from RULE 25**
      - If YES (standalone exception doc): Verify exception criteria. If criteria met, document is acceptable.
      - If NO: Proceed with file creation
@@ -591,14 +591,14 @@ When the generator processes a component JSON, it performs a **depth-first tree 
    Example tree:
    
    goblin_left_eye
-     ├─ goblin_eye
-     │  └─ gc9a01
-     │     └─ spi_display_bus
+      goblin_eye
+        gc9a01
+           spi_display_bus
 
-     │        └─ generic_spi_display
-     └─ (end of left_eye branch)
+              generic_spi_display
+      (end of left_eye branch)
    
-   Depth-first order encountered: goblin_left_eye → goblin_eye → gc9a01 → spi_display_bus → generic_spi_display
+   Depth-first order encountered: goblin_left_eye  goblin_eye  gc9a01  spi_display_bus  generic_spi_display
 
 
 
@@ -661,17 +661,17 @@ When the generator processes a component JSON, it performs a **depth-first tree 
 Bot tree structure:
 
 goblin_head
-  ├─ goblin_left_eye
-  │  └─ goblin_eye (first encounter)
-  │     └─ gc9a01 (first encounter)
-  │        └─ spi_display_bus (first encounter)
-  │           └─ generic_spi_display (first encounter)
-  │
-  └─ goblin_right_eye
-     └─ goblin_eye (duplicate - skip aggregation - still added to dispatch table
-        └─ gc9a01 (duplicate - skip aggregation- still added to dispatch table)
-           └─ spi_display_bus (duplicate - skip aggregation- still added to dispatch table)
-              └─ generic_spi_display (duplicate - skip aggregation- still added to dispatch table)
+   goblin_left_eye
+     goblin_eye (first encounter)
+        gc9a01 (first encounter)
+           spi_display_bus (first encounter)
+              generic_spi_display (first encounter)
+  
+   goblin_right_eye
+      goblin_eye (duplicate - skip aggregation - still added to dispatch table
+         gc9a01 (duplicate - skip aggregation- still added to dispatch table)
+            spi_display_bus (duplicate - skip aggregation- still added to dispatch table)
+               generic_spi_display (duplicate - skip aggregation- still added to dispatch table)
 
 
 Aggregated files created:
@@ -853,7 +853,7 @@ void {component_name}_act(void);        // NO ARGUMENTS
 ### Layer 1: Interface Layer (.hdr Aggregation)
 
 - **Purpose**: Struct definitions, constants, type declarations, forward declarations
-- **Aggregation**: All `.hdr` files aggregated into `*_component_functions.hpp` (parallel to .src → .cpp)
+- **Aggregation**: All `.hdr` files aggregated into `*_component_functions.hpp` (parallel to .src  .cpp)
 - **Content Example**: 
   ```cpp
   struct gc9a01 {
@@ -910,9 +910,9 @@ void {component_name}_act(void);        // NO ARGUMENTS
 ### Integration Example
 
 ```
-gc9a01.hdr → goblin_head_component_functions.hpp (struct definitions available)
-gc9a01.src → goblin_head_component_functions.cpp (function implementations)  
-use_fields → goblin_head_component_functions.cpp (static variables injected)
+gc9a01.hdr  goblin_head_component_functions.hpp (struct definitions available)
+gc9a01.src  goblin_head_component_functions.cpp (function implementations)  
+use_fields  goblin_head_component_functions.cpp (static variables injected)
 
 Result: goblin_left_eye can use gc9a01::WIDTH constant, call gc9a01_init(), and access display_width variable - all in same compilation unit
 ```
@@ -2380,18 +2380,18 @@ When escalating, include: (1) the specific rule/pattern, (2) situation details, 
 
 The following MUST NEVER appear in any production file:
 
-- Degree symbol: `°` (use `degrees`)
-- Plus-minus: `±` (use `+/-`)
-- Multiplication: `×` (use `x`)
-- Approximation: `≈` (use `approx`)
-- Arrow: `→` (use `->`)
-- Infinity: `∞` (use `infinity`)
-- Micro: `µ` (use `micro` or `u`)
-- Emoji of any kind: `⭐`, `⚠️`, `✓`, `❌` (use text: `[STAR]`, `[WARNING]`, `[OK]`, `[FAIL]`)
-- Mathematical symbols: `Ω`, `ω`, `Δ`, `∫`, `∞` (spell out in ASCII)
-- Box drawing: `━`, `┃`, `┐`, `└`, `├`, `┤` (use plain ASCII `-`, `|`)
-- Special punctuation: `—`, `…`, `«», `»` (use ASCII: `-`, `...`, `"`, `"`)
-- Degree/minute/second: `′`, `″` (spell out as text)
+- Degree symbol: `` (use `degrees`)
+- Plus-minus: `` (use `+/-`)
+- Multiplication: `` (use `x`)
+- Approximation: `` (use `approx`)
+- Arrow: `` (use `->`)
+- Infinity: `` (use `infinity`)
+- Micro: `` (use `micro` or `u`)
+- Emoji of any kind: ``, ``, ``, `` (use text: `[STAR]`, `[WARNING]`, `[OK]`, `[FAIL]`)
+- Mathematical symbols: ``, ``, ``, ``, `` (spell out in ASCII)
+- Box drawing: ``, ``, ``, ``, ``, `` (use plain ASCII `-`, `|`)
+- Special punctuation: `-`, ``, `, `` (use ASCII: `-`, `...`, `"`, `"`)
+- Degree/minute/second: ``, `` (spell out as text)
 - Any other non-ASCII character
 
 
@@ -2441,25 +2441,25 @@ When creating ANY file:
 
 | Unicode | Replacement | Example |
 |---------|-------------|---------|
-| `°` | degrees | 25 degrees C |
-| `±` | +/- | +/- 5 |
-| `×` | x | 1024x768 |
-| `≈` | approx | approx 3.14 |
-| `→` | -> | goto -> target |
-| `∞` | infinity | -infinity to +infinity |
-| `µ` | micro or u | microamps, uA |
-| `⭐` | [STAR] or [STARS] | [STAR] highly rated |
-| `⚠️` | [WARNING] | [WARNING] test failed |
-| `✓` | [OK] or PASS | [OK] test passed |
-| `❌` | [FAIL] | [FAIL] test failed |
-| `—` | - or -- | text - more text |
-| `…` | ... | text... |
-| `«` | " | "quoted text" |
-| `»` | " | "quoted text" |
-| `∆` | DELTA | DELTA = 5 |
-| `Ω` | OMEGA | OMEGA = 100 |
-| `━` | - | -------- |
-| `│` | \| | vertical bars |
+| `` | degrees | 25 degrees C |
+| `` | +/- | +/- 5 |
+| `` | x | 1024x768 |
+| `` | approx | approx 3.14 |
+| `` | -> | goto -> target |
+| `` | infinity | -infinity to +infinity |
+| `` | micro or u | microamps, uA |
+| `` | [STAR] or [STARS] | [STAR] highly rated |
+| `` | [WARNING] | [WARNING] test failed |
+| `` | [OK] or PASS | [OK] test passed |
+| `` | [FAIL] | [FAIL] test failed |
+| `-` | - or -- | text - more text |
+| `` | ... | text... |
+| `` | " | "quoted text" |
+| `` | " | "quoted text" |
+| `` | DELTA | DELTA = 5 |
+| `` | OMEGA | OMEGA = 100 |
+| `` | - | -------- |
+| `` | \| | vertical bars |
 
 
 

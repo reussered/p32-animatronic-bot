@@ -1,4 +1,4 @@
-# ✅ COMPLETE: Stepper Motor System & Head Motor Controls
+﻿#  COMPLETE: Stepper Motor System & Head Motor Controls
 ## P32 Animatronic Bot - Goblin Head Implementation
 
 **Status:** Ready for Review & Approval  
@@ -48,7 +48,7 @@ Each motor includes:
 - **Blink:** NEMA8_GEARED_5 (eyelid linear actuator)
 
 **Display Integration:**
-- GC9A01 240×240 RGB565 display
+- GC9A01 240240 RGB565 display
 - Single 115.2 KB frame buffer (malloc once, reuse)
 - Mood-based color rendering (inherited from `GoblinEyeMoodDisplay`)
 - Auto-blink every 3-4 seconds with customizable interval
@@ -63,9 +63,9 @@ left_eye.setGazeStyle(NEUTRAL/FOCUSED/WANDERING);
 ```
 
 **Motor Timing:**
-- Pan: 50 µs min, 250 µs recommended
-- Tilt: 60 µs min, 250 µs recommended
-- Blink: 30 µs min, 150 µs recommended
+- Pan: 50 s min, 250 s recommended
+- Tilt: 60 s min, 250 s recommended
+- Blink: 30 s min, 150 s recommended
 - Update: 30 Hz
 
 ---
@@ -75,13 +75,13 @@ left_eye.setGazeStyle(NEUTRAL/FOCUSED/WANDERING);
 **File:** `config/components/templates/goblin_head_mouth_motor.hpp` (416 lines)
 
 **5-DOF Mouth Control:**
-- **Jaw:** NEMA17_HIGHTORQUE (vertical rotation, 0-60°)
-- **Corner L/R:** NEMA14_STANDARD (up/down deflection, ±30°)
+- **Jaw:** NEMA17_HIGHTORQUE (vertical rotation, 0-60)
+- **Corner L/R:** NEMA14_STANDARD (up/down deflection, 30)
 - **Cheek L/R:** NEMA8_GEARED_5 (puff linear, 0-20mm)
 
 **Display Integration:**
-- ILI9341 480×320 RGB666 display
-- Chunked rendering: 480×80 pixels per chunk (115.2 KB buffer)
+- ILI9341 480320 RGB666 display
+- Chunked rendering: 48080 pixels per chunk (115.2 KB buffer)
 - 4 chunks rendered sequentially per frame
 - Mood-based color rendering
 
@@ -107,9 +107,9 @@ mouth.speakPhoneme(phoneme_id);            // 0-4 phonemes
 ```
 
 **Motor Timing:**
-- Jaw: 40 µs min, 200 µs recommended
-- Corners: 60 µs min, 250 µs recommended
-- Cheeks: 30 µs min, 150 µs recommended
+- Jaw: 40 s min, 200 s recommended
+- Corners: 60 s min, 250 s recommended
+- Cheeks: 30 s min, 150 s recommended
 - Update: 30 Hz
 
 ---
@@ -119,9 +119,9 @@ mouth.speakPhoneme(phoneme_id);            // 0-4 phonemes
 **File:** `config/components/templates/goblin_head_neck_motor.hpp` (324 lines)
 
 **3-DOF Neck Control:**
-- **Pan (L/R):** NEMA23_STANDARD (±60°)
-- **Tilt (U/D):** NEMA17_HIGHTORQUE (-30° to +45°)
-- **Roll:** NEMA14_STANDARD (shoulder tilt, ±25°)
+- **Pan (L/R):** NEMA23_STANDARD (60)
+- **Tilt (U/D):** NEMA17_HIGHTORQUE (-30 to +45)
+- **Roll:** NEMA14_STANDARD (shoulder tilt, 25)
 
 **Motion Preset Poses (8 total):**
 - CENTER, LEFT_TURN, RIGHT_TURN, DOWN_LOOK, UP_LOOK
@@ -147,9 +147,9 @@ neck.performMotion(NODDING_YES, amp, freq);   // Sequences
 ```
 
 **Motor Timing:**
-- Pan: 50 µs min, 200 µs recommended
-- Tilt: 40 µs min, 200 µs recommended
-- Roll: 60 µs min, 250 µs recommended
+- Pan: 50 s min, 200 s recommended
+- Tilt: 40 s min, 200 s recommended
+- Roll: 60 s min, 250 s recommended
 - Update: 30 Hz
 
 ---
@@ -242,16 +242,16 @@ display.sendToDisplay();
 
 | Component | Size | Notes |
 |-----------|------|-------|
-| Eye display buffer | 115.2 KB | 240×240×2 RGB565 (malloc once) |
-| Mouth display chunk | 115.2 KB | 480×80×3 RGB666 (malloc once, reuse 4×) |
+| Eye display buffer | 115.2 KB | 2402402 RGB565 (malloc once) |
+| Mouth display chunk | 115.2 KB | 480803 RGB666 (malloc once, reuse 4) |
 | Motor state (11 motors) | ~336 bytes | All motor controllers combined |
 | Display callbacks | 64 bytes | Function pointers |
 | Misc overhead | 104 bytes | Timers, ISRs |
-| **TOTAL USED** | **230.7 KB** | — |
+| **TOTAL USED** | **230.7 KB** | - |
 | **BUDGET (ESP32-S3)** | **300 KB** | Usable heap |
 | **HEADROOM** | **69.3 KB** | 23% spare for future expansion |
 
-✅ **Well within budget with comfortable margin**
+ **Well within budget with comfortable margin**
 
 ---
 
@@ -268,13 +268,13 @@ display.sendToDisplay();
 | **Neck** | NEMA23_STANDARD (pan) | 1 | Heavy head rotation (1500 ncm) |
 | | NEMA17_HIGHTORQUE (tilt) | 1 | Solid tilt motion |
 | | NEMA14_STANDARD (roll) | 1 | Light shoulder tilt |
-| **TOTAL** | — | **11 motors** | Full 3-subsystem head system |
+| **TOTAL** | - | **11 motors** | Full 3-subsystem head system |
 
 ---
 
 ## Rule Compliance Summary
 
-### ✅ All Critical Rules Observed
+###  All Critical Rules Observed
 
 1. **Architecture Pattern:** Component-based, ready for `.src` generation
 2. **Encoding:** ASCII-only, no BOM, no UTF-8
@@ -284,7 +284,7 @@ display.sendToDisplay();
 6. **Callbacks:** Display hardware injected, not stored
 7. **Single Buffer:** Malloc once, reuse, free at cleanup
 8. **Memory:** 230.7/300 KB (69.3 KB headroom)
-9. **Timing:** 30 Hz updates, 20-100 µs motor stepping
+9. **Timing:** 30 Hz updates, 20-100 s motor stepping
 10. **Naming:** All files follow `{creature}_{subsystem}_{type}` pattern
 
 ---
@@ -366,28 +366,28 @@ Select-String -Path build.log -Pattern "error|failed|success"
 
 ### 1. **Loose Coupling via Callbacks**
 Motor controllers don't know about display drivers. Display driver is injected at init.
-✅ Swap display drivers without motor changes
+ Swap display drivers without motor changes
 
 ### 2. **Single Buffer Architecture**
 Allocate once, reuse every frame, free at cleanup.
-✅ Prevents heap fragmentation
-✅ Predictable memory usage
-✅ Works within 300 KB budget
+ Prevents heap fragmentation
+ Predictable memory usage
+ Works within 300 KB budget
 
 ### 3. **Smooth Animation via Easing**
 Cubic ease-in-out for natural motion (not instant snapping).
-✅ Professional feel
-✅ Reduces mechanical stress
+ Professional feel
+ Reduces mechanical stress
 
 ### 4. **Mood Integration at Display Level**
 Motor controllers receive `Mood` struct, apply effects.
-✅ Mood drives expression (not other way around)
-✅ Natural emotional animation
+ Mood drives expression (not other way around)
+ Natural emotional animation
 
 ### 5. **Hardware-Agnostic Library**
 30 motor configs, all accessible via same `StepperController` interface.
-✅ Easy to swap motor types
-✅ Future-proof for new designs
+ Easy to swap motor types
+ Future-proof for new designs
 
 ---
 
@@ -402,7 +402,7 @@ Motor controllers receive `Mood` struct, apply effects.
 
 ---
 
-**Status: ✅ READY FOR REVIEW**
+**Status:  READY FOR REVIEW**
 
 All files are created, staged, documented, and compliant with project rules.
 

@@ -1284,6 +1284,11 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "goblin_sinuses",
+      "path": "config\\components\\creature_specific\\goblin_sinuses.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "goblin_sly_grin",
       "path": "config\\bots\\bot_families\\goblins\\head\\goblin_sly_grin.json",
       "git_repo": "p32-animatronic-bot"
@@ -1371,6 +1376,11 @@
     {
       "name": "gpio_bus",
       "path": "config\\components\\drivers\\gpio_bus.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "gpio_debug_driver",
+      "path": "config\\components\\drivers\\gpio_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1586,6 +1596,11 @@
     {
       "name": "i2c_bus_1",
       "path": "config\\components\\interfaces\\i2c_bus_1.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "serial_debug_driver",
+      "path": "config\\components\\drivers\\serial_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {

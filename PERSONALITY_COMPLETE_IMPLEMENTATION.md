@@ -1,4 +1,4 @@
-# Complete Implementation: Personality-Driven Mood Intensity
+﻿# Complete Implementation: Personality-Driven Mood Intensity
 
 ## Summary
 
@@ -10,7 +10,7 @@ You now have a **reusable, personality-driven mood intensity system** that works
 - `shared/Personality.hpp`
 - `include/Personality.hpp`
 
-**Key Method**: `getIntensityMultiplier(trait_value)` converts -128 to +127 range into 0.5x–2.0x multiplier
+**Key Method**: `getIntensityMultiplier(trait_value)` converts -128 to +127 range into 0.5x-2.0x multiplier
 
 ### 2. SharedMemory Integration
 - `include/core/memory/SharedMemory.hpp` (MODIFIED)
@@ -34,8 +34,8 @@ You now have a **reusable, personality-driven mood intensity system** that works
 ### Step 1: Copy Pattern to Other Eyes
 
 Copy the entire `goblin_left_eye_act()` function to:
-- `config/components/goblin_right_eye.src` (change `left_eye_buffer` → `right_eye_buffer`)
-- `config/components/goblin_mouth.src` (change `left_eye_buffer` → `mouth_buffer`)
+- `config/components/goblin_right_eye.src` (change `left_eye_buffer`  `right_eye_buffer`)
+- `config/components/goblin_mouth.src` (change `left_eye_buffer`  `mouth_buffer`)
 
 ### Step 2: Regenerate Tables
 
@@ -54,7 +54,7 @@ pio run -e goblin_head -t upload
 
 - Observe eyes respond to mood with baseline colors
 - All eyes sync together
-- Change personality values in code → see intensity change
+- Change personality values in code  see intensity change
 
 ## Code Architecture
 
@@ -112,9 +112,9 @@ Only variable names change (`left_eye_buffer`, `right_eye_buffer`, `mouth_buffer
 
 **Scenario: Angry goblin confronts player**
 
-1. **Torso detects threat** → increases `base_aggression` to 100 → broadcasts
-2. **Head receives new personality** → recalculates intensity = 1.79x
-3. **Mood already has anger=80** → red_tint = 80 * 255 * 1.5 * 1.79 = BRIGHT RED
+1. **Torso detects threat**  increases `base_aggression` to 100  broadcasts
+2. **Head receives new personality**  recalculates intensity = 1.79x
+3. **Mood already has anger=80**  red_tint = 80 * 255 * 1.5 * 1.79 = BRIGHT RED
 4. **All displays update**: left eye, right eye, mouth all turn bright red
 5. **Visual result**: Goblin looks VERY ANGRY (eyes glow red)
 
@@ -146,13 +146,13 @@ pers->base_aggression = base_aggression;
 
 ## Next Steps
 
-1. ✅ Personality class created
-2. ✅ SharedMemory integrated
-3. ✅ Torso broadcaster implemented
-4. ✅ Left eye consumer implemented
-5. ⏳ **Copy to right eye and mouth** (you do this)
-6. ⏳ **Regenerate subsystems** (you do this)
-7. ⏳ **Build and test** (you do this)
+1.  Personality class created
+2.  SharedMemory integrated
+3.  Torso broadcaster implemented
+4.  Left eye consumer implemented
+5.  **Copy to right eye and mouth** (you do this)
+6.  **Regenerate subsystems** (you do this)
+7.  **Build and test** (you do this)
 
 ## Troubleshooting
 

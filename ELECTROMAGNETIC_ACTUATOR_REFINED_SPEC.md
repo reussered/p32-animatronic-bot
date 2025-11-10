@@ -1,4 +1,4 @@
-Electromagnetic Actuator Design - REFINED SPEC
+﻿Electromagnetic Actuator Design - REFINED SPEC
 ===============================================
 
 Context: Tiny plastic pieces for goblin face animation
@@ -12,10 +12,10 @@ Power: Minimal, distributed across many small actuators
 Purpose: Subtle raise/lower for expression (minimal movement, delicate)
 
 Mechanical Design:
-  - Housing: 25mm × 10mm × 12mm (PETG, very compact)
+  - Housing: 25mm  10mm  12mm (PETG, very compact)
   - Filament per unit: ~5-8g
   - Operating principle: Tiny solenoid push-pull, spring return
-  - Iron core: 2mm diameter × 20mm length (thin rod)
+  - Iron core: 2mm diameter  20mm length (thin rod)
   - Stroke: 5-8mm (small movement for small eyebrow)
   - Force requirement: 30g MAX (light lift against minimal resistance)
   - Spring: Very light tension (~0.5N return force)
@@ -23,7 +23,7 @@ Mechanical Design:
 
 Electrical Design:
   - Wire gauge: 30 AWG (0.25mm, very fine)
-  - Coil turns: 200-250 total (3 layers × 70-80 turns)
+  - Coil turns: 200-250 total (3 layers  70-80 turns)
   - Coil resistance: ~8-12 ohms
   - Voltage: 5V DC (low power)
   - Current per pulse: ~0.4-0.5A (minimal)
@@ -31,11 +31,11 @@ Electrical Design:
   - Driver: ULN2003 single channel (can stack multiple eyebrows per IC)
 
 BOM per Eyebrow (2 units):
-  - 3D housing (2×): 2 × $0.25 = $0.50
-  - 2mm iron rod (2×): 2 × $0.02 = $0.04
+  - 3D housing (2): 2  $0.25 = $0.50
+  - 2mm iron rod (2): 2  $0.02 = $0.04
   - 30 AWG copper wire (8m total): $0.05
-  - Tiny neodymium magnet 3mm (2×): 2 × $0.03 = $0.06
-  - Lightweight spring (2×): 2 × $0.02 = $0.04
+  - Tiny neodymium magnet 3mm (2): 2  $0.03 = $0.06
+  - Lightweight spring (2): 2  $0.02 = $0.04
   - ULN2003 allocation (2 channels): $0.10
   - Diodes, resistors: $0.05
   - Connectors: $0.05
@@ -49,10 +49,10 @@ BOM per Eyebrow (2 units):
 Purpose: Puff/depress cheeks with fine granularity (separate left-upper, left-lower, right-upper, right-lower)
 
 Mechanical Design:
-  - Housing per unit: 20mm × 12mm × 10mm (tiny, localized puff)
+  - Housing per unit: 20mm  12mm  10mm (tiny, localized puff)
   - Filament per unit: ~4-5g
   - Operating principle: Light solenoid push against cheek foam
-  - Iron core: 2mm diameter × 15mm length
+  - Iron core: 2mm diameter  15mm length
   - Stroke: 3-5mm (gentle puff effect)
   - Force: 20-30g (light touch, foam compresses easily)
   - Spring: Very light return (~0.3N)
@@ -68,11 +68,11 @@ Electrical Design:
   - Driver: ULN2003 (1 channel per cheek = 4 channels total)
 
 BOM per Cheek (4 units):
-  - 3D housing (4×): 4 × $0.20 = $0.80
-  - 2mm iron rod (4×): 4 × $0.02 = $0.08
+  - 3D housing (4): 4  $0.20 = $0.80
+  - 2mm iron rod (4): 4  $0.02 = $0.08
   - 30 AWG copper wire (6m total): $0.04
-  - Tiny neodymium magnet 3mm (4×): 4 × $0.03 = $0.12
-  - Lightweight spring (4×): 4 × $0.02 = $0.08
+  - Tiny neodymium magnet 3mm (4): 4  $0.03 = $0.12
+  - Lightweight spring (4): 4  $0.02 = $0.08
   - ULN2003 allocation (4 channels): $0.15
   - Diodes, resistors: $0.08
   - Connectors: $0.10
@@ -86,10 +86,10 @@ BOM per Cheek (4 units):
 Purpose: Open/close jaw for speech (requires more force than eyebrows/cheeks)
 
 Mechanical Design:
-  - Housing: 35mm × 15mm × 18mm (medium-sized)
+  - Housing: 35mm  15mm  18mm (medium-sized)
   - Filament: ~12-15g
   - Operating principle: Linear solenoid with cam linkage to jaw hinge
-  - Iron core: 3mm diameter × 25mm length (thicker rod for force)
+  - Iron core: 3mm diameter  25mm length (thicker rod for force)
   - Stroke: 15-20mm (full jaw range)
   - Force: 100-150g (overcome jaw weight + motion resistance)
   - Spring: Moderate compression (~1.5N return)
@@ -97,7 +97,7 @@ Mechanical Design:
 
 Electrical Design:
   - Wire gauge: 26 AWG (0.4mm)
-  - Coil turns: 300-400 total (3-4 layers × 80-120 turns)
+  - Coil turns: 300-400 total (3-4 layers  80-120 turns)
   - Coil resistance: ~12-18 ohms
   - Voltage: 9V DC (more power for heavier load)
   - Current per pulse: ~0.7-0.8A
@@ -105,14 +105,14 @@ Electrical Design:
   - Driver: 2N2222 transistor or MOSFET (can handle higher current)
 
 BOM per Jaw (2 units):
-  - 3D housing (2×): 2 × $0.50 = $1.00
-  - 3mm iron rod (2×): 2 × $0.04 = $0.08
+  - 3D housing (2): 2  $0.50 = $1.00
+  - 3mm iron rod (2): 2  $0.04 = $0.08
   - 26 AWG copper wire (12m): $0.08
-  - Neodymium magnet 5mm (2×): 2 × $0.05 = $0.10
-  - Medium spring (2×): 2 × $0.04 = $0.08
+  - Neodymium magnet 5mm (2): 2  $0.05 = $0.10
+  - Medium spring (2): 2  $0.04 = $0.08
   - 2N2222 transistor (shared): $0.10
   - Diodes, resistors: $0.10
-  - Cam linkage (3D-printed, 2×): 2 × $0.25 = $0.50
+  - Cam linkage (3D-printed, 2): 2  $0.25 = $0.50
   - Connectors: $0.10
   - SUBTOTAL: $2.14 for PAIR (both jaws)
   - Per jaw: $1.07
@@ -124,11 +124,11 @@ BOM per Jaw (2 units):
 Purpose: Swivel ears for attention/expression (moderate speed, holds position)
 
 Mechanical Design:
-  - Housing: 28mm × 35mm × 12mm (vertical profile)
+  - Housing: 28mm  35mm  12mm (vertical profile)
   - Filament: ~10-12g
   - Operating principle: Rotary solenoid via linear actuator + cam
-  - Iron core: 3mm diameter × 30mm length
-  - Rotation: 45-60° (perked to neutral to drooped)
+  - Iron core: 3mm diameter  30mm length
+  - Rotation: 45-60 (perked to neutral to drooped)
   - Force: 80-120g (ear weight + air resistance)
   - Spring: Light detent (~0.8N at extremes)
   - Duty cycle: 5-8% (ears animate less frequently)
@@ -143,14 +143,14 @@ Electrical Design:
   - Driver: 2N2222 transistor or ULN2003 (if current within limits)
 
 BOM per Ear (2 units):
-  - 3D housing (2×): 2 × $0.50 = $1.00
-  - 3mm iron rod (2×): 2 × $0.04 = $0.08
+  - 3D housing (2): 2  $0.50 = $1.00
+  - 3mm iron rod (2): 2  $0.04 = $0.08
   - 26 AWG copper wire (12m): $0.08
-  - Neodymium magnet 5mm (2×): 2 × $0.05 = $0.10
-  - Light spring (2×): 2 × $0.03 = $0.06
+  - Neodymium magnet 5mm (2): 2  $0.05 = $0.10
+  - Light spring (2): 2  $0.03 = $0.06
   - 2N2222 transistor (shared): $0.05
   - Diodes, resistors: $0.08
-  - Cam linkage (3D-printed, 2×): 2 × $0.25 = $0.50
+  - Cam linkage (3D-printed, 2): 2  $0.25 = $0.50
   - Connectors: $0.10
   - SUBTOTAL: $2.05 for PAIR (both ears)
   - Per ear: $1.03
@@ -163,10 +163,10 @@ TOTAL SYSTEM BOM (REFINED)
   Cheeks (4 units): $1.45
   Jaws (2 units): $2.14
   Ears (2 units): $2.05
-  Shared driver ICs (2× ULN2003, 2× 2N2222): $0.60
+  Shared driver ICs (2 ULN2003, 2 2N2222): $0.60
   Miscellaneous (bulk capacitors, diodes, resistors): $0.40
   Power supply (12V, 1A) + wiring: $2.00
-  ─────────────────────────────────
+  
   TOTAL SYSTEM COST: $9.53
 
   Per actuator average: $0.79
@@ -177,15 +177,15 @@ POWER BUDGET (REFINED)
 ======================
 
   Peak simultaneous (all actuators):
-    - Eyebrows: 2 × 0.25W = 0.5W
-    - Cheeks: 4 × 0.25W = 1.0W
-    - Jaws: 2 × 1.0W = 2.0W
-    - Ears: 2 × 0.9W = 1.8W
+    - Eyebrows: 2  0.25W = 0.5W
+    - Cheeks: 4  0.25W = 1.0W
+    - Jaws: 2  1.0W = 2.0W
+    - Ears: 2  0.9W = 1.8W
     - Total peak: ~5.3W
 
   Typical animation (50% duty):
     - Average: ~2-3W
-    - Safe supply: 12V @ 1A (12W capacity, 4-5× overhead)
+    - Safe supply: 12V @ 1A (12W capacity, 4-5 overhead)
 
   Idle state: ~0W (no holding power, springs maintain position)
 
@@ -194,25 +194,25 @@ COIL WINDING SPECIFICATIONS (QUICK REFERENCE)
 ==============================================
 
 Eyebrow (30 AWG):
-  - Core: 2mm × 20mm
+  - Core: 2mm  20mm
   - 3 layers, 70-80 turns/layer = ~250 turns
   - Estimated wire length: ~8m per eyebrow
   - Resistance check: 8-12 ohms (multimeter validation)
 
 Cheek (30 AWG):
-  - Core: 2mm × 15mm
+  - Core: 2mm  15mm
   - 2-3 layers, 60-80 turns/layer = ~200 turns
   - Estimated wire length: ~5.5m per cheek
   - Resistance check: 6-10 ohms
 
 Jaw (26 AWG):
-  - Core: 3mm × 25mm
+  - Core: 3mm  25mm
   - 3-4 layers, 80-120 turns/layer = ~400 turns
   - Estimated wire length: ~12m per jaw
   - Resistance check: 12-18 ohms
 
 Ear (26 AWG):
-  - Core: 3mm × 30mm
+  - Core: 3mm  30mm
   - 3-4 layers, 75-100 turns/layer = ~350 turns
   - Estimated wire length: ~12m per ear
   - Resistance check: 12-16 ohms
@@ -252,15 +252,15 @@ MATERIAL SOURCING (ESTIMATED COSTS)
     - 26 AWG copper wire (25m spool): $4-6
     - 2mm steel rod stock (100mm): $1-2
     - 3mm steel rod stock (100mm): $1-2
-    - Neodymium magnet assortment (100×): $5-8
+    - Neodymium magnet assortment (100): $5-8
     - Compression spring assortment: $5-10
     - PETG filament (500g): $8-12
     - ABS filament (500g): $8-12
 
   ICs & discrete components (bulk):
-    - ULN2003 ICs (10×): $3-5
-    - 2N2222 transistor (50×): $2-3
-    - Diode assortment (100×): $2-3
+    - ULN2003 ICs (10): $3-5
+    - 2N2222 transistor (50): $2-3
+    - Diode assortment (100): $2-3
     - Resistor assortment: $2-3
     - Capacitor assortment: $2-3
 
@@ -308,7 +308,7 @@ NEXT IMMEDIATE STEPS
    - Thinner wire = less resistance, less force per turn
    - Spring tension adjustment = stroke control
 
-4. Once eyebrow validated, clone design to cheeks (same coil spec, just 4× copies)
+4. Once eyebrow validated, clone design to cheeks (same coil spec, just 4 copies)
 
 5. Then scale jaw/ear designs separately (heavier coils, 26 AWG, 9V drive)
 

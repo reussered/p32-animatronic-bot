@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Remove Unicode characters from camera documentation files."""
 
 import sys
@@ -7,29 +7,29 @@ import re
 def replace_unicode(text):
     """Replace Unicode with ASCII equivalents."""
     # Replace various dashes and hyphens
-    text = text.replace('–', '-')  # en-dash
-    text = text.replace('—', '-')  # em-dash
+    text = text.replace('-', '-')  # en-dash
+    text = text.replace('-', '-')  # em-dash
     
     # Replace degree symbols
-    text = text.replace('°', 'deg')
+    text = text.replace('', 'deg')
     
     # Replace multiplication signs
-    text = text.replace('×', 'x')
+    text = text.replace('', 'x')
     
     # Replace plus/minus
-    text = text.replace('±', '+/-')
+    text = text.replace('', '+/-')
     
     # Replace middle dot / center dot
-    text = text.replace('·', '.')
+    text = text.replace('', '.')
     
     # Replace superscript/subscript with plain text
-    text = text.replace('²', '2')
-    text = text.replace('³', '3')
+    text = text.replace('', '2')
+    text = text.replace('', '3')
     
     # Replace fractions if any
-    text = text.replace('½', '1/2')
-    text = text.replace('¼', '1/4')
-    text = text.replace('¾', '3/4')
+    text = text.replace('', '1/2')
+    text = text.replace('', '1/4')
+    text = text.replace('', '3/4')
     
     # Replace special quotes
     text = text.replace('"', '"')
@@ -38,40 +38,40 @@ def replace_unicode(text):
     text = text.replace(''', "'")
     
     # Replace other Unicode symbols
-    text = text.replace('™', 'TM')
-    text = text.replace('©', '(c)')
-    text = text.replace('®', '(R)')
+    text = text.replace('', 'TM')
+    text = text.replace('', '(c)')
+    text = text.replace('', '(R)')
     
     # Replace arrows
-    text = text.replace('→', '->')
-    text = text.replace('←', '<-')
-    text = text.replace('⟹', '=>')
-    text = text.replace('━', '-')
+    text = text.replace('', '->')
+    text = text.replace('', '<-')
+    text = text.replace('', '=>')
+    text = text.replace('', '-')
     
     # Replace checkmarks and X marks and stars
-    text = text.replace('✓', 'OK')
-    text = text.replace('✓✓', 'OKOK')
-    text = text.replace('✅', 'OK')
-    text = text.replace('❌', 'NO')
-    text = text.replace('⚠️', 'WARNING')
-    text = text.replace('⚠', 'WARNING')
-    text = text.replace('⭐', 'STAR')
+    text = text.replace('', 'OK')
+    text = text.replace('', 'OKOK')
+    text = text.replace('', 'OK')
+    text = text.replace('', 'NO')
+    text = text.replace('', 'WARNING')
+    text = text.replace('', 'WARNING')
+    text = text.replace('', 'STAR')
     
     # Replace micro symbol and infinity
-    text = text.replace('µ', 'u')
-    text = text.replace('∞', 'infinity')
+    text = text.replace('', 'u')
+    text = text.replace('', 'infinity')
     
     # Replace em-dash alternatives (already done above but be thorough)
-    text = text.replace('—', '-')
+    text = text.replace('-', '-')
     
     # Replace Omega/special letters
-    text = text.replace('Ω', 'Ohm')
-    text = text.replace('ω', 'ohm')
+    text = text.replace('', 'Ohm')
+    text = text.replace('', 'ohm')
     
     # Replace other common Unicode
-    text = text.replace('•', '*')
-    text = text.replace('■', '[BLOCK]')
-    text = text.replace('□', '[BOX]')
+    text = text.replace('', '*')
+    text = text.replace('', '[BLOCK]')
+    text = text.replace('', '[BOX]')
     
     return text
 

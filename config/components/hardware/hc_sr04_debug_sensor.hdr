@@ -1,0 +1,45 @@
+#pragma once
+
+#include "core/component_interface.h"
+#include "esp_err.h"
+#include "esp_log.h"
+#include "shared/Environment.hpp"
+
+/**
+ * @file hc_sr04_debug_sensor.hdr
+ * @brief Debug ultrasonic sensor for testing distance-based behaviors
+ * 
+ * Simulates HC-SR04 ultrasonic sensor with multiple interaction methods:
+ * - Serial commands for real-time control
+ * - GPIO triggers for physical interaction  
+ * - Predefined behavioral scenarios
+ * - Realistic echo timing simulation
+ * 
+ * Writes to Environment.distance_cm like real sensor.
+ */
+
+// Main component functions
+esp_err_t hc_sr04_debug_sensor_init(void);
+void hc_sr04_debug_sensor_act(void);
+
+// Distance control functions
+esp_err_t hc_sr04_debug_sensor_set_distance(uint16_t distance_cm);
+esp_err_t hc_sr04_debug_sensor_set_timing(uint32_t echo_delay_us);
+uint16_t hc_sr04_debug_sensor_get_distance(void);
+
+// Scenario control functions
+esp_err_t hc_sr04_debug_sensor_play_scenario(const char* scenario_name);
+esp_err_t hc_sr04_debug_sensor_stop_scenario(void);
+bool hc_sr04_debug_sensor_is_scenario_active(void);
+
+// Serial command processing
+esp_err_t hc_sr04_debug_sensor_process_serial_command(const char* command);
+
+// GPIO interaction functions
+esp_err_t hc_sr04_debug_sensor_setup_gpio_triggers(void);
+void hc_sr04_debug_sensor_handle_gpio_trigger(void);
+
+// Utility functions
+uint32_t hc_sr04_debug_sensor_calculate_echo_delay(uint16_t distance_cm);
+void hc_sr04_debug_sensor_print_status(void);
+const char* hc_sr04_debug_sensor_get_current_scenario(void);

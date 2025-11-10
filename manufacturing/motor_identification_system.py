@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Motor Identification & Vendor Management System
 P32 Animatronic Bot Project
@@ -48,7 +48,7 @@ class MotorIdentificationHelper:
                 "name": "Micro Servo (SG90 type)",
                 "typical_voltage": "5V",
                 "typical_torque": "1.5-2 kg-cm",
-                "typical_speed": "0.1-0.12 sec/60°",
+                "typical_speed": "0.1-0.12 sec/60",
                 "connectors": "3-pin (signal, power, GND)",
                 "shaft_type": "Splined",
                 "typical_cost": 3.00,
@@ -64,7 +64,7 @@ class MotorIdentificationHelper:
                 "name": "Standard Servo (MG996R type)",
                 "typical_voltage": "4.8-6V",
                 "typical_torque": "9-11 kg-cm",
-                "typical_speed": "0.2 sec/60°",
+                "typical_speed": "0.2 sec/60",
                 "connectors": "3-pin (signal, power, GND)",
                 "shaft_type": "Splined",
                 "typical_cost": 8.00,
@@ -80,7 +80,7 @@ class MotorIdentificationHelper:
                 "name": "Large Servo (DS3218 type)",
                 "typical_voltage": "6-7.4V",
                 "typical_torque": "20+ kg-cm",
-                "typical_speed": "0.16 sec/60°",
+                "typical_speed": "0.16 sec/60",
                 "connectors": "3-pin (signal, power, GND)",
                 "shaft_type": "Splined or D-shaft",
                 "typical_cost": 25.00,
@@ -177,7 +177,7 @@ class MotorIdentificationHelper:
         }
         
         for motor_type, info in motor_types.items():
-            print(f"\n📌 {info['name'].upper()}")
+            print(f"\n {info['name'].upper()}")
             print("-" * 80)
             print(f"  Voltage: {info.get('typical_voltage', 'N/A')}")
             print(f"  Torque: {info.get('typical_torque', 'N/A')}")
@@ -188,7 +188,7 @@ class MotorIdentificationHelper:
             print(f"  Common Models: {', '.join(info.get('common_models', []))}")
             print(f"  How to Identify:")
             for tip in info.get('identification_tips', []):
-                print(f"    • {tip}")
+                print(f"     {tip}")
         
         print("\n" + "="*80)
     
@@ -323,10 +323,10 @@ class MotorIdentificationHelper:
             with open('manufacturing/inventory.json', 'w') as f:
                 json.dump(inventory, f, indent=2)
             
-            print(f"\n✅ Added {len(vendors)} vendors to inventory.json")
+            print(f"\n Added {len(vendors)} vendors to inventory.json")
             return True
         except Exception as e:
-            print(f"❌ Error saving vendors: {e}")
+            print(f" Error saving vendors: {e}")
             return False
     
     def print_vendor_summary(self):
@@ -338,7 +338,7 @@ class MotorIdentificationHelper:
         print("="*80)
         
         for vendor in vendors:
-            print(f"\n🏪 {vendor['name']}")
+            print(f"\n {vendor['name']}")
             print(f"   Website: {vendor['website']}")
             print(f"   Lead Time: {vendor['average_lead_time_days']} days")
             print(f"   Reliability: {vendor['reliability_score']}%")

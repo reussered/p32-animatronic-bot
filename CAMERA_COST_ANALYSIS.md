@@ -1,4 +1,4 @@
-# Goblin Camera System - Cost vs Reliability Analysis
+﻿# Goblin Camera System - Cost vs Reliability Analysis
 
 ## Final Decision Framework
 
@@ -64,10 +64,10 @@
 - [NO] Fixed focus only (unless stepper mechanical barrel added)
 - [NO] 2MP resolution (adequate for gaze tracking, poor for fine expression)
 - [NO] Stepper focus unreliable (mechanical wear, thermal drift)
-- [NO] Focus step resolution: stepper at 1/16 microstepping ≈ 20µm per step
+- [NO] Focus step resolution: stepper at 1/16 microstepping  20m per step
 - [NO] Slow focus (2-5s per full sweep), mechanical hysteresis causes hunting
 
-**Reliability Rating:** ⭐⭐⭐ (Fixed) / ⭐⭐ (With stepper)
+**Reliability Rating:**  (Fixed) /  (With stepper)
 
 **Failure Modes:**
 
@@ -132,7 +132,7 @@ Professional camera pipeline with libcamera native support.
 - [WARNING] Cost ($105-116 per system = $210-232 for pair)
 - [WARNING] USB adapter reliability (USB hubs historically flaky on ESP32)
 
-**Reliability Rating:** ⭐⭐⭐⭐⭐ (Electronic AF, proven hardware)
+**Reliability Rating:**  (Electronic AF, proven hardware)
 
 **Failure Modes:**
 
@@ -178,7 +178,7 @@ Professional camera pipeline with libcamera native support.
 - [NO] Highest cost ($170 per system, $340 for pair)
 - [WARNING] Power hungry (1.2W per module, hub adds 0.5W)
 
-**Reliability Rating:** ⭐⭐⭐⭐ (Proven, but overkill)
+**Reliability Rating:**  (Proven, but overkill)
 
 **Failure Modes:**
 
@@ -201,7 +201,7 @@ Professional camera pipeline with libcamera native support.
 | Resolution | 2MP |
 | Power (idle) | ~0.5W |
 | Power (active) | ~2.5W |
-| Reliability | ⭐⭐⭐ |
+| Reliability |  |
 | Best For | Prototype, proof-of-concept |
 
 ### Scenario B: IMX585 + Electronic Autofocus (RECOMMENDED)
@@ -209,12 +209,12 @@ Professional camera pipeline with libcamera native support.
 | Metric | Value |
 |--------|-------|
 | Total Cost | $210-232 |
-| Focus Quality | Electronic, ~20cm-∞ |
+| Focus Quality | Electronic, ~20cm- |
 | Autofocus | [OK] Continuous |
 | Resolution | 32MP |
 | Power (idle) | ~2W |
 | Power (active) | ~4W |
-| Reliability | ⭐⭐⭐⭐⭐ |
+| Reliability |  |
 | Best For | Production animatronic |
 
 ### Scenario C: OV2640 + Stepper Focus (Risky)
@@ -227,7 +227,7 @@ Professional camera pipeline with libcamera native support.
 | Resolution | 2MP |
 | Power (idle) | ~0.5W |
 | Power (active focus) | ~3W |
-| Reliability | ⭐⭐ |
+| Reliability |  |
 | Best For | Budget option, accept maintenance |
 
 ### Scenario D: OAK-D Lite (Premium)
@@ -240,7 +240,7 @@ Professional camera pipeline with libcamera native support.
 | Resolution | 12MP RGB + depth |
 | Power (idle) | ~2.5W |
 | Power (active) | ~6W |
-| Reliability | ⭐⭐⭐⭐ |
+| Reliability |  |
 | Best For | Advanced perception, depth-aware |
 
 ---

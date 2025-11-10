@@ -1,0 +1,61 @@
+{
+    "relative_filename": "config/components/interfaces/hc_sr04_debug_ultrasonic_sensor.json",
+    "version": "1.0.0",
+    "hardware_type": "BUS_INTERFACE", 
+    "author": "config/author.json",
+    "interface_id": "HC_SR04_DEBUG_ULTRASONIC_SENSOR",
+    "interface_type": "DEBUG_ULTRASONIC_DISTANCE_SENSOR",
+    "description": "Debug version of HC-SR04 ultrasonic sensor that simulates the exact state machine and timing behavior without physical hardware",
+    "debug_features": {
+        "simulated_echo_timing": true,
+        "configurable_distance": true,
+        "realistic_state_machine": true,
+        "timeout_handling": true,
+        "serial_distance_control": true
+    },
+    "hardware_specifications": {
+        "sensor_type": "SIMULATED_ULTRASONIC_RANGING",
+        "operating_voltage": "3.3V_ESP32_COMPATIBLE",
+        "operating_current": "5mA_SIMULATED",
+        "measuring_range": "2cm_TO_400cm_SIMULATED",
+        "measuring_accuracy": "PERFECT_FOR_DEBUG",
+        "measuring_angle": "15_DEGREES_SIMULATED",
+        "response_time": "CONFIGURABLE"
+    },
+    "pin_requirements": {
+        "trigger_pin": {
+            "function": "simulated_trigger",
+            "description": "GPIO pin for trigger simulation (not actually used)",
+            "voltage_level": "3.3V_ESP32",
+            "signal_type": "SIMULATED_DIGITAL_PULSE"
+        },
+        "echo_pin": {
+            "function": "simulated_echo", 
+            "description": "GPIO pin for echo simulation (not actually used)",
+            "voltage_level": "3.3V_ESP32",
+            "signal_type": "SIMULATED_DIGITAL_PULSE"
+        }
+    },
+    "timing_specifications": {
+        "trigger_pulse_width": "10us_SIMULATED",
+        "echo_timeout": "23300us_FOR_400cm_MAX_RANGE",
+        "measurement_cycle": "60ms_MINIMUM_RECOMMENDED",
+        "settling_time": "2us_AFTER_TRIGGER",
+        "echo_calculation": "distance_cm = echo_duration_us / 58.2"
+    },
+    "components": [
+        "gpio_bus"  
+    ],
+    "timing": {
+        "hitCount": 1,
+        "description": "Real-time sensor simulation"
+    },
+    "use_fields": {
+        "sensor_state": "IDLE",
+        "trigger_time_us": 0,
+        "echo_start_time_us": 0,
+        "timeout_us": 23300,
+        "simulated_distance_cm": 30,
+        "debug_mode": true
+    }
+}

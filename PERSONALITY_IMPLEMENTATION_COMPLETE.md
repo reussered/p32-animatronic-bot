@@ -1,11 +1,11 @@
-# Implementation Summary: Personality-Driven Mood Intensity
+﻿# Implementation Summary: Personality-Driven Mood Intensity
 
 ## What Was Created
 
 ### 1. **Personality Class** (`shared/Personality.hpp` and `include/Personality.hpp`)
 - Defines personality traits: `base_aggression`, `base_curiosity`, `base_fear`, `base_affection`
 - Each trait ranges from -128 to +127
-- Provides `getIntensityMultiplier(trait_value)` method that converts trait to 0.5x–2.0x multiplier
+- Provides `getIntensityMultiplier(trait_value)` method that converts trait to 0.5x-2.0x multiplier
   - Negative values dampen effects (timid/passive)
   - Positive values amplify effects (bold/expressive)
 
@@ -77,8 +77,8 @@ void goblin_left_eye_act(void) {
    - Copy-paste the code to any new display component
 
 2. **Dynamic**: Personality can change at runtime
-   - Torso detects threat → boosts aggression → eyes show more red
-   - Goblin gets bored → increases curiosity → eyes show more green
+   - Torso detects threat  boosts aggression  eyes show more red
+   - Goblin gets bored  increases curiosity  eyes show more green
    - All displays update automatically (no code changes)
 
 3. **Distributed**: Works across multiple ESP32 controllers via ESP-NOW mesh
@@ -105,15 +105,15 @@ void goblin_left_eye_act(void) {
 
 ```
 shared/
-├── Personality.hpp                    [NEW]
+ Personality.hpp                    [NEW]
 include/
-├── Personality.hpp                    [NEW]
-├── core/memory/SharedMemory.hpp       [MODIFIED: added Personality type]
+ Personality.hpp                    [NEW]
+ core/memory/SharedMemory.hpp       [MODIFIED: added Personality type]
 config/bots/bot_families/goblins/
-├── torso/
-│   └── goblin_personality.src         [MODIFIED: full implementation]
-└── head/
-    └── goblin_left_eye.src            [MODIFIED: personality-scaled rendering]
+ torso/
+    goblin_personality.src         [MODIFIED: full implementation]
+ head/
+     goblin_left_eye.src            [MODIFIED: personality-scaled rendering]
 ```
 
 ## Integration Steps
@@ -132,7 +132,7 @@ To use this in your goblin head:
 2. **Apply same code to remaining eyes/displays**:
    - Copy `goblin_left_eye.src` logic to `goblin_right_eye.src`
    - Copy to `goblin_mouth.src`
-   - Only change references (e.g., `left_eye_buffer` → `right_eye_buffer`)
+   - Only change references (e.g., `left_eye_buffer`  `right_eye_buffer`)
 
 3. **Regenerate subsystems**:
    ```powershell
@@ -147,7 +147,7 @@ To use this in your goblin head:
 
 ## Future Enhancements
 
-- **Dynamic personality changes**: Torso sensor input → personality modification → immediate eye color changes
-- **Personality averaging**: If multiple creatures in mesh → negotiate shared personality
+- **Dynamic personality changes**: Torso sensor input  personality modification  immediate eye color changes
+- **Personality averaging**: If multiple creatures in mesh  negotiate shared personality
 - **Personality memory**: Save personality to NVS (non-volatile storage) between power cycles
 - **Personality UI**: Web dashboard to tweak personality traits in real-time

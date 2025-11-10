@@ -1,16 +1,250 @@
 // speaker component implementation
-// Auto-generated stub - needs actual implementation
+// Debug implementation - triggers audio through i2s_driver
 
 #include "esp_log.h"
+#include "esp_timer.h"
+#include "components/drivers/i2s_driver.hdr"
+
 static const char *TAG_speaker = "speaker";
 
+// Speaker state for mood-based audio
+typedef struct {
+    bool initialized;
+    uint64_t last_sound_us;
+    uint32_t sound_counter;
+    char current_mood[32];
+    bool audio_active;
+} speaker_state_t;
+
+static speaker_state_t speaker_state = {
+    .initialized = false,
+    .last_sound_us = 0,
+    .sound_counter = 0,
+    .current_mood = "neutral",
+    .audio_active = false
+};
+
+// Enhanced goblin sound effects library
+typedef struct {
+    const char* name;
+    float frequency_hz;
+    float volume;
+    uint32_t duration_ms;
+    const char* description;
+    const char* mood_context;
+} sound_effect_t;
+
+static const sound_effect_t sound_library[] = {
+    // Basic goblin vocalizations
+    {"goblin_growl_low", 120.0f, 0.5f, 2500, "Deep threatening growl", "aggressive"},
+    {"goblin_growl_med", 180.0f, 0.4f, 2000, "Warning growl", "cautious"},
+    {"goblin_snarl", 250.0f, 0.6f, 1200, "Angry snarl", "hostile"},
+    {"goblin_hiss", 400.0f, 0.3f, 800, "Threatening hiss", "defensive"},
+    
+    // Goblin laughter and amusement
+    {"goblin_cackle", 350.0f, 0.4f, 1800, "Evil cackling laugh", "mischievous"},
+    {"goblin_chuckle", 280.0f, 0.3f, 1000, "Amused chuckle", "playful"},
+    {"goblin_giggle", 450.0f, 0.2f, 600, "High-pitched giggle", "happy"},
+    
+    // Goblin communication
+    {"goblin_grunt_yes", 200.0f, 0.3f, 500, "Affirmative grunt", "agreeable"},
+    {"goblin_grunt_no", 150.0f, 0.4f, 800, "Negative grunt", "disagreeable"},
+    {"goblin_question", 300.0f, 0.3f, 400, "Questioning sound", "curious"},
+    {"goblin_surprise", 600.0f, 0.5f, 300, "Surprised exclamation", "startled"},
+    
+    // Goblin roars and calls
+    {"goblin_roar_short", 180.0f, 0.7f, 1500, "Short intimidating roar", "territorial"},
+    {"goblin_roar_long", 160.0f, 0.6f, 3000, "Long battle roar", "aggressive"},
+    {"goblin_howl", 220.0f, 0.5f, 2200, "Mournful howl", "lonely"},
+    {"goblin_screech", 800.0f, 0.4f, 600, "High-pitched screech", "alarmed"},
+    
+    // Environmental responses
+    {"proximity_close", 1000.0f, 0.4f, 200, "Something approaching", "alert"},
+    {"proximity_very_close", 1200.0f, 0.6f, 150, "Danger close", "defensive"},
+    {"movement_detected", 500.0f, 0.3f, 300, "Motion sensor triggered", "attentive"},
+    
+    // System sounds
+    {"system_boot", 440.0f, 0.3f, 1000, "System startup", "neutral"},
+    {"system_error", 220.0f, 0.5f, 1500, "Error occurred", "confused"},
+    {"idle_breathing", 80.0f, 0.1f, 4000, "Quiet breathing", "calm"},
+    {"idle_snore", 60.0f, 0.2f, 6000, "Sleeping sounds", "sleepy"}
+};
+#define SOUND_LIBRARY_SIZE (sizeof(sound_library) / sizeof(sound_effect_t))
+
 esp_err_t speaker_init(void) {
-    ESP_LOGI(TAG_speaker, "speaker init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    ESP_LOGI(TAG_speaker, "Speaker hardware init");
+    
+    // Initialize I2S driver first
+    esp_err_t ret = i2s_driver_init();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG_speaker, "Failed to initialize I2S driver: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    speaker_state.initialized = true;
+    speaker_state.last_sound_us = esp_timer_get_time();
+    
+    // Play boot sound
+    speaker_play_sound_by_name("system_boot");
+    
+    ESP_LOGI(TAG_speaker, "Speaker initialized with %d sound effects", SOUND_LIBRARY_SIZE);
     return ESP_OK;
 }
 
 void speaker_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_speaker, "speaker act");
+    if (!speaker_state.initialized) return;
+    
+    uint64_t current_time_us = esp_timer_get_time();
+    
+    // Demo: Play random sounds every 10 seconds
+    if ((current_time_us - speaker_state.last_sound_us) > 10000000) {  // 10 seconds
+        
+        // Select sound based on counter for demo purposes
+        uint32_t sound_index = speaker_state.sound_counter % SOUND_LIBRARY_SIZE;
+        const sound_effect_t* sound = &sound_library[sound_index];
+        
+        ESP_LOGI(TAG_speaker, "Demo: Playing %s", sound->name);
+        i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
+        
+        speaker_state.sound_counter++;
+        speaker_state.last_sound_us = current_time_us;
+        speaker_state.audio_active = true;
+        
+        // Schedule stop after duration
+        // Note: In real implementation, this would be handled by a timer
+    }
+    
+    // Call I2S driver to actually generate audio
+    i2s_driver_act();
+}
+
+/**
+ * @brief Play a specific sound by name
+ */
+void speaker_play_sound_by_name(const char* sound_name) {
+    for (int i = 0; i < SOUND_LIBRARY_SIZE; i++) {
+        if (strcmp(sound_library[i].name, sound_name) == 0) {
+            const sound_effect_t* sound = &sound_library[i];
+            ESP_LOGI(TAG_speaker, "Playing sound: %s", sound_name);
+            i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
+            return;
+        }
+    }
+    ESP_LOGW(TAG_speaker, "Sound not found: %s", sound_name);
+}
+
+/**
+ * @brief Play proximity alert sound
+ */
+void speaker_play_proximity_alert(void) {
+    speaker_play_sound_by_name("proximity_alert");
+}
+
+/**
+ * @brief Play mood-based ambient sound
+ */
+void speaker_play_mood_sound(const char* mood) {
+    strncpy(speaker_state.current_mood, mood, sizeof(speaker_state.current_mood) - 1);
+    
+    if (strcmp(mood, "aggressive") == 0) {
+        speaker_play_sound_by_name("goblin_roar_short");
+    } else if (strcmp(mood, "playful") == 0) {
+        speaker_play_sound_by_name("goblin_cackle");
+    } else if (strcmp(mood, "curious") == 0) {
+        speaker_play_sound_by_name("goblin_question");
+    } else if (strcmp(mood, "defensive") == 0) {
+        speaker_play_sound_by_name("goblin_hiss");
+    } else if (strcmp(mood, "happy") == 0) {
+        speaker_play_sound_by_name("goblin_giggle");
+    } else {
+        speaker_play_sound_by_name("idle_breathing");
+    }
+}
+
+/**
+ * @brief Synthesize and speak goblin words/phrases
+ */
+void speaker_speak_goblin_phrase(const char* phrase) {
+    ESP_LOGI(TAG_speaker, "Speaking goblin phrase: '%s'", phrase);
+    
+    // Goblin speech synthesis using phonetic mapping
+    if (strcmp(phrase, "hello") == 0 || strcmp(phrase, "greetings") == 0) {
+        // "Grrrak!" - Goblin greeting
+        i2s_driver_play_sound("goblin_speech_greetings", 180.0f, 0.4f);
+        
+    } else if (strcmp(phrase, "warning") == 0 || strcmp(phrase, "danger") == 0) {
+        // "Krash grok!" - Danger warning  
+        i2s_driver_play_sound("goblin_speech_warning", 220.0f, 0.6f);
+        
+    } else if (strcmp(phrase, "attack") == 0 || strcmp(phrase, "fight") == 0) {
+        // "GRAAAHHH!" - Battle cry
+        i2s_driver_play_sound("goblin_speech_attack", 160.0f, 0.8f);
+        
+    } else if (strcmp(phrase, "retreat") == 0 || strcmp(phrase, "flee") == 0) {
+        // "Grik grak grok!" - Retreat call
+        i2s_driver_play_sound("goblin_speech_retreat", 300.0f, 0.5f);
+        
+    } else if (strcmp(phrase, "curious") == 0 || strcmp(phrase, "what") == 0) {
+        // "Grok?" - Questioning
+        i2s_driver_play_sound("goblin_speech_question", 350.0f, 0.3f);
+        
+    } else if (strcmp(phrase, "yes") == 0 || strcmp(phrase, "agree") == 0) {
+        // "Grok grok!" - Agreement
+        i2s_driver_play_sound("goblin_speech_yes", 200.0f, 0.4f);
+        
+    } else if (strcmp(phrase, "no") == 0 || strcmp(phrase, "disagree") == 0) {
+        // "Grak! Grak!" - Disagreement
+        i2s_driver_play_sound("goblin_speech_no", 180.0f, 0.5f);
+        
+    } else if (strcmp(phrase, "hungry") == 0 || strcmp(phrase, "food") == 0) {
+        // "Nom nom grak!" - Hunger
+        i2s_driver_play_sound("goblin_speech_hungry", 150.0f, 0.4f);
+        
+    } else if (strcmp(phrase, "sleep") == 0 || strcmp(phrase, "tired") == 0) {
+        // "Zzzgrok..." - Sleepy
+        i2s_driver_play_sound("goblin_speech_sleepy", 100.0f, 0.2f);
+        
+    } else {
+        // Unknown phrase - generic goblin babble
+        ESP_LOGW(TAG_speaker, "Unknown phrase, playing generic goblin sounds");
+        i2s_driver_play_sound("goblin_speech_generic", 250.0f, 0.3f);
+    }
+    
+    // Notify PC about speech synthesis
+    printf("SPEECH_EVENT:PHRASE=%s\n", phrase);
+}
+
+/**
+ * @brief Play goblin emotional response
+ */
+void speaker_play_emotional_response(const char* emotion, float intensity) {
+    ESP_LOGI(TAG_speaker, "Emotional response: %s (intensity: %.2f)", emotion, intensity);
+    
+    // Adjust volume and frequency based on intensity (0.0 to 1.0)
+    float volume = 0.2f + (intensity * 0.5f);  // 0.2 to 0.7 range
+    
+    if (strcmp(emotion, "angry") == 0) {
+        float freq = 150.0f + (intensity * 100.0f);  // 150-250Hz range
+        i2s_driver_play_sound("goblin_emotional_angry", freq, volume);
+        
+    } else if (strcmp(emotion, "happy") == 0) {
+        float freq = 300.0f + (intensity * 200.0f);  // 300-500Hz range
+        i2s_driver_play_sound("goblin_emotional_happy", freq, volume);
+        
+    } else if (strcmp(emotion, "scared") == 0) {
+        float freq = 400.0f + (intensity * 400.0f);  // 400-800Hz range
+        i2s_driver_play_sound("goblin_emotional_scared", freq, volume);
+        
+    } else if (strcmp(emotion, "surprised") == 0) {
+        float freq = 500.0f + (intensity * 300.0f);  // 500-800Hz range
+        i2s_driver_play_sound("goblin_emotional_surprised", freq, volume);
+        
+    } else if (strcmp(emotion, "sad") == 0) {
+        float freq = 120.0f + (intensity * 80.0f);   // 120-200Hz range
+        i2s_driver_play_sound("goblin_emotional_sad", freq, volume);
+        
+    } else {
+        // Default neutral emotion
+        i2s_driver_play_sound("goblin_emotional_neutral", 200.0f, volume);
+    }
 }

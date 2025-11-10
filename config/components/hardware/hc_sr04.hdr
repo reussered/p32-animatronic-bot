@@ -20,6 +20,18 @@ esp_err_t hc_sr04_init(void);
  */
 void hc_sr04_act(void);
 
+/**
+ * @brief Get the current distance reading in centimeters
+ * @return Distance in cm (2-400cm range), or -1 if no valid reading
+ */
+float hc_sr04_get_distance_cm(void);
+
+/**
+ * @brief Check if sensor has a valid reading
+ * @return true if distance reading is valid, false otherwise
+ */
+bool hc_sr04_is_valid_reading(void);
+
 #ifdef __cplusplus
 }
 #endif

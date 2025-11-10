@@ -20,6 +20,35 @@ esp_err_t gpio_pair_driver_init(void);
  */
 void gpio_pair_driver_act(void);
 
+/**
+ * @brief Configure GPIO pair for ultrasonic sensor (trigger/echo)
+ * @param trigger_pin GPIO pin for trigger output
+ * @param echo_pin GPIO pin for echo input
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin);
+
+/**
+ * @brief Send trigger pulse to start ultrasonic measurement
+ * Must be called first to initiate HC-SR04 measurement cycle
+ * @return ESP_OK if trigger successful, ESP_ERR_TIMEOUT for simulated failure
+ */
+esp_err_t gpio_pair_trigger_ultrasonic(void);
+
+/**
+ * @brief Check echo pin status and return measurement when ready
+ * Call repeatedly after trigger until ESP_OK is returned
+ * @param pulse_duration_us Output: echo pulse duration in microseconds
+ * @return ESP_OK if measurement ready, ESP_ERR_NOT_FINISHED if still measuring, ESP_ERR_TIMEOUT if failed
+ */
+esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us);
+
+/**
+ * @brief Reset measurement state to idle
+ * Call after successful measurement to prepare for next cycle
+ */
+void gpio_pair_reset_measurement(void);
+
 #ifdef __cplusplus
 }
 #endif

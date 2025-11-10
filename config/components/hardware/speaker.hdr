@@ -20,6 +20,36 @@ esp_err_t speaker_init(void);
  */
 void speaker_act(void);
 
+/**
+ * @brief Play a specific sound by name
+ * @param sound_name Name of sound effect to play
+ */
+void speaker_play_sound_by_name(const char* sound_name);
+
+/**
+ * @brief Play proximity alert sound
+ */
+void speaker_play_proximity_alert(void);
+
+/**
+ * @brief Play mood-based ambient sound
+ * @param mood Current mood string ("aggressive", "playful", "curious", etc.)
+ */
+void speaker_play_mood_sound(const char* mood);
+
+/**
+ * @brief Synthesize and speak goblin words/phrases
+ * @param phrase Text phrase to convert to goblin speech
+ */
+void speaker_speak_goblin_phrase(const char* phrase);
+
+/**
+ * @brief Play goblin emotional response with intensity
+ * @param emotion Emotion type ("angry", "happy", "scared", etc.)
+ * @param intensity Intensity level (0.0 to 1.0)
+ */
+void speaker_play_emotional_response(const char* emotion, float intensity);
+
 #ifdef __cplusplus
 }
 #endif

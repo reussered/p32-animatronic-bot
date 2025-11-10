@@ -1,4 +1,4 @@
-# Personality-Driven Mood Intensity Pattern
+﻿# Personality-Driven Mood Intensity Pattern
 
 ## Overview
 
@@ -9,28 +9,28 @@ The personality system modulates how strongly mood affects the visual display. W
 ## Architecture
 
 ```
-┌─ Personality Module (torso) ─────────────────────┐
-│  Reads: base_aggression, base_curiosity from     │
-│          goblin_personality.json                 │
-│  Writes: Personality struct to GSM               │
-└────────────────────────────────────────────────┬─┘
-                                                  │
+ Personality Module (torso) 
+  Reads: base_aggression, base_curiosity from     
+          goblin_personality.json                 
+  Writes: Personality struct to GSM               
+
+                                                  
                                     ESP-NOW Mesh (broadcast)
-                                                  │
-┌─────────────────────────────────────────────────▼─────┐
-│  Head Subsystem (ESP32-S3)                             │
-│  ┌─────────────────────────────────────────────────┐  │
-│  │ goblin_left_eye_act():                          │  │
-│  │   1. Read Mood from GSM                         │  │
-│  │   2. Read Personality from GSM                  │  │
-│  │   3. Calculate intensity_multiplier             │  │
-│  │   4. Apply to color buffer with multiplier      │  │
-│  │   5. Send to display                            │  │
-│  │                                                  │  │
-│  │ goblin_right_eye_act():  [IDENTICAL CODE]      │  │
-│  │ goblin_mouth_act():       [IDENTICAL CODE]      │  │
-│  └─────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────┘
+                                                  
+
+  Head Subsystem (ESP32-S3)                             
+    
+   goblin_left_eye_act():                            
+     1. Read Mood from GSM                           
+     2. Read Personality from GSM                    
+     3. Calculate intensity_multiplier               
+     4. Apply to color buffer with multiplier        
+     5. Send to display                              
+                                                      
+   goblin_right_eye_act():  [IDENTICAL CODE]        
+   goblin_mouth_act():       [IDENTICAL CODE]        
+    
+
 ```
 
 ## Step 1: Define Personality Structure
@@ -126,8 +126,8 @@ esp_err_t goblin_personality_init(void) {
 
 void goblin_personality_act(void) {
     // In a more sophisticated implementation, would react to sensors:
-    // - Camera detects threat → increase aggression
-    // - Idle for long time → increase curiosity
+    // - Camera detects threat  increase aggression
+    // - Idle for long time  increase curiosity
     // - etc.
     
     // For now, personality is static (set once at init)
@@ -259,7 +259,7 @@ The `personality_intensity_source` field tells the eye which personality trait t
 
 **Torso (master)**:
 ```
-goblin_personality.src reads config → sets Personality in GSM → broadcasts via ESP-NOW
+goblin_personality.src reads config  sets Personality in GSM  broadcasts via ESP-NOW
 ```
 
 **Head (all eyes, identical code)**:
@@ -305,7 +305,7 @@ From `config/components/functional/goblin_personality.json`:
 - [ ] Update `config/bots/bot_families/goblins/head/goblin_left_eye.src` with code above
 - [ ] Copy same code to `goblin_right_eye.src` and `goblin_mouth.src`
 - [ ] Verify personality broadcasts via ESP-NOW from torso to head
-- [ ] Test: Change personality traits → observe eye colors intensify/dampen
+- [ ] Test: Change personality traits  observe eye colors intensify/dampen
 
 ## Notes
 

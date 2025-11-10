@@ -1,4 +1,4 @@
-# Agent Operations Rules - CRITICAL
+﻿# Agent Operations Rules - CRITICAL
 
 ## File Operation Semantics
 
@@ -43,10 +43,10 @@
 ```
 Agent sees: "Move X to Y"
 Agent does:
-  1. Copies X → Y  (creates duplicate)
+  1. Copies X  Y  (creates duplicate)
   2. Finds X and Y exist (thinks it's duplicate)
   3. Deletes X  (wrong - should have just moved)
-Result: ✓ Correct by accident, but for wrong reason
+Result:  Correct by accident, but for wrong reason
 ```
 **FIX**: If moving, use MOVE operation directly - don't COPY then DELETE
 
@@ -54,11 +54,11 @@ Result: ✓ Correct by accident, but for wrong reason
 ```
 Agent sees: "Use X in subsystems A, B, C"
 Agent does:
-  1. Copies X → A/X, B/X, C/X  (creates 3 duplicates + original)
+  1. Copies X  A/X, B/X, C/X  (creates 3 duplicates + original)
   2. Finds 4 copies of X
   3. Deletes X everywhere thinking they're all duplicates
   4. Deletes original too
-Result: ✗ File destroyed in all locations
+Result:  File destroyed in all locations
 ```
 **FIX**: Keep ONE source file. Reference it from other locations via JSON `components` arrays or `#include` statements. Do NOT copy files to create local versions.
 
@@ -72,7 +72,7 @@ Agent does:
   4. Sees duplicated content now exists in 3 places
   5. Deletes one or more versions to "remove duplicates"
   6. Breaks references because deleted file was being used
-Result: ✗ Architecture breaks, references now point to deleted files
+Result:  Architecture breaks, references now point to deleted files
 ```
 **FIX**: Consolidate means refactor ONCE into shared location. Use JSON `components` arrays to reference. Do NOT create copies then delete to "clean up duplicates."
 
@@ -107,20 +107,20 @@ Result: ✗ Architecture breaks, references now point to deleted files
    - If duplicates exist, ask which to keep before deleting any
 3. Was this file recently modified or added by previous operations?
    - Check git log for recent changes
-4. If deletion would break build/references → STOP, don't delete
+4. If deletion would break build/references  STOP, don't delete
 
 ## For Consolidation Tasks
 
 **IF asked to "consolidate" component definitions:**
 
-1. ✓ Identify duplicated content
-2. ✓ Create ONE canonical file at shared location (e.g., `config/components/shared/`)
-3. ✓ Make that canonical file authoritative
-4. ✓ Update ALL references to point to canonical
-5. ✗ DO NOT copy content to multiple places
-6. ✗ DO NOT delete originals to "remove duplicates" created by your copies
-7. ✓ AFTER all references updated, then safe to delete old versions
-8. ✓ VERIFY no broken references before committing
+1.  Identify duplicated content
+2.  Create ONE canonical file at shared location (e.g., `config/components/shared/`)
+3.  Make that canonical file authoritative
+4.  Update ALL references to point to canonical
+5.  DO NOT copy content to multiple places
+6.  DO NOT delete originals to "remove duplicates" created by your copies
+7.  AFTER all references updated, then safe to delete old versions
+8.  VERIFY no broken references before committing
 
 ---
 

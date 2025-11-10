@@ -1,0 +1,43 @@
+{
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "component_type": "FUNCTIONAL",
+    "description": "3-DOF neck motor control using ClearPath steppers",
+    "source_files": [
+        "neck_motor_3dof.src",
+        "neck_motor_3dof.hdr"
+    ],
+    "dependencies": [
+        "config/components/drivers/clearpath_motor_driver.json"
+    ],
+    "timing": {
+        "hitCount": 2
+    },
+    "software": {
+        "init_function": "neck_motor_3dof_init",
+        "act_function": "neck_motor_3dof_act"
+    },
+    "pins": {
+        "required": [
+            {
+                "function": "PAN_MOTOR",
+                "count": 3,
+                "type": "OUTPUT",
+                "description": "Pan motor control pins (step, dir, enable)"
+            },
+            {
+                "function": "TILT_MOTOR",
+                "count": 3,
+                "type": "OUTPUT",
+                "description": "Tilt motor control pins (step, dir, enable)"
+            },
+            {
+                "function": "ROLL_MOTOR",
+                "count": 3,
+                "type": "OUTPUT",
+                "description": "Roll motor control pins (step, dir, enable)"
+            }
+        ]
+    },
+    "notes": "3-DOF neck control using ClearPath MCPV-RB-2310V-ELN steppers"
+}

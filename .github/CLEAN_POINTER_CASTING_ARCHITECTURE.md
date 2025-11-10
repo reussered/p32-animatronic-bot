@@ -1,10 +1,10 @@
-# Clean Pointer Casting Architecture
+﻿# Clean Pointer Casting Architecture
 
 ## Overview
 
 The goblin eye/mouth rendering system uses a **generic-to-specific pointer casting pattern** for type-safe display buffer management across different pixel formats.
 
-## Pattern: Transform void* ↔ TypedPointer
+## Pattern: Transform void*  TypedPointer
 
 ```cpp
 // ALLOCATE: Generic bytes (positioned components)
@@ -146,20 +146,20 @@ void generic_spi_display_act(void) {
 
 ```
 goblin_left_eye        goblin_right_eye        goblin_mouth
-    ↓                       ↓                         ↓
+                                                    
   allocate            allocate                  allocate
 unsigned char*      unsigned char*          unsigned char*
 display_buffer      display_buffer          display_buffer
-    ↓                       ↓                         ↓
-    └─────────────────────┬─────────────────────────┘
-                          ↓
+                                                    
+    
+                          
                     goblin_eye
-                        ↓
+                        
                 adjustMood<Pixel_RGB565>()
               (uses Pixel_RGB565::fromBytes())
-                        ↓
+                        
                 generic_spi_display
-                        ↓
+                        
                   free(display_buffer)
 ```
 

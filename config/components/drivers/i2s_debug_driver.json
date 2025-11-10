@@ -1,0 +1,53 @@
+{
+    "relative_filename": "config/components/drivers/i2s_debug_driver.json",
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "i2s_debug_driver",
+    "hardware_type": "DEBUG_DRIVER",
+    "interface_type": "I2S_DEBUG",
+    "description": "Debug replacement for I2S generic driver - simulates microphone input without hardware",
+    "created": "2025-11-10",
+    "debug_capabilities": {
+        "pc_microphone_streaming": true,
+        "real_time_audio_transfer": "uart_based",
+        "sample_rate": 16000,
+        "bit_depth": 16,
+        "pc_side_capture": "python_pyaudio",
+        "esp32_side_reception": "uart_buffered"
+    },
+    "pc_integration": {
+        "python_script": "tools/pc_mic_streamer.py",
+        "uart_protocol": "binary_audio_packets",
+        "packet_format": "header + 16bit_samples",
+        "buffer_size": "512_samples_per_packet"
+    },
+    "uart_config": {
+        "baud_rate": 921600,
+        "data_bits": 8,
+        "stop_bits": 1,
+        "parity": "none",
+        "flow_control": "none"
+    },
+    "dependencies": [
+        "config/components/drivers/i2s_bus.json"
+    ],
+    "software": {
+        "init_function": "i2s_debug_driver_init",
+        "act_function": "i2s_debug_driver_act",
+        "api_functions": [
+            "i2s_debug_driver_read_samples(int32_t *buffer, size_t *bytes_read)",
+            "i2s_debug_driver_set_pattern(const char *pattern)",
+            "i2s_debug_driver_set_level(uint8_t level)"
+        ]
+    },
+    "type": "DEBUG_DRIVER",
+    "timing": {
+        "hitCount": 1
+    },
+    "notes": [
+        "Drop-in replacement for i2s_generic_driver during development",
+        "Generates realistic audio patterns for testing behavioral responses",
+        "Serial commands allow dynamic testing scenarios",
+        "No physical I2S hardware required"
+    ]
+}

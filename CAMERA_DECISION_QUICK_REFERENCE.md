@@ -1,4 +1,4 @@
-# QUICK REFERENCE: Camera System Comparison
+﻿# QUICK REFERENCE: Camera System Comparison
 
 ## TL;DR Cost Breakdown
 
@@ -66,10 +66,10 @@ Per pair: $340
 ## Cost Ladder (for stereo pair, both eyes)
 
 ```
-$72   ━━━━ OV2640 fixed (basic, risky)
-$108  ━━━━ OV2640 + stepper focus (cheap, unreliable)
-$156  ━━━━ IMX585 + electronic AF (RECOMMENDED)
-$340  ━━━━ OAK-D Lite (premium, overkill)
+$72    OV2640 fixed (basic, risky)
+$108   OV2640 + stepper focus (cheap, unreliable)
+$156   IMX585 + electronic AF (RECOMMENDED)
+$340   OAK-D Lite (premium, overkill)
 ```
 
 ---
@@ -105,7 +105,7 @@ $340  ━━━━ OAK-D Lite (premium, overkill)
 ## Real Failure Stories from Community
 
 ### OV2640 + Stepper Focus
-> "Worked great for 3 months, then stepper started missing steps. Noise from servo power supply was causing jitter. Added 470µF capacitor on stepper supply, helped but focus started hunting near 50cm. Gave up, switched back to fixed focus." - r/robotics user, 2024
+> "Worked great for 3 months, then stepper started missing steps. Noise from servo power supply was causing jitter. Added 470F capacitor on stepper supply, helped but focus started hunting near 50cm. Gave up, switched back to fixed focus." - r/robotics user, 2024
 
 ### IMX585 I2C Autofocus
 > "Running for 2 years in production robot. Had one I2C collision early on when AF write happened during sensor read. Fixed with 10ms delay queue. Zero issues since." - Arducam forum, verified developer

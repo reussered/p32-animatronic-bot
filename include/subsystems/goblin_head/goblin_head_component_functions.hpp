@@ -32,10 +32,14 @@ esp_err_t goblin_right_ear_init(void);
 void goblin_right_ear_act(void);
 esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
+esp_err_t goblin_sinuses_init(void);
+void goblin_sinuses_act(void);
 esp_err_t goblin_speaker_init(void);
 void goblin_speaker_act(void);
-esp_err_t hc_sr04_ultrasonic_distance_sensor_init(void);
-void hc_sr04_ultrasonic_distance_sensor_act(void);
+esp_err_t gpio_pair_driver_init(void);
+void gpio_pair_driver_act(void);
+esp_err_t hc_sr04_init(void);
+void hc_sr04_act(void);
 esp_err_t hw496_microphone_init(void);
 void hw496_microphone_act(void);
 esp_err_t i2s_bus_0_init(void);
@@ -44,6 +48,8 @@ esp_err_t i2s_driver_init(void);
 void i2s_driver_act(void);
 esp_err_t ili9341_init(void);
 void ili9341_act(void);
+esp_err_t max98357a_i2s_amplifier_init(void);
+void max98357a_i2s_amplifier_act(void);
 esp_err_t servo_sg90_micro_init(void);
 void servo_sg90_micro_act(void);
 esp_err_t speaker_init(void);
@@ -60,15 +66,8 @@ void spi_display_bus_act(void);
 
 #include <stdint.h>
 
-// Display driver parameters for GC9A01 circular display
-static const uint16_t display_width = 240;
-static const uint16_t display_height = 240;
-static const uint8_t bytes_per_pixel = 2;
-static const char* color_schema = "RGB565";
-
-// Derived values
-static const uint32_t display_pixels = display_width * display_height;
-static const uint32_t display_buffer_size = display_pixels * bytes_per_pixel;
+// Display driver parameters for GC9A01 circular display  
+// Note: Variables scoped within gc9a01 struct to avoid global namespace conflicts
 
 // This struct acts as a "type bundle" for the gc9a01 hardware.
 // It will be used as a template parameter for components that need its properties.
@@ -222,11 +221,55 @@ esp_err_t goblin_mouth_init(void);
 void goblin_mouth_act(void);
 
 // Declarations from config\bots\bot_families\goblins\head\goblin_nose.hdr
-// Auto-generated header for goblin_nose
-#include <esp_err.h>
+// Goblin nose component with HC-SR04 ultrasonic sensor
+#ifndef GOBLIN_NOSE_HDR
+#define GOBLIN_NOSE_HDR
 
+#include <esp_err.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize goblin nose with HC-SR04 sensor
+ * @return ESP_OK on success, error code otherwise
+ */
 esp_err_t goblin_nose_init(void);
+
+/**
+ * @brief Process nose sensor readings and update state
+ * Called periodically by subsystem dispatcher
+ */
 void goblin_nose_act(void);
+
+/**
+ * @brief Get the current nose sensor distance reading
+ * @return Distance in cm, or -1 if no valid reading
+ */
+float goblin_nose_get_distance(void);
+
+/**
+ * @brief Check if there's a proximity alert (object very close)
+ * @return true if object is closer than proximity threshold (10cm)
+ */
+bool goblin_nose_proximity_alert(void);
+
+/**
+ * @brief Get sensor statistics
+ * @param total_readings Output: total number of readings attempted (can be NULL)
+ * @param valid_readings Output: number of successful readings (can be NULL)
+ * @return Current success rate as percentage
+ */
+float goblin_nose_get_stats(uint32_t* total_readings, uint32_t* valid_readings);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // GOBLIN_NOSE_HDR
 
 // Declarations from config\bots\bot_families\goblins\head\goblin_right_ear.hdr
 // Auto-generated header for goblin_right_ear
@@ -242,6 +285,52 @@ void goblin_right_ear_act(void);
 esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
 
+// Declarations from config\components\creature_specific\goblin_sinuses.hdr
+#ifndef GOBLIN_SINUSES_HDR
+#define GOBLIN_SINUSES_HDR
+
+#include "esp_err.h"
+
+/**
+ * @file goblin_sinuses.hdr
+ * @brief Acoustic resonance chamber system for natural sound amplification
+ * @description 3D-printed sinus cavity that mimics biological skull acoustics
+ */
+
+/**
+ * @brief Initialize goblin_sinuses component
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_init(void);
+
+/**
+ * @brief Execute goblin_sinuses component logic
+ */
+void goblin_sinuses_act(void);
+
+/**
+ * @brief Set resonance frequency for acoustic optimization
+ * @param frequency Target resonance frequency in Hz
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_set_resonance(uint16_t frequency);
+
+/**
+ * @brief Get current amplification factor
+ * @param factor Pointer to store current amplification factor
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_get_amplification(float *factor);
+
+/**
+ * @brief Configure chamber acoustics for different voice types
+ * @param voice_type 0=deep, 1=normal, 2=high pitched
+ * @return ESP_OK on success, esp_err_t error code on failure
+ */
+esp_err_t goblin_sinuses_configure_voice(uint8_t voice_type);
+
+#endif // GOBLIN_SINUSES_HDR
+
 // Declarations from config\bots\bot_families\goblins\head\goblin_speaker.hdr
 // Auto-generated header for goblin_speaker
 #include <esp_err.h>
@@ -249,9 +338,9 @@ void goblin_right_eye_act(void);
 esp_err_t goblin_speaker_init(void);
 void goblin_speaker_act(void);
 
-// Declarations from config\components\hardware\hc_sr04_sensor.hdr
-#ifndef HC_SR04_SENSOR_HDR
-#define HC_SR04_SENSOR_HDR
+// Declarations from config\components\drivers\gpio_pair_driver.hdr
+#ifndef GPIO_PAIR_DRIVER_HDR
+#define GPIO_PAIR_DRIVER_HDR
 
 #include <esp_err.h>
 #include <stdint.h>
@@ -261,22 +350,92 @@ extern "C" {
 #endif
 
 /**
- * @brief Initialize hc_sr04_sensor component
+ * @brief Initialize gpio_pair_driver component
  * @return ESP_OK on success, error code otherwise
  */
-esp_err_t hc_sr04_sensor_init(void);
+esp_err_t gpio_pair_driver_init(void);
 
 /**
- * @brief Execute hc_sr04_sensor component action
+ * @brief Execute gpio_pair_driver component action
  * Called periodically by subsystem dispatcher
  */
-void hc_sr04_sensor_act(void);
+void gpio_pair_driver_act(void);
+
+/**
+ * @brief Configure GPIO pair for ultrasonic sensor (trigger/echo)
+ * @param trigger_pin GPIO pin for trigger output
+ * @param echo_pin GPIO pin for echo input
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin);
+
+/**
+ * @brief Send trigger pulse to start ultrasonic measurement
+ * Must be called first to initiate HC-SR04 measurement cycle
+ * @return ESP_OK if trigger successful, ESP_ERR_TIMEOUT for simulated failure
+ */
+esp_err_t gpio_pair_trigger_ultrasonic(void);
+
+/**
+ * @brief Check echo pin status and return measurement when ready
+ * Call repeatedly after trigger until ESP_OK is returned
+ * @param pulse_duration_us Output: echo pulse duration in microseconds
+ * @return ESP_OK if measurement ready, ESP_ERR_NOT_FINISHED if still measuring, ESP_ERR_TIMEOUT if failed
+ */
+esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us);
+
+/**
+ * @brief Reset measurement state to idle
+ * Call after successful measurement to prepare for next cycle
+ */
+void gpio_pair_reset_measurement(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // HC_SR04_SENSOR_HDR
+#endif // GPIO_PAIR_DRIVER_HDR
+
+// Declarations from config\components\hardware\hc_sr04.hdr
+#ifndef HC_SR04_HDR
+#define HC_SR04_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize hc_sr04 component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t hc_sr04_init(void);
+
+/**
+ * @brief Execute hc_sr04 component action
+ * Called periodically by subsystem dispatcher
+ */
+void hc_sr04_act(void);
+
+/**
+ * @brief Get the current distance reading in centimeters
+ * @return Distance in cm (2-400cm range), or -1 if no valid reading
+ */
+float hc_sr04_get_distance_cm(void);
+
+/**
+ * @brief Check if sensor has a valid reading
+ * @return true if distance reading is valid, false otherwise
+ */
+bool hc_sr04_is_valid_reading(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // HC_SR04_HDR
 
 // Declarations from config\components\hardware\hw496_microphone.hdr
 // HW-496 MEMS Microphone Component Header
@@ -348,6 +507,19 @@ esp_err_t i2s_driver_init(void);
  */
 void i2s_driver_act(void);
 
+/**
+ * @brief Start playing a sound effect (debug mode)
+ * @param sound_name Name of the sound effect
+ * @param frequency Frequency in Hz
+ * @param volume Volume level (0.0 to 1.0)
+ */
+void i2s_driver_play_sound(const char* sound_name, float frequency, float volume);
+
+/**
+ * @brief Stop audio playback
+ */
+void i2s_driver_stop_sound(void);
+
 #ifdef __cplusplus
 }
 #endif
@@ -361,14 +533,7 @@ void i2s_driver_act(void);
 #include <stdint.h>
 
 // Display driver parameters for ILI9341 3.5" TFT display
-static const uint16_t display_width = 320;
-static const uint16_t display_height = 240;
-static const uint8_t bytes_per_pixel = 2;
-static const char* color_schema = "RGB565";
-
-// Derived values
-static const uint32_t display_pixels = display_width * display_height;
-static const uint32_t display_buffer_size = display_pixels * bytes_per_pixel;
+// Note: Variables scoped within ili9341 struct to avoid global namespace conflicts
 
 // This struct acts as a "type bundle" for the ili9341 hardware.
 // It will be used as a template parameter for components that need its properties.
@@ -427,6 +592,35 @@ struct ili9341
 
 #endif // ILI9341_HDR
 
+// Declarations from config\components\interfaces\max98357a_i2s_amplifier.hdr
+#ifndef MAX98357A_I2S_AMPLIFIER_HDR
+#define MAX98357A_I2S_AMPLIFIER_HDR
+
+#include <esp_err.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Initialize max98357a_i2s_amplifier component
+ * @return ESP_OK on success, error code otherwise
+ */
+esp_err_t max98357a_i2s_amplifier_init(void);
+
+/**
+ * @brief Execute max98357a_i2s_amplifier component action
+ * Called periodically by subsystem dispatcher
+ */
+void max98357a_i2s_amplifier_act(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // MAX98357A_I2S_AMPLIFIER_HDR
+
 // Declarations from config\components\hardware\servo_sg90_micro.hdr
 // Auto-generated header for servo_sg90_micro
 #include <esp_err.h>
@@ -456,6 +650,36 @@ esp_err_t speaker_init(void);
  * Called periodically by subsystem dispatcher
  */
 void speaker_act(void);
+
+/**
+ * @brief Play a specific sound by name
+ * @param sound_name Name of sound effect to play
+ */
+void speaker_play_sound_by_name(const char* sound_name);
+
+/**
+ * @brief Play proximity alert sound
+ */
+void speaker_play_proximity_alert(void);
+
+/**
+ * @brief Play mood-based ambient sound
+ * @param mood Current mood string ("aggressive", "playful", "curious", etc.)
+ */
+void speaker_play_mood_sound(const char* mood);
+
+/**
+ * @brief Synthesize and speak goblin words/phrases
+ * @param phrase Text phrase to convert to goblin speech
+ */
+void speaker_speak_goblin_phrase(const char* phrase);
+
+/**
+ * @brief Play goblin emotional response with intensity
+ * @param emotion Emotion type ("angry", "happy", "scared", etc.)
+ * @param intensity Intensity level (0.0 to 1.0)
+ */
+void speaker_play_emotional_response(const char* emotion, float intensity);
 
 #ifdef __cplusplus
 }

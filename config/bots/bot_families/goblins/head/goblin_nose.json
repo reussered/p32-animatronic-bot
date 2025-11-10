@@ -5,7 +5,8 @@
     "name": "goblin_nose",
     "subsystem": "HEAD",
     "components": [
-        "hc_sr04_sensor",
+        "hc_sr04",
+        "gpio_pair_driver",
         "goblin_head",
         "goblin_torso"
     ],
