@@ -259,6 +259,11 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
+      "name": "clearpath_motor_driver",
+      "path": "config\\components\\drivers\\clearpath_motor_driver.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
       "name": "cat_animated_ears",
       "path": "config\\bots\\bot_families\\cats\\head\\cat_animated_ears.json",
       "git_repo": "p32-animatronic-bot"
@@ -1806,6 +1811,11 @@
     {
       "name": "neck_joint_assembly",
       "path": "config\\components\\hardware\\neck_joint_assembly.json",
+      "git_repo": "p32-animatronic-bot"
+    },
+    {
+      "name": "neck_motor_3dof",
+      "path": "config\\bots\\bot_families\\goblins\\goblin_head\\neck_motor_3dof.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
