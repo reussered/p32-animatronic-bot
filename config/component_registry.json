@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "description": "Master component registry - maps component names to paths and git repositories. Sorted alphabetically by name. NO duplicates.",
-  "last_updated": "2025-11-10T16:28:34.300780",
+  "last_updated": "2025-11-10T17:58:57.779688",
   "components": [
     {
       "name": "a4988_stepper_driver",
@@ -1164,11 +1164,6 @@
       "git_repo": "p32-animatronic-bot"
     },
     {
-      "name": "gpio_debug_driver",
-      "path": "config\\components\\drivers\\gpio_debug_driver.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
       "name": "gpio_pair_driver",
       "path": "config\\components\\drivers\\gpio_pair_driver.json",
       "git_repo": "p32-animatronic-bot"
@@ -1391,11 +1386,6 @@
     {
       "name": "i2s_bus_i2s0",
       "path": "config\\components\\interfaces\\i2s_bus_i2s0.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
-      "name": "i2s_debug_driver",
-      "path": "config\\components\\drivers\\i2s_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {
@@ -1841,11 +1831,6 @@
     {
       "name": "sensors",
       "path": "config\\components\\hardware\\sensors.json",
-      "git_repo": "p32-animatronic-bot"
-    },
-    {
-      "name": "serial_debug_driver",
-      "path": "config\\components\\drivers\\serial_debug_driver.json",
       "git_repo": "p32-animatronic-bot"
     },
     {

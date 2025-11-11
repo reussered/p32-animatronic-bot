@@ -3,8 +3,7 @@
 // Works with any positioned component (left_eye, right_eye, mouth) that provides display_buffer
 
 #include "esp_log.h"
-#include "Mood.hpp"
-#include "core/memory/SharedMemory.hpp"
+#include "PixelType.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 
@@ -57,6 +56,11 @@ void goblin_eye_act(void)
     // Note: display_buffer is file-scoped static in the positioned component
     // This component must be linked after the positioned component in the build
     
+    // Check if buffer is available (set by positioned component)
+    if (display_buffer == nullptr || buffer_size == 0) {
+        return;
+    }
+    
     // Get current global mood from shared memory
     Mood* mood_ptr = GSM.read<Mood>();
     if (mood_ptr == nullptr) {
@@ -65,15 +69,13 @@ void goblin_eye_act(void)
     
     // Check if mood changed (optimization - only render when mood changes)
     if (lastMood != *mood_ptr || !mood_initialized) {
-        // Apply mood effects to display buffer using generic template
-        // The template internally uses Pixel_RGB565::fromBytes() to cast the buffer
+        // Calculate pixel count from buffer size (assumes RGB565 = 2 bytes per pixel)
+        const uint32_t pixel_count = buffer_size / bytes_per_pixel;
         
-        // Buffer size: 240x240 * 2 bytes per pixel = 115,200 bytes
-        const uint32_t DISPLAY_PIXELS = 240 * 240;
-        
+        // Apply mood effects to display buffer
         adjustMood<Pixel_RGB565>(
             display_buffer,        // unsigned char* from positioned component
-            DISPLAY_PIXELS,
+            pixel_count,
             *mood_ptr,
             goblin_mood_effects
         );
@@ -81,41 +83,7 @@ void goblin_eye_act(void)
         lastMood = *mood_ptr;
         mood_initialized = true;
         
-        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to goblin eye buffer");
-    }
-}
-    if (color_schema == nullptr)
-    {
-        return;  // Not configured yet
-    }
-    
-    if (strcmp(color_schema, "Pixel_RGB444") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB444>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB555") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB555>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB565") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB565>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB666") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB666>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB888") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB888>();
-    }
-    else if (strcmp(color_schema, "Pixel_Grayscale") == 0)
-    {
-        adjustBufferPersonality<Pixel_Grayscale>();
-    }
-    else
-    {
-        ESP_LOGW(TAG_goblin_eye, "Unknown color schema: %s", color_schema);
+        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to buffer (%u pixels)", pixel_count);
     }
 }
 

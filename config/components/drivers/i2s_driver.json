@@ -76,6 +76,9 @@
         "esp32_c3": "FULL_I2S0",
         "esp32": "FULL_I2S0_I2S1"
     },
+    "use_fields": {
+        "debug": false
+    },
     "prototype_status": "ready_for_implementation",
     "tested": false,
     "type": "GENERIC_DRIVER",

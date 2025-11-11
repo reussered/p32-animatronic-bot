@@ -15,7 +15,7 @@
 ### General Rules
 
 - **ASCII Characters Only**: All filenames and content must use standard ASCII characters (32-126).
-- **Case Sensitivity**: Class filenames must match class names exactly (case-sensitive).
+- **Case Sensitivity**: If there is only one class specification in the file, the filename must match the class name exactly (case-sensitive).
 - **Global Uniqueness**: Component names must be unique across the entire system.
 - **File Types**:
 

@@ -5,7 +5,8 @@
     "name": "goblin_mouth",
     "subsystem": "HEAD",
     "components": [
-        "ili9341"
+        "ili9341",
+        "speaker"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

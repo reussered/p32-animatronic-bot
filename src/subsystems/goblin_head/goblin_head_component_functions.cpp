@@ -10,6 +10,7 @@ static uint8_t chamber_count;
 static uint8_t chunk;
 static uint8_t chunk_count;
 static char* color_schema;
+static bool debug;
 static uint8_t display_height;
 static uint8_t display_width;
 static uint16_t resonance_frequency;
@@ -53,12 +54,16 @@ void gc9a01_act(void) {
 static const char *TAG_generic_spi_display = "generic_spi_display";
 
 esp_err_t generic_spi_display_init(void) {
+    debug = false;
+
     ESP_LOGI(TAG_generic_spi_display, "generic_spi_display init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
+    debug = false;
+
     // TODO: Add actual action code
     // ESP_LOGD(TAG_generic_spi_display, "generic_spi_display act");
 }
@@ -72,6 +77,7 @@ void generic_spi_display_act(void) {
 #include "esp_log.h"
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
+#include "config/shared_headers/PixelType.hpp"
 
 static const char *TAG_goblin_eye = "goblin_eye";
 
@@ -124,6 +130,11 @@ void goblin_eye_act(void)
     // Note: display_buffer is file-scoped static in the positioned component
     // This component must be linked after the positioned component in the build
     
+    // Check if buffer is available (set by positioned component)
+    if (display_buffer == nullptr || buffer_size == 0) {
+        return;
+    }
+    
     // Get current global mood from shared memory
     Mood* mood_ptr = GSM.read<Mood>();
     if (mood_ptr == nullptr) {
@@ -132,15 +143,13 @@ void goblin_eye_act(void)
     
     // Check if mood changed (optimization - only render when mood changes)
     if (lastMood != *mood_ptr || !mood_initialized) {
-        // Apply mood effects to display buffer using generic template
-        // The template internally uses Pixel_RGB565::fromBytes() to cast the buffer
+        // Calculate pixel count from buffer size (assumes RGB565 = 2 bytes per pixel)
+        const uint32_t pixel_count = buffer_size / bytes_per_pixel;
         
-        // Buffer size: 240x240 * 2 bytes per pixel = 115,200 bytes
-        const uint32_t DISPLAY_PIXELS = 240 * 240;
-        
+        // Apply mood effects to display buffer
         adjustMood<Pixel_RGB565>(
             display_buffer,        // unsigned char* from positioned component
-            DISPLAY_PIXELS,
+            pixel_count,
             *mood_ptr,
             goblin_mood_effects
         );
@@ -148,41 +157,7 @@ void goblin_eye_act(void)
         lastMood = *mood_ptr;
         mood_initialized = true;
         
-        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to goblin eye buffer");
-    }
-}
-    if (color_schema == nullptr)
-    {
-        return;  // Not configured yet
-    }
-    
-    if (strcmp(color_schema, "Pixel_RGB444") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB444>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB555") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB555>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB565") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB565>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB666") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB666>();
-    }
-    else if (strcmp(color_schema, "Pixel_RGB888") == 0)
-    {
-        adjustBufferPersonality<Pixel_RGB888>();
-    }
-    else if (strcmp(color_schema, "Pixel_Grayscale") == 0)
-    {
-        adjustBufferPersonality<Pixel_Grayscale>();
-    }
-    else
-    {
-        ESP_LOGW(TAG_goblin_eye, "Unknown color schema: %s", color_schema);
+        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to buffer (%u pixels)", pixel_count);
     }
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_eye.src ---
@@ -347,6 +322,7 @@ void goblin_left_eye_init(void)
     bytes_per_pixel = 2;
     color_schema = "RGB565";
     chunk = 10;
+    debug = true;
 
 }
 esp_err_t goblin_left_eye_act(void) {
@@ -355,6 +331,7 @@ esp_err_t goblin_left_eye_act(void) {
     bytes_per_pixel = 2;
     color_schema = "RGB565";
     chunk = 10;
+    debug = true;
 
     verify(display_height % chunk == 0);
 
@@ -903,6 +880,8 @@ static float generate_simulated_distance(void) {
  * @brief Initialize GPIO pair driver
  */
 esp_err_t gpio_pair_driver_init(void) {
+    debug = false;
+
     if (DEBUG_MODE) {
         ESP_LOGI(TAG_gpio_pair_driver, "GPIO pair driver init (DEBUG MODE)");
         ESP_LOGI(TAG_gpio_pair_driver, "Simulating HC-SR04 ultrasonic sensor timing");
@@ -918,6 +897,8 @@ esp_err_t gpio_pair_driver_init(void) {
  * @brief Execute GPIO pair driver action
  */
 void gpio_pair_driver_act(void) {
+    debug = false;
+
     // This driver is passive - actual work done on demand via measure functions
     ESP_LOGD(TAG_gpio_pair_driver, "GPIO pair driver act");
 }
@@ -1340,6 +1321,8 @@ static debug_audio_state_t audio_state = {
 };
 
 esp_err_t i2s_driver_init(void) {
+    debug = false;
+
     if (DEBUG_AUDIO_MODE) {
         ESP_LOGI(TAG_i2s_driver, "I2S driver init (DEBUG AUDIO MODE)");
         ESP_LOGI(TAG_i2s_driver, "Audio will be streamed to PC via serial");
@@ -1364,6 +1347,8 @@ esp_err_t i2s_driver_init(void) {
 }
 
 void i2s_driver_act(void) {
+    debug = false;
+
     if (!audio_state.initialized) return;
     
     uint64_t current_time_us = esp_timer_get_time();

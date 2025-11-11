@@ -59,6 +59,9 @@
         "esp32_c3": "LIMITED_6_CHANNELS",
         "esp32": "FULL"
     },
+    "use_fields": {
+        "debug": false
+    },
     "prototype_status": "ready_for_implementation",
     "tested": false,
     "type": "GENERIC_DRIVER",

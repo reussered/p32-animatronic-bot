@@ -90,6 +90,9 @@
         "init_function": "generic_spi_display_init",
         "act_function": "generic_spi_display_act"
     },
+    "use_fields": {
+        "debug": false
+    },
     "required_interface_functions": [
         "generic_display_get_buffer",
         "generic_display_get_frame_size",
@@ -97,5 +100,5 @@
         "generic_display_get_frame_height"
     ],
     "type": "DISPLAY_DRIVER",
-    "description": "Auto-generated component: generic_spi_display"
+    "description": "Auto-generated component: generic_spi_display - routes to PC window when debug=true, hardware when debug=false"
 }

@@ -74,6 +74,9 @@
         "esp32_c3": "FULL_22_PINS",
         "esp32": "FULL_34_PINS"
     },
+    "use_fields": {
+        "debug": false
+    },
     "prototype_status": "ready_for_implementation",
     "tested": false,
     "type": "GENERIC_DRIVER",
