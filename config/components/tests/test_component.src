@@ -2,60 +2,58 @@
 #include "p32_pin_manager.hpp"
 #include "esp_log.h"
 
-static const char* TAG = "test_component";
-
 esp_err_t test_component_init(void) {
-    ESP_LOGI(TAG, "Initializing test_component to verify dynamic pin allocation.");
+    ESP_LOGI("test_component", "Initializing test_component to verify dynamic pin allocation.");
 
     // Request ADC pins
-    ESP_LOGI(TAG, "Requesting 5 ADC pins...");
+    ESP_LOGI("test_component", "Requesting 5 ADC pins...");
     for (int i = 0; i < 5; ++i) {
         gpio_num_t pin = PinManager::get_pin(PIN_TYPE_ADC);
         if (pin != GPIO_NUM_NC) {
-            ESP_LOGI(TAG, "  -> ADC Pin %d allocated: %d", i + 1, pin);
+            ESP_LOGI("test_component", "  -> ADC Pin %d allocated: %d", i + 1, pin);
         } else {
-            ESP_LOGE(TAG, "  -> Failed to allocate ADC Pin %d", i + 1);
+            ESP_LOGE("test_component", "  -> Failed to allocate ADC Pin %d", i + 1);
             return ESP_FAIL;
         }
     }
 
     // Request PWM pins
-    ESP_LOGI(TAG, "Requesting 8 PWM pins...");
+    ESP_LOGI("test_component", "Requesting 8 PWM pins...");
     for (int i = 0; i < 8; ++i) {
         gpio_num_t pin = PinManager::get_pin(PIN_TYPE_PWM);
         if (pin != GPIO_NUM_NC) {
-            ESP_LOGI(TAG, "  -> PWM Pin %d allocated: %d", i + 1, pin);
+            ESP_LOGI("test_component", "  -> PWM Pin %d allocated: %d", i + 1, pin);
         } else {
-            ESP_LOGE(TAG, "  -> Failed to allocate PWM Pin %d", i + 1);
+            ESP_LOGE("test_component", "  -> Failed to allocate PWM Pin %d", i + 1);
             return ESP_FAIL;
         }
     }
 
     // Request SPI pins
-    ESP_LOGI(TAG, "Requesting 3 SPI pins...");
+    ESP_LOGI("test_component", "Requesting 3 SPI pins...");
     for (int i = 0; i < 3; ++i) {
         gpio_num_t pin = PinManager::get_pin(PIN_TYPE_SPI);
         if (pin != GPIO_NUM_NC) {
-            ESP_LOGI(TAG, "  -> SPI Pin %d allocated: %d", i + 1, pin);
+            ESP_LOGI("test_component", "  -> SPI Pin %d allocated: %d", i + 1, pin);
         } else {
-            ESP_LOGE(TAG, "  -> Failed to allocate SPI Pin %d", i + 1);
+            ESP_LOGE("test_component", "  -> Failed to allocate SPI Pin %d", i + 1);
             return ESP_FAIL;
         }
     }
 
     // Request I2C pins
-    ESP_LOGI(TAG, "Requesting 2 I2C pins...");
+    ESP_LOGI("test_component", "Requesting 2 I2C pins...");
     for (int i = 0; i < 2; ++i) {
         gpio_num_t pin = PinManager::get_pin(PIN_TYPE_I2C);
         if (pin != GPIO_NUM_NC) {
-            ESP_LOGI(TAG, "  -> I2C Pin %d allocated: %d", i + 1, pin);
+            ESP_LOGI("test_component", "  -> I2C Pin %d allocated: %d", i + 1, pin);
         } else {
             ESP_LOGE(TAG-> Failed to allocate I2C Pin %d", i + 1);
             return ESP_FAIL;
         }
     }
 
-    ESP_LOGI(TAG, "Pin allocation test completed successfully.");
+    ESP_LOGI("test_component", "Pin allocation test completed successfully.");
     return ESP_OK;
 }
 

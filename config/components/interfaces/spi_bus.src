@@ -27,8 +27,6 @@ extern spi_display_pinset_t cur_spi_display_pin;
 static size_t spi_device_count = 0;
 static size_t spi_active_device_index = 0;
 
-static const char *TAG_spi_bus = "spi_bus";
-
 // SPI bus pins assigned at runtime to honour the shared pin allocator
 static int spi_mosi_pin = -1;
 static int spi_miso_pin = -1;
@@ -51,7 +49,7 @@ static int claim_next_spi_pin(void) {
         }
         if (!already_claimed) {
             if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
-                ESP_LOGE(TAG_spi_bus, "Assigned pin buffer exhausted");
+                ESP_LOGE("spi_bus", "Assigned pin buffer exhausted");
                 return -1;
             }
             assigned_pins[assigned_pins_count++] = candidate;
@@ -64,30 +62,30 @@ static int claim_next_spi_pin(void) {
 esp_err_t spi_bus_init(void) {
     const size_t device_index = spi_device_count;
     if (device_index >= SPI_DEVICE_SLOT_COUNT) {
-        ESP_LOGE(TAG_spi_bus, "No remaining SPI device slots available for allocation");
+        ESP_LOGE("spi_bus", "No remaining SPI device slots available for allocation");
         return ESP_FAIL;
     }
 
     if (!spi_initialized) {
-        ESP_LOGI(TAG_spi_bus, "Assigning shared SPI pins for first device");
+        ESP_LOGI("spi_bus", "Assigning shared SPI pins for first device");
 
         spi_mosi_pin = claim_next_spi_pin();
         spi_miso_pin = claim_next_spi_pin();
         spi_clk_pin = claim_next_spi_pin();
 
         if (spi_mosi_pin < 0 || spi_miso_pin < 0 || spi_clk_pin < 0) {
-            ESP_LOGE(TAG_spi_bus, "Unable to assign shared SPI pins (MOSI:%d MISO:%d CLK:%d)",
+            ESP_LOGE("spi_bus", "Unable to assign shared SPI pins (MOSI:%d MISO:%d CLK:%d)",
                      spi_mosi_pin, spi_miso_pin, spi_clk_pin);
             return ESP_FAIL;
         }
 
         spi_reset_pin = claim_next_spi_pin();
         if (spi_reset_pin < 0) {
-            ESP_LOGE(TAG_spi_bus, "Unable to assign shared SPI reset pin");
+            ESP_LOGE("spi_bus", "Unable to assign shared SPI reset pin");
             return ESP_FAIL;
         }
 
-        ESP_LOGI(TAG_spi_bus, "Shared SPI pins assigned MOSI:%d MISO:%d CLK:%d RESET:%d",
+        ESP_LOGI("spi_bus", "Shared SPI pins assigned MOSI:%d MISO:%d CLK:%d RESET:%d",
                  spi_mosi_pin, spi_miso_pin, spi_clk_pin, spi_reset_pin);
 
         const spi_bus_config_t bus_cfg = {
@@ -101,14 +99,14 @@ esp_err_t spi_bus_init(void) {
 
         const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG_spi_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            ESP_LOGE("spi_bus", "spi_bus_initialize failed: %s", esp_err_to_name(ret));
             return ret;
         }
 
         spi_initialized = true;
-        ESP_LOGI(TAG_spi_bus, "SPI bus initialized successfully");
+        ESP_LOGI("spi_bus", "SPI bus initialized successfully");
     } else {
-        ESP_LOGI(TAG_spi_bus, "Reusing shared SPI pins MOSI:%d MISO:%d CLK:%d RESET:%d",
+        ESP_LOGI("spi_bus", "Reusing shared SPI pins MOSI:%d MISO:%d CLK:%d RESET:%d",
                  spi_mosi_pin, spi_miso_pin, spi_clk_pin, spi_reset_pin);
     }
 
@@ -116,7 +114,7 @@ esp_err_t spi_bus_init(void) {
     for (size_t i = 0; i < REQUIRED_UNIQUE_PINS; ++i) {
         unique_allocations[i] = claim_next_spi_pin();
         if (unique_allocations[i] < 0) {
-            ESP_LOGE(TAG_spi_bus, "Unable to assign unique SPI pin index %u for device %u",
+            ESP_LOGE("spi_bus", "Unable to assign unique SPI pin index %u for device %u",
                      (unsigned)i, (unsigned)device_index);
             return ESP_FAIL;
         }
@@ -131,7 +129,7 @@ esp_err_t spi_bus_init(void) {
 
     spi_device_count++;
 
-    ESP_LOGI(TAG_spi_bus,
+    ESP_LOGI("spi_bus",
              "Device %u assigned SPI pins MOSI:%d MISO:%d CLK:%d CS:%d DC:%d BL:%d",
              (unsigned)device_index,
              spi_device_pins[device_index].mosi,

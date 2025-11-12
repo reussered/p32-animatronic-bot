@@ -5,11 +5,7 @@
 #include "esp_heap_caps.h"
 #include "shared_headers/color_schema.hpp"
 
-// Forward declaration for generic display handler
-esp_err_t generic_spi_display_act(uint8_t* front_buffer, uint8_t* back_buffer, 
-                                 uint32_t size, struct EyePosition position);
-
-static const char* TAG = "goblin_left_eye";
+// Note: Display configuration and buffers declared in goblin_eye.src (processed first)
 
 // Eye position (left eye relative to skull center)
 struct EyePosition {
@@ -18,40 +14,40 @@ struct EyePosition {
     int16_t z;      // -35 = slightly back
 } left_eye_position = {-50, 30, -35};
 
-// Display buffers - front and back for ping-pong
-static uint8_t* front_buffer = NULL;
-static uint8_t* back_buffer = NULL;
-static uint32_t display_size = 0; 
-
-void goblin_left_eye_init(void)
+esp_err_t goblin_left_eye_init(void)
 {
+    // Start with a baseline row count (can be tuned based on available RAM)
+    current_row_count = 10;  // Initial: 10 rows at a time
+    return ESP_OK;
 }
-esp_err_t goblin_left_eye_act(void) {
-    verify(display_height % chunk == 0);
 
+void goblin_left_eye_act(void)
+{
     // Allocate buffers if not already done
-    if (!front_buffer || !back_buffer) {
-        display_size = display_width * (display_height/chunk) * bytes_per_pixel;
-        size_t buffer_size_in_pixels = display_width * display_height;
-        size_t buffer_size = buffer_size_in_pixels * bytes_per_pixel;
+    if (!front_buffer || !back_buffer)
+    {
+        // Calculate buffer size based on current row count
+        display_size = display_width * current_row_count * bytes_per_pixel;
         
-        ESP_LOGI(TAG, "Allocating display buffers for left eye (%u x %u, %u bytes each)",
-                 display_width, display_height, buffer_size);
-        
+        ESP_LOGI("goblin_left_eye", "Allocating display buffers for left eye (%u rows x %u width, %u bytes each)",
+                 current_row_count, display_width, display_size);
+            
         // Allocate front buffer (DMA-capable internal RAM)
-        front_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
-        if (!front_buffer) {
-            ESP_LOGE(TAG, "Failed to allocate %u bytes for front buffer", buffer_size);
-            return ESP_ERR_NO_MEM;
+        front_buffer = (uint8_t*)heap_caps_malloc(display_size, MALLOC_CAP_DMA);
+        if (!front_buffer)
+        {
+            ESP_LOGE("goblin_left_eye", "Failed to allocate %u bytes for front buffer", display_size);
+            return;
         }
         
         // Allocate back buffer (DMA-capable internal RAM)
-        back_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
-        if (!back_buffer) {
-            ESP_LOGE(TAG, "Failed to allocate %u bytes for back buffer", buffer_size);
+        back_buffer = (uint8_t*)heap_caps_malloc(display_size, MALLOC_CAP_DMA);
+        if (!back_buffer)
+        {
+            ESP_LOGE("goblin_left_eye", "Failed to allocate %u bytes for back buffer", display_size);
             free(front_buffer);
             front_buffer = NULL;
-            return ESP_ERR_NO_MEM;
+            return;
         }
         
         // Initialize both buffers with neutral color (dark green iris)
@@ -59,12 +55,13 @@ esp_err_t goblin_left_eye_act(void) {
         uint16_t* front_u16 = (uint16_t*)front_buffer;
         uint16_t* back_u16 = (uint16_t*)back_buffer;
         
+        size_t buffer_size_in_pixels = display_width * current_row_count;
         for (uint32_t i = 0; i < buffer_size_in_pixels; i++) {
             front_u16[i] = neutral;
             back_u16[i] = neutral;
         }
         
-        ESP_LOGI(TAG, "Display buffers allocated (position: %d,%d,%d mm)",
+        ESP_LOGI("goblin_left_eye", "Display buffers allocated (position: %d,%d,%d mm)",
                  left_eye_position.x, left_eye_position.y, left_eye_position.z);
     }
     
@@ -72,9 +69,8 @@ esp_err_t goblin_left_eye_act(void) {
     // TODO: Add mood-based eye rendering here
     // This is where goblin_eye rendering logic would go
     
-    // === PASS TO GENERIC SPI DISPLAY ===
-    // Fire and forget - generic_spi_display handles the DMA pipeline
-    return generic_spi_display_act(front_buffer, back_buffer, display_size, left_eye_position);
+    // Buffers are now allocated and available for the next component in the chain
+    // (Data flows via file-scoped static variables in the single compilation unit)
 }
 
 

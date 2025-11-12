@@ -648,8 +648,22 @@ def clean_src_content(src_content: str, component_name: str) -> str:
 def render_component_source(context: SubsystemContext) -> str:
     lines: List[str] = [
         f'#include "subsystems/{context.name}/{context.name}_component_functions.hpp"',
+        '#include "core/memory/SharedMemory.hpp"',
+        '#include "with.hpp"',
+        '#include "config/shared_headers/PixelType.hpp"',
+        '#include "shared/MicrophoneData.hpp"',
+        '#include "esp_random.h"',
         "",
         "// Auto-generated component aggregation file",
+        "",
+        "// Subsystem-scoped static variables (shared across all components in this file)",
+        "static uint32_t display_width = 240;",
+        "static uint32_t display_height = 240;",
+        "static uint32_t bytes_per_pixel = 2;  // RGB565",
+        "static uint8_t* front_buffer = NULL;",
+        "static uint8_t* back_buffer = NULL;",
+        "static uint32_t display_size = 0;",
+        "static int current_row_count = 10;",
         "",
     ]
 
@@ -657,11 +671,6 @@ def render_component_source(context: SubsystemContext) -> str:
     interface_includes = collect_interface_includes(context)
     for include in sorted(interface_includes):
         lines.insert(1, f'#include "{include}"')
-
-    # Generate static variable declarations for ALL use_fields (uninitialized)
-    use_field_declarations = generate_use_field_declarations(context)
-    if use_field_declarations:
-        lines.extend(use_field_declarations)
 
     # Process each component exactly once - inject assignments for components that use use_fields
     included_srcs: Set[Path] = set()
@@ -676,15 +685,9 @@ def render_component_source(context: SubsystemContext) -> str:
             # Clean the src content to remove incorrect self-includes
             src_to_add = clean_src_content(definition.src_content, definition.name)
             
-            # Inject use_field assignments into this component's init() and act() functions
-            assignments = generate_use_field_assignments(definition.name, definition.data, context)
-            if assignments:
-                src_to_add = inject_inherited_fields_into_src(
-                    src_to_add, 
-                    assignments, 
-                    definition.init_func, 
-                    definition.act_func
-                )
+            # NOTE: use_field assignments are now handled in .src files directly
+            # Components that need use_fields values should declare static variables
+            # at file scope and assign them in their init() functions as needed
             
             try:
                 rel = definition.src_path.relative_to(PROJECT_ROOT)

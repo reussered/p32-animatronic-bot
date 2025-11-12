@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize i2s_driver component
  * @return ESP_OK on success, error code otherwise
@@ -32,9 +28,5 @@ void i2s_driver_play_sound(const char* sound_name, float frequency, float volume
  * @brief Stop audio playback
  */
 void i2s_driver_stop_sound(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // I2S_DRIVER_HDR

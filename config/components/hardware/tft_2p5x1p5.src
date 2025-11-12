@@ -4,20 +4,18 @@
 #include "esp_log.h"
 #include "tft_2p5x1p5.hdr"
 
-static const char *TAG_tft_2p5x1p5 = "tft_2p5x1p5";
-
 // Define the initial pixel value (default black)
 TFT_2P5X1P5_Pixel TFT_2P5X1P5_InitialPixel = {0, 0, 0};
 
 esp_err_t tft_2p5x1p5_init(void) {
-    ESP_LOGI(TAG_tft_2p5x1p5, "tft_2p5x1p5 init - STUB IMPLEMENTATION");
+    ESP_LOGI("tft_2p5x1p5", "tft_2p5x1p5 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void tft_2p5x1p5_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_tft_2p5x1p5, "tft_2p5x1p5 act");
+    // ESP_LOGD("tft_2p5x1p5", "tft_2p5x1p5 act");
 }
 
 size_t tft_2p5x1p5_get_width(void) {

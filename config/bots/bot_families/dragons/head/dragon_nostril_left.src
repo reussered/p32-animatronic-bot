@@ -2,12 +2,10 @@
 #include "components/dragon_nostril_left.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "dragon_nostril_left";
-
 esp_err_t dragon_nostril_left_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("dragon_nostril_left", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t dragon_nostril_left_init(void)
 void dragon_nostril_left_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("dragon_nostril_left", "act executed");
     #endif
 }

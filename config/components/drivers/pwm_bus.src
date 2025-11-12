@@ -2,17 +2,15 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_pwm_bus = "pwm_bus";
-
 esp_err_t pwm_bus_init(void) {
-    ESP_LOGI(TAG_pwm_bus, "pwm_bus init - STUB IMPLEMENTATION");
+    ESP_LOGI("pwm_bus", "pwm_bus init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void pwm_bus_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_pwm_bus, "pwm_bus act");
+    // ESP_LOGD("pwm_bus", "pwm_bus act");
 }
 
 

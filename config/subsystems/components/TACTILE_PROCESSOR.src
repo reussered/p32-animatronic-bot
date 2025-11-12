@@ -3,15 +3,13 @@
 #include "TACTILE_PROCESSOR.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "TACTILE_PROCESSOR";
-
 esp_err_t TACTILE_PROCESSOR_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("tactile_processor", "init executed");
     return ESP_OK;
 }
 
 void TACTILE_PROCESSOR_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("tactile_processor", "act executed");
 }

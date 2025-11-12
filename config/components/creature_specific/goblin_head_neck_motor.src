@@ -1,18 +1,42 @@
 #include "goblin_head_neck_motor.hdr"
 #include "esp_log.h"
 
-static const char* TAG = "goblin_neck";
+// Stub implementations for missing neck_motor_3dof functions
+// TODO: These should come from hardware/motors/neck_motor_3dof component
+esp_err_t neck_motor_3dof_init(void) {
+    ESP_LOGW("neck_motor_3dof", "Stub init - no hardware");
+    return ESP_OK;
+}
+
+void neck_motor_3dof_act(void) {
+    // No-op
+}
+
+esp_err_t neck_set_pan(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub pan: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
+
+esp_err_t neck_set_tilt(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub tilt: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
+
+esp_err_t neck_set_roll(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub roll: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
 
 // Initialize the goblin head neck motor controller
 esp_err_t goblin_head_neck_motor_init(void)
 {
-    ESP_LOGI(TAG, "Initializing goblin head neck motor controller");
+    ESP_LOGI("goblin_head_neck_motor", "Initializing goblin head neck motor controller");
     
     // Initialize the underlying hardware
     esp_err_t ret = neck_motor_3dof_init();
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_head_neck_motor", "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -20,11 +44,11 @@ esp_err_t goblin_head_neck_motor_init(void)
     ret = goblin_head_neck_motor_center();
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_head_neck_motor", "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG, "Goblin head neck motor controller initialized successfully");
+    ESP_LOGI("goblin_head_neck_motor", "Goblin head neck motor controller initialized successfully");
     return ESP_OK;
 }
 
@@ -41,37 +65,43 @@ esp_err_t goblin_head_neck_motor_set_pose(float pan_degrees, float tilt_degrees,
     // Validate ranges for goblin-specific limits
     if (pan_degrees < -60.0f || pan_degrees > 60.0f)
     {
-        ESP_LOGW(TAG, "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
         pan_degrees = (pan_degrees < -60.0f) ? -60.0f : 60.0f;
     }
     
     if (tilt_degrees < -30.0f || tilt_degrees > 45.0f)
     {
-        ESP_LOGW(TAG, "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
         tilt_degrees = (tilt_degrees < -30.0f) ? -30.0f : 45.0f;
     }
     
     if (roll_degrees < -15.0f || roll_degrees > 15.0f)
     {
-        ESP_LOGW(TAG, "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
         roll_degrees = (roll_degrees < -15.0f) ? -15.0f : 15.0f;
     }
     
-    // Call hardware layer with validated parameters
-    return neck_motor_3dof_set_position(pan_degrees, tilt_degrees, roll_degrees);
+    // Call hardware layer with validated parameters (convert degrees to steps)
+    esp_err_t err;
+    err = neck_set_pan((int32_t)(pan_degrees * 106.67f), 1000);
+    if (err != ESP_OK) return err;
+    err = neck_set_tilt((int32_t)(tilt_degrees * 106.67f), 1000);
+    if (err != ESP_OK) return err;
+    err = neck_set_roll((int32_t)(roll_degrees * 106.67f), 1000);
+    return err;
 }
 
 // Center neck to neutral position
 esp_err_t goblin_head_neck_motor_center(void)
 {
-    ESP_LOGI(TAG, "Centering neck to neutral position");
+    ESP_LOGI("goblin_head_neck_motor", "Centering neck to neutral position");
     return goblin_head_neck_motor_set_pose(0.0f, 0.0f, 0.0f);
 }
 
 // Perform a nodding motion
 esp_err_t goblin_head_neck_motor_nod(void)
 {
-    ESP_LOGI(TAG, "Performing nod gesture");
+    ESP_LOGI("goblin_head_neck_motor", "Performing nod gesture");
     
     esp_err_t ret = goblin_head_neck_motor_set_pose(0.0f, 15.0f, 0.0f);
     if (ret != ESP_OK) return ret;
@@ -89,7 +119,7 @@ esp_err_t goblin_head_neck_motor_nod(void)
 // Perform a head shake motion
 esp_err_t goblin_head_neck_motor_shake(void)
 {
-    ESP_LOGI(TAG, "Performing shake gesture");
+    ESP_LOGI("goblin_head_neck_motor", "Performing shake gesture");
     
     esp_err_t ret = goblin_head_neck_motor_set_pose(-30.0f, 0.0f, 0.0f);
     if (ret != ESP_OK) return ret;

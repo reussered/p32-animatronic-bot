@@ -3,18 +3,16 @@
 
 #include "esp_log.h"
 
-static const char* TAG = "goblin_right_eye";
-
 // Shared display buffer - allocated here, used by goblin_eye, freed by generic_spi_display
 // Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
-static unsigned char* display_buffer = nullptr;
-static const uint32_t DISPLAY_WIDTH = 240;
-static const uint32_t DISPLAY_HEIGHT = 240;
-static const uint32_t DISPLAY_PIXELS = DISPLAY_WIDTH * DISPLAY_HEIGHT;
-static const uint32_t DISPLAY_BYTES_RGB565 = DISPLAY_PIXELS * 2;  // RGB565 = 2 bytes/pixel
+static unsigned char* right_display_buffer = nullptr;
+static const uint32_t RIGHT_DISPLAY_WIDTH = 240;
+static const uint32_t RIGHT_DISPLAY_HEIGHT = 240;
+static const uint32_t RIGHT_DISPLAY_PIXELS = RIGHT_DISPLAY_WIDTH * RIGHT_DISPLAY_HEIGHT;
+static const uint32_t RIGHT_DISPLAY_BYTES_RGB565 = RIGHT_DISPLAY_PIXELS * 2;  // RGB565 = 2 bytes/pixel
 
 // Eye position (right eye relative to skull center)
-struct EyePosition {
+struct RightEyePosition {
     int16_t x;      // +50 = right of center
     int16_t y;      // +30 = above center
     int16_t z;      // -35 = slightly back
@@ -22,25 +20,25 @@ struct EyePosition {
 
 esp_err_t goblin_right_eye_init(void)
 {
-    ESP_LOGI(TAG, "Allocating display buffer for right eye (%u bytes)", DISPLAY_BYTES_RGB565);
+    ESP_LOGI("goblin_right_eye", "Allocating display buffer for right eye (%u bytes)", RIGHT_DISPLAY_BYTES_RGB565);
     
     // Allocate shared buffer as unsigned char*
     // goblin_eye will cast to PixelType* (Pixel_RGB565*) based on color_schema
-    display_buffer = (unsigned char*)malloc(DISPLAY_BYTES_RGB565);
-    if (!display_buffer) {
-        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", DISPLAY_BYTES_RGB565);
+    right_display_buffer = (unsigned char*)malloc(RIGHT_DISPLAY_BYTES_RGB565);
+    if (!right_display_buffer) {
+        ESP_LOGE("goblin_right_eye", "Failed to allocate %u bytes for display buffer", RIGHT_DISPLAY_BYTES_RGB565);
         return ESP_ERR_NO_MEM;
     }
     
     // Initialize buffer with neutral color (green iris)
     // As uint16_t: 0x0400 = RGB565 (0, 8, 0) = dark green
     uint16_t neutral = 0x0400;
-    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
-    for (uint32_t i = 0; i < DISPLAY_PIXELS; i++) {
+    uint16_t* buffer_u16 = (uint16_t*)right_display_buffer;
+    for (uint32_t i = 0; i < RIGHT_DISPLAY_PIXELS; i++) {
         buffer_u16[i] = neutral;
     }
     
-    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
+    ESP_LOGI("goblin_right_eye", "Display buffer allocated (position: %d,%d,%d mm)",
              right_eye_position.x, right_eye_position.y, right_eye_position.z);
     
     return ESP_OK;

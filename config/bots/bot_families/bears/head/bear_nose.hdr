@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize bear_nose component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t bear_nose_init(void);
  * Called periodically by subsystem dispatcher
  */
 void bear_nose_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // BEAR_NOSE_HDR

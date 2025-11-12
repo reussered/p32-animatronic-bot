@@ -4,20 +4,18 @@
 #include "esp_log.h"
 #include "ssd1963.hdr"
 
-static const char *TAG_ssd1963_tft_800x600 = "ssd1963_tft_800x600";
-
 // Define the initial pixel value (default black)
 SSD1963_Pixel SSD1963_InitialPixel = {0, 0, 0, 0};
 
 esp_err_t ssd1963_init(void) {
-    ESP_LOGI(TAG_ssd1963_tft_800x600, "ssd1963 init - STUB IMPLEMENTATION");
+    ESP_LOGI("ssd1963_tft_800x600", "ssd1963 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void ssd1963_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_ssd1963_tft_800x600, "ssd1963 act");
+    // ESP_LOGD("ssd1963_tft_800x600", "ssd1963 act");
 }
 
 

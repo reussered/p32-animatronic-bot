@@ -3,24 +3,16 @@
 // Actual display I/O handled by lower-level driver (generic_spi_display)
 
 #include "esp_log.h"
-#include "config/components/hardware/gc9a01.hdr"
 
-static const char *TAG_gc9a01 = "gc9a01";
-
-esp_err_t gc9a01_init(void) {
-    ESP_LOGI(TAG_gc9a01, "gc9a01 init - %ux%u, %s, chunk_count=%s",
-             display_width, display_height, color_schema, chunk_count);
+esp_err_t gc9a01_init(void)
+{
+    ESP_LOGI("gc9a01", "gc9a01 display initialized");
     return ESP_OK;
 }
 
-void gc9a01_act(void) {
+void gc9a01_act(void)
+{
     // No-op: display I/O handled by lower layers
-}
-    return ESP_OK;
-}
-
-void gc9a01_act(void) {
-    // This component is passive and does nothing in its act function.
 }
 
 

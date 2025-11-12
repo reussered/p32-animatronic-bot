@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize steampunk_eye_right component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t steampunk_eye_right_init(void);
  * Called periodically by subsystem dispatcher
  */
 void steampunk_eye_right_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // STEAMPUNK_EYE_RIGHT_HDR

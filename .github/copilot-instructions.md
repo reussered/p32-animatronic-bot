@@ -36,6 +36,15 @@ Select-String -Path upload.log -Pattern "error|success|Writing"
 esp_err_t goblin_eye_init(void);
 void goblin_eye_act(void);
 ```
+- **CRITICAL: .src/.hdr aggregation model**: `.hdr` and `.src` files have a DIFFERENT relationship than traditional `.hpp`/`.cpp` files:
+  - ALL `.hdr` files aggregate into ONE subsystem `.hpp` file
+  - ALL `.src` files aggregate into ONE subsystem `.cpp` file
+  - The aggregated `.hpp` is `#include`d ONCE at the top of the aggregated `.cpp`
+  - **NEVER `#include` a `.hdr` file from a `.src` file** - it makes no sense; the `.hdr` content is already in the generated `.hpp` that wraps the entire `.cpp`
+  - `.hdr` files should contain ONLY declarations (function prototypes, struct definitions)
+  - `.hdr` files must NOT contain `extern "C"` blocks (all code is C++ in the generated files)
+  - **NEVER use `extern` declarations in `.src` files** - all `.src` files aggregate into the same compilation unit, so declare variables once at file scope using `static` at the top of the first `.src` file that needs them
+  - **NEVER call functions from `.src` files in other subsystems** - inter-subsystem communication happens ONLY via GSM (Global Shared Memory)
 
 ## Patterns & data flow
 - Component timing uses `timing.hitCount`; lower numbers execute more frequently (for example eyes at 1, mood components at 10+).

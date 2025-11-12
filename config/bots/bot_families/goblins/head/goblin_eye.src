@@ -3,9 +3,11 @@
 // Works with any positioned component (left_eye, right_eye, mouth) that provides display_buffer
 
 #include "esp_log.h"
-#include "PixelType.hpp"
+#include "shared_headers/color_schema.hpp"
+#include "shared/mood.hpp"
+#include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_goblin_eye = "goblin_eye";
+// Note: Display configuration and buffers declared at top of generated file (subsystem scope)
 
 // Goblin emotion intensity multiplier - goblins show emotions STRONGLY (1.5x)
 // Compare to bears which might use 0.5x (stoic) or cats which use 0.8x (aloof)
@@ -39,25 +41,24 @@ static const MoodColorEffect goblin_mood_effects[Mood::componentCount] = {
 
 esp_err_t goblin_eye_init(void) 
 {
-    ESP_LOGI(TAG_goblin_eye, "Initializing goblin eye mood processing");
+    ESP_LOGI("goblin_eye", "Initializing goblin eye mood processing");
     
     // Clear mood tracking
     lastMood.clear();
     mood_initialized = false;
     
-    ESP_LOGI(TAG_goblin_eye, "Goblin eye initialized (emotion intensity: %.1fx)", 
+    ESP_LOGI("goblin_eye", "Goblin eye initialized (emotion intensity: %.1fx)", 
              GOBLIN_EMOTION_INTENSITY);
     return ESP_OK;
 }
 
 void goblin_eye_act(void)
 {
-    // Get display buffer from the positioned component (left_eye, right_eye, or mouth)
-    // Note: display_buffer is file-scoped static in the positioned component
-    // This component must be linked after the positioned component in the build
+    // Apply mood effects to front_buffer (allocated by goblin_left_eye)
+    // Note: Variables are file-scoped static shared across this subsystem
     
-    // Check if buffer is available (set by positioned component)
-    if (display_buffer == nullptr || buffer_size == 0) {
+    // Check if buffer is available
+    if (front_buffer == NULL || display_size == 0) {
         return;
     }
     
@@ -69,12 +70,12 @@ void goblin_eye_act(void)
     
     // Check if mood changed (optimization - only render when mood changes)
     if (lastMood != *mood_ptr || !mood_initialized) {
-        // Calculate pixel count from buffer size (assumes RGB565 = 2 bytes per pixel)
-        const uint32_t pixel_count = buffer_size / bytes_per_pixel;
+        // Calculate pixel count from buffer size
+        const uint32_t pixel_count = display_size / bytes_per_pixel;
         
         // Apply mood effects to display buffer
         adjustMood<Pixel_RGB565>(
-            display_buffer,        // unsigned char* from positioned component
+            front_buffer,
             pixel_count,
             *mood_ptr,
             goblin_mood_effects
@@ -83,7 +84,7 @@ void goblin_eye_act(void)
         lastMood = *mood_ptr;
         mood_initialized = true;
         
-        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to buffer (%u pixels)", pixel_count);
+        ESP_LOGD("goblin_eye", "Applied mood effects to buffer (%u pixels)", pixel_count);
     }
 }
 

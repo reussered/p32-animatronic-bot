@@ -2,12 +2,10 @@
 #include "components/goblin_shadow_sensors.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "goblin_shadow_sensors";
-
 esp_err_t goblin_shadow_sensors_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("goblin_shadow_sensors", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t goblin_shadow_sensors_init(void)
 void goblin_shadow_sensors_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("goblin_shadow_sensors", "act executed");
     #endif
 }

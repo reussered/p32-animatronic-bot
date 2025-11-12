@@ -2,12 +2,10 @@
 #include "components/goblin_mystical_glow.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "goblin_mystical_glow";
-
 esp_err_t goblin_mystical_glow_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("goblin_mystical_glow", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t goblin_mystical_glow_init(void)
 void goblin_mystical_glow_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("goblin_mystical_glow", "act executed");
     #endif
 }

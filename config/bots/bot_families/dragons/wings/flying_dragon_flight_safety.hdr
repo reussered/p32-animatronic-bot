@@ -7,10 +7,6 @@
 
 #include <esp_err.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * Initialize flight safety subsystem
  */
@@ -20,9 +16,5 @@ esp_err_t flying_dragon_flight_safety_init(void);
  * Main control loop - monitor safety conditions
  */
 void flying_dragon_flight_safety_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  // FLYING_DRAGON_FLIGHT_SAFETY_H

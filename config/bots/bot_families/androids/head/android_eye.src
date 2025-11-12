@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_android_eye = "android_eye";
-
 // Android personality: human-like, balanced emotional responses
 static constexpr float ANDROID_EMOTION_INTENSITY = 1.0f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t android_eye_init(void)
 {
-    ESP_LOGI(TAG_android_eye, "Initializing android eye with human-like emotion intensity %.2f", ANDROID_EMOTION_INTENSITY);
+    ESP_LOGI("android_eye", "Initializing android eye with human-like emotion intensity %.2f", ANDROID_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_android_eye, "Failed to get frame buffer");
+        ESP_LOGE("android_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t android_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_android_eye, "Android eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("android_eye", "Android eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 

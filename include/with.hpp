@@ -177,4 +177,8 @@ struct MoodColorEffect {
 // Global mood color effects (defined in implementation)
 extern const MoodColorEffect moodColorEffects[Mood::componentCount];
 
+// SharedMemory type ID (required for GSM.read<Mood>() / GSM.write<Mood>())
+#include "core/memory/SharedMemory.hpp"
+template<> inline shared_type_id_t getTypeId<Mood>() { return 1; }
+
 #endif // MOOD_HPP

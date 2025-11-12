@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_pixie_eye = "pixie_eye";
-
 // Pixie personality: extremely expressive, magical, flighty
 static constexpr float PIXIE_EMOTION_INTENSITY = 2.0f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t pixie_eye_init(void)
 {
-    ESP_LOGI(TAG_pixie_eye, "Initializing pixie eye with magical emotion intensity %.2f", PIXIE_EMOTION_INTENSITY);
+    ESP_LOGI("pixie_eye", "Initializing pixie eye with magical emotion intensity %.2f", PIXIE_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_pixie_eye, "Failed to get frame buffer");
+        ESP_LOGE("pixie_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t pixie_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_pixie_eye, "Pixie eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("pixie_eye", "Pixie eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 

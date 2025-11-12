@@ -1,19 +1,21 @@
 #include "subsystems/goblin_head/goblin_head_component_functions.hpp"
 #include "components/interfaces/spi_display_bus.hdr"
+#include "core/memory/SharedMemory.hpp"
+#include "with.hpp"
+#include "config/shared_headers/PixelType.hpp"
+#include "shared/MicrophoneData.hpp"
+#include "esp_random.h"
 
 // Auto-generated component aggregation file
 
-// Static variables for use_fields (uninitialized - set by components)
-static float amplification_factor;
-static uint8_t bytes_per_pixel;
-static uint8_t chamber_count;
-static uint8_t chunk;
-static uint8_t chunk_count;
-static char* color_schema;
-static bool debug;
-static uint8_t display_height;
-static uint8_t display_width;
-static uint16_t resonance_frequency;
+// Subsystem-scoped static variables (shared across all components in this file)
+static uint32_t display_width = 240;
+static uint32_t display_height = 240;
+static uint32_t bytes_per_pixel = 2;  // RGB565
+static uint8_t* front_buffer = NULL;
+static uint8_t* back_buffer = NULL;
+static uint32_t display_size = 0;
+static int current_row_count = 10;
 
 // --- Begin: config\components\hardware\gc9a01.src ---
 // gc9a01 component implementation
@@ -21,53 +23,35 @@ static uint16_t resonance_frequency;
 // Actual display I/O handled by lower-level driver (generic_spi_display)
 
 #include "esp_log.h"
-// Removed: #include "config/components/hardware/gc9a01.hdr" - .hdr content aggregated into .hpp
 
-static const char *TAG_gc9a01 = "gc9a01";
-
-esp_err_t gc9a01_init(void) {
-    chunk_count = 1;
-
-    ESP_LOGI(TAG_gc9a01, "gc9a01 init - %ux%u, %s, chunk_count=%s",
-             display_width, display_height, color_schema, chunk_count);
+esp_err_t gc9a01_init(void)
+{
+    ESP_LOGI("gc9a01", "gc9a01 display initialized");
     return ESP_OK;
 }
 
-void gc9a01_act(void) {
-    chunk_count = 1;
-
+void gc9a01_act(void)
+{
     // No-op: display I/O handled by lower layers
-}
-    return ESP_OK;
-}
-
-void gc9a01_act(void) {
-    // This component is passive and does nothing in its act function.
 }
 // --- End: config\components\hardware\gc9a01.src ---
 
-// --- Begin: config\components\hardware\generic_spi_display.src ---
+// --- Begin: config\components\drivers\generic_spi_display.src ---
 // generic_spi_display component implementation
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_generic_spi_display = "generic_spi_display";
-
 esp_err_t generic_spi_display_init(void) {
-    debug = false;
-
-    ESP_LOGI(TAG_generic_spi_display, "generic_spi_display init - STUB IMPLEMENTATION");
+    ESP_LOGI("generic_spi_display", "generic_spi_display init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    debug = false;
-
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_generic_spi_display, "generic_spi_display act");
+    // ESP_LOGD("generic_spi_display", "generic_spi_display act");
 }
-// --- End: config\components\hardware\generic_spi_display.src ---
+// --- End: config\components\drivers\generic_spi_display.src ---
 
 // --- Begin: config\bots\bot_families\goblins\head\goblin_eye.src ---
 // goblin_eye component implementation
@@ -75,11 +59,11 @@ void generic_spi_display_act(void) {
 // Works with any positioned component (left_eye, right_eye, mouth) that provides display_buffer
 
 #include "esp_log.h"
-#include "Mood.hpp"
+#include "shared_headers/color_schema.hpp"
+#include "shared/mood.hpp"
 #include "core/memory/SharedMemory.hpp"
-#include "config/shared_headers/PixelType.hpp"
 
-static const char *TAG_goblin_eye = "goblin_eye";
+// Note: Display configuration and buffers declared at top of generated file (subsystem scope)
 
 // Goblin emotion intensity multiplier - goblins show emotions STRONGLY (1.5x)
 // Compare to bears which might use 0.5x (stoic) or cats which use 0.8x (aloof)
@@ -113,25 +97,24 @@ static const MoodColorEffect goblin_mood_effects[Mood::componentCount] = {
 
 esp_err_t goblin_eye_init(void) 
 {
-    ESP_LOGI(TAG_goblin_eye, "Initializing goblin eye mood processing");
+    ESP_LOGI("goblin_eye", "Initializing goblin eye mood processing");
     
     // Clear mood tracking
     lastMood.clear();
     mood_initialized = false;
     
-    ESP_LOGI(TAG_goblin_eye, "Goblin eye initialized (emotion intensity: %.1fx)", 
+    ESP_LOGI("goblin_eye", "Goblin eye initialized (emotion intensity: %.1fx)", 
              GOBLIN_EMOTION_INTENSITY);
     return ESP_OK;
 }
 
 void goblin_eye_act(void)
 {
-    // Get display buffer from the positioned component (left_eye, right_eye, or mouth)
-    // Note: display_buffer is file-scoped static in the positioned component
-    // This component must be linked after the positioned component in the build
+    // Apply mood effects to front_buffer (allocated by goblin_left_eye)
+    // Note: Variables are file-scoped static shared across this subsystem
     
-    // Check if buffer is available (set by positioned component)
-    if (display_buffer == nullptr || buffer_size == 0) {
+    // Check if buffer is available
+    if (front_buffer == NULL || display_size == 0) {
         return;
     }
     
@@ -143,12 +126,12 @@ void goblin_eye_act(void)
     
     // Check if mood changed (optimization - only render when mood changes)
     if (lastMood != *mood_ptr || !mood_initialized) {
-        // Calculate pixel count from buffer size (assumes RGB565 = 2 bytes per pixel)
-        const uint32_t pixel_count = buffer_size / bytes_per_pixel;
+        // Calculate pixel count from buffer size
+        const uint32_t pixel_count = display_size / bytes_per_pixel;
         
         // Apply mood effects to display buffer
         adjustMood<Pixel_RGB565>(
-            display_buffer,        // unsigned char* from positioned component
+            front_buffer,
             pixel_count,
             *mood_ptr,
             goblin_mood_effects
@@ -157,7 +140,7 @@ void goblin_eye_act(void)
         lastMood = *mood_ptr;
         mood_initialized = true;
         
-        ESP_LOGD(TAG_goblin_eye, "Applied mood effects to buffer (%u pixels)", pixel_count);
+        ESP_LOGD("goblin_eye", "Applied mood effects to buffer (%u pixels)", pixel_count);
     }
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_eye.src ---
@@ -166,18 +149,42 @@ void goblin_eye_act(void)
 // Removed: #include "goblin_head_neck_motor.hdr" - .hdr content aggregated into .hpp
 #include "esp_log.h"
 
-static const char* TAG = "goblin_neck";
+// Stub implementations for missing neck_motor_3dof functions
+// TODO: These should come from hardware/motors/neck_motor_3dof component
+esp_err_t neck_motor_3dof_init(void) {
+    ESP_LOGW("neck_motor_3dof", "Stub init - no hardware");
+    return ESP_OK;
+}
+
+void neck_motor_3dof_act(void) {
+    // No-op
+}
+
+esp_err_t neck_set_pan(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub pan: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
+
+esp_err_t neck_set_tilt(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub tilt: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
+
+esp_err_t neck_set_roll(int32_t position, uint32_t speed) {
+    ESP_LOGD("neck_motor_3dof", "Stub roll: %ld @ %lu", position, speed);
+    return ESP_OK;
+}
 
 // Initialize the goblin head neck motor controller
 esp_err_t goblin_head_neck_motor_init(void)
 {
-    ESP_LOGI(TAG, "Initializing goblin head neck motor controller");
+    ESP_LOGI("goblin_head_neck_motor", "Initializing goblin head neck motor controller");
     
     // Initialize the underlying hardware
     esp_err_t ret = neck_motor_3dof_init();
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_head_neck_motor", "Failed to initialize neck motor 3DOF hardware: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -185,11 +192,11 @@ esp_err_t goblin_head_neck_motor_init(void)
     ret = goblin_head_neck_motor_center();
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_head_neck_motor", "Failed to center neck to neutral position: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG, "Goblin head neck motor controller initialized successfully");
+    ESP_LOGI("goblin_head_neck_motor", "Goblin head neck motor controller initialized successfully");
     return ESP_OK;
 }
 
@@ -206,37 +213,43 @@ esp_err_t goblin_head_neck_motor_set_pose(float pan_degrees, float tilt_degrees,
     // Validate ranges for goblin-specific limits
     if (pan_degrees < -60.0f || pan_degrees > 60.0f)
     {
-        ESP_LOGW(TAG, "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Pan angle %.1f out of range [-60, 60], clamping", pan_degrees);
         pan_degrees = (pan_degrees < -60.0f) ? -60.0f : 60.0f;
     }
     
     if (tilt_degrees < -30.0f || tilt_degrees > 45.0f)
     {
-        ESP_LOGW(TAG, "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Tilt angle %.1f out of range [-30, 45], clamping", tilt_degrees);
         tilt_degrees = (tilt_degrees < -30.0f) ? -30.0f : 45.0f;
     }
     
     if (roll_degrees < -15.0f || roll_degrees > 15.0f)
     {
-        ESP_LOGW(TAG, "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
+        ESP_LOGW("goblin_head_neck_motor", "Roll angle %.1f out of range [-15, 15], clamping", roll_degrees);
         roll_degrees = (roll_degrees < -15.0f) ? -15.0f : 15.0f;
     }
     
-    // Call hardware layer with validated parameters
-    return neck_motor_3dof_set_position(pan_degrees, tilt_degrees, roll_degrees);
+    // Call hardware layer with validated parameters (convert degrees to steps)
+    esp_err_t err;
+    err = neck_set_pan((int32_t)(pan_degrees * 106.67f), 1000);
+    if (err != ESP_OK) return err;
+    err = neck_set_tilt((int32_t)(tilt_degrees * 106.67f), 1000);
+    if (err != ESP_OK) return err;
+    err = neck_set_roll((int32_t)(roll_degrees * 106.67f), 1000);
+    return err;
 }
 
 // Center neck to neutral position
 esp_err_t goblin_head_neck_motor_center(void)
 {
-    ESP_LOGI(TAG, "Centering neck to neutral position");
+    ESP_LOGI("goblin_head_neck_motor", "Centering neck to neutral position");
     return goblin_head_neck_motor_set_pose(0.0f, 0.0f, 0.0f);
 }
 
 // Perform a nodding motion
 esp_err_t goblin_head_neck_motor_nod(void)
 {
-    ESP_LOGI(TAG, "Performing nod gesture");
+    ESP_LOGI("goblin_head_neck_motor", "Performing nod gesture");
     
     esp_err_t ret = goblin_head_neck_motor_set_pose(0.0f, 15.0f, 0.0f);
     if (ret != ESP_OK) return ret;
@@ -254,7 +267,7 @@ esp_err_t goblin_head_neck_motor_nod(void)
 // Perform a head shake motion
 esp_err_t goblin_head_neck_motor_shake(void)
 {
-    ESP_LOGI(TAG, "Performing shake gesture");
+    ESP_LOGI("goblin_head_neck_motor", "Performing shake gesture");
     
     esp_err_t ret = goblin_head_neck_motor_set_pose(-30.0f, 0.0f, 0.0f);
     if (ret != ESP_OK) return ret;
@@ -270,25 +283,6 @@ esp_err_t goblin_head_neck_motor_shake(void)
 }
 // --- End: config\components\creature_specific\goblin_head_neck_motor.src ---
 
-// --- Begin: config\bots\bot_families\goblins\head\goblin_left_ear.src ---
-// goblin_left_ear component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-static const char *TAG_goblin_left_ear = "goblin_left_ear";
-
-esp_err_t goblin_left_ear_init(void) {
-    ESP_LOGI(TAG_goblin_left_ear, "goblin_left_ear init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void goblin_left_ear_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_left_ear, "goblin_left_ear act");
-}
-// --- End: config\bots\bot_families\goblins\head\goblin_left_ear.src ---
-
 // --- Begin: config\bots\bot_families\goblins\head\goblin_left_eye.src ---
 // goblin_left_eye.src - Allocate shared display buffer and left eye position
 // Component chain: goblin_left_eye (allocate) -> goblin_eye (render) -> generic_spi_display (send & free)
@@ -297,11 +291,7 @@ void goblin_left_ear_act(void) {
 #include "esp_heap_caps.h"
 #include "shared_headers/color_schema.hpp"
 
-// Forward declaration for generic display handler
-esp_err_t generic_spi_display_act(uint8_t* front_buffer, uint8_t* back_buffer, 
-                                 uint32_t size, struct EyePosition position);
-
-static const char* TAG = "goblin_left_eye";
+// Note: Display configuration and buffers declared in goblin_eye.src (processed first)
 
 // Eye position (left eye relative to skull center)
 struct EyePosition {
@@ -310,54 +300,40 @@ struct EyePosition {
     int16_t z;      // -35 = slightly back
 } left_eye_position = {-50, 30, -35};
 
-// Display buffers - front and back for ping-pong
-static uint8_t* front_buffer = NULL;
-static uint8_t* back_buffer = NULL;
-static uint32_t display_size = 0; 
-
-void goblin_left_eye_init(void)
+esp_err_t goblin_left_eye_init(void)
 {
-    display_width = 240;
-    display_height = 240;
-    bytes_per_pixel = 2;
-    color_schema = "RGB565";
-    chunk = 10;
-    debug = true;
-
+    // Start with a baseline row count (can be tuned based on available RAM)
+    current_row_count = 10;  // Initial: 10 rows at a time
+    return ESP_OK;
 }
-esp_err_t goblin_left_eye_act(void) {
-    display_width = 240;
-    display_height = 240;
-    bytes_per_pixel = 2;
-    color_schema = "RGB565";
-    chunk = 10;
-    debug = true;
 
-    verify(display_height % chunk == 0);
-
+void goblin_left_eye_act(void)
+{
     // Allocate buffers if not already done
-    if (!front_buffer || !back_buffer) {
-        display_size = display_width * (display_height/chunk) * bytes_per_pixel;
-        size_t buffer_size_in_pixels = display_width * display_height;
-        size_t buffer_size = buffer_size_in_pixels * bytes_per_pixel;
+    if (!front_buffer || !back_buffer)
+    {
+        // Calculate buffer size based on current row count
+        display_size = display_width * current_row_count * bytes_per_pixel;
         
-        ESP_LOGI(TAG, "Allocating display buffers for left eye (%u x %u, %u bytes each)",
-                 display_width, display_height, buffer_size);
-        
+        ESP_LOGI("goblin_left_eye", "Allocating display buffers for left eye (%u rows x %u width, %u bytes each)",
+                 current_row_count, display_width, display_size);
+            
         // Allocate front buffer (DMA-capable internal RAM)
-        front_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
-        if (!front_buffer) {
-            ESP_LOGE(TAG, "Failed to allocate %u bytes for front buffer", buffer_size);
-            return ESP_ERR_NO_MEM;
+        front_buffer = (uint8_t*)heap_caps_malloc(display_size, MALLOC_CAP_DMA);
+        if (!front_buffer)
+        {
+            ESP_LOGE("goblin_left_eye", "Failed to allocate %u bytes for front buffer", display_size);
+            return;
         }
         
         // Allocate back buffer (DMA-capable internal RAM)
-        back_buffer = (uint8_t*)heap_caps_malloc(buffer_size, MALLOC_CAP_DMA);
-        if (!back_buffer) {
-            ESP_LOGE(TAG, "Failed to allocate %u bytes for back buffer", buffer_size);
+        back_buffer = (uint8_t*)heap_caps_malloc(display_size, MALLOC_CAP_DMA);
+        if (!back_buffer)
+        {
+            ESP_LOGE("goblin_left_eye", "Failed to allocate %u bytes for back buffer", display_size);
             free(front_buffer);
             front_buffer = NULL;
-            return ESP_ERR_NO_MEM;
+            return;
         }
         
         // Initialize both buffers with neutral color (dark green iris)
@@ -365,12 +341,13 @@ esp_err_t goblin_left_eye_act(void) {
         uint16_t* front_u16 = (uint16_t*)front_buffer;
         uint16_t* back_u16 = (uint16_t*)back_buffer;
         
+        size_t buffer_size_in_pixels = display_width * current_row_count;
         for (uint32_t i = 0; i < buffer_size_in_pixels; i++) {
             front_u16[i] = neutral;
             back_u16[i] = neutral;
         }
         
-        ESP_LOGI(TAG, "Display buffers allocated (position: %d,%d,%d mm)",
+        ESP_LOGI("goblin_left_eye", "Display buffers allocated (position: %d,%d,%d mm)",
                  left_eye_position.x, left_eye_position.y, left_eye_position.z);
     }
     
@@ -378,9 +355,8 @@ esp_err_t goblin_left_eye_act(void) {
     // TODO: Add mood-based eye rendering here
     // This is where goblin_eye rendering logic would go
     
-    // === PASS TO GENERIC SPI DISPLAY ===
-    // Fire and forget - generic_spi_display handles the DMA pipeline
-    return generic_spi_display_act(front_buffer, back_buffer, display_size, left_eye_position);
+    // Buffers are now allocated and available for the next component in the chain
+    // (Data flows via file-scoped static variables in the single compilation unit)
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_left_eye.src ---
 
@@ -391,63 +367,48 @@ esp_err_t goblin_left_eye_act(void) {
 #include "esp_log.h"
 #include "config/shared_headers/color_schema.hpp"
 
-static const char* TAG = "goblin_mouth";
-
 // Shared display buffer - allocated here, used by goblin_mouth_render, freed by generic_spi_display
 // Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
-static unsigned char* display_buffer = nullptr;
+static unsigned char* mouth_display_buffer = nullptr;
 
 // Mouth position (relative to skull center)
-struct MouthPosition {
+struct GoblinMouthPosition {
     int16_t x;      // 0 = centered
     int16_t y;      // -80 = below center
     int16_t z;      // -20 = slightly back
 } mouth_position = {0, -80, -20};
 
-// Display configuration - set from use_fields in JSON
-// These values are injected at compile time via header includes
-extern uint32_t display_width;
-extern uint32_t display_height;
-extern uint32_t bytes_per_pixel;
+// Display configuration comes from file-scoped statics defined in goblin_left_eye.src
+// (all .src files in this subsystem share the same compilation unit)
 
 esp_err_t goblin_mouth_init(void) {
-    display_width = 480;
-    display_height = 320;
-    bytes_per_pixel = 3;
-    color_schema = "RGB666";
-
     size_t display_buffer_size = display_width * display_height * bytes_per_pixel;
     
-    ESP_LOGI(TAG, "Allocating display buffer for mouth (%u x %u, %u bytes total)",
+    ESP_LOGI("goblin_mouth", "Allocating display buffer for mouth (%u x %u, %u bytes total)",
              display_width, display_height, display_buffer_size);
     
     // Allocate shared buffer as unsigned char*
     // goblin_mouth_render will cast to PixelType* based on color_schema
-    display_buffer = (unsigned char*)malloc(display_buffer_size);
-    if (!display_buffer) {
-        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", display_buffer_size);
+    mouth_display_buffer = (unsigned char*)malloc(display_buffer_size);
+    if (!mouth_display_buffer) {
+        ESP_LOGE("goblin_mouth", "Failed to allocate %u bytes for display buffer", display_buffer_size);
         return ESP_ERR_NO_MEM;
     }
     
     // Initialize buffer with neutral color (dark green)
     uint16_t neutral = 0x0400;  // RGB565: (0, 8, 0)
-    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
+    uint16_t* buffer_u16 = (uint16_t*)mouth_display_buffer;
     for (uint32_t i = 0; i < (display_buffer_size / bytes_per_pixel); i++) {
         buffer_u16[i] = neutral;
     }
     
-    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
+    ESP_LOGI("goblin_mouth", "Display buffer allocated (position: %d,%d,%d mm)",
              mouth_position.x, mouth_position.y, mouth_position.z);
     
     return ESP_OK;
 }
 
 void goblin_mouth_act(void) {
-    display_width = 480;
-    display_height = 320;
-    bytes_per_pixel = 3;
-    color_schema = "RGB666";
-
     // Buffer is managed by component chain
     // goblin_mouth_render renders into it, generic_spi_display frees it
 }
@@ -460,8 +421,6 @@ void goblin_mouth_act(void) {
 #include "esp_log.h"
 // Removed: #include "components/hardware/hc_sr04.hdr" - .hdr content aggregated into .hpp
 // Removed: #include "components/hardware/speaker.hdr" - .hdr content aggregated into .hpp
-
-static const char *TAG_goblin_nose = "goblin_nose";
 
 // Nose sensor state
 typedef struct {
@@ -487,16 +446,16 @@ static goblin_nose_state_t nose_state = {
  * @brief Initialize goblin nose with HC-SR04 sensor
  */
 esp_err_t goblin_nose_init(void) {
-    ESP_LOGI(TAG_goblin_nose, "Initializing goblin nose with HC-SR04 sensor");
+    ESP_LOGI("goblin_nose", "Initializing goblin nose with HC-SR04 sensor");
     
     // Initialize the underlying HC-SR04 hardware
     esp_err_t ret = hc_sr04_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG_goblin_nose, "Failed to initialize HC-SR04 sensor: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_nose", "Failed to initialize HC-SR04 sensor: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG_goblin_nose, "Goblin nose ready - proximity sensing enabled");
+    ESP_LOGI("goblin_nose", "Goblin nose ready - proximity sensing enabled");
     return ESP_OK;
 }
 
@@ -523,7 +482,7 @@ void goblin_nose_act(void) {
         
         // Log interesting events and trigger audio responses
         if (nose_state.proximity_alert && !was_alert) {
-            ESP_LOGW(TAG_goblin_nose, "PROXIMITY ALERT! Object detected at %.1f cm", distance_cm);
+            ESP_LOGW("goblin_nose", "PROXIMITY ALERT! Object detected at %.1f cm", distance_cm);
             
             // Trigger proximity-based goblin response
             if (distance_cm <= 5.0f) {
@@ -537,7 +496,7 @@ void goblin_nose_act(void) {
             }
             
         } else if (!nose_state.proximity_alert && was_alert) {
-            ESP_LOGI(TAG_goblin_nose, "Proximity alert cleared - object moved to %.1f cm", distance_cm);
+            ESP_LOGI("goblin_nose", "Proximity alert cleared - object moved to %.1f cm", distance_cm);
             
             // Object moved away - relieved sound
             speaker_play_sound_by_name("goblin_grunt_yes");
@@ -556,13 +515,13 @@ void goblin_nose_act(void) {
                 distance_desc = "FAR";
             }
             
-            ESP_LOGI(TAG_goblin_nose, "Distance: %.1f cm (%s) - Success rate: %lu/%lu (%.1f%%)",
+            ESP_LOGI("goblin_nose", "Distance: %.1f cm (%s) - Success rate: %lu/%lu (%.1f%%)",
                      distance_cm, distance_desc,
                      nose_state.valid_readings, nose_state.reading_count,
                      (float)nose_state.valid_readings * 100.0f / nose_state.reading_count);
         }
     } else {
-        ESP_LOGD(TAG_goblin_nose, "No valid sensor reading (out of range or obstacle)");
+        ESP_LOGD("goblin_nose", "No valid sensor reading (out of range or obstacle)");
     }
 }
 
@@ -597,43 +556,22 @@ float goblin_nose_get_stats(uint32_t* total_readings, uint32_t* valid_readings) 
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_nose.src ---
 
-// --- Begin: config\bots\bot_families\goblins\head\goblin_right_ear.src ---
-// goblin_right_ear component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-static const char *TAG_goblin_right_ear = "goblin_right_ear";
-
-esp_err_t goblin_right_ear_init(void) {
-    ESP_LOGI(TAG_goblin_right_ear, "goblin_right_ear init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void goblin_right_ear_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_right_ear, "goblin_right_ear act");
-}
-// --- End: config\bots\bot_families\goblins\head\goblin_right_ear.src ---
-
 // --- Begin: config\bots\bot_families\goblins\head\goblin_right_eye.src ---
 // goblin_right_eye.src - Allocate shared display buffer for right eye
 // Component chain: goblin_right_eye (allocate) ? goblin_eye (render) ? generic_spi_display (send & free)
 
 #include "esp_log.h"
 
-static const char* TAG = "goblin_right_eye";
-
 // Shared display buffer - allocated here, used by goblin_eye, freed by generic_spi_display
 // Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
-static unsigned char* display_buffer = nullptr;
-static const uint32_t DISPLAY_WIDTH = 240;
-static const uint32_t DISPLAY_HEIGHT = 240;
-static const uint32_t DISPLAY_PIXELS = DISPLAY_WIDTH * DISPLAY_HEIGHT;
-static const uint32_t DISPLAY_BYTES_RGB565 = DISPLAY_PIXELS * 2;  // RGB565 = 2 bytes/pixel
+static unsigned char* right_display_buffer = nullptr;
+static const uint32_t RIGHT_DISPLAY_WIDTH = 240;
+static const uint32_t RIGHT_DISPLAY_HEIGHT = 240;
+static const uint32_t RIGHT_DISPLAY_PIXELS = RIGHT_DISPLAY_WIDTH * RIGHT_DISPLAY_HEIGHT;
+static const uint32_t RIGHT_DISPLAY_BYTES_RGB565 = RIGHT_DISPLAY_PIXELS * 2;  // RGB565 = 2 bytes/pixel
 
 // Eye position (right eye relative to skull center)
-struct EyePosition {
+struct RightEyePosition {
     int16_t x;      // +50 = right of center
     int16_t y;      // +30 = above center
     int16_t z;      // -35 = slightly back
@@ -641,31 +579,25 @@ struct EyePosition {
 
 esp_err_t goblin_right_eye_init(void)
 {
-    display_width = 240;
-    display_height = 240;
-    bytes_per_pixel = 2;
-    color_schema = "RGB565";
-    chunk = 10;
-
-    ESP_LOGI(TAG, "Allocating display buffer for right eye (%u bytes)", DISPLAY_BYTES_RGB565);
+    ESP_LOGI("goblin_right_eye", "Allocating display buffer for right eye (%u bytes)", RIGHT_DISPLAY_BYTES_RGB565);
     
     // Allocate shared buffer as unsigned char*
     // goblin_eye will cast to PixelType* (Pixel_RGB565*) based on color_schema
-    display_buffer = (unsigned char*)malloc(DISPLAY_BYTES_RGB565);
-    if (!display_buffer) {
-        ESP_LOGE(TAG, "Failed to allocate %u bytes for display buffer", DISPLAY_BYTES_RGB565);
+    right_display_buffer = (unsigned char*)malloc(RIGHT_DISPLAY_BYTES_RGB565);
+    if (!right_display_buffer) {
+        ESP_LOGE("goblin_right_eye", "Failed to allocate %u bytes for display buffer", RIGHT_DISPLAY_BYTES_RGB565);
         return ESP_ERR_NO_MEM;
     }
     
     // Initialize buffer with neutral color (green iris)
     // As uint16_t: 0x0400 = RGB565 (0, 8, 0) = dark green
     uint16_t neutral = 0x0400;
-    uint16_t* buffer_u16 = (uint16_t*)display_buffer;
-    for (uint32_t i = 0; i < DISPLAY_PIXELS; i++) {
+    uint16_t* buffer_u16 = (uint16_t*)right_display_buffer;
+    for (uint32_t i = 0; i < RIGHT_DISPLAY_PIXELS; i++) {
         buffer_u16[i] = neutral;
     }
     
-    ESP_LOGI(TAG, "Display buffer allocated (position: %d,%d,%d mm)",
+    ESP_LOGI("goblin_right_eye", "Display buffer allocated (position: %d,%d,%d mm)",
              right_eye_position.x, right_eye_position.y, right_eye_position.z);
     
     return ESP_OK;
@@ -673,12 +605,6 @@ esp_err_t goblin_right_eye_init(void)
 
 void goblin_right_eye_act(void)
 {
-    display_width = 240;
-    display_height = 240;
-    bytes_per_pixel = 2;
-    color_schema = "RGB565";
-    chunk = 10;
-
     // Buffer is managed by component chain
     // goblin_eye renders into it, generic_spi_display frees it
 }
@@ -690,25 +616,15 @@ void goblin_right_eye_act(void)
 
 #include "esp_log.h"
 
-static const char *TAG_goblin_sinuses = "goblin_sinuses";
-
 // Configuration variables set via use_fields
 static uint16_t current_resonance_freq = 800;
 static float current_amplification = 1.5f;
 static uint8_t active_chambers = 3;
 
 esp_err_t goblin_sinuses_init(void) {
-    resonance_frequency = 800;
-    amplification_factor = 1.5;
-    chamber_count = 3;
-
-    // Set resonance frequency from use_fields
-    resonance_frequency = current_resonance_freq;
-    amplification_factor = current_amplification;
-    chamber_count = active_chambers;
-    
-    ESP_LOGI(TAG_goblin_sinuses, "Sinus cavity initialized - %d chambers, %.1fx amplification, %dHz resonance", 
-             chamber_count, amplification_factor, resonance_frequency);
+    // Passive acoustic system - configuration is compile-time
+    ESP_LOGI("goblin_sinuses", "Sinus cavity initialized - %d chambers, %.1fx amplification, %dHz resonance", 
+             active_chambers, current_amplification, current_resonance_freq);
     
     // Physical cavity is passive - no electrical initialization needed
     // Configuration is handled through mechanical design and 3D printing
@@ -717,10 +633,6 @@ esp_err_t goblin_sinuses_init(void) {
 }
 
 void goblin_sinuses_act(void) {
-    resonance_frequency = 800;
-    amplification_factor = 1.5;
-    chamber_count = 3;
-
     // Passive acoustic system - no active processing needed
     // Sound waves naturally resonate through the 3D-printed chambers
     
@@ -732,14 +644,13 @@ void goblin_sinuses_act(void) {
 
 esp_err_t goblin_sinuses_set_resonance(uint16_t frequency) {
     if (frequency < 100 || frequency > 10000) {
-        ESP_LOGW(TAG_goblin_sinuses, "Resonance frequency %d out of optimal range", frequency);
+        ESP_LOGW("goblin_sinuses", "Resonance frequency %d out of optimal range", frequency);
         return ESP_ERR_INVALID_ARG;
     }
     
     current_resonance_freq = frequency;
-    resonance_frequency = frequency;
     
-    ESP_LOGI(TAG_goblin_sinuses, "Resonance tuned to %dHz", frequency);
+    ESP_LOGI("goblin_sinuses", "Resonance tuned to %dHz", frequency);
     return ESP_OK;
 }
 
@@ -765,15 +676,12 @@ esp_err_t goblin_sinuses_configure_voice(uint8_t voice_type) {
             current_amplification = 1.2f;
             break;
         default:
-            ESP_LOGW(TAG_goblin_sinuses, "Unknown voice type %d", voice_type);
+            ESP_LOGW("goblin_sinuses", "Unknown voice type %d", voice_type);
             return ESP_ERR_INVALID_ARG;
     }
     
-    // Apply new configuration
-    resonance_frequency = current_resonance_freq;
-    amplification_factor = current_amplification;
-    
-    ESP_LOGI(TAG_goblin_sinuses, "Voice configured: type=%d, freq=%dHz, amp=%.1fx", 
+    // Configuration applied to static variables
+    ESP_LOGI("goblin_sinuses", "Voice configured: type=%d, freq=%dHz, amp=%.1fx", 
              voice_type, current_resonance_freq, current_amplification);
     
     return ESP_OK;
@@ -785,17 +693,15 @@ esp_err_t goblin_sinuses_configure_voice(uint8_t voice_type) {
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_goblin_speaker = "goblin_speaker";
-
 esp_err_t goblin_speaker_init(void) {
-    ESP_LOGI(TAG_goblin_speaker, "goblin_speaker init - STUB IMPLEMENTATION");
+    ESP_LOGI("goblin_speaker", "goblin_speaker init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void goblin_speaker_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_goblin_speaker, "goblin_speaker act");
+    // ESP_LOGD("goblin_speaker", "goblin_speaker act");
 }
 // --- End: config\bots\bot_families\goblins\head\goblin_speaker.src ---
 
@@ -810,8 +716,6 @@ void goblin_speaker_act(void) {
 #include "driver/gpio.h"
 #include "esp_timer.h"
 #include <math.h>
-
-static const char *TAG_gpio_pair_driver = "gpio_pair_driver";
 
 // Debug configuration
 #define DEBUG_MODE 1  // Set to 0 for real GPIO hardware
@@ -880,13 +784,11 @@ static float generate_simulated_distance(void) {
  * @brief Initialize GPIO pair driver
  */
 esp_err_t gpio_pair_driver_init(void) {
-    debug = false;
-
     if (DEBUG_MODE) {
-        ESP_LOGI(TAG_gpio_pair_driver, "GPIO pair driver init (DEBUG MODE)");
-        ESP_LOGI(TAG_gpio_pair_driver, "Simulating HC-SR04 ultrasonic sensor timing");
+        ESP_LOGI("gpio_pair_driver", "GPIO pair driver init (DEBUG MODE)");
+        ESP_LOGI("gpio_pair_driver", "Simulating HC-SR04 ultrasonic sensor timing");
     } else {
-        ESP_LOGI(TAG_gpio_pair_driver, "GPIO pair driver init (HARDWARE MODE)");
+        ESP_LOGI("gpio_pair_driver", "GPIO pair driver init (HARDWARE MODE)");
     }
     
     pair_state.measurement_state = HC_SR04_IDLE;
@@ -897,17 +799,15 @@ esp_err_t gpio_pair_driver_init(void) {
  * @brief Execute GPIO pair driver action
  */
 void gpio_pair_driver_act(void) {
-    debug = false;
-
     // This driver is passive - actual work done on demand via measure functions
-    ESP_LOGD(TAG_gpio_pair_driver, "GPIO pair driver act");
+    ESP_LOGD("gpio_pair_driver", "GPIO pair driver act");
 }
 
 /**
  * @brief Configure GPIO pair for ultrasonic sensor
  */
 esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin) {
-    ESP_LOGI(TAG_gpio_pair_driver, "Configuring GPIO pair: trigger=%d, echo=%d", 
+    ESP_LOGI("gpio_pair_driver", "Configuring GPIO pair: trigger=%d, echo=%d", 
              trigger_pin, echo_pin);
     
     pair_state.trigger_pin = trigger_pin;
@@ -933,18 +833,18 @@ esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin) {
         
         esp_err_t ret = gpio_config(&trigger_config);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG_gpio_pair_driver, "Failed to configure trigger pin: %s", esp_err_to_name(ret));
+            ESP_LOGE("gpio_pair_driver", "Failed to configure trigger pin: %s", esp_err_to_name(ret));
             return ret;
         }
         
         ret = gpio_config(&echo_config);
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG_gpio_pair_driver, "Failed to configure echo pin: %s", esp_err_to_name(ret));
+            ESP_LOGE("gpio_pair_driver", "Failed to configure echo pin: %s", esp_err_to_name(ret));
             return ret;
         }
         
         // Set trigger pin low initially
-        gpio_set_level(trigger_pin, 0);
+        gpio_set_level((gpio_num_t)trigger_pin, 0);
     }
     
     pair_state.configured = true;
@@ -956,12 +856,12 @@ esp_err_t gpio_pair_configure_ultrasonic(int trigger_pin, int echo_pin) {
  */
 esp_err_t gpio_pair_trigger_ultrasonic(void) {
     if (!pair_state.configured) {
-        ESP_LOGE(TAG_gpio_pair_driver, "GPIO pair not configured");
+        ESP_LOGE("gpio_pair_driver", "GPIO pair not configured");
         return ESP_ERR_INVALID_STATE;
     }
     
     if (pair_state.measurement_state != HC_SR04_IDLE) {
-        ESP_LOGW(TAG_gpio_pair_driver, "Measurement already in progress");
+        ESP_LOGW("gpio_pair_driver", "Measurement already in progress");
         return ESP_ERR_INVALID_STATE;
     }
     
@@ -972,7 +872,7 @@ esp_err_t gpio_pair_trigger_ultrasonic(void) {
         // Simulate occasional failures (5% chance)
         if ((esp_random() % 100) < 5) {
             pair_state.measurement_state = HC_SR04_TIMEOUT;
-            ESP_LOGD(TAG_gpio_pair_driver, "Simulated trigger failure");
+            ESP_LOGD("gpio_pair_driver", "Simulated trigger failure");
             return ESP_ERR_TIMEOUT;
         }
         
@@ -980,13 +880,13 @@ esp_err_t gpio_pair_trigger_ultrasonic(void) {
         // duration = (distance * 2) / sound_speed (round trip)
         pair_state.simulated_pulse_duration_us = (uint32_t)((pair_state.current_distance_cm * 2.0f) / SOUND_SPEED_CM_US);
         
-        ESP_LOGD(TAG_gpio_pair_driver, "Debug trigger: %.1f cm -> %lu ?s pulse", 
+        ESP_LOGD("gpio_pair_driver", "Debug trigger: %.1f cm -> %lu ?s pulse", 
                  pair_state.current_distance_cm, pair_state.simulated_pulse_duration_us);
     } else {
         // Real hardware: send 10?s trigger pulse
-        gpio_set_level(pair_state.trigger_pin, 1);
+        gpio_set_level((gpio_num_t)pair_state.trigger_pin, 1);
         esp_rom_delay_us(10);
-        gpio_set_level(pair_state.trigger_pin, 0);
+        gpio_set_level((gpio_num_t)pair_state.trigger_pin, 0);
     }
     
     pair_state.trigger_time_us = esp_timer_get_time();
@@ -1025,7 +925,7 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us) {
                 if ((current_time_us - pair_state.echo_start_us) >= pair_state.simulated_pulse_duration_us) {
                     pair_state.measurement_state = HC_SR04_COMPLETE;
                     *pulse_duration_us = pair_state.simulated_pulse_duration_us;
-                    ESP_LOGD(TAG_gpio_pair_driver, "Debug measurement complete: %.1f cm", pair_state.current_distance_cm);
+                    ESP_LOGD("gpio_pair_driver", "Debug measurement complete: %.1f cm", pair_state.current_distance_cm);
                     return ESP_OK;
                 }
                 return ESP_ERR_NOT_FINISHED;
@@ -1043,7 +943,7 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us) {
         switch (pair_state.measurement_state) {
             case HC_SR04_TRIGGERED:
                 // Wait for echo to go HIGH
-                if (gpio_get_level(pair_state.echo_pin) == 1) {
+                if (gpio_get_level((gpio_num_t)pair_state.echo_pin) == 1) {
                     pair_state.echo_start_us = current_time_us;
                     pair_state.measurement_state = HC_SR04_MEASURING;
                 }
@@ -1056,7 +956,7 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us) {
                 
             case HC_SR04_MEASURING:
                 // Check if echo is still HIGH
-                if (gpio_get_level(pair_state.echo_pin) == 0) {
+                if (gpio_get_level((gpio_num_t)pair_state.echo_pin) == 0) {
                     // Echo went LOW - measurement complete
                     uint32_t duration = (uint32_t)(current_time_us - pair_state.echo_start_us);
                     pair_state.measurement_state = HC_SR04_COMPLETE;
@@ -1087,7 +987,7 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us) {
  */
 void gpio_pair_reset_measurement(void) {
     pair_state.measurement_state = HC_SR04_IDLE;
-    ESP_LOGD(TAG_gpio_pair_driver, "Measurement reset to idle");
+    ESP_LOGD("gpio_pair_driver", "Measurement reset to idle");
 }
 // --- End: config\components\drivers\gpio_pair_driver.src ---
 
@@ -1097,8 +997,6 @@ void gpio_pair_reset_measurement(void) {
 
 #include "esp_log.h"
 // Removed: #include "components/drivers/gpio_pair_driver.hdr" - .hdr content aggregated into .hpp
-
-static const char *TAG = "hc_sr04";
 
 // HC-SR04 pins (configured via dynamic pin assignment)
 static int trigger_pin = -1;
@@ -1121,12 +1019,12 @@ static bool measurement_valid = false;
 
 
 esp_err_t hc_sr04_init(void) {
-    ESP_LOGI(TAG, "Initializing HC-SR04 ultrasonic sensor");
+    ESP_LOGI("hc_sr04", "Initializing HC-SR04 ultrasonic sensor");
     
     // Initialize the GPIO pair driver first
     esp_err_t ret = gpio_pair_driver_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize GPIO pair driver: %s", esp_err_to_name(ret));
+        ESP_LOGE("hc_sr04", "Failed to initialize GPIO pair driver: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -1138,11 +1036,11 @@ esp_err_t hc_sr04_init(void) {
     // Configure the GPIO pair for ultrasonic measurement
     ret = gpio_pair_configure_ultrasonic(trigger_pin, echo_pin);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to configure GPIO pair: %s", esp_err_to_name(ret));
+        ESP_LOGE("hc_sr04", "Failed to configure GPIO pair: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG, "HC-SR04 initialized using GPIO pair (trigger: %d, echo: %d)", trigger_pin, echo_pin);
+    ESP_LOGI("hc_sr04", "HC-SR04 initialized using GPIO pair (trigger: %d, echo: %d)", trigger_pin, echo_pin);
     return ESP_OK;
 
 }
@@ -1159,11 +1057,14 @@ void hc_sr04_act(void) {
             ret = gpio_pair_trigger_ultrasonic();
             if (ret == ESP_OK) {
                 sensor_state = HC_SR04_SENSOR_WAITING;
-                ESP_LOGD(TAG, "Trigger pulse sent, waiting for echo");
+                ESP_LOGD("hc_sr04", "Trigger pulse sent, waiting for echo");
             } else if (ret == ESP_ERR_TIMEOUT) {
                 // Trigger failed - stay idle and try again next time
                 measurement_valid = false;
-                ESP_LOGD(TAG, "Trigger failed, will retry");
+                ESP_LOGD("hc_sr04", "Trigger failed, will retry");
+            } else if (ret == ESP_ERR_INVALID_STATE) {
+                // Measurement already in progress - shouldn't happen but handle gracefully
+                ESP_LOGD("hc_sr04", "Trigger skipped - measurement already in progress");
             }
             break;
             
@@ -1176,7 +1077,7 @@ void hc_sr04_act(void) {
                 measurement_valid = true;
                 sensor_state = HC_SR04_SENSOR_READY;
                 
-                ESP_LOGD(TAG, "Distance: %.2f cm (pulse: %lu us)", last_distance_cm, pulse_duration_us);
+                ESP_LOGD("hc_sr04", "Distance: %.2f cm (pulse: %lu us)", last_distance_cm, pulse_duration_us);
                 
                 // Reset to idle for next measurement cycle
                 gpio_pair_reset_measurement();
@@ -1187,7 +1088,7 @@ void hc_sr04_act(void) {
                 measurement_valid = false;
                 sensor_state = HC_SR04_SENSOR_IDLE;
                 gpio_pair_reset_measurement();
-                ESP_LOGD(TAG, "Measurement timeout");
+                ESP_LOGD("hc_sr04", "Measurement timeout");
             }
             // If ret == ESP_ERR_NOT_FINISHED, keep waiting
             break;
@@ -1213,73 +1114,22 @@ float hc_sr04_get_distance_cm(void) {
 bool hc_sr04_is_valid_reading(void) {
     return measurement_valid;
 }
-
-}
 // --- End: config\components\hardware\hc_sr04.src ---
-
-// --- Begin: config\components\hardware\hw496_microphone.src ---
-// HW-496 MEMS Microphone Component
-// Uses generic microphone driver with HW496-specific configuration
-
-#include "esp_log.h"
-// Removed: #include "components/hardware/hw496_microphone.hdr" - .hdr content aggregated into .hpp
-// Removed: #include "../drivers/generic_mic_driver.hdr" - .hdr content aggregated into .hpp
-#include "core/memory/SharedMemory.hpp"
-
-static const char *TAG_hw496_microphone = "hw496_microphone";
-
-// HW496-specific configuration
-// Based on HW496 datasheet: adjustable gain (25x-125x), 58dB SNR, 20Hz-20kHz response
-static const float HW496_DEFAULT_GAIN = 2.0f;  // 50x gain setting
-static const int HW496_NOISE_GATE_THRESHOLD = 50;  // Adjust based on testing
-static const bool HW496_NOISE_GATE_ENABLED = true;
-
-esp_err_t hw496_microphone_init(void) {
-    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone init");
-
-    // HW496-specific hardware initialization
-    // Note: generic_mic_driver is initialized separately as a dependency
-    // HW496 uses default generic_mic_driver settings
-
-    ESP_LOGI(TAG_hw496_microphone, "HW-496 microphone initialized (using generic driver defaults)");
-    return ESP_OK;
-}
-
-void hw496_microphone_act(void) {
-    // Read microphone data from SharedMemory (written by generic_mic_driver)
-    MicrophoneData* mic_data = GSM.read<MicrophoneData>();
-
-    if (mic_data && mic_data->driver_initialized) {
-        // HW496-specific processing or monitoring
-        // For now, log the data for testing
-        ESP_LOGD(TAG_hw496_microphone, "HW496 data: raw=%d, processed=%d, voltage=%dmV, gain=%.1f, sound=%s",
-                 mic_data->raw_sample, mic_data->processed_sample, mic_data->voltage_mv,
-                 mic_data->gain_applied, mic_data->sound_detected ? "detected" : "none");
-
-        // HW496 could add hardware-specific processing here
-        // For example, adjusting gain based on audio levels, or triggering hardware responses
-    } else {
-        ESP_LOGW(TAG_hw496_microphone, "Microphone data not available or driver not initialized");
-    }
-}
-// --- End: config\components\hardware\hw496_microphone.src ---
 
 // --- Begin: config\components\interfaces\i2s_bus.src ---
 // i2s_bus component implementation
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_i2s_bus = "i2s_bus";
-
 esp_err_t i2s_bus_0_init(void) {
-    ESP_LOGI(TAG_i2s_bus, "i2s_bus init - STUB IMPLEMENTATION");
+    ESP_LOGI("i2s_bus", "i2s_bus init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void i2s_bus_0_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_i2s_bus, "i2s_bus act");
+    // ESP_LOGD("i2s_bus", "i2s_bus act");
 }
 // --- End: config\components\interfaces\i2s_bus.src ---
 
@@ -1291,7 +1141,8 @@ void i2s_bus_0_act(void) {
 #include "esp_timer.h"
 #include <math.h>
 
-static const char *TAG_i2s_driver = "i2s_driver";
+// Forward declarations
+static float generate_goblin_waveform(float sample_time, float base_freq);
 
 // Debug audio configuration
 #define DEBUG_AUDIO_MODE 1      // Set to 0 for real I2S hardware
@@ -1321,12 +1172,10 @@ static debug_audio_state_t audio_state = {
 };
 
 esp_err_t i2s_driver_init(void) {
-    debug = false;
-
     if (DEBUG_AUDIO_MODE) {
-        ESP_LOGI(TAG_i2s_driver, "I2S driver init (DEBUG AUDIO MODE)");
-        ESP_LOGI(TAG_i2s_driver, "Audio will be streamed to PC via serial");
-        ESP_LOGI(TAG_i2s_driver, "Sample rate: %d Hz, Channels: %d", SAMPLE_RATE, CHANNELS);
+        ESP_LOGI("i2s_driver", "I2S driver init (DEBUG AUDIO MODE)");
+        ESP_LOGI("i2s_driver", "Audio will be streamed to PC via serial");
+        ESP_LOGI("i2s_driver", "Sample rate: %d Hz, Channels: %d", SAMPLE_RATE, CHANNELS);
         
         // Print header for PC audio capture script
         printf("AUDIO_STREAM_START\n");
@@ -1337,7 +1186,7 @@ esp_err_t i2s_driver_init(void) {
         printf("AUDIO_HEADER_END\n");
         
     } else {
-        ESP_LOGI(TAG_i2s_driver, "I2S driver init (HARDWARE MODE)");
+        ESP_LOGI("i2s_driver", "I2S driver init (HARDWARE MODE)");
         // TODO: Initialize real I2S hardware on GPIO 4,5,6
     }
     
@@ -1347,8 +1196,6 @@ esp_err_t i2s_driver_init(void) {
 }
 
 void i2s_driver_act(void) {
-    debug = false;
-
     if (!audio_state.initialized) return;
     
     uint64_t current_time_us = esp_timer_get_time();
@@ -1417,7 +1264,7 @@ static float generate_goblin_waveform(float sample_time, float base_freq) {
  * @brief Start playing a sound effect
  */
 void i2s_driver_play_sound(const char* sound_name, float frequency, float volume) {
-    ESP_LOGI(TAG_i2s_driver, "Playing sound: %s (%.1f Hz, %.1f vol)", sound_name, frequency, volume);
+    ESP_LOGI("i2s_driver", "Playing sound: %s (%.1f Hz, %.1f vol)", sound_name, frequency, volume);
     
     strncpy(audio_state.sound_type, sound_name, sizeof(audio_state.sound_type) - 1);
     audio_state.frequency_hz = frequency;
@@ -1448,7 +1295,7 @@ void i2s_driver_play_sound(const char* sound_name, float frequency, float volume
  * @brief Stop audio playback
  */
 void i2s_driver_stop_sound(void) {
-    ESP_LOGI(TAG_i2s_driver, "Stopping audio playback");
+    ESP_LOGI("i2s_driver", "Stopping audio playback");
     audio_state.playing = false;
     strcpy(audio_state.sound_type, "idle");
     
@@ -1466,19 +1313,13 @@ void i2s_driver_stop_sound(void) {
 #include "esp_log.h"
 // Removed: #include "ili9341.hdr" - .hdr content aggregated into .hpp
 
-static const char *TAG_ili9341 = "ili9341";
-
 esp_err_t ili9341_init(void) {
-    chunk_count = 1;
-
-    ESP_LOGI(TAG_ili9341, "ili9341 init - %ux%u, %s, chunk_count=%s",
-             display_width, display_height, color_schema, chunk_count);
+    ESP_LOGI("ili9341", "ili9341 display initialized - %ux%u",
+             display_width, display_height);
     return ESP_OK;
 }
 
 void ili9341_act(void) {
-    chunk_count = 1;
-
     // No-op: display I/O handled by lower layers
 }
 // --- End: config\components\hardware\ili9341.src ---
@@ -1515,25 +1356,6 @@ void max98357a_i2s_amplifier_act(void)
 }
 // --- End: config\components\interfaces\max98357a_i2s_amplifier.src ---
 
-// --- Begin: config\components\hardware\servo_sg90_micro.src ---
-// servo_sg90_micro component implementation
-// Auto-generated stub - needs actual implementation
-
-#include "esp_log.h"
-static const char *TAG_servo_sg90_micro = "servo_sg90_micro";
-
-esp_err_t servo_sg90_micro_init(void) {
-    ESP_LOGI(TAG_servo_sg90_micro, "servo_sg90_micro init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
-    return ESP_OK;
-}
-
-void servo_sg90_micro_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
-}
-// --- End: config\components\hardware\servo_sg90_micro.src ---
-
 // --- Begin: config\components\hardware\speaker.src ---
 // speaker component implementation
 // Debug implementation - triggers audio through i2s_driver
@@ -1541,8 +1363,6 @@ void servo_sg90_micro_act(void) {
 #include "esp_log.h"
 #include "esp_timer.h"
 // Removed: #include "components/drivers/i2s_driver.hdr" - .hdr content aggregated into .hpp
-
-static const char *TAG_speaker = "speaker";
 
 // Speaker state for mood-based audio
 typedef struct {
@@ -1609,14 +1429,12 @@ static const sound_effect_t sound_library[] = {
 #define SOUND_LIBRARY_SIZE (sizeof(sound_library) / sizeof(sound_effect_t))
 
 esp_err_t speaker_init(void) {
-    chunk_count = 1;
-
-    ESP_LOGI(TAG_speaker, "Speaker hardware init");
+    ESP_LOGI("speaker", "Speaker hardware init");
     
     // Initialize I2S driver first
     esp_err_t ret = i2s_driver_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG_speaker, "Failed to initialize I2S driver: %s", esp_err_to_name(ret));
+        ESP_LOGE("speaker", "Failed to initialize I2S driver: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -1626,13 +1444,11 @@ esp_err_t speaker_init(void) {
     // Play boot sound
     speaker_play_sound_by_name("system_boot");
     
-    ESP_LOGI(TAG_speaker, "Speaker initialized with %d sound effects", SOUND_LIBRARY_SIZE);
+    ESP_LOGI("speaker", "Speaker initialized with %d sound effects", SOUND_LIBRARY_SIZE);
     return ESP_OK;
 }
 
 void speaker_act(void) {
-    chunk_count = 1;
-
     if (!speaker_state.initialized) return;
     
     uint64_t current_time_us = esp_timer_get_time();
@@ -1644,7 +1460,7 @@ void speaker_act(void) {
         uint32_t sound_index = speaker_state.sound_counter % SOUND_LIBRARY_SIZE;
         const sound_effect_t* sound = &sound_library[sound_index];
         
-        ESP_LOGI(TAG_speaker, "Demo: Playing %s", sound->name);
+        ESP_LOGI("speaker", "Demo: Playing %s", sound->name);
         i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
         
         speaker_state.sound_counter++;
@@ -1666,12 +1482,12 @@ void speaker_play_sound_by_name(const char* sound_name) {
     for (int i = 0; i < SOUND_LIBRARY_SIZE; i++) {
         if (strcmp(sound_library[i].name, sound_name) == 0) {
             const sound_effect_t* sound = &sound_library[i];
-            ESP_LOGI(TAG_speaker, "Playing sound: %s", sound_name);
+            ESP_LOGI("speaker", "Playing sound: %s", sound_name);
             i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
             return;
         }
     }
-    ESP_LOGW(TAG_speaker, "Sound not found: %s", sound_name);
+    ESP_LOGW("speaker", "Sound not found: %s", sound_name);
 }
 
 /**
@@ -1706,7 +1522,7 @@ void speaker_play_mood_sound(const char* mood) {
  * @brief Synthesize and speak goblin words/phrases
  */
 void speaker_speak_goblin_phrase(const char* phrase) {
-    ESP_LOGI(TAG_speaker, "Speaking goblin phrase: '%s'", phrase);
+    ESP_LOGI("speaker", "Speaking goblin phrase: '%s'", phrase);
     
     // Goblin speech synthesis using phonetic mapping
     if (strcmp(phrase, "hello") == 0 || strcmp(phrase, "greetings") == 0) {
@@ -1747,7 +1563,7 @@ void speaker_speak_goblin_phrase(const char* phrase) {
         
     } else {
         // Unknown phrase - generic goblin babble
-        ESP_LOGW(TAG_speaker, "Unknown phrase, playing generic goblin sounds");
+        ESP_LOGW("speaker", "Unknown phrase, playing generic goblin sounds");
         i2s_driver_play_sound("goblin_speech_generic", 250.0f, 0.3f);
     }
     
@@ -1759,7 +1575,7 @@ void speaker_speak_goblin_phrase(const char* phrase) {
  * @brief Play goblin emotional response
  */
 void speaker_play_emotional_response(const char* emotion, float intensity) {
-    ESP_LOGI(TAG_speaker, "Emotional response: %s (intensity: %.2f)", emotion, intensity);
+    ESP_LOGI("speaker", "Emotional response: %s (intensity: %.2f)", emotion, intensity);
     
     // Adjust volume and frequency based on intensity (0.0 to 1.0)
     float volume = 0.2f + (intensity * 0.5f);  // 0.2 to 0.7 range
@@ -1808,8 +1624,6 @@ static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
 spi_display_pinset_t cur_spi_display_pin;
 
-static const char *TAG_spi_display_bus = "spi_display_bus";
-
 static spi_display_pinset_t shared_display_pins;
 
 // Helper to claim the next available GPIO from the provided assignable list
@@ -1826,7 +1640,7 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
 
         if (!already_claimed) {
             if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
-                ESP_LOGE(TAG_spi_display_bus, "Assigned pin buffer exhausted");
+                ESP_LOGE("spi_display_bus", "Assigned pin buffer exhausted");
                 esp_system_abort("Assigned pin buffer exhausted");
             }
 
@@ -1835,13 +1649,13 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
         }
     }
 
-    ESP_LOGE(TAG_spi_display_bus, "No assignable pins remain for SPI display bus");
+    ESP_LOGE("spi_display_bus", "No assignable pins remain for SPI display bus");
     esp_system_abort("SPI display bus ran out of assignable pins");
     return -1; // Unreachable, abort will terminate execution
 }
 
 esp_err_t spi_display_bus_init(void) {
-    ESP_LOGI(TAG_spi_display_bus, "=== SPI_DISPLAY_BUS_INIT STARTED ===");
+    ESP_LOGI("spi_display_bus", "=== SPI_DISPLAY_BUS_INIT STARTED ===");
 
     // Locate the first available slot for a display device
     size_t slot = 0;
@@ -1850,7 +1664,7 @@ esp_err_t spi_display_bus_init(void) {
     }
 
     if (slot >= SPI_DISPLAY_SLOT_COUNT) {
-        ESP_LOGE(TAG_spi_display_bus, "No remaining SPI display device slots available");
+        ESP_LOGE("spi_display_bus", "No remaining SPI display device slots available");
         return ESP_FAIL;
     }
 
@@ -1871,13 +1685,13 @@ esp_err_t spi_display_bus_init(void) {
         };
 
         const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
-        ESP_LOGI(TAG_spi_display_bus, "SPI bus initialize result: %s", esp_err_to_name(ret));
+        ESP_LOGI("spi_display_bus", "SPI bus initialize result: %s", esp_err_to_name(ret));
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG_spi_display_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            ESP_LOGE("spi_display_bus", "spi_bus_initialize failed: %s", esp_err_to_name(ret));
             return ret;
         }
 
-        ESP_LOGI(TAG_spi_display_bus,
+        ESP_LOGI("spi_display_bus",
                  "Shared SPI display pins assigned MOSI:%d CLK:%d RST:%d",
                  shared_display_pins.mosi,
                  shared_display_pins.clk,
@@ -1892,7 +1706,7 @@ esp_err_t spi_display_bus_init(void) {
 
     spi_display_slots[slot] = pins;
 
-    ESP_LOGI(TAG_spi_display_bus,
+    ESP_LOGI("spi_display_bus",
              "Display slot %u assigned pins MOSI:%d CLK:%d CS:%d DC:%d BL:%d RST:%d",
              static_cast<unsigned>(slot),
              pins.mosi,

@@ -2,17 +2,15 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_adc_driver = "adc_driver";
-
 esp_err_t adc_driver_init(void) {
-    ESP_LOGI(TAG_adc_driver, "adc_driver init - STUB IMPLEMENTATION");
+    ESP_LOGI("adc_driver", "adc_driver init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void adc_driver_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_adc_driver, "adc_driver act");
+    // ESP_LOGD("adc_driver", "adc_driver act");
 }
 
 

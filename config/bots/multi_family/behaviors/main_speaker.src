@@ -3,15 +3,13 @@
 #include "main_speaker.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "main_speaker";
-
 esp_err_t main_speaker_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("main_speaker", "init executed");
     return ESP_OK;
 }
 
 void main_speaker_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("main_speaker", "act executed");
 }

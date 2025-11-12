@@ -2,12 +2,10 @@
 #include "components/elf_mouth.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "elf_mouth";
-
 esp_err_t elf_mouth_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("elf_mouth", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t elf_mouth_init(void)
 void elf_mouth_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("elf_mouth", "act executed");
     #endif
 }

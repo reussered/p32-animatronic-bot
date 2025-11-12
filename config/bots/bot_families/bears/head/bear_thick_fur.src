@@ -2,12 +2,10 @@
 #include "components/bear_thick_fur.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "bear_thick_fur";
-
 esp_err_t bear_thick_fur_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("bear_thick_fur", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t bear_thick_fur_init(void)
 void bear_thick_fur_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("bear_thick_fur", "act executed");
     #endif
 }

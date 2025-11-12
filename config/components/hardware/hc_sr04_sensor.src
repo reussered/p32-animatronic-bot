@@ -14,8 +14,6 @@
  * without requiring actual GPIO pins or hardware setup.
  */
 
-static const char* TAG_hc_sr04 = "hc_sr04_sensor";
-
 // Debug sensor state
 typedef struct {
     float current_distance_cm;    // Current simulated distance reading
@@ -80,7 +78,7 @@ static void update_simulated_distance(void) {
     // Occasionally simulate no reading (out of range or obstacle)
     sensor_state.valid_reading = (esp_random() % 100) < 95; // 95% success rate
     
-    ESP_LOGD(TAG_hc_sr04, "Distance: %.1f cm, valid: %s", 
+    ESP_LOGD("hc_sr04_sensor", "Distance: %.1f cm, valid: %s", 
              sensor_state.current_distance_cm, 
              sensor_state.valid_reading ? "true" : "false");
 }
@@ -90,8 +88,8 @@ static void update_simulated_distance(void) {
  */
 esp_err_t hc_sr04_sensor_init(void)
 {
-    ESP_LOGI(TAG_hc_sr04, "Initializing HC-SR04 sensor (DEBUG MODE)");
-    ESP_LOGI(TAG_hc_sr04, "Range: %.1f - %.1f cm, Update interval: %d ms", 
+    ESP_LOGI("hc_sr04_sensor", "Initializing HC-SR04 sensor (DEBUG MODE)");
+    ESP_LOGI("hc_sr04_sensor", "Range: %.1f - %.1f cm, Update interval: %d ms", 
              MIN_DISTANCE_CM, MAX_DISTANCE_CM, UPDATE_INTERVAL_MS);
     
     sensor_state.last_update_ms = get_time_ms();

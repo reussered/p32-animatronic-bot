@@ -3,15 +3,13 @@
 #include "nose_sensor.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "nose_sensor";
-
 esp_err_t nose_sensor_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("nose_sensor", "init executed");
     return ESP_OK;
 }
 
 void nose_sensor_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("nose_sensor", "act executed");
 }

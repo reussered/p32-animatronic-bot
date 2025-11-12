@@ -12,10 +12,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * Initialize leg assembly subsystem
  * Must be called once during system startup
@@ -52,9 +48,5 @@ uint8_t flying_dragon_leg_get_gait_mode(void);
  * Query deployment state (true = extended, false = stowed)
  */
 bool flying_dragon_leg_is_deployed(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  // FLYING_DRAGON_LEG_ASSEMBLY_H

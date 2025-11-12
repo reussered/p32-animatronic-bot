@@ -2,8 +2,6 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_st7796_tft_320x480 = "st7796_tft_320x480";
-
 // Define ST7796_InitialPixel
 // Note: value should be set before allocating buffers containing ST7796_Pixels
 ST7796_Pixel ST7796_InitialPixel;
@@ -29,14 +27,14 @@ size_t getDisplaySize(void) {
 }
 
 esp_err_t st7796_init(void) {
-    ESP_LOGI(TAG_st7796_tft_320x480, "st7796 init - STUB IMPLEMENTATION");
+    ESP_LOGI("st7796", "st7796 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void st7796_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_st7796_tft_320x480, "st7796 act");
+    // ESP_LOGD("st7796", "st7796 act");
 }
 
 

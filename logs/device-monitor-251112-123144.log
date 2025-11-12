@@ -1,0 +1,55 @@
+I (1305) generic_spi_display: Display with CS=3 initialized successfully
+I (1305) TEST_HEAD: Calling init function 5
+I (1305) spi_bus: Assigning shared SPI pins for first device
+I (1305) spi_bus: Shared SPI pins assigned MOSI:6 MISO:7 CLK:8 RESET:9
+E (1315) spi: spi_bus_initialize(809): SPI bus already initialized.
+E (1315) spi_bus: spi_bus_initialize failed: ESP_ERR_INVALID_STATE
+I (1325) TEST_HEAD: Calling init function 6
+I (1325) generic_spi_data_driver: Initializing generic SPI data driver
+I (1335) TEST_HEAD: Calling init function 7
+I (1335) goblin_right_eye: Initializing right eye display buffer
+
+abort() was called at PC 0x4200c65e on core 0
+
+
+Backtrace: 0x40376d81:0x3fc98b90 0x4037a505:0x3fc98bb0 0x40380bb5:0x3fc98bd0 0x4200c65e:0x3fc98c40 0x4200c355:0x3fc98c60 0x4200c385:0x3fc98c80 0x420019b3:0x3fc98ca0 0x42002161:0x3fc98ce0 0x4201b5cc:0x3fc98d10 0x4037abd5:0x3fc98d40
+
+
+
+
+ELF file SHA256: fa6e9879a
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40376cc0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x11f4
+load:0x403c8700,len:0xce0
+load:0x403cb700,len:0x2df4
+entry 0x403c8904
+I (29) boot: ESP-IDF 5.5.0 2nd stage bootloader
+I (29) boot: compile time Nov  3 2025 08:51:32
+I (29) boot: Multicore bootloader
+I (29) boot: chip revision: v0.2
+I (32) boot: efuse block revision: v1.3
+I (36) boot.esp32s3: Boot SPI Speed : 80MHz
+I (39) boot.esp32s3: SPI Mode       : DIO
+I (43) boot.esp32s3: SPI Flash Size : 2MB
+I (47) boot: Enabling RNG early entropy source...
+I (51) boot: Partition Table:
+I (54) boot: ## Label            Usage          Type ST Offset   Length
+I (60) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (67) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (73) boot:  2 factory          factory app      00 00 00010000 00100000
+I (80) boot: End of partition table
+I (83) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=09358h ( 37720) map
+I (97) esp_image: segment 1: paddr=00019380 vaddr=3fc93200 size=02160h (  8544) load
+I (100) esp_image: segment 2: paddr=0001b4e8 vaddr=40374000 size=04b30h ( 19248) load
+I (110) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1c36ch (115564) map
+I (133) esp_image: segment 4: paddr=0003c394 vaddr=40378b30 size=0a60ch ( 42508) load
+I (143) esp_image: segment 5: paddr=000469a8 vaddr=600fe000 size=00020h (    32) load
+I (149) boot: Loaded app from partition at offset 0x10000
+I (149) boot: Disabling RNG early entropy source...

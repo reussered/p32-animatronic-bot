@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize proportional_sizing_system component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t proportional_sizing_system_init(void);
  * Called periodically by subsystem dispatcher
  */
 void proportional_sizing_system_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // PROPORTIONAL_SIZING_SYSTEM_HDR

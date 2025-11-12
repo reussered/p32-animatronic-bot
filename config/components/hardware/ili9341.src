@@ -5,11 +5,9 @@
 #include "esp_log.h"
 #include "ili9341.hdr"
 
-static const char *TAG_ili9341 = "ili9341";
-
 esp_err_t ili9341_init(void) {
-    ESP_LOGI(TAG_ili9341, "ili9341 init - %ux%u, %s, chunk_count=%s",
-             display_width, display_height, color_schema, chunk_count);
+    ESP_LOGI("ili9341", "ili9341 display initialized - %ux%u",
+             display_width, display_height);
     return ESP_OK;
 }
 

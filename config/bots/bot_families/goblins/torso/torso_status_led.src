@@ -2,12 +2,10 @@
 #include "components/torso_status_led.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "torso_status_led";
-
 esp_err_t torso_status_led_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("torso_status_led", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t torso_status_led_init(void)
 void torso_status_led_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("torso_status_led", "act executed");
     #endif
 }

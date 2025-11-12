@@ -3,15 +3,13 @@
 #include "AI_BEHAVIOR_ENGINE.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "AI_BEHAVIOR_ENGINE";
-
 esp_err_t AI_BEHAVIOR_ENGINE_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("ai_behavior_engine", "init executed");
     return ESP_OK;
 }
 
 void AI_BEHAVIOR_ENGINE_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("ai_behavior_engine", "act executed");
 }

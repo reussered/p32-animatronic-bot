@@ -2,12 +2,10 @@
 #include "components/goblin_head_left_eye_only.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "goblin_head_left_eye_only";
-
 esp_err_t goblin_head_left_eye_only_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("goblin_head_left_eye_only", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t goblin_head_left_eye_only_init(void)
 void goblin_head_left_eye_only_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("goblin_head_left_eye_only", "act executed");
     #endif
 }

@@ -3,15 +3,13 @@
 #include "SENSOR_FUSION.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "SENSOR_FUSION";
-
 esp_err_t SENSOR_FUSION_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("sensor_fusion", "init executed");
     return ESP_OK;
 }
 
 void SENSOR_FUSION_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("sensor_fusion", "act executed");
 }

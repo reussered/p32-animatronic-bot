@@ -645,9 +645,9 @@ When the generator processes a component JSON, it performs a **depth-first tree 
 
 - **HDR AGGREGATION PARALLEL TO SRC**: `.hdr` files are aggregated into `*_component_functions.hpp` exactly like `.src` files into `.cpp`
 
-- **USE_FIELDS INJECTION SYSTEM**: JSON `use_fields: {}` generates `static char* variable = "value";` declarations (first encounter) or `variable = "value";` assignments (subsequent encounters)
+- **USE_FIELDS INJECTION SYSTEM**: JSON `use_fields: {}` generates variable assignments written into the aggregated output `.cpp` file as FIRST LINE of both `init()` and `act()` functions for ALL component encounters. Original `.src` files are read-only and NEVER modified. Type inference: value in quotes → `char*`, value without quotes → `int`, explicit cast like `"(_uint64_t)0"` → extracted type. Each `use_fields` entry generates ONE uninitialized `static` declaration (e.g., `static int display_width;`) placed just before the first aggregated `.src` file content begins in the output file.
 
-- **ABSOLUTE FILE MODIFICATION PROHIBITION**: NO `.src` or `.hdr` files can EVER be modified during aggregation process - build system MUST work on temporary copies only
+- **ABSOLUTE FILE MODIFICATION PROHIBITION**: NO `.src` or `.hdr` files can EVER be modified during aggregation process - build system reads originals, writes to generated output files only
 
 - **COMPONENT REGISTRY MAINTENANCE MANDATORY**: When new components are added, `config/component_registry.json` MUST be updated via `tools/component_registry.py` to maintain binary search index
 
@@ -878,27 +878,61 @@ void {component_name}_act(void);        // NO ARGUMENTS
 ### Layer 3: Parameterization Layer (use_fields Injection)
 
 - **Purpose**: Instance-specific variables injected from JSON `use_fields: {}`
-- **Mechanism**: Build system generates C++ static variables from JSON values
-- **Injection Pattern**:
-  - **First encounter**: `static char* display_width = "240";` (declaration + assignment)
-  - **Subsequent encounters**: `display_width = "320";` (assignment only - different value for different instances)
+- **Mechanism**: Build system generates C++ variable assignments into the aggregated output files. **CRITICAL**: Original `.src` and `.hdr` files are NEVER modified - assignments are injected only during aggregation into generated `*_component_functions.cpp` files
+- **Type Inference Rules**:
+  - **Value with quotes**: `"color_schema": "RGB565"` → type is `char*`
+  - **Value without quotes**: `"display_width": 240` → type is `int`
+  - **Explicit type cast**: `"result": "(_uint64_t)0"` → type extracted from cast (e.g., `_uint64_t`)
+- **Injection Location**: Assignments inserted as FIRST LINE of both `init()` and `act()` functions for ALL encounters (including first)
 - **Example Flow**:
   ```json
   // goblin_left_eye.json
-  "use_fields": { "display_width": 240, "color_schema": "RGB565" }
+  "use_fields": { 
+    "display_width": 240, 
+    "color_schema": "RGB565",
+    "frame_count": "(_uint64_t)0"
+  }
   
   // bear_left_eye.json  
-  "use_fields": { "display_width": 320, "color_schema": "RGB888" }
+  "use_fields": { 
+    "display_width": 320, 
+    "color_schema": "RGB888",
+    "frame_count": "(_uint64_t)0"
+  }
   ```
   ```cpp
-  // Generated in aggregated .cpp (first encounter):
-  static char* display_width = "240";
-  static char* color_schema = "RGB565";
+  // Generated in goblin_left_eye_init() - FIRST LINE:
+  display_width = 240;             // int type (no quotes in JSON)
+  color_schema = "RGB565";         // char* type (quotes in JSON)
+  frame_count = (_uint64_t)0;      // _uint64_t type (explicit cast)
   
-  // Later in same file (second encounter):
-  display_width = "320";
+  // Generated in goblin_left_eye_act() - FIRST LINE:
+  display_width = 240;             // Repeated in act()
+  color_schema = "RGB565";         // Repeated in act()
+  frame_count = (_uint64_t)0;      // Repeated in act()
+  
+  // Later when bear_left_eye component executes:
+  // In bear_left_eye_init() - FIRST LINE:
+  display_width = 320;             // Different value, same variable
+  color_schema = "RGB888";         // Different value, same variable
+  frame_count = (_uint64_t)0;      // Same value
+  
+  // In bear_left_eye_act() - FIRST LINE:
+  display_width = 320;
   color_schema = "RGB888";
+  frame_count = (_uint64_t)0;
   ```
+- **Variable Scope**: Variables are file-scoped `static` and shared across all components in the subsystem compilation unit
+- **Declaration Location**: Each entry in `use_fields` results in a single uninitialized declaration placed just before the first line of the first aggregated `.src` file content in the compilation unit
+- **Declaration Format**: Declarations are uninitialized and undefined:
+  ```cpp
+  static int display_width;           // From "display_width": 240
+  static char* color_schema;          // From "color_schema": "RGB565"
+  static _uint64_t frame_count;       // From "frame_count": "(_uint64_t)0"
+  
+  // ... then first .src file content begins ...
+  ```
+- **One Declaration Per Variable**: Even if multiple components use the same `use_fields` variable name, only ONE declaration is generated at the top of the aggregated file
 
 ### Critical Build Rules
 

@@ -2,8 +2,6 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_ili9486_tft_800x480 = "ili9486_tft_800x480";
-
 // Define ILI9486_InitialPixel
 // Note: value should be set before allocating buffers containing ILI9486_Pixels
 ILI9486_Pixel ILI9486_InitialPixel;
@@ -29,14 +27,14 @@ size_t getDisplaySize(void) {
 }
 
 esp_err_t ili9486_init(void) {
-    ESP_LOGI(TAG_ili9486_tft_800x480, "ili9486 init - STUB IMPLEMENTATION");
+    ESP_LOGI("ili9486", "ili9486 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void ili9486_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_ili9486_tft_800x480, "ili9486 act");
+    // ESP_LOGD("ili9486", "ili9486 act");
 }
 
 

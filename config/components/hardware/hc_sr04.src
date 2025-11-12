@@ -4,8 +4,6 @@
 #include "esp_log.h"
 #include "components/drivers/gpio_pair_driver.hdr"
 
-static const char *TAG = "hc_sr04";
-
 // HC-SR04 pins (configured via dynamic pin assignment)
 static int trigger_pin = -1;
 static int echo_pin = -1;
@@ -27,12 +25,12 @@ static bool measurement_valid = false;
 
 
 esp_err_t hc_sr04_init(void) {
-    ESP_LOGI(TAG, "Initializing HC-SR04 ultrasonic sensor");
+    ESP_LOGI("hc_sr04", "Initializing HC-SR04 ultrasonic sensor");
     
     // Initialize the GPIO pair driver first
     esp_err_t ret = gpio_pair_driver_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize GPIO pair driver: %s", esp_err_to_name(ret));
+        ESP_LOGE("hc_sr04", "Failed to initialize GPIO pair driver: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -44,11 +42,11 @@ esp_err_t hc_sr04_init(void) {
     // Configure the GPIO pair for ultrasonic measurement
     ret = gpio_pair_configure_ultrasonic(trigger_pin, echo_pin);
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to configure GPIO pair: %s", esp_err_to_name(ret));
+        ESP_LOGE("hc_sr04", "Failed to configure GPIO pair: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG, "HC-SR04 initialized using GPIO pair (trigger: %d, echo: %d)", trigger_pin, echo_pin);
+    ESP_LOGI("hc_sr04", "HC-SR04 initialized using GPIO pair (trigger: %d, echo: %d)", trigger_pin, echo_pin);
     return ESP_OK;
 
 }
@@ -65,11 +63,14 @@ void hc_sr04_act(void) {
             ret = gpio_pair_trigger_ultrasonic();
             if (ret == ESP_OK) {
                 sensor_state = HC_SR04_SENSOR_WAITING;
-                ESP_LOGD(TAG, "Trigger pulse sent, waiting for echo");
+                ESP_LOGD("hc_sr04", "Trigger pulse sent, waiting for echo");
             } else if (ret == ESP_ERR_TIMEOUT) {
                 // Trigger failed - stay idle and try again next time
                 measurement_valid = false;
-                ESP_LOGD(TAG, "Trigger failed, will retry");
+                ESP_LOGD("hc_sr04", "Trigger failed, will retry");
+            } else if (ret == ESP_ERR_INVALID_STATE) {
+                // Measurement already in progress - shouldn't happen but handle gracefully
+                ESP_LOGD("hc_sr04", "Trigger skipped - measurement already in progress");
             }
             break;
             
@@ -82,7 +83,7 @@ void hc_sr04_act(void) {
                 measurement_valid = true;
                 sensor_state = HC_SR04_SENSOR_READY;
                 
-                ESP_LOGD(TAG, "Distance: %.2f cm (pulse: %lu us)", last_distance_cm, pulse_duration_us);
+                ESP_LOGD("hc_sr04", "Distance: %.2f cm (pulse: %lu us)", last_distance_cm, pulse_duration_us);
                 
                 // Reset to idle for next measurement cycle
                 gpio_pair_reset_measurement();
@@ -93,7 +94,7 @@ void hc_sr04_act(void) {
                 measurement_valid = false;
                 sensor_state = HC_SR04_SENSOR_IDLE;
                 gpio_pair_reset_measurement();
-                ESP_LOGD(TAG, "Measurement timeout");
+                ESP_LOGD("hc_sr04", "Measurement timeout");
             }
             // If ret == ESP_ERR_NOT_FINISHED, keep waiting
             break;
@@ -119,6 +120,3 @@ float hc_sr04_get_distance_cm(void) {
 bool hc_sr04_is_valid_reading(void) {
     return measurement_valid;
 }
-
-}
-

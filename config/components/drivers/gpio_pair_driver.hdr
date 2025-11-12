@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize gpio_pair_driver component
  * @return ESP_OK on success, error code otherwise
@@ -48,9 +44,5 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us);
  * Call after successful measurement to prepare for next cycle
  */
 void gpio_pair_reset_measurement(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // GPIO_PAIR_DRIVER_HDR

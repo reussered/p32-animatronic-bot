@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize communication_abstraction_layer component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t communication_abstraction_layer_init(void);
  * Called periodically by subsystem dispatcher
  */
 void communication_abstraction_layer_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // COMMUNICATION_ABSTRACTION_LAYER_HDR

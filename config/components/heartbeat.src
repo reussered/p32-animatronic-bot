@@ -3,11 +3,9 @@
 
 #include "esp_log.h"
 
-static const char *TAG = "heartbeat";
-
 esp_err_t heartbeat_init(void) {
 #ifdef DEBUG
-    ESP_LOGI(TAG, "heartbeat_init() called");
+    ESP_LOGI("heartbeat", "heartbeat_init() called");
 #endif
     // TODO: Add initialization code
     return ESP_OK;
@@ -15,7 +13,7 @@ esp_err_t heartbeat_init(void) {
 
 void heartbeat_act(void) {
 #ifdef DEBUG
-    ESP_LOGD(TAG, "heartbeat_act() called");
+    ESP_LOGD("heartbeat", "heartbeat_act() called");
 #endif
     // TODO: Add action code
 }

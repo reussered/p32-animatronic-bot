@@ -2,12 +2,10 @@
 #include "components/network_monitor.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "network_monitor";
-
 esp_err_t network_monitor_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("network_monitor", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t network_monitor_init(void)
 void network_monitor_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("network_monitor", "act executed");
     #endif
 }

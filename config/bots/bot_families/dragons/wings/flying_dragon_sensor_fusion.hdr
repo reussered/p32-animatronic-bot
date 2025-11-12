@@ -7,10 +7,6 @@
 
 #include <esp_err.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * Initialize sensor fusion subsystem
  */
@@ -20,9 +16,5 @@ esp_err_t flying_dragon_sensor_fusion_init(void);
  * Main control loop - update sensor fusion estimates
  */
 void flying_dragon_sensor_fusion_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  // FLYING_DRAGON_SENSOR_FUSION_H

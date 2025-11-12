@@ -3,15 +3,13 @@
 #include "inline_component_1.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "inline_component_1";
-
 esp_err_t inline_component_1_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("inline_component_1", "init executed");
     return ESP_OK;
 }
 
 void inline_component_1_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("inline_component_1", "act executed");
 }

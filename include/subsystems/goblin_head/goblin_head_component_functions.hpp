@@ -20,16 +20,12 @@ esp_err_t goblin_eye_init(void);
 void goblin_eye_act(void);
 esp_err_t goblin_head_neck_motor_init(void);
 void goblin_head_neck_motor_act(void);
-esp_err_t goblin_left_ear_init(void);
-void goblin_left_ear_act(void);
 esp_err_t goblin_left_eye_init(void);
 void goblin_left_eye_act(void);
 esp_err_t goblin_mouth_init(void);
 void goblin_mouth_act(void);
 esp_err_t goblin_nose_init(void);
 void goblin_nose_act(void);
-esp_err_t goblin_right_ear_init(void);
-void goblin_right_ear_act(void);
 esp_err_t goblin_right_eye_init(void);
 void goblin_right_eye_act(void);
 esp_err_t goblin_sinuses_init(void);
@@ -40,8 +36,6 @@ esp_err_t gpio_pair_driver_init(void);
 void gpio_pair_driver_act(void);
 esp_err_t hc_sr04_init(void);
 void hc_sr04_act(void);
-esp_err_t hw496_microphone_init(void);
-void hw496_microphone_act(void);
 esp_err_t i2s_bus_0_init(void);
 void i2s_bus_0_act(void);
 esp_err_t i2s_driver_init(void);
@@ -50,8 +44,6 @@ esp_err_t ili9341_init(void);
 void ili9341_act(void);
 esp_err_t max98357a_i2s_amplifier_init(void);
 void max98357a_i2s_amplifier_act(void);
-esp_err_t servo_sg90_micro_init(void);
-void servo_sg90_micro_act(void);
 esp_err_t speaker_init(void);
 void speaker_act(void);
 esp_err_t spi_display_bus_init(void);
@@ -126,16 +118,12 @@ struct gc9a01
 
 #endif // GC9A01_HDR
 
-// Declarations from config\components\hardware\generic_spi_display.hdr
+// Declarations from config\components\drivers\generic_spi_display.hdr
 #ifndef GENERIC_SPI_DISPLAY_HDR
 #define GENERIC_SPI_DISPLAY_HDR
 
 #include <esp_err.h>
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize generic_spi_display component
@@ -148,10 +136,6 @@ esp_err_t generic_spi_display_init(void);
  * Called periodically by subsystem dispatcher
  */
 void generic_spi_display_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // GENERIC_SPI_DISPLAY_HDR
 
@@ -188,13 +172,6 @@ esp_err_t goblin_head_neck_motor_shake(void);
 
 #endif // GOBLIN_HEAD_NECK_MOTOR_H
 
-// Declarations from config\bots\bot_families\goblins\head\goblin_left_ear.hdr
-// Auto-generated header for goblin_left_ear
-#include <esp_err.h>
-
-esp_err_t goblin_left_ear_init(void);
-void goblin_left_ear_act(void);
-
 // Declarations from config\bots\bot_families\goblins\head\goblin_left_eye.hdr
 // Auto-generated header for goblin_left_eye
 #include <esp_err.h>
@@ -217,10 +194,6 @@ void goblin_mouth_act(void);
 #include <esp_err.h>
 #include <stdint.h>
 #include <stdbool.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize goblin nose with HC-SR04 sensor
@@ -254,18 +227,7 @@ bool goblin_nose_proximity_alert(void);
  */
 float goblin_nose_get_stats(uint32_t* total_readings, uint32_t* valid_readings);
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif // GOBLIN_NOSE_HDR
-
-// Declarations from config\bots\bot_families\goblins\head\goblin_right_ear.hdr
-// Auto-generated header for goblin_right_ear
-#include <esp_err.h>
-
-esp_err_t goblin_right_ear_init(void);
-void goblin_right_ear_act(void);
 
 // Declarations from config\bots\bot_families\goblins\head\goblin_right_eye.hdr
 // Auto-generated header for goblin_right_eye
@@ -334,10 +296,6 @@ void goblin_speaker_act(void);
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize gpio_pair_driver component
  * @return ESP_OK on success, error code otherwise
@@ -379,10 +337,6 @@ esp_err_t gpio_pair_check_echo(uint32_t* pulse_duration_us);
  */
 void gpio_pair_reset_measurement(void);
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif // GPIO_PAIR_DRIVER_HDR
 
 // Declarations from config\components\hardware\hc_sr04.hdr
@@ -391,10 +345,6 @@ void gpio_pair_reset_measurement(void);
 
 #include <esp_err.h>
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize hc_sr04 component
@@ -420,29 +370,7 @@ float hc_sr04_get_distance_cm(void);
  */
 bool hc_sr04_is_valid_reading(void);
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif // HC_SR04_HDR
-
-// Declarations from config\components\hardware\hw496_microphone.hdr
-// HW-496 MEMS Microphone Component Header
-// Uses generic microphone driver with HW496-specific configuration
-
-#ifndef hw496_microphone_H
-#define hw496_microphone_H
-
-#include "esp_err.h"
-
-// Test declaration
-extern int test_hw496_variable;
-
-// Function declarations for dispatch table
-esp_err_t hw496_microphone_init(void);
-void hw496_microphone_act(void);
-
-#endif // hw496_microphone_H
 
 // Declarations from config\components\interfaces\i2s_bus.hdr
 #ifndef I2S_BUS_HDR
@@ -450,10 +378,6 @@ void hw496_microphone_act(void);
 
 #include <esp_err.h>
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize i2s_bus component
@@ -467,10 +391,6 @@ esp_err_t i2s_bus_init(void);
  */
 void i2s_bus_act(void);
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif // I2S_BUS_HDR
 
 // Declarations from config\components\drivers\i2s_driver.hdr
@@ -479,10 +399,6 @@ void i2s_bus_act(void);
 
 #include <esp_err.h>
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize i2s_driver component
@@ -508,10 +424,6 @@ void i2s_driver_play_sound(const char* sound_name, float frequency, float volume
  * @brief Stop audio playback
  */
 void i2s_driver_stop_sound(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // I2S_DRIVER_HDR
 
@@ -588,10 +500,6 @@ struct ili9341
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize max98357a_i2s_amplifier component
  * @return ESP_OK on success, error code otherwise
@@ -604,18 +512,7 @@ esp_err_t max98357a_i2s_amplifier_init(void);
  */
 void max98357a_i2s_amplifier_act(void);
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif // MAX98357A_I2S_AMPLIFIER_HDR
-
-// Declarations from config\components\hardware\servo_sg90_micro.hdr
-// Auto-generated header for servo_sg90_micro
-#include <esp_err.h>
-
-esp_err_t servo_sg90_micro_init(void);
-void servo_sg90_micro_act(void);
 
 // Declarations from config\components\hardware\speaker.hdr
 #ifndef SPEAKER_HDR
@@ -623,10 +520,6 @@ void servo_sg90_micro_act(void);
 
 #include <esp_err.h>
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * @brief Initialize speaker component
@@ -669,10 +562,6 @@ void speaker_speak_goblin_phrase(const char* phrase);
  * @param intensity Intensity level (0.0 to 1.0)
  */
 void speaker_play_emotional_response(const char* emotion, float intensity);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // SPEAKER_HDR
 

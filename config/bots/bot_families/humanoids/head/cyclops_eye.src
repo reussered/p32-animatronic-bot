@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_cyclops_eye = "cyclops_eye";
-
 // Cyclops personality: dramatic, powerful, one eye shows it all
 static constexpr float CYCLOPS_EMOTION_INTENSITY = 1.3f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t cyclops_eye_init(void)
 {
-    ESP_LOGI(TAG_cyclops_eye, "Initializing cyclops eye with dramatic emotion intensity %.2f", CYCLOPS_EMOTION_INTENSITY);
+    ESP_LOGI("cyclops_eye", "Initializing cyclops eye with dramatic emotion intensity %.2f", CYCLOPS_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_cyclops_eye, "Failed to get frame buffer");
+        ESP_LOGE("cyclops_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t cyclops_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_cyclops_eye, "Cyclops eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("cyclops_eye", "Cyclops eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 

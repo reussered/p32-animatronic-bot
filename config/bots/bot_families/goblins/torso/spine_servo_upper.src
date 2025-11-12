@@ -2,12 +2,10 @@
 #include "components/spine_servo_upper.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "spine_servo_upper";
-
 esp_err_t spine_servo_upper_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("spine_servo_upper", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t spine_servo_upper_init(void)
 void spine_servo_upper_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("spine_servo_upper", "act executed");
     #endif
 }

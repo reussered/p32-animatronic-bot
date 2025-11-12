@@ -3,15 +3,13 @@
 #include "right_eye_display.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "right_eye_display";
-
 esp_err_t right_eye_display_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("right_eye_display", "init executed");
     return ESP_OK;
 }
 
 void right_eye_display_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("right_eye_display", "act executed");
 }

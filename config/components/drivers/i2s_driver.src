@@ -5,7 +5,8 @@
 #include "esp_timer.h"
 #include <math.h>
 
-static const char *TAG_i2s_driver = "i2s_driver";
+// Forward declarations
+static float generate_goblin_waveform(float sample_time, float base_freq);
 
 // Debug audio configuration
 #define DEBUG_AUDIO_MODE 1      // Set to 0 for real I2S hardware
@@ -36,9 +37,9 @@ static debug_audio_state_t audio_state = {
 
 esp_err_t i2s_driver_init(void) {
     if (DEBUG_AUDIO_MODE) {
-        ESP_LOGI(TAG_i2s_driver, "I2S driver init (DEBUG AUDIO MODE)");
-        ESP_LOGI(TAG_i2s_driver, "Audio will be streamed to PC via serial");
-        ESP_LOGI(TAG_i2s_driver, "Sample rate: %d Hz, Channels: %d", SAMPLE_RATE, CHANNELS);
+        ESP_LOGI("i2s_driver", "I2S driver init (DEBUG AUDIO MODE)");
+        ESP_LOGI("i2s_driver", "Audio will be streamed to PC via serial");
+        ESP_LOGI("i2s_driver", "Sample rate: %d Hz, Channels: %d", SAMPLE_RATE, CHANNELS);
         
         // Print header for PC audio capture script
         printf("AUDIO_STREAM_START\n");
@@ -49,7 +50,7 @@ esp_err_t i2s_driver_init(void) {
         printf("AUDIO_HEADER_END\n");
         
     } else {
-        ESP_LOGI(TAG_i2s_driver, "I2S driver init (HARDWARE MODE)");
+        ESP_LOGI("i2s_driver", "I2S driver init (HARDWARE MODE)");
         // TODO: Initialize real I2S hardware on GPIO 4,5,6
     }
     
@@ -127,7 +128,7 @@ static float generate_goblin_waveform(float sample_time, float base_freq) {
  * @brief Start playing a sound effect
  */
 void i2s_driver_play_sound(const char* sound_name, float frequency, float volume) {
-    ESP_LOGI(TAG_i2s_driver, "Playing sound: %s (%.1f Hz, %.1f vol)", sound_name, frequency, volume);
+    ESP_LOGI("i2s_driver", "Playing sound: %s (%.1f Hz, %.1f vol)", sound_name, frequency, volume);
     
     strncpy(audio_state.sound_type, sound_name, sizeof(audio_state.sound_type) - 1);
     audio_state.frequency_hz = frequency;
@@ -158,7 +159,7 @@ void i2s_driver_play_sound(const char* sound_name, float frequency, float volume
  * @brief Stop audio playback
  */
 void i2s_driver_stop_sound(void) {
-    ESP_LOGI(TAG_i2s_driver, "Stopping audio playback");
+    ESP_LOGI("i2s_driver", "Stopping audio playback");
     audio_state.playing = false;
     strcpy(audio_state.sound_type, "idle");
     

@@ -9,8 +9,6 @@
 #include "components/spi_data_bus.hdr"
 #include <stddef.h>
 
-static const char *TAG_spi_data_bus = "spi_data_bus";
-
 static constexpr size_t SPI_DATA_SLOT_COUNT = 32U;
 static spi_data_pinset_t spi_data_slots[SPI_DATA_SLOT_COUNT];
 spi_data_pinset_t cur_spi_data_pin;
@@ -29,7 +27,7 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
 
         if (!already_claimed) {
             if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
-                ESP_LOGE(TAG_spi_data_bus, "Assigned pin buffer exhausted");
+                ESP_LOGE("spi_data_bus", "Assigned pin buffer exhausted");
                 esp_system_abort("Assigned pin buffer exhausted");
             }
 
@@ -38,7 +36,7 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
         }
     }
 
-    ESP_LOGE(TAG_spi_data_bus, "No assignable pins remain for SPI data bus");
+    ESP_LOGE("spi_data_bus", "No assignable pins remain for SPI data bus");
     esp_system_abort("SPI data bus ran out of assignable pins");
     return -1;
 }
@@ -49,7 +47,7 @@ esp_err_t spi_data_bus_init(void) {
 
     if (device_count >= SPI_DATA_SLOT_COUNT) 
     {
-        ESP_LOGE(TAG_spi_data_bus, "No remaining SPI data device slots available");
+        ESP_LOGE("spi_data_bus", "No remaining SPI data device slots available");
         return ESP_FAIL;
     }
 
@@ -72,11 +70,11 @@ esp_err_t spi_data_bus_init(void) {
         const esp_err_t ret = spi_bus_initialize(SPI3_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
         if (ret != ESP_OK) 
         {
-            ESP_LOGE(TAG_spi_data_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            ESP_LOGE("spi_data_bus", "spi_bus_initialize failed: %s", esp_err_to_name(ret));
             return ret;
         }
 
-        ESP_LOGI(TAG_spi_data_bus,
+        ESP_LOGI("spi_data_bus",
                  "Shared SPI data pins assigned MOSI:%d MISO:%d CLK:%d",
                  spi_data_slots[0].mosi,
                  spi_data_slots[0].miso,
@@ -95,7 +93,7 @@ esp_err_t spi_data_bus_init(void) {
     spi_data_slots[device_count].cs = get_next_assignable(spi_assignable, spi_assignable_count);
     spi_data_slots[device_count].handle = nullptr;
 
-    ESP_LOGI(TAG_spi_data_bus,
+    ESP_LOGI("spi_data_bus",
              "Data slot %u assigned unique pin CS:%d",
              static_cast<unsigned>(device_count),
              spi_data_slots[device_count].cs);

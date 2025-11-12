@@ -2,12 +2,10 @@
 #include "components/elf_speaker.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "elf_speaker";
-
 esp_err_t elf_speaker_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("elf_speaker", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t elf_speaker_init(void)
 void elf_speaker_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("elf_speaker", "act executed");
     #endif
 }

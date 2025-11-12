@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_cat_eye = "cat_eye";
-
 // Cat personality: subtle, aloof, controlled - shows emotions carefully
 static constexpr float CAT_EMOTION_INTENSITY = 0.8f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t cat_eye_init(void)
 {
-    ESP_LOGI(TAG_cat_eye, "Initializing cat eye with controlled emotion intensity %.2f", CAT_EMOTION_INTENSITY);
+    ESP_LOGI("cat_eye", "Initializing cat eye with controlled emotion intensity %.2f", CAT_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_cat_eye, "Failed to get frame buffer");
+        ESP_LOGE("cat_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t cat_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_cat_eye, "Cat eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("cat_eye", "Cat eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 

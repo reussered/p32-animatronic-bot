@@ -31,23 +31,10 @@
  * @struct MoodColorEffect
  * @brief Color effect multipliers for a single mood component
  * 
- * Defines how a mood component (anger, fear, etc.) affects R, G, B channels.
- * Values are multipliers that are scaled by mood intensity (-128 to +127).
- * 
- * Example:
- *   MoodColorEffect(0.8f, -0.3f, -0.3f)
- *   - Anger (value 80): adds 0.8*80 = 64 red, removes 0.3*80 = 24 green/blue
+ * NOTE: MoodColorEffect is now defined in with.hpp to avoid redefinition errors
+ * when both with.hpp and PixelType.hpp are included together.
  */
-struct MoodColorEffect {
-    float red_multiplier;    // Red channel effect (-1.0 to +1.0)
-    float green_multiplier;  // Green channel effect (-1.0 to +1.0)
-    float blue_multiplier;   // Blue channel effect (-1.0 to +1.0)
-    
-    MoodColorEffect(float r = 0.0f, float g = 0.0f, float b = 0.0f)
-        : red_multiplier(r), green_multiplier(g), blue_multiplier(b)
-    {
-    }
-};
+// struct MoodColorEffect - see with.hpp for definition
 
 /**
  * @brief Apply mood-based color adjustments to a pixel buffer
@@ -110,15 +97,11 @@ void adjustMood(
     for (uint32_t i = 0; i < pixel_count; ++i) {
         PixelType& pixel = buffer[i];
         
-        // Each PixelType must implement saturating add operators
-        // Example for RGB565:
-        //   pixel.r += r_delta;  (clamps internally)
-        //   pixel.g += g_delta;
-        //   pixel.b += b_delta;
-        
-        pixel.r = pixel.r + r_delta;  // Relies on PixelType's operator+= implementation
-        pixel.g = pixel.g + g_delta;
-        pixel.b = pixel.b + b_delta;
+        // Apply deltas to red, green, blue members
+        // Each PixelType (Pixel_RGB565, Pixel_RGB888, etc.) has red, green, blue members
+        pixel.red = pixel.red + r_delta;
+        pixel.green = pixel.green + g_delta;
+        pixel.blue = pixel.blue + b_delta;
     }
 }
 

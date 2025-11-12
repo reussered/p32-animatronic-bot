@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_bear_eye = "bear_eye";
-
 // Bear personality: calm, stoic, gentle - shows emotions subtly
 static constexpr float BEAR_EMOTION_INTENSITY = 0.5f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t bear_eye_init(void)
 {
-    ESP_LOGI(TAG_bear_eye, "Initializing bear eye with gentle emotion intensity %.2f", BEAR_EMOTION_INTENSITY);
+    ESP_LOGI("bear_eye", "Initializing bear eye with gentle emotion intensity %.2f", BEAR_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_bear_eye, "Failed to get frame buffer");
+        ESP_LOGE("bear_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t bear_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_bear_eye, "Bear eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("bear_eye", "Bear eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 

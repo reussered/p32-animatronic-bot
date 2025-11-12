@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize servo_motor_standard component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t servo_motor_standard_init(void);
  * Called periodically by subsystem dispatcher
  */
 void servo_motor_standard_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // SERVO_MOTOR_STANDARD_HDR

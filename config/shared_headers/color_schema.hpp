@@ -27,6 +27,263 @@
 // Forward declaration
 struct Pixel_RGB565;
 
+/**
+ * @class Pixel_RGB888
+ * @brief 8-8-8 bit RGB color format (24-bit per pixel)
+ * 
+ * Memory layout: RRRRRRRR GGGGGGGG BBBBBBBB
+ * - Red: 8 bits (0-255)
+ * - Green: 8 bits (0-255)
+ * - Blue: 8 bits (0-255)
+ * 
+ * Total: 3 bytes per pixel
+ * Example: 240x240 display = 172,800 bytes (168.75 KB)
+ * 
+ * Highest color fidelity, used by:
+ * - Large OLED displays (AMOLED, etc.)
+ * - High-end LCD displays
+ * - Displays where color accuracy is critical
+ */
+struct Pixel_RGB888
+{
+    uint8_t r, g, b;
+    
+    // Default constructor
+    Pixel_RGB888() : r(0), g(0), b(0) {}
+    
+    // Constructor from 8-bit RGB components
+    Pixel_RGB888(uint8_t r_val, uint8_t g_val, uint8_t b_val)
+        : r(r_val), g(g_val), b(b_val)
+    {}
+       
+    static const unsigned int bytes_per_pixel = 3;
+    // Extract RGB components (no conversion needed - already 8-bit)
+    uint8_t red() const   { return r; }
+    uint8_t green() const { return g; }
+    uint8_t blue() const  { return b; }
+    
+    // Static color constants
+    static constexpr Pixel_RGB888 Red()   { return Pixel_RGB888(255, 0,   0); }
+    static constexpr Pixel_RGB888 Green() { return Pixel_RGB888(0,   255, 0); }
+    static constexpr Pixel_RGB888 Blue()  { return Pixel_RGB888(0,   0,   255); }
+    static constexpr Pixel_RGB888 White() { return Pixel_RGB888(255, 255, 255); }
+    static constexpr Pixel_RGB888 Black() { return Pixel_RGB888(0,   0,   0); }
+    static constexpr Pixel_RGB888 Yellow(){ return Pixel_RGB888(255, 255, 0); }
+    static constexpr Pixel_RGB888 Cyan()  { return Pixel_RGB888(0,   255, 255); }
+    static constexpr Pixel_RGB888 Magenta(){ return Pixel_RGB888(255, 0,   255); }
+    
+    // CSS Standard Colors
+    static constexpr Pixel_RGB888 aliceblue()          { return Pixel_RGB888(240, 248, 255); }
+    static constexpr Pixel_RGB888 antiquewhite()       { return Pixel_RGB888(250, 235, 215); }
+    static constexpr Pixel_RGB888 aqua()               { return Pixel_RGB888(0,   255, 255); }
+    static constexpr Pixel_RGB888 aquamarine()         { return Pixel_RGB888(127, 255, 212); }
+    static constexpr Pixel_RGB888 azure()              { return Pixel_RGB888(240, 255, 255); }
+    static constexpr Pixel_RGB888 beige()              { return Pixel_RGB888(245, 245, 220); }
+    static constexpr Pixel_RGB888 bisque()             { return Pixel_RGB888(255, 228, 196); }
+    static constexpr Pixel_RGB888 blanchedalmond()     { return Pixel_RGB888(255, 235, 205); }
+    static constexpr Pixel_RGB888 blueviolet()         { return Pixel_RGB888(138, 43,  226); }
+    static constexpr Pixel_RGB888 brown()              { return Pixel_RGB888(165, 42,  42); }
+    static constexpr Pixel_RGB888 burlywood()          { return Pixel_RGB888(222, 184, 135); }
+    static constexpr Pixel_RGB888 cadetblue()          { return Pixel_RGB888(95,  158, 160); }
+    static constexpr Pixel_RGB888 chartreuse()         { return Pixel_RGB888(127, 255, 0); }
+    static constexpr Pixel_RGB888 chocolate()          { return Pixel_RGB888(210, 105, 30); }
+    static constexpr Pixel_RGB888 coral()              { return Pixel_RGB888(255, 127, 80); }
+    static constexpr Pixel_RGB888 cornflowerblue()     { return Pixel_RGB888(100, 149, 237); }
+    static constexpr Pixel_RGB888 cornsilk()           { return Pixel_RGB888(255, 248, 220); }
+    static constexpr Pixel_RGB888 crimson()            { return Pixel_RGB888(220, 20,  60); }
+    static constexpr Pixel_RGB888 darkblue()           { return Pixel_RGB888(0,   0,   139); }
+    static constexpr Pixel_RGB888 darkcyan()           { return Pixel_RGB888(0,   139, 139); }
+    static constexpr Pixel_RGB888 darkgoldenrod()      { return Pixel_RGB888(184, 134, 11); }
+    static constexpr Pixel_RGB888 darkgray()           { return Pixel_RGB888(169, 169, 169); }
+    static constexpr Pixel_RGB888 darkgreen()          { return Pixel_RGB888(0,   100, 0); }
+    static constexpr Pixel_RGB888 darkkhaki()          { return Pixel_RGB888(189, 183, 107); }
+    static constexpr Pixel_RGB888 darkmagenta()        { return Pixel_RGB888(139, 0,   139); }
+    static constexpr Pixel_RGB888 darkolivegreen()     { return Pixel_RGB888(85,  107, 47); }
+    static constexpr Pixel_RGB888 darkorange()         { return Pixel_RGB888(255, 140, 0); }
+    static constexpr Pixel_RGB888 darkorchid()         { return Pixel_RGB888(153, 50,  204); }
+    static constexpr Pixel_RGB888 darkred()            { return Pixel_RGB888(139, 0,   0); }
+    static constexpr Pixel_RGB888 darksalmon()         { return Pixel_RGB888(233, 150, 122); }
+    static constexpr Pixel_RGB888 darkseagreen()       { return Pixel_RGB888(143, 188, 143); }
+    static constexpr Pixel_RGB888 darkslateblue()      { return Pixel_RGB888(72,  61,  139); }
+    static constexpr Pixel_RGB888 darkslategray()      { return Pixel_RGB888(47,  79,  79); }
+    static constexpr Pixel_RGB888 darkturquoise()      { return Pixel_RGB888(0,   206, 209); }
+    static constexpr Pixel_RGB888 darkviolet()         { return Pixel_RGB888(148, 0,   211); }
+    static constexpr Pixel_RGB888 deeppink()           { return Pixel_RGB888(255, 20,  147); }
+    static constexpr Pixel_RGB888 deepskyblue()        { return Pixel_RGB888(0,   191, 255); }
+    static constexpr Pixel_RGB888 dimgray()            { return Pixel_RGB888(105, 105, 105); }
+    static constexpr Pixel_RGB888 dodgerblue()         { return Pixel_RGB888(30,  144, 255); }
+    static constexpr Pixel_RGB888 firebrick()          { return Pixel_RGB888(178, 34,  34); }
+    static constexpr Pixel_RGB888 floralwhite()        { return Pixel_RGB888(255, 250, 240); }
+    static constexpr Pixel_RGB888 forestgreen()        { return Pixel_RGB888(34,  139, 34); }
+    static constexpr Pixel_RGB888 fuchsia()            { return Pixel_RGB888(255, 0,   255); }
+    static constexpr Pixel_RGB888 gainsboro()          { return Pixel_RGB888(220, 220, 220); }
+    static constexpr Pixel_RGB888 ghostwhite()         { return Pixel_RGB888(248, 248, 255); }
+    static constexpr Pixel_RGB888 gold()               { return Pixel_RGB888(255, 215, 0); }
+    static constexpr Pixel_RGB888 goldenrod()          { return Pixel_RGB888(218, 165, 32); }
+    static constexpr Pixel_RGB888 gray()               { return Pixel_RGB888(128, 128, 128); }
+    static constexpr Pixel_RGB888 grey()               { return Pixel_RGB888(128, 128, 128); }
+    static constexpr Pixel_RGB888 greenyellow()        { return Pixel_RGB888(173, 255, 47); }
+    static constexpr Pixel_RGB888 honeydew()           { return Pixel_RGB888(240, 255, 240); }
+    static constexpr Pixel_RGB888 hotpink()            { return Pixel_RGB888(255, 105, 180); }
+    static constexpr Pixel_RGB888 indianred()          { return Pixel_RGB888(205, 92,  92); }
+    static constexpr Pixel_RGB888 indigo()             { return Pixel_RGB888(75,  0,   130); }
+    static constexpr Pixel_RGB888 ivory()              { return Pixel_RGB888(255, 255, 240); }
+    static constexpr Pixel_RGB888 khaki()              { return Pixel_RGB888(240, 230, 140); }
+    static constexpr Pixel_RGB888 lavender()           { return Pixel_RGB888(230, 230, 250); }
+    static constexpr Pixel_RGB888 lavenderblush()      { return Pixel_RGB888(255, 240, 245); }
+    static constexpr Pixel_RGB888 lawngreen()          { return Pixel_RGB888(124, 252, 0); }
+    static constexpr Pixel_RGB888 lemonchiffon()       { return Pixel_RGB888(255, 250, 205); }
+    static constexpr Pixel_RGB888 lightblue()          { return Pixel_RGB888(173, 216, 230); }
+    static constexpr Pixel_RGB888 lightcoral()         { return Pixel_RGB888(240, 128, 128); }
+    static constexpr Pixel_RGB888 lightcyan()          { return Pixel_RGB888(224, 255, 255); }
+    static constexpr Pixel_RGB888 lightgoldenrodyellow(){ return Pixel_RGB888(250, 250, 210); }
+    static constexpr Pixel_RGB888 lightgray()          { return Pixel_RGB888(211, 211, 211); }
+    static constexpr Pixel_RGB888 lightgrey()          { return Pixel_RGB888(211, 211, 211); }
+    static constexpr Pixel_RGB888 lightgreen()         { return Pixel_RGB888(144, 238, 144); }
+    static constexpr Pixel_RGB888 lightpink()          { return Pixel_RGB888(255, 182, 193); }
+    static constexpr Pixel_RGB888 lightsalmon()        { return Pixel_RGB888(255, 160, 122); }
+    static constexpr Pixel_RGB888 lightseagreen()      { return Pixel_RGB888(32,  178, 170); }
+    static constexpr Pixel_RGB888 lightskyblue()       { return Pixel_RGB888(135, 206, 250); }
+    static constexpr Pixel_RGB888 lightslategray()     { return Pixel_RGB888(119, 136, 153); }
+    static constexpr Pixel_RGB888 lightslategrey()     { return Pixel_RGB888(119, 136, 153); }
+    static constexpr Pixel_RGB888 lightsteelblue()     { return Pixel_RGB888(176, 196, 222); }
+    static constexpr Pixel_RGB888 lightyellow()        { return Pixel_RGB888(255, 255, 224); }
+    static constexpr Pixel_RGB888 lime()               { return Pixel_RGB888(0,   255, 0); }
+    static constexpr Pixel_RGB888 limegreen()          { return Pixel_RGB888(50,  205, 50); }
+    static constexpr Pixel_RGB888 linen()              { return Pixel_RGB888(250, 240, 230); }
+    static constexpr Pixel_RGB888 maroon()             { return Pixel_RGB888(128, 0,   0); }
+    static constexpr Pixel_RGB888 mediumaquamarine()   { return Pixel_RGB888(102, 205, 170); }
+    static constexpr Pixel_RGB888 mediumblue()         { return Pixel_RGB888(0,   0,   205); }
+    static constexpr Pixel_RGB888 mediumorchid()       { return Pixel_RGB888(186, 85,  211); }
+    static constexpr Pixel_RGB888 mediumpurple()       { return Pixel_RGB888(147, 112, 219); }
+    static constexpr Pixel_RGB888 mediumseagreen()     { return Pixel_RGB888(60,  179, 113); }
+    static constexpr Pixel_RGB888 mediumslateblue()    { return Pixel_RGB888(123, 104, 238); }
+    static constexpr Pixel_RGB888 mediumspringgreen()  { return Pixel_RGB888(0,   250, 154); }
+    static constexpr Pixel_RGB888 mediumturquoise()    { return Pixel_RGB888(72,  209, 204); }
+    static constexpr Pixel_RGB888 mediumvioletred()    { return Pixel_RGB888(199, 21,  133); }
+    static constexpr Pixel_RGB888 midnightblue()       { return Pixel_RGB888(25,  25,  112); }
+    static constexpr Pixel_RGB888 mintcream()          { return Pixel_RGB888(245, 255, 250); }
+    static constexpr Pixel_RGB888 mistyrose()          { return Pixel_RGB888(255, 228, 225); }
+    static constexpr Pixel_RGB888 moccasin()           { return Pixel_RGB888(255, 228, 181); }
+    static constexpr Pixel_RGB888 navajowhite()        { return Pixel_RGB888(255, 222, 173); }
+    static constexpr Pixel_RGB888 navy()               { return Pixel_RGB888(0,   0,   128); }
+    static constexpr Pixel_RGB888 oldlace()            { return Pixel_RGB888(253, 245, 230); }
+    static constexpr Pixel_RGB888 olive()              { return Pixel_RGB888(128, 128, 0); }
+    static constexpr Pixel_RGB888 olivedrab()          { return Pixel_RGB888(107, 142, 35); }
+    static constexpr Pixel_RGB888 orange()             { return Pixel_RGB888(255, 165, 0); }
+    static constexpr Pixel_RGB888 orangered()          { return Pixel_RGB888(255, 69,  0); }
+    static constexpr Pixel_RGB888 orchid()             { return Pixel_RGB888(218, 112, 214); }
+    static constexpr Pixel_RGB888 palegoldenrod()      { return Pixel_RGB888(238, 232, 170); }
+    static constexpr Pixel_RGB888 palegreen()          { return Pixel_RGB888(152, 251, 152); }
+    static constexpr Pixel_RGB888 paleturquoise()      { return Pixel_RGB888(175, 238, 238); }
+    static constexpr Pixel_RGB888 palevioletred()      { return Pixel_RGB888(219, 112, 147); }
+    static constexpr Pixel_RGB888 papayawhip()         { return Pixel_RGB888(255, 239, 213); }
+    static constexpr Pixel_RGB888 peachpuff()          { return Pixel_RGB888(255, 218, 185); }
+    static constexpr Pixel_RGB888 peru()               { return Pixel_RGB888(205, 133, 63); }
+    static constexpr Pixel_RGB888 pink()               { return Pixel_RGB888(255, 192, 203); }
+    static constexpr Pixel_RGB888 plum()               { return Pixel_RGB888(221, 160, 221); }
+    static constexpr Pixel_RGB888 powderblue()         { return Pixel_RGB888(176, 224, 230); }
+    static constexpr Pixel_RGB888 purple()             { return Pixel_RGB888(128, 0,   128); }
+    static constexpr Pixel_RGB888 rebeccapurple()      { return Pixel_RGB888(102, 51,  153); }
+    static constexpr Pixel_RGB888 rosybrown()          { return Pixel_RGB888(188, 143, 143); }
+    static constexpr Pixel_RGB888 royalblue()          { return Pixel_RGB888(65,  105, 225); }
+    static constexpr Pixel_RGB888 saddlebrown()        { return Pixel_RGB888(139, 69,  19); }
+    static constexpr Pixel_RGB888 salmon()             { return Pixel_RGB888(250, 128, 114); }
+    static constexpr Pixel_RGB888 sandybrown()         { return Pixel_RGB888(244, 164, 96); }
+    static constexpr Pixel_RGB888 seagreen()           { return Pixel_RGB888(46,  139, 87); }
+    static constexpr Pixel_RGB888 seashell()           { return Pixel_RGB888(255, 245, 238); }
+    static constexpr Pixel_RGB888 sienna()             { return Pixel_RGB888(160, 82,  45); }
+    static constexpr Pixel_RGB888 silver()             { return Pixel_RGB888(192, 192, 192); }
+    static constexpr Pixel_RGB888 skyblue()            { return Pixel_RGB888(135, 206, 235); }
+    static constexpr Pixel_RGB888 slateblue()          { return Pixel_RGB888(106, 90,  205); }
+    static constexpr Pixel_RGB888 slategray()          { return Pixel_RGB888(112, 128, 144); }
+    static constexpr Pixel_RGB888 slategrey()          { return Pixel_RGB888(112, 128, 144); }
+    static constexpr Pixel_RGB888 snow()               { return Pixel_RGB888(255, 250, 250); }
+    static constexpr Pixel_RGB888 springgreen()        { return Pixel_RGB888(0,   255, 127); }
+    static constexpr Pixel_RGB888 steelblue()          { return Pixel_RGB888(70,  130, 180); }
+    static constexpr Pixel_RGB888 tan()                { return Pixel_RGB888(210, 180, 140); }
+    static constexpr Pixel_RGB888 teal()               { return Pixel_RGB888(0,   128, 128); }
+    static constexpr Pixel_RGB888 thistle()            { return Pixel_RGB888(216, 191, 216); }
+    static constexpr Pixel_RGB888 tomato()             { return Pixel_RGB888(255, 99,  71); }
+    static constexpr Pixel_RGB888 turquoise()          { return Pixel_RGB888(64,  224, 208); }
+    static constexpr Pixel_RGB888 violet()             { return Pixel_RGB888(238, 130, 238); }
+    static constexpr Pixel_RGB888 wheat()              { return Pixel_RGB888(245, 245, 220); }
+    static constexpr Pixel_RGB888 whitesmoke()         { return Pixel_RGB888(245, 245, 245); }
+    static constexpr Pixel_RGB888 yellowgreen()        { return Pixel_RGB888(154, 205, 50); }
+    
+    // Assignment operator
+    Pixel_RGB888& operator=(const Pixel_RGB888& other)
+    {
+        r = other.r;
+        g = other.g;
+        b = other.b;
+        return *this;
+    }
+    
+    // Comparison operators
+    bool operator==(const Pixel_RGB888& other) const 
+    { 
+        return (r == other.r) && (g == other.g) && (b == other.b); 
+    }
+    
+    bool operator!=(const Pixel_RGB888& other) const 
+    { 
+        return !(*this == other); 
+    }
+    
+    // Arithmetic operators for color blending/accumulation
+    Pixel_RGB888 operator+(const Pixel_RGB888& other) const
+    {
+        return Pixel_RGB888(
+            ((r + other.r) > 255) ? 255 : (r + other.r),
+            ((g + other.g) > 255) ? 255 : (g + other.g),
+            ((b + other.b) > 255) ? 255 : (b + other.b)
+        );
+    }
+    
+    Pixel_RGB888& operator+=(const Pixel_RGB888& other)
+    {
+        r = ((r + other.r) > 255) ? 255 : (r + other.r);
+        g = ((g + other.g) > 255) ? 255 : (g + other.g);
+        b = ((b + other.b) > 255) ? 255 : (b + other.b);
+        return *this;
+    }
+    
+    // Conversion operator to uint8_t* (returns pointer to the byte storage)
+    explicit operator uint8_t*() 
+    { 
+        return reinterpret_cast<uint8_t*>(this); 
+    }
+    
+    explicit operator const uint8_t*() const 
+    { 
+        return reinterpret_cast<const uint8_t*>(this); 
+    }
+    
+    // Generic byte casting interface
+    // Transform FROM raw bytes TO typed pixels
+    static Pixel_RGB888* fromBytes(uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<Pixel_RGB888*>(byte_ptr);
+    }
+    
+    static const Pixel_RGB888* fromBytes(const uint8_t* byte_ptr)
+    {
+        return reinterpret_cast<const Pixel_RGB888*>(byte_ptr);
+    }
+    
+    // Transform FROM typed pixel TO raw bytes
+    uint8_t* toBytes()
+    {
+        return reinterpret_cast<uint8_t*>(this);
+    }
+    
+    const uint8_t* toBytes() const
+    {
+        return reinterpret_cast<const uint8_t*>(this);
+    }
+};
+
 // Global InitialPixel - must be set before allocating buffers containing Pixel_RGB565s
 extern Pixel_RGB565 RGB565_InitialPixel;
 
@@ -570,262 +827,6 @@ struct Pixel_RGB666
 };
 
 
-/**
- * @class Pixel_RGB888
- * @brief 8-8-8 bit RGB color format (24-bit per pixel)
- * 
- * Memory layout: RRRRRRRR GGGGGGGG BBBBBBBB
- * - Red: 8 bits (0-255)
- * - Green: 8 bits (0-255)
- * - Blue: 8 bits (0-255)
- * 
- * Total: 3 bytes per pixel
- * Example: 240x240 display = 172,800 bytes (168.75 KB)
- * 
- * Highest color fidelity, used by:
- * - Large OLED displays (AMOLED, etc.)
- * - High-end LCD displays
- * - Displays where color accuracy is critical
- */
-struct Pixel_RGB888
-{
-    uint8_t r, g, b;
-    
-    // Default constructor
-    Pixel_RGB888() : r(0), g(0), b(0) {}
-    
-    // Constructor from 8-bit RGB components
-    Pixel_RGB888(uint8_t r_val, uint8_t g_val, uint8_t b_val)
-        : r(r_val), g(g_val), b(b_val)
-    {}
-       
-    static const unsigned int bytes_per_pixel = 3;
-    // Extract RGB components (no conversion needed - already 8-bit)
-    uint8_t red() const   { return r; }
-    uint8_t green() const { return g; }
-    uint8_t blue() const  { return b; }
-    
-    // Static color constants
-    static constexpr Pixel_RGB888 Red()   { return Pixel_RGB888(255, 0,   0); }
-    static constexpr Pixel_RGB888 Green() { return Pixel_RGB888(0,   255, 0); }
-    static constexpr Pixel_RGB888 Blue()  { return Pixel_RGB888(0,   0,   255); }
-    static constexpr Pixel_RGB888 White() { return Pixel_RGB888(255, 255, 255); }
-    static constexpr Pixel_RGB888 Black() { return Pixel_RGB888(0,   0,   0); }
-    static constexpr Pixel_RGB888 Yellow(){ return Pixel_RGB888(255, 255, 0); }
-    static constexpr Pixel_RGB888 Cyan()  { return Pixel_RGB888(0,   255, 255); }
-    static constexpr Pixel_RGB888 Magenta(){ return Pixel_RGB888(255, 0,   255); }
-    
-    // CSS Standard Colors
-    static constexpr Pixel_RGB888 aliceblue()          { return Pixel_RGB888(240, 248, 255); }
-    static constexpr Pixel_RGB888 antiquewhite()       { return Pixel_RGB888(250, 235, 215); }
-    static constexpr Pixel_RGB888 aqua()               { return Pixel_RGB888(0,   255, 255); }
-    static constexpr Pixel_RGB888 aquamarine()         { return Pixel_RGB888(127, 255, 212); }
-    static constexpr Pixel_RGB888 azure()              { return Pixel_RGB888(240, 255, 255); }
-    static constexpr Pixel_RGB888 beige()              { return Pixel_RGB888(245, 245, 220); }
-    static constexpr Pixel_RGB888 bisque()             { return Pixel_RGB888(255, 228, 196); }
-    static constexpr Pixel_RGB888 blanchedalmond()     { return Pixel_RGB888(255, 235, 205); }
-    static constexpr Pixel_RGB888 blueviolet()         { return Pixel_RGB888(138, 43,  226); }
-    static constexpr Pixel_RGB888 brown()              { return Pixel_RGB888(165, 42,  42); }
-    static constexpr Pixel_RGB888 burlywood()          { return Pixel_RGB888(222, 184, 135); }
-    static constexpr Pixel_RGB888 cadetblue()          { return Pixel_RGB888(95,  158, 160); }
-    static constexpr Pixel_RGB888 chartreuse()         { return Pixel_RGB888(127, 255, 0); }
-    static constexpr Pixel_RGB888 chocolate()          { return Pixel_RGB888(210, 105, 30); }
-    static constexpr Pixel_RGB888 coral()              { return Pixel_RGB888(255, 127, 80); }
-    static constexpr Pixel_RGB888 cornflowerblue()     { return Pixel_RGB888(100, 149, 237); }
-    static constexpr Pixel_RGB888 cornsilk()           { return Pixel_RGB888(255, 248, 220); }
-    static constexpr Pixel_RGB888 crimson()            { return Pixel_RGB888(220, 20,  60); }
-    static constexpr Pixel_RGB888 darkblue()           { return Pixel_RGB888(0,   0,   139); }
-    static constexpr Pixel_RGB888 darkcyan()           { return Pixel_RGB888(0,   139, 139); }
-    static constexpr Pixel_RGB888 darkgoldenrod()      { return Pixel_RGB888(184, 134, 11); }
-    static constexpr Pixel_RGB888 darkgray()           { return Pixel_RGB888(169, 169, 169); }
-    static constexpr Pixel_RGB888 darkgreen()          { return Pixel_RGB888(0,   100, 0); }
-    static constexpr Pixel_RGB888 darkkhaki()          { return Pixel_RGB888(189, 183, 107); }
-    static constexpr Pixel_RGB888 darkmagenta()        { return Pixel_RGB888(139, 0,   139); }
-    static constexpr Pixel_RGB888 darkolivegreen()     { return Pixel_RGB888(85,  107, 47); }
-    static constexpr Pixel_RGB888 darkorange()         { return Pixel_RGB888(255, 140, 0); }
-    static constexpr Pixel_RGB888 darkorchid()         { return Pixel_RGB888(153, 50,  204); }
-    static constexpr Pixel_RGB888 darkred()            { return Pixel_RGB888(139, 0,   0); }
-    static constexpr Pixel_RGB888 darksalmon()         { return Pixel_RGB888(233, 150, 122); }
-    static constexpr Pixel_RGB888 darkseagreen()       { return Pixel_RGB888(143, 188, 143); }
-    static constexpr Pixel_RGB888 darkslateblue()      { return Pixel_RGB888(72,  61,  139); }
-    static constexpr Pixel_RGB888 darkslategray()      { return Pixel_RGB888(47,  79,  79); }
-    static constexpr Pixel_RGB888 darkturquoise()      { return Pixel_RGB888(0,   206, 209); }
-    static constexpr Pixel_RGB888 darkviolet()         { return Pixel_RGB888(148, 0,   211); }
-    static constexpr Pixel_RGB888 deeppink()           { return Pixel_RGB888(255, 20,  147); }
-    static constexpr Pixel_RGB888 deepskyblue()        { return Pixel_RGB888(0,   191, 255); }
-    static constexpr Pixel_RGB888 dimgray()            { return Pixel_RGB888(105, 105, 105); }
-    static constexpr Pixel_RGB888 dodgerblue()         { return Pixel_RGB888(30,  144, 255); }
-    static constexpr Pixel_RGB888 firebrick()          { return Pixel_RGB888(178, 34,  34); }
-    static constexpr Pixel_RGB888 floralwhite()        { return Pixel_RGB888(255, 250, 240); }
-    static constexpr Pixel_RGB888 forestgreen()        { return Pixel_RGB888(34,  139, 34); }
-    static constexpr Pixel_RGB888 fuchsia()            { return Pixel_RGB888(255, 0,   255); }
-    static constexpr Pixel_RGB888 gainsboro()          { return Pixel_RGB888(220, 220, 220); }
-    static constexpr Pixel_RGB888 ghostwhite()         { return Pixel_RGB888(248, 248, 255); }
-    static constexpr Pixel_RGB888 gold()               { return Pixel_RGB888(255, 215, 0); }
-    static constexpr Pixel_RGB888 goldenrod()          { return Pixel_RGB888(218, 165, 32); }
-    static constexpr Pixel_RGB888 gray()               { return Pixel_RGB888(128, 128, 128); }
-    static constexpr Pixel_RGB888 grey()               { return Pixel_RGB888(128, 128, 128); }
-    static constexpr Pixel_RGB888 greenyellow()        { return Pixel_RGB888(173, 255, 47); }
-    static constexpr Pixel_RGB888 honeydew()           { return Pixel_RGB888(240, 255, 240); }
-    static constexpr Pixel_RGB888 hotpink()            { return Pixel_RGB888(255, 105, 180); }
-    static constexpr Pixel_RGB888 indianred()          { return Pixel_RGB888(205, 92,  92); }
-    static constexpr Pixel_RGB888 indigo()             { return Pixel_RGB888(75,  0,   130); }
-    static constexpr Pixel_RGB888 ivory()              { return Pixel_RGB888(255, 255, 240); }
-    static constexpr Pixel_RGB888 khaki()              { return Pixel_RGB888(240, 230, 140); }
-    static constexpr Pixel_RGB888 lavender()           { return Pixel_RGB888(230, 230, 250); }
-    static constexpr Pixel_RGB888 lavenderblush()      { return Pixel_RGB888(255, 240, 245); }
-    static constexpr Pixel_RGB888 lawngreen()          { return Pixel_RGB888(124, 252, 0); }
-    static constexpr Pixel_RGB888 lemonchiffon()       { return Pixel_RGB888(255, 250, 205); }
-    static constexpr Pixel_RGB888 lightblue()          { return Pixel_RGB888(173, 216, 230); }
-    static constexpr Pixel_RGB888 lightcoral()         { return Pixel_RGB888(240, 128, 128); }
-    static constexpr Pixel_RGB888 lightcyan()          { return Pixel_RGB888(224, 255, 255); }
-    static constexpr Pixel_RGB888 lightgoldenrodyellow(){ return Pixel_RGB888(250, 250, 210); }
-    static constexpr Pixel_RGB888 lightgray()          { return Pixel_RGB888(211, 211, 211); }
-    static constexpr Pixel_RGB888 lightgrey()          { return Pixel_RGB888(211, 211, 211); }
-    static constexpr Pixel_RGB888 lightgreen()         { return Pixel_RGB888(144, 238, 144); }
-    static constexpr Pixel_RGB888 lightpink()          { return Pixel_RGB888(255, 182, 193); }
-    static constexpr Pixel_RGB888 lightsalmon()        { return Pixel_RGB888(255, 160, 122); }
-    static constexpr Pixel_RGB888 lightseagreen()      { return Pixel_RGB888(32,  178, 170); }
-    static constexpr Pixel_RGB888 lightskyblue()       { return Pixel_RGB888(135, 206, 250); }
-    static constexpr Pixel_RGB888 lightslategray()     { return Pixel_RGB888(119, 136, 153); }
-    static constexpr Pixel_RGB888 lightslategrey()     { return Pixel_RGB888(119, 136, 153); }
-    static constexpr Pixel_RGB888 lightsteelblue()     { return Pixel_RGB888(176, 196, 222); }
-    static constexpr Pixel_RGB888 lightyellow()        { return Pixel_RGB888(255, 255, 224); }
-    static constexpr Pixel_RGB888 lime()               { return Pixel_RGB888(0,   255, 0); }
-    static constexpr Pixel_RGB888 limegreen()          { return Pixel_RGB888(50,  205, 50); }
-    static constexpr Pixel_RGB888 linen()              { return Pixel_RGB888(250, 240, 230); }
-    static constexpr Pixel_RGB888 maroon()             { return Pixel_RGB888(128, 0,   0); }
-    static constexpr Pixel_RGB888 mediumaquamarine()   { return Pixel_RGB888(102, 205, 170); }
-    static constexpr Pixel_RGB888 mediumblue()         { return Pixel_RGB888(0,   0,   205); }
-    static constexpr Pixel_RGB888 mediumorchid()       { return Pixel_RGB888(186, 85,  211); }
-    static constexpr Pixel_RGB888 mediumpurple()       { return Pixel_RGB888(147, 112, 219); }
-    static constexpr Pixel_RGB888 mediumseagreen()     { return Pixel_RGB888(60,  179, 113); }
-    static constexpr Pixel_RGB888 mediumslateblue()    { return Pixel_RGB888(123, 104, 238); }
-    static constexpr Pixel_RGB888 mediumspringgreen()  { return Pixel_RGB888(0,   250, 154); }
-    static constexpr Pixel_RGB888 mediumturquoise()    { return Pixel_RGB888(72,  209, 204); }
-    static constexpr Pixel_RGB888 mediumvioletred()    { return Pixel_RGB888(199, 21,  133); }
-    static constexpr Pixel_RGB888 midnightblue()       { return Pixel_RGB888(25,  25,  112); }
-    static constexpr Pixel_RGB888 mintcream()          { return Pixel_RGB888(245, 255, 250); }
-    static constexpr Pixel_RGB888 mistyrose()          { return Pixel_RGB888(255, 228, 225); }
-    static constexpr Pixel_RGB888 moccasin()           { return Pixel_RGB888(255, 228, 181); }
-    static constexpr Pixel_RGB888 navajowhite()        { return Pixel_RGB888(255, 222, 173); }
-    static constexpr Pixel_RGB888 navy()               { return Pixel_RGB888(0,   0,   128); }
-    static constexpr Pixel_RGB888 oldlace()            { return Pixel_RGB888(253, 245, 230); }
-    static constexpr Pixel_RGB888 olive()              { return Pixel_RGB888(128, 128, 0); }
-    static constexpr Pixel_RGB888 olivedrab()          { return Pixel_RGB888(107, 142, 35); }
-    static constexpr Pixel_RGB888 orange()             { return Pixel_RGB888(255, 165, 0); }
-    static constexpr Pixel_RGB888 orangered()          { return Pixel_RGB888(255, 69,  0); }
-    static constexpr Pixel_RGB888 orchid()             { return Pixel_RGB888(218, 112, 214); }
-    static constexpr Pixel_RGB888 palegoldenrod()      { return Pixel_RGB888(238, 232, 170); }
-    static constexpr Pixel_RGB888 palegreen()          { return Pixel_RGB888(152, 251, 152); }
-    static constexpr Pixel_RGB888 paleturquoise()      { return Pixel_RGB888(175, 238, 238); }
-    static constexpr Pixel_RGB888 palevioletred()      { return Pixel_RGB888(219, 112, 147); }
-    static constexpr Pixel_RGB888 papayawhip()         { return Pixel_RGB888(255, 239, 213); }
-    static constexpr Pixel_RGB888 peachpuff()          { return Pixel_RGB888(255, 218, 185); }
-    static constexpr Pixel_RGB888 peru()               { return Pixel_RGB888(205, 133, 63); }
-    static constexpr Pixel_RGB888 pink()               { return Pixel_RGB888(255, 192, 203); }
-    static constexpr Pixel_RGB888 plum()               { return Pixel_RGB888(221, 160, 221); }
-    static constexpr Pixel_RGB888 powderblue()         { return Pixel_RGB888(176, 224, 230); }
-    static constexpr Pixel_RGB888 purple()             { return Pixel_RGB888(128, 0,   128); }
-    static constexpr Pixel_RGB888 rebeccapurple()      { return Pixel_RGB888(102, 51,  153); }
-    static constexpr Pixel_RGB888 rosybrown()          { return Pixel_RGB888(188, 143, 143); }
-    static constexpr Pixel_RGB888 royalblue()          { return Pixel_RGB888(65,  105, 225); }
-    static constexpr Pixel_RGB888 saddlebrown()        { return Pixel_RGB888(139, 69,  19); }
-    static constexpr Pixel_RGB888 salmon()             { return Pixel_RGB888(250, 128, 114); }
-    static constexpr Pixel_RGB888 sandybrown()         { return Pixel_RGB888(244, 164, 96); }
-    static constexpr Pixel_RGB888 seagreen()           { return Pixel_RGB888(46,  139, 87); }
-    static constexpr Pixel_RGB888 seashell()           { return Pixel_RGB888(255, 245, 238); }
-    static constexpr Pixel_RGB888 sienna()             { return Pixel_RGB888(160, 82,  45); }
-    static constexpr Pixel_RGB888 silver()             { return Pixel_RGB888(192, 192, 192); }
-    static constexpr Pixel_RGB888 skyblue()            { return Pixel_RGB888(135, 206, 235); }
-    static constexpr Pixel_RGB888 slateblue()          { return Pixel_RGB888(106, 90,  205); }
-    static constexpr Pixel_RGB888 slategray()          { return Pixel_RGB888(112, 128, 144); }
-    static constexpr Pixel_RGB888 slategrey()          { return Pixel_RGB888(112, 128, 144); }
-    static constexpr Pixel_RGB888 snow()               { return Pixel_RGB888(255, 250, 250); }
-    static constexpr Pixel_RGB888 springgreen()        { return Pixel_RGB888(0,   255, 127); }
-    static constexpr Pixel_RGB888 steelblue()          { return Pixel_RGB888(70,  130, 180); }
-    static constexpr Pixel_RGB888 tan()                { return Pixel_RGB888(210, 180, 140); }
-    static constexpr Pixel_RGB888 teal()               { return Pixel_RGB888(0,   128, 128); }
-    static constexpr Pixel_RGB888 thistle()            { return Pixel_RGB888(216, 191, 216); }
-    static constexpr Pixel_RGB888 tomato()             { return Pixel_RGB888(255, 99,  71); }
-    static constexpr Pixel_RGB888 turquoise()          { return Pixel_RGB888(64,  224, 208); }
-    static constexpr Pixel_RGB888 violet()             { return Pixel_RGB888(238, 130, 238); }
-    static constexpr Pixel_RGB888 wheat()              { return Pixel_RGB888(245, 245, 220); }
-    static constexpr Pixel_RGB888 whitesmoke()         { return Pixel_RGB888(245, 245, 245); }
-    static constexpr Pixel_RGB888 yellowgreen()        { return Pixel_RGB888(154, 205, 50); }
-    
-    // Assignment operator
-    Pixel_RGB888& operator=(const Pixel_RGB888& other)
-    {
-        r = other.r;
-        g = other.g;
-        b = other.b;
-        return *this;
-    }
-    
-    // Comparison operators
-    bool operator==(const Pixel_RGB888& other) const 
-    { 
-        return (r == other.r) && (g == other.g) && (b == other.b); 
-    }
-    
-    bool operator!=(const Pixel_RGB888& other) const 
-    { 
-        return !(*this == other); 
-    }
-    
-    // Arithmetic operators for color blending/accumulation
-    Pixel_RGB888 operator+(const Pixel_RGB888& other) const
-    {
-        return Pixel_RGB888(
-            ((r + other.r) > 255) ? 255 : (r + other.r),
-            ((g + other.g) > 255) ? 255 : (g + other.g),
-            ((b + other.b) > 255) ? 255 : (b + other.b)
-        );
-    }
-    
-    Pixel_RGB888& operator+=(const Pixel_RGB888& other)
-    {
-        r = ((r + other.r) > 255) ? 255 : (r + other.r);
-        g = ((g + other.g) > 255) ? 255 : (g + other.g);
-        b = ((b + other.b) > 255) ? 255 : (b + other.b);
-        return *this;
-    }
-    
-    // Conversion operator to uint8_t* (returns pointer to the byte storage)
-    explicit operator uint8_t*() 
-    { 
-        return reinterpret_cast<uint8_t*>(this); 
-    }
-    
-    explicit operator const uint8_t*() const 
-    { 
-        return reinterpret_cast<const uint8_t*>(this); 
-    }
-    
-    // Generic byte casting interface
-    // Transform FROM raw bytes TO typed pixels
-    static Pixel_RGB888* fromBytes(uint8_t* byte_ptr)
-    {
-        return reinterpret_cast<Pixel_RGB888*>(byte_ptr);
-    }
-    
-    static const Pixel_RGB888* fromBytes(const uint8_t* byte_ptr)
-    {
-        return reinterpret_cast<const Pixel_RGB888*>(byte_ptr);
-    }
-    
-    // Transform FROM typed pixel TO raw bytes
-    uint8_t* toBytes()
-    {
-        return reinterpret_cast<uint8_t*>(this);
-    }
-    
-    const uint8_t* toBytes() const
-    {
-        return reinterpret_cast<const uint8_t*>(this);
-    }
-};
 
 
 /**

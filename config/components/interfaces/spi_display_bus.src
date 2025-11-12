@@ -14,8 +14,6 @@ static constexpr size_t SPI_DISPLAY_SLOT_COUNT = 32U;
 static spi_display_pinset_t spi_display_slots[SPI_DISPLAY_SLOT_COUNT];
 spi_display_pinset_t cur_spi_display_pin;
 
-static const char *TAG_spi_display_bus = "spi_display_bus";
-
 static spi_display_pinset_t shared_display_pins;
 
 // Helper to claim the next available GPIO from the provided assignable list
@@ -32,7 +30,7 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
 
         if (!already_claimed) {
             if (assigned_pins_count >= (sizeof(assigned_pins) / sizeof(assigned_pins[0]))) {
-                ESP_LOGE(TAG_spi_display_bus, "Assigned pin buffer exhausted");
+                ESP_LOGE("spi_display_bus", "Assigned pin buffer exhausted");
                 esp_system_abort("Assigned pin buffer exhausted");
             }
 
@@ -41,13 +39,13 @@ static int get_next_assignable(const int *assignable, size_t assignable_count) {
         }
     }
 
-    ESP_LOGE(TAG_spi_display_bus, "No assignable pins remain for SPI display bus");
+    ESP_LOGE("spi_display_bus", "No assignable pins remain for SPI display bus");
     esp_system_abort("SPI display bus ran out of assignable pins");
     return -1; // Unreachable, abort will terminate execution
 }
 
 esp_err_t spi_display_bus_init(void) {
-    ESP_LOGI(TAG_spi_display_bus, "=== SPI_DISPLAY_BUS_INIT STARTED ===");
+    ESP_LOGI("spi_display_bus", "=== SPI_DISPLAY_BUS_INIT STARTED ===");
 
     // Locate the first available slot for a display device
     size_t slot = 0;
@@ -56,7 +54,7 @@ esp_err_t spi_display_bus_init(void) {
     }
 
     if (slot >= SPI_DISPLAY_SLOT_COUNT) {
-        ESP_LOGE(TAG_spi_display_bus, "No remaining SPI display device slots available");
+        ESP_LOGE("spi_display_bus", "No remaining SPI display device slots available");
         return ESP_FAIL;
     }
 
@@ -77,13 +75,13 @@ esp_err_t spi_display_bus_init(void) {
         };
 
         const esp_err_t ret = spi_bus_initialize(SPI2_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
-        ESP_LOGI(TAG_spi_display_bus, "SPI bus initialize result: %s", esp_err_to_name(ret));
+        ESP_LOGI("spi_display_bus", "SPI bus initialize result: %s", esp_err_to_name(ret));
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG_spi_display_bus, "spi_bus_initialize failed: %s", esp_err_to_name(ret));
+            ESP_LOGE("spi_display_bus", "spi_bus_initialize failed: %s", esp_err_to_name(ret));
             return ret;
         }
 
-        ESP_LOGI(TAG_spi_display_bus,
+        ESP_LOGI("spi_display_bus",
                  "Shared SPI display pins assigned MOSI:%d CLK:%d RST:%d",
                  shared_display_pins.mosi,
                  shared_display_pins.clk,
@@ -98,7 +96,7 @@ esp_err_t spi_display_bus_init(void) {
 
     spi_display_slots[slot] = pins;
 
-    ESP_LOGI(TAG_spi_display_bus,
+    ESP_LOGI("spi_display_bus",
              "Display slot %u assigned pins MOSI:%d CLK:%d CS:%d DC:%d BL:%d RST:%d",
              static_cast<unsigned>(slot),
              pins.mosi,

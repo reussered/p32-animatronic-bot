@@ -12,10 +12,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * Initialize foot assembly subsystem
  * Must be called once during system startup
@@ -43,9 +39,5 @@ float flying_dragon_foot_get_total_vertical_load(void);
  * Total mass of foot assembly (for ballistics)
  */
 float flying_dragon_foot_get_total_mass_kg(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  // FLYING_DRAGON_FOOT_ASSEMBLY_H

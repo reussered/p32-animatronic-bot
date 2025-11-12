@@ -104,7 +104,7 @@ esp_err_t clearpath_enable_motor(uint8_t motor_id)
         return ESP_ERR_INVALID_ARG;
     }
     
-    gpio_set_level(motor_states[motor_id].config.enable_pin, 1);
+    gpio_set_level((gpio_num_t)motor_states[motor_id].config.enable_pin, 1);
     motor_states[motor_id].enabled = true;
     
     ESP_LOGI(TAG, "Motor %d enabled", motor_id);
@@ -117,7 +117,7 @@ esp_err_t clearpath_disable_motor(uint8_t motor_id)
         return ESP_ERR_INVALID_ARG;
     }
     
-    gpio_set_level(motor_states[motor_id].config.enable_pin, 0);
+    gpio_set_level((gpio_num_t)motor_states[motor_id].config.enable_pin, 0);
     motor_states[motor_id].enabled = false;
     
     ESP_LOGI(TAG, "Motor %d disabled", motor_id);
@@ -134,7 +134,7 @@ esp_err_t clearpath_move_to_position(uint8_t motor_id, int32_t position, uint32_
     
     // Set direction
     bool direction = position > motor->current_position;
-    gpio_set_level(motor->config.dir_pin, direction);
+    gpio_set_level((gpio_num_t)motor->config.dir_pin, direction);
     
     // Calculate number of steps
     uint32_t steps = abs(position - motor->current_position);
@@ -179,7 +179,7 @@ esp_err_t clearpath_emergency_stop(uint8_t motor_id)
     }
     
     // Immediately disable motor and stop pulses
-    gpio_set_level(motor_states[motor_id].config.enable_pin, 0);
+    gpio_set_level((gpio_num_t)motor_states[motor_id].config.enable_pin, 0);
     ESP_ERROR_CHECK(ledc_set_duty(LEDC_HIGH_SPEED_MODE, step_channels[motor_id], 0));
     ESP_ERROR_CHECK(ledc_update_duty(LEDC_HIGH_SPEED_MODE, step_channels[motor_id]));
     

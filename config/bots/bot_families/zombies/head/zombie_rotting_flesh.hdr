@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize zombie_rotting_flesh component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t zombie_rotting_flesh_init(void);
  * Called periodically by subsystem dispatcher
  */
 void zombie_rotting_flesh_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // ZOMBIE_ROTTING_FLESH_HDR

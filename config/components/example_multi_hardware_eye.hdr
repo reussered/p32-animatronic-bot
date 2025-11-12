@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize example_multi_hardware_eye component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t example_multi_hardware_eye_init(void);
  * Called periodically by subsystem dispatcher
  */
 void example_multi_hardware_eye_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // EXAMPLE_MULTI_HARDWARE_EYE_HDR

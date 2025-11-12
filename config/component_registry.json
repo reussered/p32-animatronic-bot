@@ -1,2367 +1,1895 @@
 {
   "version": "1.0.0",
-  "description": "Master component registry - maps component names to paths and git repositories. Sorted alphabetically by name. NO duplicates.",
-  "last_updated": "2025-11-10T17:58:57.779688",
+  "description": "Master component registry - maps component names to paths. Sorted alphabetically by name. NO duplicates.",
+  "last_updated": "November 10, 2025 at 5:58 PM",
   "components": [
     {
       "name": "a4988_stepper_driver",
-      "path": "config\\components\\interfaces\\a4988_stepper_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/a4988_stepper_driver.json"
     },
     {
       "name": "adc_bus",
-      "path": "config\\components\\drivers\\adc_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/adc_bus.json"
     },
     {
       "name": "adc_driver",
-      "path": "config\\components\\drivers\\adc_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/adc_driver.json"
     },
     {
       "name": "advanced_dynamic_movements",
-      "path": "config\\components\\behaviors\\advanced_dynamic_movements.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/advanced_dynamic_movements.json"
     },
     {
       "name": "aesthetic_overlay",
-      "path": "config\\components\\hardware\\aesthetic_overlay.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/aesthetic_overlay.json"
     },
     {
       "name": "ai_behavior_engine",
-      "path": "config\\subsystems\\components\\ai_behavior_engine.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/ai_behavior_engine.json"
     },
     {
       "name": "ambient_temperature_sensor",
-      "path": "config\\components\\creature_specific\\ambient_temperature_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/ambient_temperature_sensor.json"
     },
     {
       "name": "android_companion_unit_001",
-      "path": "config\\bots\\bot_families\\androids\\android_companion_unit_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/android_companion_unit_001.json"
     },
     {
       "name": "android_emotion_display",
-      "path": "config\\bots\\bot_families\\androids\\head\\android_emotion_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/head/android_emotion_display.json"
     },
     {
       "name": "android_eye",
-      "path": "config\\bots\\bot_families\\androids\\head\\android_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/head/android_eye.json"
     },
     {
       "name": "android_family",
-      "path": "config\\bots\\bot_families\\mechanical\\android_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/android_family.json"
     },
     {
       "name": "android_left_eye",
-      "path": "config\\bots\\bot_families\\androids\\head\\android_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/head/android_left_eye.json"
     },
     {
       "name": "android_medical_unit_001",
-      "path": "config\\bots\\bot_families\\androids\\android_medical_unit_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/android_medical_unit_001.json"
     },
     {
       "name": "android_neural_interface",
-      "path": "config\\bots\\bot_families\\androids\\head\\android_neural_interface.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/head/android_neural_interface.json"
     },
     {
       "name": "android_security_unit_001",
-      "path": "config\\bots\\bot_families\\androids\\android_security_unit_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/android_security_unit_001.json"
     },
     {
       "name": "android_synthetic_skin",
-      "path": "config\\bots\\bot_families\\androids\\head\\android_synthetic_skin.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/androids/head/android_synthetic_skin.json"
     },
     {
       "name": "androids_family",
-      "path": "config\\bots\\bot_families\\mechanical\\androids_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/androids_family.json"
     },
     {
       "name": "angry",
-      "path": "config\\components\\behaviors\\moods\\angry.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/moods/angry.json"
     },
     {
       "name": "ankle_joint_assembly",
-      "path": "config\\components\\hardware\\ankle_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ankle_joint_assembly.json"
     },
     {
       "name": "arm_base",
-      "path": "config\\templates\\base\\arm_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/templates/base/arm_base.json"
     },
     {
       "name": "audio",
-      "path": "config\\components\\hardware\\audio.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/audio.json"
     },
     {
       "name": "audio_analysis_unit",
-      "path": "config\\components\\creature_specific\\audio_analysis_unit.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/audio_analysis_unit.json"
     },
     {
       "name": "author",
-      "path": "config\\author.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/author.json"
     },
     {
       "name": "back_mount_system",
-      "path": "config\\components\\hardware\\back_mount_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/back_mount_system.json"
     },
     {
       "name": "balance_controller",
-      "path": "config\\subsystems\\components\\balance_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/balance_controller.json"
     },
     {
       "name": "bear_arctic_fur",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_arctic_fur.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_arctic_fur.json"
     },
     {
       "name": "bear_eye",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_eye.json"
     },
     {
       "name": "bear_family",
-      "path": "config\\bots\\bot_families\\animals\\bear_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/animals/bear_family.json"
     },
     {
       "name": "bear_grizzly",
-      "path": "config\\bots\\bot_families\\bears\\bear_grizzly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/bear_grizzly.json"
     },
     {
       "name": "bear_ice_sensors",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_ice_sensors.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_ice_sensors.json"
     },
     {
       "name": "bear_left_eye",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_left_eye.json"
     },
     {
       "name": "bear_massive_claws",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_massive_claws.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_massive_claws.json"
     },
     {
       "name": "bear_mouth",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_mouth.json"
     },
     {
       "name": "bear_nose",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_nose.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_nose.json"
     },
     {
       "name": "bear_polar",
-      "path": "config\\bots\\bot_families\\bears\\bear_polar.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/bear_polar.json"
     },
     {
       "name": "bear_protective_guardian_001",
-      "path": "config\\bots\\bot_families\\bears\\bear_protective_guardian_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/bear_protective_guardian_001.json"
     },
     {
       "name": "bear_right_eye",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_right_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_right_eye.json"
     },
     {
       "name": "bear_snout",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_snout.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_snout.json"
     },
     {
       "name": "bear_speaker",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_speaker.json"
     },
     {
       "name": "bear_thick_fur",
-      "path": "config\\bots\\bot_families\\bears\\head\\bear_thick_fur.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/bears/head/bear_thick_fur.json"
     },
     {
       "name": "ble_mesh_network",
-      "path": "config\\components\\interfaces\\ble_mesh_network.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/ble_mesh_network.json"
     },
     {
       "name": "capacitive_touch_sensor",
-      "path": "config\\components\\hardware\\capacitive_touch_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/capacitive_touch_sensor.json"
     },
     {
       "name": "cat_animated_ears",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_animated_ears.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_animated_ears.json"
     },
     {
       "name": "cat_bobcat_desert_prowler_001",
-      "path": "config\\bots\\bot_families\\cats\\wildcats\\cat_bobcat_desert_prowler_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/wildcats/cat_bobcat_desert_prowler_001.json"
     },
     {
       "name": "cat_cheetah_speed_runner_001",
-      "path": "config\\bots\\bot_families\\cats\\big_cats\\cat_cheetah_speed_runner_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/big_cats/cat_cheetah_speed_runner_001.json"
     },
     {
       "name": "cat_eye",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_eye.json"
     },
     {
       "name": "cat_family",
-      "path": "config\\bots\\bot_families\\animals\\cat_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/animals/cat_family.json"
     },
     {
       "name": "cat_house_tabby_001",
-      "path": "config\\bots\\bot_families\\cats\\domestic\\cat_house_tabby_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/domestic/cat_house_tabby_001.json"
     },
     {
       "name": "cat_interactive_tabby",
-      "path": "config\\bots\\bot_families\\cats\\domestic\\cat_interactive_tabby.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/domestic/cat_interactive_tabby.json"
     },
     {
       "name": "cat_left_eye",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_left_eye.json"
     },
     {
       "name": "cat_lion_pride_leader_001",
-      "path": "config\\bots\\bot_families\\cats\\big_cats\\cat_lion_pride_leader_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/big_cats/cat_lion_pride_leader_001.json"
     },
     {
       "name": "cat_lynx_mountain_hunter_001",
-      "path": "config\\bots\\bot_families\\cats\\wildcats\\cat_lynx_mountain_hunter_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/wildcats/cat_lynx_mountain_hunter_001.json"
     },
     {
       "name": "cat_mouth",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_mouth.json"
     },
     {
       "name": "cat_mysterious_shadow",
-      "path": "config\\bots\\bot_families\\cats\\domestic\\cat_mysterious_shadow.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json"
     },
     {
       "name": "cat_nose",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_nose.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_nose.json"
     },
     {
       "name": "cat_nose_sensor",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_nose_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_nose_sensor.json"
     },
     {
       "name": "cat_ocelot_jungle_scout_001",
-      "path": "config\\bots\\bot_families\\cats\\wildcats\\cat_ocelot_jungle_scout_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/wildcats/cat_ocelot_jungle_scout_001.json"
     },
     {
       "name": "cat_panther_shadow_001",
-      "path": "config\\bots\\bot_families\\cats\\big_cats\\cat_panther_shadow_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/big_cats/cat_panther_shadow_001.json"
     },
     {
       "name": "cat_purr_generator",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_purr_generator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_purr_generator.json"
     },
     {
       "name": "cat_right_eye",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_right_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_right_eye.json"
     },
     {
       "name": "cat_speaker",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_speaker.json"
     },
     {
       "name": "cat_tail_servo",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_tail_servo.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_tail_servo.json"
     },
     {
       "name": "cat_tiger_siberian_hunter_001",
-      "path": "config\\bots\\bot_families\\cats\\big_cats\\cat_tiger_siberian_hunter_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/big_cats/cat_tiger_siberian_hunter_001.json"
     },
     {
       "name": "cat_whisker_sensors",
-      "path": "config\\bots\\bot_families\\cats\\head\\cat_whisker_sensors.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/cats/head/cat_whisker_sensors.json"
     },
     {
       "name": "cats_family",
-      "path": "config\\bots\\bot_families\\animals\\cats_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/animals/cats_family.json"
     },
     {
       "name": "celebration",
-      "path": "config\\components\\behaviors\\celebration.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/celebration.json"
     },
     {
       "name": "color_changing_leds",
-      "path": "config\\components\\hardware\\color_changing_leds.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/color_changing_leds.json"
     },
     {
       "name": "communication_abstraction_layer",
-      "path": "config\\components\\interfaces\\communication_abstraction_layer.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/communication_abstraction_layer.json"
     },
     {
       "name": "complete_full_body_specification",
-      "path": "config\\validation\\complete_full_body_specification.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/validation/complete_full_body_specification.json"
     },
     {
       "name": "complete_json_audit",
-      "path": "config\\validation\\complete_json_audit.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/validation/complete_json_audit.json"
     },
     {
       "name": "coordination_engine",
-      "path": "config\\subsystems\\components\\coordination_engine.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/coordination_engine.json"
     },
     {
       "name": "creature_library_master",
-      "path": "config\\components\\scaling\\creature_library_master.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/scaling/creature_library_master.json"
     },
     {
       "name": "cyclops_center_eye",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\cyclops_center_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/cyclops_center_eye.json"
     },
     {
       "name": "cyclops_eye",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\cyclops_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/cyclops_eye.json"
     },
     {
       "name": "cyclops_eye_central",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\cyclops_eye_central.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/cyclops_eye_central.json"
     },
     {
       "name": "cyclops_family",
-      "path": "config\\bots\\bot_families\\fantasy\\cyclops_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/cyclops_family.json"
     },
     {
       "name": "cyclops_mouth",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\cyclops_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/cyclops_mouth.json"
     },
     {
       "name": "cyclops_speaker",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\cyclops_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/cyclops_speaker.json"
     },
     {
       "name": "dc_motor_controller",
-      "path": "config\\components\\interfaces\\dc_motor_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/dc_motor_controller.json"
     },
     {
       "name": "directional_microphone",
-      "path": "config\\components\\hardware\\directional_microphone.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/directional_microphone.json"
     },
     {
       "name": "dragon_ancient_fire_001",
-      "path": "config\\bots\\bot_families\\dragons\\dragon_ancient_fire_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/dragon_ancient_fire_001.json"
     },
     {
       "name": "dragon_eye_left",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_eye_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_eye_left.json"
     },
     {
       "name": "dragon_eye_right",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_eye_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_eye_right.json"
     },
     {
       "name": "dragon_family",
-      "path": "config\\bots\\bot_families\\fantasy\\dragon_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/dragon_family.json"
     },
     {
       "name": "dragon_frost_guardian_001",
-      "path": "config\\bots\\bot_families\\dragons\\dragon_frost_guardian_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/dragon_frost_guardian_001.json"
     },
     {
       "name": "dragon_hatchling_001",
-      "path": "config\\bots\\bot_families\\dragons\\dragon_hatchling_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/dragon_hatchling_001.json"
     },
     {
       "name": "dragon_mouth",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_mouth.json"
     },
     {
       "name": "dragon_nostril_left",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_nostril_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_nostril_left.json"
     },
     {
       "name": "dragon_nostril_right",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_nostril_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_nostril_right.json"
     },
     {
       "name": "dragon_snout",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_snout.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_snout.json"
     },
     {
       "name": "dragon_speaker",
-      "path": "config\\bots\\bot_families\\dragons\\head\\dragon_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/head/dragon_speaker.json"
     },
     {
       "name": "dragons_family",
-      "path": "config\\bots\\bot_families\\fantasy\\dragons_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/dragons_family.json"
     },
     {
       "name": "drv8825_stepper_driver",
-      "path": "config\\components\\interfaces\\drv8825_stepper_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/drv8825_stepper_driver.json"
     },
     {
       "name": "ds18b20_temperature_sensor",
-      "path": "config\\components\\hardware\\ds18b20_temperature_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ds18b20_temperature_sensor.json"
     },
     {
       "name": "dynamic_gpio_driver",
-      "path": "config\\components\\drivers\\dynamic_gpio_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/dynamic_gpio_driver.json"
     },
     {
       "name": "elbow_joint_assembly",
-      "path": "config\\components\\hardware\\elbow_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/elbow_joint_assembly.json"
     },
     {
       "name": "electromagnet_controller",
-      "path": "config\\components\\interfaces\\electromagnet_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/electromagnet_controller.json"
     },
     {
       "name": "elf_dark_assassin_001",
-      "path": "config\\bots\\bot_families\\elves\\elf_dark_assassin_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/elf_dark_assassin_001.json"
     },
     {
       "name": "elf_ear_left",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_ear_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_ear_left.json"
     },
     {
       "name": "elf_ear_right",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_ear_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_ear_right.json"
     },
     {
       "name": "elf_eye_left",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_eye_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_eye_left.json"
     },
     {
       "name": "elf_eye_right",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_eye_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_eye_right.json"
     },
     {
       "name": "elf_family",
-      "path": "config\\bots\\bot_families\\fantasy\\elf_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/elf_family.json"
     },
     {
       "name": "elf_mouth",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_mouth.json"
     },
     {
       "name": "elf_speaker",
-      "path": "config\\bots\\bot_families\\elves\\head\\elf_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/head/elf_speaker.json"
     },
     {
       "name": "elf_woodland_ranger_001",
-      "path": "config\\bots\\bot_families\\elves\\elf_woodland_ranger_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/elves/elf_woodland_ranger_001.json"
     },
     {
       "name": "elves_family",
-      "path": "config\\bots\\bot_families\\fantasy\\elves_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/elves_family.json"
     },
     {
       "name": "emergency_handler",
-      "path": "config\\subsystems\\components\\emergency_handler.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/emergency_handler.json"
     },
     {
       "name": "esp32_c3_controller",
-      "path": "config\\components\\hardware\\esp32_c3_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_c3_controller.json"
     },
     {
       "name": "esp32_c3_devkit_chip",
-      "path": "config\\components\\hardware\\esp32_c3_devkit_chip.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_c3_devkit_chip.json"
     },
     {
       "name": "esp32_c3_gpio_constraints",
-      "path": "config\\components\\hardware\\esp32_c3_gpio_constraints.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_c3_gpio_constraints.json"
     },
     {
       "name": "esp32_c3_mini_controller",
-      "path": "config\\components\\hardware\\esp32_c3_mini_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_c3_mini_controller.json"
     },
     {
       "name": "esp32_humanoid_full",
-      "path": "config\\bots\\bot_families\\humanoids\\esp32_humanoid_full.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/esp32_humanoid_full.json"
     },
     {
       "name": "esp32_s3_devkit",
-      "path": "config\\components\\hardware\\esp32_s3_devkit.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_devkit.json"
     },
     {
       "name": "esp32_s3_devkit_chip",
-      "path": "config\\components\\hardware\\esp32_s3_devkit_chip.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_devkit_chip.json"
     },
     {
       "name": "esp32_s3_devkit_controller",
-      "path": "config\\components\\hardware\\esp32_s3_devkit_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_devkit_controller.json"
     },
     {
       "name": "esp32_s3_r2n2_controller",
-      "path": "config\\components\\hardware\\esp32_s3_r2n2_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_r2n2_controller.json"
     },
     {
       "name": "esp32_s3_r8n16_controller",
-      "path": "config\\components\\hardware\\esp32_s3_r8n16_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_r8n16_controller.json"
     },
     {
       "name": "esp32_s3_wifi",
-      "path": "config\\components\\hardware\\esp32_s3_wifi.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/esp32_s3_wifi.json"
     },
     {
       "name": "esp32_servo_controller",
-      "path": "config\\components\\interfaces\\esp32_servo_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/esp32_servo_controller.json"
     },
     {
       "name": "esp_now_mesh",
-      "path": "config\\components\\interfaces\\esp_now_mesh.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/esp_now_mesh.json"
     },
     {
       "name": "esp_now_mesh_coordinator",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\esp_now_mesh_coordinator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/esp_now_mesh_coordinator.json"
     },
     {
       "name": "example_multi_hardware_eye",
-      "path": "config\\components\\example_multi_hardware_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/example_multi_hardware_eye.json"
     },
     {
       "name": "external_wifi_communication",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\external_wifi_communication.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/external_wifi_communication.json"
     },
     {
       "name": "flying_dragon_behavior_sequencer",
-      "path": "config\\bots\\bot_families\\dragons\\flying_dragon_behavior_sequencer.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/flying_dragon_behavior_sequencer.json"
     },
     {
       "name": "flying_dragon_flight_safety",
-      "path": "config\\bots\\bot_families\\dragons\\wings\\flying_dragon_flight_safety.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/wings/flying_dragon_flight_safety.json"
     },
     {
       "name": "flying_dragon_flight_system",
-      "path": "config\\components\\subsystem\\flying_dragon_flight_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/subsystem/flying_dragon_flight_system.json"
     },
     {
       "name": "flying_dragon_foot_assembly",
-      "path": "config\\bots\\bot_families\\dragons\\feet\\flying_dragon_foot_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/feet/flying_dragon_foot_assembly.json"
     },
     {
       "name": "flying_dragon_full",
-      "path": "config\\bots\\bot_families\\dragons\\flying_dragon_full.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/flying_dragon_full.json"
     },
     {
       "name": "flying_dragon_leg_assembly",
-      "path": "config\\bots\\bot_families\\dragons\\legs\\flying_dragon_leg_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/legs/flying_dragon_leg_assembly.json"
     },
     {
       "name": "flying_dragon_motor_controller",
-      "path": "config\\bots\\bot_families\\dragons\\wings\\flying_dragon_motor_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/wings/flying_dragon_motor_controller.json"
     },
     {
       "name": "flying_dragon_power_system",
-      "path": "config\\bots\\bot_families\\dragons\\body\\flying_dragon_power_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/body/flying_dragon_power_system.json"
     },
     {
       "name": "flying_dragon_sensor_fusion",
-      "path": "config\\bots\\bot_families\\dragons\\wings\\flying_dragon_sensor_fusion.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/wings/flying_dragon_sensor_fusion.json"
     },
     {
       "name": "flying_dragon_wing_servo_controller",
-      "path": "config\\bots\\bot_families\\dragons\\wings\\flying_dragon_wing_servo_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/wings/flying_dragon_wing_servo_controller.json"
     },
     {
       "name": "gait_coordinator",
-      "path": "config\\subsystems\\components\\gait_coordinator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/gait_coordinator.json"
     },
     {
       "name": "gc9a01",
-      "path": "config\\components\\hardware\\gc9a01.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/gc9a01.json"
     },
     {
       "name": "gc9a01_standard_mount",
-      "path": "config\\components\\templates\\hardware\\displays\\gc9a01_standard_mount.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/templates/hardware/displays/gc9a01_standard_mount.json"
     },
     {
       "name": "generic_mic_driver",
-      "path": "config\\components\\drivers\\generic_mic_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/generic_mic_driver.json"
     },
     {
       "name": "generic_spi_data_driver",
-      "path": "config\\components\\drivers\\generic_spi_data_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/generic_spi_data_driver.json"
     },
     {
       "name": "generic_spi_display",
-      "path": "config\\components\\hardware\\generic_spi_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/generic_spi_display.json"
     },
     {
       "name": "ghost_ectoplasm_generator",
-      "path": "config\\bots\\bot_families\\horror\\head\\ghost_ectoplasm_generator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/head/ghost_ectoplasm_generator.json"
     },
     {
       "name": "ghost_family",
-      "path": "config\\bots\\bot_families\\horror\\ghost_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/ghost_family.json"
     },
     {
       "name": "ghost_floating_mechanism",
-      "path": "config\\bots\\bot_families\\horror\\head\\ghost_floating_mechanism.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/head/ghost_floating_mechanism.json"
     },
     {
       "name": "ghost_phase_lights",
-      "path": "config\\bots\\bot_families\\horror\\head\\ghost_phase_lights.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/head/ghost_phase_lights.json"
     },
     {
       "name": "ghost_poltergeist_001",
-      "path": "config\\bots\\bot_families\\undead\\ghost_poltergeist_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/ghost_poltergeist_001.json"
     },
     {
       "name": "ghosts_family",
-      "path": "config\\bots\\bot_families\\horror\\ghosts_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/ghosts_family.json"
     },
     {
       "name": "gmt12864",
-      "path": "config\\components\\hardware\\gmt12864.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/gmt12864.json"
     },
     {
       "name": "goblin_authority_markings",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_authority_markings.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_authority_markings.json"
     },
     {
       "name": "goblin_battle_scars",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_battle_scars.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_battle_scars.json"
     },
     {
       "name": "goblin_behavior_engine",
-      "path": "config\\components\\functional\\goblin_behavior_engine.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/goblin_behavior_engine.json"
     },
     {
       "name": "goblin_berserker",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_berserker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_berserker.json"
     },
     {
       "name": "goblin_bloodshot_eyes",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_bloodshot_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_bloodshot_eyes.json"
     },
     {
       "name": "goblin_bone_ornaments",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_bone_ornaments.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_bone_ornaments.json"
     },
     {
       "name": "goblin_camouflage_skin",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_camouflage_skin.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_camouflage_skin.json"
     },
     {
       "name": "goblin_center_eye",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_center_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_center_eye.json"
     },
     {
       "name": "goblin_chief",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_chief.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_chief.json"
     },
     {
       "name": "goblin_clever_eyes",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_clever_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_clever_eyes.json"
     },
     {
       "name": "goblin_ear",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ear.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_ear.json"
     },
     {
       "name": "goblin_ear_left",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ear_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_ear_left.json"
     },
     {
       "name": "goblin_ear_left_example",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ear_left_example.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_ear_left_example.json"
     },
     {
       "name": "goblin_ear_right",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ear_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_ear_right.json"
     },
     {
       "name": "goblin_enhanced_ears",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_enhanced_ears.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_enhanced_ears.json"
     },
     {
       "name": "goblin_enlarged_eyes",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_enlarged_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_enlarged_eyes.json"
     },
     {
       "name": "goblin_enlarged_fangs",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_enlarged_fangs.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_enlarged_fangs.json"
     },
     {
       "name": "goblin_eye",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_eye.json"
     },
     {
       "name": "goblin_eye_mood_display",
-      "path": "config\\components\\templates\\goblin_eye_mood_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/templates/goblin_eye_mood_display.json"
     },
     {
       "name": "goblin_eye_mood_processor",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_eye_mood_processor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_eye_mood_processor.json"
     },
     {
       "name": "goblin_family",
-      "path": "config\\bots\\bot_families\\fantasy\\goblin_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/goblin_family.json"
     },
     {
       "name": "goblin_forehead",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_forehead.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_forehead.json"
     },
     {
       "name": "goblin_full",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_full.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_full.json"
     },
     {
       "name": "goblin_full_arm_left",
-      "path": "config\\bots\\goblin_full_arm_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/goblin_full_arm_left.json"
     },
     {
       "name": "goblin_full_arm_right",
-      "path": "config\\bots\\goblin_full_arm_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/goblin_full_arm_right.json"
     },
     {
       "name": "goblin_full_hand_left",
-      "path": "config\\bots\\goblin_full_hand_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/goblin_full_hand_left.json"
     },
     {
       "name": "goblin_full_leg_left",
-      "path": "config\\bots\\goblin_full_leg_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/goblin_full_leg_left.json"
     },
     {
       "name": "goblin_full_torso",
-      "path": "config\\bots\\goblin_full_torso.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/goblin_full_torso.json"
     },
     {
       "name": "goblin_fury_veins",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_fury_veins.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_fury_veins.json"
     },
     {
       "name": "goblin_head",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_head.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_head.json"
     },
     {
       "name": "goblin_head_eye_motor",
-      "path": "config\\components\\creature_specific\\goblin_head_eye_motor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/goblin_head_eye_motor.json"
     },
     {
       "name": "goblin_head_left_eye_only",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_head_left_eye_only.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_head_left_eye_only.json"
     },
     {
       "name": "goblin_head_mouth_motor",
-      "path": "config\\components\\creature_specific\\goblin_head_mouth_motor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/goblin_head_mouth_motor.json"
     },
     {
       "name": "goblin_head_neck_motor",
-      "path": "config\\components\\creature_specific\\goblin_head_neck_motor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/goblin_head_neck_motor.json"
     },
     {
       "name": "goblin_head_only",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_head_only.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_head_only.json"
     },
     {
       "name": "goblin_horn_crown",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_horn_crown.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_horn_crown.json"
     },
     {
       "name": "goblin_jaw",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_jaw.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_jaw.json"
     },
     {
       "name": "goblin_left_cheek",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_left_cheek.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_left_cheek.json"
     },
     {
       "name": "goblin_left_ear",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_left_ear.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_left_ear.json"
     },
     {
       "name": "goblin_left_eye",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_left_eye.json"
     },
     {
       "name": "goblin_left_eyebrow",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_left_eyebrow.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_left_eyebrow.json"
     },
     {
       "name": "goblin_malnutrition_features",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_malnutrition_features.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_malnutrition_features.json"
     },
     {
       "name": "goblin_mood",
-      "path": "config\\components\\functional\\goblin_mood.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/goblin_mood.json"
     },
     {
       "name": "goblin_mouth",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_mouth.json"
     },
     {
       "name": "goblin_mouth_mood_display",
-      "path": "config\\components\\templates\\goblin_mouth_mood_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/templates/goblin_mouth_mood_display.json"
     },
     {
       "name": "goblin_mystical_glow",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_mystical_glow.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_mystical_glow.json"
     },
     {
       "name": "goblin_nimble_fingers",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_nimble_fingers.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_nimble_fingers.json"
     },
     {
       "name": "goblin_nose",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_nose.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_nose.json"
     },
     {
       "name": "goblin_nose_sensor",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_nose_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_nose_sensor.json"
     },
     {
       "name": "goblin_pale_skin",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_pale_skin.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_pale_skin.json"
     },
     {
       "name": "goblin_personality",
-      "path": "config\\components\\functional\\goblin_personality.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/goblin_personality.json"
     },
     {
       "name": "goblin_pirate",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_pirate.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_pirate.json"
     },
     {
       "name": "goblin_pirate_head",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_pirate_head.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_pirate_head.json"
     },
     {
       "name": "goblin_pirate_personality",
-      "path": "config\\components\\functional\\goblin_pirate_personality.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/goblin_pirate_personality.json"
     },
     {
       "name": "goblin_prank_accessories",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_prank_accessories.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_prank_accessories.json"
     },
     {
       "name": "goblin_rage_foam",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_rage_foam.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_rage_foam.json"
     },
     {
       "name": "goblin_right_cheek",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_right_cheek.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_right_cheek.json"
     },
     {
       "name": "goblin_right_ear",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_right_ear.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_right_ear.json"
     },
     {
       "name": "goblin_right_eye",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_right_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_right_eye.json"
     },
     {
       "name": "goblin_right_eyebrow",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_right_eyebrow.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_right_eyebrow.json"
     },
     {
       "name": "goblin_ritual_scars",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_ritual_scars.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_ritual_scars.json"
     },
     {
       "name": "goblin_scent_sensor",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_scent_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_scent_sensor.json"
     },
     {
       "name": "goblin_scout",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_scout.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_scout.json"
     },
     {
       "name": "goblin_self_wounds",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_self_wounds.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_self_wounds.json"
     },
     {
       "name": "goblin_shadow_sensors",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_shadow_sensors.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_shadow_sensors.json"
     },
     {
       "name": "goblin_shaman",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_shaman.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_shaman.json"
     },
     {
       "name": "goblin_simple",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_simple.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_simple.json"
     },
     {
       "name": "goblin_sinuses",
-      "path": "config\\components\\creature_specific\\goblin_sinuses.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/creature_specific/goblin_sinuses.json"
     },
     {
       "name": "goblin_sly_grin",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_sly_grin.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_sly_grin.json"
     },
     {
       "name": "goblin_sneak",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_sneak.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_sneak.json"
     },
     {
       "name": "goblin_speaker",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_speaker.json"
     },
     {
       "name": "goblin_spirit_runes",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_spirit_runes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_spirit_runes.json"
     },
     {
       "name": "goblin_status_leds_example",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_status_leds_example.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_status_leds_example.json"
     },
     {
       "name": "goblin_test",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_test.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_test.json"
     },
     {
       "name": "goblin_test_eyes",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_test_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_test_eyes.json"
     },
     {
       "name": "goblin_torso",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\goblin_torso.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/goblin_torso.json"
     },
     {
       "name": "goblin_tribal_tattoos",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_tribal_tattoos.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_tribal_tattoos.json"
     },
     {
       "name": "goblin_trickster",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_trickster.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_trickster.json"
     },
     {
       "name": "goblin_trophy_scars",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_trophy_scars.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_trophy_scars.json"
     },
     {
       "name": "goblin_war_paint",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_war_paint.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_war_paint.json"
     },
     {
       "name": "goblin_warrior",
-      "path": "config\\bots\\bot_families\\goblins\\goblin_warrior.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/goblin_warrior.json"
     },
     {
       "name": "goblin_warrior_head",
-      "path": "config\\bots\\bot_families\\goblins\\head\\goblin_warrior_head.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/head/goblin_warrior_head.json"
     },
     {
       "name": "goblin_warrior_head_resolved",
-      "path": "config\\resolved\\goblin_warrior_head_resolved.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/resolved/goblin_warrior_head_resolved.json"
     },
     {
       "name": "goblins_family",
-      "path": "config\\bots\\bot_families\\fantasy\\goblins_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/goblins_family.json"
     },
     {
       "name": "gpio_bus",
-      "path": "config\\components\\drivers\\gpio_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/gpio_bus.json"
     },
     {
       "name": "gpio_pair_driver",
-      "path": "config\\components\\drivers\\gpio_pair_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/gpio_pair_driver.json"
     },
     {
       "name": "gpio_pair_hw506_temperature",
-      "path": "config\\components\\interfaces\\gpio_pair_hw506_temperature.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/gpio_pair_hw506_temperature.json"
     },
     {
       "name": "gpio_pair_vibration_sensor",
-      "path": "config\\components\\interfaces\\gpio_pair_vibration_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/gpio_pair_vibration_sensor.json"
     },
     {
       "name": "gpio_single_driver",
-      "path": "config\\components\\drivers\\gpio_single_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/gpio_single_driver.json"
     },
     {
       "name": "greeting",
-      "path": "config\\components\\behaviors\\greeting.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/greeting.json"
     },
     {
       "name": "grip_controller",
-      "path": "config\\subsystems\\components\\grip_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/grip_controller.json"
     },
     {
       "name": "hand_base",
-      "path": "config\\subsystems\\hand_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/hand_base.json"
     },
     {
       "name": "happy",
-      "path": "config\\components\\behaviors\\moods\\happy.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/moods/happy.json"
     },
     {
       "name": "hardware_cost_performance_template",
-      "path": "config\\templates\\hardware_cost_performance_template.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/templates/hardware_cost_performance_template.json"
     },
     {
       "name": "hc_sr04",
-      "path": "config\\components\\hardware\\hc_sr04.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hc_sr04.json"
     },
     {
       "name": "hc_sr04_sensor",
-      "path": "config\\components\\hardware\\hc_sr04_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hc_sr04_sensor.json"
     },
     {
       "name": "hc_sr04_ultrasonic_sensor",
-      "path": "config\\components\\interfaces\\hc_sr04_ultrasonic_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/hc_sr04_ultrasonic_sensor.json"
     },
     {
       "name": "head_base",
-      "path": "config\\subsystems\\head_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/head_base.json"
     },
     {
       "name": "head_structural_assembly",
-      "path": "config\\components\\hardware\\head_structural_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/head_structural_assembly.json"
     },
     {
       "name": "heartbeat",
-      "path": "config\\components\\heartbeat.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/heartbeat.json"
     },
     {
       "name": "hip_joint_assembly",
-      "path": "config\\components\\hardware\\hip_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hip_joint_assembly.json"
     },
     {
       "name": "hobbywing_40a_esc",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\HOBBYWING_40A_ESC.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/HOBBYWING_40A_ESC.json"
     },
     {
       "name": "hobgoblin_captain",
-      "path": "config\\bots\\bot_families\\goblins\\hobgoblin_captain.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/hobgoblin_captain.json"
     },
     {
       "name": "humanoid_ankle_left",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_ankle_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_ankle_left.json"
     },
     {
       "name": "humanoid_ankle_right",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_ankle_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_ankle_right.json"
     },
     {
       "name": "humanoid_elbow_left",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_elbow_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_elbow_left.json"
     },
     {
       "name": "humanoid_elbow_right",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_elbow_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_elbow_right.json"
     },
     {
       "name": "humanoid_head_assembly",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\humanoid_head_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/humanoid_head_assembly.json"
     },
     {
       "name": "humanoid_head_base",
-      "path": "config\\templates\\base\\humanoid_head_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/templates/base/humanoid_head_base.json"
     },
     {
       "name": "humanoid_hip_left",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_hip_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_hip_left.json"
     },
     {
       "name": "humanoid_hip_right",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_hip_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_hip_right.json"
     },
     {
       "name": "humanoid_knee_left",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_knee_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_knee_left.json"
     },
     {
       "name": "humanoid_knee_right",
-      "path": "config\\bots\\bot_families\\humanoids\\legs\\humanoid_knee_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/legs/humanoid_knee_right.json"
     },
     {
       "name": "humanoid_leg_subsystem",
-      "path": "config\\components\\functional\\humanoid_leg_subsystem.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/humanoid_leg_subsystem.json"
     },
     {
       "name": "humanoid_neck_assembly",
-      "path": "config\\bots\\bot_families\\humanoids\\head\\humanoid_neck_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/head/humanoid_neck_assembly.json"
     },
     {
       "name": "humanoid_pelvis_assembly",
-      "path": "config\\bots\\bot_families\\humanoids\\torso\\humanoid_pelvis_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/torso/humanoid_pelvis_assembly.json"
     },
     {
       "name": "humanoid_shoulder_left",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_shoulder_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_shoulder_left.json"
     },
     {
       "name": "humanoid_shoulder_right",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_shoulder_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_shoulder_right.json"
     },
     {
       "name": "humanoid_spine_vertebrae",
-      "path": "config\\bots\\bot_families\\humanoids\\torso\\humanoid_spine_vertebrae.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/torso/humanoid_spine_vertebrae.json"
     },
     {
       "name": "humanoid_walker_mk1",
-      "path": "config\\bots\\bot_families\\humanoids\\humanoid_walker_mk1.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/humanoid_walker_mk1.json"
     },
     {
       "name": "humanoid_wrist_left",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_wrist_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_wrist_left.json"
     },
     {
       "name": "humanoid_wrist_right",
-      "path": "config\\bots\\bot_families\\humanoids\\arms\\humanoid_wrist_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/arms/humanoid_wrist_right.json"
     },
     {
       "name": "hw496_microphone",
-      "path": "config\\components\\hardware\\hw496_microphone.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hw496_microphone.json"
     },
     {
       "name": "hw500_vibration_sensor",
-      "path": "config\\components\\hardware\\hw500_vibration_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hw500_vibration_sensor.json"
     },
     {
       "name": "hw506_temperature_sensor",
-      "path": "config\\components\\hardware\\hw506_temperature_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/hw506_temperature_sensor.json"
     },
     {
       "name": "i2c_bus",
-      "path": "config\\components\\interfaces\\i2c_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2c_bus.json"
     },
     {
       "name": "i2c_bus_1",
-      "path": "config\\components\\interfaces\\i2c_bus_1.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2c_bus_1.json"
     },
     {
       "name": "i2c_driver",
-      "path": "config\\components\\drivers\\i2c_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/i2c_driver.json"
     },
     {
       "name": "i2s_bus",
-      "path": "config\\components\\interfaces\\i2s_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2s_bus.json"
     },
     {
       "name": "i2s_bus_i2s0",
-      "path": "config\\components\\interfaces\\i2s_bus_i2s0.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2s_bus_i2s0.json"
     },
     {
       "name": "i2s_device_1",
-      "path": "config\\components\\interfaces\\i2s_device_1.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2s_device_1.json"
     },
     {
       "name": "i2s_device_2",
-      "path": "config\\components\\interfaces\\i2s_device_2.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/i2s_device_2.json"
     },
     {
       "name": "i2s_driver",
-      "path": "config\\components\\drivers\\i2s_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/i2s_driver.json"
     },
     {
       "name": "i2s_generic_driver",
-      "path": "config\\components\\drivers\\i2s_generic_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/i2s_generic_driver.json"
     },
     {
       "name": "icm20689_bmp390",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\ICM20689_BMP390.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/ICM20689_BMP390.json"
     },
     {
       "name": "idle_scan",
-      "path": "config\\components\\behaviors\\idle_scan.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/idle_scan.json"
     },
     {
       "name": "ili9341",
-      "path": "config\\components\\hardware\\ili9341.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9341.json"
     },
     {
       "name": "ili9341_3p5inch_tft",
-      "path": "config\\components\\hardware\\ili9341_3p5inch_tft.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9341_3p5inch_tft.json"
     },
     {
       "name": "ili9481",
-      "path": "config\\components\\hardware\\ili9481.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9481.json"
     },
     {
       "name": "ili9481_5inch_tft",
-      "path": "config\\components\\hardware\\ili9481_5inch_tft.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9481_5inch_tft.json"
     },
     {
       "name": "ili9486",
-      "path": "config\\components\\hardware\\ili9486.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9486.json"
     },
     {
       "name": "ili9486_4inch_tft",
-      "path": "config\\components\\hardware\\ili9486_4inch_tft.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9486_4inch_tft.json"
     },
     {
       "name": "ili9488",
-      "path": "config\\components\\hardware\\ili9488.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ili9488.json"
     },
     {
       "name": "imu_balance_sensor",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\imu_balance_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/imu_balance_sensor.json"
     },
     {
       "name": "inline_component_0",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\components\\inline_component_0.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/components/inline_component_0.json"
     },
     {
       "name": "inline_component_1",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\components\\inline_component_1.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/components/inline_component_1.json"
     },
     {
       "name": "inmp441_microphone",
-      "path": "config\\components\\hardware\\inmp441_microphone.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/inmp441_microphone.json"
     },
     {
       "name": "ips_round_rgb",
-      "path": "config\\components\\hardware\\ips_round_rgb.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ips_round_rgb.json"
     },
     {
       "name": "json_completeness_tracker",
-      "path": "config\\validation\\json_completeness_tracker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/validation/json_completeness_tracker.json"
     },
     {
       "name": "knee_joint_assembly",
-      "path": "config\\components\\hardware\\knee_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/knee_joint_assembly.json"
     },
     {
       "name": "l298n_motor_driver",
-      "path": "config\\components\\interfaces\\l298n_motor_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/l298n_motor_driver.json"
     },
     {
       "name": "led_matrix_small",
-      "path": "config\\components\\hardware\\led_matrix_small.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/led_matrix_small.json"
     },
     {
       "name": "led_neopixel_ring",
-      "path": "config\\components\\hardware\\led_neopixel_ring.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/led_neopixel_ring.json"
     },
     {
       "name": "leds",
-      "path": "config\\components\\hardware\\leds.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/leds.json"
     },
     {
       "name": "left_eye_display",
-      "path": "config\\bots\\multi_family\\behaviors\\left_eye_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/multi_family/behaviors/left_eye_display.json"
     },
     {
       "name": "leg_base",
-      "path": "config\\subsystems\\leg_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/leg_base.json"
     },
     {
       "name": "linear_actuator_electric",
-      "path": "config\\components\\interfaces\\linear_actuator_electric.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/linear_actuator_electric.json"
     },
     {
       "name": "main_battery_monitor",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\main_battery_monitor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/main_battery_monitor.json"
     },
     {
       "name": "main_speaker",
-      "path": "config\\bots\\multi_family\\behaviors\\main_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/multi_family/behaviors/main_speaker.json"
     },
     {
       "name": "makernames",
-      "path": "config\\components\\interfaces\\makernames.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/makernames.json"
     },
     {
       "name": "massive_orc_chieftain",
-      "path": "config\\bots\\bot_families\\orcs\\massive_orc_chieftain.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/orcs/massive_orc_chieftain.json"
     },
     {
       "name": "master_controller",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\master_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/master_controller.json"
     },
     {
       "name": "master_controller_interface",
-      "path": "config\\components\\interfaces\\master_controller_interface.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/master_controller_interface.json"
     },
     {
       "name": "max98357a_i2s_amplifier",
-      "path": "config\\components\\interfaces\\max98357a_i2s_amplifier.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/max98357a_i2s_amplifier.json"
     },
     {
       "name": "mechanical_actuator",
-      "path": "config\\components\\hardware\\mechanical_actuator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/mechanical_actuator.json"
     },
     {
       "name": "mesh_software_coordinator",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\mesh_software_coordinator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/mesh_software_coordinator.json"
     },
     {
       "name": "mg996r_servo",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\MG996R_SERVO.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/MG996R_SERVO.json"
     },
     {
       "name": "micro_servo_array",
-      "path": "config\\components\\interfaces\\micro_servo_array.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/micro_servo_array.json"
     },
     {
       "name": "modular_humanoid_esp32",
-      "path": "config\\bots\\bot_families\\humanoids\\modular_humanoid_esp32.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/modular_humanoid_esp32.json"
     },
     {
       "name": "mood_calculator_template",
-      "path": "config\\components\\templates\\mood_calculator_template.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/templates/mood_calculator_template.json"
     },
     {
       "name": "mouth_display",
-      "path": "config\\bots\\multi_family\\behaviors\\mouth_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/multi_family/behaviors/mouth_display.json"
     },
     {
       "name": "mpu6050_imu_sensor",
-      "path": "config\\components\\interfaces\\mpu6050_imu_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/mpu6050_imu_sensor.json"
     },
     {
       "name": "neck_joint_assembly",
-      "path": "config\\components\\hardware\\neck_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/neck_joint_assembly.json"
     },
     {
       "name": "neopixel_matrix_8x8",
-      "path": "config\\components\\hardware\\neopixel_matrix_8x8.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/neopixel_matrix_8x8.json"
     },
     {
       "name": "network_monitor",
-      "path": "config\\components\\network_monitor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/network_monitor.json"
     },
     {
       "name": "neutral",
-      "path": "config\\components\\behaviors\\moods\\neutral.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/moods/neutral.json"
     },
     {
       "name": "nose_sensor",
-      "path": "config\\bots\\multi_family\\behaviors\\nose_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/multi_family/behaviors/nose_sensor.json"
     },
     {
       "name": "ogre_brute",
-      "path": "config\\bots\\bot_families\\orcs\\ogre_brute.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/orcs/ogre_brute.json"
     },
     {
       "name": "oled_ssd1306_128x64",
-      "path": "config\\components\\hardware\\oled_ssd1306_128x64.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/oled_ssd1306_128x64.json"
     },
     {
       "name": "orc_mouth",
-      "path": "config\\bots\\bot_families\\orcs\\head\\orc_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/orcs/head/orc_mouth.json"
     },
     {
       "name": "orcs_family",
-      "path": "config\\bots\\bot_families\\fantasy\\orcs_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/orcs_family.json"
     },
     {
       "name": "pelvis_structural_assembly",
-      "path": "config\\components\\hardware\\pelvis_structural_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/pelvis_structural_assembly.json"
     },
     {
       "name": "pir_motion_sensor",
-      "path": "config\\components\\hardware\\pir_motion_sensor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/pir_motion_sensor.json"
     },
     {
       "name": "pixie_eye",
-      "path": "config\\bots\\bot_families\\fantasy\\head\\pixie_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/head/pixie_eye.json"
     },
     {
       "name": "pixie_left_eye",
-      "path": "config\\bots\\bot_families\\fantasy\\head\\pixie_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/head/pixie_left_eye.json"
     },
     {
       "name": "pneumatic_actuator",
-      "path": "config\\components\\interfaces\\pneumatic_actuator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/pneumatic_actuator.json"
     },
     {
       "name": "pocket_pixie",
-      "path": "config\\bots\\bot_families\\humanoids\\pocket_pixie.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/pocket_pixie.json"
     },
     {
       "name": "power_management",
-      "path": "config\\subsystems\\components\\power_management.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/power_management.json"
     },
     {
       "name": "power_management_system",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\power_management_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/power_management_system.json"
     },
     {
       "name": "power_management_unit",
-      "path": "config\\components\\hardware\\power_management_unit.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/power_management_unit.json"
     },
     {
       "name": "proportional_sizing_system",
-      "path": "config\\components\\scaling\\proportional_sizing_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/scaling/proportional_sizing_system.json"
     },
     {
       "name": "pwm_bus",
-      "path": "config\\components\\drivers\\pwm_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/pwm_bus.json"
     },
     {
       "name": "pwm_driver",
-      "path": "config\\components\\drivers\\pwm_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/pwm_driver.json"
     },
     {
       "name": "pwm_motor_controller",
-      "path": "config\\components\\interfaces\\pwm_motor_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/pwm_motor_controller.json"
     },
     {
       "name": "quadruped_walker_mk1",
-      "path": "config\\bots\\bot_families\\humanoids\\quadruped_walker_mk1.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/humanoids/quadruped_walker_mk1.json"
     },
     {
       "name": "ra8875_tft_1024x600",
-      "path": "config\\components\\hardware\\ra8875_tft_1024x600.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ra8875_tft_1024x600.json"
     },
     {
       "name": "ra8875_tft_800x480",
-      "path": "config\\components\\hardware\\ra8875_tft_800x480.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ra8875_tft_800x480.json"
     },
     {
       "name": "right_eye_display",
-      "path": "config\\bots\\multi_family\\behaviors\\right_eye_display.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/multi_family/behaviors/right_eye_display.json"
     },
     {
       "name": "robot_back_mount",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_back_mount.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_back_mount.json"
     },
     {
       "name": "robot_camera_eyes",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_camera_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_camera_eyes.json"
     },
     {
       "name": "robot_chest_matrix",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_chest_matrix.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_chest_matrix.json"
     },
     {
       "name": "robot_combat_unit_001",
-      "path": "config\\bots\\bot_families\\robots\\robot_combat_unit_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/robot_combat_unit_001.json"
     },
     {
       "name": "robot_companion_buddy",
-      "path": "config\\bots\\bot_families\\robots\\robot_companion_buddy.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/robot_companion_buddy.json"
     },
     {
       "name": "robot_exploration_unit_001",
-      "path": "config\\bots\\bot_families\\robots\\robot_exploration_unit_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/robot_exploration_unit_001.json"
     },
     {
       "name": "robot_eye",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_eye.json"
     },
     {
       "name": "robot_family",
-      "path": "config\\bots\\bot_families\\mechanical\\robot_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/robot_family.json"
     },
     {
       "name": "robot_family_corrupted",
-      "path": "config\\bots\\bot_families\\mechanical\\robot_family_corrupted.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/robot_family_corrupted.json"
     },
     {
       "name": "robot_family_enhanced",
-      "path": "config\\bots\\bot_families\\mechanical\\robot_family_enhanced.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/robot_family_enhanced.json"
     },
     {
       "name": "robot_led_strips",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_led_strips.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_led_strips.json"
     },
     {
       "name": "robot_left_eye",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_left_eye.json"
     },
     {
       "name": "robot_security_unit_mk2",
-      "path": "config\\bots\\bot_families\\robots\\robot_security_unit_mk2.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/robot_security_unit_mk2.json"
     },
     {
       "name": "robot_solar_parasol",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_solar_parasol.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_solar_parasol.json"
     },
     {
       "name": "robot_speaker_array",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_speaker_array.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_speaker_array.json"
     },
     {
       "name": "robot_status_oled",
-      "path": "config\\bots\\bot_families\\robots\\head\\robot_status_oled.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/robots/head/robot_status_oled.json"
     },
     {
       "name": "robots_family",
-      "path": "config\\bots\\bot_families\\mechanical\\robots_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/robots_family.json"
     },
     {
       "name": "sad",
-      "path": "config\\components\\behaviors\\moods\\sad.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/moods/sad.json"
     },
     {
       "name": "safety_monitor",
-      "path": "config\\subsystems\\components\\safety_monitor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/safety_monitor.json"
     },
     {
       "name": "sensor_fusion",
-      "path": "config\\subsystems\\components\\sensor_fusion.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/sensor_fusion.json"
     },
     {
       "name": "sensors",
-      "path": "config\\components\\hardware\\sensors.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/sensors.json"
     },
     {
       "name": "servo_9g_micro",
-      "path": "config\\components\\hardware\\servo_9g_micro.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/servo_9g_micro.json"
     },
     {
       "name": "servo_assembly",
-      "path": "config\\components\\hardware\\servo_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/servo_assembly.json"
     },
     {
       "name": "servo_hardware_abstraction",
-      "path": "config\\components\\interfaces\\servo_hardware_abstraction.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/servo_hardware_abstraction.json"
     },
     {
       "name": "servo_motor_standard",
-      "path": "config\\components\\interfaces\\servo_motor_standard.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/servo_motor_standard.json"
     },
     {
       "name": "servo_sg90_micro",
-      "path": "config\\components\\hardware\\servo_sg90_micro.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/servo_sg90_micro.json"
     },
     {
       "name": "servos",
-      "path": "config\\components\\hardware\\servos.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/servos.json"
     },
     {
       "name": "sg90_micro_servo",
-      "path": "config\\components\\interfaces\\sg90_micro_servo.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/sg90_micro_servo.json"
     },
     {
       "name": "shoulder_flexion",
-      "path": "config\\bots\\bot_families\\goblins\\arms\\left\\shoulder_flexion.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/arms/left/shoulder_flexion.json"
     },
     {
       "name": "shoulder_joint_assembly",
-      "path": "config\\components\\hardware\\shoulder_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/shoulder_joint_assembly.json"
     },
     {
       "name": "simple_goblin_bot",
-      "path": "config\\bots\\bot_families\\goblins\\simple_goblin_bot.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/simple_goblin_bot.json"
     },
     {
       "name": "skeletal_power_distribution",
-      "path": "config\\components\\interfaces\\skeletal_power_distribution.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/skeletal_power_distribution.json"
     },
     {
       "name": "skeleton_bone_structure",
-      "path": "config\\bots\\bot_families\\undead\\head\\skeleton_bone_structure.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/skeleton_bone_structure.json"
     },
     {
       "name": "skeleton_family",
-      "path": "config\\bots\\bot_families\\horror\\skeleton_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/skeleton_family.json"
     },
     {
       "name": "skeleton_jaw_actuator",
-      "path": "config\\bots\\bot_families\\undead\\head\\skeleton_jaw_actuator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/skeleton_jaw_actuator.json"
     },
     {
       "name": "skeleton_joint_mechanism",
-      "path": "config\\bots\\bot_families\\undead\\head\\skeleton_joint_mechanism.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/skeleton_joint_mechanism.json"
     },
     {
       "name": "skeleton_mage_001",
-      "path": "config\\bots\\bot_families\\undead\\skeleton_mage_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/skeleton_mage_001.json"
     },
     {
       "name": "skeleton_warrior_001",
-      "path": "config\\bots\\bot_families\\undead\\skeleton_warrior_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/skeleton_warrior_001.json"
     },
     {
       "name": "skeletons_family",
-      "path": "config\\bots\\bot_families\\horror\\skeletons_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/skeletons_family.json"
     },
     {
       "name": "sleep",
-      "path": "config\\components\\behaviors\\sleep.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/sleep.json"
     },
     {
       "name": "software_coordinator_interface",
-      "path": "config\\components\\interfaces\\software_coordinator_interface.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/software_coordinator_interface.json"
     },
     {
       "name": "solar_parasol_system",
-      "path": "config\\components\\hardware\\solar_parasol_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/solar_parasol_system.json"
     },
     {
       "name": "speaker",
-      "path": "config\\components\\hardware\\speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/speaker.json"
     },
     {
       "name": "spi_bus",
-      "path": "config\\components\\interfaces\\spi_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/spi_bus.json"
     },
     {
       "name": "spi_data_bus",
-      "path": "config\\components\\drivers\\spi_data_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/drivers/spi_data_bus.json"
     },
     {
       "name": "spi_display_bus",
-      "path": "config\\components\\interfaces\\spi_display_bus.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/spi_display_bus.json"
     },
     {
       "name": "spine_servo_lower",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\spine_servo_lower.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/spine_servo_lower.json"
     },
     {
       "name": "spine_servo_middle",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\spine_servo_middle.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/spine_servo_middle.json"
     },
     {
       "name": "spine_servo_upper",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\spine_servo_upper.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/spine_servo_upper.json"
     },
     {
       "name": "spine_vertebrae_assembly",
-      "path": "config\\components\\hardware\\spine_vertebrae_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/spine_vertebrae_assembly.json"
     },
     {
       "name": "ssd1306",
-      "path": "config\\components\\hardware\\ssd1306.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ssd1306.json"
     },
     {
       "name": "ssd1331_micro_rgb_oled",
-      "path": "config\\components\\hardware\\ssd1331_micro_rgb_oled.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ssd1331_micro_rgb_oled.json"
     },
     {
       "name": "ssd1351_rgb_oled",
-      "path": "config\\components\\hardware\\ssd1351_rgb_oled.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ssd1351_rgb_oled.json"
     },
     {
       "name": "ssd1963_tft_800x600",
-      "path": "config\\components\\hardware\\ssd1963_tft_800x600.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ssd1963_tft_800x600.json"
     },
     {
       "name": "st7735",
-      "path": "config\\components\\hardware\\st7735.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7735.json"
     },
     {
       "name": "st7735_tft_rgb",
-      "path": "config\\components\\hardware\\st7735_tft_rgb.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7735_tft_rgb.json"
     },
     {
       "name": "st7789",
-      "path": "config\\components\\hardware\\st7789.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7789.json"
     },
     {
       "name": "st7789_premium_tft_rgb",
-      "path": "config\\components\\hardware\\st7789_premium_tft_rgb.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7789_premium_tft_rgb.json"
     },
     {
       "name": "st7796",
-      "path": "config\\components\\hardware\\st7796.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7796.json"
     },
     {
       "name": "st7796s",
-      "path": "config\\components\\hardware\\st7796s.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/st7796s.json"
     },
     {
       "name": "steampunk_aristocrat_001",
-      "path": "config\\bots\\bot_families\\steampunk\\steampunk_aristocrat_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/steampunk_aristocrat_001.json"
     },
     {
       "name": "steampunk_eye_left",
-      "path": "config\\bots\\bot_families\\steampunk\\head\\steampunk_eye_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/head/steampunk_eye_left.json"
     },
     {
       "name": "steampunk_eye_right",
-      "path": "config\\bots\\bot_families\\steampunk\\head\\steampunk_eye_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/head/steampunk_eye_right.json"
     },
     {
       "name": "steampunk_family",
-      "path": "config\\bots\\bot_families\\mechanical\\steampunk_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/mechanical/steampunk_family.json"
     },
     {
       "name": "steampunk_mouth",
-      "path": "config\\bots\\bot_families\\steampunk\\head\\steampunk_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/head/steampunk_mouth.json"
     },
     {
       "name": "steampunk_nose",
-      "path": "config\\bots\\bot_families\\steampunk\\head\\steampunk_nose.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/head/steampunk_nose.json"
     },
     {
       "name": "steampunk_speaker",
-      "path": "config\\bots\\bot_families\\steampunk\\head\\steampunk_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/steampunk/head/steampunk_speaker.json"
     },
     {
       "name": "stepper_motor_28byj48",
-      "path": "config\\components\\interfaces\\stepper_motor_28byj48.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/stepper_motor_28byj48.json"
     },
     {
       "name": "stepper_motor_catalog",
-      "path": "config\\components\\hardware\\stepper_motor_catalog.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/stepper_motor_catalog.json"
     },
     {
       "name": "stepper_motor_nema17",
-      "path": "config\\components\\interfaces\\stepper_motor_nema17.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/stepper_motor_nema17.json"
     },
     {
       "name": "stepper_nema14_standard",
-      "path": "config\\components\\hardware\\stepper_nema14_standard.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/stepper_nema14_standard.json"
     },
     {
       "name": "stepper_nema17_standard",
-      "path": "config\\components\\hardware\\stepper_nema17_standard.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/stepper_nema17_standard.json"
     },
     {
       "name": "stepper_nema23_standard",
-      "path": "config\\components\\hardware\\stepper_nema23_standard.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/stepper_nema23_standard.json"
     },
     {
       "name": "stepper_nema8_standard",
-      "path": "config\\components\\hardware\\stepper_nema8_standard.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/stepper_nema8_standard.json"
     },
     {
       "name": "system_health_monitor",
-      "path": "config\\subsystems\\components\\system_health_monitor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/system_health_monitor.json"
     },
     {
       "name": "t_motor_u3_580kv",
-      "path": "config\\bots\\bot_families\\dragons\\hardware_templates\\T_MOTOR_U3_580KV.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/dragons/hardware_templates/T_MOTOR_U3_580KV.json"
     },
     {
       "name": "tactile_processor",
-      "path": "config\\subsystems\\components\\tactile_processor.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/subsystems/components/tactile_processor.json"
     },
     {
       "name": "test_bot",
-      "path": "config\\bots\\bot_families\\tests\\test_bot.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/tests/test_bot.json"
     },
     {
       "name": "test_bot_minimal",
-      "path": "config\\bots\\test_bot_minimal.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/test_bot_minimal.json"
     },
     {
       "name": "test_component",
-      "path": "config\\components\\tests\\test_component.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/tests/test_component.json"
     },
     {
       "name": "test_goblin_head_dual_eyes",
-      "path": "config\\bots\\test_goblin_head_dual_eyes.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/test_goblin_head_dual_eyes.json"
     },
     {
       "name": "test_head",
-      "path": "config\\bots\\bot_families\\tests\\head\\test_head.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/tests/head/test_head.json"
     },
     {
       "name": "test_left_eye_positioned",
-      "path": "config\\components\\test\\test_left_eye_positioned.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/test/test_left_eye_positioned.json"
     },
     {
       "name": "test_multi_esp32",
-      "path": "config\\bots\\test_multi_esp32.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/test_multi_esp32.json"
     },
     {
       "name": "test_right_eye_positioned",
-      "path": "config\\components\\test\\test_right_eye_positioned.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/test/test_right_eye_positioned.json"
     },
     {
       "name": "test_single_eye",
-      "path": "config\\test_single_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/test_single_eye.json"
     },
     {
       "name": "test_subsystem",
-      "path": "config\\bots\\test_subsystem.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/test_subsystem.json"
     },
     {
       "name": "test_system_controller",
-      "path": "config\\components\\functional\\test_system_controller.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/functional/test_system_controller.json"
     },
     {
       "name": "tft_2p5x1p5",
-      "path": "config\\components\\hardware\\tft_2p5x1p5.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/tft_2p5x1p5.json"
     },
     {
       "name": "tiny_house_goblin",
-      "path": "config\\bots\\bot_families\\goblins\\tiny_house_goblin.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/tiny_house_goblin.json"
     },
     {
       "name": "torso_base",
-      "path": "config\\templates\\base\\torso_base.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/templates/base/torso_base.json"
     },
     {
       "name": "torso_integrated_power_system",
-      "path": "config\\components\\hardware\\torso_integrated_power_system.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/torso_integrated_power_system.json"
     },
     {
       "name": "torso_status_led",
-      "path": "config\\bots\\bot_families\\goblins\\torso\\torso_status_led.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/goblins/torso/torso_status_led.json"
     },
     {
       "name": "uln2003_stepper_driver",
-      "path": "config\\components\\interfaces\\uln2003_stepper_driver.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/uln2003_stepper_driver.json"
     },
     {
       "name": "unified_proportional_scaling",
-      "path": "config\\components\\scaling\\unified_proportional_scaling.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/scaling/unified_proportional_scaling.json"
     },
     {
       "name": "vampire_ancient_elder_001",
-      "path": "config\\bots\\bot_families\\undead\\vampire_ancient_elder_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/vampire_ancient_elder_001.json"
     },
     {
       "name": "vampire_eye_left",
-      "path": "config\\bots\\bot_families\\vampires\\head\\vampire_eye_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/vampires/head/vampire_eye_left.json"
     },
     {
       "name": "vampire_eye_right",
-      "path": "config\\bots\\bot_families\\vampires\\head\\vampire_eye_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/vampires/head/vampire_eye_right.json"
     },
     {
       "name": "vampire_family",
-      "path": "config\\bots\\bot_families\\fantasy\\vampire_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/fantasy/vampire_family.json"
     },
     {
       "name": "vampire_mouth",
-      "path": "config\\bots\\bot_families\\vampires\\head\\vampire_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/vampires/head/vampire_mouth.json"
     },
     {
       "name": "vampire_speaker",
-      "path": "config\\bots\\bot_families\\vampires\\head\\vampire_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/vampires/head/vampire_speaker.json"
     },
     {
       "name": "versioned_cost_performance_template",
-      "path": "config\\templates\\versioned_cost_performance_template.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/templates/versioned_cost_performance_template.json"
     },
     {
       "name": "walking_gait_controllers",
-      "path": "config\\components\\behaviors\\walking_gait_controllers.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/behaviors/walking_gait_controllers.json"
     },
     {
       "name": "wifi_interface",
-      "path": "config\\components\\interfaces\\wifi_interface.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/interfaces/wifi_interface.json"
     },
     {
       "name": "wolf_eye_left",
-      "path": "config\\bots\\bot_families\\wolves\\head\\wolf_eye_left.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/wolves/head/wolf_eye_left.json"
     },
     {
       "name": "wolf_eye_right",
-      "path": "config\\bots\\bot_families\\wolves\\head\\wolf_eye_right.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/wolves/head/wolf_eye_right.json"
     },
     {
       "name": "wolf_family",
-      "path": "config\\bots\\bot_families\\animals\\wolf_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/animals/wolf_family.json"
     },
     {
       "name": "wolf_snout",
-      "path": "config\\bots\\bot_families\\wolves\\head\\wolf_snout.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/wolves/head/wolf_snout.json"
     },
     {
       "name": "wolf_speaker",
-      "path": "config\\bots\\bot_families\\wolves\\head\\wolf_speaker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/wolves/head/wolf_speaker.json"
     },
     {
       "name": "wolves_family",
-      "path": "config\\bots\\bot_families\\animals\\wolves_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/animals/wolves_family.json"
     },
     {
       "name": "wrist_joint_assembly",
-      "path": "config\\components\\hardware\\wrist_joint_assembly.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/wrist_joint_assembly.json"
     },
     {
       "name": "ws2812_led_strip",
-      "path": "config\\components\\hardware\\ws2812_led_strip.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ws2812_led_strip.json"
     },
     {
       "name": "ws2812b_strip",
-      "path": "config\\components\\hardware\\ws2812b_strip.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/components/hardware/ws2812b_strip.json"
     },
     {
       "name": "zombie_crawler",
-      "path": "config\\bots\\bot_families\\undead\\zombie_crawler.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/zombie_crawler.json"
     },
     {
       "name": "zombie_drag_mechanism",
-      "path": "config\\bots\\bot_families\\undead\\head\\zombie_drag_mechanism.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/zombie_drag_mechanism.json"
     },
     {
       "name": "zombie_exposed_bone",
-      "path": "config\\bots\\bot_families\\undead\\head\\zombie_exposed_bone.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/zombie_exposed_bone.json"
     },
     {
       "name": "zombie_eye",
-      "path": "config\\bots\\bot_families\\zombies\\head\\zombie_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/zombies/head/zombie_eye.json"
     },
     {
       "name": "zombie_family",
-      "path": "config\\bots\\bot_families\\horror\\zombie_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/zombie_family.json"
     },
     {
       "name": "zombie_left_eye",
-      "path": "config\\bots\\bot_families\\zombies\\head\\zombie_left_eye.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/zombies/head/zombie_left_eye.json"
     },
     {
       "name": "zombie_mouth",
-      "path": "config\\bots\\bot_families\\zombies\\head\\zombie_mouth.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/zombies/head/zombie_mouth.json"
     },
     {
       "name": "zombie_oozing_wounds",
-      "path": "config\\bots\\bot_families\\undead\\head\\zombie_oozing_wounds.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/zombie_oozing_wounds.json"
     },
     {
       "name": "zombie_rotting_flesh",
-      "path": "config\\bots\\bot_families\\undead\\head\\zombie_rotting_flesh.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/head/zombie_rotting_flesh.json"
     },
     {
       "name": "zombie_runner_001",
-      "path": "config\\bots\\bot_families\\undead\\zombie_runner_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/zombie_runner_001.json"
     },
     {
       "name": "zombie_shamble_actuator",
-      "path": "config\\bots\\bot_families\\zombies\\head\\zombie_shamble_actuator.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/zombies/head/zombie_shamble_actuator.json"
     },
     {
       "name": "zombie_shambler_001",
-      "path": "config\\bots\\bot_families\\undead\\zombie_shambler_001.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/zombie_shambler_001.json"
     },
     {
       "name": "zombie_walker",
-      "path": "config\\bots\\bot_families\\undead\\zombie_walker.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/undead/zombie_walker.json"
     },
     {
       "name": "zombies_family",
-      "path": "config\\bots\\bot_families\\horror\\zombies_family.json",
-      "git_repo": "p32-animatronic-bot"
+      "path": "config/bots/bot_families/horror/zombies_family.json"
     }
   ]
 }

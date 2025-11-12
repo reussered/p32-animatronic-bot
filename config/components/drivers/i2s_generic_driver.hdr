@@ -8,10 +8,6 @@
 #include "driver/i2s.h"
 #include "esp_log.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // Component interface functions
 esp_err_t i2s_generic_driver_init(void);
 void i2s_generic_driver_act(void);
@@ -25,9 +21,5 @@ esp_err_t i2s_generic_driver_stop_dma(void);
 
 // I2S bus dependency - provided by i2s_bus component
 esp_err_t i2s_bus_get_pins(i2s_pin_config_t *pin_config);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // I2S_GENERIC_DRIVER_H

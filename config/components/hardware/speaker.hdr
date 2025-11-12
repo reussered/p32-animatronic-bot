@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize speaker component
  * @return ESP_OK on success, error code otherwise
@@ -49,9 +45,5 @@ void speaker_speak_goblin_phrase(const char* phrase);
  * @param intensity Intensity level (0.0 to 1.0)
  */
 void speaker_play_emotional_response(const char* emotion, float intensity);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // SPEAKER_HDR

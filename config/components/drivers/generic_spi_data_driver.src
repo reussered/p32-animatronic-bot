@@ -3,10 +3,8 @@
 
 #include "esp_log.h"
 
-static const char *TAG = "generic_spi_data_driver";
-
 esp_err_t generic_spi_data_driver_init(void) {
-    ESP_LOGI(TAG, "Initializing generic SPI data driver");
+    ESP_LOGI("generic_spi_data_driver", "Initializing generic SPI data driver");
     // Initialization logic for a generic SPI device will go here.
     // This would typically involve adding a device to the spi_data_bus.
     return ESP_OK;

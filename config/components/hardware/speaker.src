@@ -5,8 +5,6 @@
 #include "esp_timer.h"
 #include "components/drivers/i2s_driver.hdr"
 
-static const char *TAG_speaker = "speaker";
-
 // Speaker state for mood-based audio
 typedef struct {
     bool initialized;
@@ -72,12 +70,12 @@ static const sound_effect_t sound_library[] = {
 #define SOUND_LIBRARY_SIZE (sizeof(sound_library) / sizeof(sound_effect_t))
 
 esp_err_t speaker_init(void) {
-    ESP_LOGI(TAG_speaker, "Speaker hardware init");
+    ESP_LOGI("speaker", "Speaker hardware init");
     
     // Initialize I2S driver first
     esp_err_t ret = i2s_driver_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG_speaker, "Failed to initialize I2S driver: %s", esp_err_to_name(ret));
+        ESP_LOGE("speaker", "Failed to initialize I2S driver: %s", esp_err_to_name(ret));
         return ret;
     }
     
@@ -87,7 +85,7 @@ esp_err_t speaker_init(void) {
     // Play boot sound
     speaker_play_sound_by_name("system_boot");
     
-    ESP_LOGI(TAG_speaker, "Speaker initialized with %d sound effects", SOUND_LIBRARY_SIZE);
+    ESP_LOGI("speaker", "Speaker initialized with %d sound effects", SOUND_LIBRARY_SIZE);
     return ESP_OK;
 }
 
@@ -103,7 +101,7 @@ void speaker_act(void) {
         uint32_t sound_index = speaker_state.sound_counter % SOUND_LIBRARY_SIZE;
         const sound_effect_t* sound = &sound_library[sound_index];
         
-        ESP_LOGI(TAG_speaker, "Demo: Playing %s", sound->name);
+        ESP_LOGI("speaker", "Demo: Playing %s", sound->name);
         i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
         
         speaker_state.sound_counter++;
@@ -125,12 +123,12 @@ void speaker_play_sound_by_name(const char* sound_name) {
     for (int i = 0; i < SOUND_LIBRARY_SIZE; i++) {
         if (strcmp(sound_library[i].name, sound_name) == 0) {
             const sound_effect_t* sound = &sound_library[i];
-            ESP_LOGI(TAG_speaker, "Playing sound: %s", sound_name);
+            ESP_LOGI("speaker", "Playing sound: %s", sound_name);
             i2s_driver_play_sound(sound->name, sound->frequency_hz, sound->volume);
             return;
         }
     }
-    ESP_LOGW(TAG_speaker, "Sound not found: %s", sound_name);
+    ESP_LOGW("speaker", "Sound not found: %s", sound_name);
 }
 
 /**
@@ -165,7 +163,7 @@ void speaker_play_mood_sound(const char* mood) {
  * @brief Synthesize and speak goblin words/phrases
  */
 void speaker_speak_goblin_phrase(const char* phrase) {
-    ESP_LOGI(TAG_speaker, "Speaking goblin phrase: '%s'", phrase);
+    ESP_LOGI("speaker", "Speaking goblin phrase: '%s'", phrase);
     
     // Goblin speech synthesis using phonetic mapping
     if (strcmp(phrase, "hello") == 0 || strcmp(phrase, "greetings") == 0) {
@@ -206,7 +204,7 @@ void speaker_speak_goblin_phrase(const char* phrase) {
         
     } else {
         // Unknown phrase - generic goblin babble
-        ESP_LOGW(TAG_speaker, "Unknown phrase, playing generic goblin sounds");
+        ESP_LOGW("speaker", "Unknown phrase, playing generic goblin sounds");
         i2s_driver_play_sound("goblin_speech_generic", 250.0f, 0.3f);
     }
     
@@ -218,7 +216,7 @@ void speaker_speak_goblin_phrase(const char* phrase) {
  * @brief Play goblin emotional response
  */
 void speaker_play_emotional_response(const char* emotion, float intensity) {
-    ESP_LOGI(TAG_speaker, "Emotional response: %s (intensity: %.2f)", emotion, intensity);
+    ESP_LOGI("speaker", "Emotional response: %s (intensity: %.2f)", emotion, intensity);
     
     // Adjust volume and frequency based on intensity (0.0 to 1.0)
     float volume = 0.2f + (intensity * 0.5f);  // 0.2 to 0.7 range

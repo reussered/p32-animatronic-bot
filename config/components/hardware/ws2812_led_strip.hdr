@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize ws2812_led_strip component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t ws2812_led_strip_init(void);
  * Called periodically by subsystem dispatcher
  */
 void ws2812_led_strip_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // WS2812_LED_STRIP_HDR

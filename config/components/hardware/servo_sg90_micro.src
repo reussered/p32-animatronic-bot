@@ -2,17 +2,15 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_servo_sg90_micro = "servo_sg90_micro";
-
 esp_err_t servo_sg90_micro_init(void) {
-    ESP_LOGI(TAG_servo_sg90_micro, "servo_sg90_micro init - STUB IMPLEMENTATION");
+    ESP_LOGI("servo_sg90_micro", "servo_sg90_micro init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void servo_sg90_micro_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_servo_sg90_micro, "servo_sg90_micro act");
+    // ESP_LOGD("servo_sg90_micro", "servo_sg90_micro act");
 }
 
 

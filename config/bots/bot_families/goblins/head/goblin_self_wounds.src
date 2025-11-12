@@ -2,12 +2,10 @@
 #include "components/goblin_self_wounds.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "goblin_self_wounds";
-
 esp_err_t goblin_self_wounds_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("goblin_self_wounds", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t goblin_self_wounds_init(void)
 void goblin_self_wounds_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("goblin_self_wounds", "act executed");
     #endif
 }

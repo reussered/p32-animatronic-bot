@@ -2,17 +2,15 @@
 // Auto-generated stub - needs actual implementation
 
 #include "esp_log.h"
-static const char *TAG_oled_ssd1306_128x64 = "oled_ssd1306_128x64";
-
 esp_err_t ssd1306_init(void) {
-    ESP_LOGI(TAG_oled_ssd1306_128x64, "OLED_SSD1306_128X64 init - STUB IMPLEMENTATION");
+    ESP_LOGI("ssd1306", "OLED_SSD1306_128X64 init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void ssd1306_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_oled_ssd1306_128x64, "OLED_SSD1306_128X64 act");
+    // ESP_LOGD("ssd1306", "OLED_SSD1306_128X64 act");
 }
 
 

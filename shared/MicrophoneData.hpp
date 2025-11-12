@@ -42,4 +42,8 @@ public:
     {}
 };
 
+// SharedMemory type ID (required for GSM.read<MicrophoneData>() / GSM.write<MicrophoneData>())
+#include "core/memory/SharedMemory.hpp"
+template<> inline shared_type_id_t getTypeId<MicrophoneData>() { return 2; }
+
 #endif // MICROPHONE_DATA_HPP

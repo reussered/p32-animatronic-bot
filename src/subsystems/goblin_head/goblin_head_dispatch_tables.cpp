@@ -28,12 +28,6 @@ const init_function_t goblin_head_init_table[] = {
     &i2s_driver_init,
     &goblin_sinuses_init,
     &max98357a_i2s_amplifier_init,
-    &goblin_left_ear_init,
-    &servo_sg90_micro_init,
-    &hw496_microphone_init,
-    &goblin_right_ear_init,
-    &servo_sg90_micro_init,
-    &hw496_microphone_init,
     &goblin_head_neck_motor_init
 };
 
@@ -62,12 +56,6 @@ const act_function_t goblin_head_act_table[] = {
     &i2s_driver_act,
     &goblin_sinuses_act,
     &max98357a_i2s_amplifier_act,
-    &goblin_left_ear_act,
-    &servo_sg90_micro_act,
-    &hw496_microphone_act,
-    &goblin_right_ear_act,
-    &servo_sg90_micro_act,
-    &hw496_microphone_act,
     &goblin_head_neck_motor_act
 };
 
@@ -95,12 +83,6 @@ const uint32_t goblin_head_hitcount_table[] = {
     1,
     1,
     5,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
     1,
     1
 };

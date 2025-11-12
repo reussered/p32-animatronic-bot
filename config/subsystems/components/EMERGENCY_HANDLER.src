@@ -3,15 +3,13 @@
 #include "EMERGENCY_HANDLER.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "EMERGENCY_HANDLER";
-
 esp_err_t EMERGENCY_HANDLER_init(void)
 {
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("emergency_handler", "init executed");
     return ESP_OK;
 }
 
 void EMERGENCY_HANDLER_act(void)
 {
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("emergency_handler", "act executed");
 }

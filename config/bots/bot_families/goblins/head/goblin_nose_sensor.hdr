@@ -4,10 +4,6 @@
 #include <esp_err.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize goblin_nose_sensor component
  * @return ESP_OK on success, error code otherwise
@@ -19,9 +15,5 @@ esp_err_t goblin_nose_sensor_init(void);
  * Called periodically by subsystem dispatcher
  */
 void goblin_nose_sensor_act(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // GOBLIN_NOSE_SENSOR_HDR

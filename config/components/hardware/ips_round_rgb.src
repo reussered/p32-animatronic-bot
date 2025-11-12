@@ -4,20 +4,18 @@
 #include "esp_log.h"
 #include "ips_round_rgb.hdr"
 
-static const char *TAG_ips_round_rgb = "ips_round_rgb";
-
 // Define the initial pixel value (default black)
 IPS_ROUND_RGB_Pixel IPS_ROUND_RGB_InitialPixel = {0, 0, 0};
 
 esp_err_t ips_round_rgb_init(void) {
-    ESP_LOGI(TAG_ips_round_rgb, "ips_round_rgb init - STUB IMPLEMENTATION");
+    ESP_LOGI("ips_round_rgb", "ips_round_rgb init - STUB IMPLEMENTATION");
     // TODO: Add actual initialization code
     return ESP_OK;
 }
 
 void ips_round_rgb_act(void) {
     // TODO: Add actual action code
-    // ESP_LOGD(TAG_ips_round_rgb, "ips_round_rgb act");
+    // ESP_LOGD("ips_round_rgb", "ips_round_rgb act");
 }
 
 size_t ips_round_rgb_get_width(void) {

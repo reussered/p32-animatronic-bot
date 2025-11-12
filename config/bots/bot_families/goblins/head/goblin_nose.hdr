@@ -6,10 +6,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * @brief Initialize goblin nose with HC-SR04 sensor
  * @return ESP_OK on success, error code otherwise
@@ -41,9 +37,5 @@ bool goblin_nose_proximity_alert(void);
  * @return Current success rate as percentage
  */
 float goblin_nose_get_stats(uint32_t* total_readings, uint32_t* valid_readings);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // GOBLIN_NOSE_HDR

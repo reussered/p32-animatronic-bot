@@ -7,7 +7,6 @@
     "display_height": 240,
     "bytes_per_pixel": 2,
     "color_schema": "RGB565",
-    "chunk": 10,
     "debug": true
   },
   "components": [

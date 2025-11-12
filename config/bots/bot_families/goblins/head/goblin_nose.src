@@ -5,8 +5,6 @@
 #include "components/hardware/hc_sr04.hdr"
 #include "components/hardware/speaker.hdr"
 
-static const char *TAG_goblin_nose = "goblin_nose";
-
 // Nose sensor state
 typedef struct {
     float last_distance_cm;       // Last valid distance reading
@@ -31,16 +29,16 @@ static goblin_nose_state_t nose_state = {
  * @brief Initialize goblin nose with HC-SR04 sensor
  */
 esp_err_t goblin_nose_init(void) {
-    ESP_LOGI(TAG_goblin_nose, "Initializing goblin nose with HC-SR04 sensor");
+    ESP_LOGI("goblin_nose", "Initializing goblin nose with HC-SR04 sensor");
     
     // Initialize the underlying HC-SR04 hardware
     esp_err_t ret = hc_sr04_init();
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG_goblin_nose, "Failed to initialize HC-SR04 sensor: %s", esp_err_to_name(ret));
+        ESP_LOGE("goblin_nose", "Failed to initialize HC-SR04 sensor: %s", esp_err_to_name(ret));
         return ret;
     }
     
-    ESP_LOGI(TAG_goblin_nose, "Goblin nose ready - proximity sensing enabled");
+    ESP_LOGI("goblin_nose", "Goblin nose ready - proximity sensing enabled");
     return ESP_OK;
 }
 
@@ -67,7 +65,7 @@ void goblin_nose_act(void) {
         
         // Log interesting events and trigger audio responses
         if (nose_state.proximity_alert && !was_alert) {
-            ESP_LOGW(TAG_goblin_nose, "PROXIMITY ALERT! Object detected at %.1f cm", distance_cm);
+            ESP_LOGW("goblin_nose", "PROXIMITY ALERT! Object detected at %.1f cm", distance_cm);
             
             // Trigger proximity-based goblin response
             if (distance_cm <= 5.0f) {
@@ -81,7 +79,7 @@ void goblin_nose_act(void) {
             }
             
         } else if (!nose_state.proximity_alert && was_alert) {
-            ESP_LOGI(TAG_goblin_nose, "Proximity alert cleared - object moved to %.1f cm", distance_cm);
+            ESP_LOGI("goblin_nose", "Proximity alert cleared - object moved to %.1f cm", distance_cm);
             
             // Object moved away - relieved sound
             speaker_play_sound_by_name("goblin_grunt_yes");
@@ -100,13 +98,13 @@ void goblin_nose_act(void) {
                 distance_desc = "FAR";
             }
             
-            ESP_LOGI(TAG_goblin_nose, "Distance: %.1f cm (%s) - Success rate: %lu/%lu (%.1f%%)",
+            ESP_LOGI("goblin_nose", "Distance: %.1f cm (%s) - Success rate: %lu/%lu (%.1f%%)",
                      distance_cm, distance_desc,
                      nose_state.valid_readings, nose_state.reading_count,
                      (float)nose_state.valid_readings * 100.0f / nose_state.reading_count);
         }
     } else {
-        ESP_LOGD(TAG_goblin_nose, "No valid sensor reading (out of range or obstacle)");
+        ESP_LOGD("goblin_nose", "No valid sensor reading (out of range or obstacle)");
     }
 }
 

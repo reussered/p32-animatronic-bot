@@ -2,12 +2,10 @@
 #include "components/cat_speaker.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "cat_speaker";
-
 esp_err_t cat_speaker_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("cat_speaker", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t cat_speaker_init(void)
 void cat_speaker_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("cat_speaker", "act executed");
     #endif
 }

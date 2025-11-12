@@ -2,12 +2,10 @@
 #include "components/cat_tail_servo.hdr"
 #include <esp_log.h>
 
-static const char* TAG = "cat_tail_servo";
-
 esp_err_t cat_tail_servo_init(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "init executed");
+    ESP_LOGI("cat_tail_servo", "init executed");
     #endif
     return ESP_OK;
 }
@@ -15,6 +13,6 @@ esp_err_t cat_tail_servo_init(void)
 void cat_tail_servo_act(void)
 {
     #ifdef DEBUG
-    ESP_LOGI(TAG, "act executed");
+    ESP_LOGI("cat_tail_servo", "act executed");
     #endif
 }

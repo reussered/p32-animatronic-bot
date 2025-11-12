@@ -6,8 +6,6 @@
 #include "Mood.hpp"
 #include "core/memory/SharedMemory.hpp"
 
-static const char *TAG_robot_eye = "robot_eye";
-
 // Robot personality: mechanical, calculated, systematic responses
 static constexpr float ROBOT_EMOTION_INTENSITY = 0.6f;
 
@@ -40,12 +38,12 @@ static Mood lastMood;
 
 esp_err_t robot_eye_init(void)
 {
-    ESP_LOGI(TAG_robot_eye, "Initializing robot eye with mechanical emotion intensity %.2f", ROBOT_EMOTION_INTENSITY);
+    ESP_LOGI("robot_eye", "Initializing robot eye with mechanical emotion intensity %.2f", ROBOT_EMOTION_INTENSITY);
     
     currentFrame = gc9a01_getBuffer();
     if (!currentFrame)
     {
-        ESP_LOGE(TAG_robot_eye, "Failed to get frame buffer");
+        ESP_LOGE("robot_eye", "Failed to get frame buffer");
         return ESP_FAIL;
     }
     
@@ -57,7 +55,7 @@ esp_err_t robot_eye_init(void)
         lastMood.components[i] = 0;
     }
     
-    ESP_LOGI(TAG_robot_eye, "Robot eye initialized with %zu pixels", frameSize);
+    ESP_LOGI("robot_eye", "Robot eye initialized with %zu pixels", frameSize);
     return ESP_OK;
 }
 
