@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "description": "Master component registry - maps component names to paths. Sorted alphabetically by name. NO duplicates.",
-  "last_updated": "November 12, 2025 at 09:19 PM",
+  "last_updated": "November 12, 2025 at 09:20 PM",
   "components": [
     {
       "name": "a4988_stepper_driver",
