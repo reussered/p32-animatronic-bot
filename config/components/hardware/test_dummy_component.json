@@ -1,0 +1,8 @@
+{
+  "component": "test_dummy_component",
+  "type": "test",
+  "description": "Temporary test component for delete script validation",
+  "timing": {
+    "hitCount": 1
+  }
+}

@@ -1,0 +1,3 @@
+// test_dummy_component.hdr
+esp_err_t test_dummy_component_init(void);
+void test_dummy_component_act(void);

@@ -1,0 +1,13 @@
+// test_dummy_component.src
+#include "esp_log.h"
+
+esp_err_t test_dummy_component_init(void)
+{
+    ESP_LOGI("test_dummy", "Test component init");
+    return ESP_OK;
+}
+
+void test_dummy_component_act(void)
+{
+    // Do nothing
+}

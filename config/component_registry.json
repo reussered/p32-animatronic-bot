@@ -1704,6 +1704,10 @@
       "path": "config/components/tests/test_component.json"
     },
     {
+      "name": "test_dummy_component",
+      "path": "config/components/hardware/test_dummy_component.json"
+    },
+    {
       "name": "test_goblin_head_dual_eyes",
       "path": "config/bots/test_goblin_head_dual_eyes.json"
     },
