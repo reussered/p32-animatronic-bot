@@ -1,0 +1,8 @@
+{
+  "component": "debug_display_output",
+  "type": "debug",
+  "description": "Outputs display state as JSON over serial for visualization",
+  "timing": {
+    "hitCount": 1
+  }
+}

@@ -1,0 +1,3 @@
+// debug_display_output.hdr - Debug display output declarations
+esp_err_t debug_display_output_init(void);
+void debug_display_output_act(void);
