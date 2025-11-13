@@ -21,31 +21,54 @@ PROJECT_ROOT = Path(__file__).parent.parent
 CONFIG_ROOT = PROJECT_ROOT / "config"
 COMPONENT_REGISTRY = PROJECT_ROOT / "config" / "component_registry.json"
 
+def binary_search_component(registry, component_name):
+    """
+    Binary search on alphabetically sorted component registry.
+    O(log n) complexity - much faster than linear search.
+    """
+    components = registry.get("components", [])
+    
+    left = 0
+    right = len(components) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        mid_name = components[mid]["name"]
+        
+        if mid_name == component_name:
+            return components[mid]["path"]
+        elif mid_name < component_name:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return None
+
+
 def find_component_files(component_name):
     """
     Find component .json, .src, and .hdr files.
+    Uses binary search on component registry for O(log n) lookup.
     Returns: (json_path, src_path, hdr_path)
     """
-    # Search common locations
-    search_paths = [
-        CONFIG_ROOT / "components" / "hardware",
-        CONFIG_ROOT / "components" / "drivers",
-        CONFIG_ROOT / "components" / "behaviors",
-        CONFIG_ROOT / "components" / "functional",
-        CONFIG_ROOT / "components" / "interfaces",
-        CONFIG_ROOT / "bots" / "bot_families",
-    ]
-    
-    json_path = None
-    for base_path in search_paths:
-        for candidate in base_path.rglob(f"{component_name}.json"):
-            json_path = candidate
-            break
-        if json_path:
-            break
+    # Use binary search on registry for fast lookup
+    if COMPONENT_REGISTRY.exists():
+        with open(COMPONENT_REGISTRY, 'r') as f:
+            registry = json.load(f)
+        
+        rel_path = binary_search_component(registry, component_name)
+        
+        if rel_path:
+            json_path = PROJECT_ROOT / rel_path
+            if not json_path.exists():
+                json_path = None
+        else:
+            json_path = None
+    else:
+        json_path = None
     
     if not json_path:
-        print(f"⚠️ WARNING: Could not find {component_name}.json")
+        print(f"⚠️ WARNING: Could not find {component_name} in component registry")
         return None, None, None
     
     # Find .src and .hdr files
