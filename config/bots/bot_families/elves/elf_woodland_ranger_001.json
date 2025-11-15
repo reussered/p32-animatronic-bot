@@ -1,81 +1,82 @@
 {
-    "relative_filename": "config/bots/bot_families/elves/elf_woodland_ranger_001.json",
-    "version": "2.1.0",
-    "author": "config/author.json",
-    "bot_type": "ELF_WOODLAND_RANGER",
-    "inherits_family": "elf_family",
-    "bot_name": "Silverleaf the Forest Guardian",
-    "description": "A wise woodland elf ranger with keen senses and deep connection to nature. Protects the forest and its creatures.",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "eye_spacing": "2.5 INCH",
-    "scale_factor": 0.85,
-    "default_mood": "CONTENTMENT",
-    "mood_defaults": {
-        "FEAR": {
-            "duration_ms": 4000,
-            "intensity": 0.5
-        },
-        "ANGER": {
-            "duration_ms": 10000,
-            "intensity": 0.7
-        },
-        "IRRITATION": {
-            "duration_ms": 6000,
-            "intensity": 0.6
-        },
-        "HAPPINESS": {
-            "duration_ms": 12000,
-            "intensity": 0.8
-        },
-        "CONTENTMENT": {
-            "duration_ms": 30000,
-            "intensity": 0.9
-        },
-        "HUNGER": {
-            "duration_ms": 8000,
-            "intensity": 0.5
-        },
-        "CURIOSITY": {
-            "duration_ms": 15000,
-            "intensity": 0.85
-        },
-        "AFFECTION": {
-            "duration_ms": 10000,
-            "intensity": 0.7
-        }
-    },
-    "personality_traits": {
-        "aggression_level": 0.4,
-        "curiosity_level": 0.8,
-        "sociability_level": 0.6,
-        "energy_level": 0.7,
-        "nature_connection": 0.95,
-        "protective_instinct": 0.8
-    },
-    "behavior_config": {
-        "proximity_alert_distance": "80 CM",
-        "proximity_interact_distance": "30 CM",
-        "interaction_timeout": "15000 MS",
-        "sleep_mode_timeout": "120000 MS"
-    },
-    "audio_profile": {
-        "ambient_sounds": [
-            "forest_wind.wav",
-            "bird_songs.wav"
-        ],
-        "reaction_sounds": {
-            "happy": "elf_melodic_laugh.wav",
-            "angry": "elf_stern_warning.wav",
-            "curious": "elf_thoughtful_hum.wav",
-            "afraid": "elf_forest_call.wav"
-        }
-    },
-    "component_count": 0,
-    "components": [],
-    "name": "elf_woodland_ranger_001",
-    "type": "UNKNOWN",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "2.1.0",
+    "author":  "config/author.json",
+    "bot_type":  "ELF_WOODLAND_RANGER",
+    "inherits_family":  "elf_family",
+    "bot_name":  "Silverleaf the Forest Guardian",
+    "description":  "A wise woodland elf ranger with keen senses and deep connection to nature. Protects the forest and its creatures.",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "2.5 INCH",
+    "scale_factor":  0.85,
+    "default_mood":  "CONTENTMENT",
+    "mood_defaults":  {
+                          "FEAR":  {
+                                       "duration_ms":  4000,
+                                       "intensity":  0.5
+                                   },
+                          "ANGER":  {
+                                        "duration_ms":  10000,
+                                        "intensity":  0.7
+                                    },
+                          "IRRITATION":  {
+                                             "duration_ms":  6000,
+                                             "intensity":  0.6
+                                         },
+                          "HAPPINESS":  {
+                                            "duration_ms":  12000,
+                                            "intensity":  0.8
+                                        },
+                          "CONTENTMENT":  {
+                                              "duration_ms":  30000,
+                                              "intensity":  0.9
+                                          },
+                          "HUNGER":  {
+                                         "duration_ms":  8000,
+                                         "intensity":  0.5
+                                     },
+                          "CURIOSITY":  {
+                                            "duration_ms":  15000,
+                                            "intensity":  0.85
+                                        },
+                          "AFFECTION":  {
+                                            "duration_ms":  10000,
+                                            "intensity":  0.7
+                                        }
+                      },
+    "personality_traits":  {
+                               "aggression_level":  0.4,
+                               "curiosity_level":  0.8,
+                               "sociability_level":  0.6,
+                               "energy_level":  0.7,
+                               "nature_connection":  0.95,
+                               "protective_instinct":  0.8
+                           },
+    "behavior_config":  {
+                            "proximity_alert_distance":  "80 CM",
+                            "proximity_interact_distance":  "30 CM",
+                            "interaction_timeout":  "15000 MS",
+                            "sleep_mode_timeout":  "120000 MS"
+                        },
+    "audio_profile":  {
+                          "ambient_sounds":  [
+                                                 "forest_wind.wav",
+                                                 "bird_songs.wav"
+                                             ],
+                          "reaction_sounds":  {
+                                                  "happy":  "elf_melodic_laugh.wav",
+                                                  "angry":  "elf_stern_warning.wav",
+                                                  "curious":  "elf_thoughtful_hum.wav",
+                                                  "afraid":  "elf_forest_call.wav"
+                                              }
+                      },
+    "component_count":  0,
+    "components":  [
+
+                   ],
+    "name":  "elf_woodland_ranger_001",
+    "type":  "UNKNOWN",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

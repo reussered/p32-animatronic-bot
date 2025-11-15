@@ -1,4 +1,4 @@
-Write-Host "QUICK FIX: Adding config/ prefix to all relative_filename fields" -ForegroundColor Green
+Write-Host "QUICK FIX: Removing deprecated 'relative_filename' entries from JSON files" -ForegroundColor Green
 
 $configPath = Resolve-Path "config"
 $jsonFiles = Get-ChildItem -Path "config" -Recurse -Filter "*.json" -File
@@ -16,11 +16,10 @@ foreach ($file in $jsonFiles) {
         $projectRoot = Split-Path $configPath.Path -Parent
         $correctPath = $file.FullName.Replace($projectRoot + [IO.Path]::DirectorySeparatorChar, "").Replace([IO.Path]::DirectorySeparatorChar, "/")
         
-        if ($json.relative_filename -ne $correctPath) {
-            $json.relative_filename = $correctPath
-            $json | ConvertTo-Json -Depth 10 | Set-Content $file.FullName -Encoding UTF8
-            $fixedCount++
-        }
+        # Remove deprecated property rather than correcting it
+        $json.PSObject.Properties.Remove('relative_filename') | Out-Null
+        $json | ConvertTo-Json -Depth 10 | Set-Content $file.FullName -Encoding ASCII
+        $fixedCount++
     }
     catch {
         Write-Host "Skipped invalid JSON: $($file.Name)" -ForegroundColor Red

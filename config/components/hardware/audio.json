@@ -1,60 +1,59 @@
 {
-    "relative_filename": "config/components/hardware/hardware/audio.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "audio",
-    "displayName": "Audio System",
-    "description": "Speaker and audio output configurations for animatronic voice and sound effects",
-    "type": "OUTPUT",
-    "devices": [
-        {
-            "id": "speaker_main",
-            "pin": "DYNAMICALLY_ASSIGNED",
-            "type": "I2S",
-            "sampleRate": 44100,
-            "bitDepth": 16,
-            "channels": 2,
-            "amplifier": "MAX98357A",
-            "power_rating": "3_WATTS_RMS"
-        },
-        {
-            "id": "speaker_subwoofer",
-            "pin": "DYNAMICALLY_ASSIGNED",
-            "type": "I2S",
-            "sampleRate": 22050,
-            "bitDepth": 16,
-            "channels": 1,
-            "frequency_range": "20HZ_TO_200HZ",
-            "power_rating": "5_WATTS_RMS"
-        }
-    ],
-    "enabled": true,
-    "audio_profiles": {
-        "voice_communication": {
-            "volume": 80,
-            "frequency_emphasis": "VOCAL_RANGE_300HZ_TO_3KHZ",
-            "compression": "ENABLED"
-        },
-        "sound_effects": {
-            "volume": 70,
-            "frequency_emphasis": "FULL_RANGE",
-            "bass_boost": "ENABLED"
-        },
-        "music_playback": {
-            "volume": 60,
-            "equalization": "FLAT_RESPONSE",
-            "stereo_imaging": "ENABLED"
-        }
-    },
-    "config": {
-        "defaultVolume": 60,
-        "maxVolume": 100,
-        "volumeSteps": 20,
-        "mutePin": 21,
-        "lowPassFilter": "ENABLED_AT_8KHZ",
-        "dynamicRange": "24_BIT_EQUIVALENT"
-    },
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "audio",
+    "displayName":  "Audio System",
+    "description":  "Speaker and audio output configurations for animatronic voice and sound effects",
+    "type":  "OUTPUT",
+    "devices":  [
+                    {
+                        "id":  "speaker_main",
+                        "pin":  "DYNAMICALLY_ASSIGNED",
+                        "type":  "I2S",
+                        "sampleRate":  44100,
+                        "bitDepth":  16,
+                        "channels":  2,
+                        "amplifier":  "MAX98357A",
+                        "power_rating":  "3_WATTS_RMS"
+                    },
+                    {
+                        "id":  "speaker_subwoofer",
+                        "pin":  "DYNAMICALLY_ASSIGNED",
+                        "type":  "I2S",
+                        "sampleRate":  22050,
+                        "bitDepth":  16,
+                        "channels":  1,
+                        "frequency_range":  "20HZ_TO_200HZ",
+                        "power_rating":  "5_WATTS_RMS"
+                    }
+                ],
+    "enabled":  true,
+    "audio_profiles":  {
+                           "voice_communication":  {
+                                                       "volume":  80,
+                                                       "frequency_emphasis":  "VOCAL_RANGE_300HZ_TO_3KHZ",
+                                                       "compression":  "ENABLED"
+                                                   },
+                           "sound_effects":  {
+                                                 "volume":  70,
+                                                 "frequency_emphasis":  "FULL_RANGE",
+                                                 "bass_boost":  "ENABLED"
+                                             },
+                           "music_playback":  {
+                                                  "volume":  60,
+                                                  "equalization":  "FLAT_RESPONSE",
+                                                  "stereo_imaging":  "ENABLED"
+                                              }
+                       },
+    "config":  {
+                   "defaultVolume":  60,
+                   "maxVolume":  100,
+                   "volumeSteps":  20,
+                   "mutePin":  21,
+                   "lowPassFilter":  "ENABLED_AT_8KHZ",
+                   "dynamicRange":  "24_BIT_EQUIVALENT"
+               },
+    "timing":  {
+                   "hitCount":  1
+               }
 }

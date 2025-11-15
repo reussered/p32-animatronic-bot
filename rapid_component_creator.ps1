@@ -6,7 +6,6 @@ foreach ($channel in $pwmChannels) {
     $filePath = "config/components/interfaces/$($channel.ToLower()).json"
     if (-not (Test-Path $filePath)) {
         $pwmInterface = @{
-            relative_filename = "config/components/interfaces/$($channel.ToLower()).json"
             version = "1.0.0"
             author = "config/author.json"
             interface_type = "PWM_CHANNEL"
@@ -20,7 +19,7 @@ foreach ($channel in $pwmChannels) {
                 frequency_range = "1Hz-40MHz"
             }
         }
-        $pwmInterface | ConvertTo-Json -Depth 10 | Set-Content $filePath -Encoding UTF8
+        $pwmInterface | ConvertTo-Json -Depth 10 | Set-Content $filePath -Encoding ASCII
         Write-Host "Created: $channel interface" -ForegroundColor Yellow
     }
 }
@@ -61,13 +60,12 @@ foreach ($name in $interfaces.Keys) {
     $filePath = "config/components/interfaces/$($name.ToLower()).json"
     if (-not (Test-Path $filePath)) {
         $interface = @{
-            relative_filename = "config/components/interfaces/$($name.ToLower()).json"
             version = "1.0.0"
             author = "config/author.json"
             interface_id = $name
         } + $interfaces[$name]
         
-        $interface | ConvertTo-Json -Depth 10 | Set-Content $filePath -Encoding UTF8
+        $interface | ConvertTo-Json -Depth 10 | Set-Content $filePath -Encoding ASCII
         Write-Host "Created: $name interface" -ForegroundColor Yellow
     }
 }
@@ -89,7 +87,6 @@ foreach ($componentPath in $missingComponents) {
     if (-not (Test-Path $componentPath)) {
         $componentName = (Split-Path $componentPath -Leaf) -replace "\.json$", ""
         $component = @{
-            relative_filename = $componentPath
             version = "1.0.0"
             author = "config/author.json"
             component_name = $componentName
@@ -111,7 +108,7 @@ foreach ($componentPath in $missingComponents) {
         }
         
         New-Item -ItemType Directory -Path (Split-Path $componentPath -Parent) -Force | Out-Null
-        $component | ConvertTo-Json -Depth 10 | Set-Content $componentPath -Encoding UTF8
+        $component | ConvertTo-Json -Depth 10 | Set-Content $componentPath -Encoding ASCII
         Write-Host "Created: $componentName" -ForegroundColor Yellow
     }
 }

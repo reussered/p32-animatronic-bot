@@ -4,10 +4,12 @@
 - Embedded ESP32-S3/ESP32-C3 project; think tight RAM (~512KB) and real-time loops, not web stacks.
 - Tooling is PlatformIO + ESP-IDF running on Windows PowerShell; paths are absolute like `F:\GitHub\p32-animatronic-bot\...`.
 - ASCII-only encoding everywhere (no BOM); Allman braces with mandatory `{}` on every control flow block.
+- **ALWAYS use workspace files for builds**: All build operations must reference files from the local workspace directory, never from repository cache or external sources. All paths must be absolute workspace paths.
 - Before touching code reread the rest of the files in       `.github`
 
 ## Architecture
 - **CRITICAL: Single Compilation Unit**: The build script (`tools/generate_tables.py`) concatenates all component `.src` files for a subsystem (e.g., `goblin_head`) into a single, large `.cpp` file. This means all `.src` files within that subsystem share the **same file scope**.
+- **CRITICAL: Component Registry**: The component registry (`config/component_registry.json`) is the single source of truth for all component definitions, mapping component names to their JSON file paths. All components must be registered here and verified against `COMPONENT_REGISTRY_REPORT.md`.
 - **Intra-Subsystem Communication**: Because of the single compilation unit, components within the same subsystem **must** communicate using file-scoped `static` variables (e.g., `static uint16_t* display_buffer = NULL;`). This is the standard way to pass data along a processing chain. You do **not** need to `#include` other component headers for this to work; the build system aggregates them.
 - **Component System**: Every behavior lives in `config/components/**/*.src` (logic) and `.hdr` (definitions), exposing `{name}_init()` / `{name}_act()` functions.
 - **JSON-Driven Composition**: A hierarchy of JSON files starting from `config/bots/...` defines the animatronic, composes components, and assigns them to controllers.
@@ -29,7 +31,7 @@ Select-String -Path upload.log -Pattern "error|success|Writing"
 - Serial capture for diagnostics: `Start-Job { pio device monitor } | Wait-Job -Timeout 60 | Receive-Job`.
 
 ## Editing rules
-- Never hand-edit generated `src/components/*.cpp`, `include/components/*.hpp`, or subsystem dispatch files; source truth lives in `config/**`.
+- Never hand-edit generated `src/components/*.cpp`, `include/components/*.hpp`, or subsystem dispatch files; source truth lives in `config/**` and `assets/**`.
 - Keep PowerShell syntax (`;` separators, backslash paths); avoid Unix commands.
 - Maintain Allman-style formatting and component signatures exactly:
 ```cpp
@@ -48,12 +50,13 @@ void goblin_eye_act(void);
 
 ## Patterns & data flow
 - Component timing uses `timing.hitCount`; lower numbers execute more frequently (for example eyes at 1, mood components at 10+).
-- SharedMemory writes incur ESP-NOW traffic, only perform after state changes; reads are free.
+- SharedMemory writes incur synchronization overhead, only perform after state changes; reads are free.
 - Dynamic pin assignment lives in `include/esp32_s3_r8n16_pin_assignments.h`; SPI/I2C/ADC buses assign pins during their `init()` and rotate within `act()`.
 
 ## Reference map
+- Component registry: `config/component_registry.json` (single source of truth for component paths)
 - Component logic: `config/components/hardware/`, `config/components/drivers/`, `config/components/behaviors/`, `config/components/functional/`, `config/components/interfaces/`
-- Creature-specific components: `config/bots/bot_families/{family}/{subsystem}/{component_name}.json|src|hdr`
+- Creature-specific components: `config/bots/bot_families/{family}/head/{component_name}.json|src|hdr` (components related to goblin head, not confined to a single subsystem; can be assembled into different variants)
 - Bot assemblies: `config/bots/bot_families/goblins/goblin_full.json` (root for head/torso/etc.).
 - Shared state classes: `shared/*.hpp` (Mood, Environment, Personality, SysTest, etc.)
 - Shared header definitions: `config/shared_headers/*.hpp` (color_schema, etc.)

@@ -1,18 +1,17 @@
 {
-    "relative_filename": "config/components/interfaces/i2s_device_1.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "I2S_DEVICE_1",
-    "interface_type": "I2S_DEVICE",
-    "bus_reference": "I2S_BUS",
-    "device_config": {
-        "channel": "left"
-    },
-    "name": "i2s_device_1",
-    "type": "INTERFACE_BUS",
-    "description": "Auto-generated component: i2s_device_1",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "I2S_DEVICE_1",
+    "interface_type":  "I2S_DEVICE",
+    "bus_reference":  "I2S_BUS",
+    "device_config":  {
+                          "channel":  "left"
+                      },
+    "name":  "i2s_device_1",
+    "type":  "INTERFACE_BUS",
+    "description":  "Auto-generated component: i2s_device_1",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

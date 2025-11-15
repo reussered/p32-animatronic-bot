@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_trickster.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
@@ -85,12 +84,12 @@
         }
     },
     "components": [
-        "goblin_sly_grin",
-        "goblin_clever_eyes",
-        "goblin_nimble_fingers",
-        "goblin_prank_accessories",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_sly_grin.json",
+        "config/bots/bot_families/goblins/head/goblin_clever_eyes.json",
+        "config/bots/bot_families/goblins/head/goblin_nimble_fingers.json",
+        "config/bots/bot_families/goblins/head/goblin_prank_accessories.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "prank_execution": {

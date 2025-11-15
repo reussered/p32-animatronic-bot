@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_simple.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINSIMPLE",
@@ -10,11 +9,11 @@
     "reference_point": "nose_center",
     "eye_spacing": "3.0 INCH",
     "components": [
-        "goblin_left_eye",
-        "goblin_right_eye",
-        "goblin_nose",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_nose.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

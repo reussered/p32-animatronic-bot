@@ -40,7 +40,6 @@ function Create-CreatureVariant($SourcePath, $VariantType, $VariantData) {
     $variant = $sourceContent | ConvertTo-Json -Depth 10 | ConvertFrom-Json
     
     # Update basic info
-    $variant.relative_filename = $variantPath -replace '^.*\\config\\', 'config/'
     $variant.bot_id = $variantName.ToUpper() -replace '_', '_'
     $variant.description = "$($sourceContent.description) - $($VariantData.Description)"
     $variant.created = Get-Date -Format "yyyy-MM-dd"

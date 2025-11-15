@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/animals/wolf_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "WOLF",
@@ -16,10 +15,10 @@
         "snout_extension": "1.8 INCH"
     },
     "components": [
-        "wolf_eye_left",
-        "wolf_eye_right",
-        "wolf_snout",
-        "wolf_speaker"
+        "config/bots/bot_families/wolves/head/wolf_eye_left.json",
+        "config/bots/bot_families/wolves/head/wolf_eye_right.json",
+        "config/bots/bot_families/wolves/head/wolf_snout.json",
+        "config/bots/bot_families/wolves/head/wolf_speaker.json"
     ],
     "family_mood_profile": {
         "FEAR": 10,

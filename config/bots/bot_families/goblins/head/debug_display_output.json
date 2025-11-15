@@ -1,8 +1,9 @@
 {
-  "component": "debug_display_output",
-  "type": "debug",
-  "description": "Outputs display state as JSON over serial for visualization",
-  "timing": {
-    "hitCount": 1
-  }
+    "component": "debug_display_output",
+    "type": "DEBUG",
+    "description": "Outputs display state as JSON over serial for visualization",
+    "timing": {
+        "hitCount": 1
+    },
+    "name": "debug_display_output"
 }

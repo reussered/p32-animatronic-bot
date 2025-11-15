@@ -18,11 +18,11 @@ function New-PositionedComponent {
 
 {    
 
-    "relative_filename": "$Path",    $content = @"
+    
 
     "version": "1.0.0",{
 
-    "author": "config/author.json",    "relative_filename": "$Path",
+    "author": "config/author.json",
 
     "component_type": "POSITIONED_COMPONENT",    "version": "1.0.0",
 

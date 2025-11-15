@@ -151,6 +151,7 @@ class UseFieldVariable:
     cpp_type: str                      # C++ type (uint16_t, char*, etc.)
     components: List[str] = field(default_factory=list)  # Components that use this variable
     values: Dict[str, Any] = field(default_factory=dict)  # component_name -> value mapping
+    is_parent: Dict[str, bool] = field(default_factory=dict)  # component_name -> is it a parent (BOT/SUBSYSTEM_ASSEMBLY)
     timestamp: Optional[float] = None   # For ordering/debugging
 
 
@@ -403,6 +404,13 @@ def to_cpp_literal(value: Any) -> str:
     return f'"{escaped}"'
 
 
+def is_organizational_component(data: Dict[str, Any]) -> bool:
+    """Check if component is organizational (BOT/SUBSYSTEM_ASSEMBLY) without src/hdr files."""
+    comp_type = data.get("type", "")
+    has_controller = "controller" in data
+    return comp_type in ["BOT", "SUBSYSTEM_ASSEMBLY", "CREATURE_ASSEMBLY"] or has_controller
+
+
 def collect_use_fields(component_name: str, data: Dict[str, Any], context: SubsystemContext) -> None:
     """Collect use_fields from a component into the subsystem's use_field_vars tracking.
     
@@ -414,6 +422,7 @@ def collect_use_fields(component_name: str, data: Dict[str, Any], context: Subsy
     
     import time
     timestamp = time.time()
+    is_parent = is_organizational_component(data)
     
     for key, value in use_fields.items():
         sanitized_key = sanitize_identifier(key)
@@ -433,25 +442,40 @@ def collect_use_fields(component_name: str, data: Dict[str, Any], context: Subsy
         if component_name not in var_tracker.components:
             var_tracker.components.append(component_name)
         
-        # Record the value this component wants
+        # Record the value this component wants and whether it's a parent
         var_tracker.values[component_name] = value
+        var_tracker.is_parent[component_name] = is_parent
 
 
 def generate_use_field_declarations(context: SubsystemContext) -> List[str]:
-    """Generate static variable declarations for all collected use_fields.
+    """Generate static variable declarations for use_fields that aren't hardcoded.
     
-    Creates uninitialized static variables - components will assign values in init/act.
+    Checks context.use_field_vars for all collected use_field variables,
+    and generates declarations initialized with the subsystem/parent value.
     """
-    lines: List[str] = []
+    hardcoded = {
+        'display_width', 'display_height', 'bytes_per_pixel',
+        'front_buffer', 'back_buffer', 'display_size',
+        'current_row_count', 'max_display_height', 'color_schema'
+    }
     
-    if context.use_field_vars:
-        lines.append("// Static variables for use_fields (uninitialized - set by components)")
-        
-        for var_name in sorted(context.use_field_vars.keys()):
-            var_tracker = context.use_field_vars[var_name]
-            lines.append(f"static {var_tracker.cpp_type} {var_tracker.name};")
-        
-        lines.append("")
+    lines: List[str] = []
+    for var_name, var_info in sorted(context.use_field_vars.items()):
+        if var_name not in hardcoded:
+            # Find the parent/subsystem value for initialization
+            parent_value = None
+            for comp_name in var_info.components:
+                if var_info.is_parent.get(comp_name, False):
+                    parent_value = var_info.values.get(comp_name)
+                    break
+            
+            # Generate declaration with initialization from parent value
+            if parent_value is not None:
+                literal = to_cpp_literal(parent_value)
+                lines.append(f"static {var_info.cpp_type} {var_name} = {literal};")
+            else:
+                # No parent value found, use uninitialized
+                lines.append(f"static {var_info.cpp_type} {var_name};")
     
     return lines
 
@@ -476,20 +500,17 @@ def generate_use_field_assignments(component_name: str, data: Dict[str, Any], co
 
 
 def infer_cpp_type(value: Any) -> str:
-    """Infer appropriate C++ type from Python value."""
+    """Infer appropriate C++ type from Python value.
+    
+    Per architecture rules: use_fields numeric values should be 'int' type.
+    String values use 'char*', boolean values use 'bool'.
+    """
     if isinstance(value, str):
         return "char*"
     elif isinstance(value, bool):
         return "bool"
-    elif isinstance(value, int):
-        if 0 <= value <= 255:
-            return "uint8_t"
-        elif 0 <= value <= 65535:
-            return "uint16_t"
-        else:
-            return "uint32_t"
-    elif isinstance(value, float):
-        return "float"
+    elif isinstance(value, (int, float)):
+        return "int"
     else:
         return "char*"  # fallback
 
@@ -623,49 +644,115 @@ def inject_inherited_fields_into_src(src_content: str, assignments: List[str], i
 
 
 def clean_src_content(src_content: str, component_name: str) -> str:
-    """Remove incorrect .hdr includes from .src file content.
+    """Remove incorrect .hdr includes and duplicate shared includes from .src file content.
     
     .src files should never include .hdr files since both get 
     aggregated into the same compilation unit by the generator.
+    Also removes shared/ and shared_headers/ includes that are
+    auto-injected by render_component_source.
     """
     if not src_content:
         return src_content
+    
+    # Define patterns for auto-included files
+    # Note: These match both full paths and the -Ishared/-Iconfig shortened paths
+    auto_included_patterns = [
+        'BalanceCompensation.hpp',
+        'BehaviorControl.hpp',
+        'CollisionAvoidance.hpp',
+        'EmergencyCoordination.hpp',
+        'Environment.hpp',
+        'FrameProcessor.hpp',
+        'ManipulationControl.hpp',
+        'MicrophoneData.hpp',
+        'Mood.hpp',
+        'Personality.hpp',
+        'SensorFusion.hpp',
+        'SysTest.hpp',
+        'shared_headers/color_schema.hpp',  # Duplicate of represents.hpp
+        'color_schema.hpp',  # Duplicate of represents.hpp
+        'shared_headers/PixelType.hpp',
+        'PixelType.hpp',
+        'shared_headers/represents.hpp',
+        'represents.hpp',
+    ]
     
     lines = src_content.split('\n')
     cleaned_lines = []
     
     for line in lines:
+        stripped = line.strip()
+        
         # Remove ALL .hdr includes (self-includes and cross-component includes)
-        if line.strip().startswith('#include') and '.hdr' in line:
-            # Replace with a comment explaining why it was removed
-            cleaned_lines.append(f'// Removed: {line.strip()} - .hdr content aggregated into .hpp')
+        if stripped.startswith('#include') and '.hdr' in line:
+            cleaned_lines.append(f'// Removed: {stripped} - .hdr content aggregated into .hpp')
             continue
+        
+        # Remove duplicate auto-included shared files
+        if stripped.startswith('#include'):
+            is_duplicate = any(pattern in line for pattern in auto_included_patterns)
+            if is_duplicate:
+                cleaned_lines.append(f'// Removed: {stripped} - auto-included by generator')
+                continue
+        
         cleaned_lines.append(line)
     
     return '\n'.join(cleaned_lines)
 
 
-def render_component_source(context: SubsystemContext) -> str:
+def render_component_source(context: SubsystemContext, include_shared: bool = True) -> str:
     lines: List[str] = [
         f'#include "subsystems/{context.name}/{context.name}_component_functions.hpp"',
         '#include "core/memory/SharedMemory.hpp"',
         '#include "with.hpp"',
-        '#include "config/shared_headers/PixelType.hpp"',
-        '#include "shared/MicrophoneData.hpp"',
         '#include "esp_random.h"',
         "",
+    ]
+    
+    # Add shared includes only if enabled
+    # Note: -Ishared and -Iconfig are in platformio.ini build_flags,
+    # so paths are relative to those directories
+    if include_shared:
+        lines.extend([
+            "// Shared state classes (auto-included in all components)",
+            '#include "BalanceCompensation.hpp"',
+            '#include "BehaviorControl.hpp"',
+            '#include "CollisionAvoidance.hpp"',
+            '#include "EmergencyCoordination.hpp"',
+            '#include "Environment.hpp"',
+            '#include "FrameProcessor.hpp"',
+            '#include "ManipulationControl.hpp"',
+            '#include "MicrophoneData.hpp"',
+            '#include "Mood.hpp"',
+            '#include "Personality.hpp"',
+            '#include "SensorFusion.hpp"',
+            '#include "SysTest.hpp"',
+            "",
+            "// Shared type definitions (auto-included in all components)",
+            '#include "shared_headers/color_schema.hpp"',  # Defines Pixel_RGB888 first
+            '#include "shared_headers/PixelType.hpp"',
+            # Skip represents.hpp - causes redefinition errors with color_schema.hpp
+            "",
+        ])
+    
+    lines.extend([
         "// Auto-generated component aggregation file",
         "",
         "// Subsystem-scoped static variables (shared across all components in this file)",
-        "static uint32_t display_width = 240;",
-        "static uint32_t display_height = 240;",
-        "static uint32_t bytes_per_pixel = 2;  // RGB565",
+        "static int display_width = 240;",
+        "static int display_height = 240;",
+        "static int bytes_per_pixel = 2;  // RGB565",
         "static uint8_t* front_buffer = NULL;",
         "static uint8_t* back_buffer = NULL;",
-        "static uint32_t display_size = 0;",
+        "static int display_size = 0;",
         "static int current_row_count = 10;",
+        "static int max_display_height = INT_MAX;  // Min height across all displays",
+        "static char* color_schema = nullptr;",
         "",
-    ]
+    ])
+    
+    # Add use_fields variable declarations
+    lines.extend(generate_use_field_declarations(context))
 
     # Include interface headers for global variables used by components
     interface_includes = collect_interface_includes(context)
@@ -685,9 +772,13 @@ def render_component_source(context: SubsystemContext) -> str:
             # Clean the src content to remove incorrect self-includes
             src_to_add = clean_src_content(definition.src_content, definition.name)
             
-            # NOTE: use_field assignments are now handled in .src files directly
-            # Components that need use_fields values should declare static variables
-            # at file scope and assign them in their init() functions as needed
+            # Generate use_field assignments for this component
+            assignments = generate_use_field_assignments(definition.name, definition.data, context)
+            if assignments:
+                # Inject assignments into init() and act() functions
+                init_func = f"{definition.name}_init"
+                act_func = f"{definition.name}_act"
+                src_to_add = inject_inherited_fields_into_src(src_to_add, assignments, init_func, act_func)
             
             try:
                 rel = definition.src_path.relative_to(PROJECT_ROOT)
@@ -889,24 +980,46 @@ def resolve_board_from_controller(controller: str) -> str:
 def generate_cmake_metadata(subsystems: List[SubsystemContext]) -> None:
     if not subsystems:
         return
+    
+    # Generate per-subsystem CMake files
+    for ctx in subsystems:
+        subsystem_cmake = [
+            f"# Auto-generated by tools/generate_tables.py for subsystem: {ctx.name}",
+            f"set(P32_{ctx.name.upper()}_SOURCES",
+            f"    src/subsystems/{ctx.name}/{ctx.name}_component_functions.cpp",
+            f"    src/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.cpp",
+            f"    src/subsystems/{ctx.name}/{ctx.name}_main.cpp",
+            ")",
+            "",
+            f"set(P32_{ctx.name.upper()}_HEADERS",
+            f"    include/subsystems/{ctx.name}/{ctx.name}_component_functions.hpp",
+            f"    include/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.hpp",
+            f"    include/subsystems/{ctx.name}/{ctx.name}_main.hpp",
+            ")",
+            "",
+        ]
+        write_text_file(PROJECT_ROOT / f"p32_{ctx.name}_sources.cmake", "\n".join(subsystem_cmake))
+    
+    # Generate master CMake file with conditional includes
     cmake_lines: List[str] = [
         "# Auto-generated by tools/generate_tables.py",
-        "set(P32_GENERATED_SOURCES",
+        "# Conditionally includes subsystem sources based on build defines",
+        "",
     ]
+    
     for ctx in subsystems:
-        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_component_functions.cpp")
-        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.cpp")
-        cmake_lines.append(f"    src/subsystems/{ctx.name}/{ctx.name}_main.cpp")
-    cmake_lines.append(")")
-    cmake_lines.append("")
-    cmake_lines.append("set(P32_GENERATED_HEADERS")
-    for ctx in subsystems:
-        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_component_functions.hpp")
-        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_dispatch_tables.hpp")
-        cmake_lines.append(f"    include/subsystems/{ctx.name}/{ctx.name}_main.hpp")
-    cmake_lines.append(")")
-    cmake_lines.append("")
+        define_name = f"SUBSYSTEM_{ctx.name.upper()}"
+        cmake_lines.extend([
+            f"if(\"$ENV{{PIOENV}}\" STREQUAL \"{ctx.name}\")",
+            f"    include(p32_{ctx.name}_sources.cmake OPTIONAL)",
+            f"    set(P32_GENERATED_SOURCES ${{P32_{ctx.name.upper()}_SOURCES}})",
+            f"    message(STATUS \"Including {ctx.name} subsystem sources\")",
+            f"endif()",
+            "",
+        ])
+    
     write_text_file(PROJECT_ROOT / "p32_generated_sources.cmake", "\n".join(cmake_lines))
+    
     cmakelists_path = PROJECT_ROOT / "CMakeLists.txt"
     existing = cmakelists_path.read_text(encoding="ascii")
     include_line = "include(p32_generated_sources.cmake OPTIONAL)"
@@ -916,9 +1029,10 @@ def generate_cmake_metadata(subsystems: List[SubsystemContext]) -> None:
 
 
 class TableGenerator:
-    def __init__(self, root_config: Path, output_src: Path) -> None:
+    def __init__(self, root_config: Path, output_src: Path, include_shared: bool = True) -> None:
         self.root_config = root_config
         self.output_src = output_src
+        self.include_shared = include_shared
         self.loader = JsonLoader()
         self.sources = ComponentSourceIndex(CONFIG_ROOT / "components")
         self.subsystems: Dict[str, SubsystemContext] = {}
@@ -966,6 +1080,8 @@ class TableGenerator:
                     context.controller = controller_str
                     if context.json_path is None:
                         context.json_path = json_path
+                # Collect use_fields from the subsystem definition itself
+                collect_use_fields(component_name, data, context)
                 stack.append(context)
                 new_context = context
             active_context = stack[-1] if stack else None
@@ -1011,6 +1127,8 @@ class TableGenerator:
                 self.subsystem_order.append(context)
             else:
                 context.controller = controller_str
+            # Collect use_fields from the subsystem definition itself
+            collect_use_fields(component_name, data, context)
             stack.append(context)
             new_context = context
         active_context = stack[-1] if stack else None
@@ -1040,7 +1158,7 @@ class TableGenerator:
         )
         write_text_file(
             subsystem_src_dir / f"{context.name}_component_functions.cpp",
-            render_component_source(context),
+            render_component_source(context, self.include_shared),
         )
         write_text_file(
             subsystem_inc_dir / f"{context.name}_dispatch_tables.hpp",
@@ -1089,6 +1207,11 @@ def parse_arguments() -> argparse.Namespace:
         "output",
         help="Output directory for generated source files (relative to project root)",
     )
+    parser.add_argument(
+        "--no-shared-includes",
+        action="store_true",
+        help="Disable automatic inclusion of shared/ and shared_headers/ files",
+    )
     return parser.parse_args()
 
 
@@ -1103,7 +1226,7 @@ def main() -> None:
     if not output_dir.is_absolute():
         output_dir = PROJECT_ROOT / output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
-    generator = TableGenerator(root_config, output_dir)
+    generator = TableGenerator(root_config, output_dir, include_shared=not args.no_shared_includes)
     try:
         generator.run()
     except Exception as exc:

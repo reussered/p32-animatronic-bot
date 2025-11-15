@@ -11,15 +11,12 @@ foreach ($file in $jsonFiles) {
         if (-not ($json.PSObject.Properties.Name -contains "relative_filename")) {
             continue
         }
-        
-        $correctPath = $file.FullName.Replace($configPath.Path + [IO.Path]::DirectorySeparatorChar, "").Replace([IO.Path]::DirectorySeparatorChar, "/")
-        
-        if ($json.relative_filename -ne $correctPath) {
-            Write-Host "Fixing: $($file.Name) '$($json.relative_filename)' -> '$correctPath'" -ForegroundColor Yellow
-            $json.relative_filename = $correctPath
-            $json | ConvertTo-Json -Depth 10 | Set-Content $file.FullName -Encoding UTF8
-            $fixedCount++
-        }
+
+        # Remove deprecated relative_filename field
+        Write-Host "Removing deprecated relative_filename from: $($file.Name) '$($json.relative_filename)'" -ForegroundColor Yellow
+        $json.PSObject.Properties.Remove('relative_filename') | Out-Null
+        $json | ConvertTo-Json -Depth 10 | Set-Content $file.FullName -Encoding ASCII
+        $fixedCount++
     }
     catch {
         Write-Host "Skipped (invalid JSON): $($file.Name)" -ForegroundColor Red

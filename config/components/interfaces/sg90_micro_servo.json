@@ -1,307 +1,306 @@
 {
-    "relative_filename": "config/components/interfaces/sg90_micro_servo.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "SG90_MICRO_SERVO",
-    "interface_type": "MICRO_SERVO_MOTOR",
-    "description": "SG90 9g micro servo motor for precise angular positioning in small mechanisms",
-    "hardware_specifications": {
-        "servo_type": "MICRO_SERVO_ANALOG",
-        "weight": "9g",
-        "dimensions": "22.2x11.8x22.7mm",
-        "operating_voltage": "4.8V_TO_6V",
-        "operating_current_no_load": "200mA_AT_4.8V",
-        "operating_current_stall": "650mA_AT_4.8V",
-        "power_consumption_no_load": "960mW_AT_4.8V",
-        "power_consumption_stall": "3.12W_AT_4.8V",
-        "torque_4_8v": "1.8kg_cm",
-        "torque_6v": "2.5kg_cm",
-        "speed_4_8v": "0.1s_per_60_degrees",
-        "speed_6v": "0.08s_per_60_degrees",
-        "rotation_range": "180_DEGREES_TYPICAL",
-        "gear_material": "PLASTIC_GEARS",
-        "bearing_type": "BUSHINGS"
-    },
-    "pin_requirements": {
-        "vcc_pin": {
-            "function": "servo_power_supply",
-            "generic_name": "vcc_servo",
-            "description": "Servo motor power supply",
-            "voltage_level": "4.8V_TO_6V",
-            "voltage_optimal": "5V",
-            "current_no_load": "200mA_TYPICAL",
-            "current_stall": "650mA_MAXIMUM",
-            "power_no_load": "1W_AT_5V",
-            "power_stall": "3.25W_AT_5V"
-        },
-        "gnd_pin": {
-            "function": "ground_reference",
-            "generic_name": "gnd_servo",
-            "description": "Ground reference for servo",
-            "voltage_level": "0V"
-        },
-        "pwm_pin": {
-            "function": "position_control_signal",
-            "generic_name": "pwm_signal",
-            "description": "PWM control signal for position",
-            "voltage_level": "3.3V_5V_COMPATIBLE",
-            "signal_type": "PWM_50HZ",
-            "pulse_width_range": "1ms_TO_2ms",
-            "pulse_period": "20ms",
-            "logic_current": "NEGLIGIBLE_10uA"
-        }
-    },
-    "pwm_specifications": {
-        "control_frequency": "50Hz_STANDARD",
-        "pulse_period": "20ms",
-        "pulse_width_specifications": {
-            "minimum_position": {
-                "pulse_width": "1.0ms",
-                "servo_angle": "0_DEGREES",
-                "description": "FULL_COUNTERCLOCKWISE"
-            },
-            "center_position": {
-                "pulse_width": "1.5ms",
-                "servo_angle": "90_DEGREES",
-                "description": "CENTER_NEUTRAL"
-            },
-            "maximum_position": {
-                "pulse_width": "2.0ms",
-                "servo_angle": "180_DEGREES",
-                "description": "FULL_CLOCKWISE"
-            }
-        },
-        "dead_band": "5us_TYPICAL",
-        "resolution": "APPROXIMATELY_1_DEGREE_WITH_8_BIT_PWM"
-    },
-    "mechanical_specifications": {
-        "output_shaft": {
-            "diameter": "4mm_PLASTIC",
-            "shape": "CROSS_SPLINE",
-            "material": "ABS_PLASTIC"
-        },
-        "mounting": {
-            "hole_spacing": "10mm_CENTER_TO_CENTER",
-            "screw_size": "M2_OR_SELF_TAPPING",
-            "mounting_tabs": "REMOVABLE_FLANGES"
-        },
-        "horn_options": {
-            "single_arm": "INCLUDED_VARIOUS_LENGTHS",
-            "double_arm": "INCLUDED_STRAIGHT_AND_L_SHAPED",
-            "circular_horn": "INCLUDED_MULTI_HOLE_DISC",
-            "custom_horns": "3D_PRINTABLE_4mm_SPLINE"
-        },
-        "gear_ratio": "INTERNAL_GEAR_REDUCTION_APPROXIMATELY_10_1"
-    },
-    "performance_characteristics": {
-        "at_4_8v": {
-            "torque": "1.8kg_cm",
-            "speed": "0.1s_per_60_degrees",
-            "no_load_current": "200mA",
-            "stall_current": "650mA",
-            "power_consumption": "960mW_NO_LOAD_3.12W_STALL"
-        },
-        "at_6v": {
-            "torque": "2.5kg_cm",
-            "speed": "0.08s_per_60_degrees",
-            "no_load_current": "250mA_ESTIMATED",
-            "stall_current": "800mA_ESTIMATED",
-            "power_consumption": "1.5W_NO_LOAD_4.8W_STALL"
-        },
-        "holding_torque": "1.8kg_cm_AT_4.8V_POWERED",
-        "backlash": "1_TO_3_DEGREES_TYPICAL_PLASTIC_GEARS",
-        "positioning_accuracy": "PLUS_MINUS_1_DEGREE_TYPICAL"
-    },
-    "power_consumption_analysis": {
-        "idle_holding": {
-            "description": "Servo maintaining position with no external load",
-            "current": "200mA_AT_4.8V",
-            "power": "960mW",
-            "duty_cycle": "CONTINUOUS_WHEN_POSITIONED"
-        },
-        "moving_no_load": {
-            "description": "Servo moving without external resistance",
-            "current": "400mA_PEAK_AT_4.8V",
-            "power": "1.92W_PEAK",
-            "duration": "BRIEF_DURING_MOVEMENT"
-        },
-        "moving_with_load": {
-            "description": "Servo moving against mechanical load",
-            "current": "450mA_TO_650mA_AT_4.8V",
-            "power": "2.16W_TO_3.12W",
-            "duration": "DURING_LOADED_MOVEMENT"
-        },
-        "stall_condition": {
-            "description": "Servo blocked from reaching commanded position",
-            "current": "650mA_AT_4.8V",
-            "power": "3.12W",
-            "protection": "THERMAL_SHUTDOWN_IF_PROLONGED"
-        }
-    },
-    "control_modes": {
-        "position_control": {
-            "description": "Standard servo position control",
-            "input": "PWM_PULSE_WIDTH_1_TO_2ms",
-            "output": "ANGULAR_POSITION_0_TO_180_DEGREES",
-            "feedback": "INTERNAL_POTENTIOMETER",
-            "accuracy": "PLUS_MINUS_1_DEGREE",
-            "response_time": "0.1s_FOR_60_DEGREE_MOVEMENT"
-        },
-        "continuous_rotation_modification": {
-            "description": "Modified for continuous rotation",
-            "modification": "DISCONNECT_INTERNAL_POTENTIOMETER",
-            "input": "PWM_PULSE_WIDTH_FOR_SPEED_DIRECTION",
-            "output": "CONTINUOUS_ROTATION_VARIABLE_SPEED",
-            "center_stop": "1.5ms_PULSE_WIDTH",
-            "max_cw": "2.0ms_PULSE_WIDTH",
-            "max_ccw": "1.0ms_PULSE_WIDTH"
-        }
-    },
-    "thermal_characteristics": {
-        "operating_temperature": "-30C_TO_60C",
-        "thermal_protection": "INTERNAL_THERMAL_SHUTDOWN",
-        "heat_dissipation": "CONVECTION_THROUGH_CASE",
-        "thermal_resistance": "HIGH_DUE_TO_PLASTIC_CASE",
-        "cooling_requirements": "PASSIVE_AIR_COOLING_ADEQUATE"
-    },
-    "reliability_specifications": {
-        "gear_life": "PLASTIC_GEARS_MODERATE_DURABILITY",
-        "bearing_life": "BUSHING_BEARINGS_MODERATE_LIFE",
-        "electrical_life": "POTENTIOMETER_WEAR_OVER_TIME",
-        "environmental_protection": "NOT_WATERPROOF_INDOOR_USE",
-        "shock_resistance": "MODERATE_AVOID_HARD_IMPACTS"
-    },
-    "manufacturer_pin_mappings": {
-        "tower_pro_sg90": {
-            "pwm_signal": [
-                "ORANGE",
-                "YELLOW",
-                "WHITE"
-            ],
-            "vcc_servo": [
-                "RED",
-                "POSITIVE",
-                "+"
-            ],
-            "gnd_servo": [
-                "BROWN",
-                "BLACK",
-                "NEGATIVE",
-                "-"
-            ]
-        },
-        "generic_sg90": {
-            "pwm_signal": [
-                "SIGNAL",
-                "CONTROL"
-            ],
-            "vcc_servo": [
-                "VCC",
-                "POWER",
-                "5V"
-            ],
-            "gnd_servo": [
-                "GND",
-                "GROUND"
-            ]
-        },
-        "hitec_equivalent": {
-            "pwm_signal": [
-                "YELLOW"
-            ],
-            "vcc_servo": [
-                "RED"
-            ],
-            "gnd_servo": [
-                "BLACK"
-            ]
-        }
-    },
-    "application_examples": {
-        "eyebrow_articulation": {
-            "mounting": "ABOVE_EYE_MECHANISM",
-            "load": "MINIMAL_EYEBROW_WEIGHT",
-            "power_consumption": "960mW_HOLDING_POSITION",
-            "movement_frequency": "OCCASIONAL_EXPRESSION_CHANGES",
-            "use_case": "FACIAL_EXPRESSION_EYEBROW_RAISE",
-            "advantages": [
-                "LOW_COST",
-                "PRECISE_CONTROL",
-                "SMALL_SIZE"
-            ]
-        },
-        "mouth_corner_control": {
-            "mounting": "MOUTH_CORNER_MECHANISMS",
-            "load": "LIGHT_FACIAL_SKIN_TENSION",
-            "power_consumption": "1.5W_DURING_MOVEMENT",
-            "movement_frequency": "MODERATE_SPEECH_EXPRESSIONS",
-            "use_case": "SMILE_FROWN_MOUTH_EXPRESSIONS",
-            "advantages": [
-                "SMOOTH_MOVEMENT",
-                "GOOD_HOLDING_POWER"
-            ]
-        },
-        "ear_wiggle_mechanism": {
-            "mounting": "EAR_BASE_PIVOT_POINT",
-            "load": "EAR_WEIGHT_PLUS_FRICTION",
-            "power_consumption": "1.2W_MOVING_0.96W_HOLDING",
-            "movement_frequency": "PERIODIC_CUTE_ANIMATIONS",
-            "use_case": "EAR_WIGGLE_ANIMATION",
-            "advantages": [
-                "PRECISE_ANGLE_CONTROL",
-                "REPEATABLE_MOTION"
-            ]
-        },
-        "small_joint_articulation": {
-            "mounting": "FINGER_WRIST_SMALL_JOINTS",
-            "load": "JOINT_FRICTION_MINIMAL_WEIGHT",
-            "power_consumption": "960mW_TYPICAL_HOLDING",
-            "movement_frequency": "GESTURE_DEPENDENT",
-            "use_case": "FINGER_WRIST_SMALL_MOVEMENTS",
-            "advantages": [
-                "COMPACT_SIZE",
-                "ADEQUATE_TORQUE",
-                "LOW_COST"
-            ]
-        },
-        "head_nod_assist": {
-            "mounting": "HEAD_TILT_MECHANISM_ASSIST",
-            "load": "PARTIAL_HEAD_WEIGHT_ASSISTANCE",
-            "power_consumption": "2W_UNDER_LOAD",
-            "movement_frequency": "NOD_SHAKE_HEAD_GESTURES",
-            "use_case": "ASSIST_MAIN_HEAD_MOTOR",
-            "limitations": [
-                "INSUFFICIENT_FOR_FULL_HEAD_WEIGHT"
-            ]
-        }
-    },
-    "power_supply_requirements": {
-        "voltage_regulation": {
-            "requirement": "CLEAN_REGULATED_5V_PREFERRED",
-            "ripple_tolerance": "LESS_THAN_100mV_P2P",
-            "dropout_sensitivity": "SENSITIVE_TO_VOLTAGE_DROPS"
-        },
-        "current_supply": {
-            "minimum_capacity": "1A_PER_SERVO_SAFE_MARGIN",
-            "peak_current": "650mA_PER_SERVO_STALL",
-            "inrush_current": "BRIEF_SPIKE_DURING_POWER_ON"
-        },
-        "power_distribution": {
-            "individual_supplies": "RECOMMENDED_FOR_MULTIPLE_SERVOS",
-            "shared_supply": "POSSIBLE_WITH_ADEQUATE_CAPACITY",
-            "filtering": "CAPACITOR_FILTERING_RECOMMENDED_100uF_TO_1000uF"
-        }
-    },
-    "cost_analysis": {
-        "unit_cost": "2_TO_5_USD_DEPENDING_ON_QUANTITY",
-        "cost_per_torque": "EXCELLENT_VALUE_FOR_SMALL_LOADS",
-        "cost_per_precision": "GOOD_VALUE_FOR_1_DEGREE_ACCURACY",
-        "total_system_cost": "LOW_FOR_MULTI_SERVO_FACIAL_ANIMATION"
-    },
-    "name": "sg90_micro_servo",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "SG90_MICRO_SERVO",
+    "interface_type":  "MICRO_SERVO_MOTOR",
+    "description":  "SG90 9g micro servo motor for precise angular positioning in small mechanisms",
+    "hardware_specifications":  {
+                                    "servo_type":  "MICRO_SERVO_ANALOG",
+                                    "weight":  "9g",
+                                    "dimensions":  "22.2x11.8x22.7mm",
+                                    "operating_voltage":  "4.8V_TO_6V",
+                                    "operating_current_no_load":  "200mA_AT_4.8V",
+                                    "operating_current_stall":  "650mA_AT_4.8V",
+                                    "power_consumption_no_load":  "960mW_AT_4.8V",
+                                    "power_consumption_stall":  "3.12W_AT_4.8V",
+                                    "torque_4_8v":  "1.8kg_cm",
+                                    "torque_6v":  "2.5kg_cm",
+                                    "speed_4_8v":  "0.1s_per_60_degrees",
+                                    "speed_6v":  "0.08s_per_60_degrees",
+                                    "rotation_range":  "180_DEGREES_TYPICAL",
+                                    "gear_material":  "PLASTIC_GEARS",
+                                    "bearing_type":  "BUSHINGS"
+                                },
+    "pin_requirements":  {
+                             "vcc_pin":  {
+                                             "function":  "servo_power_supply",
+                                             "generic_name":  "vcc_servo",
+                                             "description":  "Servo motor power supply",
+                                             "voltage_level":  "4.8V_TO_6V",
+                                             "voltage_optimal":  "5V",
+                                             "current_no_load":  "200mA_TYPICAL",
+                                             "current_stall":  "650mA_MAXIMUM",
+                                             "power_no_load":  "1W_AT_5V",
+                                             "power_stall":  "3.25W_AT_5V"
+                                         },
+                             "gnd_pin":  {
+                                             "function":  "ground_reference",
+                                             "generic_name":  "gnd_servo",
+                                             "description":  "Ground reference for servo",
+                                             "voltage_level":  "0V"
+                                         },
+                             "pwm_pin":  {
+                                             "function":  "position_control_signal",
+                                             "generic_name":  "pwm_signal",
+                                             "description":  "PWM control signal for position",
+                                             "voltage_level":  "3.3V_5V_COMPATIBLE",
+                                             "signal_type":  "PWM_50HZ",
+                                             "pulse_width_range":  "1ms_TO_2ms",
+                                             "pulse_period":  "20ms",
+                                             "logic_current":  "NEGLIGIBLE_10uA"
+                                         }
+                         },
+    "pwm_specifications":  {
+                               "control_frequency":  "50Hz_STANDARD",
+                               "pulse_period":  "20ms",
+                               "pulse_width_specifications":  {
+                                                                  "minimum_position":  {
+                                                                                           "pulse_width":  "1.0ms",
+                                                                                           "servo_angle":  "0_DEGREES",
+                                                                                           "description":  "FULL_COUNTERCLOCKWISE"
+                                                                                       },
+                                                                  "center_position":  {
+                                                                                          "pulse_width":  "1.5ms",
+                                                                                          "servo_angle":  "90_DEGREES",
+                                                                                          "description":  "CENTER_NEUTRAL"
+                                                                                      },
+                                                                  "maximum_position":  {
+                                                                                           "pulse_width":  "2.0ms",
+                                                                                           "servo_angle":  "180_DEGREES",
+                                                                                           "description":  "FULL_CLOCKWISE"
+                                                                                       }
+                                                              },
+                               "dead_band":  "5us_TYPICAL",
+                               "resolution":  "APPROXIMATELY_1_DEGREE_WITH_8_BIT_PWM"
+                           },
+    "mechanical_specifications":  {
+                                      "output_shaft":  {
+                                                           "diameter":  "4mm_PLASTIC",
+                                                           "shape":  "CROSS_SPLINE",
+                                                           "material":  "ABS_PLASTIC"
+                                                       },
+                                      "mounting":  {
+                                                       "hole_spacing":  "10mm_CENTER_TO_CENTER",
+                                                       "screw_size":  "M2_OR_SELF_TAPPING",
+                                                       "mounting_tabs":  "REMOVABLE_FLANGES"
+                                                   },
+                                      "horn_options":  {
+                                                           "single_arm":  "INCLUDED_VARIOUS_LENGTHS",
+                                                           "double_arm":  "INCLUDED_STRAIGHT_AND_L_SHAPED",
+                                                           "circular_horn":  "INCLUDED_MULTI_HOLE_DISC",
+                                                           "custom_horns":  "3D_PRINTABLE_4mm_SPLINE"
+                                                       },
+                                      "gear_ratio":  "INTERNAL_GEAR_REDUCTION_APPROXIMATELY_10_1"
+                                  },
+    "performance_characteristics":  {
+                                        "at_4_8v":  {
+                                                        "torque":  "1.8kg_cm",
+                                                        "speed":  "0.1s_per_60_degrees",
+                                                        "no_load_current":  "200mA",
+                                                        "stall_current":  "650mA",
+                                                        "power_consumption":  "960mW_NO_LOAD_3.12W_STALL"
+                                                    },
+                                        "at_6v":  {
+                                                      "torque":  "2.5kg_cm",
+                                                      "speed":  "0.08s_per_60_degrees",
+                                                      "no_load_current":  "250mA_ESTIMATED",
+                                                      "stall_current":  "800mA_ESTIMATED",
+                                                      "power_consumption":  "1.5W_NO_LOAD_4.8W_STALL"
+                                                  },
+                                        "holding_torque":  "1.8kg_cm_AT_4.8V_POWERED",
+                                        "backlash":  "1_TO_3_DEGREES_TYPICAL_PLASTIC_GEARS",
+                                        "positioning_accuracy":  "PLUS_MINUS_1_DEGREE_TYPICAL"
+                                    },
+    "power_consumption_analysis":  {
+                                       "idle_holding":  {
+                                                            "description":  "Servo maintaining position with no external load",
+                                                            "current":  "200mA_AT_4.8V",
+                                                            "power":  "960mW",
+                                                            "duty_cycle":  "CONTINUOUS_WHEN_POSITIONED"
+                                                        },
+                                       "moving_no_load":  {
+                                                              "description":  "Servo moving without external resistance",
+                                                              "current":  "400mA_PEAK_AT_4.8V",
+                                                              "power":  "1.92W_PEAK",
+                                                              "duration":  "BRIEF_DURING_MOVEMENT"
+                                                          },
+                                       "moving_with_load":  {
+                                                                "description":  "Servo moving against mechanical load",
+                                                                "current":  "450mA_TO_650mA_AT_4.8V",
+                                                                "power":  "2.16W_TO_3.12W",
+                                                                "duration":  "DURING_LOADED_MOVEMENT"
+                                                            },
+                                       "stall_condition":  {
+                                                               "description":  "Servo blocked from reaching commanded position",
+                                                               "current":  "650mA_AT_4.8V",
+                                                               "power":  "3.12W",
+                                                               "protection":  "THERMAL_SHUTDOWN_IF_PROLONGED"
+                                                           }
+                                   },
+    "control_modes":  {
+                          "position_control":  {
+                                                   "description":  "Standard servo position control",
+                                                   "input":  "PWM_PULSE_WIDTH_1_TO_2ms",
+                                                   "output":  "ANGULAR_POSITION_0_TO_180_DEGREES",
+                                                   "feedback":  "INTERNAL_POTENTIOMETER",
+                                                   "accuracy":  "PLUS_MINUS_1_DEGREE",
+                                                   "response_time":  "0.1s_FOR_60_DEGREE_MOVEMENT"
+                                               },
+                          "continuous_rotation_modification":  {
+                                                                   "description":  "Modified for continuous rotation",
+                                                                   "modification":  "DISCONNECT_INTERNAL_POTENTIOMETER",
+                                                                   "input":  "PWM_PULSE_WIDTH_FOR_SPEED_DIRECTION",
+                                                                   "output":  "CONTINUOUS_ROTATION_VARIABLE_SPEED",
+                                                                   "center_stop":  "1.5ms_PULSE_WIDTH",
+                                                                   "max_cw":  "2.0ms_PULSE_WIDTH",
+                                                                   "max_ccw":  "1.0ms_PULSE_WIDTH"
+                                                               }
+                      },
+    "thermal_characteristics":  {
+                                    "operating_temperature":  "-30C_TO_60C",
+                                    "thermal_protection":  "INTERNAL_THERMAL_SHUTDOWN",
+                                    "heat_dissipation":  "CONVECTION_THROUGH_CASE",
+                                    "thermal_resistance":  "HIGH_DUE_TO_PLASTIC_CASE",
+                                    "cooling_requirements":  "PASSIVE_AIR_COOLING_ADEQUATE"
+                                },
+    "reliability_specifications":  {
+                                       "gear_life":  "PLASTIC_GEARS_MODERATE_DURABILITY",
+                                       "bearing_life":  "BUSHING_BEARINGS_MODERATE_LIFE",
+                                       "electrical_life":  "POTENTIOMETER_WEAR_OVER_TIME",
+                                       "environmental_protection":  "NOT_WATERPROOF_INDOOR_USE",
+                                       "shock_resistance":  "MODERATE_AVOID_HARD_IMPACTS"
+                                   },
+    "manufacturer_pin_mappings":  {
+                                      "tower_pro_sg90":  {
+                                                             "pwm_signal":  [
+                                                                                "ORANGE",
+                                                                                "YELLOW",
+                                                                                "WHITE"
+                                                                            ],
+                                                             "vcc_servo":  [
+                                                                               "RED",
+                                                                               "POSITIVE",
+                                                                               "+"
+                                                                           ],
+                                                             "gnd_servo":  [
+                                                                               "BROWN",
+                                                                               "BLACK",
+                                                                               "NEGATIVE",
+                                                                               "-"
+                                                                           ]
+                                                         },
+                                      "generic_sg90":  {
+                                                           "pwm_signal":  [
+                                                                              "SIGNAL",
+                                                                              "CONTROL"
+                                                                          ],
+                                                           "vcc_servo":  [
+                                                                             "VCC",
+                                                                             "POWER",
+                                                                             "5V"
+                                                                         ],
+                                                           "gnd_servo":  [
+                                                                             "GND",
+                                                                             "GROUND"
+                                                                         ]
+                                                       },
+                                      "hitec_equivalent":  {
+                                                               "pwm_signal":  [
+                                                                                  "YELLOW"
+                                                                              ],
+                                                               "vcc_servo":  [
+                                                                                 "RED"
+                                                                             ],
+                                                               "gnd_servo":  [
+                                                                                 "BLACK"
+                                                                             ]
+                                                           }
+                                  },
+    "application_examples":  {
+                                 "eyebrow_articulation":  {
+                                                              "mounting":  "ABOVE_EYE_MECHANISM",
+                                                              "load":  "MINIMAL_EYEBROW_WEIGHT",
+                                                              "power_consumption":  "960mW_HOLDING_POSITION",
+                                                              "movement_frequency":  "OCCASIONAL_EXPRESSION_CHANGES",
+                                                              "use_case":  "FACIAL_EXPRESSION_EYEBROW_RAISE",
+                                                              "advantages":  [
+                                                                                 "LOW_COST",
+                                                                                 "PRECISE_CONTROL",
+                                                                                 "SMALL_SIZE"
+                                                                             ]
+                                                          },
+                                 "mouth_corner_control":  {
+                                                              "mounting":  "MOUTH_CORNER_MECHANISMS",
+                                                              "load":  "LIGHT_FACIAL_SKIN_TENSION",
+                                                              "power_consumption":  "1.5W_DURING_MOVEMENT",
+                                                              "movement_frequency":  "MODERATE_SPEECH_EXPRESSIONS",
+                                                              "use_case":  "SMILE_FROWN_MOUTH_EXPRESSIONS",
+                                                              "advantages":  [
+                                                                                 "SMOOTH_MOVEMENT",
+                                                                                 "GOOD_HOLDING_POWER"
+                                                                             ]
+                                                          },
+                                 "ear_wiggle_mechanism":  {
+                                                              "mounting":  "EAR_BASE_PIVOT_POINT",
+                                                              "load":  "EAR_WEIGHT_PLUS_FRICTION",
+                                                              "power_consumption":  "1.2W_MOVING_0.96W_HOLDING",
+                                                              "movement_frequency":  "PERIODIC_CUTE_ANIMATIONS",
+                                                              "use_case":  "EAR_WIGGLE_ANIMATION",
+                                                              "advantages":  [
+                                                                                 "PRECISE_ANGLE_CONTROL",
+                                                                                 "REPEATABLE_MOTION"
+                                                                             ]
+                                                          },
+                                 "small_joint_articulation":  {
+                                                                  "mounting":  "FINGER_WRIST_SMALL_JOINTS",
+                                                                  "load":  "JOINT_FRICTION_MINIMAL_WEIGHT",
+                                                                  "power_consumption":  "960mW_TYPICAL_HOLDING",
+                                                                  "movement_frequency":  "GESTURE_DEPENDENT",
+                                                                  "use_case":  "FINGER_WRIST_SMALL_MOVEMENTS",
+                                                                  "advantages":  [
+                                                                                     "COMPACT_SIZE",
+                                                                                     "ADEQUATE_TORQUE",
+                                                                                     "LOW_COST"
+                                                                                 ]
+                                                              },
+                                 "head_nod_assist":  {
+                                                         "mounting":  "HEAD_TILT_MECHANISM_ASSIST",
+                                                         "load":  "PARTIAL_HEAD_WEIGHT_ASSISTANCE",
+                                                         "power_consumption":  "2W_UNDER_LOAD",
+                                                         "movement_frequency":  "NOD_SHAKE_HEAD_GESTURES",
+                                                         "use_case":  "ASSIST_MAIN_HEAD_MOTOR",
+                                                         "limitations":  [
+                                                                             "INSUFFICIENT_FOR_FULL_HEAD_WEIGHT"
+                                                                         ]
+                                                     }
+                             },
+    "power_supply_requirements":  {
+                                      "voltage_regulation":  {
+                                                                 "requirement":  "CLEAN_REGULATED_5V_PREFERRED",
+                                                                 "ripple_tolerance":  "LESS_THAN_100mV_P2P",
+                                                                 "dropout_sensitivity":  "SENSITIVE_TO_VOLTAGE_DROPS"
+                                                             },
+                                      "current_supply":  {
+                                                             "minimum_capacity":  "1A_PER_SERVO_SAFE_MARGIN",
+                                                             "peak_current":  "650mA_PER_SERVO_STALL",
+                                                             "inrush_current":  "BRIEF_SPIKE_DURING_POWER_ON"
+                                                         },
+                                      "power_distribution":  {
+                                                                 "individual_supplies":  "RECOMMENDED_FOR_MULTIPLE_SERVOS",
+                                                                 "shared_supply":  "POSSIBLE_WITH_ADEQUATE_CAPACITY",
+                                                                 "filtering":  "CAPACITOR_FILTERING_RECOMMENDED_100uF_TO_1000uF"
+                                                             }
+                                  },
+    "cost_analysis":  {
+                          "unit_cost":  "2_TO_5_USD_DEPENDING_ON_QUANTITY",
+                          "cost_per_torque":  "EXCELLENT_VALUE_FOR_SMALL_LOADS",
+                          "cost_per_precision":  "GOOD_VALUE_FOR_1_DEGREE_ACCURACY",
+                          "total_system_cost":  "LOW_FOR_MULTI_SERVO_FACIAL_ANIMATION"
+                      },
+    "name":  "sg90_micro_servo",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

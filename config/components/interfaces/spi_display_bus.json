@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/components/interfaces/interfaces/spi_display_bus.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "spi_display_bus",
@@ -8,7 +7,7 @@
     "bus_name": "VSPI",
     "description": "Dedicated SPI bus interface for display peripherals",
     "components": [
-        "generic_spi_display"
+        "config/components/drivers/generic_spi_display.json"
     ],
     "pin_requirements": {
         "shared_pins_needed": [

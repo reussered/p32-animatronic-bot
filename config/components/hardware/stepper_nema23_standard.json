@@ -1,6 +1,6 @@
 {
     "name": "stepper_nema23_standard",
-    "type": "stepper_motor",
+    "type": "STEPPER_MOTOR",
     "category": "heavy",
     "nema_size": 23,
     "description": "NEMA23 Standard - neck pan, heavy-load positioning",

@@ -1,88 +1,87 @@
 {
-    "relative_filename": "config/bots/.archived_components/bot_families/androids/head/android_eye.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "android_eye",
-    "subsystem": "HEAD",
-    "description": "Shared android eye processing logic with LED matrix and digital mood-based rendering",
-    "created": "2025-10-22",
-    "components": [
-        "led_matrix_small"
-    ],
-    "component_constraints": {
-        "required_contained_types": [
-            "DISPLAY_DRIVER"
-        ],
-        "interface_requirements": [
-            "getBuffer",
-            "getFrameSize",
-            "getFrameRowSize"
-        ]
-    },
-    "creature_display_profile": {
-        "species": "ANDROID",
-        "eye_color_base": "ANDROID_BLUE_LED",
-        "pupil_style": "PIXELATED_DIGITAL",
-        "expression_range": "SCANNING_TO_FOCUSED",
-        "mood_responsiveness": "DIGITAL_ALGORITHMIC"
-    },
-    "led_matrix_config": {
-        "matrix_type": "SMALL_LED_MATRIX",
-        "interface": "I2C",
-        "brightness_levels": 128,
-        "update_frequency": "30_HZ"
-    },
-    "mood_pattern_mapping": {
-        "ANGER": {
-            "color": "RED_ALERT",
-            "pattern": "AGGRESSIVE_SCAN",
-            "animation": "RAPID_PULSE"
-        },
-        "CURIOSITY": {
-            "color": "CYAN_SCAN",
-            "pattern": "SEARCH_GRID",
-            "animation": "SMOOTH_SWEEP"
-        },
-        "FEAR": {
-            "color": "YELLOW_ERROR",
-            "pattern": "MALFUNCTION_STATIC",
-            "animation": "ERRATIC_FLICKER"
-        },
-        "HAPPINESS": {
-            "color": "GREEN_ACTIVE",
-            "pattern": "POSITIVE_CONFIRMATION",
-            "animation": "GENTLE_GLOW"
-        }
-    },
-    "frame_processing": {
-        "buffer_stack_support": "ENABLED",
-        "multi_eye_coordination": "ENABLED",
-        "mood_based_adjustments": "REALTIME",
-        "color_space": "LED_RGB"
-    },
-    "animatronic_cache": {
-        "animation_buffers": "LEFT_RIGHT_COORDINATED",
-        "frame_interpolation": "DIGITAL_STEPPED",
-        "mood_transition_ms": 200,
-        "expression_blend_mode": "DIGITAL_SWITCH"
-    },
-    "timing": {
-        "hitCount": 1,
-        "description": "Process all frames in buffer stack every loop"
-    },
-    "software": {
-        "init_function": "android_eye_init",
-        "act_function": "android_eye_act"
-    },
-    "prototype_status": "needs_implementation",
-    "tested": false,
-    "notes": [
-        "Software-only component - no physical shape",
-        "Code pattern based on goblin_eye.cpp/hpp but adapted for LED matrix",
-        "Handles mood-based LED pattern generation",
-        "Supports buffer stack processing for left/right eye coordination",
-        "Digital-style animations with algorithmic precision",
-        "Real-time pattern processing with SharedMemory mood integration"
-    ],
-    "type": "DISPLAY_DRIVER"
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "android_eye",
+    "subsystem":  "HEAD",
+    "description":  "Shared android eye processing logic with LED matrix and digital mood-based rendering",
+    "created":  "2025-10-22",
+    "components":  [
+                       "led_matrix_small"
+                   ],
+    "component_constraints":  {
+                                  "required_contained_types":  [
+                                                                   "DISPLAY_DRIVER"
+                                                               ],
+                                  "interface_requirements":  [
+                                                                 "getBuffer",
+                                                                 "getFrameSize",
+                                                                 "getFrameRowSize"
+                                                             ]
+                              },
+    "creature_display_profile":  {
+                                     "species":  "ANDROID",
+                                     "eye_color_base":  "ANDROID_BLUE_LED",
+                                     "pupil_style":  "PIXELATED_DIGITAL",
+                                     "expression_range":  "SCANNING_TO_FOCUSED",
+                                     "mood_responsiveness":  "DIGITAL_ALGORITHMIC"
+                                 },
+    "led_matrix_config":  {
+                              "matrix_type":  "SMALL_LED_MATRIX",
+                              "interface":  "I2C",
+                              "brightness_levels":  128,
+                              "update_frequency":  "30_HZ"
+                          },
+    "mood_pattern_mapping":  {
+                                 "ANGER":  {
+                                               "color":  "RED_ALERT",
+                                               "pattern":  "AGGRESSIVE_SCAN",
+                                               "animation":  "RAPID_PULSE"
+                                           },
+                                 "CURIOSITY":  {
+                                                   "color":  "CYAN_SCAN",
+                                                   "pattern":  "SEARCH_GRID",
+                                                   "animation":  "SMOOTH_SWEEP"
+                                               },
+                                 "FEAR":  {
+                                              "color":  "YELLOW_ERROR",
+                                              "pattern":  "MALFUNCTION_STATIC",
+                                              "animation":  "ERRATIC_FLICKER"
+                                          },
+                                 "HAPPINESS":  {
+                                                   "color":  "GREEN_ACTIVE",
+                                                   "pattern":  "POSITIVE_CONFIRMATION",
+                                                   "animation":  "GENTLE_GLOW"
+                                               }
+                             },
+    "frame_processing":  {
+                             "buffer_stack_support":  "ENABLED",
+                             "multi_eye_coordination":  "ENABLED",
+                             "mood_based_adjustments":  "REALTIME",
+                             "color_space":  "LED_RGB"
+                         },
+    "animatronic_cache":  {
+                              "animation_buffers":  "LEFT_RIGHT_COORDINATED",
+                              "frame_interpolation":  "DIGITAL_STEPPED",
+                              "mood_transition_ms":  200,
+                              "expression_blend_mode":  "DIGITAL_SWITCH"
+                          },
+    "timing":  {
+                   "hitCount":  1,
+                   "description":  "Process all frames in buffer stack every loop"
+               },
+    "software":  {
+                     "init_function":  "android_eye_init",
+                     "act_function":  "android_eye_act"
+                 },
+    "prototype_status":  "needs_implementation",
+    "tested":  false,
+    "notes":  [
+                  "Software-only component - no physical shape",
+                  "Code pattern based on goblin_eye.cpp/hpp but adapted for LED matrix",
+                  "Handles mood-based LED pattern generation",
+                  "Supports buffer stack processing for left/right eye coordination",
+                  "Digital-style animations with algorithmic precision",
+                  "Real-time pattern processing with SharedMemory mood integration"
+              ],
+    "type":  "DISPLAY_DRIVER"
 }

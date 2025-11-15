@@ -1,12 +1,11 @@
 {
-    "relative_filename": "config/components/hardware/hardware/gc9a01.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "display_driver": true,
     "name": "gc9a01",
     "type": "DISPLAY_DRIVER",
     "components": [
-        "spi_display_bus"
+        "config/components/interfaces/spi_display_bus.json"
     ],
     "physical_specs": {
         "diameter": "1.28 INCH",
@@ -20,9 +19,6 @@
     },
     "timing": {
         "hitCount": 1
-    },
-    "use_fields": {
-        "chunk_count": 1
     },
     "driver_config": {
         "rotation": 0,

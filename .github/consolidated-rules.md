@@ -41,11 +41,10 @@
 
 ### JSON Structure
 
-- **Mandatory Fields**:
+- **Recommended Fields** (not strictly required):
 
   ```json
   {
-    "relative_filename": "config/components/positioned/component.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "unique_component_name",
@@ -56,6 +55,8 @@
     }
   }
   ```
+
+  > Note: `relative_filename` may be present for human-readability and some tooling convenience, but it is no longer a required field for JSON validation.
 
 - **Encoding**: ASCII-only, no UTF-8 BOM.
 - **Validation**: Use `python config/validate.py` to ensure compliance.

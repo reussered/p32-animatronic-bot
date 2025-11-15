@@ -1,15 +1,8 @@
-// goblin_right_eye.src - Allocate shared display buffer for right eye
-// Component chain: goblin_right_eye (allocate) ? goblin_eye (render) ? generic_spi_display (send & free)
+// goblin_right_eye.src - Right eye uses same buffer as left (shared processing)
+// Component chain: goblin_right_eye -> goblin_eye (shared) -> generic_spi_display
+// Note: display_width, display_height, bytes_per_pixel auto-assigned by use_fields
 
 #include "esp_log.h"
-
-// Shared display buffer - allocated here, used by goblin_eye, freed by generic_spi_display
-// Type: unsigned char* (cast to PixelType* inside adjustMood based on color_schema)
-static unsigned char* right_display_buffer = nullptr;
-static const uint32_t RIGHT_DISPLAY_WIDTH = 240;
-static const uint32_t RIGHT_DISPLAY_HEIGHT = 240;
-static const uint32_t RIGHT_DISPLAY_PIXELS = RIGHT_DISPLAY_WIDTH * RIGHT_DISPLAY_HEIGHT;
-static const uint32_t RIGHT_DISPLAY_BYTES_RGB565 = RIGHT_DISPLAY_PIXELS * 2;  // RGB565 = 2 bytes/pixel
 
 // Eye position (right eye relative to skull center)
 struct RightEyePosition {
@@ -20,32 +13,17 @@ struct RightEyePosition {
 
 esp_err_t goblin_right_eye_init(void)
 {
-    ESP_LOGI("goblin_right_eye", "Allocating display buffer for right eye (%u bytes)", RIGHT_DISPLAY_BYTES_RGB565);
+    // NOTE: display_width, display_height, bytes_per_pixel are auto-assigned above by generator
+    // Right eye shares the buffer allocated by goblin_left_eye (both 240x240 RGB565)
     
-    // Allocate shared buffer as unsigned char*
-    // goblin_eye will cast to PixelType* (Pixel_RGB565*) based on color_schema
-    right_display_buffer = (unsigned char*)malloc(RIGHT_DISPLAY_BYTES_RGB565);
-    if (!right_display_buffer) {
-        ESP_LOGE("goblin_right_eye", "Failed to allocate %u bytes for display buffer", RIGHT_DISPLAY_BYTES_RGB565);
-        return ESP_ERR_NO_MEM;
-    }
-    
-    // Initialize buffer with neutral color (green iris)
-    // As uint16_t: 0x0400 = RGB565 (0, 8, 0) = dark green
-    uint16_t neutral = 0x0400;
-    uint16_t* buffer_u16 = (uint16_t*)right_display_buffer;
-    for (uint32_t i = 0; i < RIGHT_DISPLAY_PIXELS; i++) {
-        buffer_u16[i] = neutral;
-    }
-    
-    ESP_LOGI("goblin_right_eye", "Display buffer allocated (position: %d,%d,%d mm)",
-             right_eye_position.x, right_eye_position.y, right_eye_position.z);
+    ESP_LOGI("goblin_right_eye", "Right eye configured (shares buffer, %dx%d)",
+             display_width, display_height);
     
     return ESP_OK;
 }
 
 void goblin_right_eye_act(void)
 {
-    // Buffer is managed by component chain
-    // goblin_eye renders into it, generic_spi_display frees it
+    // NOTE: display_width, display_height, bytes_per_pixel are auto-assigned above by generator
+    // Buffer processing handled by shared goblin_eye component
 }

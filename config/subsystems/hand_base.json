@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/subsystems/hand_base.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HAND_CONTROLLER",
@@ -15,8 +14,8 @@
         "i2c_interfaces": 1
     },
     "components": [
-        "subsystems/components/grip_controller.json",
-        "subsystems/components/tactile_processor.json"
+        "config/subsystems/components/grip_controller.json",
+        "config/subsystems/components/tactile_processor.json"
     ],
     "servo_specifications": {
         "thumb_joint": {

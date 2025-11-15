@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_nose_sensor.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_nose_sensor",
@@ -7,7 +6,7 @@
     "description": "Goblin-specific proximity sensor with aggressive threat detection and territorial awareness",
     "created": "2025-10-22",
     "components": [
-        "hc_sr04_sensor"
+        "config/components/hardware/hc_sr04_sensor.json"
     ],
     "creature_sensor_profile": {
         "species": "GOBLIN",

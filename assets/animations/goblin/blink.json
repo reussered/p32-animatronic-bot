@@ -1,84 +1,83 @@
 {
-    "relative_filename": "assets/animations/goblin/blink.json",
-    "animation_name": "goblin_blink",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "description": "Natural blinking animation for idle state",
-    "duration_ms": 800,
-    "loop": false,
-    "mood_trigger": "CONTENTMENT",
-    "components": [
-        {
-            "component_id": "goblin_eye_left",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.8,
-                        "color": "#4444ff",
-                        "expression": "normal"
-                    }
-                },
-                {
-                    "time_ms": 100,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.0,
-                        "color": "#000000",
-                        "expression": "closed"
-                    }
-                },
-                {
-                    "time_ms": 200,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.8,
-                        "color": "#4444ff",
-                        "expression": "normal"
-                    }
-                }
-            ]
-        },
-        {
-            "component_id": "goblin_eye_right",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.8,
-                        "color": "#4444ff",
-                        "expression": "normal"
-                    }
-                },
-                {
-                    "time_ms": 100,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.0,
-                        "color": "#000000",
-                        "expression": "closed"
-                    }
-                },
-                {
-                    "time_ms": 200,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.8,
-                        "color": "#4444ff",
-                        "expression": "normal"
-                    }
-                }
-            ]
-        }
-    ],
-    "type": "UNKNOWN",
-    "name": "blink"
+    "animation_name":  "goblin_blink",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "description":  "Natural blinking animation for idle state",
+    "duration_ms":  800,
+    "loop":  false,
+    "mood_trigger":  "CONTENTMENT",
+    "components":  [
+                       {
+                           "component_id":  "goblin_eye_left",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.8,
+                                                                         "color":  "#4444ff",
+                                                                         "expression":  "normal"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  100,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.0,
+                                                                         "color":  "#000000",
+                                                                         "expression":  "closed"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  200,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.8,
+                                                                         "color":  "#4444ff",
+                                                                         "expression":  "normal"
+                                                                     }
+                                             }
+                                         ]
+                       },
+                       {
+                           "component_id":  "goblin_eye_right",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.8,
+                                                                         "color":  "#4444ff",
+                                                                         "expression":  "normal"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  100,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.0,
+                                                                         "color":  "#000000",
+                                                                         "expression":  "closed"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  200,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.8,
+                                                                         "color":  "#4444ff",
+                                                                         "expression":  "normal"
+                                                                     }
+                                             }
+                                         ]
+                       }
+                   ],
+    "type":  "UNKNOWN",
+    "name":  "blink"
 }

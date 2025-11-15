@@ -1,6 +1,6 @@
 {
     "name": "goblin_head_neck_motor",
-    "type": "motor_controller",
+    "type": "MOTOR_CONTROLLER",
     "description": "3-DOF neck articulation with smooth easing and preset poses",
     "subsystem": "goblin_head",
     "source_files": [

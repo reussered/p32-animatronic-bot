@@ -1,11 +1,10 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_back_mount.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "positioned_id": "ROBOT_BACK_MOUNT",
     "description": "Back-mounted mechanical attachment system for deployable equipment",
     "components": [
-        "back_mount_system"
+        "config/components/hardware/back_mount_system.json"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",

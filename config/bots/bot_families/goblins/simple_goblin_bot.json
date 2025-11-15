@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/simple_goblin_bot.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "SIMPLE_GOBLIN",
@@ -41,13 +40,13 @@
         }
     },
     "components": [
-        "left_eye_display",
-        "right_eye_display",
-        "mouth_display",
-        "nose_sensor",
-        "main_speaker",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/multi_family/behaviors/left_eye_display.json",
+        "config/bots/multi_family/behaviors/right_eye_display.json",
+        "config/bots/multi_family/behaviors/mouth_display.json",
+        "config/bots/multi_family/behaviors/nose_sensor.json",
+        "config/bots/multi_family/behaviors/main_speaker.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "behaviors": [
         {

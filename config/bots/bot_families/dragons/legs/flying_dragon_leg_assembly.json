@@ -1,72 +1,73 @@
 {
-    "relative_filename": "config/bots/bot_families/dragons/legs/flying_dragon_leg_assembly.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "flying_dragon_leg_assembly",
-    "description": "Retractable bipedal leg mechanism for walking and running when grounded. Poppy Project-inspired jumping/leaping locomotion with 4 DOF per leg (Hip X, Hip Y, Knee Y, Ankle Y)",
-    "created": "2025-11-05",
-    "type": "CREATURE_SPECIFIC",
-    "hardware_type": "SERVO_ASSEMBLY",
-    "interface_type": "SERVO_CONTROL",
-    "physical_specifications": {
-        "weight_per_leg_g": 150,
-        "total_weight_g": 300,
-        "structure": "Symmetric bipedal",
-        "degrees_of_freedom_per_leg": 4,
-        "joints": [
-            "Hip_X (Abduction/Adduction)",
-            "Hip_Y (Flexion/Extension)",
-            "Knee_Y (Extension/Flexion)",
-            "Ankle_Y (Dorsi/Plantarflexion)"
-        ],
-        "range_of_motion": {
-            "hip_x": "-45 to +45 degrees",
-            "hip_y": "-60 to +60 degrees",
-            "knee_y": "0 to +120 degrees",
-            "ankle_y": "-45 to +45 degrees"
-        },
-        "actuation": "MG996R servos (reuses wing power distribution)",
-        "gait_modes": [
-            "idle",
-            "walking",
-            "running",
-            "jumping"
-        ],
-        "stowage": "Completely retracts into body (no flight interference)"
-    },
-    "software": {
-        "init_function": "flying_dragon_leg_assembly_init",
-        "act_function": "flying_dragon_leg_assembly_act",
-        "source_file": "config/components/creature_specific/flying_dragon_leg_assembly.src",
-        "header_file": "config/components/creature_specific/flying_dragon_leg_assembly.hdr",
-        "api_functions": [
-            "flying_dragon_leg_set_gait_mode(uint8_t mode)",
-            "flying_dragon_leg_set_energy_seek(bool enabled)",
-            "flying_dragon_leg_set_speed_factor(float factor)",
-            "flying_dragon_leg_get_gait_mode(void)",
-            "flying_dragon_leg_is_deployed(void)"
-        ]
-    },
-    "timing": {
-        "hitCount": 5,
-        "description": "Execute leg control at ~50 Hz (10ms periods)"
-    },
-    "control_characteristics": {
-        "gait_cycle_time_s": 1.2,
-        "walking_frequency_hz": 0.833,
-        "speed_modulation_range": "0.3 - 1.5",
-        "control_algorithm": "Timing-based gait primitives + compliant mode",
-        "safety_features": "Compliant endpoints for shock absorption"
-    },
-    "integration_notes": {
-        "works_with": "quadcopter lift assist during initial motion",
-        "coordination": "Cascading servo control for smooth gaits",
-        "stowed_position": "Completely into body when not deployed",
-        "deployment_modes": "Walking, running, jumping, energy-seeking"
-    },
-    "components": [],
-    "dependencies": [
-        "servo control infrastructure",
-        "gait timing system"
-    ]
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "flying_dragon_leg_assembly",
+    "description":  "Retractable bipedal leg mechanism for walking and running when grounded. Poppy Project-inspired jumping/leaping locomotion with 4 DOF per leg (Hip X, Hip Y, Knee Y, Ankle Y)",
+    "created":  "2025-11-05",
+    "type":  "CREATURE_SPECIFIC",
+    "hardware_type":  "SERVO_ASSEMBLY",
+    "interface_type":  "SERVO_CONTROL",
+    "physical_specifications":  {
+                                    "weight_per_leg_g":  150,
+                                    "total_weight_g":  300,
+                                    "structure":  "Symmetric bipedal",
+                                    "degrees_of_freedom_per_leg":  4,
+                                    "joints":  [
+                                                   "Hip_X (Abduction/Adduction)",
+                                                   "Hip_Y (Flexion/Extension)",
+                                                   "Knee_Y (Extension/Flexion)",
+                                                   "Ankle_Y (Dorsi/Plantarflexion)"
+                                               ],
+                                    "range_of_motion":  {
+                                                            "hip_x":  "-45 to +45 degrees",
+                                                            "hip_y":  "-60 to +60 degrees",
+                                                            "knee_y":  "0 to +120 degrees",
+                                                            "ankle_y":  "-45 to +45 degrees"
+                                                        },
+                                    "actuation":  "MG996R servos (reuses wing power distribution)",
+                                    "gait_modes":  [
+                                                       "idle",
+                                                       "walking",
+                                                       "running",
+                                                       "jumping"
+                                                   ],
+                                    "stowage":  "Completely retracts into body (no flight interference)"
+                                },
+    "software":  {
+                     "init_function":  "flying_dragon_leg_assembly_init",
+                     "act_function":  "flying_dragon_leg_assembly_act",
+                     "source_file":  "config/components/creature_specific/flying_dragon_leg_assembly.src",
+                     "header_file":  "config/components/creature_specific/flying_dragon_leg_assembly.hdr",
+                     "api_functions":  [
+                                           "flying_dragon_leg_set_gait_mode(uint8_t mode)",
+                                           "flying_dragon_leg_set_energy_seek(bool enabled)",
+                                           "flying_dragon_leg_set_speed_factor(float factor)",
+                                           "flying_dragon_leg_get_gait_mode(void)",
+                                           "flying_dragon_leg_is_deployed(void)"
+                                       ]
+                 },
+    "timing":  {
+                   "hitCount":  5,
+                   "description":  "Execute leg control at ~50 Hz (10ms periods)"
+               },
+    "control_characteristics":  {
+                                    "gait_cycle_time_s":  1.2,
+                                    "walking_frequency_hz":  0.833,
+                                    "speed_modulation_range":  "0.3 - 1.5",
+                                    "control_algorithm":  "Timing-based gait primitives + compliant mode",
+                                    "safety_features":  "Compliant endpoints for shock absorption"
+                                },
+    "integration_notes":  {
+                              "works_with":  "quadcopter lift assist during initial motion",
+                              "coordination":  "Cascading servo control for smooth gaits",
+                              "stowed_position":  "Completely into body when not deployed",
+                              "deployment_modes":  "Walking, running, jumping, energy-seeking"
+                          },
+    "components":  [
+
+                   ],
+    "dependencies":  [
+                         "servo control infrastructure",
+                         "gait timing system"
+                     ]
 }

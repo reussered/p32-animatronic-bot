@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_chest_matrix.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "robot_chest_matrix",
@@ -7,7 +6,7 @@
     "description": "8x8 RGB LED matrix for robot chest display and status indication",
     "created": "2025-10-12",
     "components": [
-        "neopixel_matrix_8x8"
+        "config/components/hardware/neopixel_matrix_8x8.json"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",

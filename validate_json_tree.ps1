@@ -52,22 +52,17 @@ function Test-JsonFile {
         $content = Get-Content $filePath -Raw
         $json = $content | ConvertFrom-Json
         
-        # Check for relative_filename field
-        if (-not $json.relative_filename) {
-            return @{
-                valid = $false
-                error = "Missing 'relative_filename' field"
+        # Check for relative_filename field (OPTIONAL - not required)
+            if ($json.relative_filename) {
+                # This field is deprecated, warn but do not fail validation
+                $warnings += "[DEPRECATED] $($filePath.Replace($projectRoot + '\\', '').Replace('\\', '/')) : has 'relative_filename' (deprecated)"
             }
-        }
-        
-        # Verify relative_filename matches actual path
-        $expectedPath = $filePath.Replace($projectRoot + "\", "").Replace("\", "/")
-        if ($json.relative_filename -ne $expectedPath) {
-            return @{
-                valid = $false
-                error = "relative_filename mismatch: expected '$expectedPath', got '$($json.relative_filename)'"
+
+            # Verify relative_filename matches actual path if present. Only warn on mismatch.
+            $expectedPath = $filePath.Replace($projectRoot + "\", "").Replace("\", "/")
+            if ($json.relative_filename -and ($json.relative_filename -ne $expectedPath)) {
+                $warnings += "[DEPRECATED MISMATCH] $($filePath.Replace($projectRoot + '\\', '').Replace('\\', '/')) : relative_filename mismatch: expected '$expectedPath', got '$($json.relative_filename)'"
             }
-        }
         
         return @{
             valid = $true

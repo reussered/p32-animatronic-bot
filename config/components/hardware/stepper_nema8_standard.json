@@ -1,6 +1,6 @@
 {
     "name": "stepper_nema8_standard",
-    "type": "stepper_motor",
+    "type": "STEPPER_MOTOR",
     "category": "micro",
     "nema_size": 8,
     "description": "NEMA8 Micro Standard - finger articulation, micro-positioning",

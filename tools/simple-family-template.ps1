@@ -6,7 +6,7 @@ $Date = Get-Date -Format "yyyy-MM-dd"
 
 $CatFamilyTemplate = @"
 {
-  "relative_filename": "config/bots/bot_families/animals/cats_family.json",
+  
   "version": "1.0.0", 
   "author": "config/author.json",
   "family_type": "CAT",

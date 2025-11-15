@@ -1,35 +1,34 @@
 {
-    "relative_filename": "assets/sounds/goblin/growl_angry.json",
-    "sound_name": "goblin_growl_angry",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "description": "Low menacing growl for angry/threatening mood",
-    "audio_file": "goblin_growl_angry.wav",
-    "duration_ms": 2500,
-    "mood_trigger": "ANGER",
-    "volume": 0.8,
-    "audio_specs": {
-        "sample_rate": "44100 Hz",
-        "bit_depth": "16-bit",
-        "channels": "mono",
-        "format": "WAV"
-    },
-    "playback_config": {
-        "loop": false,
-        "fade_in_ms": 100,
-        "fade_out_ms": 200,
-        "priority": "high"
-    },
-    "trigger_conditions": {
-        "proximity_cm": 50,
-        "mood_threshold": 60,
-        "cooldown_ms": 5000
-    },
-    "notes": [
-        "Deep bass frequencies for intimidation",
-        "Should be played through main speaker",
-        "Can be layered with eye animation angry_stare"
-    ],
-    "type": "UNKNOWN",
-    "name": "growl_angry"
+    "sound_name":  "goblin_growl_angry",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "description":  "Low menacing growl for angry/threatening mood",
+    "audio_file":  "goblin_growl_angry.wav",
+    "duration_ms":  2500,
+    "mood_trigger":  "ANGER",
+    "volume":  0.8,
+    "audio_specs":  {
+                        "sample_rate":  "44100 Hz",
+                        "bit_depth":  "16-bit",
+                        "channels":  "mono",
+                        "format":  "WAV"
+                    },
+    "playback_config":  {
+                            "loop":  false,
+                            "fade_in_ms":  100,
+                            "fade_out_ms":  200,
+                            "priority":  "high"
+                        },
+    "trigger_conditions":  {
+                               "proximity_cm":  50,
+                               "mood_threshold":  60,
+                               "cooldown_ms":  5000
+                           },
+    "notes":  [
+                  "Deep bass frequencies for intimidation",
+                  "Should be played through main speaker",
+                  "Can be layered with eye animation angry_stare"
+              ],
+    "type":  "UNKNOWN",
+    "name":  "growl_angry"
 }

@@ -88,18 +88,14 @@ foreach ($jsonData in $validJsonFiles) {
     $filePath = $jsonData.RelativePath
     $content = $jsonData.Content
     
-    # Check relative_filename consistency
+    # Deprecated: relative_filename presence or mismatch
     if ($content.relative_filename -and $null -ne $content.relative_filename) {
+        # Mark presence as a deprecation warning
+        $warnings += "DEPRECATED_FIELD: $filePath contains deprecated field 'relative_filename'"
         $expectedPath = $content.relative_filename.Replace('/', '\')
         $actualPath = $filePath.Replace('/', '\')
-        
         if ($expectedPath -ne $actualPath) {
-            $inconsistencies += "PATH_MISMATCH: $filePath has relative_filename '$($content.relative_filename)' but actual path is '$filePath'"
-        }
-    } else {
-        # Only flag missing relative_filename for config files (ignore build artifacts)
-        if ($filePath -like "*config*") {
-            $warnings += "MISSING_RELATIVE_FILENAME: $filePath has no relative_filename field"
+            $warnings += "DEPRECATED_MISMATCH: $filePath has relative_filename '$($content.relative_filename)' which doesn't match actual path '$filePath'"
         }
     }
     

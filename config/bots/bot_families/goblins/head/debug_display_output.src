@@ -1,53 +1,40 @@
-// debug_display_output.src - Send display state to visualization server via serial JSON
-#include "esp_log.h"
-#include "shared/mood.hpp"
-#include "core/memory/SharedMemory.hpp"
-#include <stdio.h>
+// debug_display_output.src - Routes display output based on debug flag
+// If debug=true: send to generic_console_display (network to PC)
+// If debug=false: send to generic_spi_display (physical GC9A01 displays)
 
-static bool registered = false;
-static uint32_t frame_count = 0;
+#include "esp_log.h"
+
+static const char* TAG = "debug_display_output";
 
 esp_err_t debug_display_output_init(void)
 {
-    ESP_LOGI("debug_display", "Debug display output initialized");
-    return ESP_OK;
+    if (debug)
+    {
+        ESP_LOGI(TAG, "DEBUG MODE: Display output routed to console (network)");
+        return generic_console_display_init();
+    }
+    else
+    {
+        ESP_LOGI(TAG, "PRODUCTION MODE: Display output routed to SPI (physical displays)");
+        generic_spi_display_init();
+        return ESP_OK;
+    }
 }
 
 void debug_display_output_act(void)
 {
-    // Register devices once at startup
-    if (!registered)
+    if (debug)
     {
-        // Register left eye
-        printf("DISPLAY_REGISTER:{\"device_id\":\"goblin_left_eye\",\"display_type\":\"eye\",\"display_width\":240,\"display_height\":240,\"bot_name\":\"Goblin\",\"component_name\":\"Left Eye\"}\n");
-        
-        // Register right eye
-        printf("DISPLAY_REGISTER:{\"device_id\":\"goblin_right_eye\",\"display_type\":\"eye\",\"display_width\":240,\"display_height\":240,\"bot_name\":\"Goblin\",\"component_name\":\"Right Eye\"}\n");
-        
-        registered = true;
-        ESP_LOGI("debug_display", "Registered display components");
+        // Route to console display (network to PC)
+        generic_console_display_act();
     }
-    
-    // Send animation data every 10 frames (~100ms at 10Hz timing)
-    if (frame_count++ % 10 == 0)
+    else
     {
-        // Get current mood
-        Mood* mood = GSM.read<Mood>();
-        float anger = mood ? mood->anger : 0.0f;
-        float fear = mood ? mood->fear : 0.0f;
-        float happiness = mood ? mood->happiness : 0.0f;
-        
-        // Convert mood to eyeball parameters
-        float eye_openness = 0.8f - (fear * 0.3f);  // Fear makes eyes wider
-        float pupil_size = 0.5f + (fear * 0.3f);    // Fear dilates pupils
-        int expression = (happiness > 0.3f) ? 1 : ((anger > 0.3f) ? -1 : 0);
-        
-        // Determine color based on dominant emotion
-        uint32_t color = 0x00FF00;  // Default green
-        if (anger > 0.5f) color = 0xFF4444;        // Red when angry
-        else if (fear > 0.5f) color = 0x4444FF;    // Blue when fearful
-        else if (happiness > 0.5f) color = 0xFFFF00; // Yellow when happy
-        
+        // Route to SPI display (physical GC9A01 displays)
+        // Pass the file-scoped buffers allocated by goblin_left_eye and goblin_right_eye
+        generic_spi_display_act(front_buffer, back_buffer, display_size, left_eye_position);
+    }
+}
         // Send left eye data
         printf("DISPLAY_DATA:{\"device_id\":\"goblin_left_eye\",\"animation_name\":\"mood\",\"eye_openness\":%.2f,\"pupil_size\":%.2f,\"color\":%u,\"expression\":%d}\n",
                eye_openness, pupil_size, color, expression);

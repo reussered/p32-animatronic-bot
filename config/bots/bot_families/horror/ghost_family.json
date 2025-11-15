@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/horror/ghost_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_name": "GHOST",
@@ -83,9 +82,9 @@
         "ethereal_extension": "1.5 INCH"
     },
     "components": [
-        "ghost_ectoplasm_generator",
-        "ghost_floating_mechanism",
-        "ghost_phase_lights"
+        "config/bots/bot_families/horror/head/ghost_ectoplasm_generator.json",
+        "config/bots/bot_families/horror/head/ghost_floating_mechanism.json",
+        "config/bots/bot_families/horror/head/ghost_phase_lights.json"
     ],
     "supernatural_features": {
         "manifestation_effects": {

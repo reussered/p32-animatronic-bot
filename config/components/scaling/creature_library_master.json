@@ -1,137 +1,136 @@
 {
-    "relative_filename": "config/components/scaling/creature_library_master.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_type": "CONFIGURATION",
-    "creature_scaling_library": {
-        "description": "Complete creature library using unified proportional scaling system",
-        "scaling_reference": "config/components/scaling/unified_proportional_scaling.json",
-        "baseline": "HUMAN_ADULT_MALE_PROPORTIONS",
-        "creature_categories": {
-            "MINIATURE_COMPANIONS": {
-                "height_range": "12-24 INCHES",
-                "scale_range": "0.3-0.5",
-                "use_cases": [
-                    "DESKTOP_COMPANION",
-                    "PORTABLE_ENTERTAINMENT",
-                    "TRAVEL_COMPANION"
-                ],
-                "creatures": {
-                    "pocket_pixie": {
-                        "file": "config/bots/pocket_pixie.json",
-                        "horizontal_scale": 0.4,
-                        "vertical_scale": 0.3,
-                        "final_height": "21.0 INCHES"
-                    },
-                    "tiny_house_goblin": {
-                        "file": "config/bots/tiny_house_goblin.json",
-                        "horizontal_scale": 0.5,
-                        "vertical_scale": 0.3,
-                        "final_height": "21.0 INCHES"
-                    }
-                }
-            },
-            "STANDARD_HUMANOIDS": {
-                "height_range": "36-66 INCHES",
-                "scale_range": "0.6-1.0",
-                "use_cases": [
-                    "HOME_COMPANION",
-                    "INTERACTIVE_ROBOT",
-                    "EDUCATIONAL_PLATFORM"
-                ],
-                "creatures": {
-                    "standard_goblin": {
-                        "file": "config/bots/goblin_full.json",
-                        "horizontal_scale": 0.7,
-                        "vertical_scale": 0.6,
-                        "final_height": "42.0 INCHES"
-                    },
-                    "hobgoblin_captain": {
-                        "file": "config/bots/hobgoblin_captain.json",
-                        "horizontal_scale": 1.0,
-                        "vertical_scale": 0.9,
-                        "final_height": "63.0 INCHES"
-                    }
-                }
-            },
-            "LARGE_GUARDIANS": {
-                "height_range": "66-90 INCHES",
-                "scale_range": "1.0-1.5",
-                "use_cases": [
-                    "SECURITY_PRESENCE",
-                    "PERFORMANCE_ROBOT",
-                    "INTIMIDATION_DISPLAY"
-                ],
-                "creatures": {
-                    "massive_orc_chieftain": {
-                        "file": "config/bots/massive_orc_chieftain.json",
-                        "horizontal_scale": 1.5,
-                        "vertical_scale": 1.1,
-                        "final_height": "77.0 INCHES"
-                    },
-                    "ogre_brute": {
-                        "file": "config/bots/ogre_brute.json",
-                        "horizontal_scale": 1.8,
-                        "vertical_scale": 1.4,
-                        "final_height": "98.0 INCHES"
-                    }
-                }
-            }
-        },
-        "scaling_formulas": {
-            "height_calculation": "BASE_HEIGHT(70) * vertical_scale",
-            "width_calculation": "BASE_WIDTH(18) * horizontal_scale",
-            "component_scaling": "ALL_DIMENSIONS * respective_scale_factor",
-            "servo_selection": "AUTOMATIC_BASED_ON_SCALE_AND_LOAD"
-        },
-        "component_auto_selection": {
-            "miniature_servos": {
-                "scale_threshold": "< 0.6",
-                "primary": "MICRO_SG90_SERVO_MOTORS",
-                "secondary": "MICRO_SG92R_SERVO_MOTORS"
-            },
-            "standard_servos": {
-                "scale_threshold": "0.6 - 1.2",
-                "primary": "DS3218_HIGH_TORQUE_SERVOS",
-                "secondary": "NEMA17_SERVO_MOTORS"
-            },
-            "heavy_duty_servos": {
-                "scale_threshold": "> 1.2",
-                "primary": "NEMA23_HEAVY_DUTY_SERVO_MOTORS",
-                "secondary": "NEMA23_ULTRA_HIGH_TORQUE"
-            }
-        },
-        "power_system_scaling": {
-            "miniature_power": {
-                "scale_threshold": "< 0.6",
-                "battery": "LITHIUM_ION_3S1P_PACK",
-                "voltage": "11.1V",
-                "capacity": "2200mAh"
-            },
-            "standard_power": {
-                "scale_threshold": "0.6 - 1.2",
-                "battery": "LITHIUM_ION_10S4P_PACK",
-                "voltage": "37V",
-                "capacity": "8800mAh"
-            },
-            "heavy_duty_power": {
-                "scale_threshold": "> 1.2",
-                "battery": "LITHIUM_ION_14S6P_PACK",
-                "voltage": "51.8V",
-                "capacity": "13200mAh"
-            }
-        },
-        "manufacturing_considerations": {
-            "stl_generation": "PARAMETRIC_OPENSCAD_WITH_SCALE_FACTORS",
-            "material_usage": "SCALES_QUADRATICALLY_WITH_SIZE",
-            "assembly_complexity": "INCREASES_WITH_SCALE_FACTOR",
-            "cost_estimation": "AUTOMATED_BASED_ON_SCALE_AND_COMPONENTS"
-        }
-    },
-    "name": "creature_library_master",
-    "type": "SCALING_LIBRARY",
-    "description": "Auto-generated component: creature_library_master",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "CONFIGURATION",
+    "creature_scaling_library":  {
+                                     "description":  "Complete creature library using unified proportional scaling system",
+                                     "scaling_reference":  "config/components/scaling/unified_proportional_scaling.json",
+                                     "baseline":  "HUMAN_ADULT_MALE_PROPORTIONS",
+                                     "creature_categories":  {
+                                                                 "MINIATURE_COMPANIONS":  {
+                                                                                              "height_range":  "12-24 INCHES",
+                                                                                              "scale_range":  "0.3-0.5",
+                                                                                              "use_cases":  [
+                                                                                                                "DESKTOP_COMPANION",
+                                                                                                                "PORTABLE_ENTERTAINMENT",
+                                                                                                                "TRAVEL_COMPANION"
+                                                                                                            ],
+                                                                                              "creatures":  {
+                                                                                                                "pocket_pixie":  {
+                                                                                                                                     "file":  "config/bots/pocket_pixie.json",
+                                                                                                                                     "horizontal_scale":  0.4,
+                                                                                                                                     "vertical_scale":  0.3,
+                                                                                                                                     "final_height":  "21.0 INCHES"
+                                                                                                                                 },
+                                                                                                                "tiny_house_goblin":  {
+                                                                                                                                          "file":  "config/bots/tiny_house_goblin.json",
+                                                                                                                                          "horizontal_scale":  0.5,
+                                                                                                                                          "vertical_scale":  0.3,
+                                                                                                                                          "final_height":  "21.0 INCHES"
+                                                                                                                                      }
+                                                                                                            }
+                                                                                          },
+                                                                 "STANDARD_HUMANOIDS":  {
+                                                                                            "height_range":  "36-66 INCHES",
+                                                                                            "scale_range":  "0.6-1.0",
+                                                                                            "use_cases":  [
+                                                                                                              "HOME_COMPANION",
+                                                                                                              "INTERACTIVE_ROBOT",
+                                                                                                              "EDUCATIONAL_PLATFORM"
+                                                                                                          ],
+                                                                                            "creatures":  {
+                                                                                                              "standard_goblin":  {
+                                                                                                                                      "file":  "config/bots/goblin_full.json",
+                                                                                                                                      "horizontal_scale":  0.7,
+                                                                                                                                      "vertical_scale":  0.6,
+                                                                                                                                      "final_height":  "42.0 INCHES"
+                                                                                                                                  },
+                                                                                                              "hobgoblin_captain":  {
+                                                                                                                                        "file":  "config/bots/hobgoblin_captain.json",
+                                                                                                                                        "horizontal_scale":  1.0,
+                                                                                                                                        "vertical_scale":  0.9,
+                                                                                                                                        "final_height":  "63.0 INCHES"
+                                                                                                                                    }
+                                                                                                          }
+                                                                                        },
+                                                                 "LARGE_GUARDIANS":  {
+                                                                                         "height_range":  "66-90 INCHES",
+                                                                                         "scale_range":  "1.0-1.5",
+                                                                                         "use_cases":  [
+                                                                                                           "SECURITY_PRESENCE",
+                                                                                                           "PERFORMANCE_ROBOT",
+                                                                                                           "INTIMIDATION_DISPLAY"
+                                                                                                       ],
+                                                                                         "creatures":  {
+                                                                                                           "massive_orc_chieftain":  {
+                                                                                                                                         "file":  "config/bots/massive_orc_chieftain.json",
+                                                                                                                                         "horizontal_scale":  1.5,
+                                                                                                                                         "vertical_scale":  1.1,
+                                                                                                                                         "final_height":  "77.0 INCHES"
+                                                                                                                                     },
+                                                                                                           "ogre_brute":  {
+                                                                                                                              "file":  "config/bots/ogre_brute.json",
+                                                                                                                              "horizontal_scale":  1.8,
+                                                                                                                              "vertical_scale":  1.4,
+                                                                                                                              "final_height":  "98.0 INCHES"
+                                                                                                                          }
+                                                                                                       }
+                                                                                     }
+                                                             },
+                                     "scaling_formulas":  {
+                                                              "height_calculation":  "BASE_HEIGHT(70) * vertical_scale",
+                                                              "width_calculation":  "BASE_WIDTH(18) * horizontal_scale",
+                                                              "component_scaling":  "ALL_DIMENSIONS * respective_scale_factor",
+                                                              "servo_selection":  "AUTOMATIC_BASED_ON_SCALE_AND_LOAD"
+                                                          },
+                                     "component_auto_selection":  {
+                                                                      "miniature_servos":  {
+                                                                                               "scale_threshold":  "\u003c 0.6",
+                                                                                               "primary":  "MICRO_SG90_SERVO_MOTORS",
+                                                                                               "secondary":  "MICRO_SG92R_SERVO_MOTORS"
+                                                                                           },
+                                                                      "standard_servos":  {
+                                                                                              "scale_threshold":  "0.6 - 1.2",
+                                                                                              "primary":  "DS3218_HIGH_TORQUE_SERVOS",
+                                                                                              "secondary":  "NEMA17_SERVO_MOTORS"
+                                                                                          },
+                                                                      "heavy_duty_servos":  {
+                                                                                                "scale_threshold":  "\u003e 1.2",
+                                                                                                "primary":  "NEMA23_HEAVY_DUTY_SERVO_MOTORS",
+                                                                                                "secondary":  "NEMA23_ULTRA_HIGH_TORQUE"
+                                                                                            }
+                                                                  },
+                                     "power_system_scaling":  {
+                                                                  "miniature_power":  {
+                                                                                          "scale_threshold":  "\u003c 0.6",
+                                                                                          "battery":  "LITHIUM_ION_3S1P_PACK",
+                                                                                          "voltage":  "11.1V",
+                                                                                          "capacity":  "2200mAh"
+                                                                                      },
+                                                                  "standard_power":  {
+                                                                                         "scale_threshold":  "0.6 - 1.2",
+                                                                                         "battery":  "LITHIUM_ION_10S4P_PACK",
+                                                                                         "voltage":  "37V",
+                                                                                         "capacity":  "8800mAh"
+                                                                                     },
+                                                                  "heavy_duty_power":  {
+                                                                                           "scale_threshold":  "\u003e 1.2",
+                                                                                           "battery":  "LITHIUM_ION_14S6P_PACK",
+                                                                                           "voltage":  "51.8V",
+                                                                                           "capacity":  "13200mAh"
+                                                                                       }
+                                                              },
+                                     "manufacturing_considerations":  {
+                                                                          "stl_generation":  "PARAMETRIC_OPENSCAD_WITH_SCALE_FACTORS",
+                                                                          "material_usage":  "SCALES_QUADRATICALLY_WITH_SIZE",
+                                                                          "assembly_complexity":  "INCREASES_WITH_SCALE_FACTOR",
+                                                                          "cost_estimation":  "AUTOMATED_BASED_ON_SCALE_AND_COMPONENTS"
+                                                                      }
+                                 },
+    "name":  "creature_library_master",
+    "type":  "SCALING_LIBRARY",
+    "description":  "Auto-generated component: creature_library_master",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

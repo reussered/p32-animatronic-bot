@@ -72,7 +72,6 @@ foreach ($item in $missing) {
         author = "config/author.json"
         component_type = $componentType
         subsystem = $subsystem
-        relative_filename = $relPath
     }
     
     # Add components array if we have interfaces
@@ -100,7 +99,7 @@ foreach ($item in $missing) {
     }
     
     # Write JSON
-    $json | ConvertTo-Json -Depth 10 | Set-Content $fullPath -Encoding UTF8
+    $json | ConvertTo-Json -Depth 10 | Set-Content $fullPath -Encoding ASCII
     
     # Create .hdr file
     $hdrPath = Join-Path "f:\GitHub\p32-animatronic-bot\config\components" "$filename.hdr"
@@ -127,7 +126,7 @@ void ${filename}_act(void);
 
 #endif // ${filename}_HDR
 "@
-    $hdrContent | Set-Content $hdrPath -Encoding UTF8
+    $hdrContent | Set-Content $hdrPath -Encoding ASCII
     
     # Create .src file
     $srcPath = Join-Path "f:\GitHub\p32-animatronic-bot\config\components" "$filename.src"
@@ -154,7 +153,7 @@ void ${filename}_act(void) {
     // TODO: Add action code
 }
 "@
-    $srcContent | Set-Content $srcPath -Encoding UTF8
+    $srcContent | Set-Content $srcPath -Encoding ASCII
     
     Write-Host "  [CREATE] $filename" -ForegroundColor Green
     $created++

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_solar_parasol.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "robot_solar_parasol",
@@ -7,7 +6,7 @@
     "description": "Shoulder-mounted deployable solar parasol system for autonomous power generation",
     "created": "2025-10-13",
     "components": [
-        "solar_parasol_system"
+        "config/components/hardware/solar_parasol_system.json"
     ],
     "spatial_coordinates": {
         "coordinate_system": "planar_2d",

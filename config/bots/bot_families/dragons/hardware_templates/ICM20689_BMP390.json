@@ -1,8 +1,8 @@
 {
     "template_name": "ICM20689_BMP390",
     "components": [
-        "inline_component_0",
-        "inline_component_1"
+        "config/bots/bot_families/dragons/hardware_templates/components/inline_component_0.json",
+        "config/bots/bot_families/dragons/hardware_templates/components/inline_component_1.json"
     ],
     "breakout_board": {
         "dimensions_mm": [

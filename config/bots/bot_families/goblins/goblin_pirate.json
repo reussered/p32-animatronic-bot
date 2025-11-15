@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_pirate.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINPIRATE",
@@ -15,18 +14,11 @@
     "eye_spacing": "3.0 INCH",
     "compression_factor": 0.7,
     "components": [
-        "goblin_pirate_personality",
-        "goblin_mood",
-        "goblin_behavior_engine",
-        "goblin_pirate_head",
-        "goblin_left_eye",
-        "goblin_mouth",
-        "goblin_speaker",
-        "goblin_nose",
-        "goblin_left_ear",
-        "goblin_right_ear",
-        "goblin_head",
-        "goblin_torso"
+        "config/components/functional/goblin_pirate_personality.json",
+        "config/components/functional/goblin_mood.json",
+        "config/components/functional/goblin_behavior_engine.json",
+        "config/bots/bot_families/goblins/head/goblin_pirate_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 5,
@@ -73,7 +65,7 @@
         "More aggressive power management due to battle-hardened nature"
     ],
     "name": "goblin_pirate",
-    "type": "UNKNOWN",
+    "type": "BOT",
     "timing": {
         "hitCount": 1
     }

@@ -1,0 +1,11 @@
+// goblin_mouth_mood_display stub - rendering logic placeholder
+#include "esp_log.h"
+
+esp_err_t goblin_mouth_mood_display_init(void) {
+    ESP_LOGI("goblin_mouth_mood_display", "Init (stub)");
+    return ESP_OK;
+}
+
+void goblin_mouth_mood_display_act(void) {
+    // TODO: Implement mouth rendering with mood effects
+}

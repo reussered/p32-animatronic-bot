@@ -1,6 +1,6 @@
 {
     "name": "stepper_nema14_standard",
-    "type": "stepper_motor",
+    "type": "STEPPER_MOTOR",
     "category": "light",
     "nema_size": 14,
     "description": "NEMA14 Standard - general purpose light articulation",

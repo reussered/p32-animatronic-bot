@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_war_paint.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_war_paint",
@@ -7,7 +6,7 @@
     "description": "War paint markings and tribal decorations for warrior goblins",
     "created": "2025-10-12",
     "components": [
-        "aesthetic_overlay"
+        "config/components/hardware/aesthetic_overlay.json"
     ],
     "interface_reference": "config/components/interfaces/gpio_pair_1.json",
     "coordinate_system": "skull_3d",

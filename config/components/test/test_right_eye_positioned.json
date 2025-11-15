@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/components/test/test_right_eye_positioned.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "test_right_eye_positioned",
@@ -8,7 +7,7 @@
         "description": "Test right eye updates every cycle"
     },
     "components": [
-        "gc9a01"
+        "config/components/hardware/gc9a01.json"
     ],
     "additional_interfaces": [
         "config/interfaces/gpio_pin_33.json",

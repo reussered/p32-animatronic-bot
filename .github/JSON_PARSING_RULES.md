@@ -247,13 +247,12 @@ JSON `components: []` arrays specify the next component in the chain using **fil
 
 ---
 
-## MANDATORY JSON FIELDS FOR ALL COMPONENTS
+## REQUIRED JSON FIELDS FOR ALL COMPONENTS
 
-Every component JSON file MUST include these fields:
+Every component JSON file SHOULD include these fields (but `relative_filename` is optional):
 
 ```json
 {
-  "relative_filename": "config/components/positioned/component.json",
   "version": "1.0.0",
   "author": "config/author.json",
   "name": "unique_component_name",
@@ -449,12 +448,12 @@ Animations use a different pattern than component pipelines:
 | **Encoding** | ASCII-only, no UTF-8 BOM, no Unicode |
 | **components array** | Ordered list of file paths to component JSON files |
 | **File paths** | Can be relative (to component directory) or full paths |
-| **relative_filename** | Metadata field documenting full path from project root |
+| **relative_filename** | Optional metadata field documenting full path from project root |
 | **Traversal** | Depth-first, processing parents before children |
 | **Aggregation** | Code aggregated only on FIRST encounter of each component |
 | **Dispatch table** | Contains entry for EVERY component encounter (duplicates allowed) |
 | **Component names** | Must be globally unique (fermionic - no duplicates) |
-| **Mandatory fields** | name, type, version, timing, components, relative_filename |
+| **Mandatory fields** | name, type, version, timing, components |
 | **Leaf components** | Have empty `components: []` array |
 | **Circular refs** | NOT allowed - will cause infinite loop |
 | **Error handling** | Check file paths first, then validate JSON syntax |

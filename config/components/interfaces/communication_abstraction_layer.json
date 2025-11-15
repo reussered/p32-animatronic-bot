@@ -1,165 +1,164 @@
 {
-    "relative_filename": "config/components/interfaces/communication_abstraction_layer.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "COMMUNICATION_ABSTRACTION_LAYER",
-    "interface_type": "PROTOCOL_ABSTRACTION",
-    "description": "Protocol-agnostic communication layer allowing hot-swapping of communication methods",
-    "abstraction_philosophy": {
-        "principle": "SEPARATE_WHAT_FROM_HOW",
-        "what": "Message content and semantics",
-        "how": "Physical transport and protocol implementation",
-        "benefit": "Change communication method without changing application logic"
-    },
-    "unified_message_interface": {
-        "base_message_structure": {
-            "header": {
-                "message_id": "UINT32",
-                "source_controller": "UINT8",
-                "destination_controller": "UINT8",
-                "message_type": "ENUM",
-                "timestamp": "UINT32",
-                "priority": "UINT8"
-            },
-            "payload": {
-                "data_format": "JSON_OR_BINARY",
-                "max_size": "PROTOCOL_DEPENDENT",
-                "compression": "OPTIONAL_ZLIB",
-                "encryption": "OPTIONAL_AES"
-            },
-            "footer": {
-                "checksum": "CRC32",
-                "sequence_number": "UINT16",
-                "acknowledgment_required": "BOOLEAN"
-            }
-        }
-    },
-    "supported_protocols": {
-        "esp_now_mesh": {
-            "implementation": "config/components/interfaces/esp_now_mesh.json",
-            "max_payload": "250_BYTES",
-            "latency": "5_MILLISECONDS",
-            "range": "10_METERS",
-            "power_consumption": "LOW",
-            "reliability": "MESH_REDUNDANCY"
-        },
-        "can_bus": {
-            "implementation": "config/components/interfaces/can_bus_interface.json",
-            "max_payload": "8_BYTES_STANDARD",
-            "latency": "1_MILLISECOND",
-            "range": "WIRED_NETWORK",
-            "power_consumption": "MEDIUM",
-            "reliability": "INDUSTRIAL_GRADE"
-        },
-        "wifi_tcp": {
-            "implementation": "config/components/interfaces/wifi_tcp_interface.json",
-            "max_payload": "1500_BYTES_MTU",
-            "latency": "10_MILLISECONDS",
-            "range": "100_METERS_WIFI",
-            "power_consumption": "HIGH",
-            "reliability": "TCP_GUARANTEED_DELIVERY"
-        },
-        "rs485_serial": {
-            "implementation": "config/components/interfaces/rs485_serial_interface.json",
-            "max_payload": "256_BYTES_CONFIGURABLE",
-            "latency": "2_MILLISECONDS",
-            "range": "1200_METERS_WIRED",
-            "power_consumption": "LOW",
-            "reliability": "WIRED_ROBUST"
-        }
-    },
-    "protocol_selection_matrix": {
-        "real_time_critical": {
-            "best_choice": "can_bus",
-            "backup_choice": "rs485_serial",
-            "reason": "LOWEST_LATENCY_DETERMINISTIC"
-        },
-        "wireless_required": {
-            "best_choice": "esp_now_mesh",
-            "backup_choice": "wifi_tcp",
-            "reason": "NO_WIRING_MESH_TOPOLOGY"
-        },
-        "long_range": {
-            "best_choice": "rs485_serial",
-            "backup_choice": "wifi_tcp",
-            "reason": "KILOMETER_RANGE_POSSIBLE"
-        },
-        "low_power": {
-            "best_choice": "esp_now_mesh",
-            "backup_choice": "can_bus",
-            "reason": "SLEEP_MODE_COMPATIBLE"
-        }
-    },
-    "api_abstraction": {
-        "send_message": {
-            "function": "comm_send(destination, message_type, payload)",
-            "implementation": "PROTOCOL_SPECIFIC_DRIVER",
-            "return": "SUCCESS_OR_ERROR_CODE",
-            "async": "NON_BLOCKING_WITH_CALLBACK"
-        },
-        "receive_message": {
-            "function": "comm_register_handler(message_type, callback)",
-            "implementation": "PROTOCOL_INTERRUPT_DRIVEN",
-            "thread_safety": "RTOS_QUEUE_BASED",
-            "filtering": "AUTOMATIC_BY_MESSAGE_TYPE"
-        },
-        "broadcast_message": {
-            "function": "comm_broadcast(message_type, payload)",
-            "esp_now": "MESH_FLOOD_PROTOCOL",
-            "can_bus": "BROADCAST_ADDRESS_0x000",
-            "wifi": "UDP_MULTICAST_GROUP"
-        }
-    },
-    "configuration_switching": {
-        "compile_time": {
-            "method": "PREPROCESSOR_DEFINES",
-            "example": "#define COMM_PROTOCOL ESP_NOW_MESH",
-            "benefit": "OPTIMAL_CODE_SIZE_PERFORMANCE"
-        },
-        "runtime": {
-            "method": "FUNCTION_POINTER_TABLE",
-            "example": "comm_driver = &esp_now_driver",
-            "benefit": "DYNAMIC_PROTOCOL_SWITCHING"
-        },
-        "configuration_file": {
-            "method": "JSON_CONFIG_LOADING",
-            "example": "\"communication_protocol\": \"esp_now_mesh\"",
-            "benefit": "NO_RECOMPILATION_REQUIRED"
-        }
-    },
-    "failure_handling": {
-        "protocol_failure": {
-            "detection": "TIMEOUT_OR_ERROR_RESPONSE",
-            "action": "AUTOMATIC_FALLBACK_TO_BACKUP_PROTOCOL",
-            "recovery": "PERIODIC_RETRY_PRIMARY_PROTOCOL"
-        },
-        "message_corruption": {
-            "detection": "CHECKSUM_VALIDATION_FAILURE",
-            "action": "REQUEST_RETRANSMISSION",
-            "limit": "MAX_3_RETRIES_THEN_ERROR"
-        },
-        "network_congestion": {
-            "detection": "LATENCY_THRESHOLD_EXCEEDED",
-            "action": "REDUCE_MESSAGE_FREQUENCY",
-            "recovery": "GRADUAL_RATE_INCREASE"
-        }
-    },
-    "example_usage": {
-        "application_code": {
-            "language": "C++",
-            "example": "// Application doesn't know about ESP-NOW vs CAN\ncomm_send(ARM_CONTROLLER, SERVO_COMMAND, servo_positions);\ncomm_register_handler(SENSOR_DATA, handle_sensor_data);"
-        },
-        "protocol_change": {
-            "from": "esp_now_mesh",
-            "to": "can_bus",
-            "required_changes": "ONLY_CONFIGURATION_FILE",
-            "application_impact": "ZERO_CODE_CHANGES"
-        }
-    },
-    "name": "communication_abstraction_layer",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "COMMUNICATION_ABSTRACTION_LAYER",
+    "interface_type":  "PROTOCOL_ABSTRACTION",
+    "description":  "Protocol-agnostic communication layer allowing hot-swapping of communication methods",
+    "abstraction_philosophy":  {
+                                   "principle":  "SEPARATE_WHAT_FROM_HOW",
+                                   "what":  "Message content and semantics",
+                                   "how":  "Physical transport and protocol implementation",
+                                   "benefit":  "Change communication method without changing application logic"
+                               },
+    "unified_message_interface":  {
+                                      "base_message_structure":  {
+                                                                     "header":  {
+                                                                                    "message_id":  "UINT32",
+                                                                                    "source_controller":  "UINT8",
+                                                                                    "destination_controller":  "UINT8",
+                                                                                    "message_type":  "ENUM",
+                                                                                    "timestamp":  "UINT32",
+                                                                                    "priority":  "UINT8"
+                                                                                },
+                                                                     "payload":  {
+                                                                                     "data_format":  "JSON_OR_BINARY",
+                                                                                     "max_size":  "PROTOCOL_DEPENDENT",
+                                                                                     "compression":  "OPTIONAL_ZLIB",
+                                                                                     "encryption":  "OPTIONAL_AES"
+                                                                                 },
+                                                                     "footer":  {
+                                                                                    "checksum":  "CRC32",
+                                                                                    "sequence_number":  "UINT16",
+                                                                                    "acknowledgment_required":  "BOOLEAN"
+                                                                                }
+                                                                 }
+                                  },
+    "supported_protocols":  {
+                                "esp_now_mesh":  {
+                                                     "implementation":  "config/components/interfaces/esp_now_mesh.json",
+                                                     "max_payload":  "250_BYTES",
+                                                     "latency":  "5_MILLISECONDS",
+                                                     "range":  "10_METERS",
+                                                     "power_consumption":  "LOW",
+                                                     "reliability":  "MESH_REDUNDANCY"
+                                                 },
+                                "can_bus":  {
+                                                "implementation":  "config/components/interfaces/can_bus_interface.json",
+                                                "max_payload":  "8_BYTES_STANDARD",
+                                                "latency":  "1_MILLISECOND",
+                                                "range":  "WIRED_NETWORK",
+                                                "power_consumption":  "MEDIUM",
+                                                "reliability":  "INDUSTRIAL_GRADE"
+                                            },
+                                "wifi_tcp":  {
+                                                 "implementation":  "config/components/interfaces/wifi_tcp_interface.json",
+                                                 "max_payload":  "1500_BYTES_MTU",
+                                                 "latency":  "10_MILLISECONDS",
+                                                 "range":  "100_METERS_WIFI",
+                                                 "power_consumption":  "HIGH",
+                                                 "reliability":  "TCP_GUARANTEED_DELIVERY"
+                                             },
+                                "rs485_serial":  {
+                                                     "implementation":  "config/components/interfaces/rs485_serial_interface.json",
+                                                     "max_payload":  "256_BYTES_CONFIGURABLE",
+                                                     "latency":  "2_MILLISECONDS",
+                                                     "range":  "1200_METERS_WIRED",
+                                                     "power_consumption":  "LOW",
+                                                     "reliability":  "WIRED_ROBUST"
+                                                 }
+                            },
+    "protocol_selection_matrix":  {
+                                      "real_time_critical":  {
+                                                                 "best_choice":  "can_bus",
+                                                                 "backup_choice":  "rs485_serial",
+                                                                 "reason":  "LOWEST_LATENCY_DETERMINISTIC"
+                                                             },
+                                      "wireless_required":  {
+                                                                "best_choice":  "esp_now_mesh",
+                                                                "backup_choice":  "wifi_tcp",
+                                                                "reason":  "NO_WIRING_MESH_TOPOLOGY"
+                                                            },
+                                      "long_range":  {
+                                                         "best_choice":  "rs485_serial",
+                                                         "backup_choice":  "wifi_tcp",
+                                                         "reason":  "KILOMETER_RANGE_POSSIBLE"
+                                                     },
+                                      "low_power":  {
+                                                        "best_choice":  "esp_now_mesh",
+                                                        "backup_choice":  "can_bus",
+                                                        "reason":  "SLEEP_MODE_COMPATIBLE"
+                                                    }
+                                  },
+    "api_abstraction":  {
+                            "send_message":  {
+                                                 "function":  "comm_send(destination, message_type, payload)",
+                                                 "implementation":  "PROTOCOL_SPECIFIC_DRIVER",
+                                                 "return":  "SUCCESS_OR_ERROR_CODE",
+                                                 "async":  "NON_BLOCKING_WITH_CALLBACK"
+                                             },
+                            "receive_message":  {
+                                                    "function":  "comm_register_handler(message_type, callback)",
+                                                    "implementation":  "PROTOCOL_INTERRUPT_DRIVEN",
+                                                    "thread_safety":  "RTOS_QUEUE_BASED",
+                                                    "filtering":  "AUTOMATIC_BY_MESSAGE_TYPE"
+                                                },
+                            "broadcast_message":  {
+                                                      "function":  "comm_broadcast(message_type, payload)",
+                                                      "esp_now":  "MESH_FLOOD_PROTOCOL",
+                                                      "can_bus":  "BROADCAST_ADDRESS_0x000",
+                                                      "wifi":  "UDP_MULTICAST_GROUP"
+                                                  }
+                        },
+    "configuration_switching":  {
+                                    "compile_time":  {
+                                                         "method":  "PREPROCESSOR_DEFINES",
+                                                         "example":  "#define COMM_PROTOCOL ESP_NOW_MESH",
+                                                         "benefit":  "OPTIMAL_CODE_SIZE_PERFORMANCE"
+                                                     },
+                                    "runtime":  {
+                                                    "method":  "FUNCTION_POINTER_TABLE",
+                                                    "example":  "comm_driver = \u0026esp_now_driver",
+                                                    "benefit":  "DYNAMIC_PROTOCOL_SWITCHING"
+                                                },
+                                    "configuration_file":  {
+                                                               "method":  "JSON_CONFIG_LOADING",
+                                                               "example":  "\"communication_protocol\": \"esp_now_mesh\"",
+                                                               "benefit":  "NO_RECOMPILATION_REQUIRED"
+                                                           }
+                                },
+    "failure_handling":  {
+                             "protocol_failure":  {
+                                                      "detection":  "TIMEOUT_OR_ERROR_RESPONSE",
+                                                      "action":  "AUTOMATIC_FALLBACK_TO_BACKUP_PROTOCOL",
+                                                      "recovery":  "PERIODIC_RETRY_PRIMARY_PROTOCOL"
+                                                  },
+                             "message_corruption":  {
+                                                        "detection":  "CHECKSUM_VALIDATION_FAILURE",
+                                                        "action":  "REQUEST_RETRANSMISSION",
+                                                        "limit":  "MAX_3_RETRIES_THEN_ERROR"
+                                                    },
+                             "network_congestion":  {
+                                                        "detection":  "LATENCY_THRESHOLD_EXCEEDED",
+                                                        "action":  "REDUCE_MESSAGE_FREQUENCY",
+                                                        "recovery":  "GRADUAL_RATE_INCREASE"
+                                                    }
+                         },
+    "example_usage":  {
+                          "application_code":  {
+                                                   "language":  "C++",
+                                                   "example":  "// Application doesn\u0027t know about ESP-NOW vs CAN\ncomm_send(ARM_CONTROLLER, SERVO_COMMAND, servo_positions);\ncomm_register_handler(SENSOR_DATA, handle_sensor_data);"
+                                               },
+                          "protocol_change":  {
+                                                  "from":  "esp_now_mesh",
+                                                  "to":  "can_bus",
+                                                  "required_changes":  "ONLY_CONFIGURATION_FILE",
+                                                  "application_impact":  "ZERO_CODE_CHANGES"
+                                              }
+                      },
+    "name":  "communication_abstraction_layer",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

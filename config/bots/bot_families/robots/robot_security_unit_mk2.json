@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/robot_security_unit_mk2.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_id": "ROBOT_SECURITY_MK2",
@@ -29,7 +28,7 @@
     "components": [
         "security_camera_array",
         "thermal_sensor",
-        "audio_analysis_unit",
+        "config/components/creature_specific/audio_analysis_unit.json",
         "emergency_beacon"
     ],
     "specialized_behaviors": {

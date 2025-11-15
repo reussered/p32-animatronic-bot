@@ -8,7 +8,7 @@
     "name": "dragon_speaker",
     "subsystem": "AUDIO",
     "components": [
-        "i2s_bus"
+        "config/components/interfaces/i2s_bus.json"
     ],
     "author": "config/author.json",
     "position": {

@@ -1,26 +1,34 @@
-// generic_spi_display.src - Non-blocking dual-DMA display pipeline
-// DMA1: PSRAM->buffer, DMA2: buffer->display, ping-pong operation
+// generic_spi_display.src - Display output driver with debug routing
+// If debug=true: sends buffer data to PC via network (for visualization)
+// If debug=false: sends buffer data to physical GC9A01 displays via SPI DMA
 
 #include "esp_log.h"
 #include "driver/spi_master.h"
+#include "esp_wifi.h"
+#include "lwip/sockets.h"
 #include "string.h"
 
 static const char* TAG = "generic_spi_display";
 
-// Global pipeline state for all displays
+// Network connection state (for debug mode)
 static struct {
-    // DMA states (simple boolean flags)
+    int socket_fd;
+    bool connected_to_server;
+    uint32_t frames_sent;
+} network_state = {
+    .socket_fd = -1,
+    .connected_to_server = false,
+    .frames_sent = 0
+};
+
+// SPI DMA pipeline state (for production mode)
+static struct {
     bool dma1_busy;  // PSRAM -> buffer transfer active
     bool dma2_busy;  // buffer -> display transfer active
-    
-    // SPI handles (shared across displays)
-    spi_device_handle_t psram_spi_handle;    // SPI1 for PSRAM access
-    spi_device_handle_t display_spi_handle;  // SPI2 for display output
-    
-    // Current operation tracking
+    spi_device_handle_t psram_spi_handle;
+    spi_device_handle_t display_spi_handle;
     uint32_t current_chunk;
-    bool ping_pong_state;  // false = use front/load back, true = use back/load front
-    
+    bool ping_pong_state;
 } pipeline_state = {
     .dma1_busy = false,
     .dma2_busy = false,
@@ -29,91 +37,128 @@ static struct {
 };
 
 void generic_spi_display_init(void) {
-    // Initialize pipeline state
-    pipeline_state.dma1_busy = false;
-    pipeline_state.dma2_busy = false;
-    pipeline_state.current_chunk = 0;
-    pipeline_state.ping_pong_state = false;
-    
-    ESP_LOGI(TAG, "Generic SPI display pipeline initialized");
+    if (debug)
+    {
+        // Debug mode: setup network connection to PC
+        // TODO: Setup WiFi and connect to visualization server on port 5555
+        ESP_LOGI(TAG, "Display driver init: DEBUG MODE (network to PC)");
+    }
+    else
+    {
+        // Production mode: setup SPI DMA to physical displays
+        pipeline_state.dma1_busy = false;
+        pipeline_state.dma2_busy = false;
+        pipeline_state.current_chunk = 0;
+        pipeline_state.ping_pong_state = false;
+        ESP_LOGI(TAG, "Display driver init: PRODUCTION MODE (SPI to GC9A01)");
+    }
 }
 
 esp_err_t generic_spi_display_act(uint8_t* front_buffer, uint8_t* back_buffer, 
                                  uint32_t chunk_size, struct EyePosition position) {
     
-    spi_transaction_t *completed_trans;
-    
-    // === CHECK DMA COMPLETIONS (non-blocking) ===
-    
-    // Check if DMA1 (PSRAM->buffer) completed
-    if (pipeline_state.dma1_busy) {
-        if (spi_device_get_trans_result(pipeline_state.psram_spi_handle, &completed_trans, 0) == ESP_OK) {
-            pipeline_state.dma1_busy = false;
-            ESP_LOGD(TAG, "DMA1 completed: PSRAM->buffer chunk %d", pipeline_state.current_chunk);
+    if (debug)
+    {
+        // === DEBUG MODE: Send buffer to PC via network ===
+        if (!network_state.connected_to_server)
+        {
+            return ESP_OK;  // Not connected yet
         }
-    }
-    
-    // Check if DMA2 (buffer->display) completed  
-    if (pipeline_state.dma2_busy) {
-        if (spi_device_get_trans_result(pipeline_state.display_spi_handle, &completed_trans, 0) == ESP_OK) {
-            pipeline_state.dma2_busy = false;
+        
+        // Determine which buffer to send (use front buffer for now)
+        if (front_buffer != NULL)
+        {
+            // Build network packet
+            typedef struct {
+                uint32_t magic;
+                uint32_t frame_number;
+                uint32_t buffer_size;
+                int16_t eye_x, eye_y, eye_z;
+                uint8_t eye_id;
+                uint8_t data[];
+            } __attribute__((packed)) display_packet_t;
             
-            // Advance to next chunk (round-robin)
-            pipeline_state.current_chunk++;
-            if (pipeline_state.current_chunk >= chunk) {
-                pipeline_state.current_chunk = 0;
+            size_t packet_size = sizeof(display_packet_t) + chunk_size;
+            display_packet_t* packet = (display_packet_t*)malloc(packet_size);
+            if (packet)
+            {
+                packet->magic = 0xDEADBEEF;
+                packet->frame_number = network_state.frames_sent;
+                packet->buffer_size = chunk_size;
+                packet->eye_x = position.x;
+                packet->eye_y = position.y;
+                packet->eye_z = position.z;
+                packet->eye_id = (position.x < 0) ? 0 : 1;  // Left=0, Right=1
+                memcpy(packet->data, front_buffer, chunk_size);
+                
+                ssize_t sent = send(network_state.socket_fd, packet, packet_size, 0);
+                if (sent == packet_size)
+                {
+                    network_state.frames_sent++;
+                    ESP_LOGV(TAG, "Sent frame to PC: %u bytes", packet_size);
+                }
+                
+                free(packet);
             }
+        }
+        
+        return ESP_OK;
+    }
+    else
+    {
+        // === PRODUCTION MODE: SPI DMA to physical displays ===
+        spi_transaction_t *completed_trans;
+        
+        // Check DMA1 (PSRAM->buffer) completion
+        if (pipeline_state.dma1_busy) {
+            if (spi_device_get_trans_result(pipeline_state.psram_spi_handle, &completed_trans, 0) == ESP_OK) {
+                pipeline_state.dma1_busy = false;
+                ESP_LOGD(TAG, "DMA1 completed: PSRAM->buffer chunk %d", pipeline_state.current_chunk);
+            }
+        }
+        
+        // Check DMA2 (buffer->display) completion  
+        if (pipeline_state.dma2_busy) {
+            if (spi_device_get_trans_result(pipeline_state.display_spi_handle, &completed_trans, 0) == ESP_OK) {
+                pipeline_state.dma2_busy = false;
+                pipeline_state.current_chunk++;
+                if (pipeline_state.current_chunk >= chunk) {
+                    pipeline_state.current_chunk = 0;
+                }
+                pipeline_state.ping_pong_state = !pipeline_state.ping_pong_state;
+                ESP_LOGD(TAG, "DMA2 completed: buffer->display");
+            }
+        }
+        
+        // Start DMA1 if available
+        if (!pipeline_state.dma1_busy) {
+            uint8_t* target_buffer = pipeline_state.ping_pong_state ? front_buffer : back_buffer;
+            uint32_t chunk_offset = pipeline_state.current_chunk * chunk_size;
             
-            // Flip ping-pong state for next frame
-            pipeline_state.ping_pong_state = !pipeline_state.ping_pong_state;
+            static spi_transaction_t dma1_trans;
+            memset(&dma1_trans, 0, sizeof(dma1_trans));
+            dma1_trans.length = chunk_size * 8;
+            dma1_trans.rx_buffer = target_buffer;
             
-            ESP_LOGD(TAG, "DMA2 completed: buffer->display, next chunk: %d", pipeline_state.current_chunk);
+            if (spi_device_queue_trans(pipeline_state.psram_spi_handle, &dma1_trans, 0) == ESP_OK) {
+                pipeline_state.dma1_busy = true;
+            }
         }
-    }
-    
-    // === START NEW TRANSFERS IF AVAILABLE ===
-    
-    // Try to start DMA1 (PSRAM->buffer) if not busy
-    if (!pipeline_state.dma1_busy) {
-        // Determine which buffer to load into (opposite of display buffer)
-        uint8_t* target_buffer = pipeline_state.ping_pong_state ? front_buffer : back_buffer;
         
-        // Calculate PSRAM source address for current chunk
-        // NOTE: psram_display_buffer would be a use_fields variable
-        uint32_t chunk_offset = pipeline_state.current_chunk * chunk_size;
-        
-        // Setup transaction (conceptual - real implementation needs proper PSRAM access)
-        static spi_transaction_t dma1_trans;
-        memset(&dma1_trans, 0, sizeof(dma1_trans));
-        dma1_trans.length = chunk_size * 8;  // Convert bytes to bits
-        // dma1_trans.tx_buffer = psram_display_buffer + chunk_offset;  // Source in PSRAM
-        dma1_trans.rx_buffer = target_buffer;  // Target internal buffer
-        
-        // Start transfer (fire and forget)
-        if (spi_device_queue_trans(pipeline_state.psram_spi_handle, &dma1_trans, 0) == ESP_OK) {
-            pipeline_state.dma1_busy = true;
-            ESP_LOGD(TAG, "DMA1 started: PSRAM->buffer chunk %d", pipeline_state.current_chunk);
+        // Start DMA2 if available
+        if (!pipeline_state.dma2_busy) {
+            uint8_t* source_buffer = pipeline_state.ping_pong_state ? back_buffer : front_buffer;
+            
+            static spi_transaction_t dma2_trans;
+            memset(&dma2_trans, 0, sizeof(dma2_trans));
+            dma2_trans.length = chunk_size * 8;
+            dma2_trans.tx_buffer = source_buffer;
+            
+            if (spi_device_queue_trans(pipeline_state.display_spi_handle, &dma2_trans, 0) == ESP_OK) {
+                pipeline_state.dma2_busy = true;
+            }
         }
-    }
-    
-    // Try to start DMA2 (buffer->display) if not busy  
-    if (!pipeline_state.dma2_busy) {
-        // Use current display buffer
-        uint8_t* source_buffer = pipeline_state.ping_pong_state ? back_buffer : front_buffer;
         
-        // Setup transaction
-        static spi_transaction_t dma2_trans;
-        memset(&dma2_trans, 0, sizeof(dma2_trans));
-        dma2_trans.length = chunk_size * 8;  // Convert bytes to bits  
-        dma2_trans.tx_buffer = source_buffer;  // Source buffer
-        
-        // Start transfer (fire and forget)
-        if (spi_device_queue_trans(pipeline_state.display_spi_handle, &dma2_trans, 0) == ESP_OK) {
-            pipeline_state.dma2_busy = true;
-            ESP_LOGD(TAG, "DMA2 started: buffer->display chunk %d", pipeline_state.current_chunk);
-        }
+        return ESP_OK;
     }
-    
-    // === EXIT IMMEDIATELY - NEVER WAIT ===
-    return ESP_OK;
 }

@@ -1,11 +1,10 @@
 {
-    "relative_filename": "config/bots/bot_families/fantasy/head/pixie_left_eye.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "pixie_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "pixie_eye"
+        "config/bots/bot_families/fantasy/head/pixie_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gmt12864.json",

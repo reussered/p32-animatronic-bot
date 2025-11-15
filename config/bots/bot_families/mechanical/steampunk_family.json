@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/mechanical/steampunk_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "STEAMPUNK",
@@ -15,11 +14,11 @@
         "component_spacing": "1.5 INCH"
     },
     "components": [
-        "steampunk_eye_left",
-        "steampunk_eye_right",
-        "steampunk_nose",
-        "steampunk_mouth",
-        "steampunk_speaker"
+        "config/bots/bot_families/steampunk/head/steampunk_eye_left.json",
+        "config/bots/bot_families/steampunk/head/steampunk_eye_right.json",
+        "config/bots/bot_families/steampunk/head/steampunk_nose.json",
+        "config/bots/bot_families/steampunk/head/steampunk_mouth.json",
+        "config/bots/bot_families/steampunk/head/steampunk_speaker.json"
     ],
     "family_mood_profile": {
         "FEAR": 15,

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/components/hardware/hardware/speaker.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "hardware_type": "I2S_SPEAKER",
@@ -101,7 +100,9 @@
     },
     "type": "UNKNOWN",
     "description": "Auto-generated component: speaker",
-    "components": ["i2s_bus"],
+    "components": [
+        "config/components/interfaces/i2s_bus.json"
+    ],
     "use_fields": {
         "chunk_count": 1
     },

@@ -12,7 +12,7 @@
     },
     "interface_id": "I2C_BUS_1",
     "components": [
-        "i2c_driver"
+        "config/components/drivers/i2c_driver.json"
     ],
     "name": "i2c_bus_1",
     "type": "INTERFACE_BUS",

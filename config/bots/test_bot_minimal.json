@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/test_bot_minimal.json",
     "version": "1.0.0.0",
     "author": "config/author.json",
     "name": "test_bot_minimal",
@@ -12,18 +11,18 @@
     "reference_point": "center",
     "units": "PIXELS",
     "components": [
-        "esp32_s3_devkit_chip",
+        "config/components/hardware/esp32_s3_devkit_chip.json",
         "system_core",
         "power_monitor",
-        "heartbeat",
-        "network_monitor",
-        "test_head",
-        "goblin_eye",
-        "gc9a01",
-        "goblin_left_eye",
-        "goblin_right_eye",
-        "goblin_head",
-        "goblin_torso"
+        "config/components/heartbeat.json",
+        "config/components/network_monitor.json",
+        "config/bots/bot_families/tests/head/test_head.json",
+        "config/bots/bot_families/goblins/head/goblin_eye.json",
+        "config/components/hardware/gc9a01.json",
+        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "eye_movement_dof": "4",

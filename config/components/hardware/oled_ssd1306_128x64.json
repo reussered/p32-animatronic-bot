@@ -1,109 +1,108 @@
 {
-    "relative_filename": "config/components/hardware/hardware/oled_ssd1306_128x64.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "display_driver": true,
-    "hardware_id": "OLED_SSD1306_128X64",
-    "description": "Monochrome OLED display for text, graphics, and simple animations",
-    "created": "2025-10-12",
-    "physical_specifications": {
-        "screen_size": "0.96 INCH",
-        "resolution": "128x64",
-        "pixel_size": "0.15x0.15 MM",
-        "active_area": "21.74x10.86 MM",
-        "module_size": "27x27x4 MM",
-        "weight": "3 G",
-        "viewing_angle": "160 DEG"
-    },
-    "electrical_requirements": {
-        "power_supply_voltage": "3.3V-5V",
-        "logic_voltage": "3.3V",
-        "interface_type": "I2C",
-        "i2c_address": "0x3C",
-        "current_consumption": "20 MA",
-        "power_consumption": "0.06 W"
-    },
-    "gpio_requirements": {
-        "sda_pin": 1,
-        "scl_pin": 1,
-        "power_pins": 1,
-        "ground_pins": 1,
-        "total_connections": 4
-    },
-    "display_specifications": {
-        "color_depth": "MONOCHROME",
-        "brightness_levels": 256,
-        "contrast_ratio": "HIGH",
-        "refresh_rate": "60 FPS",
-        "pixel_response": "INSTANT",
-        "viewing_in_dark": "EXCELLENT"
-    },
-    "capabilities": {
-        "text_display": true,
-        "graphics_drawing": true,
-        "bitmap_images": true,
-        "animations": true,
-        "fonts_supported": [
-            "6x8",
-            "8x16",
-            "12x16"
-        ],
-        "drawing_primitives": [
-            "line",
-            "rectangle",
-            "circle",
-            "bitmap"
-        ]
-    },
-    "use_cases": [
-        "status_display",
-        "text_messages",
-        "simple_graphics",
-        "menu_interface",
-        "diagnostic_info",
-        "real_time_data",
-        "small_animations",
-        "debug_output"
-    ],
-    "family_suitability": {
-        "robot": "EXCELLENT",
-        "android": "GOOD",
-        "goblin": "POOR",
-        "vampire": "MODERATE",
-        "zombie": "POOR",
-        "ghost": "MODERATE",
-        "dragon": "MODERATE",
-        "steampunk": "EXCELLENT"
-    },
-    "programming_notes": {
-        "library_support": "EXTENSIVE",
-        "framebuffer_required": true,
-        "memory_usage": "1024 BYTES",
-        "initialization_sequence": "REQUIRED",
-        "font_rendering": "SOFTWARE"
-    },
-    "mounting_requirements": {
-        "mounting_holes": 4,
-        "hole_diameter": "2.5 MM",
-        "requires_bezel": "OPTIONAL",
-        "heat_generation": "MINIMAL"
-    },
-    "software": {
-        "init_function": "ssd1306_init",
-        "act_function": "ssd1306_act",
-        "components": [
-            "config/components/drivers/i2c_bus.json"
-        ]
-    },
-    "required_interface_functions": [
-        "getBuffer",
-        "getFrameSize",
-        "getFrameRowSize"
-    ],
-    "hardware_type": "OLED_DISPLAY",
-    "name": "oled_ssd1306_128x64",
-    "type": "DISPLAY_DRIVER",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "display_driver":  true,
+    "hardware_id":  "OLED_SSD1306_128X64",
+    "description":  "Monochrome OLED display for text, graphics, and simple animations",
+    "created":  "2025-10-12",
+    "physical_specifications":  {
+                                    "screen_size":  "0.96 INCH",
+                                    "resolution":  "128x64",
+                                    "pixel_size":  "0.15x0.15 MM",
+                                    "active_area":  "21.74x10.86 MM",
+                                    "module_size":  "27x27x4 MM",
+                                    "weight":  "3 G",
+                                    "viewing_angle":  "160 DEG"
+                                },
+    "electrical_requirements":  {
+                                    "power_supply_voltage":  "3.3V-5V",
+                                    "logic_voltage":  "3.3V",
+                                    "interface_type":  "I2C",
+                                    "i2c_address":  "0x3C",
+                                    "current_consumption":  "20 MA",
+                                    "power_consumption":  "0.06 W"
+                                },
+    "gpio_requirements":  {
+                              "sda_pin":  1,
+                              "scl_pin":  1,
+                              "power_pins":  1,
+                              "ground_pins":  1,
+                              "total_connections":  4
+                          },
+    "display_specifications":  {
+                                   "color_depth":  "MONOCHROME",
+                                   "brightness_levels":  256,
+                                   "contrast_ratio":  "HIGH",
+                                   "refresh_rate":  "60 FPS",
+                                   "pixel_response":  "INSTANT",
+                                   "viewing_in_dark":  "EXCELLENT"
+                               },
+    "capabilities":  {
+                         "text_display":  true,
+                         "graphics_drawing":  true,
+                         "bitmap_images":  true,
+                         "animations":  true,
+                         "fonts_supported":  [
+                                                 "6x8",
+                                                 "8x16",
+                                                 "12x16"
+                                             ],
+                         "drawing_primitives":  [
+                                                    "line",
+                                                    "rectangle",
+                                                    "circle",
+                                                    "bitmap"
+                                                ]
+                     },
+    "use_cases":  [
+                      "status_display",
+                      "text_messages",
+                      "simple_graphics",
+                      "menu_interface",
+                      "diagnostic_info",
+                      "real_time_data",
+                      "small_animations",
+                      "debug_output"
+                  ],
+    "family_suitability":  {
+                               "robot":  "EXCELLENT",
+                               "android":  "GOOD",
+                               "goblin":  "POOR",
+                               "vampire":  "MODERATE",
+                               "zombie":  "POOR",
+                               "ghost":  "MODERATE",
+                               "dragon":  "MODERATE",
+                               "steampunk":  "EXCELLENT"
+                           },
+    "programming_notes":  {
+                              "library_support":  "EXTENSIVE",
+                              "framebuffer_required":  true,
+                              "memory_usage":  "1024 BYTES",
+                              "initialization_sequence":  "REQUIRED",
+                              "font_rendering":  "SOFTWARE"
+                          },
+    "mounting_requirements":  {
+                                  "mounting_holes":  4,
+                                  "hole_diameter":  "2.5 MM",
+                                  "requires_bezel":  "OPTIONAL",
+                                  "heat_generation":  "MINIMAL"
+                              },
+    "software":  {
+                     "init_function":  "ssd1306_init",
+                     "act_function":  "ssd1306_act",
+                     "components":  [
+                                        "config/components/drivers/i2c_bus.json"
+                                    ]
+                 },
+    "required_interface_functions":  [
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
+    "hardware_type":  "OLED_DISPLAY",
+    "name":  "oled_ssd1306_128x64",
+    "type":  "DISPLAY_DRIVER",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

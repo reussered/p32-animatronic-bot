@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_spirit_runes.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_spirit_runes",
@@ -7,7 +6,7 @@
     "description": "Glowing mystical runes for shaman goblin spiritual communication",
     "created": "2025-10-12",
     "components": [
-        "led_matrix_small"
+        "config/components/hardware/led_matrix_small.json"
     ],
     "interface_reference": "config/components/interfaces/spi_device_3.json",
     "coordinate_system": "skull_3d",

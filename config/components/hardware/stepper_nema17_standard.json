@@ -1,6 +1,6 @@
 {
     "name": "stepper_nema17_standard",
-    "type": "stepper_motor",
+    "type": "STEPPER_MOTOR",
     "category": "standard",
     "nema_size": 17,
     "description": "NEMA17 Standard - workhorse motor for eye pan, general articulation",

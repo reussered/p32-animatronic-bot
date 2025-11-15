@@ -1,119 +1,118 @@
 {
-    "relative_filename": "assets/animations/goblin/angry_stare.json",
-    "animation_name": "goblin_angry_stare",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "description": "Angry stare with narrowed eyes and slight mouth downturn",
-    "duration_ms": 2000,
-    "loop": true,
-    "mood_trigger": "ANGER",
-    "components": [
-        {
-            "component_id": "goblin_eye_left",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.6,
-                        "eye_openness": 0.4,
-                        "color": "#ff4444",
-                        "expression": "angry_narrow"
-                    }
-                },
-                {
-                    "time_ms": 1000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.8,
-                        "eye_openness": 0.3,
-                        "color": "#ff2222",
-                        "expression": "angry_narrow"
-                    }
-                },
-                {
-                    "time_ms": 2000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.6,
-                        "eye_openness": 0.4,
-                        "color": "#ff4444",
-                        "expression": "angry_narrow"
-                    }
-                }
-            ]
-        },
-        {
-            "component_id": "goblin_eye_right",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.6,
-                        "eye_openness": 0.4,
-                        "color": "#ff4444",
-                        "expression": "angry_narrow"
-                    }
-                },
-                {
-                    "time_ms": 1000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.8,
-                        "eye_openness": 0.3,
-                        "color": "#ff2222",
-                        "expression": "angry_narrow"
-                    }
-                },
-                {
-                    "time_ms": 2000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.6,
-                        "eye_openness": 0.4,
-                        "color": "#ff4444",
-                        "expression": "angry_narrow"
-                    }
-                }
-            ]
-        },
-        {
-            "component_id": "goblin_mouth",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "mouth_expression",
-                        "mouth_shape": "frown",
-                        "teeth_visible": true,
-                        "color": "#882222",
-                        "expression": "angry"
-                    }
-                },
-                {
-                    "time_ms": 1000,
-                    "display_content": {
-                        "type": "mouth_expression",
-                        "mouth_shape": "snarl",
-                        "teeth_visible": true,
-                        "color": "#aa1111",
-                        "expression": "threatening"
-                    }
-                },
-                {
-                    "time_ms": 2000,
-                    "display_content": {
-                        "type": "mouth_expression",
-                        "mouth_shape": "frown",
-                        "teeth_visible": true,
-                        "color": "#882222",
-                        "expression": "angry"
-                    }
-                }
-            ]
-        }
-    ],
-    "type": "UNKNOWN",
-    "name": "angry_stare"
+    "animation_name":  "goblin_angry_stare",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "description":  "Angry stare with narrowed eyes and slight mouth downturn",
+    "duration_ms":  2000,
+    "loop":  true,
+    "mood_trigger":  "ANGER",
+    "components":  [
+                       {
+                           "component_id":  "goblin_eye_left",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.6,
+                                                                         "eye_openness":  0.4,
+                                                                         "color":  "#ff4444",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  1000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.8,
+                                                                         "eye_openness":  0.3,
+                                                                         "color":  "#ff2222",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  2000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.6,
+                                                                         "eye_openness":  0.4,
+                                                                         "color":  "#ff4444",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             }
+                                         ]
+                       },
+                       {
+                           "component_id":  "goblin_eye_right",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.6,
+                                                                         "eye_openness":  0.4,
+                                                                         "color":  "#ff4444",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  1000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.8,
+                                                                         "eye_openness":  0.3,
+                                                                         "color":  "#ff2222",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  2000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.6,
+                                                                         "eye_openness":  0.4,
+                                                                         "color":  "#ff4444",
+                                                                         "expression":  "angry_narrow"
+                                                                     }
+                                             }
+                                         ]
+                       },
+                       {
+                           "component_id":  "goblin_mouth",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "mouth_expression",
+                                                                         "mouth_shape":  "frown",
+                                                                         "teeth_visible":  true,
+                                                                         "color":  "#882222",
+                                                                         "expression":  "angry"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  1000,
+                                                 "display_content":  {
+                                                                         "type":  "mouth_expression",
+                                                                         "mouth_shape":  "snarl",
+                                                                         "teeth_visible":  true,
+                                                                         "color":  "#aa1111",
+                                                                         "expression":  "threatening"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  2000,
+                                                 "display_content":  {
+                                                                         "type":  "mouth_expression",
+                                                                         "mouth_shape":  "frown",
+                                                                         "teeth_visible":  true,
+                                                                         "color":  "#882222",
+                                                                         "expression":  "angry"
+                                                                     }
+                                             }
+                                         ]
+                       }
+                   ],
+    "type":  "UNKNOWN",
+    "name":  "angry_stare"
 }

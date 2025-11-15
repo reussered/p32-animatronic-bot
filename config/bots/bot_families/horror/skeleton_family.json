@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/horror/skeleton_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_name": "SKELETON",
@@ -81,9 +80,9 @@
         "bone_prominence": "high_definition"
     },
     "components": [
-        "skeleton_jaw_actuator",
-        "skeleton_bone_structure",
-        "skeleton_joint_mechanism"
+        "config/bots/bot_families/undead/head/skeleton_jaw_actuator.json",
+        "config/bots/bot_families/undead/head/skeleton_bone_structure.json",
+        "config/bots/bot_families/undead/head/skeleton_joint_mechanism.json"
     ],
     "skeletal_features": {
         "bone_mechanics": {

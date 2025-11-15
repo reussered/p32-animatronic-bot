@@ -60,7 +60,6 @@ function New-CreatureDefinition($Category, $Family, $Species) {
     $coordinateSystem = if ($Category -eq "aquatic") { "planar_2d" } else { "skull_3d" }
     
     $creature = @{
-        "relative_filename" = "config/bots/bot_families/$Category/$Family/${creatureName}.json"
         "version" = "1.0.0"
         "author" = "config/author.json"
         "bot_type" = $creatureName.ToUpper()

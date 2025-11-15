@@ -17,7 +17,7 @@
         ]
     },
     "components": [
-        "pwm_driver"
+        "config/components/drivers/pwm_driver.json"
     ],
     "software": {
         "init_function": "pwm_bus_init",

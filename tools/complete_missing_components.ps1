@@ -46,7 +46,6 @@ Write-Info "="*70
 # Extended Hardware Component Definitions
 $HardwareDefinitions = @{
     "hc_sr04_sensor.json" = @{
-        relative_filename = "components/hardware/hc_sr04_sensor.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "hc_sr04_sensor"
@@ -72,7 +71,6 @@ $HardwareDefinitions = @{
     }
     
     "esp32_s3_devkit.json" = @{
-        relative_filename = "components/hardware/esp32_s3_devkit.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "esp32_s3_devkit"
@@ -100,7 +98,6 @@ $HardwareDefinitions = @{
     }
     
     "esp32_s3_wifi.json" = @{
-        relative_filename = "components/hardware/esp32_s3_wifi.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "esp32_s3_wifi"
@@ -126,7 +123,6 @@ $HardwareDefinitions = @{
     }
     
     "mg996r_servo.json" = @{
-        relative_filename = "components/hardware/mg996r_servo.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "mg996r_servo"
@@ -152,7 +148,6 @@ $HardwareDefinitions = @{
     }
     
     "directional_microphone.json" = @{
-        relative_filename = "components/hardware/directional_microphone.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "directional_microphone"
@@ -178,7 +173,6 @@ $HardwareDefinitions = @{
     }
     
     "mechanical_actuator.json" = @{
-        relative_filename = "components/hardware/mechanical_actuator.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "mechanical_actuator"
@@ -204,7 +198,6 @@ $HardwareDefinitions = @{
     }
     
     "led_matrix_small.json" = @{
-        relative_filename = "components/hardware/led_matrix_small.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "led_matrix_small"
@@ -230,7 +223,6 @@ $HardwareDefinitions = @{
     }
     
     "ws2812b_strip.json" = @{
-        relative_filename = "components/hardware/ws2812b_strip.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "ws2812b_strip"
@@ -256,7 +248,6 @@ $HardwareDefinitions = @{
     }
     
     "aesthetic_overlay.json" = @{
-        relative_filename = "components/hardware/aesthetic_overlay.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "aesthetic_overlay"
@@ -282,7 +273,6 @@ $HardwareDefinitions = @{
     }
     
     "power_management_unit.json" = @{
-        relative_filename = "components/hardware/power_management_unit.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "power_management_unit"
@@ -311,7 +301,6 @@ $HardwareDefinitions = @{
 # Complete Creature Components Definitions  
 $CreatureComponents = @{
     "goblin_eye.json" = @{
-        relative_filename = "components/creature_specific/goblin_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "goblin_eye"
@@ -341,7 +330,6 @@ $CreatureComponents = @{
     }
     
     "goblin_ear.json" = @{
-        relative_filename = "components/creature_specific/goblin_ear.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "goblin_ear"
@@ -371,7 +359,6 @@ $CreatureComponents = @{
     }
     
     "cat_eye.json" = @{
-        relative_filename = "components/creature_specific/cat_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "cat_eye"
@@ -401,7 +388,6 @@ $CreatureComponents = @{
     }
     
     "bear_eye.json" = @{
-        relative_filename = "components/creature_specific/bear_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "bear_eye"
@@ -431,7 +417,6 @@ $CreatureComponents = @{
     }
     
     "android_eye.json" = @{
-        relative_filename = "components/creature_specific/android_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "android_eye"
@@ -461,7 +446,6 @@ $CreatureComponents = @{
     }
     
     "cyclops_eye.json" = @{
-        relative_filename = "components/creature_specific/cyclops_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "cyclops_eye"
@@ -491,7 +475,6 @@ $CreatureComponents = @{
     }
     
     "pixie_eye.json" = @{
-        relative_filename = "components/creature_specific/pixie_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "pixie_eye"
@@ -521,7 +504,6 @@ $CreatureComponents = @{
     }
     
     "robot_eye.json" = @{
-        relative_filename = "components/creature_specific/robot_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "robot_eye"
@@ -551,7 +533,6 @@ $CreatureComponents = @{
     }
     
     "zombie_eye.json" = @{
-        relative_filename = "components/creature_specific/zombie_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "zombie_eye"
@@ -585,7 +566,7 @@ $CreatureComponents = @{
 $createdHardware = 0
 foreach ($filename in $HardwareDefinitions.Keys) {
     $definition = $HardwareDefinitions[$filename]
-    $fullPath = Join-Path $ProjectRoot $definition.relative_filename
+    $fullPath = Join-Path $ProjectRoot (Join-Path "components/hardware" $filename)
     
     if (-not (Test-Path $fullPath)) {
         if ($Verbose) { Write-Progress "Creating hardware component: $filename" }
@@ -596,7 +577,7 @@ foreach ($filename in $HardwareDefinitions.Keys) {
                 New-Item -ItemType Directory -Path $directory -Force | Out-Null
             }
             
-            $definition | ConvertTo-Json -Depth 20 | Set-Content -Path $fullPath -Encoding UTF8
+            $definition | ConvertTo-Json -Depth 99 | Set-Content -Path $fullPath -Encoding ASCII
         }
         $createdHardware++
     }
@@ -606,7 +587,7 @@ foreach ($filename in $HardwareDefinitions.Keys) {
 $createdCreatures = 0
 foreach ($filename in $CreatureComponents.Keys) {
     $definition = $CreatureComponents[$filename]
-    $fullPath = Join-Path $ProjectRoot $definition.relative_filename
+    $fullPath = Join-Path $ProjectRoot (Join-Path "components/creature_specific" $filename)
     
     if (-not (Test-Path $fullPath)) {
         if ($Verbose) { Write-Progress "Creating creature component: $filename" }
@@ -617,7 +598,7 @@ foreach ($filename in $CreatureComponents.Keys) {
                 New-Item -ItemType Directory -Path $directory -Force | Out-Null
             }
             
-            $definition | ConvertTo-Json -Depth 20 | Set-Content -Path $fullPath -Encoding UTF8
+            $definition | ConvertTo-Json -Depth 99 | Set-Content -Path $fullPath -Encoding ASCII
         }
         $createdCreatures++
     }

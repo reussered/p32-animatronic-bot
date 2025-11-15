@@ -1,54 +1,53 @@
 {
-    "relative_filename": "config/components/templates/mood_calculator_template.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "mood_calculator_template",
-    "subsystem": "HEAD",
-    "type": "TEMPLATE",
-    "description": "Generic mood calculator template working with any color schema (RGB565, RGB666, RGB888)",
-    "created": "2025-11-06",
-    "purpose": "Provides template-based color modification system that adapts to display color format at compile time",
-    "template_features": {
-        "color_schema_agnostic": "Works with RGB565, RGB666, RGB888, etc.",
-        "mood_states": [
-            "ANGER",
-            "CURIOSITY",
-            "FEAR",
-            "HAPPINESS",
-            "SADNESS",
-            "NEUTRAL"
-        ],
-        "effects": [
-            "Color delta shifts",
-            "Glow overlay",
-            "Desaturation",
-            "Warmth (red/yellow shift)",
-            "Coolness (blue/cyan shift)"
-        ]
-    },
-    "instantiation": {
-        "rgb565": "MoodCalcRGB565 mood_calc;",
-        "rgb666": "MoodCalcRGB666 mood_calc;",
-        "rgb888": "MoodCalcRGB888 mood_calc;"
-    },
-    "usage": {
-        "initialization": "mood_calc.initializeDefaultMoodPalette();",
-        "set_mood": "mood_calc.setMood(ANGER, 0.8f);",
-        "apply": "Pixel_RGB565 modified = mood_calc.applyMoodDelta(base_color);",
-        "customize": "MoodColorDelta custom = {...}; mood_calc.setMoodDelta(FEAR, custom);"
-    },
-    "memory_usage": "~200 bytes for calculator instance (color deltas lookup table)",
-    "performance": "O(1) color lookup, single pixel processing ~50 CPU cycles on ESP32",
-    "notes": [
-        "Template instantiation happens at compile-time, no runtime overhead",
-        "Each mood state has customizable delta parameters",
-        "Supports intensity scaling (0.0 to 1.0) for gradual mood transitions",
-        "Color clamping prevents overflow/underflow"
-    ],
-    "prototype_status": "template_ready",
-    "tested": false,
-    "header_file": "config/components/templates/mood_calculator_template.hpp",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "mood_calculator_template",
+    "subsystem":  "HEAD",
+    "type":  "TEMPLATE",
+    "description":  "Generic mood calculator template working with any color schema (RGB565, RGB666, RGB888)",
+    "created":  "2025-11-06",
+    "purpose":  "Provides template-based color modification system that adapts to display color format at compile time",
+    "template_features":  {
+                              "color_schema_agnostic":  "Works with RGB565, RGB666, RGB888, etc.",
+                              "mood_states":  [
+                                                  "ANGER",
+                                                  "CURIOSITY",
+                                                  "FEAR",
+                                                  "HAPPINESS",
+                                                  "SADNESS",
+                                                  "NEUTRAL"
+                                              ],
+                              "effects":  [
+                                              "Color delta shifts",
+                                              "Glow overlay",
+                                              "Desaturation",
+                                              "Warmth (red/yellow shift)",
+                                              "Coolness (blue/cyan shift)"
+                                          ]
+                          },
+    "instantiation":  {
+                          "rgb565":  "MoodCalcRGB565 mood_calc;",
+                          "rgb666":  "MoodCalcRGB666 mood_calc;",
+                          "rgb888":  "MoodCalcRGB888 mood_calc;"
+                      },
+    "usage":  {
+                  "initialization":  "mood_calc.initializeDefaultMoodPalette();",
+                  "set_mood":  "mood_calc.setMood(ANGER, 0.8f);",
+                  "apply":  "Pixel_RGB565 modified = mood_calc.applyMoodDelta(base_color);",
+                  "customize":  "MoodColorDelta custom = {...}; mood_calc.setMoodDelta(FEAR, custom);"
+              },
+    "memory_usage":  "~200 bytes for calculator instance (color deltas lookup table)",
+    "performance":  "O(1) color lookup, single pixel processing ~50 CPU cycles on ESP32",
+    "notes":  [
+                  "Template instantiation happens at compile-time, no runtime overhead",
+                  "Each mood state has customizable delta parameters",
+                  "Supports intensity scaling (0.0 to 1.0) for gradual mood transitions",
+                  "Color clamping prevents overflow/underflow"
+              ],
+    "prototype_status":  "template_ready",
+    "tested":  false,
+    "header_file":  "config/components/templates/mood_calculator_template.hpp",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

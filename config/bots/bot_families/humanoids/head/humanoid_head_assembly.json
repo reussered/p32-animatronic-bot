@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/humanoids/head/humanoid_head_assembly.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "humanoid_head_assembly",
@@ -14,7 +13,7 @@
         "scaling_applies": true
     },
     "components": [
-        "head_structural_assembly"
+        "config/components/hardware/head_structural_assembly.json"
     ],
     "facial_components": [
         "config/bots/bot_families/goblins/head/goblin_left_eye.json",

@@ -1,158 +1,157 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/robot_combat_unit_001.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "bot_type": "ROBOT_COMBAT_UNIT_001",
-    "family_reference": "config/bots/bot_families/mechanical/robot_family.json",
-    "subfamily": "combat_robot",
-    "description": "Military-grade combat robot with weapon simulation systems and tactical behavior patterns",
-    "created": "2025-10-12",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "baseline_dimensions": {
-        "eye_spacing": "2.8 INCH",
-        "compression_factor": 0.7,
-        "skull_scale": 1.3
-    },
-    "mood_profile": {
-        "FEAR": 0,
-        "ANGER": 25,
-        "IRRITATION": 30,
-        "HAPPINESS": 10,
-        "CONTENTMENT": 35,
-        "HUNGER": 0,
-        "CURIOSITY": 15,
-        "AFFECTION": 0
-    },
-    "behavior_config": {
-        "threat_response_enabled": true,
-        "auto_sleep_timeout_seconds": 3600,
-        "interaction_range_cm": 400,
-        "aggressive_threshold": 35,
-        "movement_style": "tactical_precise",
-        "attention_span_seconds": 900,
-        "combat_readiness": "always_alert"
-    },
-    "audio_profile": {
-        "primary_sounds": [
-            "servo_whirring",
-            "system_alerts",
-            "tactical_beeping",
-            "power_cycling"
-        ],
-        "threat_sounds": [
-            "weapon_charging",
-            "targeting_lock",
-            "alarm_sirens",
-            "plasma_discharge"
-        ],
-        "ambient_sounds": [
-            "cooling_fans",
-            "electrical_humming",
-            "data_processing",
-            "mechanical_movement"
-        ],
-        "volume_range": [
-            45,
-            90
-        ],
-        "frequency_preference": "mid_electronic",
-        "directional_audio": true
-    },
-    "aesthetic_customizations": {
-        "armor_configuration": "heavy_plated",
-        "weapon_hardpoints": [
-            "shoulder_mounted",
-            "arm_integrated",
-            "modular_attachments"
-        ],
-        "color_variations": [
-            "military_olive",
-            "urban_gray",
-            "desert_tan",
-            "stealth_black"
-        ],
-        "texture_details": [
-            "battle_scarred",
-            "armor_plating",
-            "weapon_ports",
-            "sensor_arrays"
-        ]
-    },
-    "construction_preference": "hard_shell",
-    "prototype_status": "design_complete",
-    "tested": false,
-    "notes": [
-        "Combat robot variant designed for military simulation and tactical demonstration",
-        "Specialized components emphasize weapon systems, defensive capabilities, and tactical awareness",
-        "All weapon systems are simulation-only with safety interlocks and non-harmful implementations",
-        "Designed for training environments, gaming applications, and military technology demonstration"
-    ],
-    "name": "robot_combat_unit_001",
-    "type": "UNKNOWN",
-    "subsystems": {
-        "laser_targeting_system": {
-            "description": "Red laser dot projection system with servo-controlled pointing for target acquisition",
-            "implementation": "Class 1 laser diode with precision servo gimbal mount, eye-safe operation with automatic shutoff",
-            "targeting_modes": [
-                "single_target_lock",
-                "area_sweep",
-                "threat_assessment",
-                "friendly_identification"
-            ]
-        },
-        "plasma_cannon_simulator": {
-            "description": "LED array and sound effects system that simulates futuristic energy weapon discharge",
-            "implementation": "High-intensity LED strip with capacitor discharge effects and synchronized audio for realistic plasma burst simulation",
-            "firing_modes": [
-                "single_shot",
-                "burst_fire",
-                "sustained_beam",
-                "overcharge_blast"
-            ]
-        },
-        "armor_plating_actuators": {
-            "description": "Servo-driven armor panels that can extend, retract, and angle for defensive positioning",
-            "implementation": "Multiple servo motors driving sliding and rotating armor segments with position feedback sensors",
-            "defensive_configurations": [
-                "full_protection",
-                "combat_stance",
-                "mobility_mode",
-                "stealth_profile"
-            ]
-        },
-        "tactical_display_array": {
-            "description": "LED matrix system displaying tactical information, threat levels, and status indicators",
-            "implementation": "Addressable RGB LED matrices with real-time data display capability and tactical symbology",
-            "display_modes": [
-                "threat_assessment",
-                "tactical_overlay",
-                "system_status",
-                "mission_parameters"
-            ]
-        },
-        "electronic_warfare_suite": {
-            "description": "RF signal analysis and jamming system for detecting and disrupting electronic threats",
-            "implementation": "Software-defined radio module with signal analysis algorithms and controlled interference generation",
-            "capabilities": [
-                "signal_detection",
-                "frequency_analysis",
-                "jamming_simulation",
-                "communication_intercept"
-            ]
-        },
-        "ballistic_protection_simulation": {
-            "description": "Impact detection system with reactive armor sound effects and damage assessment",
-            "implementation": "Accelerometer array with audio feedback system simulating projectile impacts and armor responses",
-            "damage_modeling": [
-                "impact_detection",
-                "penetration_assessment",
-                "armor_effectiveness",
-                "system_degradation"
-            ]
-        }
-    },
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "ROBOT_COMBAT_UNIT_001",
+    "family_reference":  "config/bots/bot_families/mechanical/robot_family.json",
+    "subfamily":  "combat_robot",
+    "description":  "Military-grade combat robot with weapon simulation systems and tactical behavior patterns",
+    "created":  "2025-10-12",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "2.8 INCH",
+                                "compression_factor":  0.7,
+                                "skull_scale":  1.3
+                            },
+    "mood_profile":  {
+                         "FEAR":  0,
+                         "ANGER":  25,
+                         "IRRITATION":  30,
+                         "HAPPINESS":  10,
+                         "CONTENTMENT":  35,
+                         "HUNGER":  0,
+                         "CURIOSITY":  15,
+                         "AFFECTION":  0
+                     },
+    "behavior_config":  {
+                            "threat_response_enabled":  true,
+                            "auto_sleep_timeout_seconds":  3600,
+                            "interaction_range_cm":  400,
+                            "aggressive_threshold":  35,
+                            "movement_style":  "tactical_precise",
+                            "attention_span_seconds":  900,
+                            "combat_readiness":  "always_alert"
+                        },
+    "audio_profile":  {
+                          "primary_sounds":  [
+                                                 "servo_whirring",
+                                                 "system_alerts",
+                                                 "tactical_beeping",
+                                                 "power_cycling"
+                                             ],
+                          "threat_sounds":  [
+                                                "weapon_charging",
+                                                "targeting_lock",
+                                                "alarm_sirens",
+                                                "plasma_discharge"
+                                            ],
+                          "ambient_sounds":  [
+                                                 "cooling_fans",
+                                                 "electrical_humming",
+                                                 "data_processing",
+                                                 "mechanical_movement"
+                                             ],
+                          "volume_range":  [
+                                               45,
+                                               90
+                                           ],
+                          "frequency_preference":  "mid_electronic",
+                          "directional_audio":  true
+                      },
+    "aesthetic_customizations":  {
+                                     "armor_configuration":  "heavy_plated",
+                                     "weapon_hardpoints":  [
+                                                               "shoulder_mounted",
+                                                               "arm_integrated",
+                                                               "modular_attachments"
+                                                           ],
+                                     "color_variations":  [
+                                                              "military_olive",
+                                                              "urban_gray",
+                                                              "desert_tan",
+                                                              "stealth_black"
+                                                          ],
+                                     "texture_details":  [
+                                                             "battle_scarred",
+                                                             "armor_plating",
+                                                             "weapon_ports",
+                                                             "sensor_arrays"
+                                                         ]
+                                 },
+    "construction_preference":  "hard_shell",
+    "prototype_status":  "design_complete",
+    "tested":  false,
+    "notes":  [
+                  "Combat robot variant designed for military simulation and tactical demonstration",
+                  "Specialized components emphasize weapon systems, defensive capabilities, and tactical awareness",
+                  "All weapon systems are simulation-only with safety interlocks and non-harmful implementations",
+                  "Designed for training environments, gaming applications, and military technology demonstration"
+              ],
+    "name":  "robot_combat_unit_001",
+    "type":  "UNKNOWN",
+    "subsystems":  {
+                       "laser_targeting_system":  {
+                                                      "description":  "Red laser dot projection system with servo-controlled pointing for target acquisition",
+                                                      "implementation":  "Class 1 laser diode with precision servo gimbal mount, eye-safe operation with automatic shutoff",
+                                                      "targeting_modes":  [
+                                                                              "single_target_lock",
+                                                                              "area_sweep",
+                                                                              "threat_assessment",
+                                                                              "friendly_identification"
+                                                                          ]
+                                                  },
+                       "plasma_cannon_simulator":  {
+                                                       "description":  "LED array and sound effects system that simulates futuristic energy weapon discharge",
+                                                       "implementation":  "High-intensity LED strip with capacitor discharge effects and synchronized audio for realistic plasma burst simulation",
+                                                       "firing_modes":  [
+                                                                            "single_shot",
+                                                                            "burst_fire",
+                                                                            "sustained_beam",
+                                                                            "overcharge_blast"
+                                                                        ]
+                                                   },
+                       "armor_plating_actuators":  {
+                                                       "description":  "Servo-driven armor panels that can extend, retract, and angle for defensive positioning",
+                                                       "implementation":  "Multiple servo motors driving sliding and rotating armor segments with position feedback sensors",
+                                                       "defensive_configurations":  [
+                                                                                        "full_protection",
+                                                                                        "combat_stance",
+                                                                                        "mobility_mode",
+                                                                                        "stealth_profile"
+                                                                                    ]
+                                                   },
+                       "tactical_display_array":  {
+                                                      "description":  "LED matrix system displaying tactical information, threat levels, and status indicators",
+                                                      "implementation":  "Addressable RGB LED matrices with real-time data display capability and tactical symbology",
+                                                      "display_modes":  [
+                                                                            "threat_assessment",
+                                                                            "tactical_overlay",
+                                                                            "system_status",
+                                                                            "mission_parameters"
+                                                                        ]
+                                                  },
+                       "electronic_warfare_suite":  {
+                                                        "description":  "RF signal analysis and jamming system for detecting and disrupting electronic threats",
+                                                        "implementation":  "Software-defined radio module with signal analysis algorithms and controlled interference generation",
+                                                        "capabilities":  [
+                                                                             "signal_detection",
+                                                                             "frequency_analysis",
+                                                                             "jamming_simulation",
+                                                                             "communication_intercept"
+                                                                         ]
+                                                    },
+                       "ballistic_protection_simulation":  {
+                                                               "description":  "Impact detection system with reactive armor sound effects and damage assessment",
+                                                               "implementation":  "Accelerometer array with audio feedback system simulating projectile impacts and armor responses",
+                                                               "damage_modeling":  [
+                                                                                       "impact_detection",
+                                                                                       "penetration_assessment",
+                                                                                       "armor_effectiveness",
+                                                                                       "system_degradation"
+                                                                                   ]
+                                                           }
+                   },
+    "timing":  {
+                   "hitCount":  1
+               }
 }

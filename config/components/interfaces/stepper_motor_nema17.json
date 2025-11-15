@@ -1,200 +1,199 @@
 {
-    "relative_filename": "config/components/interfaces/stepper_motor_nema17.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "STEPPER_MOTOR_NEMA17",
-    "interface_type": "STEPPER_MOTOR_CONTROLLER",
-    "description": "NEMA17 stepper motor interface with Step/Dir/Enable control pattern",
-    "hardware_specifications": {
-        "motor_type": "NEMA17_BIPOLAR",
-        "step_angle": "1.8_DEGREES",
-        "steps_per_revolution": 200,
-        "microstepping_support": true,
-        "max_microsteps": 256,
-        "torque_rating": "4.4_KG_CM",
-        "voltage_rating": "12V_24V",
-        "current_rating": "1.7A_MAX"
-    },
-    "pin_requirements": {
-        "step_pin": {
-            "function": "step_pulse",
-            "generic_name": "step",
-            "description": "Rising edge triggers one step",
-            "voltage_level": "3.3V_5V_TOLERANT",
-            "frequency_range": "1Hz_to_50KHz"
-        },
-        "direction_pin": {
-            "function": "rotation_direction",
-            "generic_name": "direction",
-            "description": "High/Low sets rotation direction",
-            "voltage_level": "3.3V_5V_TOLERANT",
-            "setup_time": "1_MICROSECOND_MIN"
-        },
-        "enable_pin": {
-            "function": "motor_enable",
-            "generic_name": "enable",
-            "description": "Low enables motor, High disables/freewheel",
-            "voltage_level": "3.3V_5V_TOLERANT",
-            "default_state": "HIGH_DISABLED"
-        }
-    },
-    "optional_pins": {
-        "fault_pin": {
-            "function": "fault_detection",
-            "generic_name": "fault",
-            "description": "Driver fault indication",
-            "direction": "INPUT",
-            "active_state": "LOW"
-        },
-        "sleep_pin": {
-            "function": "low_power_mode",
-            "generic_name": "sleep",
-            "description": "Sleep mode control",
-            "voltage_level": "3.3V_5V_TOLERANT",
-            "default_state": "HIGH_AWAKE"
-        }
-    },
-    "driver_compatibility": {
-        "a4988": {
-            "microstep_pins": [
-                "ms1",
-                "ms2",
-                "ms3"
-            ],
-            "microstep_resolution": [
-                1,
-                2,
-                4,
-                8,
-                16
-            ],
-            "current_control": "POTENTIOMETER",
-            "thermal_protection": true
-        },
-        "drv8825": {
-            "microstep_pins": [
-                "mode0",
-                "mode1",
-                "mode2"
-            ],
-            "microstep_resolution": [
-                1,
-                2,
-                4,
-                8,
-                16,
-                32
-            ],
-            "current_control": "POTENTIOMETER",
-            "thermal_protection": true
-        },
-        "tmc2208": {
-            "uart_interface": true,
-            "microstep_resolution": [
-                1,
-                2,
-                4,
-                8,
-                16,
-                32,
-                64,
-                128,
-                256
-            ],
-            "current_control": "DIGITAL_UART",
-            "stealthchop": true,
-            "stallguard": false
-        },
-        "tmc2209": {
-            "uart_interface": true,
-            "microstep_resolution": [
-                1,
-                2,
-                4,
-                8,
-                16,
-                32,
-                64,
-                128,
-                256
-            ],
-            "current_control": "DIGITAL_UART",
-            "stealthchop": true,
-            "stallguard": true,
-            "sensorless_homing": true
-        }
-    },
-    "timing_specifications": {
-        "minimum_step_pulse": "2_MICROSECONDS",
-        "minimum_step_interval": "20_MICROSECONDS",
-        "direction_setup_time": "1_MICROSECOND",
-        "enable_to_step_delay": "1_MILLISECOND"
-    },
-    "manufacturer_pin_mappings": {
-        "generic": {
-            "step": [
-                "STEP",
-                "PUL",
-                "CLK"
-            ],
-            "direction": [
-                "DIR",
-                "CW_CCW",
-                "DIRECTION"
-            ],
-            "enable": [
-                "EN",
-                "ENABLE",
-                "ENA"
-            ]
-        },
-        "pololu": {
-            "step": [
-                "STEP"
-            ],
-            "direction": [
-                "DIR"
-            ],
-            "enable": [
-                "EN"
-            ]
-        },
-        "bigtreetech": {
-            "step": [
-                "STEP"
-            ],
-            "direction": [
-                "DIR"
-            ],
-            "enable": [
-                "EN"
-            ]
-        }
-    },
-    "application_examples": {
-        "shoulder_joint": {
-            "gearing_ratio": "50:1",
-            "max_speed": "30_DEGREES_PER_SECOND",
-            "positioning_accuracy": "0.18_DEGREES",
-            "use_case": "HIGH_TORQUE_PRECISE_POSITIONING"
-        },
-        "elbow_joint": {
-            "gearing_ratio": "50:1",
-            "max_speed": "45_DEGREES_PER_SECOND",
-            "positioning_accuracy": "0.18_DEGREES",
-            "use_case": "MODERATE_TORQUE_SMOOTH_MOTION"
-        },
-        "locomotion_drive": {
-            "gearing_ratio": "10:1",
-            "max_speed": "200_RPM",
-            "positioning_accuracy": "1.8_DEGREES",
-            "use_case": "MOBILE_PLATFORM_MOVEMENT"
-        }
-    },
-    "name": "stepper_motor_nema17",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "STEPPER_MOTOR_NEMA17",
+    "interface_type":  "STEPPER_MOTOR_CONTROLLER",
+    "description":  "NEMA17 stepper motor interface with Step/Dir/Enable control pattern",
+    "hardware_specifications":  {
+                                    "motor_type":  "NEMA17_BIPOLAR",
+                                    "step_angle":  "1.8_DEGREES",
+                                    "steps_per_revolution":  200,
+                                    "microstepping_support":  true,
+                                    "max_microsteps":  256,
+                                    "torque_rating":  "4.4_KG_CM",
+                                    "voltage_rating":  "12V_24V",
+                                    "current_rating":  "1.7A_MAX"
+                                },
+    "pin_requirements":  {
+                             "step_pin":  {
+                                              "function":  "step_pulse",
+                                              "generic_name":  "step",
+                                              "description":  "Rising edge triggers one step",
+                                              "voltage_level":  "3.3V_5V_TOLERANT",
+                                              "frequency_range":  "1Hz_to_50KHz"
+                                          },
+                             "direction_pin":  {
+                                                   "function":  "rotation_direction",
+                                                   "generic_name":  "direction",
+                                                   "description":  "High/Low sets rotation direction",
+                                                   "voltage_level":  "3.3V_5V_TOLERANT",
+                                                   "setup_time":  "1_MICROSECOND_MIN"
+                                               },
+                             "enable_pin":  {
+                                                "function":  "motor_enable",
+                                                "generic_name":  "enable",
+                                                "description":  "Low enables motor, High disables/freewheel",
+                                                "voltage_level":  "3.3V_5V_TOLERANT",
+                                                "default_state":  "HIGH_DISABLED"
+                                            }
+                         },
+    "optional_pins":  {
+                          "fault_pin":  {
+                                            "function":  "fault_detection",
+                                            "generic_name":  "fault",
+                                            "description":  "Driver fault indication",
+                                            "direction":  "INPUT",
+                                            "active_state":  "LOW"
+                                        },
+                          "sleep_pin":  {
+                                            "function":  "low_power_mode",
+                                            "generic_name":  "sleep",
+                                            "description":  "Sleep mode control",
+                                            "voltage_level":  "3.3V_5V_TOLERANT",
+                                            "default_state":  "HIGH_AWAKE"
+                                        }
+                      },
+    "driver_compatibility":  {
+                                 "a4988":  {
+                                               "microstep_pins":  [
+                                                                      "ms1",
+                                                                      "ms2",
+                                                                      "ms3"
+                                                                  ],
+                                               "microstep_resolution":  [
+                                                                            1,
+                                                                            2,
+                                                                            4,
+                                                                            8,
+                                                                            16
+                                                                        ],
+                                               "current_control":  "POTENTIOMETER",
+                                               "thermal_protection":  true
+                                           },
+                                 "drv8825":  {
+                                                 "microstep_pins":  [
+                                                                        "mode0",
+                                                                        "mode1",
+                                                                        "mode2"
+                                                                    ],
+                                                 "microstep_resolution":  [
+                                                                              1,
+                                                                              2,
+                                                                              4,
+                                                                              8,
+                                                                              16,
+                                                                              32
+                                                                          ],
+                                                 "current_control":  "POTENTIOMETER",
+                                                 "thermal_protection":  true
+                                             },
+                                 "tmc2208":  {
+                                                 "uart_interface":  true,
+                                                 "microstep_resolution":  [
+                                                                              1,
+                                                                              2,
+                                                                              4,
+                                                                              8,
+                                                                              16,
+                                                                              32,
+                                                                              64,
+                                                                              128,
+                                                                              256
+                                                                          ],
+                                                 "current_control":  "DIGITAL_UART",
+                                                 "stealthchop":  true,
+                                                 "stallguard":  false
+                                             },
+                                 "tmc2209":  {
+                                                 "uart_interface":  true,
+                                                 "microstep_resolution":  [
+                                                                              1,
+                                                                              2,
+                                                                              4,
+                                                                              8,
+                                                                              16,
+                                                                              32,
+                                                                              64,
+                                                                              128,
+                                                                              256
+                                                                          ],
+                                                 "current_control":  "DIGITAL_UART",
+                                                 "stealthchop":  true,
+                                                 "stallguard":  true,
+                                                 "sensorless_homing":  true
+                                             }
+                             },
+    "timing_specifications":  {
+                                  "minimum_step_pulse":  "2_MICROSECONDS",
+                                  "minimum_step_interval":  "20_MICROSECONDS",
+                                  "direction_setup_time":  "1_MICROSECOND",
+                                  "enable_to_step_delay":  "1_MILLISECOND"
+                              },
+    "manufacturer_pin_mappings":  {
+                                      "generic":  {
+                                                      "step":  [
+                                                                   "STEP",
+                                                                   "PUL",
+                                                                   "CLK"
+                                                               ],
+                                                      "direction":  [
+                                                                        "DIR",
+                                                                        "CW_CCW",
+                                                                        "DIRECTION"
+                                                                    ],
+                                                      "enable":  [
+                                                                     "EN",
+                                                                     "ENABLE",
+                                                                     "ENA"
+                                                                 ]
+                                                  },
+                                      "pololu":  {
+                                                     "step":  [
+                                                                  "STEP"
+                                                              ],
+                                                     "direction":  [
+                                                                       "DIR"
+                                                                   ],
+                                                     "enable":  [
+                                                                    "EN"
+                                                                ]
+                                                 },
+                                      "bigtreetech":  {
+                                                          "step":  [
+                                                                       "STEP"
+                                                                   ],
+                                                          "direction":  [
+                                                                            "DIR"
+                                                                        ],
+                                                          "enable":  [
+                                                                         "EN"
+                                                                     ]
+                                                      }
+                                  },
+    "application_examples":  {
+                                 "shoulder_joint":  {
+                                                        "gearing_ratio":  "50:1",
+                                                        "max_speed":  "30_DEGREES_PER_SECOND",
+                                                        "positioning_accuracy":  "0.18_DEGREES",
+                                                        "use_case":  "HIGH_TORQUE_PRECISE_POSITIONING"
+                                                    },
+                                 "elbow_joint":  {
+                                                     "gearing_ratio":  "50:1",
+                                                     "max_speed":  "45_DEGREES_PER_SECOND",
+                                                     "positioning_accuracy":  "0.18_DEGREES",
+                                                     "use_case":  "MODERATE_TORQUE_SMOOTH_MOTION"
+                                                 },
+                                 "locomotion_drive":  {
+                                                          "gearing_ratio":  "10:1",
+                                                          "max_speed":  "200_RPM",
+                                                          "positioning_accuracy":  "1.8_DEGREES",
+                                                          "use_case":  "MOBILE_PLATFORM_MOVEMENT"
+                                                      }
+                             },
+    "name":  "stepper_motor_nema17",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

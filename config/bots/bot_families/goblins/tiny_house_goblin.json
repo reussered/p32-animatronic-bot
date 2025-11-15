@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/tiny_house_goblin.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "TINY_HOUSE_GOBLIN",
@@ -20,13 +19,13 @@
     "reference_point": "nose_center",
     "eye_spacing": "1.5 INCH",
     "components": [
-        "goblin_left_eye",
-        "goblin_right_eye",
-        "goblin_mouth",
-        "goblin_speaker",
-        "goblin_nose",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_mouth.json",
+        "config/bots/bot_families/goblins/head/goblin_speaker.json",
+        "config/bots/bot_families/goblins/head/goblin_nose.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "servo_specifications": {
         "primary_servos": "MG90S_MICRO_SERVOS_ONLY",

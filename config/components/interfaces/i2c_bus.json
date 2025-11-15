@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/components/interfaces/i2c_bus.json",
     "version": "1.0.0",
     "hardware_type": "BUS_INTERFACE",
     "interface_type": "I2C_BUS",
@@ -9,7 +8,7 @@
     "bus_name": "I2C",
     "description": "ESP32 I2C bus interface for sensor and peripheral communication",
     "components": [
-        "i2c_driver"
+        "config/components/drivers/i2c_driver.json"
     ],
     "pin_requirements": {
         "shared_pins_needed": [

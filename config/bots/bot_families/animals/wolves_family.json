@@ -1,46 +1,47 @@
 {
-    "relative_filename": "config/bots/bot_families/animals/wolves_family.json",
-    "version": "1.0",
-    "author": "config/author.json",
-    "family_name": "Wolves",
-    "family_type": "WOLVES",
-    "family_category": "animals",
-    "description": "Wolves family - placeholder configuration",
-    "created": "2025-10-21",
-    "template_type": "family_template",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "baseline_dimensions": {
-        "eye_spacing": "3.0 INCH",
-        "skull_height": "8.0 INCH",
-        "skull_depth": "6.0 INCH"
-    },
-    "components": [],
-    "family_mood_profile": {
-        "FEAR": 10,
-        "ANGER": 15,
-        "IRRITATION": 20,
-        "HAPPINESS": 25,
-        "CONTENTMENT": 15,
-        "HUNGER": 10,
-        "CURIOSITY": 25,
-        "AFFECTION": 20
-    },
-    "family_behavior_patterns": {
-        "threat_response_enabled": true,
-        "auto_sleep_timeout_seconds": 1800,
-        "interaction_range_cm": 150,
-        "aggressive_threshold": 70,
-        "calm_threshold": 30,
-        "personality_traits": [
-            "curious",
-            "friendly",
-            "responsive"
-        ]
-    },
-    "name": "wolves_family",
-    "type": "UNKNOWN",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0",
+    "author":  "config/author.json",
+    "family_name":  "Wolves",
+    "family_type":  "WOLVES",
+    "family_category":  "animals",
+    "description":  "Wolves family - placeholder configuration",
+    "created":  "2025-10-21",
+    "template_type":  "family_template",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "baseline_dimensions":  {
+                                "eye_spacing":  "3.0 INCH",
+                                "skull_height":  "8.0 INCH",
+                                "skull_depth":  "6.0 INCH"
+                            },
+    "components":  [
+
+                   ],
+    "family_mood_profile":  {
+                                "FEAR":  10,
+                                "ANGER":  15,
+                                "IRRITATION":  20,
+                                "HAPPINESS":  25,
+                                "CONTENTMENT":  15,
+                                "HUNGER":  10,
+                                "CURIOSITY":  25,
+                                "AFFECTION":  20
+                            },
+    "family_behavior_patterns":  {
+                                     "threat_response_enabled":  true,
+                                     "auto_sleep_timeout_seconds":  1800,
+                                     "interaction_range_cm":  150,
+                                     "aggressive_threshold":  70,
+                                     "calm_threshold":  30,
+                                     "personality_traits":  [
+                                                                "curious",
+                                                                "friendly",
+                                                                "responsive"
+                                                            ]
+                                 },
+    "name":  "wolves_family",
+    "type":  "UNKNOWN",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

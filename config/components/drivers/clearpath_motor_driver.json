@@ -1,7 +1,6 @@
 {
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_type": "DRIVER",
     "description": "ClearPath MCPV-RB-2310V-ELN stepper motor driver component",
     "source_files": [
         "clearpath_motor_driver.src",
@@ -46,5 +45,7 @@
             }
         ]
     },
-    "notes": "Integrates with ClearPath MCPV-RB-2310V-ELN closed-loop stepper system"
+    "notes": "Integrates with ClearPath MCPV-RB-2310V-ELN closed-loop stepper system",
+    "type": "DRIVER",
+    "name": "clearpath_motor_driver"
 }

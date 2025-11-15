@@ -1,42 +1,41 @@
 {
-    "relative_filename": "config/components/behaviors/moods/happy.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "happy",
-    "displayName": "Happy",
-    "description": "Cheerful and energetic mood",
-    "led": {
-        "color": "#00FF00",
-        "brightness": 255,
-        "pattern": "pulse"
-    },
-    "servo": {
-        "headTilt": 15,
-        "headPan": 0,
-        "eyeBrows": 45,
-        "mouth": 80
-    },
-    "animations": {
-        "idle": "bounce",
-        "transition": "quick",
-        "speed": 1.5
-    },
-    "sounds": {
-        "enabled": true,
-        "volume": 80,
-        "effects": [
-            "giggle",
-            "cheerful_beep"
-        ]
-    },
-    "priority": 5,
-    "duration": 0,
-    "triggers": [
-        "positive_interaction",
-        "reward"
-    ],
-    "type": "UNKNOWN",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "happy",
+    "displayName":  "Happy",
+    "description":  "Cheerful and energetic mood",
+    "led":  {
+                "color":  "#00FF00",
+                "brightness":  255,
+                "pattern":  "pulse"
+            },
+    "servo":  {
+                  "headTilt":  15,
+                  "headPan":  0,
+                  "eyeBrows":  45,
+                  "mouth":  80
+              },
+    "animations":  {
+                       "idle":  "bounce",
+                       "transition":  "quick",
+                       "speed":  1.5
+                   },
+    "sounds":  {
+                   "enabled":  true,
+                   "volume":  80,
+                   "effects":  [
+                                   "giggle",
+                                   "cheerful_beep"
+                               ]
+               },
+    "priority":  5,
+    "duration":  0,
+    "triggers":  [
+                     "positive_interaction",
+                     "reward"
+                 ],
+    "type":  "UNKNOWN",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

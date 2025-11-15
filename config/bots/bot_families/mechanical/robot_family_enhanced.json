@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/mechanical/robot_family_enhanced.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "ROBOT",
@@ -15,11 +14,11 @@
         "component_spacing": "1.5 INCH"
     },
     "components": [
-        "robot_chest_matrix",
-        "robot_status_oled",
-        "robot_camera_eyes",
-        "robot_speaker_array",
-        "robot_led_strips"
+        "config/bots/bot_families/robots/head/robot_chest_matrix.json",
+        "config/bots/bot_families/robots/head/robot_status_oled.json",
+        "config/bots/bot_families/robots/head/robot_camera_eyes.json",
+        "config/bots/bot_families/robots/head/robot_speaker_array.json",
+        "config/bots/bot_families/robots/head/robot_led_strips.json"
     ],
     "family_mood_profile": {
         "FEAR": 5,

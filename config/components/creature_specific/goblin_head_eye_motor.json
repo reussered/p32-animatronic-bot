@@ -1,6 +1,6 @@
 {
     "name": "goblin_head_eye_motor",
-    "type": "motor_controller",
+    "type": "MOTOR_CONTROLLER",
     "description": "Stepper-controlled eye movement with mood-based display",
     "subsystem": "goblin_head",
     "dependencies": [
