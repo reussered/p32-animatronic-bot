@@ -26,8 +26,8 @@
         ]
     },
     "components": [
-        "gpio_pair_driver",
-        "gpio_single_driver"
+        "config/components/drivers/gpio_pair_driver.json",
+        "config/components/drivers/gpio_single_driver.json"
     ],
     "software": {
         "init_function": "gpio_bus_init",

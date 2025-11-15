@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/bears/bear_polar.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_template": "config/bots/bot_families/animals/bear_family.json",
@@ -39,8 +38,8 @@
         }
     },
     "components": [
-        "bear_arctic_fur",
-        "bear_ice_sensors"
+        "config/bots/bot_families/bears/head/bear_arctic_fur.json",
+        "config/bots/bot_families/bears/head/bear_ice_sensors.json"
     ],
     "custom_behaviors": {
         "ice_hunting": {

@@ -1,104 +1,111 @@
 {
-    "relative_filename": "config/components/hardware/inmp441_microphone.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_name": "INMP441 I2S Digital Microphone",
-    "description": "INMP441 omnidirectional MEMS microphone with I2S digital output",
-    "created": "2025-11-10",
-    "hardware_specs": {
-        "microphone_type": "i2s_digital_mems",
-        "frequency_response": "60Hz_to_15kHz",
-        "sensitivity": "-26dBFS",
-        "max_spl": "120dB_SPL",
-        "signal_to_noise": "65dB",
-        "dynamic_range": "105dB"
-    },
-    "physical_properties": {
-        "board_dimensions": {
-            "width": "15.5mm",
-            "length": "13.2mm", 
-            "height": "3.5mm"
-        },
-        "weight": "0.8g",
-        "mounting_holes": {
-            "count": 4,
-            "diameter": "1mm",
-            "spacing": "10mm"
-        }
-    },
-    "control_interface": {
-        "protocol": "i2s",
-        "output_type": "digital_i2s",
-        "bit_depth": "24bit",
-        "sample_rates": ["8000", "12000", "16000", "22050", "32000", "44100", "48000"]
-    },
-    "power_requirements": {
-        "operating_voltage": "1.8V-3.3V",
-        "typical_voltage": "3.3V",
-        "current_consumption": "1.4mA_typical",
-        "power_down_current": "17uA"
-    },
-    "pin_mapping": {
-        "pins": [
-            {
-                "name": "VDD",
-                "type": "power",
-                "voltage": "3.3V"
-            },
-            {
-                "name": "GND", 
-                "type": "ground"
-            },
-            {
-                "name": "WS",
-                "type": "i2s_word_select",
-                "description": "I2S Word Select / Left-Right Clock"
-            },
-            {
-                "name": "SCK",
-                "type": "i2s_clock", 
-                "description": "I2S Serial Clock / Bit Clock"
-            },
-            {
-                "name": "SD",
-                "type": "i2s_data",
-                "description": "I2S Serial Data Output"
-            },
-            {
-                "name": "L/R",
-                "type": "channel_select",
-                "description": "Left/Right channel select (GND=Left, VDD=Right)"
-            }
-        ]
-    },
-    "initialization_sequence": {
-        "power_on_delay_ms": 10,
-        "clock_stabilization_ms": 50,
-        "first_valid_sample_ms": 100,
-        "notes": "No explicit reset needed - starts automatically with I2S clock"
-    },
-    "prototype_status": "needs_ordering",
-    "tested": false,
-    "quantity_needed": 2,
-    "supplier": "Adafruit/SparkFun/Generic",
-    "notes": [
-        "No reset pin - auto-starts with I2S clock presence",
-        "L/R pin determines stereo channel (tie to GND for mono left)",
-        "Much better SNR than analog microphones",
-        "Requires stable I2S clock for proper operation"
-    ],
-    "hardware_type": "I2S_MICROPHONE",
-    "name": "inmp441_microphone",
-    "dependencies": [
-        "config/components/drivers/i2s_bus.json",
-        "config/components/drivers/i2s_generic_driver.json"
-    ],
-    "software": {
-        "init_function": "inmp441_microphone_init",
-        "act_function": "inmp441_microphone_act"
-    },
-    "type": "I2S_MICROPHONE",
-    "timing": {
-        "hitCount": 10
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_name":  "INMP441 I2S Digital Microphone",
+    "description":  "INMP441 omnidirectional MEMS microphone with I2S digital output",
+    "created":  "2025-11-10",
+    "hardware_specs":  {
+                           "microphone_type":  "i2s_digital_mems",
+                           "frequency_response":  "60Hz_to_15kHz",
+                           "sensitivity":  "-26dBFS",
+                           "max_spl":  "120dB_SPL",
+                           "signal_to_noise":  "65dB",
+                           "dynamic_range":  "105dB"
+                       },
+    "physical_properties":  {
+                                "board_dimensions":  {
+                                                         "width":  "15.5mm",
+                                                         "length":  "13.2mm",
+                                                         "height":  "3.5mm"
+                                                     },
+                                "weight":  "0.8g",
+                                "mounting_holes":  {
+                                                       "count":  4,
+                                                       "diameter":  "1mm",
+                                                       "spacing":  "10mm"
+                                                   }
+                            },
+    "control_interface":  {
+                              "protocol":  "i2s",
+                              "output_type":  "digital_i2s",
+                              "bit_depth":  "24bit",
+                              "sample_rates":  [
+                                                   "8000",
+                                                   "12000",
+                                                   "16000",
+                                                   "22050",
+                                                   "32000",
+                                                   "44100",
+                                                   "48000"
+                                               ]
+                          },
+    "power_requirements":  {
+                               "operating_voltage":  "1.8V-3.3V",
+                               "typical_voltage":  "3.3V",
+                               "current_consumption":  "1.4mA_typical",
+                               "power_down_current":  "17uA"
+                           },
+    "pin_mapping":  {
+                        "pins":  [
+                                     {
+                                         "name":  "VDD",
+                                         "type":  "power",
+                                         "voltage":  "3.3V"
+                                     },
+                                     {
+                                         "name":  "GND",
+                                         "type":  "ground"
+                                     },
+                                     {
+                                         "name":  "WS",
+                                         "type":  "i2s_word_select",
+                                         "description":  "I2S Word Select / Left-Right Clock"
+                                     },
+                                     {
+                                         "name":  "SCK",
+                                         "type":  "i2s_clock",
+                                         "description":  "I2S Serial Clock / Bit Clock"
+                                     },
+                                     {
+                                         "name":  "SD",
+                                         "type":  "i2s_data",
+                                         "description":  "I2S Serial Data Output"
+                                     },
+                                     {
+                                         "name":  "L/R",
+                                         "type":  "channel_select",
+                                         "description":  "Left/Right channel select (GND=Left, VDD=Right)"
+                                     }
+                                 ]
+                    },
+    "initialization_sequence":  {
+                                    "power_on_delay_ms":  10,
+                                    "clock_stabilization_ms":  50,
+                                    "first_valid_sample_ms":  100,
+                                    "notes":  "No explicit reset needed - starts automatically with I2S clock"
+                                },
+    "prototype_status":  "needs_ordering",
+    "tested":  false,
+    "quantity_needed":  2,
+    "supplier":  "Adafruit/SparkFun/Generic",
+    "notes":  [
+                  "No reset pin - auto-starts with I2S clock presence",
+                  "L/R pin determines stereo channel (tie to GND for mono left)",
+                  "Much better SNR than analog microphones",
+                  "Requires stable I2S clock for proper operation"
+              ],
+    "hardware_type":  "I2S_MICROPHONE",
+    "name":  "inmp441_microphone",
+    "dependencies":  [
+                         "config/components/drivers/i2s_bus.json",
+                         "config/components/drivers/i2s_generic_driver.json"
+                     ],
+    "software":  {
+                     "init_function":  "inmp441_microphone_init",
+                     "act_function":  "inmp441_microphone_act"
+                 },
+    "type":  "I2S_MICROPHONE",
+    "timing":  {
+                   "hitCount":  10
+               }
 }

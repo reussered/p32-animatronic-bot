@@ -1,42 +1,41 @@
 {
-    "relative_filename": "config/components/behaviors/moods/angry.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "angry",
-    "displayName": "Angry",
-    "description": "Agitated and intense mood",
-    "led": {
-        "color": "#FF0000",
-        "brightness": 255,
-        "pattern": "flash"
-    },
-    "servo": {
-        "headTilt": 5,
-        "headPan": 0,
-        "eyeBrows": -45,
-        "mouth": 10
-    },
-    "animations": {
-        "idle": "shake",
-        "transition": "sharp",
-        "speed": 2.0
-    },
-    "sounds": {
-        "enabled": true,
-        "volume": 100,
-        "effects": [
-            "growl",
-            "alarm_beep"
-        ]
-    },
-    "priority": 8,
-    "duration": 5000,
-    "triggers": [
-        "frustration",
-        "blocked"
-    ],
-    "type": "UNKNOWN",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "angry",
+    "displayName":  "Angry",
+    "description":  "Agitated and intense mood",
+    "led":  {
+                "color":  "#FF0000",
+                "brightness":  255,
+                "pattern":  "flash"
+            },
+    "servo":  {
+                  "headTilt":  5,
+                  "headPan":  0,
+                  "eyeBrows":  -45,
+                  "mouth":  10
+              },
+    "animations":  {
+                       "idle":  "shake",
+                       "transition":  "sharp",
+                       "speed":  2.0
+                   },
+    "sounds":  {
+                   "enabled":  true,
+                   "volume":  100,
+                   "effects":  [
+                                   "growl",
+                                   "alarm_beep"
+                               ]
+               },
+    "priority":  8,
+    "duration":  5000,
+    "triggers":  [
+                     "frustration",
+                     "blocked"
+                 ],
+    "type":  "UNKNOWN",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

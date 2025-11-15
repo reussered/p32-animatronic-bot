@@ -1,442 +1,441 @@
 {
-    "relative_filename": "config/components/interfaces/micro_servo_array.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "MICRO_SERVO_ARRAY",
-    "interface_type": "MICRO_SERVO_CONTROLLER",
-    "description": "Ultra-small servo array interface for facial expression control with shared power and individual PWM signals",
-    "hardware_specifications": {
-        "servo_types": [
-            "SG90_MICRO",
-            "MG90S_METAL_GEAR",
-            "SG51R_ULTRA_MICRO",
-            "ES08A_ULTRA_MICRO"
-        ],
-        "servo_size": "9g_TO_20g_WEIGHT",
-        "dimensions": "22x12x23mm_TO_32x12x30mm",
-        "torque_range": "0.8kg_cm_TO_2.5kg_cm",
-        "speed_range": "0.08s_60deg_TO_0.15s_60deg",
-        "voltage_range": "3.3V_TO_6V",
-        "current_per_servo": "100mA_TO_800mA",
-        "rotation_range": "90_TO_180_DEGREES",
-        "cost_target": "UNDER_5_USD_PER_SERVO"
-    },
-    "shared_pins": {
-        "shared_power_pin": {
-            "function": "common_servo_power",
-            "generic_name": "vcc_servo_shared",
-            "description": "Shared power supply for all servos in array",
-            "voltage_level": "5V_6V",
-            "current_capacity": "TOTAL_SERVO_COUNT_X_800mA",
-            "sharing_pattern": "ALL_SERVOS_PARALLEL_POWER"
-        },
-        "shared_ground_pin": {
-            "function": "common_ground_reference",
-            "generic_name": "gnd_servo_shared",
-            "description": "Shared ground for all servos in array",
-            "voltage_level": "0V",
-            "sharing_pattern": "ALL_SERVOS_COMMON_GROUND"
-        }
-    },
-    "unique_pins_per_servo": {
-        "pwm_signal_pin": {
-            "function": "individual_position_control",
-            "generic_name": "pwm_servo_N",
-            "description": "Individual PWM signal for each servo (N = servo number)",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "PWM_50HZ",
-            "pulse_width": "0.5ms_TO_2.5ms",
-            "period": "20ms",
-            "pin_count": "ONE_PER_SERVO"
-        }
-    },
-    "pin_efficiency": {
-        "traditional_wiring": {
-            "pins_per_servo": 3,
-            "total_pins_8_servos": 24,
-            "efficiency": "INEFFICIENT_HIGH_PIN_COUNT"
-        },
-        "shared_power_wiring": {
-            "shared_pins": 2,
-            "unique_pins_per_servo": 1,
-            "total_pins_8_servos": 10,
-            "efficiency": "HIGHLY_EFFICIENT_60_PERCENT_REDUCTION",
-            "pin_savings": "14_PINS_SAVED"
-        }
-    },
-    "facial_expression_servos": {
-        "eyebrow_servos": {
-            "quantity": 2,
-            "position": "LEFT_RIGHT_EYEBROW",
-            "movement": "RAISE_LOWER_EYEBROW",
-            "range": "45_DEGREES",
-            "expressions": [
-                "SURPRISE",
-                "QUESTIONING",
-                "ANGER",
-                "CONCERN"
-            ]
-        },
-        "eyelid_servos": {
-            "quantity": 4,
-            "position": "LEFT_RIGHT_UPPER_LOWER",
-            "movement": "EYELID_OPEN_CLOSE_BLINK",
-            "range": "30_DEGREES",
-            "expressions": [
-                "WINK",
-                "BLINK",
-                "SQUINT",
-                "WIDE_EYES"
-            ]
-        },
-        "mouth_corner_servos": {
-            "quantity": 2,
-            "position": "LEFT_RIGHT_MOUTH_CORNERS",
-            "movement": "SMILE_FROWN_PULL",
-            "range": "60_DEGREES",
-            "expressions": [
-                "SMILE",
-                "FROWN",
-                "SMIRK",
-                "GRIMACE"
-            ]
-        },
-        "nostril_servos": {
-            "quantity": 2,
-            "position": "LEFT_RIGHT_NOSTRILS",
-            "movement": "NOSTRIL_FLARE",
-            "range": "20_DEGREES",
-            "expressions": [
-                "ANGER",
-                "BREATHING_HEAVY",
-                "SNIFFING"
-            ]
-        },
-        "cheek_servos": {
-            "quantity": 2,
-            "position": "LEFT_RIGHT_CHEEKS",
-            "movement": "CHEEK_PUFF_SUCK",
-            "range": "30_DEGREES",
-            "expressions": [
-                "PUFFED_CHEEKS",
-                "SUCKED_CHEEKS",
-                "CHEWING"
-            ]
-        }
-    },
-    "ultra_micro_servo_specs": {
-        "sg51r_ultra_micro": {
-            "weight": "3.7g",
-            "dimensions": "20x8x18mm",
-            "torque": "0.8kg_cm_4.8V",
-            "speed": "0.08s_60deg_4.8V",
-            "voltage": "3.0V_TO_4.8V",
-            "current_no_load": "100mA",
-            "current_stall": "400mA",
-            "cost": "APPROXIMATELY_3_USD",
-            "ideal_for": "EYELIDS_EYEBROWS_SMALL_FEATURES"
-        },
-        "es08a_ultra_micro": {
-            "weight": "4.3g",
-            "dimensions": "19x8x20mm",
-            "torque": "0.9kg_cm_4.8V",
-            "speed": "0.09s_60deg_4.8V",
-            "voltage": "3.0V_TO_4.8V",
-            "current_no_load": "120mA",
-            "current_stall": "450mA",
-            "cost": "APPROXIMATELY_4_USD",
-            "ideal_for": "EYEBROWS_NOSTRILS_SMALL_MOUTH_FEATURES"
-        },
-        "sg90_micro": {
-            "weight": "9g",
-            "dimensions": "22x12x23mm",
-            "torque": "1.8kg_cm_4.8V",
-            "speed": "0.1s_60deg_4.8V",
-            "voltage": "4.8V_TO_6V",
-            "current_no_load": "200mA",
-            "current_stall": "650mA",
-            "cost": "APPROXIMATELY_2_USD",
-            "ideal_for": "MOUTH_CORNERS_CHEEKS_STRONGER_FEATURES"
-        },
-        "mg90s_metal_gear": {
-            "weight": "13.4g",
-            "dimensions": "22x12x28mm",
-            "torque": "2.5kg_cm_4.8V",
-            "speed": "0.14s_60deg_4.8V",
-            "voltage": "4.8V_TO_6V",
-            "current_no_load": "170mA",
-            "current_stall": "800mA",
-            "cost": "APPROXIMATELY_5_USD",
-            "ideal_for": "JAW_ASSIST_HEAVY_MOUTH_FEATURES"
-        }
-    },
-    "array_configurations": {
-        "minimal_expression_array": {
-            "servo_count": 4,
-            "servos": [
-                "2x_EYEBROW",
-                "2x_MOUTH_CORNER"
-            ],
-            "total_pins": 6,
-            "expressions": [
-                "BASIC_EMOTIONS",
-                "SURPRISE",
-                "HAPPINESS",
-                "SADNESS"
-            ],
-            "cost_estimate": "12_TO_20_USD"
-        },
-        "standard_expression_array": {
-            "servo_count": 8,
-            "servos": [
-                "2x_EYEBROW",
-                "4x_EYELID",
-                "2x_MOUTH_CORNER"
-            ],
-            "total_pins": 10,
-            "expressions": [
-                "FULL_EMOTION_RANGE",
-                "BLINKING",
-                "WINKING",
-                "COMPLEX_EXPRESSIONS"
-            ],
-            "cost_estimate": "24_TO_40_USD"
-        },
-        "advanced_expression_array": {
-            "servo_count": 12,
-            "servos": [
-                "2x_EYEBROW",
-                "4x_EYELID",
-                "2x_MOUTH_CORNER",
-                "2x_NOSTRIL",
-                "2x_CHEEK"
-            ],
-            "total_pins": 14,
-            "expressions": [
-                "HIGHLY_EXPRESSIVE",
-                "BREATHING_ANIMATION",
-                "DETAILED_EMOTIONS"
-            ],
-            "cost_estimate": "36_TO_60_USD"
-        }
-    },
-    "pwm_timing_optimization": {
-        "standard_timing": {
-            "frequency": "50Hz",
-            "period": "20ms",
-            "servo_update_interval": "20ms_ALL_SIMULTANEOUS",
-            "cpu_load": "LOW_SIMPLE_TIMING"
-        },
-        "staggered_timing": {
-            "frequency": "50Hz",
-            "period": "20ms",
-            "servo_update_interval": "2.5ms_STAGGERED_8_SERVOS",
-            "cpu_load": "MEDIUM_DISTRIBUTED_LOAD",
-            "advantages": [
-                "REDUCED_POWER_SPIKES",
-                "SMOOTHER_CURRENT_DRAW"
-            ]
-        },
-        "high_frequency_timing": {
-            "frequency": "333Hz",
-            "period": "3ms",
-            "servo_update_interval": "3ms_FAST_RESPONSE",
-            "cpu_load": "HIGH_FAST_UPDATES",
-            "advantages": [
-                "SMOOTHER_MOTION",
-                "FASTER_EXPRESSIONS",
-                "LESS_JITTER"
-            ]
-        }
-    },
-    "power_management": {
-        "current_calculations": {
-            "no_load_current_12_servos": "1.4A_TO_2.0A",
-            "peak_current_12_servos": "4.8A_TO_9.6A",
-            "recommended_supply": "5V_10A_CAPACITY",
-            "power_supply_headroom": "25_PERCENT_SAFETY_MARGIN"
-        },
-        "power_sequencing": {
-            "servo_enable_staggering": "100ms_INTERVALS_PREVENT_INRUSH",
-            "graceful_shutdown": "RETURN_TO_CENTER_BEFORE_POWER_OFF",
-            "emergency_stop": "IMMEDIATE_PWM_DISABLE_ALL_SERVOS"
-        },
-        "current_limiting": {
-            "per_servo_protection": "FUSE_OR_CURRENT_LIMITER_1A",
-            "total_array_protection": "MAIN_FUSE_10A",
-            "thermal_protection": "TEMPERATURE_MONITORING_POWER_SUPPLY"
-        }
-    },
-    "manufacturer_pin_mappings": {
-        "sg90_sg51r_series": {
-            "pwm_signal": [
-                "ORANGE",
-                "YELLOW",
-                "WHITE"
-            ],
-            "vcc_servo": [
-                "RED",
-                "POSITIVE"
-            ],
-            "gnd_servo": [
-                "BROWN",
-                "BLACK",
-                "NEGATIVE"
-            ]
-        },
-        "mg90s_series": {
-            "pwm_signal": [
-                "ORANGE",
-                "SIGNAL"
-            ],
-            "vcc_servo": [
-                "RED",
-                "VCC"
-            ],
-            "gnd_servo": [
-                "BROWN",
-                "GND"
-            ]
-        },
-        "es08_series": {
-            "pwm_signal": [
-                "WHITE",
-                "SIGNAL"
-            ],
-            "vcc_servo": [
-                "RED",
-                "POWER"
-            ],
-            "gnd_servo": [
-                "BLACK",
-                "GROUND"
-            ]
-        },
-        "hitec_micro": {
-            "pwm_signal": [
-                "YELLOW",
-                "SIGNAL"
-            ],
-            "vcc_servo": [
-                "RED",
-                "POSITIVE"
-            ],
-            "gnd_servo": [
-                "BLACK",
-                "NEGATIVE"
-            ]
-        }
-    },
-    "mechanical_integration": {
-        "mounting_considerations": {
-            "servo_spacing": "15mm_MINIMUM_CENTER_TO_CENTER",
-            "access_clearance": "5mm_MINIMUM_AROUND_SERVO",
-            "cable_management": "FLEXIBLE_RIBBON_CABLE_RECOMMENDED",
-            "vibration_isolation": "SOFT_MOUNTS_REDUCE_BUZZ"
-        },
-        "linkage_design": {
-            "servo_arm_length": "10mm_TO_25mm",
-            "mechanical_advantage": "1_1_TO_3_1_RATIO",
-            "backlash_minimization": "TIGHT_FITTING_SERVO_ARMS",
-            "travel_limits": "MECHANICAL_STOPS_PREVENT_DAMAGE"
-        },
-        "facial_attachment": {
-            "attachment_method": [
-                "PIANO_WIRE",
-                "FISHING_LINE",
-                "THREAD",
-                "MICRO_CABLES"
-            ],
-            "attachment_points": "SKIN_ANCHOR_POINTS_FLEXIBLE_MATERIAL",
-            "expression_mapping": "SERVO_ANGLE_TO_FACIAL_FEATURE_MOVEMENT"
-        }
-    },
-    "expression_programming": {
-        "emotion_definitions": {
-            "happiness": {
-                "mouth_corners": "UP_45_DEGREES",
-                "eyebrows": "SLIGHTLY_RAISED",
-                "eyelids": "NORMAL_OPEN",
-                "cheeks": "SLIGHTLY_RAISED"
-            },
-            "sadness": {
-                "mouth_corners": "DOWN_30_DEGREES",
-                "eyebrows": "SLIGHTLY_LOWERED_INNER",
-                "eyelids": "SLIGHTLY_DROOPED",
-                "cheeks": "NORMAL"
-            },
-            "surprise": {
-                "mouth_corners": "NEUTRAL",
-                "eyebrows": "RAISED_HIGH",
-                "eyelids": "WIDE_OPEN",
-                "cheeks": "NORMAL"
-            },
-            "anger": {
-                "mouth_corners": "DOWN_TIGHT",
-                "eyebrows": "LOWERED_FURROWED",
-                "eyelids": "NARROWED",
-                "nostrils": "FLARED"
-            }
-        },
-        "animation_sequences": {
-            "blink_sequence": "EYELIDS_CLOSE_150ms_OPEN_150ms",
-            "smile_sequence": "MOUTH_CORNERS_GRADUAL_UP_500ms",
-            "eyebrow_flash": "EYEBROWS_UP_200ms_DOWN_200ms",
-            "breathing_animation": "NOSTRILS_SLIGHT_FLARE_2s_CYCLE"
-        }
-    },
-    "application_examples": {
-        "goblin_facial_expressions": {
-            "servo_array": "8_SERVO_STANDARD_ARRAY",
-            "expressions": [
-                "MISCHIEVOUS_GRIN",
-                "ANGRY_SCOWL",
-                "SURPRISED_WIDE_EYES"
-            ],
-            "servo_types": [
-                "4x_SG51R_EYELIDS",
-                "2x_ES08A_EYEBROWS",
-                "2x_SG90_MOUTH"
-            ],
-            "total_cost": "APPROXIMATELY_28_USD",
-            "pin_count": "10_PINS_TOTAL"
-        },
-        "cat_facial_expressions": {
-            "servo_array": "6_SERVO_MINIMAL_PLUS",
-            "expressions": [
-                "CONTENT_PURR",
-                "ALERT_EARS",
-                "SLEEPY_BLINK"
-            ],
-            "servo_types": [
-                "4x_SG51R_EYELIDS",
-                "2x_ES08A_MOUTH_CORNERS"
-            ],
-            "total_cost": "APPROXIMATELY_18_USD",
-            "pin_count": "8_PINS_TOTAL"
-        },
-        "bear_facial_expressions": {
-            "servo_array": "12_SERVO_ADVANCED_ARRAY",
-            "expressions": [
-                "FRIENDLY_SMILE",
-                "PROTECTIVE_GROWL",
-                "CURIOUS_SNIFF"
-            ],
-            "servo_types": [
-                "4x_SG51R_EYELIDS",
-                "2x_ES08A_EYEBROWS",
-                "2x_SG90_MOUTH",
-                "2x_ES08A_NOSTRILS",
-                "2x_SG90_CHEEKS"
-            ],
-            "total_cost": "APPROXIMATELY_40_USD",
-            "pin_count": "14_PINS_TOTAL"
-        }
-    },
-    "name": "micro_servo_array",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "MICRO_SERVO_ARRAY",
+    "interface_type":  "MICRO_SERVO_CONTROLLER",
+    "description":  "Ultra-small servo array interface for facial expression control with shared power and individual PWM signals",
+    "hardware_specifications":  {
+                                    "servo_types":  [
+                                                        "SG90_MICRO",
+                                                        "MG90S_METAL_GEAR",
+                                                        "SG51R_ULTRA_MICRO",
+                                                        "ES08A_ULTRA_MICRO"
+                                                    ],
+                                    "servo_size":  "9g_TO_20g_WEIGHT",
+                                    "dimensions":  "22x12x23mm_TO_32x12x30mm",
+                                    "torque_range":  "0.8kg_cm_TO_2.5kg_cm",
+                                    "speed_range":  "0.08s_60deg_TO_0.15s_60deg",
+                                    "voltage_range":  "3.3V_TO_6V",
+                                    "current_per_servo":  "100mA_TO_800mA",
+                                    "rotation_range":  "90_TO_180_DEGREES",
+                                    "cost_target":  "UNDER_5_USD_PER_SERVO"
+                                },
+    "shared_pins":  {
+                        "shared_power_pin":  {
+                                                 "function":  "common_servo_power",
+                                                 "generic_name":  "vcc_servo_shared",
+                                                 "description":  "Shared power supply for all servos in array",
+                                                 "voltage_level":  "5V_6V",
+                                                 "current_capacity":  "TOTAL_SERVO_COUNT_X_800mA",
+                                                 "sharing_pattern":  "ALL_SERVOS_PARALLEL_POWER"
+                                             },
+                        "shared_ground_pin":  {
+                                                  "function":  "common_ground_reference",
+                                                  "generic_name":  "gnd_servo_shared",
+                                                  "description":  "Shared ground for all servos in array",
+                                                  "voltage_level":  "0V",
+                                                  "sharing_pattern":  "ALL_SERVOS_COMMON_GROUND"
+                                              }
+                    },
+    "unique_pins_per_servo":  {
+                                  "pwm_signal_pin":  {
+                                                         "function":  "individual_position_control",
+                                                         "generic_name":  "pwm_servo_N",
+                                                         "description":  "Individual PWM signal for each servo (N = servo number)",
+                                                         "voltage_level":  "3.3V_5V",
+                                                         "signal_type":  "PWM_50HZ",
+                                                         "pulse_width":  "0.5ms_TO_2.5ms",
+                                                         "period":  "20ms",
+                                                         "pin_count":  "ONE_PER_SERVO"
+                                                     }
+                              },
+    "pin_efficiency":  {
+                           "traditional_wiring":  {
+                                                      "pins_per_servo":  3,
+                                                      "total_pins_8_servos":  24,
+                                                      "efficiency":  "INEFFICIENT_HIGH_PIN_COUNT"
+                                                  },
+                           "shared_power_wiring":  {
+                                                       "shared_pins":  2,
+                                                       "unique_pins_per_servo":  1,
+                                                       "total_pins_8_servos":  10,
+                                                       "efficiency":  "HIGHLY_EFFICIENT_60_PERCENT_REDUCTION",
+                                                       "pin_savings":  "14_PINS_SAVED"
+                                                   }
+                       },
+    "facial_expression_servos":  {
+                                     "eyebrow_servos":  {
+                                                            "quantity":  2,
+                                                            "position":  "LEFT_RIGHT_EYEBROW",
+                                                            "movement":  "RAISE_LOWER_EYEBROW",
+                                                            "range":  "45_DEGREES",
+                                                            "expressions":  [
+                                                                                "SURPRISE",
+                                                                                "QUESTIONING",
+                                                                                "ANGER",
+                                                                                "CONCERN"
+                                                                            ]
+                                                        },
+                                     "eyelid_servos":  {
+                                                           "quantity":  4,
+                                                           "position":  "LEFT_RIGHT_UPPER_LOWER",
+                                                           "movement":  "EYELID_OPEN_CLOSE_BLINK",
+                                                           "range":  "30_DEGREES",
+                                                           "expressions":  [
+                                                                               "WINK",
+                                                                               "BLINK",
+                                                                               "SQUINT",
+                                                                               "WIDE_EYES"
+                                                                           ]
+                                                       },
+                                     "mouth_corner_servos":  {
+                                                                 "quantity":  2,
+                                                                 "position":  "LEFT_RIGHT_MOUTH_CORNERS",
+                                                                 "movement":  "SMILE_FROWN_PULL",
+                                                                 "range":  "60_DEGREES",
+                                                                 "expressions":  [
+                                                                                     "SMILE",
+                                                                                     "FROWN",
+                                                                                     "SMIRK",
+                                                                                     "GRIMACE"
+                                                                                 ]
+                                                             },
+                                     "nostril_servos":  {
+                                                            "quantity":  2,
+                                                            "position":  "LEFT_RIGHT_NOSTRILS",
+                                                            "movement":  "NOSTRIL_FLARE",
+                                                            "range":  "20_DEGREES",
+                                                            "expressions":  [
+                                                                                "ANGER",
+                                                                                "BREATHING_HEAVY",
+                                                                                "SNIFFING"
+                                                                            ]
+                                                        },
+                                     "cheek_servos":  {
+                                                          "quantity":  2,
+                                                          "position":  "LEFT_RIGHT_CHEEKS",
+                                                          "movement":  "CHEEK_PUFF_SUCK",
+                                                          "range":  "30_DEGREES",
+                                                          "expressions":  [
+                                                                              "PUFFED_CHEEKS",
+                                                                              "SUCKED_CHEEKS",
+                                                                              "CHEWING"
+                                                                          ]
+                                                      }
+                                 },
+    "ultra_micro_servo_specs":  {
+                                    "sg51r_ultra_micro":  {
+                                                              "weight":  "3.7g",
+                                                              "dimensions":  "20x8x18mm",
+                                                              "torque":  "0.8kg_cm_4.8V",
+                                                              "speed":  "0.08s_60deg_4.8V",
+                                                              "voltage":  "3.0V_TO_4.8V",
+                                                              "current_no_load":  "100mA",
+                                                              "current_stall":  "400mA",
+                                                              "cost":  "APPROXIMATELY_3_USD",
+                                                              "ideal_for":  "EYELIDS_EYEBROWS_SMALL_FEATURES"
+                                                          },
+                                    "es08a_ultra_micro":  {
+                                                              "weight":  "4.3g",
+                                                              "dimensions":  "19x8x20mm",
+                                                              "torque":  "0.9kg_cm_4.8V",
+                                                              "speed":  "0.09s_60deg_4.8V",
+                                                              "voltage":  "3.0V_TO_4.8V",
+                                                              "current_no_load":  "120mA",
+                                                              "current_stall":  "450mA",
+                                                              "cost":  "APPROXIMATELY_4_USD",
+                                                              "ideal_for":  "EYEBROWS_NOSTRILS_SMALL_MOUTH_FEATURES"
+                                                          },
+                                    "sg90_micro":  {
+                                                       "weight":  "9g",
+                                                       "dimensions":  "22x12x23mm",
+                                                       "torque":  "1.8kg_cm_4.8V",
+                                                       "speed":  "0.1s_60deg_4.8V",
+                                                       "voltage":  "4.8V_TO_6V",
+                                                       "current_no_load":  "200mA",
+                                                       "current_stall":  "650mA",
+                                                       "cost":  "APPROXIMATELY_2_USD",
+                                                       "ideal_for":  "MOUTH_CORNERS_CHEEKS_STRONGER_FEATURES"
+                                                   },
+                                    "mg90s_metal_gear":  {
+                                                             "weight":  "13.4g",
+                                                             "dimensions":  "22x12x28mm",
+                                                             "torque":  "2.5kg_cm_4.8V",
+                                                             "speed":  "0.14s_60deg_4.8V",
+                                                             "voltage":  "4.8V_TO_6V",
+                                                             "current_no_load":  "170mA",
+                                                             "current_stall":  "800mA",
+                                                             "cost":  "APPROXIMATELY_5_USD",
+                                                             "ideal_for":  "JAW_ASSIST_HEAVY_MOUTH_FEATURES"
+                                                         }
+                                },
+    "array_configurations":  {
+                                 "minimal_expression_array":  {
+                                                                  "servo_count":  4,
+                                                                  "servos":  [
+                                                                                 "2x_EYEBROW",
+                                                                                 "2x_MOUTH_CORNER"
+                                                                             ],
+                                                                  "total_pins":  6,
+                                                                  "expressions":  [
+                                                                                      "BASIC_EMOTIONS",
+                                                                                      "SURPRISE",
+                                                                                      "HAPPINESS",
+                                                                                      "SADNESS"
+                                                                                  ],
+                                                                  "cost_estimate":  "12_TO_20_USD"
+                                                              },
+                                 "standard_expression_array":  {
+                                                                   "servo_count":  8,
+                                                                   "servos":  [
+                                                                                  "2x_EYEBROW",
+                                                                                  "4x_EYELID",
+                                                                                  "2x_MOUTH_CORNER"
+                                                                              ],
+                                                                   "total_pins":  10,
+                                                                   "expressions":  [
+                                                                                       "FULL_EMOTION_RANGE",
+                                                                                       "BLINKING",
+                                                                                       "WINKING",
+                                                                                       "COMPLEX_EXPRESSIONS"
+                                                                                   ],
+                                                                   "cost_estimate":  "24_TO_40_USD"
+                                                               },
+                                 "advanced_expression_array":  {
+                                                                   "servo_count":  12,
+                                                                   "servos":  [
+                                                                                  "2x_EYEBROW",
+                                                                                  "4x_EYELID",
+                                                                                  "2x_MOUTH_CORNER",
+                                                                                  "2x_NOSTRIL",
+                                                                                  "2x_CHEEK"
+                                                                              ],
+                                                                   "total_pins":  14,
+                                                                   "expressions":  [
+                                                                                       "HIGHLY_EXPRESSIVE",
+                                                                                       "BREATHING_ANIMATION",
+                                                                                       "DETAILED_EMOTIONS"
+                                                                                   ],
+                                                                   "cost_estimate":  "36_TO_60_USD"
+                                                               }
+                             },
+    "pwm_timing_optimization":  {
+                                    "standard_timing":  {
+                                                            "frequency":  "50Hz",
+                                                            "period":  "20ms",
+                                                            "servo_update_interval":  "20ms_ALL_SIMULTANEOUS",
+                                                            "cpu_load":  "LOW_SIMPLE_TIMING"
+                                                        },
+                                    "staggered_timing":  {
+                                                             "frequency":  "50Hz",
+                                                             "period":  "20ms",
+                                                             "servo_update_interval":  "2.5ms_STAGGERED_8_SERVOS",
+                                                             "cpu_load":  "MEDIUM_DISTRIBUTED_LOAD",
+                                                             "advantages":  [
+                                                                                "REDUCED_POWER_SPIKES",
+                                                                                "SMOOTHER_CURRENT_DRAW"
+                                                                            ]
+                                                         },
+                                    "high_frequency_timing":  {
+                                                                  "frequency":  "333Hz",
+                                                                  "period":  "3ms",
+                                                                  "servo_update_interval":  "3ms_FAST_RESPONSE",
+                                                                  "cpu_load":  "HIGH_FAST_UPDATES",
+                                                                  "advantages":  [
+                                                                                     "SMOOTHER_MOTION",
+                                                                                     "FASTER_EXPRESSIONS",
+                                                                                     "LESS_JITTER"
+                                                                                 ]
+                                                              }
+                                },
+    "power_management":  {
+                             "current_calculations":  {
+                                                          "no_load_current_12_servos":  "1.4A_TO_2.0A",
+                                                          "peak_current_12_servos":  "4.8A_TO_9.6A",
+                                                          "recommended_supply":  "5V_10A_CAPACITY",
+                                                          "power_supply_headroom":  "25_PERCENT_SAFETY_MARGIN"
+                                                      },
+                             "power_sequencing":  {
+                                                      "servo_enable_staggering":  "100ms_INTERVALS_PREVENT_INRUSH",
+                                                      "graceful_shutdown":  "RETURN_TO_CENTER_BEFORE_POWER_OFF",
+                                                      "emergency_stop":  "IMMEDIATE_PWM_DISABLE_ALL_SERVOS"
+                                                  },
+                             "current_limiting":  {
+                                                      "per_servo_protection":  "FUSE_OR_CURRENT_LIMITER_1A",
+                                                      "total_array_protection":  "MAIN_FUSE_10A",
+                                                      "thermal_protection":  "TEMPERATURE_MONITORING_POWER_SUPPLY"
+                                                  }
+                         },
+    "manufacturer_pin_mappings":  {
+                                      "sg90_sg51r_series":  {
+                                                                "pwm_signal":  [
+                                                                                   "ORANGE",
+                                                                                   "YELLOW",
+                                                                                   "WHITE"
+                                                                               ],
+                                                                "vcc_servo":  [
+                                                                                  "RED",
+                                                                                  "POSITIVE"
+                                                                              ],
+                                                                "gnd_servo":  [
+                                                                                  "BROWN",
+                                                                                  "BLACK",
+                                                                                  "NEGATIVE"
+                                                                              ]
+                                                            },
+                                      "mg90s_series":  {
+                                                           "pwm_signal":  [
+                                                                              "ORANGE",
+                                                                              "SIGNAL"
+                                                                          ],
+                                                           "vcc_servo":  [
+                                                                             "RED",
+                                                                             "VCC"
+                                                                         ],
+                                                           "gnd_servo":  [
+                                                                             "BROWN",
+                                                                             "GND"
+                                                                         ]
+                                                       },
+                                      "es08_series":  {
+                                                          "pwm_signal":  [
+                                                                             "WHITE",
+                                                                             "SIGNAL"
+                                                                         ],
+                                                          "vcc_servo":  [
+                                                                            "RED",
+                                                                            "POWER"
+                                                                        ],
+                                                          "gnd_servo":  [
+                                                                            "BLACK",
+                                                                            "GROUND"
+                                                                        ]
+                                                      },
+                                      "hitec_micro":  {
+                                                          "pwm_signal":  [
+                                                                             "YELLOW",
+                                                                             "SIGNAL"
+                                                                         ],
+                                                          "vcc_servo":  [
+                                                                            "RED",
+                                                                            "POSITIVE"
+                                                                        ],
+                                                          "gnd_servo":  [
+                                                                            "BLACK",
+                                                                            "NEGATIVE"
+                                                                        ]
+                                                      }
+                                  },
+    "mechanical_integration":  {
+                                   "mounting_considerations":  {
+                                                                   "servo_spacing":  "15mm_MINIMUM_CENTER_TO_CENTER",
+                                                                   "access_clearance":  "5mm_MINIMUM_AROUND_SERVO",
+                                                                   "cable_management":  "FLEXIBLE_RIBBON_CABLE_RECOMMENDED",
+                                                                   "vibration_isolation":  "SOFT_MOUNTS_REDUCE_BUZZ"
+                                                               },
+                                   "linkage_design":  {
+                                                          "servo_arm_length":  "10mm_TO_25mm",
+                                                          "mechanical_advantage":  "1_1_TO_3_1_RATIO",
+                                                          "backlash_minimization":  "TIGHT_FITTING_SERVO_ARMS",
+                                                          "travel_limits":  "MECHANICAL_STOPS_PREVENT_DAMAGE"
+                                                      },
+                                   "facial_attachment":  {
+                                                             "attachment_method":  [
+                                                                                       "PIANO_WIRE",
+                                                                                       "FISHING_LINE",
+                                                                                       "THREAD",
+                                                                                       "MICRO_CABLES"
+                                                                                   ],
+                                                             "attachment_points":  "SKIN_ANCHOR_POINTS_FLEXIBLE_MATERIAL",
+                                                             "expression_mapping":  "SERVO_ANGLE_TO_FACIAL_FEATURE_MOVEMENT"
+                                                         }
+                               },
+    "expression_programming":  {
+                                   "emotion_definitions":  {
+                                                               "happiness":  {
+                                                                                 "mouth_corners":  "UP_45_DEGREES",
+                                                                                 "eyebrows":  "SLIGHTLY_RAISED",
+                                                                                 "eyelids":  "NORMAL_OPEN",
+                                                                                 "cheeks":  "SLIGHTLY_RAISED"
+                                                                             },
+                                                               "sadness":  {
+                                                                               "mouth_corners":  "DOWN_30_DEGREES",
+                                                                               "eyebrows":  "SLIGHTLY_LOWERED_INNER",
+                                                                               "eyelids":  "SLIGHTLY_DROOPED",
+                                                                               "cheeks":  "NORMAL"
+                                                                           },
+                                                               "surprise":  {
+                                                                                "mouth_corners":  "NEUTRAL",
+                                                                                "eyebrows":  "RAISED_HIGH",
+                                                                                "eyelids":  "WIDE_OPEN",
+                                                                                "cheeks":  "NORMAL"
+                                                                            },
+                                                               "anger":  {
+                                                                             "mouth_corners":  "DOWN_TIGHT",
+                                                                             "eyebrows":  "LOWERED_FURROWED",
+                                                                             "eyelids":  "NARROWED",
+                                                                             "nostrils":  "FLARED"
+                                                                         }
+                                                           },
+                                   "animation_sequences":  {
+                                                               "blink_sequence":  "EYELIDS_CLOSE_150ms_OPEN_150ms",
+                                                               "smile_sequence":  "MOUTH_CORNERS_GRADUAL_UP_500ms",
+                                                               "eyebrow_flash":  "EYEBROWS_UP_200ms_DOWN_200ms",
+                                                               "breathing_animation":  "NOSTRILS_SLIGHT_FLARE_2s_CYCLE"
+                                                           }
+                               },
+    "application_examples":  {
+                                 "goblin_facial_expressions":  {
+                                                                   "servo_array":  "8_SERVO_STANDARD_ARRAY",
+                                                                   "expressions":  [
+                                                                                       "MISCHIEVOUS_GRIN",
+                                                                                       "ANGRY_SCOWL",
+                                                                                       "SURPRISED_WIDE_EYES"
+                                                                                   ],
+                                                                   "servo_types":  [
+                                                                                       "4x_SG51R_EYELIDS",
+                                                                                       "2x_ES08A_EYEBROWS",
+                                                                                       "2x_SG90_MOUTH"
+                                                                                   ],
+                                                                   "total_cost":  "APPROXIMATELY_28_USD",
+                                                                   "pin_count":  "10_PINS_TOTAL"
+                                                               },
+                                 "cat_facial_expressions":  {
+                                                                "servo_array":  "6_SERVO_MINIMAL_PLUS",
+                                                                "expressions":  [
+                                                                                    "CONTENT_PURR",
+                                                                                    "ALERT_EARS",
+                                                                                    "SLEEPY_BLINK"
+                                                                                ],
+                                                                "servo_types":  [
+                                                                                    "4x_SG51R_EYELIDS",
+                                                                                    "2x_ES08A_MOUTH_CORNERS"
+                                                                                ],
+                                                                "total_cost":  "APPROXIMATELY_18_USD",
+                                                                "pin_count":  "8_PINS_TOTAL"
+                                                            },
+                                 "bear_facial_expressions":  {
+                                                                 "servo_array":  "12_SERVO_ADVANCED_ARRAY",
+                                                                 "expressions":  [
+                                                                                     "FRIENDLY_SMILE",
+                                                                                     "PROTECTIVE_GROWL",
+                                                                                     "CURIOUS_SNIFF"
+                                                                                 ],
+                                                                 "servo_types":  [
+                                                                                     "4x_SG51R_EYELIDS",
+                                                                                     "2x_ES08A_EYEBROWS",
+                                                                                     "2x_SG90_MOUTH",
+                                                                                     "2x_ES08A_NOSTRILS",
+                                                                                     "2x_SG90_CHEEKS"
+                                                                                 ],
+                                                                 "total_cost":  "APPROXIMATELY_40_USD",
+                                                                 "pin_count":  "14_PINS_TOTAL"
+                                                             }
+                             },
+    "name":  "micro_servo_array",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

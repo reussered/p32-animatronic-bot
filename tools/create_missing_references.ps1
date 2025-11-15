@@ -46,7 +46,6 @@ Write-Info "="*70
 # Standard hardware component definitions
 $HardwareDefinitions = @{
     "gc9a01_display.json" = @{
-        relative_filename = "components/hardware/gc9a01_display.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "gc9a01_display"
@@ -77,7 +76,6 @@ $HardwareDefinitions = @{
     }
     
     "hc_sr04_sensor.json" = @{
-        relative_filename = "components/hardware/hc_sr04_sensor.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "hc_sr04_sensor"
@@ -109,7 +107,6 @@ $HardwareDefinitions = @{
     }
     
     "speaker.json" = @{
-        relative_filename = "components/hardware/speaker.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "speaker"
@@ -140,7 +137,6 @@ $HardwareDefinitions = @{
     }
     
     "esp32_s3_devkit.json" = @{
-        relative_filename = "components/hardware/esp32_s3_devkit.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "esp32_s3_devkit"
@@ -174,7 +170,6 @@ $HardwareDefinitions = @{
     }
     
     "mg996r_servo.json" = @{
-        relative_filename = "components/hardware/mg996r_servo.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "mg996r_servo"
@@ -209,7 +204,6 @@ $HardwareDefinitions = @{
 # Creature-specific component definitions
 $CreatureComponents = @{
     "goblin_eye.json" = @{
-        relative_filename = "components/creature_specific/goblin_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "goblin_eye"
@@ -239,7 +233,6 @@ $CreatureComponents = @{
     }
     
     "cat_eye.json" = @{
-        relative_filename = "components/creature_specific/cat_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "cat_eye"
@@ -269,7 +262,6 @@ $CreatureComponents = @{
     }
     
     "bear_eye.json" = @{
-        relative_filename = "components/creature_specific/bear_eye.json"
         version = "1.0.0"
         author = "config/author.json"
         component_name = "bear_eye"
@@ -303,7 +295,8 @@ $CreatureComponents = @{
 $createdHardware = 0
 foreach ($filename in $HardwareDefinitions.Keys) {
     $definition = $HardwareDefinitions[$filename]
-    $fullPath = Join-Path $ProjectRoot $definition.relative_filename
+    # Construct the expected full path for hardware definitions
+    $fullPath = Join-Path $ProjectRoot (Join-Path "components/hardware" $filename)
     
     if (-not (Test-Path $fullPath)) {
         if ($Verbose) { Write-Progress "Creating hardware component: $filename" }
@@ -314,6 +307,10 @@ foreach ($filename in $HardwareDefinitions.Keys) {
                 New-Item -ItemType Directory -Path $directory -Force | Out-Null
             }
             
+            # Remove deprecated 'relative_filename' from written JSONs
+            if ($definition.PSObject.Properties.Name -contains 'relative_filename') {
+                $definition.PSObject.Properties.Remove('relative_filename') | Out-Null
+            }
             $definition | ConvertTo-Json -Depth 20 | Set-Content -Path $fullPath -Encoding UTF8
         }
         $createdHardware++
@@ -324,7 +321,8 @@ foreach ($filename in $HardwareDefinitions.Keys) {
 $createdCreatures = 0
 foreach ($filename in $CreatureComponents.Keys) {
     $definition = $CreatureComponents[$filename]
-    $fullPath = Join-Path $ProjectRoot $definition.relative_filename
+    # Construct the expected full path for creature-specific components
+    $fullPath = Join-Path $ProjectRoot (Join-Path "components/creature_specific" $filename)
     
     if (-not (Test-Path $fullPath)) {
         if ($Verbose) { Write-Progress "Creating creature component: $filename" }
@@ -335,7 +333,11 @@ foreach ($filename in $CreatureComponents.Keys) {
                 New-Item -ItemType Directory -Path $directory -Force | Out-Null
             }
             
-            $definition | ConvertTo-Json -Depth 20 | Set-Content -Path $fullPath -Encoding UTF8
+            # Remove deprecated 'relative_filename' from written JSONs and write as ASCII
+            if ($definition.PSObject.Properties.Name -contains 'relative_filename') {
+                $definition.PSObject.Properties.Remove('relative_filename') | Out-Null
+            }
+            $definition | ConvertTo-Json -Depth 99 | Set-Content -Path $fullPath -Encoding ASCII
         }
         $createdCreatures++
     }

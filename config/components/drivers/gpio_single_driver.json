@@ -1,86 +1,85 @@
 {
-    "relative_filename": "config/components/drivers/driver/gpio_single_driver.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "gpio_single_driver",
-    "hardware_type": "BUS_DRIVER",
-    "interface_type": "GPIO_SINGLE",
-    "description": "Generic single GPIO driver for ESP32 supporting digital input/output with interrupt capabilities",
-    "created": "2025-10-29",
-    "driver_capabilities": {
-        "max_pins": 34,
-        "io_modes": [
-            "DIGITAL_INPUT",
-            "DIGITAL_OUTPUT",
-            "ANALOG_INPUT",
-            "PWM_OUTPUT",
-            "TOUCH_SENSOR",
-            "RTC_GPIO"
-        ],
-        "interrupt_types": [
-            "RISING_EDGE",
-            "FALLING_EDGE",
-            "ANY_EDGE",
-            "LOW_LEVEL",
-            "HIGH_LEVEL"
-        ],
-        "pullup_pulldown": true,
-        "debouncing": true,
-        "adc_capable": true
-    },
-    "electrical_specs": {
-        "operating_voltage": "3.3V",
-        "output_current": "40mA_PER_PIN",
-        "input_voltage_range": "0-3.3V",
-        "pullup_resistance": "45K_OHM",
-        "pulldown_resistance": "45K_OHM"
-    },
-    "gpio_requirements": {
-        "pin_number": "CONFIGURABLE_AT_RUNTIME",
-        "pin_constraints": "ESP32_GPIO_PINS",
-        "adc_capable_pins": "GPIO_1-10_32-39",
-        "interrupt_capable_pins": "MOST_GPIO_PINS"
-    },
-    "software": {
-        "init_function": "gpio_single_driver_init",
-        "act_function": "gpio_single_driver_act",
-        "api_functions": [
-            "gpio_set_mode(pin, mode)",
-            "gpio_write_digital(pin, state)",
-            "gpio_read_digital(pin)",
-            "gpio_read_analog(pin)",
-            "gpio_set_interrupt(pin, type, callback)",
-            "gpio_enable_pullup(pin)",
-            "gpio_enable_pulldown(pin)"
-        ]
-    },
-    "configuration_options": {
-        "default_mode": "DIGITAL_INPUT",
-        "default_pull": "NONE",
-        "interrupt_enabled": false,
-        "debounce_delay": "10ms",
-        "adc_resolution": "12_BIT"
-    },
-    "use_cases": [
-        "digital_sensor_reading",
-        "led_control",
-        "button_input",
-        "relay_control",
-        "status_indicators",
-        "touch_sensing"
-    ],
-    "compatibility": {
-        "esp32_s3": "FULL_34_PINS",
-        "esp32_c3": "FULL_22_PINS",
-        "esp32": "FULL_34_PINS"
-    },
-    "use_fields": {
-        "debug": false
-    },
-    "prototype_status": "ready_for_implementation",
-    "tested": false,
-    "type": "GENERIC_DRIVER",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "gpio_single_driver",
+    "hardware_type":  "BUS_DRIVER",
+    "interface_type":  "GPIO_SINGLE",
+    "description":  "Generic single GPIO driver for ESP32 supporting digital input/output with interrupt capabilities",
+    "created":  "2025-10-29",
+    "driver_capabilities":  {
+                                "max_pins":  34,
+                                "io_modes":  [
+                                                 "DIGITAL_INPUT",
+                                                 "DIGITAL_OUTPUT",
+                                                 "ANALOG_INPUT",
+                                                 "PWM_OUTPUT",
+                                                 "TOUCH_SENSOR",
+                                                 "RTC_GPIO"
+                                             ],
+                                "interrupt_types":  [
+                                                        "RISING_EDGE",
+                                                        "FALLING_EDGE",
+                                                        "ANY_EDGE",
+                                                        "LOW_LEVEL",
+                                                        "HIGH_LEVEL"
+                                                    ],
+                                "pullup_pulldown":  true,
+                                "debouncing":  true,
+                                "adc_capable":  true
+                            },
+    "electrical_specs":  {
+                             "operating_voltage":  "3.3V",
+                             "output_current":  "40mA_PER_PIN",
+                             "input_voltage_range":  "0-3.3V",
+                             "pullup_resistance":  "45K_OHM",
+                             "pulldown_resistance":  "45K_OHM"
+                         },
+    "gpio_requirements":  {
+                              "pin_number":  "CONFIGURABLE_AT_RUNTIME",
+                              "pin_constraints":  "ESP32_GPIO_PINS",
+                              "adc_capable_pins":  "GPIO_1-10_32-39",
+                              "interrupt_capable_pins":  "MOST_GPIO_PINS"
+                          },
+    "software":  {
+                     "init_function":  "gpio_single_driver_init",
+                     "act_function":  "gpio_single_driver_act",
+                     "api_functions":  [
+                                           "gpio_set_mode(pin, mode)",
+                                           "gpio_write_digital(pin, state)",
+                                           "gpio_read_digital(pin)",
+                                           "gpio_read_analog(pin)",
+                                           "gpio_set_interrupt(pin, type, callback)",
+                                           "gpio_enable_pullup(pin)",
+                                           "gpio_enable_pulldown(pin)"
+                                       ]
+                 },
+    "configuration_options":  {
+                                  "default_mode":  "DIGITAL_INPUT",
+                                  "default_pull":  "NONE",
+                                  "interrupt_enabled":  false,
+                                  "debounce_delay":  "10ms",
+                                  "adc_resolution":  "12_BIT"
+                              },
+    "use_cases":  [
+                      "digital_sensor_reading",
+                      "led_control",
+                      "button_input",
+                      "relay_control",
+                      "status_indicators",
+                      "touch_sensing"
+                  ],
+    "compatibility":  {
+                          "esp32_s3":  "FULL_34_PINS",
+                          "esp32_c3":  "FULL_22_PINS",
+                          "esp32":  "FULL_34_PINS"
+                      },
+    "use_fields":  {
+                       "debug":  false
+                   },
+    "prototype_status":  "ready_for_implementation",
+    "tested":  false,
+    "type":  "GENERIC_DRIVER",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

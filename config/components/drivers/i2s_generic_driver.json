@@ -1,58 +1,69 @@
 {
-    "relative_filename": "config/components/drivers/i2s_generic_driver.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "i2s_generic_driver",
-    "hardware_type": "DRIVER",
-    "interface_type": "I2S",
-    "description": "Generic I2S driver for digital microphones with DMA management",
-    "created": "2025-11-10",
-    "driver_capabilities": {
-        "microphone_types": [
-            "INMP441", 
-            "SPH0645",
-            "ICS43432",
-            "generic_i2s_mems"
-        ],
-        "sample_rates": ["8000", "16000", "22050", "44100"],
-        "bit_depths": ["16", "24", "32"],
-        "channels": ["mono", "stereo"]
-    },
-    "i2s_config": {
-        "mode": "I2S_MODE_MASTER | I2S_MODE_RX",
-        "sample_rate": 16000,
-        "bits_per_sample": "I2S_BITS_PER_SAMPLE_32BIT",
-        "channel_format": "I2S_CHANNEL_FMT_ONLY_LEFT",
-        "communication_format": "I2S_COMM_FORMAT_I2S",
-        "dma_buf_count": 8,
-        "dma_buf_len": 1024
-    },
-    "dma_management": {
-        "auto_initiate": true,
-        "buffer_monitoring": true,
-        "underrun_protection": true
-    },
-    "dependencies": [
-        "config/components/drivers/i2s_bus.json"
-    ],
-    "software": {
-        "init_function": "i2s_generic_driver_init",
-        "act_function": "i2s_generic_driver_act",
-        "api_functions": [
-            "i2s_generic_driver_read_samples(int32_t *buffer, size_t *bytes_read)",
-            "i2s_generic_driver_get_sample_rate(uint32_t *rate)",
-            "i2s_generic_driver_is_dma_active(bool *active)",
-            "i2s_generic_driver_start_dma(void)",
-            "i2s_generic_driver_stop_dma(void)"
-        ]
-    },
-    "type": "GENERIC_DRIVER",
-    "timing": {
-        "hitCount": 1
-    },
-    "notes": [
-        "act() function checks DMA status and initiates if needed",
-        "Handles real-time audio streaming automatically",
-        "Better noise immunity than ADC-based analog mics"
-    ]
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "i2s_generic_driver",
+    "hardware_type":  "DRIVER",
+    "interface_type":  "I2S",
+    "description":  "Generic I2S driver for digital microphones with DMA management",
+    "created":  "2025-11-10",
+    "driver_capabilities":  {
+                                "microphone_types":  [
+                                                         "INMP441",
+                                                         "SPH0645",
+                                                         "ICS43432",
+                                                         "generic_i2s_mems"
+                                                     ],
+                                "sample_rates":  [
+                                                     "8000",
+                                                     "16000",
+                                                     "22050",
+                                                     "44100"
+                                                 ],
+                                "bit_depths":  [
+                                                   "16",
+                                                   "24",
+                                                   "32"
+                                               ],
+                                "channels":  [
+                                                 "mono",
+                                                 "stereo"
+                                             ]
+                            },
+    "i2s_config":  {
+                       "mode":  "I2S_MODE_MASTER | I2S_MODE_RX",
+                       "sample_rate":  16000,
+                       "bits_per_sample":  "I2S_BITS_PER_SAMPLE_32BIT",
+                       "channel_format":  "I2S_CHANNEL_FMT_ONLY_LEFT",
+                       "communication_format":  "I2S_COMM_FORMAT_I2S",
+                       "dma_buf_count":  8,
+                       "dma_buf_len":  1024
+                   },
+    "dma_management":  {
+                           "auto_initiate":  true,
+                           "buffer_monitoring":  true,
+                           "underrun_protection":  true
+                       },
+    "dependencies":  [
+                         "config/components/drivers/i2s_bus.json"
+                     ],
+    "software":  {
+                     "init_function":  "i2s_generic_driver_init",
+                     "act_function":  "i2s_generic_driver_act",
+                     "api_functions":  [
+                                           "i2s_generic_driver_read_samples(int32_t *buffer, size_t *bytes_read)",
+                                           "i2s_generic_driver_get_sample_rate(uint32_t *rate)",
+                                           "i2s_generic_driver_is_dma_active(bool *active)",
+                                           "i2s_generic_driver_start_dma(void)",
+                                           "i2s_generic_driver_stop_dma(void)"
+                                       ]
+                 },
+    "type":  "GENERIC_DRIVER",
+    "timing":  {
+                   "hitCount":  1
+               },
+    "notes":  [
+                  "act() function checks DMA status and initiates if needed",
+                  "Handles real-time audio streaming automatically",
+                  "Better noise immunity than ADC-based analog mics"
+              ]
 }

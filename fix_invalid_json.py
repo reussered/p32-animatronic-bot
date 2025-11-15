@@ -35,7 +35,6 @@ def fix_empty_json_files():
             
             # Create minimal valid JSON structure
             minimal_structure = {
-                "relative_filename": file_path,
                 "version": "1.0",
                 "author": "config/author.json",
                 "family_name": family_name,
@@ -87,7 +86,6 @@ def fix_robot_family_json():
     if file_path.exists():
         # Create corrected structure
         corrected_structure = {
-            "relative_filename": "config/bots/bot_families/mechanical/robot_family.json",
             "version": "1.0",
             "author": "config/author.json",
             "family_name": "Robot",
@@ -147,7 +145,6 @@ def fix_robot_family_corrupted():
     if file_path.exists():
         # Replace with minimal valid structure
         corrected_structure = {
-            "relative_filename": "config/bots/bot_families/mechanical/robot_family_corrupted.json",
             "version": "1.0",
             "author": "config/author.json",
             "family_name": "Robot Corrupted",

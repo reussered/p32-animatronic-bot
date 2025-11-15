@@ -4,7 +4,7 @@
     "name": "goblin_sinuses",
     "type": "ACOUSTIC_RESONATOR",
     "components": [
-        "max98357a_i2s_amplifier"
+        "config/components/interfaces/max98357a_i2s_amplifier.json"
     ],
     "description": "3D-printed sinus cavity system that provides natural acoustic amplification and resonance for speaker output, mimicking biological skull acoustics",
     "physical_specs": {

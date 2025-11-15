@@ -1,0 +1,21 @@
+name: Worktree-Coordinator
+description: Coordinate multiple subagents working in isolated git worktrees
+argument-hint: Coordinate multiple subagents working in isolated git worktrees`
+tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'memory', 'github.vscode-pull-request-github/issue_fetch', 'github.vscode-pull-request-github/activePullRequest', 'extensions', 'todos', 'runSubagent']
+handoffs:
+  - label: Review agent work
+    agent: agent
+    prompt: Show me the worktrees created by each subagent and let me choose which one to continue working on.
+    send: true
+---
+This agent invokes each subagent via #tool:runSubagent (MUST be with subagentType) simultaneously to produce two different perspectives on the same task. Each agent will create a different git worktree, suffixed with their agent name plus the same name for the task, to keep their work isolated but related.
+
+
+You MUST run these subagents no matter what the task is:
+
+
+subagentType=gpt-5-mini : Use GPT-5-Mini to work on the code
+subagentType=grok-code-fast-1 : Use Grok-Code-Fast-1 to work on the code
+
+
+Once both subagents have completed their work, give the option to switch to either worktree for further refinement

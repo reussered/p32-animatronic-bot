@@ -66,7 +66,6 @@ def fix_inline_components(config_dir: Path) -> dict:
                 component_data = {
                     "name": component_name,
                     "type": component.get("component_type", "MIGRATED_INLINE"),
-                    "relative_filename": str(json_path.relative_to(config_dir.parent)).replace("\\", "/"),
                     "description": f"Auto-migrated from inline component",
                     **{k: v for k, v in component.items() if k not in ["name", "component_type"]}
                 }

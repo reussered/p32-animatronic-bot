@@ -1,217 +1,218 @@
 {
-    "relative_filename": "config/bots/bot_families/humanoids/modular_humanoid_esp32.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "bot_type": "MODULAR_HUMANOID_ESP32",
-    "description": "Demonstrates component-based architecture for ESP32 humanoid using abstraction layers",
-    "coordinate_system": "skull_3d",
-    "reference_point": "pelvis_center",
-    "modular_architecture_demonstration": {
-        "abstraction_layers": {
-            "application_layer": {
-                "description": "High-level robot behaviors independent of hardware",
-                "components": [
-                    "walk_controller",
-                    "balance_manager",
-                    "gesture_engine"
-                ],
-                "dependencies": "ONLY_FUNCTIONAL_INTERFACES"
-            },
-            "functional_layer": {
-                "description": "Subsystem functions independent of communication/hardware",
-                "components": [
-                    "leg_subsystem",
-                    "arm_subsystem",
-                    "head_subsystem"
-                ],
-                "interfaces": [
-                    "servo_abstraction",
-                    "communication_abstraction"
-                ]
-            },
-            "abstraction_layer": {
-                "description": "Protocol and hardware agnostic interfaces",
-                "components": [
-                    "servo_hardware_abstraction",
-                    "communication_abstraction_layer"
-                ],
-                "purpose": "DECOUPLE_WHAT_FROM_HOW"
-            },
-            "implementation_layer": {
-                "description": "Specific hardware and protocol implementations",
-                "components": [
-                    "esp32_drivers",
-                    "mg996r_drivers",
-                    "esp_now_drivers"
-                ],
-                "swappable": "WITHOUT_UPPER_LAYER_CHANGES"
-            }
-        }
-    },
-    "subsystem_compositions": {
-        "legs_subsystem": {
-            "functional_component": "config/components/functional/humanoid_leg_subsystem.json",
-            "controller": "config/components/hardware/esp32_s3_controller.json",
-            "servo_hardware": "config/components/hardware/mg996r_servo.json",
-            "communication_interface": "config/components/interfaces/esp_now_mesh.json",
-            "components": [
-                "config/components/hardware/mpu6050_imu.json",
-                "config/components/hardware/pressure_sensor.json"
-            ]
-        },
-        "arms_subsystem": {
-            "functional_component": "config/components/functional/humanoid_arm_subsystem.json",
-            "controller": "config/components/hardware/esp32_s3_controller.json",
-            "servo_hardware": "config/components/hardware/mg90s_servo.json",
-            "communication_interface": "config/components/interfaces/esp_now_mesh.json",
-            "expansion_hardware": "config/components/hardware/pca9685_pwm_expander.json"
-        },
-        "head_subsystem": {
-            "functional_component": "config/components/functional/humanoid_head_subsystem.json",
-            "controller": "config/components/hardware/esp32_s3_controller.json",
-            "servo_hardware": "config/components/hardware/mg90s_servo.json",
-            "communication_interface": "config/components/interfaces/esp_now_mesh.json",
-            "components": [
-                "config/components/hardware/ov2640_camera.json",
-                "config/components/hardware/i2s_microphone.json"
-            ]
-        }
-    },
-    "hardware_swap_scenarios": {
-        "servo_upgrade_path": {
-            "phase_1_prototype": {
-                "servo_type": "pwm_standard_servo",
-                "model": "MG996R",
-                "cost_per_servo": "$8_USD",
-                "total_servos": "38",
-                "total_cost": "$304_USD"
-            },
-            "phase_2_precision": {
-                "servo_type": "encoder_feedback_servo",
-                "model": "MG996R_with_AS5600_encoder",
-                "cost_per_servo": "$25_USD",
-                "total_servos": "38",
-                "total_cost": "$950_USD",
-                "required_changes": "UPDATE_SERVO_TYPE_IN_CONFIG_ONLY"
-            },
-            "phase_3_professional": {
-                "servo_type": "smart_servo_dynamixel",
-                "model": "MX28-AT",
-                "cost_per_servo": "$200_USD",
-                "total_servos": "38",
-                "total_cost": "$7600_USD",
-                "required_changes": "UPDATE_SERVO_TYPE_IN_CONFIG_ONLY"
-            }
-        },
-        "communication_swap_scenarios": {
-            "development_phase": {
-                "protocol": "esp_now_mesh",
-                "reason": "WIRELESS_EASY_DEBUGGING",
-                "latency": "5_MILLISECONDS"
-            },
-            "production_phase": {
-                "protocol": "can_bus_interface",
-                "reason": "INDUSTRIAL_RELIABILITY",
-                "latency": "1_MILLISECOND",
-                "required_changes": "UPDATE_COMMUNICATION_TYPE_IN_CONFIG_ONLY"
-            }
-        }
-    },
-    "configuration_driven_flexibility": {
-        "servo_configuration_example": {
-            "left_hip_yaw": {
-                "servo_abstraction_config": {
-                    "servo_type": "pwm_standard_servo",
-                    "hardware_config": {
-                        "model": "MG996R",
-                        "gpio_pin": "GPIO_01",
-                        "pwm_channel": "LEDC_CHANNEL_0"
-                    },
-                    "kinematic_config": {
-                        "angle_range": "[-45, 45] DEGREES",
-                        "zero_position": "0 DEGREES",
-                        "invert_direction": false
-                    }
-                }
-            }
-        },
-        "easy_hardware_swaps": {
-            "change_servo_model": {
-                "from": "MG996R",
-                "to": "Dynamixel_MX28",
-                "required_change": "servo_type: pwm_standard_servo -> smart_servo_dynamixel",
-                "code_impact": "ZERO_APPLICATION_CODE_CHANGES"
-            },
-            "change_communication": {
-                "from": "esp_now_mesh",
-                "to": "can_bus_interface",
-                "required_change": "communication_interface: esp_now_mesh.json -> can_bus_interface.json",
-                "code_impact": "ZERO_APPLICATION_CODE_CHANGES"
-            }
-        }
-    },
-    "benefits_demonstration": {
-        "development_workflow": {
-            "prototype_phase": {
-                "hardware": "ESP32 + cheap PWM servos + ESP-NOW",
-                "cost": "$300_TOTAL",
-                "capabilities": "BASIC_MOTION_ALGORITHM_DEVELOPMENT"
-            },
-            "testing_phase": {
-                "hardware": "ESP32 + encoder servos + CAN bus",
-                "cost": "$800_TOTAL",
-                "capabilities": "PRECISION_CONTROL_VALIDATION"
-            },
-            "production_phase": {
-                "hardware": "ESP32 + Dynamixel servos + CAN bus",
-                "cost": "$2000_TOTAL",
-                "capabilities": "PROFESSIONAL_PERFORMANCE"
-            },
-            "migration_effort": "CONFIGURATION_FILES_ONLY_NO_CODE_REWRITE"
-        },
-        "maintenance_benefits": {
-            "component_failure": {
-                "problem": "Servo motor fails",
-                "solution": "Replace with different servo type if needed",
-                "effort": "UPDATE_CONFIG_FILE_ONLY"
-            },
-            "performance_upgrade": {
-                "problem": "Need better precision",
-                "solution": "Upgrade to encoder feedback servos",
-                "effort": "CONFIGURATION_CHANGE_PLUS_HARDWARE_SWAP"
-            },
-            "cost_optimization": {
-                "problem": "Budget constraints",
-                "solution": "Downgrade non-critical joints to cheaper servos",
-                "effort": "PER_SERVO_CONFIGURATION_TUNING"
-            }
-        }
-    },
-    "real_world_example": {
-        "poppy_to_esp32_adaptation": {
-            "original_poppy_config": {
-                "servo_type": "smart_servo_dynamixel",
-                "communication": "usb2ax_serial",
-                "controller": "raspberry_pi_4",
-                "total_cost": "$8000_USD"
-            },
-            "esp32_adaptation_config": {
-                "servo_type": "pwm_standard_servo",
-                "communication": "esp_now_mesh",
-                "controller": "esp32_s3_devkit",
-                "total_cost": "$800_USD"
-            },
-            "mechanical_compatibility": {
-                "stl_files": "DIRECT_USE_FROM_POPPY_PROJECT",
-                "modifications": "SERVO_MOUNTING_BRACKETS_ONLY",
-                "license_compliance": "CREATIVE_COMMONS_ATTRIBUTION"
-            }
-        }
-    },
-    "name": "modular_humanoid_esp32",
-    "type": "UNKNOWN",
-    "components": [],
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "bot_type":  "MODULAR_HUMANOID_ESP32",
+    "description":  "Demonstrates component-based architecture for ESP32 humanoid using abstraction layers",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "pelvis_center",
+    "modular_architecture_demonstration":  {
+                                               "abstraction_layers":  {
+                                                                          "application_layer":  {
+                                                                                                    "description":  "High-level robot behaviors independent of hardware",
+                                                                                                    "components":  [
+                                                                                                                       "walk_controller",
+                                                                                                                       "balance_manager",
+                                                                                                                       "gesture_engine"
+                                                                                                                   ],
+                                                                                                    "dependencies":  "ONLY_FUNCTIONAL_INTERFACES"
+                                                                                                },
+                                                                          "functional_layer":  {
+                                                                                                   "description":  "Subsystem functions independent of communication/hardware",
+                                                                                                   "components":  [
+                                                                                                                      "leg_subsystem",
+                                                                                                                      "arm_subsystem",
+                                                                                                                      "head_subsystem"
+                                                                                                                  ],
+                                                                                                   "interfaces":  [
+                                                                                                                      "servo_abstraction",
+                                                                                                                      "communication_abstraction"
+                                                                                                                  ]
+                                                                                               },
+                                                                          "abstraction_layer":  {
+                                                                                                    "description":  "Protocol and hardware agnostic interfaces",
+                                                                                                    "components":  [
+                                                                                                                       "servo_hardware_abstraction",
+                                                                                                                       "communication_abstraction_layer"
+                                                                                                                   ],
+                                                                                                    "purpose":  "DECOUPLE_WHAT_FROM_HOW"
+                                                                                                },
+                                                                          "implementation_layer":  {
+                                                                                                       "description":  "Specific hardware and protocol implementations",
+                                                                                                       "components":  [
+                                                                                                                          "esp32_drivers",
+                                                                                                                          "mg996r_drivers",
+                                                                                                                          "esp_now_drivers"
+                                                                                                                      ],
+                                                                                                       "swappable":  "WITHOUT_UPPER_LAYER_CHANGES"
+                                                                                                   }
+                                                                      }
+                                           },
+    "subsystem_compositions":  {
+                                   "legs_subsystem":  {
+                                                          "functional_component":  "config/components/functional/humanoid_leg_subsystem.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "servo_hardware":  "config/components/hardware/mg996r_servo.json",
+                                                          "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
+                                                          "components":  [
+                                                                             "config/components/hardware/mpu6050_imu.json",
+                                                                             "config/components/hardware/pressure_sensor.json"
+                                                                         ]
+                                                      },
+                                   "arms_subsystem":  {
+                                                          "functional_component":  "config/components/functional/humanoid_arm_subsystem.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "servo_hardware":  "config/components/hardware/mg90s_servo.json",
+                                                          "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
+                                                          "expansion_hardware":  "config/components/hardware/pca9685_pwm_expander.json"
+                                                      },
+                                   "head_subsystem":  {
+                                                          "functional_component":  "config/components/functional/humanoid_head_subsystem.json",
+                                                          "controller":  "config/components/hardware/esp32_s3_controller.json",
+                                                          "servo_hardware":  "config/components/hardware/mg90s_servo.json",
+                                                          "communication_interface":  "config/components/interfaces/esp_now_mesh.json",
+                                                          "components":  [
+                                                                             "config/components/hardware/ov2640_camera.json",
+                                                                             "config/components/hardware/i2s_microphone.json"
+                                                                         ]
+                                                      }
+                               },
+    "hardware_swap_scenarios":  {
+                                    "servo_upgrade_path":  {
+                                                               "phase_1_prototype":  {
+                                                                                         "servo_type":  "pwm_standard_servo",
+                                                                                         "model":  "MG996R",
+                                                                                         "cost_per_servo":  "$8_USD",
+                                                                                         "total_servos":  "38",
+                                                                                         "total_cost":  "$304_USD"
+                                                                                     },
+                                                               "phase_2_precision":  {
+                                                                                         "servo_type":  "encoder_feedback_servo",
+                                                                                         "model":  "MG996R_with_AS5600_encoder",
+                                                                                         "cost_per_servo":  "$25_USD",
+                                                                                         "total_servos":  "38",
+                                                                                         "total_cost":  "$950_USD",
+                                                                                         "required_changes":  "UPDATE_SERVO_TYPE_IN_CONFIG_ONLY"
+                                                                                     },
+                                                               "phase_3_professional":  {
+                                                                                            "servo_type":  "smart_servo_dynamixel",
+                                                                                            "model":  "MX28-AT",
+                                                                                            "cost_per_servo":  "$200_USD",
+                                                                                            "total_servos":  "38",
+                                                                                            "total_cost":  "$7600_USD",
+                                                                                            "required_changes":  "UPDATE_SERVO_TYPE_IN_CONFIG_ONLY"
+                                                                                        }
+                                                           },
+                                    "communication_swap_scenarios":  {
+                                                                         "development_phase":  {
+                                                                                                   "protocol":  "esp_now_mesh",
+                                                                                                   "reason":  "WIRELESS_EASY_DEBUGGING",
+                                                                                                   "latency":  "5_MILLISECONDS"
+                                                                                               },
+                                                                         "production_phase":  {
+                                                                                                  "protocol":  "can_bus_interface",
+                                                                                                  "reason":  "INDUSTRIAL_RELIABILITY",
+                                                                                                  "latency":  "1_MILLISECOND",
+                                                                                                  "required_changes":  "UPDATE_COMMUNICATION_TYPE_IN_CONFIG_ONLY"
+                                                                                              }
+                                                                     }
+                                },
+    "configuration_driven_flexibility":  {
+                                             "servo_configuration_example":  {
+                                                                                 "left_hip_yaw":  {
+                                                                                                      "servo_abstraction_config":  {
+                                                                                                                                       "servo_type":  "pwm_standard_servo",
+                                                                                                                                       "hardware_config":  {
+                                                                                                                                                               "model":  "MG996R",
+                                                                                                                                                               "gpio_pin":  "GPIO_01",
+                                                                                                                                                               "pwm_channel":  "LEDC_CHANNEL_0"
+                                                                                                                                                           },
+                                                                                                                                       "kinematic_config":  {
+                                                                                                                                                                "angle_range":  "[-45, 45] DEGREES",
+                                                                                                                                                                "zero_position":  "0 DEGREES",
+                                                                                                                                                                "invert_direction":  false
+                                                                                                                                                            }
+                                                                                                                                   }
+                                                                                                  }
+                                                                             },
+                                             "easy_hardware_swaps":  {
+                                                                         "change_servo_model":  {
+                                                                                                    "from":  "MG996R",
+                                                                                                    "to":  "Dynamixel_MX28",
+                                                                                                    "required_change":  "servo_type: pwm_standard_servo -\u003e smart_servo_dynamixel",
+                                                                                                    "code_impact":  "ZERO_APPLICATION_CODE_CHANGES"
+                                                                                                },
+                                                                         "change_communication":  {
+                                                                                                      "from":  "esp_now_mesh",
+                                                                                                      "to":  "can_bus_interface",
+                                                                                                      "required_change":  "communication_interface: esp_now_mesh.json -\u003e can_bus_interface.json",
+                                                                                                      "code_impact":  "ZERO_APPLICATION_CODE_CHANGES"
+                                                                                                  }
+                                                                     }
+                                         },
+    "benefits_demonstration":  {
+                                   "development_workflow":  {
+                                                                "prototype_phase":  {
+                                                                                        "hardware":  "ESP32 + cheap PWM servos + ESP-NOW",
+                                                                                        "cost":  "$300_TOTAL",
+                                                                                        "capabilities":  "BASIC_MOTION_ALGORITHM_DEVELOPMENT"
+                                                                                    },
+                                                                "testing_phase":  {
+                                                                                      "hardware":  "ESP32 + encoder servos + CAN bus",
+                                                                                      "cost":  "$800_TOTAL",
+                                                                                      "capabilities":  "PRECISION_CONTROL_VALIDATION"
+                                                                                  },
+                                                                "production_phase":  {
+                                                                                         "hardware":  "ESP32 + Dynamixel servos + CAN bus",
+                                                                                         "cost":  "$2000_TOTAL",
+                                                                                         "capabilities":  "PROFESSIONAL_PERFORMANCE"
+                                                                                     },
+                                                                "migration_effort":  "CONFIGURATION_FILES_ONLY_NO_CODE_REWRITE"
+                                                            },
+                                   "maintenance_benefits":  {
+                                                                "component_failure":  {
+                                                                                          "problem":  "Servo motor fails",
+                                                                                          "solution":  "Replace with different servo type if needed",
+                                                                                          "effort":  "UPDATE_CONFIG_FILE_ONLY"
+                                                                                      },
+                                                                "performance_upgrade":  {
+                                                                                            "problem":  "Need better precision",
+                                                                                            "solution":  "Upgrade to encoder feedback servos",
+                                                                                            "effort":  "CONFIGURATION_CHANGE_PLUS_HARDWARE_SWAP"
+                                                                                        },
+                                                                "cost_optimization":  {
+                                                                                          "problem":  "Budget constraints",
+                                                                                          "solution":  "Downgrade non-critical joints to cheaper servos",
+                                                                                          "effort":  "PER_SERVO_CONFIGURATION_TUNING"
+                                                                                      }
+                                                            }
+                               },
+    "real_world_example":  {
+                               "poppy_to_esp32_adaptation":  {
+                                                                 "original_poppy_config":  {
+                                                                                               "servo_type":  "smart_servo_dynamixel",
+                                                                                               "communication":  "usb2ax_serial",
+                                                                                               "controller":  "raspberry_pi_4",
+                                                                                               "total_cost":  "$8000_USD"
+                                                                                           },
+                                                                 "esp32_adaptation_config":  {
+                                                                                                 "servo_type":  "pwm_standard_servo",
+                                                                                                 "communication":  "esp_now_mesh",
+                                                                                                 "controller":  "esp32_s3_devkit",
+                                                                                                 "total_cost":  "$800_USD"
+                                                                                             },
+                                                                 "mechanical_compatibility":  {
+                                                                                                  "stl_files":  "DIRECT_USE_FROM_POPPY_PROJECT",
+                                                                                                  "modifications":  "SERVO_MOUNTING_BRACKETS_ONLY",
+                                                                                                  "license_compliance":  "CREATIVE_COMMONS_ATTRIBUTION"
+                                                                                              }
+                                                             }
+                           },
+    "name":  "modular_humanoid_esp32",
+    "type":  "UNKNOWN",
+    "components":  [
+
+                   ],
+    "timing":  {
+                   "hitCount":  1
+               }
 }

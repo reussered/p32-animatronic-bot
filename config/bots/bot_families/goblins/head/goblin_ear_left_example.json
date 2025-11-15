@@ -1,10 +1,9 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_ear_left_example.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_ear_left_example",
     "components": [
-        "speaker"
+        "config/components/hardware/speaker.json"
     ],
     "mounting_architecture": {
         "type": "integrated",

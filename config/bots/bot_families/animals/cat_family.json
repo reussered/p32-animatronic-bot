@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/animals/cat_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "CAT",
@@ -16,10 +15,10 @@
         "whisker_span": "3.5 INCH"
     },
     "components": [
-        "cat_left_eye",
-        "cat_right_eye",
-        "cat_nose",
-        "cat_speaker"
+        "config/bots/bot_families/cats/head/cat_left_eye.json",
+        "config/bots/bot_families/cats/head/cat_right_eye.json",
+        "config/bots/bot_families/cats/head/cat_nose.json",
+        "config/bots/bot_families/cats/head/cat_speaker.json"
     ],
     "family_mood_profile": {
         "FEAR": 15,

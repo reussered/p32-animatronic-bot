@@ -1,7 +1,6 @@
 {
-    "relative_filename": "config/components/interfaces/hc_sr04_debug_ultrasonic_sensor.json",
     "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE", 
+    "hardware_type": "BUS_INTERFACE",
     "author": "config/author.json",
     "interface_id": "HC_SR04_DEBUG_ULTRASONIC_SENSOR",
     "interface_type": "DEBUG_ULTRASONIC_DISTANCE_SENSOR",
@@ -30,7 +29,7 @@
             "signal_type": "SIMULATED_DIGITAL_PULSE"
         },
         "echo_pin": {
-            "function": "simulated_echo", 
+            "function": "simulated_echo",
             "description": "GPIO pin for echo simulation (not actually used)",
             "voltage_level": "3.3V_ESP32",
             "signal_type": "SIMULATED_DIGITAL_PULSE"
@@ -44,7 +43,7 @@
         "echo_calculation": "distance_cm = echo_duration_us / 58.2"
     },
     "components": [
-        "gpio_bus"  
+        "config/components/drivers/gpio_bus.json"
     ],
     "timing": {
         "hitCount": 1,
@@ -57,5 +56,7 @@
         "timeout_us": 23300,
         "simulated_distance_cm": 30,
         "debug_mode": true
-    }
+    },
+    "name": "hc_sr04_debug_ultrasonic_sensor",
+    "type": "UNKNOWN"
 }

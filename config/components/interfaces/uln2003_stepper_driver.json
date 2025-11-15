@@ -1,446 +1,445 @@
 {
-    "relative_filename": "config/components/interfaces/uln2003_stepper_driver.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "ULN2003_STEPPER_DRIVER",
-    "interface_type": "UNIPOLAR_STEPPER_DRIVER",
-    "description": "ULN2003 darlington array for driving unipolar stepper motors like 28BYJ-48",
-    "hardware_specifications": {
-        "compatible_motors": [
-            "28BYJ48_UNIPOLAR",
-            "OTHER_UNIPOLAR_STEPPERS"
-        ],
-        "voltage_range": "5V_TO_12V_MOTOR_SUPPLY",
-        "logic_voltage": "3.3V_TO_5V",
-        "current_per_channel": "500mA_CONTINUOUS",
-        "channels": 7,
-        "package": "16_PIN_DIP_SOIC",
-        "darlington_pairs": "HIGH_CURRENT_SWITCHES"
-    },
-    "pin_requirements": {
-        "in1_pin": {
-            "function": "coil_a_control",
-            "generic_name": "in1",
-            "description": "Input 1 - controls motor coil A",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "output_current": "500mA_MAX"
-        },
-        "in2_pin": {
-            "function": "coil_b_control",
-            "generic_name": "in2",
-            "description": "Input 2 - controls motor coil B",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "output_current": "500mA_MAX"
-        },
-        "in3_pin": {
-            "function": "coil_c_control",
-            "generic_name": "in3",
-            "description": "Input 3 - controls motor coil C",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "output_current": "500mA_MAX"
-        },
-        "in4_pin": {
-            "function": "coil_d_control",
-            "generic_name": "in4",
-            "description": "Input 4 - controls motor coil D",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "output_current": "500mA_MAX"
-        }
-    },
-    "power_pins": {
-        "vcc_motor_pin": {
-            "function": "motor_power_supply",
-            "generic_name": "vcc_motor",
-            "description": "Motor power supply input",
-            "voltage_level": "5V_TO_12V",
-            "current_capacity": "2A_TOTAL_ALL_COILS"
-        },
-        "vcc_logic_pin": {
-            "function": "logic_power_supply",
-            "generic_name": "vcc_logic",
-            "description": "Logic power supply input (often tied to motor supply)",
-            "voltage_level": "5V",
-            "current_consumption": "15mA_TYPICAL"
-        },
-        "gnd_pin": {
-            "function": "ground_reference",
-            "generic_name": "gnd",
-            "description": "Ground reference for logic and power",
-            "voltage_level": "0V"
-        }
-    },
-    "motor_connection_pins": {
-        "out1_pin": {
-            "function": "motor_coil_a_output",
-            "generic_name": "out1",
-            "description": "Output 1 - motor coil A connection",
-            "current_capacity": "500mA_CONTINUOUS",
-            "voltage_drop": "1.6V_TYPICAL_DARLINGTON"
-        },
-        "out2_pin": {
-            "function": "motor_coil_b_output",
-            "generic_name": "out2",
-            "description": "Output 2 - motor coil B connection",
-            "current_capacity": "500mA_CONTINUOUS",
-            "voltage_drop": "1.6V_TYPICAL_DARLINGTON"
-        },
-        "out3_pin": {
-            "function": "motor_coil_c_output",
-            "generic_name": "out3",
-            "description": "Output 3 - motor coil C connection",
-            "current_capacity": "500mA_CONTINUOUS",
-            "voltage_drop": "1.6V_TYPICAL_DARLINGTON"
-        },
-        "out4_pin": {
-            "function": "motor_coil_d_output",
-            "generic_name": "out4",
-            "description": "Output 4 - motor coil D connection",
-            "current_capacity": "500mA_CONTINUOUS",
-            "voltage_drop": "1.6V_TYPICAL_DARLINGTON"
-        }
-    },
-    "optional_pins": {
-        "enable_pin": {
-            "function": "driver_enable",
-            "generic_name": "enable",
-            "description": "Enable all outputs - software controlled via GPIO",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "implementation": "EXTERNAL_GPIO_CONTROL",
-            "optional": true
-        }
-    },
-    "step_sequences": {
-        "full_step_sequence": {
-            "description": "Full step sequence for maximum torque",
-            "steps_per_revolution": 2048,
-            "step_pattern": [
-                {
-                    "in1": "HIGH",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "HIGH",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "HIGH",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "HIGH"
-                }
-            ],
-            "torque": "MAXIMUM",
-            "smoothness": "LOW",
-            "power_consumption": "HIGH"
-        },
-        "half_step_sequence": {
-            "description": "Half step sequence for smoother operation",
-            "steps_per_revolution": 4096,
-            "step_pattern": [
-                {
-                    "in1": "HIGH",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "HIGH",
-                    "in2": "HIGH",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "HIGH",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "HIGH",
-                    "in3": "HIGH",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "HIGH",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "HIGH",
-                    "in4": "HIGH"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "HIGH"
-                },
-                {
-                    "in1": "HIGH",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "HIGH"
-                }
-            ],
-            "torque": "MEDIUM",
-            "smoothness": "HIGH",
-            "power_consumption": "MEDIUM"
-        },
-        "wave_drive_sequence": {
-            "description": "Wave drive sequence for lower power consumption",
-            "steps_per_revolution": 2048,
-            "step_pattern": [
-                {
-                    "in1": "HIGH",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "HIGH",
-                    "in3": "LOW",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "HIGH",
-                    "in4": "LOW"
-                },
-                {
-                    "in1": "LOW",
-                    "in2": "LOW",
-                    "in3": "LOW",
-                    "in4": "HIGH"
-                }
-            ],
-            "torque": "LOW",
-            "smoothness": "MEDIUM",
-            "power_consumption": "LOWEST"
-        }
-    },
-    "timing_specifications": {
-        "step_timing": {
-            "min_step_delay": "2ms_TYPICAL_28BYJ48",
-            "max_step_frequency": "500Hz_RECOMMENDED",
-            "input_setup_time": "100ns_TYPICAL",
-            "output_response_time": "1us_TYPICAL"
-        },
-        "power_on_timing": {
-            "power_on_delay": "10ms_RECOMMENDED",
-            "output_enable_delay": "1ms_TYPICAL"
-        }
-    },
-    "electrical_characteristics": {
-        "input_characteristics": {
-            "input_high_voltage": "2.3V_MINIMUM",
-            "input_low_voltage": "0.8V_MAXIMUM",
-            "input_current_high": "25uA_TYPICAL",
-            "input_current_low": "36uA_TYPICAL"
-        },
-        "output_characteristics": {
-            "output_saturation_voltage": "1.6V_TYPICAL_AT_500mA",
-            "output_leakage_current": "100uA_MAXIMUM",
-            "peak_output_current": "500mA_CONTINUOUS"
-        },
-        "thermal_characteristics": {
-            "junction_temperature": "150C_MAXIMUM",
-            "thermal_resistance": "65C_W_DIP_PACKAGE",
-            "power_dissipation": "2.25W_MAXIMUM"
-        }
-    },
-    "protection_features": {
-        "output_clamping_diodes": {
-            "description": "Built-in flyback diodes for inductive loads",
-            "protection": "AUTOMATIC_INDUCTIVE_KICKBACK_SUPPRESSION"
-        },
-        "thermal_protection": {
-            "description": "Thermal shutdown at high temperatures",
-            "threshold": "150C_JUNCTION_TEMPERATURE"
-        }
-    },
-    "manufacturer_pin_mappings": {
-        "generic_uln2003_module": {
-            "in1": [
-                "IN1",
-                "A"
-            ],
-            "in2": [
-                "IN2",
-                "B"
-            ],
-            "in3": [
-                "IN3",
-                "C"
-            ],
-            "in4": [
-                "IN4",
-                "D"
-            ],
-            "vcc_motor": [
-                "VCC",
-                "MOTOR_POWER",
-                "+"
-            ],
-            "vcc_logic": [
-                "VCC",
-                "LOGIC_POWER"
-            ],
-            "gnd": [
-                "GND",
-                "GROUND",
-                "-"
-            ],
-            "out1": [
-                "OUT1",
-                "COIL_A"
-            ],
-            "out2": [
-                "OUT2",
-                "COIL_B"
-            ],
-            "out3": [
-                "OUT3",
-                "COIL_C"
-            ],
-            "out4": [
-                "OUT4",
-                "COIL_D"
-            ]
-        },
-        "28byj48_stepper_module": {
-            "in1": [
-                "IN1"
-            ],
-            "in2": [
-                "IN2"
-            ],
-            "in3": [
-                "IN3"
-            ],
-            "in4": [
-                "IN4"
-            ],
-            "vcc_motor": [
-                "5V",
-                "VCC"
-            ],
-            "gnd": [
-                "GND"
-            ],
-            "motor_connector": [
-                "5_PIN_JST_CONNECTOR"
-            ]
-        },
-        "adafruit_uln2003": {
-            "in1": [
-                "A1"
-            ],
-            "in2": [
-                "A2"
-            ],
-            "in3": [
-                "A3"
-            ],
-            "in4": [
-                "A4"
-            ],
-            "vcc_motor": [
-                "VCC"
-            ],
-            "gnd": [
-                "GND"
-            ]
-        }
-    },
-    "28byj48_motor_specs": {
-        "specifications": {
-            "voltage": "5V_12V_VERSIONS_AVAILABLE",
-            "current_per_coil": "92mA_AT_5V",
-            "resistance_per_coil": "50_OHMS",
-            "step_angle": "5.625_DEGREES_64_STEPS_REV",
-            "gear_ratio": "64_1_APPROXIMATELY",
-            "steps_per_revolution": "2048_FULL_STEP_4096_HALF_STEP",
-            "torque": "0.3kg_cm_TYPICAL"
-        },
-        "wiring": {
-            "red_wire": "COMMON_POWER_5V",
-            "orange_wire": "COIL_A",
-            "yellow_wire": "COIL_B",
-            "pink_wire": "COIL_C",
-            "blue_wire": "COIL_D"
-        }
-    },
-    "application_examples": {
-        "head_pan_mechanism": {
-            "motor": "28BYJ48_5V",
-            "step_sequence": "HALF_STEP_4096_STEPS_REV",
-            "max_speed": "15_RPM",
-            "use_case": "SMOOTH_HEAD_ROTATION",
-            "advantages": [
-                "QUIET_OPERATION",
-                "PRECISE_POSITIONING",
-                "LOW_COST"
-            ]
-        },
-        "eye_tracking": {
-            "motor": "28BYJ48_5V",
-            "step_sequence": "FULL_STEP_2048_STEPS_REV",
-            "max_speed": "30_RPM",
-            "use_case": "EYE_MOVEMENT_MECHANISM",
-            "advantages": [
-                "VERY_QUIET",
-                "GOOD_HOLDING_TORQUE",
-                "SIMPLE_CONTROL"
-            ]
-        },
-        "ear_articulation": {
-            "motor": "28BYJ48_5V",
-            "step_sequence": "HALF_STEP_LIMITED_RANGE",
-            "max_speed": "10_RPM",
-            "use_case": "EAR_WIGGLE_ANIMATION",
-            "advantages": [
-                "SMOOTH_MOTION",
-                "LOW_POWER",
-                "PRECISE_CONTROL"
-            ]
-        },
-        "small_joint_movement": {
-            "motor": "28BYJ48_12V",
-            "step_sequence": "FULL_STEP_2048_STEPS_REV",
-            "max_speed": "20_RPM",
-            "use_case": "FINGER_TOE_ARTICULATION",
-            "advantages": [
-                "HIGHER_TORQUE_12V",
-                "RELIABLE",
-                "INEXPENSIVE"
-            ]
-        }
-    },
-    "name": "uln2003_stepper_driver",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "ULN2003_STEPPER_DRIVER",
+    "interface_type":  "UNIPOLAR_STEPPER_DRIVER",
+    "description":  "ULN2003 darlington array for driving unipolar stepper motors like 28BYJ-48",
+    "hardware_specifications":  {
+                                    "compatible_motors":  [
+                                                              "28BYJ48_UNIPOLAR",
+                                                              "OTHER_UNIPOLAR_STEPPERS"
+                                                          ],
+                                    "voltage_range":  "5V_TO_12V_MOTOR_SUPPLY",
+                                    "logic_voltage":  "3.3V_TO_5V",
+                                    "current_per_channel":  "500mA_CONTINUOUS",
+                                    "channels":  7,
+                                    "package":  "16_PIN_DIP_SOIC",
+                                    "darlington_pairs":  "HIGH_CURRENT_SWITCHES"
+                                },
+    "pin_requirements":  {
+                             "in1_pin":  {
+                                             "function":  "coil_a_control",
+                                             "generic_name":  "in1",
+                                             "description":  "Input 1 - controls motor coil A",
+                                             "voltage_level":  "3.3V_5V",
+                                             "signal_type":  "DIGITAL",
+                                             "output_current":  "500mA_MAX"
+                                         },
+                             "in2_pin":  {
+                                             "function":  "coil_b_control",
+                                             "generic_name":  "in2",
+                                             "description":  "Input 2 - controls motor coil B",
+                                             "voltage_level":  "3.3V_5V",
+                                             "signal_type":  "DIGITAL",
+                                             "output_current":  "500mA_MAX"
+                                         },
+                             "in3_pin":  {
+                                             "function":  "coil_c_control",
+                                             "generic_name":  "in3",
+                                             "description":  "Input 3 - controls motor coil C",
+                                             "voltage_level":  "3.3V_5V",
+                                             "signal_type":  "DIGITAL",
+                                             "output_current":  "500mA_MAX"
+                                         },
+                             "in4_pin":  {
+                                             "function":  "coil_d_control",
+                                             "generic_name":  "in4",
+                                             "description":  "Input 4 - controls motor coil D",
+                                             "voltage_level":  "3.3V_5V",
+                                             "signal_type":  "DIGITAL",
+                                             "output_current":  "500mA_MAX"
+                                         }
+                         },
+    "power_pins":  {
+                       "vcc_motor_pin":  {
+                                             "function":  "motor_power_supply",
+                                             "generic_name":  "vcc_motor",
+                                             "description":  "Motor power supply input",
+                                             "voltage_level":  "5V_TO_12V",
+                                             "current_capacity":  "2A_TOTAL_ALL_COILS"
+                                         },
+                       "vcc_logic_pin":  {
+                                             "function":  "logic_power_supply",
+                                             "generic_name":  "vcc_logic",
+                                             "description":  "Logic power supply input (often tied to motor supply)",
+                                             "voltage_level":  "5V",
+                                             "current_consumption":  "15mA_TYPICAL"
+                                         },
+                       "gnd_pin":  {
+                                       "function":  "ground_reference",
+                                       "generic_name":  "gnd",
+                                       "description":  "Ground reference for logic and power",
+                                       "voltage_level":  "0V"
+                                   }
+                   },
+    "motor_connection_pins":  {
+                                  "out1_pin":  {
+                                                   "function":  "motor_coil_a_output",
+                                                   "generic_name":  "out1",
+                                                   "description":  "Output 1 - motor coil A connection",
+                                                   "current_capacity":  "500mA_CONTINUOUS",
+                                                   "voltage_drop":  "1.6V_TYPICAL_DARLINGTON"
+                                               },
+                                  "out2_pin":  {
+                                                   "function":  "motor_coil_b_output",
+                                                   "generic_name":  "out2",
+                                                   "description":  "Output 2 - motor coil B connection",
+                                                   "current_capacity":  "500mA_CONTINUOUS",
+                                                   "voltage_drop":  "1.6V_TYPICAL_DARLINGTON"
+                                               },
+                                  "out3_pin":  {
+                                                   "function":  "motor_coil_c_output",
+                                                   "generic_name":  "out3",
+                                                   "description":  "Output 3 - motor coil C connection",
+                                                   "current_capacity":  "500mA_CONTINUOUS",
+                                                   "voltage_drop":  "1.6V_TYPICAL_DARLINGTON"
+                                               },
+                                  "out4_pin":  {
+                                                   "function":  "motor_coil_d_output",
+                                                   "generic_name":  "out4",
+                                                   "description":  "Output 4 - motor coil D connection",
+                                                   "current_capacity":  "500mA_CONTINUOUS",
+                                                   "voltage_drop":  "1.6V_TYPICAL_DARLINGTON"
+                                               }
+                              },
+    "optional_pins":  {
+                          "enable_pin":  {
+                                             "function":  "driver_enable",
+                                             "generic_name":  "enable",
+                                             "description":  "Enable all outputs - software controlled via GPIO",
+                                             "voltage_level":  "3.3V_5V",
+                                             "signal_type":  "DIGITAL",
+                                             "implementation":  "EXTERNAL_GPIO_CONTROL",
+                                             "optional":  true
+                                         }
+                      },
+    "step_sequences":  {
+                           "full_step_sequence":  {
+                                                      "description":  "Full step sequence for maximum torque",
+                                                      "steps_per_revolution":  2048,
+                                                      "step_pattern":  [
+                                                                           {
+                                                                               "in1":  "HIGH",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "HIGH",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "HIGH",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "HIGH"
+                                                                           }
+                                                                       ],
+                                                      "torque":  "MAXIMUM",
+                                                      "smoothness":  "LOW",
+                                                      "power_consumption":  "HIGH"
+                                                  },
+                           "half_step_sequence":  {
+                                                      "description":  "Half step sequence for smoother operation",
+                                                      "steps_per_revolution":  4096,
+                                                      "step_pattern":  [
+                                                                           {
+                                                                               "in1":  "HIGH",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "HIGH",
+                                                                               "in2":  "HIGH",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "HIGH",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "HIGH",
+                                                                               "in3":  "HIGH",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "HIGH",
+                                                                               "in4":  "LOW"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "HIGH",
+                                                                               "in4":  "HIGH"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "LOW",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "HIGH"
+                                                                           },
+                                                                           {
+                                                                               "in1":  "HIGH",
+                                                                               "in2":  "LOW",
+                                                                               "in3":  "LOW",
+                                                                               "in4":  "HIGH"
+                                                                           }
+                                                                       ],
+                                                      "torque":  "MEDIUM",
+                                                      "smoothness":  "HIGH",
+                                                      "power_consumption":  "MEDIUM"
+                                                  },
+                           "wave_drive_sequence":  {
+                                                       "description":  "Wave drive sequence for lower power consumption",
+                                                       "steps_per_revolution":  2048,
+                                                       "step_pattern":  [
+                                                                            {
+                                                                                "in1":  "HIGH",
+                                                                                "in2":  "LOW",
+                                                                                "in3":  "LOW",
+                                                                                "in4":  "LOW"
+                                                                            },
+                                                                            {
+                                                                                "in1":  "LOW",
+                                                                                "in2":  "HIGH",
+                                                                                "in3":  "LOW",
+                                                                                "in4":  "LOW"
+                                                                            },
+                                                                            {
+                                                                                "in1":  "LOW",
+                                                                                "in2":  "LOW",
+                                                                                "in3":  "HIGH",
+                                                                                "in4":  "LOW"
+                                                                            },
+                                                                            {
+                                                                                "in1":  "LOW",
+                                                                                "in2":  "LOW",
+                                                                                "in3":  "LOW",
+                                                                                "in4":  "HIGH"
+                                                                            }
+                                                                        ],
+                                                       "torque":  "LOW",
+                                                       "smoothness":  "MEDIUM",
+                                                       "power_consumption":  "LOWEST"
+                                                   }
+                       },
+    "timing_specifications":  {
+                                  "step_timing":  {
+                                                      "min_step_delay":  "2ms_TYPICAL_28BYJ48",
+                                                      "max_step_frequency":  "500Hz_RECOMMENDED",
+                                                      "input_setup_time":  "100ns_TYPICAL",
+                                                      "output_response_time":  "1us_TYPICAL"
+                                                  },
+                                  "power_on_timing":  {
+                                                          "power_on_delay":  "10ms_RECOMMENDED",
+                                                          "output_enable_delay":  "1ms_TYPICAL"
+                                                      }
+                              },
+    "electrical_characteristics":  {
+                                       "input_characteristics":  {
+                                                                     "input_high_voltage":  "2.3V_MINIMUM",
+                                                                     "input_low_voltage":  "0.8V_MAXIMUM",
+                                                                     "input_current_high":  "25uA_TYPICAL",
+                                                                     "input_current_low":  "36uA_TYPICAL"
+                                                                 },
+                                       "output_characteristics":  {
+                                                                      "output_saturation_voltage":  "1.6V_TYPICAL_AT_500mA",
+                                                                      "output_leakage_current":  "100uA_MAXIMUM",
+                                                                      "peak_output_current":  "500mA_CONTINUOUS"
+                                                                  },
+                                       "thermal_characteristics":  {
+                                                                       "junction_temperature":  "150C_MAXIMUM",
+                                                                       "thermal_resistance":  "65C_W_DIP_PACKAGE",
+                                                                       "power_dissipation":  "2.25W_MAXIMUM"
+                                                                   }
+                                   },
+    "protection_features":  {
+                                "output_clamping_diodes":  {
+                                                               "description":  "Built-in flyback diodes for inductive loads",
+                                                               "protection":  "AUTOMATIC_INDUCTIVE_KICKBACK_SUPPRESSION"
+                                                           },
+                                "thermal_protection":  {
+                                                           "description":  "Thermal shutdown at high temperatures",
+                                                           "threshold":  "150C_JUNCTION_TEMPERATURE"
+                                                       }
+                            },
+    "manufacturer_pin_mappings":  {
+                                      "generic_uln2003_module":  {
+                                                                     "in1":  [
+                                                                                 "IN1",
+                                                                                 "A"
+                                                                             ],
+                                                                     "in2":  [
+                                                                                 "IN2",
+                                                                                 "B"
+                                                                             ],
+                                                                     "in3":  [
+                                                                                 "IN3",
+                                                                                 "C"
+                                                                             ],
+                                                                     "in4":  [
+                                                                                 "IN4",
+                                                                                 "D"
+                                                                             ],
+                                                                     "vcc_motor":  [
+                                                                                       "VCC",
+                                                                                       "MOTOR_POWER",
+                                                                                       "+"
+                                                                                   ],
+                                                                     "vcc_logic":  [
+                                                                                       "VCC",
+                                                                                       "LOGIC_POWER"
+                                                                                   ],
+                                                                     "gnd":  [
+                                                                                 "GND",
+                                                                                 "GROUND",
+                                                                                 "-"
+                                                                             ],
+                                                                     "out1":  [
+                                                                                  "OUT1",
+                                                                                  "COIL_A"
+                                                                              ],
+                                                                     "out2":  [
+                                                                                  "OUT2",
+                                                                                  "COIL_B"
+                                                                              ],
+                                                                     "out3":  [
+                                                                                  "OUT3",
+                                                                                  "COIL_C"
+                                                                              ],
+                                                                     "out4":  [
+                                                                                  "OUT4",
+                                                                                  "COIL_D"
+                                                                              ]
+                                                                 },
+                                      "28byj48_stepper_module":  {
+                                                                     "in1":  [
+                                                                                 "IN1"
+                                                                             ],
+                                                                     "in2":  [
+                                                                                 "IN2"
+                                                                             ],
+                                                                     "in3":  [
+                                                                                 "IN3"
+                                                                             ],
+                                                                     "in4":  [
+                                                                                 "IN4"
+                                                                             ],
+                                                                     "vcc_motor":  [
+                                                                                       "5V",
+                                                                                       "VCC"
+                                                                                   ],
+                                                                     "gnd":  [
+                                                                                 "GND"
+                                                                             ],
+                                                                     "motor_connector":  [
+                                                                                             "5_PIN_JST_CONNECTOR"
+                                                                                         ]
+                                                                 },
+                                      "adafruit_uln2003":  {
+                                                               "in1":  [
+                                                                           "A1"
+                                                                       ],
+                                                               "in2":  [
+                                                                           "A2"
+                                                                       ],
+                                                               "in3":  [
+                                                                           "A3"
+                                                                       ],
+                                                               "in4":  [
+                                                                           "A4"
+                                                                       ],
+                                                               "vcc_motor":  [
+                                                                                 "VCC"
+                                                                             ],
+                                                               "gnd":  [
+                                                                           "GND"
+                                                                       ]
+                                                           }
+                                  },
+    "28byj48_motor_specs":  {
+                                "specifications":  {
+                                                       "voltage":  "5V_12V_VERSIONS_AVAILABLE",
+                                                       "current_per_coil":  "92mA_AT_5V",
+                                                       "resistance_per_coil":  "50_OHMS",
+                                                       "step_angle":  "5.625_DEGREES_64_STEPS_REV",
+                                                       "gear_ratio":  "64_1_APPROXIMATELY",
+                                                       "steps_per_revolution":  "2048_FULL_STEP_4096_HALF_STEP",
+                                                       "torque":  "0.3kg_cm_TYPICAL"
+                                                   },
+                                "wiring":  {
+                                               "red_wire":  "COMMON_POWER_5V",
+                                               "orange_wire":  "COIL_A",
+                                               "yellow_wire":  "COIL_B",
+                                               "pink_wire":  "COIL_C",
+                                               "blue_wire":  "COIL_D"
+                                           }
+                            },
+    "application_examples":  {
+                                 "head_pan_mechanism":  {
+                                                            "motor":  "28BYJ48_5V",
+                                                            "step_sequence":  "HALF_STEP_4096_STEPS_REV",
+                                                            "max_speed":  "15_RPM",
+                                                            "use_case":  "SMOOTH_HEAD_ROTATION",
+                                                            "advantages":  [
+                                                                               "QUIET_OPERATION",
+                                                                               "PRECISE_POSITIONING",
+                                                                               "LOW_COST"
+                                                                           ]
+                                                        },
+                                 "eye_tracking":  {
+                                                      "motor":  "28BYJ48_5V",
+                                                      "step_sequence":  "FULL_STEP_2048_STEPS_REV",
+                                                      "max_speed":  "30_RPM",
+                                                      "use_case":  "EYE_MOVEMENT_MECHANISM",
+                                                      "advantages":  [
+                                                                         "VERY_QUIET",
+                                                                         "GOOD_HOLDING_TORQUE",
+                                                                         "SIMPLE_CONTROL"
+                                                                     ]
+                                                  },
+                                 "ear_articulation":  {
+                                                          "motor":  "28BYJ48_5V",
+                                                          "step_sequence":  "HALF_STEP_LIMITED_RANGE",
+                                                          "max_speed":  "10_RPM",
+                                                          "use_case":  "EAR_WIGGLE_ANIMATION",
+                                                          "advantages":  [
+                                                                             "SMOOTH_MOTION",
+                                                                             "LOW_POWER",
+                                                                             "PRECISE_CONTROL"
+                                                                         ]
+                                                      },
+                                 "small_joint_movement":  {
+                                                              "motor":  "28BYJ48_12V",
+                                                              "step_sequence":  "FULL_STEP_2048_STEPS_REV",
+                                                              "max_speed":  "20_RPM",
+                                                              "use_case":  "FINGER_TOE_ARTICULATION",
+                                                              "advantages":  [
+                                                                                 "HIGHER_TORQUE_12V",
+                                                                                 "RELIABLE",
+                                                                                 "INEXPENSIVE"
+                                                                             ]
+                                                          }
+                             },
+    "name":  "uln2003_stepper_driver",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

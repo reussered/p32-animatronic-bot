@@ -38,7 +38,7 @@ class ComponentTreeWalker:
             print(f"Error loading {component_path}: {e}")
             return None
 
-    def get_component_name(self, component_data):
+    def get_component_name(self, component_data, component_path=None):
         """Extract component name from JSON data."""
         if not component_data:
             return "UNKNOWN"
@@ -49,8 +49,9 @@ class ComponentTreeWalker:
                 return component_data[name_field]
 
         # Fallback to filename
-        if 'relative_filename' in component_data:
-            return Path(component_data['relative_filename']).stem
+        # Fallback: use the provided path or 'UNNAMED' if not available
+        if component_path:
+            return Path(component_path).stem
 
         return "UNNAMED"
 
@@ -63,7 +64,7 @@ class ComponentTreeWalker:
             print(f"{indent}{prefix} {component_path} (NOT FOUND)")
             return
 
-        component_name = self.get_component_name(component_data)
+        component_name = self.get_component_name(component_data, component_path)
 
         # Check for cycles
         if component_path in self.visited:

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_camouflage_skin.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_camouflage_skin",
@@ -7,7 +6,7 @@
     "description": "Forest camouflage skin patterns for scout goblin stealth",
     "created": "2025-10-12",
     "components": [
-        "color_changing_leds"
+        "config/components/hardware/color_changing_leds.json"
     ],
     "interface_reference": "config/components/interfaces/spi_device_3.json",
     "coordinate_system": "skull_3d",

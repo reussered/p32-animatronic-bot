@@ -1,6 +1,6 @@
 {
     "name": "goblin_head_mouth_motor",
-    "type": "motor_controller",
+    "type": "MOTOR_CONTROLLER",
     "description": "5-DOF mouth articulation with expression presets and speech sync",
     "subsystem": "goblin_head",
     "dependencies": [

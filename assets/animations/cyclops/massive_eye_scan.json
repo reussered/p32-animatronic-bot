@@ -1,74 +1,73 @@
 {
-    "relative_filename": "assets/animations/cyclops/massive_eye_scan.json",
-    "animation_name": "cyclops_massive_eye_scan",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "description": "Slow, intimidating eye scanning motion for cyclops surveillance",
-    "duration_ms": 4000,
-    "loop": true,
-    "mood_trigger": "IRRITATION",
-    "components": [
-        {
-            "component_id": "cyclops_central_eye",
-            "keyframes": [
-                {
-                    "time_ms": 0,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.9,
-                        "color": "#ff6600",
-                        "expression": "center_stare",
-                        "intensity": "THREATENING_GLOW"
-                    }
-                },
-                {
-                    "time_ms": 1000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.9,
-                        "color": "#ff6600",
-                        "expression": "left_sweep",
-                        "intensity": "THREATENING_GLOW"
-                    }
-                },
-                {
-                    "time_ms": 2000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.9,
-                        "color": "#ff6600",
-                        "expression": "center_stare",
-                        "intensity": "THREATENING_GLOW"
-                    }
-                },
-                {
-                    "time_ms": 3000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.9,
-                        "color": "#ff6600",
-                        "expression": "right_sweep",
-                        "intensity": "THREATENING_GLOW"
-                    }
-                },
-                {
-                    "time_ms": 4000,
-                    "display_content": {
-                        "type": "eye_expression",
-                        "pupil_size": 0.7,
-                        "eye_openness": 0.9,
-                        "color": "#ff6600",
-                        "expression": "center_stare",
-                        "intensity": "THREATENING_GLOW"
-                    }
-                }
-            ]
-        }
-    ],
-    "type": "UNKNOWN",
-    "name": "massive_eye_scan"
+    "animation_name":  "cyclops_massive_eye_scan",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "description":  "Slow, intimidating eye scanning motion for cyclops surveillance",
+    "duration_ms":  4000,
+    "loop":  true,
+    "mood_trigger":  "IRRITATION",
+    "components":  [
+                       {
+                           "component_id":  "cyclops_central_eye",
+                           "keyframes":  [
+                                             {
+                                                 "time_ms":  0,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.9,
+                                                                         "color":  "#ff6600",
+                                                                         "expression":  "center_stare",
+                                                                         "intensity":  "THREATENING_GLOW"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  1000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.9,
+                                                                         "color":  "#ff6600",
+                                                                         "expression":  "left_sweep",
+                                                                         "intensity":  "THREATENING_GLOW"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  2000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.9,
+                                                                         "color":  "#ff6600",
+                                                                         "expression":  "center_stare",
+                                                                         "intensity":  "THREATENING_GLOW"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  3000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.9,
+                                                                         "color":  "#ff6600",
+                                                                         "expression":  "right_sweep",
+                                                                         "intensity":  "THREATENING_GLOW"
+                                                                     }
+                                             },
+                                             {
+                                                 "time_ms":  4000,
+                                                 "display_content":  {
+                                                                         "type":  "eye_expression",
+                                                                         "pupil_size":  0.7,
+                                                                         "eye_openness":  0.9,
+                                                                         "color":  "#ff6600",
+                                                                         "expression":  "center_stare",
+                                                                         "intensity":  "THREATENING_GLOW"
+                                                                     }
+                                             }
+                                         ]
+                       }
+                   ],
+    "type":  "UNKNOWN",
+    "name":  "massive_eye_scan"
 }

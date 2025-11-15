@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/fantasy/vampire_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "VAMPIRE",
@@ -16,10 +15,10 @@
         "fang_extension": "0.8 INCH"
     },
     "components": [
-        "vampire_eye_left",
-        "vampire_eye_right",
-        "vampire_mouth",
-        "vampire_speaker"
+        "config/bots/bot_families/vampires/head/vampire_eye_left.json",
+        "config/bots/bot_families/vampires/head/vampire_eye_right.json",
+        "config/bots/bot_families/vampires/head/vampire_mouth.json",
+        "config/bots/bot_families/vampires/head/vampire_speaker.json"
     ],
     "family_mood_profile": {
         "FEAR": 5,

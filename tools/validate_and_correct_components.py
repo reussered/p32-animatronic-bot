@@ -58,10 +58,7 @@ def validate_component(data: Dict) -> Tuple[bool, List[str]]:
     if 'timing' not in data and data.get('type') not in ['SUBSYSTEM_COMPOSITE', 'ASSEMBLY']:
         issues.append("missing: 'timing' (recommended for all components)")
     
-    # Check relative_filename for bot_family components
-    if 'bot_families' in data.get('relative_filename', ''):
-        if 'relative_filename' not in data:
-            issues.append("missing: 'relative_filename' (required for bot_families)")
+    # relative_filename is optional for bot_family components; no strict requirement
     
     return len(issues) == 0, issues
 

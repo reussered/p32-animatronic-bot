@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/undead/zombie_walker.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_template": "config/bots/bot_families/horror/zombie_family.json",
@@ -34,8 +33,8 @@
         }
     },
     "components": [
-        "zombie_rotting_flesh",
-        "zombie_shamble_actuator"
+        "config/bots/bot_families/zombies/head/zombie_rotting_flesh.json",
+        "config/bots/bot_families/zombies/head/zombie_shamble_actuator.json"
     ],
     "custom_behaviors": {
         "hunger_response": {

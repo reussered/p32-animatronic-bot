@@ -1,108 +1,107 @@
 {
-    "relative_filename": "config/bots/.archived_components/bot_families/goblins/head/goblin_head_left_eye_only.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "subsystem_type": "HEAD",
-    "subsystem_id": "goblin_head_left_eye_v1",
-    "description": "Goblin head subsystem with single left eye only - minimal configuration for testing",
-    "created": "2025-10-29",
-    "controller": "ESP32_S3_DEVKITC_1",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "units": "MILLIMETERS",
-    "name": "goblin_head_left_eye_only",
-    "timing": {
-        "hitCount": 25,
-        "description": "Head coordination every 2.5 seconds"
-    },
-    "components": [
-        "goblin_left_eye",
-        "goblin_head",
-        "goblin_torso"
-    ],
-    "shape_assembly": {
-        "type": "SKULL_FRAME",
-        "scad_file": "assets/shapes/scad/skull_generators/goblin_skull.scad",
-        "stl_file": "assets/shapes/stl/skull_generators/goblin_skull.stl",
-        "description": "Anatomical goblin skull frame with single left eye mounting",
-        "color_palette": "config/bots/bot_families/fantasy/goblin_family.json",
-        "mounting_points": {
-            "eye_left": {
-                "type": "26mm_ring",
-                "position": [
-                    -26.67,
-                    17.78,
-                    -8.89
-                ],
-                "units": "mm",
-                "description": "Left eye socket mounting ring"
-            }
-        },
-        "articulation": {
-            "neck_flexion": {
-                "range_degrees": 45,
-                "servo_model": "MG996R",
-                "mounting_point": [
-                    0,
-                    -15,
-                    20
-                ]
-            },
-            "neck_rotation": {
-                "range_degrees": 90,
-                "servo_model": "MG996R",
-                "mounting_point": [
-                    0,
-                    -15,
-                    15
-                ]
-            }
-        },
-        "mass_properties": {
-            "total_mass_kg": 0.8,
-            "center_of_mass": [
-                0,
-                5,
-                0
-            ]
-        },
-        "power_requirements": {
-            "peak_current_ma": 800,
-            "average_current_ma": 400,
-            "voltage_range_v": [
-                6,
-                8.4
-            ]
-        },
-        "processing_responsibilities": {
-            "display_processing": true,
-            "audio_processing": false,
-            "sensor_fusion": true,
-            "behavior_coordination": true
-        }
-    },
-    "mood_defaults": {
-        "FEAR": 20,
-        "ANGER": 10,
-        "CURIOSITY": 40,
-        "CONTENTMENT": 30
-    },
-    "behavior_config": {
-        "simple_mode": true,
-        "auto_sleep_timeout_seconds": 60,
-        "interaction_range_cm": 100
-    },
-    "hardware_config": {
-        "display_update_rate_fps": 15,
-        "sensor_poll_rate_hz": 5,
-        "power_management": "simple"
-    },
-    "prototype_status": "testing",
-    "tested": false,
-    "notes": [
-        "Single left eye goblin head for minimal testing",
-        "Uses component table generation system",
-        "No torso - head only configuration"
-    ],
-    "type": "SUBSYSTEM_ASSEMBLY"
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "subsystem_type":  "HEAD",
+    "subsystem_id":  "goblin_head_left_eye_v1",
+    "description":  "Goblin head subsystem with single left eye only - minimal configuration for testing",
+    "created":  "2025-10-29",
+    "controller":  "ESP32_S3_DEVKITC_1",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "units":  "MILLIMETERS",
+    "name":  "goblin_head_left_eye_only",
+    "timing":  {
+                   "hitCount":  25,
+                   "description":  "Head coordination every 2.5 seconds"
+               },
+    "components":  [
+                       "goblin_left_eye",
+                       "goblin_head",
+                       "goblin_torso"
+                   ],
+    "shape_assembly":  {
+                           "type":  "SKULL_FRAME",
+                           "scad_file":  "assets/shapes/scad/skull_generators/goblin_skull.scad",
+                           "stl_file":  "assets/shapes/stl/skull_generators/goblin_skull.stl",
+                           "description":  "Anatomical goblin skull frame with single left eye mounting",
+                           "color_palette":  "config/bots/bot_families/fantasy/goblin_family.json",
+                           "mounting_points":  {
+                                                   "eye_left":  {
+                                                                    "type":  "26mm_ring",
+                                                                    "position":  [
+                                                                                     -26.67,
+                                                                                     17.78,
+                                                                                     -8.89
+                                                                                 ],
+                                                                    "units":  "mm",
+                                                                    "description":  "Left eye socket mounting ring"
+                                                                }
+                                               },
+                           "articulation":  {
+                                                "neck_flexion":  {
+                                                                     "range_degrees":  45,
+                                                                     "servo_model":  "MG996R",
+                                                                     "mounting_point":  [
+                                                                                            0,
+                                                                                            -15,
+                                                                                            20
+                                                                                        ]
+                                                                 },
+                                                "neck_rotation":  {
+                                                                      "range_degrees":  90,
+                                                                      "servo_model":  "MG996R",
+                                                                      "mounting_point":  [
+                                                                                             0,
+                                                                                             -15,
+                                                                                             15
+                                                                                         ]
+                                                                  }
+                                            },
+                           "mass_properties":  {
+                                                   "total_mass_kg":  0.8,
+                                                   "center_of_mass":  [
+                                                                          0,
+                                                                          5,
+                                                                          0
+                                                                      ]
+                                               },
+                           "power_requirements":  {
+                                                      "peak_current_ma":  800,
+                                                      "average_current_ma":  400,
+                                                      "voltage_range_v":  [
+                                                                              6,
+                                                                              8.4
+                                                                          ]
+                                                  },
+                           "processing_responsibilities":  {
+                                                               "display_processing":  true,
+                                                               "audio_processing":  false,
+                                                               "sensor_fusion":  true,
+                                                               "behavior_coordination":  true
+                                                           }
+                       },
+    "mood_defaults":  {
+                          "FEAR":  20,
+                          "ANGER":  10,
+                          "CURIOSITY":  40,
+                          "CONTENTMENT":  30
+                      },
+    "behavior_config":  {
+                            "simple_mode":  true,
+                            "auto_sleep_timeout_seconds":  60,
+                            "interaction_range_cm":  100
+                        },
+    "hardware_config":  {
+                            "display_update_rate_fps":  15,
+                            "sensor_poll_rate_hz":  5,
+                            "power_management":  "simple"
+                        },
+    "prototype_status":  "testing",
+    "tested":  false,
+    "notes":  [
+                  "Single left eye goblin head for minimal testing",
+                  "Uses component table generation system",
+                  "No torso - head only configuration"
+              ],
+    "type":  "SUBSYSTEM_ASSEMBLY"
 }

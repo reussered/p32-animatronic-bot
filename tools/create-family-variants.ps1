@@ -79,7 +79,6 @@ function New-FamilyVariant($Family, $VariantName) {
     $characteristics = Get-VariantCharacteristics $VariantName
     
     $variant = @{
-        "relative_filename" = "config/bots/bot_families/$Family/${VariantName}.json"
         "version" = "1.0.0"
         "author" = "config/author.json"
         "bot_type" = $VariantName.ToUpper()
@@ -212,7 +211,9 @@ foreach ($family in $familyVariants.Keys) {
         $variant = New-FamilyVariant $family $variantName
         
         if (-not $DryRun) {
-            $variant | ConvertTo-Json -Depth 10 | Out-File -FilePath $variantFile -Encoding UTF8
+                # Remove deprecated 'relative_filename' before saving
+                if ($variant.PSObject.Properties.Name -contains 'relative_filename') { $variant.PSObject.Properties.Remove('relative_filename') | Out-Null }
+                $variant | ConvertTo-Json -Depth 10 | Out-File -FilePath $variantFile -Encoding UTF8
             Write-Host "  Created: $variantName" -ForegroundColor Green
         } else {
             Write-Host "  [DRY RUN] Would create: $variantName" -ForegroundColor Cyan

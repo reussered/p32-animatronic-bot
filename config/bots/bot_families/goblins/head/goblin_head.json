@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_head.json",
     "version": "3.0.0",
     "author": "config/author.json",
     "subsystem_type": "HEAD",
@@ -16,16 +15,24 @@
         "description": "Head coordination every 2.5 seconds"
     },
     "components": [
-        "goblin_left_eye",
-        "goblin_right_eye",
-        "goblin_left_ear",
-        "goblin_right_ear",
-        "goblin_nose",
-        "goblin_mouth",
+        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_mouth_display.json"
+    ],
+    "components_saved": [
+        "goblin_mouth_speaker",
         "goblin_speaker",
         "goblin_sinuses",
+        "goblin_nose",
+        "goblin_left_ear",
+        "goblin_right_ear",
         "goblin_head_neck_motor",
-        "debug_display_output"
+        "goblin_left_eyebrow",
+        "goblin_right_eyebrow",
+        "goblin_left_cheek",
+        "goblin_right_cheek",
+        "goblin_jaw",
+        "goblin_forehead"
     ],
     "shape_assembly": {
         "type": "SKULL_FRAME",
@@ -138,6 +145,9 @@
             "Telemetry aggregation (handled by torso)",
             "System-wide behavior planning (handled by torso)"
         ]
+    },
+    "use_fields": {
+        "debug": true
     },
     "type": "SUBSYSTEM_ASSEMBLY"
 }

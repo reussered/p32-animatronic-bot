@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config\\bots\\bot_families\\cats\\head\\cat_whisker_sensors.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_whisker_sensors",
@@ -7,7 +6,7 @@
     "description": "Touch-sensitive whiskers for spatial awareness and tactile interaction",
     "created": "2025-10-12",
     "components": [
-        "capacitive_touch_sensor"
+        "config/components/hardware/capacitive_touch_sensor.json"
     ],
     "whisker_layout": {
         "whisker_count": 6,

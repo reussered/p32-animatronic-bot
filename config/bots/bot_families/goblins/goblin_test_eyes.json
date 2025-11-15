@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_test_eyes.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINTESTEYES",
@@ -25,9 +24,9 @@
         "config/components/functional/goblin_behavior_engine.json"
     ],
     "components": [
-        "test_head",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/tests/head/test_head.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

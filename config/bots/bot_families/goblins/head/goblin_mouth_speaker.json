@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0",
+    "author": "config/author.json",
+    "name": "goblin_mouth_speaker",
+    "subsystem": "HEAD",
+    "components": [
+        "config/bots/bot_families/goblins/head/goblin_speaker.json"
+    ],
+    "coordinate_system": "skull_3d",
+    "reference_point": "nose_center",
+    "position": {
+        "x": "0 INCH",
+        "y": "-1.05 INCH",
+        "z": "0 INCH"
+    },
+    "orientation": {
+        "tilt": "0 DEGREES",
+        "rotation": "0 DEGREES",
+        "roll": "0 DEGREES"
+    },
+    "function": "audio_output",
+    "description": "Mouth-positioned speaker for audio output with mood modulation",
+    "timing": {
+        "hitCount": 1
+    },
+    "hardware_type": "POSITIONED_COMPONENT",
+    "type": "POSITIONED_COMPONENT"
+}

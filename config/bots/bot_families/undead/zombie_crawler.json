@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/undead/zombie_crawler.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_template": "config/bots/bot_families/horror/zombie_family.json",
@@ -34,8 +33,8 @@
         }
     },
     "components": [
-        "zombie_exposed_bone",
-        "zombie_drag_mechanism"
+        "config/bots/bot_families/zombies/head/zombie_exposed_bone.json",
+        "config/bots/bot_families/zombies/head/zombie_drag_mechanism.json"
     ],
     "custom_behaviors": {
         "ambush_crawling": {

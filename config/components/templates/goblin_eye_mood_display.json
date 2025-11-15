@@ -1,81 +1,80 @@
 {
-    "relative_filename": "config/components/templates/goblin_eye_mood_display.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "goblin_eye_mood_display",
-    "subsystem": "HEAD",
-    "type": "TEMPLATE",
-    "description": "Generic goblin eye display with mood-based color rendering - works with any color schema",
-    "created": "2025-11-06",
-    "purpose": "Display driver that applies mood modifications in real-time to eye animations",
-    "features": {
-        "color_schema_agnostic": "Configure once with 'color_schema' parameter, works with RGB565/666/888",
-        "mood_integration": "Real-time mood application from SharedMemory.read<Mood>()",
-        "animation_support": [
-            "Pupil position control (gaze direction)",
-            "Eyelid openness (0-255)",
-            "Blink animation trigger"
-        ],
-        "buffer_management": "Single frame buffer, efficient for 240x240 displays"
-    },
-    "supported_displays": [
-        {
-            "name": "GC9A01",
-            "resolution": "240x240",
-            "color_schema": "RGB565",
-            "buffer_size_kb": 112.5
-        },
-        {
-            "name": "ST7789",
-            "resolution": "240x320",
-            "color_schema": "RGB565",
-            "buffer_size_kb": 150
-        },
-        {
-            "name": "ST7735",
-            "resolution": "160x128",
-            "color_schema": "RGB565",
-            "buffer_size_kb": 40
-        }
-    ],
-    "configuration": {
-        "example": {
-            "width": 240,
-            "height": 240,
-            "color_schema": "RGB565",
-            "driver": "gc9a01",
-            "mood_enabled": true
-        }
-    },
-    "usage": {
-        "initialization": "GoblinEyeMoodDisplay eye; eye.init(240, 240, RGB565_FORMAT);",
-        "rendering": "Mood mood = GSM.read<Mood>(); eye.renderFrame(mood, 0x00FF00);",
-        "send_to_display": "const uint8_t* buffer = eye.getFrameBuffer(); driver.sendFrame(buffer, eye.getBufferSize());"
-    },
-    "memory_footprint": {
-        "calculator": "~200 bytes",
-        "buffer_rgb565_240x240": "115200 bytes (112.5 KB)",
-        "total": "~115.4 KB"
-    },
-    "integration_points": [
-        "SharedMemory: Read current Mood state",
-        "Display Driver: Send rendered frame buffer",
-        "Animation Controller: Set pupil position, eyelid openness"
-    ],
-    "notes": [
-        "Color schema auto-detection at init time",
-        "Mood calculator instantiated per color format",
-        "Supports all goblin creatures (just change display resolution/schema in JSON)"
-    ],
-    "prototype_status": "template_ready",
-    "tested": false,
-    "header_file": "config/components/templates/goblin_eye_mood_display.hpp",
-    "dependencies": [
-        "mood_calculator_template.hpp",
-        "color_schema.hpp",
-        "Mood.hpp"
-    ],
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_eye_mood_display",
+    "subsystem":  "HEAD",
+    "type":  "TEMPLATE",
+    "description":  "Generic goblin eye display with mood-based color rendering - works with any color schema",
+    "created":  "2025-11-06",
+    "purpose":  "Display driver that applies mood modifications in real-time to eye animations",
+    "features":  {
+                     "color_schema_agnostic":  "Configure once with \u0027color_schema\u0027 parameter, works with RGB565/666/888",
+                     "mood_integration":  "Real-time mood application from SharedMemory.read\u003cMood\u003e()",
+                     "animation_support":  [
+                                               "Pupil position control (gaze direction)",
+                                               "Eyelid openness (0-255)",
+                                               "Blink animation trigger"
+                                           ],
+                     "buffer_management":  "Single frame buffer, efficient for 240x240 displays"
+                 },
+    "supported_displays":  [
+                               {
+                                   "name":  "GC9A01",
+                                   "resolution":  "240x240",
+                                   "color_schema":  "RGB565",
+                                   "buffer_size_kb":  112.5
+                               },
+                               {
+                                   "name":  "ST7789",
+                                   "resolution":  "240x320",
+                                   "color_schema":  "RGB565",
+                                   "buffer_size_kb":  150
+                               },
+                               {
+                                   "name":  "ST7735",
+                                   "resolution":  "160x128",
+                                   "color_schema":  "RGB565",
+                                   "buffer_size_kb":  40
+                               }
+                           ],
+    "configuration":  {
+                          "example":  {
+                                          "width":  240,
+                                          "height":  240,
+                                          "color_schema":  "RGB565",
+                                          "driver":  "gc9a01",
+                                          "mood_enabled":  true
+                                      }
+                      },
+    "usage":  {
+                  "initialization":  "GoblinEyeMoodDisplay eye; eye.init(240, 240, RGB565_FORMAT);",
+                  "rendering":  "Mood mood = GSM.read\u003cMood\u003e(); eye.renderFrame(mood, 0x00FF00);",
+                  "send_to_display":  "const uint8_t* buffer = eye.getFrameBuffer(); driver.sendFrame(buffer, eye.getBufferSize());"
+              },
+    "memory_footprint":  {
+                             "calculator":  "~200 bytes",
+                             "buffer_rgb565_240x240":  "115200 bytes (112.5 KB)",
+                             "total":  "~115.4 KB"
+                         },
+    "integration_points":  [
+                               "SharedMemory: Read current Mood state",
+                               "Display Driver: Send rendered frame buffer",
+                               "Animation Controller: Set pupil position, eyelid openness"
+                           ],
+    "notes":  [
+                  "Color schema auto-detection at init time",
+                  "Mood calculator instantiated per color format",
+                  "Supports all goblin creatures (just change display resolution/schema in JSON)"
+              ],
+    "prototype_status":  "template_ready",
+    "tested":  false,
+    "header_file":  "config/components/templates/goblin_eye_mood_display.hpp",
+    "dependencies":  [
+                         "mood_calculator_template.hpp",
+                         "color_schema.hpp",
+                         "Mood.hpp"
+                     ],
+    "timing":  {
+                   "hitCount":  1
+               }
 }

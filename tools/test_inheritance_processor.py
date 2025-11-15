@@ -38,7 +38,6 @@ class TestInheritanceProcessor(unittest.TestCase):
         
         # Base humanoid template
         base_template = {
-            "relative_filename": "config/templates/humanoid_base.json",
             "version": "1.0.0",
             "template_type": "base_template",
             "coordinate_system": "skull_3d",
@@ -57,7 +56,6 @@ class TestInheritanceProcessor(unittest.TestCase):
         
         # Goblin family template
         family_template = {
-            "relative_filename": "config/templates/goblin_family.json",
             "version": "1.0.0",
             "template_type": "family_template",
             "family_type": "GOBLIN",
@@ -80,7 +78,6 @@ class TestInheritanceProcessor(unittest.TestCase):
         
         # Individual goblin creature
         creature_config = {
-            "relative_filename": "config/bots/test_goblin.json",
             "version": "1.0.0",
             "bot_id": "test_goblin_001",
             "bot_type": "GOBLIN_WARRIOR",

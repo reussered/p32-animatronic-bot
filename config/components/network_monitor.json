@@ -1,33 +1,32 @@
 {
-    "relative_filename": "config/components/network_monitor.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "network_monitor",
-    "description": "Network connectivity monitoring - WiFi signal strength, connection status",
-    "created": "2025-10-15",
-    "timing": {
-        "hitCount": 50,
-        "description": "Network check every 5 seconds"
-    },
-    "system_requirements": {
-        "min_controller": "ESP32",
-        "required_features": [
-            "WIFI_STA"
-        ],
-        "memory_footprint_kb": "24",
-        "cpu_usage_percent": "1-3"
-    },
-    "monitoring_metrics": {
-        "wifi_rssi": true,
-        "connection_quality": true,
-        "packet_loss": true,
-        "latency_ms": true
-    },
-    "responsibilities": [
-        "Monitor WiFi signal strength (RSSI)",
-        "Detect connection drops",
-        "Report connectivity status to telemetry",
-        "Trigger reconnection on failure"
-    ],
-    "type": "SYSTEM_LEVEL"
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "network_monitor",
+    "description":  "Network connectivity monitoring - WiFi signal strength, connection status",
+    "created":  "2025-10-15",
+    "timing":  {
+                   "hitCount":  50,
+                   "description":  "Network check every 5 seconds"
+               },
+    "system_requirements":  {
+                                "min_controller":  "ESP32",
+                                "required_features":  [
+                                                          "WIFI_STA"
+                                                      ],
+                                "memory_footprint_kb":  "24",
+                                "cpu_usage_percent":  "1-3"
+                            },
+    "monitoring_metrics":  {
+                               "wifi_rssi":  true,
+                               "connection_quality":  true,
+                               "packet_loss":  true,
+                               "latency_ms":  true
+                           },
+    "responsibilities":  [
+                             "Monitor WiFi signal strength (RSSI)",
+                             "Detect connection drops",
+                             "Report connectivity status to telemetry",
+                             "Trigger reconnection on failure"
+                         ],
+    "type":  "SYSTEM_LEVEL"
 }

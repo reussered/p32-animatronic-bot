@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config\\bots\\bot_families\\cats\\head\\cat_animated_ears.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_animated_ears",
@@ -7,7 +6,7 @@
     "description": "Servo-controlled cat ears for emotional expression and directional hearing simulation",
     "created": "2025-10-12",
     "components": [
-        "servo_sg90_micro"
+        "config/components/hardware/servo_sg90_micro.json"
     ],
     "ear_configuration": {
         "ear_count": 2,

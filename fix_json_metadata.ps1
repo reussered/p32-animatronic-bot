@@ -36,20 +36,11 @@ Get-ChildItem -Path "f:\GitHub\p32-animatronic-bot\config" -Recurse -Filter "*.j
             Write-Host "  [FIX NAME] $relativePath (was: $($json.name))" -ForegroundColor Yellow
         }
         
-        # Check if relative_filename exists and is correct
-        if (-not $json.relative_filename) {
-            # Add relative_filename field
-            $json | Add-Member -MemberType NoteProperty -Name "relative_filename" -Value $relativePath -Force
+        # Deprecated: remove any relative_filename entries
+        if ($json.PSObject.Properties.Name -contains "relative_filename") {
+            Write-Host "  [REMOVE PATH METADATA] $relativePath (was: $($json.relative_filename))" -ForegroundColor Yellow
+            $json.PSObject.Properties.Remove('relative_filename') | Out-Null
             $needsUpdate = $true
-            Write-Host "  [ADD PATH] $relativePath" -ForegroundColor Green
-        }
-        elseif ($json.relative_filename -ne $relativePath) {
-            # Update relative_filename field (handle absolute paths too)
-            $oldPath = $json.relative_filename
-            $json.relative_filename = $relativePath
-            $needsUpdate = $true
-            Write-Host "  [FIX PATH] $relativePath" -ForegroundColor Yellow
-            Write-Host "             (was: $oldPath)" -ForegroundColor Gray
         }
         
         # Save if changes were made

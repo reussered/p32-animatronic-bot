@@ -1,70 +1,69 @@
 {
-    "relative_filename": "config/components/hardware/hardware/ra8875_tft_1024x600.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_type": "RA8875_DISPLAY",
-    "display_driver": true,
-    "name": "ra8875_tft_1024x600",
-    "subsystem": "HEAD",
-    "physical_specs": {
-        "screen_size": "7.0 INCH",
-        "resolution": "1024x600",
-        "thickness": "0.2 INCH",
-        "aspect_ratio": "17:10",
-        "mounting_holes": {
-            "count": 4,
-            "diameter": "0.15 INCH",
-            "spacing": "7.5 INCH x 5.2 INCH"
-        }
-    },
-    "electrical_specs": {
-        "supply_voltage": "3.3V",
-        "logic_voltage": "3.3V",
-        "interface": "SPI",
-        "current_consumption": "300mA",
-        "backlight_current": "250mA",
-        "total_power": "1.8W"
-    },
-    "memory_requirements": {
-        "frame_buffer_size": "1228800 BYTES",
-        "color_depth": "2 BYTES_PER_PIXEL",
-        "total_pixels": 614400,
-        "ram_usage": "EXTREME",
-        "requires_psram": true,
-        "recommended_psram": "8MB+",
-        "notes": "RA8875 has internal frame buffer, reduces ESP32 RAM requirements"
-    },
-    "advanced_features": {
-        "built_in_frame_buffer": true,
-        "hardware_acceleration": true,
-        "touch_controller": "OPTIONAL",
-        "fonts_builtin": true,
-        "geometric_engine": true
-    },
-    "software": {
-        "init_function": "ra8875_init",
-        "act_function": "ra8875_act",
-        "components": [
-            "config/components/interfaces/spi_display_bus.json"
-        ]
-    },
-    "required_interface_functions": [
-        "getBuffer",
-        "getFrameSize",
-        "getFrameRowSize"
-    ],
-    "use_cases": {
-        "recommended_for": [
-            "PREMIUM_ORC_DISPLAYS",
-            "DRAGON_HEAD_PANELS",
-            "ULTRA_HIGH_DETAIL",
-            "ANIMATRONIC_CONTROL_PANELS"
-        ],
-        "advantages": "Built-in frame buffer reduces ESP32 memory pressure"
-    },
-    "type": "DISPLAY_DRIVER",
-    "description": "Auto-generated component: ra8875_tft_1024x600",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "RA8875_DISPLAY",
+    "display_driver":  true,
+    "name":  "ra8875_tft_1024x600",
+    "subsystem":  "HEAD",
+    "physical_specs":  {
+                           "screen_size":  "7.0 INCH",
+                           "resolution":  "1024x600",
+                           "thickness":  "0.2 INCH",
+                           "aspect_ratio":  "17:10",
+                           "mounting_holes":  {
+                                                  "count":  4,
+                                                  "diameter":  "0.15 INCH",
+                                                  "spacing":  "7.5 INCH x 5.2 INCH"
+                                              }
+                       },
+    "electrical_specs":  {
+                             "supply_voltage":  "3.3V",
+                             "logic_voltage":  "3.3V",
+                             "interface":  "SPI",
+                             "current_consumption":  "300mA",
+                             "backlight_current":  "250mA",
+                             "total_power":  "1.8W"
+                         },
+    "memory_requirements":  {
+                                "frame_buffer_size":  "1228800 BYTES",
+                                "color_depth":  "2 BYTES_PER_PIXEL",
+                                "total_pixels":  614400,
+                                "ram_usage":  "EXTREME",
+                                "requires_psram":  true,
+                                "recommended_psram":  "8MB+",
+                                "notes":  "RA8875 has internal frame buffer, reduces ESP32 RAM requirements"
+                            },
+    "advanced_features":  {
+                              "built_in_frame_buffer":  true,
+                              "hardware_acceleration":  true,
+                              "touch_controller":  "OPTIONAL",
+                              "fonts_builtin":  true,
+                              "geometric_engine":  true
+                          },
+    "software":  {
+                     "init_function":  "ra8875_init",
+                     "act_function":  "ra8875_act",
+                     "components":  [
+                                        "config/components/interfaces/spi_display_bus.json"
+                                    ]
+                 },
+    "required_interface_functions":  [
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
+    "use_cases":  {
+                      "recommended_for":  [
+                                              "PREMIUM_ORC_DISPLAYS",
+                                              "DRAGON_HEAD_PANELS",
+                                              "ULTRA_HIGH_DETAIL",
+                                              "ANIMATRONIC_CONTROL_PANELS"
+                                          ],
+                      "advantages":  "Built-in frame buffer reduces ESP32 memory pressure"
+                  },
+    "type":  "DISPLAY_DRIVER",
+    "description":  "Auto-generated component: ra8875_tft_1024x600",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

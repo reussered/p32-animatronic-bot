@@ -1,15 +1,14 @@
 {
-  "name": "goblin_left_eye",
-  "type": "POSITIONED_COMPONENT",
-  "description": "Left eye display buffer allocator",
-  "use_fields": {
-    "display_width": 240,
-    "display_height": 240,
-    "bytes_per_pixel": 2,
-    "color_schema": "RGB565",
-    "debug": true
-  },
-  "components": [
-    "goblin_eye"
-  ]
+    "name": "goblin_left_eye",
+    "type": "POSITIONED_COMPONENT",
+    "description": "Left eye display buffer allocator",
+    "use_fields": {
+        "display_width": 240,
+        "display_height": 240,
+        "bytes_per_pixel": 2,
+        "color_schema": "RGB565"
+    },
+    "components": [
+        "config/bots/bot_families/goblins/head/goblin_eye.json"
+    ]
 }

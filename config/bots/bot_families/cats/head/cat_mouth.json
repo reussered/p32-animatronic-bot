@@ -1,11 +1,10 @@
 {
-    "relative_filename": "config/bots/bot_families/cats/head/cat_mouth.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "cat_mouth",
     "subsystem": "HEAD",
     "components": [
-        "cat_mouth"
+        "config/bots/bot_families/cats/head/cat_mouth.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

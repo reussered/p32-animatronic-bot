@@ -1,19 +1,16 @@
 {
-            "relative_filename": "config\\bots\\bot_families\\goblins\\head\\goblin_right_eye.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "goblin_right_eye",
-    "use_fields": 
-    {
+    "use_fields": {
         "display_width": 240,
         "display_height": 240,
         "bytes_per_pixel": 2,
-        "color_schema": "RGB565",
-        "chunk": 10
+        "color_schema": "RGB565"
     },
-    "components": [  
-        "goblin_eye"   
-     ],
+    "components": [
+        "config/bots/bot_families/goblins/head/goblin_eye.json"
+    ],
     "template_inheritance": {
         "hardware_template": "config/hardware/gc9a01.json",
         "display_type": "CIRCULAR_LCD_FULL_COLOR",

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/test_subsystem.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "test_subsystem",
@@ -7,7 +6,7 @@
     "controller": "esp32-s3-devkitc-1",
     "description": "A subsystem for testing the dynamic pin allocation.",
     "components": [
-        "test_component"
+        "config/components/tests/test_component.json"
     ],
     "timing": {
         "hitCount": 1

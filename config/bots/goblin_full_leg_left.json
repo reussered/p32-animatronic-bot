@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/goblin_full_leg_left.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINFULL_LEG_LEFT",
@@ -19,8 +18,8 @@
         "ankle_flexion_servo",
         "ankle_rotation_servo",
         "leg_status_led",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "hip_dof": "3",

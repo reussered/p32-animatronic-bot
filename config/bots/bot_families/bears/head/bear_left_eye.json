@@ -1,11 +1,10 @@
 {
-    "relative_filename": "config/bots/bot_families/bears/head/bear_left_eye.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "name": "bear_left_eye",
     "subsystem": "HEAD",
     "components": [
-        "bear_eye"
+        "config/bots/bot_families/bears/head/bear_eye.json"
     ],
     "template_inheritance": {
         "hardware_template": "config/components/hardware/gc9a01.json",

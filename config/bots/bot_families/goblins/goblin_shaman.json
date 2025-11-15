@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_shaman.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_template": "config/bots/bot_families/fantasy/goblin_family.json",
@@ -84,12 +83,12 @@
         }
     },
     "components": [
-        "goblin_spirit_runes",
-        "goblin_ritual_scars",
-        "goblin_bone_ornaments",
-        "goblin_mystical_glow",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_spirit_runes.json",
+        "config/bots/bot_families/goblins/head/goblin_ritual_scars.json",
+        "config/bots/bot_families/goblins/head/goblin_bone_ornaments.json",
+        "config/bots/bot_families/goblins/head/goblin_mystical_glow.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "custom_behaviors": {
         "ritual_casting": {

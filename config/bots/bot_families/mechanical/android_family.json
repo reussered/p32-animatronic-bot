@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/mechanical/android_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_name": "ANDROID",
@@ -81,9 +80,9 @@
         "human_proportions": "anatomically_accurate"
     },
     "components": [
-        "android_synthetic_skin",
-        "android_emotion_display",
-        "android_neural_interface"
+        "config/bots/bot_families/androids/head/android_synthetic_skin.json",
+        "config/bots/bot_families/androids/head/android_emotion_display.json",
+        "config/bots/bot_families/androids/head/android_neural_interface.json"
     ],
     "android_features": {
         "artificial_intelligence": {

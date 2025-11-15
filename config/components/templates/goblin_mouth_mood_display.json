@@ -1,136 +1,135 @@
 {
-    "relative_filename": "config/components/templates/goblin_mouth_mood_display.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "goblin_mouth_mood_display",
-    "subsystem": "HEAD",
-    "type": "TEMPLATE",
-    "description": "Large mouth display with mood-based color rendering and chunking support",
-    "created": "2025-11-06",
-    "purpose": "Efficiently render large high-resolution displays (up to 1000x1000+) by chunking into sequential buffers",
-    "key_feature": "Memory-efficient chunking: Only ONE chunk buffer in RAM at a time, not entire frame",
-    "features": {
-        "color_schema_agnostic": "Works with RGB565, RGB666, RGB888",
-        "chunking_enabled": "Divide large displays into 80-pixel-high horizontal strips",
-        "sequential_rendering": "Render and send one chunk at a time",
-        "mood_integration": "Apply mood modifications to each chunk",
-        "animation_support": [
-            "Mouth open amount (0-255)",
-            "Expression parameter (0-255)",
-            "Smile toggle"
-        ]
-    },
-    "supported_displays": [
-        {
-            "name": "ILI9341",
-            "resolution": "480x320",
-            "color_schema": "RGB666",
-            "buffer_full_kb": 450,
-            "chunk_height_px": 80,
-            "chunks_needed": 4,
-            "buffer_single_chunk_kb": 112.5,
-            "savings_percent": 75
-        },
-        {
-            "name": "RA8875",
-            "resolution": "800x480",
-            "color_schema": "RGB666",
-            "buffer_full_kb": 1125,
-            "chunk_height_px": 80,
-            "chunks_needed": 6,
-            "buffer_single_chunk_kb": 150,
-            "savings_percent": 87
-        },
-        {
-            "name": "ILI9481",
-            "resolution": "800x480",
-            "color_schema": "RGB888",
-            "buffer_full_kb": 1152,
-            "chunk_height_px": 40,
-            "chunks_needed": 12,
-            "buffer_single_chunk_kb": 96,
-            "savings_percent": 92
-        }
-    ],
-    "chunking_strategy": {
-        "description": "Divide display into horizontal strips, render sequentially",
-        "example_ili9341": {
-            "total_display": "480x320 px (450 KB if non-chunked)",
-            "chunks": [
-                "Chunk 1: 480x80 (112.5 KB)",
-                "Chunk 2: 480x80 (112.5 KB)",
-                "Chunk 3: 480x80 (112.5 KB)",
-                "Chunk 4: 480x80 (112.5 KB)"
-            ],
-            "peak_memory": "112.5 KB (one chunk)",
-            "savings": "337.5 KB freed for other buffers"
-        }
-    },
-    "configuration": {
-        "example_ili9341": {
-            "width": 480,
-            "height": 320,
-            "color_schema": "RGB666",
-            "driver": "ili9341",
-            "chunking_enabled": true,
-            "chunk_height": 80,
-            "mood_enabled": true
-        },
-        "example_ra8875": {
-            "width": 800,
-            "height": 480,
-            "color_schema": "RGB666",
-            "driver": "ra8875",
-            "chunking_enabled": true,
-            "chunk_height": 80,
-            "mood_enabled": true
-        }
-    },
-    "usage": {
-        "initialization": "GoblinMouthMoodDisplay mouth; mouth.init(480, 320, RGB666_FORMAT, true, 80);",
-        "rendering_loop": "Mood mood = GSM.read<Mood>(); const uint8_t* chunk = mouth.renderNextChunk(mood, 0xFF6600); while(chunk) { driver.sendChunk(chunk, mouth.getChunkSize()); chunk = mouth.renderNextChunk(mood, 0xFF6600); } mouth.resetChunkIndex();",
-        "animation": "mouth.setMouthOpen(200); mouth.setExpression(150); mouth.setSmile(true);"
-    },
-    "memory_analysis": {
-        "display_size": "480x320",
-        "color_format": "RGB666",
-        "naive_approach": {
-            "buffer_size": "460800 bytes (450 KB)",
-            "exceeds_300kb_limit": true
-        },
-        "chunked_approach": {
-            "chunk_size": "115200 bytes (112.5 KB)",
-            "fits_in_300kb": true,
-            "headroom_kb": 187.5
-        },
-        "trade_off": "15 FPS refresh rate (acceptable for mouth, eye-catching updates)"
-    },
-    "performance": {
-        "chunk_render_time_ms": "5-10 ms (on ESP32-S3)",
-        "chunks_per_frame": 4,
-        "frame_time_ms": "20-40 ms",
-        "refresh_rate_fps": "15-25 FPS"
-    },
-    "integration_points": [
-        "SharedMemory: Read current Mood state",
-        "Display Driver: Send chunks sequentially",
-        "Animation Controller: Set mouth expressions"
-    ],
-    "notes": [
-        "Chunking is transparent to caller - just call renderNextChunk() in loop",
-        "Each chunk includes full mood modifications",
-        "Chunk height customizable (80 px default, adjust for display size)",
-        "Works with all goblin creatures that have large mouth displays"
-    ],
-    "prototype_status": "template_ready",
-    "tested": false,
-    "header_file": "config/components/templates/goblin_mouth_mood_display.hpp",
-    "dependencies": [
-        "mood_calculator_template.hpp",
-        "color_schema.hpp",
-        "Mood.hpp"
-    ],
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_mouth_mood_display",
+    "subsystem":  "HEAD",
+    "type":  "TEMPLATE",
+    "description":  "Large mouth display with mood-based color rendering and chunking support",
+    "created":  "2025-11-06",
+    "purpose":  "Efficiently render large high-resolution displays (up to 1000x1000+) by chunking into sequential buffers",
+    "key_feature":  "Memory-efficient chunking: Only ONE chunk buffer in RAM at a time, not entire frame",
+    "features":  {
+                     "color_schema_agnostic":  "Works with RGB565, RGB666, RGB888",
+                     "chunking_enabled":  "Divide large displays into 80-pixel-high horizontal strips",
+                     "sequential_rendering":  "Render and send one chunk at a time",
+                     "mood_integration":  "Apply mood modifications to each chunk",
+                     "animation_support":  [
+                                               "Mouth open amount (0-255)",
+                                               "Expression parameter (0-255)",
+                                               "Smile toggle"
+                                           ]
+                 },
+    "supported_displays":  [
+                               {
+                                   "name":  "ILI9341",
+                                   "resolution":  "480x320",
+                                   "color_schema":  "RGB666",
+                                   "buffer_full_kb":  450,
+                                   "chunk_height_px":  80,
+                                   "chunks_needed":  4,
+                                   "buffer_single_chunk_kb":  112.5,
+                                   "savings_percent":  75
+                               },
+                               {
+                                   "name":  "RA8875",
+                                   "resolution":  "800x480",
+                                   "color_schema":  "RGB666",
+                                   "buffer_full_kb":  1125,
+                                   "chunk_height_px":  80,
+                                   "chunks_needed":  6,
+                                   "buffer_single_chunk_kb":  150,
+                                   "savings_percent":  87
+                               },
+                               {
+                                   "name":  "ILI9481",
+                                   "resolution":  "800x480",
+                                   "color_schema":  "RGB888",
+                                   "buffer_full_kb":  1152,
+                                   "chunk_height_px":  40,
+                                   "chunks_needed":  12,
+                                   "buffer_single_chunk_kb":  96,
+                                   "savings_percent":  92
+                               }
+                           ],
+    "chunking_strategy":  {
+                              "description":  "Divide display into horizontal strips, render sequentially",
+                              "example_ili9341":  {
+                                                      "total_display":  "480x320 px (450 KB if non-chunked)",
+                                                      "chunks":  [
+                                                                     "Chunk 1: 480x80 (112.5 KB)",
+                                                                     "Chunk 2: 480x80 (112.5 KB)",
+                                                                     "Chunk 3: 480x80 (112.5 KB)",
+                                                                     "Chunk 4: 480x80 (112.5 KB)"
+                                                                 ],
+                                                      "peak_memory":  "112.5 KB (one chunk)",
+                                                      "savings":  "337.5 KB freed for other buffers"
+                                                  }
+                          },
+    "configuration":  {
+                          "example_ili9341":  {
+                                                  "width":  480,
+                                                  "height":  320,
+                                                  "color_schema":  "RGB666",
+                                                  "driver":  "ili9341",
+                                                  "chunking_enabled":  true,
+                                                  "chunk_height":  80,
+                                                  "mood_enabled":  true
+                                              },
+                          "example_ra8875":  {
+                                                 "width":  800,
+                                                 "height":  480,
+                                                 "color_schema":  "RGB666",
+                                                 "driver":  "ra8875",
+                                                 "chunking_enabled":  true,
+                                                 "chunk_height":  80,
+                                                 "mood_enabled":  true
+                                             }
+                      },
+    "usage":  {
+                  "initialization":  "GoblinMouthMoodDisplay mouth; mouth.init(480, 320, RGB666_FORMAT, true, 80);",
+                  "rendering_loop":  "Mood mood = GSM.read\u003cMood\u003e(); const uint8_t* chunk = mouth.renderNextChunk(mood, 0xFF6600); while(chunk) { driver.sendChunk(chunk, mouth.getChunkSize()); chunk = mouth.renderNextChunk(mood, 0xFF6600); } mouth.resetChunkIndex();",
+                  "animation":  "mouth.setMouthOpen(200); mouth.setExpression(150); mouth.setSmile(true);"
+              },
+    "memory_analysis":  {
+                            "display_size":  "480x320",
+                            "color_format":  "RGB666",
+                            "naive_approach":  {
+                                                   "buffer_size":  "460800 bytes (450 KB)",
+                                                   "exceeds_300kb_limit":  true
+                                               },
+                            "chunked_approach":  {
+                                                     "chunk_size":  "115200 bytes (112.5 KB)",
+                                                     "fits_in_300kb":  true,
+                                                     "headroom_kb":  187.5
+                                                 },
+                            "trade_off":  "15 FPS refresh rate (acceptable for mouth, eye-catching updates)"
+                        },
+    "performance":  {
+                        "chunk_render_time_ms":  "5-10 ms (on ESP32-S3)",
+                        "chunks_per_frame":  4,
+                        "frame_time_ms":  "20-40 ms",
+                        "refresh_rate_fps":  "15-25 FPS"
+                    },
+    "integration_points":  [
+                               "SharedMemory: Read current Mood state",
+                               "Display Driver: Send chunks sequentially",
+                               "Animation Controller: Set mouth expressions"
+                           ],
+    "notes":  [
+                  "Chunking is transparent to caller - just call renderNextChunk() in loop",
+                  "Each chunk includes full mood modifications",
+                  "Chunk height customizable (80 px default, adjust for display size)",
+                  "Works with all goblin creatures that have large mouth displays"
+              ],
+    "prototype_status":  "template_ready",
+    "tested":  false,
+    "header_file":  "config/components/templates/goblin_mouth_mood_display.hpp",
+    "dependencies":  [
+                         "mood_calculator_template.hpp",
+                         "color_schema.hpp",
+                         "Mood.hpp"
+                     ],
+    "timing":  {
+                   "hitCount":  1
+               }
 }

@@ -1,0 +1,28 @@
+// goblin_mouth_display.src - Mouth display (currently disabled - not enough RAM)
+// Note: display_width, display_height, bytes_per_pixel auto-assigned by use_fields
+
+#include "esp_log.h"
+
+// Mouth position (relative to skull center)
+struct MouthPosition {
+    int16_t x;      // 0 = center
+    int16_t y;      // -80 = below center
+    int16_t z;      // 0 = front of face
+} mouth_position = {0, -80, 0};
+
+esp_err_t goblin_mouth_display_init(void)
+{
+    // NOTE: display_width, display_height, bytes_per_pixel are auto-assigned above by generator
+    // Mouth display currently disabled - 480x320 RGB666 (460KB) exceeds available RAM
+    
+    ESP_LOGW("goblin_mouth_display", "Mouth display disabled (would need %d bytes for %dx%d)",
+             display_width * display_height * bytes_per_pixel, display_width, display_height);
+    
+    return ESP_OK;
+}
+
+void goblin_mouth_display_act(void)
+{
+    // NOTE: display_width, display_height, bytes_per_pixel are auto-assigned above by generator
+    // Currently disabled - implement chunked rendering when ready
+}

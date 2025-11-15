@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/cats/cat_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "CAT",
@@ -16,12 +15,12 @@
         "mechanical_precision": "high_tolerance"
     },
     "components": [
-        "cat_animated_ears",
-        "cat_whisker_sensors",
-        "cat_left_eye",
-        "cat_right_eye",
-        "cat_mouth",
-        "cat_nose_sensor"
+        "config/bots/bot_families/cats/head/cat_animated_ears.json",
+        "config/bots/bot_families/cats/head/cat_whisker_sensors.json",
+        "config/bots/bot_families/cats/head/cat_left_eye.json",
+        "config/bots/bot_families/cats/head/cat_right_eye.json",
+        "config/bots/bot_families/cats/head/cat_mouth.json",
+        "config/bots/bot_families/cats/head/cat_nose_sensor.json"
     ],
     "family_characteristics": {
         "physical_features": {

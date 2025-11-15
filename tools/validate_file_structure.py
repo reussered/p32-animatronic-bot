@@ -247,13 +247,16 @@ class ValidationRunner:
         return errors
 
     def _validate_relative_path(self, file_path: Path, data: dict) -> list[str]:
-        """Checks the 'relative_filename' field."""
+        """Checks the 'relative_filename' field. No longer treated as an error if missing.
+
+        If present, it must match the actual path. If not present, it's OK.
+        """
         errors = []
         relative_path = data.get("relative_filename")
         if not relative_path:
-            errors.append("Missing required field: 'relative_filename'.")
+            # Not an error anymore - relative_filename is optional
             return errors
-        
+
         expected_path = file_path.relative_to(self.root_dir).as_posix()
         if relative_path != expected_path:
             errors.append(f"Field 'relative_filename' is incorrect. Is: '{relative_path}', should be: '{expected_path}'.")
@@ -264,7 +267,8 @@ class ValidationRunner:
         errors = []
         
         # 1. Check for master required fields
-        master_fields = self.rules.get("master_required_fields", ["name", "type", "relative_filename"])
+        # NOTE: 'relative_filename' is no longer a mandatory master field
+        master_fields = self.rules.get("master_required_fields", ["name", "type"])
         for field in master_fields:
             if field not in data:
                 errors.append(f"Missing master required field: '{field}'.")
@@ -311,7 +315,6 @@ class ValidationRunner:
             json_content = {
                 "name": name,
                 "type": "SCAFFOLDED",
-                "relative_filename": json_path.relative_to(self.root_dir).as_posix(),
                 "description": "Auto-generated component."
             }
             with json_path.open("w", encoding="utf-8") as f:
@@ -445,10 +448,10 @@ class ValidationRunner:
             data["name"] = correct_name
             made_changes = True
 
-        # Fix relative path
-        correct_rel_path = Path(file_path).relative_to(self.root_dir).as_posix()
-        if data.get("relative_filename") != correct_rel_path:
-            data["relative_filename"] = correct_rel_path
+        # Remove deprecated 'relative_filename' if present
+        if "relative_filename" in data:
+            # Do not recreate or correct it; it's deprecated
+            del data["relative_filename"]
             made_changes = True
 
         # Infer type if missing, and enforce uppercase
@@ -561,7 +564,7 @@ class ValidationRunner:
             return # Migration already done
 
         print("-> Performing one-time migration to additional_required_fields...")
-        master_fields = ["name", "type", "relative_filename"]
+        master_fields = ["name", "type"]
         self.rules["master_required_fields"] = master_fields
         
         defined_types = self.rules["type_definitions"]["types"]

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/goblin_head_only.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLIN_HEAD_ONLY",
@@ -24,9 +23,9 @@
         "config/components/functional/goblin_mood.json"
     ],
     "components": [
-        "goblin_head_left_eye_only",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_head_left_eye_only.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mood_defaults": {
         "FEAR": 20,

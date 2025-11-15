@@ -1,69 +1,70 @@
 {
-    "relative_filename": "config/bots/bot_families/dragons/feet/flying_dragon_foot_assembly.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "flying_dragon_foot_assembly",
-    "description": "Ground contact and shock absorption for jumping/landing. Passive compliance with dual-toe structure for agile footfalls and terrain interaction",
-    "created": "2025-11-05",
-    "type": "CREATURE_SPECIFIC",
-    "hardware_type": "MECHANICAL_ASSEMBLY",
-    "interface_type": "PASSIVE_CONTACT",
-    "design_philosophy": {
-        "approach": "Primarily mechanical (passive)",
-        "control_type": "Passive shock absorption",
-        "future_enhancements": "Tendon-driven proprioception feedback (Phase 2)"
-    },
-    "physical_specifications": {
-        "total_mass_kg": 0.1,
-        "mass_per_foot_kg": 0.05,
-        "foot_count": 2,
-        "toe_count_per_foot": 2,
-        "material": "TPE (Thermoplastic Elastomer)",
-        "contact_area_cm2": 5.0,
-        "cushion_compression_mm": "3-5",
-        "coefficient_friction": 0.7,
-        "spring_constant_n_per_mm": "50-80",
-        "traction_surface": "Textured for grip"
-    },
-    "mechanical_features": {
-        "toe_structure": "Dual-toe per foot (fore + aft)",
-        "stability": "Optimized for rotation and stability",
-        "compliance": "Soft cushioning with foam layer",
-        "shock_absorption": "Passive mounts decouple foot from servo shafts",
-        "integration_with_leg_assembly": "Ankle Y joint controls foot roll/pitch via tendons (optional)"
-    },
-    "software": {
-        "init_function": "flying_dragon_foot_assembly_init",
-        "act_function": "flying_dragon_foot_assembly_act",
-        "source_file": "config/components/creature_specific/flying_dragon_foot_assembly.src",
-        "header_file": "config/components/creature_specific/flying_dragon_foot_assembly.hdr",
-        "api_functions": [
-            "flying_dragon_foot_is_in_contact_left(void)",
-            "flying_dragon_foot_is_in_contact_right(void)",
-            "flying_dragon_foot_get_total_vertical_load(void)",
-            "flying_dragon_foot_get_total_mass_kg(void)"
-        ]
-    },
-    "contact_detection": {
-        "method": "Passive contact estimation based on leg dynamics",
-        "uses_accelerometers": true,
-        "future_sensors": [
-            "Force sensors for ground reaction forces",
-            "Tendon tension sensors for proprioception"
-        ]
-    },
-    "timing": {
-        "hitCount": 5,
-        "description": "Update contact state at ~50 Hz (10ms periods)"
-    },
-    "telemetry": {
-        "ground_contact_state": "Boolean per foot",
-        "vertical_load_estimate": "Newtons",
-        "lateral_slip_velocity": "Estimated from leg dynamics (TBD)"
-    },
-    "components": [],
-    "dependencies": [
-        "leg assembly",
-        "motion dynamics estimation"
-    ]
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "flying_dragon_foot_assembly",
+    "description":  "Ground contact and shock absorption for jumping/landing. Passive compliance with dual-toe structure for agile footfalls and terrain interaction",
+    "created":  "2025-11-05",
+    "type":  "CREATURE_SPECIFIC",
+    "hardware_type":  "MECHANICAL_ASSEMBLY",
+    "interface_type":  "PASSIVE_CONTACT",
+    "design_philosophy":  {
+                              "approach":  "Primarily mechanical (passive)",
+                              "control_type":  "Passive shock absorption",
+                              "future_enhancements":  "Tendon-driven proprioception feedback (Phase 2)"
+                          },
+    "physical_specifications":  {
+                                    "total_mass_kg":  0.1,
+                                    "mass_per_foot_kg":  0.05,
+                                    "foot_count":  2,
+                                    "toe_count_per_foot":  2,
+                                    "material":  "TPE (Thermoplastic Elastomer)",
+                                    "contact_area_cm2":  5.0,
+                                    "cushion_compression_mm":  "3-5",
+                                    "coefficient_friction":  0.7,
+                                    "spring_constant_n_per_mm":  "50-80",
+                                    "traction_surface":  "Textured for grip"
+                                },
+    "mechanical_features":  {
+                                "toe_structure":  "Dual-toe per foot (fore + aft)",
+                                "stability":  "Optimized for rotation and stability",
+                                "compliance":  "Soft cushioning with foam layer",
+                                "shock_absorption":  "Passive mounts decouple foot from servo shafts",
+                                "integration_with_leg_assembly":  "Ankle Y joint controls foot roll/pitch via tendons (optional)"
+                            },
+    "software":  {
+                     "init_function":  "flying_dragon_foot_assembly_init",
+                     "act_function":  "flying_dragon_foot_assembly_act",
+                     "source_file":  "config/components/creature_specific/flying_dragon_foot_assembly.src",
+                     "header_file":  "config/components/creature_specific/flying_dragon_foot_assembly.hdr",
+                     "api_functions":  [
+                                           "flying_dragon_foot_is_in_contact_left(void)",
+                                           "flying_dragon_foot_is_in_contact_right(void)",
+                                           "flying_dragon_foot_get_total_vertical_load(void)",
+                                           "flying_dragon_foot_get_total_mass_kg(void)"
+                                       ]
+                 },
+    "contact_detection":  {
+                              "method":  "Passive contact estimation based on leg dynamics",
+                              "uses_accelerometers":  true,
+                              "future_sensors":  [
+                                                     "Force sensors for ground reaction forces",
+                                                     "Tendon tension sensors for proprioception"
+                                                 ]
+                          },
+    "timing":  {
+                   "hitCount":  5,
+                   "description":  "Update contact state at ~50 Hz (10ms periods)"
+               },
+    "telemetry":  {
+                      "ground_contact_state":  "Boolean per foot",
+                      "vertical_load_estimate":  "Newtons",
+                      "lateral_slip_velocity":  "Estimated from leg dynamics (TBD)"
+                  },
+    "components":  [
+
+                   ],
+    "dependencies":  [
+                         "leg assembly",
+                         "motion dynamics estimation"
+                     ]
 }

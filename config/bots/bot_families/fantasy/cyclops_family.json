@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/fantasy/cyclops_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "CYCLOPS",
@@ -16,9 +15,9 @@
         "central_eye_diameter": "4.0 INCH"
     },
     "components": [
-        "cyclops_eye_central",
-        "cyclops_mouth",
-        "cyclops_speaker"
+        "config/bots/bot_families/humanoids/head/cyclops_eye_central.json",
+        "config/bots/bot_families/humanoids/head/cyclops_mouth.json",
+        "config/bots/bot_families/humanoids/head/cyclops_speaker.json"
     ],
     "family_mood_profile": {
         "FEAR": 30,

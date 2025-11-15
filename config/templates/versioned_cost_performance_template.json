@@ -1,111 +1,110 @@
 {
-    "relative_filename": "config/templates/versioned_cost_performance_template.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "template_type": "VERSIONED_HARDWARE_COST_PERFORMANCE_TRACKING",
-    "description": "Template for tracking cost and performance data over time with historical preservation",
-    "cost_performance_history": {
-        "last_updated": "2025-10-22",
-        "update_schedule": {
-            "automatic_check_interval_days": 30,
-            "manual_check_requested": false,
-            "next_scheduled_check": "2025-11-21"
-        },
-        "current_data": {
-            "date_valid": "2025-10-22",
-            "data_source": "MANUAL_RESEARCH",
-            "verification_status": "VERIFIED",
-            "cost_analysis": {
-                "component_cost_usd": "VALUE",
-                "bulk_discount_available": "TRUE/FALSE",
-                "bulk_price_breaks": {
-                    "quantity_10": "VALUE",
-                    "quantity_50": "VALUE",
-                    "quantity_100": "VALUE"
-                },
-                "supplier_comparison": {
-                    "primary_supplier": {
-                        "name": "SUPPLIER",
-                        "price": "VALUE",
-                        "availability": "STATUS"
-                    },
-                    "secondary_supplier": {
-                        "name": "SUPPLIER",
-                        "price": "VALUE",
-                        "availability": "STATUS"
-                    },
-                    "budget_supplier": {
-                        "name": "SUPPLIER",
-                        "price": "VALUE",
-                        "availability": "STATUS"
-                    }
-                }
-            },
-            "memory_requirements": {
-                "esp32_ram_usage_kb": "VALUE",
-                "esp32_flash_usage_kb": "VALUE",
-                "shared_memory_overhead_kb": "VALUE",
-                "total_memory_impact_kb": "VALUE"
-            },
-            "speed_requirements": {
-                "minimum_clock_mhz": "VALUE",
-                "optimal_clock_mhz": "VALUE",
-                "cpu_utilization_percent": "VALUE",
-                "bandwidth_utilization_percent": "VALUE"
-            },
-            "scalability_metrics": {
-                "max_components_per_esp32": "VALUE",
-                "recommended_components_per_esp32": "VALUE",
-                "resource_bottleneck": "CPU/MEMORY/BANDWIDTH"
-            }
-        },
-        "historical_data": [
-            {
-                "date_valid": "2025-09-22",
-                "data_source": "MANUAL_RESEARCH",
-                "verification_status": "VERIFIED",
-                "cost_analysis": {
-                    "component_cost_usd": "PREVIOUS_VALUE",
-                    "note": "Price increase due to supply shortage"
-                },
-                "memory_requirements": {
-                    "esp32_ram_usage_kb": "PREVIOUS_VALUE",
-                    "note": "Driver optimization reduced usage"
-                }
-            }
-        ],
-        "change_tracking": {
-            "cost_trend": "INCREASING/DECREASING/STABLE",
-            "performance_trend": "IMPROVING/DEGRADING/STABLE",
-            "availability_trend": "IMPROVING/WORSENING/STABLE",
-            "last_significant_change": "2025-09-22",
-            "change_reason": "Supply chain disruption increased costs 15%"
-        }
-    },
-    "update_triggers": {
-        "automatic_triggers": [
-            "scheduled_interval_reached",
-            "supplier_price_change_detected",
-            "new_driver_version_released"
-        ],
-        "manual_triggers": [
-            "user_requested_update",
-            "project_planning_phase",
-            "bulk_purchase_evaluation"
-        ]
-    },
-    "validation_requirements": {
-        "price_verification": [
-            "Cross-check multiple suppliers",
-            "Verify bulk pricing accuracy",
-            "Check current availability status"
-        ],
-        "performance_verification": [
-            "Re-test memory usage with current drivers",
-            "Validate CPU utilization benchmarks",
-            "Confirm speed specifications"
-        ]
-    },
-    "name": "versioned_cost_performance_template",
-    "type": "UNKNOWN"
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "template_type":  "VERSIONED_HARDWARE_COST_PERFORMANCE_TRACKING",
+    "description":  "Template for tracking cost and performance data over time with historical preservation",
+    "cost_performance_history":  {
+                                     "last_updated":  "2025-10-22",
+                                     "update_schedule":  {
+                                                             "automatic_check_interval_days":  30,
+                                                             "manual_check_requested":  false,
+                                                             "next_scheduled_check":  "2025-11-21"
+                                                         },
+                                     "current_data":  {
+                                                          "date_valid":  "2025-10-22",
+                                                          "data_source":  "MANUAL_RESEARCH",
+                                                          "verification_status":  "VERIFIED",
+                                                          "cost_analysis":  {
+                                                                                "component_cost_usd":  "VALUE",
+                                                                                "bulk_discount_available":  "TRUE/FALSE",
+                                                                                "bulk_price_breaks":  {
+                                                                                                          "quantity_10":  "VALUE",
+                                                                                                          "quantity_50":  "VALUE",
+                                                                                                          "quantity_100":  "VALUE"
+                                                                                                      },
+                                                                                "supplier_comparison":  {
+                                                                                                            "primary_supplier":  {
+                                                                                                                                     "name":  "SUPPLIER",
+                                                                                                                                     "price":  "VALUE",
+                                                                                                                                     "availability":  "STATUS"
+                                                                                                                                 },
+                                                                                                            "secondary_supplier":  {
+                                                                                                                                       "name":  "SUPPLIER",
+                                                                                                                                       "price":  "VALUE",
+                                                                                                                                       "availability":  "STATUS"
+                                                                                                                                   },
+                                                                                                            "budget_supplier":  {
+                                                                                                                                    "name":  "SUPPLIER",
+                                                                                                                                    "price":  "VALUE",
+                                                                                                                                    "availability":  "STATUS"
+                                                                                                                                }
+                                                                                                        }
+                                                                            },
+                                                          "memory_requirements":  {
+                                                                                      "esp32_ram_usage_kb":  "VALUE",
+                                                                                      "esp32_flash_usage_kb":  "VALUE",
+                                                                                      "shared_memory_overhead_kb":  "VALUE",
+                                                                                      "total_memory_impact_kb":  "VALUE"
+                                                                                  },
+                                                          "speed_requirements":  {
+                                                                                     "minimum_clock_mhz":  "VALUE",
+                                                                                     "optimal_clock_mhz":  "VALUE",
+                                                                                     "cpu_utilization_percent":  "VALUE",
+                                                                                     "bandwidth_utilization_percent":  "VALUE"
+                                                                                 },
+                                                          "scalability_metrics":  {
+                                                                                      "max_components_per_esp32":  "VALUE",
+                                                                                      "recommended_components_per_esp32":  "VALUE",
+                                                                                      "resource_bottleneck":  "CPU/MEMORY/BANDWIDTH"
+                                                                                  }
+                                                      },
+                                     "historical_data":  [
+                                                             {
+                                                                 "date_valid":  "2025-09-22",
+                                                                 "data_source":  "MANUAL_RESEARCH",
+                                                                 "verification_status":  "VERIFIED",
+                                                                 "cost_analysis":  {
+                                                                                       "component_cost_usd":  "PREVIOUS_VALUE",
+                                                                                       "note":  "Price increase due to supply shortage"
+                                                                                   },
+                                                                 "memory_requirements":  {
+                                                                                             "esp32_ram_usage_kb":  "PREVIOUS_VALUE",
+                                                                                             "note":  "Driver optimization reduced usage"
+                                                                                         }
+                                                             }
+                                                         ],
+                                     "change_tracking":  {
+                                                             "cost_trend":  "INCREASING/DECREASING/STABLE",
+                                                             "performance_trend":  "IMPROVING/DEGRADING/STABLE",
+                                                             "availability_trend":  "IMPROVING/WORSENING/STABLE",
+                                                             "last_significant_change":  "2025-09-22",
+                                                             "change_reason":  "Supply chain disruption increased costs 15%"
+                                                         }
+                                 },
+    "update_triggers":  {
+                            "automatic_triggers":  [
+                                                       "scheduled_interval_reached",
+                                                       "supplier_price_change_detected",
+                                                       "new_driver_version_released"
+                                                   ],
+                            "manual_triggers":  [
+                                                    "user_requested_update",
+                                                    "project_planning_phase",
+                                                    "bulk_purchase_evaluation"
+                                                ]
+                        },
+    "validation_requirements":  {
+                                    "price_verification":  [
+                                                               "Cross-check multiple suppliers",
+                                                               "Verify bulk pricing accuracy",
+                                                               "Check current availability status"
+                                                           ],
+                                    "performance_verification":  [
+                                                                     "Re-test memory usage with current drivers",
+                                                                     "Validate CPU utilization benchmarks",
+                                                                     "Confirm speed specifications"
+                                                                 ]
+                                },
+    "name":  "versioned_cost_performance_template",
+    "type":  "UNKNOWN"
 }

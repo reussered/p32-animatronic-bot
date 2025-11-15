@@ -1,272 +1,271 @@
 {
-    "relative_filename": "config/components/interfaces/stepper_motor_28byj48.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "STEPPER_MOTOR_28BYJ48",
-    "interface_type": "STEPPER_MOTOR_CONTROLLER",
-    "description": "28BYJ-48 unipolar stepper motor interface for head articulation and fine positioning",
-    "hardware_specifications": {
-        "motor_type": "28BYJ48_UNIPOLAR",
-        "step_angle": "5.625_DEGREES_64_STEPS",
-        "step_angle_with_gearing": "0.087890625_DEGREES",
-        "steps_per_revolution": 4096,
-        "gear_ratio": "64:1_INTERNAL",
-        "torque_rating": "0.3_KG_CM",
-        "voltage_rating": "5V_DC",
-        "current_rating": "240mA_MAX",
-        "coil_resistance": "50_OHMS"
-    },
-    "pin_requirements": {
-        "in1_pin": {
-            "function": "coil_a_positive",
-            "generic_name": "coil_a_pos",
-            "description": "Coil A positive control",
-            "voltage_level": "5V_LOGIC",
-            "wire_color": "ORANGE"
-        },
-        "in2_pin": {
-            "function": "coil_a_negative",
-            "generic_name": "coil_a_neg",
-            "description": "Coil A negative control",
-            "voltage_level": "5V_LOGIC",
-            "wire_color": "YELLOW"
-        },
-        "in3_pin": {
-            "function": "coil_b_positive",
-            "generic_name": "coil_b_pos",
-            "description": "Coil B positive control",
-            "voltage_level": "5V_LOGIC",
-            "wire_color": "PINK"
-        },
-        "in4_pin": {
-            "function": "coil_b_negative",
-            "generic_name": "coil_b_neg",
-            "description": "Coil B negative control",
-            "voltage_level": "5V_LOGIC",
-            "wire_color": "BLUE"
-        },
-        "vcc_pin": {
-            "function": "motor_power",
-            "generic_name": "power_5v",
-            "description": "5V power supply",
-            "voltage_level": "5V_DC",
-            "wire_color": "RED"
-        }
-    },
-    "driver_compatibility": {
-        "uln2003": {
-            "type": "DARLINGTON_ARRAY",
-            "channels": 4,
-            "max_current": "500mA_PER_CHANNEL",
-            "input_voltage": "3.3V_5V",
-            "output_voltage": "UP_TO_50V",
-            "integrated_freewheeling_diodes": true
-        },
-        "l298n": {
-            "type": "H_BRIDGE_DUAL",
-            "channels": 4,
-            "max_current": "2A_PER_CHANNEL",
-            "input_voltage": "3.3V_5V",
-            "output_voltage": "5V_TO_35V",
-            "thermal_protection": true
-        }
-    },
-    "step_sequences": {
-        "full_step_single_coil": {
-            "sequence": [
-                [
-                    1,
-                    0,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    1,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    0,
-                    1,
-                    0
-                ],
-                [
-                    0,
-                    0,
-                    0,
-                    1
-                ]
-            ],
-            "torque": "LOW",
-            "power_consumption": "LOW",
-            "smoothness": "LOW"
-        },
-        "full_step_dual_coil": {
-            "sequence": [
-                [
-                    1,
-                    1,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    1,
-                    1,
-                    0
-                ],
-                [
-                    0,
-                    0,
-                    1,
-                    1
-                ],
-                [
-                    1,
-                    0,
-                    0,
-                    1
-                ]
-            ],
-            "torque": "HIGH",
-            "power_consumption": "HIGH",
-            "smoothness": "MEDIUM"
-        },
-        "half_step": {
-            "sequence": [
-                [
-                    1,
-                    0,
-                    0,
-                    0
-                ],
-                [
-                    1,
-                    1,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    1,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    1,
-                    1,
-                    0
-                ],
-                [
-                    0,
-                    0,
-                    1,
-                    0
-                ],
-                [
-                    0,
-                    0,
-                    1,
-                    1
-                ],
-                [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
-                [
-                    1,
-                    0,
-                    0,
-                    1
-                ]
-            ],
-            "torque": "MEDIUM",
-            "power_consumption": "MEDIUM",
-            "smoothness": "HIGH",
-            "resolution": "DOUBLE"
-        }
-    },
-    "timing_specifications": {
-        "minimum_step_interval": "1_MILLISECOND",
-        "recommended_step_interval": "2_MILLISECONDS",
-        "coil_switching_delay": "100_MICROSECONDS",
-        "holding_time": "INDEFINITE_WITH_POWER"
-    },
-    "manufacturer_pin_mappings": {
-        "generic_28byj48": {
-            "coil_a_pos": [
-                "IN1",
-                "A+",
-                "ORANGE"
-            ],
-            "coil_a_neg": [
-                "IN2",
-                "A-",
-                "YELLOW"
-            ],
-            "coil_b_pos": [
-                "IN3",
-                "B+",
-                "PINK"
-            ],
-            "coil_b_neg": [
-                "IN4",
-                "B-",
-                "BLUE"
-            ],
-            "power_5v": [
-                "VCC",
-                "+5V",
-                "RED"
-            ]
-        },
-        "elegoo": {
-            "coil_a_pos": [
-                "IN1"
-            ],
-            "coil_a_neg": [
-                "IN2"
-            ],
-            "coil_b_pos": [
-                "IN3"
-            ],
-            "coil_b_neg": [
-                "IN4"
-            ],
-            "power_5v": [
-                "VCC"
-            ]
-        }
-    },
-    "application_examples": {
-        "head_pan": {
-            "max_speed": "60_RPM",
-            "positioning_accuracy": "0.088_DEGREES",
-            "range_of_motion": "CONTINUOUS_360",
-            "use_case": "SMOOTH_HEAD_TRACKING"
-        },
-        "head_tilt": {
-            "max_speed": "30_RPM",
-            "positioning_accuracy": "0.088_DEGREES",
-            "range_of_motion": "-45_TO_+30_DEGREES",
-            "use_case": "EXPRESSIVE_HEAD_MOVEMENT"
-        },
-        "eye_mechanism": {
-            "max_speed": "120_RPM",
-            "positioning_accuracy": "0.088_DEGREES",
-            "range_of_motion": "-30_TO_+30_DEGREES",
-            "use_case": "PRECISE_EYE_TRACKING"
-        }
-    },
-    "name": "stepper_motor_28byj48",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "STEPPER_MOTOR_28BYJ48",
+    "interface_type":  "STEPPER_MOTOR_CONTROLLER",
+    "description":  "28BYJ-48 unipolar stepper motor interface for head articulation and fine positioning",
+    "hardware_specifications":  {
+                                    "motor_type":  "28BYJ48_UNIPOLAR",
+                                    "step_angle":  "5.625_DEGREES_64_STEPS",
+                                    "step_angle_with_gearing":  "0.087890625_DEGREES",
+                                    "steps_per_revolution":  4096,
+                                    "gear_ratio":  "64:1_INTERNAL",
+                                    "torque_rating":  "0.3_KG_CM",
+                                    "voltage_rating":  "5V_DC",
+                                    "current_rating":  "240mA_MAX",
+                                    "coil_resistance":  "50_OHMS"
+                                },
+    "pin_requirements":  {
+                             "in1_pin":  {
+                                             "function":  "coil_a_positive",
+                                             "generic_name":  "coil_a_pos",
+                                             "description":  "Coil A positive control",
+                                             "voltage_level":  "5V_LOGIC",
+                                             "wire_color":  "ORANGE"
+                                         },
+                             "in2_pin":  {
+                                             "function":  "coil_a_negative",
+                                             "generic_name":  "coil_a_neg",
+                                             "description":  "Coil A negative control",
+                                             "voltage_level":  "5V_LOGIC",
+                                             "wire_color":  "YELLOW"
+                                         },
+                             "in3_pin":  {
+                                             "function":  "coil_b_positive",
+                                             "generic_name":  "coil_b_pos",
+                                             "description":  "Coil B positive control",
+                                             "voltage_level":  "5V_LOGIC",
+                                             "wire_color":  "PINK"
+                                         },
+                             "in4_pin":  {
+                                             "function":  "coil_b_negative",
+                                             "generic_name":  "coil_b_neg",
+                                             "description":  "Coil B negative control",
+                                             "voltage_level":  "5V_LOGIC",
+                                             "wire_color":  "BLUE"
+                                         },
+                             "vcc_pin":  {
+                                             "function":  "motor_power",
+                                             "generic_name":  "power_5v",
+                                             "description":  "5V power supply",
+                                             "voltage_level":  "5V_DC",
+                                             "wire_color":  "RED"
+                                         }
+                         },
+    "driver_compatibility":  {
+                                 "uln2003":  {
+                                                 "type":  "DARLINGTON_ARRAY",
+                                                 "channels":  4,
+                                                 "max_current":  "500mA_PER_CHANNEL",
+                                                 "input_voltage":  "3.3V_5V",
+                                                 "output_voltage":  "UP_TO_50V",
+                                                 "integrated_freewheeling_diodes":  true
+                                             },
+                                 "l298n":  {
+                                               "type":  "H_BRIDGE_DUAL",
+                                               "channels":  4,
+                                               "max_current":  "2A_PER_CHANNEL",
+                                               "input_voltage":  "3.3V_5V",
+                                               "output_voltage":  "5V_TO_35V",
+                                               "thermal_protection":  true
+                                           }
+                             },
+    "step_sequences":  {
+                           "full_step_single_coil":  {
+                                                         "sequence":  [
+                                                                          [
+                                                                              1,
+                                                                              0,
+                                                                              0,
+                                                                              0
+                                                                          ],
+                                                                          [
+                                                                              0,
+                                                                              1,
+                                                                              0,
+                                                                              0
+                                                                          ],
+                                                                          [
+                                                                              0,
+                                                                              0,
+                                                                              1,
+                                                                              0
+                                                                          ],
+                                                                          [
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              1
+                                                                          ]
+                                                                      ],
+                                                         "torque":  "LOW",
+                                                         "power_consumption":  "LOW",
+                                                         "smoothness":  "LOW"
+                                                     },
+                           "full_step_dual_coil":  {
+                                                       "sequence":  [
+                                                                        [
+                                                                            1,
+                                                                            1,
+                                                                            0,
+                                                                            0
+                                                                        ],
+                                                                        [
+                                                                            0,
+                                                                            1,
+                                                                            1,
+                                                                            0
+                                                                        ],
+                                                                        [
+                                                                            0,
+                                                                            0,
+                                                                            1,
+                                                                            1
+                                                                        ],
+                                                                        [
+                                                                            1,
+                                                                            0,
+                                                                            0,
+                                                                            1
+                                                                        ]
+                                                                    ],
+                                                       "torque":  "HIGH",
+                                                       "power_consumption":  "HIGH",
+                                                       "smoothness":  "MEDIUM"
+                                                   },
+                           "half_step":  {
+                                             "sequence":  [
+                                                              [
+                                                                  1,
+                                                                  0,
+                                                                  0,
+                                                                  0
+                                                              ],
+                                                              [
+                                                                  1,
+                                                                  1,
+                                                                  0,
+                                                                  0
+                                                              ],
+                                                              [
+                                                                  0,
+                                                                  1,
+                                                                  0,
+                                                                  0
+                                                              ],
+                                                              [
+                                                                  0,
+                                                                  1,
+                                                                  1,
+                                                                  0
+                                                              ],
+                                                              [
+                                                                  0,
+                                                                  0,
+                                                                  1,
+                                                                  0
+                                                              ],
+                                                              [
+                                                                  0,
+                                                                  0,
+                                                                  1,
+                                                                  1
+                                                              ],
+                                                              [
+                                                                  0,
+                                                                  0,
+                                                                  0,
+                                                                  1
+                                                              ],
+                                                              [
+                                                                  1,
+                                                                  0,
+                                                                  0,
+                                                                  1
+                                                              ]
+                                                          ],
+                                             "torque":  "MEDIUM",
+                                             "power_consumption":  "MEDIUM",
+                                             "smoothness":  "HIGH",
+                                             "resolution":  "DOUBLE"
+                                         }
+                       },
+    "timing_specifications":  {
+                                  "minimum_step_interval":  "1_MILLISECOND",
+                                  "recommended_step_interval":  "2_MILLISECONDS",
+                                  "coil_switching_delay":  "100_MICROSECONDS",
+                                  "holding_time":  "INDEFINITE_WITH_POWER"
+                              },
+    "manufacturer_pin_mappings":  {
+                                      "generic_28byj48":  {
+                                                              "coil_a_pos":  [
+                                                                                 "IN1",
+                                                                                 "A+",
+                                                                                 "ORANGE"
+                                                                             ],
+                                                              "coil_a_neg":  [
+                                                                                 "IN2",
+                                                                                 "A-",
+                                                                                 "YELLOW"
+                                                                             ],
+                                                              "coil_b_pos":  [
+                                                                                 "IN3",
+                                                                                 "B+",
+                                                                                 "PINK"
+                                                                             ],
+                                                              "coil_b_neg":  [
+                                                                                 "IN4",
+                                                                                 "B-",
+                                                                                 "BLUE"
+                                                                             ],
+                                                              "power_5v":  [
+                                                                               "VCC",
+                                                                               "+5V",
+                                                                               "RED"
+                                                                           ]
+                                                          },
+                                      "elegoo":  {
+                                                     "coil_a_pos":  [
+                                                                        "IN1"
+                                                                    ],
+                                                     "coil_a_neg":  [
+                                                                        "IN2"
+                                                                    ],
+                                                     "coil_b_pos":  [
+                                                                        "IN3"
+                                                                    ],
+                                                     "coil_b_neg":  [
+                                                                        "IN4"
+                                                                    ],
+                                                     "power_5v":  [
+                                                                      "VCC"
+                                                                  ]
+                                                 }
+                                  },
+    "application_examples":  {
+                                 "head_pan":  {
+                                                  "max_speed":  "60_RPM",
+                                                  "positioning_accuracy":  "0.088_DEGREES",
+                                                  "range_of_motion":  "CONTINUOUS_360",
+                                                  "use_case":  "SMOOTH_HEAD_TRACKING"
+                                              },
+                                 "head_tilt":  {
+                                                   "max_speed":  "30_RPM",
+                                                   "positioning_accuracy":  "0.088_DEGREES",
+                                                   "range_of_motion":  "-45_TO_+30_DEGREES",
+                                                   "use_case":  "EXPRESSIVE_HEAD_MOVEMENT"
+                                               },
+                                 "eye_mechanism":  {
+                                                       "max_speed":  "120_RPM",
+                                                       "positioning_accuracy":  "0.088_DEGREES",
+                                                       "range_of_motion":  "-30_TO_+30_DEGREES",
+                                                       "use_case":  "PRECISE_EYE_TRACKING"
+                                                   }
+                             },
+    "name":  "stepper_motor_28byj48",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

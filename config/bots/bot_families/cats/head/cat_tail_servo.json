@@ -8,7 +8,7 @@
     "name": "cat_tail_servo",
     "subsystem": "ACTUATOR",
     "components": [
-        "esp32_servo_controller"
+        "config/components/interfaces/esp32_servo_controller.json"
     ],
     "author": "config/author.json",
     "position": {

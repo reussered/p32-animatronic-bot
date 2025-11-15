@@ -27,7 +27,7 @@
         ]
     },
     "components": [
-        "generic_spi_data_driver"
+        "config/components/drivers/generic_spi_data_driver.json"
     ],
     "software": {
         "init_function": "spi_data_bus_init",

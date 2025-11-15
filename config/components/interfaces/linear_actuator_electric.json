@@ -1,334 +1,333 @@
 {
-    "relative_filename": "config/components/interfaces/linear_actuator_electric.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "LINEAR_ACTUATOR_ELECTRIC",
-    "interface_type": "LINEAR_ACTUATOR_CONTROLLER",
-    "description": "Electric linear actuator interface for precise position control and feedback",
-    "hardware_specifications": {
-        "actuator_types": [
-            "BALL_SCREW",
-            "LEAD_SCREW",
-            "BELT_DRIVE",
-            "RACK_PINION"
-        ],
-        "force_range": "10N_TO_20000N",
-        "stroke_length": "25mm_TO_2000mm",
-        "speed_range": "0.1mm_s_TO_500mm_s",
-        "positioning_accuracy": "0.01mm_TO_1mm",
-        "voltage_range": "12V_TO_48V_DC",
-        "current_range": "1A_TO_50A"
-    },
-    "pin_requirements": {
-        "extend_pin": {
-            "function": "extend_direction",
-            "generic_name": "extend",
-            "description": "Actuator extension control",
-            "voltage_level": "3.3V_5V_12V_24V",
-            "signal_type": "DIGITAL_PWM"
-        },
-        "retract_pin": {
-            "function": "retract_direction",
-            "generic_name": "retract",
-            "description": "Actuator retraction control",
-            "voltage_level": "3.3V_5V_12V_24V",
-            "signal_type": "DIGITAL_PWM"
-        },
-        "enable_pin": {
-            "function": "actuator_enable",
-            "generic_name": "enable",
-            "description": "Enable/disable actuator operation",
-            "voltage_level": "3.3V_5V",
-            "default_state": "LOW_DISABLED"
-        }
-    },
-    "feedback_pins": {
-        "position_feedback_pin": {
-            "function": "position_sensing",
-            "generic_name": "position_feedback",
-            "description": "Linear position feedback sensor",
-            "direction": "INPUT",
-            "signal_type": "ANALOG_POTENTIOMETER_ENCODER",
-            "resolution": "10_BIT_TO_16_BIT"
-        },
-        "current_sense_pin": {
-            "function": "load_monitoring",
-            "generic_name": "current_sense",
-            "description": "Motor current monitoring for load detection",
-            "direction": "INPUT",
-            "signal_type": "ANALOG_0_TO_5V"
-        },
-        "limit_extend_pin": {
-            "function": "end_of_travel_extend",
-            "generic_name": "limit_extend",
-            "description": "Full extension limit switch",
-            "direction": "INPUT",
-            "signal_type": "DIGITAL_SWITCH_NC_NO"
-        },
-        "limit_retract_pin": {
-            "function": "end_of_travel_retract",
-            "generic_name": "limit_retract",
-            "description": "Full retraction limit switch",
-            "direction": "INPUT",
-            "signal_type": "DIGITAL_SWITCH_NC_NO"
-        }
-    },
-    "optional_pins": {
-        "brake_pin": {
-            "function": "electromagnetic_brake",
-            "generic_name": "brake",
-            "description": "Holding brake control",
-            "voltage_level": "12V_24V",
-            "active_state": "HIGH_ENGAGED"
-        },
-        "fault_pin": {
-            "function": "fault_indication",
-            "generic_name": "fault",
-            "description": "Actuator fault/alarm output",
-            "direction": "INPUT",
-            "active_state": "LOW"
-        },
-        "temperature_pin": {
-            "function": "thermal_monitoring",
-            "generic_name": "temperature",
-            "description": "Motor temperature sensor",
-            "direction": "INPUT",
-            "signal_type": "ANALOG_THERMISTOR"
-        }
-    },
-    "control_modes": {
-        "open_loop": {
-            "description": "Simple direction and speed control without feedback",
-            "pins_required": [
-                "extend",
-                "retract",
-                "enable"
-            ],
-            "advantages": [
-                "SIMPLE_CONTROL",
-                "LOW_COST",
-                "FAST_RESPONSE"
-            ],
-            "disadvantages": [
-                "NO_POSITION_FEEDBACK",
-                "DRIFT_OVER_TIME",
-                "NO_LOAD_COMPENSATION"
-            ]
-        },
-        "closed_loop_position": {
-            "description": "Precise position control with feedback sensor",
-            "pins_required": [
-                "extend",
-                "retract",
-                "enable",
-                "position_feedback"
-            ],
-            "advantages": [
-                "PRECISE_POSITIONING",
-                "REPEATABILITY",
-                "NO_DRIFT"
-            ],
-            "disadvantages": [
-                "COMPLEX_CONTROL",
-                "REQUIRES_FEEDBACK_SENSOR",
-                "HIGHER_COST"
-            ]
-        },
-        "force_control": {
-            "description": "Force/load based control with current sensing",
-            "pins_required": [
-                "extend",
-                "retract",
-                "enable",
-                "current_sense"
-            ],
-            "advantages": [
-                "FORCE_LIMITING",
-                "LOAD_DETECTION",
-                "SAFETY"
-            ],
-            "disadvantages": [
-                "COMPLEX_ALGORITHM",
-                "REQUIRES_CALIBRATION",
-                "SLOWER_RESPONSE"
-            ]
-        }
-    },
-    "actuator_technologies": {
-        "ball_screw": {
-            "efficiency": "90_TO_95_PERCENT",
-            "backlash": "MINIMAL_0.01mm",
-            "load_capacity": "VERY_HIGH",
-            "speed": "MODERATE",
-            "cost": "HIGH",
-            "maintenance": "LOW"
-        },
-        "lead_screw": {
-            "efficiency": "20_TO_80_PERCENT",
-            "backlash": "LOW_0.1mm",
-            "load_capacity": "HIGH",
-            "speed": "MODERATE",
-            "cost": "MEDIUM",
-            "maintenance": "LOW"
-        },
-        "belt_drive": {
-            "efficiency": "85_TO_95_PERCENT",
-            "backlash": "MEDIUM_1mm",
-            "load_capacity": "MEDIUM",
-            "speed": "HIGH",
-            "cost": "MEDIUM",
-            "maintenance": "MEDIUM"
-        },
-        "rack_pinion": {
-            "efficiency": "80_TO_95_PERCENT",
-            "backlash": "MEDIUM_0.5mm",
-            "load_capacity": "HIGH",
-            "speed": "HIGH",
-            "cost": "MEDIUM",
-            "maintenance": "MEDIUM"
-        }
-    },
-    "position_sensors": {
-        "potentiometer": {
-            "type": "ANALOG_RESISTIVE",
-            "resolution": "10_TO_12_BIT",
-            "accuracy": "1_TO_5_PERCENT",
-            "cost": "LOW",
-            "interface": "ANALOG_ADC"
-        },
-        "linear_encoder": {
-            "type": "DIGITAL_QUADRATURE",
-            "resolution": "0.001mm_TO_0.1mm",
-            "accuracy": "0.01_TO_0.1_PERCENT",
-            "cost": "HIGH",
-            "interface": "DIGITAL_QUADRATURE"
-        },
-        "lvdt": {
-            "type": "INDUCTIVE_ANALOG",
-            "resolution": "0.001mm",
-            "accuracy": "0.05_PERCENT",
-            "cost": "VERY_HIGH",
-            "interface": "ANALOG_AC_EXCITATION"
-        },
-        "magnetostrictive": {
-            "type": "MAGNETIC_PULSE",
-            "resolution": "0.001mm",
-            "accuracy": "0.01_PERCENT",
-            "cost": "HIGH",
-            "interface": "ANALOG_DIGITAL_HYBRID"
-        }
-    },
-    "manufacturer_pin_mappings": {
-        "thomson_linear": {
-            "extend": [
-                "FWD",
-                "FORWARD",
-                "+DIR"
-            ],
-            "retract": [
-                "REV",
-                "REVERSE",
-                "-DIR"
-            ],
-            "enable": [
-                "EN",
-                "ENABLE",
-                "MOTOR_EN"
-            ],
-            "position_feedback": [
-                "POS",
-                "FEEDBACK",
-                "ANALOG_OUT"
-            ],
-            "limit_extend": [
-                "LIMIT_+",
-                "END_PLUS"
-            ],
-            "limit_retract": [
-                "LIMIT_-",
-                "END_MINUS"
-            ]
-        },
-        "progressive_automations": {
-            "extend": [
-                "EXTEND",
-                "OUT",
-                "POSITIVE"
-            ],
-            "retract": [
-                "RETRACT",
-                "IN",
-                "NEGATIVE"
-            ],
-            "position_feedback": [
-                "FEEDBACK",
-                "POT",
-                "POSITION"
-            ],
-            "limit_extend": [
-                "LIMIT_OUT"
-            ],
-            "limit_retract": [
-                "LIMIT_IN"
-            ]
-        },
-        "firgelli": {
-            "extend": [
-                "EXTEND_RED",
-                "POSITIVE"
-            ],
-            "retract": [
-                "RETRACT_BLACK",
-                "NEGATIVE"
-            ],
-            "position_feedback": [
-                "YELLOW",
-                "SIGNAL"
-            ],
-            "power": [
-                "RED_12V",
-                "BLACK_GND"
-            ]
-        }
-    },
-    "application_examples": {
-        "arm_extension": {
-            "actuator_type": "BALL_SCREW_ELECTRIC",
-            "stroke": "300mm",
-            "force": "1000N",
-            "speed": "50mm_s",
-            "accuracy": "0.1mm",
-            "use_case": "PRECISE_ARM_REACH_CONTROL"
-        },
-        "leg_lift": {
-            "actuator_type": "LEAD_SCREW_ELECTRIC",
-            "stroke": "200mm",
-            "force": "3000N",
-            "speed": "25mm_s",
-            "accuracy": "1mm",
-            "use_case": "LEG_ELEVATION_SUPPORT"
-        },
-        "jaw_opening": {
-            "actuator_type": "RACK_PINION_ELECTRIC",
-            "stroke": "50mm",
-            "force": "500N",
-            "speed": "100mm_s",
-            "accuracy": "0.5mm",
-            "use_case": "PRECISE_JAW_ARTICULATION"
-        },
-        "spine_articulation": {
-            "actuator_type": "BELT_DRIVE_ELECTRIC",
-            "stroke": "150mm",
-            "force": "800N",
-            "speed": "75mm_s",
-            "accuracy": "0.2mm",
-            "use_case": "FLEXIBLE_SPINE_MOVEMENT"
-        }
-    },
-    "name": "linear_actuator_electric",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "LINEAR_ACTUATOR_ELECTRIC",
+    "interface_type":  "LINEAR_ACTUATOR_CONTROLLER",
+    "description":  "Electric linear actuator interface for precise position control and feedback",
+    "hardware_specifications":  {
+                                    "actuator_types":  [
+                                                           "BALL_SCREW",
+                                                           "LEAD_SCREW",
+                                                           "BELT_DRIVE",
+                                                           "RACK_PINION"
+                                                       ],
+                                    "force_range":  "10N_TO_20000N",
+                                    "stroke_length":  "25mm_TO_2000mm",
+                                    "speed_range":  "0.1mm_s_TO_500mm_s",
+                                    "positioning_accuracy":  "0.01mm_TO_1mm",
+                                    "voltage_range":  "12V_TO_48V_DC",
+                                    "current_range":  "1A_TO_50A"
+                                },
+    "pin_requirements":  {
+                             "extend_pin":  {
+                                                "function":  "extend_direction",
+                                                "generic_name":  "extend",
+                                                "description":  "Actuator extension control",
+                                                "voltage_level":  "3.3V_5V_12V_24V",
+                                                "signal_type":  "DIGITAL_PWM"
+                                            },
+                             "retract_pin":  {
+                                                 "function":  "retract_direction",
+                                                 "generic_name":  "retract",
+                                                 "description":  "Actuator retraction control",
+                                                 "voltage_level":  "3.3V_5V_12V_24V",
+                                                 "signal_type":  "DIGITAL_PWM"
+                                             },
+                             "enable_pin":  {
+                                                "function":  "actuator_enable",
+                                                "generic_name":  "enable",
+                                                "description":  "Enable/disable actuator operation",
+                                                "voltage_level":  "3.3V_5V",
+                                                "default_state":  "LOW_DISABLED"
+                                            }
+                         },
+    "feedback_pins":  {
+                          "position_feedback_pin":  {
+                                                        "function":  "position_sensing",
+                                                        "generic_name":  "position_feedback",
+                                                        "description":  "Linear position feedback sensor",
+                                                        "direction":  "INPUT",
+                                                        "signal_type":  "ANALOG_POTENTIOMETER_ENCODER",
+                                                        "resolution":  "10_BIT_TO_16_BIT"
+                                                    },
+                          "current_sense_pin":  {
+                                                    "function":  "load_monitoring",
+                                                    "generic_name":  "current_sense",
+                                                    "description":  "Motor current monitoring for load detection",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "ANALOG_0_TO_5V"
+                                                },
+                          "limit_extend_pin":  {
+                                                   "function":  "end_of_travel_extend",
+                                                   "generic_name":  "limit_extend",
+                                                   "description":  "Full extension limit switch",
+                                                   "direction":  "INPUT",
+                                                   "signal_type":  "DIGITAL_SWITCH_NC_NO"
+                                               },
+                          "limit_retract_pin":  {
+                                                    "function":  "end_of_travel_retract",
+                                                    "generic_name":  "limit_retract",
+                                                    "description":  "Full retraction limit switch",
+                                                    "direction":  "INPUT",
+                                                    "signal_type":  "DIGITAL_SWITCH_NC_NO"
+                                                }
+                      },
+    "optional_pins":  {
+                          "brake_pin":  {
+                                            "function":  "electromagnetic_brake",
+                                            "generic_name":  "brake",
+                                            "description":  "Holding brake control",
+                                            "voltage_level":  "12V_24V",
+                                            "active_state":  "HIGH_ENGAGED"
+                                        },
+                          "fault_pin":  {
+                                            "function":  "fault_indication",
+                                            "generic_name":  "fault",
+                                            "description":  "Actuator fault/alarm output",
+                                            "direction":  "INPUT",
+                                            "active_state":  "LOW"
+                                        },
+                          "temperature_pin":  {
+                                                  "function":  "thermal_monitoring",
+                                                  "generic_name":  "temperature",
+                                                  "description":  "Motor temperature sensor",
+                                                  "direction":  "INPUT",
+                                                  "signal_type":  "ANALOG_THERMISTOR"
+                                              }
+                      },
+    "control_modes":  {
+                          "open_loop":  {
+                                            "description":  "Simple direction and speed control without feedback",
+                                            "pins_required":  [
+                                                                  "extend",
+                                                                  "retract",
+                                                                  "enable"
+                                                              ],
+                                            "advantages":  [
+                                                               "SIMPLE_CONTROL",
+                                                               "LOW_COST",
+                                                               "FAST_RESPONSE"
+                                                           ],
+                                            "disadvantages":  [
+                                                                  "NO_POSITION_FEEDBACK",
+                                                                  "DRIFT_OVER_TIME",
+                                                                  "NO_LOAD_COMPENSATION"
+                                                              ]
+                                        },
+                          "closed_loop_position":  {
+                                                       "description":  "Precise position control with feedback sensor",
+                                                       "pins_required":  [
+                                                                             "extend",
+                                                                             "retract",
+                                                                             "enable",
+                                                                             "position_feedback"
+                                                                         ],
+                                                       "advantages":  [
+                                                                          "PRECISE_POSITIONING",
+                                                                          "REPEATABILITY",
+                                                                          "NO_DRIFT"
+                                                                      ],
+                                                       "disadvantages":  [
+                                                                             "COMPLEX_CONTROL",
+                                                                             "REQUIRES_FEEDBACK_SENSOR",
+                                                                             "HIGHER_COST"
+                                                                         ]
+                                                   },
+                          "force_control":  {
+                                                "description":  "Force/load based control with current sensing",
+                                                "pins_required":  [
+                                                                      "extend",
+                                                                      "retract",
+                                                                      "enable",
+                                                                      "current_sense"
+                                                                  ],
+                                                "advantages":  [
+                                                                   "FORCE_LIMITING",
+                                                                   "LOAD_DETECTION",
+                                                                   "SAFETY"
+                                                               ],
+                                                "disadvantages":  [
+                                                                      "COMPLEX_ALGORITHM",
+                                                                      "REQUIRES_CALIBRATION",
+                                                                      "SLOWER_RESPONSE"
+                                                                  ]
+                                            }
+                      },
+    "actuator_technologies":  {
+                                  "ball_screw":  {
+                                                     "efficiency":  "90_TO_95_PERCENT",
+                                                     "backlash":  "MINIMAL_0.01mm",
+                                                     "load_capacity":  "VERY_HIGH",
+                                                     "speed":  "MODERATE",
+                                                     "cost":  "HIGH",
+                                                     "maintenance":  "LOW"
+                                                 },
+                                  "lead_screw":  {
+                                                     "efficiency":  "20_TO_80_PERCENT",
+                                                     "backlash":  "LOW_0.1mm",
+                                                     "load_capacity":  "HIGH",
+                                                     "speed":  "MODERATE",
+                                                     "cost":  "MEDIUM",
+                                                     "maintenance":  "LOW"
+                                                 },
+                                  "belt_drive":  {
+                                                     "efficiency":  "85_TO_95_PERCENT",
+                                                     "backlash":  "MEDIUM_1mm",
+                                                     "load_capacity":  "MEDIUM",
+                                                     "speed":  "HIGH",
+                                                     "cost":  "MEDIUM",
+                                                     "maintenance":  "MEDIUM"
+                                                 },
+                                  "rack_pinion":  {
+                                                      "efficiency":  "80_TO_95_PERCENT",
+                                                      "backlash":  "MEDIUM_0.5mm",
+                                                      "load_capacity":  "HIGH",
+                                                      "speed":  "HIGH",
+                                                      "cost":  "MEDIUM",
+                                                      "maintenance":  "MEDIUM"
+                                                  }
+                              },
+    "position_sensors":  {
+                             "potentiometer":  {
+                                                   "type":  "ANALOG_RESISTIVE",
+                                                   "resolution":  "10_TO_12_BIT",
+                                                   "accuracy":  "1_TO_5_PERCENT",
+                                                   "cost":  "LOW",
+                                                   "interface":  "ANALOG_ADC"
+                                               },
+                             "linear_encoder":  {
+                                                    "type":  "DIGITAL_QUADRATURE",
+                                                    "resolution":  "0.001mm_TO_0.1mm",
+                                                    "accuracy":  "0.01_TO_0.1_PERCENT",
+                                                    "cost":  "HIGH",
+                                                    "interface":  "DIGITAL_QUADRATURE"
+                                                },
+                             "lvdt":  {
+                                          "type":  "INDUCTIVE_ANALOG",
+                                          "resolution":  "0.001mm",
+                                          "accuracy":  "0.05_PERCENT",
+                                          "cost":  "VERY_HIGH",
+                                          "interface":  "ANALOG_AC_EXCITATION"
+                                      },
+                             "magnetostrictive":  {
+                                                      "type":  "MAGNETIC_PULSE",
+                                                      "resolution":  "0.001mm",
+                                                      "accuracy":  "0.01_PERCENT",
+                                                      "cost":  "HIGH",
+                                                      "interface":  "ANALOG_DIGITAL_HYBRID"
+                                                  }
+                         },
+    "manufacturer_pin_mappings":  {
+                                      "thomson_linear":  {
+                                                             "extend":  [
+                                                                            "FWD",
+                                                                            "FORWARD",
+                                                                            "+DIR"
+                                                                        ],
+                                                             "retract":  [
+                                                                             "REV",
+                                                                             "REVERSE",
+                                                                             "-DIR"
+                                                                         ],
+                                                             "enable":  [
+                                                                            "EN",
+                                                                            "ENABLE",
+                                                                            "MOTOR_EN"
+                                                                        ],
+                                                             "position_feedback":  [
+                                                                                       "POS",
+                                                                                       "FEEDBACK",
+                                                                                       "ANALOG_OUT"
+                                                                                   ],
+                                                             "limit_extend":  [
+                                                                                  "LIMIT_+",
+                                                                                  "END_PLUS"
+                                                                              ],
+                                                             "limit_retract":  [
+                                                                                   "LIMIT_-",
+                                                                                   "END_MINUS"
+                                                                               ]
+                                                         },
+                                      "progressive_automations":  {
+                                                                      "extend":  [
+                                                                                     "EXTEND",
+                                                                                     "OUT",
+                                                                                     "POSITIVE"
+                                                                                 ],
+                                                                      "retract":  [
+                                                                                      "RETRACT",
+                                                                                      "IN",
+                                                                                      "NEGATIVE"
+                                                                                  ],
+                                                                      "position_feedback":  [
+                                                                                                "FEEDBACK",
+                                                                                                "POT",
+                                                                                                "POSITION"
+                                                                                            ],
+                                                                      "limit_extend":  [
+                                                                                           "LIMIT_OUT"
+                                                                                       ],
+                                                                      "limit_retract":  [
+                                                                                            "LIMIT_IN"
+                                                                                        ]
+                                                                  },
+                                      "firgelli":  {
+                                                       "extend":  [
+                                                                      "EXTEND_RED",
+                                                                      "POSITIVE"
+                                                                  ],
+                                                       "retract":  [
+                                                                       "RETRACT_BLACK",
+                                                                       "NEGATIVE"
+                                                                   ],
+                                                       "position_feedback":  [
+                                                                                 "YELLOW",
+                                                                                 "SIGNAL"
+                                                                             ],
+                                                       "power":  [
+                                                                     "RED_12V",
+                                                                     "BLACK_GND"
+                                                                 ]
+                                                   }
+                                  },
+    "application_examples":  {
+                                 "arm_extension":  {
+                                                       "actuator_type":  "BALL_SCREW_ELECTRIC",
+                                                       "stroke":  "300mm",
+                                                       "force":  "1000N",
+                                                       "speed":  "50mm_s",
+                                                       "accuracy":  "0.1mm",
+                                                       "use_case":  "PRECISE_ARM_REACH_CONTROL"
+                                                   },
+                                 "leg_lift":  {
+                                                  "actuator_type":  "LEAD_SCREW_ELECTRIC",
+                                                  "stroke":  "200mm",
+                                                  "force":  "3000N",
+                                                  "speed":  "25mm_s",
+                                                  "accuracy":  "1mm",
+                                                  "use_case":  "LEG_ELEVATION_SUPPORT"
+                                              },
+                                 "jaw_opening":  {
+                                                     "actuator_type":  "RACK_PINION_ELECTRIC",
+                                                     "stroke":  "50mm",
+                                                     "force":  "500N",
+                                                     "speed":  "100mm_s",
+                                                     "accuracy":  "0.5mm",
+                                                     "use_case":  "PRECISE_JAW_ARTICULATION"
+                                                 },
+                                 "spine_articulation":  {
+                                                            "actuator_type":  "BELT_DRIVE_ELECTRIC",
+                                                            "stroke":  "150mm",
+                                                            "force":  "800N",
+                                                            "speed":  "75mm_s",
+                                                            "accuracy":  "0.2mm",
+                                                            "use_case":  "FLEXIBLE_SPINE_MOVEMENT"
+                                                        }
+                             },
+    "name":  "linear_actuator_electric",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

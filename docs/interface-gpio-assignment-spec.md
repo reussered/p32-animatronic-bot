@@ -48,7 +48,7 @@ File: `config/components/interfaces/spi_bus.json`
 
 ```json
 {
-  "relative_filename": "config/components/interfaces/spi_bus.json", 
+  // "relative_filename": "config/components/interfaces/spi_bus.json",  # optional
   "version": "1.0.0",
   "author": "config/author.json",
   "interface_id": "spi_bus",
@@ -70,7 +70,7 @@ File: `config/components/interfaces/spi_device_1.json`
 
 ```json
 {
-  "relative_filename": "config/components/interfaces/spi_device_1.json",
+  // "relative_filename": "config/components/interfaces/spi_device_1.json",  # optional
   "version": "1.0.0", 
   "author": "config/author.json",
   "interface_id": "SPI_DEVICE_1",
@@ -90,7 +90,7 @@ File: `config/components/interfaces/i2s_bus_0.json`
 
 ```json
 {
-  "relative_filename": "config/components/interfaces/i2s_bus_0.json",
+  // "relative_filename": "config/components/interfaces/i2s_bus_0.json",  # optional
   "version": "1.0.0",
   "author": "config/author.json", 
   "interface_id": "I2S_BUS_0",
@@ -111,7 +111,7 @@ File: `config/components/interfaces/i2s_device_1.json`
 
 ```json
 {
-  "relative_filename": "config/components/interfaces/i2s_device_1.json",
+  // "relative_filename": "config/components/interfaces/i2s_device_1.json",  # optional
   "version": "1.0.0",
   "author": "config/author.json",
   "interface_id": "I2S_DEVICE_1", 

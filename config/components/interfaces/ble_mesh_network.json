@@ -1,224 +1,223 @@
 {
-    "relative_filename": "config/components/interfaces/ble_mesh_network.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "BLE_MESH_NETWORK",
-    "interface_type": "BLUETOOTH_MESH_COMMUNICATION",
-    "description": "Bluetooth mesh networking for distributed ESP32-C3 micro-controllers",
-    "network_architecture": {
-        "topology": "BLUETOOTH_MESH_SELF_HEALING",
-        "node_types": {
-            "master_node": {
-                "chip": "ESP32_S3",
-                "role": "PROVISIONER_AND_COORDINATOR",
-                "capabilities": [
-                    "MESH_PROVISIONING",
-                    "GATEWAY_TO_WIFI",
-                    "MAIN_PROCESSING"
-                ],
-                "location": "HEAD_OR_TORSO_CONTROLLER"
-            },
-            "relay_nodes": {
-                "chip": "ESP32_C3",
-                "role": "MESH_RELAY_AND_SERVO_CONTROL",
-                "capabilities": [
-                    "PACKET_FORWARDING",
-                    "LOCAL_SERVO_CONTROL",
-                    "SENSOR_READING"
-                ],
-                "locations": [
-                    "ARM_CONTROLLERS",
-                    "LEG_CONTROLLERS"
-                ]
-            },
-            "leaf_nodes": {
-                "chip": "ESP32_C3_MINI",
-                "role": "END_DEVICE_ACTUATOR_SENSOR",
-                "capabilities": [
-                    "SERVO_CONTROL",
-                    "SENSOR_INPUT",
-                    "LOW_POWER_SLEEP"
-                ],
-                "locations": [
-                    "HANDS",
-                    "FEET",
-                    "SHOULDERS",
-                    "INDIVIDUAL_JOINTS"
-                ]
-            }
-        }
-    },
-    "mesh_specifications": {
-        "protocol": "BLUETOOTH_MESH_SPEC_1_0_1",
-        "frequency": "2.4_GHZ_ISM_BAND",
-        "range": "10_METERS_DIRECT_UNLIMITED_MESH",
-        "nodes_max": "32767_THEORETICAL_64_PRACTICAL",
-        "latency": "10_MILLISECONDS_TYPICAL",
-        "throughput": "1_MBPS_SHARED_MESH"
-    },
-    "power_management": {
-        "master_node": {
-            "mode": "ALWAYS_ON_RELAY",
-            "power_source": "MAIN_ROBOT_POWER",
-            "current": "80MA_CONTINUOUS"
-        },
-        "relay_nodes": {
-            "mode": "LOW_POWER_WITH_PERIODIC_WAKE",
-            "power_source": "SHARED_SUBSYSTEM_POWER",
-            "active_current": "80MA",
-            "sleep_current": "5_MICROAMPS",
-            "wake_frequency": "10_HZ_FOR_SERVO_CONTROL"
-        },
-        "leaf_nodes": {
-            "mode": "ULTRA_LOW_POWER_EVENT_DRIVEN",
-            "power_source": "LOCAL_BATTERY_OR_SHARED",
-            "active_current": "80MA_BRIEF_BURSTS",
-            "sleep_current": "2.5_MICROAMPS",
-            "wake_triggers": [
-                "SERVO_COMMAND",
-                "SENSOR_THRESHOLD",
-                "MESH_MESSAGE"
-            ]
-        }
-    },
-    "message_routing": {
-        "servo_commands": {
-            "source": "MASTER_NODE",
-            "destination": "SPECIFIC_LEAF_NODE",
-            "routing": "AUTOMATIC_MESH_SHORTEST_PATH",
-            "priority": "HIGH_REAL_TIME",
-            "retry": "AUTOMATIC_WITH_ACKNOWLEDGMENT"
-        },
-        "sensor_data": {
-            "source": "LEAF_NODES",
-            "destination": "MASTER_NODE",
-            "routing": "MULTI_HOP_TO_MASTER",
-            "priority": "MEDIUM_PERIODIC",
-            "aggregation": "COMBINE_AT_RELAY_NODES"
-        },
-        "status_heartbeat": {
-            "source": "ALL_NODES",
-            "destination": "BROADCAST",
-            "routing": "FLOOD_MESH_NETWORK",
-            "priority": "LOW_BACKGROUND",
-            "frequency": "1_HZ_KEEP_ALIVE"
-        }
-    },
-    "distributed_control_scenarios": {
-        "hand_control_example": {
-            "master_command": "grasp_object(force=50%, shape=cylinder)",
-            "mesh_routing": "MASTER -> ARM_RELAY -> HAND_LEAF",
-            "local_processing": {
-                "hand_controller": "ESP32_C3_IN_WRIST",
-                "fingers": "5x_SERVO_CONTROL_LOCALLY",
-                "sensors": "PRESSURE_FEEDBACK_PER_FINGER",
-                "intelligence": "LOCAL_GRASP_ADJUSTMENT"
-            },
-            "benefits": [
-                "NO_WIRES_TO_INDIVIDUAL_FINGERS",
-                "REAL_TIME_GRASP_CONTROL",
-                "INDEPENDENT_FINGER_PROCESSING",
-                "PRESSURE_FEEDBACK_WITHOUT_EXTRA_WIRING"
-            ]
-        },
-        "shoulder_joint_example": {
-            "challenge": "ROTATING_JOINT_WIRING_PROBLEM",
-            "solution": "ESP32_C3_EMBEDDED_IN_SHOULDER",
-            "communication": "BLUETOOTH_MESH_NO_SLIP_RINGS",
-            "servo_control": "3_AXES_LOCAL_CONTROL",
-            "benefits": [
-                "ELIMINATE_ROTATING_WIRE_HARNESS",
-                "NO_SLIP_RINGS_REQUIRED",
-                "INDEPENDENT_SHOULDER_CONTROL",
-                "WIRELESS_POWER_VIA_INDUCTION_POSSIBLE"
-            ]
-        },
-        "foot_sensor_example": {
-            "sensors": "16_PRESSURE_SENSORS_IN_FOOT_PAD",
-            "controller": "ESP32_C3_IN_ANKLE",
-            "processing": "LOCAL_BALANCE_CALCULATIONS",
-            "mesh_data": "SUMMARIZED_BALANCE_INFO_ONLY",
-            "benefits": [
-                "NO_16_WIRE_SENSOR_HARNESS",
-                "REAL_TIME_FOOT_PROCESSING",
-                "REDUCED_MESH_BANDWIDTH",
-                "MODULAR_FOOT_ASSEMBLY"
-            ]
-        }
-    },
-    "advantages_over_wired_systems": {
-        "mechanical": {
-            "no_wire_harnesses": "ELIMINATE_COMPLEX_CABLE_ROUTING",
-            "no_slip_rings": "ROTATING_JOINTS_SIMPLIFIED",
-            "modular_assembly": "PLUG_AND_PLAY_LIMB_ATTACHMENT",
-            "maintenance": "EASY_PART_REPLACEMENT"
-        },
-        "electrical": {
-            "reduced_interference": "NO_LONG_PWM_SIGNAL_WIRES",
-            "isolated_failures": "SERVO_FAILURE_DOESN_T_AFFECT_OTHERS",
-            "distributed_processing": "REDUCE_MAIN_CONTROLLER_LOAD",
-            "scalability": "ADD_SENSORS_WITHOUT_REWIRING"
-        },
-        "software": {
-            "modularity": "EACH_CONTROLLER_INDEPENDENT_FIRMWARE",
-            "ota_updates": "WIRELESS_FIRMWARE_UPDATES",
-            "debugging": "INDIVIDUAL_NODE_MONITORING",
-            "development": "PARALLEL_SUBSYSTEM_DEVELOPMENT"
-        }
-    },
-    "mesh_robustness": {
-        "self_healing": {
-            "node_failure": "AUTOMATIC_ROUTE_RECALCULATION",
-            "interference": "FREQUENCY_HOPPING_ADAPTATION",
-            "range_limits": "MULTI_HOP_EXTENSION",
-            "recovery_time": "SECONDS_TO_MINUTES"
-        },
-        "redundancy": {
-            "multiple_paths": "MESH_PROVIDES_ALTERNATE_ROUTES",
-            "relay_nodes": "MULTIPLE_RELAYS_FOR_CRITICAL_PATHS",
-            "master_backup": "DESIGNATED_RELAY_AS_BACKUP_MASTER",
-            "data_integrity": "AUTOMATIC_RETRY_AND_ACKNOWLEDGMENT"
-        }
-    },
-    "implementation_phases": {
-        "phase_1_simple": {
-            "topology": "STAR_NETWORK_ONE_MASTER",
-            "nodes": "MASTER_PLUS_4_LEAF_NODES",
-            "complexity": "SIMPLEST_MESH_SETUP",
-            "applications": "BASIC_HAND_OR_HEAD_CONTROL"
-        },
-        "phase_2_hierarchical": {
-            "topology": "TREE_WITH_RELAY_NODES",
-            "nodes": "MASTER_PLUS_RELAYS_PLUS_LEAVES",
-            "complexity": "MODERATE_MESH_ROUTING",
-            "applications": "FULL_ARM_WITH_HAND_CONTROL"
-        },
-        "phase_3_full_mesh": {
-            "topology": "FULL_MESH_SELF_HEALING",
-            "nodes": "ALL_JOINTS_AS_MESH_NODES",
-            "complexity": "ADVANCED_MESH_ALGORITHMS",
-            "applications": "COMPLETE_HUMANOID_ROBOT"
-        }
-    },
-    "cost_analysis": {
-        "traditional_wired": {
-            "wire_harnesses": "$200_COMPLEX_ROUTING",
-            "slip_rings": "$100_PER_ROTATING_JOINT",
-            "connectors": "$150_MANY_CONNECTIONS",
-            "assembly_labor": "$500_COMPLEX_WIRING"
-        },
-        "ble_mesh_wireless": {
-            "esp32_c3_nodes": "$40_FOR_20_NODES",
-            "no_harnesses": "$0_WIRELESS",
-            "no_slip_rings": "$0_WIRELESS",
-            "simple_power": "$50_POWER_ONLY_WIRING",
-            "total_savings": "$750_COST_REDUCTION"
-        }
-    },
-    "name": "ble_mesh_network",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "BLE_MESH_NETWORK",
+    "interface_type":  "BLUETOOTH_MESH_COMMUNICATION",
+    "description":  "Bluetooth mesh networking for distributed ESP32-C3 micro-controllers",
+    "network_architecture":  {
+                                 "topology":  "BLUETOOTH_MESH_SELF_HEALING",
+                                 "node_types":  {
+                                                    "master_node":  {
+                                                                        "chip":  "ESP32_S3",
+                                                                        "role":  "PROVISIONER_AND_COORDINATOR",
+                                                                        "capabilities":  [
+                                                                                             "MESH_PROVISIONING",
+                                                                                             "GATEWAY_TO_WIFI",
+                                                                                             "MAIN_PROCESSING"
+                                                                                         ],
+                                                                        "location":  "HEAD_OR_TORSO_CONTROLLER"
+                                                                    },
+                                                    "relay_nodes":  {
+                                                                        "chip":  "ESP32_C3",
+                                                                        "role":  "MESH_RELAY_AND_SERVO_CONTROL",
+                                                                        "capabilities":  [
+                                                                                             "PACKET_FORWARDING",
+                                                                                             "LOCAL_SERVO_CONTROL",
+                                                                                             "SENSOR_READING"
+                                                                                         ],
+                                                                        "locations":  [
+                                                                                          "ARM_CONTROLLERS",
+                                                                                          "LEG_CONTROLLERS"
+                                                                                      ]
+                                                                    },
+                                                    "leaf_nodes":  {
+                                                                       "chip":  "ESP32_C3_MINI",
+                                                                       "role":  "END_DEVICE_ACTUATOR_SENSOR",
+                                                                       "capabilities":  [
+                                                                                            "SERVO_CONTROL",
+                                                                                            "SENSOR_INPUT",
+                                                                                            "LOW_POWER_SLEEP"
+                                                                                        ],
+                                                                       "locations":  [
+                                                                                         "HANDS",
+                                                                                         "FEET",
+                                                                                         "SHOULDERS",
+                                                                                         "INDIVIDUAL_JOINTS"
+                                                                                     ]
+                                                                   }
+                                                }
+                             },
+    "mesh_specifications":  {
+                                "protocol":  "BLUETOOTH_MESH_SPEC_1_0_1",
+                                "frequency":  "2.4_GHZ_ISM_BAND",
+                                "range":  "10_METERS_DIRECT_UNLIMITED_MESH",
+                                "nodes_max":  "32767_THEORETICAL_64_PRACTICAL",
+                                "latency":  "10_MILLISECONDS_TYPICAL",
+                                "throughput":  "1_MBPS_SHARED_MESH"
+                            },
+    "power_management":  {
+                             "master_node":  {
+                                                 "mode":  "ALWAYS_ON_RELAY",
+                                                 "power_source":  "MAIN_ROBOT_POWER",
+                                                 "current":  "80MA_CONTINUOUS"
+                                             },
+                             "relay_nodes":  {
+                                                 "mode":  "LOW_POWER_WITH_PERIODIC_WAKE",
+                                                 "power_source":  "SHARED_SUBSYSTEM_POWER",
+                                                 "active_current":  "80MA",
+                                                 "sleep_current":  "5_MICROAMPS",
+                                                 "wake_frequency":  "10_HZ_FOR_SERVO_CONTROL"
+                                             },
+                             "leaf_nodes":  {
+                                                "mode":  "ULTRA_LOW_POWER_EVENT_DRIVEN",
+                                                "power_source":  "LOCAL_BATTERY_OR_SHARED",
+                                                "active_current":  "80MA_BRIEF_BURSTS",
+                                                "sleep_current":  "2.5_MICROAMPS",
+                                                "wake_triggers":  [
+                                                                      "SERVO_COMMAND",
+                                                                      "SENSOR_THRESHOLD",
+                                                                      "MESH_MESSAGE"
+                                                                  ]
+                                            }
+                         },
+    "message_routing":  {
+                            "servo_commands":  {
+                                                   "source":  "MASTER_NODE",
+                                                   "destination":  "SPECIFIC_LEAF_NODE",
+                                                   "routing":  "AUTOMATIC_MESH_SHORTEST_PATH",
+                                                   "priority":  "HIGH_REAL_TIME",
+                                                   "retry":  "AUTOMATIC_WITH_ACKNOWLEDGMENT"
+                                               },
+                            "sensor_data":  {
+                                                "source":  "LEAF_NODES",
+                                                "destination":  "MASTER_NODE",
+                                                "routing":  "MULTI_HOP_TO_MASTER",
+                                                "priority":  "MEDIUM_PERIODIC",
+                                                "aggregation":  "COMBINE_AT_RELAY_NODES"
+                                            },
+                            "status_heartbeat":  {
+                                                     "source":  "ALL_NODES",
+                                                     "destination":  "BROADCAST",
+                                                     "routing":  "FLOOD_MESH_NETWORK",
+                                                     "priority":  "LOW_BACKGROUND",
+                                                     "frequency":  "1_HZ_KEEP_ALIVE"
+                                                 }
+                        },
+    "distributed_control_scenarios":  {
+                                          "hand_control_example":  {
+                                                                       "master_command":  "grasp_object(force=50%, shape=cylinder)",
+                                                                       "mesh_routing":  "MASTER -\u003e ARM_RELAY -\u003e HAND_LEAF",
+                                                                       "local_processing":  {
+                                                                                                "hand_controller":  "ESP32_C3_IN_WRIST",
+                                                                                                "fingers":  "5x_SERVO_CONTROL_LOCALLY",
+                                                                                                "sensors":  "PRESSURE_FEEDBACK_PER_FINGER",
+                                                                                                "intelligence":  "LOCAL_GRASP_ADJUSTMENT"
+                                                                                            },
+                                                                       "benefits":  [
+                                                                                        "NO_WIRES_TO_INDIVIDUAL_FINGERS",
+                                                                                        "REAL_TIME_GRASP_CONTROL",
+                                                                                        "INDEPENDENT_FINGER_PROCESSING",
+                                                                                        "PRESSURE_FEEDBACK_WITHOUT_EXTRA_WIRING"
+                                                                                    ]
+                                                                   },
+                                          "shoulder_joint_example":  {
+                                                                         "challenge":  "ROTATING_JOINT_WIRING_PROBLEM",
+                                                                         "solution":  "ESP32_C3_EMBEDDED_IN_SHOULDER",
+                                                                         "communication":  "BLUETOOTH_MESH_NO_SLIP_RINGS",
+                                                                         "servo_control":  "3_AXES_LOCAL_CONTROL",
+                                                                         "benefits":  [
+                                                                                          "ELIMINATE_ROTATING_WIRE_HARNESS",
+                                                                                          "NO_SLIP_RINGS_REQUIRED",
+                                                                                          "INDEPENDENT_SHOULDER_CONTROL",
+                                                                                          "WIRELESS_POWER_VIA_INDUCTION_POSSIBLE"
+                                                                                      ]
+                                                                     },
+                                          "foot_sensor_example":  {
+                                                                      "sensors":  "16_PRESSURE_SENSORS_IN_FOOT_PAD",
+                                                                      "controller":  "ESP32_C3_IN_ANKLE",
+                                                                      "processing":  "LOCAL_BALANCE_CALCULATIONS",
+                                                                      "mesh_data":  "SUMMARIZED_BALANCE_INFO_ONLY",
+                                                                      "benefits":  [
+                                                                                       "NO_16_WIRE_SENSOR_HARNESS",
+                                                                                       "REAL_TIME_FOOT_PROCESSING",
+                                                                                       "REDUCED_MESH_BANDWIDTH",
+                                                                                       "MODULAR_FOOT_ASSEMBLY"
+                                                                                   ]
+                                                                  }
+                                      },
+    "advantages_over_wired_systems":  {
+                                          "mechanical":  {
+                                                             "no_wire_harnesses":  "ELIMINATE_COMPLEX_CABLE_ROUTING",
+                                                             "no_slip_rings":  "ROTATING_JOINTS_SIMPLIFIED",
+                                                             "modular_assembly":  "PLUG_AND_PLAY_LIMB_ATTACHMENT",
+                                                             "maintenance":  "EASY_PART_REPLACEMENT"
+                                                         },
+                                          "electrical":  {
+                                                             "reduced_interference":  "NO_LONG_PWM_SIGNAL_WIRES",
+                                                             "isolated_failures":  "SERVO_FAILURE_DOESN_T_AFFECT_OTHERS",
+                                                             "distributed_processing":  "REDUCE_MAIN_CONTROLLER_LOAD",
+                                                             "scalability":  "ADD_SENSORS_WITHOUT_REWIRING"
+                                                         },
+                                          "software":  {
+                                                           "modularity":  "EACH_CONTROLLER_INDEPENDENT_FIRMWARE",
+                                                           "ota_updates":  "WIRELESS_FIRMWARE_UPDATES",
+                                                           "debugging":  "INDIVIDUAL_NODE_MONITORING",
+                                                           "development":  "PARALLEL_SUBSYSTEM_DEVELOPMENT"
+                                                       }
+                                      },
+    "mesh_robustness":  {
+                            "self_healing":  {
+                                                 "node_failure":  "AUTOMATIC_ROUTE_RECALCULATION",
+                                                 "interference":  "FREQUENCY_HOPPING_ADAPTATION",
+                                                 "range_limits":  "MULTI_HOP_EXTENSION",
+                                                 "recovery_time":  "SECONDS_TO_MINUTES"
+                                             },
+                            "redundancy":  {
+                                               "multiple_paths":  "MESH_PROVIDES_ALTERNATE_ROUTES",
+                                               "relay_nodes":  "MULTIPLE_RELAYS_FOR_CRITICAL_PATHS",
+                                               "master_backup":  "DESIGNATED_RELAY_AS_BACKUP_MASTER",
+                                               "data_integrity":  "AUTOMATIC_RETRY_AND_ACKNOWLEDGMENT"
+                                           }
+                        },
+    "implementation_phases":  {
+                                  "phase_1_simple":  {
+                                                         "topology":  "STAR_NETWORK_ONE_MASTER",
+                                                         "nodes":  "MASTER_PLUS_4_LEAF_NODES",
+                                                         "complexity":  "SIMPLEST_MESH_SETUP",
+                                                         "applications":  "BASIC_HAND_OR_HEAD_CONTROL"
+                                                     },
+                                  "phase_2_hierarchical":  {
+                                                               "topology":  "TREE_WITH_RELAY_NODES",
+                                                               "nodes":  "MASTER_PLUS_RELAYS_PLUS_LEAVES",
+                                                               "complexity":  "MODERATE_MESH_ROUTING",
+                                                               "applications":  "FULL_ARM_WITH_HAND_CONTROL"
+                                                           },
+                                  "phase_3_full_mesh":  {
+                                                            "topology":  "FULL_MESH_SELF_HEALING",
+                                                            "nodes":  "ALL_JOINTS_AS_MESH_NODES",
+                                                            "complexity":  "ADVANCED_MESH_ALGORITHMS",
+                                                            "applications":  "COMPLETE_HUMANOID_ROBOT"
+                                                        }
+                              },
+    "cost_analysis":  {
+                          "traditional_wired":  {
+                                                    "wire_harnesses":  "$200_COMPLEX_ROUTING",
+                                                    "slip_rings":  "$100_PER_ROTATING_JOINT",
+                                                    "connectors":  "$150_MANY_CONNECTIONS",
+                                                    "assembly_labor":  "$500_COMPLEX_WIRING"
+                                                },
+                          "ble_mesh_wireless":  {
+                                                    "esp32_c3_nodes":  "$40_FOR_20_NODES",
+                                                    "no_harnesses":  "$0_WIRELESS",
+                                                    "no_slip_rings":  "$0_WIRELESS",
+                                                    "simple_power":  "$50_POWER_ONLY_WIRING",
+                                                    "total_savings":  "$750_COST_REDUCTION"
+                                                }
+                      },
+    "name":  "ble_mesh_network",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

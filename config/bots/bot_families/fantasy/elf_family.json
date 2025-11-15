@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/fantasy/elf_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "ELF",
@@ -16,12 +15,12 @@
         "ear_extension": "1.5 INCH"
     },
     "components": [
-        "elf_eye_left",
-        "elf_eye_right",
-        "elf_mouth",
-        "elf_speaker",
-        "elf_ear_left",
-        "elf_ear_right"
+        "config/bots/bot_families/elves/head/elf_eye_left.json",
+        "config/bots/bot_families/elves/head/elf_eye_right.json",
+        "config/bots/bot_families/elves/head/elf_mouth.json",
+        "config/bots/bot_families/elves/head/elf_speaker.json",
+        "config/bots/bot_families/elves/head/elf_ear_left.json",
+        "config/bots/bot_families/elves/head/elf_ear_right.json"
     ],
     "family_mood_profile": {
         "FEAR": 8,

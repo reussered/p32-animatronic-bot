@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_ear.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_ear",
@@ -7,7 +6,7 @@
     "description": "Shared goblin ear processing logic with directional sensitivity and goblin-specific audio characteristics",
     "created": "2025-10-22",
     "components": [
-        "hw496_microphone"
+        "config/components/hardware/hw496_microphone.json"
     ],
     "creature_audio_profile": {
         "species": "GOBLIN",

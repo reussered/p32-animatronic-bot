@@ -1,14 +1,13 @@
 {
-    "relative_filename": "config\\bots\\bot_families\\goblins\\head\\goblin_nose.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_nose",
     "subsystem": "HEAD",
     "components": [
-        "hc_sr04",
-        "gpio_pair_driver",
-        "goblin_head",
-        "goblin_torso"
+        "config/components/hardware/hc_sr04.json",
+        "config/components/drivers/gpio_pair_driver.json",
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "mounting_architecture": {
         "type": "two_tier",

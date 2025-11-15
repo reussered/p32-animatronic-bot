@@ -1,80 +1,79 @@
 {
-    "relative_filename": "config/components/hardware/hardware/neopixel_matrix_8x8.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_id": "NEOPIXEL_MATRIX_8X8",
-    "description": "8x8 RGB LED matrix for pixel-based displays and animations",
-    "created": "2025-10-12",
-    "physical_specifications": {
-        "matrix_size": "8x8",
-        "pixel_count": 64,
-        "pixel_pitch": "10 MM",
-        "overall_size": "80x80 MM",
-        "thickness": "5 MM",
-        "voltage": "5V",
-        "max_current": "3.84 A",
-        "data_protocol": "WS2812B"
-    },
-    "electrical_requirements": {
-        "power_supply_voltage": "5V",
-        "data_voltage": "3.3V",
-        "logic_compatibility": "3.3V_TOLERANT",
-        "interface_type": "SINGLE_WIRE_DATA",
-        "timing_critical": true,
-        "requires_level_shifter": false
-    },
-    "gpio_requirements": {
-        "data_pin": 1,
-        "power_pins": 2,
-        "ground_pins": 1,
-        "total_connections": 4
-    },
-    "display_capabilities": {
-        "resolution": "8x8",
-        "color_depth": "24_BIT_RGB",
-        "brightness_levels": 256,
-        "refresh_rate_hz": 60,
-        "addressable_pixels": true,
-        "animation_support": true
-    },
-    "effects_supported": [
-        "scrolling_text",
-        "animated_eyes",
-        "status_icons",
-        "pixel_art",
-        "reactive_patterns",
-        "breathing_glow",
-        "fire_animation",
-        "matrix_rain"
-    ],
-    "use_cases": [
-        "robot_chest_display",
-        "android_status_panel",
-        "vampire_hypnotic_eyes",
-        "dragon_fire_breath",
-        "ghost_spectral_effects",
-        "communication_display"
-    ],
-    "family_suitability": {
-        "robot": "EXCELLENT",
-        "android": "EXCELLENT",
-        "goblin": "POOR",
-        "vampire": "MODERATE",
-        "zombie": "POOR",
-        "ghost": "EXCELLENT",
-        "dragon": "GOOD"
-    },
-    "mounting_requirements": {
-        "mount_holes": 4,
-        "hole_diameter": "3 MM",
-        "hole_spacing": "74 MM",
-        "requires_diffusion": true,
-        "heat_dissipation": "MODERATE"
-    },
-    "hardware_type": "LED_MATRIX",
-    "name": "neopixel_matrix_8x8",
-    "type": "LED_MATRIX",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_id":  "NEOPIXEL_MATRIX_8X8",
+    "description":  "8x8 RGB LED matrix for pixel-based displays and animations",
+    "created":  "2025-10-12",
+    "physical_specifications":  {
+                                    "matrix_size":  "8x8",
+                                    "pixel_count":  64,
+                                    "pixel_pitch":  "10 MM",
+                                    "overall_size":  "80x80 MM",
+                                    "thickness":  "5 MM",
+                                    "voltage":  "5V",
+                                    "max_current":  "3.84 A",
+                                    "data_protocol":  "WS2812B"
+                                },
+    "electrical_requirements":  {
+                                    "power_supply_voltage":  "5V",
+                                    "data_voltage":  "3.3V",
+                                    "logic_compatibility":  "3.3V_TOLERANT",
+                                    "interface_type":  "SINGLE_WIRE_DATA",
+                                    "timing_critical":  true,
+                                    "requires_level_shifter":  false
+                                },
+    "gpio_requirements":  {
+                              "data_pin":  1,
+                              "power_pins":  2,
+                              "ground_pins":  1,
+                              "total_connections":  4
+                          },
+    "display_capabilities":  {
+                                 "resolution":  "8x8",
+                                 "color_depth":  "24_BIT_RGB",
+                                 "brightness_levels":  256,
+                                 "refresh_rate_hz":  60,
+                                 "addressable_pixels":  true,
+                                 "animation_support":  true
+                             },
+    "effects_supported":  [
+                              "scrolling_text",
+                              "animated_eyes",
+                              "status_icons",
+                              "pixel_art",
+                              "reactive_patterns",
+                              "breathing_glow",
+                              "fire_animation",
+                              "matrix_rain"
+                          ],
+    "use_cases":  [
+                      "robot_chest_display",
+                      "android_status_panel",
+                      "vampire_hypnotic_eyes",
+                      "dragon_fire_breath",
+                      "ghost_spectral_effects",
+                      "communication_display"
+                  ],
+    "family_suitability":  {
+                               "robot":  "EXCELLENT",
+                               "android":  "EXCELLENT",
+                               "goblin":  "POOR",
+                               "vampire":  "MODERATE",
+                               "zombie":  "POOR",
+                               "ghost":  "EXCELLENT",
+                               "dragon":  "GOOD"
+                           },
+    "mounting_requirements":  {
+                                  "mount_holes":  4,
+                                  "hole_diameter":  "3 MM",
+                                  "hole_spacing":  "74 MM",
+                                  "requires_diffusion":  true,
+                                  "heat_dissipation":  "MODERATE"
+                              },
+    "hardware_type":  "LED_MATRIX",
+    "name":  "neopixel_matrix_8x8",
+    "type":  "LED_MATRIX",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

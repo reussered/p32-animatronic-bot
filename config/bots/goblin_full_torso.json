@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/goblin_full_torso.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINFULL_TORSO",
@@ -12,17 +11,17 @@
     "reference_point": "pelvis_center",
     "units": "INCHES",
     "components": [
-        "power_management_system",
-        "main_battery_monitor",
-        "external_wifi_communication",
-        "esp_now_mesh_coordinator",
-        "master_controller",
-        "mesh_software_coordinator",
-        "imu_balance_sensor",
-        "spine_servo_lower",
-        "spine_servo_middle",
-        "spine_servo_upper",
-        "torso_status_led"
+        "config/bots/bot_families/goblins/torso/power_management_system.json",
+        "config/bots/bot_families/goblins/torso/main_battery_monitor.json",
+        "config/bots/bot_families/goblins/torso/external_wifi_communication.json",
+        "config/bots/bot_families/goblins/torso/esp_now_mesh_coordinator.json",
+        "config/bots/bot_families/goblins/torso/master_controller.json",
+        "config/bots/bot_families/goblins/torso/mesh_software_coordinator.json",
+        "config/bots/bot_families/goblins/torso/imu_balance_sensor.json",
+        "config/bots/bot_families/goblins/torso/spine_servo_lower.json",
+        "config/bots/bot_families/goblins/torso/spine_servo_middle.json",
+        "config/bots/bot_families/goblins/torso/spine_servo_upper.json",
+        "config/bots/bot_families/goblins/torso/torso_status_led.json"
     ],
     "degrees_of_freedom": {
         "spine_dof": "3",

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/robots/head/robot_led_strips.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "robot_led_strips",
@@ -7,7 +6,7 @@
     "description": "Accent LED strips for ambient lighting and mood indication",
     "created": "2025-10-12",
     "components": [
-        "ws2812_led_strip"
+        "config/components/hardware/ws2812_led_strip.json"
     ],
     "strip_layout": {
         "strip_count": 3,

@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_enhanced_ears.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_enhanced_ears",
@@ -7,7 +6,7 @@
     "description": "Enlarged and enhanced ears for scout goblin superior hearing",
     "created": "2025-10-12",
     "components": [
-        "directional_microphone"
+        "config/components/hardware/directional_microphone.json"
     ],
     "interface_reference": "config/components/interfaces/i2s_device_2.json",
     "coordinate_system": "skull_3d",

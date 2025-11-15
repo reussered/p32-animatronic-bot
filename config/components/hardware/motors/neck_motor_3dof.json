@@ -1,7 +1,6 @@
 {
     "version": "1.0.0",
     "author": "config/author.json",
-    "component_type": "FUNCTIONAL",
     "description": "3-DOF neck motor control using ClearPath steppers",
     "source_files": [
         "neck_motor_3dof.src",
@@ -39,5 +38,7 @@
             }
         ]
     },
-    "notes": "3-DOF neck control using ClearPath MCPV-RB-2310V-ELN steppers"
+    "notes": "3-DOF neck control using ClearPath MCPV-RB-2310V-ELN steppers",
+    "type": "FUNCTIONAL",
+    "name": "neck_motor_3dof"
 }

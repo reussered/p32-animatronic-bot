@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/tests/test_head/test_head.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "subsystem_type": "HEAD",
@@ -16,9 +15,9 @@
         "description": "Test head coordination every cycle for real-time validation"
     },
     "components": [
-        "goblin_left_eye",
-        "goblin_right_eye",
-        "gc9a01"
+        "config/bots/bot_families/goblins/head/goblin_left_eye.json",
+        "config/bots/bot_families/goblins/head/goblin_right_eye.json",
+        "config/components/hardware/gc9a01.json"
     ],
     "test_configuration": {
         "hardware_validation": true,

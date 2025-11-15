@@ -1,48 +1,47 @@
 {
-    "relative_filename": "config/components/functional/goblin_behavior_engine.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "name": "goblin_behavior_engine",
-    "family_type": "GOBLIN",
-    "description": "Goblin behavior selection engine - chooses actions based on mood and personality",
-    "created": "2025-10-15",
-    "timing": {
-        "hitCount": 10,
-        "description": "Behavior decision every 1 second"
-    },
-    "behavior_states": {
-        "IDLE": {
-            "animation": "idle_scan",
-            "sound": null
-        },
-        "CURIOUS": {
-            "animation": "curious_look",
-            "sound": "curious_chirp"
-        },
-        "AGGRESSIVE": {
-            "animation": "angry_stare",
-            "sound": "growl_angry"
-        },
-        "FEARFUL": {
-            "animation": "blink",
-            "sound": null
-        },
-        "CONTENT": {
-            "animation": "blink",
-            "sound": "ambient_breathing"
-        }
-    },
-    "transition_thresholds": {
-        "idle_to_curious": 50,
-        "curious_to_aggressive": 70,
-        "aggressive_to_fearful": 80,
-        "any_to_content": 60
-    },
-    "responsibilities": [
-        "Select current behavior based on mood state",
-        "Trigger animations via ESP-NOW commands",
-        "Select audio clips for vocalization",
-        "Manage behavior state transitions"
-    ],
-    "type": "FAMILY_LEVEL"
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "name":  "goblin_behavior_engine",
+    "family_type":  "GOBLIN",
+    "description":  "Goblin behavior selection engine - chooses actions based on mood and personality",
+    "created":  "2025-10-15",
+    "timing":  {
+                   "hitCount":  10,
+                   "description":  "Behavior decision every 1 second"
+               },
+    "behavior_states":  {
+                            "IDLE":  {
+                                         "animation":  "idle_scan",
+                                         "sound":  null
+                                     },
+                            "CURIOUS":  {
+                                            "animation":  "curious_look",
+                                            "sound":  "curious_chirp"
+                                        },
+                            "AGGRESSIVE":  {
+                                               "animation":  "angry_stare",
+                                               "sound":  "growl_angry"
+                                           },
+                            "FEARFUL":  {
+                                            "animation":  "blink",
+                                            "sound":  null
+                                        },
+                            "CONTENT":  {
+                                            "animation":  "blink",
+                                            "sound":  "ambient_breathing"
+                                        }
+                        },
+    "transition_thresholds":  {
+                                  "idle_to_curious":  50,
+                                  "curious_to_aggressive":  70,
+                                  "aggressive_to_fearful":  80,
+                                  "any_to_content":  60
+                              },
+    "responsibilities":  [
+                             "Select current behavior based on mood state",
+                             "Trigger animations via ESP-NOW commands",
+                             "Select audio clips for vocalization",
+                             "Manage behavior state transitions"
+                         ],
+    "type":  "FAMILY_LEVEL"
 }

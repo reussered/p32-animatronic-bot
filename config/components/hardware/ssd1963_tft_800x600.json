@@ -1,66 +1,65 @@
 {
-    "relative_filename": "config/components/hardware/hardware/ssd1963_tft_800x600.json",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "hardware_type": "SSD1963_DISPLAY",
-    "display_driver": true,
-    "name": "ssd1963_tft_800x600",
-    "subsystem": "HEAD",
-    "physical_specs": {
-        "screen_size": "7.0 INCH",
-        "resolution": "800x600",
-        "thickness": "0.18 INCH",
-        "aspect_ratio": "4:3",
-        "mounting_holes": {
-            "count": 4,
-            "diameter": "0.15 INCH",
-            "spacing": "7.2 INCH x 5.8 INCH"
-        }
-    },
-    "electrical_specs": {
-        "supply_voltage": "3.3V",
-        "logic_voltage": "3.3V",
-        "interface": "PARALLEL_RGB",
-        "current_consumption": "250mA",
-        "backlight_current": "200mA",
-        "total_power": "1.5W"
-    },
-    "memory_requirements": {
-        "frame_buffer_size": "960000 BYTES",
-        "color_depth": "2 BYTES_PER_PIXEL",
-        "total_pixels": 480000,
-        "ram_usage": "EXTREME",
-        "requires_psram": true,
-        "recommended_psram": "8MB+"
-    },
-    "interface_notes": {
-        "description": "SSD1963 uses parallel RGB interface, requires many GPIO pins",
-        "pin_count": "16+ pins for RGB565 + control",
-        "complexity": "HIGH"
-    },
-    "software": {
-        "init_function": "ssd1963_init",
-        "act_function": "ssd1963_act",
-        "components": [
-            "config/components/interfaces/spi_display_bus.json"
-        ]
-    },
-    "required_interface_functions": [
-        "getBuffer",
-        "getFrameSize",
-        "getFrameRowSize"
-    ],
-    "use_cases": {
-        "recommended_for": [
-            "MASSIVE_ORC_FACES",
-            "DRAGON_TORSO_PANELS",
-            "MULTI_CHARACTER_DISPLAYS",
-            "ULTRA_DETAILED_EXPRESSIONS"
-        ]
-    },
-    "type": "DISPLAY_DRIVER",
-    "description": "Auto-generated component: ssd1963_tft_800x600",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "hardware_type":  "SSD1963_DISPLAY",
+    "display_driver":  true,
+    "name":  "ssd1963_tft_800x600",
+    "subsystem":  "HEAD",
+    "physical_specs":  {
+                           "screen_size":  "7.0 INCH",
+                           "resolution":  "800x600",
+                           "thickness":  "0.18 INCH",
+                           "aspect_ratio":  "4:3",
+                           "mounting_holes":  {
+                                                  "count":  4,
+                                                  "diameter":  "0.15 INCH",
+                                                  "spacing":  "7.2 INCH x 5.8 INCH"
+                                              }
+                       },
+    "electrical_specs":  {
+                             "supply_voltage":  "3.3V",
+                             "logic_voltage":  "3.3V",
+                             "interface":  "PARALLEL_RGB",
+                             "current_consumption":  "250mA",
+                             "backlight_current":  "200mA",
+                             "total_power":  "1.5W"
+                         },
+    "memory_requirements":  {
+                                "frame_buffer_size":  "960000 BYTES",
+                                "color_depth":  "2 BYTES_PER_PIXEL",
+                                "total_pixels":  480000,
+                                "ram_usage":  "EXTREME",
+                                "requires_psram":  true,
+                                "recommended_psram":  "8MB+"
+                            },
+    "interface_notes":  {
+                            "description":  "SSD1963 uses parallel RGB interface, requires many GPIO pins",
+                            "pin_count":  "16+ pins for RGB565 + control",
+                            "complexity":  "HIGH"
+                        },
+    "software":  {
+                     "init_function":  "ssd1963_init",
+                     "act_function":  "ssd1963_act",
+                     "components":  [
+                                        "config/components/interfaces/spi_display_bus.json"
+                                    ]
+                 },
+    "required_interface_functions":  [
+                                         "getBuffer",
+                                         "getFrameSize",
+                                         "getFrameRowSize"
+                                     ],
+    "use_cases":  {
+                      "recommended_for":  [
+                                              "MASSIVE_ORC_FACES",
+                                              "DRAGON_TORSO_PANELS",
+                                              "MULTI_CHARACTER_DISPLAYS",
+                                              "ULTRA_DETAILED_EXPRESSIONS"
+                                          ]
+                  },
+    "type":  "DISPLAY_DRIVER",
+    "description":  "Auto-generated component: ssd1963_tft_800x600",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

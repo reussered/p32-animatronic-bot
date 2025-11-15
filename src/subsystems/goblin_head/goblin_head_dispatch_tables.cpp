@@ -14,21 +14,8 @@ const init_function_t goblin_head_init_table[] = {
     &gc9a01_init,
     &spi_display_bus_init,
     &generic_spi_display_init,
-    &goblin_nose_init,
-    &hc_sr04_init,
-    &gpio_pair_driver_init,
-    &goblin_mouth_init,
-    &ili9341_init,
-    &speaker_init,
-    &i2s_bus_0_init,
-    &i2s_driver_init,
-    &goblin_speaker_init,
-    &speaker_init,
-    &i2s_bus_0_init,
-    &i2s_driver_init,
-    &goblin_sinuses_init,
-    &max98357a_i2s_amplifier_init,
-    &goblin_head_neck_motor_init
+    &goblin_mouth_display_init,
+    &goblin_mouth_mood_display_init
 };
 
 const act_function_t goblin_head_act_table[] = {
@@ -42,21 +29,8 @@ const act_function_t goblin_head_act_table[] = {
     &gc9a01_act,
     &spi_display_bus_act,
     &generic_spi_display_act,
-    &goblin_nose_act,
-    &hc_sr04_act,
-    &gpio_pair_driver_act,
-    &goblin_mouth_act,
-    &ili9341_act,
-    &speaker_act,
-    &i2s_bus_0_act,
-    &i2s_driver_act,
-    &goblin_speaker_act,
-    &speaker_act,
-    &i2s_bus_0_act,
-    &i2s_driver_act,
-    &goblin_sinuses_act,
-    &max98357a_i2s_amplifier_act,
-    &goblin_head_neck_motor_act
+    &goblin_mouth_display_act,
+    &goblin_mouth_mood_display_act
 };
 
 const uint32_t goblin_head_hitcount_table[] = {
@@ -70,19 +44,6 @@ const uint32_t goblin_head_hitcount_table[] = {
     1,
     1,
     1,
-    180000,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    84000,
-    1,
-    1,
-    1,
-    5,
     1,
     1
 };

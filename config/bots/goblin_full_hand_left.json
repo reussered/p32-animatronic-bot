@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/goblin_full_hand_left.json",
     "version": "2.0.0",
     "author": "config/author.json",
     "bot_type": "GOBLINFULL_HAND_LEFT",
@@ -18,8 +17,8 @@
         "ring_finger_servo",
         "pinky_finger_servo",
         "hand_status_led",
-        "goblin_head",
-        "goblin_torso"
+        "config/bots/bot_families/goblins/head/goblin_head.json",
+        "config/bots/bot_families/goblins/torso/goblin_torso.json"
     ],
     "degrees_of_freedom": {
         "thumb_dof": "1",

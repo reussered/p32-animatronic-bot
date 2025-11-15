@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/humanoids/torso/humanoid_pelvis_assembly.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "humanoid_pelvis_assembly",
@@ -14,7 +13,7 @@
         "scaling_applies": true
     },
     "components": [
-        "pelvis_structural_assembly"
+        "config/components/hardware/pelvis_structural_assembly.json"
     ],
     "attachment_points": {
         "hip_left_connection": {

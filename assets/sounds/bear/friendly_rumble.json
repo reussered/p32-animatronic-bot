@@ -1,40 +1,39 @@
 {
-    "relative_filename": "assets/sounds/bear/friendly_rumble.json",
-    "sound_name": "bear_friendly_rumble",
-    "version": "1.0.0",
-    "author": "config/author.json",
-    "description": "Deep, warm rumbling sound for friendly bear interactions",
-    "audio_file": "bear_friendly_rumble.wav",
-    "duration_ms": 3000,
-    "mood_trigger": "AFFECTION",
-    "volume": 0.7,
-    "audio_specs": {
-        "sample_rate": "44100 Hz",
-        "bit_depth": "16-bit",
-        "channels": "mono",
-        "format": "WAV"
-    },
-    "frequency_profile": {
-        "fundamental": "80-120 Hz",
-        "harmonics": "LOW_FREQUENCY_EMPHASIS",
-        "character": "WARM_BASS_RUMBLE"
-    },
-    "playback_settings": {
-        "loop": false,
-        "fade_in": "200ms",
-        "fade_out": "500ms",
-        "priority": 6
-    },
-    "trigger_conditions": {
-        "proximity": "CLOSE_INTERACTION",
-        "mood_state": "HAPPY_OR_CONTENT",
-        "context": "FRIENDLY_APPROACH"
-    },
-    "audio_processing": {
-        "low_pass_filter": "ENABLED_AT_2KHZ",
-        "reverb": "SLIGHT_CAVE_ECHO",
-        "compression": "GENTLE_SMOOTHING"
-    },
-    "type": "UNKNOWN",
-    "name": "friendly_rumble"
+    "sound_name":  "bear_friendly_rumble",
+    "version":  "1.0.0",
+    "author":  "config/author.json",
+    "description":  "Deep, warm rumbling sound for friendly bear interactions",
+    "audio_file":  "bear_friendly_rumble.wav",
+    "duration_ms":  3000,
+    "mood_trigger":  "AFFECTION",
+    "volume":  0.7,
+    "audio_specs":  {
+                        "sample_rate":  "44100 Hz",
+                        "bit_depth":  "16-bit",
+                        "channels":  "mono",
+                        "format":  "WAV"
+                    },
+    "frequency_profile":  {
+                              "fundamental":  "80-120 Hz",
+                              "harmonics":  "LOW_FREQUENCY_EMPHASIS",
+                              "character":  "WARM_BASS_RUMBLE"
+                          },
+    "playback_settings":  {
+                              "loop":  false,
+                              "fade_in":  "200ms",
+                              "fade_out":  "500ms",
+                              "priority":  6
+                          },
+    "trigger_conditions":  {
+                               "proximity":  "CLOSE_INTERACTION",
+                               "mood_state":  "HAPPY_OR_CONTENT",
+                               "context":  "FRIENDLY_APPROACH"
+                           },
+    "audio_processing":  {
+                             "low_pass_filter":  "ENABLED_AT_2KHZ",
+                             "reverb":  "SLIGHT_CAVE_ECHO",
+                             "compression":  "GENTLE_SMOOTHING"
+                         },
+    "type":  "UNKNOWN",
+    "name":  "friendly_rumble"
 }

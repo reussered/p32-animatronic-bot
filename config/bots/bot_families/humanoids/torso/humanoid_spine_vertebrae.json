@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/humanoids/torso/humanoid_spine_vertebrae.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "humanoid_spine_vertebrae",
@@ -37,7 +36,7 @@
         }
     ],
     "components": [
-        "spine_vertebrae_assembly"
+        "config/components/hardware/spine_vertebrae_assembly.json"
     ],
     "degrees_of_freedom": {
         "total_dof": 6,

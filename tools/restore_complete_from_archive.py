@@ -46,8 +46,7 @@ def restore_from_archive():
                 with open(archived_file, 'r', encoding='utf-8-sig') as f:
                     data = json.load(f)
                 
-                # Preserve current path/name
-                data['relative_filename'] = str(current_file.relative_to(Path(".")))
+                # Preserve current name; do not set deprecated 'relative_filename'
                 data['name'] = current_file.stem
                 
                 # Write back to current location

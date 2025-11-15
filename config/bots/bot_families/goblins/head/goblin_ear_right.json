@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_ear_right.json",
     "version": "3.0.0",
     "author": "config/author.json",
     "name": "goblin_ear_right",
@@ -7,7 +6,7 @@
     "description": "Right ear positioned microphone with goblin-specific directional processing",
     "created": "2025-10-22",
     "components": [
-        "goblin_ear"
+        "config/components/creature_specific/goblin_ear.json"
     ],
     "coordinate_system": "skull_3d",
     "reference_point": "nose_center",

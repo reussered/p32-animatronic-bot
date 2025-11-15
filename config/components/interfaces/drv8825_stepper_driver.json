@@ -1,380 +1,379 @@
 {
-    "relative_filename": "config/components/interfaces/drv8825_stepper_driver.json",
-    "version": "1.0.0",
-    "hardware_type": "BUS_INTERFACE",
-    "author": "config/author.json",
-    "interface_id": "DRV8825_STEPPER_DRIVER",
-    "interface_type": "STEPPER_MOTOR_DRIVER",
-    "description": "DRV8825 stepper motor driver interface with higher current capacity and advanced microstepping",
-    "hardware_specifications": {
-        "compatible_motors": [
-            "NEMA17",
-            "NEMA23",
-            "NEMA14",
-            "HIGH_CURRENT_STEPPERS"
-        ],
-        "voltage_range": "8.2V_TO_45V_MOTOR_SUPPLY",
-        "logic_voltage": "2.5V_TO_5.25V",
-        "current_per_phase": "1.5A_CONTINUOUS_2.5A_PEAK",
-        "microstepping": [
-            "FULL",
-            "HALF",
-            "QUARTER",
-            "EIGHTH",
-            "SIXTEENTH",
-            "THIRTY_SECOND"
-        ],
-        "step_resolution": "200_TO_6400_STEPS_PER_REV",
-        "package": "28_PIN_HTSSOP"
-    },
-    "pin_requirements": {
-        "step_pin": {
-            "function": "step_pulse_input",
-            "generic_name": "step",
-            "description": "Step pulse input - rising edge triggers step",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL_PULSE",
-            "min_pulse_width": "1.9us"
-        },
-        "direction_pin": {
-            "function": "rotation_direction",
-            "generic_name": "dir",
-            "description": "Direction control - HIGH/LOW sets rotation direction",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "setup_time": "650ns_BEFORE_STEP"
-        },
-        "enable_pin": {
-            "function": "driver_enable",
-            "generic_name": "enable",
-            "description": "Enable driver outputs - LOW enables, HIGH disables",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "default_state": "LOW_ENABLED",
-            "active_logic": "ACTIVE_LOW"
-        }
-    },
-    "microstepping_pins": {
-        "mode0_pin": {
-            "function": "microstep_select_0",
-            "generic_name": "m0",
-            "description": "Microstepping selection bit 0",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL"
-        },
-        "mode1_pin": {
-            "function": "microstep_select_1",
-            "generic_name": "m1",
-            "description": "Microstepping selection bit 1",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL"
-        },
-        "mode2_pin": {
-            "function": "microstep_select_2",
-            "generic_name": "m2",
-            "description": "Microstepping selection bit 2",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL"
-        }
-    },
-    "power_pins": {
-        "vmot_pin": {
-            "function": "motor_power_supply",
-            "generic_name": "vmot",
-            "description": "Motor power supply input",
-            "voltage_level": "8.2V_TO_45V",
-            "current_capacity": "2.5A_PEAK"
-        },
-        "vdd_pin": {
-            "function": "logic_power_supply",
-            "generic_name": "vdd",
-            "description": "Logic power supply input",
-            "voltage_level": "2.5V_TO_5.25V",
-            "current_consumption": "1.5mA_TYPICAL"
-        },
-        "gnd_pin": {
-            "function": "ground_reference",
-            "generic_name": "gnd",
-            "description": "Ground reference for logic and power",
-            "voltage_level": "0V"
-        }
-    },
-    "motor_connection_pins": {
-        "motor_a1_pin": {
-            "function": "motor_coil_a_positive",
-            "generic_name": "a1",
-            "description": "Motor coil A positive terminal",
-            "current_capacity": "2.5A_PEAK"
-        },
-        "motor_a2_pin": {
-            "function": "motor_coil_a_negative",
-            "generic_name": "a2",
-            "description": "Motor coil A negative terminal",
-            "current_capacity": "2.5A_PEAK"
-        },
-        "motor_b1_pin": {
-            "function": "motor_coil_b_positive",
-            "generic_name": "b1",
-            "description": "Motor coil B positive terminal",
-            "current_capacity": "2.5A_PEAK"
-        },
-        "motor_b2_pin": {
-            "function": "motor_coil_b_negative",
-            "generic_name": "b2",
-            "description": "Motor coil B negative terminal",
-            "current_capacity": "2.5A_PEAK"
-        }
-    },
-    "optional_pins": {
-        "reset_pin": {
-            "function": "driver_reset",
-            "generic_name": "reset",
-            "description": "Reset driver to initial state - active LOW",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "active_logic": "ACTIVE_LOW",
-            "optional": true
-        },
-        "sleep_pin": {
-            "function": "low_power_mode",
-            "generic_name": "sleep",
-            "description": "Sleep mode control - LOW disables driver",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL",
-            "active_logic": "ACTIVE_LOW",
-            "optional": true
-        },
-        "fault_pin": {
-            "function": "fault_indication",
-            "generic_name": "fault",
-            "description": "Fault condition output - LOW indicates fault",
-            "voltage_level": "3.3V_5V",
-            "signal_type": "DIGITAL_OUTPUT",
-            "active_logic": "ACTIVE_LOW",
-            "optional": true
-        }
-    },
-    "microstepping_configuration": {
-        "full_step": {
-            "m0": "LOW",
-            "m1": "LOW",
-            "m2": "LOW",
-            "steps_per_revolution": 200,
-            "torque": "MAXIMUM",
-            "smoothness": "LOWEST"
-        },
-        "half_step": {
-            "m0": "HIGH",
-            "m1": "LOW",
-            "m2": "LOW",
-            "steps_per_revolution": 400,
-            "torque": "HIGH",
-            "smoothness": "LOW"
-        },
-        "quarter_step": {
-            "m0": "LOW",
-            "m1": "HIGH",
-            "m2": "LOW",
-            "steps_per_revolution": 800,
-            "torque": "MEDIUM_HIGH",
-            "smoothness": "MEDIUM"
-        },
-        "eighth_step": {
-            "m0": "HIGH",
-            "m1": "HIGH",
-            "m2": "LOW",
-            "steps_per_revolution": 1600,
-            "torque": "MEDIUM",
-            "smoothness": "HIGH"
-        },
-        "sixteenth_step": {
-            "m0": "LOW",
-            "m1": "LOW",
-            "m2": "HIGH",
-            "steps_per_revolution": 3200,
-            "torque": "LOW",
-            "smoothness": "VERY_HIGH"
-        },
-        "thirty_second_step": {
-            "m0": "HIGH",
-            "m1": "LOW",
-            "m2": "HIGH",
-            "steps_per_revolution": 6400,
-            "torque": "LOWEST",
-            "smoothness": "HIGHEST"
-        }
-    },
-    "timing_specifications": {
-        "step_pulse_timing": {
-            "min_pulse_width": "1.9us",
-            "min_pulse_spacing": "1.9us",
-            "max_step_frequency": "250kHz",
-            "direction_setup_time": "650ns"
-        },
-        "enable_timing": {
-            "enable_to_step_delay": "1.4us_TYPICAL",
-            "disable_to_tristrate": "1.4us_TYPICAL"
-        },
-        "mode_timing": {
-            "mode_setup_time": "650ns_BEFORE_STEP",
-            "mode_hold_time": "650ns_AFTER_STEP"
-        }
-    },
-    "current_regulation": {
-        "vref_voltage": "0V_TO_3.3V",
-        "current_formula": "I_TRIP = VREF / (5 * RS)",
-        "sense_resistor": "0.1_OHM_TYPICAL",
-        "max_current_0.1ohm": "2.0A_WITH_1V_VREF",
-        "current_adjustment": "POTENTIOMETER_OR_DAC_VREF",
-        "regulation_method": "FIXED_OFF_TIME_PWM"
-    },
-    "protection_features": {
-        "thermal_shutdown": {
-            "threshold": "150C_TYPICAL",
-            "hysteresis": "20C",
-            "action": "DISABLE_OUTPUTS_FAULT_PIN_LOW"
-        },
-        "overcurrent_protection": {
-            "detection": "CYCLE_BY_CYCLE_CURRENT_LIMITING",
-            "response_time": "2.2us_TYPICAL",
-            "fault_indication": "FAULT_PIN_LOW"
-        },
-        "undervoltage_lockout": {
-            "vdd_threshold": "2.2V_RISING_2.0V_FALLING",
-            "vmot_threshold": "6.5V_TYPICAL",
-            "fault_indication": "FAULT_PIN_LOW"
-        },
-        "motor_load_open_detection": {
-            "detection": "AUTOMATIC",
-            "indication": "FAULT_PIN_LOW"
-        },
-        "vm_undervoltage": {
-            "threshold": "6.5V_TYPICAL",
-            "action": "DISABLE_OUTPUTS"
-        }
-    },
-    "advantages_over_a4988": {
-        "higher_voltage": "45V_VS_35V_MOTOR_SUPPLY",
-        "higher_current": "2.5A_VS_2A_PEAK_CURRENT",
-        "more_microstepping": "1_32_VS_1_16_MAXIMUM",
-        "fault_detection": "FAULT_PIN_OUTPUT",
-        "better_thermal": "LOWER_RDS_ON_BETTER_EFFICIENCY",
-        "advanced_current_regulation": "FIXED_OFF_TIME_PWM"
-    },
-    "manufacturer_pin_mappings": {
-        "pololu_drv8825": {
-            "step": [
-                "STEP"
-            ],
-            "dir": [
-                "DIR"
-            ],
-            "enable": [
-                "EN"
-            ],
-            "m0": [
-                "M0"
-            ],
-            "m1": [
-                "M1"
-            ],
-            "m2": [
-                "M2"
-            ],
-            "reset": [
-                "RST"
-            ],
-            "sleep": [
-                "SLP"
-            ],
-            "fault": [
-                "FLT"
-            ],
-            "vmot": [
-                "VMOT"
-            ],
-            "vdd": [
-                "VDD"
-            ],
-            "gnd": [
-                "GND"
-            ],
-            "motor_a1": [
-                "A1"
-            ],
-            "motor_a2": [
-                "A2"
-            ],
-            "motor_b1": [
-                "B1"
-            ],
-            "motor_b2": [
-                "B2"
-            ]
-        },
-        "bigtreetech_drv8825": {
-            "step": [
-                "STEP",
-                "STP"
-            ],
-            "dir": [
-                "DIR",
-                "DIRECTION"
-            ],
-            "enable": [
-                "EN",
-                "ENABLE"
-            ],
-            "vmot": [
-                "VIN",
-                "MOTOR_POWER"
-            ],
-            "vdd": [
-                "3.3V",
-                "5V"
-            ]
-        },
-        "mks_drv8825": {
-            "step": [
-                "STEP"
-            ],
-            "dir": [
-                "DIR"
-            ],
-            "enable": [
-                "EN"
-            ],
-            "fault": [
-                "DIAG"
-            ]
-        }
-    },
-    "application_examples": {
-        "heavy_duty_arm_joint": {
-            "motor": "NEMA17_48mm_HIGH_TORQUE",
-            "microstepping": "SIXTEENTH_STEP_3200_STEPS_REV",
-            "current_setting": "2.0A",
-            "max_speed": "1500_STEPS_PER_SECOND",
-            "use_case": "HIGH_TORQUE_ARM_POSITIONING"
-        },
-        "precision_platform_drive": {
-            "motor": "NEMA23_57mm",
-            "microstepping": "THIRTY_SECOND_STEP_6400_STEPS_REV",
-            "current_setting": "2.5A",
-            "max_speed": "3000_STEPS_PER_SECOND",
-            "use_case": "ULTRA_PRECISE_LOCOMOTION"
-        },
-        "spine_articulation": {
-            "motor": "NEMA14_35mm",
-            "microstepping": "EIGHTH_STEP_1600_STEPS_REV",
-            "current_setting": "1.2A",
-            "max_speed": "2000_STEPS_PER_SECOND",
-            "use_case": "SMOOTH_SPINE_MOVEMENT"
-        }
-    },
-    "name": "drv8825_stepper_driver",
-    "type": "INTERFACE_BUS",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "1.0.0",
+    "hardware_type":  "BUS_INTERFACE",
+    "author":  "config/author.json",
+    "interface_id":  "DRV8825_STEPPER_DRIVER",
+    "interface_type":  "STEPPER_MOTOR_DRIVER",
+    "description":  "DRV8825 stepper motor driver interface with higher current capacity and advanced microstepping",
+    "hardware_specifications":  {
+                                    "compatible_motors":  [
+                                                              "NEMA17",
+                                                              "NEMA23",
+                                                              "NEMA14",
+                                                              "HIGH_CURRENT_STEPPERS"
+                                                          ],
+                                    "voltage_range":  "8.2V_TO_45V_MOTOR_SUPPLY",
+                                    "logic_voltage":  "2.5V_TO_5.25V",
+                                    "current_per_phase":  "1.5A_CONTINUOUS_2.5A_PEAK",
+                                    "microstepping":  [
+                                                          "FULL",
+                                                          "HALF",
+                                                          "QUARTER",
+                                                          "EIGHTH",
+                                                          "SIXTEENTH",
+                                                          "THIRTY_SECOND"
+                                                      ],
+                                    "step_resolution":  "200_TO_6400_STEPS_PER_REV",
+                                    "package":  "28_PIN_HTSSOP"
+                                },
+    "pin_requirements":  {
+                             "step_pin":  {
+                                              "function":  "step_pulse_input",
+                                              "generic_name":  "step",
+                                              "description":  "Step pulse input - rising edge triggers step",
+                                              "voltage_level":  "3.3V_5V",
+                                              "signal_type":  "DIGITAL_PULSE",
+                                              "min_pulse_width":  "1.9us"
+                                          },
+                             "direction_pin":  {
+                                                   "function":  "rotation_direction",
+                                                   "generic_name":  "dir",
+                                                   "description":  "Direction control - HIGH/LOW sets rotation direction",
+                                                   "voltage_level":  "3.3V_5V",
+                                                   "signal_type":  "DIGITAL",
+                                                   "setup_time":  "650ns_BEFORE_STEP"
+                                               },
+                             "enable_pin":  {
+                                                "function":  "driver_enable",
+                                                "generic_name":  "enable",
+                                                "description":  "Enable driver outputs - LOW enables, HIGH disables",
+                                                "voltage_level":  "3.3V_5V",
+                                                "signal_type":  "DIGITAL",
+                                                "default_state":  "LOW_ENABLED",
+                                                "active_logic":  "ACTIVE_LOW"
+                                            }
+                         },
+    "microstepping_pins":  {
+                               "mode0_pin":  {
+                                                 "function":  "microstep_select_0",
+                                                 "generic_name":  "m0",
+                                                 "description":  "Microstepping selection bit 0",
+                                                 "voltage_level":  "3.3V_5V",
+                                                 "signal_type":  "DIGITAL"
+                                             },
+                               "mode1_pin":  {
+                                                 "function":  "microstep_select_1",
+                                                 "generic_name":  "m1",
+                                                 "description":  "Microstepping selection bit 1",
+                                                 "voltage_level":  "3.3V_5V",
+                                                 "signal_type":  "DIGITAL"
+                                             },
+                               "mode2_pin":  {
+                                                 "function":  "microstep_select_2",
+                                                 "generic_name":  "m2",
+                                                 "description":  "Microstepping selection bit 2",
+                                                 "voltage_level":  "3.3V_5V",
+                                                 "signal_type":  "DIGITAL"
+                                             }
+                           },
+    "power_pins":  {
+                       "vmot_pin":  {
+                                        "function":  "motor_power_supply",
+                                        "generic_name":  "vmot",
+                                        "description":  "Motor power supply input",
+                                        "voltage_level":  "8.2V_TO_45V",
+                                        "current_capacity":  "2.5A_PEAK"
+                                    },
+                       "vdd_pin":  {
+                                       "function":  "logic_power_supply",
+                                       "generic_name":  "vdd",
+                                       "description":  "Logic power supply input",
+                                       "voltage_level":  "2.5V_TO_5.25V",
+                                       "current_consumption":  "1.5mA_TYPICAL"
+                                   },
+                       "gnd_pin":  {
+                                       "function":  "ground_reference",
+                                       "generic_name":  "gnd",
+                                       "description":  "Ground reference for logic and power",
+                                       "voltage_level":  "0V"
+                                   }
+                   },
+    "motor_connection_pins":  {
+                                  "motor_a1_pin":  {
+                                                       "function":  "motor_coil_a_positive",
+                                                       "generic_name":  "a1",
+                                                       "description":  "Motor coil A positive terminal",
+                                                       "current_capacity":  "2.5A_PEAK"
+                                                   },
+                                  "motor_a2_pin":  {
+                                                       "function":  "motor_coil_a_negative",
+                                                       "generic_name":  "a2",
+                                                       "description":  "Motor coil A negative terminal",
+                                                       "current_capacity":  "2.5A_PEAK"
+                                                   },
+                                  "motor_b1_pin":  {
+                                                       "function":  "motor_coil_b_positive",
+                                                       "generic_name":  "b1",
+                                                       "description":  "Motor coil B positive terminal",
+                                                       "current_capacity":  "2.5A_PEAK"
+                                                   },
+                                  "motor_b2_pin":  {
+                                                       "function":  "motor_coil_b_negative",
+                                                       "generic_name":  "b2",
+                                                       "description":  "Motor coil B negative terminal",
+                                                       "current_capacity":  "2.5A_PEAK"
+                                                   }
+                              },
+    "optional_pins":  {
+                          "reset_pin":  {
+                                            "function":  "driver_reset",
+                                            "generic_name":  "reset",
+                                            "description":  "Reset driver to initial state - active LOW",
+                                            "voltage_level":  "3.3V_5V",
+                                            "signal_type":  "DIGITAL",
+                                            "active_logic":  "ACTIVE_LOW",
+                                            "optional":  true
+                                        },
+                          "sleep_pin":  {
+                                            "function":  "low_power_mode",
+                                            "generic_name":  "sleep",
+                                            "description":  "Sleep mode control - LOW disables driver",
+                                            "voltage_level":  "3.3V_5V",
+                                            "signal_type":  "DIGITAL",
+                                            "active_logic":  "ACTIVE_LOW",
+                                            "optional":  true
+                                        },
+                          "fault_pin":  {
+                                            "function":  "fault_indication",
+                                            "generic_name":  "fault",
+                                            "description":  "Fault condition output - LOW indicates fault",
+                                            "voltage_level":  "3.3V_5V",
+                                            "signal_type":  "DIGITAL_OUTPUT",
+                                            "active_logic":  "ACTIVE_LOW",
+                                            "optional":  true
+                                        }
+                      },
+    "microstepping_configuration":  {
+                                        "full_step":  {
+                                                          "m0":  "LOW",
+                                                          "m1":  "LOW",
+                                                          "m2":  "LOW",
+                                                          "steps_per_revolution":  200,
+                                                          "torque":  "MAXIMUM",
+                                                          "smoothness":  "LOWEST"
+                                                      },
+                                        "half_step":  {
+                                                          "m0":  "HIGH",
+                                                          "m1":  "LOW",
+                                                          "m2":  "LOW",
+                                                          "steps_per_revolution":  400,
+                                                          "torque":  "HIGH",
+                                                          "smoothness":  "LOW"
+                                                      },
+                                        "quarter_step":  {
+                                                             "m0":  "LOW",
+                                                             "m1":  "HIGH",
+                                                             "m2":  "LOW",
+                                                             "steps_per_revolution":  800,
+                                                             "torque":  "MEDIUM_HIGH",
+                                                             "smoothness":  "MEDIUM"
+                                                         },
+                                        "eighth_step":  {
+                                                            "m0":  "HIGH",
+                                                            "m1":  "HIGH",
+                                                            "m2":  "LOW",
+                                                            "steps_per_revolution":  1600,
+                                                            "torque":  "MEDIUM",
+                                                            "smoothness":  "HIGH"
+                                                        },
+                                        "sixteenth_step":  {
+                                                               "m0":  "LOW",
+                                                               "m1":  "LOW",
+                                                               "m2":  "HIGH",
+                                                               "steps_per_revolution":  3200,
+                                                               "torque":  "LOW",
+                                                               "smoothness":  "VERY_HIGH"
+                                                           },
+                                        "thirty_second_step":  {
+                                                                   "m0":  "HIGH",
+                                                                   "m1":  "LOW",
+                                                                   "m2":  "HIGH",
+                                                                   "steps_per_revolution":  6400,
+                                                                   "torque":  "LOWEST",
+                                                                   "smoothness":  "HIGHEST"
+                                                               }
+                                    },
+    "timing_specifications":  {
+                                  "step_pulse_timing":  {
+                                                            "min_pulse_width":  "1.9us",
+                                                            "min_pulse_spacing":  "1.9us",
+                                                            "max_step_frequency":  "250kHz",
+                                                            "direction_setup_time":  "650ns"
+                                                        },
+                                  "enable_timing":  {
+                                                        "enable_to_step_delay":  "1.4us_TYPICAL",
+                                                        "disable_to_tristrate":  "1.4us_TYPICAL"
+                                                    },
+                                  "mode_timing":  {
+                                                      "mode_setup_time":  "650ns_BEFORE_STEP",
+                                                      "mode_hold_time":  "650ns_AFTER_STEP"
+                                                  }
+                              },
+    "current_regulation":  {
+                               "vref_voltage":  "0V_TO_3.3V",
+                               "current_formula":  "I_TRIP = VREF / (5 * RS)",
+                               "sense_resistor":  "0.1_OHM_TYPICAL",
+                               "max_current_0.1ohm":  "2.0A_WITH_1V_VREF",
+                               "current_adjustment":  "POTENTIOMETER_OR_DAC_VREF",
+                               "regulation_method":  "FIXED_OFF_TIME_PWM"
+                           },
+    "protection_features":  {
+                                "thermal_shutdown":  {
+                                                         "threshold":  "150C_TYPICAL",
+                                                         "hysteresis":  "20C",
+                                                         "action":  "DISABLE_OUTPUTS_FAULT_PIN_LOW"
+                                                     },
+                                "overcurrent_protection":  {
+                                                               "detection":  "CYCLE_BY_CYCLE_CURRENT_LIMITING",
+                                                               "response_time":  "2.2us_TYPICAL",
+                                                               "fault_indication":  "FAULT_PIN_LOW"
+                                                           },
+                                "undervoltage_lockout":  {
+                                                             "vdd_threshold":  "2.2V_RISING_2.0V_FALLING",
+                                                             "vmot_threshold":  "6.5V_TYPICAL",
+                                                             "fault_indication":  "FAULT_PIN_LOW"
+                                                         },
+                                "motor_load_open_detection":  {
+                                                                  "detection":  "AUTOMATIC",
+                                                                  "indication":  "FAULT_PIN_LOW"
+                                                              },
+                                "vm_undervoltage":  {
+                                                        "threshold":  "6.5V_TYPICAL",
+                                                        "action":  "DISABLE_OUTPUTS"
+                                                    }
+                            },
+    "advantages_over_a4988":  {
+                                  "higher_voltage":  "45V_VS_35V_MOTOR_SUPPLY",
+                                  "higher_current":  "2.5A_VS_2A_PEAK_CURRENT",
+                                  "more_microstepping":  "1_32_VS_1_16_MAXIMUM",
+                                  "fault_detection":  "FAULT_PIN_OUTPUT",
+                                  "better_thermal":  "LOWER_RDS_ON_BETTER_EFFICIENCY",
+                                  "advanced_current_regulation":  "FIXED_OFF_TIME_PWM"
+                              },
+    "manufacturer_pin_mappings":  {
+                                      "pololu_drv8825":  {
+                                                             "step":  [
+                                                                          "STEP"
+                                                                      ],
+                                                             "dir":  [
+                                                                         "DIR"
+                                                                     ],
+                                                             "enable":  [
+                                                                            "EN"
+                                                                        ],
+                                                             "m0":  [
+                                                                        "M0"
+                                                                    ],
+                                                             "m1":  [
+                                                                        "M1"
+                                                                    ],
+                                                             "m2":  [
+                                                                        "M2"
+                                                                    ],
+                                                             "reset":  [
+                                                                           "RST"
+                                                                       ],
+                                                             "sleep":  [
+                                                                           "SLP"
+                                                                       ],
+                                                             "fault":  [
+                                                                           "FLT"
+                                                                       ],
+                                                             "vmot":  [
+                                                                          "VMOT"
+                                                                      ],
+                                                             "vdd":  [
+                                                                         "VDD"
+                                                                     ],
+                                                             "gnd":  [
+                                                                         "GND"
+                                                                     ],
+                                                             "motor_a1":  [
+                                                                              "A1"
+                                                                          ],
+                                                             "motor_a2":  [
+                                                                              "A2"
+                                                                          ],
+                                                             "motor_b1":  [
+                                                                              "B1"
+                                                                          ],
+                                                             "motor_b2":  [
+                                                                              "B2"
+                                                                          ]
+                                                         },
+                                      "bigtreetech_drv8825":  {
+                                                                  "step":  [
+                                                                               "STEP",
+                                                                               "STP"
+                                                                           ],
+                                                                  "dir":  [
+                                                                              "DIR",
+                                                                              "DIRECTION"
+                                                                          ],
+                                                                  "enable":  [
+                                                                                 "EN",
+                                                                                 "ENABLE"
+                                                                             ],
+                                                                  "vmot":  [
+                                                                               "VIN",
+                                                                               "MOTOR_POWER"
+                                                                           ],
+                                                                  "vdd":  [
+                                                                              "3.3V",
+                                                                              "5V"
+                                                                          ]
+                                                              },
+                                      "mks_drv8825":  {
+                                                          "step":  [
+                                                                       "STEP"
+                                                                   ],
+                                                          "dir":  [
+                                                                      "DIR"
+                                                                  ],
+                                                          "enable":  [
+                                                                         "EN"
+                                                                     ],
+                                                          "fault":  [
+                                                                        "DIAG"
+                                                                    ]
+                                                      }
+                                  },
+    "application_examples":  {
+                                 "heavy_duty_arm_joint":  {
+                                                              "motor":  "NEMA17_48mm_HIGH_TORQUE",
+                                                              "microstepping":  "SIXTEENTH_STEP_3200_STEPS_REV",
+                                                              "current_setting":  "2.0A",
+                                                              "max_speed":  "1500_STEPS_PER_SECOND",
+                                                              "use_case":  "HIGH_TORQUE_ARM_POSITIONING"
+                                                          },
+                                 "precision_platform_drive":  {
+                                                                  "motor":  "NEMA23_57mm",
+                                                                  "microstepping":  "THIRTY_SECOND_STEP_6400_STEPS_REV",
+                                                                  "current_setting":  "2.5A",
+                                                                  "max_speed":  "3000_STEPS_PER_SECOND",
+                                                                  "use_case":  "ULTRA_PRECISE_LOCOMOTION"
+                                                              },
+                                 "spine_articulation":  {
+                                                            "motor":  "NEMA14_35mm",
+                                                            "microstepping":  "EIGHTH_STEP_1600_STEPS_REV",
+                                                            "current_setting":  "1.2A",
+                                                            "max_speed":  "2000_STEPS_PER_SECOND",
+                                                            "use_case":  "SMOOTH_SPINE_MOVEMENT"
+                                                        }
+                             },
+    "name":  "drv8825_stepper_driver",
+    "type":  "INTERFACE_BUS",
+    "timing":  {
+                   "hitCount":  1
+               }
 }

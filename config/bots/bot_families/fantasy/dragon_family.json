@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/fantasy/dragon_family.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "family_type": "DRAGON",
@@ -16,12 +15,12 @@
         "snout_extension": "2.5 INCH"
     },
     "components": [
-        "dragon_eye_left",
-        "dragon_eye_right",
-        "dragon_snout",
-        "dragon_speaker",
-        "dragon_nostril_left",
-        "dragon_nostril_right"
+        "config/bots/bot_families/dragons/head/dragon_eye_left.json",
+        "config/bots/bot_families/dragons/head/dragon_eye_right.json",
+        "config/bots/bot_families/dragons/head/dragon_snout.json",
+        "config/bots/bot_families/dragons/head/dragon_speaker.json",
+        "config/bots/bot_families/dragons/head/dragon_nostril_left.json",
+        "config/bots/bot_families/dragons/head/dragon_nostril_right.json"
     ],
     "family_mood_profile": {
         "FEAR": 2,

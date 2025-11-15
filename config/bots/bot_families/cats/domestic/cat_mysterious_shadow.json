@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/cats/domestic/cat_mysterious_shadow.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "bot_id": "CAT_MYSTERIOUS_SHADOW",
@@ -27,7 +26,7 @@
         }
     },
     "components": [
-        "cat_animated_ears",
+        "config/bots/bot_families/cats/head/cat_animated_ears.json",
         "subtle_led_eyes",
         "ambient_purr_speaker",
         "motion_stealth_sensor"

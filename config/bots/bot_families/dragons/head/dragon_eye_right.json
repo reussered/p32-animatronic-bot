@@ -8,7 +8,7 @@
     "name": "dragon_eye_right",
     "subsystem": "VISION",
     "components": [
-        "spi_bus"
+        "config/components/interfaces/spi_bus.json"
     ],
     "author": "config/author.json",
     "position": {

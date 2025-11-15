@@ -2,10 +2,9 @@
     "name": "shoulder_flexion",
     "version": "2.0.0",
     "author": "config/author.json",
-    "component_type": "SERVO_ASSEMBLY",
     "subsystem": "ARM",
     "components": [
-        "mg996r_servo"
+        "config/bots/bot_families/dragons/hardware_templates/mg996r_servo.json"
     ],
     "shape_reference": "assets/shapes/scad/creature_shells/goblin/shoulder_flexion_mount.scad",
     "servo_specific_config": {
@@ -21,5 +20,5 @@
         "hitCount": 10
     },
     "hardware_type": "SERVO_ASSEMBLY",
-    "type": "ASSEMBLY"
+    "type": "SERVO_ASSEMBLY"
 }

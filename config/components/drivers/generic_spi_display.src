@@ -1,18 +1,453 @@
-// generic_spi_display component implementation
-// Auto-generated stub - needs actual implementation
+// generic_spi_display.src - Display output driver with debug routing
+// If debug=true: sends buffer data to PC via network (for visualization)
+// If debug=false: sends buffer data to physical GC9A01 displays via SPI DMA
+// Uses adaptive row-based buffering: current_row_count varies based on DMA state
 
 #include "esp_log.h"
+#include "driver/spi_master.h"
+#include "esp_wifi.h"
+#include "esp_event.h"
+#include "nvs_flash.h"
+#include "esp_netif.h"
+#include "lwip/sockets.h"
+#include "lwip/inet.h"
+#include "string.h"
+#include "fcntl.h"
+#include "errno.h"
+
+static const char* TAG = "generic_spi_display";
+
+// WiFi credentials for debug mode
+#define WIFI_SSID "ATT7b9q3Ku"
+#define WIFI_PASS "89cqy6d7jjd7"
+#define SERVER_IP "192.168.1.79"  // Your PC's IP address
+#define SERVER_PORT 5555
+
+// Network connection state (for debug mode)
+static struct {
+    int socket_fd;
+    bool connected_to_server;
+    uint32_t frames_sent;
+    bool wifi_connected;
+} network_state = {
+    .socket_fd = -1,
+    .connected_to_server = false,
+    .frames_sent = 0,
+    .wifi_connected = false
+};
+
+// WiFi initialization flag (shared across all displays)
+static bool wifi_already_initialized = false;
+
+// Display buffer management
+typedef struct {
+    uint8_t* front_buffer;
+    uint8_t* back_buffer;
+    uint32_t buffer_size;
+    uint16_t width;
+    uint16_t height;
+    uint8_t bpp;
+    bool in_use;
+} display_buffer_slot_t;
+
+#define MAX_DISPLAY_SLOTS 3  // Left eye, right eye, mouth
+static display_buffer_slot_t display_buffers[MAX_DISPLAY_SLOTS] = {0};
+static int next_slot_index = 0;
+static int current_send_slot = 0;
+
+// SPI DMA pipeline state (for production mode)
+static struct {
+    bool dma1_busy;  // PSRAM -> buffer transfer active
+    bool dma2_busy;  // buffer -> display transfer active
+    spi_device_handle_t display_spi_handle;
+    bool ping_pong_state;
+    int current_row[3];  // Track row position for up to 3 displays
+    int last_display_id;  // Which display we're currently working on
+} spi_state = {
+    .dma1_busy = false,
+    .dma2_busy = false,
+    .display_spi_handle = NULL,
+    .ping_pong_state = false,
+    .current_row = {0, 0, 0},
+    .last_display_id = -1
+};
+
+// WiFi event handler
+static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
+{
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START)
+    {
+        esp_wifi_connect();
+        ESP_LOGI(TAG, "WiFi connecting...");
+    }
+    else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
+    {
+        network_state.wifi_connected = false;
+        network_state.connected_to_server = false;
+        if (network_state.socket_fd >= 0)
+        {
+            close(network_state.socket_fd);
+            network_state.socket_fd = -1;
+        }
+        esp_wifi_connect();
+        ESP_LOGI(TAG, "WiFi disconnected, reconnecting...");
+    }
+    else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP)
+    {
+        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
+        ESP_LOGI(TAG, "WiFi connected! IP: " IPSTR, IP2STR(&event->ip_info.ip));
+        network_state.wifi_connected = true;
+    }
+}
+
+static esp_err_t setup_wifi(void)
+{
+    // Initialize NVS (required for WiFi)
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
+    {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+    
+    // Initialize TCP/IP stack
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    esp_netif_create_default_wifi_sta();
+    
+    // Initialize WiFi
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+    
+    // Register event handlers
+    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL));
+    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL));
+    
+    // Configure WiFi
+    wifi_config_t wifi_config = {};
+    strcpy((char*)wifi_config.sta.ssid, WIFI_SSID);
+    strcpy((char*)wifi_config.sta.password, WIFI_PASS);
+    wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+    
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
+    ESP_ERROR_CHECK(esp_wifi_start());
+    
+    ESP_LOGI(TAG, "WiFi initialized, connecting to %s...", WIFI_SSID);
+    return ESP_OK;
+}
+
+static esp_err_t connect_to_server(void)
+{
+    if (network_state.connected_to_server)
+    {
+        return ESP_OK;
+    }
+    
+    if (!network_state.wifi_connected)
+    {
+        return ESP_ERR_NOT_FINISHED;
+    }
+    
+    // Create socket
+    network_state.socket_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (network_state.socket_fd < 0)
+    {
+        ESP_LOGE(TAG, "Failed to create socket");
+        return ESP_FAIL;
+    }
+    
+    // Set socket to non-blocking for connect
+    int flags = fcntl(network_state.socket_fd, F_GETFL, 0);
+    fcntl(network_state.socket_fd, F_SETFL, flags | O_NONBLOCK);
+    
+    // Configure server address
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(SERVER_PORT);
+    inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr);
+    
+    // Attempt connection
+    int ret = connect(network_state.socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
+    if (ret == 0 || (ret < 0 && errno == EINPROGRESS))
+    {
+        // Set back to blocking mode
+        fcntl(network_state.socket_fd, F_SETFL, flags);
+        network_state.connected_to_server = true;
+        ESP_LOGI(TAG, "Connected to display server at %s:%d", SERVER_IP, SERVER_PORT);
+        return ESP_OK;
+    }
+    
+    close(network_state.socket_fd);
+    network_state.socket_fd = -1;
+    return ESP_FAIL;
+}
+
 esp_err_t generic_spi_display_init(void) {
-    ESP_LOGI("generic_spi_display", "generic_spi_display init - STUB IMPLEMENTATION");
-    // TODO: Add actual initialization code
+    // Register this display's buffers in the slot array
+    if (next_slot_index < MAX_DISPLAY_SLOTS && front_buffer != NULL)
+    {
+        display_buffers[next_slot_index].front_buffer = front_buffer;
+        display_buffers[next_slot_index].back_buffer = back_buffer;
+        display_buffers[next_slot_index].buffer_size = display_width * display_height * bytes_per_pixel;
+        display_buffers[next_slot_index].width = display_width;
+        display_buffers[next_slot_index].height = display_height;
+        display_buffers[next_slot_index].bpp = bytes_per_pixel;
+        display_buffers[next_slot_index].in_use = true;
+        
+        ESP_LOGI(TAG, "Registered display slot %d: %dx%d, buffer=%p", 
+                 next_slot_index, display_width, display_height, front_buffer);
+        next_slot_index++;
+    }
+    
+    // Track smallest display height across all displays
+    if (display_height < max_display_height)
+    {
+        max_display_height = display_height;
+    }
+    
+    if (debug)
+    {
+        // Debug mode: setup WiFi and connect to visualization server
+        ESP_LOGI(TAG, "Display driver init: DEBUG MODE (network to PC)");
+        
+        // Only first display initializes WiFi (shared resource)
+        if (!wifi_already_initialized)
+        {
+            esp_err_t ret = setup_wifi();
+            if (ret != ESP_OK)
+            {
+                ESP_LOGE(TAG, "WiFi setup failed: %d", ret);
+                return ret;
+            }
+            wifi_already_initialized = true;
+        }
+        else
+        {
+            ESP_LOGI(TAG, "WiFi already initialized by another display");
+        }
+    }
+    else
+    {
+        // Production mode: setup SPI DMA to physical displays
+        spi_state.dma1_busy = false;
+        spi_state.dma2_busy = false;
+        spi_state.ping_pong_state = false;
+        ESP_LOGI(TAG, "Display driver init: PRODUCTION MODE (SPI to GC9A01)");
+    }
+    
     return ESP_OK;
 }
 
 void generic_spi_display_act(void) {
-    // TODO: Add actual action code
-    // ESP_LOGD("generic_spi_display", "generic_spi_display act");
+    static uint32_t act_call_count = 0;
+    act_call_count++;
+    
+    if (act_call_count % 100 == 0)
+    {
+        ESP_LOGI(TAG, "Act called %u times, debug=%d, connected=%d, slot=%d", 
+                 act_call_count, debug, network_state.connected_to_server, current_send_slot);
+    }
+    
+    if (debug)
+    {
+        // === DEBUG MODE: Send buffer to PC via network ===
+        
+        // Try to connect if not connected
+        if (!network_state.connected_to_server)
+        {
+            static uint32_t last_connect_attempt = 0;
+            uint32_t now = esp_log_timestamp();
+            if (now - last_connect_attempt > 5000)  // Try every 5 seconds
+            {
+                connect_to_server();
+                last_connect_attempt = now;
+            }
+            return;
+        }
+        
+        // Rotate through display slots
+        if (display_buffers[current_send_slot].front_buffer == NULL || 
+            !display_buffers[current_send_slot].in_use)
+        {
+            // Skip to next slot or wrap around
+            current_send_slot++;
+            if (current_send_slot >= MAX_DISPLAY_SLOTS || 
+                display_buffers[current_send_slot].front_buffer == NULL)
+            {
+                current_send_slot = 0;
+            }
+            
+            // If still no valid buffer, bail
+            if (display_buffers[current_send_slot].front_buffer == NULL)
+            {
+                return;
+            }
+        }
+        
+        display_buffer_slot_t* slot = &display_buffers[current_send_slot];
+        
+        // Build and send packet header
+        typedef struct {
+            uint32_t magic;
+            uint32_t frame_number;
+            uint32_t width;
+            uint32_t height;
+            uint32_t bytes_per_pixel;
+        } __attribute__((packed)) display_packet_header_t;
+        
+        display_packet_header_t header;
+        header.magic = 0xDEADBEEF;
+        header.frame_number = network_state.frames_sent;
+        header.width = slot->width;
+        header.height = slot->height;
+        header.bytes_per_pixel = slot->bpp;
+        
+        // Debug output: show parameters being sent
+        ESP_LOGI(TAG, "[DEBUG] Sending: slot=%d, buffer=%p, size=%u bytes, dims=%dx%d, current_row_count=%d",
+                 current_send_slot, (void*)slot->front_buffer, slot->buffer_size, 
+                 slot->width, slot->height, current_row_count);
+        
+        // Send header
+        ssize_t sent_header = send(network_state.socket_fd, &header, sizeof(header), 0);
+        if (sent_header != sizeof(header))
+        {
+            ESP_LOGE(TAG, "Failed to send header: %d", sent_header);
+        }
+        else
+        {
+            // Send full frame from front_buffer (already allocated in internal RAM!)
+            ssize_t sent_data = send(network_state.socket_fd, slot->front_buffer, slot->buffer_size, 0);
+            if (sent_data == slot->buffer_size)
+            {
+                network_state.frames_sent++;
+                ESP_LOGI(TAG, "[DEBUG] Successfully sent frame %u from slot %d: %u bytes total",
+                         network_state.frames_sent, current_send_slot, 
+                         (uint32_t)(sizeof(header) + slot->buffer_size));
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Failed to send data: %d (expected %u)", sent_data, slot->buffer_size);
+            }
+        }
+        
+        // Move to next slot for next call
+        current_send_slot++;
+        if (current_send_slot >= MAX_DISPLAY_SLOTS || 
+            display_buffers[current_send_slot].front_buffer == NULL)
+        {
+            current_send_slot = 0;
+        }
+    }
+    else
+    {
+        // === PRODUCTION MODE: SPI DMA to physical displays ===
+        if (front_buffer == NULL || back_buffer == NULL)
+        {
+            return;  // Buffers not allocated
+        }
+        
+        // Identify which display is calling based on buffer pointer
+        int display_id = 0;
+        if (front_buffer != NULL)
+        {
+            // Simple hash based on pointer address to identify display
+            display_id = ((uintptr_t)front_buffer >> 16) % 3;
+        }
+        
+        spi_transaction_t *completed_trans;
+        bool dma1_just_completed = false;
+        bool dma2_just_completed = false;
+        
+        // Check DMA1 (PSRAM->buffer) completion
+        if (spi_state.dma1_busy)
+        {
+            if (spi_device_get_trans_result(spi_state.display_spi_handle, &completed_trans, 0) == ESP_OK)
+            {
+                spi_state.dma1_busy = false;
+                dma1_just_completed = true;
+                ESP_LOGV(TAG, "DMA1 completed: display %d row %u", display_id, spi_state.current_row[display_id]);
+            }
+        }
+        
+        // Check DMA2 (buffer->display) completion  
+        if (spi_state.dma2_busy)
+        {
+            if (spi_device_get_trans_result(spi_state.display_spi_handle, &completed_trans, 0) == ESP_OK)
+            {
+                spi_state.dma2_busy = false;
+                dma2_just_completed = true;
+                spi_state.ping_pong_state = !spi_state.ping_pong_state;
+                ESP_LOGV(TAG, "DMA2 completed: sent to display %d", display_id);
+            }
+        }
+        
+        // Adaptive row count adjustment (shared across all displays)
+        if (dma1_just_completed && dma2_just_completed)
+        {
+            // Both completed simultaneously - pipeline stalled, increase batch size
+            if (current_row_count < max_display_height)
+            {
+                current_row_count++;
+                ESP_LOGD(TAG, "Pipeline stall: increased row_count to %d", current_row_count);
+            }
+        }
+        else if (spi_state.dma1_busy && spi_state.dma2_busy)
+        {
+            // Both still running - good parallelism, decrease batch size
+            if (current_row_count > 1)
+            {
+                current_row_count--;
+                ESP_LOGD(TAG, "Good parallelism: decreased row_count to %d", current_row_count);
+            }
+        }
+        
+        // Calculate how many rows to transfer for this specific display
+        int rows_remaining = display_height - spi_state.current_row[display_id];
+        int rows_to_send = (current_row_count < rows_remaining) ? current_row_count : rows_remaining;
+        int buffer_size = display_width * rows_to_send * bytes_per_pixel;
+        
+        // Start DMA1 if available (load next chunk from PSRAM)
+        if (!spi_state.dma1_busy && !spi_state.dma2_busy && rows_to_send > 0)
+        {
+            uint8_t* target_buffer = spi_state.ping_pong_state ? front_buffer : back_buffer;
+            uint32_t row_offset = spi_state.current_row[display_id] * display_width * bytes_per_pixel;
+            
+            static spi_transaction_t dma1_trans;
+            memset(&dma1_trans, 0, sizeof(dma1_trans));
+            dma1_trans.length = buffer_size * 8;
+            dma1_trans.rx_buffer = target_buffer + row_offset;
+            
+            if (spi_device_queue_trans(spi_state.display_spi_handle, &dma1_trans, 0) == ESP_OK)
+            {
+                spi_state.dma1_busy = true;
+                spi_state.last_display_id = display_id;
+            }
+        }
+        
+        // Start DMA2 if available (send to display)
+        if (!spi_state.dma2_busy && spi_state.dma1_busy && spi_state.last_display_id == display_id)
+        {
+            uint8_t* source_buffer = spi_state.ping_pong_state ? back_buffer : front_buffer;
+            
+            static spi_transaction_t dma2_trans;
+            memset(&dma2_trans, 0, sizeof(dma2_trans));
+            dma2_trans.length = buffer_size * 8;
+            dma2_trans.tx_buffer = source_buffer;
+            
+            if (spi_device_queue_trans(spi_state.display_spi_handle, &dma2_trans, 0) == ESP_OK)
+            {
+                spi_state.dma2_busy = true;
+                spi_state.current_row[display_id] += rows_to_send;
+                if (spi_state.current_row[display_id] >= display_height)
+                {
+                    spi_state.current_row[display_id] = 0;  // Wrapped to next frame
+                }
+            }
+        }
+    }
 }
-
 
 
 

@@ -91,8 +91,12 @@ function Read-JsonSafe {
 
 function Write-JsonSafe {
     param($Object, [string]$FilePath)
+    # Remove deprecated 'relative_filename' from all objects before writing
+    if ($Object -and $Object.PSObject -and $Object.PSObject.Properties.Name -contains 'relative_filename') {
+        $Object.PSObject.Properties.Remove('relative_filename') | Out-Null
+    }
     if (-not $DryRun) {
-        $Object | ConvertTo-Json -Depth 20 | Set-Content -Path $FilePath -Encoding UTF8
+        $Object | ConvertTo-Json -Depth 99 | Set-Content -Path $FilePath -Encoding ASCII
     }
     if ($Verbose) { Write-Progress "Updated: $FilePath" }
 }
@@ -132,7 +136,6 @@ function Get-HardwareTemplate {
     param([string]$ComponentType, [string]$ComponentName)
     
     $baseTemplate = @{
-        relative_filename = ""
         version = "1.0.0"
         author = "config/author.json"
         component_name = $ComponentName
@@ -198,7 +201,6 @@ function Get-CreatureComponentTemplate {
     param([string]$CreatureType, [string]$ComponentType, [string]$ComponentName)
     
     return @{
-        relative_filename = ""
         version = "1.0.0"
         author = "config/author.json"
         component_name = $ComponentName
@@ -232,7 +234,6 @@ function Get-InterfaceTemplate {
     param([string]$InterfaceId, [string]$InterfaceType)
     
     $baseTemplate = @{
-        relative_filename = ""
         version = "1.0.0"
         author = "config/author.json"
         interface_id = $InterfaceId
@@ -322,10 +323,11 @@ function Repair-PathMismatches {
         $actualPath = Get-RelativePathFromConfig $file.FullName $ProjectRoot
         if ($json.relative_filename -ne $actualPath) {
             if ($Verbose) { 
-                Write-Warning "PATH_MISMATCH: $($file.Name) has '$($json.relative_filename)' should be '$actualPath'" 
+                Write-Warning "PATH_MISMATCH: $($file.Name) had '$($json.relative_filename)' should be '$actualPath' (deprecated field will be removed)" 
             }
-            
-            $json.relative_filename = $actualPath
+
+            # Remove deprecated field instead of correcting it
+            $json.PSObject.Properties.Remove('relative_filename') | Out-Null
             Write-JsonSafe $json $file.FullName
             $RepairStats.PathMismatches++
         }
@@ -367,7 +369,6 @@ function Repair-MissingHardwareComponents {
         if ($Verbose) { Write-Progress "Creating missing hardware: $componentName" }
         
         $template = Get-HardwareTemplate $componentType $componentName
-        $template.relative_filename = Get-RelativePathFromConfig $hw.Path $ProjectRoot
         
         New-MissingDirectory $hw.Path
         Write-JsonSafe $template $hw.Path
@@ -421,7 +422,6 @@ function Repair-MissingCreatureComponents {
         if ($Verbose) { Write-Progress "Creating missing component: $creatureType $componentType" }
         
         $template = Get-CreatureComponentTemplate $creatureType $componentType $componentName
-        $template.relative_filename = Get-RelativePathFromConfig $comp.Path $ProjectRoot
         
         New-MissingDirectory $comp.Path
         Write-JsonSafe $template $comp.Path
@@ -474,7 +474,6 @@ function Repair-UndefinedInterfaces {
         if ($Verbose) { Write-Progress "Creating missing interface: $($iface.InterfaceId)" }
         
         $template = Get-InterfaceTemplate $iface.InterfaceId $interfaceType
-        $template.relative_filename = Get-RelativePathFromConfig $iface.Path $ProjectRoot
         
         New-MissingDirectory $iface.Path
         Write-JsonSafe $template $iface.Path

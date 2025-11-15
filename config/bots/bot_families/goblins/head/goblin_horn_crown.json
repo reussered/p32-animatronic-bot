@@ -1,12 +1,11 @@
 {
-    "relative_filename": "config/bots/bot_families/goblins/head/goblin_horn_crown.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "goblin_horn_crown",
     "description": "Crown of horns and authority markings for chief goblin leadership",
     "created": "2025-10-12",
     "components": [
-        "mechanical_actuator"
+        "config/components/hardware/mechanical_actuator.json"
     ],
     "interface_reference": "config/components/interfaces/gpio_pair_1.json",
     "coordinate_system": "skull_3d",

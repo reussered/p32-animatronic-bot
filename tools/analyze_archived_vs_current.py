@@ -78,7 +78,7 @@ def merge_components(archived_path: str, current_path: str) -> Dict:
     if len(str(archived)) > len(str(current)):
         merged = archived
         merged['name'] = current.get('name', archived.get('name'))
-        merged['relative_filename'] = current.get('relative_filename', archived.get('relative_filename'))
+        # Do not preserve deprecated 'relative_filename' from either source
         return merged
     else:
         return current

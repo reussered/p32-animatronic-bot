@@ -180,7 +180,6 @@ function New-FamilyTemplate {
     # Generate family template
     $FamilyTemplate = @"
 {
-  "relative_filename": "config/bots/bot_families/$Category/${FamilyName}_family.json",
   "version": "1.0.0",
   "author": "config/author.json",
   "family_type": "$FamilyUpper",

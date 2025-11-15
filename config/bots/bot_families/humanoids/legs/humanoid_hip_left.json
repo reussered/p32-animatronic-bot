@@ -1,5 +1,4 @@
 {
-    "relative_filename": "config/bots/bot_families/humanoids/legs/humanoid_hip_left.json",
     "version": "1.0.0",
     "author": "config/author.json",
     "name": "humanoid_hip_left",
@@ -14,7 +13,7 @@
         "scaling_applies": true
     },
     "components": [
-        "hip_joint_assembly"
+        "config/components/hardware/hip_joint_assembly.json"
     ],
     "degrees_of_freedom": {
         "total_dof": 3,

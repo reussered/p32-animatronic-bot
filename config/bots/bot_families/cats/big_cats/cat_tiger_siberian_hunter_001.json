@@ -1,82 +1,83 @@
 {
-    "relative_filename": "config/bots/bot_families/cats/big_cats/cat_tiger_siberian_hunter_001.json",
-    "version": "2.1.0",
-    "author": "config/author.json",
-    "bot_type": "CAT_TIGER_SIBERIAN_HUNTER",
-    "inherits_family": "cat_family",
-    "bot_name": "Frost Stripe the Winter King",
-    "description": "A massive Siberian tiger with orange and black stripes. Apex predator with incredible strength and cold-weather adaptation.",
-    "coordinate_system": "skull_3d",
-    "reference_point": "nose_center",
-    "eye_spacing": "4.8 INCH",
-    "scale_factor": 1.8,
-    "default_mood": "CONTENTMENT",
-    "mood_defaults": {
-        "FEAR": {
-            "duration_ms": 1000,
-            "intensity": 0.2
-        },
-        "ANGER": {
-            "duration_ms": 20000,
-            "intensity": 0.95
-        },
-        "IRRITATION": {
-            "duration_ms": 12000,
-            "intensity": 0.8
-        },
-        "HAPPINESS": {
-            "duration_ms": 8000,
-            "intensity": 0.7
-        },
-        "CONTENTMENT": {
-            "duration_ms": 35000,
-            "intensity": 0.9
-        },
-        "HUNGER": {
-            "duration_ms": 25000,
-            "intensity": 0.9
-        },
-        "CURIOSITY": {
-            "duration_ms": 10000,
-            "intensity": 0.7
-        },
-        "AFFECTION": {
-            "duration_ms": 6000,
-            "intensity": 0.5
-        }
-    },
-    "personality_traits": {
-        "aggression_level": 0.9,
-        "curiosity_level": 0.7,
-        "sociability_level": 0.1,
-        "energy_level": 0.8,
-        "apex_predator": 0.95,
-        "cold_adaptation": 0.9,
-        "solitary_nature": 0.9
-    },
-    "behavior_config": {
-        "proximity_alert_distance": "150 CM",
-        "proximity_interact_distance": "80 CM",
-        "interaction_timeout": "6000 MS",
-        "sleep_mode_timeout": "240000 MS"
-    },
-    "audio_profile": {
-        "ambient_sounds": [
-            "tiger_deep_breathing.wav",
-            "snow_wind.wav"
-        ],
-        "reaction_sounds": {
-            "happy": "tiger_contented_chuff.wav",
-            "angry": "tiger_thunderous_roar.wav",
-            "curious": "tiger_low_rumble_question.wav",
-            "afraid": "tiger_warning_snarl.wav"
-        }
-    },
-    "component_count": 0,
-    "components": [],
-    "name": "cat_tiger_siberian_hunter_001",
-    "type": "UNKNOWN",
-    "timing": {
-        "hitCount": 1
-    }
+    "version":  "2.1.0",
+    "author":  "config/author.json",
+    "bot_type":  "CAT_TIGER_SIBERIAN_HUNTER",
+    "inherits_family":  "cat_family",
+    "bot_name":  "Frost Stripe the Winter King",
+    "description":  "A massive Siberian tiger with orange and black stripes. Apex predator with incredible strength and cold-weather adaptation.",
+    "coordinate_system":  "skull_3d",
+    "reference_point":  "nose_center",
+    "eye_spacing":  "4.8 INCH",
+    "scale_factor":  1.8,
+    "default_mood":  "CONTENTMENT",
+    "mood_defaults":  {
+                          "FEAR":  {
+                                       "duration_ms":  1000,
+                                       "intensity":  0.2
+                                   },
+                          "ANGER":  {
+                                        "duration_ms":  20000,
+                                        "intensity":  0.95
+                                    },
+                          "IRRITATION":  {
+                                             "duration_ms":  12000,
+                                             "intensity":  0.8
+                                         },
+                          "HAPPINESS":  {
+                                            "duration_ms":  8000,
+                                            "intensity":  0.7
+                                        },
+                          "CONTENTMENT":  {
+                                              "duration_ms":  35000,
+                                              "intensity":  0.9
+                                          },
+                          "HUNGER":  {
+                                         "duration_ms":  25000,
+                                         "intensity":  0.9
+                                     },
+                          "CURIOSITY":  {
+                                            "duration_ms":  10000,
+                                            "intensity":  0.7
+                                        },
+                          "AFFECTION":  {
+                                            "duration_ms":  6000,
+                                            "intensity":  0.5
+                                        }
+                      },
+    "personality_traits":  {
+                               "aggression_level":  0.9,
+                               "curiosity_level":  0.7,
+                               "sociability_level":  0.1,
+                               "energy_level":  0.8,
+                               "apex_predator":  0.95,
+                               "cold_adaptation":  0.9,
+                               "solitary_nature":  0.9
+                           },
+    "behavior_config":  {
+                            "proximity_alert_distance":  "150 CM",
+                            "proximity_interact_distance":  "80 CM",
+                            "interaction_timeout":  "6000 MS",
+                            "sleep_mode_timeout":  "240000 MS"
+                        },
+    "audio_profile":  {
+                          "ambient_sounds":  [
+                                                 "tiger_deep_breathing.wav",
+                                                 "snow_wind.wav"
+                                             ],
+                          "reaction_sounds":  {
+                                                  "happy":  "tiger_contented_chuff.wav",
+                                                  "angry":  "tiger_thunderous_roar.wav",
+                                                  "curious":  "tiger_low_rumble_question.wav",
+                                                  "afraid":  "tiger_warning_snarl.wav"
+                                              }
+                      },
+    "component_count":  0,
+    "components":  [
+
+                   ],
+    "name":  "cat_tiger_siberian_hunter_001",
+    "type":  "UNKNOWN",
+    "timing":  {
+                   "hitCount":  1
+               }
 }
